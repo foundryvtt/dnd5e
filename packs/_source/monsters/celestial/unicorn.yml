@@ -455,9 +455,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -472,7 +469,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -492,23 +489,28 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: iWDQPwdffkW06c2Y
     name: Charge
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the unicorn moves at least 20 ft. straight toward a target and
-          then hits it with a horn attack on the same turn, the target takes an
-          extra [[/damage average]] damage.</p><p>If the target is a creature,
-          it must succeed on a [[/save]] saving throw or be knocked prone.</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a target and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.G9PENY6nw0xRxCJW.Item.ORrGdhTLKLTKK3BH]{Horn}
+          attack on the same turn, the target takes an extra [[/damage average]]
+          damage.</p><p>If the target is a creature, it must succeed on a
+          [[/save]] saving throw or be knocked &amp;reference[prone].</p>
         chat: >-
-          <p>If the unicorn moves at least 20 ft. straight toward a target and
-          then hits it with a horn attack on the same turn, the target takes
-          extra <em>piercing damage</em>. If the target is a creature, it must
-          make a <strong>Strength</strong> saving throw or be knocked prone.</p>
+          <p>If the [[lookup @name]]{monster} moves at least 20 feet straight
+          toward a target and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.G9PENY6nw0xRxCJW.Item.ORrGdhTLKLTKK3BH]{horn}
+          attack on the same turn, the target takes extra <em>piercing
+          damage</em>. If the target is a creature, it must make a Strength
+          saving throw or be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -521,135 +523,90 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
-        - mgc
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
+        gedgxTsglJd93LKU:
+          type: save
+          name: Charge Save
+          _id: gedgxTsglJd93LKU
+          img: ''
+          sort: 100000
           activation:
-            type: ''
-            value: null
-            condition: ''
+            type: special
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 20
+              feet straight toward a target and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.G9PENY6nw0xRxCJW.Item.ORrGdhTLKLTKK3BH]{Horn}
+              attack on the same turn.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            value: '20'
-            units: ft
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            critical:
-              allow: false
-              bonus: ''
+            onSave: half
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 8
                 bonus: ''
                 types:
                   - piercing
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
+                  number: 1
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
+            visible: true
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -659,19 +616,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378747401
+      systemVersion: 6.0.0
+      createdTime: 1781741990743
+      modifiedTime: 1781743656690
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.iWDQPwdffkW06c2Y'
@@ -724,7 +677,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -732,100 +685,6 @@ items:
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.8yPzMeXvBJC2POQK'
-  - _id: MW3V6fHknXOLuVxU
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The unicorn has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445664678
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!G9PENY6nw0xRxCJW.MW3V6fHknXOLuVxU'
-  - _id: hyiKyfKiplfTQ0ZX
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The unicorn's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!G9PENY6nw0xRxCJW.hyiKyfKiplfTQ0ZX'
   - _id: vnAmgF7ZkpmDIJSc
     name: Multiattack
     type: feat
@@ -833,8 +692,8 @@ items:
     system:
       description:
         value: >-
-          <p>The unicorn makes two attacks: one with its [[/item
-          .f7m44y4TqYYcunMj]]{hooves} and one with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .f7m44y4TqYYcunMj]]{hooves} and one with its [[/item
           .ORrGdhTLKLTKK3BH]]{horn}.</p>
         chat: ''
       source:
@@ -849,13 +708,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        QHqV2LhSB54wZsgA:
           type: utility
           activation:
             type: action
@@ -870,15 +728,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -889,7 +748,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -906,7 +766,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: QHqV2LhSB54wZsgA
       enchant: {}
       prerequisites:
         level: null
@@ -920,11 +788,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445693273
+      systemVersion: 6.0.0
+      createdTime: 1781744054942
+      modifiedTime: 1781744062331
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.vnAmgF7ZkpmDIJSc'
@@ -935,7 +803,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Unicorn attacks with its Hooves.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -999,7 +869,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1008,8 +878,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        tueIdBN34Y9xvjMU:
           type: attack
           activation:
             type: action
@@ -1024,10 +893,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1044,7 +914,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1057,23 +928,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: tueIdBN34Y9xvjMU
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: hooves
       mastery: ''
     effects: []
@@ -1085,22 +968,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378730408
+      systemVersion: 6.0.0
+      createdTime: 1781743965515
+      modifiedTime: 1781744033968
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.f7m44y4TqYYcunMj'
   - _id: ORrGdhTLKLTKK3BH
     name: Horn
     type: weapon
-    img: icons/commodities/bones/horn-simple-grey.webp
+    img: icons/commodities/bones/horn-engraved-stripes-white.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Unicorn attacks with its Horn.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1164,7 +1049,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1173,8 +1058,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        wioeORGdqnKXvk0B:
           type: attack
           activation:
             type: action
@@ -1189,10 +1073,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1209,7 +1094,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1222,23 +1108,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: wioeORGdqnKXvk0B
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: horn
       mastery: ''
     effects: []
@@ -1250,148 +1148,27 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.aa9KuBy4dst7WIW9
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378734715
+      systemVersion: 6.0.0
+      createdTime: 1781743695298
+      modifiedTime: 1781743757448
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.ORrGdhTLKLTKK3BH'
-  - _id: uCaHWOOBeJEyR1ay
-    name: Healing Touch
-    type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
-    system:
-      description:
-        value: >-
-          <p>The [[lookup @name lowercase]]{monster} touches another creature.
-          The target magically regains 30 ([[/heal]]{2d8 + 2}) hit points. In
-          addition, the touch removes all diseases and neutralizes all poisons
-          afflicting the target.</p>
-        chat: >-
-          <section class="secret"><p></p></section><p>The unicorn touches
-          another creature with its horn. The target magically regains 11 (2d8 +
-          2) hit points. In addition, the touch removes all diseases and
-          neutralizes all poisons afflicting the target.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: '3'
-        recovery:
-          - period: day
-            type: recoverAll
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: heal
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: touch
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: '1'
-              type: creature
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          healing:
-            number: 2
-            denomination: 8
-            bonus: '2'
-            types:
-              - healing
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: healing-touch
-    effects: []
-    folder: null
-    sort: 400000
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.r3Ugp8f5Ckw2EUHL
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445745393
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!G9PENY6nw0xRxCJW.uCaHWOOBeJEyR1ay'
   - _id: W5ceTePXIPlUuiEY
     name: Teleport
     type: feat
-    img: icons/magic/symbols/runes-star-pentagon-magenta.webp
+    img: icons/magic/symbols/ring-circle-smoke-blue.webp
     system:
       description:
         value: >-
-          <p>The unicorn magically teleports itself and up to three willing
-          creatures it can see within 5 feet of it, along with any equipment
-          they are wearing or carrying, to a location the unicorn is familiar
-          with, up to 1 mile away.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically teleports itself
+          and up to [[lookup @labels.description.affects
+          activity=8owft3XymVhz240J]] it can see within 5 feet of it, along with
+          any equipment they are wearing or carrying, to a location the unicorn
+          is familiar with, up to [[lookup @labels.description.range
+          activity=8owft3XymVhz240J]] away.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The unicorn magically
           teleports itself and up to three willing creatures it can see within 5
@@ -1411,13 +1188,13 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        8owft3XymVhz240J:
           type: utility
           activation:
             type: action
@@ -1427,21 +1204,20 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1458,10 +1234,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '3'
-              type: creature
+              type: willing
               choice: false
               special: ''
             prompt: true
@@ -1475,7 +1252,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: 8owft3XymVhz240J
+          name: Reposition
       enchant: {}
       prerequisites:
         level: null
@@ -1489,64 +1278,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445766361
+      systemVersion: 6.0.0
+      createdTime: 1781743837686
+      modifiedTime: 1781743952767
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.W5ceTePXIPlUuiEY'
-  - _id: uGNhUMAmD8L5AD1M
-    name: Legendary Actions
-    type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
-    system:
-      description:
-        value: <p>[[lookup @resources.legact.label]]</p>
-        chat: <p>The unicorn can take 3 legendary actions.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445685750
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!G9PENY6nw0xRxCJW.uGNhUMAmD8L5AD1M'
   - _id: UNbcqlW8Siek0Fpm
     name: Hooves
     type: feat
-    img: icons/commodities/bones/hooves-cloven-brown.webp
+    img: icons/commodities/bones/hooves-cloven-grey.webp
     system:
       description:
         value: >-
@@ -1565,13 +1308,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        MdDNojDK4vzgDsjU:
           type: utility
           activation:
             type: legendary
@@ -1586,15 +1328,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1605,7 +1348,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1622,7 +1366,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: MdDNojDK4vzgDsjU
+          name: Strike
       enchant: {}
       prerequisites:
         level: null
@@ -1632,32 +1388,30 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445801064
+      systemVersion: 6.0.0
+      createdTime: 1781744087944
+      modifiedTime: 1781744139892
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.UNbcqlW8Siek0Fpm'
   - _id: Ps56FcAJxi2L3QdZ
     name: Shimmering Shield
     type: feat
-    img: icons/magic/light/explosion-star-large-blue-yellow.webp
+    img: icons/magic/light/orb-container-orange.webp
     system:
       description:
         value: >-
-          <p>The unicorn creates a shimmering, magical field around itself or
-          another creature it can see within 60 feet of it. The target gains a
-          +2 bonus to AC until the end of the unicorn's next turn.</p>
+          <p>The [[lookup @name lowercase]]{monster} creates a shimmering,
+          magical field around itself or another creature it can see within
+          [[lookup @labels.description.range activity=dnd5eactivity000]] of it.
+          The target gains a +2 bonus to AC until the end of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p>
         chat: ''
       source:
         custom: ''
@@ -1671,10 +1425,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1698,7 +1453,11 @@ items:
             units: turn
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: LPhDTpvZjgjOi27R
+              level:
+                min: null
+                max: null
           range:
             value: '60'
             units: ft
@@ -1730,38 +1489,88 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: Ward Creature
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireMagic: true
       enchant: {}
       prerequisites:
         level: null
       identifier: shimmering-shield
-    effects: []
+    effects:
+      - name: Ward Creature
+        img: icons/magic/light/orb-container-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.G9PENY6nw0xRxCJW.Item.Ps56FcAJxi2L3QdZ
+        transfer: false
+        _id: LPhDTpvZjgjOi27R
+        type: base
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              type: add
+              value: 2
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>A shimmering, magical field has manifested around you. You gain a
+          +2 bonus to AC until the end of the unicorn's next turn.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781744199168
+          modifiedTime: 1781744241459
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!G9PENY6nw0xRxCJW.Ps56FcAJxi2L3QdZ.LPhDTpvZjgjOi27R
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.8l0R2MIYxWxYJT6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445810730
+      systemVersion: 6.0.0
+      createdTime: 1781744150981
+      modifiedTime: 1781744249463
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.Ps56FcAJxi2L3QdZ'
   - _id: Plfy8GZ08uqupxe6
     name: Heal Self
     type: feat
-    img: icons/magic/life/ankh-gold-blue.webp
+    img: icons/magic/life/heart-pink.webp
     system:
       description:
-        value: <p>The unicorn magically regains 11 ([[/heal]]{2d8+2}) hit points.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} magically regains
+          [[/healing average]].</p>
         chat: ''
       source:
         custom: ''
@@ -1775,13 +1584,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        VN605HgEhCu7vMa5:
           type: heal
           activation:
             type: legendary
@@ -1796,15 +1605,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1815,7 +1625,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: self
@@ -1840,7 +1651,19 @@ items:
               mode: whole
               number: null
               formula: ''
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: VN605HgEhCu7vMa5
+          name: Close Wounds
       enchant: {}
       prerequisites:
         level: null
@@ -1850,19 +1673,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gklxiU0PKYSM7RWv
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445829271
+      systemVersion: 6.0.0
+      createdTime: 1781744261279
+      modifiedTime: 1781916192400
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.Plfy8GZ08uqupxe6'
@@ -1974,7 +1793,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2103,7 +1922,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.SbSvZKkJASyk8jKo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2219,7 +2038,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pRMvmknwLf2tdMTj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2353,7 +2172,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3MYDjS6k9IYL0aTj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2544,7 +2363,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2673,7 +2492,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2681,6 +2500,300 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!G9PENY6nw0xRxCJW.gMrWeG8fMDPRFiVe'
+  - _id: RSGZ0vLWQuhODI9b
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781743661799
+      modifiedTime: 1781743661799
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!G9PENY6nw0xRxCJW.RSGZ0vLWQuhODI9b'
+  - _id: AobEIVsjaSlaSRiD
+    name: Magic Weapons
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781743666752
+      modifiedTime: 1781743666752
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.nahRRxck9R5GVVFS
+    _key: '!actors.items!G9PENY6nw0xRxCJW.AobEIVsjaSlaSRiD'
+  - _id: 6zUj0WyV0m7odlPl
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can take [[lookup
+          @resources.legact.max]] legendary actions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 137500
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781743675602
+      modifiedTime: 1781896940115
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!G9PENY6nw0xRxCJW.6zUj0WyV0m7odlPl'
+  - _id: YGdeLev4E1XdB4fh
+    name: Healing Touch
+    type: feat
+    img: icons/magic/holy/prayer-hands-glowing-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} touches another creature.
+          The target magically regains [[/heal average]]. In addition, the touch
+          removes all diseases and neutralizes all poisons afflicting the
+          target.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - mgc
+      activities:
+        NU3xBsGu4WmvA8GV:
+          type: heal
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          healing:
+            number: 2
+            denomination: 8
+            bonus: '2'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: NU3xBsGu4WmvA8GV
+          name: Heal Creature
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: healing-touch
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 450000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.m4H3hjamBNMH09S9.Item.Lx0nT1oq0bLjX1lx
+      duplicateSource: Item.KnN496LoN9YIdyvh
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781743772291
+      modifiedTime: 1781743817448
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!G9PENY6nw0xRxCJW.YGdeLev4E1XdB4fh'
 effects: []
 folder: pCy5ieJezFRCg9A0
 sort: 0
@@ -2689,7 +2802,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171217295
