@@ -489,11 +489,12 @@ items:
         value: >-
           <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
           straight toward a creature and then hits it with a
-          @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d.Item.7MiLYgDyM2Rm3nEb]{Hooves}
+          @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d.Item.7MiLYgDyM2Rm3nEb]{hooves}
           attack on the same turn, that target must succeed on a [[/save]]
           saving throw or be knocked &amp;reference[prone]. If the target is
           prone, the [[lookup @name lowercase]]{monster} can make another attack
-          with its Hooves against it as a bonus action.</p>
+          with its [[/item .7MiLYgDyM2Rm3nEb]]{hooves} against it as a bonus
+          action.</p>
         chat: >-
           <p>If the horse moves at least <strong>20 ft.</strong> straight toward
           a creature and then hits it with a hooves attack on the same turn,
@@ -528,7 +529,7 @@ items:
             condition: >-
               When the [[lookup @name lowercase]]{monster} moves at least 20
               feet straight toward a creature and then hits it with a
-              @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d.Item.7MiLYgDyM2Rm3nEb]{Hooves}
+              @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d.Item.7MiLYgDyM2Rm3nEb]{hooves}
               attack on that same turn.
           consumption:
             scaling:
@@ -601,7 +602,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781525541496
-      modifiedTime: 1781525681919
+      modifiedTime: 1783369989183
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!T1xZTDCGuvMBSq8d.1KyNbDtLLrcA5lj0'

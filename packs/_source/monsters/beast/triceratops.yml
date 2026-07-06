@@ -847,11 +847,11 @@ items:
         value: >-
           <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
           straight toward a creature and then hits it with a
-          @UUID[Compendium.dnd5e.monsters.Actor.e5IQxSJO7ySEDdSH.Item.h5lGnMKW65NWIi2W]{Gore}
+          @UUID[Compendium.dnd5e.monsters.Actor.e5IQxSJO7ySEDdSH.Item.h5lGnMKW65NWIi2W]{gore}
           attack on the same turn, that target must succeed on a [[/save]]
           saving throw or be knocked &amp;Reference[prone]. If the target is
           prone, the [[lookup @name lowercase]]{monster} can make one [[/item
-          .6UWSefP0BqnmYwAz]]{Stomp} attack against it as a bonus action.</p>
+          .6UWSefP0BqnmYwAz]]{stomp} attack against it as a bonus action.</p>
         chat: >-
           <p>If the triceratops moves at least <strong>20 ft.</strong> straight
           toward a creature and then hits it with a gore attack on the same
@@ -868,10 +868,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         HfuVdPpbIXuiBaiB:
           type: save
@@ -885,7 +886,7 @@ items:
             condition: >-
               The [[lookup @name lowercase]]{monster} moves at least 20 feet
               straight toward a creature and then hits it with a
-              @UUID[Compendium.dnd5e.monsters.Actor.e5IQxSJO7ySEDdSH.Item.h5lGnMKW65NWIi2W]{Gore}
+              @UUID[Compendium.dnd5e.monsters.Actor.e5IQxSJO7ySEDdSH.Item.h5lGnMKW65NWIi2W]{gore}
               attack on the same turn.
           consumption:
             scaling:
@@ -958,7 +959,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781530876562
-      modifiedTime: 1781531116803
+      modifiedTime: 1783369948240
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!e5IQxSJO7ySEDdSH.4jztSrWQNxc4q55u'

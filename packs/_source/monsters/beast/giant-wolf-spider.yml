@@ -491,9 +491,10 @@ items:
           make a [[/save]] saving throw, taking [[/damage average
           activity=RDbtJIrHQobdffi4]] damage on a failed save, or half as much
           damage on a successful one. If the poison damage reduces the target to
-          0 hit points, the target is stable but &amp;reference[poisoned] for 1
-          hour, even after regaining hit points, and is &amp;reference[paralyzed
-          apply=false] while poisoned in this way.</p>
+          0 hit points, the target is stable but &amp;reference[poisoned] for
+          [[lookup @labels.duration activity=RDbtJIrHQobdffi4]], even after
+          regaining hit points, and is &amp;reference[paralyzed apply=false]
+          while poisoned in this way.</p>
         chat: >-
           <p>The [[lookup @name]]{monster} attacks with its [[lookup
           @item.name]]. The target must make a Constitution saving throw.</p>
@@ -660,17 +661,18 @@ items:
               average activity=RDbtJIrHQobdffi4]] damage on a failed save, or
               half as much damage on a successful one. If the poison damage
               reduces the target to 0 hit points, the target is stable but
-              &amp;reference[poisoned] for 1 hour, even after regaining hit
-              points, and is &amp;reference[paralyzed] while poisoned in this
+              &amp;reference[poisoned] for [[lookup @labels.duration
+              activity=RDbtJIrHQobdffi4]], even after regaining hit points, and
+              is &amp;reference[paralyzed apply=false] while poisoned in this
               way.</p>
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: hour
             special: ''
             override: false
           effects:
-            - _id: v7V36B2XrnbgyxIQ
+            - _id: 4nLmtWXeB4LG17Nr
               onSave: false
               level:
                 min: null
@@ -741,11 +743,11 @@ items:
       identifier: bite
       mastery: ''
     effects:
-      - name: Paralyzing Poison
+      - name: Stablizing Paralysis Poison
         img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
         origin: Compendium.dnd5e.monsters.Actor.f9JbhBfWucrY2eDA.Item.Et0GP61ZnJkxxqvN
         transfer: false
-        _id: v7V36B2XrnbgyxIQ
+        _id: 4nLmtWXeB4LG17Nr
         type: base
         system:
           changes: []
@@ -757,9 +759,10 @@ items:
           expiry: turnStart
           expired: false
         description: >-
-          <p>You are stable but &amp;reference[poisoned apply=false] for 1 hour,
-          even after regaining hit points. While poisoned in this way, you are
-          also &amp;reference[paralyzed apply=false].</p>
+          <p>You are &amp;reference[stable] but &amp;reference[poisoned
+          apply=false] for the duration, even after regaining hit points. While
+          poisoned in this way, you are also &amp;reference[paralyzed
+          apply=false].</p>
         tint: '#ffffff'
         statuses:
           - paralyzed
@@ -776,15 +779,15 @@ items:
           coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 6.0.0
-          createdTime: 1781543507031
-          modifiedTime: 1781543507031
+          createdTime: 1781909905840
+          modifiedTime: 1781909905840
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz.Item.8EvqvqLumOBhrjeD.ActiveEffect.0RzAvZ3heVXtbVt1
           duplicateSource: null
           exportSource: null
         _key: >-
-          !actors.items.effects!f9JbhBfWucrY2eDA.Et0GP61ZnJkxxqvN.v7V36B2XrnbgyxIQ
+          !actors.items.effects!f9JbhBfWucrY2eDA.Et0GP61ZnJkxxqvN.4nLmtWXeB4LG17Nr
     folder: null
     sort: 0
     ownership:
@@ -797,7 +800,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781543438797
-      modifiedTime: 1781543563253
+      modifiedTime: 1781909949183
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!f9JbhBfWucrY2eDA.Et0GP61ZnJkxxqvN'

@@ -1004,11 +1004,11 @@ items:
         value: >-
           <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
           straight toward a creature and then hits it with a
-          @UUID[Compendium.dnd5e.monsters.Actor.hjhERRzafCiFFVLA.Item.CHIayoaCAZj0GBkM]{Claw}
+          @UUID[Compendium.dnd5e.monsters.Actor.hjhERRzafCiFFVLA.Item.CHIayoaCAZj0GBkM]{claw}
           attack on the same turn, that target must succeed on a [[/save]]
           saving throw or be knocked &amp;Reference[prone].</p><p>If the target
           is prone, the [[lookup @name lowercase]]{monster} can make one [[/item
-          .gKj1TlVfDhLp5WIk]]{Bite} attack against it as a bonus action.</p>
+          .gKj1TlVfDhLp5WIk]]{bite} attack against it as a bonus action.</p>
         chat: >-
           <p>If the [[lookup @name]]{monster} moves at least 20 feet straight
           toward a creature and then hits it with a
@@ -1027,10 +1027,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         8dIa5DwJPOAhNkpx:
           type: save
@@ -1044,7 +1045,7 @@ items:
             condition: >-
               When the [[lookup @name lowercase]]{monster} moves at least 20
               feet straight toward a creature and then hits it with a
-              @UUID[Compendium.dnd5e.monsters.Actor.hjhERRzafCiFFVLA.Item.CHIayoaCAZj0GBkM]{Claw}
+              @UUID[Compendium.dnd5e.monsters.Actor.hjhERRzafCiFFVLA.Item.CHIayoaCAZj0GBkM]{claw}
               attack on the same turn.
           consumption:
             scaling:
@@ -1121,7 +1122,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781534701967
-      modifiedTime: 1781534834681
+      modifiedTime: 1783369743549
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hjhERRzafCiFFVLA.3jkeGG7QcQI0bi6W'

@@ -489,11 +489,11 @@ items:
         value: >-
           <p>If the mammoth moves at least 20 feet straight toward a creature
           and then hits it with a
-          @UUID[Compendium.dnd5e.monsters.Actor.MiYRAIHwm9It1in8.Item.S7i3GTdoo6tyc2wL]{Gore}
+          @UUID[Compendium.dnd5e.monsters.Actor.MiYRAIHwm9It1in8.Item.S7i3GTdoo6tyc2wL]{gore}
           attack on the same turn, that target must succeed on a [[/save]]
           saving throw or be knocked &amp;Reference[prone].</p><p>If the target
           is prone, the [[lookup @name lowercase]]{monster} can make one [[/item
-          .Hx541foatcQiMSZj]]{Stomp} attack against it as a bonus action.</p>
+          .Hx541foatcQiMSZj]]{stomp} attack against it as a bonus action.</p>
         chat: >-
           <p>If the mammoth moves at least <strong>20 ft.</strong> straight
           toward a creature and then hits it with a gore attack on the same
@@ -510,10 +510,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         m3Y9QKA3Rf1CxBHz:
           type: save
@@ -527,7 +528,7 @@ items:
             condition: >-
               When the mammoth moves at least 20 feet straight toward a creature
               and then hits it with a
-              @UUID[Compendium.dnd5e.monsters.Actor.MiYRAIHwm9It1in8.Item.S7i3GTdoo6tyc2wL]{Gore}
+              @UUID[Compendium.dnd5e.monsters.Actor.MiYRAIHwm9It1in8.Item.S7i3GTdoo6tyc2wL]{gore}
               attack on the same turn.
           consumption:
             scaling:
@@ -600,7 +601,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781537201925
-      modifiedTime: 1781537278344
+      modifiedTime: 1783369771535
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MiYRAIHwm9It1in8.4LYRJH02EsSnZUNc'

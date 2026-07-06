@@ -489,7 +489,7 @@ items:
         value: >-
           <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
           straight toward a target and then hits it with a
-          @UUID[Compendium.dnd5e.monsters.Actor.y8sRU8Ks2lcrGsaf.Item.I3ioyE4CVHPLGGy7]{Ram}
+          @UUID[Compendium.dnd5e.monsters.Actor.y8sRU8Ks2lcrGsaf.Item.I3ioyE4CVHPLGGy7]{ram}
           attack on the same turn, the target takes an extra [[/damage average]]
           damage.</p><p>If the target is a creature, it must succeed on a
           [[/save]] saving throw or be knocked &amp;Reference[prone].</p>
@@ -512,10 +512,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         aGOFjtHDhyyGrI2a:
           type: save
@@ -529,7 +530,7 @@ items:
             condition: >-
               When the [[lookup @name lowercase]]{monster} moves at least 20
               feet straight toward a target and then hits it with a
-              @UUID[Compendium.dnd5e.monsters.Actor.y8sRU8Ks2lcrGsaf.Item.I3ioyE4CVHPLGGy7]{Ram}
+              @UUID[Compendium.dnd5e.monsters.Actor.y8sRU8Ks2lcrGsaf.Item.I3ioyE4CVHPLGGy7]{ram}
               attack on the same turn.
           consumption:
             scaling:
@@ -612,7 +613,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781537781807
-      modifiedTime: 1781538100951
+      modifiedTime: 1783369706792
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!y8sRU8Ks2lcrGsaf.fmILoB0arLdodNGB'
