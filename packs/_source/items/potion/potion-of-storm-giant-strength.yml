@@ -6,13 +6,10 @@ system:
   description:
     value: >-
       <p><em>This potion's transparent liquid has floating in it a sliver of
-      fingernail from a giant of the appropriate type.</em></p>
-
-      <p>When you drink this potion, your Strength score changes to 29 for 1
-      hour.  The potion has no effect on you if your Strength is equal to or
-      greater than that score.</p>
-
-      <p> </p>
+      fingernail from a giant of the appropriate type.</em></p><p>When you drink
+      this potion, your Strength score changes to 29 for [[lookup
+      @labels.duration activity=2cOOq5vkw0u763Px]]. The potion has no effect on
+      you if your Strength is equal to or greater than that score.</p>
     chat: ''
   source:
     custom: ''
@@ -50,14 +47,16 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This potion's transparent liquid has floating in it a sliver of
+      fingernail from a giant of the appropriate type.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    2cOOq5vkw0u763Px:
       type: utility
       activation:
         type: action
@@ -69,19 +68,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: sjbluBPTvdkkf3pv
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -94,7 +98,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -111,8 +116,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -120,10 +125,57 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: 2cOOq5vkw0u763Px
   attuned: false
   identifier: potion-of-storm-giant-strength
-effects: []
+effects:
+  - name: Storm Giant Strength
+    img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
+    origin: Compendium.dnd5e.items.Item.1KMSpOSU0EliUBm2
+    transfer: false
+    _id: sjbluBPTvdkkf3pv
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.value
+          type: upgrade
+          value: 29
+          phase: initial
+          priority: null
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your Strength score changes to 29 for the duration. This has no effect
+      on you if your Strength is equal to or greater than 29.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783372709925
+      modifiedTime: 1783374087871
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!1KMSpOSU0EliUBm2.sjbluBPTvdkkf3pv'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -131,11 +183,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037085351
-  modifiedTime: 1764618711482
+  modifiedTime: 1783372804970
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1KMSpOSU0EliUBm2'

@@ -6,11 +6,9 @@ system:
   description:
     value: >-
       <p><em>The potion's dense, purple liquid has an ovoid cloud of pink
-      floating in it.</em></p>
-
-      <p>When you drink this potion, you gain the effect of the
-      @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect Thoughts}
-      spell (save DC 13). </p>
+      floating in it.</em></p><p>When you drink this potion, you gain the effect
+      of the @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect
+      Thoughts} spell (save DC 13).</p>
     chat: ''
   source:
     custom: ''
@@ -48,7 +46,10 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>The potion's dense, purple liquid has an ovoid cloud of pink floating
+      in it.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
@@ -60,13 +61,13 @@ system:
         uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
         challenge:
           override: true
-          attack: null
+          attack: ''
           save: 13
         properties:
           - vocal
           - somatic
           - material
-        spellbook: true
+        spellbook: false
         ability: ''
         level: 2
       _id: DN8gzY6YObgBtXba
@@ -80,6 +81,9 @@ system:
         spellSlot: true
         targets:
           - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
       description:
         chatFlavor: ''
       duration:
@@ -110,7 +114,7 @@ system:
         requireIdentification: false
         requireMagic: false
         identifier: ''
-      name: ''
+      name: Drink
       img: ''
   attuned: false
   identifier: potion-of-mind-reading
@@ -122,11 +126,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037129606
-  modifiedTime: 1764619315594
+  modifiedTime: 1783373070029
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Ct9LR9Ft1FG4a6Y1'

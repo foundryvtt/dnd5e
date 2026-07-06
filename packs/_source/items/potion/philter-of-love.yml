@@ -6,14 +6,12 @@ system:
   description:
     value: >-
       <p><em>This potion's rose-hued, effervescent liquid contains one
-      easy-to-miss bubble shaped like a heart.</em></p>
-
-      <p>The next time you see a creature within 10 minutes after drinking this
-      philter, you become charmed by that creature for 1 hour. If the creature
-      is of a species and gender you are normally attracted to, you regard it as
-      your true love while you are charmed.</p>
-
-      <p> </p>
+      easy-to-miss bubble shaped like a heart.</em></p><p>The next time you see
+      a creature within 10 minutes after drinking this philter, you become
+      &amp;reference[charmed] by that creature for [[lookup @labels.duration
+      activity=PQa875kavCObYkw7]]. If the creature is of a species and gender
+      you are normally attracted to, you regard it as your true love while you
+      are charmed.</p>
     chat: ''
   source:
     custom: ''
@@ -51,14 +49,16 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This potion's rose-hued, effervescent liquid contains one easy-to-miss
+      bubble shaped like a heart.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    PQa875kavCObYkw7:
       type: utility
       activation:
         type: action
@@ -70,19 +70,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: VGNePB21bqJfLsCr
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -95,7 +100,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -112,8 +118,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -121,10 +127,54 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: PQa875kavCObYkw7
   attuned: false
   identifier: philter-of-love
-effects: []
+effects:
+  - name: Alchemical Love
+    img: icons/consumables/potions/potion-flask-corked-labeled-pink.webp
+    origin: Compendium.dnd5e.items.Item.63nb14yQRJMc4bIn
+    transfer: false
+    _id: VGNePB21bqJfLsCr
+    type: base
+    system:
+      changes: []
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You become &amp;reference[charmed apply=false] for 1 hour by the first
+      creature you see within 10 minutes after drinking this potion. If the
+      creature is of a species and gender you are normally attracted to, you
+      regard it as your true love while you are charmed.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783374813073
+      modifiedTime: 1783374967437
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!63nb14yQRJMc4bIn.VGNePB21bqJfLsCr'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -132,11 +182,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037103044
-  modifiedTime: 1764618993827
+  modifiedTime: 1783374961687
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!63nb14yQRJMc4bIn'

@@ -1,12 +1,13 @@
 _id: Fc6UfFNOnW80XMzi
 name: Antitoxin
 type: consumable
-img: icons/consumables/potions/bottle-round-corked-pink.webp
+img: icons/consumables/potions/bottle-conical-corked-green.webp
 system:
   description:
     value: >-
       <p>A creature that drinks this vial of liquid gains advantage on saving
-      throws against poison for 1 hour. It confers no benefit to undead or
+      throws against poison for [[lookup @labels.duration
+      activity=aSEhgvHgQF5LiEsf]]. It confers no benefit to undead or
       constructs.</p>
     chat: ''
   source:
@@ -25,7 +26,7 @@ system:
   attunement: ''
   equipped: false
   rarity: ''
-  identified: true
+  identified: false
   uses:
     max: '1'
     recovery: []
@@ -42,16 +43,16 @@ system:
         number: 1
     replace: false
   type:
-    value: potion
+    value: poison
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Potion
   container: null
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    aSEhgvHgQF5LiEsf:
       type: utility
       activation:
         type: action
@@ -61,26 +62,27 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: 86kZBSv4Zyis1RQm
+          level: {}
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -91,7 +93,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -107,10 +110,59 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: aSEhgvHgQF5LiEsf
+      name: Drink
   attuned: false
   identifier: antitoxin
-effects: []
+effects:
+  - name: Antitoxin Protection
+    img: icons/consumables/potions/bottle-conical-corked-green.webp
+    origin: Compendium.dnd5e.items.Item.Fc6UfFNOnW80XMzi
+    transfer: false
+    _id: 86kZBSv4Zyis1RQm
+    type: base
+    system:
+      changes: []
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>You have advantage on saving throws against poison.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781978867630
+      modifiedTime: 1781978911227
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Fc6UfFNOnW80XMzi.86kZBSv4Zyis1RQm'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -118,11 +170,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037143228
-  modifiedTime: 1725992498253
+  modifiedTime: 1783375851022
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Fc6UfFNOnW80XMzi'

@@ -6,10 +6,9 @@ system:
   description:
     value: >-
       <p><em>An eyeball bobs in this yellowish liquid but vanishes when the
-      potion is opened.</em></p>
-
-      <p>When you drink this potion, you gain the effect of the
-      @UUID[Compendium.dnd5e.spells.Item.cg50KpBkBdPK6vPL]{Clairvoyance}
+      potion is opened.</em></p><p>When you drink this potion, you gain the
+      effect of the
+      @UUID[Compendium.dnd5e.spells.Item.cg50KpBkBdPK6vPL]{clairvoyance}
       spell.</p>
     chat: ''
   source:
@@ -48,77 +47,74 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>An eyeball bobs in this yellowish liquid but vanishes when the potion
+      is opened.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    8hBw81kwg8UiPHa3:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.cg50KpBkBdPK6vPL
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+        ability: ''
+        level: 3
+      _id: 8hBw81kwg8UiPHa3
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '10'
         units: minute
-        special: ''
-        override: false
-      effects: []
+        concentration: false
+        override: true
+        value: '10'
+      flags: {}
       range:
-        units: touch
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
+          stationary: false
+          units: ft
         affects:
-          count: '1'
-          type: creature
           choice: false
-          special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
         identifier: ''
-      appliedEffects: []
+      name: Drink
   attuned: false
   identifier: potion-of-clairvoyance
 effects: []
@@ -129,11 +125,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037226301
-  modifiedTime: 1764620266037
+  modifiedTime: 1783376860177
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!bAyr7j5Peq9wIJTa'
