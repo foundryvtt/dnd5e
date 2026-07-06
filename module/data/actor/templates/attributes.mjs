@@ -53,7 +53,7 @@ export default class AttributesFields {
         deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.min.label"
       }),
       override: new NumberField({
-        min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label",
+        min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label", initial: null,
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.hint"
       }),
       shield: new NumberField({
