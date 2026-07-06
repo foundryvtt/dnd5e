@@ -36,6 +36,10 @@ export default class AttributesFields {
         deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.bonus.label"
       }),
       calc: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calc.label" }),
+      calcs: new SetField(new StringField(), {
+        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.hint"
+      }),
       cover: new NumberField({
         integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.cover.label"
       }),
@@ -51,10 +55,6 @@ export default class AttributesFields {
       override: new NumberField({
         min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label",
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.hint"
-      }),
-      selectedFormulas: new SetField(new StringField(), {
-        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.label",
-        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.hint"
       }),
       shield: new NumberField({
         integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.shield.label"
@@ -202,11 +202,11 @@ export default class AttributesFields {
         break;
       case "default": break;
       case "natural":
-        ac.selectedFormulas = ["natural"];
+        ac.calcs = ["natural"];
         break;
       default:
-        ac.selectedFormulas ??= ["unarmored", "armored"];
-        ac.selectedFormulas.push(ac.calc);
+        ac.calcs ??= ["unarmored", "armored"];
+        ac.calcs.push(ac.calc);
         break;
     }
     delete ac.calc;
@@ -262,11 +262,11 @@ export default class AttributesFields {
     else if ( (ac.calc === "custom") && ac.formula ) ac.formulas.push({
       formula: ac.formula, label: _loc("DND5E.ARMORCLASS.Calculation.Custom")
     });
-    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.selectedFormulas.add(ac.calc);
+    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.calcs.add(ac.calc);
 
     // Add selected formulas
     const baseFormulas = foundry.utils.iterateEntries(CONFIG.DND5E.armorClasses)
-      .filter(([id, data]) => ac.selectedFormulas.has(id))
+      .filter(([id]) => ac.calcs.has(id))
       .map(([id, data]) => ({ ...data, id, type: "base" }));
     ac.formulas.unshift(...baseFormulas);
 

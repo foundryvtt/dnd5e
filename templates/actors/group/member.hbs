@@ -88,7 +88,7 @@
             <div data-attribution="attributes.ac" data-reference-tooltip="{{ uuid }}"
                  data-attribution-caption="DND5E.ArmorClass">
                 <i class="fa-solid fa-shield" aria-label="{{ localize "DND5E.ArmorClass" }}"></i>
-                <span class="value">{{ system.attributes.ac.value }}</span>
+                <span class="value">{{{ ifThen system.attributes.ac.value system.attributes.ac.value "&mdash;" }}}</span>
             </div>
             <div data-attribution="attributes.movement" data-reference-tooltip="{{ uuid }}">
                 <i class="fa-solid fa-shoe-prints" aria-label="{{ localize "DND5E.Speed" }}"></i>
