@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,6 +481,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Cvw6LMtbxmSBvVoZ
     name: Shriek
@@ -492,13 +490,16 @@ items:
     system:
       description:
         value: >-
-          <p>When bright light or a creature is within 30 feet of the shrieker,
-          it emits a shriek audible within 300 feet of it. The shrieker
-          continues to shriek until the disturbance moves out of range and for
-          1d4 of the shrieker's turns afterward</p>
+          <p>When &amp;reference[bright light] or a creature is within [[lookup
+          @labels.description.range activity=jlIOy920hBT6hxVd]] of the [[lookup
+          @name lowercase]]{monster}, it emits a shriek audible within 300 feet
+          of it. The [[lookup @name lowercase]]{monster} continues to shriek
+          until the disturbance moves out of range and for 1d4 of the [[lookup
+          @name lowercase]]{monster}'s turns afterward.</p>
         chat: >-
-          <p>When bright light or a creature is within 30 feet of the shrieker,
-          it emits a shriek audible within 300 feet of it. </p>
+          <p>When &amp;reference[bright light] or a creature is within [[lookup
+          @labels.description.range activity=jlIOy920hBT6hxVd]] of the [[lookup
+          @name]]{monster}, it emits a shriek audible within 300 feet of it.</p>
       source:
         custom: ''
         book: ''
@@ -511,18 +512,19 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        jlIOy920hBT6hxVd:
           type: utility
           activation:
             type: reaction
             value: 1
-            condition: ''
+            condition: >-
+              When &reference[bright light] or a creature is within 30 feet of
+              the [[lookup @name lowercase]]{monster}.
             override: false
           consumption:
             targets: []
@@ -532,17 +534,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: ft
             special: ''
             override: false
+            value: '30'
           target:
             template:
               count: ''
@@ -551,7 +555,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -565,10 +570,22 @@ items:
             recovery: []
           roll:
             formula: 1d4
-            name: ''
+            name: Shriek Duration (Rounds)
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          name: Emit Shriek
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: jlIOy920hBT6hxVd
       enchant: {}
       prerequisites:
         level: null
@@ -582,23 +599,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.OqRnKL4703RuReS1
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676384
+      systemVersion: 6.0.0
+      createdTime: 1781478132215
+      modifiedTime: 1781481093841
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!TaK6nQMGqZ0y8gt7.Cvw6LMtbxmSBvVoZ'
   - _id: NAyTy2HfzqvHtjRh
     name: False Appearance
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/consumables/mushrooms/umbontae-bumpy-purple.webp
     system:
       description:
         value: >-
-          <p>While the shrieker remains motionless, it is indistinguishable from
-          an ordinary fungus.</p>
+          <p>While the [[lookup @name lowercase]]{monster} remains motionless,
+          it is indistinguishable from an ordinary fungus.</p>
         chat: ''
       source:
         custom: ''
@@ -612,10 +629,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -630,12 +648,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781478080089
+      modifiedTime: 1781910304720
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!TaK6nQMGqZ0y8gt7.NAyTy2HfzqvHtjRh'
 effects: []
@@ -646,7 +664,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171233630
