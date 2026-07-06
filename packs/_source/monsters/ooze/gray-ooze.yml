@@ -620,16 +620,6 @@ items:
               value: -1
               phase: initial
               priority: null
-            - key: system.description.value
-              type: override
-              value: >-
-                {} <p><strong>Corroded Weapon
-                (@item.flags.world.corrode-weapon-penalty).</strong> This weapon
-                has been corroded, taking a permanent and cumulative -1 penalty
-                to damage rolls. If its penalty drops to -5, the weapon is
-                destroyed.</p>
-              phase: initial
-              priority: null
         disabled: false
         start: null
         duration:
@@ -656,7 +646,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781907491069
-          modifiedTime: 1781907549188
+          modifiedTime: 1783367966197
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -742,8 +732,8 @@ items:
           id="secret-8JkOh4DLk4cb3dhN" class="secret"><p><strong>Foundry
           Note</strong></p><p>You can apply the
           @UUID[Compendium.dnd5e.monsters.Actor.fqbFYtbtkrL53FOC.Item.KO4qRywgiEQ3F004.ActiveEffect.SiRqKDm2qerReaj8]{Corroded
-          Armor} a suit of armor, granting it a cumulative -1 to the AC it
-          offers each time the enchantment is applied.</p></section>
+          Armor} enchantment to a suit of armor, granting it a cumulative -1 to
+          the AC it offers each time the enchantment is applied.</p></section>
         chat: >-
           <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
           @item.name]]. If the target is wearing nonmagical metal armor, its
@@ -935,16 +925,6 @@ items:
               value: -1
               phase: initial
               priority: null
-            - key: system.description.value
-              type: override
-              value: >-
-                {} <p><strong>Corroded Armor
-                (@item.flags.world.corroded-armor-penalty).</strong> This armor
-                has been corroded, taking a permanent and cumulative -1 penalty
-                to the AC it offers. The armor is destroyed if the penalty
-                reduces its AC to 10.</p>
-              phase: initial
-              priority: null
         disabled: false
         start: null
         duration:
@@ -971,7 +951,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781907939398
-          modifiedTime: 1781908035661
+          modifiedTime: 1783367884059
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -990,7 +970,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781908046481
-      modifiedTime: 1781909298586
+      modifiedTime: 1783367939491
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!fqbFYtbtkrL53FOC.KO4qRywgiEQ3F004'

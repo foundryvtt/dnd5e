@@ -697,16 +697,6 @@ items:
               value: -1
               phase: initial
               priority: null
-            - key: system.description.value
-              type: override
-              value: >-
-                {} <p><strong>Corroded Weapon
-                (@item.flags.world.corrode-weapon-penalty).</strong> This weapon
-                has been corroded, taking a permanent and cumulative -1 penalty
-                to damage rolls. If its penalty drops to -5, the weapon is
-                destroyed.</p>
-              phase: initial
-              priority: null
         disabled: false
         start: null
         duration:
@@ -733,7 +723,7 @@ items:
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1781908350102
-          modifiedTime: 1781908370457
+          modifiedTime: 1783367752168
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -766,7 +756,12 @@ items:
           <p>[[/attack extended]]. [[/damage extended]].</p><p>In addition,
           nonmagical armor worn by the target is partly dissolved and takes a
           permanent and cumulative -1 penalty to the AC it offers. The armor is
-          destroyed if the penalty reduces its AC to 10.</p>
+          destroyed if the penalty reduces its AC to 10.</p><section
+          id="secret-EuthiTlnSJwRrtDQ" class="secret"><p><strong>Foundry
+          Note</strong></p><p>You can apply the
+          @UUID[Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.v6ZspnPr8G5hApkL.ActiveEffect.4U4SIb01ypbc6lzv]{Corroded
+          Armor} enchantment to a suit of armor, granting it a cumulative -1 to
+          the AC it offers each time the enchantment is applied.</p></section>
         chat: >-
           <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
           @item.name]]. In addition, nonmagical armor worn by the target is
@@ -923,7 +918,57 @@ items:
       magicalBonus: null
       identifier: pseudopod
       mastery: ''
-    effects: []
+    effects:
+      - name: Corroded Armor
+        img: icons/equipment/chest/breastplate-collared-leather-brown.webp
+        origin: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.v6ZspnPr8G5hApkL
+        type: enchantment
+        _id: 4U4SIb01ypbc6lzv
+        system:
+          changes:
+            - key: flags.world.corroded-armor-penalty
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+            - key: system.armor.value
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>This armor has been corroded, taking a permanent and cumulative -1
+          penalty to the AC it offers. The armor is destroyed if the penalty
+          reduces its AC to 10.</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783367872455
+          modifiedTime: 1783367890262
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!NwQpeeaMxAC3fRft.v6ZspnPr8G5hApkL.4U4SIb01ypbc6lzv
     folder: null
     sort: 0
     ownership:
@@ -936,7 +981,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781909385190
-      modifiedTime: 1781909385190
+      modifiedTime: 1783367948769
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.v6ZspnPr8G5hApkL'

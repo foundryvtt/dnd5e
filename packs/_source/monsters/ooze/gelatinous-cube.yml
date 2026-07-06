@@ -543,8 +543,8 @@ items:
             type: special
             override: false
             condition: >-
-              When a creature takes an action to pull a creature out out the
-              [[lookup @name lowercase]]{monster}
+              When a creature takes an action to pull another creature out out
+              the [[lookup @name lowercase]]{monster}
           consumption:
             scaling:
               allowed: false
@@ -602,8 +602,8 @@ items:
             type: special
             override: false
             condition: >-
-              When a creature takes an action to pull a creature out out the
-              [[lookup @name lowercase]]{monster}
+              When a creature takes an action to pull another creature out out
+              the [[lookup @name lowercase]]{monster}
           consumption:
             scaling:
               allowed: false
@@ -676,7 +676,7 @@ items:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781901062701
-      modifiedTime: 1781909484772
+      modifiedTime: 1783368079371
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.m8prrQUwqGwX6Jyk'
