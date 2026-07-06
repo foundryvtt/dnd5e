@@ -117,7 +117,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( this.target?.testUserPermission(game.user, "OBSERVER") ) return false;
 
     // Hide bloodied status effect from players unless the token is friendly
-    if ( (this.id === this.constructor.ID.BLOODIED) && (game.settings.get("dnd5e", "bloodied") === "player") ) {
+    if ( (this.id === this.constructor.ID.BLOODIED) && (dnd5e.settings.bloodied === "player") ) {
       return this.target?.token?.disposition !== foundry.CONST.TOKEN_DISPOSITIONS.FRIENDLY;
     }
 

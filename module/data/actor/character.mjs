@@ -56,6 +56,10 @@ export default class CharacterData extends CreatureTemplate {
         ...AttributesFields.creature,
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
+          bloodied: new NumberField({
+            nullable: false, min: 0, max: 100, persisted: false, initial: () => CONFIG.DND5E.bloodied.threshold,
+            label: "DND5E.HITPOINTS.Bloodied.label"
+          }),
           max: new NumberField({
             nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride",
             hint: "DND5E.HitPointsOverrideHint"
