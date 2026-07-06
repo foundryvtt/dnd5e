@@ -449,9 +449,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -466,7 +463,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -486,20 +483,22 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: GkVxLIsamEXICEeT
     name: Rejuvenation
     type: feat
-    img: icons/magic/control/debuff-energy-hold-levitate-green.webp
+    img: icons/magic/life/ankh-gold-blue.webp
     system:
       description:
         value: >-
-          <p>If it dies, the naga returns to life in 1d6 days and regains all
-          its hit points.</p><p>Only a wish spell can prevent this trait from
-          functioning.</p>
+          <p>If it dies, the [[lookup @name lowercase]]{monster} returns to life
+          in 1d6 days and regains all its hit points.</p><p>Only a
+          @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell can
+          prevent this trait from functioning.</p>
         chat: >-
-          <p>If it dies, the naga returns to life in 1d6 days and regains all
-          its<strong> hit points</strong>.</p>
+          <p>If it dies, the [[lookup @name]]{monster} returns to life in 1d6
+          days and regains all its hit points.</p>
       source:
         custom: ''
         book: ''
@@ -512,18 +511,18 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ySWjzwp54wZZXxgV:
           type: utility
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: When the [[lookup @name lowercase]]{monster} dies.
             override: false
           consumption:
             targets: []
@@ -533,15 +532,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -552,10 +552,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -566,10 +567,22 @@ items:
             recovery: []
           roll:
             formula: 1d6
-            name: ''
+            name: Days until Revival
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ySWjzwp54wZZXxgV
+          name: ''
       enchant: {}
       prerequisites:
         level: null
@@ -583,11 +596,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825615513
+      systemVersion: 6.0.0
+      createdTime: 1781864496379
+      modifiedTime: 1781864695435
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8ExSFCar5Lbhdo7u.GkVxLIsamEXICEeT'
@@ -646,7 +659,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -657,17 +670,18 @@ items:
   - _id: hQFQz2LiNGpxcRvw
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/fang-tooth-venomous.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           make a [[/save]] saving throw, taking [[/damage average
-          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          activity=Z2wqSwuJDKaRy2TA]] damage on a failed save, or half as much
           damage on a successful one.</p>
         chat: >-
-          <p>The Guardian Naga attacks with its Bite. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]{monster}. The target must make a Constitution saving
+          throw.</p>
       source:
         custom: ''
         book: ''
@@ -691,7 +705,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -729,9 +743,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -740,8 +753,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        AWAHjBHm6x57EofR:
           type: attack
           activation:
             type: action
@@ -756,69 +768,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '10'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
           duration:
             concentration: false
             value: ''
@@ -839,10 +789,90 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: AWAHjBHm6x57EofR
+          name: ''
+        Z2wqSwuJDKaRy2TA:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a creature is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>The target must make a [[/save]] saving throw, taking [[/damage
+              average activity=Z2wqSwuJDKaRy2TA]] damage on a failed save, or
+              half as much damage on a successful one.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -858,19 +888,33 @@ items:
                   enabled: false
                   formula: ''
                 number: 10
-                denomination: '8'
+                denomination: 8
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Z2wqSwuJDKaRy2TA
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -881,19 +925,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745174086849
+      systemVersion: 6.0.0
+      createdTime: 1781863679747
+      modifiedTime: 1781883271429
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8ExSFCar5Lbhdo7u.hQFQz2LiNGpxcRvw'
@@ -908,8 +948,9 @@ items:
           [[/save]] saving throw, taking [[/damage average]] on a failed save,
           or half as much damage on a successful one.</p>
         chat: >-
-          <p>The Guardian Naga attacks with its Spit Poison. The target must
-          make a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]{monster}. The target must make a Constitution saving
+          throw.</p>
       source:
         custom: ''
         book: ''
@@ -953,7 +994,7 @@ items:
             formula: ''
         base:
           number: null
-          denomination: 0
+          denomination: null
           bonus: ''
           types: []
           custom:
@@ -971,17 +1012,16 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleR
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        g5npzTSZtFkxaYhI:
           type: attack
           activation:
             type: action
@@ -996,10 +1036,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1016,7 +1057,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1029,27 +1071,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
               value: ranged
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: g5npzTSZtFkxaYhI
+          name: ''
+        xY71xP3CmurJqBCp:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1059,10 +1112,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1079,10 +1133,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1094,24 +1149,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 10
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 10
                 denomination: 8
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
+            bonus: ''
+            visible: true
+          sort: 200000
+          name: Poison Save
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: xY71xP3CmurJqBCp
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1126,11 +1194,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173990484
+      systemVersion: 6.0.0
+      createdTime: 1781863502581
+      modifiedTime: 1781864580034
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8ExSFCar5Lbhdo7u.PtPZ5aBQPEfbbvla'
@@ -1241,7 +1309,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.kjmjY0zlE6IEiQVL
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1370,7 +1438,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1501,7 +1569,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1612,7 +1680,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1733,7 +1801,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1846,7 +1914,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1972,7 +2040,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3MYDjS6k9IYL0aTj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2086,7 +2154,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2232,7 +2300,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pO4zGe5LmFIYqJiL
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2355,7 +2423,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.cg50KpBkBdPK6vPL
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2485,7 +2553,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pxpb2eOB6bv4phAf
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2602,7 +2670,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.da0a1t2FqaTjRZGT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2748,7 +2816,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.5e1xTohkzqFqbYH4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2888,7 +2956,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JQyigMNPiDnGI18b
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3003,7 +3071,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.XzkJpE6XpZfKjODD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3019,7 +3087,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171206978

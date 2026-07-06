@@ -454,9 +454,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -471,7 +468,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -491,175 +488,23 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
-  - _id: Lq4Toyg4sjkdU4e2
-    name: Legendary Resistance
-    type: feat
-    img: icons/equipment/shield/kite-wooden-oak-glow.webp
-    system:
-      description:
-        value: >-
-          <p>If the tarrasque fails a saving throw, it can choose to succeed
-          instead.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: special
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legres.value
-                value: '3'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.Lq4Toyg4sjkdU4e2'
-  - _id: QmAWameRMoj0gDKt
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The tarrasque has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826831151
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.QmAWameRMoj0gDKt'
   - _id: tE9TjxIMLnqDisjv
     name: Reflective Carapace
     type: feat
-    img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
+    img: icons/magic/defensive/barrier-shield-dome-blue-purple.webp
     system:
       description:
         value: >-
-          <p>Any time the tarrasque is targeted by a magic missile spell, a line
-          spell, or a spell that requires a ranged attack roll, roll a d6. On a
-          1 to 5, the tarrasque is unaffected.</p><p>On a 6, the tarrasque is
+          <p>Any time the [[lookup @name lowercase]]{monster} is targeted by a
+          @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{magic missile}
+          spell, a line spell, or a spell that requires a ranged attack roll,
+          roll a d6. On a 1 to 5, the [[lookup @name lowercase]]{monster} is
+          unaffected.</p><p>On a 6, the [[lookup @name lowercase]]{monster} is
           unaffected, and the effect is reflected back at the caster as though
-          it originated from the tarrasque, turning the caster into the
-          target.</p>
+          it originated from the [[lookup @name lowercase]]{monster}, turning
+          the caster into the target.</p>
         chat: >-
           <p>The tarrasque is unaffected, and the effect is reflected back at
           the caster as though it originated from the tarrasque, turning the
@@ -676,18 +521,22 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        U1GLrVtWwHvia9Ou:
           type: utility
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} is targeted by a
+              @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{magic
+              missile} spell, a line spell, or a spell that requires a ranged
+              attack roll.
             override: false
           consumption:
             targets: []
@@ -696,16 +545,17 @@ items:
               max: ''
             spellSlot: true
           description:
-            chatFlavor: ''
+            chatFlavor: On a result of a 6, the spell is reflected back at the caster.
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -716,10 +566,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -730,77 +581,43 @@ items:
             recovery: []
           roll:
             formula: 1d6
-            name: ''
+            name: Reflect Spell Check
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: U1GLrVtWwHvia9Ou
+          name: Reflect Spell
       enchant: {}
       prerequisites:
         level: null
       identifier: reflective-carapace
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PLBui1FCQuSlEqyI
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676998
+      systemVersion: 6.0.0
+      createdTime: 1781892620222
+      modifiedTime: 1783368419352
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.tE9TjxIMLnqDisjv'
-  - _id: wSqPYa5GWfBsLRbY
-    name: Siege Monster
-    type: feat
-    img: icons/creatures/magical/construct-iron-stomping-yellow.webp
-    system:
-      description:
-        value: <p>The tarrasque deals double damage to objects and structures.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: siege-monster
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.wSqPYa5GWfBsLRbY'
   - _id: Eb4utmmDfdnqLOZV
     name: Multiattack
     type: feat
@@ -808,9 +625,9 @@ items:
     system:
       description:
         value: >-
-          <p>The tarrasque can use its [[/item .3mtn5D2GoD19WDVW]]{Frightful
-          Presence}. It then makes five attacks: one with its [[/item
-          .suUr7bJqBqE7xk2F]]{bite}, two with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} can use its [[/item
+          .WGGtJeKC6RjDyMC2]]{Frightful Presence}. It then makes five attacks:
+          one with its [[/item .suUr7bJqBqE7xk2F]]{bite}, two with its [[/item
           .7DRko62ztr6FjZLA]]{claws}, one with its [[/item
           .E1RZdzEY2qnG2jLn]]{horns}, and one with its [[/item
           .Lo4LU9FBxez1Nzqm]]{tail}. It can use its [[/item
@@ -828,13 +645,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        kOKeR98ICp6DfL0J:
           type: utility
           activation:
             type: action
@@ -849,15 +665,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -868,7 +685,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -885,43 +703,54 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: kOKeR98ICp6DfL0J
       enchant: {}
       prerequisites:
         level: null
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655764
+      systemVersion: 6.0.0
+      createdTime: 1781893107512
+      modifiedTime: 1783366835396
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.Eb4utmmDfdnqLOZV'
   - _id: suUr7bJqBqE7xk2F
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature, it is grappled (escape DC 20). Until this grapple ends,
-          the target is restrained, and the tarrasque can't bite another
-          target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it is &amp;reference[grappled] (escape DC 20). Until this
+          grapple ends, the target is &amp;reference[restrained], and the
+          [[lookup @name lowercase]]{monster} can't [[lookup @item.name
+          lowercase]] another target.</p>
         chat: >-
-          <p>The Tarrasque attacks with its Bite. If the target is a creature,
-          it is grappled. Until this grapple ends, the target is restrained, and
-          the tarrasque can't bite another target.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it is
+          &amp;reference[grappled]. Until this grapple ends, the target is
+          &amp;reference[restrained], and the [[lookup @name]]{monster} can't
+          [[lookup @item.name lowercase]]{monster} another target.</p>
       source:
         custom: ''
         book: ''
@@ -945,7 +774,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -983,9 +812,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -994,8 +822,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        92Xy9sVAW1SGLDqU:
           type: attack
           activation:
             type: action
@@ -1010,13 +837,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: EohMSUbNUDuzkgNi
+              level: {}
           range:
             value: '10'
             units: ft
@@ -1030,7 +860,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1043,49 +874,106 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 92Xy9sVAW1SGLDqU
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
-    effects: []
+      mastery: ''
+    effects:
+      - name: Grappled by Bite
+        img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.KCvt4FdOVJbuZ3T0.Item.suUr7bJqBqE7xk2F
+        transfer: false
+        _id: EohMSUbNUDuzkgNi
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 20). While
+          grappled in this way, you are also &amp;reference[restrained
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781892870998
+          modifiedTime: 1781892908259
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!KCvt4FdOVJbuZ3T0.suUr7bJqBqE7xk2F.EohMSUbNUDuzkgNi
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551149
+      systemVersion: 6.0.0
+      createdTime: 1781892783388
+      modifiedTime: 1781893107512
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.suUr7bJqBqE7xk2F'
   - _id: 7DRko62ztr6FjZLA
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-straight-brown.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Tarrasque attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1147,9 +1035,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1158,8 +1045,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        3uG0isVfCgGXrTki:
           type: attack
           activation:
             type: action
@@ -1174,10 +1060,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1194,7 +1081,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1207,49 +1095,64 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 3uG0isVfCgGXrTki
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551149
+      systemVersion: 6.0.0
+      createdTime: 1781892920730
+      modifiedTime: 1781893107512
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.7DRko62ztr6FjZLA'
   - _id: E1RZdzEY2qnG2jLn
     name: Horns
     type: weapon
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/commodities/bones/horn-antler-brown-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Tarrasque attacks with its Horns.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1273,7 +1176,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -1311,9 +1214,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1322,8 +1224,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BfV0SMIIK4FZErFf:
           type: attack
           activation:
             type: action
@@ -1338,10 +1239,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1358,7 +1260,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1371,55 +1274,68 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 300000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: BfV0SMIIK4FZErFf
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: horns
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551149
+      systemVersion: 6.0.0
+      createdTime: 1781892951310
+      modifiedTime: 1781893107513
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.E1RZdzEY2qnG2jLn'
   - _id: Lo4LU9FBxez1Nzqm
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-strike-bone-orange.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature, it must succeed on a DC 20 Strength saving throw or be
-          knocked prone.</p>
+          a creature, it must succeed on a [[/save]] saving throw or be knocked
+          &amp;reference[prone].</p>
         chat: >-
-          <p>The Tarrasque attacks with its Tail. If the target is a creature,
-          it must make a <strong>Strength</strong> saving throw or be knocked
-          prone.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it must make a Strength
+          saving throw or be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -1481,9 +1397,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1492,8 +1407,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        A1miPzeeyp5pJLvD:
           type: attack
           activation:
             type: action
@@ -1508,10 +1422,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1528,7 +1443,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1541,27 +1457,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: A1miPzeeyp5pJLvD
+          name: ''
+        AKfCvNpKbIMQvSUD:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1571,10 +1498,13 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If the target is a creature, it must succeed on a [[/save]]
+              saving throw or be knocked &amp;reference[prone].</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1591,10 +1521,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1604,14 +1535,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '20'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: AKfCvNpKbIMQvSUD
+          name: Prone Save
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1619,40 +1565,32 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826862424
+      systemVersion: 6.0.0
+      createdTime: 1781893029969
+      modifiedTime: 1781893107513
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.Lo4LU9FBxez1Nzqm'
-  - _id: 3mtn5D2GoD19WDVW
-    name: Frightful Presence
+  - _id: XFNRU61XBt7FvXAM
+    name: Attack
     type: feat
-    img: icons/creatures/unholy/demons-horned-glowing-pink.webp
+    img: icons/skills/melee/blood-slash-foam-red.webp
     system:
       description:
         value: >-
-          <p>Each creature of the tarrasque's choice within 120 feet of it and
-          aware of it must succeed on a DC 17 Wisdom saving throw or become
-          frightened for 1 minute.</p><p>A creature can repeat the saving throw
-          at the end of each of its turns, with disadvantage if the tarrasque is
-          within line of sight, ending the effect on itself on a success. If a
-          creature's saving throw is successful or the effect ends for it, the
-          creature is immune to the tarrasque's Frightful Presence for the next
-          24 hours.</p>
-        chat: >-
-          <p>Each creature of the tarrasque's choice <strong>within 120
-          feet</strong> of it and aware of it must succeed on a Wisdom saving
-          throw.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .7DRko62ztr6FjZLA]]{claw} attack or [[/item .Lo4LU9FBxez1Nzqm]]{tail}
+          attack.</p>
+        chat: ''
       source:
         custom: ''
         book: ''
@@ -1670,8 +1608,647 @@ items:
       requirements: ''
       properties: []
       activities:
+        lUwUScKtK3LzoXmx:
+          type: utility
+          activation:
+            type: legendary
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: lUwUScKtK3LzoXmx
+          name: Strike
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: attack
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781893413376
+      modifiedTime: 1783366851499
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.XFNRU61XBt7FvXAM'
+  - _id: wYuyOwVFLle1u78H
+    name: Move
+    type: feat
+    img: icons/skills/movement/feet-winged-boots-glowing-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} moves up to half its
+          speed.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        HNY4MIUjFzcj7q0B:
+          type: utility
+          activation:
+            type: legendary
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '20'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: HNY4MIUjFzcj7q0B
+          name: Reposition
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: move
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781893430304
+      modifiedTime: 1781893468470
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.wYuyOwVFLle1u78H'
+  - _id: wqgAyjgICylYksGZ
+    name: Chomp
+    type: feat
+    img: icons/creatures/abilities/mouth-teeth-lamprey-red.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .suUr7bJqBqE7xk2F]]{bite} attack or uses its [[/item
+          .7ycN6rrAEJQP3ZOs]]{Swallow}.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        pk6BECQlfPbzUEV4:
+          type: utility
+          activation:
+            type: legendary
+            value: 2
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: pk6BECQlfPbzUEV4
+          name: Gnaw
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: chomp
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.5rr8YdsGtL8WxEuE
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781893473819
+      modifiedTime: 1783366864369
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.wqgAyjgICylYksGZ'
+  - _id: wJImDjEv5xKuE40N
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 250000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781892618896
+      modifiedTime: 1781892621176
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.wJImDjEv5xKuE40N'
+  - _id: gvYK3ldsj5xVO7lA
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can take [[lookup
+          @resources.legact.max]] legendary actions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 700000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781892628177
+      modifiedTime: 1781897153220
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.gvYK3ldsj5xVO7lA'
+  - _id: MjXShh6A2viVlyc8
+    name: Legendary Resistance
+    type: feat
+    img: icons/equipment/shield/targe-steel-blue.webp
+    system:
+      description:
+        value: >-
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: special
+            value: null
+            condition: When the [[lookup @name lowercase]]{monster} fails a saving throw.
+            override: false
+          consumption:
+            targets:
+              - type: attribute
+                value: '1'
+                target: resources.legres.value
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+          name: Persevere
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 550000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.6gjpG1ezpMNyJDGc
+      duplicateSource: Item.MwYDaI9opLjPGaPA
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781892628974
+      modifiedTime: 1781892630415
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.MjXShh6A2viVlyc8'
+  - _id: dBODhEZk3BnyTZwy
+    name: Siege Monster
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @details.type.config.label lowercase]]{monster} deals
+          double damage to objects and structures.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: siege-monster
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/creatures/magical/construct-iron-stomping-yellow.webp
+    effects: []
+    folder: null
+    sort: 425000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781892643766
+      modifiedTime: 1781892648494
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.cSA0EbjlxCbst4gJ
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.dBODhEZk3BnyTZwy'
+  - _id: WGGtJeKC6RjDyMC2
+    name: Frightful Presence
+    type: feat
+    img: icons/creatures/reptiles/dragon-horned-blue.webp
+    system:
+      description:
+        value: >-
+          <p>Each creature of the [[lookup @name lowercase]]{monster}'s choice
+          that is within [[lookup @labels.description.range
+          activity=2VOmvThI0bGdUsMt]] of the [[lookup @name lowercase]]{monster}
+          and aware of it must succeed on a [[/save]] saving throw or become
+          &amp;Reference[frightened] for [[lookup @labels.duration
+          activity=2VOmvThI0bGdUsMt]].</p><p>A creature can repeat the saving
+          throw at the end of each of its turns, ending the effect on itself on
+          a success. If a creature's saving throw is successful or the effect
+          ends for it, the creature is immune to the [[lookup @name
+          lowercase]]{mosnter}'s [[lookup @item.name]] for the next 24
+          hours.</p>
+        chat: >-
+          <p>Each creature of the [[lookup @name]]{monster}'s choice that is
+          within [[lookup @labels.description.range activity=2VOmvThI0bGdUsMt]]
+          of the [[lookup @name]]{monster} and aware of it must succeed on a
+          Wisdom saving throw. A creature can repeat the saving throw at the end
+          of each of its turns.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        2VOmvThI0bGdUsMt:
           type: save
           activation:
             type: action
@@ -1686,13 +2263,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: JG2uXIqEJlTnRHpq
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '120'
             units: ft
@@ -1707,6 +2290,7 @@ items:
               width: ''
               height: ''
               units: any
+              stationary: false
             affects:
               count: ''
               type: creature
@@ -1719,56 +2303,126 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
-              calculation: ''
-              formula: '17'
-          sort: 0
+              calculation: cha
+              formula: '16'
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Fear Save
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 2VOmvThI0bGdUsMt
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: frightful-presence
-    effects: []
-    folder: null
-    sort: 0
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Frightful Presence
+        img: icons/creatures/reptiles/dragon-horned-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.A3azHlbNcHLRgogu
+        transfer: false
+        _id: JG2uXIqEJlTnRHpq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] for 1
+          minute.</p><p>You can repeat the saving throw at the end of each of
+          your turns, ending the effect on yourself on a success. If your saving
+          throw is successful or the effect ends for you, you are immune to the
+          tarrasque's Frightful Presence for the next 24 hours.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781893106449
+          modifiedTime: 1781893159230
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!KCvt4FdOVJbuZ3T0.WGGtJeKC6RjDyMC2.JG2uXIqEJlTnRHpq
+    folder: 5cwqjeuI64dkrUa8
+    sort: 700000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nb6zOmwIIJBLz4iT
-      duplicateSource: null
-      coreVersion: '13.351'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.A3azHlbNcHLRgogu
+      duplicateSource: Item.MsuiWclOG7d6FE0U
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826873404
+      systemVersion: 6.0.0
+      createdTime: 1781893106449
+      modifiedTime: 1781893185650
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.3mtn5D2GoD19WDVW'
-  - _id: 7ycN6rrAEJQP3ZOs
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.WGGtJeKC6RjDyMC2'
+  - _id: JKnHbj3EFyloyYpd
     name: Swallow
-    type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    type: feat
+    img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
     system:
       description:
         value: >-
-          <p>The tarrasque makes one bite attack against a Large or smaller
-          creature it is grappling. If the attack hits, the target takes the
-          bite's damage, the target is swallowed, and the grapple ends. While
-          swallowed, the creature is blinded and restrained, it has total cover
-          against attacks and other effects outside the tarrasque, and it takes
-          56 (16d6) acid damage at the start of each of the tarrasque's
-          turns.</p><p>If the tarrasque takes 60 damage or more on a single turn
-          from a creature inside it, the tarrasque must succeed on a DC 20
-          Constitution saving throw at the end of that turn or regurgitate all
-          swallowed creatures, which fall prone in a space within 10 feet of the
-          tarrasque. If the tarrasque dies, a swallowed creature is no longer
-          restrained by it and can escape from the corpse by using 30 feet of
-          movement, exiting prone.</p>
-        chat: <p>The Tarrasque attacks with its Swallow.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .suUr7bJqBqE7xk2F]]{Bite} attack against a Medium or smaller target it
+          is &amp;reference[grappling]. If the attack hits, the target is also
+          swallowed, and the grapple ends. While swallowed, the target is
+          &amp;reference[blinded] and &amp;reference[restrained], it has
+          &amp;reference[total cover] against attacks and other effects outside
+          the [[lookup @name lowercase]]{monster}, and it takes [[/damage
+          average activity=JiBTCgEtAZs60k7R]] damage at the start of each of the
+          [[lookup @name lowercase]]{monster}'s turns. A [[lookup @name
+          lowercase]]{monster} can have only one creature swallowed at a
+          time.</p><p>If the [[lookup @name lowercase]]{monster} takes 30 damage
+          or more on a single turn from the swallowed creature, the [[lookup
+          @name lowercase]]{monster} must succeed on a [[/save
+          activity=2pCVkETAYg7qALRu]] saving throw at the end of that turn or
+          regurgitate the creature, which falls prone in a space within 10 feet
+          of the [[lookup @name lowercase]]{monster}. If the [[lookup @name
+          lowercase]]{monster} dies, a swallowed creature is no longer
+          restrained by it and can escape from the corpse by using 15 feet of
+          movement, exiting &amp;reference[prone].</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1776,84 +2430,190 @@ items:
         license: CC-BY-4.0
         rules: '2014'
         revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: null
-        long: null
-        units: ''
-        reach: null
       uses:
         max: ''
         recovery: []
         spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: 16
-          denomination: 6
-          bonus: ''
-          types:
-            - acid
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
       type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
       activities:
-        KKNpoOVnXklx84vr:
+        JiBTCgEtAZs60k7R:
           type: damage
-          _id: KKNpoOVnXklx84vr
+          activation:
+            type: special
+            value: 1
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts its turn while
+              it has a creature swallowed.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>A swallowed creature takes [[/damage average
+              activity=JiBTCgEtAZs60k7R]] damage at the start of each of the
+              [[lookup @name lowercase]]{monster}'s turns.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: spec
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 16
+                denomination: 6
+                bonus: ''
+                types:
+                  - acid
+                scaling:
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: JiBTCgEtAZs60k7R
+          name: Start of Turn Digestion Damage
+        CfImu0j0eosWKdUO:
+          type: utility
+          name: Swallow Creature
+          img: ''
           sort: 0
           activation:
             type: action
             override: false
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} hits a creature it
+              has &reference[grappled apply=false] with its
+              @UUID[Compendium.dnd5e.monsters.Actor.x47ZnpHfYl0ptDM9.Item.4fNbTxkAFYHxDdJX]{Bite}.
           consumption:
             scaling:
               allowed: false
             spellSlot: true
             targets: []
           description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: 51z7ys99aMd1N9tG
+              level:
+                min: null
+                max: null
+          flags: {}
+          range:
+            units: touch
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          _id: CfImu0j0eosWKdUO
+        2pCVkETAYg7qALRu:
+          type: save
+          name: Regurgitate Creature Save
+          _id: 2pCVkETAYg7qALRu
+          img: ''
+          sort: 200000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} takes 60 or more
+              damage on a single turn form a swallowed creature.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>If the [[lookup @name lowercase]]{monster} takes 60 damage or
+              more on a single turn from the swallowed creature, the [[lookup
+              @name lowercase]]{monster} must succeed on a [[/save
+              activity=2pCVkETAYg7qALRu]] saving throw at the end of that turn
+              or regurgitate the creature, which falls prone in a space within
+              10 feet of the [[lookup @name lowercase]]{monster}. If the
+              [[lookup @name lowercase]]{monster} dies, a swallowed creature is
+              no longer restrained by it and can escape from the corpse by using
+              30 feet of movement, exiting &amp;reference[prone].</p>
             chatFlavor: ''
           duration:
             units: inst
@@ -1864,14 +2624,18 @@ items:
           range:
             units: self
             override: false
+            special: ''
           target:
             template:
               contiguous: false
+              stationary: false
               units: ft
               type: ''
             affects:
               choice: false
-              type: ''
+              type: self
+              count: ''
+              special: ''
             override: false
             prompt: true
           uses:
@@ -1887,411 +2651,93 @@ items:
             requireMagic: false
             identifier: ''
           damage:
-            critical:
-              allow: false
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 16
-                denomination: 6
-                bonus: ''
-                types:
-                  - acid
-          name: ''
-          img: ''
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '20'
+            visible: true
+            bonus: ''
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
       identifier: swallow
-      mastery: ''
-    effects: []
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Swallowed
+        img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.x47ZnpHfYl0ptDM9.Item.0QJeW80m89X0RLNz
+        transfer: false
+        _id: 51z7ys99aMd1N9tG
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been swallowed by the tarrasque. You are
+          &amp;reference[blinded apply=false], &amp;reference[restrained
+          apply=false], and have &amp;reference[total cover] against attacks and
+          other effects outsdie the tarrasque.</p><p>You also take [[/damage
+          average 16d6 acid]] damage at the start of each of the tarrasque's
+          turns.</p><p>If the tarrasque takes 60 damage or more on a single turn
+          from you, the tarrasque must succceed on a Constitution saving throw
+          or regurgitate you, causing you to fall &amp;reference[prone] in a
+          space within 10 feet of the tarrasque. If the tarrasque dies, you are
+          no longer restrained by it and can escape from the corpse by using 30
+          feet of movement, exiting &amp;reference[prone].</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+          - restrained
+          - coverTotal
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781893253405
+          modifiedTime: 1781893334184
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.6aBDwlIsxceFMXxL.ActiveEffect.5YoZO3QgfMTcLhgh
+          duplicateSource: Item.ePcEJFaXQWlel7lw.ActiveEffect.5YoZO3QgfMTcLhgh
+          exportSource: null
+        _key: >-
+          !actors.items.effects!KCvt4FdOVJbuZ3T0.JKnHbj3EFyloyYpd.51z7ys99aMd1N9tG
     folder: null
-    sort: 0
+    sort: 750000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826941357
+      systemVersion: 6.0.0
+      createdTime: 1781893253405
+      modifiedTime: 1781893379740
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.7ycN6rrAEJQP3ZOs'
-  - _id: sBnQiUt83GYUkKBw
-    name: Legendary Actions
-    type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
-    system:
-      description:
-        value: >-
-          <p>The tarrasque can take 3 legendary actions. Only one legendary
-          action option can be used at a time and only at the end of another
-          creature's turn. The tarrasque regains spent legendary actions at the
-          start of its turn.</p>
-        chat: <p>The tarrasque can take 3 legendary actions.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676998
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.sBnQiUt83GYUkKBw'
-  - _id: XFNRU61XBt7FvXAM
-    name: Attack
-    type: feat
-    img: icons/skills/melee/blood-slash-foam-red.webp
-    system:
-      description:
-        value: >-
-          <p>The tarrasque makes one [[/item .7DRko62ztr6FjZLA]]{claw} attack or
-          [[/item .Lo4LU9FBxez1Nzqm]]{tail} attack.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: attack
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826969643
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.XFNRU61XBt7FvXAM'
-  - _id: wYuyOwVFLle1u78H
-    name: Move
-    type: feat
-    img: icons/skills/movement/feet-winged-boots-brown.webp
-    system:
-      description:
-        value: <p>The tarrasque moves up to half its speed.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: move
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.wYuyOwVFLle1u78H'
-  - _id: wqgAyjgICylYksGZ
-    name: Chomp
-    type: feat
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
-    system:
-      description:
-        value: >-
-          <p>The tarrasque makes one [[/item .suUr7bJqBqE7xk2F]]{bite} attack or
-          uses its [[/item .7ycN6rrAEJQP3ZOs]]{Swallow}.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 2
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: chomp
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.5rr8YdsGtL8WxEuE
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826999122
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!KCvt4FdOVJbuZ3T0.wqgAyjgICylYksGZ'
+    _key: '!actors.items!KCvt4FdOVJbuZ3T0.JKnHbj3EFyloyYpd'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -2300,7 +2746,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171222116
