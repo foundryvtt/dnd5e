@@ -54,8 +54,8 @@ system:
     hp:
       value: 85
       max: 85
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 10d10 + 30
     init:
       ability: ''
@@ -270,7 +270,7 @@ system:
       roll:
         min: null
         max: null
-        mode: 0
+        mode: 1
     prf:
       value: 0
       ability: cha
@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,17 +480,21 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: hon1LZGigQRl2jBn
     name: Two Heads
     type: feat
-    img: icons/magic/death/skull-horned-goat-pentagram-red.webp
+    img: icons/creatures/magical/construct-face-stone-pink.webp
     system:
       description:
         value: >-
-          <p>The ettin has advantage on Wisdom (Perception) checks and on saving
-          throws against being blinded, charmed, deafened, frightened, stunned,
-          and knocked unconscious.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks and on saving throws against being
+          &amp;reference[blinded apply=false], &amp;reference[charmed
+          apply=false], &amp;reference[deafened apply=false],
+          &amp;reference[frightened apply=false], &amp;reference[stunned
+          apply=false], and knocked &amp;reference[unconscious apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -507,10 +508,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -525,23 +527,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gWpp0N06HvS937Go
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402426698
+      systemVersion: 6.0.0
+      createdTime: 1781805242210
+      modifiedTime: 1781805290043
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.hon1LZGigQRl2jBn'
   - _id: 0NvLts9eWaCvcOOn
     name: Wakeful
     type: feat
-    img: icons/creatures/eyes/lizard-single-slit-blue.webp
+    img: icons/creatures/eyes/human-single-blue.webp
     system:
       description:
         value: >-
-          <p>When one of the ettin's heads is asleep, its other head is
-          awake.</p>
+          <p>When one of the [[lookup @name lowercase]]{monster}'s heads is
+          asleep, its other head is awake.</p>
         chat: ''
       source:
         custom: ''
@@ -555,10 +557,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -573,12 +576,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.T2gLBBjrHTbLTdGc
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781805402074
+      modifiedTime: 1781805415096
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.0NvLts9eWaCvcOOn'
   - _id: FcbmWHMk3H4MGdxy
@@ -588,9 +591,9 @@ items:
     system:
       description:
         value: >-
-          <p>The ettin makes two attacks: one with its [[/item
-          .T1QQrbvnvnM73eIe]]{battleaxe} and one with its [[/item
-          .5ri5zr7IJKsaZNF7]]{morningstar}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .T1QQrbvnvnM73eIe]]{Battleaxe} and one with its [[/item
+          .5ri5zr7IJKsaZNF7]]{Morningstar}.</p>
         chat: ''
       source:
         custom: ''
@@ -604,13 +607,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        LcrGZKFaGHzyMUUp:
           type: utility
           activation:
             type: action
@@ -625,15 +627,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -644,7 +647,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -661,7 +665,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: LcrGZKFaGHzyMUUp
       enchant: {}
       prerequisites:
         level: null
@@ -675,11 +687,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655774
+      systemVersion: 6.0.0
+      createdTime: 1781805360268
+      modifiedTime: 1781805368095
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.FcbmWHMk3H4MGdxy'
@@ -690,7 +702,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ettin attacks with its Battleaxe.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -754,7 +768,7 @@ items:
         conditions: ''
       properties:
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -763,8 +777,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        lhhKYuLx7INexKvy:
           type: attack
           activation:
             type: action
@@ -779,10 +792,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -799,7 +813,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -812,24 +827,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: lhhKYuLx7INexKvy
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: battleaxe
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -839,11 +867,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.I0WocDSuNpGJayPb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551238
+      systemVersion: 6.0.0
+      createdTime: 1781805311810
+      modifiedTime: 1781805325572
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.T1QQrbvnvnM73eIe'
@@ -854,7 +882,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ettin attacks with its Morningstar.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -917,7 +947,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -926,8 +956,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        1WIZlTWUCSRIx78G:
           type: attack
           activation:
             type: action
@@ -942,10 +971,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -962,7 +992,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -975,24 +1006,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 1WIZlTWUCSRIx78G
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: morningstar
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1002,11 +1046,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.dX8AxCh9o0A9CkT3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551238
+      systemVersion: 6.0.0
+      createdTime: 1781805332587
+      modifiedTime: 1781805343278
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.5ri5zr7IJKsaZNF7'
@@ -1018,11 +1062,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1726171222553
-  modifiedTime: 1726171443186
+  modifiedTime: 1781805305341
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!KLCkHep28HBfdsky'

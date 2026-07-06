@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,6 +480,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: P38O0pGKUKXuYgd0
     name: Plate Armor
@@ -554,7 +552,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -569,8 +567,8 @@ items:
     system:
       description:
         value: >-
-          <p>The giant makes two [[/item .c8b8jy3sM3Z8gxm0]]{greatsword}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .c8b8jy3sM3Z8gxm0]]{Greatsword} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -584,13 +582,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EVPB1DSqe2msles1:
           type: utility
           activation:
             type: action
@@ -605,15 +602,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -624,7 +622,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -641,7 +640,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: EVPB1DSqe2msles1
       enchant: {}
       prerequisites:
         level: null
@@ -655,22 +662,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655054
+      systemVersion: 6.0.0
+      createdTime: 1781805497201
+      modifiedTime: 1781805502841
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!45Z5kogZEhawX1Ey.vgN2DlqQtt77mxKO'
   - _id: c8b8jy3sM3Z8gxm0
     name: Greatsword
     type: weapon
-    img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+    img: icons/weapons/swords/sword-guard-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Fire Giant attacks with its Greatsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -736,7 +745,7 @@ items:
         - hvy
         - rch
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -745,8 +754,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        8i6ZXsc5CRmGDsTJ:
           type: attack
           activation:
             type: action
@@ -761,10 +769,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -781,7 +790,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -794,24 +804,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 8i6ZXsc5CRmGDsTJ
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: greatsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -821,22 +844,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107549926
+      systemVersion: 6.0.0
+      createdTime: 1781805463877
+      modifiedTime: 1781805479469
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!45Z5kogZEhawX1Ey.c8b8jy3sM3Z8gxm0'
   - _id: DgNvJ2F0HSMya3hp
     name: Rock
     type: weapon
-    img: icons/magic/earth/projectile-stone-ball-brown.webp
+    img: icons/magic/earth/projectile-boulder-yellow.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Fire Giant attacks with its Rock.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -899,19 +924,17 @@ items:
         dt: null
         conditions: ''
       properties:
-        - hvy
         - thr
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleR
+        value: improv
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        uVvDTCy8C3KVOZv8:
           type: attack
           activation:
             type: action
@@ -926,10 +949,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -946,7 +970,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -966,17 +991,30 @@ items:
             flat: false
             type:
               value: ranged
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: uVvDTCy8C3KVOZv8
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: rock
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -986,11 +1024,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173384716
+      systemVersion: 6.0.0
+      createdTime: 1781805425692
+      modifiedTime: 1781805451858
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!45Z5kogZEhawX1Ey.DgNvJ2F0HSMya3hp'
@@ -1002,7 +1040,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171201463
