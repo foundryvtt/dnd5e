@@ -1,4 +1,5 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
+import ConditionData from "../../../data/active-effect/condition.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
   formatLength,
@@ -253,12 +254,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       conditionIds.add(id);
       const existing = this.actor.effects.get(id);
       const { disabled } = existing ?? {};
-      arr.push({
+      const condition = {
         name, reference,
         id: k,
         img: existing?.img ?? img,
         disabled: existing ? disabled : true
-      });
+      };
+      if ( ConditionData.hasLevels(k) ) condition.level = this.actor.system.conditions?.[k] ?? 0;
+      arr.push(condition);
       return arr;
     }, []);
 
