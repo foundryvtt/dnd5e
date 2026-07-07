@@ -161,6 +161,14 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 
   /* -------------------------------------------- */
 
+  /**
+   * Maximum levels deep that starting equipment entries can be nested.
+   * @type {number}
+   */
+  static MAX_DEPTH = 4;
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return {
