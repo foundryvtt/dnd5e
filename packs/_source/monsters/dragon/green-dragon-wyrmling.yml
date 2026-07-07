@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,22 +481,24 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: pFFlq9KvfXzAxhU8
     name: Poison Breath
     type: feat
-    img: icons/magic/acid/projectile-smoke-glowing.webp
+    img: icons/skills/toxins/cauldron-bubbles-overflow-green.webp
     system:
       description:
         value: >-
-          <p>The dragon exhales poisonous gas in a 15-foot cone. Each creature
-          in that area must make a [[/save]] saving throw, taking [[/damage
-          average]] damage on a failed save, or half as much damage on a
-          successful one.</p>
+          <p>The [[lookup @name lowercase]]{monster} exhales poisonous gas in a
+          [[lookup @labels.description.template activity=MiNhGAqISi8NVtZa]].
+          Each creature in that area must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
-          <p>The dragon exhales poisonous gas in a 15-foot cone. Each creature
-          in that area must make a <strong>Constitution</strong> saving
-          throw.</p>
+          <p>The [[lookup @name]]{monster} exhales poisonous gas in a [[lookup
+          @labels.description.template activity=MiNhGAqISi8NVtZa]]. Each
+          creature in that area must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -515,13 +514,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        MiNhGAqISi8NVtZa:
           type: save
           activation:
             type: action
@@ -531,17 +529,16 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -562,9 +559,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -576,53 +574,68 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
                 denomination: 6
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
-              calculation: ''
+              calculation: con
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: MiNhGAqISi8NVtZa
+          name: Exhale Poison
       enchant: {}
       prerequisites:
         level: null
       identifier: poison-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JAEclghgOT24pQD9
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745449881089
+      systemVersion: 6.0.0
+      createdTime: 1781557132616
+      modifiedTime: 1781605757432
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KH6ZrUiUOKQCOlRH.pFFlq9KvfXzAxhU8'
   - _id: zii9P95YmeE6b4km
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Green Dragon Wyrmling attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -685,7 +698,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -694,8 +707,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bnR3jz0lzHjGfBBV:
           type: attack
           activation:
             type: action
@@ -710,10 +722,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -730,7 +743,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -743,36 +757,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 6
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: bnR3jz0lzHjGfBBV
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -782,21 +807,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551230
+      systemVersion: 6.0.0
+      createdTime: 1781557135397
+      modifiedTime: 1781557156128
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KH6ZrUiUOKQCOlRH.zii9P95YmeE6b4km'
-  - _id: 8U6fHYSsBSDhYHpr
+  - _id: NKSFy0qwS1M30Mb4
     name: Amphibious
     type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
     system:
       description:
-        value: <p>The dragon can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       source:
         custom: ''
@@ -810,32 +837,37 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: amphibious
+      advancement: {}
+      crewed: false
     effects: []
-    folder: null
-    sort: 0
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 125000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781557130325
+      modifiedTime: 1781557130325
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!KH6ZrUiUOKQCOlRH.8U6fHYSsBSDhYHpr'
+    _key: '!actors.items!KH6ZrUiUOKQCOlRH.NKSFy0qwS1M30Mb4'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -844,7 +876,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171222365

@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,15 +480,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 5fAK2gZdIiYxLNzK
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The White Dragon Wyrmling attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -554,7 +554,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -563,8 +563,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EBlF7BNUIfnwABmF:
           type: attack
           activation:
             type: action
@@ -579,10 +578,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -599,7 +599,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -612,36 +613,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 4
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: EBlF7BNUIfnwABmF
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -651,29 +663,30 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107554041
+      systemVersion: 6.0.0
+      createdTime: 1781557686283
+      modifiedTime: 1781557700815
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!vc2TAgIuq4yInjbf.5fAK2gZdIiYxLNzK'
   - _id: 8ZXdgzpI6WytT63w
     name: Cold Breath
     type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+    img: icons/magic/water/projectile-ice-orb-white.webp
     system:
       description:
         value: >-
-          <p>The dragon exhales an icy blast of hail in a 15-foot cone. Each
-          creature in that area must make a [[/save]] saving throw, taking
-          [[/damage average]] damage on a failed save, or half as much damage on
-          a successful one.</p>
+          <p>The [[lookup @name lowercase]]{monster} exhales an icy blast of
+          hail in a [[lookup @labels.description.template
+          activity=UF4fJlhyYiLM7XeM]]. Each creature in that area must make a
+          [[/save]] saving throw, taking [[/damage average]] damage on a failed
+          save, or half as much damage on a successful one.</p>
         chat: >-
-          <p>The dragon exhales an icy blast of hail in a 15-foot cone. Each
-          creature in that area must make a <strong>Constitution</strong> saving
-          throw.</p>
+          <p>The [[lookup @name]]{monster} exhales an icy blast of hail in a
+          [[lookup @labels.description.template activity=UF4fJlhyYiLM7XeM]].
+          Each creature in that area must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -694,8 +707,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        UF4fJlhyYiLM7XeM:
           type: save
           activation:
             type: action
@@ -705,17 +717,16 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -736,9 +747,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -750,24 +762,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 5
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 5
                 denomination: 8
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
-              calculation: ''
+              calculation: con
               formula: '12'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: UF4fJlhyYiLM7XeM
+          name: Exhale Ice
       enchant: {}
       prerequisites:
         level: null
@@ -781,11 +806,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450516684
+      systemVersion: 6.0.0
+      createdTime: 1781557607256
+      modifiedTime: 1781557677475
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!vc2TAgIuq4yInjbf.8ZXdgzpI6WytT63w'
@@ -797,7 +822,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171265352

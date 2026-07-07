@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,53 +481,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
-  - _id: Pu7Q4aCRVqVqVkeM
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The dragon turtle can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!ijsfYEDqSuwQXwNN.Pu7Q4aCRVqVqVkeM'
   - _id: 2m2mkUSBJi2QOZje
     name: Multiattack
     type: feat
@@ -538,8 +490,8 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon turtle makes three attacks: one with its [[/item
-          .7QJr0VCtVk2wtZ78]]{bite} and two with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks: one
+          with its [[/item .7QJr0VCtVk2wtZ78]]{bite} and two with its [[/item
           .P4joxK4BwyYsPfJv]]{claws}. It can make one [[/item
           .zNDI1LvLKZ9Hi2Ew]]{tail} attack in place of its two claw attacks.</p>
         chat: ''
@@ -555,13 +507,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        pPPba24FXwuHsnbU:
           type: utility
           activation:
             type: action
@@ -576,15 +527,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -595,7 +547,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -612,7 +565,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: pPPba24FXwuHsnbU
       enchant: {}
       prerequisites:
         level: null
@@ -626,22 +587,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448418235
+      systemVersion: 6.0.0
+      createdTime: 1781550294809
+      modifiedTime: 1783371895976
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ijsfYEDqSuwQXwNN.2m2mkUSBJi2QOZje'
   - _id: 7QJr0VCtVk2wtZ78
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Dragon Turtle attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -704,7 +667,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -713,8 +676,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        K99jewYF6rSzbYcU:
           type: attack
           activation:
             type: action
@@ -729,10 +691,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -749,7 +712,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -762,24 +726,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: K99jewYF6rSzbYcU
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -789,22 +766,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448417424
+      systemVersion: 6.0.0
+      createdTime: 1781550305837
+      modifiedTime: 1781550365433
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ijsfYEDqSuwQXwNN.7QJr0VCtVk2wtZ78'
   - _id: P4joxK4BwyYsPfJv
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-lizard-white-black.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Dragon Turtle attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -867,7 +846,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -876,8 +855,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dB1ARqTthnAXU642:
           type: attack
           activation:
             type: action
@@ -892,10 +870,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -912,7 +891,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -925,24 +905,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dB1ARqTthnAXU642
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -952,18 +945,18 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448417424
+      systemVersion: 6.0.0
+      createdTime: 1781550389199
+      modifiedTime: 1781550418379
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ijsfYEDqSuwQXwNN.P4joxK4BwyYsPfJv'
   - _id: zNDI1LvLKZ9Hi2Ew
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-swipe-green.webp
     system:
       description:
         value: >-
@@ -972,8 +965,9 @@ items:
           up to 10 feet away from the dragon turtle and knocked
           &amp;Reference[prone].</p>
         chat: >-
-          <p>The Dragon Turtle attacks with its Tail. If the target is a
-          creature, it must make a <strong>Strength</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it must make a Strength
+          saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1045,8 +1039,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BhqI2QbOe0Qee4TM:
           type: attack
           activation:
             type: action
@@ -1061,10 +1054,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1081,7 +1075,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1107,14 +1102,21 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: BhqI2QbOe0Qee4TM
+        cW425UuJbXKMBAPa:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1124,10 +1126,14 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If the target is a creature, it must succeed on a [[/save]]
+              saving throw or be pushed up to 10 feet away from the dragon
+              turtle and knocked &amp;Reference[prone].</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1144,10 +1150,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1157,14 +1164,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '20'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: cW425UuJbXKMBAPa
+          name: Prone Save
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1175,38 +1197,35 @@ items:
     sort: 400000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448451475
+      systemVersion: 6.0.0
+      createdTime: 1781550427806
+      modifiedTime: 1781550515403
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ijsfYEDqSuwQXwNN.zNDI1LvLKZ9Hi2Ew'
   - _id: UjT93YD55B87gMqZ
     name: Steam Breath
     type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+    img: icons/magic/fire/projectile-fireball-embers-yellow.webp
     system:
       description:
         value: >-
-          <p>The dragon turtle exhales scalding steam in a 60-foot cone. Each
-          creature in that area must make a [[/save]] saving throw, taking
+          <p>The [[lookup @name lowercase]]{monster} exhales scalding steam in a
+          [[lookup @labels.description.template activity=4P1o1KZZ4sUzsAOu]].
+          Each creature in that area must make a [[/save]] saving throw, taking
           [[/damage average]] damage on a failed save, or half as much damage on
           a successful one.</p><p>Being underwater doesn't grant resistance
           against this damage.</p>
         chat: >-
-          <p>The dragon turtle exhales scalding steam in a 60-foot cone. Each
-          creature in that area must make a <strong>Constitution</strong> saving
-          throw.</p>
+          <p>The [[lookup @name]]{monster} exhales scalding steam in a [[lookup
+          @labels.description.template activity=4P1o1KZZ4sUzsAOu]]. Each
+          creature in that area must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1222,13 +1241,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        4P1o1KZZ4sUzsAOu:
           type: save
           activation:
             type: action
@@ -1238,17 +1256,16 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1269,9 +1286,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1283,24 +1301,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 15
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 15
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '18'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 4P1o1KZZ4sUzsAOu
+          name: Exhale Steam
       enchant: {}
       prerequisites:
         level: null
@@ -1314,14 +1345,67 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4UuuUKjATTixrZGP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745448483290
+      systemVersion: 6.0.0
+      createdTime: 1781550543822
+      modifiedTime: 1781550901986
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ijsfYEDqSuwQXwNN.UjT93YD55B87gMqZ'
+  - _id: kz0dD5J9FQTTryWp
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 125000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781550269624
+      modifiedTime: 1781550269624
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!ijsfYEDqSuwQXwNN.kz0dD5J9FQTTryWp'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1330,7 +1414,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171251099
