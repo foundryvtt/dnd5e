@@ -507,7 +507,34 @@ Hooks.once("setup", function() {
   document.body.append(probe);
   document.documentElement.style.setProperty("--dnd5e-scrollbar-width", `${probe.offsetWidth - probe.clientWidth}px`);
   probe.remove();
+
+  // Patch Document Index
+  _originalLookup = game.documentIndex.lookup;
+  game.documentIndex.lookup = documentIndexLookup;
 });
+
+/* --------------------------------------------- */
+
+let _originalLookup;
+
+/**
+ * Return entries that match the given string prefix.
+ * @param {string} query                      The search prefix or phrase.
+ * @param {object} [options]                  Additional options to configure behaviour.
+ * @param {string[]} [options.ignoreCompendiumFiltering]  Don't filter based on pack source configuration.
+ * @returns {Record<string, WordTreeEntry[]>} A number of entries that have the given prefix, grouped by document
+ *                                            type.
+ */
+function documentIndexLookup(query, { ignoreCompendiumFiltering, ...options }={}) {
+  return _originalLookup.call(this, query, {
+    ...options,
+    filterEntries: entry => {
+      if ( fromUuidSync(entry.uuid, { strict: false })?.system?.container ) return false;
+      if ( !ignoreCompendiumFiltering && (dnd5e.settings.packSourceConfiguration[entry.pack] === false) ) return false;
+      return options.filterEntries?.(entry) ?? true;
+    }
+  });
+}
 
 /* --------------------------------------------- */
 
@@ -589,6 +616,9 @@ Hooks.once("ready", function() {
 
   // Register items by type
   dnd5e.registry.items.initialize();
+
+  // Re-index any item compendiums to ensure container property is indexed
+  game.packs.filter(p => p.documentName === "Item").forEach(p => p.getIndex());
 
   // Chat message listeners
   documents.ChatMessage5e.activateListeners();
