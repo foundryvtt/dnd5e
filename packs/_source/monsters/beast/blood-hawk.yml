@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: TePImx0XTnaVC3HB
     name: Keen Sight
@@ -489,8 +487,8 @@ items:
     system:
       description:
         value: >-
-          <p>The hawk has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on sight.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on sight.</p>
         chat: ''
       source:
         custom: ''
@@ -504,116 +502,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: check
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: The hawk focuses its gaze!
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          check:
-            ability: ''
-            dc: {}
-            associated: []
-          sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: The hawk focuses its gaze!
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 2d20kh + @skills.prc.total
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+      properties:
+        - trait
+      activities: {}
       enchant: {}
       prerequisites:
         level: null
@@ -627,71 +521,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781524597157
+      modifiedTime: 1781530684295
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!AJiJW7K957aJJCN6.TePImx0XTnaVC3HB'
-  - _id: H3wZQRau9dswB1Fr
-    name: Pack Tactics
-    type: feat
-    img: icons/creatures/abilities/paw-print-orange.webp
-    system:
-      description:
-        value: >-
-          <p>The hawk has<strong> advantage </strong>on an attack roll against a
-          creature if at least one of the hawk's allies is within <strong>5
-          ft.</strong> of the creature and the ally isn't incapacitated.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: pack-tactics
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!AJiJW7K957aJJCN6.H3wZQRau9dswB1Fr'
   - _id: Jt0l1S2jZWGIiXjE
     name: Beak
     type: weapon
-    img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
+    img: icons/commodities/bones/beak-hooked-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Blood Hawk attacks with its Beak.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -753,9 +600,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -764,8 +610,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        a6UToidUlUs7KonC:
           type: attack
           activation:
             type: action
@@ -780,10 +625,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -800,7 +646,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -813,20 +660,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: a6UToidUlUs7KonC
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -841,14 +700,69 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741116964889
+      systemVersion: 6.0.0
+      createdTime: 1781524620985
+      modifiedTime: 1781524652649
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!AJiJW7K957aJJCN6.Jt0l1S2jZWGIiXjE'
+  - _id: Pv2BNg5mSrUY6U1g
+    name: Pack Tactics
+    type: feat
+    img: icons/creatures/abilities/paw-print-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on an attack
+          roll against a creature if at least one of the [[lookup @name
+          lowercase]]{monster}'s allies is within 5 feet of the creature and the
+          ally isn't &amp;reference[incapacitated apply=false].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: pack-tactics
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.JW8bXggOMBx1S6tF.Item.yb6o6KfKlg9bGhqA
+      duplicateSource: Item.bYY0d7kkeVIYaNof
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781524604185
+      modifiedTime: 1781525791588
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!AJiJW7K957aJJCN6.Pv2BNg5mSrUY6U1g'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -857,7 +771,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171209626

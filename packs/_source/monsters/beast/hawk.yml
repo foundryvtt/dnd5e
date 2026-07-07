@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,63 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
-  - _id: hHbY6NAFUWVlz7tj
-    name: Keen Sight
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The eagle has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on sight.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: Hawk
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!fnkPNfIpS62LqOu4.hHbY6NAFUWVlz7tj'
   - _id: 0Di3cqTRD7ot8ZCa
     name: Talons
     type: weapon
-    img: icons/creatures/claws/claw-talons-glowing-orange.webp
+    img: icons/commodities/claws/claw-bird-pink.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Hawk attacks with its Talons.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -610,8 +562,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        XlysNtHE4YhC1NDs:
           type: attack
           activation:
             type: action
@@ -626,10 +577,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -646,7 +598,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -665,14 +618,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: XlysNtHE4YhC1NDs
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -687,14 +652,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744916838840
+      systemVersion: 6.0.0
+      createdTime: 1781537355437
+      modifiedTime: 1781537363418
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!fnkPNfIpS62LqOu4.0Di3cqTRD7ot8ZCa'
+  - _id: JGeUGU3fzM4mRs0i
+    name: Keen Sight
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on sight.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-sight
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.AJiJW7K957aJJCN6.Item.TePImx0XTnaVC3HB
+      duplicateSource: Item.9c2KMzJlW3pdb8hy
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781537348636
+      modifiedTime: 1781537348636
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!fnkPNfIpS62LqOu4.JGeUGU3fzM4mRs0i'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -703,7 +721,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171246620

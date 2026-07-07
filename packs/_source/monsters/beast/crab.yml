@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: gvfgesIscW0VALbY
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-pincer-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Crab attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -552,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -561,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        7mYoh94Cv7MHm19a:
           type: attack
           activation:
             type: action
@@ -577,6 +576,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -597,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,23 +611,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: none
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: true
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 7mYoh94Cv7MHm19a
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -637,29 +647,27 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741117285974
+      systemVersion: 6.0.0
+      createdTime: 1781528915244
+      modifiedTime: 1781528939762
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8RgUhb31VvjUNZU1.gvfgesIscW0VALbY'
   - _id: ciz8wAZjqxPnu5Pe
     name: Amphibious
     type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
     system:
       description:
-        value: <p>The crab can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       source:
         custom: ''
@@ -673,10 +681,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -691,12 +700,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781528885668
+      modifiedTime: 1781528898398
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8RgUhb31VvjUNZU1.ciz8wAZjqxPnu5Pe'
 effects: []
@@ -707,7 +716,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171207812

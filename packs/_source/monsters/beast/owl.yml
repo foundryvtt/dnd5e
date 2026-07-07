@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,55 +478,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
-  - _id: HZ5UNadatPJxpeKP
-    name: Flyby
-    type: feat
-    img: icons/creatures/mammals/bats-movement-flying-purple.webp
-    system:
-      description:
-        value: >-
-          <p>The owl doesn't provoke opportunity attacks when it flies out of an
-          enemy's reach.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: flyby
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.7WfeHV27l7DMcuTG
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!d0prpsGSAorDadec.HZ5UNadatPJxpeKP'
   - _id: 9H6ylAxHKFhsfqno
     name: Keen Hearing and Sight
     type: feat
@@ -537,8 +487,8 @@ items:
     system:
       description:
         value: >-
-          <p>The owl has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on hearing or sight.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on hearing or sight.</p>
         chat: ''
       source:
         custom: ''
@@ -552,10 +502,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -563,29 +514,31 @@ items:
       identifier: keen-hearing-and-sight
     effects: []
     folder: null
-    sort: 0
+    sort: 212500
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781533781121
+      modifiedTime: 1781533823416
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!d0prpsGSAorDadec.9H6ylAxHKFhsfqno'
   - _id: c3NnWQRHnaBpqtbe
     name: Talons
     type: weapon
-    img: icons/creatures/claws/claw-scaled-red.webp
+    img: icons/commodities/claws/claw-bird-pink.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Owl attacks with its Talons.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -648,7 +601,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -657,8 +610,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        OvHUvaWFRfX4w8W4:
           type: attack
           activation:
             type: action
@@ -673,10 +625,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -693,7 +646,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -706,20 +660,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: OvHUvaWFRfX4w8W4
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -734,14 +700,68 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741122444317
+      systemVersion: 6.0.0
+      createdTime: 1781533803913
+      modifiedTime: 1781533816711
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!d0prpsGSAorDadec.c3NnWQRHnaBpqtbe'
+  - _id: YhtTMVOFSgPGm71b
+    name: Flyby
+    type: feat
+    img: icons/creatures/abilities/wings-birdlike-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} doesn't provoke
+          &amp;reference[opportunity attacks] when it flies out of an enemy's
+          reach.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: flyby
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 112500
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.SMfgOsfPgf6rb01k.Item.5d7uD5cYAPtlPrWh
+      duplicateSource: Item.OV5QjvvV1l8Cn4os
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781533758463
+      modifiedTime: 1781533758463
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!d0prpsGSAorDadec.YhtTMVOFSgPGm71b'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -750,7 +770,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171243940

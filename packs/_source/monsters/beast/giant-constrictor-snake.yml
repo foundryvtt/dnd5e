@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: qB9j7Epq7UVkGWzY
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Constrictor Snake attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -513,7 +513,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -551,9 +551,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -562,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        7zZLcbqyKW4LkgnD:
           type: attack
           activation:
             type: action
@@ -578,10 +576,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -598,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -611,20 +611,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 7zZLcbqyKW4LkgnD
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -639,29 +651,31 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118268365
+      systemVersion: 6.0.0
+      createdTime: 1781541872157
+      modifiedTime: 1781541894802
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NpvwE1feOHyEqAbP.qB9j7Epq7UVkGWzY'
   - _id: 3FIKn37A037kPgzc
     name: Constrict
     type: weapon
-    img: icons/creatures/reptiles/serpent-horned-green.webp
+    img: icons/creatures/reptiles/snake-fangs-bite-green.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
           &amp;Reference[grappled] (escape DC 16). Until this grapple ends, the
-          creature is restrained, and the snake can't constrict another
-          target.</p>
+          creature is &amp;reference[restrained], and the [[lookup @name
+          lowercase]] can't [[lookup @item.name lowercase]] another target.</p>
         chat: >-
-          <p>The Giant Constrictor Snake attacks with its Constrict. The target
-          is grappled. Until this grapple ends, the creature is restrained, and
-          the snake can't constrict another target.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled]. Until this
+          grapple ends, the creature is &amp;reference[restrained], and the
+          [[lookup @name]]{monster} can't [[lookup @item.name]] another
+          target.</p>
       source:
         custom: ''
         book: ''
@@ -724,7 +738,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -733,8 +747,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ykL0w3sPbcnaA2Ss:
           type: attack
           activation:
             type: action
@@ -749,13 +762,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: otpYrYVhGMP5ZAUo
+              level: {}
           range:
             value: '5'
             units: ft
@@ -769,7 +785,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -782,26 +799,81 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ykL0w3sPbcnaA2Ss
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: constrict
       mastery: ''
-    effects: []
+    effects:
+      - name: Constricted
+        img: icons/creatures/reptiles/snake-fangs-bite-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.NpvwE1feOHyEqAbP.Item.3FIKn37A037kPgzc
+        transfer: false
+        _id: otpYrYVhGMP5ZAUo
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 16). While
+          grappled in this way, you are also &amp;reference[restrained
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781541947610
+          modifiedTime: 1781541958097
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.UTuKdTah1DKfPwWe.Item.haXdYCAfGXo0iVqC.ActiveEffect.ZHHKsrqnIkhEqvom
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!NpvwE1feOHyEqAbP.3FIKn37A037kPgzc.otpYrYVhGMP5ZAUo
     folder: null
     sort: 0
     ownership:
@@ -810,11 +882,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118420538
+      systemVersion: 6.0.0
+      createdTime: 1781541901212
+      modifiedTime: 1781542004781
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NpvwE1feOHyEqAbP.3FIKn37A037kPgzc'
@@ -826,7 +898,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171227428
