@@ -845,7 +845,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Activities
     ctx.activities = item.system.activities
-      ?.filter(a => a.canUse)
+      ?.filter(a => !a.isHidden)
       ?.map(this._prepareActivity.bind(this));
 
     // Concentration

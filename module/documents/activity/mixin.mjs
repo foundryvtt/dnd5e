@@ -97,16 +97,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      if ( this.isRider ) return false;
-      if ( !this.item.canUse ) return false;
-      if ( this.dependentOrigin?.active === false ) return false;
-      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
-      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return false;
-      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
-      const level = this.relevantLevel;
-      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
-        || ((this.visibility?.level?.max ?? Infinity) < level) ) return false;
-      return true;
+      return this.item.canUse && !this.isHidden;
     }
 
     /* -------------------------------------------- */
@@ -127,6 +118,25 @@ export default function ActivityMixin(Base) {
      */
     get dependentOrigin() {
       return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity hidden from display?
+     * @type {boolean}
+     */
+    get isHidden() {
+      if ( this.isRider ) return true;
+      if ( this.item.isHidden ) return true;
+      if ( this.dependentOrigin?.active === false ) return true;
+      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return true;
+      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return true;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return true;
+      const level = this.relevantLevel;
+      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
+        || ((this.visibility?.level?.max ?? Infinity) < level) ) return true;
+      return false;
     }
 
     /* -------------------------------------------- */
