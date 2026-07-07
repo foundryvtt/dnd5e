@@ -21,6 +21,14 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _attachFrameListeners() {
+    super._attachFrameListeners();
+    new dnd5e.applications.ContextMenu5e(this.element, "[data-result-id]", this._getEntryContextOptions(), { jQuery: false });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
 
@@ -69,5 +77,66 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
    */
   static #onChangeMode(event, target) {
     this.changeMode();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get context menu entries for roll table entries.
+   * @returns {ContextMenuEntry[]}
+   * @protected
+   */
+  _getEntryContextOptions() {
+    const getResult = target => this.document.results.get(target.closest("[data-result-id]")?.dataset?.resultId);
+    return [
+      {
+        label: "DND5E.ContextMenuActionView",
+        icon: '<i class="fa-solid fa-eye"></i>',
+        visible: () => !this.document.isOwner || this.document.compendium?.locked,
+        onClick: (event, target) => getResult(target)?.sheet.render({ force: true })
+      },
+      {
+        label: "DND5E.ContextMenuActionEdit",
+        icon: '<i class="fa-solid fa-pen-to-square"></i>',
+        visible: () => this.document.isOwner && !this.document.compendium?.locked,
+        onClick: (event, target) => getResult(target)?.sheet.render({ force: true })
+      },
+      {
+        label: "DND5E.ContextMenuActionDuplicate",
+        icon: '<i class="fa-solid fa-copy"></i>',
+        visible: () => this.document.isOwner && !this.document.compendium?.locked,
+        onClick: async (event, target) => {
+          await this.submit();
+          const createData = getResult(target)?.toObject() ?? {};
+          delete createData._id;
+          delete createData.range;
+          delete createData.weight;
+          this._createResult(createData);
+        }
+      },
+      {
+        label: "DND5E.ContextMenuActionDelete",
+        icon: '<i class="fa-solid fa-trash"></i>',
+        visible: () => this.document.isOwner && !this.document.compendium?.locked,
+        onClick: (event, target) => getResult(target)?.deleteDialog()
+      },
+      {
+        label: "TABLE.ACTIONS.DrawSpecificResult",
+        icon: '<i class="fa-solid fa-up-from-bracket"></i>',
+        onClick: (event, target) => this.document.draw({ results: [getResult(target)] }),
+        group: "state"
+      },
+      {
+        label: "TABLE.ACTIONS.ToggleDrawn",
+        icon: '<i class="fa-solid fa-lock"></i>',
+        visible: () => this.document.isOwner && !this.document.compendium?.locked,
+        onClick: async (event, target) => {
+          await this.submit();
+          const result = getResult(target);
+          result.update({ drawn: !result.drawn });
+        },
+        group: "state"
+      }
+    ];
   }
 }
