@@ -596,7 +596,7 @@ items:
       - name: True Form
         img: icons/magic/nature/symbol-moon-stars-white.webp
         origin: Compendium.dnd5e.monsters.Actor.zIr3NaNF0mWz5Ahq.Item.EjU9p4Wh1U2wsnFK
-        transfer: false
+        transfer: true
         _id: 8E3ebjn8NLGzDZTp
         type: base
         system:
@@ -608,17 +608,17 @@ items:
               priority: null
             - key: items.hidden
               type: add
-              value: bite-tiger-or-hybrid-form-only
+              value: bite
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: claw-tiger-or-hybrid-form-only
+              value: claw
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: pounce-tiger-or-hybrid-form-only
+              value: pounce
               phase: initial
               priority: null
           magical: false
@@ -639,11 +639,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783364319221
-          modifiedTime: 1783364374561
+          modifiedTime: 1783445158042
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -661,7 +661,7 @@ items:
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -678,11 +678,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783364319444
-          modifiedTime: 1783364817251
+          modifiedTime: 1783445161854
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -704,17 +704,17 @@ items:
               priority: null
             - key: items.hidden
               type: add
-              value: multiattack-humanoid-or-hybrid-form-only
+              value: multiattack
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: scimitar-humanoid-or-hybrid-form-only
+              value: scimitar
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: longbow-humanoid-or-hybrid-form-only
+              value: longbow
               phase: initial
               priority: null
             - key: system.traits.size
@@ -725,7 +725,7 @@ items:
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -740,11 +740,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783364319692
-          modifiedTime: 1783364935615
+          modifiedTime: 1783445171617
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -925,7 +925,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: pounce-tiger-or-hybrid-form-only
+      identifier: pounce
     effects:
       - name: Prone
         img: systems/dnd5e/icons/svg/statuses/prone.svg
@@ -973,11 +973,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365147688
-      modifiedTime: 1783365244345
+      modifiedTime: 1783445138588
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.jW4qHQ761qRLeWM8'
@@ -1077,7 +1077,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-humanoid-or-hybrid-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 0
@@ -1087,11 +1087,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783364957473
-      modifiedTime: 1783364964026
+      modifiedTime: 1783445111971
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.SmUCt79LtakgTJoa'
@@ -1342,7 +1342,7 @@ items:
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: bite-tiger-or-hybrid-form-only
+      identifier: bite
     effects:
       - name: Weretiger Lycanthropy
         img: icons/creatures/abilities/cougar-pounce-stalk-black.webp
@@ -1390,11 +1390,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783364970083
-      modifiedTime: 1783365034302
+      modifiedTime: 1783445117794
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.FOkSL18gU0Sli5ZA'
@@ -1557,7 +1557,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: claw-tiger-or-hybrid-form-only
+      identifier: claw
       mastery: ''
     effects: []
     folder: null
@@ -1568,11 +1568,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365046382
-      modifiedTime: 1783365098531
+      modifiedTime: 1783445123351
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.HPmjVRKpG08bgohb'
@@ -1737,7 +1737,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: scimitar-humanoid-or-hybrid-form-only
+      identifier: scimitar
       mastery: ''
     effects: []
     folder: null
@@ -1748,11 +1748,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365067542
-      modifiedTime: 1783365085269
+      modifiedTime: 1783445127579
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.vtnEGCOptmp2bcqG'
@@ -1919,7 +1919,7 @@ items:
       ammunition:
         type: arrow
       magicalBonus: null
-      identifier: longbow-humanoid-or-hybrid-form-only
+      identifier: longbow
       mastery: ''
     effects: []
     folder: null
@@ -1930,11 +1930,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365110626
-      modifiedTime: 1783365117383
+      modifiedTime: 1783445131835
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.onmNGMiE4AyvYxDQ'

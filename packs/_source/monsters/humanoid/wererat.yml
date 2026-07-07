@@ -596,14 +596,14 @@ items:
       - name: True Form
         img: icons/magic/nature/symbol-moon-stars-white.webp
         origin: Compendium.dnd5e.monsters.Actor.CrnUJhTbkdZjCZsH.Item.PhdUmTsYUeWSSDNN
-        transfer: false
+        transfer: true
         _id: qmqGUOYBjP4rSWNU
         type: base
         system:
           changes:
             - key: items.hidden
               type: add
-              value: bite-rat-or-hybrid-form-only
+              value: bite
               phase: initial
               priority: null
             - key: token.texture.src
@@ -629,11 +629,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783364008334
-          modifiedTime: 1783364266536
+          modifiedTime: 1783445065295
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -651,7 +651,7 @@ items:
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -668,11 +668,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783364008599
-          modifiedTime: 1783364082030
+          modifiedTime: 1783445069683
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -689,17 +689,17 @@ items:
           changes:
             - key: items.hidden
               type: add
-              value: multiattack-humanoid-or-hybrid-form-only
+              value: multiattack
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: hand-crossbow-humanoid-or-hybrid-form-only
+              value: hand-crossbow
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: shortsword-humanoid-or-hybrid-form-only
+              value: shortsword
               phase: initial
               priority: null
             - key: tokens.texture.src
@@ -710,7 +710,7 @@ items:
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -725,11 +725,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783364008843
-          modifiedTime: 1783364184676
+          modifiedTime: 1783445080516
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -883,7 +883,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-humanoid-or-hybrid-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 0
@@ -893,11 +893,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783363899080
-      modifiedTime: 1783363899080
+      modifiedTime: 1783445036025
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.ykZaywAeuqtWHAqQ'
@@ -1146,7 +1146,7 @@ items:
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: bite-rat-or-hybrid-form-only
+      identifier: bite
     effects:
       - name: Wererat Lycanthropy
         img: icons/creatures/mammals/rodent-rat-diseaed-gray.webp
@@ -1194,11 +1194,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783363792509
-      modifiedTime: 1783363841501
+      modifiedTime: 1783445040994
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.ldz0yUpzhV9Xlhss'
@@ -1365,7 +1365,7 @@ items:
       ammunition:
         type: ''
       magicalBonus: null
-      identifier: hand-crossbow-humanoid-or-hybrid-form-only
+      identifier: hand-crossbow
       mastery: ''
     effects: []
     folder: null
@@ -1376,11 +1376,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783363647293
-      modifiedTime: 1783363786863
+      modifiedTime: 1783445046773
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.YJi7nfridP2LjdJs'
@@ -1545,7 +1545,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: shortsword-humanoid-or-hybrid-form-only
+      identifier: shortsword
       mastery: ''
     effects: []
     folder: null
@@ -1556,11 +1556,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783363611424
-      modifiedTime: 1783363636126
+      modifiedTime: 1783445051442
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.wpyEts6pBAxoD0Gh'

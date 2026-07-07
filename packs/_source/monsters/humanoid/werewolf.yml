@@ -733,7 +733,7 @@ items:
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: bite-wolf-or-hybrid-form-only
+      identifier: bite
     effects:
       - name: Werewolf Lycanthrope
         img: icons/creatures/mammals/wolf-shadow-black.webp
@@ -781,11 +781,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783361670364
-      modifiedTime: 1783363575847
+      modifiedTime: 1783445188405
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.tWfR8uJNnQxpXgDw'
@@ -873,7 +873,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-humanoid-or-hybrid-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 200000
@@ -883,11 +883,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783362271035
-      modifiedTime: 1783362292357
+      modifiedTime: 1783445182816
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.abhGXKzA0XGprXED'
@@ -1055,7 +1055,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: spear-humanoid-form-only
+      identifier: spear
       mastery: ''
     effects: []
     folder: null
@@ -1066,11 +1066,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783361563307
-      modifiedTime: 1783363588741
+      modifiedTime: 1783445193379
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.TiKtAuqd6urQ45Ds'
@@ -1233,7 +1233,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: claws-hybrid-form-only
+      identifier: claws
       mastery: ''
     effects: []
     folder: null
@@ -1244,11 +1244,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783361778390
-      modifiedTime: 1783361802644
+      modifiedTime: 1783445198231
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.36H4LGNMMEYS1Irm'
@@ -1361,19 +1361,19 @@ items:
       - name: True Form
         img: icons/magic/nature/symbol-moon-stars-white.webp
         origin: Compendium.dnd5e.monsters.Actor.7tRhrxuknTpHpYcA.Item.2kHNI1T4gg879fDv
-        transfer: false
+        transfer: true
         _id: wobMCqAriIDoX5zV
         type: base
         system:
           changes:
             - key: items.hidden
               type: add
-              value: claws-hybrid-form-only
+              value: claws
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: bite-wolf-or-hybrid-form-only
+              value: bite
               phase: initial
               priority: null
             - key: token.texture.src
@@ -1399,11 +1399,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783361329477
-          modifiedTime: 1783362330267
+          modifiedTime: 1783445210817
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1420,7 +1420,7 @@ items:
           changes:
             - key: items.hidden
               type: add
-              value: spear-humanoid-form-only
+              value: spear
               phase: initial
               priority: null
           magical: false
@@ -1443,11 +1443,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783361329831
-          modifiedTime: 1783362333424
+          modifiedTime: 1783445214601
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1464,17 +1464,17 @@ items:
           changes:
             - key: items.hidden
               type: add
-              value: multiattack-humanoid-or-hybrid-form-only
+              value: multiattack
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: spear-humanoid-form-only
+              value: spear
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: claws-hybrid-form-only
+              value: claws
               phase: initial
               priority: null
             - key: token.texture.src
@@ -1505,11 +1505,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783361330159
-          modifiedTime: 1783363257938
+          modifiedTime: 1783445221680
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null

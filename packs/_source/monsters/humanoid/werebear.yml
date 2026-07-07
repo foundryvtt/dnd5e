@@ -596,19 +596,19 @@ items:
       - name: True Form
         img: icons/magic/nature/symbol-moon-stars-white.webp
         origin: Compendium.dnd5e.monsters.Actor.oRBnO5OHoOZzlCOr.Item.D8QWBbYLFAT7uIiz
-        transfer: false
+        transfer: true
         _id: cOUQA2zcqWXsrHZP
         type: base
         system:
           changes:
             - key: items.hidden
               type: add
-              value: bite-bear-or-hybrid-form-only
+              value: bite
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: claw-bear-or-hybrid-form-only
+              value: claw
               phase: initial
               priority: null
             - key: token.texture.src
@@ -634,11 +634,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783362420606
-          modifiedTime: 1783363064495
+          modifiedTime: 1783444958267
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -661,7 +661,7 @@ items:
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -678,11 +678,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783362420979
-          modifiedTime: 1783362984647
+          modifiedTime: 1783444962541
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -699,7 +699,7 @@ items:
           changes:
             - key: items.hidden
               type: add
-              value: greataxe-humanoid-or-hybrid-form-only
+              value: greataxe
               phase: initial
               priority: null
             - key: system.traits.size
@@ -720,7 +720,7 @@ items:
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -735,11 +735,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783362421243
-          modifiedTime: 1783363247836
+          modifiedTime: 1783444966408
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1171,7 +1171,7 @@ items:
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: bite-bear-or-hybrid-form-only
+      identifier: bite
     effects:
       - name: Werebear Lycanthropy
         img: icons/creatures/abilities/bear-roar-bite-brown.webp
@@ -1219,11 +1219,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783363339948
-      modifiedTime: 1783363491066
+      modifiedTime: 1783444930975
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.h9XO0f5Un3EhJqHm'
@@ -1386,7 +1386,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: claw-bear-or-hybrid-form-only
+      identifier: claw
       mastery: ''
     effects: []
     folder: null
@@ -1397,11 +1397,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783363423311
-      modifiedTime: 1783363444186
+      modifiedTime: 1783444925558
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.pEYcOjAF2fovrXRP'
@@ -1566,7 +1566,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: greataxe-humanoid-or-hybrid-form-only
+      identifier: greataxe
       mastery: ''
     effects: []
     folder: null
@@ -1577,11 +1577,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783363499427
-      modifiedTime: 1783363525309
+      modifiedTime: 1783444920606
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.UeXfHUO5RZp72PIs'

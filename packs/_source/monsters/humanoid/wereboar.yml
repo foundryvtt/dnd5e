@@ -605,7 +605,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: charge-boar-or-hybrid-form-only
+      identifier: charge
     effects: []
     folder: null
     sort: 0
@@ -615,11 +615,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365327584
-      modifiedTime: 1783365428492
+      modifiedTime: 1783445002408
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.TizBVS6hRuBa8JYY'
@@ -716,7 +716,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-humanoid-or-hybrid-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 0
@@ -726,11 +726,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365786681
-      modifiedTime: 1783365810710
+      modifiedTime: 1783444983192
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.599WNlvXk7snLj4O'
@@ -976,7 +976,7 @@ items:
       - name: True Form
         img: icons/magic/nature/symbol-moon-stars-white.webp
         origin: Compendium.dnd5e.monsters.Actor.J9hgSaZODGjrNl9B.Item.zzskoOXzAiMDZfbc
-        transfer: false
+        transfer: true
         _id: K4vjNxNcAsqLpwOb
         type: base
         system:
@@ -988,12 +988,12 @@ items:
               priority: null
             - key: items.hidden
               type: add
-              value: tusks-boar-or-hybrid-form-only
+              value: tusks
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: charge-boar-or-hybrid-form-only
+              value: charge
               phase: initial
               priority: null
           magical: false
@@ -1014,11 +1014,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783365462263
-          modifiedTime: 1783365530253
+          modifiedTime: 1783445012870
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1036,7 +1036,7 @@ items:
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -1053,11 +1053,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783365462448
-          modifiedTime: 1783365561099
+          modifiedTime: 1783445017528
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1079,18 +1079,18 @@ items:
               priority: null
             - key: items.hidden
               type: add
-              value: multiattack-humanoid-or-hybrid-form-only
+              value: multiattack
               phase: initial
               priority: null
             - key: items.hidden
               type: add
-              value: maul-humanoid-or-hybrid-form-only
+              value: maul
               phase: initial
               priority: null
           magical: false
           rider:
             statuses: []
-        disabled: false
+        disabled: true
         start: null
         duration:
           value: null
@@ -1105,11 +1105,11 @@ items:
         sort: 0
         flags: {}
         _stats:
-          coreVersion: '14.361'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 6.0.0
           createdTime: 1783365462661
-          modifiedTime: 1783365629234
+          modifiedTime: 1783445026515
           lastModifiedBy: dnd5ebuilder0000
           compendiumSource: null
           duplicateSource: null
@@ -1379,7 +1379,7 @@ items:
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: tusks-boar-or-hybrid-form-only
+      identifier: tusks
     effects:
       - name: Wereboar Lycanthropy
         img: icons/creatures/mammals/livestock-pig-green.webp
@@ -1427,11 +1427,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365651339
-      modifiedTime: 1783365751477
+      modifiedTime: 1783444988137
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.3TD2NpdjIDJxeLl9'
@@ -1596,7 +1596,7 @@ items:
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: maul-humanoid-or-hybrid-form-only
+      identifier: maul
       mastery: ''
     effects: []
     folder: null
@@ -1607,11 +1607,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.361'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783365762965
-      modifiedTime: 1783365775038
+      modifiedTime: 1783444993065
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.dtdXnvp5cptFkGPu'
