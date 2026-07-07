@@ -83,7 +83,9 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @protected
    */
   async _prepareChangesContext(context, options) {
-    context.changes = context.document.system.changes.map(c => this.document.getSheetChangeContext(c));
+    context.changes = await Promise.all(
+      context.document.system.changes.map(c => this.document.getSheetChangeContext(c))
+    );
     return context;
   }
 
@@ -168,7 +170,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @type {ApplicationClickAction}
    */
   static async #onDeleteChange(event, target) {
-    const index = Number(event.target.closest("[data-index]")?.dataset.index || 0);
+    const index = Number(target.closest("[data-index]")?.dataset.index || 0);
     return this.submit({
       updateData: {
         system: {
@@ -186,7 +188,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @type {ApplicationClickAction}
    */
   static async #onEditChange(event, target) {
-    const { changeId } = event.target.closest("[data-change-id]")?.dataset ?? {};
+    const { changeId } = target.closest("[data-change-id]")?.dataset ?? {};
     const app = new EffectChangeConfig({ changeId, document: this.document });
     this._renderChild(app);
   }

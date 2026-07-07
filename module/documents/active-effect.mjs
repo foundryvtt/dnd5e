@@ -2,7 +2,7 @@ import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { getHumanReadableAttributeLabel, parseOrString, staticID } from "../utils.mjs";
+import { parseOrString, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
 
@@ -950,7 +950,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * Prepare the context used to display an effect on an actor or item sheet.
-   * @returns {object}  An object of chat data to render.
+   * @returns {object}  Context needed to render the effect on an actor or item sheet.
    */
   async getSheetContext() {
     this.updateDuration();
@@ -958,7 +958,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const source = await this.getSource();
     return {
       id, name, img, disabled, duration, source,
-      changes: this.changes.map(change => this.getSheetChangeContext(change)),
+      changes: await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))),
       durationParts: Number.isFinite(duration.remaining) ? duration.label.split(", ") : [],
       showDuration: Number.isFinite(duration.value),
       effect: this
@@ -969,17 +969,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * Prepare the context for individual changes to display on actor, item, or active effect sheets.
-   * @param {object} change                     Change to prepare.
-   * @returns {object}  An object of chat data to render.
+   * @param {object} change  Change to prepare.
+   * @returns {object}       Context needed to render the change.
    */
-  getSheetChangeContext(change) {
-    const attributeCtx = this.type === "enchantment"
-      ? { item: this.isAppliedEnchantment ? this.item : true }
-      : { actor: this.actor };
+  async getSheetChangeContext(change) {
     return {
       ...change,
-      name: getHumanReadableAttributeLabel(change.key, { ...attributeCtx, prefixItemName: false }),
-      typeLabel: _loc(ActiveEffect.CHANGE_TYPES[change.type]?.label)
+      typeLabel: _loc(ActiveEffect.CHANGE_TYPES[change.type]?.label),
+      ...((await this.system.getSheetChangeContext?.(change)) ?? {})
     };
   }
 

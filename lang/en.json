@@ -2612,7 +2612,7 @@
             "label": "Attribute Key"
           },
           "phase": {
-            "hint": "The point in data preparation or another event a change is to be applied.",
+            "hint": "The point in data preparation, or another event, at which a change is to be applied.",
             "label": "Phase"
           },
           "priority": {
@@ -2641,7 +2641,7 @@
   "Change": {
     "Configuration": "Change Configuration",
     "Label": "Change",
-    "Title": "{effect} Change {number}"
+    "Title": "{effect} Change #{number}"
   },
   "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",

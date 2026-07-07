@@ -1,3 +1,5 @@
+import { getHumanReadableAttributeLabel } from "../../utils.mjs";
+
 const { DocumentIdField } = foundry.data.fields;
 
 /**
@@ -75,6 +77,19 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context for individual changes to display on actor, item, or active effect sheets.
+   * @param {object} change  Change to prepare.
+   * @returns {object}       An object of chat data to render.
+   */
+  async getSheetChangeContext(change) {
+    return {
+      name: getHumanReadableAttributeLabel(change.key, { actor: this.actor, prefixItemName: false })
+    };
+  }
+
   /* -------------------------------------------- */
 
   /**

@@ -1,3 +1,4 @@
+import { getHumanReadableAttributeLabel } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
@@ -221,5 +222,18 @@ export default class EnchantmentData extends ActiveEffectDataModel {
    */
   static availableForItem(doc) {
     return !doc || (doc instanceof Item);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async getSheetChangeContext(change) {
+    return {
+      name: getHumanReadableAttributeLabel(change.key, {
+        item: this.isAppliedEnchantment ? this.item : true, prefixItemName: false
+      })
+    };
   }
 }

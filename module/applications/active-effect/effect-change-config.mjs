@@ -39,7 +39,18 @@ export default class EffectChangeConfig extends DocumentSheet5e {
   /* -------------------------------------------- */
 
   /**
+   * The change's source data.
+   * @type {object}
+   */
+  get change() {
+    return this.effect.system._source.changes.find(c => c._id === this.options.changeId);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Active effect to which this change belongs.
+   * @type {ActiveEffect5e}
    */
   get effect() {
     return this.options.document;
@@ -49,9 +60,8 @@ export default class EffectChangeConfig extends DocumentSheet5e {
 
   /** @override */
   get title() {
-    return _loc("DND5E.EFFECT.Change.Title", {
-      effect: this.effect.name, number: this.options.changeId
-    });
+    const number = formatNumber(this.effect.system.changes.findIndex(c => c._id === this.options.changeId) + 1);
+    return _loc("DND5E.EFFECT.Change.Title", { effect: this.effect.name, number });
   }
 
   /* -------------------------------------------- */
@@ -87,7 +97,7 @@ export default class EffectChangeConfig extends DocumentSheet5e {
    * @protected
    */
   async _prepareConfigContext(context, options) {
-    context.source = this.effect.system._source.changes.find(c => c._id === this.options.changeId);
+    context.source = this.change;
     context.defaultPriority = ActiveEffect.CHANGE_TYPES[context.source?.type]?.defaultPriority;
     context.fields = this.effect.system.schema.fields.changes.element.fields;
 
@@ -122,7 +132,7 @@ export default class EffectChangeConfig extends DocumentSheet5e {
 
   /** @inheritDoc */
   async render(...args) {
-    if ( !this.effect.system.changes.find(c => c._id === this.options.changeId) ) return this.close();
+    if ( !this.change ) return this.close();
     return super.render(...args);
   }
 
