@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,16 +478,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: Mgvz3Hm49kujtR0M
     name: Hold Breath
     type: feat
-    img: icons/magic/water/pseudopod-swirl-blue.webp
+    img: icons/magic/water/orb-ice-opaque.webp
     system:
       description:
         value: >-
-          <p>The crocodile can hold its breath for <strong>30
-          minutes</strong>.</p>
+          <p>The [[lookup @name lowercase]]{monster} can hold its breath for 30
+          minutes.</p>
         chat: ''
       source:
         custom: ''
@@ -522,12 +520,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781542733683
+      modifiedTime: 1781542742337
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.Mgvz3Hm49kujtR0M'
   - _id: YSeYSzU3P0FooGIw
@@ -537,8 +535,8 @@ items:
     system:
       description:
         value: >-
-          <p>The crocodile makes two attacks: one with its [[/item
-          .u7eurp95tuW3tYGl]]{bite} and one with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .u7eurp95tuW3tYGl]]{bite} and one with its [[/item
           .VkCVMF2SvsuYWWYg]]{tail}.</p>
         chat: ''
       source:
@@ -553,13 +551,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        f8rYPSiPq76J6rXb:
           type: utility
           activation:
             type: action
@@ -574,15 +571,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -593,7 +591,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,7 +609,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: f8rYPSiPq76J6rXb
       enchant: {}
       prerequisites:
         level: null
@@ -624,18 +631,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273654976
+      systemVersion: 6.0.0
+      createdTime: 1781542761386
+      modifiedTime: 1783369523694
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.YSeYSzU3P0FooGIw'
   - _id: u7eurp95tuW3tYGl
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -708,7 +715,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -717,8 +724,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        wmVXOmE3ddrgeBoq:
           type: attack
           activation:
             type: action
@@ -733,10 +739,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -753,7 +760,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -766,20 +774,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: wmVXOmE3ddrgeBoq
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -794,18 +814,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118396110
+      systemVersion: 6.0.0
+      createdTime: 1781542770672
+      modifiedTime: 1781542855213
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.u7eurp95tuW3tYGl'
   - _id: VkCVMF2SvsuYWWYg
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-swipe-green.webp
     system:
       description:
         value: >-
@@ -813,8 +833,9 @@ items:
           a creature, it must succeed on a [[/save]] saving throw or be knocked
           &amp;Reference[prone].</p>
         chat: >-
-          <p>The Giant Crocodile attacks with its Tail. If the target is a
-          creature, it must make a <strong>Strength</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it must make a Strength
+          saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -838,7 +859,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -876,9 +897,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -887,8 +907,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        kGx5U5uLk1I9B9Ln:
           type: attack
           activation:
             type: action
@@ -903,10 +922,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -923,7 +943,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -936,27 +957,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: kGx5U5uLk1I9B9Ln
+          name: ''
+        PAEYHgI0ScoValWE:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -966,10 +998,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -986,10 +1019,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -999,14 +1033,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '16'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: PAEYHgI0ScoValWE
+          name: Prone Save
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1017,19 +1066,15 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118452325
+      systemVersion: 6.0.0
+      createdTime: 1781542781284
+      modifiedTime: 1781542837268
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.VkCVMF2SvsuYWWYg'
@@ -1041,7 +1086,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200554
