@@ -1217,7 +1217,7 @@ items:
             type: special
             override: false
             condition: >-
-              When the [[lookup @name lowercase]]{mosnter} starts its turn while
+              When the [[lookup @name lowercase]]{monster} starts its turn while
               it has creatures &reference[grappled apply=false] with this
               ability.
           consumption:
