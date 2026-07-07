@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,21 +484,23 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: EjU9p4Wh1U2wsnFK
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/magic/nature/symbol-moon-stars-white.webp
     system:
       description:
         value: >-
-          <p>The weretiger can use its action to polymorph into a tiger-humanoid
-          hybrid or into a tiger, or back into its true form, which is
-          humanoid.</p><p>Its statistics, other than its size, are the same in
-          each form. Any equipment it is wearing or carrying isn't transformed.
-          It reverts to its true form if it dies.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its action to
+          polymorph into a tiger-humanoid hybrid or into a tiger, or back into
+          its true form, which is humanoid.</p><p>Its statistics, other than its
+          size, are the same in each form. Any equipment it is wearing or
+          carrying isn't transformed. It reverts to its true form if it
+          dies.</p>
         chat: >-
-          <p>The weretiger can use its action to <strong>polymorph</strong>, or
+          <p>The [[lookup @name]]{monster} can use its action to polymorph, or
           return to its true form.</p>
       source:
         custom: ''
@@ -521,64 +520,237 @@ items:
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        DUUySoqiV41tFf1i:
+          type: transform
+          name: Change Form
+          _id: DUUySoqiV41tFf1i
+          img: ''
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
+          behaviors: []
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 8E3ebjn8NLGzDZTp
+              uuid: null
+              level: {}
+            - _id: VZawf4dtCwePtOVj
+              uuid: null
+              level: {}
+            - _id: ccSXFTdE7hqm9aaX
+              uuid: null
+              level: {}
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          profiles: []
+          settings: null
+          transform:
+            customize: false
+            formless: false
+            mode: form
+            preset: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: shapechanger
-    effects: []
+    effects:
+      - name: True Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.zIr3NaNF0mWz5Ahq.Item.EjU9p4Wh1U2wsnFK
+        transfer: true
+        _id: 8E3ebjn8NLGzDZTp
+        type: base
+        system:
+          changes:
+            - key: token.texture.src
+              type: override
+              value: systems/dnd5e/tokens/humanoid/Commoner.webp
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: bite
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: claw
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: pounce
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have transformed into your true form, which is humanoid.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783364319221
+          modifiedTime: 1783445158042
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!zIr3NaNF0mWz5Ahq.EjU9p4Wh1U2wsnFK.8E3ebjn8NLGzDZTp
+      - name: Hybrid Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.zIr3NaNF0mWz5Ahq.Item.EjU9p4Wh1U2wsnFK
+        transfer: false
+        _id: VZawf4dtCwePtOVj
+        type: base
+        system:
+          changes: []
+          magical: false
+          rider:
+            statuses: []
+        disabled: true
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have transformed in your hybrid form, which is a tiger-humanoid
+          hybrid.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783364319444
+          modifiedTime: 1783445161854
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!zIr3NaNF0mWz5Ahq.EjU9p4Wh1U2wsnFK.VZawf4dtCwePtOVj
+      - name: Tiger Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.zIr3NaNF0mWz5Ahq.Item.EjU9p4Wh1U2wsnFK
+        transfer: false
+        _id: ccSXFTdE7hqm9aaX
+        type: base
+        system:
+          changes:
+            - key: tokens.texture.src
+              type: override
+              value: systems/dnd5e/tokens/beast/Tiger.webp
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: multiattack
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: scimitar
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: longbow
+              phase: initial
+              priority: null
+            - key: system.traits.size
+              type: override
+              value: lg
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: true
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have transformed into your tiger form.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783364319692
+          modifiedTime: 1783445171617
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!zIr3NaNF0mWz5Ahq.EjU9p4Wh1U2wsnFK.ccSXFTdE7hqm9aaX
     folder: null
     sort: 600000
     ownership:
@@ -587,11 +759,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403946671
+      systemVersion: 6.0.0
+      createdTime: 1783364283178
+      modifiedTime: 1783364319726
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.EjU9p4Wh1U2wsnFK'
@@ -602,8 +774,8 @@ items:
     system:
       description:
         value: >-
-          <p>The weretiger has advantage on Wisdom (Perception) checks that rely
-          on hearing or smell.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on hearing or smell.</p>
         chat: ''
       source:
         custom: ''
@@ -617,7 +789,7 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
@@ -636,11 +808,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403935651
+      systemVersion: 6.0.0
+      createdTime: 1783365222864
+      modifiedTime: 1783365225166
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.2iPYXoxM2ZReuhSL'
@@ -651,18 +823,18 @@ items:
     system:
       description:
         value: >-
-          <p>If the [[lookup @name lowercase]]{monster} moves at <strong>least
-          15 feet</strong> straight toward a creature and then hits it with a
-          [[/item .HPmjVRKpG08bgohb]]{claw} attack on the same turn, that target
-          must succeed on a [[/save]] saving throw or be knocked
-          &amp;Reference[prone]. If the target is prone, the weretiger can make
-          one [[/item .FOkSL18gU0Sli5ZA]]{bite} attack against it as a bonus
-          action.</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 15 feet
+          straight toward a creature and then hits it with a [[/item
+          .HPmjVRKpG08bgohb]]{claw} attack on the same turn, that target must
+          succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone]. If the target is prone, the [[lookup @name
+          lowercase]]{monster} can make one [[/item .FOkSL18gU0Sli5ZA]]{bite}
+          attack against it as a bonus action.</p>
         chat: >-
-          <p>If the weretiger moves at <strong>least 15 feet</strong> straight
+          <p>If the [[lookup @name]]{monster} moves at least 15 feet straight
           toward a creature and then hits it with a claw attack on the same
-          turn, that target must make a <strong>Strength</strong> saving throw
-          or be knocked prone.</p>
+          turn, that target must make a Strength saving throw or be knocked
+          &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -681,71 +853,79 @@ items:
       properties:
         - trait
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        nYBic2ohsKRdFIMK:
           type: save
+          name: Pounce Save
+          img: ''
+          sort: 100000
           activation:
-            type: ''
-            value: null
-            condition: moves 15 feet and hits with a claw attack
+            type: special
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 15
+              feet straight toward a creature and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.zIr3NaNF0mWz5Ahq.Item.HPmjVRKpG08bgohb]{Claw}
+              attack on the same turn.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
-            concentration: false
-            value: ''
             units: inst
-            special: ''
+            concentration: false
             override: false
-          effects:
-            - _id: xx5oDVvttzxBUXpQ
+          effects: []
+          flags: {}
           range:
-            value: '15'
-            units: ft
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
             onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
+            visible: true
+            bonus: ''
+          behaviors: []
+          _id: nYBic2ohsKRdFIMK
       enchant: {}
       prerequisites:
         level: null
-      identifier: pounce-tiger-or-hybrid-form-only
+      identifier: pounce
     effects:
       - name: Prone
         img: systems/dnd5e/icons/svg/statuses/prone.svg
@@ -753,17 +933,14 @@ items:
         transfer: false
         _id: xx5oDVvttzxBUXpQ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses:
@@ -776,32 +953,31 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744074885146
           modifiedTime: 1744074906625
           lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!zIr3NaNF0mWz5Ahq.jW4qHQ761qRLeWM8.xx5oDVvttzxBUXpQ
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744074929043
+      systemVersion: 6.0.0
+      createdTime: 1783365147688
+      modifiedTime: 1783445138588
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.jW4qHQ761qRLeWM8'
@@ -812,8 +988,8 @@ items:
     system:
       description:
         value: >-
-          <p>In humanoid form, the weretiger makes two [[/item
-          .vtnEGCOptmp2bcqG]]{scimitar} attacks or two [[/item
+          <p>In humanoid form, the [[lookup @name lowercase]]{monster} makes two
+          [[/item .vtnEGCOptmp2bcqG]]{scimitar} attacks or two [[/item
           .onmNGMiE4AyvYxDQ]]{longbow} attacks.</p><p>In hybrid form, it can
           attack like a humanoid or make two [[/item .HPmjVRKpG08bgohb]]{claw}
           attacks.</p>
@@ -835,8 +1011,7 @@ items:
       requirements: Humanoid or Hybrid Form
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        zSAdm6BdkXoVfgfc:
           type: utility
           activation:
             type: action
@@ -851,15 +1026,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -870,7 +1046,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -887,11 +1064,20 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          behaviors: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: zSAdm6BdkXoVfgfc
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-humanoid-or-hybrid-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 0
@@ -901,18 +1087,18 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744075424301
+      systemVersion: 6.0.0
+      createdTime: 1783364957473
+      modifiedTime: 1783445111971
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.SmUCt79LtakgTJoa'
   - _id: FOkSL18gU0Sli5ZA
     name: Bite (Tiger or Hybrid Form Only)
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -920,8 +1106,8 @@ items:
           a humanoid, it must succeed on a [[/save]] saving throw or be cursed
           with weretiger lycanthropy.</p>
         chat: >-
-          <p>The Weretiger attacks with its Bite. If the target is a humanoid,
-          it must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its Bite. If the target
+          is a humanoid, it must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -984,7 +1170,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -993,8 +1179,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        8Iz79HWgEiXuzVcQ:
           type: attack
           activation:
             type: action
@@ -1009,6 +1194,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1029,7 +1215,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1049,23 +1236,32 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 8Iz79HWgEiXuzVcQ
+        GbqEwcKP1alZKGDl:
           type: save
           activation:
             type: special
             value: 1
-            condition: ''
+            condition: When a humanoid is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1075,13 +1271,22 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If the target is a humanoid, it must succeed on a [[/save]]
+              saving throw or be cursed with weretiger lycanthropy.</p>
           duration:
             concentration: false
             value: ''
             units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 9AM2lvhRgSUciyvg
+              uuid: null
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -1095,10 +1300,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1108,51 +1314,98 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Curse Save
           img: ''
-          appliedEffects: []
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: GbqEwcKP1alZKGDl
       attuned: false
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: bite-tiger-or-hybrid-form-only
-    effects: []
+      identifier: bite
+    effects:
+      - name: Weretiger Lycanthropy
+        img: icons/creatures/abilities/cougar-pounce-stalk-black.webp
+        origin: Compendium.dnd5e.monsters.Actor.zIr3NaNF0mWz5Ahq.Item.FOkSL18gU0Sli5ZA
+        transfer: false
+        _id: 9AM2lvhRgSUciyvg
+        type: base
+        system:
+          changes: []
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have been cursed with weretiger lycanthropy.</p>
+        tint: '#ffffff'
+        statuses:
+          - cursed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783365002178
+          modifiedTime: 1783365022617
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!zIr3NaNF0mWz5Ahq.FOkSL18gU0Sli5ZA.9AM2lvhRgSUciyvg
     folder: null
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744075307516
+      systemVersion: 6.0.0
+      createdTime: 1783364970083
+      modifiedTime: 1783445117794
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.FOkSL18gU0Sli5ZA'
   - _id: HPmjVRKpG08bgohb
     name: Claw (Tiger or Hybrid Form Only)
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Weretiger attacks with its Claw.</p>
+        chat: <p>The [[lookup @name]]{monster} attacks with its Claw.</p>
       source:
         custom: ''
         book: ''
@@ -1224,8 +1477,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        qNMMjJEKqiuqJVKG:
           type: attack
           activation:
             type: action
@@ -1240,6 +1492,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1260,7 +1513,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1280,50 +1534,56 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          behaviors: []
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: qNMMjJEKqiuqJVKG
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: claw-tiger-or-hybrid-form-only
+      identifier: claw
       mastery: ''
     effects: []
     folder: null
     sort: 300000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744075307516
+      systemVersion: 6.0.0
+      createdTime: 1783365046382
+      modifiedTime: 1783445123351
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.HPmjVRKpG08bgohb'
   - _id: vtnEGCOptmp2bcqG
     name: Scimitar (Humanoid or Hybrid Form Only)
     type: weapon
-    img: icons/weapons/swords/sword-katana.webp
+    img: icons/weapons/swords/sword-hooked-worn.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Weretiger attacks with its Scimitar.</p>
+        chat: <p>The [[lookup @name]]{monster} attacks with its Scimitar.</p>
       source:
         custom: ''
         book: ''
@@ -1388,7 +1648,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1397,8 +1657,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        OlTkINGctPX0GuUh:
           type: attack
           activation:
             type: action
@@ -1413,10 +1672,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1433,7 +1693,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1446,24 +1707,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: OlTkINGctPX0GuUh
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: scimitar-humanoid-or-hybrid-form-only
+      identifier: scimitar
       mastery: ''
     effects: []
     folder: null
@@ -1474,11 +1748,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744075307516
+      systemVersion: 6.0.0
+      createdTime: 1783365067542
+      modifiedTime: 1783445127579
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.vtnEGCOptmp2bcqG'
@@ -1489,7 +1763,7 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Weretiger attacks with its Longbow.</p>
+        chat: <p>The [[lookup @name]]{monster} attacks with its Longbow.</p>
       source:
         custom: ''
         book: ''
@@ -1555,7 +1829,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1564,8 +1838,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        GEP56tYbgZHXuapo:
           type: attack
           activation:
             type: action
@@ -1580,6 +1853,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1600,7 +1874,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1620,40 +1895,46 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: GEP56tYbgZHXuapo
       attuned: false
       ammunition:
         type: arrow
       magicalBonus: null
-      identifier: longbow-humanoid-or-hybrid-form-only
+      identifier: longbow
       mastery: ''
     effects: []
     folder: null
     sort: 500000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744075307516
+      systemVersion: 6.0.0
+      createdTime: 1783365110626
+      modifiedTime: 1783445131835
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.onmNGMiE4AyvYxDQ'
@@ -1665,7 +1946,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171267537
