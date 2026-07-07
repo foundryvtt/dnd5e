@@ -24,18 +24,18 @@
                         <div class="item-detail item-controls">
                             {{#if @root.editable}}
                             {{!-- Editing --}}
-                            <button class="unbutton config-button item-control icon fa-solid fa-pen-to-square"
+                            <button class="unbutton control-button inline-control icon fa-solid fa-pen-to-square"
                                     type="button" data-action="editChange" data-tooltip
                                     aria-label="{{ localize 'DND5E.EFFECT.Action.EditChange' }}"></button>
 
                             {{!-- Deleting --}}
-                            <button class="unbutton config-button item-control icon fa-solid fa-trash"
+                            <button class="unbutton control-button inline-control icon fa-solid fa-trash"
                                     type="button" data-action="deleteChange" data-tooltip
                                     aria-label="{{ localize 'DND5E.EFFECT.Action.DeleteChange' }}"></button>
                             {{/if}}
 
                             {{!-- Context Menu --}}
-                            <button class="unbutton config-button item-control always-interactive icon fa-solid
+                            <button class="unbutton control-button inline-control always-interactive icon fa-solid
                                     fa-ellipsis-vertical" type="button" data-context-menu
                                     aria-label="{{ localize 'DND5E.AdditionalControls' }}"></button>
                         </div>

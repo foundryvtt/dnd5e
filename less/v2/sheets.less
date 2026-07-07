@@ -291,6 +291,15 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
   }
   .changes-list {
     ol, li { display: block; }
+    .items-section .item .item-controls {
+      justify-content: space-evenly;
+      padding-inline-end: 16px;
+
+      button.control-button:not(.always-interactive) {
+        color: var(--control-button-text-color);
+        font-size: var(--font-size-11);
+      }
+    }
   }
 }
 
@@ -346,5 +355,6 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
     }
   }
 
+  .controls { justify-content: space-evenly; }
   &.edit-mode table .controls { flex: 0 0 90px; }
 }

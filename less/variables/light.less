@@ -153,18 +153,18 @@
     --control-active-background-color: rgb(0 0 0 / 20%);
   }
 
-  input, textarea, file-picker, formula-input, document-tags, string-tags { --input-placeholder-color: var(--color-text-light-6); }
+  input, textarea, color-picker, file-picker, formula-input, document-tags, string-tags { --input-placeholder-color: var(--color-text-light-6); }
 
-  input, textarea, select, file-picker, formula-input, document-tags, string-tags {
+  input, textarea, select, color-picker, file-picker, formula-input, document-tags, string-tags {
     --input-background-color: rgb(0 0 0 / 10%);
     --input-disabled-background-color: rgb(0 0 0 / 20%);
   }
-  file-picker > input, formula-input > input {
+  color-picker > input, file-picker > input, formula-input > input {
     --input-background-color: transparent;
     --input-disabled-background-color: transparent;
   }
 
-  input:not([type=range]), textarea, select, file-picker, formula-input, document-tags, string-tags {
+  input:not([type=range]), textarea, select, color-picker, file-picker, formula-input, document-tags, string-tags {
     --input-border-color: transparent;
     --input-hover-border-color: var(--dnd5e-color-gold);
   }
