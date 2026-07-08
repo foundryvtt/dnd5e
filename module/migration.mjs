@@ -1041,7 +1041,10 @@ function _migrateEffectChanges(effect, updateData, { setIds }={}) {
   let containsUpdates = false;
   const changes = (effect.system.changes || []).map(c => {
     // Add ID
-    if ( setIds ) containsUpdates = true;
+    if ( setIds ) {
+      c._id = foundry.utils.randomID();
+      containsUpdates = true;
+    }
 
     // Migrate AC keys
     if ( c.key === "system.attributes.ac.base" ) {
