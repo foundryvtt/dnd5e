@@ -897,6 +897,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static onRenderActiveEffectConfig(app, html, context) {
     app.document.system.onRenderActiveEffectConfig?.(app, html, context);
+
+    // If special duration, hide normal duration fields
+    const hideDuration = !!app.document.specialDuration;
+    html.querySelector("[data-duration]")?.classList.toggle("hidden", hideDuration);
   }
 
   /* -------------------------------------------- */

@@ -69,6 +69,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
     switch ( partId ) {
       case "changes": return this._prepareChangesContext(context, options);
       case "details": return this._prepareDetailsContext(context, options);
+      case "duration": return this._prepareDurationContext(context, options);
     }
     return context;
   }
@@ -99,6 +100,26 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @protected
    */
   async _prepareDetailsContext(context, options) {
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the duration tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareDurationContext(context, options) {
+    const systemGroupLabel = _loc("DND5E.ACTIVEEFFECT.SystemExpiries");
+    for ( const expiry of dnd5e.documents.ActiveEffect5e.PSEUDO_EXPIRIES ) {
+      context.expiryEvents[expiry] = {
+        group: systemGroupLabel,
+        label: _loc(`DND5E.ACTIVEEFFECT.Expiry.${expiry.capitalize()}`)
+      }
+    }
     return context;
   }
 
