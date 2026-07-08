@@ -1,3 +1,4 @@
+import { getHumanReadableAttributeLabel } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
@@ -18,7 +19,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT"];
+  static LOCALIZATION_PREFIXES = ["DND5E.EFFECT.BASE", "DND5E.ENCHANTMENT"];
 
   /* -------------------------------------------- */
 
@@ -160,7 +161,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /** @override */
   onRenderActiveEffectConfig(app, html, context) {
-    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"])');
+    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"], [name="showIcon"])');
     toRemove.forEach(f => f.remove());
   }
 
@@ -221,5 +222,18 @@ export default class EnchantmentData extends ActiveEffectDataModel {
    */
   static availableForItem(doc) {
     return !doc || (doc instanceof Item);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async getSheetChangeContext(change) {
+    return {
+      name: getHumanReadableAttributeLabel(change.key, {
+        item: this.isAppliedEnchantment ? this.item : true, prefixItemName: false
+      })
+    };
   }
 }
