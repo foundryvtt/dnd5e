@@ -32,7 +32,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       showIcon: ItemSheet5e.#showIcon,
       toggleState: ItemSheet5e.#toggleState
     },
-    classes: ["item"],
+    classes: ["item", "hidden-title"],
     editingDescriptionTarget: null,
     elements: {
       activities: "dnd5e-activities",
@@ -160,6 +160,18 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       this.expandedSections.set("system.description.value", true);
       if ( !game.user.isGM ) this.expandedSections.set("system.unidentified.description", true);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    if ( "effects" in parts ) {
+      parts.effects.templates ??= [];
+      parts.effects.templates.push(...customElements.get(this.options.elements.effects).templates);
+    }
+    return parts;
   }
 
   /* -------------------------------------------- */
@@ -390,20 +402,19 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const riderIds = new Set(this.item.getFlag("dnd5e", "riders.effect") ?? []);
     context.tab = context.tabs.effects;
     context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
+    const columns = [EffectsElement.COLUMNS.source, EffectsElement.COLUMNS.value, EffectsElement.COLUMNS.controls];
     for ( const category of Object.values(context.effects) ) {
+      category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {
-        effect.updateDuration();
-        const { id, name, img, disabled, duration } = effect;
-        const source = await effect.getSource();
+        const isExpanded = this.expandedSections.get(`effects.${effect.id}`) === true;
         arr = await arr;
-        const ctx = effectMap[id] = {
-          id, name, img, disabled, duration, source, parent,
-          durationParts: effect.getDurationParts(),
-          showDuration: effect.specialDuration || Number.isFinite(duration.value),
+        const ctx = effectMap[effect.id] = {
+          ...(await effect.getSheetContext({ maxKeyLength: 25 })), parent, isExpanded,
+          expanded: isExpanded ? await effect.getPreviewContext({ secrets: effect.isOwner }) : null,
           hasTooltip: true,
           riders: []
         };
-        if ( riderIds.has(id) ) riders.push(ctx);
+        if ( riderIds.has(effect.id) ) riders.push(ctx);
         else arr.push(ctx);
         return arr;
       }, []);

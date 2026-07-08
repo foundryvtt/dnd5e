@@ -452,9 +452,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -469,7 +466,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -489,17 +486,19 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: IZgoYn3Baw7MAZCT
     name: Inscrutable
     type: feat
-    img: icons/magic/perception/third-eye-blue-red.webp
+    img: icons/magic/perception/eye-slit-orange.webp
     system:
       description:
         value: >-
-          <p>The sphinx is immune to any effect that would sense its emotions or
-          read its thoughts, as well as any divination spell that it refuses.
-          Wisdom (Insight) checks made to ascertain the sphinx's intentions or
+          <p>The [[lookup @name monster]]{monster} is immune to any effect that
+          would sense its emotions or read its thoughts, as well as any
+          divination spell that it refuses. Wisdom (Insight) checks made to
+          ascertain the [[lookup @name monster]]{monster}'s intentions or
           sincerity have disadvantage.</p>
         chat: ''
       source:
@@ -514,10 +513,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -532,60 +532,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FHrFOjEfkdRm4u43
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781826696138
+      modifiedTime: 1781826701784
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.IZgoYn3Baw7MAZCT'
-  - _id: wmqCsq80pewLPg4c
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The sphinx's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!nEC1BRwM8Lx9hLXW.wmqCsq80pewLPg4c'
   - _id: zXzGfPnSFJbfZ7oW
     name: Spellcasting
     type: feat
@@ -637,29 +591,31 @@ items:
       identifier: spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765824512170
+      createdTime: 1781826715814
+      modifiedTime: 1781826715814
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.zXzGfPnSFJbfZ7oW'
   - _id: yotsIj19d5spOVGb
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Androsphinx attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -723,7 +679,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -732,8 +688,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        jm8c4TLwHfyFJGYS:
           type: attack
           activation:
             type: action
@@ -748,10 +703,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -768,7 +724,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -781,23 +738,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: jm8c4TLwHfyFJGYS
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: claw
       mastery: ''
     effects: []
@@ -809,11 +778,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378380000
+      systemVersion: 6.0.0
+      createdTime: 1781826724847
+      modifiedTime: 1781826752020
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.yotsIj19d5spOVGb'
@@ -908,7 +877,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -923,29 +892,33 @@ items:
     system:
       description:
         value: >-
-          <p>The sphinx emits a magical roar. Each time it roars before
-          finishing a long rest, the roar is louder and the effect is different,
-          as detailed below. Each creature within 500 feet of the sphinx and
-          able to hear the roar must make a saving throw.</p><p><strong>First
-          Roar.</strong> Each creature that fails a DC 18 Wisdom saving throw is
-          &amp;Reference[frightened apply=false]{frightened} for 1 minute. A
-          frightened creature can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a
-          success.</p><p><strong>Second Roar.</strong> Each creature that fails
-          a DC 18 Wisdom saving throw is &amp;Reference[deafened
-          apply=false]{deafened} and frightened for 1 minute. A frightened
-          creature is &amp;Reference[paralyzed apply=false]{paralyzed} and can
-          repeat the saving throw at the end of each of its turns, ending the
-          effect on itself on a success.</p><p><strong>Third Roar.</strong> Each
-          creature makes a DC 18 Constitution saving throw. On a failed save, a
-          creature takes 44 (8d10) thunder damage and is knocked
-          &amp;Reference[prone]{prone}. On a successful save, the creature takes
-          half as much damage and isn't knocked prone.</p>
+          <p>The [[lookup @name lowercase]]{monster} emits a magical roar. Each
+          time it roars before finishing a long rest, the roar is louder and the
+          effect is different, as detailed below. Each creature within [[lookup
+          @target.template.size activity=YEy36H064rrzAAxY]] feet of the [[lookup
+          @name lowercase]]{monster} and able to hear the roar must make a
+          saving throw.</p><p><strong>First Roar.</strong> Each creature that
+          fails a [[/save activity=YEy36H064rrzAAxY]] saving throw is
+          &amp;Reference[frightened] for [[lookup @labels.duration
+          activity=YEy36H064rrzAAxY]]. A frightened creature can repeat the
+          saving throw at the end of each of its turns, ending the effect on
+          itself on a success.</p><p><strong>Second Roar.</strong> Each creature
+          that fails a [[/save activity=bw7Ol7mkkyDDH3LD]] saving throw is
+          &amp;Reference[deafened] and &amp;reference[frightened] for [[lookup
+          @labels.duration activity=bw7Ol7mkkyDDH3LD]]. A frightened creature is
+          &amp;Reference[paralyzed] and can repeat the saving throw at the end
+          of each of its turns, ending the effect on itself on a
+          success.</p><p><strong>Third Roar.</strong> Each creature makes a
+          [[/save activity=euc6EMlISPKQtmY5]] saving throw. On a failed save, a
+          creature takes [[/damage average activity=euc6EMlISPKQtmY5]] damage
+          and is knocked &amp;Reference[prone]{prone}. On a successful save, the
+          creature takes half as much damage and isn't knocked prone.</p>
         chat: >-
-          <p>The sphinx emits a magical roar. Each time it roars before
-          finishing a long rest, the roar is louder and the effect is different.
-          Each creature within 500 feet of the sphinx and able to hear the roar
-          must make a saving throw.</p>
+          <p>The [[lookup @name]]{monster} emits a magical roar. Each time it
+          roars before finishing a long rest, the roar is louder and the effect
+          is different. Each creature within [[lookup @target.template.size
+          activity=YEy36H064rrzAAxY]] feet of the [[lookup @name]]{monster} and
+          able to hear the roar must make a saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -956,14 +929,15 @@ items:
       uses:
         max: '3'
         recovery:
-          - period: day
+          - period: lr
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
         YEy36H064rrzAAxY:
           type: save
@@ -977,12 +951,28 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
+                scaling: {}
+              - type: activityUses
+                value: '1'
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} emits a magical roar.
+              Each time it roars before finishing a long rest, the roar is
+              louder and the effect is different, as detailed below. Each
+              creature within 500 feet of the [[lookup @name
+              lowercase]]{monster} and able to hear the roar must make a saving
+              throw.</p><h4><strong>First Roar</strong></h4><p>Each creature
+              that fails a [[/save activity=YEy36H064rrzAAxY]] saving throw is
+              &amp;Reference[frightened] for [[lookup @labels.duration
+              activity=YEy36H064rrzAAxY]]. A frightened creature can repeat the
+              saving throw at the end of each of its turns, ending the effect on
+              itself on a success.</p>
           duration:
             concentration: false
             value: '1'
@@ -990,7 +980,11 @@ items:
             special: ''
             override: false
           effects:
-            - _id: 8y59T2g8cbSOAHCs
+            - _id: QGykY23zVVKEmOse
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -1013,10 +1007,12 @@ items:
             override: false
           uses:
             spent: 0
-            max: ''
-            recovery: []
+            max: '1'
+            recovery:
+              - period: lr
+                type: recoverAll
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
             ability:
@@ -1024,6 +1020,7 @@ items:
             dc:
               calculation: wis
               formula: '18'
+            bonus: ''
           sort: 0
           name: First Roar
           flags: {}
@@ -1033,7 +1030,7 @@ items:
               max: null
             requireAttunement: false
             requireIdentification: false
-            requireMagic: false
+            requireMagic: true
             identifier: ''
           _id: YEy36H064rrzAAxY
           img: ''
@@ -1049,12 +1046,30 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
+                scaling: {}
+              - type: activityUses
+                value: '1'
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} emits a magical roar.
+              Each time it roars before finishing a long rest, the roar is
+              louder and the effect is different, as detailed below. Each
+              creature within [[lookup @target.template.size
+              activity=YEy36H064rrzAAxY]] feet of the [[lookup @name
+              lowercase]]{monster} and able to hear the roar must make a saving
+              throw.</p><h4>Second Roar</h4><p>Each creature that fails a
+              [[/save activity=bw7Ol7mkkyDDH3LD]] saving throw is
+              &amp;Reference[deafened] and &amp;reference[frightened] for
+              [[lookup @labels.duration activity=bw7Ol7mkkyDDH3LD]]. A
+              frightened creature is &amp;Reference[paralyzed] and can repeat
+              the saving throw at the end of each of its turns, ending the
+              effect on itself on a success.</p>
           duration:
             concentration: false
             value: '1'
@@ -1063,6 +1078,10 @@ items:
             override: false
           effects:
             - _id: zFYAB0S0YmMO1C8D
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -1085,10 +1104,10 @@ items:
             override: false
           uses:
             spent: 0
-            max: ''
+            max: '1'
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
             ability:
@@ -1096,6 +1115,7 @@ items:
             dc:
               calculation: wis
               formula: '18'
+            bonus: ''
           sort: 0
           name: Second Roar
           flags: {}
@@ -1105,7 +1125,7 @@ items:
               max: null
             requireAttunement: false
             requireIdentification: false
-            requireMagic: false
+            requireMagic: true
             identifier: ''
           _id: bw7Ol7mkkyDDH3LD
           img: ''
@@ -1121,12 +1141,22 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
+                scaling: {}
+              - type: activityUses
+                value: '1'
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>Each creature makes a [[/save activity=euc6EMlISPKQtmY5]]
+              saving throw. On a failed save, a creature takes [[/damage average
+              activity=euc6EMlISPKQtmY5]] damage and is knocked
+              &amp;Reference[prone]{prone}. On a successful save, the creature
+              takes half as much damage and isn't knocked prone.</p>
           duration:
             concentration: false
             value: ''
@@ -1156,7 +1186,7 @@ items:
             override: false
           uses:
             spent: 0
-            max: ''
+            max: '1'
             recovery: []
           damage:
             onSave: half
@@ -1175,6 +1205,7 @@ items:
             dc:
               calculation: wis
               formula: '18'
+            bonus: ''
           sort: 0
           name: Third Roar
           flags: {}
@@ -1184,7 +1215,7 @@ items:
               max: null
             requireAttunement: false
             requireIdentification: false
-            requireMagic: false
+            requireMagic: true
             identifier: ''
           _id: euc6EMlISPKQtmY5
           img: ''
@@ -1193,62 +1224,26 @@ items:
         level: null
       identifier: roar
     effects:
-      - name: Frightened
-        img: systems/dnd5e/icons/svg/statuses/frightened.svg
-        origin: Compendium.dnd5e.monsters.Actor.nEC1BRwM8Lx9hLXW.Item.ez87kySQJgKUPT9L
-        transfer: false
-        _id: 8y59T2g8cbSOAHCs
-        type: base
-        system: {}
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          combat: null
-          seconds: 60
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
-        description: ''
-        tint: '#ffffff'
-        statuses:
-          - frightened
-        sort: 0
-        flags:
-          dnd5e:
-            riders:
-              statuses: []
-        _stats:
-          compendiumSource: null
-          duplicateSource: null
-          exportSource: null
-          coreVersion: '13.351'
-          systemId: dnd5e
-          systemVersion: 5.2.3
-          createdTime: 1765824670938
-          modifiedTime: 1765824693547
-          lastModifiedBy: dnd5ebuilder0000
-        _key: >-
-          !actors.items.effects!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L.8y59T2g8cbSOAHCs
-      - name: Deafened, Frightened, & Paralyzed
-        img: systems/dnd5e/icons/svg/statuses/deafened.svg
+      - name: Sphinx's Second Roar
+        img: icons/magic/sonic/projectile-sound-rings-wave.webp
         origin: Compendium.dnd5e.monsters.Actor.nEC1BRwM8Lx9hLXW.Item.ez87kySQJgKUPT9L
         transfer: false
         _id: zFYAB0S0YmMO1C8D
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          combat: null
-          seconds: 60
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
-        description: ''
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[deafened apply=false] and
+          &amp;reference[frightened apply=false] for the duration. While
+          frightened, you are also &amp;reference[paralyzed
+          apply=false].</p><p>You can repeat the saving throw at the end of each
+          of your turns, ending the effect on yourself on a success.</p>
         tint: '#ffffff'
         statuses:
           - deafened
@@ -1263,14 +1258,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 5.2.3
           createdTime: 1765824705378
-          modifiedTime: 1765824758890
+          modifiedTime: 1781827189165
           lastModifiedBy: dnd5ebuilder0000
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L.zFYAB0S0YmMO1C8D
+      - name: Sphinx's First Roar
+        img: icons/magic/control/fear-fright-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.nEC1BRwM8Lx9hLXW.Item.ez87kySQJgKUPT9L
+        transfer: false
+        _id: QGykY23zVVKEmOse
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] for the
+          duration.</p><p>You can repeat the saving throw at the end of each of
+          your turns, ending the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781826902608
+          modifiedTime: 1781827207917
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L.QGykY23zVVKEmOse
     folder: null
     sort: 300000
     ownership:
@@ -1279,11 +1318,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QCNJD2GuOZSTT4Wt
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765824842919
+      systemVersion: 6.0.0
+      createdTime: 1781826792525
+      modifiedTime: 1781827357772
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L'
@@ -1293,7 +1332,9 @@ items:
     img: icons/skills/melee/blood-slash-foam-red.webp
     system:
       description:
-        value: <p>The sphinx makes one [[/item .yotsIj19d5spOVGb]]{claw} attack.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .yotsIj19d5spOVGb]]{claw} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -1307,7 +1348,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -1321,13 +1362,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1371,144 +1406,43 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: Strike
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: claw-attack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.DPrO7eVVxiKD8QWD
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825709190
+      systemVersion: 6.0.0
+      createdTime: 1781827380748
+      modifiedTime: 1783367060488
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.fZY6aMo87z2iSl9Q'
-  - _id: ZZdoas8GMbE3AzzZ
-    name: Teleport
-    type: feat
-    img: icons/magic/symbols/runes-star-pentagon-magenta.webp
-    system:
-      description:
-        value: >-
-          <p>The sphinx magically teleports, along with any equipment it is
-          wearing or carrying, up to 120 feet to an unoccupied space it can
-          see.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 2
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: teleport
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!nEC1BRwM8Lx9hLXW.ZZdoas8GMbE3AzzZ'
   - _id: COSA7NBYXiWccqNu
     name: Cast a Spell
     type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
+    img: icons/magic/symbols/star-rising-purple.webp
     system:
       description:
         value: >-
-          <p>The sphinx casts a spell from its list of prepared spells, using a
-          spell slot as normal.</p>
+          <p>The [[lookup @name lowercase]]{monster} casts a spell from its list
+          of prepared spells, using a spell slot as normal.</p>
         chat: ''
       source:
         custom: ''
@@ -1522,7 +1456,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -1536,13 +1470,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '3'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1586,25 +1514,32 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: Cast Spell
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: cast-a-spell
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.7HPC39yg8OYshJos
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781827380749
+      modifiedTime: 1781895257938
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.COSA7NBYXiWccqNu'
   - _id: n9pJzTDsAwQxJVRl
@@ -1728,7 +1663,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1845,7 +1780,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.8zT7njvqbpXs4Cel
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1976,7 +1911,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2087,7 +2022,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2203,7 +2138,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2320,7 +2255,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2431,7 +2366,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.F0GsG0SJzsIOacwV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2551,7 +2486,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CylBa7jR8DSbo8Z3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2669,7 +2604,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2781,7 +2716,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gopnZvS0c2jD5FP8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2911,7 +2846,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pxpb2eOB6bv4phAf
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3028,7 +2963,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.da0a1t2FqaTjRZGT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3174,7 +3109,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.5e1xTohkzqFqbYH4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3299,7 +3234,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WzvJ7G3cqvIubsLk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3416,7 +3351,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.mgFqi0ev8f7Ut19y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -3424,6 +3359,225 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.mgFqi0ev8f7Ut19y'
+  - _id: FhfUU71G8WJDH4q4
+    name: Magic Weapons
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    effects: []
+    folder: null
+    sort: 100000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781826713508
+      modifiedTime: 1781826714676
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.nahRRxck9R5GVVFS
+    _key: '!actors.items!nEC1BRwM8Lx9hLXW.FhfUU71G8WJDH4q4'
+  - _id: zlcpHG8JZGvViCqm
+    name: Teleport
+    type: feat
+    img: icons/magic/symbols/ring-circle-smoke-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} magically teleports, along
+          with any equipment it is wearing or carrying, up to [[lookup
+          @labels.description.range activity=nfaYtrEmylWmLluh]] to an unoccupied
+          space it can see.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - mgc
+      activities:
+        nfaYtrEmylWmLluh:
+          type: teleport
+          name: Reposition
+          _id: nfaYtrEmylWmLluh
+          img: ''
+          sort: 200000
+          activation:
+            type: legendary
+            override: false
+            condition: ''
+            value: 2
+          behaviors: []
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: ft
+            override: false
+            special: ''
+            value: '120'
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          teleport:
+            override: false
+            units: ft
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: teleport
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.lOYt73eaJojBDxAV.Item.H4Qnl5aNwIuOiKvm
+      duplicateSource: Item.F4RvgKoeOdcVw8YS
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781827371204
+      modifiedTime: 1782950003731
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!nEC1BRwM8Lx9hLXW.zlcpHG8JZGvViCqm'
+  - _id: pHPuDo1dD0B3phuF
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can take [[lookup
+          @resources.legact.max]] legendary actions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781897166039
+      modifiedTime: 1781897171640
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!nEC1BRwM8Lx9hLXW.pHPuDo1dD0B3phuF'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -3432,7 +3586,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171255742

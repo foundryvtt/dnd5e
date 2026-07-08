@@ -8,15 +8,18 @@ import { CalendarGreyhawk, CALENDAR_OF_GREYHAWK } from "./data/calendar/calendar
 import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-of-harptos.mjs";
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
+import * as regionBehaviors from "./data/region-behavior/_module.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
+import Adventure5e from "./documents/adventure.mjs";
 import { preLocalize } from "./utils.mjs";
 
 /**
  * @import {
  *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
  *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
+ *   AdventureConfiguration, AdventureImportAction,
  *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
  *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
@@ -1096,6 +1099,26 @@ preLocalize("activityActivationTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * Types of behaviors that can be attached to regions through activities.
+ * @enum {ActivityBehaviorConfiguration}
+ */
+DND5E.activityBehaviorTypes = {
+  applyActiveEffect: {
+    label: "TYPES.RegionBehavior.applyActiveEffect",
+    icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
+    model: regionBehaviors.ApplyActiveEffectActivityBehavior
+  },
+  difficultTerrain: {
+    label: "TYPES.RegionBehavior.dnd5e.difficultTerrain",
+    icon: "systems/dnd5e/icons/svg/behaviors/difficult-terrain.svg",
+    model: regionBehaviors.DifficultTerrainActivityBehavior
+  }
+};
+preLocalize("activityBehaviorTypes", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * Different things that an ability can consume upon use.
  * @enum {string}
  */
@@ -1847,6 +1870,9 @@ DND5E.featureTypes = {
       epicBoon: "DND5E.Feature.Feat.EpicBoon"
     }
   },
+  pietyTrait: {
+    label: "DND5E.Feature.PietyTrait"
+  },
   supernaturalGift: {
     label: "DND5E.Feature.SupernaturalGift.Label",
     subtypes: {
@@ -1881,7 +1907,7 @@ DND5E.itemProperties = {
   },
   concentration: {
     label: "DND5E.ITEM.Property.Concentration",
-    abbreviation: "DND5E.ConcentrationAbbr",
+    abbreviation: "DND5E.CONCENTRATION.Abbreviation",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
@@ -2035,6 +2061,8 @@ DND5E.validProperties = {
     "mgc"
   ])
 };
+
+DND5E.validProperties.consumable.ammo = new Set(["ret"]);
 
 /* -------------------------------------------- */
 
@@ -3637,7 +3665,10 @@ DND5E.conditionTypes = {
     img: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.jSQtPgNm0i4f3Qi3",
     levels: 6,
-    reduction: { rolls: 2, speed: 5 }
+    reduction: { rolls: 2, speed: 5 },
+    conditions: {
+      6: ["dead"]
+    }
   },
   falling: {
     name: "EFFECT.DND5E.StatusFalling",
@@ -3740,23 +3771,23 @@ preLocalize("conditionTypes", { key: "name", sort: true });
 
 /**
  * Various effects of conditions and which conditions apply it. Either keys for the conditions,
- * and with a number appended for a level of exhaustion.
+ * and with a number appended for a level of a leveled condition.
  * @enum {Set<string>}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
-  halfMovement: new Set(["exhaustion-2"]),
+  noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
+  halfMovement: new Set(),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set(["exhaustion-4"]),
+  halfHealth: new Set(),
   dehydrated: new Set(["dehydration"]),
   malnourished: new Set(["malnutrition"]),
-  abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
+  abilityCheckDisadvantage: new Set(["poisoned"]),
   physicalCheckDisadvantage: new Set(["heavilyEncumbered"]),
-  abilitySaveDisadvantage: new Set(["exhaustion-3"]),
+  abilitySaveDisadvantage: new Set(),
   physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
   physicalAttackDisadvantage: new Set(["heavilyEncumbered"]),
-  attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
+  attackDisadvantage: new Set(["poisoned"]),
   dexteritySaveDisadvantage: new Set(["restrained"]),
   dexteritySaveAdvantage: new Set(["dodging"]),
   initiativeAdvantage: new Set(["invisible"]),
@@ -3858,12 +3889,12 @@ DND5E.neverBlockStatuses = new Set();
 
 /**
  * Configuration for the special bloodied status effect.
- * @type {{ name: string, icon: string, threshold: number }}
+ * @type {{ name: string, img: string, threshold: number }}
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
   img: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
-  threshold: .5
+  threshold: 50
 };
 
 /* -------------------------------------------- */
@@ -4406,6 +4437,9 @@ DND5E.activityTypes = {
   summon: {
     documentClass: activities.SummonActivity
   },
+  teleport: {
+    documentClass: activities.TeleportActivity
+  },
   transform: {
     documentClass: activities.TransformActivity
   },
@@ -4495,6 +4529,43 @@ DND5E.defaultArtwork = {
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
 };
+
+/* -------------------------------------------- */
+/*  Adventures                                  */
+/* -------------------------------------------- */
+
+/**
+ * Configuration for adventure handling by the system.
+ * @type {{
+ *   config: Record<string, AdventureConfiguration>,
+ *   importActions: Record<string, Omit<AdventureImportAction, "id">>
+ * }}
+ */
+DND5E.adventure = {
+  config: {},
+  importActions: {
+    activateScene: {
+      label: "DND5E.ADVENTURE.ImportAction.ActivateScene",
+      default: true,
+      handler: Adventure5e.activateScene,
+      quickstartHandler: Adventure5e.activateSceneQuickstart,
+      lifecycle: "post"
+    },
+    customizeWorld: {
+      label: "DND5E.ADVENTURE.ImportAction.CustomizeWorld",
+      handler: Adventure5e.customizeWorld,
+      lifecycle: "post"
+    },
+    displayJournal: {
+      label: "DND5E.ADVENTURE.ImportAction.DisplayJournal",
+      default: true,
+      handler: Adventure5e.displayJournal,
+      quickstartHandler: Adventure5e.displayJournalQuickstart,
+      lifecycle: "post"
+    }
+  }
+};
+preLocalize("adventure.importActions", { key: "label" });
 
 /* -------------------------------------------- */
 /*  Calendar                                    */

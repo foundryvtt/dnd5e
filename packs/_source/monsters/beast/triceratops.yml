@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: h5lGnMKW65NWIi2W
     name: Gore
@@ -489,7 +487,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Triceratops attacks with its Gore.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -552,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -561,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        kl1IUJXxYtLG18zM:
           type: attack
           activation:
             type: action
@@ -577,15 +576,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -596,7 +596,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -609,20 +610,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: kl1IUJXxYtLG18zM
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -637,24 +650,26 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123788739
+      systemVersion: 6.0.0
+      createdTime: 1781531259024
+      modifiedTime: 1781531275876
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!e5IQxSJO7ySEDdSH.h5lGnMKW65NWIi2W'
   - _id: 6UWSefP0BqnmYwAz
     name: Stomp
     type: weapon
-    img: icons/creatures/abilities/cougar-pounce-stalk-black.webp
+    img: icons/commodities/biological/foot-black-grey.webp
     system:
       description:
         value: >-
           <p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one prone
           creature. Hit: [[/damage average]] damage.</p>
-        chat: <p>The Triceratops attacks with its Stomp.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -717,7 +732,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -726,8 +741,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        AQIcfoWNacHcu71z:
           type: attack
           activation:
             type: action
@@ -742,15 +756,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -761,7 +776,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -774,20 +790,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: AQIcfoWNacHcu71z
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -802,26 +830,28 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123830633
+      systemVersion: 6.0.0
+      createdTime: 1781531052318
+      modifiedTime: 1781531069058
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!e5IQxSJO7ySEDdSH.6UWSefP0BqnmYwAz'
   - _id: 4jztSrWQNxc4q55u
     name: Trampling Charge
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the triceratops moves at least 20 ft. straight toward a creature
-          and then hits it with a gore attack on the same turn, that target must
-          succeed on a [[/save]] saving throw or be knocked
-          &amp;Reference[prone]. If the target is prone, the triceratops can
-          make one stomp attack against it as a bonus action.</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a creature and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.e5IQxSJO7ySEDdSH.Item.h5lGnMKW65NWIi2W]{gore}
+          attack on the same turn, that target must succeed on a [[/save]]
+          saving throw or be knocked &amp;Reference[prone]. If the target is
+          prone, the [[lookup @name lowercase]]{monster} can make one [[/item
+          .6UWSefP0BqnmYwAz]]{stomp} attack against it as a bonus action.</p>
         chat: >-
           <p>If the triceratops moves at least <strong>20 ft.</strong> straight
           toward a creature and then hits it with a gore attack on the same
@@ -838,67 +868,80 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        HfuVdPpbIXuiBaiB:
           type: save
+          name: Trample Save
+          _id: HfuVdPpbIXuiBaiB
+          img: ''
+          sort: 100000
           activation:
-            type: ''
-            value: null
-            condition: ''
+            type: special
             override: false
+            condition: >-
+              The [[lookup @name lowercase]]{monster} moves at least 20 feet
+              straight toward a creature and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.e5IQxSJO7ySEDdSH.Item.h5lGnMKW65NWIi2W]{gore}
+              attack on the same turn.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+            visible: true
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -912,11 +955,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yD51x4dihnbHwfsj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123777625
+      systemVersion: 6.0.0
+      createdTime: 1781530876562
+      modifiedTime: 1783369948240
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!e5IQxSJO7ySEDdSH.4jztSrWQNxc4q55u'
@@ -928,7 +971,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171244487

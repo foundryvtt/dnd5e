@@ -39,6 +39,7 @@ export default function ActivityMixin(Base) {
       sheetClass: ActivitySheet,
       usage: {
         actions: {},
+        applyEffectsInChat: true,
         chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
         dialog: ActivityUsageDialog
       }
@@ -96,16 +97,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      if ( this.isRider ) return false;
-      if ( !this.item.canUse ) return false;
-      if ( this.dependentOrigin?.active === false ) return false;
-      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
-      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return false;
-      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
-      const level = this.relevantLevel;
-      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
-        || ((this.visibility?.level?.max ?? Infinity) < level) ) return false;
-      return true;
+      return this.item.canUse && !this.isHidden;
     }
 
     /* -------------------------------------------- */
@@ -126,6 +118,25 @@ export default function ActivityMixin(Base) {
      */
     get dependentOrigin() {
       return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity hidden from display?
+     * @type {boolean}
+     */
+    get isHidden() {
+      if ( this.isRider ) return true;
+      if ( this.item.isHidden ) return true;
+      if ( this.dependentOrigin?.active === false ) return true;
+      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return true;
+      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return true;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return true;
+      const level = this.relevantLevel;
+      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
+        || ((this.visibility?.level?.max ?? Infinity) < level) ) return true;
+      return false;
     }
 
     /* -------------------------------------------- */
@@ -202,9 +213,6 @@ export default function ActivityMixin(Base) {
         data: {
           flags: {
             dnd5e: this.messageFlags
-          },
-          system: {
-            effects: this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -636,13 +644,13 @@ export default function ActivityMixin(Base) {
         if ( config.concentration.end ) {
           const replacedEffect = effects.find(i => i.id === config.concentration.end);
           if ( !replacedEffect ) errors.push(
-            new ConsumptionError(_loc("DND5E.ConcentratingMissingItem"))
+            new ConsumptionError(_loc("DND5E.CONCENTRATION.Warning.MissingItem"))
           );
         }
 
         // Cannot begin more concentrations than the limit
         else if ( effects.size >= this.actor.system.attributes?.concentration?.limit ) errors.push(
-          new ConsumptionError(_loc("DND5E.ConcentratingLimited"))
+          new ConsumptionError(_loc("DND5E.CONCENTRATION.Limit.Reached"))
         );
       }
 
@@ -719,8 +727,10 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
-      const effects = this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`);
-      if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      if ( this.metadata.usage.applyEffectsInChat ) {
+        const effects = this.applicableEffects?.map(e => e.relativeUUID);
+        if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      }
     }
 
     /* -------------------------------------------- */
@@ -1121,6 +1131,34 @@ export default function ActivityMixin(Base) {
         });
       }
       return templates;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle attaching region behaviors to a newly created template.
+     * @param {Region} region
+     * @param {object} options
+     * @param {string} userId
+     */
+    static async placeTemplateBehaviors(region, options, userId) {
+      if ( !game.user.isActiveGM || (options.dnd5e?.createActivityBehaviors === false) ) return;
+
+      const activity = await fromUuid(region.getFlag("dnd5e", "origin"));
+      const behaviors = activity?.applicableBehaviors;
+      if ( !behaviors?.length ) return;
+
+      const toCreate = [];
+      for ( const behavior of behaviors ) {
+        const data = behavior.config.createBehaviorData(activity);
+        if ( !data ) continue;
+        data.name ??= behavior.name;
+        toCreate.push(data);
+      }
+
+      // TODO: Add pre- and post- hooks
+
+      region.createEmbeddedDocuments("RegionBehavior", toCreate);
     }
 
     /* -------------------------------------------- */

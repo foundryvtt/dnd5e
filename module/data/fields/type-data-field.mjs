@@ -67,7 +67,7 @@ export default class TypeDataField5e extends foundry.data.fields.ObjectField {
 
   /** @override */
   _migrate(value, options, _state) {
-    const cls = this.getModelForType(_state.dnd5e?.type ?? value.type ?? _state.source?.type);
+    const cls = this.getModelForType(_state.dnd5e?.type ?? value?.type ?? _state.source?.type);
     if ( cls ) cls.migrateDataSafe(value);
     return value;
   }

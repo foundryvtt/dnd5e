@@ -88,14 +88,15 @@ export default class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  async apply(level, { ability, retainedData={}, selected=Object.keys(retainedData) }={}, options={}) {
+  async apply(level, { ability, retainedData={}, selected }={}, options={}) {
     if ( options.initial ) {
-      ability = retainedData.ability ?? this.value.ability ?? this.configuration.spell?.ability?.first();
-      selected = this.configuration.items?.reduce((arr, { optional, uuid }) => {
+      ability ??= retainedData.ability ?? this.value.ability ?? this.configuration.spell?.ability?.first();
+      selected ??= this.configuration.items?.reduce((arr, { optional, uuid }) => {
         if ( !this.configuration.optional || !optional ) arr.push(uuid);
         return arr;
       }, []) ?? [];
     }
+    selected ??= Object.keys(retainedData);
 
     const added = foundry.utils.getProperty(this, this.storagePath(level)) ?? {};
     if ( ability && (ability !== this.value?.ability) ) {

@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,17 +480,20 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Y73kGtiKbGevpBCo
     name: Martial Advantage
     type: feat
-    img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+    img: icons/skills/melee/weapons-crossed-swords-yellow.webp
     system:
       description:
         value: >-
-          <p>Once per turn, the hobgoblin can deal an extra 7 (2d6) damage to a
-          creature it hits with a weapon attack if that creature is within 5 ft.
-          of an ally of the hobgoblin that isn't incapacitated.</p>
+          <p>Once per turn, the [[lookup @name lowercase]]{monster} can deal an
+          extra [[/damage average]] to a creature it hits with a weapon attack
+          if that creature is within 5 feet of an ally of the [[lookup @name
+          lowercase]]{monster} that isn't &amp;reference[incapacitated
+          apply=false].</p>
         chat: >-
           <p>Once per turn, the hobgoblin can deal extra damage to a creature it
           hits with a weapon attack if that creature is within 5 ft. of an ally
@@ -506,40 +506,51 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: ''
-        recovery: []
+        max: '1'
+        recovery:
+          - period: turnStart
+            type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        HNdExcfy1u7JZbbC:
           type: damage
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} hits with a weapon
+              attack against a creature is within 5 feet of an ally of the
+              [[lookup @name lowercase]]{monster} that isn't
+              &reference[incapacitated apply=false].
             override: false
           consumption:
-            targets: []
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: spec
             special: ''
             override: false
           target:
@@ -550,10 +561,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -564,21 +576,31 @@ items:
             recovery: []
           damage:
             critical:
-              allow: false
+              allow: true
               bonus: ''
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types: []
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: HNdExcfy1u7JZbbC
+          name: Bonus Damage
       enchant: {}
       prerequisites:
         level: null
@@ -592,24 +614,26 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zg0RZmAncKJqIpax
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676763
+      systemVersion: 6.0.0
+      createdTime: 1781824096218
+      modifiedTime: 1781911336401
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.Y73kGtiKbGevpBCo'
   - _id: is4wHu9FG6SPackl
     name: Longsword
     type: weapon
-    img: icons/weapons/swords/greatsword-crossguard-steel.webp
+    img: icons/weapons/swords/sword-guard-worn-brown.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
           attackMode=twoHanded]] damage if used with two hands.</p>
-        chat: <p>The Hobgoblin attacks with its Longsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -673,7 +697,7 @@ items:
         conditions: ''
       properties:
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -682,8 +706,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        B9Dpo2qT2fTpxKWg:
           type: attack
           activation:
             type: action
@@ -698,10 +721,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -718,7 +742,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -737,18 +762,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: B9Dpo2qT2fTpxKWg
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -758,11 +796,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173384992
+      systemVersion: 6.0.0
+      createdTime: 1781824258949
+      modifiedTime: 1781824281796
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.is4wHu9FG6SPackl'
@@ -773,7 +811,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Hobgoblin attacks with its Longbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -839,7 +879,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -848,8 +888,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        C7HHrUlqcelaTmsP:
           type: attack
           activation:
             type: action
@@ -864,10 +903,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -884,7 +924,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -903,18 +944,32 @@ items:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: C7HHrUlqcelaTmsP
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -924,11 +979,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173384992
+      systemVersion: 6.0.0
+      createdTime: 1781824242487
+      modifiedTime: 1781824248549
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.ahUVLSMfFY5mqJ66'
@@ -1001,7 +1056,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.rLMflzmxpe8JGTOA
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1077,7 +1132,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1093,7 +1148,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171204750

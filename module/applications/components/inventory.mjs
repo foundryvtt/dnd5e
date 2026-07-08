@@ -356,8 +356,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
 
     if ( !this.actor || this.actor.system.isGroup ) return options;
     const favorited = this.actor.system.hasFavorite?.(foundry.utils.buildRelativeUuid(item, this.actor));
-    const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
-      : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
+    const expanded = this.app.expandedSections.get(`items.${item.id}`);
 
     // Owned item options.
     options.push({
@@ -383,7 +382,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       },
       group: "action"
     }, {
-      label: "DND5E.ConcentrationBreak",
+      label: "DND5E.CONCENTRATION.Action.Break",
       icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
       group: "state",
       visible: () => this.actor?.concentration?.items.has(item),
@@ -750,12 +749,12 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     item ??= await fromUuid(uuid);
     if ( !item ) return;
 
-    const expanded = this.app.expandedSections.get(item.id);
+    const expanded = this.app.expandedSections.get(`items.${item.id}`);
     if ( expanded ) {
       summary.parentElement.addEventListener("transitionend", () => {
         if ( row.classList.contains("collapsed") ) summary.querySelector(".item-summary")?.remove();
       }, { once: true });
-      this.app.expandedSections.set(item.id, false);
+      this.app.expandedSections.set(`items.${item.id}`, false);
     } else {
       const context = await item.getChatData({ secrets: item.isOwner });
       const template = "systems/dnd5e/templates/items/parts/item-summary.hbs";
@@ -763,7 +762,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       summary.querySelectorAll(".item-summary").forEach(el => el.remove());
       summary.insertAdjacentHTML("beforeend", content);
       await new Promise(resolve => requestAnimationFrame(resolve));
-      this.app.expandedSections.set(item.id, true);
+      this.app.expandedSections.set(`items.${item.id}`, true);
     }
 
     row.classList.toggle("collapsed", expanded);

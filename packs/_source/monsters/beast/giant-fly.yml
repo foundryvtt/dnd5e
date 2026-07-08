@@ -441,9 +441,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -458,7 +455,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -478,6 +475,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items: []
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -487,11 +485,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171261034
-  modifiedTime: 1741121004853
+  modifiedTime: 1781538282004
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!rLl22hYeAH3ljhdI'

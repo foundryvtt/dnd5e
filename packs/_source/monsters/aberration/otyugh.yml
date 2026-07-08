@@ -448,9 +448,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -465,7 +462,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -485,18 +482,19 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: z8zfieQSSbMtBNQz
     name: Limited Telepathy
     type: feat
-    img: icons/magic/defensive/illusion-evasion-echo-purple.webp
+    img: icons/magic/movement/trail-streak-impact-blue.webp
     system:
       description:
         value: >-
-          <p>The otyugh can magically transmit simple messages and images to any
-          creature within 120 ft. of it that can understand a language. This
-          form of telepathy doesn't allow the receiving creature to
-          telepathically respond.</p>
+          <p>The [[lookup @name lowercase]]{monster} can magically transmit
+          simple messages and images to any creature within 120 feet of it that
+          can understand a language. This form of telepathy doesn't allow the
+          receiving creature to telepathically respond.</p>
         chat: ''
       source:
         custom: ''
@@ -510,10 +508,12 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -528,33 +528,33 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.xna3UTd4EFLCZMt9
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744841524123
+      systemVersion: 6.0.0
+      createdTime: 1781745807733
+      modifiedTime: 1781745823660
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.z8zfieQSSbMtBNQz'
   - _id: CCawltKiVU4Mup9i
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
           a creature, it must succeed on a [[/save]] saving throw against
-          disease or become &amp;Reference[poisoned apply=false] until the
-          disease is cured. Every 24 hours that elapse, the target must repeat
-          the saving throw, reducing its hit point maximum by 5 ([[/r 1d10]]) on
-          a failure. The disease is cured on a success. The target dies if the
-          disease reduces its hit point maximum to 0. This reduction to the
+          disease or become &amp;Reference[poisoned] until the disease is cured.
+          Every 24 hours that elapse, the target must repeat the saving throw,
+          reducing its hit point maximum by [[/damage maximum 1d10]]{5 (1d10)}
+          on a failure. The disease is cured on a success. The target dies if
+          the disease reduces its hit point maximum to 0. This reduction to the
           target's hit point maximum lasts until the disease is cured.</p>
         chat: >-
-          <p>The Otyugh attacks with its Bite. If the target is a creature, it
-          must make a <strong>Constitution</strong> saving throw. Every 24 hours
-          that elapse, the target must repeat the saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must then make a Constitution saving
+          throw.</p>
       source:
         custom: ''
         book: ''
@@ -626,8 +626,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        oAH5PPIJwHjFJ4TD:
           type: attack
           activation:
             type: action
@@ -642,10 +641,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -662,7 +662,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -688,14 +689,21 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: oAH5PPIJwHjFJ4TD
+        kry4D7LOVXNmiINV:
           type: save
           activation:
-            type: ''
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -705,13 +713,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
             units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: y08IDhSebGn0B6ab
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -725,7 +739,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -738,55 +753,108 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Disease Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: kry4D7LOVXNmiINV
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
       mastery: ''
-    effects: []
+    effects:
+      - name: Disease Save
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.jcZblJ6lqtW0ePxe.Item.CCawltKiVU4Mup9i
+        transfer: false
+        _id: y08IDhSebGn0B6ab
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are diseased. Until the disease is cured, you are also
+          &amp;reference[poisoned apply=false].</p><p>Every 24 hours that
+          elapse, you must repeat the saving throw, reducing your hit point
+          maximum by [[/damage maximum 1d10]]{5 (1d10)} on a failure. The
+          disease ic cured on a success.</p><p>You die if the disease reduces
+          your hit point maximum to 0. This reduction to your hit point maximum
+          lasts until the disease is cured.</p>
+        tint: '#ffffff'
+        statuses:
+          - diseased
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781746105540
+          modifiedTime: 1781746464604
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!jcZblJ6lqtW0ePxe.CCawltKiVU4Mup9i.y08IDhSebGn0B6ab
     folder: null
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744916839163
+      systemVersion: 6.0.0
+      createdTime: 1781745829345
+      modifiedTime: 1781746504424
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.CCawltKiVU4Mup9i'
   - _id: BPYsBEkmZMcGYZDh
     name: Tentacle
     type: weapon
-    img: icons/creatures/tentacles/tentacles-thing-green.webp
+    img: icons/commodities/biological/tentacle-purple-white.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
           Medium or smaller, it is &amp;Reference[grappled apply=false] (escape
           DC 13) and &amp;Reference[restrained apply=false] until the grapple
-          ends. The otyugh has two tentacles, each of which can grapple one
-          target.</p>
+          ends. The [[lookup @name lowercse]]{monster} has two [[lookup
+          @item.name lowercase]]s, each of which can grapple one target.</p>
         chat: >-
           <p>The Otyugh attacks with its Tentacle. If the target is Medium or
           smaller, it is grappled, and restrained until the grapple ends. The
@@ -814,7 +882,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -852,9 +920,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -863,8 +930,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ZxmWa2TEZOlGYnGd:
           type: attack
           activation:
             type: action
@@ -879,13 +945,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: cbXYY9JllPk8clTC
+              level: {}
           range:
             value: '10'
             units: ft
@@ -899,7 +968,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -912,38 +982,86 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 8
                 bonus: ''
                 types:
                   - piercing
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ZxmWa2TEZOlGYnGd
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tentacle
       mastery: ''
-    effects: []
+    effects:
+      - name: Grappled by Tentacle
+        img: icons/commodities/biological/tentacle-purple-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.jcZblJ6lqtW0ePxe.Item.BPYsBEkmZMcGYZDh
+        transfer: false
+        _id: cbXYY9JllPk8clTC
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You are &amp;reference[grappled apply=false] (escape DC 13).</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781745931692
+          modifiedTime: 1781745954267
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!jcZblJ6lqtW0ePxe.BPYsBEkmZMcGYZDh.cbXYY9JllPk8clTC
     folder: null
     sort: 300000
     ownership:
@@ -952,31 +1070,32 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744841714189
+      systemVersion: 6.0.0
+      createdTime: 1781745888583
+      modifiedTime: 1781745959773
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.BPYsBEkmZMcGYZDh'
   - _id: 9d1ZhvT1vIJsNnN1
     name: Tentacle Slam
     type: feat
-    img: icons/magic/death/undead-skeleton-deformed-red.webp
+    img: icons/creatures/tentacles/tentacles-octopus-black-pink.webp
     system:
       description:
         value: >-
-          <p>The otyugh slams creatures grappled by it into each other or a
-          solid surface. Each creature must succeed on a [[/save]] saving throw
-          or take [[/damage average]] damage and be &amp;Reference[stunned
-          apply=false] until the end of the otyugh's next turn.</p><p>On a
-          successful save, the target takes half the bludgeoning damage and
-          isn't stunned.</p>
+          <p>The [[lookup @name lowercase]]{monster} slams creatures
+          &amp;reference[grappled apply=false] by it into each other or a solid
+          surface. Each creature must succeed on a [[/save]] saving throw or
+          take [[/damage average]] damage and be &amp;Reference[stunned
+          apply=false] until the end of the [[lookup @name lowercse]]{monster}'s
+          next turn.</p><p>On a successful save, the target takes half the
+          bludgeoning damage and isn't stunned.</p>
         chat: >-
-          <p>The otyugh slams creatures grappled by it into each other or a
-          solid surface. Each creature must make a <strong>Constitution</strong>
-          saving throw.</p>
+          <p>The [[lookup @name lowercase]]{monster} slams creatures
+          &amp;reference[grappled apply=false] by it into each other or a solid
+          surface. Each creature must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -989,13 +1108,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        HCOsx72lEwu33b27:
           type: save
           activation:
             type: action
@@ -1010,15 +1128,21 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
             units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: obI7Dl3IiLP5Zhwq
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
-            units: self
+            units: touch
             special: ''
             override: false
           target:
@@ -1029,10 +1153,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1048,41 +1173,91 @@ items:
                   enabled: false
                   formula: ''
                 number: 2
-                denomination: '6'
+                denomination: 6
                 bonus: '@abilities.str.mod'
                 types:
                   - bludgeoning
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Slam Creatures
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: HCOsx72lEwu33b27
       enchant: {}
       prerequisites:
         level: null
       identifier: tentacle-slam
-    effects: []
+    effects:
+      - name: Slam Stun
+        img: icons/magic/air/wind-vortex-swirl-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.jcZblJ6lqtW0ePxe.Item.9d1ZhvT1vIJsNnN1
+        transfer: false
+        _id: obI7Dl3IiLP5Zhwq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[stunned apply=false] until the start of the
+          otyugh's next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - stunned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781746035621
+          modifiedTime: 1781746069080
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!jcZblJ6lqtW0ePxe.9d1ZhvT1vIJsNnN1.obI7Dl3IiLP5Zhwq
     folder: null
     sort: 400000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QiM1nbPzbLzKnfmP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744841784193
+      systemVersion: 6.0.0
+      createdTime: 1781745976552
+      modifiedTime: 1781746089283
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.9d1ZhvT1vIJsNnN1'
@@ -1180,7 +1355,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -1196,7 +1371,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171252040

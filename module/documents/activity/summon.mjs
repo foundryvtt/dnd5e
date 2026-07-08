@@ -37,6 +37,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         actions: {
           placeSummons: SummonActivity.#placeSummons
         },
+        applyEffectsInChat: false,
         dialog: SummonUsageDialog
       }
     }, { inplace: false })
@@ -71,14 +72,6 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     config.summons.creatureSize ??= this.creatureSizes.first() ?? null;
     config.summons.creatureType ??= this.creatureTypes.first() ?? null;
     return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _finalizeMessageConfig(usageConfig, messageConfig, results) {
-    super._finalizeMessageConfig(usageConfig, messageConfig, results);
-    delete messageConfig.data.system?.effects;
   }
 
   /* -------------------------------------------- */
@@ -204,7 +197,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       }
     } catch(err) {
       Hooks.onError("SummonActivity#placeSummons", err, {
-        msg: game.i18n.localize("DND5E.SUMMON.Warning.PlaceTokens"),
+        msg: _loc("DND5E.SUMMON.Warning.PlaceTokens"),
         log: "error",
         notify: "error"
       });
@@ -480,7 +473,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     // Add applied effects
-    actorUpdates.effects.push(...this.applicableEffects.map(e => e.toObject()));
+    actorUpdates.effects.push(...(await this.getApplicableEffects()).map(e => e.toObject()));
 
     return { actorUpdates, tokenUpdates };
   }

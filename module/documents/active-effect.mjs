@@ -1,4 +1,5 @@
 import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
+import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, staticID } from "../utils.mjs";
@@ -126,7 +127,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( this.target?.testUserPermission(game.user, "OBSERVER") ) return false;
 
     // Hide bloodied status effect from players unless the token is friendly
-    if ( (this.id === this.constructor.ID.BLOODIED) && (game.settings.get("dnd5e", "bloodied") === "player") ) {
+    if ( (this.id === this.constructor.ID.BLOODIED) && (dnd5e.settings.bloodied === "player") ) {
       return this.target?.token?.disposition !== foundry.CONST.TOKEN_DISPOSITIONS.FRIENDLY;
     }
 
@@ -140,6 +141,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( super.isSuppressed ) return true;
     if ( this.system.magical && this.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
+    if ( this.type === "condition" ) return false;
     if ( this.item ) {
       if ( this.item.areEffectsSuppressed ) return true;
       if ( this.dependentOrigin?.active === false ) return true;
@@ -151,7 +153,24 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   get isTemporary() {
-    return !this.isConcealed && (super.isTemporary || this.getFlag("dnd5e", "isTemporary"));
+    return !this.isConcealed && (super.isTemporary || !!this.getFlag("dnd5e", "isTemporary"));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get isExpiryTrackable() {
+    return super.isExpiryTrackable && !this.getFlag("dnd5e", "isTemporary");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the special duration, if expiry is one, or null if none.
+   * @returns {string|null}
+   */
+  get specialDuration() {
+    return this.constructor.PSEUDO_EXPIRIES.has(this.duration.expiry) ? this.duration.expiry : null;
   }
 
   /* -------------------------------------------- */
@@ -211,7 +230,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
     if ( !("description" in effectData) && reference ) effectData.description = `@Embed[${reference} inline]`;
-    return super._fromStatusEffect?.(statusId, effectData, options) ?? new this(effectData, options);
+    foundry.utils.mergeObject(effectData, { type: "condition", "system.type": statusId });
+    return super._fromStatusEffect(statusId, effectData, options);
   }
 
   /* -------------------------------------------- */
@@ -226,6 +246,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       data.type = "enchantment";
       delete data.flags.dnd5e.type;
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
+    }
+
+    else if ( (data.type !== "condition")
+      && Object.values(CONFIG.statusEffects).some(e => e._id === data._id) ) {
+      foundry.utils.mergeObject(data, {
+        type: "condition",
+        "system.type": data.statuses[0],
+        "flags.dnd5e.persistSourceMigration": true
+      });
     }
 
     return super._initializeSource(data, options);
@@ -259,6 +288,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   static applyChange(model, change, options={}) {
+    // Apply shims to moved fields
     change = change.effect._applyChangeShim(change);
 
     // Handle special actor flags
@@ -272,7 +302,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Handle activity-targeted changes
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
-      && (model instanceof Item) ) return change.effect.applyActivity(model, change);
+      && (model instanceof Item) ) return change.effect.applyActivity(model, change, options);
 
     // Handle hiding items
     if ( (change.key === "items.hidden") && (model instanceof Actor) ) {
@@ -295,12 +325,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Apply a change to activities on this item.
    * @param {Item5e} item              The Item to whom this change should be applied.
    * @param {EffectChangeData} change  The change data being applied.
+   * @param {object} [options]         Options passed through to `ActiveEffect#applyChange`.
    * @returns {Record<string, *>}      An object of property paths and their updated values.
    */
-  applyActivity(item, change) {
+  applyActivity(item, change, options) {
     const changes = {};
     const apply = (activity, key) => {
-      const c = this.constructor.applyChange(activity, { ...change, key });
+      const c = this.constructor.applyChange(activity, { ...change, key }, options);
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
     };
     if ( change.key.startsWith("system.activities.") ) {
@@ -466,14 +497,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    if ( this.id === this.constructor.ID.EXHAUSTION ) this._prepareExhaustionLevel();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   _prepareDuration(duration, context) {
     super._prepareDuration(duration, context);
     if ( this.duration.expired && !Number.isFinite(this.duration.value) ) {
@@ -485,24 +508,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${this.specialDuration.capitalize()}`);
     }
     return duration;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Modify the ActiveEffect's attributes based on the exhaustion level.
-   * @protected
-   */
-  _prepareExhaustionLevel() {
-    const config = CONFIG.DND5E.conditionTypes.exhaustion;
-    let level = this.getFlag("dnd5e", "exhaustionLevel");
-    if ( !Number.isFinite(level) ) level = 1;
-    this.img = this.constructor._getExhaustionImage(level);
-    this.name = `${_loc("DND5E.Exhaustion")} ${level}`;
-    if ( level >= config.levels ) {
-      this.statuses.add("dead");
-      CONFIG.DND5E.statusEffects.dead.statuses?.forEach(s => this.statuses.add(s));
-    }
   }
 
   /* -------------------------------------------- */
@@ -531,7 +536,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const riders = new Set(this.system.rider?.statuses ?? []);
 
     for ( const status of this.statuses ) {
-      const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
+      const r = CONFIG.statusEffects[status]?.riders ?? [];
       for ( const p of r ) riders.add(p);
     }
 
@@ -702,8 +707,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
-    const newLevel = foundry.utils.getProperty(data, "flags.dnd5e.exhaustionLevel");
     const originalEncumbrance = foundry.utils.getProperty(options, "dnd5e.originalEncumbrance");
     const newEncumbrance = data.statuses?.[0];
     const name = this.name;
@@ -715,18 +718,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( !combat?.getCombatantsByActor(actor).length ) return this.delete();
     }
 
-    // Display proper scrolling status effects for exhaustion
-    if ( (this.id === this.constructor.ID.EXHAUSTION) && Number.isFinite(newLevel) && Number.isFinite(originalLevel) ) {
-      if ( newLevel === originalLevel ) return;
-      // Temporarily set the name for the benefit of _displayScrollingTextStatus. We should improve this method to
-      // accept a name parameter instead.
-      if ( newLevel < originalLevel ) this.name = `Exhaustion ${originalLevel}`;
-      this._displayScrollingStatus(newLevel > originalLevel);
-      this.name = name;
-    }
-
     // Display proper scrolling status effects for encumbrance
-    else if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance && newEncumbrance ) {
+    if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance && newEncumbrance ) {
       if ( newEncumbrance === originalEncumbrance ) return;
       const increase = !originalEncumbrance || ((originalEncumbrance === "encumbered") && newEncumbrance)
         || (newEncumbrance === "exceedingCarryingCapacity");
@@ -742,7 +735,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preDelete(options, user) {
     const dependents = this.getDependents();
     if ( dependents.length && !game.users.activeGM ) {
-      ui.notifications.warn("DND5E.ConcentrationBreakWarning");
+      ui.notifications.warn("DND5E.CONCENTRATION.Warning.BreakWithoutGM");
       return false;
     }
     return super._preDelete(options, user);
@@ -800,7 +793,42 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   }
 
   /* -------------------------------------------- */
-  /*  Exhaustion and Concentration Handling       */
+  /*  Expiration                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  isExpiryEvent(event, context={}) {
+    const special = this.specialDuration;
+    if ( !special ) return super.isExpiryEvent(event, context);
+
+    // Out of combat, any time advancement expires the effect
+    if ( (event === "updateWorldTime") && !this.actor?.inCombat ) return true;
+
+    // Skip irrelevant events
+    const isStart = special.endsWith("Start");
+    if ( event !== (isStart ? "turnStart" : "turnEnd") ) return false;
+
+    // These expiries are only driven by the combat they were created in
+    if ( !this.start.combat ) return true;
+    const combat = context.combat ?? game.combat;
+    if ( combat !== this.start.combat ) return false;
+
+    // Re-derive the expiry-relevant combatant; affected actor for "target" or originating actor for "source"
+    // If they have left combat, expire once we are past the creation round
+    const origin = special.startsWith("target") ? this.actor : this.getSourceActor();
+    const [combatant] = combat.getCombatantsByActor(origin);
+    if ( !combatant ) return this.start.round < context.round;
+
+    // Only the origin's own turn edge triggers expiry
+    const originTurn = isStart ? (combat.combatant === combatant) : (combat.previous.combatantId === combatant.id);
+    if ( !originTurn ) return false;
+
+    // Skip the turn the effect was applied on
+    return (this.start.round !== context.round) || (this.start.turn !== context.turn);
+  }
+
+  /* -------------------------------------------- */
+  /*  Concentration Handling                      */
   /* -------------------------------------------- */
 
   /**
@@ -815,11 +843,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       throw new Error("You may not begin concentrating on this item!");
     }
 
-    const statusEffect = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.CONCENTRATING);
+    const statusEffect = CONFIG.statusEffects[CONFIG.specialStatusEffects.CONCENTRATING];
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
       name: `${_loc("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
-      description: `<p>${_loc("DND5E.ConcentratingOn", {
+      description: `<p>${_loc("DND5E.CONCENTRATION.Description", {
         name: item.name,
         type: _loc(`TYPES.Item.${item.type}`)
       })}</p><hr><p>@Embed[${item.uuid} inline]</p>`,
@@ -834,7 +862,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         }
       },
       origin: item.uuid,
-      statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
+      statuses: [statusEffect.id].concat(statusEffect.statuses ?? []),
+      system: {
+        type: "concentrating"
+      }
     }, data, {inplace: false});
     delete effectData.id;
     if ( item.type === "spell" ) effectData["flags.dnd5e.spellLevel"] = item.system.level;
@@ -859,139 +890,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Register listeners for custom handling in the TokenHUD.
-   */
-  static registerHUDListeners() {
-    Hooks.on("renderTokenHUD", this.onTokenHUDRender);
-    document.addEventListener("click", this.onClickTokenHUD.bind(this), { capture: true });
-    document.addEventListener("auxclick", this.onClickTokenHUD.bind(this), { capture: true });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Add modifications to the core ActiveEffect config.
    * @param {ActiveEffectConfig} app           The ActiveEffect config.
    * @param {HTMLElement} html                 The ActiveEffect config element.
    * @param {ApplicationRenderContext} context The app's rendering context.
    */
   static onRenderActiveEffectConfig(app, html, context) {
-    if ( app.document.system.onRenderActiveEffectConfig?.(app, html, context) === false ) return;
-    const fields = app.document.system.schema.fields;
-    const magicalField = fields.magical?.toFormGroup({}, {
-      value: app.document.system._source.magical,
-      disabled: !context.editable
-    });
-    const statusesField = fields.rider?.fields?.statuses?.toFormGroup({}, {
-      value: app.document.system._source.rider?.statuses ?? [],
-      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name })),
-      disabled: !context.editable
-    });
-    const detailsTab = html.querySelector("[data-application-part=details]");
-    const statuses = detailsTab.querySelector("& > .form-group:has([name=statuses])");
-    if ( statuses ) {
-      if ( magicalField ) statuses?.before(magicalField);
-      if ( statusesField ) statuses?.after(statusesField);
-    } else {
-      detailsTab.append(...[magicalField, statusesField].filter(_ => _));
-    }
-
-    // Add tooltip with link to wiki for effects/enchantments
-    const helpIconElement = document.createElement("i");
-    helpIconElement.classList.add("fa-solid", "fa-circle-question");
-    const tooltipText = _loc("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
-      url: app.document.type === "enchantment"
-        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
-        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
-    });
-    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
-    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
-    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
-
-    // Append to expiry dropdown
-    // TODO: Move all of this logic to a sheet extension
-    const optGroup = document.createElement("optgroup");
-    optGroup.label = _loc("DND5E.ACTIVEEFFECT.SystemExpiries");
-    for ( const expiry of ActiveEffect5e.PSEUDO_EXPIRIES ) {
-      optGroup.insertAdjacentHTML("beforeEnd", `<option ${expiry === app.document.duration.expiry ? "selected " : ""}value="${expiry}">${_loc(`DND5E.ACTIVEEFFECT.Expiry.${expiry.capitalize()}`)}</option>`);
-    }
-    const expirySelect = html.querySelector("[name='duration.expiry']");
-    expirySelect?.insertAdjacentElement("beforeend", optGroup);
-
-    // TODO: This really needs to be in _onChangeForm
-    const hideDuration = ActiveEffect5e.PSEUDO_EXPIRIES.has(expirySelect?.value);
-    html.querySelector("[data-duration]")?.classList.toggle("hidden", hideDuration);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Adjust exhaustion icon display to match current level.
-   * @param {Application} app   The TokenHUD application.
-   * @param {HTMLElement} html  The TokenHUD HTML.
-   */
-  static onTokenHUDRender(app, html) {
-    const actor = app.object.actor;
-    const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
-    if ( Number.isFinite(level) && (level > 0) ) {
-      const img = ActiveEffect5e._getExhaustionImage(level);
-      const elem = html.querySelector('[data-status-id="exhaustion"]');
-      if ( elem ) {
-        elem.style.objectPosition = "-100px";
-        elem.style.background = `url('${img}') no-repeat center / contain`;
-      }
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the image used to represent exhaustion at this level.
-   * @param {number} level
-   * @returns {string}
-   */
-  static _getExhaustionImage(level) {
-    const { img } = CONFIG.DND5E.conditionTypes.exhaustion;
-    const split = img.split(".");
-    const ext = split.pop();
-    const path = split.join(".");
-    return `${path}-${level}.${ext}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Implement custom behavior for select conditions on the token HUD.
-   * @param {PointerEvent} event        The triggering event.
-   */
-  static onClickTokenHUD(event) {
-    if ( (event.button !== 0) && (event.button !== 2) ) return;
-    const { target } = event;
-    if ( !target.classList?.contains("effect-control") ) return;
-
-    const actor = canvas.hud.token.object?.actor;
-    if ( !actor ) return;
-
-    const id = target.dataset?.statusId;
-    if ( id === "exhaustion" ) ActiveEffect5e._manageExhaustion(event, actor);
-    else if ( id === "concentrating" ) ActiveEffect5e._manageConcentration(event, actor);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Manage custom exhaustion cycling when interacting with the token HUD.
-   * @param {PointerEvent} event        The triggering event.
-   * @param {Actor5e} actor             The actor belonging to the token.
-   */
-  static _manageExhaustion(event, actor) {
-    let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
-    if ( !Number.isFinite(level) ) return;
-    event.stopPropagation();
-    if ( event.button === 0 ) level++;
-    else level--;
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
-    actor.update({ "system.attributes.exhaustion": Math.clamp(level, 0, max) });
+    app.document.system.onRenderActiveEffectConfig?.(app, html, context);
   }
 
   /* -------------------------------------------- */
@@ -1000,38 +905,112 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Manage custom concentration handling when interacting with the token HUD.
    * @param {PointerEvent} event        The triggering event.
    * @param {Actor5e} actor             The actor belonging to the token.
+   * @returns {boolean}                 Whether the status was resolved via this method.
    */
   static _manageConcentration(event, actor) {
     const { effects } = actor.concentration;
-    if ( effects.size < 1 ) return;
+    if ( effects.size < 1 ) return false;
+    event.preventDefault();
     event.stopPropagation();
-    if ( effects.size === 1 ) {
-      actor.endConcentration(effects.first());
-      return;
+    if ( effects.size === 1 ) actor.endConcentration(effects.first());
+    else ActiveEffect5e.endConcentrationDialog(actor, effects);
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Manage custom condition handling when interacting with the token HUD.
+   * @param {PointerEvent} event        The triggering event.
+   * @param {Actor5e} actor             The actor belonging to the token.
+   * @param {string} status             The status condition.
+   * @returns {boolean}                 Whether the status was resolved via this method.
+   */
+  static _manageCondition(event, actor, status) {
+    if ( ConditionData.hasLevels(status) ) return false;
+    const effects = new Set(actor.effects.filter(effect => effect.statuses.has(status)));
+    if ( !effects.size ) return false;
+    event.preventDefault();
+    event.stopPropagation();
+    if ( effects.size > 1 ) ActiveEffect5e.deleteConditionDialog(actor, effects);
+    else effects.first().delete();
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to delete one of several conditions.
+   * @param {Actor5e} actor                           The owner of the effects.
+   * @param {string|Set<ActiveEffect5e>} effects      A set of effects, or the status to derive them from.
+   * @returns {Promise<ActiveEffect5e[]|null>}
+   */
+  static async deleteConditionDialog(actor, effects) {
+    if ( foundry.utils.getType(effects) === "string" ) {
+      effects = new Set(actor.effects.filter(effect => effect.statuses.has(effects)));
     }
+    if ( !effects.size ) return null;
+    const choices = Object.fromEntries(Array.from(effects).map(effect => [effect.id, effect.name]));
+    const source = await ActiveEffect5e.#promptRemoveSource({
+      choices, hint: "DND5E.EFFECT.Status.DeleteDialog.hint", title: "DND5E.EFFECT.Status.DeleteDialog.title"
+    });
+    if ( source === null ) return null;
+    return actor.deleteEmbeddedDocuments("ActiveEffect", source ? [source] : Object.keys(choices));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to end concentration on one source, or all of them.
+   * @param {Actor5e} actor                       The concentrating actor.
+   * @param {Collection<ActiveEffect5e>} effects  The active concentration effects.
+   * @returns {Promise<ActiveEffect5e[]|null>}    The effects concentration was ended on, or null if dismissed.
+   */
+  static async endConcentrationDialog(actor, effects) {
     const choices = effects.reduce((acc, effect) => {
       const data = effect.getFlag("dnd5e", "item");
-      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.ConcentratingItemless");
+      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.CONCENTRATION.NoSource");
       return acc;
     }, {});
-    const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
-    const content = `
-    <p>${_loc("DND5E.ConcentratingEndChoice")}</p>
-    <div class="form-group">
-      <label>${_loc("DND5E.SOURCE.FIELDS.source.label")}</label>
-      <div class="form-fields">
-        <select name="source">${options}</select>
-      </div>
-    </div>`;
-    foundry.applications.api.Dialog.prompt({
-      content,
-      window: { title: _loc("DND5E.Concentration") },
+    const source = await ActiveEffect5e.#promptRemoveSource({
+      choices, hint: "DND5E.CONCENTRATION.EndChoice", title: "DND5E.Concentration"
+    });
+    if ( source === null ) return null;
+    return actor.endConcentration(source || undefined);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prompt the user to pick one of several sources of an effect, or all of them.
+   * @param {object} config
+   * @param {Record<string, string>} config.choices  Mapping of option value to display label.
+   * @param {string} config.hint                     Localization key for the hint describing the choice.
+   * @param {string} config.title                    Localization key for the dialog title.
+   * @returns {Promise<string|null>}                 The selected value ("" for all sources), or null if dismissed.
+   */
+  static #promptRemoveSource({ choices, hint, title }) {
+    const sources = Object.entries(choices).sort((a, b) => a[1].localeCompare(b[1], game.i18n.lang));
+    const group = foundry.applications.fields.createFormGroup({
+      label: _loc("DND5E.EFFECT.Action.RemoveStatus.label"),
+      hint: _loc(hint),
+      input: foundry.applications.fields.createSelectInput({
+        name: "source",
+        options: [
+          { label: _loc("DND5E.EFFECT.Action.RemoveStatus.all"), rule: true, value: "" },
+          ...sources.map(([value, label]) => ({ label, value }))
+        ]
+      })
+    }).outerHTML;
+
+    return foundry.applications.api.DialogV2.prompt({
+      rejectClose: false,
+      content: `<fieldset>${group}</fieldset>`,
+      window: { title },
+      position: { width: 400 },
       ok: {
-        label: _loc("DND5E.Confirm"),
-        callback: (event, button, dialog) => {
-          const source = new foundry.applications.ux.FormDataExtended(button.form).object.source;
-          if ( source ) actor.endConcentration(source);
-        }
+        label: "DND5E.Confirm",
+        callback: (event, button) => button.form.elements.source.value
       }
     });
   }
@@ -1069,11 +1048,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /**
+   * Prepare default list of types if none are specified.
+   * @param {Actor5e} [parent]  Parent document within which this ActiveEffect will be created.
+   * @returns {string[]}
+   * @protected
+   */
   static _createDialogTypes(parent) {
-    return parent
-      ? ActiveEffect.TYPES.filter(t => CONFIG.ActiveEffect.dataModels[t]?.availableForItem?.(parent) ?? true)
-      : ActiveEffect.TYPES;
+    return ActiveEffect.TYPES.filter(type => {
+      return CONFIG.ActiveEffect.dataModels[type]?.availableForItem?.(parent) ?? true;
+    });
   }
 
   /* -------------------------------------------- */
@@ -1111,30 +1095,84 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Render a rich tooltip for this effect.
+   * Prepare an object of chat data used to display a card for the Item in the chat log.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
-   * @returns {Promise<{content: string, classes: string[]}>}
+   * @returns {object}              An object of chat data to render.
    */
-  async richTooltip(enrichmentOptions={}) {
+  async getPreviewContext(enrichmentOptions={}) {
     let properties = [];
-    if ( this.isSuppressed ) properties.push("DND5E.EffectType.Unavailable");
-    else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
-    else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
-    else properties.push("DND5E.EffectType.Passive");
+    if ( this.isSuppressed ) properties.push("DND5E.EFFECT.Status.Unavailable");
+    else if ( this.disabled ) properties.push("DND5E.EFFECT.Status.Inactive");
+    else if ( this.isTemporary ) properties.push("DND5E.EFFECT.Status.Temporary");
+    else properties.push("DND5E.EFFECT.Status.Passive");
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
     if ( this.system.magical ) properties.push("DND5E.ITEM.Property.Magical");
     properties = properties.map(p => _loc(p));
     properties.unshift(...this.statuses.map(id => CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
+      properties,
+      description: await TextEditor.enrichHTML(this.description ?? "", {
+        ...enrichmentOptions,
+        relativeTo: this
+        // TODO: Use this once https://github.com/foundryvtt/dnd5e/issues/5758 is resolved
+        // rollData: this.getRollData()
+      }),
+      effect: this
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context used to display an effect on an actor or item sheet.
+   * @returns {object}  Context needed to render the effect on an actor or item sheet.
+   */
+  async getSheetContext() {
+    this.updateDuration();
+    const { id, name, img, disabled, duration } = this;
+    const source = await this.getSource();
+    return {
+      id, name, img, disabled, duration, source,
+      changes: await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))),
+      durationParts: this.getDurationParts(),
+      showDuration: !!this.specialDuration || Number.isFinite(this.duration.value),
+      effect: this
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context for individual changes to display on actor, item, or active effect sheets.
+   * @param {object} change  Change to prepare.
+   * @returns {object}       Context needed to render the change.
+   */
+  async getSheetChangeContext(change) {
+    const context = {
+      ...change,
+      typeLabel: _loc(ActiveEffect.CHANGE_TYPES[change.type]?.label),
+      ...((await this.system.getSheetChangeContext?.(change)) ?? {})
+    };
+    context.name ||= change.key;
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render a rich tooltip for this effect.
+   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @returns {Promise<{content: string, classes: string[]}>}
+   */
+  async richTooltip(enrichmentOptions={}) {
+    const context = await this.getPreviewContext(enrichmentOptions);
+    context.durationParts = this.getDurationParts();
+    context.showDuration = !!this.specialDuration || Number.isFinite(this.duration.value);
+
+    return {
       content: await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
-          effect: this,
-          description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),
-          durationParts: this.getDurationParts(),
-          showDuration: !!this.specialDuration || Number.isFinite(this.duration.value),
-          properties
-        }
+        "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", context
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip", "themed", "theme-light"]
     };

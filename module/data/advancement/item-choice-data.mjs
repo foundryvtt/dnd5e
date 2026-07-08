@@ -2,7 +2,7 @@ import MappingField from "../fields/mapping-field.mjs";
 import SpellConfigurationData from "./spell-config.mjs";
 
 const {
-  ArrayField, BooleanField, EmbeddedDataField, ForeignDocumentField,
+  ArrayField, BooleanField, DocumentUUIDField, EmbeddedDataField, ForeignDocumentField,
   IntegerSortField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
 
@@ -36,7 +36,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
       })),
       pool: new ArrayField(new SchemaField({
         sort: new IntegerSortField(),
-        uuid: new StringField()
+        uuid: new DocumentUUIDField({ type: "Item", embedded: false })
       })),
       restriction: new SchemaField({
         level: new StringField(),
@@ -81,7 +81,7 @@ export class ItemChoiceValueData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       ability: new StringField(),
-      added: new MappingField(new MappingField(new StringField())),
+      added: new MappingField(new MappingField(new DocumentUUIDField({ type: "Item", embedded: false }))),
       replaced: new MappingField(new SchemaField({
         level: new NumberField({ integer: true, min: 0 }),
         original: new ForeignDocumentField(foundry.documents.BaseItem, { idOnly: true }),

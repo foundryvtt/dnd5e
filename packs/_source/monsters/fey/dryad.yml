@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,6 +480,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Wkv8laBNYgkdA7lL
     name: Innate Spellcasting
@@ -581,78 +579,30 @@ items:
       identifier: innate-spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447015696
+      createdTime: 1781806847833
+      modifiedTime: 1781806847833
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.Wkv8laBNYgkdA7lL'
-  - _id: JExoadfmCtQH6vsK
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The dryad has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!KOHVWl5RU9XBR8Jb.JExoadfmCtQH6vsK'
   - _id: beL4bLUcyTb1Sxgz
     name: Speak with Beasts and Plants
     type: feat
-    img: icons/commodities/currency/coin-engraved-sun-smile-copper.webp
+    img: icons/creatures/mammals/elk-moose-marked-green.webp
     system:
       description:
         value: >-
-          <p>The dryad can communicate with beasts and plants as if they shared
-          a language.</p>
+          <p>The [[lookup @name lowercase]]{monster} can communicate with beasts
+          and plants as if they shared a language.</p>
         chat: ''
       source:
         custom: ''
@@ -666,10 +616,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -677,19 +628,19 @@ items:
       identifier: speak-with-beasts-and-plants
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.59DUUDZet1J4PIlA
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781806847833
+      modifiedTime: 1781809137849
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.beL4bLUcyTb1Sxgz'
   - _id: wwQTeXOmFLO2MW0Y
@@ -699,11 +650,12 @@ items:
     system:
       description:
         value: >-
-          <p>Once on her turn, the dryad can use 10 feet of her movement to step
-          magically into one living tree within her reach and emerge from a
-          second living tree within 60 feet of the first tree, appearing in an
-          unoccupied space within 5 feet of the second tree. Both trees must be
-          Large or bigger.</p>
+          <p>Once on her turn, the [[lookup @name lowercase]]{monster} can use
+          10 feet of her movement to step magically into one living tree within
+          her reach and emerge from a second living tree within [[lookup
+          @labels.description.range activity=KG74eACNUkh6t3ZJ]] of the first
+          tree, appearing in an unoccupied space within 5 feet of the second
+          tree. Both trees must be Large or bigger.</p>
         chat: ''
       source:
         custom: ''
@@ -713,34 +665,101 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: ''
+        max: '1'
         spent: 0
-        recovery: []
+        recovery:
+          - period: turnStart
+            type: recoverAll
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - mgc
+        - trait
+      activities:
+        KG74eACNUkh6t3ZJ:
+          type: utility
+          name: Step Through Tree
+          _id: KG74eACNUkh6t3ZJ
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: ft
+            override: false
+            special: ''
+            value: '60'
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: space
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: tree-stride
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.g4V02wJbEstUpwi9
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781806847833
+      modifiedTime: 1781806977102
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.wwQTeXOmFLO2MW0Y'
   - _id: DNPx6Myd5rHTGu4a
@@ -753,7 +772,9 @@ items:
           <p><em>Melee Weapon Attack:</em> [[/attack]] (or [[/attack +6]] with
           shillelagh), reach 5 ft., one target. [[/damage extended]], or
           [[/damage 1d8 + 4 bludgeoning average]] with shillelagh.</p>
-        chat: <p>The Dryad attacks with its Club.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -817,7 +838,7 @@ items:
         conditions: ''
       properties:
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -826,8 +847,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        a5YT8023lDdWL8SM:
           type: attack
           activation:
             type: action
@@ -842,6 +862,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -862,7 +883,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -881,17 +903,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: a5YT8023lDdWL8SM
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -902,19 +933,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.nfIRTECQIG81CvM4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745174477994
+      systemVersion: 6.0.0
+      createdTime: 1781809148973
+      modifiedTime: 1781809486221
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.DNPx6Myd5rHTGu4a'
@@ -925,20 +952,25 @@ items:
     system:
       description:
         value: >-
-          <p>The dryad targets one humanoid or beast that she can see within 30
-          feet of her. If the target can see the dryad, it must succeed on a
-          [[/save]] saving throw or be magically
-          &amp;Reference[charmed].</p><p>The charmed creature regards the dryad
-          as a trusted friend to be heeded and protected. Although the target
-          isn't under the dryad's control, it takes the dryad's requests or
-          actions in the most favorable way it can.Each time the dryad or its
+          <p>The [[lookup @name lowercase]]{monster} targets one humanoid or
+          beast that she can see within [[lookup @labels.description.range
+          activity=dDlrfAXYYcXdTANa]] of her. If the target can see the [[lookup
+          @name lowercase]]{monster}, it must succeed on a [[/save]] saving
+          throw or be magically &amp;Reference[charmed].</p><p>The charmed
+          creature regards the [[lookup @name lowercase]]{monster} as a trusted
+          friend to be heeded and protected. Although the target isn't under the
+          [[lookup @name lowercase]]{monster}'s control, it takes the [[lookup
+          @name lowercase]]{monster}'s requests or actions in the most favorable
+          way it can. Each time the [[lookup @name lowercase]]{monster} or its
           allies do anything harmful to the target, it can repeat the saving
           throw, ending the effect on itself on a success. Otherwise, the effect
-          lasts 24 hours or until the dryad dies, is on a different plane of
-          existence from the target, or ends the effect as a bonus action. If a
-          target's saving throw is successful, the target is immune to the
-          dryad's Fey Charm for the next 24 hours.The dryad can have no more
-          than one humanoid and up to three beasts charmed at a time.</p>
+          lasts [[lookup @labels.duration activity=dDlrfAXYYcXdTANa]] or until
+          the [[lookup @name lowercase]]{monster} dies, is on a different plane
+          of existence from the target, or ends the effect as a bonus action. If
+          a target's saving throw is successful, the target is immune to the
+          [[lookup @name lowercase]]{monster}'s [[lookup @item.name]] for the
+          next 24 hours. The [[lookup @name lowercase]]{monster} can have no
+          more than one humanoid and up to three beasts charmed at a time.</p>
         chat: >-
           <p>The dryad targets one humanoid or beast that she can see within 30
           feet of her. If the target can see the dryad, it must make a
@@ -957,72 +989,18 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: one humanoid or beast
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '24'
-            units: hour
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '30'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: spec
-            affects:
-              count: '1'
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        dDlrfAXYYcXdTANa:
           type: save
           activation:
             type: action
             value: 1
-            condition: one humanoid or beast
+            condition: ''
             override: false
           consumption:
             targets: []
@@ -1032,13 +1010,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '24'
             units: hour
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: j31eZQRAcnPXW1pQ
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '30'
             units: ft
@@ -1053,11 +1037,12 @@ items:
               width: ''
               height: ''
               units: spec
+              stationary: false
             affects:
               count: '1'
-              type: ''
+              type: creature
               choice: false
-              special: ''
+              special: a humanoid or beast
             prompt: true
             override: false
           uses:
@@ -1065,19 +1050,81 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: dDlrfAXYYcXdTANa
+          name: Charm Creature
       enchant: {}
       prerequisites:
         level: null
       identifier: fey-charm
-    effects: []
+    effects:
+      - name: Fey Charm
+        img: icons/consumables/plants/leaf-veins-glowing-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.KOHVWl5RU9XBR8Jb.Item.OdzhvEDeD06BWsZS
+        transfer: false
+        _id: j31eZQRAcnPXW1pQ
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 24
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[charmed apply=false] by the
+          dryad.</p><p>While charmed, you regard the dryad as a trusted friend
+          to be heeded and protected. Although you are not under the dryad's
+          control, you take the dryad's requests or actions in the most
+          favorable way you can.</p><p>Each time the dryad or its allies do
+          anything harmful to you, you can repeat the saving throw, ending the
+          effect on yourself on a success. Otherwise, the effect lasts for the
+          duration or until the dryad dies, is on a different plane of existence
+          from you, or they end the effect as a bonus action.</p>
+        tint: '#ffffff'
+        statuses:
+          - charmed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781809280986
+          modifiedTime: 1781809425249
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!KOHVWl5RU9XBR8Jb.OdzhvEDeD06BWsZS.j31eZQRAcnPXW1pQ
     folder: null
     sort: 0
     ownership:
@@ -1086,11 +1133,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.SGgVxdZbmsStfeGB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955825097
+      systemVersion: 6.0.0
+      createdTime: 1781809208061
+      modifiedTime: 1781809468326
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.OdzhvEDeD06BWsZS'
@@ -1215,7 +1262,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1344,7 +1391,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.SbSvZKkJASyk8jKo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1473,7 +1520,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1588,24 +1635,12 @@ items:
     effects:
       - _id: uM6rgctYpcbCVSkn
         flags: {}
-        changes:
-          - key: system.attributes.ac.formula
-            value: '16'
-            mode: 5
-            priority: null
-          - key: system.attributes.ac.calc
-            value: custom
-            mode: 5
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         origin: Item.VQMKMnQDw5rzL0zp
         tint: '#ffffff'
         transfer: false
@@ -1615,7 +1650,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -1624,8 +1659,16 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.min
+              value: 16
+              priority: null
+              type: override
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!KOHVWl5RU9XBR8Jb.JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn
     folder: null
@@ -1636,7 +1679,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JPwIEfgUPVebr5AH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1760,7 +1803,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pRMvmknwLf2tdMTj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1895,7 +1938,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.VzgFzcmocr1X1cp4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1903,6 +1946,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.VzgFzcmocr1X1cp4'
+  - _id: gK5fX5pMH745LgCa
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 250000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781806845501
+      modifiedTime: 1781806848746
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!KOHVWl5RU9XBR8Jb.gK5fX5pMH745LgCa'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
 sort: 0
@@ -1911,7 +2007,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171222835

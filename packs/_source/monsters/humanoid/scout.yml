@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: qnFVVlRzucX7BNga
     name: Leather Armor
@@ -550,7 +548,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -565,8 +563,8 @@ items:
     system:
       description:
         value: >-
-          <p>The scout has advantage on Wisdom (Perception) checks that rely on
-          hearing or sight.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
         chat: ''
       source:
         custom: ''
@@ -599,11 +597,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744052052908
+      systemVersion: 6.0.0
+      createdTime: 1781825880984
+      modifiedTime: 1781825880984
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.PQGwUNCJ7EkJAE8V'
@@ -614,8 +612,9 @@ items:
     system:
       description:
         value: >-
-          <p>The scout makes two [[/item .YDoOa6D6QDoR2Htu]]{melee} attacks or
-          two [[/item .E2fYrhLigMeVH09l]]{ranged} attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .YDoOa6D6QDoR2Htu]]{melee} attacks or two [[/item
+          .E2fYrhLigMeVH09l]]{ranged} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -629,13 +628,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        uRLsh5WfnqEPFOKi:
           type: utility
           activation:
             type: action
@@ -650,15 +648,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -669,7 +668,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -686,7 +686,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: uRLsh5WfnqEPFOKi
       enchant: {}
       prerequisites:
         level: null
@@ -700,22 +708,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403691381
+      systemVersion: 6.0.0
+      createdTime: 1781825954392
+      modifiedTime: 1781826019956
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.YO57HtdvpuGxJANB'
   - _id: YDoOa6D6QDoR2Htu
     name: Shortsword
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/sword-guard-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Scout attacks with their Shortsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -780,7 +790,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -789,8 +799,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        1mPDAi9iuW8KCQrE:
           type: attack
           activation:
             type: action
@@ -805,6 +814,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -825,7 +835,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -845,38 +856,44 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 1mPDAi9iuW8KCQrE
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shortsword
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744132985302
+      systemVersion: 6.0.0
+      createdTime: 1781825897047
+      modifiedTime: 1781825908593
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.YDoOa6D6QDoR2Htu'
@@ -887,7 +904,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Scout attacks with their Longbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -953,7 +972,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -962,8 +981,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        V5covUT5xk8rUrVo:
           type: attack
           activation:
             type: action
@@ -978,10 +996,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -998,7 +1017,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1011,20 +1031,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: V5covUT5xk8rUrVo
+          name: ''
       attuned: false
       ammunition:
         type: arrow
@@ -1040,11 +1072,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744132985302
+      systemVersion: 6.0.0
+      createdTime: 1781825920252
+      modifiedTime: 1781825930461
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!O3ABqI55Ir1du1Xa.E2fYrhLigMeVH09l'
@@ -1056,7 +1088,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171227806

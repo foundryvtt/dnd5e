@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: vdaEgOdpIO2o7GNX
     name: Hide Armor
@@ -550,7 +548,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.n1V07puo0RQxPGuF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -565,9 +563,10 @@ items:
     system:
       description:
         value: >-
-          <p>At the start of its turn, the berserker can gain advantage on all
-          melee weapon attack rolls during that turn, but attack rolls against
-          it have advantage until the start of its next turn.</p>
+          <p>At the start of its turn, the [[lookup @name lowercase]]{monster}
+          can gain advantage on all melee weapon attack rolls during that turn,
+          but attack rolls against it have advantage until the start of its next
+          turn.</p>
         chat: ''
       source:
         custom: ''
@@ -586,7 +585,67 @@ items:
       requirements: ''
       properties:
         - trait
-      activities: {}
+      activities:
+        29iQYWK0wYhqSGfE:
+          type: utility
+          name: Become Reckless
+          _id: 29iQYWK0wYhqSGfE
+          img: ''
+          sort: 0
+          activation:
+            type: turnStart
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: round
+            concentration: false
+            override: false
+            value: '1'
+          effects:
+            - _id: mc0qfRRq1rZXrJbi
+              level: {}
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
       enchant: {}
       prerequisites:
         level: null
@@ -597,17 +656,14 @@ items:
         origin: Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2.Item.Qzj9HKnvRGhYoggC
         _id: WqXUqzRbXoMjF2MJ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Attack rolls against it have advantage until the start of its next
           turn.</p>
@@ -622,15 +678,58 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744135358115
           modifiedTime: 1744135431645
           lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!kz1t6xeXVwODpYb2.Qzj9HKnvRGhYoggC.WqXUqzRbXoMjF2MJ
+      - name: Reckless
+        img: icons/skills/social/intimidation-impressing.webp
+        origin: Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2.Item.Qzj9HKnvRGhYoggC
+        transfer: false
+        _id: mc0qfRRq1rZXrJbi
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You have advantag eon all melee weapon attack rolls during your
+          turn, but attack rolls against you have advantage until the start of
+          your next turn.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781820595045
+          modifiedTime: 1781820637837
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!kz1t6xeXVwODpYb2.Qzj9HKnvRGhYoggC.mc0qfRRq1rZXrJbi
     folder: null
     sort: 0
     ownership:
@@ -639,11 +738,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4v3xxn1jEEMRzLBG
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744135320648
+      systemVersion: 6.0.0
+      createdTime: 1781820577197
+      modifiedTime: 1781820595067
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kz1t6xeXVwODpYb2.Qzj9HKnvRGhYoggC'
@@ -654,7 +753,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Berserker attacks with their Greataxe.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -719,7 +820,7 @@ items:
       properties:
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -728,8 +829,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        C4iUlRAJ28YIfLWW:
           type: attack
           activation:
             type: action
@@ -744,6 +844,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -764,7 +865,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -784,16 +886,25 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: C4iUlRAJ28YIfLWW
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -804,19 +915,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744135489725
+      systemVersion: 6.0.0
+      createdTime: 1781820557349
+      modifiedTime: 1781820563457
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kz1t6xeXVwODpYb2.RrHhFZOd6QT75V3W'
@@ -828,7 +935,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171252938

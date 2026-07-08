@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,16 +481,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: fL3AlIo9kQ591fz5
     name: Elemental Demise
     type: feat
-    img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+    img: icons/magic/air/wind-vortex-swirl-red.webp
     system:
       description:
         value: >-
-          <p>If the djinni dies, its body disintegrates into a warm breeze,
-          leaving behind only equipment the djinni was wearing or carrying.</p>
+          <p>If the [[lookup @name lowercase]]{monster} dies, its body
+          disintegrates into a warm breeze, leaving behind only equipment the
+          [[lookup @name lowercase]]{monster} was wearing or carrying.</p>
         chat: ''
       source:
         custom: ''
@@ -507,10 +506,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -525,12 +525,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WbaKH3NLA3mvylfM
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781811996988
+      modifiedTime: 1781812012096
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5P1VGAZQwOilwZQf.fL3AlIo9kQ591fz5'
   - _id: PvddSEYCJ3fSHEOr
@@ -588,7 +588,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -603,8 +603,8 @@ items:
     system:
       description:
         value: >-
-          <p>The djinni makes three [[/item .DGP7lnAJT1cv8SA4]]{scimitar}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
+          .DGP7lnAJT1cv8SA4]]{scimitar} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -618,13 +618,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        pEmXboaD4KnLYEvS:
           type: utility
           activation:
             type: action
@@ -639,15 +638,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -658,7 +658,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -675,7 +676,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: pEmXboaD4KnLYEvS
       enchant: {}
       prerequisites:
         level: null
@@ -689,18 +698,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655071
+      systemVersion: 6.0.0
+      createdTime: 1781812614726
+      modifiedTime: 1781812618986
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5P1VGAZQwOilwZQf.Q7JcaZkLaYQq4CE5'
   - _id: DGP7lnAJT1cv8SA4
     name: Scimitar
     type: weapon
-    img: icons/weapons/swords/sword-katana.webp
+    img: icons/weapons/swords/scimitar-guard-gold.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]] (djinni's choice).</p>
@@ -767,17 +776,16 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleM
-        baseItem: ''
+        value: martialM
+        baseItem: scimitar
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        9uVMnJt6VcQmQLbp:
           type: attack
           activation:
             type: action
@@ -792,6 +800,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -812,7 +821,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -825,14 +835,14 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
@@ -842,15 +852,26 @@ items:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - lightning
                   - thunder
-          sort: 0
+                scaling:
+                  number: 1
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 9uVMnJt6VcQmQLbp
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -861,19 +882,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173840296
+      systemVersion: 6.0.0
+      createdTime: 1781812022060
+      modifiedTime: 1781812051724
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5P1VGAZQwOilwZQf.DGP7lnAJT1cv8SA4'
@@ -884,29 +901,34 @@ items:
     system:
       description:
         value: >-
-          <p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically
-          forms on a point the djinni can see within 120 feet of it. The
-          whirlwind lasts as long as the djinni maintains concentration (as if
-          concentrating on a spell).</p><p>Any creature but the djinni that
+          <p>A [[lookup @labels.description.template activity=5QSOnuuVfbhaFcH4]]
+          of swirling air magically forms on a point the djinni can see within
+          [[lookup @labels.description.range activity=5QSOnuuVfbhaFcH4]] of it.
+          The whirlwind lasts as long as the djinni maintains concentration (as
+          if concentrating on a spell).</p><p>Any creature but the djinni that
           enters the whirlwind must succeed on a [[/save]] saving throw or be
-          restrained by it. The djinni can move the whirlwind up to 60 feet as
-          an action, and creatures restrained by the whirlwind move with it. The
-          whirlwind ends if the djinni loses sight of it.</p><p>A creature can
-          use its action to free a creature restrained by the whirlwind,
-          including itself, by succeeding on a [[/check]] check. If the check
-          succeeds, the creature is no longer restrained and moves to the
-          nearest space outside the whirlwind.</p>
+          restrained by it. The djinni can move the whirlwind up to [[lookup
+          @labels.description.range activity=gtStP2vVpkp7MMw5]] as an action,
+          and creatures restrained by the whirlwind move with it. The whirlwind
+          ends if the djinni loses sight of it.</p><p>A creature can use its
+          action to free a creature restrained by the whirlwind, including
+          itself, by succeeding on a [[/check activity=LlBHDTeLFiSXeSPL]] check.
+          If the check succeeds, the creature is no longer restrained and moves
+          to the nearest space outside the whirlwind.</p>
         chat: >-
-          <p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically
-          forms on a point the djinni can see within 120 feet of it. Any
-          creature but the djinni that enters the whirlwind must make a
-          <strong>Strength</strong> saving throw or be restrained by it. The
-          djinni can move the whirlwind up to 60 feet as an action, and
-          creatures restrained by the whirlwind move with it. A creature can use
-          its action to free a creature restrained by the whirlwind, including
-          itself, by succeeding on a Strength check. If the check succeeds, the
-          creature is no longer restrained and moves to the nearest space
-          outside the whirlwind.</p>
+          <p>A [[lookup @labels.description.template activity=5QSOnuuVfbhaFcH4]]
+          of swirling air magically forms on a point the [[lookup
+          @name]]{monster} can see within [[lookup @labels.description.range
+          activity=5QSOnuuVfbhaFcH4]] of it. Any creature but the [[lookup
+          @name]]{monster} that enters the whirlwind must make a Strength saving
+          throw or be &amp;reference[restrained] by it. The [[lookup
+          @name]]{monster} can move the whirlwind up to [[lookup
+          @labels.description.range activity=gtStP2vVpkp7MMw5]] as an action,
+          and creatures restrained by the whirlwind move with it.</p><p>A
+          creature can use its action to free a creature restrained by the
+          whirlwind, including itself, by succeeding on a Strength check. If the
+          check succeeds, the creature is no longer restrained and moves to the
+          nearest space outside the whirlwind.</p>
       source:
         custom: ''
         book: ''
@@ -919,18 +941,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        HFesW3NEjtAzAnz1:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: >-
+              When a creature other than the [[lookup @name lowercase]]{monster}
+              enters the whirlwind.
             override: false
           consumption:
             targets: []
@@ -940,58 +964,78 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: true
             value: ''
             units: spec
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 4oc8HfRHypael6Rq
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
-            value: '120'
-            units: ft
+            value: ''
+            units: spec
             special: ''
             override: false
           target:
             template:
               count: ''
               contiguous: false
-              type: cylinder
+              type: ''
               size: '5'
               width: ''
               height: '30'
               units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
-            prompt: true
+            prompt: false
             override: false
           uses:
             spent: 0
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '18'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Whirlwind Save
           img: ''
-          appliedEffects: []
-        hUuMAYQYtO7oHptY:
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: HFesW3NEjtAzAnz1
+        LlBHDTeLFiSXeSPL:
           type: check
-          _id: hUuMAYQYtO7oHptY
-          sort: 0
+          sort: 400000
           activation:
-            type: action
+            type: special
             override: false
-            condition: ''
+            condition: >-
+              When a creature takes an action to try to free itself or another
+              creature &reference[restrained apply=false] by the whirlwind.
           consumption:
             scaling:
               allowed: false
@@ -999,13 +1043,14 @@ items:
             targets: []
           description:
             chatFlavor: ''
+            value: ''
           duration:
             units: inst
             concentration: false
             override: false
           effects: []
           range:
-            units: self
+            units: touch
             override: false
             special: ''
           target:
@@ -1013,11 +1058,14 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
-              type: ''
+              type: creature
+              count: '1'
+              special: ''
             override: false
-            prompt: true
+            prompt: false
           uses:
             spent: 0
             recovery: []
@@ -1028,31 +1076,203 @@ items:
               calculation: ''
               formula: '18'
             ability: str
-          name: Escape
+            visible: true
+            bonus: ''
+          name: Escape Whirlwind
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: LlBHDTeLFiSXeSPL
+        5QSOnuuVfbhaFcH4:
+          type: utility
+          name: Conjure Whirlwind
+          _id: 5QSOnuuVfbhaFcH4
+          img: ''
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: ft
+            override: false
+            special: ''
+            value: '120'
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: cylinder
+              size: '5'
+              height: '30'
+              count: '1'
+            affects:
+              choice: false
+              type: creature
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+        gtStP2vVpkp7MMw5:
+          type: utility
+          name: Move Whirlwind
+          _id: gtStP2vVpkp7MMw5
+          img: ''
+          sort: 300000
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>The djinni can move the whirlwind up to 60 feet as an action,
+              and creatures restrained by the whirlwind move with it. The
+              whirlwind ends if the djinni loses sight of it.</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: ft
+            override: false
+            special: ''
+            value: '60'
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: false
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: create-whirlwind
-    effects: []
+    effects:
+      - name: Restrained by Whirlwind
+        img: icons/magic/air/wind-tornado-cyclone-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.5P1VGAZQwOilwZQf.Item.nE7YNnVM7srBcdfl
+        transfer: false
+        _id: 4oc8HfRHypael6Rq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[restrained apply=false] by the whirlwind,
+          and move with it.</p><p>You or another creature can use an action to
+          free yourself from the whirlwind by succeeding on a [[/check 18 str]]
+          check. If the check succeeds, you are no longer restrained and move to
+          the enarest space outside the whirlwind.</p>
+        tint: '#ffffff'
+        statuses:
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781812288750
+          modifiedTime: 1781812384876
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!5P1VGAZQwOilwZQf.nE7YNnVM7srBcdfl.4oc8HfRHypael6Rq
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.1XeF2VMMPw7QYffo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747954813245
+      systemVersion: 6.0.0
+      createdTime: 1781812065348
+      modifiedTime: 1781812599869
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5P1VGAZQwOilwZQf.nE7YNnVM7srBcdfl'
@@ -1170,7 +1390,7 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1286,7 +1506,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1403,7 +1623,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1537,7 +1757,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1658,7 +1878,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.BV0mpbHh29IbbIj5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1778,7 +1998,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gopnZvS0c2jD5FP8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1906,7 +2126,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.8PJAsHmbu6UgDHC0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2026,7 +2246,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.lnaGnxMzpYnbw1uU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2159,7 +2379,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2283,7 +2503,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2427,7 +2647,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.nslx2nT3p4lNkmdp
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2623,7 +2843,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2639,7 +2859,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171203084

@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: vTb2KSllrajm88Ni
     name: Leather Armor
@@ -550,7 +548,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -561,12 +559,13 @@ items:
   - _id: lSteE7vBmM70Jy3Z
     name: Dark Devotion
     type: feat
-    img: icons/magic/control/control-influence-rally-purple.webp
+    img: icons/magic/death/skull-weapon-staff-glow-pink.webp
     system:
       description:
         value: >-
-          <p>The fanatic has advantage on saving throws against being charmed or
-          frightened.</p>
+          <p>The [[l;ookup @name lowercase]]{monster} has advantage on saving
+          throws against being &amp;reference[charmed apply=false] or
+          &amp;reference[frightened apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -580,10 +579,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -598,11 +598,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.XFvk6ywwZWTkMmQR
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403039590
+      systemVersion: 6.0.0
+      createdTime: 1781820854881
+      modifiedTime: 1781820880281
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.lSteE7vBmM70Jy3Z'
@@ -657,7 +657,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -671,7 +671,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The fanatic makes two melee attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two melee
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -685,13 +687,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        eIinx30WW1Hfsi8r:
           type: utility
           activation:
             type: action
@@ -706,15 +707,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -725,7 +727,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -742,7 +745,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: eIinx30WW1Hfsi8r
       enchant: {}
       prerequisites:
         level: null
@@ -756,12 +767,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781820925092
+      modifiedTime: 1781820931959
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.WfqCnxOUS8aXxd7O'
   - _id: zTX7ZTUkqUMSbGII
@@ -771,7 +782,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Cult Fanatic attacks with their Dagger.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -837,7 +850,7 @@ items:
         - fin
         - lgt
         - thr
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -846,8 +859,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        GMWEXVbJVAQbRTEl:
           type: attack
           activation:
             type: action
@@ -862,10 +874,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -882,7 +895,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -895,24 +909,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: GMWEXVbJVAQbRTEl
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: dagger
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -922,11 +949,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.0E565kQUBmndJ1a2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385801
+      systemVersion: 6.0.0
+      createdTime: 1781820885589
+      modifiedTime: 1781820912792
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.zTX7ZTUkqUMSbGII'
@@ -1041,7 +1068,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1170,7 +1197,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1301,7 +1328,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1412,7 +1439,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1546,7 +1573,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ksaaTxIbKx2sJfia
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1659,7 +1686,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1773,7 +1800,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1916,7 +1943,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1932,7 +1959,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171263677

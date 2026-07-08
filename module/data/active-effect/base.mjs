@@ -50,4 +50,17 @@ export default class BaseEffectData extends ActiveEffectDataModel {
   get isRider() {
     return this.item?.getFlag("dnd5e", "riders.effect")?.includes?.(this.parent.id) ?? false;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async getSheetData(context) {
+    context.additionalChangesFields.unshift({
+      field: context.systemFields.rider.fields.statuses,
+      options: Object.values(CONFIG.statusEffects).map(se => ({ value: se.id, label: se.name })),
+      value: context.source.system.rider.statuses
+    });
+  }
 }

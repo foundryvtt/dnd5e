@@ -458,9 +458,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -475,7 +472,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -495,24 +492,29 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: wkqjn4bqhPIUUo7k
     name: Fear Aura
     type: feat
-    img: icons/magic/water/elemental-water.webp
+    img: icons/magic/control/fear-fright-monster-grin-red-orange.webp
     system:
       description:
         value: >-
-          <p>Any creature hostile to the pit fiend that starts its turn within
-          20 feet of the pit fiend must make a [[/save]] saving throw, unless
-          the pit fiend is incapacitated. On a failed save, the creature is
-          &amp;Reference[frightened] until the start of its next turn. If a
-          creature's saving throw is successful, the creature is immune to the
-          pit fiend's Fear Aura for the next 24 hours.</p>
+          <p>Any creature hostile to the [[lookup @name lowercase]]{monster}
+          that starts its turn within [[lookup @labels.description.range
+          activity=2EPr5relqpSLmasf]] of the [[lookup @name lowercase]]{monster}
+          must make a [[/save]] saving throw, unless the [[lookup @name
+          lowercase]]{monster} is &amp;reference[incapacitated apply=false]. On
+          a failed save, the creature is &amp;Reference[frightened] until the
+          start of its next turn. If a creature's saving throw is successful,
+          the creature is immune to the [[lookup @name lowercase]]{monster}'s
+          [[lookup @item.name]] for the next 24 hours.</p>
         chat: >-
-          <p>Any creature hostile to the pit fiend that starts its turn
-          <strong>within 20 feet</strong> of the pit fiend must make a
-          <strong>Wisdom</strong> saving throw.</p>
+          <p>Any creature hostile to the [[lookup @name]]{monster} that starts
+          its turn within [[lookup @labels.description.range
+          activity=2EPr5relqpSLmasf]] of the [[lookup @name]]{monster} must make
+          a Wisdom saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -525,19 +527,22 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        2EPr5relqpSLmasf:
           type: save
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature hostile to the [[lookup @name lowercase]]{monster}
+              starts its turn within range of the [[lookup @name
+              lowercase]]{monster} (unless the [[lookup @name
+              lowercase]]{monster} is &reference[incapacitated apply=false]).
             override: false
           consumption:
             targets: []
@@ -547,29 +552,37 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
-            units: turn
+            units: round
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 7nIc5RnZTZ9Eocv8
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
-            units: ''
+            units: ft
             special: ''
             override: false
+            value: '20'
           target:
             template:
               count: ''
               contiguous: false
-              type: radius
-              size: '20'
+              type: ''
+              size: ''
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -579,151 +592,103 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
-              calculation: ''
+              calculation: cha
               formula: '21'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Fear Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 2EPr5relqpSLmasf
       enchant: {}
       prerequisites:
         level: null
       identifier: fear-aura
-    effects: []
+    effects:
+      - name: Terrified
+        img: icons/magic/control/fear-fright-monster-grin-red-orange.webp
+        origin: Compendium.dnd5e.monsters.Actor.RCv5y7iWlfNxkinx.Item.wkqjn4bqhPIUUo7k
+        transfer: false
+        _id: 7nIc5RnZTZ9Eocv8
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] until the start of
+          your next turn.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781643189758
+          modifiedTime: 1781643234729
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!RCv5y7iWlfNxkinx.wkqjn4bqhPIUUo7k.7nIc5RnZTZ9Eocv8
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MLVEyA7VcWu9uXqV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957309086
+      systemVersion: 6.0.0
+      createdTime: 1781642904487
+      modifiedTime: 1781643296531
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.wkqjn4bqhPIUUo7k'
-  - _id: 2MKXiCJeOrUJIEto
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The pit fiend has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957270896
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!RCv5y7iWlfNxkinx.2MKXiCJeOrUJIEto'
-  - _id: TT2YmAw82Sj1WNKn
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The pit fiend's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!RCv5y7iWlfNxkinx.TT2YmAw82Sj1WNKn'
   - _id: 2Wh1GHIIzBfCm8md
     name: Innate Spellcasting
     type: feat
-    img: icons/magic/light/projectiles-star-purple.webp
+    img: icons/magic/symbols/star-yellow.webp
     system:
       description:
         value: >-
-          <p>The pit fiend's spellcasting ability is Charisma (spell save DC
-          21). The pit fiend can innately cast the following spells, requiring
-          no material components:</p>
-
-          <p>At will: [[/item .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item
-          .ztgcdrWPshKRpFd0]]{fireball}</p>
-
-          <p>3/day each: [[/item .l9Ju5KE7bbn3WpTm]]{hold monster}, [[/item
+          <p>The [[lookup @name lowercase]]{monster}'s spellcasting ability is
+          Charisma (spell save DC 21). The [[lookup @name lowercase]]{monster}
+          can innately cast the following spells, requiring no material
+          components:</p><p><strong>At will:</strong> [[/item
+          .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item
+          .ztgcdrWPshKRpFd0]]{fireball}</p><p><strong>3/day each:</strong>
+          [[/item .l9Ju5KE7bbn3WpTm]]{hold monster}, [[/item
           .X3DrXgxjwI2dvkD6]]{wall of fire}</p>
         chat: ''
       source:
@@ -738,10 +703,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -749,18 +715,18 @@ items:
       identifier: innate-spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447015780
+      systemVersion: 6.0.0
+      createdTime: 1781643296531
+      modifiedTime: 1781643360103
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.2Wh1GHIIzBfCm8md'
@@ -771,8 +737,8 @@ items:
     system:
       description:
         value: >-
-          <p>The pit fiend makes four attacks: one with its [[/item
-          .GjIQl7UOQUtsrj2v]]{bite}, one with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes four attacks: one
+          with its [[/item .GjIQl7UOQUtsrj2v]]{bite}, one with its [[/item
           .RkuPEGbAXHhxfNWJ]]{claw}, one with its [[/item
           .gpjBebqxqbQA35st]]{mace}, and one with its [[/item
           .Gh1DbMpJiaTlTwWp]]{tail}.</p>
@@ -789,13 +755,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        sySrKKcfckLISejq:
           type: utility
           activation:
             type: action
@@ -810,15 +775,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -829,7 +795,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -846,7 +813,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: sySrKKcfckLISejq
       enchant: {}
       prerequisites:
         level: null
@@ -860,33 +835,34 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273656170
+      systemVersion: 6.0.0
+      createdTime: 1781643383626
+      modifiedTime: 1781643390788
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.BFv56pkQ54pdTkYM'
   - _id: GjIQl7UOQUtsrj2v
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a [[/save]] saving throw or become poisoned. While poisoned
-          in this way, the target can't regain hit points, and it takes
-          [[/damage average activity=dnd5eactivity100]] damage at the start of
-          each of its turns. The poisoned target can repeat the saving throw at
-          the end of each of its turns, ending the effect on itself on a
-          success.</p>
+          succeed on a [[/save]] saving throw or become
+          &amp;reference[poisoned]. While poisoned in this way, the target can't
+          regain hit points, and it takes [[/damage average
+          activity=JtAxEJ6yXykPXhDf]] damage at the start of each of its turns.
+          The poisoned target can repeat the saving throw at the end of each of
+          its turns, ending the effect on itself on a success.</p>
         chat: >-
-          <p>The Pit Fiend attacks with its Bite. The target must succeed on a 
-          <strong>DC 21 Constitution</strong> saving throw or become poisoned.
-          The target can repeat the saving throw at the end of each of its
-          turns, ending the effect on itself on a success.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must succeed on a Constitution saving throw
+          or become &amp;reference[poisoned]. The target can repeat the saving
+          throw at the end of each of its turns, ending the effect on itself on
+          a success.</p>
       source:
         custom: ''
         book: ''
@@ -950,7 +926,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -959,8 +935,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FwBmw1fKbjf4r7Fm:
           type: attack
           activation:
             type: action
@@ -975,69 +950,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
           duration:
             concentration: false
             value: ''
@@ -1058,7 +971,95 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FwBmw1fKbjf4r7Fm
+          name: ''
+        t62QSFrpupkF6Qav:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save]] saving throw or become
+              poisoned. While poisoned in this way, the target can't regain hit
+              points, and it takes [[/damage average activity=JtAxEJ6yXykPXhDf]]
+              damage at the start of each of its turns. The poisoned target can
+              repeat the saving throw at the end of each of its turns, ending
+              the effect on itself on a success.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects:
+            - _id: lezzp3EJSn2vM7mL
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1071,59 +1072,177 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '21'
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: t62QSFrpupkF6Qav
+        JtAxEJ6yXykPXhDf:
+          type: damage
+          name: Start of Turn Poison Damage
+          _id: JtAxEJ6yXykPXhDf
+          img: ''
+          sort: 300000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When a creature &reference[poisoned apply=false] by this attack
+              starts their turn.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>A takes [[/damage average activity=JtAxEJ6yXykPXhDf]] damage at
+              the start of each of its turns. The poisoned target can repeat the
+              saving throw at the end of each of its turns, ending the effect on
+              itself on a success.</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: true
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
             parts:
               - custom:
                   enabled: false
                   formula: ''
                 number: 6
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - poison
-          save:
-            ability: con
-            dc:
-              calculation: ''
-              formula: '21'
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
+                scaling:
+                  number: 1
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: bite
       mastery: ''
-    effects: []
+    effects:
+      - name: Pit Fiend Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.RCv5y7iWlfNxkinx.Item.GjIQl7UOQUtsrj2v
+        transfer: false
+        _id: lezzp3EJSn2vM7mL
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false]. While poisoned in
+          this way, you can't regain hit points, and you take [[/damage 6d6
+          poison average]] damage at the start of each of your turns.</p><p>You
+          can repeat the saving throw at the end of each of your turns, ending
+          the effect on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781643665595
+          modifiedTime: 1781643822221
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!RCv5y7iWlfNxkinx.GjIQl7UOQUtsrj2v.lezzp3EJSn2vM7mL
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378617409
+      systemVersion: 6.0.0
+      createdTime: 1781643394966
+      modifiedTime: 1781644134512
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.GjIQl7UOQUtsrj2v'
   - _id: RkuPEGbAXHhxfNWJ
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Pit Fiend attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1147,7 +1266,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -1187,8 +1306,7 @@ items:
         conditions: ''
       properties:
         - mgc
-        - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1197,8 +1315,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dLSo535zC0amzPaJ:
           type: attack
           activation:
             type: action
@@ -1213,10 +1330,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1233,7 +1351,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1246,23 +1365,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dLSo535zC0amzPaJ
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: claw
       mastery: ''
     effects: []
@@ -1274,11 +1405,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378620819
+      systemVersion: 6.0.0
+      createdTime: 1781644143515
+      modifiedTime: 1781644165402
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.RkuPEGbAXHhxfNWJ'
@@ -1289,7 +1420,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Pit Fiend attacks with its Mace.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1354,7 +1487,7 @@ items:
       properties:
         - mgc
         - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1363,8 +1496,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BQgv1qZJeBWfYajj:
           type: attack
           activation:
             type: action
@@ -1379,10 +1511,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1399,7 +1532,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1412,35 +1546,45 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: BQgv1qZJeBWfYajj
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: mace
       mastery: ''
     effects: []
@@ -1452,22 +1596,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378625159
+      systemVersion: 6.0.0
+      createdTime: 1781644443549
+      modifiedTime: 1781644456085
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.gpjBebqxqbQA35st'
   - _id: Gh1DbMpJiaTlTwWp
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-strike-bone-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Pit Fiend attacks with its Tail.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1491,7 +1637,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -1531,8 +1677,7 @@ items:
         conditions: ''
       properties:
         - mgc
-        - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1541,8 +1686,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FBEeJj038NWWJaFH:
           type: attack
           activation:
             type: action
@@ -1557,10 +1701,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1577,7 +1722,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1590,23 +1736,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FBEeJj038NWWJaFH
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: tail
       mastery: ''
     effects: []
@@ -1618,11 +1776,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378629200
+      systemVersion: 6.0.0
+      createdTime: 1781644468762
+      modifiedTime: 1781644492069
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.Gh1DbMpJiaTlTwWp'
@@ -1735,7 +1893,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1870,7 +2028,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ztgcdrWPshKRpFd0
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2001,7 +2159,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.l9Ju5KE7bbn3WpTm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2149,7 +2307,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.X3DrXgxjwI2dvkD6
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2157,6 +2315,112 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.X3DrXgxjwI2dvkD6'
+  - _id: wSv6itzApAoj3Rxb
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 400000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781643295099
+      modifiedTime: 1781643296531
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!RCv5y7iWlfNxkinx.wSv6itzApAoj3Rxb'
+  - _id: xyT7cWc2NsSDZyYn
+    name: Magic Weapons
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    effects: []
+    folder: null
+    sort: 450000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781643304171
+      modifiedTime: 1781643307163
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.nahRRxck9R5GVVFS
+    _key: '!actors.items!RCv5y7iWlfNxkinx.xyT7cWc2NsSDZyYn'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -2165,7 +2429,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171231220

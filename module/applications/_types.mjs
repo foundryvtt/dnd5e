@@ -14,10 +14,12 @@
 
 /**
  * @typedef CurrencyUpdateOptions
- * @property {boolean} [exact=true]           Prioritize deducting the requested denomination first.
- * @property {boolean} [makeChange=true]      Convert higher denominations to fulfill the request if needed.
- * @property {"high"|"low"} [priority="low"]  Prioritize higher denominations before lower, or vice-versa.
- * @property {boolean} [recursive=false]      Deduct currency from containers as well as the base Actor. TODO
+ * @property {boolean} [exact=true]                    Prioritize deducting the requested denomination first.
+ * @property {boolean} [makeChange=true]               Convert higher denominations to fulfill the request if needed.
+ * @property {"high"|"low"|string[]} [priority="low"]  Prioritize higher denominations before lower, or vice-versa. If
+ *                                                     an array of denominations is passed, this exact order is used,
+ *                                                     skipping any denominations that are omitted.
+ * @property {boolean} [recursive=false]               Deduct currency from containers as well as the base Actor. TODO
  */
 
 /* -------------------------------------------- */

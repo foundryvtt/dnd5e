@@ -1,6 +1,8 @@
 import SpellConfigurationData from "./spell-config.mjs";
 
-const { ArrayField, BooleanField, EmbeddedDataField, IntegerSortField, SchemaField, StringField } = foundry.data.fields;
+const {
+  ArrayField, BooleanField, DocumentUUIDField, EmbeddedDataField, IntegerSortField, SchemaField, StringField
+} = foundry.data.fields;
 
 /**
  * @import { ItemGrantAdvancementConfigurationData } from "./_types.mjs";
@@ -28,7 +30,7 @@ export default class ItemGrantConfigurationData extends foundry.abstract.DataMod
       items: new ArrayField(new SchemaField({
         optional: new BooleanField(),
         sort: new IntegerSortField(),
-        uuid: new StringField()
+        uuid: new DocumentUUIDField({ type: "Item", embedded: false })
       }), { required: true }),
       optional: new BooleanField({ required: true }),
       sorting: new StringField({ initial: "m", choices: Folder.SORTING_MODES }),

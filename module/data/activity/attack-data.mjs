@@ -273,7 +273,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     }, rollData);
 
     // Add exhaustion reduction
-    this.actor?.addRollExhaustion(parts, data);
+    this.actor?.addConditionRollReduction(parts, data);
 
     return { data, parts };
   }
