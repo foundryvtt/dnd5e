@@ -973,11 +973,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {object}       Context needed to render the change.
    */
   async getSheetChangeContext(change) {
-    return {
+    const context = {
       ...change,
       typeLabel: _loc(ActiveEffect.CHANGE_TYPES[change.type]?.label),
       ...((await this.system.getSheetChangeContext?.(change)) ?? {})
     };
+    context.name ||= change.key;
+    return context;
   }
 
   /* -------------------------------------------- */
