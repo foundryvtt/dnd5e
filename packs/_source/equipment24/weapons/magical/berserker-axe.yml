@@ -164,21 +164,21 @@ effects:
     img: icons/magic/life/heart-glowing-red.webp
     _id: 7W0LDyDY0mcAVS1J
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.bonuses.level
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.bonuses.level
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: y1AilaCJISkenSfa
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>While you are attuned to this weapon, your Hit Point maximum increases
       by 1 for each level you have attained.</p>
@@ -191,55 +191,67 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.4
+      systemVersion: 6.0.0
       createdTime: 1728595622060
-      modifiedTime: 1728595804921
+      modifiedTime: 1783544093820
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgBerserkerAxe0.7W0LDyDY0mcAVS1J'
   - type: enchantment
     name: Berserker Axe
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: J4bEaPvFwAGKSrPm
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Berserker {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgBerserkerAxe0
-          caption=false]</p>
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Berserker {}
+          priority: null
+          type: override
+          phase: initial
+          _id: RpuPwuj4nlBuafW0
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: 0TXIeBjmLekA7lnY
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: WaLmzlycLYflO4Jy
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgBerserkerAxe0
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: YCi0sVQ8slfSFdSg
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: MNvsJUb58nUP0xug
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: Mz6uDisW6DFru5BK
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -250,13 +262,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730835222661
-      modifiedTime: 1730835379186
+      modifiedTime: 1783544093820
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgBerserkerAxe0.J4bEaPvFwAGKSrPm'
 folder: kie870i5kr7yuxO8
 flags:
@@ -267,11 +282,11 @@ flags:
         - 7W0LDyDY0mcAVS1J
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745433480191
+  modifiedTime: 1783544093820
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7050000

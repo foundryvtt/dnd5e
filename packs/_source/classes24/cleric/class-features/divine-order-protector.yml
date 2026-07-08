@@ -38,25 +38,26 @@ effects:
     img: icons/magic/holy/barrier-shield-winged-blue.webp
     _id: Mvzn4plDBs9fDfph
     type: base
-    system: {}
-    changes:
-      - key: system.traits.weaponProf.value
-        mode: 2
-        value: mar
-        priority: null
-      - key: system.traits.armorProf.value
-        mode: 2
-        value: hvy
-        priority: null
+    system:
+      changes:
+        - key: system.traits.weaponProf.value
+          value: mar
+          priority: null
+          type: add
+          phase: initial
+          _id: Uoe1yE94HGUcWYVU
+        - key: system.traits.armorProf.value
+          value: hvy
+          priority: null
+          type: add
+          phase: initial
+          _id: 0cfyQFSBA5r0cbqr
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -67,13 +68,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544100879
+      modifiedTime: 1783544100879
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbDivineOrderPr.Mvzn4plDBs9fDfph'
 folder: 3wY92TRgyyyDkpmF
 flags:
@@ -83,11 +87,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866373481
-  modifiedTime: 1745256759459
+  modifiedTime: 1783544100879
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1300000

@@ -42,17 +42,14 @@ effects:
     transfer: false
     _id: iKPJ2nBT687zLvTc
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -62,13 +59,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbpdnCourageAur.ActiveEffect.cJtDumOL6RUzrBHA
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbpdnDevotionAu.iKPJ2nBT687zLvTc'
 flags:
   dnd5e:
@@ -77,7 +77,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866569467

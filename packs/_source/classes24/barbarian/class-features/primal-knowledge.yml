@@ -45,37 +45,44 @@ effects:
     img: icons/creatures/birds/raptor-owl-flying-moon.webp
     _id: ufbJRsGGW3REMmJm
     type: base
-    system: {}
-    changes:
-      - key: system.skills.acr.bonuses.check
-        mode: 2
-        value: max(0, @abilities.str.mod - @mod)
-        priority: null
-      - key: system.skills.itm.bonuses.check
-        mode: 2
-        value: max(0, @abilities.str.mod - @mod)
-        priority: null
-      - key: system.skills.prc.bonuses.check
-        mode: 2
-        value: max(0, @abilities.str.mod - @mod)
-        priority: null
-      - key: system.skills.ste.bonuses.check
-        mode: 2
-        value: max(0, @abilities.str.mod - @mod)
-        priority: null
-      - key: system.skills.sur.bonuses.check
-        mode: 2
-        value: max(0, @abilities.str.mod - @mod)
-        priority: null
+    system:
+      changes:
+        - key: system.skills.acr.bonuses.check
+          value: max(0, @abilities.str.mod - @mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: 6yJOQP9AU4koplCO
+        - key: system.skills.itm.bonuses.check
+          value: max(0, @abilities.str.mod - @mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: KP7skIT3vfjuhnap
+        - key: system.skills.prc.bonuses.check
+          value: max(0, @abilities.str.mod - @mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: bm6RQcKQcWZTlKrL
+        - key: system.skills.ste.bonuses.check
+          value: max(0, @abilities.str.mod - @mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: lJ4cad5bqdkb2yXi
+        - key: system.skills.sur.bonuses.check
+          value: max(0, @abilities.str.mod - @mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: XTAJj2uPpnG0wOef
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.classes24.Item.phbbrbPrimalKnow
     tint: '#ffffff'
@@ -87,13 +94,22 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbbrbPrimalKnow.ActiveEffect.ktAO4M4jvixfzyuO
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101247
+      modifiedTime: 1783544101247
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbPrimalKnow.ufbJRsGGW3REMmJm'
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -103,11 +119,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735865940469
-  modifiedTime: 1745256760042
+  modifiedTime: 1783544101246
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

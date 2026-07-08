@@ -200,17 +200,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmSmother0000000
     _id: wfTA3WUcjBVzGa2H
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target is &amp;Reference[Grappled apply=false] (escape DC [[/check
       ability=str skill=ath format=long]], see source item for DC) instead of
@@ -229,13 +226,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736206208073
       modifiedTime: 1736206555488
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmSmother0000000.wfTA3WUcjBVzGa2H'
 flags:
   dnd5e:
@@ -244,7 +244,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

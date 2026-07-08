@@ -119,33 +119,38 @@ effects:
     transfer: false
     _id: lPONVotWP8yhuuWe
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.cha.value
-        mode: 5
-        value: '1'
-        priority: null
-      - key: system.abilities.int.value
-        mode: 5
-        value: '1'
-        priority: null
-      - key: system.traits.languages.value
-        mode: 5
-        value: '{}'
-        priority: null
-      - key: system.traits.languages.custom
-        mode: 2
-        value: Can't speak
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.cha.value
+          value: 1
+          priority: null
+          type: override
+          phase: initial
+          _id: lJqih26Sp0jOv9F4
+        - key: system.abilities.int.value
+          value: 1
+          priority: null
+          type: override
+          phase: initial
+          _id: 33Nb8pskCq2qUAIW
+        - key: system.traits.languages.value
+          value: {}
+          priority: null
+          type: override
+          phase: initial
+          _id: ak920hmuHUsC8iUk
+        - key: system.traits.languages.custom
+          value: Can't speak
+          priority: null
+          type: add
+          phase: initial
+          _id: fk0JzYeI4w6dTPDZ
     disabled: false
     duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The tree has Intelligence and Charisma scores of 1, can't speak, and
       lacks the Animate Trees action.</p>
@@ -159,13 +164,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.5
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544085041
+      modifiedTime: 1783544085041
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmAnimateTrees00.lPONVotWP8yhuuWe'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -175,11 +183,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.3.6
   createdTime: 1741124037758
-  modifiedTime: 1741217006357
+  modifiedTime: 1783544085041
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 150000

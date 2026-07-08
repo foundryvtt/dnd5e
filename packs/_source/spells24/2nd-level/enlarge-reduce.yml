@@ -119,13 +119,10 @@ effects:
   - name: Enlarged
     origin: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -134,24 +131,33 @@ effects:
     img: icons/magic/control/silhouette-grow-shrink-tan.webp
     _id: Wi2E10l7n6Ka8k6u
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.rwak.damage
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: BILOOAY4dj2TaYo6
+        - key: system.bonuses.rwak.damage
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: Ads6r9B1HxdiUZCy
+        - key: system.abilities.str.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 4FOwOOP9LfyeEvZM
+        - key: system.abilities.str.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: svpIMfPDpRdBNBk4
+      magical: true
     description: >-
       <p>The target’s size increases by one category—from Medium to Large, for
       example. The target also has Advantage on Strength checks and Strength
@@ -164,24 +170,24 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760128165509
+      systemVersion: 6.0.0
+      createdTime: 1783543974912
+      modifiedTime: 1783543974912
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnlargeRed.Wi2E10l7n6Ka8k6u'
   - name: Reduced
     origin: Compendium.dnd5e.spells24.Item.phbsplEnlargeRed
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -190,24 +196,33 @@ effects:
     img: icons/magic/control/silhouette-grow-shrink-blue.webp
     _id: NXdtOxX4HvPeodml
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: '- 1d4'
-        priority: null
-      - key: system.bonuses.rwak.damage
-        mode: 2
-        value: '- 1d4'
-        priority: null
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: '- 1d4'
+          priority: null
+          type: add
+          phase: initial
+          _id: 6lp3F7BQYinW6zgt
+        - key: system.bonuses.rwak.damage
+          value: '- 1d4'
+          priority: null
+          type: add
+          phase: initial
+          _id: 7TaorlUsDOitZvcY
+        - key: system.abilities.str.check.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: qxCndCBm9LBJD8ln
+        - key: system.abilities.str.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: kA20tabH3yLdR1Jh
+      magical: true
     description: >-
       <p>The target’s size decreases by one category—from Medium to Small, for
       example. The target also has Disadvantage on Strength checks and Strength
@@ -221,13 +236,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760128184394
+      systemVersion: 6.0.0
+      createdTime: 1783543974912
+      modifiedTime: 1783543974912
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnlargeRed.NXdtOxX4HvPeodml'
 folder: 3SjcO2acsFnWegp4
 sort: 3700000
@@ -236,11 +254,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425952041
-  modifiedTime: 1760128197778
+  modifiedTime: 1783543974912
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEnlargeRed'

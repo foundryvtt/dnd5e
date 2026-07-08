@@ -99,20 +99,18 @@ effects:
   - name: Invisible
     origin: Compendium.dnd5e.spells24.Item.phbsplInvisibili
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/invisible.svg
     _id: 9svfDetqjhsFP3ey
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The spell ends early immediately after the target makes an attack roll,
       deals damage, or casts a spell.</p>
@@ -124,13 +122,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975735
+      modifiedTime: 1783543975735
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplInvisibili.9svfDetqjhsFP3ey'
 folder: 3SjcO2acsFnWegp4
 sort: 2700000
@@ -143,11 +144,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425960202
-  modifiedTime: 1745256795236
+  modifiedTime: 1783543975734
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplInvisibili'

@@ -492,12 +492,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -541,7 +538,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -561,6 +558,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmLegendaryResis
     name: Legendary Resistance
@@ -665,10 +663,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 100000
@@ -722,10 +722,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmUndeadRestorat
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 300000
@@ -772,10 +774,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 200000
@@ -992,17 +996,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmRottingFist000
         _id: B1S4dZd1Lz0jokIo
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>If the target is a creature, it is cursed. While cursed, the target
           can’t regain Hit Points, its Hit Point maximum doesn’t return to
@@ -1021,10 +1022,15 @@ items:
             Compendium.dnd5e.actors24.Actor.mmMummy000000000.Item.mmRottingFist000.ActiveEffect.t7Anyyhyg6fmTdXw
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.mmRottingFist000.B1S4dZd1Lz0jokIo
     flags:
@@ -1036,10 +1042,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRottingFist000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: -50000
@@ -1134,10 +1142,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: -100000
@@ -1479,10 +1489,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -1581,6 +1593,7 @@ items:
       identifier: dispel-magic
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/skills/melee/sword-damaged-broken-purple.webp
     effects:
@@ -1588,37 +1601,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: g6HkMkleeXwcfRKk
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181164
+          modifiedTime: 1783544181164
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.MNMv0vuxNlTLXjTJ.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -1632,10 +1657,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDispelMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181163
+      modifiedTime: 1783544181163
     _id: MNMv0vuxNlTLXjTJ
     _key: '!actors.items!mmMummyLord00000.MNMv0vuxNlTLXjTJ'
   - name: Thaumaturgy
@@ -1749,6 +1776,7 @@ items:
       identifier: thaumaturgy
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/environment/people/cleric-orange.webp
     effects:
@@ -1756,37 +1784,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.2L5xIB4F7pzLxodZ
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: LIfBIqTbFpeqUdCa
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.2L5xIB4F7pzLxodZ
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181164
+          modifiedTime: 1783544181164
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.qJROiSCEROFUzokI.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1803,10 +1843,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181164
+      modifiedTime: 1783544181164
     _id: qJROiSCEROFUzokI
     _key: '!actors.items!mmMummyLord00000.qJROiSCEROFUzokI'
   - name: Animate Dead
@@ -1960,6 +2002,7 @@ items:
       identifier: animate-dead
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/death/undead-zombie-grave-green.webp
     effects:
@@ -1967,37 +2010,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.r1CShKUHpGLk6S15
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: xwg70wsz25bovUia
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.r1CShKUHpGLk6S15
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181164
+          modifiedTime: 1783544181164
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.TR4icqSOLRCzde5j.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2011,10 +2066,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplAnimateDea
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181164
+      modifiedTime: 1783544181164
     _id: TR4icqSOLRCzde5j
     _key: '!actors.items!mmMummyLord00000.TR4icqSOLRCzde5j'
   - name: Harm
@@ -2136,6 +2193,7 @@ items:
       identifier: harm
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/strike-body-explode-disintegrate.webp
     effects:
@@ -2143,37 +2201,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.UuaXl5nquzkuZass
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: to16FmF9nj9vMNWk
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.UuaXl5nquzkuZass
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181165
+          modifiedTime: 1783544181165
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.4K4UcgI4iS2ecAzk.dnd5espellchange
     folder: 8WmlLARx1Df3Ii9v
@@ -2190,10 +2260,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHarm000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181164
+      modifiedTime: 1783544181164
     _id: 4K4UcgI4iS2ecAzk
     _key: '!actors.items!mmMummyLord00000.4K4UcgI4iS2ecAzk'
   - name: Insect Plague
@@ -2319,6 +2391,7 @@ items:
       identifier: insect-plague
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/creatures/invertebrates/wasp-swarm-attack.webp
     effects:
@@ -2326,37 +2399,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.h8Z0JRmWxCy0fyYu
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: 1Xc8VzRkEwjfvZo8
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.mmSpellcasting00.Activity.h8Z0JRmWxCy0fyYu
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181165
+          modifiedTime: 1783544181165
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.4cGulOY7E3mxCmBK.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2370,10 +2455,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplInsectPlag
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181165
+      modifiedTime: 1783544181165
     _id: 4cGulOY7E3mxCmBK
     _key: '!actors.items!mmMummyLord00000.4cGulOY7E3mxCmBK'
   - _id: d6GVHcFrHv83C7eS
@@ -2522,10 +2609,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmChannelNegativ
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: -25000
     ownership:
       default: 0
@@ -2627,10 +2716,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmGlare000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 2900000
     ownership:
       default: 0
@@ -2748,21 +2839,20 @@ items:
         origin: Item.mmWhirlwindOfSan
         _id: Xy0tzgObrMRF2lHm
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.ac.bonus
-            mode: 2
-            value: '2'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              value: 2
+              priority: null
+              type: add
+              phase: initial
+              _id: e8VlZvfZKqwqYv8a
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The attacking creature adds 2 to its AC against the attack,
           possibly causing the attack to miss.</p>
@@ -2777,10 +2867,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181165
+          modifiedTime: 1783544181165
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.Hp6Uq0ZvymMIEGys.Xy0tzgObrMRF2lHm
       - name: Blinded
@@ -2788,17 +2889,14 @@ items:
         origin: Item.mmWhirlwindOfSan
         _id: MMp7IK5bYYPYtSdL
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Each creature of the attacking creature's choice that it can see
           within 5 ft. of its destination space has the &amp;Reference[Blinded
@@ -2816,10 +2914,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.Hp6Uq0ZvymMIEGys.MMp7IK5bYYPYtSdL
     flags:
@@ -2831,10 +2940,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmWhirlwindOfSan
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181165
+      modifiedTime: 1783544181165
     sort: 23600000
     ownership:
       default: 0
@@ -2940,10 +3051,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDreadCommand00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 2800000
     ownership:
       default: 0
@@ -3063,6 +3176,7 @@ items:
       identifier: command
       method: spell
       prepared: 0
+      sourceItem: feat:dread-command
     type: spell
     img: icons/magic/sonic/scream-wail-shout-teal.webp
     effects:
@@ -3070,37 +3184,52 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.SSc4GeA0NJxba8O4.Activity.9RQr4xjb1zKIXBxn
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: AS6nMu1oFQ1cvDQK
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmMummyLord00000.Item.SSc4GeA0NJxba8O4.Activity.9RQr4xjb1zKIXBxn
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181166
+          modifiedTime: 1783544181166
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.KOWKJe3vIwDbWY0Y.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -3114,10 +3243,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommand000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181166
+      modifiedTime: 1783544181166
     _id: KOWKJe3vIwDbWY0Y
     _key: '!actors.items!mmMummyLord00000.KOWKJe3vIwDbWY0Y'
   - _id: xhuz3Gwz1C5hyZLl
@@ -3217,10 +3348,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmNecroticStrike
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 3000000
     ownership:
       default: 0
@@ -3344,17 +3477,14 @@ items:
         origin: Item.mmDreadfulGlare0
         _id: hRSvOovTSlu4Dw8c
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[<span style="font-family:'Roboto
           Condensed', sans-serif">Paralyzed</span> apply=false] condition until
@@ -3369,10 +3499,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmMummyLord00000.mmDreadfulGlare0.hRSvOovTSlu4Dw8c
     flags:
@@ -3384,10 +3525,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDreadfulGlare0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -3398,11 +3541,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452709761
-  modifiedTime: 1771452709761
+  systemVersion: 6.0.0
+  createdTime: 1783544181163
+  modifiedTime: 1783544181163
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

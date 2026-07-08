@@ -35,20 +35,12 @@ system:
   identifier: unarmored-defense
 effects:
   - _id: m2RCcVkc0YkCXNEb
-    changes:
-      - key: system.attributes.ac.calc
-        mode: 5
-        value: unarmoredMonk
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.classes24.Item.phbmnkUnarmoredD
     transfer: true
     flags: {}
@@ -60,17 +52,27 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.UAvV7N7T4zJhxdfI.ActiveEffect.R5ro4AuNjcdWD56O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102875
+      modifiedTime: 1783544102875
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/control/silhouette-hold-change-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.calc
+          value: unarmoredMonk
+          priority: null
+          type: override
+          phase: initial
+          _id: ernBxWFCCnjcMuRU
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbmnkUnarmoredD.m2RCcVkc0YkCXNEb'
 flags:
   dnd5e:
@@ -79,11 +81,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866307724
-  modifiedTime: 1745256763447
+  modifiedTime: 1783544102875
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1900000

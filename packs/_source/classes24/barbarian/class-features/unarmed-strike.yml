@@ -195,17 +195,14 @@ effects:
     transfer: false
     _id: I62g7t7ytl0V3dTE
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -216,13 +213,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.bdG1d6kwc7F8Gbfg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbbrbUnarmedStr.I62g7t7ytl0V3dTE'
   - name: Prone
     img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
@@ -230,17 +230,14 @@ effects:
     transfer: false
     _id: l2B6aDyEF8l9FCME
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -251,13 +248,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.phbUnarmedStrike.ActiveEffect.SfM8X3xktY0PR0Kz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbbrbUnarmedStr.l2B6aDyEF8l9FCME'
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -267,7 +267,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735865940469

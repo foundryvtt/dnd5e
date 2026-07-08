@@ -126,29 +126,32 @@ effects:
     img: icons/skills/melee/weapons-crossed-swords-black.webp
     _id: IMt1nMPrWppyRYMT
     type: enchantment
-    system: {}
-    changes:
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: name
-        mode: 5
-        value: Magic {} +1
-        priority: null
+    system:
+      changes:
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: 1C45HMwV3Hor55CC
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: lieJqnmaAnE0wna1
+        - key: name
+          value: Magic {} +1
+          priority: null
+          type: override
+          phase: initial
+          _id: tlsO1bCQHkd2onMp
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Until the spell ends, that weapon becomes a magic weapon with a +1
       bonus to attack rolls and damage rolls.</p>
@@ -160,13 +163,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975896
+      modifiedTime: 1783543975896
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMagicWeapo.IMt1nMPrWppyRYMT'
   - name: Magic Weapon +2
     flags:
@@ -181,29 +187,32 @@ effects:
     img: icons/skills/melee/weapons-crossed-swords-black-gray.webp
     _id: 9zA6SFF8HKk9xNn2
     type: enchantment
-    system: {}
-    changes:
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '2'
-        priority: null
-      - key: name
-        mode: 5
-        value: Magic {} +2
-        priority: null
+    system:
+      changes:
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: L8PWTNL2vUSQiIVH
+        - key: system.magicalBonus
+          value: 2
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 1lSUbC0C18tZLitv
+        - key: name
+          value: Magic {} +2
+          priority: null
+          type: override
+          phase: initial
+          _id: qVpWCVXeK24ATf7W
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Until the spell ends, that weapon becomes a magic weapon with a +2
       bonus to attack rolls and damage rolls.</p>
@@ -215,13 +224,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975896
+      modifiedTime: 1783543975896
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMagicWeapo.9zA6SFF8HKk9xNn2'
   - name: Magic Weapon +3
     flags:
@@ -236,29 +248,32 @@ effects:
     img: icons/skills/melee/weapons-crossed-swords-pink.webp
     _id: AJQwm1dgXz7D333k
     type: enchantment
-    system: {}
-    changes:
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '3'
-        priority: null
-      - key: name
-        mode: 2
-        value: Magic {} +3
-        priority: null
+    system:
+      changes:
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: E6AFzGfT2qTK0SvC
+        - key: system.magicalBonus
+          value: 3
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: ZeCr5se5DMSHeAze
+        - key: name
+          value: Magic {} +3
+          priority: null
+          type: add
+          phase: initial
+          _id: DbaAnVQVoAdeozp7
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Until the spell ends, that weapon becomes a magic weapon with a +3
       bonus to attack rolls and damage rolls.</p>
@@ -270,13 +285,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975896
+      modifiedTime: 1783543975896
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMagicWeapo.AJQwm1dgXz7D333k'
 folder: 3SjcO2acsFnWegp4
 sort: 2000000
@@ -289,11 +307,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425962592
-  modifiedTime: 1745256795840
+  modifiedTime: 1783543975896
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMagicWeapo'

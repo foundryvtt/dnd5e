@@ -114,45 +114,57 @@ effects:
     img: icons/svg/stoned.svg
     _id: etY0sDrXe6DcFEzc
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.check
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.attributes.init.bonus
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.check
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: PZoH9PRKyDySjPHk
+        - key: system.bonuses.abilities.save
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: iuReuFXfV5tJ1UJk
+        - key: system.attributes.init.bonus
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 31t0oiNGJHgphPPJ
+        - key: system.bonuses.mwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: uTb8mUDKkFUcoq1s
+        - key: system.bonuses.msak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: NpmOTgFVhVcl5HvV
+        - key: system.bonuses.rsak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: i0H1Dce8QJKTZUIX
+        - key: system.bonuses.rwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: EtPwmEsf46pmFK71
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
       to D20 Tests. Every time the target finishes a Long Rest, the penalty is
@@ -166,56 +178,71 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976463
+      modifiedTime: 1783543976463
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRaiseDead0.etY0sDrXe6DcFEzc'
   - name: Resurrection Sickness (Day 2)
     img: icons/svg/stoned.svg
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.check
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.attributes.init.bonus
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.check
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 0s9GMGpHq2vRNi7l
+        - key: system.bonuses.abilities.save
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: l6KzS4MUlcfIMmE9
+        - key: system.attributes.init.bonus
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: GdbVIck3qMn4ct2g
+        - key: system.bonuses.mwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 3bQQz9PbteaSEzwh
+        - key: system.bonuses.msak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: xkQpNNOrCnaxBEQs
+        - key: system.bonuses.rsak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: N98C97hzLy6XHozZ
+        - key: system.bonuses.rwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: zNTjEtHFPhyHSp0M
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
       to D20 Tests. Every time the target finishes a Long Rest, the penalty is
@@ -230,57 +257,72 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976463
+      modifiedTime: 1783543976463
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: QUWVMgg2HidYsUxy
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRaiseDead0.QUWVMgg2HidYsUxy'
   - name: Resurrection Sickness (Day 4)
     img: icons/svg/stoned.svg
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.check
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.attributes.init.bonus
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.check
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: re1em74s8c5pYhN4
+        - key: system.bonuses.abilities.save
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: ckYklrHoWh0UjRXr
+        - key: system.attributes.init.bonus
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: jHZuNj7yr73i6gwb
+        - key: system.bonuses.mwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: R8Yo2Bw8GwjgWXnQ
+        - key: system.bonuses.msak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 7J5wMgYDHrKXePcT
+        - key: system.bonuses.rsak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: Ye40JcilAqLQQSCi
+        - key: system.bonuses.rwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: JoddH5bqDjuvstmE
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
       to D20 Tests. Every time the target finishes a Long Rest, the penalty is
@@ -295,57 +337,72 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976463
+      modifiedTime: 1783543976463
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: vyf4vVVoGkZPyAqa
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRaiseDead0.vyf4vVVoGkZPyAqa'
   - name: Resurrection Sickness (Day 3)
     img: icons/svg/stoned.svg
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.check
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.attributes.init.bonus
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.check
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: zVpqreFgj9MttoGB
+        - key: system.bonuses.abilities.save
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: Rpr2XoiqioqCyH0H
+        - key: system.attributes.init.bonus
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: bTXFpLPNpbXMQxQe
+        - key: system.bonuses.mwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: VzbrbY0rHB8cwIE3
+        - key: system.bonuses.msak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 8SiYpvy7FKaBGsU5
+        - key: system.bonuses.rsak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: fimvqTRPShzjLeBj
+        - key: system.bonuses.rwak.attack
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: KJG4Lt3MsiCUyQai
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Coming back from the dead is an ordeal. The target takes a −4 penalty
       to D20 Tests. Every time the target finishes a Long Rest, the penalty is
@@ -360,14 +417,17 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976463
+      modifiedTime: 1783543976463
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 0EAyGy8YaKbvgvkm
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRaiseDead0.0EAyGy8YaKbvgvkm'
 folder: beZ8MTpWY2cMEUlp
 sort: 700000
@@ -380,11 +440,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425967877
-  modifiedTime: 1745256797350
+  modifiedTime: 1783543976463
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRaiseDead0'

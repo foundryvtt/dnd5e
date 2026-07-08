@@ -390,17 +390,15 @@ effects:
     transfer: false
     _id: cN85nWiTzfGzWR7D
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -410,41 +408,48 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544095373
+      modifiedTime: 1783544095373
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgEarthRingOfEl.cN85nWiTzfGzWR7D'
   - name: Earth Focus
     img: icons/magic/earth/barrier-stone-explosion-debris.webp
     _id: cXb7lTtpbcsz0BJn
     type: base
-    system: {}
-    changes:
-      - key: system.traits.languages.value
-        mode: 2
-        value: terran
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
-      - key: system.attributes.movement.ignoredDifficultTerrain
-        mode: 2
-        value: rocks
-        priority: null
+    system:
+      changes:
+        - key: system.traits.languages.value
+          value: terran
+          priority: null
+          type: add
+          phase: initial
+          _id: YfPJc48zFm2s5q3I
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: DJmLfZlP4KdiDu0Z
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          value: rocks
+          priority: null
+          type: add
+          phase: initial
+          _id: NbNm6CRfbt11NeH2
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgEarthRingOfEl
     tint: '#ffffff'
@@ -459,23 +464,26 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgAirRingOfElem.ActiveEffect.d5aFCMPqEUaUQ37L
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 6.0.0
       createdTime: 1730685668821
-      modifiedTime: 1753119190117
+      modifiedTime: 1783544095373
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgEarthRingOfEl.cXb7lTtpbcsz0BJn'
 folder: DC1x1wAm0NLFudA6
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1730684815591
-  modifiedTime: 1764616023669
+  modifiedTime: 1783544095373
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 2050000

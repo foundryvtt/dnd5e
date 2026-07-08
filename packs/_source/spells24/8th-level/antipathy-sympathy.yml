@@ -237,17 +237,15 @@ effects:
     transfer: false
     _id: bW6xZzK4dmulRmUT
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 864000
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 864000
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -256,13 +254,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725288818281
-      modifiedTime: 1725289339445
+      modifiedTime: 1783543973956
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAntipathyS.bW6xZzK4dmulRmUT'
   - name: Sympathy
     img: icons/magic/control/modfiy-luck-fortune-gray.webp
@@ -270,17 +271,15 @@ effects:
     transfer: false
     _id: Cz9yMSQmtWRnz81Z
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 864000
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 864000
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -289,13 +288,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725288896535
-      modifiedTime: 1725289350198
+      modifiedTime: 1783543973956
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAntipathyS.Cz9yMSQmtWRnz81Z'
   - name: Frightened
     img: systems/dnd5e/icons/svg/statuses/frightened.svg
@@ -303,17 +305,15 @@ effects:
     transfer: false
     _id: aNztI08V5rN4s5mF
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 864000
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 864000
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The creature has the &amp;Reference[Frightened apply=false] condition.
       The Frightened creature must use its movement on its turns to get as far
@@ -332,30 +332,31 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725291461839
-      modifiedTime: 1725291827932
+      modifiedTime: 1783543973956
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplAntipathyS.aNztI08V5rN4s5mF'
   - name: Charmed
     img: systems/dnd5e/icons/svg/statuses/charmed.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplAntipathyS
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 864000
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 864000
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The creature has the &amp;Reference[Charmed apply=false] condition. The
       Charmed creature must use its movement on its turns to get as close as
@@ -376,14 +377,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725291844436
-      modifiedTime: 1725291900960
+      modifiedTime: 1783543973956
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: pkTbvXvccMakDjyU
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplAntipathyS.pkTbvXvccMakDjyU'
 folder: M5CvwK9zVtzx6Dnn
 sort: 150000
@@ -396,11 +400,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425941036
-  modifiedTime: 1745256785679
+  modifiedTime: 1783543973956
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAntipathyS'

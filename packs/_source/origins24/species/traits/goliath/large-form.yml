@@ -101,25 +101,26 @@ effects:
     transfer: false
     _id: QI7POclNlvX9a8VD
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '10'
-        priority: null
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 10
+          priority: null
+          type: add
+          phase: initial
+          _id: EK8IRsBsVtxfuAK9
+        - key: system.abilities.str.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 00Zlo6HTM5uZRvUo
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>For the duration, you have Advantage on Strength checks, and your Speed
       increases by 10 feet. Once you use this trait, you can’t use it again
@@ -134,13 +135,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
+      systemVersion: 6.0.0
       createdTime: 1725810985123
-      modifiedTime: 1760131436359
+      modifiedTime: 1783544082004
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsptLargeForm0.QI7POclNlvX9a8VD'
 sort: 100000
 ownership:
@@ -152,11 +156,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425891196
-  modifiedTime: 1760131474099
+  modifiedTime: 1783544082004
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptLargeForm0'

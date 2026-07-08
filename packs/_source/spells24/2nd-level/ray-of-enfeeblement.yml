@@ -106,20 +106,18 @@ effects:
   - name: Brief Enfeeblement
     origin: Compendium.dnd5e.spells24.Item.phbsplRayofEnfee
     duration:
-      rounds: 1
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/skills/melee/sword-damaged-broken-glow-red.webp
     _id: yril8uhQgO1dR507
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The target has Disadvantage on the next attack roll it makes until the
       start of your next turn.</p>
@@ -130,24 +128,24 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976519
+      modifiedTime: 1783543976519
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRayofEnfee.yril8uhQgO1dR507'
   - name: Enervated
     origin: Compendium.dnd5e.spells24.Item.phbsplRayofEnfee
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -156,32 +154,45 @@ effects:
     img: icons/skills/wounds/blood-cells-disease-green.webp
     _id: uaHZaHEalgWa6eoC
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: '- 1d8'
-        priority: null
-      - key: system.bonuses.rwak.damage
-        mode: 2
-        value: '- 1d8'
-        priority: null
-      - key: system.bonuses.msak.damage
-        mode: 2
-        value: '- 1d8'
-        priority: null
-      - key: system.bonuses.rsak.damage
-        mode: 2
-        value: '- 1d8'
-        priority: null
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: '- 1d8'
+          priority: null
+          type: add
+          phase: initial
+          _id: 1uDwblWGdJVTQbBr
+        - key: system.bonuses.rwak.damage
+          value: '- 1d8'
+          priority: null
+          type: add
+          phase: initial
+          _id: Dil2VSCdXVsZ21rG
+        - key: system.bonuses.msak.damage
+          value: '- 1d8'
+          priority: null
+          type: add
+          phase: initial
+          _id: FYKlWyCltgtXaEFg
+        - key: system.bonuses.rsak.damage
+          value: '- 1d8'
+          priority: null
+          type: add
+          phase: initial
+          _id: bGHcPQ4Ul0orTs30
+        - key: system.abilities.str.check.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: Qc2sxBt76YreaDmM
+        - key: system.abilities.str.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: XVoVArAG1dZU0iwP
+      magical: true
     description: >-
       <p>The target has Disadvantage on Strength-based D20 Tests for the
       duration. During that time, it also subtracts 1d8 from all its damage
@@ -194,13 +205,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760127505191
+      systemVersion: 6.0.0
+      createdTime: 1783543976519
+      modifiedTime: 1783543976519
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRayofEnfee.uaHZaHEalgWa6eoC'
 folder: 3SjcO2acsFnWegp4
 sort: 1100000
@@ -209,11 +223,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425968070
-  modifiedTime: 1760127432635
+  modifiedTime: 1783543976519
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRayofEnfee'

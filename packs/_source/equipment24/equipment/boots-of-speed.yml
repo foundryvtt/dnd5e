@@ -129,37 +129,45 @@ effects:
     transfer: true
     _id: XP45fDHAojcVjDc0
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 1
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: LXnPvp7TBgzRnqof
+        - key: system.attributes.movement.fly
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: P2IwQ7hD59tw2fpj
+        - key: system.attributes.movement.climb
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: yE36Bd93kZLevaun
+        - key: system.attributes.movement.burrow
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: jfZvFfgCU7Fjyz4N
+        - key: system.attributes.movement.swim
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: 1xdcfaYAoeB3lKGx
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The boots double your Speed, and any creature that makes an Opportunity
       Attack against you has Disadvantage on the attack roll. If you click your
@@ -171,22 +179,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.4
+      systemVersion: 6.0.0
       createdTime: 1728680333326
-      modifiedTime: 1728681103651
+      modifiedTime: 1783544093917
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgBootsOfSpeed0.XP45fDHAojcVjDc0'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764616628853
+  modifiedTime: 1783544093917
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 4000000

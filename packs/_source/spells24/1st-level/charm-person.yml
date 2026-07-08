@@ -105,20 +105,18 @@ effects:
   - name: Charmed
     origin: Compendium.dnd5e.spells24.Item.phbsplCharmPerso
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/charmed.svg
     _id: 78JcD7wFiSCOfmns
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>the target has the &amp;Reference[charmed apply=false] condition until
       the spell ends or until you or your allies damage it. The Charmed creature
@@ -132,13 +130,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974331
+      modifiedTime: 1783543974331
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplCharmPerso.78JcD7wFiSCOfmns'
 folder: pBaAAtXBCq9FVEnL
 sort: 5000000
@@ -151,11 +152,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425944623
-  modifiedTime: 1745256787700
+  modifiedTime: 1783543974331
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplCharmPerso'

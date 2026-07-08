@@ -216,42 +216,51 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
     _id: qiwTWGRINh3WFPaA
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Nine Lives Stealer {}
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgNineLivesStea
-          caption=false]</p>
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Nine Lives Stealer {}
+          priority: null
+          type: override
+          phase: initial
+          _id: qIPDjHF8V2bIxGsG
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgNineLivesStea
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: sKGgxz5R8SErGeJ0
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: fy1tnOvNjDnh9Ydl
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: BRi7fGBGkP3gIPLI
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: rYBNb57BBMYIi6jw
+        - key: system.magicalBonus
+          value: 2
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: J7cer5Y3kclpMeVJ
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -262,13 +271,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730162619510
-      modifiedTime: 1730162882385
+      modifiedTime: 1783544096978
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgNineLivesStea.qiwTWGRINh3WFPaA'
 folder: kie870i5kr7yuxO8
 flags:
@@ -278,11 +290,11 @@ flags:
         - QxD7LVTB9MWX8QmK
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615192127
+  modifiedTime: 1783544096978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 9300000

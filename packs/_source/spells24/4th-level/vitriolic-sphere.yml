@@ -184,20 +184,18 @@ effects:
   - name: Lingering Acid
     origin: Compendium.dnd5e.spells24.Item.phbsplVitriolicS
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
     _id: WHhf4PFHQBDkCAyb
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The creature takes [[/damage <span style="font-family:Signika,
       sans-serif">5d4 type=acid]] damage at the end of its next turn</span></p>
@@ -208,13 +206,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977562
+      modifiedTime: 1783543977562
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplVitriolicS.WHhf4PFHQBDkCAyb'
 folder: qi3IbnEwap7mRw4b
 flags:
@@ -224,11 +225,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745433110943
-  modifiedTime: 1745712696407
+  modifiedTime: 1783543977561
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 25000

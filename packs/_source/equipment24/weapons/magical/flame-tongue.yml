@@ -218,42 +218,51 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: VtBOwsAVipxkP2f5
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Flame Tongue {}
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgFlameTongue00
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Flame Tongue {}
+          priority: null
+          type: override
+          phase: initial
+          _id: 4n8MFiivhWXvGJC1
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgFlameTongue00
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: OnS2A1bPVAafwpz2
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: dMEaplAIyWfNK5Ap
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: QwNLSq4uOx6VolHn
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: CBy04doszJTE2xOu
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: nJqRuK7xJjl9fxeX
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -264,37 +273,43 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729803617244
-      modifiedTime: 1731004864280
+      modifiedTime: 1783544095612
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgFlameTongue00.VtBOwsAVipxkP2f5'
   - type: enchantment
     name: Ablaze
     img: icons/weapons/swords/greatsword-crossguard-flanged-red.webp
     disabled: true
     _id: MHnAqxEXBhUbnjPq
-    system: {}
-    changes:
-      - key: system.damage.parts
-        mode: 2
-        value: '[["2d6", "fire"]]'
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} (Ablaze)'
-        priority: null
+    system:
+      changes:
+        - key: system.damage.parts
+          value:
+            - - 2d6
+              - fire
+          priority: null
+          type: add
+          phase: initial
+          _id: wleAjp1yjFbcMwsM
+        - key: name
+          value: '{} (Ablaze)'
+          priority: null
+          type: override
+          phase: initial
+          _id: gkpZ6V5dEYI8xzb3
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -308,13 +323,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 6.0.0
       createdTime: 1731004134526
-      modifiedTime: 1754952006310
+      modifiedTime: 1783544095612
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgFlameTongue00.MHnAqxEXBhUbnjPq'
 folder: kie870i5kr7yuxO8
 flags:
@@ -324,11 +342,11 @@ flags:
         - FrNZRC1C2HFJxUNu
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615065505
+  modifiedTime: 1783544095612
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8000000

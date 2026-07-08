@@ -197,32 +197,39 @@ effects:
     img: icons/magic/symbols/runes-etched-steel-blade.webp
     disabled: true
     _id: qwUNBZRXUAvDcqDw
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} Oiled'
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: '{}<p>This item has been oiled and is +3 weapon for the next hour.</p>'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '3'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} Oiled'
+          priority: null
+          type: override
+          phase: initial
+          _id: 5sOE9rdg106CwZRg
+        - key: system.description.value
+          value: >-
+            {}<p>This item has been oiled and is +3 weapon for the next
+            hour.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: agcXQPBKoXDpP2ZB
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: 22G0stMnog1XswcV
+        - key: system.magicalBonus
+          value: 3
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 2uMDJ0JMXOLZIcTJ
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -233,44 +240,54 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730491842978
-      modifiedTime: 1731107177415
+      modifiedTime: 1783544097089
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgOilOfSharpnes.qwUNBZRXUAvDcqDw'
   - type: enchantment
     name: Oiled Ammunition
     img: icons/magic/symbols/runes-etched-steel-blade.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} Oiled'
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: '{}<p>This ammunition has been oiled and is a +3 for the next hour.</p>'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '3'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} Oiled'
+          priority: null
+          type: override
+          phase: initial
+          _id: pYL69sBkNKYNjTFq
+        - key: system.description.value
+          value: >-
+            {}<p>This ammunition has been oiled and is a +3 for the next
+            hour.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 2YU4OSWWknrzt7lq
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: PV2wXxd5mY5577Wc
+        - key: system.magicalBonus
+          value: 3
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: V8EeQtbgpqbI03dB
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -281,23 +298,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730735237175
-      modifiedTime: 1731107171216
+      modifiedTime: 1783544097089
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: RcpoKs7oJMugW7ib
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgOilOfSharpnes.RcpoKs7oJMugW7ib'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614830211
+  modifiedTime: 1783544097088
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1300000

@@ -478,12 +478,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -527,7 +524,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -550,6 +547,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - name: Fire Element
     type: feat
@@ -739,20 +737,18 @@ items:
       - name: Restrained
         origin: Compendium.dnd5e.actors24.Actor.phbsplConjuredEl.Item.M6i0fFdNQmWKA4BZ
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/restrained.svg
         _id: BWZxm9qxlXDSF6Dy
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>At the start of each of its turns, the &amp;Reference[Restrained
           apply=false] target repeats the [[/save ability=dex]] save. On a
@@ -769,10 +765,15 @@ items:
             Compendium.dnd5e.actors24.Actor.phbsplConjuredEl.Item.1sm4KQqflaDX7MEu.ActiveEffect.NGnrAr3HdReYoTjS
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184349
+          modifiedTime: 1783544184349
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!phbConjuredFireE.M6i0fFdNQmWKA4BZ.BWZxm9qxlXDSF6Dy
     folder: null
@@ -784,10 +785,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544184349
+      modifiedTime: 1783544184349
     _id: M6i0fFdNQmWKA4BZ
     _key: '!actors.items!phbConjuredFireE.M6i0fFdNQmWKA4BZ'
 effects: []
@@ -801,10 +804,10 @@ ownership:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452719532
-  modifiedTime: 1771452719532
+  systemVersion: 6.0.0
+  createdTime: 1783544184348
+  modifiedTime: 1783544184348
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbConjuredFireE'

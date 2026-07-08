@@ -130,17 +130,15 @@ effects:
     transfer: false
     _id: poB090Yp3gKXXcMH
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -150,13 +148,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724883132817
-      modifiedTime: 1724883224416
+      modifiedTime: 1783543974722
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplDivineWord.poB090Yp3gKXXcMH'
   - name: Blinded, Deafened, Stunned
     img: systems/dnd5e/icons/svg/statuses/stunned.svg
@@ -164,17 +165,15 @@ effects:
     transfer: false
     _id: grWj3oo8iH8egvi1
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -186,13 +185,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724883228265
-      modifiedTime: 1724883335681
+      modifiedTime: 1783543974722
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplDivineWord.grWj3oo8iH8egvi1'
   - name: Blinded, Deafened
     img: systems/dnd5e/icons/svg/statuses/blinded.svg
@@ -200,17 +202,15 @@ effects:
     transfer: false
     _id: 8O8KymREuOZFi45g
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -219,13 +219,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724883338160
-      modifiedTime: 1724883369318
+      modifiedTime: 1783543974723
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplDivineWord.8O8KymREuOZFi45g'
   - name: Deafened
     img: systems/dnd5e/icons/svg/statuses/deafened.svg
@@ -233,17 +236,15 @@ effects:
     transfer: false
     _id: qZvAfjU2H6Fg6y6M
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -252,13 +253,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724883371355
-      modifiedTime: 1724883402185
+      modifiedTime: 1783543974723
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplDivineWord.qZvAfjU2H6Fg6y6M'
 folder: EdAGMG8IF26PLkD3
 sort: 1900000
@@ -271,11 +275,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425950635
-  modifiedTime: 1745256791274
+  modifiedTime: 1783543974722
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDivineWord'

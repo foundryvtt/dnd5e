@@ -135,37 +135,44 @@ effects:
     transfer: false
     _id: HsbtDDdiWhk4d7WB
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 5
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: qphYRabXBpZY0rVU
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: L2hhgHMaJr52dfys
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: 9HGoDBUOH7DsxqTV
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: y5f3HJiB5hhb7jk7
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: 7OelyaGga1RDn1JA
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -174,13 +181,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725848497965
-      modifiedTime: 1725848574365
+      modifiedTime: 1783544099859
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbagCaltrops000.HsbtDDdiWhk4d7WB'
 sort: 500000
 ownership:
@@ -188,11 +198,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1724425907080
-  modifiedTime: 1757448552545
+  modifiedTime: 1783544099858
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbagCaltrops000'

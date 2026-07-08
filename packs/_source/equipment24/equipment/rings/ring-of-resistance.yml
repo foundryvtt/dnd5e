@@ -214,21 +214,21 @@ effects:
     img: systems/dnd5e/icons/svg/damage/acid.svg
     _id: M9FSD0rpBM2XIEzQ
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: X3Tic1DI9Go3VH73
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -240,32 +240,35 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.YP420EGhAHmNVa8w
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844683713
-      modifiedTime: 1730844683713
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.M9FSD0rpBM2XIEzQ'
   - name: Cold Resistance
     img: systems/dnd5e/icons/svg/damage/cold.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: 1MF6nczBm49BV1tL
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -277,33 +280,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.ACmdUQgMzhh6BiJs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844686361
-      modifiedTime: 1730844686361
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: VEnkRUkJKOh6wKWS
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.VEnkRUkJKOh6wKWS'
   - name: Fire Resistance
     img: systems/dnd5e/icons/svg/damage/fire.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: sQ2phqxZHGFsvs7s
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -315,33 +321,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.Lakck2k6LIxzlncZ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844689211
-      modifiedTime: 1730844689211
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: JQNsTcP2jKVGMuvh
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.JQNsTcP2jKVGMuvh'
   - name: Force Resistance
     img: systems/dnd5e/icons/svg/damage/force.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: force
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: flg2LFYGbYTn67IO
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -353,33 +362,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.nP2MPjGkjwc2qoa7
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844691812
-      modifiedTime: 1730844691812
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: jFl3BJMsLvcypLTS
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.jFl3BJMsLvcypLTS'
   - name: Lightning Resistance
     img: systems/dnd5e/icons/svg/damage/lightning.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: XDOBuzcIX7bmPuGe
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -391,33 +403,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.MHtyWzlMMBeUoFnz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844697174
-      modifiedTime: 1730844697174
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: MNeyPXbTgvHvBZe5
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.MNeyPXbTgvHvBZe5'
   - name: Necrotic Resistance
     img: systems/dnd5e/icons/svg/damage/necrotic.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: necrotic
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: 05E2jAxjAzP0OpNY
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -429,33 +444,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.OVh17qutRZ4vceWw
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844699866
-      modifiedTime: 1730844699866
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 01YXdlZK1vD4LXv6
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.01YXdlZK1vD4LXv6'
   - name: Poison Resistance
     img: systems/dnd5e/icons/svg/damage/necrotic.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: bg0gh0lRqs89Pibj
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -467,33 +485,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.R2WuyXjV8Z8E0wKu
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844702877
-      modifiedTime: 1730844702877
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: zQi42zdJw8VZNATF
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.zQi42zdJw8VZNATF'
   - name: Psychic Resistance
     img: systems/dnd5e/icons/svg/damage/psychic.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: psychic
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: psychic
+          priority: null
+          type: add
+          phase: initial
+          _id: lthgYgZyMyos0IKM
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -505,33 +526,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.meu3jAB2SZjKZrUC
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844705520
-      modifiedTime: 1730844705520
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: W0PypYGpeJur9AJl
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.W0PypYGpeJur9AJl'
   - name: Radiant Resistance
     img: systems/dnd5e/icons/svg/damage/radiant.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: radiant
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: CM9vLGA09ndDsc5w
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -543,33 +567,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.MOoO1WhULDcQtooN
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844708029
-      modifiedTime: 1730844708029
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: SnhlQBFtBdEB1OGB
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.SnhlQBFtBdEB1OGB'
   - name: Thunder Resistance
     img: systems/dnd5e/icons/svg/damage/thunder.svg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: thunder
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: thunder
+          priority: null
+          type: add
+          phase: initial
+          _id: H5kve9TwuaTpVjvz
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfResista
     tint: '#ffffff'
@@ -581,57 +608,69 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgArmorOfResist.ActiveEffect.FtKhRdQT4zB1DG4f
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730844710422
-      modifiedTime: 1730844710422
+      modifiedTime: 1783544097797
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 1154actymx6hAYXS
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.1154actymx6hAYXS'
   - type: enchantment
     name: Ring of Resistance (Acid)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (pearl)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (pearl)
+          priority: null
+          type: override
+          phase: initial
+          _id: 68PxAvavVKbHVcsy
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: 5SH0YUsqS4yQglyE
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: PZJ2hfJffjiJpjPT
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: CaqRVkmLNnmikFBm
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: Tt1cGi8hovaCxuSF
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: q1kKZTofnfIsc1Vn
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -645,57 +684,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845236084
-      modifiedTime: 1768931736079
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: dBl3gfYXWn7YguDb
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.dBl3gfYXWn7YguDb'
   - type: enchantment
     name: Ring of Resistance (Cold)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (tourmaline)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (tourmaline)
+          priority: null
+          type: override
+          phase: initial
+          _id: 6MRzPZCRLayu2JLz
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: 45vr5Qj5E9939v6Z
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: gtVxWHPVzZpuxRP9
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 5S2NMc4JwknN3Uhb
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: VwbNGQQAnX7szlR2
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: cC7lR08YD5zLAIZw
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -709,57 +760,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845284667
-      modifiedTime: 1768931748220
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: P5fYc9OEg5GKGgkR
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.P5fYc9OEg5GKGgkR'
   - type: enchantment
     name: Ring of Resistance (Fire)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (garnet)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (garnet)
+          priority: null
+          type: override
+          phase: initial
+          _id: ffyxxWq8ojXw5z7C
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: M6coHpq1ARzogrVg
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: DsJJMVL6dq4Ry2GX
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: qtk1E4MetMtepWyb
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: SDScVx2z6fb7kN4z
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: ACGvIeoBJl1DEHav
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -773,57 +836,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845322240
-      modifiedTime: 1768931760775
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 8IIAYzI3gqAJIBYo
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.8IIAYzI3gqAJIBYo'
   - type: enchantment
     name: Ring of Resistance (Force)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (sapphire)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (sapphire)
+          priority: null
+          type: override
+          phase: initial
+          _id: oMtrH7HAZIqcmR9w
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: qPpaQ1m9xbcMbxXe
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: TCPyL0cyFqyIgnnA
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 0zA1r3TEEU5EVvrA
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: XwE0xu0bArn4sk8N
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: A46i9txvGLqLF7rO
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -837,57 +912,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845343915
-      modifiedTime: 1768931772732
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: ivnRnslXhD6UZH0L
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.ivnRnslXhD6UZH0L'
   - type: enchantment
     name: Ring of Resistance (Lightning)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (citrine)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (citrine)
+          priority: null
+          type: override
+          phase: initial
+          _id: K1OEm5L2BTyuahyR
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: vOoSNDcHIOm69lYP
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: Hp2ilAfhgN9RhdBF
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 8ZOJIG7d9TV3E2RH
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: uRzqyfIpDhwhyebA
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: 7HxPbB8Azuk0ANkX
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -901,57 +988,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845365844
-      modifiedTime: 1768931783693
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 96wcenml9tk62g37
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.96wcenml9tk62g37'
   - type: enchantment
     name: Ring of Resistance (Necrotic)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (jet)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (jet)
+          priority: null
+          type: override
+          phase: initial
+          _id: E0EBzwnV33puUApH
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: PB91mpx1l0DVbiIK
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: fGP9bVHCPotshzlH
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 04sUMEMkEbi97R4L
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: 1Jd2p2kq5bScyXH2
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: e4uN3cpjW7FdHv9T
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -965,57 +1064,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845400213
-      modifiedTime: 1768931796184
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 9r8SX6QYbeLa780J
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.9r8SX6QYbeLa780J'
   - type: enchantment
     name: Ring of Resistance (Poison)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (amethyst)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (amethyst)
+          priority: null
+          type: override
+          phase: initial
+          _id: fcbvafrWibeVKHRB
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: H5QaahSiFfuIetbJ
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: rB6UMQyZRMGnq2y7
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: nHYl8pzQ9rhixR8p
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: UEz5tt14JNBcuWMJ
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: G53X2czgxtT9A5ZZ
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -1029,57 +1140,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845419421
-      modifiedTime: 1768931806580
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: msSwrsX2i4sCvhLa
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.msSwrsX2i4sCvhLa'
   - type: enchantment
     name: Ring of Resistance (Psychic)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (jade)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (jade)
+          priority: null
+          type: override
+          phase: initial
+          _id: Jwedr1inVZXaNpmF
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: 1JVXE3yaTskAeB7C
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: PRY0i6ZZhDoFg44k
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: xJfYlWxKGJM0pxgN
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: i8RRHysYHlcpmc9C
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: D1XFF6YydwIOkDOx
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -1093,57 +1216,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845438901
-      modifiedTime: 1768931818006
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: ls5HwdyGS36zGNsf
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.ls5HwdyGS36zGNsf'
   - type: enchantment
     name: Ring of Resistance (Radiant)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (topaz)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (topaz)
+          priority: null
+          type: override
+          phase: initial
+          _id: YynSosBISdXeVHEw
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: qW3rGJFhfZGiAQsc
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: Oj3NkJDaqUxGClHp
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: XFu2XHwOMVgVh647
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: RyPZ2BPILqfLKHQl
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: qUfK84POULNCzh1H
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -1157,57 +1292,69 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845459708
-      modifiedTime: 1768931828930
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: zgCVJEc1e9dCj7Ut
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.zgCVJEc1e9dCj7Ut'
   - type: enchantment
     name: Ring of Resistance (Thunder)
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Ring of Resistance (spinel)
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/finger/ring-faceted-gold-purple.webp
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p><em>See:
-          @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
-          <p>You have Resistance to one damage type while wearing this ring. The
-          gemstone in the ring indicates the type.</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Ring of Resistance (spinel)
+          priority: null
+          type: override
+          phase: initial
+          _id: xkiZCD4DMRGlYpv9
+        - key: img
+          value: icons/equipment/finger/ring-faceted-gold-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: hRTEfbQC3X8UZqaN
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: J3VH65PEmdnUcPGS
+        - key: system.description.value
+          value: >-
+            {}<p><em>See:
+            @UUID[Compendium.dnd5e.equipment24.Item.dmgRingOfResista]</em></p>
+            <p>You have Resistance to one damage type while wearing this ring.
+            The gemstone in the ring indicates the type.</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: x3M3ecTAAouwmVCd
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: EIGvVafvmadmUUZj
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: ah44Y0C5nqXF14Gw
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -1221,14 +1368,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1730845485683
-      modifiedTime: 1768931840892
+      modifiedTime: 1783544097798
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: JA9aLSXZ6W3O0W9l
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfResista.JA9aLSXZ6W3O0W9l'
 flags:
   dnd5e:
@@ -1247,11 +1397,11 @@ flags:
         - 1154actymx6hAYXS
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745433176689
+  modifiedTime: 1783544097797
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1150000

@@ -42,21 +42,20 @@ effects:
     transfer: true
     _id: JdULzod722VVpgZx
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: z415mxiWjxWG4tXN
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -66,34 +65,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.jZGIulxQFLY7uRDe
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103803
+      modifiedTime: 1783544103803
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.JdULzod722VVpgZx'
   - name: 'Fiendish Resilience: Bludgeoning'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: iejyHQc5YYkE2Rgr
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -103,35 +104,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.HybTLXiZgGa3t61e
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103803
+      modifiedTime: 1783544103803
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: JjA9Jda2qeK6Tpxk
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.JjA9Jda2qeK6Tpxk'
   - name: 'Fiendish Resilience: Cold'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: QHHWssstkd3WkB99
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -141,35 +144,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.6z5fLOHiOiHHcuac
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103803
+      modifiedTime: 1783544103803
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: rhUc7IVz5XTphPRp
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.rhUc7IVz5XTphPRp'
   - name: 'Fiendish Resilience: Fire'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: YLsts1KjYvMLWiaN
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -179,35 +184,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.DW6JJBsbBtR1Z75R
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103803
+      modifiedTime: 1783544103803
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: GvzW5wzRBfjFqye7
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.GvzW5wzRBfjFqye7'
   - name: 'Fiendish Resilience: Lightning'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: 30KEmQfya7mwPvGR
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -217,35 +224,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.5ZizSWuVy8cy77K1
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: UZ00jXoUKfevQhxQ
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.UZ00jXoUKfevQhxQ'
   - name: 'Fiendish Resilience: Necrotic'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: necrotic
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: pgMs36HB9d6S0MWh
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -255,35 +264,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.fcFLysPw4llFTQsg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: iMBfFAs7UwqdgSI5
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.iMBfFAs7UwqdgSI5'
   - name: 'Fiendish Resilience: Piercing'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: ozDfAmpMjgqm0rQS
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -293,35 +304,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.8Uf0Dw8A3l7CI8Fd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: G0Ed5szAi1vUFCf7
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.G0Ed5szAi1vUFCf7'
   - name: 'Fiendish Resilience: Poison'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: Hdn0bOTRRdUnJZ5i
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -331,35 +344,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.PpWYucbhugNEIBJ7
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 3Uw7a9ldJtxHam1x
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.3Uw7a9ldJtxHam1x'
   - name: 'Fiendish Resilience: Psychic'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: psychic
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: psychic
+          priority: null
+          type: add
+          phase: initial
+          _id: j0n4A6nz7jj3J7HL
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -369,35 +384,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.BbvC3rh4RDmi06XI
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: loTaIaBwUsMSzpdW
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.loTaIaBwUsMSzpdW'
   - name: 'Fiendish Resilience: Radiant'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: radiant
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: V39lgvx01qbPhTqh
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -407,35 +424,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.IFg9ae4ZyhMDPa3m
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: F8szMcfuxVxXJ7sf
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.F8szMcfuxVxXJ7sf'
   - name: 'Fiendish Resilience: Slashing'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: 4LLUDWhx6LN3hVeR
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -445,35 +464,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.30KWef6vBjF8RChr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 7oATkYAfEZzx6F5P
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.7oATkYAfEZzx6F5P'
   - name: 'Fiendish Resilience: Thunder'
     img: icons/magic/defensive/armor-stone-skin.webp
     origin: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: thunder
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: thunder
+          priority: null
+          type: add
+          phase: initial
+          _id: Cs8vZTbrBXicD6Ib
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -483,14 +504,17 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.P7YUT6Y1NXGpo5Er
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103804
+      modifiedTime: 1783544103804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 6BHlD7hrfHUEfum5
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwlkFiendishRe.6BHlD7hrfHUEfum5'
 flags:
   dnd5e:
@@ -499,11 +523,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866551616
-  modifiedTime: 1745256767795
+  modifiedTime: 1783544103803
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

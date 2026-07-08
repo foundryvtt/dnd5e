@@ -171,21 +171,21 @@ effects:
     img: icons/equipment/head/helm-spangen.webp
     _id: hFWmlSeGZKjnB2ZE
     type: base
-    system: {}
-    changes:
-      - key: system.traits.languages.custom
-        mode: 2
-        value: Telepathy (30 feet)
-        priority: null
+    system:
+      changes:
+        - key: system.traits.languages.custom
+          value: Telepathy (30 feet)
+          priority: null
+          type: add
+          phase: initial
+          _id: kt4MwmGXmiElehre
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -196,22 +196,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730696336539
-      modifiedTime: 1730696368791
+      modifiedTime: 1783544096172
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHelmOfTelepat.hFWmlSeGZKjnB2ZE'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764617055730
+  modifiedTime: 1783544096172
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 18400000

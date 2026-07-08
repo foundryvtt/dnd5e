@@ -39,21 +39,20 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
     _id: 3r3OTgMSHx0rQ8Wf
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: 5gNEQRsgqTUtGCww
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -64,33 +63,35 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.RM0B2jICsibgFm0E
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.2
+      systemVersion: 6.0.0
       createdTime: 1738027637913
-      modifiedTime: 1738027637913
+      modifiedTime: 1783544085805
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmDraconicOrigin.3r3OTgMSHx0rQ8Wf'
   - name: Cold Resistance
     img: icons/magic/water/snowflake-ice-purple.webp
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: Iookydt82aSjxt2C
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -101,34 +102,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.uZOPfiqPvCCLReTj
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.2
+      systemVersion: 6.0.0
       createdTime: 1738027639737
-      modifiedTime: 1738027639737
+      modifiedTime: 1783544085805
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: bhvmkZAA605sA3cw
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmDraconicOrigin.bhvmkZAA605sA3cw'
   - name: Fire Resistance
     img: icons/magic/fire/flame-burning-earth-orange.webp
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: etKij9kOes2vQXTZ
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -139,34 +142,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.br641pBi8PTZSTJf
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.2
+      systemVersion: 6.0.0
       createdTime: 1738027641590
-      modifiedTime: 1738027641590
+      modifiedTime: 1783544085805
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: pz5r0ksOuMpJTH7q
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmDraconicOrigin.pz5r0ksOuMpJTH7q'
   - name: Poison Resistance
     img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: to2Z7SDnb4xTd3km
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -180,34 +185,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.srrXvF207wssH68S
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.5
+      systemVersion: 6.0.0
       createdTime: 1738027643194
-      modifiedTime: 1741060476363
+      modifiedTime: 1783544085805
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: BYHSCmIwcOd5tA1O
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmDraconicOrigin.BYHSCmIwcOd5tA1O'
   - name: Lightning Resistance
     img: icons/magic/lightning/bolt-strike-blue-white.webp
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmDraconicOrigin
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: RK54D0XwyKFGlZY4
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -221,23 +228,26 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmHalfdragon0000.Item.mmDraconicOrigin.ActiveEffect.srrXvF207wssH68S
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.3.5
+      systemVersion: 6.0.0
       createdTime: 1741060453520
-      modifiedTime: 1741060468057
+      modifiedTime: 1783544085805
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: XfAztVHPpKrgYrnD
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmDraconicOrigin.XfAztVHPpKrgYrnD'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956
-  modifiedTime: 1738027655606
+  modifiedTime: 1783544085805
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 4200000

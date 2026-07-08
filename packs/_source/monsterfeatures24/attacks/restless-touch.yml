@@ -138,17 +138,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmRestlessTouch0
     _id: BvP51cOd6lyrhEgq
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target is cursed for 24 hours or until the attacking creature dies.
       Until the curse ends, the target gains no benefit from finishing Short
@@ -162,13 +159,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736273788486
       modifiedTime: 1736273840905
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmRestlessTouch0.BvP51cOd6lyrhEgq'
 flags:
   dnd5e:
@@ -177,7 +177,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

@@ -115,44 +115,12 @@ effects:
   - name: Slowed
     origin: Compendium.dnd5e.spells24.Item.phbsplSlow000000
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     _id: z1lkguBohjqXRSHm
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '-2'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.walk
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.abilities.dex.bonuses.save
-        mode: 2
-        value: '-2'
-        priority: null
     description: >-
       <p>An affected target’s Speed is halved, it takes a −2 penalty to AC and
       Dexterity saving throws, and it can’t take Reactions. On its turns, it can
@@ -174,17 +142,64 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.1
-      createdTime: null
-      modifiedTime: 1755290154685
+      systemVersion: 6.0.0
+      createdTime: 1783543977046
+      modifiedTime: 1783543977046
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/time/clock-stopwatch-white-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: -2
+          priority: null
+          type: add
+          phase: initial
+          _id: RUGZEglM6jZDUfOB
+        - key: system.attributes.movement.burrow
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: 7wL4mCSL1qo0NACY
+        - key: system.attributes.movement.climb
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: kA0RxuRFx3iVUroq
+        - key: system.attributes.movement.fly
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: cQDirOfXRUlnsUb4
+        - key: system.attributes.movement.swim
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: qrxHB6R6ETXvbmdm
+        - key: system.attributes.movement.walk
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: X3bgzVYRwn6eWgP1
+        - key: system.abilities.dex.bonuses.save
+          value: -2
+          priority: null
+          type: add
+          phase: initial
+          _id: mdSJz9LJR2leZxPD
+      magical: true
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplSlow000000.z1lkguBohjqXRSHm'
 folder: HCovEE4VoPGlIbKi
 sort: 112500
@@ -197,11 +212,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.1
   createdTime: 1724425971412
-  modifiedTime: 1755290138453
+  modifiedTime: 1783543977045
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSlow000000'

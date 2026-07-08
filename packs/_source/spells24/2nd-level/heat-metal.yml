@@ -235,17 +235,15 @@ effects:
     transfer: false
     _id: VVQbCUE5W44bF4QU
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>If a creature is holding or wearing the object and takes the damage
       from it, The creature must succeed on a [[/save ability=con format=long]]
@@ -259,13 +257,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725651192762
-      modifiedTime: 1725651285907
+      modifiedTime: 1783543975459
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplHeatMetal0.VVQbCUE5W44bF4QU'
 folder: 3SjcO2acsFnWegp4
 sort: 2900000
@@ -278,11 +279,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425958340
-  modifiedTime: 1745256794514
+  modifiedTime: 1783543975459
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHeatMetal0'

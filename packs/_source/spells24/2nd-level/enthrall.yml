@@ -100,24 +100,24 @@ effects:
   - name: Distracted
     origin: Compendium.dnd5e.spells24.Item.phbsplEnthrall00
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/symbols/question-stone-yellow.webp
     _id: Na1yaiXqMUEtCXGy
     type: base
-    system: {}
-    changes:
-      - key: system.skills.prc.bonuses.check
-        mode: 2
-        value: '-10'
-        priority: null
+    system:
+      changes:
+        - key: system.skills.prc.bonuses.check
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: xlE8U5XN5Mf4YDxh
+      magical: true
     description: >-
       <p><span style="font-family:Signika, sans-serif">The target has a −10
       penalty to [[/check ability=wis skill=prc]] checks and Passive Perception
@@ -129,13 +129,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974982
+      modifiedTime: 1783543974982
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnthrall00.Na1yaiXqMUEtCXGy'
 folder: 3SjcO2acsFnWegp4
 sort: 3600000
@@ -148,11 +151,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425952330
-  modifiedTime: 1745256792411
+  modifiedTime: 1783543974982
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEnthrall00'

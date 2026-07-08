@@ -111,42 +111,51 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: nrk34InFS4POIYtq
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Elven {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgElvenChain000
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.proficient
-        mode: 4
-        value: '1'
-        priority: null
-      - key: system.armor.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Elven {}
+          priority: null
+          type: override
+          phase: initial
+          _id: bg8KERuvHUvf5rKO
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: H3pEPerEzOh69ARb
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgElvenChain000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: nyIKeBhypdQku1i8
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: U2GabSJQEOWdnah3
+        - key: system.proficient
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 7nweS1WEQQzxt6Ud
+        - key: system.armor.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: yfCSICftF6YF32jU
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -157,13 +166,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730307869141
-      modifiedTime: 1730837914369
+      modifiedTime: 1783544095422
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgElvenChain000.nrk34InFS4POIYtq'
 flags:
   dnd5e:
@@ -172,11 +184,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544095422
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 800000

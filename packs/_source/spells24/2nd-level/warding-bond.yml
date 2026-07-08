@@ -100,80 +100,108 @@ effects:
   - name: Bonded
     origin: Compendium.dnd5e.spells24.Item.phbsplWardingBon
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
     _id: HRfwqQtKmhNzaGX8
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: force
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: necrotic
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: psychic
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: radiant
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: thunder
-        priority: null
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: VVgPiCQAYflLHpou
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: BRV7GbvaCm9V7vh2
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: LvfdKMOZBMQbPkmH
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: 6fZiuEDp2rTvKZhx
+        - key: system.traits.dr.value
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: Ouklfi92eWMfy29G
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: ik7Xq9iuF6epGUA5
+        - key: system.traits.dr.value
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: pPSOf2zEPXhrnXCx
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: 3ScJTNKJR7QPJXva
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: AhSWO71rJ3r4BVfp
+        - key: system.traits.dr.value
+          value: psychic
+          priority: null
+          type: add
+          phase: initial
+          _id: 3KpteEOSDGKXPafI
+        - key: system.traits.dr.value
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: gihdycJu2zxZaFGp
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: lyoX2g7lCPehr3vk
+        - key: system.traits.dr.value
+          value: thunder
+          priority: null
+          type: add
+          phase: initial
+          _id: cBQ1xOn0fQ3fW4Rb
+        - key: system.attributes.ac.bonus
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: PBrwY6ZJkQV34ZPh
+        - key: system.bonuses.abilities.save
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: YTGMxZaSscEvQH28
+      magical: true
     description: >-
       <p>While the target is within 60 feet of you, it gains a +1 bonus to AC
       and saving throws, and it has Resistance to all damage. Also, each time it
@@ -188,13 +216,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977587
+      modifiedTime: 1783543977587
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplWardingBon.HRfwqQtKmhNzaGX8'
 folder: 3SjcO2acsFnWegp4
 sort: 112500
@@ -207,11 +238,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425977406
-  modifiedTime: 1745256799886
+  modifiedTime: 1783543977587
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplWardingBon'

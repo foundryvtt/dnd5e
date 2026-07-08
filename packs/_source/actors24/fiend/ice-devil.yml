@@ -492,12 +492,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -541,7 +538,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -561,6 +558,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mmDiabolicalRest
     name: Diabolical Restoration
@@ -605,10 +603,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDiabolicalRest
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -655,10 +655,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -761,10 +763,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 100000
@@ -927,10 +931,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTail0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 300000
@@ -1045,10 +1051,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmIceWall0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 400000
@@ -1334,6 +1342,7 @@ items:
       identifier: wall-of-ice
       method: spell
       prepared: 0
+      sourceItem: feat:ice-wall
     type: spell
     img: icons/magic/water/barrier-ice-wall-snow.webp
     effects:
@@ -1341,49 +1350,67 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmIceDevil000000.Item.mmIceWall0000000.Activity.EAYOqr0SbvmvajZ4
-        changes:
-          - key: system.ability
-            mode: 5
-            value: int
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: int
+              priority: null
+              type: override
+              phase: initial
+              _id: AdWTdvRDkyYbDnI5
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: ekODj0DWUcI3LZpX
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: rrIvRfooU7PrWBMf
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: RhGQG5ObcHLozU8T
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmIceDevil000000.Item.mmIceWall0000000.Activity.EAYOqr0SbvmvajZ4
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180092
+          modifiedTime: 1783544180092
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmIceDevil000000.QQwZ5SZ1p1qFIToL.dnd5espellchange
     folder: 8WmlLARx1Df3Ii9v
@@ -1397,10 +1424,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWallofIce0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180092
+      modifiedTime: 1783544180092
     _id: QQwZ5SZ1p1qFIToL
     _key: '!actors.items!mmIceDevil000000.QQwZ5SZ1p1qFIToL'
   - _id: mmIceSpear000000
@@ -1564,21 +1593,20 @@ items:
         origin: Item.mmIceSpear000000
         _id: 273sG6C6R7qUcL2v
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 2
-            value: '-10'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: -10
+              priority: null
+              type: add
+              phase: initial
+              _id: Lq138BgLlvkF8NIg
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Until the end of its next turn, the target's speed decreases by 10
           feet.</p>
@@ -1591,10 +1619,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180093
+          modifiedTime: 1783544180093
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmIceDevil000000.mmIceSpear000000.273sG6C6R7qUcL2v
     folder: pSCWWdqMX9eUATRJ
@@ -1607,10 +1640,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmIceSpear000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180093
+      modifiedTime: 1783544180093
     ownership:
       default: 0
     sort: 200000
@@ -1621,11 +1656,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452707335
-  modifiedTime: 1771452707335
+  systemVersion: 6.0.0
+  createdTime: 1783544180092
+  modifiedTime: 1783544180092
   lastModifiedBy: dnd5ebuilder0000
 sort: 151563
 ownership:

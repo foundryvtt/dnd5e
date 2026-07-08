@@ -78,17 +78,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmThundercloud00
     _id: zntfQrOQz4iBlh22
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Incapacitated apply=false] condition
       until the end of its next turn.</p>
@@ -102,13 +99,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmCloudGiant0000.Item.mmThundercloud00.ActiveEffect.ZwKTwzvDAUm6FSgv
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.2
       createdTime: 1737845375064
       modifiedTime: 1737845375064
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmThundercloud00.zntfQrOQz4iBlh22'
 flags:
   dnd5e:
@@ -117,7 +117,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

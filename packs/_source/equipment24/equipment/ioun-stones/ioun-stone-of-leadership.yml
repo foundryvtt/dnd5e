@@ -67,25 +67,27 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/charisma.svg
     _id: DoQVfD1Ef0o1U8SP
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.cha.value
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.abilities.cha.value
-        mode: 3
-        value: '20'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.cha.value
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: Vjt8j1YNABjAxvcZ
+        - key: system.abilities.cha.value
+          value: 20
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: udWyvI0720A27A4U
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your Charisma increases by 2, to a maximum of 20, while this marbled
       pink and green sphere orbits your head.</p>
@@ -98,22 +100,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730486706756
-      modifiedTime: 1730486838261
+      modifiedTime: 1783544096569
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgLeadershipIou.DoQVfD1Ef0o1U8SP'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701178
+  modifiedTime: 1783544096569
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 12500

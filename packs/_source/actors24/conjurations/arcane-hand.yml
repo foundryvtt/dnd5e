@@ -479,12 +479,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -528,7 +525,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -551,6 +548,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - name: Clenched Fist
     system:
@@ -682,10 +680,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiClenchedFi'
   - name: Forceful Hand
     system:
@@ -806,10 +806,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiForcefulHa'
   - name: Grasping Hand
     system:
@@ -1010,10 +1012,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiGraspingHa'
   - name: Interposing Hand
     system:
@@ -1122,28 +1126,30 @@ items:
       - name: Half Cover
         origin: Actor.phbsplBigbysHand.Item.phbaoiInterposin
         duration:
-          rounds: null
-          startTime: null
-          seconds: null
-          combat: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/svg/shield.svg
         _id: wDcd4bpCErQfW0To
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.ac.bonus
-            mode: 2
-            value: '2'
-            priority: null
-          - key: system.abilities.dex.bonuses.save
-            mode: 2
-            value: '2'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              value: 2
+              priority: null
+              type: add
+              phase: initial
+              _id: ExaoxZewOgSOaXRJ
+            - key: system.abilities.dex.bonuses.save
+              value: 2
+              priority: null
+              type: add
+              phase: initial
+              _id: E0dXpfOQSJtwJR0O
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1154,10 +1160,15 @@ items:
             Actor.phbsplBigbysHand.Item.phbaoiInterposin.ActiveEffect.wDcd4bpCErQfW0To
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184894
+          modifiedTime: 1783544184894
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbsplBigbysHand.phbaoiInterposin.wDcd4bpCErQfW0To
       - name: Interposed
@@ -1166,17 +1177,15 @@ items:
         transfer: false
         _id: 7kq0juDjYR7wlwee
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Granting you &amp;Reference[HalfCover] from attacks or effects that
           pass through its space.</p>
@@ -1188,10 +1197,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184894
+          modifiedTime: 1783544184894
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbsplBigbysHand.phbaoiInterposin.7kq0juDjYR7wlwee
     folder: null
@@ -1207,10 +1221,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544184894
+      modifiedTime: 1783544184894
     _key: '!actors.items!phbsplBigbysHand.phbaoiInterposin'
 effects: []
 folder: 9mmdDqYZFLIJBacj
@@ -1223,11 +1239,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452721416
-  modifiedTime: 1771452721416
+  systemVersion: 6.0.0
+  createdTime: 1783544184893
+  modifiedTime: 1783544184893
   lastModifiedBy: dnd5ebuilder0000
 sort: 100000
 ownership:

@@ -481,12 +481,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -530,7 +527,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -550,6 +547,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmAmphibious0000
     name: Amphibious
@@ -593,10 +591,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -762,21 +762,20 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmOceanSpear0000
         _id: JXXj1j2cUhRFmmaN
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 2
-            value: '-10'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: -10
+              priority: null
+              type: add
+              phase: initial
+              _id: hPnGGATagn8kz5mX
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>If the target is a creature, its Speed decreases by 10 feet until
           the end of its next turn.</p>
@@ -789,10 +788,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181018
+          modifiedTime: 1783544181018
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmMerfolkSkirmis.mmOceanSpear0000.JXXj1j2cUhRFmmaN
     flags:
@@ -804,10 +808,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmOceanSpear0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181018
+      modifiedTime: 1783544181018
     ownership:
       default: 0
     sort: 1
@@ -818,11 +824,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452709232
-  modifiedTime: 1771452709232
+  systemVersion: 6.0.0
+  createdTime: 1783544181017
+  modifiedTime: 1783544181017
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

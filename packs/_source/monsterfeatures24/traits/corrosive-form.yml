@@ -104,20 +104,19 @@ effects:
     img: icons/skills/melee/sword-damaged-broken-purple.webp
     disabled: true
     _id: caD7IB1k2XLnkUDS
-    system: {}
-    changes:
-      - key: activities[attack].attack.bonus
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: activities[attack].attack.bonus
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: n8MSlmEk8f1xDRA9
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Any nonmagical weapon takes a cumulative −1 penalty to attack rolls
       immediately after dealing damage to the attacking creature and coming into
@@ -131,13 +130,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1736980346109
-      modifiedTime: 1736980388349
+      modifiedTime: 1783544085495
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmCorrosiveForm0.caD7IB1k2XLnkUDS'
 flags:
   dnd5e:
@@ -146,11 +148,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1736980492457
+  modifiedTime: 1783544085495
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 3100000
