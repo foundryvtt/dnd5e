@@ -64,18 +64,6 @@ export function registerSystemKeybindings() {
       return true;
     }
   });
-
-  // TODO: Workaround for foundryvtt#14564
-  Hooks.on("openDetachedWindow", (id, win) => {
-    const { KeyboardManager } = foundry.helpers.interaction;
-    const forward = up => event => {
-      const el = win.document.activeElement;
-      if ( el && (["INPUT", "SELECT", "TEXTAREA"].includes(el.tagName) || el.isContentEditable) ) return;
-      game.keyboard._processKeyboardContext(KeyboardManager.getKeyboardEventContext(event, up), { force: true });
-    };
-    win.addEventListener("keydown", forward(false));
-    win.addEventListener("keyup", forward(true));
-  });
 }
 
 /* -------------------------------------------- */
