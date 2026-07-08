@@ -489,12 +489,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -538,7 +535,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -558,6 +555,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: mmMagicResistanc
     name: Magic Resistance
@@ -601,10 +599,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -756,17 +756,14 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.mmQuasit00000000.Item.mmRend0000000000
         _id: KlXNOgoOPqEV7BoN
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p> The target has the &amp;Reference[Poisoned apply=false] condition
           until the start of the [[lookup @name lowercase]]{monster}’s next
@@ -781,10 +778,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmRend0000000000.KlXNOgoOPqEV7BoN
     flags:
@@ -796,10 +798,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -906,10 +910,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmInvisibility00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1019,26 +1025,25 @@ items:
       identifier: invisibility
       method: spell
       prepared: 0
+      sourceItem: feat:invisibility
     type: spell
     img: icons/creatures/magical/spirit-undead-ghost-purple.webp
     effects:
       - name: Invisible
         origin: Compendium.dnd5e.spells24.Item.phbsplInvisibili
         duration:
-          rounds: null
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/invisible.svg
         _id: 9svfDetqjhsFP3ey
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>The spell ends early immediately after the target makes an attack
           roll, deals damage, or casts a spell.</p>
@@ -1051,59 +1056,82 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182114
+          modifiedTime: 1783544182114
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.32LONl1rUCtttKkg.9svfDetqjhsFP3ey
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmQuasit00000000.Item.mmInvisibility00.Activity.6BqYzqlxZTtqyPmH
-        changes:
-          - key: system.ability
-            mode: 5
-            value: cha
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: cha
+              priority: null
+              type: override
+              phase: initial
+              _id: vRktss7d1dSmBpkF
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: LzM3Zv9LyGtkB4jS
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: WriaX3DYnMxpljQU
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: otJYksZ1mCdvHbRd
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmQuasit00000000.Item.mmInvisibility00.Activity.6BqYzqlxZTtqyPmH
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182114
+          modifiedTime: 1783544182114
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.32LONl1rUCtttKkg.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1117,10 +1145,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplInvisibili
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544182114
+      modifiedTime: 1783544182114
     _id: 32LONl1rUCtttKkg
     _key: '!actors.items!mmQuasit00000000.32LONl1rUCtttKkg'
   - _id: mmShapeshift0000
@@ -1226,28 +1256,29 @@ items:
       - name: Bat Form
         origin: Compendium.dnd5e.actors24.Actor.mmQuasit00000000.Item.mmShapeshift0000
         duration:
-          rounds: null
-          startTime: null
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         disabled: false
         flags: {}
         img: icons/creatures/mammals/bat-movement-flying-purple.webp
         _id: 4NzZxgY0MLwkXs9D
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 5
-            value: '10'
-            priority: null
-          - key: system.attributes.movement.fly
-            mode: 5
-            value: '40'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 10
+              priority: null
+              type: override
+              phase: initial
+              _id: 4bKfz46fzuQ8ihCw
+            - key: system.attributes.movement.fly
+              value: 40
+              priority: null
+              type: override
+              phase: initial
+              _id: Qp8P9rxcMx7JdHZu
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1258,37 +1289,43 @@ items:
             Compendium.dnd5e.actors24.Actor.phbmobImp0000000.Item.phbaoiShapeShift.ActiveEffect.Q4RaKl2vHLshyF3B
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182115
+          modifiedTime: 1783544182115
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmShapeshift0000.4NzZxgY0MLwkXs9D
       - name: Centipede Form
         origin: Compendium.dnd5e.actors24.Actor.mmQuasit00000000.Item.mmShapeshift0000
         duration:
-          rounds: null
-          startTime: null
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         disabled: false
         flags: {}
         img: icons/creatures/invertebrates/centipede-brown.webp
         _id: ZC4DrnZ0xxvvTFjf
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 5
-            value: '40'
-            priority: null
-          - key: system.attributes.movement.climb
-            mode: 5
-            value: '40'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 40
+              priority: null
+              type: override
+              phase: initial
+              _id: ZmvD3LyEZ1vzIXaf
+            - key: system.attributes.movement.climb
+              value: 40
+              priority: null
+              type: override
+              phase: initial
+              _id: 259xzmysuUbmvcX4
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1299,37 +1336,43 @@ items:
             Compendium.dnd5e.actors24.Actor.phbmobImp0000000.Item.phbaoiShapeShift.ActiveEffect.NFMrfbOawWP0jdQ8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182115
+          modifiedTime: 1783544182115
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmShapeshift0000.ZC4DrnZ0xxvvTFjf
       - name: Toad Form
         origin: Compendium.dnd5e.actors24.Actor.mmQuasit00000000.Item.mmShapeshift0000
         duration:
-          rounds: null
-          startTime: null
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         disabled: false
         flags: {}
         img: icons/creatures/amphibians/frog-water-teal.webp
         _id: tJNkg2riPFHGiBkH
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 5
-            value: '20'
-            priority: null
-          - key: system.attributes.movement.swim
-            mode: 5
-            value: '0'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 20
+              priority: null
+              type: override
+              phase: initial
+              _id: n6wnVPPVdQ47Ah5r
+            - key: system.attributes.movement.swim
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: eUEqerVeZAsypxZk
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1340,10 +1383,15 @@ items:
             Compendium.dnd5e.actors24.Actor.phbmobImp0000000.Item.phbaoiShapeShift.ActiveEffect.LK7QKDKtjaAzAIIv
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182115
+          modifiedTime: 1783544182115
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmShapeshift0000.tJNkg2riPFHGiBkH
     flags:
@@ -1355,10 +1403,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShapeshift0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544182115
+      modifiedTime: 1783544182115
     ownership:
       default: 0
     sort: 100004
@@ -1475,17 +1525,14 @@ items:
         origin: Item.mmScare000000000
         _id: u8Gu5Oo3a48vKYla
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Frightened apply=false]
           condition.</p>
@@ -1499,10 +1546,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmScare000000000.u8Gu5Oo3a48vKYla
     folder: 4T18pEvubPMQLzvD
@@ -1515,10 +1573,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmScare000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1531,11 +1591,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452712071
-  modifiedTime: 1771452712071
+  systemVersion: 6.0.0
+  createdTime: 1783544182114
+  modifiedTime: 1783544182114
   lastModifiedBy: dnd5ebuilder0000
 sort: 125000
 ownership:

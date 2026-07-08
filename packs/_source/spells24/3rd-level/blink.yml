@@ -100,20 +100,18 @@ effects:
   - name: Ethereal
     origin: Compendium.dnd5e.spells24.Item.phbsplBlink00000
     duration:
-      rounds: 1
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/ethereal.svg
     _id: La5ofK0TnPSTL3iq
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -123,13 +121,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974237
+      modifiedTime: 1783543974237
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBlink00000.La5ofK0TnPSTL3iq'
 folder: HCovEE4VoPGlIbKi
 sort: 3400000
@@ -142,11 +143,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425943980
-  modifiedTime: 1745256787159
+  modifiedTime: 1783543974237
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBlink00000'

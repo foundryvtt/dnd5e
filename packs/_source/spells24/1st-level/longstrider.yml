@@ -101,24 +101,24 @@ effects:
   - name: Longstrider
     origin: Compendium.dnd5e.spells24.Item.phbsplLongstride
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/equipment/feet/boots-leather-laced-brown.webp
     _id: I746neZVrgJFkRco
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '10'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 10
+          priority: null
+          type: add
+          phase: initial
+          _id: sd0ena0tnwxOwIQV
+      magical: true
     description: <p>The target’s Speed increases by 10 feet until the spell ends.</p>
     tint: '#ffffff'
     transfer: false
@@ -127,13 +127,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975812
+      modifiedTime: 1783543975812
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplLongstride.I746neZVrgJFkRco'
 folder: pBaAAtXBCq9FVEnL
 sort: 1300000
@@ -146,11 +149,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425961911
-  modifiedTime: 1745256795632
+  modifiedTime: 1783543975812
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplLongstride'

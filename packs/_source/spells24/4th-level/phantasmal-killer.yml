@@ -122,20 +122,18 @@ effects:
   - name: Fears Manifested
     origin: Compendium.dnd5e.spells24.Item.phbsplPhantasmal
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/death/skull-horned-white-purple.webp
     _id: 4k92Sjfpcm5bnguO
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The target has Disadvantage on ability checks and attack rolls for the
       duration.</p><p>For the duration, the target makes a [[/save ability=wis]]
@@ -148,13 +146,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976270
+      modifiedTime: 1783543976270
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplPhantasmal.4k92Sjfpcm5bnguO'
 folder: qi3IbnEwap7mRw4b
 sort: 1100000
@@ -167,11 +168,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425965711
-  modifiedTime: 1745256796719
+  modifiedTime: 1783543976270
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPhantasmal'

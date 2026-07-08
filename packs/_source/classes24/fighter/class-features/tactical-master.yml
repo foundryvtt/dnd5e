@@ -36,29 +36,32 @@ effects:
     img: icons/sundries/documents/blueprint-axe.webp
     _id: 9Dwnc4r39iE997j0
     type: base
-    system: {}
-    changes:
-      - key: system.traits.weaponProf.mastery.bonus
-        mode: 2
-        value: push
-        priority: null
-      - key: system.traits.weaponProf.mastery.bonus
-        mode: 2
-        value: sap
-        priority: null
-      - key: system.traits.weaponProf.mastery.bonus
-        mode: 2
-        value: slow
-        priority: null
+    system:
+      changes:
+        - key: system.traits.weaponProf.mastery.bonus
+          value: push
+          priority: null
+          type: add
+          phase: initial
+          _id: 6JfjUZqSei2xTTDa
+        - key: system.traits.weaponProf.mastery.bonus
+          value: sap
+          priority: null
+          type: add
+          phase: initial
+          _id: KxJcRhqy7VUbWiW0
+        - key: system.traits.weaponProf.mastery.bonus
+          value: slow
+          priority: null
+          type: add
+          phase: initial
+          _id: d3cAe1ruUwtUPmAw
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -69,13 +72,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102061
+      modifiedTime: 1783544102061
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbftrTacticalMa.9Dwnc4r39iE997j0'
 flags:
   dnd5e:
@@ -84,11 +90,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866361253
-  modifiedTime: 1745256761811
+  modifiedTime: 1783544102061
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

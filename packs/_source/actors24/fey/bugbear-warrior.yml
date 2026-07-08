@@ -492,12 +492,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -541,7 +538,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -561,6 +558,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Light Hammer
     system:
@@ -735,10 +733,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLightHamme
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmBugbearWarrior.ST0XpSUdRn52jAF0'
   - name: Hide Armor
     system:
@@ -805,10 +805,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmHideArmor0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: VttDnFXLmhjSdrkC
     sort: 0
     _key: '!actors.items!mmBugbearWarrior.VttDnFXLmhjSdrkC'
@@ -854,10 +856,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAbduct00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -1065,17 +1069,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmGrab0000000000
         _id: 2N5R5UunQHBncwF3
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>If the target is a Medium or smaller creature, it has the
           &amp;Reference[Grappled apply=false] condition (escape DC [[/check
@@ -1090,10 +1091,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmBugbearWarrior.mmGrab0000000000.2N5R5UunQHBncwF3
     flags:
@@ -1105,10 +1111,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmGrab0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: -100000
@@ -1119,7 +1127,7 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452698559

@@ -132,20 +132,18 @@ effects:
   - name: Under Orders
     origin: Compendium.dnd5e.spells24.Item.phbsplGeas000000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 2592000
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 2592000
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/skills/wounds/anatomy-organ-brain-pink-red.webp
     _id: TXwfzpj9bERo0X1r
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>While &amp;Reference[Charmed apply=false], the creature takes [[/damage
       5d10 type=psyhic]] damage if it acts in a manner directly counter to your
@@ -158,13 +156,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975296
+      modifiedTime: 1783543975296
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplGeas000000.TXwfzpj9bERo0X1r'
 folder: beZ8MTpWY2cMEUlp
 sort: 1900000
@@ -177,11 +178,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425956193
-  modifiedTime: 1745256793639
+  modifiedTime: 1783543975296
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGeas000000'

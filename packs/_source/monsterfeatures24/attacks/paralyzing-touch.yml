@@ -137,17 +137,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmParalyzingTouc
     _id: XONucKj1fLr03vaU
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Paralyzed apply=false] condition
       until the start of the attacking creature's next turn.</p>
@@ -160,13 +157,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736288847246
       modifiedTime: 1736288910717
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmParalyzingTouc.XONucKj1fLr03vaU'
 flags:
   dnd5e:
@@ -175,7 +175,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

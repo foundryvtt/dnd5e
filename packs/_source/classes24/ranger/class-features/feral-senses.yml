@@ -37,21 +37,20 @@ effects:
     img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
     _id: ji48r1IGeRKQhpi9
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.senses.blindsight
-        mode: 4
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.senses.blindsight
+          value: 30
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: g09m1IycJOuJLZJl
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -62,13 +61,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103413
+      modifiedTime: 1783544103413
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbrgrFeralSense.ji48r1IGeRKQhpi9'
 flags:
   dnd5e:
@@ -77,11 +79,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735932734523
-  modifiedTime: 1745256764866
+  modifiedTime: 1783544103413
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

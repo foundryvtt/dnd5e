@@ -55,24 +55,12 @@ system:
   proficient: null
 effects:
   - _id: vKSASCidlRLgY3lA
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '+1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '+1'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfProtect
     transfer: true
     flags:
@@ -87,17 +75,34 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.items.Item.QtmVEreNIWEVOoLR.ActiveEffect.q1wbe9ru251bfnhg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 6.0.0
       createdTime: 1730683236644
-      modifiedTime: 1745610436026
+      modifiedTime: 1783544097753
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/defensive/shield-barrier-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: '+1'
+          priority: null
+          type: add
+          phase: initial
+          _id: yhJYaxJjUUlwaw8l
+        - key: system.bonuses.abilities.save
+          value: '+1'
+          priority: null
+          type: add
+          phase: initial
+          _id: XcKvzxLS0uvuBSLn
+      magical: true
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfProtect.vKSASCidlRLgY3lA'
 flags:
   dnd5e:
@@ -106,11 +111,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544097752
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

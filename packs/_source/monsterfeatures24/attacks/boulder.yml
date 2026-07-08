@@ -136,17 +136,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmBoulder0000000
     _id: BCkl5LkP4M1bkVpt
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If the target is a Large or smaller creature, it has the
       &amp;Reference[Prone] condition.</p>
@@ -160,13 +157,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmStoneGiant0000.Item.mmBoulder0000000.ActiveEffect.wKWWzb7MJy7OauVf
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1737415261853
       modifiedTime: 1737415261853
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmBoulder0000000.BCkl5LkP4M1bkVpt'
 flags:
   dnd5e:
@@ -175,7 +175,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

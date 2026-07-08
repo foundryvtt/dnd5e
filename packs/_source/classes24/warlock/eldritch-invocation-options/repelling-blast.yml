@@ -98,20 +98,19 @@ effects:
     img: icons/magic/fire/explosion-embers-evade-silhouette.webp
     disabled: true
     _id: DShZGDAUy0w9RUzS
-    system: {}
-    changes:
-      - key: name
-        mode: 2
-        value: ', Repelling'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: ', Repelling'
+          priority: null
+          type: add
+          phase: initial
+          _id: lxwjgiat4DhI6vSE
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Choose one of your known Warlock cantrips that requires an attack roll.
       When you hit a Large or smaller creature with that cantrip, you can push
@@ -125,13 +124,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102464
+      modifiedTime: 1783544102464
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvRepellingB.DShZGDAUy0w9RUzS'
 folder: BjeMHiqnKNWkWhox
 flags:
@@ -141,11 +143,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735866281378
-  modifiedTime: 1752706893690
+  modifiedTime: 1783544102464
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

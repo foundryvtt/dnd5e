@@ -113,61 +113,80 @@ effects:
     img: icons/magic/unholy/silhouette-robe-evil-power.webp
     _id: f6JofmGpxquX9bqb
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: force
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: necrotic
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: thunder
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: dNe8ZIyev3j9NwXJ
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: SUkWqM0VQeVdFhHo
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: MHIp7YmfFoFLEwf4
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: dbYsOAdQa5Y9L1fc
+        - key: system.traits.dr.value
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: NFbRA7zAku5nTYgY
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: Y5YPfJHuH4fPPrpY
+        - key: system.traits.dr.value
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: W7k1cHjB5fxBrQXb
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: y9AYT9JmpNUghO88
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: FVGg2er5XfdUmWtf
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: VlTjqqd9ZXdeH2Qy
+        - key: system.traits.dr.value
+          value: thunder
+          priority: null
+          type: add
+          phase: initial
+          _id: 6NBWlZ7KWAt2Yf2B
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -178,13 +197,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544088766
+      modifiedTime: 1783544088766
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbBoonoftheNigh.f6JofmGpxquX9bqb'
   - name: Merged with Shadows
     img: icons/magic/unholy/silhouette-robe-evil-power.webp
@@ -192,17 +214,14 @@ effects:
     transfer: false
     _id: Zusz9sywPycPxb1N
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -212,13 +231,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbBoonoftheNigh.Zusz9sywPycPxb1N'
 folder: 7zo2bljGLQY3uwXI
 sort: 100196
@@ -231,11 +253,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735865940774
-  modifiedTime: 1752706705743
+  modifiedTime: 1783544088765
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbBoonoftheNigh'

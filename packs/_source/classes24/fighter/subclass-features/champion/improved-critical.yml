@@ -38,21 +38,20 @@ effects:
     img: icons/skills/melee/strikes-sword-scimitar.webp
     _id: fbCF0jqdt3NMZdkc
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd5e.weaponCriticalThreshold
-        mode: 3
-        value: '19'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd5e.weaponCriticalThreshold
+          value: 19
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: 1LpHxQmFZeSHfEw0
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -66,13 +65,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101970
+      modifiedTime: 1783544101970
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbftrImprovedCr.fbCF0jqdt3NMZdkc'
 flags:
   dnd5e:
@@ -81,11 +83,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866578955
-  modifiedTime: 1745256761637
+  modifiedTime: 1783544101970
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

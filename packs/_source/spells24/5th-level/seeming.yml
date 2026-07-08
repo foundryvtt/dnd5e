@@ -158,17 +158,15 @@ effects:
     transfer: false
     _id: WY574kvdnuPlNGfU
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>A creature that takes the Study action to examine a target can make an
       [[/check ability=int skill=inv]] check against your spell save DC. If it
@@ -180,13 +178,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724436996987
-      modifiedTime: 1724438648039
+      modifiedTime: 1783543976727
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplSeeming000.WY574kvdnuPlNGfU'
 folder: beZ8MTpWY2cMEUlp
 sort: 300000
@@ -199,11 +200,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425970014
-  modifiedTime: 1745256797933
+  modifiedTime: 1783543976727
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSeeming000'

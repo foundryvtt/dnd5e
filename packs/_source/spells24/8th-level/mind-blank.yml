@@ -107,25 +107,27 @@ effects:
     transfer: false
     _id: po9iJIqq4OqhvMw0
     type: base
-    system: {}
-    changes:
-      - key: system.traits.di.value
-        mode: 2
-        value: psychic
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: charmed
-        priority: null
+    system:
+      changes:
+        - key: system.traits.di.value
+          value: psychic
+          priority: null
+          type: add
+          phase: initial
+          _id: JIiirn9CXlIlVszQ
+        - key: system.traits.ci.value
+          value: charmed
+          priority: null
+          type: add
+          phase: initial
+          _id: 6zGlbMtEvjHJH2F0
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -134,13 +136,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725308856004
-      modifiedTime: 1725309438645
+      modifiedTime: 1783543975995
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMindBlank0.po9iJIqq4OqhvMw0'
 folder: M5CvwK9zVtzx6Dnn
 sort: 100025
@@ -153,11 +158,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425963715
-  modifiedTime: 1745256796193
+  modifiedTime: 1783543975995
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMindBlank0'

@@ -191,17 +191,14 @@ effects:
     transfer: false
     _id: bdG1d6kwc7F8Gbfg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -214,13 +211,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.1.0
       createdTime: 1736290576477
       modifiedTime: 1755027255443
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbUnarmedStrike.bdG1d6kwc7F8Gbfg'
   - name: Prone
     img: systems/dnd5e/icons/svg/statuses/prone.svg
@@ -228,17 +228,14 @@ effects:
     transfer: false
     _id: SfM8X3xktY0PR0Kz
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -251,13 +248,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.1.0
       createdTime: 1736290607929
       modifiedTime: 1755027271889
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbUnarmedStrike.SfM8X3xktY0PR0Kz'
 folder: 3gGfshno9bSHH0Dh
 flags:
@@ -267,7 +267,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.3
   createdTime: 1726850216075

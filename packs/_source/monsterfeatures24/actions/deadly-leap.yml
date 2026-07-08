@@ -107,17 +107,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmDeadlyLeap0000
     _id: 6922OmgCjpz242Ib
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
     tint: '#ffffff'
     transfer: false
@@ -128,13 +125,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1735676319820
       modifiedTime: 1736047663176
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmDeadlyLeap0000.6922OmgCjpz242Ib'
 flags:
   dnd5e:
@@ -143,7 +143,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

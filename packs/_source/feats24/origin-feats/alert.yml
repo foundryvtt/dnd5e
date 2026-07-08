@@ -41,21 +41,20 @@ effects:
     img: icons/creatures/eyes/human-single-brown.webp
     _id: uvZy4Zzi0oPd54qs
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd5e.initiativeAlert
-        mode: 2
-        value: 'true'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd5e.initiativeAlert
+          value: true
+          priority: null
+          type: add
+          phase: initial
+          _id: D45wfvCQXDDA2TUG
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -69,13 +68,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544088809
+      modifiedTime: 1783544088809
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbftAlert000000.uvZy4Zzi0oPd54qs'
 folder: d5jrO8A6QpjEV9rn
 sort: 100000
@@ -88,11 +90,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866666366
-  modifiedTime: 1745256780460
+  modifiedTime: 1783544088809
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbftAlert000000'

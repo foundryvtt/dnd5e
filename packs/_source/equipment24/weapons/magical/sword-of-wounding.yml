@@ -218,50 +218,65 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: tuFnPbghL64ioL04
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of Wounding'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.damage.parts
-        mode: 2
-        value: '[["2d6", "necrotic"]]'
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSwordOfWoundi
-          caption=false]</p>
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of Wounding'
+          priority: null
+          type: override
+          phase: initial
+          _id: LxOnimRSGwgcTrme
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: mUJL3EobqmBLATfZ
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: nLeHHWHLWfbQai1n
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: v39OETPcoHSJHFWp
+        - key: system.damage.parts
+          value:
+            - - 2d6
+              - necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: ChqxdubvCLyOALeF
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSwordOfWoundi
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: A4HNCJvAX3BSYEgd
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: O5qaZgkBb9OGef8i
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: 5TQLMoJxTjfCBUzz
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -272,13 +287,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730914243389
-      modifiedTime: 1731085926885
+      modifiedTime: 1783544099022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgSwordOfWoundi.tuFnPbghL64ioL04'
   - name: Wounded and Cannot Heal
     img: icons/skills/melee/strike-sword-blood-red.webp
@@ -286,17 +304,15 @@ effects:
     transfer: false
     _id: UeuDQeM3fRIB0aMN
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -305,13 +321,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730914782418
-      modifiedTime: 1730914792121
+      modifiedTime: 1783544099022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgSwordOfWoundi.UeuDQeM3fRIB0aMN'
 folder: kie870i5kr7yuxO8
 flags:
@@ -321,11 +340,11 @@ flags:
         - LOKYV2JQKWQlJxxa
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615243935
+  modifiedTime: 1783544099022
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 15400000

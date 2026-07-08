@@ -109,13 +109,10 @@ effects:
   - name: Spider Climb
     origin: Compendium.dnd5e.spells24.Item.phbsplSpiderClim
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -124,12 +121,15 @@ effects:
     img: icons/creatures/invertebrates/spider-dotted-green.webp
     _id: q2ug9SpVRCGuudoG
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.climb
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.climb
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: fcItPvLTF18qQ32d
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -138,13 +138,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1759793968184
+      systemVersion: 6.0.0
+      createdTime: 1783543977151
+      modifiedTime: 1783543977151
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplSpiderClim.q2ug9SpVRCGuudoG'
 folder: 3SjcO2acsFnWegp4
 sort: 400000
@@ -157,11 +160,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425971969
-  modifiedTime: 1745256798601
+  modifiedTime: 1783543977151
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSpiderClim'

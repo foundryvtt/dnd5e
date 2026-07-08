@@ -258,21 +258,20 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmDrainingSwipe0
     _id: 6AjyMN83LppkkgC3
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.value
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: FuKjjsyIJNoQvzXn
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: <p>The target’s Strength score decreases by [[/r 1d4]].</p>
     tint: '#ffffff'
     transfer: false
@@ -284,13 +283,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1736473659773
-      modifiedTime: 1736988822595
+      modifiedTime: 1783544085858
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmDrainingSwipe0.6AjyMN83LppkkgC3'
 flags:
   dnd5e:
@@ -299,11 +301,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1736988950461
+  modifiedTime: 1783544085858
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7200000

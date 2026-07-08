@@ -313,17 +313,15 @@ effects:
     transfer: false
     _id: iuIlP2Br3aHDUjai
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Blinded apply=false] condition for 1
       minute.</p>
@@ -335,13 +333,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725381814256
-      modifiedTime: 1725381899493
+      modifiedTime: 1783543976411
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplPrismaticW.iuIlP2Br3aHDUjai'
   - name: Restrained (Indigo)
     img: systems/dnd5e/icons/svg/statuses/restrained.svg
@@ -349,17 +350,15 @@ effects:
     transfer: false
     _id: CbAuJQPoOViKebWs
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Restrained apply=false] condition and
       makes a [[/save ability=con dc=@attributes.spell.dc]] format=long]] at the
@@ -376,13 +375,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725384160913
-      modifiedTime: 1725384505640
+      modifiedTime: 1783543976411
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplPrismaticW.CbAuJQPoOViKebWs'
   - name: Blinded (Violet)
     img: systems/dnd5e/icons/svg/statuses/blinded.svg
@@ -390,17 +392,15 @@ effects:
     transfer: false
     _id: EIaFpuWAfQKSkFyp
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p> The target has the &amp;Reference[Blinded apply=false] condition and
       makes a [[/save ability=wis dc=@attributes.spell.dc format=long]] at the
@@ -415,13 +415,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725384515817
-      modifiedTime: 1725384631185
+      modifiedTime: 1783543976411
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplPrismaticW.EIaFpuWAfQKSkFyp'
 folder: iG0Zia8jh6uK39TB
 sort: 100782
@@ -434,11 +437,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425967242
-  modifiedTime: 1753140361848
+  modifiedTime: 1783543976411
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPrismaticW'

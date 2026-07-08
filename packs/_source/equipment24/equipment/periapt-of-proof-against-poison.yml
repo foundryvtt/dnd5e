@@ -60,25 +60,27 @@ effects:
     img: icons/magic/defensive/shield-barrier-flaming-diamond-acid.webp
     _id: 4gvBhVBKAHuIetno
     type: base
-    system: {}
-    changes:
-      - key: system.traits.di.value
-        mode: 2
-        value: poison
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: poisoned
-        priority: null
+    system:
+      changes:
+        - key: system.traits.di.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: hbu88WbH3F98zMo4
+        - key: system.traits.ci.value
+          value: poisoned
+          priority: null
+          type: add
+          phase: initial
+          _id: xLmY8uvmMYxTRDkT
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -89,13 +91,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730688482111
-      modifiedTime: 1730688598492
+      modifiedTime: 1783544097201
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgPeriaptOfProo.4gvBhVBKAHuIetno'
 flags:
   dnd5e:
@@ -104,11 +109,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544097201
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 24700000

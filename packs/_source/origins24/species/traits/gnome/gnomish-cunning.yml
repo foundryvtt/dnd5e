@@ -33,29 +33,32 @@ effects:
     origin: Compendium.dnd5e.origins24.Item.phbsptGnomishCun
     _id: KNWLGPsZSHtINp6L
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.int.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.wis.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.cha.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.int.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 9Al2Ahcgj3dF9tPG
+        - key: system.abilities.wis.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 6AviMY5qrr977eI4
+        - key: system.abilities.cha.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: LAO365RHFlhFzlpM
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>You have Advantage on Intelligence, Wisdom, and Charisma saving
       throws.</p>
@@ -71,22 +74,25 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
+      systemVersion: 6.0.0
       createdTime: 1760131706242
-      modifiedTime: 1760131741049
+      modifiedTime: 1783544081937
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsptGnomishCun.KNWLGPsZSHtINp6L'
 folder: e9Bx86LUj7rJMszu
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1725718946261
-  modifiedTime: 1760131747968
+  modifiedTime: 1783544081937
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

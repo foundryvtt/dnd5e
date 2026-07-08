@@ -320,54 +320,69 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell5.webp
     disabled: true
     _id: RSpASIW4HbToM7yC
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of Thunderbolts'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: legendary
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgHammerOfThund
-          caption=false]</p>
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '200000'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/hammers/hammer-double-glowing-yellow.webp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of Thunderbolts'
+          priority: null
+          type: override
+          phase: initial
+          _id: 2yszBmZg2YK9qa1U
+        - key: system.rarity
+          value: legendary
+          priority: null
+          type: override
+          phase: initial
+          _id: H1qWmFV8XgKB6neC
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: CsmykZpvkgajoQ9b
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: ffEAzVlX0GioS6yd
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: hmjkjgknuYae3Ue5
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgHammerOfThund
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 69GJmbU6qpierQkT
+        - key: system.price.value
+          value: 200000
+          priority: null
+          type: add
+          phase: initial
+          _id: Xxht0LaIaaIT5F6O
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: lTYEnODEGeXbEFoq
+        - key: img
+          value: icons/weapons/hammers/hammer-double-glowing-yellow.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: F8y5gXcL8Ahzjcop
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -378,13 +393,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730397010444
-      modifiedTime: 1745438836576
+      modifiedTime: 1783544096055
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHammerOfThund.RSpASIW4HbToM7yC'
   - name: Stunned
     img: systems/dnd5e/icons/svg/statuses/stunned.svg
@@ -392,17 +410,15 @@ effects:
     transfer: false
     _id: 4awBYMh85YMXFJDS
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Stunned apply=false] condition until
       the end of your next turn.</p>
@@ -414,33 +430,35 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730397252747
-      modifiedTime: 1730828665849
+      modifiedTime: 1783544096055
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgHammerOfThund.4awBYMh85YMXFJDS'
   - type: enchantment
     name: 'Giant''s Bane: Paired Attunement Bonuses'
     img: icons/svg/upgrade.svg
     disabled: true
     _id: NpHh40FxvJqKojsI
-    system: {}
-    changes:
-      - key: name
-        mode: 2
-        value: ', Giant''s Bane'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: ', Giant''s Bane'
+          priority: null
+          type: add
+          phase: initial
+          _id: gHtKRYOT0mJ7jXGl
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><strong>Giant’s Bane.</strong> While you are attuned to the weapon and
       wearing either a <em>Belt of Giant Strength</em> or <em>Gauntlets of Ogre
@@ -460,37 +478,42 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730397956984
-      modifiedTime: 1730829063221
+      modifiedTime: 1783544096055
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHammerOfThund.NpHh40FxvJqKojsI'
   - name: Might of Giants
     img: icons/skills/melee/hand-grip-hammer-spiked-blue.webp
     _id: dC3xorzL0AAgy7y1
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.value
-        mode: 2
-        value: '4'
-        priority: null
-      - key: system.abilities.str.value
-        mode: 3
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: 4
+          priority: null
+          type: add
+          phase: initial
+          _id: 28pZCHPjFDFberkU
+        - key: system.abilities.str.value
+          value: 30
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: LGtiX6MeJtNYuGlZ
+      magical: true
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The Strength score bestowed by your <em>Belt of Giant Strength</em> or
       <em>Gauntlets of Ogre Power</em> increases by 4, to a maximum of 30.</p>
@@ -503,13 +526,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730399272124
-      modifiedTime: 1730399751219
+      modifiedTime: 1783544096055
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHammerOfThund.dC3xorzL0AAgy7y1'
 folder: kie870i5kr7yuxO8
 flags:
@@ -522,11 +548,11 @@ flags:
         - dC3xorzL0AAgy7y1
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615117102
+  modifiedTime: 1783544096055
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8300000

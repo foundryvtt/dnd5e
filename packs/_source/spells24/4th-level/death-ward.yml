@@ -95,20 +95,18 @@ effects:
   - name: Protection from Death
     origin: Compendium.dnd5e.spells24.Item.phbsplDeathWard0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 28800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/death/skull-horned-worn-fire-blue.webp
     _id: mLUL8mRFsCzleR5d
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The first time the target would drop to 0 Hit Points before the spell
       ends, the target instead drops to 1 Hit Point, and the spell
@@ -122,13 +120,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974559
+      modifiedTime: 1783543974559
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplDeathWard0.mLUL8mRFsCzleR5d'
 folder: qi3IbnEwap7mRw4b
 sort: 2800000
@@ -141,11 +142,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425949111
-  modifiedTime: 1745256790056
+  modifiedTime: 1783543974559
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDeathWard0'

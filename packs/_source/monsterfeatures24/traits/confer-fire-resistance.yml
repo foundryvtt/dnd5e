@@ -34,21 +34,20 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmConferFireResi
     _id: uf0s4DJcB5yQbQvN
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: WhhJmLWDJw1CHqDe
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The creature can grant Resistance to Fire damage to a rider while it is
       on the creature.</p>
@@ -60,22 +59,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1736540468504
-      modifiedTime: 1736540589673
+      modifiedTime: 1783544085439
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmConferFireResi.uf0s4DJcB5yQbQvN'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1736540411158
+  modifiedTime: 1783544085439
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 2900000
