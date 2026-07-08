@@ -2,7 +2,7 @@ import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { getHumanReadableAttributeLabel, parseOrString, staticID } from "../utils.mjs";
+import { parseOrString, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
 
@@ -223,6 +223,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   static applyChange(model, change, options={}) {
+    // Apply shims to moved fields
     change = change.effect._applyChangeShim(change);
 
     // Handle special actor flags
@@ -236,7 +237,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Handle activity-targeted changes
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
-      && (model instanceof Item) ) return change.effect.applyActivity(model, change);
+      && (model instanceof Item) ) return change.effect.applyActivity(model, change, options);
 
     // Handle hiding items
     if ( (change.key === "items.hidden") && (model instanceof Actor) ) {
@@ -259,12 +260,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * Apply a change to activities on this item.
    * @param {Item5e} item              The Item to whom this change should be applied.
    * @param {EffectChangeData} change  The change data being applied.
+   * @param {object} [options]         Options passed through to `ActiveEffect#applyChange`.
    * @returns {Record<string, *>}      An object of property paths and their updated values.
    */
-  applyActivity(item, change) {
+  applyActivity(item, change, options) {
     const changes = {};
     const apply = (activity, key) => {
-      const c = this.constructor.applyChange(activity, { ...change, key });
+      const c = this.constructor.applyChange(activity, { ...change, key }, options);
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
     };
     if ( change.key.startsWith("system.activities.") ) {
@@ -718,37 +720,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {ApplicationRenderContext} context The app's rendering context.
    */
   static onRenderActiveEffectConfig(app, html, context) {
-    if ( app.document.system.onRenderActiveEffectConfig?.(app, html, context) === false ) return;
-    const fields = app.document.system.schema.fields;
-    const magicalField = fields.magical?.toFormGroup({}, {
-      value: app.document.system._source.magical,
-      disabled: !context.editable
-    });
-    const statusesField = fields.rider?.fields?.statuses?.toFormGroup({}, {
-      value: app.document.system._source.rider?.statuses ?? [],
-      options: Object.values(CONFIG.statusEffects).map(se => ({ value: se.id, label: se.name })),
-      disabled: !context.editable
-    });
-    const detailsTab = html.querySelector("[data-application-part=details]");
-    const statuses = detailsTab.querySelector("& > .form-group:has([name=statuses])");
-    if ( statuses ) {
-      if ( magicalField ) statuses?.before(magicalField);
-      if ( statusesField ) statuses?.after(statusesField);
-    } else {
-      detailsTab.append(...[magicalField, statusesField].filter(_ => _));
-    }
-
-    // Add tooltip with link to wiki for effects/enchantments
-    const helpIconElement = document.createElement("i");
-    helpIconElement.classList.add("fa-solid", "fa-circle-question");
-    const tooltipText = _loc("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
-      url: app.document.type === "enchantment"
-        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
-        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
-    });
-    Object.assign(helpIconElement.dataset, { tooltip: tooltipText, tooltipDirection: "RIGHT", locked: "" });
-    const targetElement = html.querySelector("section:is([data-tab='effects'], [data-tab='changes']) .key");
-    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
+    app.document.system.onRenderActiveEffectConfig?.(app, html, context);
   }
 
   /* -------------------------------------------- */
@@ -978,35 +950,36 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * Prepare the context used to display an effect on an actor or item sheet.
-   * @param {object} [options={}]
-   * @param {number} [options.maxKeyLength=35]  Maximum length of the attribute key displayed.
-   * @returns {object}  An object of chat data to render.
+   * @returns {object}  Context needed to render the effect on an actor or item sheet.
    */
-  async getSheetContext({ maxKeyLength=35 }={}) {
+  async getSheetContext() {
     this.updateDuration();
     const { id, name, img, disabled, duration } = this;
     const source = await this.getSource();
-    const attributeCtx = this.type === "enchantment"
-      ? { item: this.isAppliedEnchantment ? this.item : true }
-      : { actor: this.actor };
     return {
       id, name, img, disabled, duration, source,
-      changes: this.changes.map(change => {
-        let displayKey = change.key;
-        if ( displayKey.length > (maxKeyLength + 5) ) {
-          displayKey = displayKey.replace(/^systems.|^flags.|^activities\[/, "");
-          if ( displayKey.length > maxKeyLength ) displayKey = displayKey.slice(1 - maxKeyLength);
-          displayKey = `…${displayKey}`;
-        }
-        return {
-          ...change, displayKey,
-          name: getHumanReadableAttributeLabel(change.key, { ...attributeCtx, prefixItemName: false })
-        };
-      }),
+      changes: await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))),
       durationParts: Number.isFinite(duration.remaining) ? duration.label.split(", ") : [],
       showDuration: Number.isFinite(duration.value),
       effect: this
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context for individual changes to display on actor, item, or active effect sheets.
+   * @param {object} change  Change to prepare.
+   * @returns {object}       Context needed to render the change.
+   */
+  async getSheetChangeContext(change) {
+    const context = {
+      ...change,
+      typeLabel: _loc(ActiveEffect.CHANGE_TYPES[change.type]?.label),
+      ...((await this.system.getSheetChangeContext?.(change)) ?? {})
+    };
+    context.name ||= change.key;
+    return context;
   }
 
   /* -------------------------------------------- */

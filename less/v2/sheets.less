@@ -49,13 +49,11 @@
   }
 }
 
-.dnd5e2.sheet:is(.item, .actor, .roll-table-sheet) {
+.dnd5e2.sheet:is(.item, .actor) {
   &:where(:not(.minimized)) > header {
     background: transparent;
     position: relative;
     z-index: 1;
-
-    .window-title { visibility: hidden; }
   }
 }
 
@@ -240,9 +238,22 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
   }
 
   /* ---------------------------------- */
-  /*  Child Creation                    */
+  /*  Interactivity                     */
   /* ---------------------------------- */
 
+  &.locked {
+    .rollable, .draggable { cursor: var(--cursor-default); }
+    .rollable:hover { text-shadow: none; }
+  }
+
+  &:not(.locked) .rollable.draggable { cursor: var(--cursor-pointer); }
+}
+
+/* ---------------------------------- */
+/*  Child Creation                    */
+/* ---------------------------------- */
+
+.dnd5e2.sheet:is(.active-effect-config, .actor, .item) {
   .create-child {
     display: none;
     position: absolute;
@@ -254,21 +265,42 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
     line-height: 24px;
   }
 
-  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew) .create-child,
-  &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew) .create-child {
+  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes) .create-child,
+  &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes) .create-child {
     display: block;
   }
+}
 
-  /* ---------------------------------- */
-  /*  Interactivity                     */
-  /* ---------------------------------- */
+/* ---------------------------------- */
+/*  Active Effect Sheets              */
+/* ---------------------------------- */
 
-  &.locked {
-    .rollable, .draggable { cursor: var(--cursor-default); }
-    .rollable:hover { text-shadow: none; }
+.dnd5e2.active-effect-config {
+  .sheet-header { --dnd5e-document-image-size: 96px; }
+  .document-name {
+    background: var(--dnd5e-background-5);
+    font-family: var(--dnd5e-font-modesto);
+    font-size: var(--font-size-32);
+    font-weight: bold;
+    text-align: center;
   }
+  .tab.changes {
+    overflow-y: auto;
+    padding-block-end: 35px;
+    padding-inline-end: 2px;
+  }
+  .changes-list {
+    ol, li { display: block; }
+    .items-section .item .item-controls {
+      justify-content: space-evenly;
+      padding-inline-end: 16px;
 
-  &:not(.locked) .rollable.draggable { cursor: var(--cursor-pointer); }
+      button.control-button:not(.always-interactive) {
+        color: var(--control-button-text-color);
+        font-size: var(--font-size-11);
+      }
+    }
+  }
 }
 
 /* ---------------------------------- */
@@ -323,5 +355,6 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
     }
   }
 
+  .controls { justify-content: space-evenly; }
   &.edit-mode table .controls { flex: 0 0 90px; }
 }
