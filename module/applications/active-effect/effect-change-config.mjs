@@ -9,7 +9,7 @@ export default class EffectChangeConfig extends DocumentSheet5e {
   static DEFAULT_OPTIONS = {
     canImport: false,
     changeId: null,
-    classes: ["standard-form"],
+    classes: ["standard-form", "titlebar"],
     form: {
       closeOnSubmit: true,
       handler: EffectChangeConfig.#handleFormSubmission
@@ -66,6 +66,15 @@ export default class EffectChangeConfig extends DocumentSheet5e {
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _canRender(options) {
+    if ( !this.rendered ) return;
+    if ( !this.change ) this.close();
+    return false;
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -126,14 +135,6 @@ export default class EffectChangeConfig extends DocumentSheet5e {
   async _prepareFooterContext(context, options) {
     context.buttons = [{ type: "submit", icon: "fa-solid fa-floppy-disk", label: "EFFECT.Submit" }];
     return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async render(...args) {
-    if ( !this.change ) return this.close();
-    return super.render(...args);
   }
 
   /* -------------------------------------------- */
