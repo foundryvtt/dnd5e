@@ -175,23 +175,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  get isExpiryTrackable() {
-    return super.isExpiryTrackable && !this.getFlag("dnd5e", "isTemporary");
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the special duration, if expiry is one, or null if none.
-   * @returns {string|null}
-   */
-  get specialDuration() {
-    return this.constructor.PSEUDO_EXPIRIES.has(this.duration.expiry) ? this.duration.expiry : null;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Retrieve the source Actor or Item, or null if it could not be determined.
    * @returns {Promise<Actor5e|Item5e|null>}
@@ -222,7 +205,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   getDurationParts() {
     if ( this.specialDuration ) return [this.duration.label];
-    return this.duration.remaining ? this.duration.label.split(", ") : [];
+    return Number.isFinite(this.duration.remaining) ? this.duration.label.split(", ") : [];
   }
 
   /* -------------------------------------------- */
@@ -498,14 +481,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   _prepareDuration(duration, context) {
-    super._prepareDuration(duration, context);
-    if ( this.duration.expired && !Number.isFinite(this.duration.value) ) {
+    duration = super._prepareDuration(duration, context);
+    const special = this.constructor.PSEUDO_EXPIRIES.has(duration.expiry) ? duration.expiry : null;
+    if ( duration.expired && !Number.isFinite(duration.value) ) {
       duration.label = _loc("DND5E.ACTIVEEFFECT.Expired");
-    } else if ( this.specialDuration ) {
+    } else if ( special ) {
       const useYour = (this.modifiesActor || this.isAppliedEnchantment)
-        && (this.specialDuration.startsWith("target") || (this.getSourceActor() === this.actor));
-      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.Your${this.specialDuration.slice(6)}`);
-      else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${this.specialDuration.capitalize()}`);
+        && (special.startsWith("target") || (this.getSourceActor() === this.actor));
+      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.Your${special.slice(6)}`);
+      else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${special.capitalize()}`);
     }
     return duration;
   }
@@ -793,41 +777,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   }
 
   /* -------------------------------------------- */
-  /*  Expiration                                  */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  isExpiryEvent(event, context={}) {
-    const special = this.specialDuration;
-    if ( !special ) return super.isExpiryEvent(event, context);
-
-    // Out of combat, any time advancement expires the effect
-    if ( (event === "updateWorldTime") && !this.actor?.inCombat ) return true;
-
-    // Skip irrelevant events
-    const isStart = special.endsWith("Start");
-    if ( event !== (isStart ? "turnStart" : "turnEnd") ) return false;
-
-    // These expiries are only driven by the combat they were created in
-    if ( !this.start.combat ) return true;
-    const combat = context.combat ?? game.combat;
-    if ( combat !== this.start.combat ) return false;
-
-    // Re-derive the expiry-relevant combatant; affected actor for "target" or originating actor for "source"
-    // If they have left combat, expire once we are past the creation round
-    const origin = special.startsWith("target") ? this.actor : this.getSourceActor();
-    const [combatant] = combat.getCombatantsByActor(origin);
-    if ( !combatant ) return this.start.round < context.round;
-
-    // Only the origin's own turn edge triggers expiry
-    const originTurn = isStart ? (combat.combatant === combatant) : (combat.previous.combatantId === combatant.id);
-    if ( !originTurn ) return false;
-
-    // Skip the turn the effect was applied on
-    return (this.start.round !== context.round) || (this.start.turn !== context.turn);
-  }
-
-  /* -------------------------------------------- */
   /*  Concentration Handling                      */
   /* -------------------------------------------- */
 
@@ -897,10 +846,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static onRenderActiveEffectConfig(app, html, context) {
     app.document.system.onRenderActiveEffectConfig?.(app, html, context);
-
-    // If special duration, hide normal duration fields
-    const hideDuration = !!app.document.specialDuration;
-    html.querySelector("[data-duration]")?.classList.toggle("hidden", hideDuration);
   }
 
   /* -------------------------------------------- */
