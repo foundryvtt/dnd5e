@@ -69,6 +69,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /**
+   * System-specific "expiry" choices which do not require registration or custom expiry events, and instead
+   * are handled dynamically in isExpiryEvent.
+   * @type {Set<string>}
+   */
+  static PSEUDO_EXPIRIES = new Set(["sourceStart", "sourceEnd", "targetStart", "targetEnd"]);
+
+  /* -------------------------------------------- */
+
   /** @inheritdoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
@@ -149,6 +158,23 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  get isExpiryTrackable() {
+    return super.isExpiryTrackable && !this.getFlag("dnd5e", "isTemporary");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the special duration, if expiry is one, or null if none.
+   * @returns {string|null}
+   */
+  get specialDuration() {
+    return this.constructor.PSEUDO_EXPIRIES.has(this.duration.expiry) ? this.duration.expiry : null;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Retrieve the source Actor or Item, or null if it could not be determined.
    * @returns {Promise<Actor5e|Item5e|null>}
@@ -158,6 +184,28 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return this.item;
     }
     return fromUuid(this.origin);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Synchronously retrieve the originating Actor, or null if it cannot be determined.
+   * @returns {Actor5e|null}
+   */
+  getSourceActor() {
+    const origin = fromUuidSync(this.origin);
+    return (origin instanceof dnd5e.documents.Actor5e) ? origin : (origin?.actor || null);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Format durationParts for use in the Active Effects & Effect Tooltip partials.
+   * @returns {string[]}
+   */
+  getDurationParts() {
+    if ( this.specialDuration ) return [this.duration.label];
+    return Number.isFinite(this.duration.remaining) ? this.duration.label.split(", ") : [];
   }
 
   /* -------------------------------------------- */
@@ -431,6 +479,23 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _prepareDuration(duration, context) {
+    duration = super._prepareDuration(duration, context);
+    const special = this.constructor.PSEUDO_EXPIRIES.has(duration.expiry) ? duration.expiry : null;
+    if ( duration.expired && !Number.isFinite(duration.value) ) {
+      duration.label = _loc("DND5E.ACTIVEEFFECT.Expired");
+    } else if ( special ) {
+      const useYour = (this.modifiesActor || this.isAppliedEnchantment)
+        && (special.startsWith("target") || (this.getSourceActor() === this.actor));
+      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.Your${special.slice(6)}`);
+      else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${special.capitalize()}`);
+    }
+    return duration;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Prepare effect favorite data.
    * @returns {Promise<FavoriteData5e>}
@@ -572,6 +637,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preCreate(data, options, user) {
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
+
+    // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
+    const { units, expiry } = this.duration;
+    if ( this.constructor.PSEUDO_EXPIRIES.has(expiry) ) this.updateSource({ "duration.value": null });
+
+    // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
+    const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
+    if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
+    if ( !expiry && (units === "rounds") ) this.updateSource({ "duration.expiry": "turnStart" });
   }
 
   /* -------------------------------------------- */
@@ -606,11 +680,27 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( await super._preUpdate(changed, options, user) === false ) return false;
+    const newExpiry = foundry.utils.getProperty(changed, "duration.expiry");
+    if ( this.constructor.PSEUDO_EXPIRIES.has(newExpiry) ) foundry.utils.setProperty(changed, "duration.value", null);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
     const originalEncumbrance = foundry.utils.getProperty(options, "dnd5e.originalEncumbrance");
     const newEncumbrance = data.statuses?.[0];
     const name = this.name;
+
+    // If out of combat & effect expires, delete it
+    if ( game.user.isActiveGM && data.duration?.expired ) {
+      const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
+      const combat = this.start?.combat ?? game.combat;
+      if ( !combat?.getCombatantsByActor(actor).length ) return this.delete();
+    }
 
     // Display proper scrolling status effects for encumbrance
     if ( (this.id === this.constructor.ID.ENCUMBERED) && originalEncumbrance && newEncumbrance ) {
@@ -649,6 +739,41 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   _displayScrollingStatus(enabled) {
     if ( this.isConcealed ) return;
     super._displayScrollingStatus(enabled);
+  }
+
+  /* -------------------------------------------- */
+  /*  Expiration                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  isExpiryEvent(event, context={}) {
+    const special = this.specialDuration;
+    if ( !special ) return super.isExpiryEvent(event, context);
+
+    // Out of combat, any time advancement expires the effect
+    if ( (event === "updateWorldTime") && !this.actor?.inCombat ) return true;
+
+    // Skip irrelevant events
+    const isStart = special.endsWith("Start");
+    if ( event !== (isStart ? "turnStart" : "turnEnd") ) return false;
+
+    // These expiries are only driven by the combat they were created in
+    if ( !this.start.combat ) return true;
+    const combat = context.combat ?? game.combat;
+    if ( combat !== this.start.combat ) return false;
+
+    // Re-derive the expiry-relevant combatant; affected actor for "target" or originating actor for "source"
+    // If they have left combat, expire once we are past the creation round
+    const origin = special.startsWith("target") ? this.actor : this.getSourceActor();
+    const [combatant] = combat.getCombatantsByActor(origin);
+    if ( !combatant ) return this.start.round < context.round;
+
+    // Only the origin's own turn edge triggers expiry
+    const originTurn = isStart ? (combat.combatant === combatant) : (combat.previous.combatantId === combatant.id);
+    if ( !originTurn ) return false;
+
+    // Skip the turn the effect was applied on
+    return (this.start.round !== context.round) || (this.start.turn !== context.turn);
   }
 
   /* -------------------------------------------- */
@@ -959,8 +1084,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return {
       id, name, img, disabled, duration, source,
       changes: await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))),
-      durationParts: Number.isFinite(duration.remaining) ? duration.label.split(", ") : [],
-      showDuration: Number.isFinite(duration.value),
+      durationParts: this.getDurationParts(),
+      showDuration: !!this.specialDuration || Number.isFinite(this.duration.value),
       effect: this
     };
   }
@@ -991,8 +1116,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   async richTooltip(enrichmentOptions={}) {
     const context = await this.getPreviewContext(enrichmentOptions);
-    context.durationParts = Number.isFinite(this.duration.remaining) ? this.duration.label.split(", ") : [];
-    context.showDuration = Number.isFinite(this.duration.value);
+    context.durationParts = this.getDurationParts();
+    context.showDuration = !!this.specialDuration || Number.isFinite(this.duration.value);
 
     return {
       content: await foundry.applications.handlebars.renderTemplate(

@@ -186,7 +186,11 @@ export default class EnchantmentData extends ActiveEffectDataModel {
         errors.forEach(err => console.error(err));
         return false;
       }
-      this.parent.updateSource({ disabled: false });
+      const start = this.parent.constructor.getEffectStart();
+      for ( const key of Object.keys(start) ) {
+        if ( data.start?.[key] !== undefined ) delete start[key]; // Prefer user-defined duration data
+      }
+      this.parent.updateSource({ start, disabled: false });
     }
   }
 
