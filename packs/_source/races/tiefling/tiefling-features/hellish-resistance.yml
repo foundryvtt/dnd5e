@@ -21,24 +21,25 @@ system:
     value: race
     subtype: ''
   requirements: Tiefling
-  properties: []
+  properties:
+    - trait
   activities: {}
   enchant: {}
   prerequisites:
     level: null
   identifier: hellish-resistance
 flags: {}
-img: icons/magic/air/fog-gas-smoke-swirling-orange.webp
+img: icons/magic/fire/flame-burning-earth-yellow.webp
 effects: []
 folder: uTOlS6Wk9xGuCs7Z
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037393321
-  modifiedTime: 1725992703745
+  modifiedTime: 1781473464936
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!q71Pe1F8RRtEJt8Q'

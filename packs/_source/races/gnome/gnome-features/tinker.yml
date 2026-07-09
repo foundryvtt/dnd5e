@@ -13,21 +13,16 @@ system:
       functioning), or when you use your action to dismantle it; at that time,
       you can reclaim the materials used to create it. You can have up to three
       such devices active at a time. When you create a device, choose one of the
-      following options:</p>
-
-      <p><em>Clockwork Toy:</em> This toy is a clockwork animal, monster, or
-      person, such as a frog, mouse, bird, dragon, or soldier. When placed on
-      the ground, the toy moves 5 feet across the ground on each of your turns
-      in a random direction. It makes noises as appropriate to the creature it
-      represents.</p>
-
-      <p><em>Fire Starter:</em> The device produces a miniature flame, which you
+      following options:</p><p><em><strong>Clockwork Toy:</strong></em> This toy
+      is a clockwork animal, monster, or person, such as a frog, mouse, bird,
+      dragon, or soldier. When placed on the ground, the toy moves 5 feet across
+      the ground on each of your turns in a random direction. It makes noises as
+      appropriate to the creature it represents.</p><p><em><strong>Fire
+      Starter:</strong></em> The device produces a miniature flame, which you
       can use to light a candle, torch, or campfire. Using the device requires
-      your action.</p>
-
-      <p><em>Music Box:</em> When opened, this music box plays a single song at
-      a moderate volume. The box stops playing when it reaches the song's end or
-      when it is closed.</p>
+      your action.</p><p><em><strong>Music Box:</strong></em> When opened, this
+      music box plays a single song at a moderate volume. The box stops playing
+      when it reaches the song's end or when it is closed.</p>
     chat: ''
   source:
     custom: ''
@@ -96,23 +91,31 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Create Clockwork Device
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   enchant: {}
   prerequisites:
     level: null
   identifier: tinker
 flags: {}
-img: icons/commodities/tech/cog-steel.webp
+img: icons/commodities/tech/plating-metal-armor-piston-tech-red.webp
 effects: []
 folder: AabmBKPsHt2BlNVK
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037393173
-  modifiedTime: 1725992703644
+  modifiedTime: 1781472898264
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!koRPOLtj8XAFMwnW'
