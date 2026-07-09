@@ -3648,13 +3648,6 @@
 "DND5E.ItemLootType": "Loot Type",
 "DND5E.ItemName": "Item Name",
 "DND5E.ItemNew": "New {type}",
-"DND5E.ItemRarityCommon": "common",
-"DND5E.ItemRarityMundane": "mundane",
-"DND5E.ItemRarityUncommon": "uncommon",
-"DND5E.ItemRarityRare": "rare",
-"DND5E.ItemRarityVeryRare": "very rare",
-"DND5E.ItemRarityLegendary": "legendary",
-"DND5E.ItemRarityArtifact": "artifact",
 "DND5E.ItemRechargeCheck": "{name} recharge check - {result}",
 "DND5E.ItemRechargeFailure": "failure!",
 "DND5E.ItemRechargeSuccess": "success!",
@@ -3719,6 +3712,16 @@
     "Versatile": "Versatile",
     "Verbal": "Verbal",
     "WeightlessContents": "Weightless Contents"
+  },
+  "Rarity": {
+    "Artifact": "Artifact",
+    "Common": "Common",
+    "Legendary": "Legendary",
+    "Mundane": "Mundane",
+    "Rare": "Rare",
+    "Uncommon": "Uncommon",
+    "Varies": "Varies",
+    "VeryRare": "Very Rare"
   },
   "SECTIONS": {
     "Activities": "Activities",

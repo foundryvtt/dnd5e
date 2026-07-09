@@ -1425,12 +1425,13 @@ preLocalize("itemActionTypes");
  * @enum {string}
  */
 DND5E.itemRarity = {
-  common: "DND5E.ItemRarityCommon",
-  uncommon: "DND5E.ItemRarityUncommon",
-  rare: "DND5E.ItemRarityRare",
-  veryRare: "DND5E.ItemRarityVeryRare",
-  legendary: "DND5E.ItemRarityLegendary",
-  artifact: "DND5E.ItemRarityArtifact"
+  common: "DND5E.ITEM.Rarity.Common",
+  uncommon: "DND5E.ITEM.Rarity.Uncommon",
+  rare: "DND5E.ITEM.Rarity.Rare",
+  veryRare: "DND5E.ITEM.Rarity.VeryRare",
+  legendary: "DND5E.ITEM.Rarity.Legendary",
+  artifact: "DND5E.ITEM.Rarity.Artifact",
+  varies: "DND5E.ITEM.Rarity.Varies"
 };
 preLocalize("itemRarity");
 
