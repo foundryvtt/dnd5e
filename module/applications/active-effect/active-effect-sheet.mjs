@@ -69,6 +69,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
     switch ( partId ) {
       case "changes": return this._prepareChangesContext(context, options);
       case "details": return this._prepareDetailsContext(context, options);
+      case "duration": return this._prepareDurationContext(context, options);
     }
     return context;
   }
@@ -104,6 +105,31 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare rendering context for the duration tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareDurationContext(context, options) {
+    const general = _loc("DND5E.ACTIVEEFFECT.Expiry.GROUPS.General");
+    const specific = _loc("DND5E.ACTIVEEFFECT.Expiry.GROUPS.Specific");
+
+    for ( const [expiry, label] of Object.entries(context.expiryEvents) ) {
+      context.expiryEvents[expiry] = { group: general, label };
+    }
+    for ( const expiry of dnd5e.documents.ActiveEffect5e.PSEUDO_EXPIRIES ) {
+      context.expiryEvents[expiry] = {
+        group: specific,
+        label: _loc(`DND5E.ACTIVEEFFECT.Expiry.${expiry.capitalize()}`)
+      };
+    }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async _renderChange(context) {}
 
@@ -126,6 +152,17 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
       button.innerHTML = '<i class="fas fa-plus" inert></i>';
       this.element.querySelector(".window-content").append(button);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+
+    // Special durations imply their own value & units, so the normal duration fields are not configurable.
+    const duration = this.element.querySelector("[data-duration]");
+    if ( duration ) duration.hidden = !!this.document.specialDuration;
   }
 
   /* -------------------------------------------- */

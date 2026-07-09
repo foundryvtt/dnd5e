@@ -198,7 +198,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const effectFlags = {
       flags: {
         dnd5e: {
-          dependentOn: origin.uuid,
+          dependentOn: concentration?.uuid,
           scaling: this.chatMessage.system.scaling,
           spellLevel: this.chatMessage.system.spellLevel
         }
