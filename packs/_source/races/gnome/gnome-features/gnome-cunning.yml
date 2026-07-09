@@ -23,24 +23,25 @@ system:
     value: race
     subtype: ''
   requirements: Gnome
-  properties: []
+  properties:
+    - trait
   activities: {}
   enchant: {}
   prerequisites:
     level: null
   identifier: gnome-cunning
 flags: {}
-img: icons/magic/light/hand-sparks-glow-yellow.webp
+img: icons/magic/symbols/rune-sigil-rough-white-teal.webp
 effects: []
 folder: AabmBKPsHt2BlNVK
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037392638
-  modifiedTime: 1725992703308
+  modifiedTime: 1781472929481
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!EHhr9umJ5kxJFCQH'

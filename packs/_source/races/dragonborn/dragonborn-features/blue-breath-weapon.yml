@@ -1,19 +1,19 @@
-_id: bFpLM0N3uTeHLdzu
-name: Breath Weapon - Copper
+_id: KVgvW5yhKcmQUanz
+name: Blue Breath Weapon
 ownership:
   default: 0
 type: feat
 system:
   description:
     value: >-
-      <p>You can use your action to exhale destructive energy. Your draconic
-      ancestry determines the size, shape, and damage type of the
-      exhalation.</p><p>When you use your breath weapon, each creature in the
-      area of the exhalation must make a dexterity saving throw. The DC for this
-      saving throw equals 8 + your Constitution modifier + your proficiency
-      bonus. A creature takes 2d6 acid damage on a failed save, and half as much
-      damage on a successful one. The damage increases to 3d6 at 6th level, 4d6
-      at 11th level, and 5d6 at 16th level.</p><p>After you use your breath
+      <p>You can use your action to exhale lightning.</p><p>When you use your
+      breath weapon, [[lookup @labels.description.affects
+      activity=KZuPd4j1zCchLdpG]] in a [[lookup @labels.description.template
+      activity=KZuPd4j1zCchLdpG]] must make a Dexterity saving throw. The DC for
+      this saving throw equals 8 + your Constitution modifier + your proficiency
+      bonus. A creature takes 2d6 lightning damage on a failed save, and half as
+      much damage on a successful one. The damage increases to 3d6 at 6th level,
+      4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath
       weapon, you can't use it again until you complete a short or long
       rest.</p>
     chat: ''
@@ -32,11 +32,10 @@ system:
   type:
     value: race
     subtype: ''
-  requirements: Copper Dragonborn
+  requirements: Blue Dragonborn
   properties: []
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    KZuPd4j1zCchLdpG:
       type: save
       activation:
         type: action
@@ -48,12 +47,14 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
@@ -62,7 +63,7 @@ system:
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -74,6 +75,7 @@ system:
           width: '5'
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: creature
@@ -91,41 +93,50 @@ system:
             denomination: null
             bonus: ''
             types:
-              - acid
+              - lightning
+            scaling:
+              number: 1
       save:
         ability:
           - dex
         dc:
           calculation: con
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Exhale Lightning
       img: ''
-      appliedEffects: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: KZuPd4j1zCchLdpG
   enchant: {}
   prerequisites:
     level: null
-  identifier: breath-weapon-copper
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
-img: icons/magic/acid/projectile-smoke-glowing.webp
+  identifier: breath-weapon-blue
+flags: {}
+img: icons/magic/lightning/bolt-strike-sparks-blue.webp
 effects: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1725037393109
-  modifiedTime: 1750440648128
+  systemVersion: 6.0.0
+  createdTime: 1725037392801
+  modifiedTime: 1781472150998
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
 folder: TAw7621pFkXOkuYI
-_key: '!items!bFpLM0N3uTeHLdzu'
+_key: '!items!KVgvW5yhKcmQUanz'
