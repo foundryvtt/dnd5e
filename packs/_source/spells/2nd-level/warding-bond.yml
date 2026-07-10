@@ -128,6 +128,10 @@ effects:
           value: 1
           phase: initial
           priority: null
+        - key: system.bonuses.abilities.save
+          mode: 2
+          value: '+1'
+          priority: null
         - key: system.traits.dr.value
           type: add
           value: ALL

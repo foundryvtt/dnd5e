@@ -303,32 +303,32 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.str.check.rollmode
+        - key: system.abilities.str.check.roll.mode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.dex.check.rollmode
+        - key: system.abilities.dex.check.roll.mode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.con.check.rollmode
+        - key: system.abilities.con.check.roll.mode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.int.check.rollmode
+        - key: system.abilities.int.check.roll.mode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.wis.check.rollmode
+        - key: system.abilities.wis.check.roll.mode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.cha.check.rollmode
+        - key: system.abilities.cha.check.roll.mode
           type: add
           value: -1
           phase: initial
