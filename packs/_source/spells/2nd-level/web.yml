@@ -1,18 +1,26 @@
 _id: UJJu9c2UvCzVljiP
 name: Web
 type: spell
-img: icons/magic/control/debuff-chains-ropes-net-white.webp
+img: icons/commodities/materials/material-webbing.webp
 system:
   description:
     value: >-
       <p>You conjure a mass of thick, sticky webbing at a point of your choice
       within range. The webs fill a 20-foot cube from that point for the
-      Duration. The webs are difficult terrain and lightly obscure their
-      area.</p>
-              <p>If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.</p>
-              <p>Each creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw. On a failed save, the creature is Restrained as long as it remains in the webs or until it breaks free.</p>
-              <p>A creature Restrained by the webs can use its action to make a Strength check against your spell save DC. If it succeeds, it is no longer Restrained.</p>
-              <p>The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.</p>
+      Duration. The webs are &amp;reference[difficult terrain] and
+      &amp;reference[lightly obscured]{Lighty Obscure} their area.</p><p>If the
+      webs aren't anchored between two solid masses (such as walls or trees) or
+      layered across a floor, wall, or ceiling, the conjured web collapses on
+      itself, and the spell ends at the start of your next turn. Webs layered
+      over a flat surface have a depth of 5 feet.</p><p>Each creature that
+      starts its turn in the webs or that enters them during its turn must make
+      a Dexterity saving throw. On a failed save, the creature is
+      &amp;reference[Restrained] as long as it remains in the webs or until it
+      breaks free.</p><p>A creature Restrained by the webs can use its action to
+      make a Strength check against your spell save DC. If it succeeds, it is no
+      longer Restrained.</p><p>The webs are flammable. Any 5-foot cube of webs
+      exposed to fire burns away in 1 round, dealing 2d4 fire damage to any
+      creature that starts its turn in the fire.</p>
     chat: ''
   source:
     custom: ''
@@ -30,14 +38,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -58,89 +69,227 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    ftvFmQAo49Z6MdNX:
+      type: utility
+      name: Conjure Webs
+      _id: ftvFmQAo49Z6MdNX
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    PRFBGysxlHdLt0l2:
+      type: save
+      name: Enter Web Save
+      _id: PRFBGysxlHdLt0l2
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: CLGFGD5YmLil8lUi
+          level: {}
+          onSave: false
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: >-
+          When a creature starts their turn in the webs or enters them during
+          their turn.
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
-    dnd5eactivity300:
-      _id: dnd5eactivity300
-      type: utility
+        visible: true
+        bonus: ''
+    EQ3kh837OtgGcg8n:
+      type: damage
+      name: Burning Web Damage
+      _id: EQ3kh837OtgGcg8n
+      img: ''
+      sort: 300000
       activation:
-        type: action
-        value: null
-        override: false
+        type: special
+        override: true
+        condition: When a creature starts their turn in a space occupied by burning webs.
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
+      flags: {}
       range:
-        override: false
+        units: spec
+        override: true
+        special: ''
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
-      roll:
-        formula: 2d4[fire]
-        name: ''
-        prompt: false
-        visible: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 4
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+              number: 1
   identifier: web
-effects: []
+effects:
+  - name: Restrained in Webs
+    img: icons/commodities/materials/material-webbing.webp
+    origin: Compendium.dnd5e.spells.Item.UJJu9c2UvCzVljiP
+    transfer: false
+    _id: CLGFGD5YmLil8lUi
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are &amp;reference[restrained apply=false] in webs until you break
+      free. You can use your action to make a Strength check against the
+      caster's spell save DC. On a success, you are no longer Restrained.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781221381535
+      modifiedTime: 1781221447527
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!UJJu9c2UvCzVljiP.CLGFGD5YmLil8lUi'
 folder: Qi4Se3we69ukl2V9
 sort: 0
 ownership:
@@ -148,11 +297,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357301
-  modifiedTime: 1725992720207
+  modifiedTime: 1781221493452
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!UJJu9c2UvCzVljiP'

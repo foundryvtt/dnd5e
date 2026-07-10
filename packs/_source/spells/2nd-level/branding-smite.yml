@@ -9,11 +9,11 @@ system:
       <p>The next time you hit a creature with a weapon attack before this spell
       ends, the weapon gleams with astral radiance as you strike. The attack
       deals an extra 2d6 radiant damage to the target, which becomes visible if
-      it's invisible, and the target sheds dim light in a 5-foot radius and
-      can't become invisible until the spell ends.</p><p><strong>At Higher
-      Levels.</strong> When you cast this spell using a spell slot of 3rd level
-      or higher, the extra damage increases by 1d6 for each slot level above
-      2nd.</p>
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p><p><strong>At Higher Levels.</strong> When you
+      cast this spell using a spell slot of 3rd level or higher, the extra
+      damage increases by 1d6 for each slot level above 2nd.</p>
     chat: ''
   source:
     custom: ''
@@ -32,11 +32,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -59,9 +62,10 @@ system:
       _id: dnd5eactivity000
       type: damage
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: When you hit a creature with a weapon attack before this spell ends.
       consumption:
         targets: []
         scaling:
@@ -71,10 +75,13 @@ system:
       description:
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
-        override: false
-      effects: []
+        override: true
+        value: '1'
+      effects:
+        - _id: mEIfHN39NpypxvkS
+          level: {}
       range:
         override: false
       target:
@@ -87,7 +94,7 @@ system:
         override: false
       damage:
         critical:
-          allow: false
+          allow: true
           bonus: ''
         parts:
           - number: 2
@@ -105,20 +112,505 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Bonus Damage On Hit
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    Ke2wZRoRCFxmiHJb:
+      type: utility
+      name: Cast
+      _id: Ke2wZRoRCFxmiHJb
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: xM2PEzUfQZgNIXRv
+          level:
+            min: 2
+            max: 2
+        - _id: pkXLCMEMNzccLQs4
+          level:
+            min: 3
+            max: 3
+        - _id: wylpKcAY3Gw609ug
+          level:
+            min: 4
+            max: 4
+        - _id: f4xG4p6y77duw9yt
+          level:
+            min: 5
+            max: 5
+        - _id: 13BrsdpazrFevbup
+          level:
+            min: 6
+            max: 6
+        - _id: XNwGaFsyQyqp7cP7
+          level:
+            min: 7
+            max: 7
+        - _id: doT9gQvDafhsdNxs
+          level:
+            min: 8
+            max: 8
+        - _id: MQz6BZkH6TOMsHAn
+          level:
+            min: 9
+            max: 9
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: shining-smite
 sort: 0
 flags: {}
-img: icons/magic/fire/dagger-rune-enchant-flame-orange.webp
-effects: []
+img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+effects:
+  - name: 'Branding Smite: 2nd Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    _id: xM2PEzUfQZgNIXRv
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 2d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220296200
+      modifiedTime: 1781221086743
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.xM2PEzUfQZgNIXRv'
+  - name: 'Branding Smite: 3rd Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 3d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220490148
+      modifiedTime: 1781221093374
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: pkXLCMEMNzccLQs4
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.pkXLCMEMNzccLQs4'
+  - name: 'Branding Smite: 4th Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 4d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220577170
+      modifiedTime: 1781221097652
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: wylpKcAY3Gw609ug
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.wylpKcAY3Gw609ug'
+  - name: 'Branding Smite: 5th Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 5d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220587562
+      modifiedTime: 1781221102273
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: f4xG4p6y77duw9yt
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.f4xG4p6y77duw9yt'
+  - name: 'Branding Smite: 6th Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 6d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220598053
+      modifiedTime: 1781221106146
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 13BrsdpazrFevbup
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.13BrsdpazrFevbup'
+  - name: 'Branding Smite: 7th Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 7d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220607720
+      modifiedTime: 1781221109989
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: XNwGaFsyQyqp7cP7
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.XNwGaFsyQyqp7cP7'
+  - name: 'Branding Smite: 8th Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 8d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220615383
+      modifiedTime: 1781221114022
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: doT9gQvDafhsdNxs
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.doT9gQvDafhsdNxs'
+  - name: 'Branding Smite: 9th Level'
+    img: icons/magic/lightning/bolt-strike-smoke-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you hit a creature with a weapon attack before this spell
+      ends, the weapon gleams with astral radiance as you strike. The attack
+      deals an extra 9d6 radiant damage to the target, which becomes visible if
+      it's &amp;reference[invisible apply=false], and the target sheds
+      &amp;reference[dim light] in a 5-foot radius and can't become invisible
+      until the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220624827
+      modifiedTime: 1781221118404
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: MQz6BZkH6TOMsHAn
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.MQz6BZkH6TOMsHAn'
+  - name: Smite Brand
+    img: icons/magic/lightning/bolt-strike-explosion-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+    transfer: false
+    _id: mEIfHN39NpypxvkS
+    type: base
+    system:
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 5
+          phase: initial
+          priority: null
+        - key: token.light.animation.type
+          type: override
+          value: starlight
+          phase: initial
+          priority: null
+        - key: token.light.color
+          type: override
+          value: '#bb8c25'
+          phase: initial
+          priority: null
+        - key: system.traits.ci.value
+          type: add
+          value: invisible
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration of the spell, you sheds &amp;reference[dim light] in a
+      5-foot radius and can't become &amp;reference[invisible apply=false] until
+      the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220671807
+      modifiedTime: 1781221058451
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!7UwUjJ6owIQkEPrs.mEIfHN39NpypxvkS'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348142
-  modifiedTime: 1725992717246
+  modifiedTime: 1781221071724
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7UwUjJ6owIQkEPrs'
