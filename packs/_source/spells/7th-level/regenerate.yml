@@ -6,8 +6,8 @@ type: spell
 system:
   description:
     value: >-
-      <p>You touch a creature and stimulate its natural Healing ability. The
-      target regains 4d8 + 15 Hit Points. For the Duration of the spell, the
+      <p>You touch a creature and stimulate its natural healing ability. The
+      target regains 4d8 + 15 hit points. For the duration of the spell, the
       target regains 1 hit point at the start of each of its turns (10 hit
       points each minute).</p><p>The target's severed body members (fingers,
       legs, tails, and so on), if any, are restored after 2 minutes. If you have
@@ -32,11 +32,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,7 +78,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 7CwqRSVzG7EhgDFq
+          level: {}
       range:
         override: false
       target:
@@ -102,70 +107,69 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
-    dnd5eactivity200:
-      _id: dnd5eactivity200
-      type: damage
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-      target:
-        prompt: true
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: null
-            denomination: null
-            bonus: ''
-            types: []
-            custom:
-              enabled: true
-              formula: '1'
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: regenerate
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-flame-green.webp
-effects: []
+img: icons/magic/nature/beam-hand-leaves-green.webp
+effects:
+  - name: Regeneration
+    img: icons/magic/nature/beam-hand-leaves-green.webp
+    origin: Compendium.dnd5e.spells.Item.9kGrFXnLiRg3Xnbo
+    transfer: false
+    _id: 7CwqRSVzG7EhgDFq
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration of the spell, the target regains [[/healing 1]] at the
+      start of each of its turns ([[/healing 10]] each minute).</p><p>The
+      target's severed body members (fingers, legs, tails, and so on), if any,
+      are restored after 2 minutes. If you have the severed part and hold it to
+      the stump, the spell instantaneously causes the limb to knit to the
+      stump.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781463171536
+      modifiedTime: 1781463287412
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!9kGrFXnLiRg3Xnbo.7CwqRSVzG7EhgDFq'
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037349635
-  modifiedTime: 1725992717706
+  modifiedTime: 1781463198117
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!9kGrFXnLiRg3Xnbo'
