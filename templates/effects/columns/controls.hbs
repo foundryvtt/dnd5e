@@ -39,9 +39,8 @@
     {{else if isChange}}
 
     <span class="application-status">
-        <!-- TODO: Change this to checking `entry.applied` once conditions are merged -->
-        <i class="fa-solid fa-{{ ifThen effect.active 'check' 'xmark' }}"
-           aria-label="{{ localize (concat 'DND5E.EFFECT.Status.Change' (ifThen effect.active 'Active' 'Inactive')) }}"></i>
+        <i class="fa-solid fa-{{ ifThen ctx.applied 'check' 'xmark' }}"
+           aria-label="{{ localize (concat 'DND5E.EFFECT.Status.Change' (ifThen ctx.applied 'Active' 'Inactive')) }}"></i>
     </span>
 
     {{/if}}

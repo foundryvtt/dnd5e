@@ -21,44 +21,22 @@ export class Filter {
   #definition;
 
   /* -------------------------------------------- */
-
-  /**
-   * Cached result of the filter check.
-   * @type {boolean}
-   */
-  #result;
-
-  /* -------------------------------------------- */
   /*  Methods                                     */
   /* -------------------------------------------- */
 
   /**
-   * Check some data against the filter to determine if it matches. Result will be cached between multiple calls.
+   * Check some data against the filter to determine if it matches.
    * @param {object} data  Arbitrary data object to check.
    * @returns {boolean}
    */
   check(data) {
-    if ( this.#result !== undefined ) return this.#result;
     try {
-      if ( foundry.utils.isEmpty(this.#definition) ) this.#result = true;
-      else this.#result = performCheck(data, this.#definition);
-      return this.#result;
+      if ( foundry.utils.isEmpty(this.#definition) ) return true;
+      else return performCheck(data, this.#definition);
     } catch(err) {
       console.error(err);
       return false;
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Clear the cached result of the filter check and perform the check again.
-   * @param {object} data  Arbitrary data object to check.
-   * @returns {boolean}
-   */
-  recheck(data) {
-    this.#result = undefined;
-    return this.check(data);
   }
 }
 

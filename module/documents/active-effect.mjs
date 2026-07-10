@@ -138,7 +138,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   get isSuppressed() {
-    if ( super.isSuppressed ) return true;
+    if ( super.isSuppressed || this.system.isSuppressed ) return true;
     if ( this.system.magical && this.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
     if ( this.type === "condition" ) return false;
@@ -273,6 +273,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static applyChange(model, change, options={}) {
     // Apply shims to moved fields
     change = change.effect._applyChangeShim(change);
+
+    if ( (model instanceof foundry.abstract.Document)
+      && !change.effect._checkCondition(change, options.replacementData) ) return {};
 
     // Handle special actor flags
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
@@ -465,6 +468,27 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       else change.value = Boolean(value);
     }
     return change;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether a specific change should be applied during this phase, setting `applied` if approved.
+   * @param {object} change           Change that might be applied.
+   * @param {object} [conditionData]  Data used to evaluate conditions.
+   * @returns {boolean}
+   * @internal
+   */
+  _checkCondition(change, conditionData) {
+    if ( conditionData ) {
+      if ( this.system.conditions?.check(conditionData) === false ) return false;
+      if ( change.conditions?.check(conditionData) === false ) return false;
+    }
+
+    const originalChange = this.system.changes.find(c => c._id === change._id);
+    if ( originalChange ) originalChange.applied = true;
+
+    return true;
   }
 
   /* -------------------------------------------- */
