@@ -5,16 +5,16 @@ img: icons/commodities/materials/liquid-orange.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p><p>This glass jar, 3 inches in diameter,
-      contains 1d4 + 1 doses of a thick mixture that smells faintly of aloe. The
-      jar and its contents weigh 1/2 pound.</p><p>As an action, one dose of the
-      ointment can be swallowed or applied to the skin. The creature that
-      receives it regains 2d8 + 2 hit points, ceases to be poisoned, and is
-      cured of any disease.</p><section class="secret foundry-note"
-      id="secret-hzyPBoWppRXYnf9A"><p><strong>Foundry Note</strong></p><p>The 5
-      charges reflect the maximum number of doses possible. Similarly, the guide
-      price of 600 gp is calculated at 120 gp per dose. Adjust both as
-      required.</p></section>
+      <p>This glass jar, 3 inches in diameter, contains 1d4 + 1 doses of a thick
+      mixture that smells faintly of aloe. The jar and its contents weigh 1/2
+      pound.</p><p>As an action, one dose of the ointment can be swallowed or
+      applied to the skin. The creature that receives it regains [[/healing
+      activity=gRkokZZM4WWwqjEu]], ceases to be &amp;reference[poisoned
+      apply=false], and is cured of any disease.</p><section
+      id="secret-hzyPBoWppRXYnf9A" class="secret
+      foundry-note"><p><strong>Foundry Note</strong></p><p>The 5 charges reflect
+      the maximum number of doses possible. Similarly, the guide price of 600 gp
+      is calculated at 120 gp per dose. Adjust both as required.</p></section>
     chat: ''
   source:
     custom: ''
@@ -54,17 +54,20 @@ system:
         formula: ''
     replace: false
   type:
-    value: potion
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This glass jar, 3 inches in diameter, contains 1d4 + 1 doses of a thick
+      mixture that smells faintly of aloe. The jar and its contents weigh 1/2
+      pound.</p>
+    name: Unidentified Mixture
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    gRkokZZM4WWwqjEu:
       type: heal
       activation:
         type: action
@@ -76,12 +79,18 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>As an action, one dose of the ointment can be swallowed or applied
+          to the skin. The creature that receives it regains [[/healing
+          activity=gRkokZZM4WWwqjEu]], ceases to be &amp;reference[poisoned
+          apply=false], and is cured of any disease.</p>
       duration:
         concentration: false
         value: ''
@@ -101,7 +110,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -122,12 +132,13 @@ system:
           mode: whole
           number: null
           formula: ''
+        modifiers: []
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Apply Ointment
       img: ''
       visibility:
         requireMagic: true
@@ -135,7 +146,11 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: gRkokZZM4WWwqjEu
   attuned: false
   identifier: restorative-ointment
 effects: []
@@ -146,11 +161,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037202727
-  modifiedTime: 1764620092338
+  modifiedTime: 1783372539472
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!VmcgAIsRCyrjBguC'
