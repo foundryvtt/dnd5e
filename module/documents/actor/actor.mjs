@@ -365,6 +365,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( (this.system?.prepareEmbeddedData instanceof Function) && (phase === "initial") ) {
       this.system.prepareEmbeddedData();
     }
+
+    // Pre-collect statuses so they can be reliably used for conditions
+    if ( phase === "initial" ) {
+      for ( const effect of this.allApplicableEffects() ) {
+        if ( effect.active ) for ( const statusId of effect.statuses ) this.statuses.add(statusId);
+      }
+    }
+
     return super.applyActiveEffects(phase);
   }
 

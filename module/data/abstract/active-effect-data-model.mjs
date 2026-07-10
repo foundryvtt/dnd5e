@@ -1,4 +1,5 @@
 import { getHumanReadableAttributeLabel } from "../../utils.mjs";
+import FiltersField from "../fields/filters-field.mjs";
 
 const { DocumentIdField } = foundry.data.fields;
 
@@ -15,7 +16,8 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   static defineSchema() {
     const schema = super.defineSchema();
     schema.changes.element.extendFields({
-      _id: new DocumentIdField({ initial: () => foundry.utils.randomID() })
+      _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
+      conditions: new FiltersField()
     });
     return schema;
   }
@@ -50,6 +52,16 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
    * @type {boolean}
    */
   get isConcealed() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is there some system logic that makes this Active Effect ineligible for application?
+   * @type {boolean}
+   */
+  get isSuppressed() {
     return false;
   }
 

@@ -6,4 +6,7 @@
     {{ formField fields.value name=(concat prefix "value") value=source.value elementType="input" rootId=partId }}
     {{ formField fields.priority name=(concat prefix "priority") value=source.priority
                  placeholder=defaultPriority rootId=partId }}
+    {{#if fields.conditions}}
+    {{ formField fields.conditions name=(concat prefix "conditions") value=source.conditions rootId=partId }}
+    {{/if}}
 </fieldset>

@@ -2621,6 +2621,10 @@
     "FIELDS": {
       "changes": {
         "element": {
+          "conditions": {
+            "hint": "Condition that must be met for this change to apply.",
+            "label": "Change Conditions"
+          },
           "key": {
             "label": "Attribute Key"
           },
@@ -2638,6 +2642,10 @@
             "label": "Value"
           }
         }
+      },
+      "conditions": {
+        "hint": "Conditions that control when the effect will be applied.",
+        "label": "Effect Conditions"
       },
       "magical": {
         "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
