@@ -45,8 +45,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    Odlfa7aHWethWRuO:
       type: check
       activation:
         type: ''
@@ -61,15 +60,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -80,7 +80,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -90,11 +91,30 @@ system:
         override: false
       check:
         ability: int
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: Odlfa7aHWethWRuO
+      name: Use Tools
   attuned: false
   identifier: cartographers-tools
 effects: []
@@ -105,11 +125,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037246077
-  modifiedTime: 1725992532487
+  modifiedTime: 1783649685580
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!fC0lFK8P4RuhpfaU'
