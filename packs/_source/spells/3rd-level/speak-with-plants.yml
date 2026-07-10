@@ -129,62 +129,7 @@ system:
 sort: 0
 flags: {}
 img: icons/magic/nature/tree-animated-smile.webp
-effects:
-  - name: Speak with Plants
-    img: icons/magic/nature/tree-animated-smile.webp
-    origin: Compendium.dnd5e.spells.Item.2VXGS206tuChoeXy
-    transfer: false
-    _id: H8CR6VAzYR51xze7
-    type: base
-    system:
-      changes: []
-    disabled: false
-    start: null
-    duration:
-      value: 10
-      units: minutes
-      expiry: turnStart
-      expired: false
-    description: >-
-      <p>You imbue Plants within 30 feet of you with limited sentience and
-      animation, giving them the ability to communicate with you and follow your
-      simple commands. You can question plants about events in the spell's area
-      within the past day, gaining information about creatures that have passed,
-      weather, and other circumstances.</p><p>You can also turn
-      &amp;reference[difficult terrain] caused by
-      @UUID[Compendium.dnd5e.spells.Item.YWtwzp6ZnQJMEmVW]{Plant Growth} (such
-      as thickets and undergrowth) into ordinary terrain that lasts for the
-      Duration. Or you can turn ordinary terrain where Plants are present into
-      difficult terrain that lasts for the duration, causing vines and branches
-      to hinder pursuers, for example.</p><p>Plants might be able to perform
-      other tasks on your behalf, at the DM's discretion. The spell doesn't
-      enable Plants to uproot themselves and move about, but they can freely
-      move branches, tendrils, and stalks.</p><p>If a plant creature is in the
-      area, you can communicate with it as if you shared a Common language, but
-      you gain no magical ability to influence it.</p><p>This spell can cause
-      the plants created by the
-      @UUID[Compendium.dnd5e.spells.Item.gMrWeG8fMDPRFiVe]{Entangle} spell to
-      release a &amp;reference[Restrained apply=false] creature.</p>
-    tint: '#ffffff'
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1781355442109
-      modifiedTime: 1781355509008
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!2VXGS206tuChoeXy.H8CR6VAzYR51xze7'
+effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null

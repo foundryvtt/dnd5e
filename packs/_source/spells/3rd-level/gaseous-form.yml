@@ -131,17 +131,17 @@ effects:
       changes:
         - key: system.abilities.str.save.roll.mode
           type: add
-          value: ''
+          value: 1
           phase: initial
           priority: null
         - key: system.abilities.dex.save.roll.mode
           type: add
-          value: ''
+          value: 1
           phase: initial
           priority: null
         - key: system.abilities.con.save.roll.mode
           type: add
-          value: ''
+          value: 1
           phase: initial
           priority: null
         - key: system.attributes.movement.fly
@@ -225,7 +225,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781359773544
-      modifiedTime: 1781360225675
+      modifiedTime: 1783720892792
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null

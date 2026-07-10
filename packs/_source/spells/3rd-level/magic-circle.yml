@@ -265,17 +265,7 @@ effects:
     _id: 3UZLcyUKG7zz2VdP
     type: base
     system:
-      changes:
-        - key: system.traits.ci.value
-          type: add
-          value: charmed
-          phase: initial
-          priority: null
-        - key: system.traits.ci.value
-          type: add
-          value: frightened
-          phase: initial
-          priority: null
+      changes: []
     disabled: false
     start: null
     duration:
@@ -303,7 +293,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781361671158
-      modifiedTime: 1781361788033
+      modifiedTime: 1783720914032
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
