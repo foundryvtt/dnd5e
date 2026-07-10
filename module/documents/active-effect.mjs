@@ -226,7 +226,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Apply shims to moved fields
     change = change.effect._applyChangeShim(change);
 
-    if ( !change.effect.shouldApplyChange(change, options.replacementData) ) return {};
+    if ( (model instanceof foundry.abstract.Document)
+      && !change.effect._checkCondition(change, options.replacementData) ) return {};
 
     // Handle special actor flags
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
@@ -428,8 +429,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {object} change           Change that might be applied.
    * @param {object} [conditionData]  Data used to evaluate conditions.
    * @returns {boolean}
+   * @internal
    */
-  shouldApplyChange(change, conditionData) {
+  _checkCondition(change, conditionData) {
     if ( conditionData ) {
       if ( this.system.conditions?.check(conditionData) === false ) return false;
       if ( change.conditions?.check(conditionData) === false ) return false;

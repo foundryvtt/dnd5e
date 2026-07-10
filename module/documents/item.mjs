@@ -487,8 +487,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const overrides = {};
     const replacementData = this.getRollData();
     for ( const change of changes ) {
-      const result = ActiveEffect.CHANGE_TYPES[change.type]?.handler?.(this, change)
-        ?? change.effect.constructor.applyChange(this, change, { replacementData });
+      const result = change.effect.constructor.applyChange(this, change, { replacementData });
       if ( foundry.utils.isPlainObject(result) ) Object.assign(overrides, result);
     }
 
