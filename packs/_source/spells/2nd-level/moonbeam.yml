@@ -8,18 +8,18 @@ system:
     value: >-
       <p>A silvery beam of pale light shines down in a 5-foot-radius,
       40-foot-high Cylinder centered on a point within range. Until the spell
-      ends, dim light fills the cylinder.</p><p>When a creature enters the
-      spell's area for the first time on a turn or starts its turn there, it is
-      engulfed in ghostly flames that cause searing pain, and it must make a
-      Constitution saving throw. It takes 2d10 radiant damage on a failed save,
-      or half as much damage on a successful one.</p><p>A Shapechanger makes its
-      saving throw with disadvantage. If it fails, it also instantly reverts to
-      its original form and can't assume a different form until it leaves the
-      spell's light.</p><p>On each of your turns after you cast this spell, you
-      can use an action to move the beam up to 60 feet in any
-      direction.</p><p><strong>At Higher Levels</strong>. When you cast this
-      spell using a spell slot of 3rd level or higher, the damage increases by
-      1d10 for each slot level above 2nd.</p>
+      ends, &amp;reference[dim light] fills the cylinder.</p><p>When a creature
+      enters the spell's area for the first time on a turn or starts its turn
+      there, it is engulfed in ghostly flames that cause searing pain, and it
+      must make a Constitution saving throw. It takes 2d10 radiant damage on a
+      failed save, or half as much damage on a successful one.</p><p>A
+      Shapechanger makes its saving throw with disadvantage. If it fails, it
+      also instantly reverts to its original form and can't assume a different
+      form until it leaves the spell's light.</p><p>On each of your turns after
+      you cast this spell, you can use an action to move the beam up to 60 feet
+      in any direction.</p><p><strong>At Higher Levels</strong>. When you cast
+      this spell using a spell slot of 3rd level or higher, the damage increases
+      by 1d10 for each slot level above 2nd.</p>
     chat: ''
   source:
     custom: ''
@@ -37,14 +37,18 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cylinder
       size: '5'
       contiguous: false
+      height: '40'
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -69,32 +73,41 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature enters the spell's area for the first time on a turn
+          or starts its turn there.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
       damage:
         onSave: half
         parts:
@@ -115,23 +128,130 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Moonbeam Burn Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    JKOXpZM16ErnikPJ:
+      type: utility
+      name: Conjure Moon Beam
+      _id: JKOXpZM16ErnikPJ
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    jxsbHRCwTD0qWzeV:
+      type: utility
+      name: Move Moonbeam
+      _id: jxsbHRCwTD0qWzeV
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: ft
+        override: true
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: moonbeam
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-blue-large.webp
+img: icons/magic/light/beams-strike-blue.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037360102
-  modifiedTime: 1725992721094
+  modifiedTime: 1781230084813
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!bV3yun6MIuFj71Er'

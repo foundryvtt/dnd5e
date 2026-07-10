@@ -15,11 +15,11 @@ system:
       the saving throw against the sphere's damage, and the sphere stops moving
       this turn.</p><p>When you move the Sphere, you can direct it over barriers
       up to 5 feet tall and jump it across pits up to 10 feet wide. The sphere
-      ignites flammable Objects not being worn or carried, and it sheds bright
-      light in a 20-foot radius and dim light for an additional 20
-      feet.</p><p><strong>At Higher Levels.</strong> When you cast this spell
-      using a spell slot of 3rd level or higher, the damage increases by 1d6 for
-      each slot level above 2nd.</p>
+      ignites flammable Objects not being worn or carried, and it sheds
+      &amp;reference[bright light] in a 20-foot radius and &amp;reference[dim
+      light] for an additional 20 feet.</p><p><strong>At Higher Levels.</strong>
+      When you cast this spell using a spell slot of 3rd level or higher, the
+      damage increases by 1d6 for each slot level above 2nd.</p>
     chat: ''
   source:
     custom: ''
@@ -37,14 +37,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '5'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -65,36 +68,119 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    AdvbemIjfAfOL9OU:
+      type: summon
+      name: Summon Sphere
+      _id: AdvbemIjfAfOL9OU
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: (@item.level)d6
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: true
+        saves: true
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: Y9DJQ8V9R9IKJWAm
+          uuid: Compendium.dnd5e.monsters.Actor.v3dIgWrdrQRede2X
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+    Abi8r6ArCkjaIPUs:
+      type: save
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        override: true
+        concentration: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '30'
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
         onSave: half
         parts:
@@ -111,27 +197,42 @@ system:
               number: 1
               formula: ''
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: Abi8r6ArCkjaIPUs
+      name: Roll Sphere
   identifier: flaming-sphere
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-large-orange.webp
+img: icons/magic/earth/orb-lava-orange.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351860
-  modifiedTime: 1725992718378
+  modifiedTime: 1781224711848
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!FjYE214HTERCRZNm'
