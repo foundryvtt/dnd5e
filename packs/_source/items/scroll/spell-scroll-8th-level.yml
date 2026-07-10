@@ -67,7 +67,12 @@ system:
     value: scroll
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This spell scroll bears the words of a single spell, written in a
+      mystical cipher. If the spell is on your class's spell list, you can read
+      the scroll and cast its spell without providing any material components.
+      Otherwise, the scroll is unintelligible.</p>
+    name: Unidentified Scroll
   container: null
   properties:
     - mgc
@@ -83,11 +88,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037222888
-  modifiedTime: 1750697344647
+  modifiedTime: 1783648834704
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!aOrinPg7yuDZEuWr'
