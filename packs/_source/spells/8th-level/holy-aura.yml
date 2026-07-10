@@ -88,13 +88,7 @@ system:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: LteHhamNgl8Pu2NE
-          level:
-            min: null
-            max: null
-        - _id: vtInaQPPgrwFw8iq
-          level: {}
+      effects: []
       range:
         override: false
       target:
@@ -102,8 +96,14 @@ system:
         template:
           contiguous: false
           units: ft
+          type: ''
+          size: ''
+          count: ''
         affects:
           choice: false
+          type: ''
+          count: ''
+          special: ''
         override: false
       roll:
         formula: ''
@@ -121,6 +121,7 @@ system:
         level:
           min: null
           max: null
+      behaviors: []
     dnd5eactivity100:
       _id: dnd5eactivity100
       type: save
@@ -274,50 +275,6 @@ effects:
       duplicateSource: null
       exportSource: null
     _key: '!items.effects!j8S49Rea8b1640Zi.vtInaQPPgrwFw8iq'
-  - name: Holy Aura
-    img: icons/magic/light/explosion-beam-impact-silhouette.webp
-    origin: Compendium.dnd5e.spells.Item.j8S49Rea8b1640Zi
-    transfer: false
-    _id: LteHhamNgl8Pu2NE
-    type: base
-    system:
-      changes: []
-    disabled: false
-    start: null
-    duration:
-      value: 1
-      units: minutes
-      expiry: turnStart
-      expired: false
-    description: >-
-      <p>Divine light washes out from you and coalesces in a soft radiance in a
-      30-foot radius around you. Creatures of your choice in that radius when
-      you cast this spell shed &amp;reference[dim light] in a 5-foot radius and
-      have advantage on all saving throws, and other creatures have disadvantage
-      on attack rolls against them until the spell ends.</p><p>In addition, when
-      a fiend or an undead hits an affected creature with a melee attack, the
-      aura flashes with brilliant light. The attacker must succeed on a [[/save
-      con]] saving throw or be &amp;reference[Blinded] until the spell ends.</p>
-    tint: '#ffffff'
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1781450901413
-      modifiedTime: 1781450941657
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!j8S49Rea8b1640Zi.LteHhamNgl8Pu2NE'
   - name: Blinded by Holy Aura
     img: icons/magic/light/explosion-glow-spiral-yellow.webp
     origin: Compendium.dnd5e.spells.Item.j8S49Rea8b1640Zi
@@ -364,7 +321,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037363483
-  modifiedTime: 1781451112820
+  modifiedTime: 1783719776928
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!j8S49Rea8b1640Zi'
