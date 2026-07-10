@@ -4,9 +4,9 @@ type: consumable
 img: icons/consumables/potions/bottle-round-corked-red.webp
 system:
   description:
-    value: |-
-      <p><em>The potion's red liquid glimmers when agitated.</em></p>
-      <p>You regain 8d4+8 hit points when you drink this potion.</p>
+    value: >-
+      <p><em>The potion's red liquid glimmers when agitated.</em></p><p>You
+      regain [[/healing]] when you drink this potion.</p>
     chat: ''
   source:
     custom: ''
@@ -49,14 +49,14 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>The potion's red liquid glimmers when agitated.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    Kzhyy0MhTDsOwDWy:
       type: heal
       activation:
         type: action
@@ -68,16 +68,18 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -93,7 +95,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -114,12 +117,13 @@ system:
           mode: whole
           number: null
           formula: ''
+        modifiers: []
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -127,7 +131,11 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: Kzhyy0MhTDsOwDWy
   attuned: false
   identifier: potion-of-superior-healing
 effects: []
@@ -138,11 +146,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037101838
-  modifiedTime: 1764618987292
+  modifiedTime: 1783372670336
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5m9ErO9In8Uc5yyf'

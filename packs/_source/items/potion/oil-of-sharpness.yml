@@ -1,17 +1,16 @@
 _id: C0MNXWA81ufzGlp5
 name: Oil of Sharpness
 type: consumable
-img: icons/consumables/potions/potion-tube-corked-bat-gold-red.webp
+img: icons/consumables/potions/flask-ornate-skull-green.webp
 system:
   description:
     value: >-
       <p><em>This clear, gelatinous oil sparkles with tiny, ultrathin silver
-      shards. </em></p>
-
-      <p>The oil can coat one slashing or piercing weapon or up to 5 pieces of
-      slashing or piercing ammunition. Applying the oil takes 1 minute. For 1
-      hour, the coated item is magical and has a +3 bonus to attack and damage
-      rolls.</p>
+      shards.</em></p><p>The oil can coat one slashing or piercing weapon or up
+      to 5 pieces of slashing or piercing ammunition. Applying the oil takes
+      [[lookup @labels.activation activity=cT06cj9LC81wNski]]. For [[lookup
+      @labels.duration activity=cT06cj9LC81wNski]], the coated item is magical
+      and has a +3 bonus to attack and damage rolls.</p>
     chat: ''
   source:
     custom: ''
@@ -49,80 +48,278 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This clear, gelatinous oil sparkles with tiny, ultrathin silver
+      shards.</p>
+    name: Unidentified Oil
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    cT06cj9LC81wNski:
+      type: enchant
+      name: Apply Oil to Weapon
+      _id: cT06cj9LC81wNski
+      img: ''
+      sort: 200000
       activation:
-        type: action
-        value: 1
-        condition: ''
+        type: minute
         override: false
+        condition: ''
+        value: 1
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '1'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: IHJhvGPE1KPinh1r
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
       range:
         units: touch
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: object
           choice: false
+          type: object
+          count: '1'
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
         prompt: false
-        visible: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: weapon
+    Wa0cWtddVr7eTGOz:
+      type: enchant
+      name: Apply Oil to Ammunition
+      img: ''
+      sort: 300000
+      activation:
+        type: minute
+        override: false
+        value: 1
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: IHJhvGPE1KPinh1r
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '5'
+          type: object
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: true
+        categories:
+          - ammo
+        properties: []
+        type: consumable
+      _id: Wa0cWtddVr7eTGOz
   attuned: false
   identifier: oil-of-sharpness
-effects: []
+effects:
+  - type: enchantment
+    name: 'Oil of Sharpness: Weapon'
+    img: icons/consumables/potions/flask-ornate-skull-green.webp
+    disabled: true
+    _id: IHJhvGPE1KPinh1r
+    system:
+      changes:
+        - key: system.magicalBonus
+          type: upgrade
+          value: 3
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: >-
+            {} <p><strong>Oil of Sharpness.</strong> For the duration, this
+            weapon is magical and has a +3 bonus to attack and damage rolls.</p>
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, this weapon is magical and has a +3 bonus to attack
+      and damage rolls.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783375289476
+      modifiedTime: 1783375558654
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!C0MNXWA81ufzGlp5.IHJhvGPE1KPinh1r'
+  - type: enchantment
+    name: 'Oil of Sharpness: Ammunition'
+    img: icons/consumables/potions/flask-ornate-skull-green.webp
+    disabled: true
+    system:
+      changes:
+        - key: system.magicalBonus
+          type: upgrade
+          value: 3
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: >-
+            {} <p><strong>Oil of Sharpness.</strong> For the duration, this
+            piece of ammunition is magical and has a +3 bonus to attack and
+            damage rolls.</p>
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, this piece of ammunition is magical and has a +3
+      bonus to attack and damage rolls.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783375559743
+      modifiedTime: 1783375616755
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: L6ERoLhCCv7UsF1b
+    _key: '!items.effects!C0MNXWA81ufzGlp5.L6ERoLhCCv7UsF1b'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -130,11 +327,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037126982
-  modifiedTime: 1764619248930
+  modifiedTime: 1783646334597
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!C0MNXWA81ufzGlp5'

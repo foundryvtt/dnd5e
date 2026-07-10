@@ -1,19 +1,18 @@
 _id: f5chGcpQCi1HYPQw
 name: Potion of Poison Resistance
 type: consumable
-img: icons/consumables/potions/bottle-bulb-corked-green.webp
+img: icons/consumables/potions/potion-tube-corked-tied-green.webp
 system:
   description:
     value: >-
       <p><em>The potion is a plain indescriminate color and smells slightly
-      foul.</em></p>
-
-      <p>When you drink this potion, you gain resistance to Poison type damage
-      for 1 hour.</p>
-
-      <p>For other potions of resistance, roll on the
+      foul.</em></p><p>When you drink this potion, you gain resistance to poison
+      damage for [[lookup @labels.duration
+      activity=AqP9tNv6zZ2N6PLi]].</p><section id="secret-bqCNFf2zrQ0N0kKC"
+      class="secret"><p><strong>Foundry Note</strong></p><p>For other potions of
+      resistance, roll on the
       @UUID[Compendium.dnd5e.tables.RollTable.JzLOE4IxcmxjLLuz]{Potion of
-      Resistance} table.</p>
+      Resistance} table.</p></section>
     chat: ''
   source:
     custom: ''
@@ -51,14 +50,16 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>The potion is a plain indescriminate color and smells slightly
+      foul.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    AqP9tNv6zZ2N6PLi:
       type: utility
       activation:
         type: action
@@ -70,19 +71,23 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: vkhMbnwDVjFzcSsl
+          level: {}
       range:
         units: touch
         special: ''
@@ -95,7 +100,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -112,8 +118,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -121,10 +127,54 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      flags: {}
+      _id: AqP9tNv6zZ2N6PLi
   attuned: false
   identifier: potion-of-poison-resistance
-effects: []
+effects:
+  - name: Poison Resistance
+    img: icons/skills/toxins/cauldron-bubbles-overflow-green.webp
+    origin: Compendium.dnd5e.items.Item.f5chGcpQCi1HYPQw
+    transfer: false
+    _id: vkhMbnwDVjFzcSsl
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: poison
+          phase: initial
+          priority: null
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>You have resistance to poison damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781978082511
+      modifiedTime: 1781979090769
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!f5chGcpQCi1HYPQw.vkhMbnwDVjFzcSsl'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -132,11 +182,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037245805
-  modifiedTime: 1764620485301
+  modifiedTime: 1783372256612
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!f5chGcpQCi1HYPQw'

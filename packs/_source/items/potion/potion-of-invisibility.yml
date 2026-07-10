@@ -6,13 +6,10 @@ system:
   description:
     value: >-
       <p><em>This potion's container looks empty but feels as though it holds
-      liquid. </em></p>
-
-      <p>When you drink it, you become invisible for 1 hour. Anything you wear
-      or carry is invisible with you. The effect ends early if you attack or
-      cast a spell.</p>
-
-      <p> </p>
+      liquid.</em></p><p>When you drink it, you become &amp;reference[invisible]
+      for [[lookup @labels.duration activity=V2JumDYJgM7ktIzw]]. Anything you
+      wear or carry is invisible with you. The effect ends early if you attack
+      or cast a spell.</p>
     chat: ''
   source:
     custom: ''
@@ -50,14 +47,16 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This potion's container looks empty but feels as though it holds
+      liquid.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    V2JumDYJgM7ktIzw:
       type: utility
       activation:
         type: action
@@ -69,19 +68,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: oGWqgNUAzC2P3E2m
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -94,7 +98,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -111,8 +116,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -120,10 +125,54 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: V2JumDYJgM7ktIzw
   attuned: false
   identifier: potion-of-invisibility
-effects: []
+effects:
+  - name: Invisibility
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+    origin: Compendium.dnd5e.items.Item.rTn4p9nJr4Aq2GPB
+    transfer: false
+    _id: oGWqgNUAzC2P3E2m
+    type: base
+    system:
+      changes: []
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, you are &amp;reference[invisible apply=false].
+      Anything you wear or carry is invisible with you. This effect ends early
+      if you attack or cast a spell.</p>
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783373118688
+      modifiedTime: 1783376537990
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!rTn4p9nJr4Aq2GPB.oGWqgNUAzC2P3E2m'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -131,11 +180,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037299390
-  modifiedTime: 1764621070892
+  modifiedTime: 1783373205562
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!rTn4p9nJr4Aq2GPB'
