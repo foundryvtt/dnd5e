@@ -226,6 +226,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Apply shims to moved fields
     change = change.effect._applyChangeShim(change);
 
+    if ( !change.effect.shouldApplyChange(change, options.replacementData) ) return {};
+
     // Handle special actor flags
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
 
@@ -388,21 +390,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     return super._applyChangeUpgrade(actor, change, current, delta, changes);
   }
 
-  /* -------------------------------------------- */
-
-  /**
-   * Evaluate the conditions to see if the effect or change should be applied.
-   * @param {Filter} [conditions]  Filter definition to evaluate.
-   * @returns {boolean}
-   */
-  evaluateConditions(conditions) {
-    if ( !conditions ) return true;
-    const rollData = (this.system.applicableType === "Actor") && this.actor
-      ? this.actor.getRollData({ deterministic: true })
-      : this.item.getRollData({ deterministic: true });
-    return conditions.check(rollData);
-  }
-
   /* --------------------------------------------- */
 
   /**
@@ -439,22 +426,18 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Determine whether a specific change should be applied during this phase, setting `applied` if approved.
    * @param {object} change           Change that might be applied.
-   * @param {object} [options={}]
-   * @param {string} [options.phase]  Active effect phase being checked.
+   * @param {object} [conditionData]  Data used to evaluate conditions.
    * @returns {boolean}
    */
-  shouldApplyChange(change, { phase }={}) {
-    // TODO: Adapt when core implements https://github.com/foundryvtt/foundryvtt/issues/13931, if it does
-    if ( change.phase !== phase ) return false;
-
-    const targetDoc = this.applicableType === "Actor" ? this.actor : this.applicableType === "Item" ? this.item : null;
-    const conditionData = targetDoc?.getRollData?.();
+  shouldApplyChange(change, conditionData) {
     if ( conditionData ) {
-      if ( change.effect.system.conditions?.check(conditionData) === false ) return false;
+      if ( this.system.conditions?.check(conditionData) === false ) return false;
       if ( change.conditions?.check(conditionData) === false ) return false;
     }
 
-    change.applied = true;
+    const originalChange = this.system.changes.find(c => c._id === change._id);
+    if ( originalChange ) originalChange.applied = true;
+
     return true;
   }
 

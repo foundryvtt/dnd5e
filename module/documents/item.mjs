@@ -474,7 +474,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     for ( const effect of this.allApplicableEffects() ) {
       if ( !effect.active ) continue;
       for ( const change of effect.system.changes ) {
-        if ( (change.key === "") || !effect.shouldApplyChange(change) ) continue;
+        if ( change.key === "" ) continue;
         const copy = foundry.utils.deepClone(change);
         copy.effect = effect;
         changes.push(copy);
@@ -487,7 +487,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const overrides = {};
     const replacementData = this.getRollData();
     for ( const change of changes ) {
-      const result = ActiveEffect.CHANGE_TYPES[change.type].handler?.(this, change)
+      const result = ActiveEffect.CHANGE_TYPES[change.type]?.handler?.(this, change)
         ?? change.effect.constructor.applyChange(this, change, { replacementData });
       if ( foundry.utils.isPlainObject(result) ) Object.assign(overrides, result);
     }
