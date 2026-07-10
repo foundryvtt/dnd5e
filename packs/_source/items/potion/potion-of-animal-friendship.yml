@@ -88,7 +88,9 @@ system:
       effects:
         - _id: U6yBzHzpfZRh3yZY
           uuid: null
-          level: {}
+          level:
+            min: null
+            max: null
       flags: {}
       range:
         units: touch
@@ -117,7 +119,7 @@ system:
           max: null
         requireAttunement: false
         requireIdentification: false
-        requireMagic: false
+        requireMagic: true
         identifier: ''
       roll:
         prompt: false
@@ -177,7 +179,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037282716
-  modifiedTime: 1783377156497
+  modifiedTime: 1783646399495
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!nXWevqtV6p484N59'

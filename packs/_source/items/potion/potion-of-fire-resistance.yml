@@ -7,7 +7,7 @@ system:
     value: >-
       <p><em>The potion is a plain indescriminate color and smells slightly
       foul.</em></p><p>When you drink this potion, you gain resistance to fire
-      type damage for [[lookup @labels.duration
+      damage for [[lookup @labels.duration
       activity=qkJxETJ3791U09MR]].</p><section id="secret-vs12uqzX6R92PN4m"
       class="secret"><p><strong>Foundry Note</strong></p><p>For other potions of
       resistance, roll on the
@@ -87,7 +87,10 @@ system:
         override: false
       effects:
         - _id: camHDa74ZwAPUqmG
-          level: {}
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         units: touch
         special: ''
@@ -186,7 +189,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037159774
-  modifiedTime: 1783372203791
+  modifiedTime: 1783646479399
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Jj4iFQQGvckx8Wsj'

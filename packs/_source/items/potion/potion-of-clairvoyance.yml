@@ -56,65 +56,6 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    8hBw81kwg8UiPHa3:
-      type: cast
-      spell:
-        uuid: Compendium.dnd5e.spells.Item.cg50KpBkBdPK6vPL
-        challenge:
-          override: false
-        properties:
-          - vocal
-          - somatic
-          - material
-        spellbook: false
-        ability: ''
-        level: 3
-      _id: 8hBw81kwg8UiPHa3
-      img: ''
-      sort: 200000
-      activation:
-        type: action
-        override: false
-      behaviors: []
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        value: ''
-        chatFlavor: ''
-      duration:
-        units: minute
-        concentration: false
-        override: true
-        value: '10'
-      flags: {}
-      range:
-        units: self
-        override: false
-      target:
-        template:
-          contiguous: false
-          stationary: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      visibility:
-        level:
-          min: null
-          max: null
-        requireAttunement: false
-        requireIdentification: false
-        requireMagic: false
-        identifier: ''
-      name: Drink
     3sfoi99DiGRXsmVd:
       type: utility
       name: Drink
@@ -243,7 +184,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037226301
-  modifiedTime: 1783377554562
+  modifiedTime: 1783646413499
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!bAyr7j5Peq9wIJTa'

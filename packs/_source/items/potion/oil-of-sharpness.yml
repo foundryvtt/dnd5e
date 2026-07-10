@@ -113,7 +113,7 @@ system:
           count: '1'
           special: ''
         override: false
-        prompt: true
+        prompt: false
       uses:
         spent: 0
         recovery: []
@@ -124,7 +124,7 @@ system:
           max: null
         requireAttunement: false
         requireIdentification: false
-        requireMagic: false
+        requireMagic: true
         identifier: ''
       enchant:
         self: false
@@ -188,7 +188,7 @@ system:
           type: object
           special: ''
         override: false
-        prompt: true
+        prompt: false
       uses:
         spent: 0
         recovery: []
@@ -199,7 +199,7 @@ system:
           max: null
         requireAttunement: false
         requireIdentification: false
-        requireMagic: false
+        requireMagic: true
         identifier: ''
       enchant:
         self: false
@@ -331,7 +331,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037126982
-  modifiedTime: 1783375642051
+  modifiedTime: 1783646334597
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!C0MNXWA81ufzGlp5'

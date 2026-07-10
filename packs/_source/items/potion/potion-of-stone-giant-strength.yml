@@ -6,10 +6,10 @@ system:
   description:
     value: >-
       <p><em>This potion's transparent liquid has floating in it a sliver of
-      fingernail from a giant of the appropriate type.</em></p><p>When you drink
-      this potion, your Strength score changes to 23 for [[lookup
-      @labels.duration activity=0S5O1JqFRIlf9gik]]. The potion has no effect on
-      you if your Strength is equal to or greater than that score.</p>
+      fingernail from a stone giant.</em></p><p>When you drink this potion, your
+      Strength score changes to 23 for [[lookup @labels.duration
+      activity=0S5O1JqFRIlf9gik]]. The potion has no effect on you if your
+      Strength is equal to or greater than that score.</p>
     chat: ''
   source:
     custom: ''
@@ -49,7 +49,7 @@ system:
   unidentified:
     description: >-
       <p>This potion's transparent liquid has floating in it a sliver of
-      fingernail from a giant of the appropriate type.</p>
+      fingernail.</p>
     name: Unidentified Potion
   container: null
   properties:
@@ -188,7 +188,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037099251
-  modifiedTime: 1783372948526
+  modifiedTime: 1783646235617
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!4ZiJsDTRA1GgcWKP'
