@@ -122,7 +122,17 @@ effects:
     _id: 32YeLueknbdTmm6Y
     type: base
     system:
-      changes: []
+      changes:
+        - key: system.attributes.ac.bonus
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: ALL
+          phase: initial
+          priority: null
     disabled: false
     start: null
     duration:
@@ -150,7 +160,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781266182507
-      modifiedTime: 1781266281236
+      modifiedTime: 1783644066113
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null

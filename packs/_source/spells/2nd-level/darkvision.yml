@@ -136,17 +136,18 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781222470256
-      modifiedTime: 1781222470256
+      modifiedTime: 1783644603200
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/eyes/lizard-single-slit-blue.webp
     type: base
     system:
       changes:
-        - key: system.attributes.senses.darkvision
-          value: 60
-          priority: null
+        - key: system.attributes.senses.ranges.darkvision
           type: upgrade
+          value: 60
+          phase: initial
+          priority: null
     sort: 0
     start: null
     showIcon: 1

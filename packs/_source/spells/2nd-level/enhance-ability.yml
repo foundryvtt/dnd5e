@@ -141,7 +141,7 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.con.bonuses.check
+        - key: system.abilities.con.check.rollmode
           type: add
           value: 1
           phase: initial
@@ -154,7 +154,7 @@ effects:
       expiry: turnStart
       expired: false
     description: >-
-      <p>FOr the duration of the spell, you have advantage on Constitution
+      <p>For the duration of the spell, you have advantage on Constitution
       Checks. You also gain 2d6 temporary hit points, which are lost when the
       spell ends.</p>
     tint: '#ffffff'
@@ -171,7 +171,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781223235541
-      modifiedTime: 1781223565278
+      modifiedTime: 1783644564314
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -185,7 +185,7 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.str.bonuses.check
+        - key: system.abilities.str.check.rollmode
           type: add
           value: 1
           phase: initial
@@ -219,7 +219,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781223292367
-      modifiedTime: 1781223692218
+      modifiedTime: 1783644528808
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -233,7 +233,7 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.dex.bonuses.check
+        - key: system.abilities.dex.check.rollmode
           type: add
           value: 1
           phase: initial
@@ -263,7 +263,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781223343599
-      modifiedTime: 1781226319897
+      modifiedTime: 1783644571585
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -277,7 +277,7 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.cha.bonuses.check
+        - key: system.abilities.cha.check.rollmode
           type: add
           value: 1
           phase: initial
@@ -306,7 +306,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781223413371
-      modifiedTime: 1781223581307
+      modifiedTime: 1783644575469
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -320,7 +320,7 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.int.bonuses.check
+        - key: system.abilities.int.check.rollmode
           type: add
           value: 1
           phase: initial
@@ -349,7 +349,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781223456036
-      modifiedTime: 1781223587091
+      modifiedTime: 1783644545025
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -363,7 +363,7 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.wis.bonuses.check
+        - key: system.abilities.wis.check.rollmode
           type: add
           value: 1
           phase: initial
@@ -390,7 +390,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781223503142
-      modifiedTime: 1781223593041
+      modifiedTime: 1783644540216
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null

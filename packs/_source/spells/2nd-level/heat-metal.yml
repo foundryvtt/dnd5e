@@ -303,32 +303,32 @@ effects:
     type: base
     system:
       changes:
-        - key: system.abilities.str.bonuses.check
+        - key: system.abilities.str.check.rollmode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.dex.bonuses.check
+        - key: system.abilities.dex.check.rollmode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.con.bonuses.check
+        - key: system.abilities.con.check.rollmode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.int.bonuses.check
+        - key: system.abilities.int.check.rollmode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.wis.bonuses.check
+        - key: system.abilities.wis.check.rollmode
           type: add
           value: -1
           phase: initial
           priority: null
-        - key: system.abilities.cha.bonuses.check
+        - key: system.abilities.cha.check.rollmode
           type: add
           value: -1
           phase: initial
@@ -357,7 +357,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781226234022
-      modifiedTime: 1781226446518
+      modifiedTime: 1783644287194
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null

@@ -61,79 +61,12 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: attack
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-      target:
-        prompt: true
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-      attack:
-        ability: ''
-        bonus: ''
-        critical:
-          threshold: null
-        flat: false
-        type:
-          value: melee
-          classification: ''
-      damage:
-        critical:
-          bonus: ''
-        includeBase: true
-        parts:
-          - custom:
-              enabled: true
-              formula: '@flags.world.flame-blade-damage'
-            number: null
-            denomination: null
-            bonus: ''
-            modifiers: []
-            types:
-              - fire
-            scaling:
-              mode: ''
-              number: 1
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 400000
-      name: Attack with Flame Blade
-      img: ''
-      visibility:
-        level:
-          min: null
-          max: null
     rUOzC7j6wRPm8fpO:
       type: utility
-      name: Cast
+      name: Evoke Flame Blade to Hand
       _id: rUOzC7j6wRPm8fpO
       img: ''
-      sort: 300000
+      sort: 600000
       activation:
         type: action
         override: false
@@ -141,36 +74,18 @@ system:
       consumption:
         scaling:
           allowed: false
-        spellSlot: true
+        spellSlot: false
         targets: []
       description:
-        value: ''
+        value: >-
+          <p>If you let go of the blade, it disappears, but you can evoke the
+          blade again as a Bonus Action.</p>
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: vULxJuCFS32tApK7
-          uuid: null
-          level:
-            min: 2
-            max: 3
-        - _id: tpXf44S04mFJMol7
-          uuid: null
-          level:
-            min: 4
-            max: 5
-        - _id: BUBEz95PSksSQbVs
-          uuid: null
-          level:
-            min: 6
-            max: 7
-        - _id: 9TTHVfcjufZowUOr
-          uuid: null
-          level:
-            min: 8
-            max: 9
+      effects: []
       flags: {}
       range:
         units: self
@@ -200,6 +115,112 @@ system:
         visible: false
         name: ''
         formula: ''
+    Wj7GiWyEQQKGdYol:
+      type: enchant
+      name: Cast
+      _id: Wj7GiWyEQQKGdYol
+      img: ''
+      sort: 500000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>You evoke a fiery blade in your free hand. The blade is similar in
+          size and shape to a Scimitar, and it lasts for the Duration. If you
+          let go of the blade, it disappears, but you can evoke the blade again
+          as a Bonus Action.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Dg3Qi2SmWyCMpmU4
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - rUOzC7j6wRPm8fpO
+            effect:
+              - vULxJuCFS32tApK7
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+        - _id: nHmffcGZo11sgPV3
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - rUOzC7j6wRPm8fpO
+            effect:
+              - tpXf44S04mFJMol7
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+        - _id: JF8ELBI1o8vmfiZA
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - rUOzC7j6wRPm8fpO
+            effect:
+              - BUBEz95PSksSQbVs
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+        - _id: HrBnniYMsaCB4PQz
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - rUOzC7j6wRPm8fpO
+            effect:
+              - 9TTHVfcjufZowUOr
+            item:
+              - Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
   identifier: flame-blade
 effects:
   - type: enchantment
@@ -280,7 +301,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781225001605
-      modifiedTime: 1783217977266
+      modifiedTime: 1783644874705
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -542,14 +563,23 @@ folder: Qi4Se3we69ukl2V9
 sort: 0
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - vULxJuCFS32tApK7
+        - tpXf44S04mFJMol7
+        - BUBEz95PSksSQbVs
+        - 9TTHVfcjufZowUOr
+      activity:
+        - rUOzC7j6wRPm8fpO
 _stats:
   duplicateSource: null
   coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037350089
-  modifiedTime: 1783218022755
+  modifiedTime: 1783645512418
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Advtckpz1B733bu9'

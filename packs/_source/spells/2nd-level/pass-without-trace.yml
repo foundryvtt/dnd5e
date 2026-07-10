@@ -119,7 +119,12 @@ effects:
     _id: yXrjsSvXaxXXzsU2
     type: base
     system:
-      changes: []
+      changes:
+        - key: system.skills.ste.bonuses.check
+          type: add
+          value: 10
+          phase: initial
+          priority: null
     disabled: false
     start: null
     duration:
@@ -128,12 +133,9 @@ effects:
       expiry: turnStart
       expired: false
     description: >-
-      <p>A veil of shadows and Silence radiates from you, masking you and your
-      companions from detection. For the Duration, each creature you choose
-      within 30 feet of you (including you) has a +10 bonus to Dexterity
-      (Stealth) checks and can't be tracked except by magical means. A creature
-      that receives this bonus leaves behind no tracks or other traces of its
-      passage.</p>
+      <p>A veil of shadows and silence masks you from detection. You have a a
+      +10 to Dexterity (Stealth) checks and can't be tracked except by magical
+      means. You leave behind no tracks or other traces of your passge.</p>
     tint: '#ffffff'
     statuses: []
     showIcon: 1
@@ -148,7 +150,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781229483125
-      modifiedTime: 1781229517159
+      modifiedTime: 1783644199247
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
