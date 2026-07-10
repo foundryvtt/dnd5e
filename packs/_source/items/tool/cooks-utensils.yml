@@ -1,7 +1,7 @@
 _id: Gflnp29aEv5Lc1ZM
 name: Cook's Utensils
 type: tool
-img: icons/tools/laboratory/bowl-mixing.webp
+img: icons/tools/laboratory/cauldron-empty-black.webp
 system:
   description:
     value: >-
@@ -45,8 +45,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    CmH1aq9qxYEhVGQm:
       type: check
       activation:
         type: ''
@@ -61,15 +60,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -80,7 +80,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -90,11 +91,30 @@ system:
         override: false
       check:
         ability: wis
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: CmH1aq9qxYEhVGQm
+      name: Use Tools
   attuned: false
   identifier: cooks-utensils
 effects: []
@@ -105,11 +125,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037148068
-  modifiedTime: 1725992499881
+  modifiedTime: 1783649649381
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Gflnp29aEv5Lc1ZM'

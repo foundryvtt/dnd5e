@@ -87,8 +87,7 @@ system:
   crewed: false
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    0dfjzlgueZCUfAk8:
       type: attack
       activation:
         type: action
@@ -103,6 +102,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
@@ -123,7 +123,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -149,10 +150,17 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 0dfjzlgueZCUfAk8
   attuned: false
   ammunition: {}
   identifier: staff
@@ -162,18 +170,14 @@ folder: xedn1r43VWuEBcli
 sort: 0
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037124380
-  modifiedTime: 1730324904161
+  modifiedTime: 1783649943098
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!BeKIrNIvNHRPQ4t5'

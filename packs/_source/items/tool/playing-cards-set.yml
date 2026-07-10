@@ -35,9 +35,16 @@ system:
   bonus: ''
   type:
     value: game
-    baseItem: ''
+    baseItem: card
   unidentified:
-    description: ''
+    description: >-
+      <p>This item encompasses a wide range of playing card types, both unmarked
+      and marked.</p>
+
+      <p>If you are proficient with a gaming set, you can add your proficiency
+      bonus to ability checks you make to play a game with that set. Each type
+      of gaming set requires a separate proficiency.</p>
+    name: Unidentified Playing Cards Set
   container: null
   properties: []
   uses:
@@ -45,8 +52,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    HkDgcxCvNAnHH6Qx:
       type: check
       activation:
         type: ''
@@ -61,15 +67,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -80,7 +87,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -90,11 +98,30 @@ system:
         override: false
       check:
         ability: dex
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Play Game
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        identifier: ''
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: HkDgcxCvNAnHH6Qx
   attuned: false
   identifier: playing-cards-set
 effects: []
@@ -105,11 +132,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037216493
-  modifiedTime: 1725992522855
+  modifiedTime: 1783649850256
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!YwlHI3BVJapz4a3E'

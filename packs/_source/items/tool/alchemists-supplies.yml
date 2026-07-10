@@ -1,7 +1,7 @@
 _id: SztwZhbhZeCqyAes
 name: Alchemist's Supplies
 type: tool
-img: icons/tools/cooking/mortar-herbs-yellow.webp
+img: icons/tools/laboratory/vials-blue-pink.webp
 system:
   description:
     value: >-
@@ -37,7 +37,14 @@ system:
     value: art
     baseItem: alchemist
   unidentified:
-    description: ''
+    description: >-
+      <p>These special tools include the items needed to pursue a craft or trade
+      in alchemy.</p>
+
+      <p>Proficiency with a set of artisan's tools lets you add your proficiency
+      bonus to any ability checks you make using the tools in your craft. Each
+      type of artisan's tools requires a separate proficiency.</p>
+    name: Unidentified Alchemist's Supplies
   container: null
   properties: []
   uses:
@@ -45,8 +52,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    JYiIYjfC4CdDixTE:
       type: check
       activation:
         type: ''
@@ -61,15 +67,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -80,7 +87,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -90,11 +98,30 @@ system:
         override: false
       check:
         ability: int
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: JYiIYjfC4CdDixTE
+      name: Use Tools
   attuned: false
   identifier: alchemists-supplies
 effects: []
@@ -105,11 +132,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037192417
-  modifiedTime: 1725992514876
+  modifiedTime: 1783649817578
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!SztwZhbhZeCqyAes'
