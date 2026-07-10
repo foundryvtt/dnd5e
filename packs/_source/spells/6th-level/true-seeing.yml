@@ -119,8 +119,8 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.senses.truesight
-          type: add
+        - key: system.attributes.senses.ranges.truesight
+          type: upgrade
           value: 120
           phase: initial
           priority: null
@@ -150,7 +150,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781438817594
-      modifiedTime: 1781438951022
+      modifiedTime: 1783719985531
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null

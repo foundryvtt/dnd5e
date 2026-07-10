@@ -59,7 +59,7 @@ system:
       activation:
         type: ''
         value: null
-        override: true
+        override: false
         condition: ''
       consumption:
         targets: []
@@ -72,7 +72,7 @@ system:
       duration:
         units: hour
         concentration: false
-        override: true
+        override: false
         value: '1'
       range:
         override: false
@@ -129,51 +129,6 @@ system:
           min: null
           max: null
       tempHP: ''
-    x4Ve9uYutRRHlCNi:
-      type: utility
-      name: Cast
-      img: null
-      sort: 100000
-      activation:
-        type: action
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        value: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      flags: {}
-      range:
-        units: self
-        override: false
-      target:
-        template:
-          contiguous: false
-          stationary: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-      visibility:
-        level: {}
-        requireAttunement: false
-        requireIdentification: false
-        requireMagic: false
-      roll:
-        prompt: false
-        visible: false
-      _id: x4Ve9uYutRRHlCNi
   identifier: conjure-fey
 sort: 0
 flags: {}
@@ -228,7 +183,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037366907
-  modifiedTime: 1781448208831
+  modifiedTime: 1783720083544
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!yN3XZZujhR4aVvPa'

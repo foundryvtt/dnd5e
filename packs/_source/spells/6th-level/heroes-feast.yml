@@ -131,7 +131,22 @@ effects:
     _id: 9nCmXRaDKtOjPZVh
     type: base
     system:
-      changes: []
+      changes:
+        - key: system.abilities.wis.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.traits.ci.value
+          type: add
+          value: frightened
+          phase: initial
+          priority: null
+        - key: system.traits.di.value
+          type: add
+          value: poison
+          phase: initial
+          priority: null
     disabled: false
     start: null
     duration:
@@ -158,7 +173,7 @@ effects:
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1781438601756
-      modifiedTime: 1781438673834
+      modifiedTime: 1783720211140
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
