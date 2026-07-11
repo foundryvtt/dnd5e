@@ -19,7 +19,7 @@ const {
 
 /**
  * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
- * @import { ActivityRollData } from "../../documents/_types.mjs";
+ * @import { ActivityRollData, ActivityRollDataOptions } from "../../documents/_types.mjs";
  * @import { DamageFormulaOptions } from "../shared/_types.mjs";
  * @import { ActivityData, BehaviorApplicationData, EffectApplicationData } from "./_types.mjs";
  */

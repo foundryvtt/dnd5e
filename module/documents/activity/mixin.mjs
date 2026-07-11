@@ -13,7 +13,6 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
- * @import { ActivityRollData, ActivityRollDataOptions } from "../_types.mjs";
  * @import {
  *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
  *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
