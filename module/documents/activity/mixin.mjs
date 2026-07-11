@@ -1216,21 +1216,6 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
-     * @param {ActivityRollDataOptions} [options]
-     * @returns {ActivityRollData}
-     */
-    getRollData(options) {
-      const rollData = this.item.getRollData(options);
-      rollData.activity = { ...this };
-      rollData.consumed = this.item.flags.dnd5e?.consumed;
-      rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
-      return rollData;
-    }
-
-    /* -------------------------------------------- */
-
-    /**
      * Get the best matched token from which this activity is being used if one can be found for this actor
      * in the current scene.
      * @returns {TokenDocument|void}

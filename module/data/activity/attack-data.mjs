@@ -258,7 +258,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData({ ammunition, attackMode, situational }={}) {
-    const rollData = Object.assign(this.getRollData(), { roll: { attackMode } });
+    const rollData = this.getRollData({ data: { roll: { attack: { mode: attackMode } } } });
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
@@ -365,6 +365,20 @@ export default class BaseAttackActivityData extends BaseActivityData {
     }
 
     return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(options={}) {
+    const rollData = super.getRollData(options);
+    if ( rollData.roll ) {
+      rollData.roll.attack ??= {};
+      rollData.roll.attack.classification = this.attack.type.classification;
+      rollData.roll.attack.type = rollData.roll.attack.mode?.includes("thrown") ? "ranged" : this.attack.type.value;
+      rollData.roll.type = "attack";
+    }
+    return rollData;
   }
 
   /* -------------------------------------------- */
