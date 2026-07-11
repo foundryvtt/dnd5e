@@ -133,7 +133,7 @@ export default class ScaleValueAdvancement extends Advancement {
     const options = super.getContextMenuOptions();
     options.push({
       label: "DND5E.ADVANCEMENT.ScaleValue.Action.CopyFormula",
-      icon: '<i class="fa-solid fa-copy"></i>',
+      icon: "fa-solid fa-copy",
       group: "copy",
       onClick: () => {
         const value = `@scale.${this.item.identifier}.${this.identifier}`;
