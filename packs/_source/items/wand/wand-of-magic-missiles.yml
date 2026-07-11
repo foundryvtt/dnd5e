@@ -1,18 +1,18 @@
 _id: 1taRIMF9w7jpnonN
 name: Wand of Magic Missiles
 type: equipment
-img: icons/weapons/wands/wand-gem-pink.webp
+img: icons/weapons/wands/wand-gem-blue.webp
 system:
   description:
     value: >-
-      <p><em>Wand</em></p><p>This wand has 7 charges. While holding it, you can
-      use an action to expend 1 or more of its charges to cast the
-      @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile} spell
-      from it. For 1 charge, you cast the 1st-level version of the spell. You
-      can increase the spell slot level by one for each additional charge you
-      expend.</p><p>The wand regains 1d6 + 1 expended charges daily at dawn. If
-      you expend the wand's last charge, roll a d20. On a 1, the wand crumbles
-      into ashes and is destroyed.</p>
+      <p><em>Wand</em></p><p>This wand has [[lookup @item.uses.max]] charges.
+      While holding it, you can use an action to expend 1 or more of its charges
+      to cast the @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic
+      Missile} spell from it. For 1 charge, you cast the 1st-level version of
+      the spell. You can increase the spell slot level by one for each
+      additional charge you expend.</p><p>The wand regains 1d6 + 1 expended
+      charges daily at dawn. If you expend the wand's last charge, roll a d20.
+      On a 1, the wand crumbles into ashes and is destroyed.</p>
     chat: ''
   source:
     custom: ''
@@ -59,6 +59,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   properties:
     - foc
@@ -88,7 +89,7 @@ system:
       consumption:
         scaling:
           allowed: true
-          max: ''
+          max: '@item.uses.value'
         spellSlot: true
         targets:
           - type: itemUses
@@ -127,6 +128,8 @@ system:
         identifier: ''
   attuned: false
   identifier: wand-of-magic-missiles
+  armor:
+    magicalBonus: ''
 effects: []
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
@@ -135,11 +138,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037087123
-  modifiedTime: 1764618736150
+  modifiedTime: 1783700373951
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1taRIMF9w7jpnonN'

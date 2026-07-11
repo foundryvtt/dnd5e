@@ -1,19 +1,22 @@
 _id: 5Rxo4K9cgpwgW9vZ
 name: Wand of Enemy Detection
 type: equipment
-img: icons/weapons/wands/wand-simple-eye.webp
+img: icons/weapons/staves/staff-hooked-banded.webp
 system:
   description:
     value: >-
-      <p><em>Wand (requires attunement)</em></p><p>This wand has 7 charges.
-      While holding it, you can use an action and expend 1 charge to speak its
-      command word. For the next minute, you know the direction of the nearest
-      creature hostile to you within 60 feet, but not its distance from you. The
-      wand can sense the presence of hostile creatures that are ethereal,
-      invisible, disguised, or hidden, as well as those in plain sight. The
-      effect ends if you stop holding the wand.</p><p>The wand regains 1d6 + 1
-      expended charges daily at dawn. If you expend the wand's last charge, roll
-      a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>
+      <p><em>Wand (requires attunement)</em></p><p>This wand has [[lookup
+      @item.uses.max]] charges. While holding it, you can use an action and
+      expend 1 charge to speak its command word. For the next [[lookup
+      @labels.duration activity=8rw7aoQH53r3yP40]], you know the direction of
+      the nearest creature hostile to you within [[lookup
+      @labels.description.range activity=8rw7aoQH53r3yP40]], but not its
+      distance from you. The wand can sense the presence of hostile creatures
+      that are ethereal, &amp;reference[invisible apply=false], disguised, or
+      hidden, as well as those in plain sight. The effect ends if you stop
+      holding the wand.</p><p>The wand regains 1d6 + 1 expended charges daily at
+      dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand
+      crumbles into ashes and is destroyed.</p>
     chat: ''
   source:
     custom: ''
@@ -55,6 +58,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   properties:
     - foc
@@ -81,10 +85,16 @@ system:
       description:
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: JOw7fImsOhKTI6E2
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -97,7 +107,7 @@ system:
           type: ''
         affects:
           choice: false
-          count: '1'
+          count: ''
           type: enemy
           special: ''
         override: false
@@ -123,7 +133,51 @@ system:
         requireIdentification: true
   attuned: false
   identifier: wand-of-enemy-detection
-effects: []
+  armor:
+    magicalBonus: ''
+effects:
+  - name: Detecting Enemies
+    img: icons/magic/perception/mask-stone-eyes-orange.webp
+    origin: Compendium.dnd5e.items.Item.5Rxo4K9cgpwgW9vZ
+    transfer: false
+    _id: JOw7fImsOhKTI6E2
+    type: base
+    system:
+      changes: []
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, you know the direction to the nearest creature
+      hostile to you within 60 feet, but not its distance from you. The wand
+      that granted this effect can sense the presence of hostile creatures that
+      are ethereal, &amp;reference[invisible apply=false], disguised, or hidden,
+      as well as those in plain sight. This effect ends if you stop holding the
+      wand.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783691771136
+      modifiedTime: 1783691923266
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!5Rxo4K9cgpwgW9vZ.JOw7fImsOhKTI6E2'
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
 ownership:
@@ -131,11 +185,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037100973
-  modifiedTime: 1764618981987
+  modifiedTime: 1783700143753
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5Rxo4K9cgpwgW9vZ'
