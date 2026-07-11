@@ -13,7 +13,6 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
- * @import { ActivityRollData, RollDataOptions } from "../_types.mjs";
  * @import {
  *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
  *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
@@ -1211,21 +1210,6 @@ export default function ActivityMixin(Base) {
       if ( !this.actor ) return null;
       relativeUUID ??= this.item.getFlag("dnd5e", "cachedFor");
       return fromUuidSync(relativeUUID, { relative: this.actor, strict: false });
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
-     * @param {RollDataOptions} [options]
-     * @returns {ActivityRollData}
-     */
-    getRollData(options) {
-      const rollData = this.item.getRollData(options);
-      rollData.activity = { ...this };
-      rollData.consumed = this.item.flags.dnd5e?.consumed;
-      rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
-      return rollData;
     }
 
     /* -------------------------------------------- */
