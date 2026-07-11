@@ -2,6 +2,19 @@
  * @extends {Map<string, Map<string, ChangeData[]>>}
  */
 export default class AppliedRules extends Map {
+  /**
+   * Add a change to the collection of applied rules.
+   * @param {ActiveEffectChangeData} change
+   */
+  add(change) {
+    const type = change.type.startsWith("dnd5e.") ? change.type.split(".")[1] : change.type;
+    if ( !this.has(change.key) ) super.set(change.key, new Map());
+    if ( this.get(change.key).has(type) ) this.get(change.key).get(type).push(change);
+    else this.get(change.key).set(type, [change]);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   get(key) {
     if ( !key ) return;
@@ -21,22 +34,6 @@ export default class AppliedRules extends Map {
    */
   getValues(key) {
     return this.get(key)?.map(c => c.value) ?? [];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  set(key, value) {
-    if ( !key ) return this;
-    if ( key.type && key.key ) {
-      const type = key.type.split(".")[1];
-      if ( !this.has(key.key) ) super.set(key.key, new Map());
-      if ( this.get(key.key).has(type) ) this.get(key.key).get(type).push(key);
-      else this.get(key.key).set(type, [key]);
-    } else {
-      super.set(key, value);
-    }
-    return this;
   }
 
   /* -------------------------------------------- */
@@ -104,8 +101,8 @@ class RulesIterator extends Iterator {
    */
   filterWith(rollData) {
     return new RulesIterator(this.filter(r => {
-      if ( r.effect?.system.conditions?.recheck(rollData) === false ) return false;
-      if ( r.conditions?.recheck(rollData) === false ) return false;
+      if ( r.effect?.system.conditions?.check(rollData) === false ) return false;
+      if ( r.conditions?.check(rollData) === false ) return false;
       return true;
     }));
   }
@@ -123,31 +120,13 @@ class RulesIterator extends Iterator {
   /* -------------------------------------------- */
 
   /**
-   * Find the highest value among all of the provided rules, or `-Infinity` of no rules are available.
-   * @returns {number}
-   */
-  toLargest() {
-    return this.values(Number).reduce((max, value) => value > max ? value : max, -Infinity);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Find the lowest value among all of the provided rules, or `Infinity` of no rules are available.
-   * @returns {number}
-   */
-  toSmallest() {
-    return this.values(Number).reduce((min, value) => value < min ? value : min, Infinity);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Transform each rule element into its underlying value.
    * @param {Number|String} [type]  Transform value into specific primitive type.
    * @returns {RulesIterator}
    */
   values(type) {
-    return new RulesIterator(this.map(r => type ? type(r.value ?? r) : r.value ?? r));
+    return new RulesIterator(
+      this.map(r => r.value ?? r).filter(v => (v !== "") && (v != null)).map(v => type ? type(v) : v)
+    );
   }
 }

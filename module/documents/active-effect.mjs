@@ -406,7 +406,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static _applyChangeRule(targetDoc, change, options) {
     if ( !targetDoc.appliedRules ) return;
-    targetDoc.appliedRules.set(change);
+    targetDoc.appliedRules.add(change);
   }
 
   /* -------------------------------------------- */

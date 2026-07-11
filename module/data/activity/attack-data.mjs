@@ -258,7 +258,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData({ ammunition, attackMode, situational }={}) {
-    const rollData = this.getRollData({ roll: { attackMode } });
+    const rollData = Object.assign(this.getRollData(), { roll: { attackMode } });
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;

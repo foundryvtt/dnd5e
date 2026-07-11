@@ -1220,12 +1220,11 @@ export default function ActivityMixin(Base) {
      * @param {ActivityRollDataOptions} [options]
      * @returns {ActivityRollData}
      */
-    getRollData({ roll, ...options }={}) {
+    getRollData(options) {
       const rollData = this.item.getRollData(options);
       rollData.activity = { ...this };
       rollData.consumed = this.item.flags.dnd5e?.consumed;
       rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
-      rollData.roll = roll;
       return rollData;
     }
 
