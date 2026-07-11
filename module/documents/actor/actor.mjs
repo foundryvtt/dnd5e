@@ -3315,7 +3315,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( app instanceof foundry.applications.sidebar.apps.Compendium ) return;
     entryOptions.push({
       label: "DND5E.TRANSFORM.Action.Restore",
-      icon: '<i class="fa-solid fa-backward"></i>',
+      icon: "fa-solid fa-backward",
       group: "system",
       visible: li => {
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -3329,7 +3329,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, {
       label: "DND5E.Group.Primary.Set",
-      icon: '<i class="fa-solid fa-star"></i>',
+      icon: "fa-solid fa-star",
       group: "system",
       visible: li => {
         const actor = game.actors.get(li.dataset.entryId);
@@ -3341,7 +3341,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       })
     }, {
       label: "DND5E.Group.Primary.Remove",
-      icon: '<i class="fa-regular fa-star"></i>',
+      icon: "fa-regular fa-star",
       group: "system",
       visible: li => {
         const actor = game.actors.get(li.dataset.entryId);

@@ -91,19 +91,19 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
     return [
       {
         label: "DND5E.ContextMenuActionView",
-        icon: '<i class="fa-solid fa-eye"></i>',
+        icon: "fa-solid fa-eye",
         visible: () => !this.document.isOwner || this.document.compendium?.locked,
         onClick: (event, target) => getResult(target)?.sheet.render({ force: true })
       },
       {
         label: "DND5E.ContextMenuActionEdit",
-        icon: '<i class="fa-solid fa-pen-to-square"></i>',
+        icon: "fa-solid fa-pen-to-square",
         visible: () => this.document.isOwner && !this.document.compendium?.locked,
         onClick: (event, target) => getResult(target)?.sheet.render({ force: true })
       },
       {
         label: "DND5E.ContextMenuActionDuplicate",
-        icon: '<i class="fa-solid fa-copy"></i>',
+        icon: "fa-solid fa-copy",
         visible: () => this.document.isOwner && !this.document.compendium?.locked,
         onClick: async (event, target) => {
           await this.submit();
@@ -116,19 +116,19 @@ export default class RollTableSheet5e extends ApplicationV2Mixin(RollTableSheet,
       },
       {
         label: "DND5E.ContextMenuActionDelete",
-        icon: '<i class="fa-solid fa-trash"></i>',
+        icon: "fa-solid fa-trash",
         visible: () => this.document.isOwner && !this.document.compendium?.locked,
         onClick: (event, target) => getResult(target)?.deleteDialog()
       },
       {
         label: "TABLE.ACTIONS.DrawSpecificResult",
-        icon: '<i class="fa-solid fa-up-from-bracket"></i>',
+        icon: "fa-solid fa-up-from-bracket",
         onClick: (event, target) => this.document.draw({ results: [getResult(target)] }),
         group: "state"
       },
       {
         label: "TABLE.ACTIONS.ToggleDrawn",
-        icon: '<i class="fa-solid fa-lock"></i>',
+        icon: "fa-solid fa-lock",
         visible: () => this.document.isOwner && !this.document.compendium?.locked,
         onClick: async (event, target) => {
           await this.submit();

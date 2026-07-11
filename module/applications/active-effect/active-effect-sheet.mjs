@@ -208,25 +208,25 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
     return [
       {
         label: "DND5E.ContextMenuActionView",
-        icon: '<i class="fa-solid fa-eye"></i>',
+        icon: "fa-solid fa-eye",
         visible: () => !this.document.isOwner || this.document.compendium?.locked,
         onClick: (event, target) => this._onAction(target, "view", { event })
       },
       {
         label: "DND5E.ContextMenuActionEdit",
-        icon: '<i class="fa-solid fa-pen-to-square"></i>',
+        icon: "fa-solid fa-pen-to-square",
         visible: () => this.document.isOwner && !this.document.compendium?.locked,
         onClick: (event, target) => this._onAction(target, "edit", { event })
       },
       {
         label: "DND5E.ContextMenuActionDuplicate",
-        icon: '<i class="fa-solid fa-copy"></i>',
+        icon: "fa-solid fa-copy",
         visible: () => this.document.isOwner && !this.document.compendium?.locked,
         onClick: (event, target) => this._onAction(target, "duplicate", { event })
       },
       {
         label: "DND5E.ContextMenuActionDelete",
-        icon: '<i class="fa-solid fa-trash"></i>',
+        icon: "fa-solid fa-trash",
         visible: () => this.document.isOwner && !this.document.compendium?.locked,
         onClick: (event, target) => this._onAction(target, "delete", { event })
       }
@@ -245,7 +245,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @protected
    */
   async _onAction(target, action, { event }={}) {
-    let { changeId, index } = target.closest("[data-change-id]")?.dataset ?? {};
+    const { changeId } = target.closest("[data-change-id]")?.dataset ?? {};
     switch ( action ) {
       case "delete":
         return foundry.applications.api.DialogV2.confirm({
@@ -256,14 +256,14 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
             callback: () => {
               const changes = this.document.system.toObject().changes;
               changes.findSplice(c => c._id === changeId);
-              this.submit({ updateData: { system: { changes } } })
+              this.submit({ updateData: { system: { changes } } });
             }
           },
           window: {
             icon: "fa-solid fa-trash",
             title: `${_loc("DOCUMENT.Delete", { type: _loc("DND5E.EFFECT.Change.Label") })}: ${changeId}`
           }
-        });;
+        });
       case "duplicate":
         const changeData = this.document.system.toObject().changes.find(c => c._id === changeId);
         delete changeData._id;
