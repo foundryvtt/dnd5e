@@ -19,7 +19,7 @@ const {
 
 /**
  * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
- * @import { ActivityRollData } from "../../documents/_types.mjs";
+ * @import { ActivityRollData, ActivityRollDataOptions } from "../../documents/_types.mjs";
  * @import { DamageFormulaOptions } from "../shared/_types.mjs";
  * @import { ActivityData, BehaviorApplicationData, EffectApplicationData } from "./_types.mjs";
  */
@@ -743,6 +743,19 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Effects that can be applied from this activity.
+   * @returns {Promise<ActiveEffect5e[]>|null}
+   */
+  getApplicableEffects() {
+    const applicableEffects = this.applicableEffects;
+    return applicableEffects
+      ? Promise.all(applicableEffects.map(e => e.getEffect())).then(e => e.filter(_ => _))
+      : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
    * @param {object} [options]                                     Damage configuration options.
@@ -766,14 +779,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Effects that can be applied from this activity.
-   * @returns {Promise<ActiveEffect5e[]>|null}
+   * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
+   * @param {ActivityRollDataOptions} [options]
+   * @returns {ActivityRollData}
    */
-  getApplicableEffects() {
-    const applicableEffects = this.applicableEffects;
-    return applicableEffects
-      ? Promise.all(applicableEffects.map(e => e.getEffect())).then(e => e.filter(_ => _))
-      : null;
+  getRollData({ data, ...options }={}) {
+    const rollData = this.item.getRollData(options);
+    rollData.activity = { ...this };
+    rollData.consumed = this.item.flags.dnd5e?.consumed;
+    rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
+    if ( data ) Object.assign(rollData, data);
+    return rollData;
   }
 
   /* -------------------------------------------- */

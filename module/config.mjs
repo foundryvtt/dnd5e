@@ -9,6 +9,7 @@ import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-o
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
 import * as regionBehaviors from "./data/region-behavior/_module.mjs";
+import ActiveEffect5e from "./documents/active-effect.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -3897,6 +3898,21 @@ DND5E.bloodied = {
   img: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
   threshold: 50
 };
+
+/* -------------------------------------------- */
+
+/**
+ * System provided active effect change types.
+ * @enum {ActiveEffectChangeTypeConfig & { [skipConditions]: boolean }}
+ */
+DND5E.activeEffectChangeTypes = Object.freeze({
+  "dnd5e.bonus": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Bonus.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    skipConditions: true
+  }
+});
 
 /* -------------------------------------------- */
 /*  Languages                                   */
