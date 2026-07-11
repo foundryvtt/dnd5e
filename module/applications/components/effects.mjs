@@ -226,25 +226,25 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const options = [
       {
         label: "DND5E.ContextMenuActionEdit",
-        icon: "<i class='fas fa-edit fa-fw'></i>",
+        icon: "fa-solid fa-edit",
         visible: () => effect.isOwner,
         onClick: (event, target) => this._onAction(target, "edit", { event })
       },
       {
         label: "DND5E.ContextMenuActionDuplicate",
-        icon: "<i class='fas fa-copy fa-fw'></i>",
+        icon: "fa-solid fa-copy",
         visible: () => effect.isOwner,
         onClick: (event, target) => this._onAction(target, "duplicate", { event })
       },
       {
         label: "DND5E.ContextMenuActionDelete",
-        icon: "<i class='fas fa-trash fa-fw'></i>",
+        icon: "fa-solid fa-trash",
         visible: () => effect.isOwner && !isConcentrationEffect,
         onClick: (event, target) => this._onAction(target, "delete", { event })
       },
       {
         label: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
-        icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
+        icon: effect.disabled ? "fa-solid fa-check" : "fa-solid fa-times",
         group: "state",
         visible: () => effect.isOwner && !isConcentrationEffect,
         onClick: (event, target) => this._onAction(target, "toggle", { event })
@@ -258,7 +258,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       },
       {
         label: expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
-        icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
+        icon: `fa-solid fa-${expanded ? "compress" : "expand"}`,
         group: "collapsible",
         visible: () => "canExpand" in this.app ? this.app.canExpand(effect) : true,
         onClick: (event, target) => this._onAction(target, "toggleExpand", { event })
@@ -271,7 +271,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       const isFavorited = this.document.system.hasFavorite(uuid);
       options.push({
         label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: "<i class='fas fa-bookmark fa-fw'></i>",
+        icon: "fa-solid fa-bookmark",
         group: "state",
         visible: () => effect.isOwner,
         onClick: (event, target) => this._onAction(target, isFavorited ? "unfavorite" : "favorite", { event })

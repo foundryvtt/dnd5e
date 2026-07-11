@@ -101,8 +101,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
           handler = handler.handler;
         }
         yield {
-          label,
-          icon: `<i class="${icon}" inert></i>`,
+          label, icon,
           onClick: (event, target) => {
             if ( onClick ) onClick(event);
             else if ( handler ) handler.call(this, event, target);

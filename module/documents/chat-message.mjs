@@ -734,49 +734,49 @@ export default class ChatMessage5e extends ChatMessage {
     options.push(
       {
         label: _loc("DND5E.ChatContextDamage"),
-        icon: '<i class="fas fa-user-minus"></i>',
+        icon: "fa-solid fa-user-minus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 1)
       },
       {
         label: _loc("DND5E.ChatContextHealing"),
-        icon: '<i class="fas fa-user-plus"></i>',
+        icon: "fa-solid fa-user-plus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, -1)
       },
       {
         label: _loc("DND5E.ChatContextTempHP"),
-        icon: '<i class="fas fa-user-clock"></i>',
+        icon: "fa-solid fa-user-clock",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardTemp(target)
       },
       {
         label: _loc("DND5E.ChatContextDoubleDamage"),
-        icon: '<i class="fas fa-user-injured"></i>',
+        icon: "fa-solid fa-user-injured",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 2)
       },
       {
         label: _loc("DND5E.ChatContextHalfDamage"),
-        icon: '<i class="fas fa-user-shield"></i>',
+        icon: "fa-solid fa-user-shield",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 0.5)
       },
       {
         label: _loc("DND5E.ChatContextSelectHit"),
-        icon: '<i class="fas fa-bullseye"></i>',
+        icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "hit")
       },
       {
         label: _loc("DND5E.ChatContextSelectMiss"),
-        icon: '<i class="fas fa-bullseye"></i>',
+        icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "miss")

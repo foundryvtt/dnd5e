@@ -967,11 +967,11 @@ export default function ActivityMixin(Base) {
       if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
           label: "DND5E.ContextMenuActionEdit",
-          icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
+          icon: "fa-solid fa-pen-to-square",
           onClick: () => this.item.sheet._renderChild(this.sheet)
         }, {
           label: "DND5E.ContextMenuActionDuplicate",
-          icon: '<i class="fas fa-copy fa-fw"></i>',
+          icon: "fa-solid fa-copy",
           onClick: () => {
             const createData = this.toObject();
             delete createData._id;
@@ -979,13 +979,13 @@ export default function ActivityMixin(Base) {
           }
         }, {
           label: "DND5E.ContextMenuActionDelete",
-          icon: '<i class="fas fa-trash fa-fw"></i>',
+          icon: "fa-solid fa-trash",
           onClick: () => this.deleteDialog({ sheet: this.item.sheet })
         });
       } else {
         entries.push({
           label: "DND5E.ContextMenuActionView",
-          icon: '<i class="fas fa-eye fa-fw"></i>',
+          icon: "fa-solid fa-eye",
           onClick: () => this.item.sheet._renderChild(this.sheet)
         });
       }
@@ -995,7 +995,7 @@ export default function ActivityMixin(Base) {
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
           label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-          icon: '<i class="fas fa-bookmark fa-fw"></i>',
+          icon: "fa-solid fa-bookmark",
           group: "state",
           visible: () => this.item.isOwner && !compendiumLocked,
           onClick: () => {

@@ -1260,7 +1260,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static addDirectoryContextOptions(app, entryOptions) {
     entryOptions.push({
       label: "DND5E.Scroll.CreateScroll",
-      icon: '<i class="fa-solid fa-scroll"></i>',
+      icon: "fa-solid fa-scroll",
       group: "system",
       visible: li => {
         let item = game.items.get(li.dataset.entryId);

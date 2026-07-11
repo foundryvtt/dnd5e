@@ -134,7 +134,23 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
   async _renderChange(context) {}
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _toggleDisabled(disabled) {
+    super._toggleDisabled(disabled);
+    this.element.querySelectorAll(".always-interactive").forEach(input => input.disabled = false);
+  }
+
+  /* -------------------------------------------- */
   /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _attachFrameListeners() {
+    super._attachFrameListeners();
+    new dnd5e.applications.ContextMenu5e(this.element, "[data-change-id]", this._getEntryContextOptions(), { jQuery: false });
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -163,6 +179,10 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
     // Special durations imply their own value & units, so the normal duration fields are not configurable.
     const duration = this.element.querySelector("[data-duration]");
     if ( duration ) duration.hidden = !!this.document.specialDuration;
+
+    this.element.querySelectorAll("[data-context-menu]").forEach(control =>
+      control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)
+    );
   }
 
   /* -------------------------------------------- */
@@ -175,6 +195,88 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
     if ( group !== "sheet" ) return;
     this.element.className = this.element.className.replace(/tab-\w+/g, "");
     this.element.classList.add(`tab-${tab}`);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get context menu entries for changes.
+   * @returns {ContextMenuEntry[]}
+   * @protected
+   */
+  _getEntryContextOptions() {
+    return [
+      {
+        label: "DND5E.ContextMenuActionView",
+        icon: "fa-solid fa-eye",
+        visible: () => !this.document.isOwner || this.document.compendium?.locked,
+        onClick: (event, target) => this._onAction(target, "view", { event })
+      },
+      {
+        label: "DND5E.ContextMenuActionEdit",
+        icon: "fa-solid fa-pen-to-square",
+        visible: () => this.document.isOwner && !this.document.compendium?.locked,
+        onClick: (event, target) => this._onAction(target, "edit", { event })
+      },
+      {
+        label: "DND5E.ContextMenuActionDuplicate",
+        icon: "fa-solid fa-copy",
+        visible: () => this.document.isOwner && !this.document.compendium?.locked,
+        onClick: (event, target) => this._onAction(target, "duplicate", { event })
+      },
+      {
+        label: "DND5E.ContextMenuActionDelete",
+        icon: "fa-solid fa-trash",
+        visible: () => this.document.isOwner && !this.document.compendium?.locked,
+        onClick: (event, target) => this._onAction(target, "delete", { event })
+      }
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle change actions.
+   * @param {Element} target                Button or context menu entry that triggered this action.
+   * @param {string} action                 Action being triggered.
+   * @param {object} [options]
+   * @param {PointerEvent} [options.event]  The triggering event.
+   * @returns {Promise}
+   * @protected
+   */
+  async _onAction(target, action, { event }={}) {
+    const { changeId } = target.closest("[data-change-id]")?.dataset ?? {};
+    switch ( action ) {
+      case "delete":
+        return foundry.applications.api.DialogV2.confirm({
+          content: `<p><strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", {
+            type: _loc("DND5E.EFFECT.Change.Label")
+          })}</p>`,
+          yes: {
+            callback: () => {
+              const changes = this.document.system.toObject().changes;
+              changes.findSplice(c => c._id === changeId);
+              this.submit({ updateData: { system: { changes } } });
+            }
+          },
+          window: {
+            icon: "fa-solid fa-trash",
+            title: `${_loc("DOCUMENT.Delete", { type: _loc("DND5E.EFFECT.Change.Label") })}: ${changeId}`
+          }
+        });
+      case "duplicate":
+        const changeData = this.document.system.toObject().changes.find(c => c._id === changeId);
+        delete changeData._id;
+        return this.submit({
+          updateData: {
+            system: { changes: [...this.document.system.toObject().changes, changeData] }
+          }
+        });
+      case "edit":
+      case "view":
+        this._renderChild(new EffectChangeConfig({ changeId, document: this.document }));
+        break;
+    }
   }
 
   /* -------------------------------------------- */
@@ -207,14 +309,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @type {ApplicationClickAction}
    */
   static async #onDeleteChange(event, target) {
-    const index = Number(target.closest("[data-index]")?.dataset.index || 0);
-    return this.submit({
-      updateData: {
-        system: {
-          changes: this.document.system.toObject().changes.toSpliced(index, 1)
-        }
-      }
-    });
+    this._onAction(target, "delete", { event });
   }
 
   /* -------------------------------------------- */
@@ -225,10 +320,6 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @type {ApplicationClickAction}
    */
   static async #onEditChange(event, target) {
-    const { changeId } = target.closest("[data-change-id]")?.dataset ?? {};
-    const app = new EffectChangeConfig({ changeId, document: this.document });
-    this._renderChild(app);
+    this._onAction(target, "edit", { event });
   }
-
-  // TODO: Add context options to changes
 }
