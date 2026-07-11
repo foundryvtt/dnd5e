@@ -1,12 +1,12 @@
 _id: LC5LsQOPwoHQW9Mi
 name: Ring of Water Walking
 type: equipment
-img: icons/equipment/finger/ring-faceted-gold-purple.webp
+img: icons/equipment/finger/ring-cabochon-squared-gold.webp
 system:
   description:
     value: >-
-      <p>While wearing this ring, you can stand on and move across any liquid
-      surface as if it were solid ground.</p>
+      <p><em>Ring</em></p><p>While wearing this ring, you can stand on and move
+      across any liquid surface as if it were solid ground.</p>
     chat: ''
   source:
     custom: ''
@@ -33,7 +33,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -49,6 +49,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -56,7 +57,45 @@ system:
   activities: {}
   attuned: false
   identifier: ring-of-water-walking
-effects: []
+effects:
+  - name: Water Walking
+    img: icons/magic/water/barrier-ice-shield.webp
+    origin: Compendium.dnd5e.items.Item.LC5LsQOPwoHQW9Mi
+    system:
+      magical: true
+      changes: []
+      rider:
+        statuses: []
+    type: base
+    _id: Vxy9WpZkyvV1crnz
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You can stand on and move across any liquid surface as if it were solid
+      ground.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783378727766
+      modifiedTime: 1783378762862
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!LC5LsQOPwoHQW9Mi.Vxy9WpZkyvV1crnz'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
@@ -68,11 +107,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037165527
-  modifiedTime: 1750697344647
+  modifiedTime: 1783737192395
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!LC5LsQOPwoHQW9Mi'

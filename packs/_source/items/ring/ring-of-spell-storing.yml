@@ -1,28 +1,31 @@
 _id: 9cIlRtKDtDXQtElf
 name: Ring of Spell Storing
 type: equipment
-img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+img: icons/equipment/finger/ring-cabochon-bronze-green.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>This ring stores spells cast into it, holding them until the attuned
-      wearer uses them. The ring can store up to 5 levels worth of spells at a
-      time. When found, it contains 1d6 − 1 levels of stored spells chosen by
-      the GM.</p>
-
-      <p>Any creature can cast a spell of 1st through 5th level into the ring by
-      touching the ring as the spell is cast. The spell has no effect, other
-      than to be stored in the ring. If the ring can't hold the spell, the spell
-      is expended without effect. The level of the slot used to cast the spell
-      determines how much space it uses.</p>
-
-      <p>While wearing this ring, you can cast any spell stored in it. The spell
-      uses the slot level, spell save DC, spell attack bonus, and spellcasting
-      ability of the original caster, but is otherwise treated as if you cast
-      the spell. The spell cast from the ring is no longer stored in it, freeing
-      up space.</p>
+      <p><em>Ring (requires attunement)</em></p><p>This ring stores spells cast
+      into it, holding them until the attuned wearer uses them. The ring can
+      store up to 5 levels worth of spells at a time. When found, it contains
+      [[/r 1d6−1 #Levels of stored spells when this ring is found.]] levels of
+      stored spells chosen by the GM.</p><p>Any creature can cast a spell of 1st
+      through 5th level into the ring by touching the ring as the spell is cast.
+      The spell has no effect, other than to be stored in the ring. If the ring
+      can't hold the spell, the spell is expended without effect. The level of
+      the slot used to cast the spell determines how much space it
+      uses.</p><p>While wearing this ring, you can cast any spell stored in it.
+      The spell uses the slot level, spell save DC, spell attack bonus, and
+      spellcasting ability of the original caster, but is otherwise treated as
+      if you cast the spell. The spell cast from the ring is no longer stored in
+      it, freeing up space.</p><section id="secret-WferqZXbAuOuwtC7"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This ring has
+      several Cast activities that you can use to hold spells (a total of five
+      to represent five levels worth of spells stored). When you wish to store a
+      spell in this ring, open up one of the Cast activities, navigate to the
+      "Spell" tab, and drop the spell into it's space. You can then enter in the
+      original caster's Attack Bonus and Save DC for the spell stored within the
+      ring.</p></section>
     chat: ''
   source:
     custom: ''
@@ -49,7 +52,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -70,72 +73,287 @@ system:
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    DVLXpnJ9EKKYWCvT:
+      type: cast
+      name: ''
+      _id: DVLXpnJ9EKKYWCvT
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
+          stationary: false
+          units: ft
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: false
+        identifier: ''
+      spell:
+        challenge:
+          override: true
+          attack: ''
+          save: ''
+        properties: []
+        spellbook: true
+        uuid: null
+        ability: ''
+        level: 1
+    u4B765T7xqAoSXtV:
+      type: cast
+      name: ''
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: false
+        identifier: ''
+      spell:
+        challenge:
+          override: true
+          attack: ''
+          save: ''
+        properties: []
+        spellbook: true
+        uuid: null
+        ability: ''
+      _id: u4B765T7xqAoSXtV
+    mx3IaACxDmk4L4GI:
+      type: cast
+      name: ''
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: false
+        identifier: ''
+      spell:
+        challenge:
+          override: true
+          attack: ''
+          save: ''
+        properties: []
+        spellbook: true
+        uuid: null
+        ability: ''
+      _id: mx3IaACxDmk4L4GI
+    53rORwMWgXuelpKc:
+      type: cast
+      name: ''
+      img: ''
+      sort: 400000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: false
+        identifier: ''
+      spell:
+        challenge:
+          override: true
+          attack: ''
+          save: ''
+        properties: []
+        spellbook: true
+        uuid: null
+        ability: ''
+      _id: 53rORwMWgXuelpKc
+    0G8gQ62gFGgpzTNx:
+      type: cast
+      name: ''
+      img: ''
+      sort: 500000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: false
+        identifier: ''
+      spell:
+        challenge:
+          override: true
+          attack: ''
+          save: ''
+        properties: []
+        spellbook: true
+        uuid: null
+        ability: ''
+      _id: 0G8gQ62gFGgpzTNx
   attuned: false
   identifier: ring-of-spell-storing
 effects: []
@@ -146,11 +364,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037118809
-  modifiedTime: 1764619148348
+  modifiedTime: 1783790931935
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!9cIlRtKDtDXQtElf'

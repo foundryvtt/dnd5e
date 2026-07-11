@@ -1,48 +1,35 @@
 _id: Zf7kBZa5f4WBepn1
 name: Ring of Earth Elemental Command
 type: equipment
-img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+img: icons/equipment/finger/ring-band-engraved-teal.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>This ring is linked to the Elemental Plane of Earth.</p>
-
-      <p>While wearing this ring, you have advantage on attack rolls against
-      @UUID[Compendium.dnd5e.monsters.Actor.sApYLZj9PTZ40wJr]{Earth Elemental}s,
+      <p><em>Ring (requires attunement)</em></p><p>This ring is linked to the
+      Elemental Plane of Earth.</p><p>While wearing this ring, you have
+      advantage on attack rolls against
+      @UUID[Compendium.dnd5e.monsters.Actor.sApYLZj9PTZ40wJr]{earth elementals},
       and they have disadvantage on attack rolls against you. In addition, you
-      have access to properties based on the linked plane.</p>
-
-      <p>The ring has 5 charges. It regains 1d4 + 1 expended charges daily at
-      dawn. Spells cast from the ring have a save DC of 17.</p>
-
-      <p><strong>Ring of Earth Elemental Command</strong>. You can expend 2 of
-      the ring's charges to cast
+      have access to properties based on the linked plane.</p><p>The ring has
+      [[lookup @item.uses.max]] charges. It regains 1d4 + 1 expended charges
+      daily at dawn. Spells cast from the ring have a save DC of
+      17.</p><p><strong>Ring of Earth Elemental Command</strong>. You can expend
+      2 of the ring's charges to cast
       @UUID[Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp]{Dominate Monster} on
-      an Earth Elemental. In addition, you can move in difficult terrain that is
-      composed of rubble, rocks, or dirt as if it were normal terrain. You can
-      also speak and understand Terran.</p>
-
-      <p>If you help slay an Earth Elemental while attuned to the ring, you gain
-      access to the following additional properties:</p>
-
-      <ul>
-
-      <li>You have resistance to acid damage.</li>
-
-      <li>You can move through solid earth or rock as if those areas were
-      difficult terrain. If you end your turn there, you are shunted out to the
-      nearest unoccupied space you last occupied.</li>
-
-      <li>You can cast the following spells from the ring, expending the
-      necessary number of charges:
-      @UUID[Compendium.dnd5e.spells.Item.QvGcdRUSNRKEQJlK]{Stone Shape} (2
-      charges), @UUID[Compendium.dnd5e.spells.Item.ReMbjfeOKoSj3O79]{Stoneskin}
-      (3 charges), or @UUID[Compendium.dnd5e.spells.Item.NmoRmM1mhuM3pqnY]{Wall
-      of Stone} (3 charges).</li>
-
-      </ul>
+      an Earth Elemental. In addition, you can move in &amp;reference[difficult
+      terrain] that is composed of rubble, rocks, or dirt as if it were normal
+      terrain. You can also speak and understand Terran.</p><p>If you help slay
+      an Earth Elemental while attuned to the ring, you gain access to the
+      following additional properties:</p><ul><li><p>You have resistance to acid
+      damage.</p></li><li><p>You can move through solid earth or rock as if
+      those areas were &amp;reference[difficult terrain]. If you end your turn
+      there, you are shunted out to the nearest unoccupied space you last
+      occupied.</p></li><li><p>You can cast the following spells from the ring,
+      expending the necessary number of charges:
+      @UUID[Compendium.dnd5e.spells.Item.QvGcdRUSNRKEQJlK]{stone shape} (2
+      charges), @UUID[Compendium.dnd5e.spells.Item.ReMbjfeOKoSj3O79]{stoneskin}
+      (3 charges), or @UUID[Compendium.dnd5e.spells.Item.NmoRmM1mhuM3pqnY]{wall
+      of stone} (3 charges).</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -72,7 +59,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -88,6 +75,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -98,7 +86,7 @@ system:
       spell:
         uuid: Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp
         challenge:
-          attack: null
+          attack: ''
           save: 17
           override: true
         level: '8'
@@ -145,7 +133,7 @@ system:
         spent: 0
         recovery: []
         max: ''
-      name: ''
+      name: Dominate Monster (Earth Elemental)
       img: ''
       visibility:
         requireIdentification: true
@@ -321,21 +309,280 @@ system:
           min: null
           max: null
         identifier: ''
+    F4cgsk7D2QeQv7QS:
+      type: enchant
+      name: Empower Ring
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: false
+        condition: When you help slay an Earth Elemental while attuned to this ring.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>If you help slay an Earth Elemental while attuned to the ring, you
+          gain access to the following additional properties:</p><ul><li><p>You
+          have resistance to acid damage.</p></li><li><p>You can move through
+          solid earth or rock as if those areas were &amp;reference[difficult
+          terrain]. If you end your turn there, you are shunted out to the
+          nearest unoccupied space you last occupied.</p></li><li><p>You can
+          cast the following spells from the ring, expending the necessary
+          number of charges:
+          @UUID[Compendium.dnd5e.spells.Item.QvGcdRUSNRKEQJlK]{stone shape} (2
+          charges),
+          @UUID[Compendium.dnd5e.spells.Item.ReMbjfeOKoSj3O79]{stoneskin} (3
+          charges), or @UUID[Compendium.dnd5e.spells.Item.NmoRmM1mhuM3pqnY]{wall
+          of stone} (3 charges).</p></li></ul>
+        chatFlavor: ''
+      duration:
+        units: disp
+        concentration: false
+        override: false
+      effects:
+        - _id: Qoq7csz2hzXitVh6
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - d8GlId9yzDbJHrS7
+              - lsp1CkHeT5EWo09F
+              - KEqwUW6z1Hk9CyB2
+            effect:
+              - q5JL0VfwEijcz0uf
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: true
+        categories:
+          - ring
+        properties: []
+        type: equipment
+      _id: F4cgsk7D2QeQv7QS
   attuned: false
   identifier: ring-of-earth-elemental-command
-effects: []
+effects:
+  - type: enchantment
+    name: Empowered Earth Elemental Control
+    img: icons/commodities/stone/ore-pile-purple.webp
+    disabled: true
+    _id: Qoq7csz2hzXitVh6
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Empowered {}
+          phase: initial
+          _id: j116lFs8S2LGJgWo
+          conditions: '{}'
+          priority: null
+        - key: system.activities.F4cgsk7D2QeQv7QS.name
+          type: override
+          value: '{} (Currently Empowered)'
+          phase: initial
+          _id: pAcA2TCb25sQhCp7
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have helped slay an Earth Elemental while attuned to this ring, and
+      gain access to the following properties:</p><ul><li><p>You have resistance
+      to acid damage.</p></li><li><p>You can move through solid earth or rock as
+      if those areas were &amp;reference[difficult terrain]. If you end your
+      turn there, you are shunted out to the nearest unoccupied space you last
+      occupied.</p></li><li><p>You can cast the following spells from the ring,
+      expending the necessary number of charges:
+      @UUID[Compendium.dnd5e.spells.Item.QvGcdRUSNRKEQJlK]{stone shape} (2
+      charges), @UUID[Compendium.dnd5e.spells.Item.ReMbjfeOKoSj3O79]{stoneskin}
+      (3 charges), or @UUID[Compendium.dnd5e.spells.Item.NmoRmM1mhuM3pqnY]{wall
+      of stone} (3 charges).</p></li></ul>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783786888528
+      modifiedTime: 1783788975003
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Zf7kBZa5f4WBepn1.Qoq7csz2hzXitVh6'
+  - name: Earth Elemental Hunter
+    img: icons/magic/earth/orb-stone-smoke-teal.webp
+    origin: Compendium.dnd5e.items.Item.Zf7kBZa5f4WBepn1
+    system:
+      magical: true
+      changes:
+        - key: system.traits.languages.value
+          type: add
+          value: terran
+          phase: initial
+          _id: IFcOJdWxc2MKXGq0
+          conditions: '{}'
+          priority: null
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          type: add
+          value: rocks
+          phase: initial
+          _id: BQyWvBzeGAOWzpb8
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: 74TZh3aqDSWnjESV
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have advantage on attack rolls against Air Elementals and they have
+      disadvantage on attack rolls against you. Additionally, you can move in
+      &amp;reference[difficult terrain that is composed of rubble, rocks, or
+      dirt as if it were normal terrain.</p><p>Finally, you can also speak and
+      understand Terran.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783787052714
+      modifiedTime: 1783788410135
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Zf7kBZa5f4WBepn1.74TZh3aqDSWnjESV'
+  - name: Earth Elemental's Power
+    img: icons/magic/earth/barrier-stone-brown-green.webp
+    origin: Compendium.dnd5e.items.Item.Zf7kBZa5f4WBepn1
+    system:
+      magical: true
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: acid
+          phase: initial
+          _id: dkvSFyrzzifH2Ooy
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: q5JL0VfwEijcz0uf
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have resistance to acid damage.</p><p>Additionally, you can move
+      through solid earth or rock as if those areas were
+      &amp;reference[difficult terrain]. If you end your turn there, you are
+      shunted out to the nearest unoccupied space you last occupied.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783787202757
+      modifiedTime: 1783789726533
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Zf7kBZa5f4WBepn1.q5JL0VfwEijcz0uf'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - d8GlId9yzDbJHrS7
+        - lsp1CkHeT5EWo09F
+        - KEqwUW6z1Hk9CyB2
+      effect:
+        - q5JL0VfwEijcz0uf
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037219133
-  modifiedTime: 1764620220860
+  modifiedTime: 1783789801763
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Zf7kBZa5f4WBepn1'

@@ -5,22 +5,18 @@ img: icons/equipment/finger/ring-cabochon-gold-purple.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While wearing this ring, you are immune to magic that allows other
-      creatures to read your thoughts, determine whether you are lying, know
-      your alignment, or know your creature type. Creatures can telepathically
-      communicate with you only if you allow it.</p>
-
-      <p>You can use an action to cause the ring to become invisible until you
-      use another action to make it visible, until you remove the ring, or until
-      you die.</p>
-
-      <p>If you die while wearing the ring, your soul enters it, unless it
-      already houses a soul. You can remain in the ring or depart for the
-      afterlife. As long as your soul is in the ring, you can telepathically
-      communicate with any creature wearing it. A wearer can't prevent this
-      telepathic communication.</p>
+      <p><em>Ring (requires attunement)</em></p><p>While wearing this ring, you
+      are immune to magic that allows other creatures to read your thoughts,
+      determine whether you are lying, know your alignment, or know your
+      creature type. Creatures can telepathically communicate with you only if
+      you allow it.</p><p>You can use an action to cause the ring to become
+      &amp;reference[invisible apply=false] until you use another action to make
+      it visible, until you remove the ring, or until you die.</p><p>If you die
+      while wearing the ring, your soul enters it, unless it already houses a
+      soul. You can remain in the ring or depart for the afterlife. As long as
+      your soul is in the ring, you can telepathically communicate with any
+      creature wearing it. A wearer can't prevent this telepathic
+      communication.</p>
     chat: ''
   source:
     custom: ''
@@ -47,7 +43,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -63,77 +59,134 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    07iSscj7670VEASc:
+      type: enchant
+      name: Conceal Ring
+      _id: 07iSscj7670VEASc
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: >-
+          <p>You can use an action to cause the ring to become
+          &amp;reference[invisible apply=false] until you use another action to
+          make it visible, until you remove the ring, or until you die.</p>
         chatFlavor: ''
       duration:
+        units: disp
         concentration: false
-        value: ''
-        units: inst
-        special: ''
         override: false
-      effects: []
+      effects:
+        - _id: 65RwLaHkAHSzu0Og
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
       range:
         units: self
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: self
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      roll:
-        formula: ''
-        name: ''
         prompt: false
-        visible: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: Conceal Ring
-      img: ''
-      appliedEffects: []
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-        requireIdentification: true
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: ''
   attuned: false
   identifier: ring-of-mind-shielding
-effects: []
+effects:
+  - type: enchantment
+    name: Concealed
+    img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+    disabled: true
+    _id: 65RwLaHkAHSzu0Og
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Concealed {}
+          phase: initial
+          _id: PzCOO4Cd0h1JSIca
+          conditions: '{}'
+          priority: null
+        - key: system.activities.07iSscj7670VEASc.name
+          type: override
+          value: Reveal Ring
+          phase: initial
+          _id: F8Jk6hyjzDL2yIul
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>This ring is &amp;reference[invisible apply=false]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783737552954
+      modifiedTime: 1783737587178
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!dGnkwePemh7ovuDv.65RwLaHkAHSzu0Og'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
@@ -141,11 +194,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037233243
-  modifiedTime: 1764620359507
+  modifiedTime: 1783737618024
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dGnkwePemh7ovuDv'

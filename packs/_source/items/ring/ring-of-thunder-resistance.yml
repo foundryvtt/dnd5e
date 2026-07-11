@@ -1,20 +1,17 @@
 _id: IpBBqr0r7JanyVn0
 name: Ring of Thunder Resistance
 type: equipment
-img: icons/equipment/finger/ring-faceted-silver-orange.webp
+img: icons/equipment/finger/ring-band-engraved-silver-teal.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p><em>This ring has been inlaid with a spinel stone that gleams when it
-      catches the light.</em></p>
-
-      <p>You have resistance to thunder damage while wearing this ring.</p>
-
-      <p>For other rings of resistance, roll on the
+      <p><em>Ring (requires attunement)</em></p><p><em>This ring has been inlaid
+      with a spinel stone that gleams when it catches the light.</em></p><p>You
+      have resistance to thunder damage while wearing this ring.</p><section
+      id="secret-cb0y05x2ZWyngode" class="secret"><p><strong>Foundry
+      Note</strong></p><p>For other rings of resistance, roll on the
       @UUID[Compendium.dnd5e.tables.RollTable.MdTxWyYVhTIgtNcG]{Ring of
-      Resistance} table.</p>
+      Resistance} table.</p></section>
     chat: ''
   source:
     custom: ''
@@ -41,7 +38,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -56,7 +53,10 @@ system:
     value: ring
     baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This ring has been inlaid with a spinel stone that gleams when it
+      catches the light.</p>
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -66,42 +66,47 @@ system:
   identifier: ring-of-thunder-resistance
 effects:
   - name: Thunder Resistance
-    img: icons/equipment/finger/ring-faceted-silver-orange.webp
-    _id: BuDRWmDb8IbiCjLs
-    type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: thunder
-        priority: null
-    disabled: false
-    duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
-    origin: null
-    tint: '#ffffff'
+    img: icons/magic/sonic/explosion-shock-wave-teal.webp
+    origin: Compendium.dnd5e.items.Item.IpBBqr0r7JanyVn0
     transfer: true
+    _id: 6RNRKGsV7l4Bh2Ep
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: thunder
+          phase: initial
+          priority: null
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to thunder damage.</p>
+    tint: '#ffffff'
     statuses: []
+    showIcon: 1
+    folder: null
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.1.0
-      createdTime: 1731017740458
-      modifiedTime: 1731017869997
+      systemVersion: 6.0.0
+      createdTime: 1781984069766
+      modifiedTime: 1781985987022
       lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.zBX8LLC2CjC89Dzl.ActiveEffect.QlQh25ywP4LsgKtg
+      duplicateSource: null
       exportSource: null
-    _key: '!items.effects!IpBBqr0r7JanyVn0.BuDRWmDb8IbiCjLs'
+    _key: '!items.effects!IpBBqr0r7JanyVn0.6RNRKGsV7l4Bh2Ep'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
@@ -109,11 +114,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037157183
-  modifiedTime: 1750697344647
+  modifiedTime: 1783737164084
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!IpBBqr0r7JanyVn0'

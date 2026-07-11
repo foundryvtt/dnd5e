@@ -1,26 +1,20 @@
 _id: ElLfmohtIFMagr5f
 name: Ring of Animal Influence
 type: equipment
-img: icons/equipment/finger/ring-cabochon-gold-orange.webp
+img: icons/equipment/finger/ring-cabochon-gold-green.webp
 system:
   description:
     value: >-
-      <p>This ring has 3 charges, and it regains 1d3 expended charges daily at
-      dawn. While wearing the ring, you can use an action to expend 1 of its
-      charges to cast one of the following spells:</p>
-
-      <ul>
-
-      <li>@UUID[Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B]{Animal
-      Friendship} (save DC 13)</li>
-
-      <li>@UUID[Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0]{Fear} (save DC
-      13), targeting only beasts that have an Intelligence of 3 or lower</li>
-
-      <li>@UUID[Compendium.dnd5e.spells.Item.aL1F8fvYLtNzUbKu]{Speak with
-      Animals}</li>
-
-      </ul>
+      <p><em>Ring</em></p><p>This ring has [[lookup @item.uses.max]] charges,
+      and it regains [[lookup @item.uses.recovery.0.formula]] expended charges
+      daily at dawn. While wearing the ring, you can use an action to expend 1
+      of its charges to cast one of the following
+      spells:</p><ul><li><p>@UUID[Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B]{Animal
+      Friendship} (save DC
+      13)</p></li><li><p>@UUID[Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0]{Fear}
+      (save DC 13), targeting only beasts that have an Intelligence of 3 or
+      lower</p></li><li><p>@UUID[Compendium.dnd5e.spells.Item.aL1F8fvYLtNzUbKu]{Speak
+      with Animals}</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -43,14 +37,14 @@ system:
   uses:
     max: '3'
     recovery:
-      - period: lr
+      - period: dawn
         type: formula
         formula: 1d3
     spent: 0
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -66,6 +60,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -253,11 +248,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037138894
-  modifiedTime: 1764619428440
+  modifiedTime: 1783737988263
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ElLfmohtIFMagr5f'

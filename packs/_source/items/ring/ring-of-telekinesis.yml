@@ -1,7 +1,7 @@
 _id: hxfOtvFrY1PXHQN1
 name: Ring of Telekinesis
 type: equipment
-img: icons/equipment/finger/ring-inlay-red.webp
+img: icons/equipment/finger/ring-band-engraved-spirals-gold.webp
 system:
   description:
     value: >-
@@ -37,7 +37,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -53,6 +53,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -125,11 +126,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037258445
-  modifiedTime: 1764620600084
+  modifiedTime: 1783379414075
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hxfOtvFrY1PXHQN1'

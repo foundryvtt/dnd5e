@@ -1,43 +1,31 @@
 _id: L9KBLub5vfb3mTDz
 name: Ring of Fire Elemental Command
 type: equipment
-img: icons/equipment/finger/ring-inlay-red.webp
+img: icons/equipment/finger/ring-cabochon-squared-gold-red.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>This ring is linked to the Elemental Plane of Fire.</p>
-
-      <p>While wearing this ring, you have advantage on attack rolls against
+      <p><em>Ring (requires attunement)</em></p><p>This ring is linked to the
+      Elemental Plane of Fire.</p><p>While wearing this ring, you have advantage
+      on attack rolls against
       @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{Fire Elemental}s,
       and they have disadvantage on attack rolls against you. In addition, you
-      have access to properties based on the linked plane.</p>
-
-      <p>The ring has 5 charges. It regains 1d4 + 1 expended charges daily at
-      dawn. Spells cast from the ring have a save DC of 17.</p>
-
-      <p><strong>Ring of Fire Elemental Command</strong>. You can expend 2 of
-      the ring's charges to cast
+      have access to properties based on the linked plane.</p><p>The ring has
+      [[lookup @item.uses.max]] charges. It regains 1d4 + 1 expended charges
+      daily at dawn. Spells cast from the ring have a save DC of
+      17.</p><p><strong>Ring of Fire Elemental Command</strong>. You can expend
+      2 of the ring's charges to cast
       @UUID[Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp]{Dominate Monster} on
       a Fire Elemental. In addition, you have resistance to fire damage. You can
-      also speak and understand Ignan.</p>
-
-      <p>If you help slay a Fire Elemental while attuned to the ring, you gain
-      access to the following additional properties:</p>
-
-      <ul>
-
-      <li>You are immune to fire damage.</li>
-
-      <li>You can cast the following spells from the ring, expending the
-      necessary number of charges:
-      @UUID[Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F]{Burning Hands} (1
-      charge), @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball} (2
-      charges), or @UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{Wall of
-      Fire} (3 charges).</li>
-
-      </ul>
+      also speak and understand Ignan.</p><p>If you help slay a Fire Elemental
+      while attuned to the ring, you gain access to the following additional
+      properties:</p><ul><li><p>You are immune to fire
+      damage.</p></li><li><p>You can cast the following spells from the ring,
+      expending the necessary number of charges:
+      @UUID[Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F]{burning hands} (1
+      charge), @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{fireball} (2
+      charges), or @UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{wall of
+      fire} (3 charges).</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -67,7 +55,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -83,6 +71,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -316,21 +305,276 @@ system:
           min: null
           max: null
         identifier: ''
+    Ms02k1Fhvm6G1j6w:
+      type: enchant
+      name: Empower Ring
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: false
+        condition: When you help slay a Fire Elemental while attuned to this ring.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>If you help slay a Water Elemental while attuned to the ring, you
+          gain access to the following additional properties:</p><ul><li><p>You
+          can breathe underwater and have a swimming speed equal to your walking
+          speed.</p></li><li><p>You can cast the following spells from the ring,
+          expending the necessary number of charges:
+          @UUID[Compendium.dnd5e.spells.Item.a3XtAO5n2GrqiAh5]{create or destroy
+          water} (1 charge),
+          @UUID[Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL]{control water} (3
+          charges), @UUID[Compendium.dnd5e.spells.Item.WN2LWEljYU6QqnRH]{ice
+          storm} (2 charges), or
+          @UUID[Compendium.dnd5e.spells.Item.fzZnVKLmBMo2f5up]{wall of ice} (3
+          charges).</p></li></ul>
+        chatFlavor: ''
+      duration:
+        units: disp
+        concentration: false
+        override: false
+      effects:
+        - _id: H528TcSOmJkQbgnc
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - rWInlhCUYFV0xFpU
+              - MWSaqDybpLBn8R9V
+              - Favmm3fyHI1GTOcN
+            effect:
+              - q6cXIKdSWR0t6Y3b
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: true
+        categories:
+          - ring
+        properties: []
+        type: equipment
+      _id: Ms02k1Fhvm6G1j6w
   attuned: false
   identifier: ring-of-fire-elemental-command
-effects: []
+effects:
+  - name: Fire Elemental Hunter
+    img: icons/magic/fire/projectile-fireball-embers-yellow.webp
+    origin: Compendium.dnd5e.items.Item.L9KBLub5vfb3mTDz
+    system:
+      magical: true
+      changes:
+        - key: system.traits.languages.value
+          type: add
+          value: ignan
+          phase: initial
+          _id: l8E8fHBgdJd0DmG9
+          conditions: '{}'
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: fire
+          phase: initial
+          _id: 9ByQHTIYMhyJu18N
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: 3eJUH0qhLv5KdaVH
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have resistance to fire damage. Additionally, you can speak and
+      understand Ignan.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783789061231
+      modifiedTime: 1783789113358
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!L9KBLub5vfb3mTDz.3eJUH0qhLv5KdaVH'
+  - type: enchantment
+    name: Empowered Fire Elemental Control
+    img: icons/magic/fire/flame-burning-yellow-orange.webp
+    disabled: true
+    _id: H528TcSOmJkQbgnc
+    system:
+      changes:
+        - key: system.traits.di.value
+          type: add
+          value: fire
+          phase: initial
+          _id: bgixf4chuiRZi9yU
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Empowered {}
+          phase: initial
+          _id: WhYGCIdTycN5McDe
+          conditions: '{}'
+          priority: null
+        - key: system.activities.Ms02k1Fhvm6G1j6w.name
+          type: override
+          value: '{} (Currently Empowered)'
+          phase: initial
+          _id: wLlWMnzoPHZO24z1
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have helped slay a Water Elemental while attuned to this ring, and
+      gain access to the following properties:</p><ul><li><p>You are immune to
+      fire damage.</p></li><li><p>You can cast the following spells from the
+      ring, expending the necessary number of charges:
+      @UUID[Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F]{burning hands} (1
+      charge), @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{fireball} (2
+      charges), or @UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{wall of
+      fire} (3 charges).</p></li></ul>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783789184620
+      modifiedTime: 1783789447338
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!L9KBLub5vfb3mTDz.H528TcSOmJkQbgnc'
+  - name: Fire Elemental's Power
+    img: icons/magic/fire/flame-burning-campfire-red.webp
+    origin: Compendium.dnd5e.items.Item.L9KBLub5vfb3mTDz
+    system:
+      magical: true
+      changes:
+        - key: system.traits.di.value
+          type: add
+          value: fire
+          phase: initial
+          _id: 0mfrb9NovO9z9wc0
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: q6cXIKdSWR0t6Y3b
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have immunity for fire damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783789364301
+      modifiedTime: 1783789394795
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!L9KBLub5vfb3mTDz.q6cXIKdSWR0t6Y3b'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - rWInlhCUYFV0xFpU
+        - MWSaqDybpLBn8R9V
+        - Favmm3fyHI1GTOcN
+      effect:
+        - q6cXIKdSWR0t6Y3b
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037164666
-  modifiedTime: 1764619679610
+  modifiedTime: 1783789794873
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!L9KBLub5vfb3mTDz'

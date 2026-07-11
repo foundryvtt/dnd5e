@@ -5,16 +5,13 @@ img: icons/equipment/finger/ring-cabochon-thin-gold-orange.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p><em>This ring has been inlaid with a topaz stone that shimmers when it
-      catches the light.</em></p>
-
-      <p>You have resistance to radiant damage while wearing this ring.</p>
-
-      <p>For other rings of resistance, roll on the
+      <p><em>Ring (requires attunement)</em></p><p><em>This ring has been inlaid
+      with a topaz stone that shimmers when it catches the light.</em></p><p>You
+      have resistance to radiant damage while wearing this ring.</p><section
+      id="secret-sSxPiW6dkmjqTbZw" class="secret"><p><strong>Foundry
+      Note</strong></p><p>For other rings of resistance, roll on the
       @UUID[Compendium.dnd5e.tables.RollTable.MdTxWyYVhTIgtNcG]{Ring of
-      Resistance} table.</p>
+      Resistance} table.</p></section>
     chat: ''
   source:
     custom: ''
@@ -41,7 +38,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -56,7 +53,10 @@ system:
     value: ring
     baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This ring has been inlaid with a topaz stone that shimmers when it
+      catches the light.</p>
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -66,42 +66,47 @@ system:
   identifier: ring-of-radiant-resistance
 effects:
   - name: Radiant Resistance
-    img: icons/equipment/finger/ring-inlay-red.webp
-    _id: gRodAMS7XGgoYSpq
-    type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: radiant
-        priority: null
-    disabled: false
-    duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
-    origin: null
-    tint: '#ffffff'
+    img: icons/magic/light/explosion-glow-spiral-yellow.webp
+    origin: Compendium.dnd5e.items.Item.IrC5LPbWNxlAQoK7
     transfer: true
+    _id: VQSLaieGgSWK5svH
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: radiant
+          phase: initial
+          priority: null
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to radiant damage.</p>
+    tint: '#ffffff'
     statuses: []
+    showIcon: 1
+    folder: null
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.1.0
-      createdTime: 1731017753877
-      modifiedTime: 1731017875208
+      systemVersion: 6.0.0
+      createdTime: 1781984167976
+      modifiedTime: 1781985991975
       lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.LBQWNqX6hZOKhQ8a.ActiveEffect.eEef3fb2MpkTeguM
+      duplicateSource: null
       exportSource: null
-    _key: '!items.effects!IrC5LPbWNxlAQoK7.gRodAMS7XGgoYSpq'
+    _key: '!items.effects!IrC5LPbWNxlAQoK7.VQSLaieGgSWK5svH'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
@@ -109,11 +114,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037157461
-  modifiedTime: 1750697344647
+  modifiedTime: 1783737458223
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!IrC5LPbWNxlAQoK7'

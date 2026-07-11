@@ -1,16 +1,14 @@
 _id: x7LfMrLafLKfemGH
 name: Ring of Jumping
 type: equipment
-img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+img: icons/equipment/finger/ring-band-thin-rounded-gold.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While wearing this ring, you can cast the
-      @UUID[Compendium.dnd5e.spells.Item.ZrTc23tToJ0JpH2h]{Jump} spell from it
-      as a bonus action at will, but can target only yourself when you do
-      so.</p>
+      <p><em>Ring (requires attunement)</em></p><p>While wearing this ring, you
+      can cast the @UUID[Compendium.dnd5e.spells.Item.ZrTc23tToJ0JpH2h]{Jump}
+      spell from it as a bonus action at will, but can target only yourself when
+      you do so.</p>
     chat: ''
   source:
     custom: ''
@@ -37,7 +35,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -53,6 +51,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -128,11 +127,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037321555
-  modifiedTime: 1764621362895
+  modifiedTime: 1783737653691
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!x7LfMrLafLKfemGH'

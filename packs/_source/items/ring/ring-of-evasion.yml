@@ -1,13 +1,12 @@
 _id: 2wxqnjpnPmkpPCC5
 name: Ring of Evasion
 type: equipment
-img: icons/equipment/finger/ring-eye-silver-green.webp
+img: icons/equipment/finger/ring-cabochon-copper-red.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>This ring has 3 charges, and it regains 1d3 expended charges daily at
+      <p><em>Ring (requires attunement)</em></p><p>This ring has [[lookup
+      @item.uses.max]] charges, and it regains 1d3 expended charges daily at
       dawn. When you fail a Dexterity saving throw while wearing it, you can use
       your reaction to expend 1 of its charges to succeed on that saving throw
       instead.</p>
@@ -40,7 +39,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -56,30 +55,32 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    D2Tjdvv8zrVPCCKi:
       type: utility
       activation:
         type: reaction
         value: 1
-        condition: ''
+        condition: When you fail a Dexterity saving throw.
         override: false
       consumption:
         targets:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
@@ -99,7 +100,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -116,17 +118,20 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       name: Evade
       img: ''
-      appliedEffects: []
       visibility:
         requireMagic: true
         level:
           min: null
           max: null
         identifier: ''
-        requireIdentification: true
+        requireIdentification: false
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: D2Tjdvv8zrVPCCKi
   attuned: false
   identifier: ring-of-evasion
 effects: []
@@ -137,11 +142,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037091805
-  modifiedTime: 1764618850723
+  modifiedTime: 1783789835598
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2wxqnjpnPmkpPCC5'

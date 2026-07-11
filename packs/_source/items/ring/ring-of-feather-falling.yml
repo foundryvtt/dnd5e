@@ -1,14 +1,13 @@
 _id: JyYwliYiWEw2g0yJ
 name: Ring of Feather Falling
 type: equipment
-img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+img: icons/equipment/finger/ring-band-engraved-silver.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>When you fall while wearing this ring, you descend 60 feet per round
-      and take no damage from falling.</p>
+      <p><em>Ring (requires attunement)</em></p><p>When you fall while wearing
+      this ring, you descend 60 feet per round and take no damage from
+      falling.</p>
     chat: ''
   source:
     custom: ''
@@ -35,7 +34,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -51,6 +50,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -70,11 +70,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037161193
-  modifiedTime: 1750697344647
+  modifiedTime: 1783737869776
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JyYwliYiWEw2g0yJ'

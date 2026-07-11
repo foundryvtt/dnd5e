@@ -1,15 +1,16 @@
 _id: AweD4kpKGM7Ilu3n
 name: Ring of Regeneration
 type: equipment
-img: icons/equipment/finger/ring-faceted-gold-purple.webp
+img: icons/equipment/finger/ring-ball-leaves-green.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p><p>While wearing this ring, you
-      regain 1d6 hit points every 10 minutes, provided that you have at least 1
-      hit point. If you lose a body part, the ring causes the missing part to
-      regrow and return to full functionality after [[/r 1d6 + 1]] days if you
-      have at least 1 hit point the whole time.</p>
+      <p><em>Ring (requires attunement)</em></p><p>While wearing this ring, you
+      regain [[/healing activity=aHDNea4ZRwU0L77x]] every [[lookup
+      @labels.activation activity=aHDNea4ZRwU0L77x]], provided that you have at
+      least 1 hit point. If you lose a body part, the ring causes the missing
+      part to regrow and return to full functionality after [[/r 1d6 + 1]] days
+      if you have at least 1 hit point the whole time.</p>
     chat: ''
   source:
     custom: ''
@@ -36,7 +37,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -52,13 +53,13 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    aHDNea4ZRwU0L77x:
       type: heal
       activation:
         type: minute
@@ -73,6 +74,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
@@ -92,7 +94,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -102,7 +105,7 @@ system:
         override: false
       healing:
         number: 1
-        denomination: '6'
+        denomination: 6
         bonus: ''
         types:
           - healing
@@ -113,14 +116,14 @@ system:
           mode: whole
           number: null
           formula: ''
+        modifiers: []
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Regenerate
       img: ''
-      appliedEffects: []
       visibility:
         requireMagic: true
         level:
@@ -128,6 +131,10 @@ system:
           max: null
         identifier: ''
         requireIdentification: false
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: aHDNea4ZRwU0L77x
   attuned: false
   identifier: ring-of-regeneration
 effects: []
@@ -138,11 +145,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037123520
-  modifiedTime: 1764619219044
+  modifiedTime: 1783737359663
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!AweD4kpKGM7Ilu3n'

@@ -1,18 +1,16 @@
 _id: 8PI1EL8xHLq4tXKr
 name: Ring of Spell Turning
 type: equipment
-img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+img: icons/equipment/finger/ring-eye-purple-red.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While wearing this ring, you have advantage on saving throws against
-      any spell that targets only you (not in an area of effect). In addition,
-      if you roll a 20 for the save and the spell is 7th level or lower, the
-      spell has no effect on you and instead targets the caster, using the slot
-      level, spell save DC, attack bonus, and spellcasting ability of the
-      caster.</p>
+      <p><em>Ring (requires attunement)</em></p><p>While wearing this ring, you
+      have advantage on saving throws against any spell that targets only you
+      (not in an area of effect). In addition, if you roll a 20 for the save and
+      the spell is 7th level or lower, the spell has no effect on you and
+      instead targets the caster, using the slot level, spell save DC, attack
+      bonus, and spellcasting ability of the caster.</p>
     chat: ''
   source:
     custom: ''
@@ -39,7 +37,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -55,6 +53,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -62,7 +61,48 @@ system:
   activities: {}
   attuned: false
   identifier: ring-of-spell-turning
-effects: []
+effects:
+  - name: Spell Turning
+    img: icons/magic/defensive/shield-barrier-blades-teal.webp
+    origin: Compendium.dnd5e.items.Item.8PI1EL8xHLq4tXKr
+    system:
+      magical: true
+      changes: []
+      rider:
+        statuses: []
+    type: base
+    _id: T26LKKSOBI730mXP
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have advantage on saving throws against any spell that targets only
+      you (not in an area of effect). In addition, if you roll a 20 for the save
+      and the spell is 7th level or lower, the spell has no effect on you and
+      instead targets the caster, using the slot level, spell save DC, attack
+      bonus, and spellcasting ability of the caster.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783379451276
+      modifiedTime: 1783379492007
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!8PI1EL8xHLq4tXKr.T26LKKSOBI730mXP'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
@@ -74,11 +114,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037114117
-  modifiedTime: 1750697344647
+  modifiedTime: 1783790938092
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8PI1EL8xHLq4tXKr'
