@@ -2,6 +2,7 @@ const D20_TESTS = new Set(["attack", "check", "save"]);
 
 /**
  * @import { AdvantageModeData } from "../data/fields/_types.mjs";
+ * @import { RollRange } from "../dice/_types.mjs";
  */
 
 /**
@@ -56,6 +57,11 @@ export default class AppliedRules extends Map {
   static *#collect(rule, actor, item) {
     const [category, key] = rule.split(":");
     if ( D20_TESTS.has(category) ) yield* AppliedRules.#collect(`d20:${key}`, actor, item);
+    if ( key === "range" ) {
+      yield* AppliedRules.#collect(`${category}:maximum`, actor, item);
+      yield* AppliedRules.#collect(`${category}:minimum`, actor, item);
+      return;
+    }
     for ( const r of actor?.appliedRules.get(rule) ?? [] ) yield r;
     for ( const r of item?.appliedRules.get(rule) ?? [] ) yield r;
   }
@@ -171,6 +177,45 @@ class RulesIterator extends Iterator {
    */
   toFormula() {
     return this.values(String).toArray().join(" + ");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Find the highest value among all of the provided rules, or `-Infinity` if no rules are available.
+   * @param {number} [initial]  Starting value to compare against.
+   * @returns {number}
+   */
+  toLargest(initial) {
+    return this.values(Number).reduce((max, value) => value > max ? value : max, initial ?? -Infinity);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Find the minimum and maximum limit among all of the provided rules.
+   * @param {Partial<RollRange>} [range]  Initial range to fine tune.
+   * @returns {RollRange}
+   */
+  toRange(range) {
+    return this.reduce((range, rule) => {
+      const value = Number(rule.value);
+      if ( !Number.isFinite(value) ) return range;
+      if ( (rule.type === "dnd5e.maximum") && (value < range.maximum) ) range.maximum = value;
+      if ( (rule.type === "dnd5e.minimum") && (value > range.minimum) ) range.minimum = value;
+      return range;
+    }, { maximum: range?.maximum ?? Infinity, minimum: range?.minimum ?? -Infinity });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Find the lowest value among all of the provided rules, or `Infinity` if no rules are available.
+   * @param {number} [initial]  Starting value to compare against.
+   * @returns {number}
+   */
+  toSmallest(initial) {
+    return this.values(Number).reduce((min, value) => value < min ? value : min, initial ?? Infinity);
   }
 
   /* -------------------------------------------- */

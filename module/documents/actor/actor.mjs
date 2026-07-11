@@ -1358,10 +1358,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
-      options: {
+      options: AppliedRules.collect("check:range", this).filterWith(rollData).toRange({
         maximum: Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
         minimum: Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
-      }
+      })
     }, config.rolls?.shift())].concat(config.rolls ?? []);
     rollConfig.subject = this;
 
@@ -1570,13 +1570,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
 
-    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
-      `abilities.${config.ability}.${type}.roll.mode`
-    ], AppliedRules.collect(`${type}:advantage`, this).filterWith(rollData).toAdvantageCounts());
     const options = {
-      advantage, disadvantage,
-      maximum: ability?.[type]?.roll.max,
-      minimum: ability?.[type]?.roll.min
+      ...AdvantageModeField.combineFields(this.system, [
+        `abilities.${config.ability}.${type}.roll.mode`
+      ], AppliedRules.collect(`${type}:advantage`, this).filterWith(rollData).toAdvantageCounts()),
+      ...AppliedRules.collect(`${type}:range`, this).filterWith(rollData).toRange({
+        maximum: ability?.[type]?.roll.max,
+        minimum: ability?.[type]?.roll.min
+      })
     };
 
     const rollConfig = foundry.utils.mergeObject({
@@ -1918,8 +1919,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
-      maximum: Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
-      minimum: Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
+      ...AppliedRules.collect("check:range", this).filterWith(rollData).toRange({
+        maximum: Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
+        minimum: Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
+      })
     }, options);
 
     const rollConfig = { parts, data, options, subject: this };

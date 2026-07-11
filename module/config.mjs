@@ -3917,6 +3917,18 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     skipConditions: true
+  },
+  "dnd5e.maximum": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Maximum.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    skipConditions: true
+  },
+  "dnd5e.minimum": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Minimum.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    skipConditions: true
   }
 });
 

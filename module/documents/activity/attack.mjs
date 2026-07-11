@@ -123,11 +123,13 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       this.actor.system, [],
       AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()
     ) : {};
+    const { maximum, minimum } = this.actor
+      ? AppliedRules.collect("attack:range", this.actor, this.item).filterWith(rollData).toRange() : {}
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
       options: {
-        advantage, disadvantage,
+        advantage, disadvantage, maximum, minimum,
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,
         criticalSuccess: this.criticalThreshold,

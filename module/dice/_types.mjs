@@ -55,7 +55,7 @@
 /**
  * Options that describe a d20 roll.
  *
- * @typedef {BasicRollOptions} D20RollOptions
+ * @typedef {BasicRollOptions & Partial<RollRange>} D20RollOptions
  * @property {boolean} [advantage]       Does this roll potentially have advantage?
  * @property {boolean} [disadvantage]    Does this roll potentially have disadvantage?
  * @property {D20Roll.ADV_MODE} [advantageMode]  Final advantage mode.
@@ -63,8 +63,12 @@
  * @property {number} [criticalFailure]  The value of the d20 die to be considered a critical failure.
  * @property {boolean} [elvenAccuracy]   Use three dice when rolling with advantage.
  * @property {boolean} [halflingLucky]   Add a re-roll once modifier to the d20 die.
- * @property {number} [maximum]          Maximum number the d20 die can roll.
- * @property {number} [minimum]          Minimum number the d20 die can roll.
+ */
+
+/**
+ * @typedef RollRange
+ * @property {number} maximum  Maximum number the d20 die can roll.
+ * @property {number} minimum  Minimum number the d20 die can roll.
  */
 
 /**
