@@ -1,0 +1,215 @@
+folder: D3ufaDHnyE4MJyWy
+name: Adamantine Armor
+type: equipment
+_id: dBMexfyhezsAnhhM
+img: icons/equipment/shoulder/pauldron-ridged-copper-green.webp
+system:
+  activities:
+    r2B7R9VIYnIvBNuE:
+      type: enchant
+      name: Apply Magic Item Template
+      _id: r2B7R9VIYnIvBNuE
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: ik6bCdaICkZXXuAN
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories:
+          - medium
+          - heavy
+        properties: []
+        type: equipment
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (medium or heavy, but not hide)</em></p><p>This suit of armor
+      is reinforced with adamantine, one of the hardest substances in existence.
+      While you are wearing it, any critical hit against you becomes a normal
+      hit.</p>
+    chat: ''
+  identifier: adamantine-armor
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  properties:
+    - ada
+    - mgc
+  strength: null
+  type:
+    value: ''
+    baseItem: ''
+effects:
+  - type: enchantment
+    name: Adamantine Armor
+    img: icons/equipment/shoulder/pauldron-ridged-copper-green.webp
+    disabled: true
+    _id: ik6bCdaICkZXXuAN
+    system:
+      changes:
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.dBMexfyhezsAnhhM inline]'
+          phase: initial
+          priority: null
+        - key: name
+          type: override
+          value: Adamantine {}
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: uncommon
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: ada
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 400
+          phase: initial
+          priority: null
+        - key: system.price.denomination
+          type: add
+          value: gp
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: img
+          type: override
+          value: icons/equipment/shoulder/pauldron-ridged-copper-green.webp
+          phase: initial
+          priority: null
+        - key: flags.world.remove-text
+          type: override
+          value: ''
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.dBMexfyhezsAnhhM inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783434559485
+      modifiedTime: 1783435478639
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!dBMexfyhezsAnhhM.ik6bCdaICkZXXuAN'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1783434544352
+  modifiedTime: 1783734588231
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!dBMexfyhezsAnhhM'

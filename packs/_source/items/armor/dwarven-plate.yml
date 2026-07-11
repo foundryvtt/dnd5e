@@ -56,13 +56,12 @@ system:
     - mgc
     - stealthDisadvantage
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    EM9dLRuClH9ZoXCc:
       type: utility
       activation:
         type: reaction
         value: 1
-        condition: ''
+        condition: When an effect moves you against your will along the ground.
         override: false
       consumption:
         targets: []
@@ -72,15 +71,19 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>If an effect moves you against your will along the ground, you can
+          use your reaction to reduce the distance you are moved by up to 10
+          feet.</p>
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -91,10 +94,11 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
-          type: ''
+          type: self
           choice: false
           special: ''
         prompt: true
@@ -107,7 +111,21 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Hold Ground
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        identifier: ''
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+      _id: EM9dLRuClH9ZoXCc
   attuned: false
   identifier: dwarven-plate
 effects: []
@@ -118,11 +136,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037178763
-  modifiedTime: 1750697344647
+  modifiedTime: 1783648636838
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!OwqRt1pVLhdMQa0d'

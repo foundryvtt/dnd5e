@@ -1,25 +1,23 @@
 _id: dJjdWdaZU30r1zx4
 name: Plate Armor of Etherealness
 type: equipment
-img: icons/equipment/chest/breastplate-collared-steel.webp
+img: icons/equipment/chest/breastplate-layered-leather-blue-gold.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>Plate consists of shaped, interlocking metal plates to cover the entire
-      body. A suit of plate includes gauntlets, heavy leather boots, a visored
-      helmet, and thick layers of padding underneath the armor. Buckles and
-      straps distribute the weight over the body. This particular armor has been
-      inscribed with certain magical runes or other means to imbue power upon
-      it.</p>
-
-      <p>While you're wearing this armor, you can speak its command word as an
-      action to gain the effect of the
-      @UUID[Compendium.dnd5e.spells.Item.PQuEgKyCdovOvhqN]{Etherealness} spell,
-      which last for 10 minutes or until you remove the armor or use an action
-      to speak the command word again. This property of the armor can't be used
-      again until the next dawn.</p>
+      <p><em>Armor (Requires attunement)</em></p><p>Plate consists of shaped,
+      interlocking metal plates to cover the entire body. A suit of plate
+      includes gauntlets, heavy leather boots, a visored helmet, and thick
+      layers of padding underneath the armor. Buckles and straps distribute the
+      weight over the body. This particular armor has been inscribed with
+      certain magical runes or other means to imbue power upon it.</p><p>While
+      you're wearing this armor, you can speak its command word as an action to
+      gain the effect of the
+      @UUID[Compendium.dnd5e.spells.Item.PQuEgKyCdovOvhqN]{etherealness} spell,
+      which last for [[lookup @labels.duration activity=dnd5eactivity000]] or
+      until you remove the armor or use an action to speak the command word
+      again. This property of the armor can't be used again until the next
+      dawn.</p>
     chat: ''
   source:
     custom: ''
@@ -41,15 +39,13 @@ system:
   cover: null
   crewed: false
   uses:
-    max: '1'
-    recovery:
-      - period: day
-        type: recoverAll
+    max: ''
+    recovery: []
     spent: 0
   armor:
     value: 18
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -76,26 +72,39 @@ system:
       activation:
         type: action
         value: 1
-        condition: Command word.
+        condition: You speak the armor's command word.
         override: false
       consumption:
         targets:
-          - type: itemUses
+          - type: activityUses
             value: '1'
-            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>While you're wearing this armor, you can speak its command word as
+          an action to gain the effect of the
+          @UUID[Compendium.dnd5e.spells.Item.PQuEgKyCdovOvhqN]{etherealness}
+          spell, which last for [[lookup @labels.duration
+          activity=R1Kbo30dpevKvQoO]] or until you remove the armor or use an
+          action to speak the command word again. This property of the armor
+          can't be used again until the next dawn.</p>
       duration:
         concentration: false
         value: '10'
         units: minute
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: BTSNTYBxNxJul7X0
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         units: self
         special: ''
@@ -114,7 +123,7 @@ system:
           type: self
           choice: false
           special: ''
-        prompt: true
+        prompt: false
         override: false
       roll:
         formula: ''
@@ -123,10 +132,12 @@ system:
         visible: false
       uses:
         spent: 0
-        recovery: []
-        max: ''
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
       sort: 0
-      name: ''
+      name: Become Ethereal
       img: ''
       visibility:
         requireMagic: true
@@ -138,7 +149,66 @@ system:
       appliedEffects: []
   attuned: false
   identifier: plate-armor-of-etherealness
-effects: []
+effects:
+  - name: Etherealness
+    img: icons/creatures/magical/construct-golem-stone-blue.webp
+    origin: Compendium.dnd5e.items.Item.dJjdWdaZU30r1zx4
+    transfer: false
+    _id: BTSNTYBxNxJul7X0
+    type: base
+    system:
+      changes: []
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: false
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You step into the border regions of the Ethereal Plane, in the area
+      where it overlaps with your current plane. You remain in the Border
+      Ethereal for the duration or until you use your action to dismiss the
+      spell. During this time, you can move in any direction. If you move up or
+      down, every foot of movement costs an extra foot. You can see and hear the
+      plane you originated from, but everything there looks gray, and you can't
+      see anything more than 60 feet away.</p><p>While on the Ethereal Plane,
+      you can only affect and be affected by other creatures on that plane.
+      Creatures that aren't on the Ethereal Plane can't perceive you and can't
+      interact with you, unless a special ability or magic has given them the
+      ability to do so.</p><p>You ignore all objects and effects that aren't on
+      the Ethereal Plane, allowing you to move through objects you perceive on
+      the plane you originated from.</p><p>When the spell ends, you immediately
+      return to the plane you originated from in the spot you currently occupy.
+      If you occupy the same spot as a solid object or creature when this
+      happens, you are immediately shunted to the nearest unoccupied space that
+      you can occupy and take force damage equal to twice the number of feet you
+      are moved.</p>
+    tint: '#ffffff'
+    statuses:
+      - ethereal
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783734358292
+      modifiedTime: 1783734358292
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.PQuEgKyCdovOvhqN.ActiveEffect.rrA8RYmv4eAuVbg8
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!dJjdWdaZU30r1zx4.BTSNTYBxNxJul7X0'
 folder: JqTP017wj3uxDJ8g
 sort: 0
 ownership:
@@ -146,11 +216,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037233531
-  modifiedTime: 1764620366338
+  modifiedTime: 1783734440813
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dJjdWdaZU30r1zx4'

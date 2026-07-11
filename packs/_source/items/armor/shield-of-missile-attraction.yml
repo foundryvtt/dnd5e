@@ -5,17 +5,14 @@ img: icons/equipment/shield/kite-decorative-steel-claws.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While holding this shield, you have resistance to damage from ranged
-      weapon attacks.</p>
-
-      <p><strong>Curse</strong>. This shield is cursed. Attuning to it curses
-      you until you are targeted by the
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
-      or similar magic. Removing the shield fails to end the curse on you.
+      <p><em>Armor (requires attunement)</em></p><p>While holding this shield,
+      you have resistance to damage from ranged weapon attacks.</p><section
+      id="secret-3yeMFKZRK2wdFvRo" class="secret"><p><strong>Curse</strong>.
+      This shield is cursed. Attuning to it curses you until you are targeted by
+      the @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse}
+      spell or similar magic. Removing the shield fails to end the curse on you.
       Whenever a ranged weapon attack is made against a target within 10 feet of
-      you, the curse causes you to become the target instead.</p>
+      you, the curse causes you to become the target instead.</p></section>
     chat: ''
   source:
     custom: ''
@@ -43,7 +40,7 @@ system:
   armor:
     value: 2
     dex: null
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -73,11 +70,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037168703
-  modifiedTime: 1750697344647
+  modifiedTime: 1783735015056
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!M5APnDW8bKQb7fHI'

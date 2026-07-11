@@ -1,0 +1,1705 @@
+folder: D3ufaDHnyE4MJyWy
+name: Dragon Scale Mail
+type: equipment
+_id: tkTnQ4rxmZsJ5I6l
+img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+system:
+  activities:
+    mZVscVlRpgrX5kHN:
+      type: enchant
+      name: Apply Magic Item Template
+      _id: mZVscVlRpgrX5kHN
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 2kY1MO2iVQW1NR8M
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - hY6gk3YhUjVHjald
+            item: []
+        - _id: K32swIesbpyIBeNw
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - UPl2akm7ExoV59zV
+            item: []
+        - _id: MDD4F6VBYks5sJkD
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - vPhHSlm3a9NfigGa
+            item: []
+        - _id: YdXrvka4b11lcnfU
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - UPl2akm7ExoV59zV
+            item: []
+        - _id: ZBGWvWFvub3onSZI
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - hY6gk3YhUjVHjald
+            item: []
+        - _id: auFZKiRWtItt3YCX
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - vPhHSlm3a9NfigGa
+            item: []
+        - _id: v5lIsqkvICmi5uPe
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - dfCLhUFIPJ0QoJLQ
+            item: []
+        - _id: XmU8cbU43QfIzWyD
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - vPhHSlm3a9NfigGa
+            item: []
+        - _id: 8V3JcS6R1ACsBBqb
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - D3r3DReuAYR4RxYR
+            item: []
+        - _id: 5pJdXnr2izf4Chsc
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - ck0BduGmQ4v8Xdfc
+            effect:
+              - D3r3DReuAYR4RxYR
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories:
+          - medium
+        properties: []
+        type: equipment
+    ck0BduGmQ4v8Xdfc:
+      type: utility
+      name: Detect Dragons
+      _id: ck0BduGmQ4v8Xdfc
+      img: systems/dnd5e/icons/svg/statuses/hiding.svg
+      sort: 100000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        value: >-
+          <p>You can focus your senses as an action to magically discern the
+          distance and direction to the closest [[lookup
+          @item.flags.world.dragon-scale-mail-dragon-type]]{ } dragon within 30
+          miles of you[[lookup
+          @item.flags.world.dragon-scale-mail-removed-text]]{ that is of the
+          same type as the armor}. This special action can't be used again until
+          the next dawn.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: mi
+        override: false
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: true
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor </em><span class="hide-in-embed"><em>(scale mail),
+      </em></span><em>(requires attunement)</em></p>
+
+      <p>Dragon Scale Mail is made of the scales of one kind of dragon.
+      Sometimes dragons collect their cast-off scales and gift them to
+      humanoids. Other times, hunters carefully skin and preserve the hide of a
+      dead dragon. In either case, dragon scale mail is highly valued.</p>
+
+      <p>While wearing this armor, you gain a +1 bonus to AC, you have advantage
+      on saving throws against the Frightful Presence and Breath Weapons of
+      dragons, and you have resistance to [[lookup
+      @item.flags.world.dragon-scale-mail-resistance]]{one damage type that is
+      determined by the kind of dragon that provided the scales (see the
+      table)}.</p>
+
+      <p>Additionally, you can focus your senses as an action to magically
+      discern the distance and direction to the closest [[lookup
+      @item.flags.world.dragon-scale-mail-dragon-type]]{ } dragon within 30
+      miles of you[[lookup @item.flags.world.dragon-scale-mail-removed-text]]{
+      that is of the same type as the armor}. This special action can't be used
+      again until the next dawn.</p>
+
+      <table class="hide-in-embed">
+          <thead>
+              <tr>
+                  <th>
+                      <p><strong>Dragon</strong></p>
+                  </th>
+                  <th>
+                      <p><strong>Resistance</strong></p>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>
+                      <p>Black</p>
+                  </td>
+                  <td>
+                      <p>Acid</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Blue</p>
+                  </td>
+                  <td>
+                      <p>Lightning</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Brass</p>
+                  </td>
+                  <td>
+                      <p>Fire</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Bronze</p>
+                  </td>
+                  <td>
+                      <p>Lightning</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Copper</p>
+                  </td>
+                  <td>
+                      <p>Acid</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Gold</p>
+                  </td>
+                  <td>
+                      <p>Fire</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Green</p>
+                  </td>
+                  <td>
+                      <p>Poison</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Red</p>
+                  </td>
+                  <td>
+                      <p>Fire</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>Silver</p>
+                  </td>
+                  <td>
+                      <p>Cold</p>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      <p>White</p>
+                  </td>
+                  <td>
+                      <p>Cold</p>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    chat: ''
+  identifier: dragon-scale-mail
+  source:
+    revision: 1
+    rules: '2014'
+    book: ''
+    page: ''
+    custom: ''
+    license: ''
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: required
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  properties:
+    - mgc
+  strength: null
+  type:
+    value: medium
+    baseItem: scalemail
+effects:
+  - type: enchantment
+    name: Black Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    _id: 2kY1MO2iVQW1NR8M
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: black
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: acid damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Black Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783731961223
+      modifiedTime: 1783732632098
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.2kY1MO2iVQW1NR8M'
+  - name: Acid Resistance
+    img: icons/magic/acid/projectile-faceted-glob.webp
+    origin: Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l
+    transfer: true
+    _id: hY6gk3YhUjVHjald
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: acid
+          phase: initial
+          priority: null
+          _id: tLcw1qF6hi5qqvyK
+          conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to acid damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733212614
+      modifiedTime: 1783733212614
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.zgZkJAyFAfYmyn11.ActiveEffect.7bDbdK6YYorswEGe
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.hY6gk3YhUjVHjald'
+  - name: Cold Resistance
+    img: icons/magic/water/snowflake-ice-blue-white.webp
+    origin: Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l
+    transfer: true
+    _id: D3r3DReuAYR4RxYR
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: cold
+          phase: initial
+          priority: null
+          _id: QfNdPTgWt8kCU7gc
+          conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to cold damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733239524
+      modifiedTime: 1783733239524
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.34YKlIJVVWLeBv7R.ActiveEffect.iYO0o4oLErq9j3ph
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.D3r3DReuAYR4RxYR'
+  - name: Fire Resistance
+    img: icons/magic/fire/flame-burning-earth-yellow.webp
+    origin: Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l
+    transfer: true
+    _id: vPhHSlm3a9NfigGa
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: fire
+          phase: initial
+          priority: null
+          _id: FSUxiCAkczHNJoK0
+          conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to fire damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733244794
+      modifiedTime: 1783733244794
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.Jj4iFQQGvckx8Wsj.ActiveEffect.camHDa74ZwAPUqmG
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.vPhHSlm3a9NfigGa'
+  - name: Lightning Resistance
+    img: icons/magic/lightning/bolt-blue.webp
+    origin: Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l
+    transfer: true
+    _id: UPl2akm7ExoV59zV
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: lightning
+          phase: initial
+          priority: null
+          _id: Na0CnUdUeyqdzbzo
+          conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to lightning damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733248909
+      modifiedTime: 1783733248909
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.8MPnSrvEeZhPhtTi.ActiveEffect.o5uwUilyOmZKavPX
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.UPl2akm7ExoV59zV'
+  - name: Poison Resistance
+    img: icons/skills/toxins/cauldron-bubbles-overflow-green.webp
+    origin: Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l
+    transfer: true
+    _id: dfCLhUFIPJ0QoJLQ
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: poison
+          phase: initial
+          priority: null
+          _id: 74K30IdPAkcDMqO6
+          conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to poison damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733253841
+      modifiedTime: 1783733253841
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.f5chGcpQCi1HYPQw.ActiveEffect.vkhMbnwDVjFzcSsl
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.dfCLhUFIPJ0QoJLQ'
+  - type: enchantment
+    name: Blue Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: blue
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: lightning damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Blue Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733288448
+      modifiedTime: 1783733317612
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: K32swIesbpyIBeNw
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.K32swIesbpyIBeNw'
+  - type: enchantment
+    name: Brass Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: brass
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: fire damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Brass Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733289757
+      modifiedTime: 1783733340920
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: MDD4F6VBYks5sJkD
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.MDD4F6VBYks5sJkD'
+  - type: enchantment
+    name: Bronze Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: bronze
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: lightning damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Bronze Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733293601
+      modifiedTime: 1783733381493
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: YdXrvka4b11lcnfU
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.YdXrvka4b11lcnfU'
+  - type: enchantment
+    name: Copper Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: copper
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: acid damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Copper Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733294717
+      modifiedTime: 1783733412292
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: ZBGWvWFvub3onSZI
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.ZBGWvWFvub3onSZI'
+  - type: enchantment
+    name: Gold Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: gold
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: fire damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Gold Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733416185
+      modifiedTime: 1783733441690
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: auFZKiRWtItt3YCX
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.auFZKiRWtItt3YCX'
+  - type: enchantment
+    name: Green Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: green
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: poison damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Green Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733417041
+      modifiedTime: 1783733468958
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: v5lIsqkvICmi5uPe
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.v5lIsqkvICmi5uPe'
+  - type: enchantment
+    name: Red Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: red
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: fire damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Red Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733417789
+      modifiedTime: 1783733487334
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: XmU8cbU43QfIzWyD
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.XmU8cbU43QfIzWyD'
+  - type: enchantment
+    name: Silver Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: silver
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: cold damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Silver Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733418573
+      modifiedTime: 1783733508723
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: 8V3JcS6R1ACsBBqb
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.8V3JcS6R1ACsBBqb'
+  - type: enchantment
+    name: White Dragon Scale Mail
+    img: icons/equipment/shoulder/shoulderguard-segmented-studded-leather.webp
+    disabled: true
+    system:
+      changes:
+        - key: flags.world.dragon-scale-mail-dragon-type
+          type: override
+          value: white
+          phase: initial
+          _id: 65bmyTm6XjfOy4Th
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-resistance
+          type: override
+          value: cold damage
+          phase: initial
+          _id: 4YeLnY9sOdH6Iil9
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]'
+          phase: initial
+          _id: 2aOVDbdBgumy2DQd
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: White Dragon {}
+          phase: initial
+          _id: UOV6Tn9a5hbuEo17
+          conditions: '{}'
+          priority: null
+        - key: flags.world.dragon-scale-mail-removed-text
+          type: add
+          value: ''
+          phase: initial
+          _id: KGzCb5nsLy4A74sC
+          conditions: '{}'
+          priority: null
+        - key: system.price
+          type: add
+          value: 40000
+          phase: initial
+          _id: Wko9JuygEfUpaUfb
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: EamwJLiRQLrD4yEG
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: kOlfIuMpfvaXm7YD
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: P9nYXtWTgbkS553y
+          conditions: '{}'
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          _id: A2NAer1KjfIKCGhS
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783733419330
+      modifiedTime: 1783733530174
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.tkTnQ4rxmZsJ5I6l.ActiveEffect.2kY1MO2iVQW1NR8M
+      duplicateSource: null
+      exportSource: null
+    _id: 5pJdXnr2izf4Chsc
+    _key: '!items.effects!tkTnQ4rxmZsJ5I6l.5pJdXnr2izf4Chsc'
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - ck0BduGmQ4v8Xdfc
+      effect:
+        - hY6gk3YhUjVHjald
+        - UPl2akm7ExoV59zV
+        - vPhHSlm3a9NfigGa
+        - dfCLhUFIPJ0QoJLQ
+        - D3r3DReuAYR4RxYR
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1783731883283
+  modifiedTime: 1783734697376
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!tkTnQ4rxmZsJ5I6l'
