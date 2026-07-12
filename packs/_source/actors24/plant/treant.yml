@@ -485,12 +485,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -534,7 +531,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -554,6 +551,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: mmSiegeMonster00
     name: Siege Monster
@@ -597,10 +595,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSiegeMonster00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -694,10 +694,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -833,10 +835,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSlam0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -989,10 +993,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmHailOfBark0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1129,33 +1135,38 @@ items:
         transfer: false
         _id: lPONVotWP8yhuuWe
         type: base
-        system: {}
-        changes:
-          - key: system.abilities.cha.value
-            mode: 5
-            value: '1'
-            priority: null
-          - key: system.abilities.int.value
-            mode: 5
-            value: '1'
-            priority: null
-          - key: system.traits.languages.value
-            mode: 5
-            value: '{}'
-            priority: null
-          - key: system.traits.languages.custom
-            mode: 2
-            value: Can't speak
-            priority: null
+        system:
+          changes:
+            - key: system.abilities.cha.value
+              value: 1
+              priority: null
+              type: override
+              phase: initial
+              _id: FYLVnqjzrCNGrWkY
+            - key: system.abilities.int.value
+              value: 1
+              priority: null
+              type: override
+              phase: initial
+              _id: xtijwXXvteoWaIn2
+            - key: system.traits.languages.value
+              value: {}
+              priority: null
+              type: override
+              phase: initial
+              _id: j7QCs4UQaeywlgHh
+            - key: system.traits.languages.custom
+              value: Can't speak
+              priority: null
+              type: add
+              phase: initial
+              _id: jOFmXwTiMPHdeK5z
         disabled: false
         duration:
-          startTime: null
-          seconds: 86400
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 86400
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The tree has Intelligence and Charisma scores of 1, can't speak,
           and lacks the Animate Trees action.</p>
@@ -1170,10 +1181,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544183554
+          modifiedTime: 1783544183554
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmTreant00000000.lqG4KueiyzdOy01v.lPONVotWP8yhuuWe
     folder: 4T18pEvubPMQLzvD
@@ -1186,10 +1202,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAnimateTrees00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544183554
+      modifiedTime: 1783544183554
     sort: 150000
     ownership:
       default: 0
@@ -1200,11 +1218,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452716164
-  modifiedTime: 1771452716164
+  systemVersion: 6.0.0
+  createdTime: 1783544183554
+  modifiedTime: 1783544183554
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

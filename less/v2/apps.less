@@ -171,6 +171,7 @@
         line-height: 1;
       }
 
+      button, button:hover:not(:disabled) { color: currentcolor; }
       .radio-button {
         background: var(--dnd5e-background-alt-1);
         &[aria-pressed="true"]::before { background: var(--dnd5e-color-gold); }
@@ -194,6 +195,10 @@
         background: none;
 
         option { color: var(--color-text-primary); }
+      }
+
+      .form-group .form-fields > span {
+        padding-inline-start: 6px;
       }
     }
 
@@ -228,6 +233,18 @@
         .sign { color: var(--color-text-tertiary); }
       }
     }
+  }
+
+  .drag-bar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset-block: 0;
+    inset-inline-end: 0;
+    inline-size: 16px;
+    cursor: var(--cursor-grab);
+    color: var(--dnd5e-color-faint);
   }
 
   .unlist {
@@ -658,6 +675,7 @@
         > li {
           margin: 0 -.75em;
           padding: 6px .75em;
+          position: relative;
 
           &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
           &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
@@ -672,6 +690,7 @@
         text-align: right;
         flex-wrap: nowrap;
         gap: 4px;
+        &:has(> .drag-bar) { margin-inline-end: 8px; }
       }
 
       .name-header { padding-inline-start: 16px; }
@@ -692,14 +711,13 @@
 
   .drop-area {
     &.drop-area-lg {
-      border: var(--pill-empty-border);
-      color: var(--pill-empty-text-color);
-      border-radius: 4px;
-      display: grid;
-      place-content: center;
-      opacity: .5;
       background: var(--dnd5e-background-card);
+      border: var(--pill-empty-border);
       box-shadow: 0 0 12px var(--dnd5e-shadow-15);
+      color: var(--pill-empty-text-color);
+      font-size: inherit;
+      font-style: normal;
+      opacity: .5;
       padding-block: 16px;
     }
 
@@ -722,54 +740,6 @@
     gap: .125rem;
 
     + .meter-group { margin-block-start: .5rem; }
-  }
-
-  .meter {
-    border: 1px solid var(--dnd5e-color-gold);
-    border-radius: 4px;
-    background: var(--meter-background);
-    font-family: var(--dnd5e-font-roboto);
-    font-weight: bold;
-    box-shadow: inset 0 0 16px rgb(0 0 0 / 25%);
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-
-    &.progress, .progress {
-      --bar-percentage: 0%;
-      --border-width: 3px;
-      overflow: hidden;
-
-      &::before {
-        content: "";
-        position: absolute;
-        block-size: 100%;
-        inline-size: var(--bar-percentage);
-        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
-      }
-    }
-
-    .label {
-      inline-size: 100%;
-      display: flex;
-      align-items: center;
-      gap: .25rem;
-      position: relative;
-      padding-inline-start: 8px;
-      padding-inline-end: 12px;
-      color: var(--color-text-light-0);
-
-      &[hidden] { display: none; }
-      .value, .max { text-shadow: 0 0 4px var(--dnd5e-color-gold); }
-      .separator { color: var(--dnd5e-color-gold); }
-      .bonus {
-        margin-inline-start: auto;
-        font-size: var(--font-size-14);
-        opacity: .8;
-      }
-    }
   }
 
   /* ---------------------------------- */
@@ -1144,7 +1114,7 @@
     }
     h1 {
       inset-block-start: calc(var(--header-height) - 20px);
-      font-size: var(--font-size-24);
+      font-size: calc(var(--font-size-24) * var(--font-size-scale, 1));
     }
     h2 {
       inset-block-start: calc(var(--header-height) + var(--font-size-16));
@@ -1209,6 +1179,10 @@
       font-size: var(--font-size-13);
       font-weight: normal;
     }
+  }
+
+  &.hidden-title:not(.minimized) .window-header .window-title {
+    visibility: hidden;
   }
 
   .window-content {
@@ -1308,51 +1282,17 @@
   }
 }
 
-dialog.dnd5e2.application {
-  margin: 0;
-  padding: 0;
-}
-
 /* ---------------------------------- */
 /*  Dialogs                           */
 /* ---------------------------------- */
 
-.dnd5e2.dialog {
-  background: url("ui/texture-gray1.webp") no-repeat top left,
-    url("ui/texture-gray2.webp") no-repeat bottom right,
-    var(--dnd5e-color-parchment);
-  border: 1px solid var(--dnd5e-color-gold);
-
-  > .window-content { background: transparent; }
-
-  > .window-header .window-title { visibility: hidden; }
-
-  form {
-    padding: 0 .75rem .75rem;
-
-    > header {
-      font-family: var(--dnd5e-font-roboto-slab);
-      font-weight: bold;
-      font-size: var(--font-size-24);
-      text-align: center;
-      margin-bottom: .75rem;
-    }
+dialog.dnd5e2 {
+  &.application {
+    margin: 0;
+    padding: 0;
   }
 
-  .dialog-buttons {
-    padding: .5rem;
-    gap: .5rem;
-
-    button {
-      background: var(--dnd5e-color-card);
-      border: 1px solid var(--color-border-light-2);
-      &.default { border-color: var(--dnd5e-color-gold); }
-    }
-  }
-
-  &.create-document .document-name {
-    &:hover, &:focus { box-shadow: none; }
-  }
+  &.dialog > .window-header .window-title { visibility: hidden; }
 }
 
 .dnd5e2.dialog-lg {
@@ -1889,12 +1829,41 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
+/*  Request Dialog                    */
+/* ---------------------------------- */
+
+.party-request {
+  .recipients { gap: 4px; }
+  .recipient {
+    align-items: center;
+    gap: 4px;
+
+    label { display: contents; }
+    .name { flex: 2; }
+  }
+}
+
+/* ---------------------------------- */
 /*  Rest Dialogs                      */
 /* ---------------------------------- */
 
 .rest.application {
   .window-content > section.flexcol { gap: 12px; }
   [data-action="rollHitDie"] { flex: 0; }
+
+  .bar.hit-points {
+    margin: 4px 0 0 -4px;
+
+    .meter:not(.full)::before { border-radius: 2px 0 0 2px; }
+
+    .progress-potential-min, .progress-potential-max {
+      position: absolute;
+      inset-block: 1px;
+    }
+
+    .progress-potential-min { background: var(--dnd5e-color-hp-2); }
+    .progress-potential-max { background: var(--dnd5e-color-hp-1); }
+  }
 }
 
 /* ---------------------------------- */
@@ -2030,6 +1999,14 @@ dialog.dnd5e2.application {
         flex: 1;
         .title { font-size: var(--font-size-13); }
       }
+
+      .condition-level {
+        block-size: 16px;
+        font-size: var(--font-size-15);
+        font-weight: 900;
+        inline-size: 15px;
+        text-align: center;
+      }
     }
   }
 }
@@ -2045,16 +2022,21 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .dnd5e2 .collapsible, .collapsible.dnd5e2-collapsible {
-  &.collapsed {
-    .fa-caret-down { transform: rotate(-90deg); }
-    .collapsible-content { grid-template-rows: 0fr; }
-  }
   .fa-caret-down { transition: transform 250ms ease; }
   .collapsible-content {
     display: grid;
-    grid-template-rows: 1fr;
     transition: grid-template-rows 250ms ease;
     > .wrapper { overflow: hidden; }
+  }
+}
+
+@scope (.dnd5e2 .collapsible, .dnd5e2-collapsible.collapsible) to (.collapsible) {
+  :scope:not(.collapsed) {
+    .collapsible-content { grid-template-rows: 1fr; }
+  }
+  :scope.collapsed {
+    .fa-caret-down { transform: rotate(-90deg); }
+    .collapsible-content { grid-template-rows: 0fr; }
   }
 }
 
@@ -2157,4 +2139,14 @@ dialog.dnd5e2.application {
   .effect-control.active:not(.overlay) {
     border: 1px solid green;
   }
+}
+
+/* -------------------------------------------- */
+/*  Sense Sync Notice                           */
+/* -------------------------------------------- */
+
+.token-config .sense-sync-notice a {
+  text-decoration: underline currentcolor;
+  text-underline-offset: 2px;
+  cursor: var(--cursor-pointer);
 }

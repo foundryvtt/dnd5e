@@ -388,25 +388,27 @@ effects:
     transfer: false
     _id: fHNlrUKZ6KWRNTmy
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: xlNg7wODJQjqu6gB
+        - key: system.bonuses.abilities.save
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: Dp0PpjiZCiggQ7Sx
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -415,23 +417,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730386409754
-      modifiedTime: 1730386904286
+      modifiedTime: 1783544098056
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRodOfAlertnes.fHNlrUKZ6KWRNTmy'
 folder: XVIITMl9kCCSjZQz
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764616281604
+  modifiedTime: 1783544098056
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

@@ -206,17 +206,15 @@ effects:
     transfer: false
     _id: vPkln6UeePHnbLr4
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 3600
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Until the spell ends, the caster deals an extra [[/damage 1d6 force]]
       damage to the target whenever they hit it with an attack roll.</p>
@@ -232,12 +230,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 6.0.0
       createdTime: 1755019302366
-      modifiedTime: 1755019416980
+      modifiedTime: 1783543975655
       lastModifiedBy: dnd5ebuilder0000
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplHuntersMar.vPkln6UeePHnbLr4'
 folder: pBaAAtXBCq9FVEnL
 sort: 1900000
@@ -250,11 +251,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425959210
-  modifiedTime: 1755019619035
+  modifiedTime: 1783543975655
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHuntersMar'

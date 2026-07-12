@@ -119,17 +119,14 @@ effects:
     transfer: false
     _id: 67ofG0FVqrrkAHKa
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -139,13 +136,16 @@ effects:
     _stats:
       compendiumSource: Item.phbagNet00000000.ActiveEffect.MrZjrcUIzXwDYHYP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.0.2
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbagNet00000000.67ofG0FVqrrkAHKa'
 folder: uDk4FBYfcP2JnX6t
 flags:
@@ -155,7 +155,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727448884108

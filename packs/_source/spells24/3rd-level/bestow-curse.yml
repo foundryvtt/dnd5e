@@ -280,28 +280,30 @@ effects:
   - name: Cursed Charisma
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/charisma.svg
     _id: 2Xjz5PKhyDferpZ7
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.cha.check.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.cha.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.cha.check.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 05CVNeGYaAB6CT6x
+        - key: system.abilities.cha.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 3yXrcU2teXhwVPmU
+      magical: true
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -314,39 +316,44 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.sC2IXWDs07oTt5JN
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1725055417995
-      modifiedTime: 1761861523129
+      modifiedTime: 1783543974157
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.2Xjz5PKhyDferpZ7'
   - name: Cursed Constitution
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/constitution.svg
     _id: BXWN6AGeNbxrRBUZ
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.con.check.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.con.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.con.check.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: YH2fj3R6Bd0xko9i
+        - key: system.abilities.con.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: T7EAd1kIir5Eeg7m
+      magical: true
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -359,39 +366,44 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.XVQwGWbC0A1svBNm
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1725055419250
-      modifiedTime: 1761861541688
+      modifiedTime: 1783543974157
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.BXWN6AGeNbxrRBUZ'
   - name: Cursed Dexterity
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/dexterity.svg
     _id: pG5HdDpW8VELR1O3
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.dex.check.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.dex.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.dex.check.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: tC8dfq0vn06k9njr
+        - key: system.abilities.dex.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: dO5tjUOvpC40exa6
+      magical: true
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -404,39 +416,44 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.Mmss2SPIy7wtt2PV
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1725055420606
-      modifiedTime: 1761861559532
+      modifiedTime: 1783543974157
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.pG5HdDpW8VELR1O3'
   - name: Cursed Intelligence
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/intelligence.svg
     _id: eA7PgIuucNGqZ1AS
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.int.check.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.int.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.int.check.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 85FhBuBNUWahY2fy
+        - key: system.abilities.int.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 3gxJgolKqU3bYAi9
+      magical: true
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -449,39 +466,44 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.FfVB2Yyb7wfgpsQB
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1725055422101
-      modifiedTime: 1761861579749
+      modifiedTime: 1783543974157
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.eA7PgIuucNGqZ1AS'
   - name: Cursed Strength
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/strength.svg
     _id: m5aRx9iXnJi2WWPU
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.check.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: 2ckPVUgl8cvPt0rt
+        - key: system.abilities.str.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: OGHCBvCdaZiZRURW
+      magical: true
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -494,39 +516,44 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.ljMTBKPVmEnLPX1b
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1725055423595
-      modifiedTime: 1761861611803
+      modifiedTime: 1783543974157
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.m5aRx9iXnJi2WWPU'
   - name: Cursed Wisdom
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/wisdom.svg
     _id: qLBTtRHOpGfv4IAb
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.wis.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: system.abilities.wis.save.roll.mode
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.wis.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: PJ9bLO41L4nOb3iB
+        - key: system.abilities.wis.save.roll.mode
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: l3Ar93E4IY58Wx31
+      magical: true
     description: >-
       <p>The target has Disadvantage on ability checks and saving throws made
       with the chosen ability.</p>
@@ -539,13 +566,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.k2569xtIeXKRReLU
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1725055424987
-      modifiedTime: 1761861624520
+      modifiedTime: 1783543974157
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.qLBTtRHOpGfv4IAb'
   - name: Cursed Attacks
     img: icons/skills/melee/sword-damaged-broken-purple.webp
@@ -553,17 +583,15 @@ effects:
     transfer: false
     _id: u7Yc7mxHYPDvipS1
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target has Disadvantage on attack rolls against you.</p>
     tint: '#ffffff'
     statuses:
@@ -573,30 +601,31 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725055567320
-      modifiedTime: 1725055842134
+      modifiedTime: 1783543974157
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.u7Yc7mxHYPDvipS1'
   - name: Cursed Actions
     img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>In combat, the target must succeed on a [[/save ability=wis
       dc=@attributes.spell.dc format=long]] at the start of each of its turns or
@@ -609,31 +638,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725055653002
-      modifiedTime: 1725055732741
+      modifiedTime: 1783543974158
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: T3x6XvQbSkg6kW6u
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.T3x6XvQbSkg6kW6u'
   - name: Cursed Resilience
     img: icons/skills/wounds/bone-broken-marrow-red.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplBestowCurs
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>If you deal damage to the target with an attack roll or a spell, the
       target takes an extra [[/damage 1d8 type=necrotic]] damage.</p>
@@ -645,14 +675,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725055858341
-      modifiedTime: 1725055971137
+      modifiedTime: 1783543974158
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: DRsQi8p3Zvhte2G0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBestowCurs.DRsQi8p3Zvhte2G0'
 folder: HCovEE4VoPGlIbKi
 sort: 3600000
@@ -661,11 +694,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.2
   createdTime: 1724425943234
-  modifiedTime: 1778086434998
+  modifiedTime: 1783543974157
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBestowCurs'

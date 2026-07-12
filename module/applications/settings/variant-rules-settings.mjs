@@ -24,6 +24,9 @@ export default class VariantRulesSettingsConfig extends BaseSettingsConfig {
     abilities: {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
+    scores: {
+      template: "systems/dnd5e/templates/settings/base-config.hbs"
+    },
     footer: {
       template: "templates/generic/form-footer.hbs"
     }
@@ -59,6 +62,13 @@ export default class VariantRulesSettingsConfig extends BaseSettingsConfig {
           this.createSettingField("sanityScore")
         ];
         context.legend = _loc("DND5E.Abilities");
+        break;
+      case "scores":
+        context.fields = [
+          this.createSettingField("loyaltyScore"),
+          this.createSettingField("pietyScore")
+        ];
+        context.legend = _loc("DND5E.AttributeScores");
         break;
     }
     return context;

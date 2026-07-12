@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,17 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: jFoGi81ljGK27zpX
     name: Blood Frenzy
     type: feat
-    img: icons/skills/wounds/blood-spurt-spray-red.webp
+    img: icons/skills/wounds/blood-cells-vessel-red-orange.webp
     system:
       description:
         value: >-
-          <p>The quipper has<strong> advantage </strong>on melee attack rolls
-          against any creature that doesn't have all its<strong> hit
-          points</strong>.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on melee
+          attack rolls against any creature that doesn't have all its hit
+          points.</p>
         chat: ''
       source:
         custom: ''
@@ -505,10 +503,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -523,64 +522,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.B2kZOyrB7poB4liR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781532999788
+      modifiedTime: 1781533024336
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nkyCGJ9wXeAZkyyz.jFoGi81ljGK27zpX'
-  - _id: fTUKEAcQ4JT7xieY
-    name: Water Breathing
-    type: feat
-    img: icons/magic/water/projectile-water-ice-orb.webp
-    system:
-      description:
-        value: <p>The quipper can breathe only underwater.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: water-breathing
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!nkyCGJ9wXeAZkyyz.fTUKEAcQ4JT7xieY'
   - _id: 0SJofXpPrHJsVXOy
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
@@ -656,8 +609,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        rOmlYxMpLVtDc5RU:
           type: attack
           activation:
             type: action
@@ -672,10 +624,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -692,7 +645,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -705,20 +659,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          name: ''
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: rOmlYxMpLVtDc5RU
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -733,14 +699,67 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741122685928
+      systemVersion: 6.0.0
+      createdTime: 1781533060334
+      modifiedTime: 1781533073187
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!nkyCGJ9wXeAZkyyz.0SJofXpPrHJsVXOy'
+  - _id: IdvIzHdyEYvyOQ4u
+    name: Water Breathing
+    type: feat
+    img: icons/magic/water/orb-water-bubbles.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe only
+          underwater.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: water-breathing
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 175000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.FWSDiq9SZsdiBAa8.Item.PBYkvhJmi5ACi2MO
+      duplicateSource: Item.SYAPC9BqPkYwLplq
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781532989587
+      modifiedTime: 1781532989587
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!nkyCGJ9wXeAZkyyz.IdvIzHdyEYvyOQ4u'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -749,7 +768,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171257014

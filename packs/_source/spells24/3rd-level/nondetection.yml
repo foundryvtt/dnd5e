@@ -95,20 +95,18 @@ effects:
   - name: Hidden from Divination
     origin: Compendium.dnd5e.spells24.Item.phbsplNondetecti
     duration:
-      rounds: null
-      startTime: null
-      seconds: 28800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/perception/mask-stone-eyes-orange.webp
     _id: usz9yzOPHV4Nb93D
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -117,13 +115,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976120
+      modifiedTime: 1783543976120
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplNondetecti.usz9yzOPHV4Nb93D'
 folder: HCovEE4VoPGlIbKi
 sort: 600000
@@ -136,11 +137,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425964979
-  modifiedTime: 1745256796469
+  modifiedTime: 1783543976120
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplNondetecti'

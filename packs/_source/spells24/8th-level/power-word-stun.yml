@@ -108,17 +108,15 @@ effects:
     transfer: false
     _id: o7XJceFSBTiIIPFo
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The &amp;Reference[Stunned apply=false] target makes a [[/save
       ability=con]] saving throw at the end of each of its turns, ending the
@@ -131,13 +129,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725309558474
-      modifiedTime: 1725309691509
+      modifiedTime: 1783543976329
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplPowerWordS.o7XJceFSBTiIIPFo'
   - name: No Movement
     img: icons/svg/anchor.svg
@@ -145,37 +146,45 @@ effects:
     transfer: false
     _id: B5dLPDfw1fDtfRW1
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 3
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: cUf9ouWOHimBfnRx
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: Zazei337YU6J0Tq2
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: pkll3KT00SnFBGyI
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: UO48xgcZ5Kol7T3m
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: WU2XY0ZqEqiqI56V
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Speed is 0 until the start of your next turn.</p>
     tint: '#ffffff'
     statuses: []
@@ -184,13 +193,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725309698245
-      modifiedTime: 1725309800044
+      modifiedTime: 1783543976330
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplPowerWordS.B5dLPDfw1fDtfRW1'
 folder: M5CvwK9zVtzx6Dnn
 sort: 100013
@@ -203,11 +215,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425966817
-  modifiedTime: 1745256797037
+  modifiedTime: 1783543976329
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPowerWordS'

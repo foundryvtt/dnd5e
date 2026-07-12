@@ -1,7 +1,7 @@
 _id: Y9S75go1hLMXUD48
 name: Brewer's Supplies
 type: tool
-img: icons/consumables/plants/herb-marjoram-basil-oregano-leaf-bunch-green.webp
+img: icons/consumables/drinks/wine-amphora-clay-blue.webp
 system:
   description:
     value: >-
@@ -45,8 +45,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    J4Qbtpw2LBM5xjRS:
       type: check
       activation:
         type: ''
@@ -61,15 +60,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -80,7 +80,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -90,11 +91,30 @@ system:
         override: false
       check:
         ability: wis
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: J4Qbtpw2LBM5xjRS
+      name: Use Tools
   attuned: false
   identifier: brewers-supplies
 effects: []
@@ -105,11 +125,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037212822
-  modifiedTime: 1725992521609
+  modifiedTime: 1783649737998
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Y9S75go1hLMXUD48'

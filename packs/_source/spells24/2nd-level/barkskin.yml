@@ -95,20 +95,12 @@ img: icons/magic/nature/thorns-hand-glow-green.webp
 effects:
   - _id: Vq0t8ts0lfPoGx6U
     flags: {}
-    changes:
-      - key: system.attributes.ac.min
-        mode: 4
-        value: '17'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.spells24.Item.phbsplBarkskin00
     tint: '#ffffff'
     transfer: false
@@ -119,17 +111,28 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.JPwIEfgUPVebr5AH.ActiveEffect.uM6rgctYpcbCVSkn
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1726592051215
+      systemVersion: 6.0.0
+      createdTime: 1783543974084
+      modifiedTime: 1783543974084
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/nature/barrier-shield-wood-vines.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.min
+          value: 17
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: NgckdM4c0E3PWGpq
+      magical: true
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplBarkskin00.Vq0t8ts0lfPoGx6U'
 folder: 3SjcO2acsFnWegp4
 sort: 5100000
@@ -142,11 +145,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425942865
-  modifiedTime: 1745256786445
+  modifiedTime: 1783543974084
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBarkskin00'

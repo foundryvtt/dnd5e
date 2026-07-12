@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,28 +480,32 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: afXMbT7smRaCJbhc
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-white.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], and if the target is
-          Large or smaller, the cloaker attaches to it.</p><p>If the cloaker has
-          advantage against the target, the cloaker attaches to the target's
-          head, and the target is &amp;Reference[blinded] and unable to
-          &amp;Reference[suffocation apply=false]{breathe} while the cloaker is
-          attached. While attached, the cloaker can make this attack only
-          against the target and has advantage on the attack roll. The cloaker
-          can detach itself by spending 5 feet of its movement. A creature,
-          including the target, can take its action to detach the cloaker by
-          succeeding on a DC 16 Strength check.</p>
+          Large or smaller, the cloaker attaches to it.</p><p>If the [[lookup
+          @name lowercase]]{monster} has advantage against the target, the
+          [[lookup @name lowercase]]{monster} attaches to the target's head, and
+          the target is &amp;Reference[blinded] and unable to
+          &amp;Reference[suffocation apply=false]{Breathe} while the [[lookup
+          @name lowercase]]{monster} is attached. While attached, the [[lookup
+          @name lowercase]]{monster} can make this attack only against the
+          target and has advantage on the attack roll. The [[lookup @name
+          lowercase]]{monster} can detach itself by spending 5 feet of its
+          movement. A creature, including the target, can take its action to
+          detach the cloaker by succeeding on a [[/check]] check.</p>
         chat: >-
-          <p>The Cloaker attacks with its Bite. A creature, including the
-          target, can take its action to detach the cloaker by succeeding on a
-          Strength check.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. A creature, including the target, can take its action to
+          detach the [[lookup @name]]{monster} by succeeding on a Strength
+          check.</p>
       source:
         custom: ''
         book: ''
@@ -567,7 +568,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -576,8 +577,68 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        0Zv56HDjDfhQsQp6:
+          type: check
+          name: Detach Cloaker Check
+          _id: 0Zv56HDjDfhQsQp6
+          img: ''
+          sort: 300000
+          activation:
+            type: ''
+            override: false
+            condition: ''
+            value: null
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          check:
+            associated: []
+            dc:
+              calculation: ''
+              formula: '16'
+            visible: true
+            ability: str
+            bonus: ''
+        PCDsjerLBKL8Ha5B:
           type: attack
           activation:
             type: action
@@ -592,13 +653,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: WEZ63n8dEExdKdTp
+              level: {}
           range:
             value: '5'
             units: ft
@@ -612,7 +676,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -625,26 +690,82 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: PCDsjerLBKL8Ha5B
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
       mastery: ''
-    effects: []
+    effects:
+      - name: Attached Cloaker
+        img: icons/creatures/abilities/mouth-teeth-rows-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.HPUO3weiwRQnql0d.Item.afXMbT7smRaCJbhc
+        transfer: false
+        _id: WEZ63n8dEExdKdTp
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>A cloaker has attached itself to you. While attached, you are
+          &amp;reference[blinded apply=false], unable to
+          &amp;Reference[suffocation apply=false]{Breathe}.</p><p>You or another
+          creature can take an action to detach the cloaker by succeeding on a
+          [[/check 16 str]] check.</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+          - suffocation
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781753965632
+          modifiedTime: 1781754057290
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!HPUO3weiwRQnql0d.afXMbT7smRaCJbhc.WEZ63n8dEExdKdTp
     folder: null
     sort: 100000
     ownership:
@@ -653,24 +774,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745276213080
+      systemVersion: 6.0.0
+      createdTime: 1781753866885
+      modifiedTime: 1781754070389
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.afXMbT7smRaCJbhc'
   - _id: Dfy6ujJALd2FPxNy
     name: Damage Transfer
     type: feat
-    img: icons/magic/water/strike-ice-blades.webp
+    img: icons/magic/control/encase-creature-humanoid-hold.webp
     system:
       description:
         value: >-
-          <p>While attached to a creature, the cloaker takes only half the
-          damage dealt to it (rounded down) and that creature takes the other
-          half.</p>
+          <p>While attached to a creature, the [[lookup @name
+          lowercase]]{monster} takes only half the damage dealt to it (rounded
+          down) and that creature takes the other half.</p>
         chat: ''
       source:
         custom: ''
@@ -684,10 +805,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -702,12 +824,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0npeEcwmiVMdwGMV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781753790165
+      modifiedTime: 1781753806134
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.Dfy6ujJALd2FPxNy'
   - _id: i7LEQhKLh7yPIldc
@@ -717,8 +839,9 @@ items:
     system:
       description:
         value: >-
-          <p>While the cloaker remains motionless without its underside exposed,
-          it is indistinguishable from a dark leather cloak.</p>
+          <p>While the [[lookup @name lowercase]]{monster} remains motionless
+          without its underside exposed, it is indistinguishable from a dark
+          leather cloak.</p>
         chat: ''
       source:
         custom: ''
@@ -732,10 +855,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -750,23 +874,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781753824756
+      modifiedTime: 1781753829220
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.i7LEQhKLh7yPIldc'
   - _id: DxtSFI4LS6w1gzQP
     name: Light Sensitivity
     type: feat
-    img: icons/magic/time/day-night-sunset-sunrise.webp
+    img: icons/magic/light/explosion-star-glow-yellow.webp
     system:
       description:
         value: >-
-          <p>While in bright light, the cloaker has disadvantage on attack rolls
-          and Wisdom (Perception) checks that rely on sight.</p>
+          <p>While in &amp;reference[bright light], the [[lookup @name
+          lowercase]]{monster} has disadvantage on attack rolls and Wisdom
+          (Perception) checks that rely on sight.</p>
         chat: ''
       source:
         custom: ''
@@ -780,10 +905,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -798,11 +924,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.2l557y06401lwsqs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275788738
+      systemVersion: 6.0.0
+      createdTime: 1781753841286
+      modifiedTime: 1781753861866
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.DxtSFI4LS6w1gzQP'
@@ -900,7 +1026,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -911,11 +1037,13 @@ items:
   - _id: ZRvdvg8n7pQdJ1Mj
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-swipe-green.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Cloaker attacks with its Tail.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -978,7 +1106,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -987,8 +1115,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        B8vN7g6hCEV1QnnM:
           type: attack
           activation:
             type: action
@@ -1003,10 +1130,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1023,7 +1151,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1036,24 +1165,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: B8vN7g6hCEV1QnnM
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -1063,30 +1205,33 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275791763
+      systemVersion: 6.0.0
+      createdTime: 1781754081166
+      modifiedTime: 1781754106003
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.ZRvdvg8n7pQdJ1Mj'
   - _id: Jiua0A8CFeKc7Zun
     name: Moan
     type: feat
-    img: icons/magic/death/projectile-skull-flaming-green.webp
+    img: icons/magic/sonic/projectile-sound-rings-wave.webp
     system:
       description:
         value: >-
-          <p>Each creature within 60 feet of the cloaker that can hear its moan
-          and that isn't an aberration must succeed on a [[/save]] saving throw
-          or become &amp;Reference[frightened] until the end of the cloaker's
-          next turn. If a creature's saving throw is successful, the creature is
-          immune to the cloaker's moan for the next 24 hours.</p>
+          <p>Each creature within 60 feet of the [[lookup @name
+          lowercase]]{monster} that can hear its moan and that isn't an
+          aberration must succeed on a [[/save]] saving throw or become
+          &amp;Reference[frightened] until the end of the [[lookup @name
+          lowercase]]{monster}'s next turn. If a creature's saving throw is
+          successful, the creature is immune to the [[lookup @name
+          lowercase]]{monster}'s [[lookup @item.name]] for the next 24
+          hours.</p>
         chat: >-
-          <p>Each creature within 60 feet of the cloaker that can hear its moan
-          and that isn't an aberration must make a <strong>Wisdom</strong>
-          saving throw.</p>
+          <p>Each creature within 60 feet of the [[lookup @name]]{monster} that
+          can hear its [[lookup @item.name lowercase]] and that isn't an
+          aberration must make a Wisdom saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1099,13 +1244,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Vc8IXjyNAIc5C6VG:
           type: save
           activation:
             type: action
@@ -1120,15 +1264,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: turn
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: C7Rb6zylLfziFr96
+              level: {}
+              onSave: false
           range:
-            value: '60'
+            value: ''
             units: self
             special: ''
             override: false
@@ -1141,9 +1289,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1153,39 +1302,87 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: cha
               formula: '13'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Frightening Moan
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Vc8IXjyNAIc5C6VG
       enchant: {}
       prerequisites:
         level: null
       identifier: moan
-    effects: []
+    effects:
+      - name: Frightening Moan
+        img: icons/magic/control/fear-fright-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.HPUO3weiwRQnql0d.Item.Jiua0A8CFeKc7Zun
+        transfer: false
+        _id: C7Rb6zylLfziFr96
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] until the end of the
+          cloaker's next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781754207165
+          modifiedTime: 1781754248285
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!HPUO3weiwRQnql0d.Jiua0A8CFeKc7Zun.C7Rb6zylLfziFr96
     folder: null
     sort: 400000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VvXrTnB2FscxqbG3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745276132912
+      systemVersion: 6.0.0
+      createdTime: 1781754116592
+      modifiedTime: 1781754289845
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.Jiua0A8CFeKc7Zun'
@@ -1196,21 +1393,21 @@ items:
     system:
       description:
         value: >-
-          <p>The cloaker magically creates three illusory duplicates of itself
-          if it isn't in bright light. The duplicates move with it and mimic its
-          actions, shifting position so as to make it impossible to track which
-          cloaker is the real one. If the cloaker is ever in an area of bright
-          light, the duplicates disappear.</p>
-
-          <p>Whenever any creature targets the cloaker with an attack or a
-          harmful spell while a duplicate remains, that creature rolls randomly
-          to determine whether it targets the cloaker or one of the duplicates.
-          A creature is unaffected by this magical effect if it can't see or if
-          it relies on senses other than sight.</p>
-
-          <p>A duplicate has the cloaker's AC and uses its saving throws. If an
-          attack hits a duplicate, or if a duplicate fails a saving throw
-          against an effect that deals damage, the duplicate disappears.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically creates three
+          illusory duplicates of itself if it isn't in &amp;reference[bright
+          light]. The duplicates move with it and mimic its actions, shifting
+          position so as to make it impossible to track which [[lookup @name
+          lowercase]]{monster} is the real one. If the [[lookup @name
+          lowercase]]{monster} is ever in an area of bright light, the
+          duplicates disappear.</p><p>Whenever any creature targets the [[lookup
+          @name lowercase]]{monster} with an attack or a harmful spell while a
+          duplicate remains, that creature rolls randomly to determine whether
+          it targets the cloaker or one of the duplicates. A creature is
+          unaffected by this magical effect if it can't see or if it relies on
+          senses other than sight.</p><p>A duplicate has the [[lookup @name
+          lowercase]]{monster}'s AC and uses its saving throws. If an attack
+          hits a duplicate, or if a duplicate fails a saving throw against an
+          effect that deals damage, the duplicate disappears.</p>
         chat: ''
       source:
         custom: ''
@@ -1226,13 +1423,13 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        kGnEJRGim506bVpD:
           type: utility
           activation:
             type: action
@@ -1242,26 +1439,35 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: J8AVrH7fDphpeAgl
+              level:
+                min: null
+                max: null
+            - _id: gvdmi4GxqQUyDAak
+              level:
+                min: null
+                max: null
+            - _id: GhPa8httnSE0Tx3g
+              level: {}
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1272,7 +1478,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1289,12 +1496,251 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: kGnEJRGim506bVpD
+          name: Conjure Phantasms
+        LSGV6WUSvL33MR2E:
+          type: utility
+          name: Duplicate Hit Check
+          _id: LSGV6WUSvL33MR2E
+          img: ''
+          sort: 200000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{name} is targeted by an attack
+              or harmful spell while a duplicate remains.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>Whenever any creature targets the [[lookup @name
+              lowercase]]{monster} with an attack or a harmful spell while a
+              duplicate remains, that creature rolls randomly to determine
+              whether it targets the cloaker or one of the duplicates. A
+              creature is unaffected by this magical effect if it can't see or
+              if it relies on senses other than sight.</p><p>A duplicate has the
+              [[lookup @name lowercase]]{monster}'s AC and uses its saving
+              throws. If an attack hits a duplicate, or if a duplicate fails a
+              saving throw against an effect that deals damage, the duplicate
+              disappears.</p><h4>Current Amount of Phantasm: [[lookup
+              @flags.world.cloaker-phantasms]]{0}</h4>
+            chatFlavor: >-
+              On a result of a 1, the real [[lookup @name lowercase]]{monster}
+              is hit. On a result of 0, a duplicate is hit.
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: Attack Target
+            formula: 1d(@flags.world.cloaker-phantasms + 1)cf1
       enchant: {}
       prerequisites:
         level: null
       identifier: phantasms
-    effects: []
+    effects:
+      - name: Phantasm 1
+        img: icons/sundries/flags/banner-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.HPUO3weiwRQnql0d.Item.UYqrfrW4pmBsmtiQ
+        transfer: false
+        _id: J8AVrH7fDphpeAgl
+        type: base
+        system:
+          changes:
+            - key: flags.world.cloaker-phantasms
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>An illusory duplicate mimics your actions, shifting position so as
+          to make it impossible to track you. If you are ever in an area of
+          &amp;reference[bright light], the duplicate dissapears.</p><p>Whenever
+          any creature targets you with an attack or harmful spell while this
+          duplicate remains, that creatures rolls randomly to determine whether
+          it targets you or one of your duplicates. A creature is unaffected by
+          this magical effect if it can't see or if it relies on senses other
+          than sight.</p><p>A duplciate has your AC and uses your saving throws.
+          If an attack hits a duplicate, or if a duplicate fails a saving theow
+          against an effect that deals damage, the duplicate dissapears.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781754364080
+          modifiedTime: 1781787803227
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!HPUO3weiwRQnql0d.UYqrfrW4pmBsmtiQ.J8AVrH7fDphpeAgl
+      - name: Phantasm 2
+        img: icons/sundries/flags/banner-pink.webp
+        origin: Compendium.dnd5e.monsters.Actor.HPUO3weiwRQnql0d.Item.UYqrfrW4pmBsmtiQ
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: flags.world.cloaker-phantasms
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>An illusory duplicate mimics your actions, shifting position so as
+          to make it impossible to track you. If you are ever in an area of
+          &amp;reference[bright light], the duplicate dissapears.</p><p>Whenever
+          any creature targets you with an attack or harmful spell while this
+          duplicate remains, that creatures rolls randomly to determine whether
+          it targets you or one of your duplicates. A creature is unaffected by
+          this magical effect if it can't see or if it relies on senses other
+          than sight.</p><p>A duplciate has your AC and uses your saving throws.
+          If an attack hits a duplicate, or if a duplicate fails a saving theow
+          against an effect that deals damage, the duplicate dissapears.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781787727555
+          modifiedTime: 1781787808810
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: gvdmi4GxqQUyDAak
+        _key: >-
+          !actors.items.effects!HPUO3weiwRQnql0d.UYqrfrW4pmBsmtiQ.gvdmi4GxqQUyDAak
+      - name: Phantasm 3
+        img: icons/sundries/flags/banner-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.HPUO3weiwRQnql0d.Item.UYqrfrW4pmBsmtiQ
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: flags.world.cloaker-phantasms
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>An illusory duplicate mimics your actions, shifting position so as
+          to make it impossible to track you. If you are ever in an area of
+          &amp;reference[bright light], the duplicate dissapears.</p><p>Whenever
+          any creature targets you with an attack or harmful spell while this
+          duplicate remains, that creatures rolls randomly to determine whether
+          it targets you or one of your duplicates. A creature is unaffected by
+          this magical effect if it can't see or if it relies on senses other
+          than sight.</p><p>A duplciate has your AC and uses your saving throws.
+          If an attack hits a duplicate, or if a duplicate fails a saving theow
+          against an effect that deals damage, the duplicate dissapears.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781787728340
+          modifiedTime: 1781787812544
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: GhPa8httnSE0Tx3g
+        _key: >-
+          !actors.items.effects!HPUO3weiwRQnql0d.UYqrfrW4pmBsmtiQ.GhPa8httnSE0Tx3g
     folder: null
     sort: 500000
     ownership:
@@ -1303,11 +1749,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.t0ojYPOlKEbPpYNc
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1745275791763
+      systemVersion: 6.0.0
+      createdTime: 1781754343068
+      modifiedTime: 1781788135757
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.UYqrfrW4pmBsmtiQ'
@@ -1319,7 +1765,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171218692

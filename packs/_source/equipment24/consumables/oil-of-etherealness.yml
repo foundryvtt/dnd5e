@@ -124,17 +124,15 @@ effects:
     transfer: false
     _id: YIlD33DO4Py9aaRi
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -145,22 +143,25 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplEtherealne.ActiveEffect.louTI4Z9bNUYBa8K
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730494572998
-      modifiedTime: 1730494593209
+      modifiedTime: 1783544097053
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgOilOfEthereal.YIlD33DO4Py9aaRi'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614834412
+  modifiedTime: 1783544097052
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1150000

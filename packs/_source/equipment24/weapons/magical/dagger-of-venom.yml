@@ -286,17 +286,15 @@ effects:
     transfer: false
     _id: zM8Qfv5u9OCNUrhE
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The creature has the &amp;Reference[Poisoned apply=false] condition for
       1 minute.</p>
@@ -308,37 +306,41 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729091648092
-      modifiedTime: 1729091758305
+      modifiedTime: 1783544094635
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgDaggerOfVenom.zM8Qfv5u9OCNUrhE'
   - type: enchantment
     name: Poison Coat
     img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
     disabled: true
     _id: f0WvHHwmTfdkF3OP
-    system: {}
-    changes:
-      - key: img
-        mode: 5
-        value: icons/skills/melee/blade-tip-acid-poison-green.webp
-        priority: null
-      - key: activities[attack].description.chatFlavor
-        mode: 5
-        value: '{}  On Hit: Use <em>Poison Save</em> activity.'
-        priority: null
+    system:
+      changes:
+        - key: img
+          value: icons/skills/melee/blade-tip-acid-poison-green.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: C6vv1wMqYQ65fHDQ
+        - key: activities[attack].description.chatFlavor
+          value: '{}  On Hit: Use <em>Poison Save</em> activity.'
+          priority: null
+          type: override
+          phase: initial
+          _id: C81KGTSnVHq6EcKI
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -349,13 +351,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729091772989
-      modifiedTime: 1731015620978
+      modifiedTime: 1783544094635
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDaggerOfVenom.f0WvHHwmTfdkF3OP'
 folder: kie870i5kr7yuxO8
 flags:
@@ -365,11 +370,11 @@ flags:
         - VHStJ3hZGwHAHcUQ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615004411
+  modifiedTime: 1783544094635
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7100000

@@ -233,17 +233,15 @@ effects:
     transfer: false
     _id: JUeiirjbzslhBtNL
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>While your soul inhabits the container, you are aware of your
       surroundings as if you were in the container’s space. You can’t move or
@@ -256,13 +254,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724775242350
-      modifiedTime: 1724779300816
+      modifiedTime: 1783543975864
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplMagicJar00.JUeiirjbzslhBtNL'
   - name: Trapped Soul
     img: icons/containers/kitchenware/vase-clay-painted-brown-white.webp
@@ -270,37 +271,45 @@ effects:
     transfer: false
     _id: rgKqVmb0inZoKREu
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 3
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: G59DvaycH5ATg9ys
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: Q9Dpk3BFtFePWzPe
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: rFIO3I40qJbQKYcH
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: 4u05AbJ0r3waZk3P
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: tz4RBdOXsSlbzhJ2
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>the possessed creature’s soul can perceive from the container using its
       own senses, but it can’t move and it is &amp;Reference[Incapacitated
@@ -313,13 +322,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724778161589
-      modifiedTime: 1724778341275
+      modifiedTime: 1783543975864
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplMagicJar00.rgKqVmb0inZoKREu'
 folder: 8WmlLARx1Df3Ii9v
 sort: 400000
@@ -332,11 +344,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425962300
-  modifiedTime: 1745256795753
+  modifiedTime: 1783543975864
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMagicJar00'

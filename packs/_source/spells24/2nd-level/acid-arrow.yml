@@ -181,17 +181,15 @@ effects:
     transfer: false
     _id: NgglkyjzTbDh5Loa
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>On a hit, the target takes 4d4 Acid damage and [[/damage 2d4
       type=acid]] (plus 1d4 per spell slot level above 2) Acid damage at the end
@@ -203,13 +201,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726502703941
-      modifiedTime: 1726502874630
+      modifiedTime: 1783543975968
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMelfsAcidA.NgglkyjzTbDh5Loa'
 folder: 3SjcO2acsFnWegp4
 sort: 1900000
@@ -222,11 +223,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425963336
-  modifiedTime: 1753380702066
+  modifiedTime: 1783543975968
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMelfsAcidA'

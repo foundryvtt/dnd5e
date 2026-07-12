@@ -11,8 +11,8 @@ system:
       cubes, which you can arrange as you wish. Each cube must have at least one
       face adjacent to the face of another cube. Each creature in the area must
       make a Dexterity saving throw. It takes 7d10 fire damage on a failed save,
-      or half as much damage on a successful one.</p><p>The fire damages Objects
-      in the area and ignites flammable Objects that aren't being worn or
+      or half as much damage on a successful one.</p><p>The fire damages objects
+      in the area and ignites flammable objects that aren't being worn or
       carried. If you choose, plant life in the area is unaffected by this
       spell.</p>
     chat: ''
@@ -32,14 +32,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '10'
       contiguous: false
+      count: '10'
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -91,40 +94,47 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 7
+          - custom:
+              enabled: false
+              formula: ''
+            number: 7
             denomination: 10
             bonus: ''
             types:
               - fire
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
         ability: dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: fire-storm
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-meteor-salvo-heavy-red.webp
+img: icons/magic/fire/projectile-smoke-swirl-red.webp
 effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352720
-  modifiedTime: 1725992718686
+  modifiedTime: 1781464656203
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!J3uILDYS7MiOfmTJ'

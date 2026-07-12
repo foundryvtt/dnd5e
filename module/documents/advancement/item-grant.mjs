@@ -1,7 +1,6 @@
-import { filteredKeys } from "../../utils.mjs";
 import ItemGrantConfig from "../../applications/advancement/item-grant-config.mjs";
 import ItemGrantFlow from "../../applications/advancement/item-grant-flow-v2.mjs";
-import ItemGrantConfigurationData from "../../data/advancement/item-grant.mjs";
+import ItemGrantConfigurationData from "../../data/advancement/item-grant-data.mjs";
 import Advancement from "./advancement.mjs";
 
 /**
@@ -56,8 +55,13 @@ export default class ItemGrantAdvancement extends Advancement {
   /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     // Link to compendium items
-    if ( !this.value.added || configMode ) return this.configuration.items.filter(i => fromUuidSync(i.uuid))
-      .reduce((html, i) => html + dnd5e.utils.linkForUuid(i.uuid), "");
+    if ( !this.value.added || configMode ) return this.configuration.items
+      .map(i => [i, fromUuidSync(i.uuid)])
+      .filter(([, _]) => _)
+      .sort((lhs, rhs) => this.configuration.sorting === "m"
+        ? lhs[0].sort - rhs[0].sort
+        : lhs[1].name.localeCompare(rhs[1].name))
+      .reduce((html, [i]) => html + dnd5e.utils.linkForUuid(i.uuid), "");
 
     // Link to items on the actor
     else {
@@ -84,14 +88,15 @@ export default class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  async apply(level, { ability, retainedData={}, selected=Object.keys(retainedData) }={}, options={}) {
+  async apply(level, { ability, retainedData={}, selected }={}, options={}) {
     if ( options.initial ) {
-      ability = retainedData.ability ?? this.value.ability ?? this.configuration.spell?.ability?.first();
-      selected = this.configuration.items?.reduce((arr, { optional, uuid }) => {
+      ability ??= retainedData.ability ?? this.value.ability ?? this.configuration.spell?.ability?.first();
+      selected ??= this.configuration.items?.reduce((arr, { optional, uuid }) => {
         if ( !this.configuration.optional || !optional ) arr.push(uuid);
         return arr;
       }, []) ?? [];
     }
+    selected ??= Object.keys(retainedData);
 
     const added = foundry.utils.getProperty(this, this.storagePath(level)) ?? {};
     if ( ability && (ability !== this.value?.ability) ) {

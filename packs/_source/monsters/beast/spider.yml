@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,16 +481,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: 0Oap13hi3sDNwVZn
     name: Spider Climb
     type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
     system:
       description:
         value: >-
-          <p>The spider can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including upside down on ceilings, without needing to make
+          an ability check.</p>
         chat: ''
       source:
         custom: ''
@@ -507,10 +506,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -525,12 +525,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781527434692
+      modifiedTime: 1781527448959
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!28gU50HtG8Kp7uIz.0Oap13hi3sDNwVZn'
   - _id: ysV0KgiPcJOYCdMh
@@ -542,10 +542,10 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           succeed on a [[/save]] saving throw or take [[/damage average
-          activity=dnd5eactivity100]] damage.</p>
+          activity=gJp39jB1DO0Q5LPK]] damage.</p>
         chat: >-
-          <p>The Spider attacks with its Bite. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -607,9 +607,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -618,8 +617,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        2ClGRpMjJhL1qfz0:
           type: attack
           activation:
             type: action
@@ -634,15 +632,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -653,7 +652,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -672,16 +672,27 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 2ClGRpMjJhL1qfz0
+          name: ''
+        gJp39jB1DO0Q5LPK:
           type: save
           activation:
             type: action
@@ -696,6 +707,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -704,7 +716,7 @@ items:
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -715,7 +727,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -728,25 +741,39 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts:
               - custom:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '4'
+                denomination: 4
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '9'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: gJp39jB1DO0Q5LPK
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -757,31 +784,28 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741122951513
+      systemVersion: 6.0.0
+      createdTime: 1781527560903
+      modifiedTime: 1781527948915
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!28gU50HtG8Kp7uIz.ysV0KgiPcJOYCdMh'
   - _id: JxuVwnSxsKwGVL0x
     name: Web Sense
     type: feat
-    img: icons/magic/perception/eye-tendrils-web-purple.webp
+    img: icons/commodities/materials/material-webbing.webp
     system:
       description:
         value: >-
-          <p>While in contact with a web, the spider knows the exact location of
-          any other creature in contact with the same web.</p>
+          <p>While in contact with a web, the [[lookup @name
+          lowercase]]{monster} knows the exact location of any other creature in
+          contact with the same web.</p>
         chat: ''
       source:
         custom: ''
@@ -795,10 +819,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -813,21 +838,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kjF0btAMYHUAQgOt
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781527486719
+      modifiedTime: 1781527507504
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!28gU50HtG8Kp7uIz.JxuVwnSxsKwGVL0x'
   - _id: GQ8a63ou7VwIGrvv
     name: Web Walker
     type: feat
-    img: icons/creatures/webs/web-spider-glowing-purple.webp
+    img: icons/creatures/webs/web-thin-pruple.webp
     system:
       description:
-        value: <p>The spider ignores movement restrictions caused by webbing.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} ignores movement
+          restrictions caused by webbing.</p>
         chat: ''
       source:
         custom: ''
@@ -841,10 +868,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -859,12 +887,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781527515437
+      modifiedTime: 1781527534678
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!28gU50HtG8Kp7uIz.GQ8a63ou7VwIGrvv'
 effects: []
@@ -875,7 +903,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 5.1.3
   createdTime: 1726171199655

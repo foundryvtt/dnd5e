@@ -61,20 +61,20 @@ effects:
     origin: Compendium.dnd5e.equipment24.Item.dmgCloakOfElvenk
     _id: hyU6mHq6YNhLZlTY
     type: base
-    system: {}
-    changes:
-      - key: ''
-        value: ''
-        mode: 2
+    system:
+      changes:
+        - key: ''
+          value: ''
+          type: add
+          phase: initial
+          _id: PNKmaFxqazGICEgn
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -88,21 +88,24 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1768925573821
-      modifiedTime: 1768925652026
+      modifiedTime: 1783544094389
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgCloakOfElvenk.hyU6mHq6YNhLZlTY'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698692
+  modifiedTime: 1783544094388
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7800000

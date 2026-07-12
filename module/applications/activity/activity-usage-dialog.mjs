@@ -157,9 +157,7 @@ export default class ActivityUsageDialog extends Dialog5e {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    if ( "scaling" in this.config ) {
-      this.#item = this.#item.clone({ "flags.dnd5e.scaling": this.config.scaling }, { keepId: true });
-    }
+    if ( "scaling" in this.config ) this.#item = this.#item.scaledClone(this.config.scaling);
     return {
       ...await super._prepareContext(options),
       activity: this.activity,
@@ -208,25 +206,25 @@ export default class ActivityUsageDialog extends Dialog5e {
         return {
           value: effect.id,
           label: data?.data?.name ?? this.actor.items.get(data?.id)?.name
-            ?? _loc("DND5E.ConcentratingItemless")
+            ?? _loc("DND5E.CONCENTRATION.NoSource")
         };
       });
       if ( existingConcentration.length ) {
         const optional = existingConcentration.length < (this.actor.system.attributes?.concentration?.limit ?? 0);
         context.fields.push({
           field: new StringField({
-            required: true, label: _loc("DND5E.ConcentratingEnd"), blank: optional
+            required: true, label: _loc("DND5E.CONCENTRATION.Action.End"), blank: optional
           }),
           name: "concentration.end",
           value: this.config.concentration?.end,
           options: optional ? [{ value: "", label: "—" }, ...existingConcentration] : existingConcentration
         });
         context.notes.push({
-          type: "info", message: _loc(`DND5E.ConcentratingWarnLimit${optional ? "Optional" : ""}`)
+          type: "info", message: _loc(`DND5E.CONCENTRATION.Limit.${optional ? "Optional" : "Hard"}`)
         });
       } else if ( !this.actor.system.attributes?.concentration?.limit ) {
         context.notes.push({
-          type: "warn", message: _loc("DND5E.ConcentratingWarnLimitZero")
+          type: "warn", message: _loc("DND5E.CONCENTRATION.Limit.Zero")
         });
       }
     }

@@ -107,20 +107,18 @@ effects:
   - name: Masked
     origin: Compendium.dnd5e.spells24.Item.phbsplNystulsMag
     duration:
-      rounds: null
-      startTime: null
-      seconds: 86400
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/equipment/head/mask-horned-brown.webp
     _id: 8MLxwX6ZeAIdhDj9
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>Choose a creature type other than the target’s actual type. Spells and
       other magical effects treat the target as if it were a creature of the
@@ -132,13 +130,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976142
+      modifiedTime: 1783543976142
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplNystulsMag.8MLxwX6ZeAIdhDj9'
 folder: 3SjcO2acsFnWegp4
 sort: 1500000
@@ -151,11 +152,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425965082
-  modifiedTime: 1753380786167
+  modifiedTime: 1783543976142
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplNystulsMag'

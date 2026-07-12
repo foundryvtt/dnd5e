@@ -97,24 +97,25 @@ effects:
     img: icons/skills/melee/sword-damaged-chipped-green.webp
     disabled: true
     _id: PTSwIOo5chgO4d1p
-    system: {}
-    changes:
-      - key: system.armor.value
-        mode: 2
-        value: '-1'
-        priority: null
-      - key: activities[attack].attack.bonus
-        mode: 2
-        value: '-1'
-        priority: null
+    system:
+      changes:
+        - key: system.armor.value
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: YUqCRJfzovC9d7R2
+        - key: activities[attack].attack.bonus
+          value: -1
+          priority: null
+          type: add
+          phase: initial
+          _id: wtnWQg0qM4UvxC2V
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The object takes a -1 penalty to the AC it offers (armor) or to its
       attack rolls (weapon). Armor is destroyed if the penalty reduces its AC to
@@ -131,13 +132,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544085065
+      modifiedTime: 1783544085065
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmAntennae000000.PTSwIOo5chgO4d1p'
 flags:
   dnd5e:
@@ -146,11 +150,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1734559271305
+  modifiedTime: 1783544085065
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

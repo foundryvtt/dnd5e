@@ -44,11 +44,12 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
 
     for ( const abilityId of this.save.ability ) {
       const ability = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
+      const promptTitle = _loc("DND5E.SavePromptTitle", { ability });
       buttons.push({
-        label: `
+        label: dc ? `
           <span class="visible-dc">${_loc("DND5E.SavingThrowDC", { dc, ability })}</span>
-          <span class="hidden-dc">${_loc("DND5E.SavePromptTitle", { ability })}</span>
-        `,
+          <span class="hidden-dc">${promptTitle}</span>
+        ` : promptTitle,
         icon: '<i class="fa-solid fa-shield-heart" inert></i>',
         dataset: {
           dc,

@@ -348,12 +348,27 @@ export default class RollConfigurationDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
-   * Make any final modifications to rolls based on the button clicked.
+   * Apply any action-specific changes to the roll configuration before the final rolls are built.
+   * @param {BasicRollProcessConfiguration} config  Roll configuration data to mutate in place.
+   * @param {string} action                         Action on the button clicked.
+   * @protected
+   */
+  _finalizeConfig(config, action) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Make any final modifications to rolls based on the button clicked, by re-building them from a fresh copy of the
+   * configuration. Subclasses adjust the configuration for the chosen action in _finalizeConfig, rather than mutating
+   * the already-built rolls, so that each roll is constructed exactly once.
    * @param {string} action  Action on the button clicked.
    * @returns {BasicRoll[]}
    * @protected
    */
   _finalizeRolls(action) {
+    const config = foundry.utils.deepClone(this.#config);
+    this._finalizeConfig(config, action);
+    this.#buildRolls(config, new foundry.applications.ux.FormDataExtended(this.form));
     return this.rolls;
   }
 

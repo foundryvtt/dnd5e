@@ -126,37 +126,45 @@ effects:
     transfer: false
     _id: 7dnnwBMWLykrVJub
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 2
-        value: '-10'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 2
-        value: '-10'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: wrvzbPmvNz5F1tPd
+        - key: system.attributes.movement.swim
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: Mu729JPOwGIthoCj
+        - key: system.attributes.movement.climb
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: 7EPUbpfVRbLluYX7
+        - key: system.attributes.movement.fly
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: BThq46tD4JD0FeY8
+        - key: system.attributes.movement.burrow
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: nimG03cIeDoOBgI5
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target's Speed is reduced by 10 feet until the start of your next
       turn.</p>
@@ -167,13 +175,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725489565438
-      modifiedTime: 1725489699864
+      modifiedTime: 1783543976545
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRayofFrost.7dnnwBMWLykrVJub'
 folder: 4FhsY9FJQd7h7MZb
 sort: 200000
@@ -186,11 +197,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425968524
-  modifiedTime: 1745256797436
+  modifiedTime: 1783543976545
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRayofFrost'

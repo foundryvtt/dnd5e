@@ -32,7 +32,7 @@ export default class CharacterData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES"];
+  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.CHARACTER"];
 
   /* -------------------------------------------- */
 
@@ -56,6 +56,10 @@ export default class CharacterData extends CreatureTemplate {
         ...AttributesFields.creature,
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
+          bloodied: new NumberField({
+            nullable: false, min: 0, max: 100, persisted: false, initial: () => CONFIG.DND5E.bloodied.threshold,
+            label: "DND5E.HITPOINTS.Bloodied.label"
+          }),
           max: new NumberField({
             nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride",
             hint: "DND5E.HitPointsOverrideHint"
@@ -77,7 +81,12 @@ export default class CharacterData extends CreatureTemplate {
             save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
         }, { label: "DND5E.DeathSave" }),
-        inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" })
+        inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" }),
+        piety: new SchemaField({
+          value: new NumberField({
+            min: 1, initial: null, nullable: true, integer: true, label: "DND5E.PIETY.FIELDS.value.label", placeholder: "0"
+          }),
+        })
       }, { label: "DND5E.Attributes" }),
       bastion: new SchemaField({
         name: new StringField({ required: true }),
@@ -149,6 +158,7 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
     return source;
   }
@@ -160,8 +170,6 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   prepareBaseData() {
     this.attributes.hd = new HitDice(this.parent);
-    this.details.level = 0;
-    this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
       if ( item.type === "class" ) this.details.level += item.system.levels;
@@ -227,12 +235,12 @@ export default class CharacterData extends CreatureTemplate {
     this.prepareCurrency();
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
+    AttributesFields.prepareSpellcastingAbility.call(this);
     AttributesFields.prepareArmorClass.call(this, rollData);
     AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this, rollData);
-    AttributesFields.prepareSpellcastingAbility.call(this);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
 
@@ -282,6 +290,7 @@ export default class CharacterData extends CreatureTemplate {
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     AttributesFields.onUpdateHP.call(this, changed, options, userId);
+    AttributesFields.onUpdateDeathSaves.call(this, changed, options, userId);
   }
 
   /* -------------------------------------------- */

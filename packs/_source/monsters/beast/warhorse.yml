@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,19 +478,22 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: 1KyNbDtLLrcA5lj0
     name: Trampling Charge
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the horse moves at least <strong>20 ft.</strong> straight toward
-          a creature and then hits it with a hooves attack on the same turn,
-          that target must succeed on a <strong>DC 14 Strength saving
-          throw</strong> or be knocked prone. If the target is prone, the horse
-          can make another attack with its hooves against it as a bonus
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a creature and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d.Item.7MiLYgDyM2Rm3nEb]{hooves}
+          attack on the same turn, that target must succeed on a [[/save]]
+          saving throw or be knocked &amp;reference[prone]. If the target is
+          prone, the [[lookup @name lowercase]]{monster} can make another attack
+          with its [[/item .7MiLYgDyM2Rm3nEb]]{hooves} against it as a bonus
           action.</p>
         chat: >-
           <p>If the horse moves at least <strong>20 ft.</strong> straight toward
@@ -511,122 +511,80 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        CAzwHJTiBdax8lUN:
           type: save
+          name: Trample Save
+          _id: CAzwHJTiBdax8lUN
+          img: ''
+          sort: 100000
           activation:
-            type: ''
-            value: null
-            condition: ''
+            type: special
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 20
+              feet straight toward a creature and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.T1xZTDCGuvMBSq8d.Item.7MiLYgDyM2Rm3nEb]{hooves}
+              attack on that same turn.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            value: '20'
-            units: ft
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
+            visible: true
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -640,11 +598,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yD51x4dihnbHwfsj
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676574
+      systemVersion: 6.0.0
+      createdTime: 1781525541496
+      modifiedTime: 1783369989183
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!T1xZTDCGuvMBSq8d.1KyNbDtLLrcA5lj0'
@@ -655,7 +613,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Warhorse attacks with its Hooves.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -718,7 +678,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -727,8 +687,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Tx8jc9H69iShqq94:
           type: attack
           activation:
             type: action
@@ -743,10 +702,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -763,7 +723,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -776,20 +737,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Tx8jc9H69iShqq94
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -804,11 +777,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123934411
+      systemVersion: 6.0.0
+      createdTime: 1781525518884
+      modifiedTime: 1781525528930
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!T1xZTDCGuvMBSq8d.7MiLYgDyM2Rm3nEb'
@@ -820,7 +793,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171233148

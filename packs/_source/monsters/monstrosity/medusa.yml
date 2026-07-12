@@ -445,9 +445,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -462,7 +459,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -482,31 +479,40 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: KmzlUGMXUhY2HubE
     name: Petrifying Gaze
     type: feat
-    img: icons/magic/control/hypnosis-mesmerism-eye.webp
+    img: icons/commodities/treasure/statue-bust-stone-grey.webp
     system:
       description:
         value: >-
-          <p>When a creature that can see the medusa's eyes starts its turn
-          within 30 ft. of the medusa, the medusa can force it to make a DC 14
-          Constitution saving throw if the medusa isn't incapacitated and can
-          see the creature. If the saving throw fails by 5 or more, the creature
-          is instantly petrified. Otherwise, a creature that fails the save
-          begins to turn to stone and is restrained. The restrained creature
-          must repeat the saving throw at the end of its next turn, becoming
-          petrified on a failure or ending the effect on a success. The
-          petrification lasts until the creature is freed by the greater
-          restoration spell or other magic.</p><p>Unless surprised, a creature
-          can avert its eyes to avoid the saving throw at the start of its turn.
-          If the creature does so, it can't see the medusa until the start of
-          its next turn, when it can avert its eyes again. If the creature looks
-          at the medusa in the meantime, it must immediately make the save. If
-          the medusa sees itself reflected on a polished surface within 30 ft.
-          of it and in an area of bright light, the medusa is, due to its curse,
-          affected by its own gaze.</p>
+          <p>When a creature that can see the [[lookup @name
+          lowercase]]{monster}'s eyes starts its turn within [[lookup
+          @target.template.size activity=LoXmK0mBZ0hatvaU]] feet of the [[lookup
+          @name lowercase]]{monster}, the [[lookup @name lowercase]]{monster}
+          can force it to make a [[/save activity=LoXmK0mBZ0hatvaU]] saving
+          throw if the [[lookup @name lowercase]]{monster} isn't
+          &amp;reference[incapacitated apply=false] and can see the creature. If
+          the saving throw fails by 5 or more, the creature is instantly
+          &amp;reference[petrified]. Otherwise, a creature that fails the save
+          begins to turn to stone and is &amp;reference[restrained]. The
+          restrained creature must repeat the saving throw at the end of its
+          next turn, becoming &amp;reference[petrified] on a failure or ending
+          the effect on a success. The petrification lasts until the creature is
+          freed by the
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p><p>Unless
+          &amp;reference[surprise]{Surprised}, a creature can avert its eyes to
+          avoid the saving throw at the start of its turn. If the creature does
+          so, it can't see the [[lookup @name lowercase]]{monster} until the
+          start of its next turn, when it can avert its eyes again. If the
+          creature looks at the [[lookup @name lowercase]]{monster} in the
+          meantime, it must immediately make the save. If the [[lookup @name
+          lowercase]]{monster} sees itself reflected on a polished surface
+          within 30 feet of it and in an area of &amp;reference[bright light],
+          the medusa is, due to its curse, affected by its own gaze.</p>
         chat: >-
           <p>The medusa can force it to make a <strong>Constitution</strong>
           saving throw. The restrained creature must repeat the saving throw at
@@ -533,18 +539,22 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        LoXmK0mBZ0hatvaU:
           type: save
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature that can see the [[lookup @name
+              lowercase]]{monster}'s eyes starts its turn within [[lookup
+              @target.template.size activity=LoXmK0mBZ0hatvaU]] feet of the
+              [[lookup @name lowercase]]{monster}.
             override: false
           consumption:
             targets: []
@@ -554,15 +564,24 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: X227DPzcMe3z6bic
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: Nc19TcGMlbwrwBeq
+              level: {}
+              onSave: false
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -574,9 +593,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -586,19 +606,122 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: LoXmK0mBZ0hatvaU
+          name: Direct Gaze
       enchant: {}
       prerequisites:
         level: null
       identifier: petrifying-gaze
-    effects: []
+    effects:
+      - name: Fully Petrified
+        img: icons/commodities/treasure/statue-bust-stone-grey.webp
+        origin: Compendium.dnd5e.monsters.Actor.eiifqZwYGi71r2Yl.Item.KmzlUGMXUhY2HubE
+        transfer: false
+        _id: Nc19TcGMlbwrwBeq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[petrified apply=false] until freed by the
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - petrified
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781879439333
+          modifiedTime: 1783368550125
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.SkiwEOXDYspZ7NOt
+          duplicateSource: Item.r3tEoCWfiLjcWQtc.ActiveEffect.jfTDhRJiQGf8oyXJ
+          exportSource: null
+        _key: >-
+          !actors.items.effects!eiifqZwYGi71r2Yl.KmzlUGMXUhY2HubE.Nc19TcGMlbwrwBeq
+      - name: Petrifying
+        img: icons/magic/defensive/armor-stone-skin.webp
+        origin: Compendium.dnd5e.monsters.Actor.eiifqZwYGi71r2Yl.Item.KmzlUGMXUhY2HubE
+        transfer: false
+        _id: X227DPzcMe3z6bic
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: turns
+          expiry: turnEnd
+          expired: false
+        description: >-
+          <p>You are &amp;reference[restrained apply=false] as you begin to turn
+          to stone. You must repeat the saving throw at the end of your next
+          turn.</p><p>On a success, the effect ends. On a failure, you are
+          @UUID[Compendium.dnd5e.monsters.Actor.eiifqZwYGi71r2Yl.Item.KmzlUGMXUhY2HubE.ActiveEffect.Nc19TcGMlbwrwBeq]{Petrified}
+          until freed by the
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{greater
+          restoration} spell or other magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - restrained
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781879444391
+          modifiedTime: 1783368546010
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.EpYl7qifM5pq6W6B.Item.gpxvIs8yjQ4awt4s.ActiveEffect.Z4mFj1zWP0EkqbNH
+          duplicateSource: Item.r3tEoCWfiLjcWQtc.ActiveEffect.dlT1Vtz6YqV7Qf5I
+          exportSource: null
+        _key: >-
+          !actors.items.effects!eiifqZwYGi71r2Yl.KmzlUGMXUhY2HubE.X227DPzcMe3z6bic
     folder: null
     sort: 0
     ownership:
@@ -607,11 +730,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.wkIN7WTeX8ebbjtv
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826169974
+      systemVersion: 6.0.0
+      createdTime: 1781879182727
+      modifiedTime: 1783368555757
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.KmzlUGMXUhY2HubE'
@@ -639,13 +762,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        pzuM1aB4EfFUmYwa:
           type: utility
           activation:
             type: action
@@ -660,15 +782,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -679,7 +802,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -696,7 +820,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: pzuM1aB4EfFUmYwa
       enchant: {}
       prerequisites:
         level: null
@@ -710,11 +842,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273656655
+      systemVersion: 6.0.0
+      createdTime: 1781879590580
+      modifiedTime: 1783366397635
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.udfhkp3BOEpgThbR'
@@ -725,7 +857,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Medusa attacks with its Snake Hair.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -788,7 +922,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -797,8 +931,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        qfpiY1DP6UnpdJXb:
           type: attack
           activation:
             type: action
@@ -813,10 +946,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -833,7 +967,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -846,36 +981,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 4
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 4
                 denomination: 6
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: qfpiY1DP6UnpdJXb
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: snake-hair
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -885,22 +1031,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552552
+      systemVersion: 6.0.0
+      createdTime: 1781879522652
+      modifiedTime: 1781879535748
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.1N53jrQmsZuhiREF'
   - _id: ixrzcEmkn9jaDOZ0
     name: Shortsword
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/sword-guard-worn-gold.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Medusa attacks with its Shortsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -965,7 +1113,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -974,8 +1122,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bN4HKmALSTSxQgLS:
           type: attack
           activation:
             type: action
@@ -990,10 +1137,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1010,7 +1158,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1023,24 +1172,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: bN4HKmALSTSxQgLS
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shortsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1050,22 +1212,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552552
+      systemVersion: 6.0.0
+      createdTime: 1781879542616
+      modifiedTime: 1781879554929
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.ixrzcEmkn9jaDOZ0'
   - _id: 4U98oe3Qr28BGbzG
     name: Longbow
     type: weapon
-    img: icons/weapons/bows/longbow-leather-green.webp
+    img: icons/weapons/bows/longbow-gold-pink.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Medusa attacks with its Longbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1130,7 +1294,7 @@ items:
       properties:
         - amm
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1139,8 +1303,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        btgLVJOYfXxbIVAl:
           type: attack
           activation:
             type: action
@@ -1155,10 +1318,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1175,7 +1339,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1194,30 +1359,42 @@ items:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: btgLVJOYfXxbIVAl
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1227,11 +1404,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385596
+      systemVersion: 6.0.0
+      createdTime: 1781879561511
+      modifiedTime: 1781879573316
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.4U98oe3Qr28BGbzG'
@@ -1243,7 +1420,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171245489

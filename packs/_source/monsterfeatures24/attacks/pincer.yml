@@ -186,17 +186,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmPincer00000000
     _id: GCED8YlF6qXTgEkd
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If the target is a Large or smaller creature, it has the
       &amp;Reference[Grappled apply=false] condition (escape DC [[/check
@@ -210,13 +207,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736287346497
       modifiedTime: 1737584878437
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmPincer00000000.GCED8YlF6qXTgEkd'
 flags:
   dnd5e:
@@ -225,7 +225,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

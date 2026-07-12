@@ -1,12 +1,12 @@
-import AdvancementConfig from "./advancement-config-v2.mjs";
+import ItemSharedConfig from "./item-shared-config.mjs";
 
 /**
  * Configuration application for item choices.
  */
-export default class ItemChoiceConfig extends AdvancementConfig {
+export default class ItemChoiceConfig extends ItemSharedConfig {
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["item-choice", "three-column"],
+    classes: ["item-choice"],
     dropKeyPath: "pool",
     position: {
       width: 800
@@ -51,7 +51,9 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       data,
       fields: this.advancement.configuration.schema.fields.pool.element.fields,
       index: fromUuidSync(data.uuid)
-    }));
+    })).sort((lhs, rhs) => context.manualSort
+      ? lhs.data.sort - rhs.data.sort
+      : lhs.index?.name.localeCompare(rhs.index?.name));
 
     context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }));
     context.choices = context.levels.reduce((obj, { value, label }) => {
@@ -63,6 +65,10 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       {
         value: "available",
         label: _loc("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.Available")
+      },
+      {
+        value: "availableNoCantrips",
+        label: _loc("DND5E.ADVANCEMENT.ItemChoice.FIELDS.restriction.level.AvailableNoCantrips")
       },
       { rule: true },
       ...Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label }))
@@ -134,7 +140,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
   _validateDroppedItem(event, item) {
     this.advancement._validateItemType(item, { type: false });
   }

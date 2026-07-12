@@ -131,17 +131,15 @@ effects:
     transfer: false
     _id: xCyHeKeepXMk3KXZ
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>This wind can fill the sails of one ship, increasing its speed by 5
       miles per hour for 8 hours. You can dismiss the fan as a Magic action.</p>
@@ -152,22 +150,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730769776812
-      modifiedTime: 1730769890567
+      modifiedTime: 1783544095502
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgFanQuaalsFeat.xCyHeKeepXMk3KXZ'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.4
   createdTime: 1727883376108
-  modifiedTime: 1768930177461
+  modifiedTime: 1783544095502
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

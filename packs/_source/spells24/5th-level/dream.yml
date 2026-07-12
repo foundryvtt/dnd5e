@@ -123,40 +123,48 @@ effects:
   - name: Trance State
     origin: Compendium.dnd5e.spells24.Item.phbsplDream00000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 28800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
     _id: x52Ga7U45IJOPFxK
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 3
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: vRpWCiIB5wLxG7rq
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: 3BkI4V5IRpCq6fhA
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: 6UZGd2wahbWqc56N
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: ijHUjR1pTMDf9anA
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: AhRoSEja5VYZfNwe
+      magical: true
     description: >-
       <p><span style="font-family:Signika, sans-serif">While in the trance, the
       messenger is Incapacitated and has a Speed of 0.</span></p>
@@ -168,13 +176,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974823
+      modifiedTime: 1783543974823
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplDream00000.x52Ga7U45IJOPFxK'
 folder: beZ8MTpWY2cMEUlp
 sort: 2100000
@@ -187,11 +198,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425951385
-  modifiedTime: 1745256791862
+  modifiedTime: 1783543974823
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDream00000'

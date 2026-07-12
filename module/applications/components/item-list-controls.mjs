@@ -345,6 +345,39 @@ export default class ItemListControlsElement extends MaybeAdoptable {
   /* -------------------------------------------- */
 
   /**
+   * Partition a flat filter set, as produced by the filter menu.
+   * @param {Set<string>} filters  The filter state's property set.
+   * @returns {{ included: Set<string>, excluded: Set<string> }}
+   */
+  static partitionFilters(filters) {
+    const included = new Set();
+    const excluded = new Set();
+    for ( const f of filters ) {
+      if ( f[0] === "!" ) excluded.add(f.slice(1));
+      else included.add(f);
+    }
+    return { included, excluded };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Evaluate a tri-state filter against an item property.
+   * @param {Set<string>} included  Filter keys toggled to include.
+   * @param {Set<string>} excluded  Filter keys toggled to exclude.
+   * @param {string} key            The filter key to evaluate.
+   * @param {boolean} matches       Whether the item satisfies the filtered property.
+   * @returns {boolean}             False if the filter rejects the item, otherwise true.
+   */
+  static passesFilter(included, excluded, key, matches) {
+    if ( included.has(key) ) return matches;
+    if ( excluded.has(key) ) return !matches;
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Apply the filters to the managed list.
    * @internal
    */

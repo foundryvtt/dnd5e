@@ -1,3 +1,4 @@
+import { loadingTooltip } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
@@ -78,10 +79,10 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
     // Build the frame HTML only once
     if ( !this.effectsList || !this.targetList ) {
-      if ( !this.effects.length ) {
-        const item = this.chatMessage.getAssociatedItem();
-        this.effects = Array.from(this.querySelectorAll("option")).map(o => item?.effects.get(o.value)).filter(_ => _);
-      }
+      let effectPromise;
+      if ( !this.effects.length ) effectPromise = Promise.all(
+        Array.from(this.querySelectorAll("option")).map(o => fromUuid(o.value))
+      ).then(p => this.effects = p.filter(_ => _));
 
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
@@ -89,7 +90,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-bolt"></i>
-          <span>${_loc("DND5E.Effects")}</span>
+          <span>${_loc("DND5E.EFFECT.Application.Header")}</span>
           <i class="fa-solid fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
@@ -101,7 +102,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       `;
       this.replaceChildren(div);
       this.effectsList = div.querySelector(".effects");
-      this.buildEffectsList();
+      if ( effectPromise ) effectPromise.then(() => this.buildEffectsList());
+      else this.buildEffectsList();
       div.querySelector(".wrapper").prepend(...this.buildTargetContainer());
       this.targetList.addEventListener("change", this._onCheckTarget.bind(this));
       div.addEventListener("click", this._handleClickHeader.bind(this));
@@ -120,7 +122,13 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
-      li.dataset.id = effect.id;
+      Object.assign(li.dataset, {
+        id: effect.id,
+        tooltipHtml: loadingTooltip({ uuid: effect.uuid }),
+        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light",
+        tooltipDirection: "LEFT",
+        uuid: effect.uuid
+      });
       li.innerHTML = `
         <img class="gold-icon">
         <div class="name-stacked">
@@ -128,7 +136,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
           <span class="subtitle">${effect.duration.label}</span>
         </div>
         <button class="apply-effect" type="button" data-action="applyEffect"
-                data-tooltip aria-label="${_loc("DND5E.EffectsApplyTokens")}">
+                data-tooltip aria-label="${_loc("DND5E.EFFECT.Application.Action.ApplyTokens")}">
           <i class="fas fa-reply-all fa-flip-horizontal" inert></i>
         </button>
       `;
@@ -181,15 +189,16 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   async _applyEffectToActor(effect, actor) {
     const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
-    const origin = concentration ?? effect;
+    const item = this.chatMessage.getAssociatedItem();
+    const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
-      throw new Error(_loc("DND5E.EffectApplyWarningOwnership"));
+      throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
     }
 
     const effectFlags = {
       flags: {
         dnd5e: {
-          dependentOn: origin.uuid,
+          dependentOn: concentration?.uuid,
           scaling: this.chatMessage.system.scaling,
           spellLevel: this.chatMessage.system.spellLevel
         }
@@ -199,22 +208,23 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     // Inherit the activity's duration when the applied effect has no explicit duration of its own
     let durationOverride = {};
     if ( !Number.isFinite(effect.duration.value) ) {
-      const effectDuration = this.chatMessage.system.activity?.duration.getEffectData();
+      const effectDuration = this.chatMessage.getAssociatedActivity({ scaled: true })?.duration.getEffectData();
       if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
     }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = actor.effects.find(e => e.origin === origin.uuid);
+    const existingEffect = effect.inCompendium ? actor.effects.find(e => e._stats.compendiumSource === effect.uuid)
+      : actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
       return existingEffect.update(foundry.utils.mergeObject({
-        ...effect.constructor.getInitialDuration(),
         ...durationOverride,
-        disabled: false
+        disabled: false,
+        start: effect.constructor.getEffectStart()
       }, effectFlags));
     }
 
     if ( !game.user.isGM && concentration && !concentration.isOwner ) {
-      throw new Error(_loc("DND5E.EffectApplyWarningConcentration"));
+      throw new Error(_loc("DND5E.EFFECT.Application.Warning.Concentration"));
     }
 
     // Otherwise, create a new effect on the target
@@ -223,7 +233,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       ...durationOverride,
       disabled: false,
       transfer: false,
-      origin: origin.uuid
+      origin: origin.uuid,
+      _stats: {
+        [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
+        [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
+      }
     }, effectFlags);
     return await ActiveEffect.implementation.create(effectData, { parent: actor });
   }
@@ -236,7 +250,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   async _onApplyEffect(event) {
     event.preventDefault();
-    const effect = this.chatMessage.getAssociatedItem()?.effects.get(event.target.closest("[data-id]")?.dataset.id);
+    const effect = await fromUuid(event.target.closest("[data-uuid]")?.dataset.uuid);
     if ( !effect ) return;
     for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
       const actor = fromUuidSync(target.dataset.targetUuid);

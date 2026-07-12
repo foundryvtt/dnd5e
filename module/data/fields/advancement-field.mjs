@@ -1,44 +1,24 @@
+import TypeDataField5e from "./type-data-field.mjs";
+
 /**
  * Data field that selects the appropriate advancement data model if available, otherwise defaults to generic
  * `ObjectField` to prevent issues with custom advancement types that aren't currently loaded.
  */
-export default class AdvancementField extends foundry.data.fields.ObjectField {
-
-  /**
-   * Get the BaseAdvancement definition for the specified advancement type.
-   * @param {string} type                    The Advancement type.
-   * @returns {typeof BaseAdvancement|null}  The BaseAdvancement class, or null.
-   */
-  getModelForType(type) {
-    return CONFIG.DND5E.advancementTypes[type]?.documentClass ?? null;
+export default class AdvancementField extends TypeDataField5e {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "`AdvancementField` has been deprecated in favor of a `TypeDataField5e`.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
+    super(...args);
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _cleanType(value, options, _state) {
-    if ( !(typeof value === "object") ) value = {};
-
-    const cls = this.getModelForType(value.type ?? _state?.source?.type);
-    if ( cls ) return cls.cleanData(value, options, _state);
-    return value;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  initialize(value, model, options={}) {
-    const cls = this.getModelForType(value.type);
-    if ( cls ) return new cls(value, {parent: model, ...options});
-    return foundry.utils.deepClone(value);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _migrate(value, options, _state) {
-    const cls = this.getModelForType(value.type);
-    if ( cls ) cls.migrateDataSafe(value);
-    return value;
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, {
+      getModel: type => CONFIG.DND5E.advancementTypes[type]?.documentClass
+    });
   }
 }

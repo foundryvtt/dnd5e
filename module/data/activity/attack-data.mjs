@@ -1,4 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import AppliedRules from "../../documents/applied-rules.mjs";
 import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -257,7 +258,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData({ ammunition, attackMode, situational }={}) {
-    const rollData = this.getRollData();
+    const rollData = this.getRollData({ data: { roll: { attack: { mode: attackMode } } } });
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
@@ -269,24 +270,21 @@ export default class BaseAttackActivityData extends BaseActivityData {
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
       actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
+      ruleBonus: AppliedRules.collect("attack:bonus", this.actor, this.item).filterWith(rollData).toFormula(),
       situational
     }, rollData);
 
     // Add exhaustion reduction
-    this.actor?.addRollExhaustion(parts, data);
+    this.actor?.addConditionRollReduction(parts, data);
 
     return { data, parts };
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Get the roll parts used to create the damage rolls.
-   * @param {Partial<AttackDamageRollProcessConfiguration>} [config={}]
-   * @returns {AttackDamageRollProcessConfiguration}
-   */
-  getDamageConfig(config={}) {
-    const rollConfig = super.getDamageConfig(config);
+  /** @override */
+  getDamageConfig(config={}, options={}) {
+    const rollConfig = super.getDamageConfig(config, options);
 
     // Handle ammunition
     const ammo = config.ammunition?.system;
@@ -310,14 +308,18 @@ export default class BaseAttackActivityData extends BaseActivityData {
         // If mode is "replace" and base part is present, replace the base part
         if ( ammo.damage.replace & (basePartIndex !== -1) ) {
           damage.base = true;
-          rollConfig.rolls.splice(basePartIndex, 1, this._processDamagePart(damage, config, rollData, basePartIndex));
+          rollConfig.rolls.splice(
+            basePartIndex, 1,
+            this._processDamagePart(damage, config, rollData, basePartIndex, options.formulaOptions)
+          );
         }
 
         // Otherwise stick the ammo damage after base part (or as first part)
         else {
           damage.ammo = true;
           rollConfig.rolls.splice(
-            basePartIndex + 1, 0, this._processDamagePart(damage, rollConfig, rollData, basePartIndex + 1)
+            basePartIndex + 1, 0,
+            this._processDamagePart(damage, rollConfig, rollData, basePartIndex + 1, options.formulaOptions)
           );
         }
       }
@@ -368,8 +370,22 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processDamagePart(damage, rollConfig, rollData, index=0) {
-    if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData, index);
+  getRollData(options={}) {
+    const rollData = super.getRollData(options);
+    if ( rollData.roll ) {
+      rollData.roll.attack ??= {};
+      rollData.roll.attack.classification = this.attack.type.classification;
+      rollData.roll.attack.type = rollData.roll.attack.mode?.includes("thrown") ? "ranged" : this.attack.type.value;
+      rollData.roll.type = "attack";
+    }
+    return rollData;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
+    if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData, index, options);
 
     // Swap base damage for versatile if two-handed attack is made on versatile weapon
     if ( this.item.system.isVersatile && (rollConfig.attackMode === "twoHanded") ) {
@@ -381,7 +397,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       damage = versatile;
     }
 
-    const roll = super._processDamagePart(damage, rollConfig, rollData, index);
+    const roll = super._processDamagePart(damage, rollConfig, rollData, index, options);
     roll.base = true;
 
     if ( this.item.type === "weapon" ) {

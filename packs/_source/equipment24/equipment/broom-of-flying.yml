@@ -191,37 +191,45 @@ effects:
     transfer: true
     _id: HT7JLnMCpfGKFxI2
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 5
-        value: '50'
-        priority: null
-      - key: system.attributes.movement.walk
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 5
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 50
+          priority: null
+          type: override
+          phase: initial
+          _id: S9fiRgSIHPUKGuQK
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: Os641aZiyFgKDFuj
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: KO4siiXA95XKYRFh
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: wwttHv6RMi1dEA9o
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: K2kDHrYo9YPct3il
+      magical: true
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The broom can carry up to 400 pounds, but its Fly Speed becomes 30 feet
       while carrying over 200 pounds.</p>
@@ -233,50 +241,61 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1728925762986
-      modifiedTime: 1728926319433
+      modifiedTime: 1783544094244
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgBroomOfFlying.HT7JLnMCpfGKFxI2'
   - name: Riding Broom (High Weight)
     img: icons/tools/hand/broom-straw-brown.webp
     origin: Compendium.dnd5e.equipment24.Item.dmgBroomOfFlying
     transfer: true
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 5
-        value: '30'
-        priority: null
-      - key: system.attributes.movement.walk
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 5
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 30
+          priority: null
+          type: override
+          phase: initial
+          _id: 2xHrbpm83BqnmBIt
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: QfQK3A1Hk5rMfmFi
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: HlrWBjn8UDJvCBkF
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: jCyXxZho2hXNGqSE
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: Zy4FfxkwIob4beAD
+      magical: true
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The broom can carry up to 400 pounds, but its Fly Speed becomes 30 feet
       while carrying over 200 pounds.</p>
@@ -289,23 +308,26 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgBroomOfFlying.ActiveEffect.HT7JLnMCpfGKFxI2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1728926324520
-      modifiedTime: 1728926351272
+      modifiedTime: 1783544094244
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: UzcvESI8ovNwhIPz
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgBroomOfFlying.UzcvESI8ovNwhIPz'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764616670999
+  modifiedTime: 1783544094243
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 5100000

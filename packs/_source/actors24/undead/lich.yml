@@ -493,12 +493,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -542,7 +539,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -562,6 +559,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Component Pouch
     type: container
@@ -616,10 +614,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagComponentPo
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _id: cWsXcEl8uW2q33U8
@@ -728,10 +728,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -837,10 +839,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpiritJar00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -935,10 +939,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: -100000
@@ -1833,10 +1839,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1953,26 +1961,25 @@ items:
       identifier: detect-magic
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/symbols/runes-carved-stone-green.webp
     effects:
       - name: Detect Magic
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/symbols/runes-carved-stone-green.webp
         _id: BHw91lQmVgdx39WZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1983,43 +1990,58 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180750
+          modifiedTime: 1783544180750
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.vIKgOrEUgzIgtaBg.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.vIKgOrEUgzIgtaBg.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2036,10 +2058,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180750
+      modifiedTime: 1783544180750
     _id: vIKgOrEUgzIgtaBg
     _key: '!actors.items!mmLich0000000000.vIKgOrEUgzIgtaBg'
   - name: Detect Thoughts
@@ -2224,6 +2248,7 @@ items:
       identifier: detect-thoughts
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/skills/social/diplomacy-handshake-yellow.webp
     effects:
@@ -2231,33 +2256,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.0T8h7axDm6UqtQh8
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.0T8h7axDm6UqtQh8
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.kOKHbZktHfRffihQ.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2274,10 +2309,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectThou
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180750
+      modifiedTime: 1783544180750
     _id: kOKHbZktHfRffihQ
     _key: '!actors.items!mmLich0000000000.kOKHbZktHfRffihQ'
   - name: Dispel Magic
@@ -2374,6 +2411,7 @@ items:
       identifier: dispel-magic
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/skills/melee/sword-damaged-broken-purple.webp
     effects:
@@ -2381,33 +2419,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.Kguzn7uqRbnITDOu
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.Kguzn7uqRbnITDOu
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.CneqcsBmpjXWcQse.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2421,10 +2469,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDispelMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180750
+      modifiedTime: 1783544180750
     _id: CneqcsBmpjXWcQse
     _key: '!actors.items!mmLich0000000000.CneqcsBmpjXWcQse'
   - name: Fireball
@@ -2551,6 +2601,7 @@ items:
       identifier: fireball
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/fire/barrier-shield-explosion-yellow.webp
     effects:
@@ -2558,33 +2609,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.hRNK0PKnbWSJ1dW5
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.hRNK0PKnbWSJ1dW5
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.v7gWdFR49IuVBTlO.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2598,10 +2659,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFireball00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180751
+      modifiedTime: 1783544180751
     _id: v7gWdFR49IuVBTlO
     _key: '!actors.items!mmLich0000000000.v7gWdFR49IuVBTlO'
   - name: Invisibility
@@ -2709,26 +2772,25 @@ items:
       identifier: invisibility
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/creatures/magical/spirit-undead-ghost-purple.webp
     effects:
       - name: Invisible
         origin: Compendium.dnd5e.spells24.Item.phbsplInvisibili
         duration:
-          rounds: null
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/invisible.svg
         _id: 9svfDetqjhsFP3ey
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>The spell ends early immediately after the target makes an attack
           roll, deals damage, or casts a spell.</p>
@@ -2741,43 +2803,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180751
+          modifiedTime: 1783544180751
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.dz9rY4S9xO1zL4Vi.9svfDetqjhsFP3ey
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.f4HDLt9fdRhdcLYl
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.f4HDLt9fdRhdcLYl
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.dz9rY4S9xO1zL4Vi.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2791,10 +2868,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplInvisibili
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180751
+      modifiedTime: 1783544180751
     _id: dz9rY4S9xO1zL4Vi
     _key: '!actors.items!mmLich0000000000.dz9rY4S9xO1zL4Vi'
   - name: Lightning Bolt
@@ -2914,6 +2993,7 @@ items:
       identifier: lightning-bolt
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/lightning/bolt-strike-blue.webp
     effects:
@@ -2921,33 +3001,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.Twda5eaj2J9txakH
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.Twda5eaj2J9txakH
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.ZUCBu5XBzt6dJyL1.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2961,10 +3051,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLightningB
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180751
+      modifiedTime: 1783544180751
     _id: ZUCBu5XBzt6dJyL1
     _key: '!actors.items!mmLich0000000000.ZUCBu5XBzt6dJyL1'
   - name: Mage Hand
@@ -3096,6 +3188,7 @@ items:
       identifier: mage-hand
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/light/hand-sparks-smoke-teal.webp
     effects:
@@ -3103,33 +3196,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.sj1hwqEgTJSDrKk4
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.sj1hwqEgTJSDrKk4
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.Wu2Dye64TtEvfV3X.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -3146,10 +3249,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMageHand00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180752
+      modifiedTime: 1783544180752
     _id: Wu2Dye64TtEvfV3X
     _key: '!actors.items!mmLich0000000000.Wu2Dye64TtEvfV3X'
   - name: Prestidigitation
@@ -3262,6 +3367,7 @@ items:
       identifier: prestidigitation
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/weapons/wands/wand-star-white.webp
     effects:
@@ -3269,33 +3375,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.HnbZUMdnR2AjZWMG
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.HnbZUMdnR2AjZWMG
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.IKMIK50aMMlKjp3O.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -3309,10 +3425,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPrestidigi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180752
+      modifiedTime: 1783544180752
     _id: IKMIK50aMMlKjp3O
     _key: '!actors.items!mmLich0000000000.IKMIK50aMMlKjp3O'
   - name: Animate Dead
@@ -3466,6 +3584,7 @@ items:
       identifier: animate-dead
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/death/undead-zombie-grave-green.webp
     effects:
@@ -3473,33 +3592,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.y6iPZVAYHdRjkr6A
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.y6iPZVAYHdRjkr6A
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.5ChYAsKeTMNZ7Z0X.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -3513,10 +3642,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplAnimateDea
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180752
+      modifiedTime: 1783544180752
     _id: 5ChYAsKeTMNZ7Z0X
     _key: '!actors.items!mmLich0000000000.5ChYAsKeTMNZ7Z0X'
   - name: Dimension Door
@@ -3639,6 +3770,7 @@ items:
       identifier: dimension-door
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/environment/wilderness/portal.webp
     effects:
@@ -3646,33 +3778,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.sE9KAlUDkH01lT2D
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.sE9KAlUDkH01lT2D
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.LXTe7EcK0LZn7ADV.dnd5espellchange
     folder: qi3IbnEwap7mRw4b
@@ -3689,10 +3831,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDimensionD
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180752
+      modifiedTime: 1783544180752
     _id: LXTe7EcK0LZn7ADV
     _key: '!actors.items!mmLich0000000000.LXTe7EcK0LZn7ADV'
   - name: Plane Shift
@@ -3803,6 +3947,7 @@ items:
       identifier: plane-shift
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/skills/targeting/target-glowing-yellow.webp
     effects:
@@ -3810,33 +3955,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.hSULDxzfMHkBnEnL
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.hSULDxzfMHkBnEnL
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.Q17AQ49d8A1j9xcQ.dnd5espellchange
     folder: EdAGMG8IF26PLkD3
@@ -3850,10 +4005,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPlaneShift
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180752
+      modifiedTime: 1783544180752
     _id: Q17AQ49d8A1j9xcQ
     _key: '!actors.items!mmLich0000000000.Q17AQ49d8A1j9xcQ'
   - name: Chain Lightning
@@ -3979,6 +4136,7 @@ items:
       identifier: chain-lightning
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/lightning/bolt-strike-sparks-teal.webp
     effects:
@@ -3986,33 +4144,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.wvyeMRAQmHTCpCBe
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.wvyeMRAQmHTCpCBe
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.0BICKix3CVqBYI6s.dnd5espellchange
     folder: 8WmlLARx1Df3Ii9v
@@ -4026,10 +4194,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplChainLight
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180753
+      modifiedTime: 1783544180753
     _id: 0BICKix3CVqBYI6s
     _key: '!actors.items!mmLich0000000000.0BICKix3CVqBYI6s'
   - name: Finger of Death
@@ -4221,6 +4391,7 @@ items:
       identifier: finger-of-death
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/hand-light-pink.webp
     effects:
@@ -4228,33 +4399,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.qRnfHwsOGm8uV7qZ
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.qRnfHwsOGm8uV7qZ
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.VGnFSkQ3oz0By0ef.dnd5espellchange
     folder: EdAGMG8IF26PLkD3
@@ -4268,10 +4449,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFingerofDe
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180753
+      modifiedTime: 1783544180753
     _id: VGnFSkQ3oz0By0ef
     _key: '!actors.items!mmLich0000000000.VGnFSkQ3oz0By0ef'
   - name: Power Word Kill
@@ -4384,6 +4567,7 @@ items:
       identifier: power-word-kill
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/death/projectile-skull-flaming-yellow.webp
     effects:
@@ -4391,33 +4575,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.uHFIlYfHjtpqObtR
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.uHFIlYfHjtpqObtR
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.uFLWrVlBNvu85XrJ.dnd5espellchange
     folder: iG0Zia8jh6uK39TB
@@ -4431,10 +4625,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplPowerWordK
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180753
+      modifiedTime: 1783544180753
     _id: uFLWrVlBNvu85XrJ
     _key: '!actors.items!mmLich0000000000.uFLWrVlBNvu85XrJ'
   - name: Scrying
@@ -5056,6 +5252,7 @@ items:
       identifier: scrying
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
     effects:
@@ -5063,33 +5260,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.THJrfbCediYUAgm2
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.mmSpellcasting00.Activity.THJrfbCediYUAgm2
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.TiKX9UpLWvOVdkOd.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -5103,10 +5310,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScrying000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180753
+      modifiedTime: 1783544180753
     _id: TiKX9UpLWvOVdkOd
     _key: '!actors.items!mmLich0000000000.TiKX9UpLWvOVdkOd'
   - _id: wk3FkTwZDKMW6wdM
@@ -5264,10 +5473,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmProtectiveMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 17800000
     ownership:
       default: 0
@@ -5376,6 +5587,7 @@ items:
       identifier: counterspell
       method: spell
       prepared: 0
+      sourceItem: feat:protective-magic
     type: spell
     img: icons/magic/unholy/hands-circle-light-green.webp
     effects:
@@ -5383,37 +5595,52 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.wk3FkTwZDKMW6wdM.Activity.Jc8kZLhCdTcbaImH
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"reaction","value":null,"condition":""}'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: reaction
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: nQbw9p3TZ8j2dNn6
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.wk3FkTwZDKMW6wdM.Activity.Jc8kZLhCdTcbaImH
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180754
+          modifiedTime: 1783544180754
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.8Jzmhd5Lm4NkcdZF.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -5427,10 +5654,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCounterspe
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180754
+      modifiedTime: 1783544180754
     _id: 8Jzmhd5Lm4NkcdZF
     _key: '!actors.items!mmLich0000000000.8Jzmhd5Lm4NkcdZF'
   - name: Shield
@@ -5540,25 +5769,18 @@ items:
       identifier: shield
       method: spell
       prepared: 0
+      sourceItem: feat:protective-magic
     type: spell
     img: icons/equipment/shield/heater-crystal-blue.webp
     effects:
       - _id: Bv3EoHGfYCprLdG1
         flags: {}
-        changes:
-          - key: system.attributes.ac.bonus
-            mode: 2
-            value: '5'
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          rounds: 1
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         origin: Compendium.dnd5e.spells24.Item.phbsplShield0000
         tint: '#ffffff'
         transfer: false
@@ -5573,51 +5795,79 @@ items:
             Compendium.dnd5e.spells.Item.z1mx84ONwkXKUZd7.ActiveEffect.6pbotGIvqQkraPva
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180754
+          modifiedTime: 1783544180754
         img: icons/equipment/shield/heater-steel-crystal-red.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              value: 5
+              priority: null
+              type: add
+              phase: initial
+              _id: Ne4eh7emW8UGfDnY
+          magical: true
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.uIoVuqHT9A8hkkRh.Bv3EoHGfYCprLdG1
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.wk3FkTwZDKMW6wdM.Activity.1rK9SlZ7cBWEeWnG
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"reaction","value":null,"condition":""}'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: reaction
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: NExBj8oHvGhrf0GX
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.wk3FkTwZDKMW6wdM.Activity.1rK9SlZ7cBWEeWnG
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180754
+          modifiedTime: 1783544180754
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.uIoVuqHT9A8hkkRh.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -5631,10 +5881,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShield0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180754
+      modifiedTime: 1783544180754
     _id: uIoVuqHT9A8hkkRh
     _key: '!actors.items!mmLich0000000000.uIoVuqHT9A8hkkRh'
   - _id: 43ZbhFhGR7uIY1j6
@@ -5754,10 +6006,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDeathlyTelepor
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 400000
     ownership:
       default: 0
@@ -5885,10 +6139,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDisruptLife000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 3400000
     ownership:
       default: 0
@@ -5994,10 +6250,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFrighteningGaz
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 4100000
     ownership:
       default: 0
@@ -6113,26 +6371,25 @@ items:
       identifier: fear
       method: spell
       prepared: 0
+      sourceItem: feat:frightening-gaze
     type: spell
     img: icons/magic/unholy/silhouette-robe-evil-glow.webp
     effects:
       - name: Fear
         origin: Compendium.dnd5e.spells24.Item.phbsplFear000000
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/frightened.svg
         _id: ijiWLu6EJZmEJPOZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>A &amp;Reference[frightened apply=false] creature takes the
           &amp;Reference[dash] action and moves away from you by the safest
@@ -6149,47 +6406,67 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180754
+          modifiedTime: 1783544180754
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.Djd2Ghgnu74QcdHq.ijiWLu6EJZmEJPOZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.80FiTdFhW9hNegeJ.Activity.7RiCnWnmXG61xpkE
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: e4bdpTM64905RM4Y
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmLich0000000000.Item.80FiTdFhW9hNegeJ.Activity.7RiCnWnmXG61xpkE
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544180755
+          modifiedTime: 1783544180755
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.Djd2Ghgnu74QcdHq.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -6203,10 +6480,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFear000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544180754
+      modifiedTime: 1783544180754
     _id: Djd2Ghgnu74QcdHq
     _key: '!actors.items!mmLich0000000000.Djd2Ghgnu74QcdHq'
   - _id: 6qvUZeTimud7ekV8
@@ -6357,10 +6636,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEldritchBurst0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: -50000
     ownership:
       default: 0
@@ -6513,17 +6794,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmParalyzingTouc
         _id: XONucKj1fLr03vaU
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Paralyzed apply=false] condition
           until the start of the attacking creature's next turn.</p>
@@ -6537,10 +6815,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmLich0000000000.9p8yotv4r7nt3NWl.XONucKj1fLr03vaU
     flags:
@@ -6552,10 +6835,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmParalyzingTouc
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 2
     ownership:
       default: 0
@@ -6568,11 +6853,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452708375
-  modifiedTime: 1771452708375
+  systemVersion: 6.0.0
+  createdTime: 1783544180749
+  modifiedTime: 1783544180749
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

@@ -119,20 +119,18 @@ effects:
   - name: Guiding Bolt
     origin: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
     duration:
-      rounds: 1
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/skills/targeting/target-strike-triple-blue.webp
     _id: rHzZCeXfdeTcYyk8
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p><span style="font-family:Signika, sans-serif">The next attack roll made
       against the target before the end of your next turn has
@@ -145,13 +143,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975409
+      modifiedTime: 1783543975409
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplGuidingBol.rHzZCeXfdeTcYyk8'
 folder: pBaAAtXBCq9FVEnL
 sort: 2500000
@@ -164,11 +165,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425957500
-  modifiedTime: 1745256794206
+  modifiedTime: 1783543975409
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGuidingBol'

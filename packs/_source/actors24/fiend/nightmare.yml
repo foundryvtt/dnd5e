@@ -484,12 +484,9 @@ prototypeToken:
     src: modules/dnd-monster-manual/assets/tokens/nightmare-*.webp
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -533,7 +530,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -553,6 +550,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mmConferFireResi
     name: Confer Fire Resistance
@@ -597,21 +595,20 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmConferFireResi
         _id: uf0s4DJcB5yQbQvN
         type: base
-        system: {}
-        changes:
-          - key: system.traits.dr.value
-            mode: 2
-            value: fire
-            priority: null
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: fire
+              priority: null
+              type: add
+              phase: initial
+              _id: 4aI1GJcyWvHRsUFs
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The creature can grant Resistance to Fire damage to a rider while
           it is on the creature.</p>
@@ -624,10 +621,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544181411
+          modifiedTime: 1783544181411
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmNightmare00000.mmConferFireResi.uf0s4DJcB5yQbQvN
     flags: {}
@@ -635,10 +637,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmConferFireResi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544181410
+      modifiedTime: 1783544181410
     ownership:
       default: 0
     sort: 0
@@ -685,10 +689,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmIllumination00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -849,10 +855,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmHooves00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -960,10 +968,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEtherealStride
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -976,11 +986,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452710062
-  modifiedTime: 1771452710062
+  systemVersion: 6.0.0
+  createdTime: 1783544181410
+  modifiedTime: 1783544181410
   lastModifiedBy: dnd5ebuilder0000
 sort: 127735
 ownership:

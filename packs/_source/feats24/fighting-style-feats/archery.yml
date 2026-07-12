@@ -39,21 +39,20 @@ effects:
     img: icons/skills/ranged/arrow-flying-broadhead-metal.webp
     _id: kigkIjyf2OGWqdVU
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.rwak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: 4OBXNJyb2xC8Jvka
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -64,13 +63,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544088781
+      modifiedTime: 1783544088781
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbfstArchery000.kigkIjyf2OGWqdVU'
 folder: O942K0m1gZMIIoMB
 sort: 100000
@@ -83,11 +85,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735866298107
-  modifiedTime: 1752706622230
+  modifiedTime: 1783544088781
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbfstArchery000'

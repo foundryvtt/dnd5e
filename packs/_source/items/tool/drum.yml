@@ -47,8 +47,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    uUV9Ua7ZnGoBQIMR:
       type: check
       activation:
         type: ''
@@ -63,15 +62,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -82,7 +82,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -92,11 +93,30 @@ system:
         override: false
       check:
         ability: cha
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: uUV9Ua7ZnGoBQIMR
+      name: Play Instrument
   attuned: false
   identifier: drum
 effects: []
@@ -107,11 +127,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037103926
-  modifiedTime: 1725992485225
+  modifiedTime: 1783649588560
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!69Dpr25pf4BjkHKb'

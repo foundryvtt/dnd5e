@@ -92,24 +92,24 @@ effects:
   - name: Poison Protection
     origin: Compendium.dnd5e.spells24.Item.phbsplProtection
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/equipment/head/mask-plague-leather-brown.webp
     _id: zTci2V6Iij0r0IIg
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: 4ShV9W5vmlIxn6lo
+      magical: true
     description: >-
       <p><span style="font-family:Signika, sans-serif">For the duration, the
       target has Advantage on saving throws to avoid or end the Poisoned
@@ -121,13 +121,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976437
+      modifiedTime: 1783543976437
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplProtection.zTci2V6Iij0r0IIg'
 folder: 3SjcO2acsFnWegp4
 sort: 1200000
@@ -140,11 +143,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425967665
-  modifiedTime: 1745256797292
+  modifiedTime: 1783543976437
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplProtection'

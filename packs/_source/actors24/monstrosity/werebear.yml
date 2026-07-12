@@ -486,12 +486,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -535,7 +532,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -555,6 +552,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Handaxe (Humanoid or Hybrid Form Only)
     system:
@@ -722,10 +720,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepHandaxe000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: JIRP6xpVCOyZotXc
     sort: 100000
     _key: '!actors.items!mmWerebear000000.JIRP6xpVCOyZotXc'
@@ -828,10 +828,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -1120,17 +1122,14 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.mmWerebear000000.Item.mmBite0000000000
         _id: SddCHTo4ze77lMvs
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The target is &amp;Reference[cursed apply=false] if they fail their
           saving throw.</p>
@@ -1144,10 +1143,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmWerebear000000.mmBite0000000000.SddCHTo4ze77lMvs
     flags:
@@ -1159,10 +1163,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBite0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 50000
@@ -1313,10 +1319,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 400000
@@ -1424,25 +1432,26 @@ items:
         img: icons/skills/movement/figure-running-gray.webp
         _id: UeN1SvpeSeyZBU5R
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 5
-            value: '40'
-            priority: null
-          - key: system.attributes.movement.climb
-            mode: 2
-            value: '30'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 40
+              priority: null
+              type: override
+              phase: initial
+              _id: PuYH4i3hvj8YYTGG
+            - key: system.attributes.movement.climb
+              value: 30
+              priority: null
+              type: add
+              phase: initial
+              _id: Z3OtDmyeY0UHENyM
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         origin: Compendium.dnd5e.actors24.Actor.mmWerebear000000.Item.mmShapeshift0000
         tint: '#ffffff'
@@ -1455,10 +1464,21 @@ items:
             Compendium.dnd5e.actors24.Actor.mmWerebear000000.ActiveEffect.KI7U5B2KrvDtzUjD
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544183918
+          modifiedTime: 1783544183918
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmWerebear000000.mmShapeshift0000.UeN1SvpeSeyZBU5R
     flags:
@@ -1470,10 +1490,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShapeshift0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544183918
+      modifiedTime: 1783544183918
     ownership:
       default: 0
     sort: 3
@@ -1484,11 +1506,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452717588
-  modifiedTime: 1771452717588
+  systemVersion: 6.0.0
+  createdTime: 1783544183917
+  modifiedTime: 1783544183917
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

@@ -198,17 +198,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmCrush000000000
     _id: xoOyjbkZSz44HMbD
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Blinded apply=false] condition and is
       &amp;Reference[suffocating apply=false]{suffocating} while the attacking
@@ -223,38 +220,42 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736531157607
       modifiedTime: 1736531289195
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmCrush000000000.xoOyjbkZSz44HMbD'
   - name: 'Self: Attack Adv./0 Speed'
     img: icons/skills/movement/figure-running-gray.webp
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmCrush000000000
     _id: ca1RtYs4i9JuL9sV
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 5
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: T5QalLK4vaQrGVq6
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: tGuZJnKO6xB7mqCw
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>While attached to a target, the [[lookup @name lowercase]]{monster} can
       attack only the target but has Advantage on its attack rolls. Its Speed
@@ -268,13 +269,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1736531299059
-      modifiedTime: 1736531782481
+      modifiedTime: 1783544085568
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmCrush000000000.ca1RtYs4i9JuL9sV'
 flags:
   dnd5e:
@@ -283,11 +287,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1736532076877
+  modifiedTime: 1783544085568
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 6400000

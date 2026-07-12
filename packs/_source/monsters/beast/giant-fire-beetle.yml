@@ -418,7 +418,7 @@ prototypeToken:
   randomImg: false
   alpha: 1
   light:
-    alpha: 1
+    alpha: 0.35
     angle: 360
     bright: 10
     coloration: 1
@@ -428,25 +428,22 @@ prototypeToken:
     contrast: 0
     shadows: 0
     animation:
-      speed: 5
-      intensity: 5
-      type: null
+      speed: 1
+      intensity: 1
+      type: flame
       reverse: false
     darkness:
       min: 0
       max: 1
-    color: null
+    color: '#6c4714'
     attenuation: 0.5
     negative: false
     priority: 0
   texture:
     src: null
     tint: '#ffffff'
-    scaleX: 1
-    scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
+    scaleX: 0.7
+    scaleY: 0.7
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -471,7 +468,7 @@ prototypeToken:
     colors:
       ring: null
       background: null
-    effects: 1
+    effects: 0
     subject:
       scale: 1
       texture: null
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: ytajTMHqbOxc0BvA
     name: Bite
     type: weapon
-    img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
+    img: icons/creatures/invertebrates/spider-mandibles-brown.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Fire Beetle attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -552,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -561,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        mmFA2hX3ul4W0BYk:
           type: attack
           activation:
             type: action
@@ -577,10 +576,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -597,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -616,14 +617,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: mmFA2hX3ul4W0BYk
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -638,23 +651,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118590092
+      systemVersion: 6.0.0
+      createdTime: 1781542148148
+      modifiedTime: 1781542166295
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Z0GiAv3bJxTjUfjM.ytajTMHqbOxc0BvA'
   - _id: t1I5Ss8xvBplViSy
     name: Illumination
     type: feat
-    img: icons/magic/light/beam-strike-orange-gold.webp
+    img: icons/magic/light/explosion-glow-spiral-yellow.webp
     system:
       description:
         value: >-
-          <p>The beetle sheds bright light in a 10-foot radius and dim light for
-          an additional 10 feet.</p>
+          <p>The [[lookup @name lowercase]]{monster} sheds &amp;reference[bright
+          light] in a 10-foot radius and &amp;reference[dim light] for an
+          additional 10 feet.</p>
         chat: ''
       source:
         custom: ''
@@ -668,10 +682,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: Fire Beetle
-      properties: []
+      requirements: ''
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -686,11 +701,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118598461
+      systemVersion: 6.0.0
+      createdTime: 1781542106274
+      modifiedTime: 1781542131834
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Z0GiAv3bJxTjUfjM.t1I5Ss8xvBplViSy'
@@ -702,11 +717,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171238619
-  modifiedTime: 1741118601480
+  modifiedTime: 1781542264479
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!Z0GiAv3bJxTjUfjM'

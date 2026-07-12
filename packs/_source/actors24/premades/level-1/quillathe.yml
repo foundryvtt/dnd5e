@@ -504,12 +504,9 @@ prototypeToken:
     src: systems/dnd5e/icons/svg/actors/character.svg
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -553,7 +550,7 @@ prototypeToken:
     brightness: 0
     saturation: -1
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -575,6 +572,7 @@ prototypeToken:
   randomImg: false
   appendNumber: false
   prependAdjective: false
+  depth: 1
 items:
   - name: Monster Hunter
     type: background
@@ -737,11 +735,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     _id: WSfqg4qp13LFdc3N
     ownership:
       default: 0
@@ -793,21 +792,20 @@ items:
         img: icons/creatures/eyes/human-single-brown.webp
         _id: uvZy4Zzi0oPd54qs
         type: base
-        system: {}
-        changes:
-          - key: flags.dnd5e.initiativeAlert
-            mode: 2
-            value: 'true'
-            priority: null
+        system:
+          changes:
+            - key: flags.dnd5e.initiativeAlert
+              value: true
+              priority: null
+              type: add
+              phase: initial
+              _id: 9qOyHkxXbI2vnWdX
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -822,10 +820,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544145429
+          modifiedTime: 1783544145429
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!QuillatheLv01000.6156HtS7RvjQ7nhJ.uvZy4Zzi0oPd54qs
     folder: d5jrO8A6QpjEV9rn
@@ -839,11 +848,12 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbftAlert000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1777923364225
+      modifiedTime: 1783544145429
+      createdTime: 1783544145429
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.6156HtS7RvjQ7nhJ'
@@ -1046,11 +1056,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbspWoodElf0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -1099,11 +1110,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptFeyAncestr
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -1154,11 +1166,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptKeenSenses
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -1208,11 +1221,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptTrance0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -1278,11 +1292,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptWoodElfLin
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -2035,11 +2050,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrRanger0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -2162,6 +2178,7 @@ items:
       identifier: druidcraft
       method: spell
       prepared: 2
+      sourceItem: race:elf-wood
     _id: kEjBWiTMcmhrI5w4
     type: spell
     img: icons/magic/nature/plant-seed-hands-glow-yellow.webp
@@ -2177,11 +2194,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDruidcraft
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.2
+      systemVersion: 6.0.0
       lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1777923364225
+      modifiedTime: 1783544145429
+      createdTime: 1783544145429
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.kEjBWiTMcmhrI5w4'
@@ -2261,11 +2279,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrSpellcasti
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -2319,11 +2338,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrWeaponMast
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -2450,11 +2470,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCureWounds
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.2KxozSkbJhhPD7Zb'
@@ -2661,20 +2682,18 @@ items:
       - name: Ensnared
         origin: Compendium.dnd5e.spells24.Item.phbsplEnsnaringS
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/nature/root-vine-entangled-hand.webp
         _id: tFGMG3cjQTEeAhv2
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p><span style="font-family:Signika, sans-serif">The target has the
           &amp;Reference[restrained apply=false] condition until the spell
@@ -2693,10 +2712,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544145430
+          modifiedTime: 1783544145430
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!QuillatheLv01000.EBgpZ648SEfydQRq.tFGMG3cjQTEeAhv2
     folder: pBaAAtXBCq9FVEnL
@@ -2706,11 +2730,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplEnsnaringS
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
-      modifiedTime: 1777923364225
+      modifiedTime: 1783544145430
+      createdTime: 1783544145430
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.EBgpZ648SEfydQRq'
@@ -2836,11 +2861,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbtulHerbalismK
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.unYsJXqTKiLwFGEu'
@@ -2910,11 +2936,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagClothesTrav
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.8OhoDlMp6n7S6vkp'
@@ -3116,17 +3143,14 @@ items:
         transfer: false
         _id: 9jl46RZ5GOjs9QlJ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -3136,10 +3160,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!QuillatheLv01000.kokZ2ulFQRGtAwaU.9jl46RZ5GOjs9QlJ
     sort: 2700000
@@ -3148,11 +3177,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagHuntingTrap
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.kokZ2ulFQRGtAwaU'
@@ -3287,17 +3317,14 @@ items:
         transfer: false
         _id: 67ofG0FVqrrkAHKa
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses:
@@ -3308,10 +3335,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!QuillatheLv01000.C9uK2B5CpCVfyrnm.67ofG0FVqrrkAHKa
     folder: uDk4FBYfcP2JnX6t
@@ -3320,11 +3352,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagNet00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     sort: 0
     ownership:
       default: 0
@@ -3393,11 +3426,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.zLB9qhJw8z2FSbCO'
@@ -3563,11 +3597,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepScimitar00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.D3zED6xcDPkysnuj'
@@ -3733,11 +3768,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepShortsword
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.lERu2Skz1q5s9egL'
@@ -3905,11 +3941,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepLongbow000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.qdxxGDu9tguu68Fu'
@@ -3966,11 +4003,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.nTW4gFU6HZR5aZXL'
@@ -4040,11 +4078,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.WiXfB8xRlPdC7kiB'
@@ -4116,11 +4155,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbdfcSprigofmis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.pie1jETwfFOgm3Ea'
@@ -4187,11 +4227,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.friHHTqUU9vmohfg'
@@ -4318,11 +4359,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagTinderbox00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.hc8MggfBaxwCzCHA'
@@ -4565,11 +4607,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagRope0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.NQXrw78HaPfjDwCR'
@@ -4616,11 +4659,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagBedroll0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.lSEr732XDGJKNopc'
@@ -4677,11 +4721,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagWaterskin00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.KaPzoh8WPLzQEWMu'
@@ -4800,11 +4845,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbWaterpint0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     _id: 6kKffxM60Oq7uyzV
     sort: 100000
     ownership:
@@ -4957,11 +5003,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagTorch000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.sMFxms44gxWpPEzK'
@@ -5178,11 +5225,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagOil00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.IllhigPdXlPBx5Mu'
@@ -5247,11 +5295,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagRations0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1777923364225
+      createdTime: null
     ownership:
       default: 0
     _key: '!actors.items!QuillatheLv01000.biyQChEtJrhkkj9X'
@@ -5389,7 +5438,7 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       createdTime: 1777923364210
@@ -5628,17 +5677,15 @@ items:
         transfer: false
         _id: vPkln6UeePHnbLr4
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          combat: null
-          seconds: 3600
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Until the spell ends, the caster deals an extra [[/damage 1d6
           force]] damage to the target whenever they hit it with an attack
@@ -5655,10 +5702,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.2
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544145431
+          modifiedTime: 1783544145431
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!QuillatheLv01000.YzOlWHzPeyRC3sDu.vPkln6UeePHnbLr4
     folder: pBaAAtXBCq9FVEnL
@@ -5677,11 +5729,11 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       createdTime: 1777923364210
-      modifiedTime: 1777923364210
+      modifiedTime: 1783544145431
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!QuillatheLv01000.YzOlWHzPeyRC3sDu'
   - name: Hunter's Mark
@@ -5912,17 +5964,15 @@ items:
         transfer: false
         _id: vPkln6UeePHnbLr4
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          combat: null
-          seconds: 3600
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Until the spell ends, the caster deals an extra [[/damage 1d6
           force]] damage to the target whenever they hit it with an attack
@@ -5939,46 +5989,70 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.2
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544145432
+          modifiedTime: 1783544145432
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!QuillatheLv01000.WMKaTlBSGK1PCDTF.vPkln6UeePHnbLr4
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.QuillatheLv01000.Item.2p1sA50BWv2AdBYe.Activity.18OW4UKZ5cSPPLhC
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","condition":""}'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: TRXjpv7ha2vu5hFV
+            - key: system.activation
+              value:
+                type: bonus
+                condition: ''
+              type: override
+              phase: initial
+              _id: lYhZntd7c0TQr9hg
         disabled: false
         duration:
-          startTime: 0
-          combat: null
-          startRound: 0
-          startTurn: 0
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.QuillatheLv01000.Item.2p1sA50BWv2AdBYe.Activity.18OW4UKZ5cSPPLhC
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.2
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544145432
+          modifiedTime: 1783544145432
+        start:
+          combat: null
+          round: 0
+          time: 0
+          turn: 0
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!QuillatheLv01000.WMKaTlBSGK1PCDTF.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -5995,11 +6069,11 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       createdTime: 1777923364273
-      modifiedTime: 1777923364273
+      modifiedTime: 1783544145432
       lastModifiedBy: dnd5ebuilder0000
     _id: WMKaTlBSGK1PCDTF
     _key: '!actors.items!QuillatheLv01000.WMKaTlBSGK1PCDTF'
@@ -6009,11 +6083,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.2
-  createdTime: 1771452688099
-  modifiedTime: 1777993813614
+  systemVersion: 6.0.0
+  createdTime: 1783544145427
+  modifiedTime: 1783544145427
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

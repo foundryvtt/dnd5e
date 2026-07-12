@@ -445,9 +445,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -462,7 +459,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -482,16 +479,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: 7GyypGVW1RhhbcqC
     name: Tail Spike Regrowth
     type: feat
-    img: icons/creatures/mammals/wolf-shadow-black.webp
+    img: icons/commodities/bones/bones-stack-tan.webp
     system:
       description:
         value: >-
-          <p>The manticore has twenty-four tail spikes. Used spikes regrow when
-          the manticore finishes a long rest.</p>
+          <p>The [[lookup @name lowercase]]{monster} has twenty-four tail
+          spikes. Used spikes regrow when the [[lookup @name
+          lowercase]]{monster} finishes a long rest.</p>
         chat: ''
       source:
         custom: ''
@@ -507,10 +506,11 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -525,12 +525,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iVOxckt9448v7Ho5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781883411357
+      modifiedTime: 1781883490805
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.7GyypGVW1RhhbcqC'
   - _id: Wr6BSqrXAJZu28sp
@@ -540,10 +540,10 @@ items:
     system:
       description:
         value: >-
-          <p>The manticore makes three attacks: one with its [[/item
-          .thSJXAlyfHGmVWN5]]{bite} and two with its [[/item
-          .4WFf0M2tCPwiLPxG]]{claws} or three with its [[/item
-          .bYJjJPKhiDOTMlmS]]{tail spikes}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks: one
+          with its [[/item .thSJXAlyfHGmVWN5]]{Bite} and two with its [[/item
+          .4WFf0M2tCPwiLPxG]]{Claws} or three with its [[/item
+          .bYJjJPKhiDOTMlmS]]Ttail Spikes}.</p>
         chat: ''
       source:
         custom: ''
@@ -557,13 +557,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        irZfw7sVPmela46B:
           type: utility
           activation:
             type: action
@@ -578,15 +577,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -597,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -614,7 +615,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: irZfw7sVPmela46B
       enchant: {}
       prerequisites:
         level: null
@@ -628,22 +637,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655951
+      systemVersion: 6.0.0
+      createdTime: 1781883609792
+      modifiedTime: 1781883615270
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.Wr6BSqrXAJZu28sp'
   - _id: thSJXAlyfHGmVWN5
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Manticore attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -706,7 +717,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -715,8 +726,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        O8z7Cs8P9xFyz0sR:
           type: attack
           activation:
             type: action
@@ -731,10 +741,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -751,7 +762,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -764,24 +776,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: O8z7Cs8P9xFyz0sR
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -791,22 +816,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551422
+      systemVersion: 6.0.0
+      createdTime: 1781883502981
+      modifiedTime: 1781883516066
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.thSJXAlyfHGmVWN5'
   - _id: 4WFf0M2tCPwiLPxG
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-canine-brown-grey.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Manticore attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -869,7 +896,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -878,8 +905,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        eXwDAp6nwgR8UEU6:
           type: attack
           activation:
             type: action
@@ -894,10 +920,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -914,7 +941,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -927,24 +955,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: eXwDAp6nwgR8UEU6
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -954,11 +995,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551422
+      systemVersion: 6.0.0
+      createdTime: 1781883526269
+      modifiedTime: 1781883540276
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.4WFf0M2tCPwiLPxG'
@@ -969,7 +1010,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Manticore attacks with its Tail Spike.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -995,10 +1038,8 @@ items:
         units: ft
         reach: null
       uses:
-        max: '24'
-        recovery:
-          - period: lr
-            type: recoverAll
+        max: ''
+        recovery: []
         spent: 0
       damage:
         versatile:
@@ -1034,7 +1075,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1043,8 +1084,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        j8OnWkTeN78TCLtw:
           type: attack
           activation:
             type: action
@@ -1054,21 +1094,20 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: 7GyypGVW1RhhbcqC
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1085,7 +1124,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1105,17 +1145,30 @@ items:
             flat: false
             type:
               value: ranged
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: j8OnWkTeN78TCLtw
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tail-spike
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1125,11 +1178,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385393
+      systemVersion: 6.0.0
+      createdTime: 1781883549800
+      modifiedTime: 1781883584392
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MAoCGF5VkQwhmgvI.bYJjJPKhiDOTMlmS'
@@ -1141,7 +1194,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171225157

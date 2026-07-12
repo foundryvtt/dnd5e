@@ -464,9 +464,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -481,7 +478,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -501,20 +498,22 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: FpoS5qzlgE3YPZGN
+  - _id: TyOSKhiJLPU0Xw5P
     name: Incorporeal Movement
     type: feat
-    img: icons/skills/movement/feet-winged-boots-brown.webp
+    img: icons/creatures/magical/spirit-undead-ghost-purple.webp
     system:
       description:
         value: >-
-          <p>The specter can move through other creatures and objects as if they
-          were difficult terrain.</p><p>It takes 5 (1d10) force damage if it
-          ends its turn inside an object.</p>
+          <p>The [[lookup @name lowercase]]{monster} can move through other
+          creatures and objects as if they were &amp;reference[difficult
+          terrain].</p><p>It takes [[/damage average]] damage if it ends its
+          turn inside an object.</p>
         chat: >-
-          <p>The specter can move through other creatures and objects as if they
-          were difficult terrain.</p>
+          <p>The [[lookup @name]]{monster} can move through other creatures and
+          objects as if they were &amp;reference[difficult terrain].</p>
       source:
         custom: ''
         book: ''
@@ -527,18 +526,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EMsG8gJaIafZVjS5:
           type: damage
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} ends their turn
+              inside an object.
             override: false
           consumption:
             targets: []
@@ -548,15 +549,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -567,10 +569,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -584,55 +587,163 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 10
                 bonus: ''
                 types:
                   - force
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: EMsG8gJaIafZVjS5
+          name: End Turn in Object Damage
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: incorporeal-movement
-    effects: []
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Incorporeal Movement
+        img: icons/creatures/magical/spirit-undead-ghost-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.ET4PEVEiNJLU4f7c.Item.idILnIUj76QH9v8w
+        type: base
+        _id: T4RyC3NMej3wwUfZ
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You can move through other creatures and objects as if they were
+          &amp;reference[difficult terrain].</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses:
+          - ethereal
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781832717130
+          modifiedTime: 1781832717130
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!PuPo4H4Dcxigf0fY.TyOSKhiJLPU0Xw5P.T4RyC3NMej3wwUfZ
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
-      duplicateSource: null
-      coreVersion: '13.351'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.ET4PEVEiNJLU4f7c.Item.idILnIUj76QH9v8w
+      duplicateSource: Item.zK1tAqzwB9vwiK6w
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828300127
+      systemVersion: 6.0.0
+      createdTime: 1781832717130
+      modifiedTime: 1781832930000
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!PuPo4H4Dcxigf0fY.FpoS5qzlgE3YPZGN'
-  - _id: pxm7rAqI5ackW8Oy
+    _key: '!actors.items!PuPo4H4Dcxigf0fY.TyOSKhiJLPU0Xw5P'
+  - _id: 3WwJUKXEtMQkARMv
+    name: Sunlight Sensitivity
+    type: feat
+    img: icons/magic/light/beam-rays-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>While in sunlight, the [[lookup @name lowercase]]{monster} has
+          disadvantage on attack rolls, as well as on Wisdom (Perception) checks
+          that rely on sight.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: sunlight-sensitivity
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 400000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.Up2YzkDn0uBKQj6K
+      duplicateSource: Item.O2X2jlQHc9cUVKbR
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781832722098
+      modifiedTime: 1781832723119
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!PuPo4H4Dcxigf0fY.3WwJUKXEtMQkARMv'
+  - _id: 3pysq4SciAXLDhuY
     name: Life Drain
     type: weapon
-    img: icons/magic/unholy/strike-hand-glow-pink.webp
+    img: icons/magic/unholy/hand-claw-fire-blue.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           succeed on a [[/save]] saving throw or its hit point maximum is
           reduced by an amount equal to the damage taken. This reduction lasts
-          until the creature finishes a long rest. The target dies if this
-          effect reduces its hit point maximum to 0.</p>
+          until the target finishes a long rest. The target dies if this effect
+          reduces its hit point maximum to 0.</p>
         chat: >-
-          <p>The Specter attacks with its Life Drain.The target must make a
-          <strong>Constitution</strong> saving throw. </p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -648,7 +759,6 @@ items:
         value: 0
         denomination: gp
       attunement: ''
-      equipped: true
       rarity: ''
       identified: true
       cover: null
@@ -695,17 +805,15 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
         value: natural
         baseItem: ''
       container: null
-      crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        rG9UKvy92fPe5zuT:
           type: attack
           activation:
             type: action
@@ -720,6 +828,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -728,7 +837,8 @@ items:
             override: false
           effects: []
           range:
-            units: ''
+            value: '5'
+            units: ft
             special: ''
             override: false
           target:
@@ -739,7 +849,84 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: dex
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: rG9UKvy92fPe5zuT
+          name: ''
+        fgOnIEkkTcT5MCDK:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a creature is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: true
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -751,154 +938,65 @@ items:
             spent: 0
             max: ''
             recovery: []
-          attack:
-            ability: none
-            bonus: '@abilities.dex.mod'
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: spell
           damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
+            onSave: none
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '@scaling'
+                number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - maximum
+                scaling:
+                  mode: ''
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
-              calculation: spellcasting
+              calculation: ''
               formula: '10'
-          sort: 0
-      attuned: false
+            visible: true
+            bonus: ''
+          sort: 300000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: fgOnIEkkTcT5MCDK
+          name: Drain Maximum Hit Point Save
       ammunition: {}
-      magicalBonus: null
       identifier: life-drain
       mastery: ''
+      crew:
+        value: []
+      attuned: false
+      equipped: true
     effects: []
     folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745174819557
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!PuPo4H4Dcxigf0fY.pxm7rAqI5ackW8Oy'
-  - _id: 1FbU02rRuNLnEDXC
-    name: Sunlight Sensitivity
-    type: feat
-    img: icons/magic/time/day-night-sunset-sunrise.webp
-    system:
-      description:
-        value: >-
-          <p>While in sunlight, the specter has disadvantage on attack rolls, as
-          well as on Wisdom (Perception) checks that rely on sight.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: sunlight-sensitivity
-    effects: []
-    folder: null
-    sort: 0
+    sort: 103125
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
-      duplicateSource: null
-      coreVersion: '13.351'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.ET4PEVEiNJLU4f7c.Item.xZPFtf2vCYraWXVe
+      duplicateSource: Item.KdViBogPBxhFmwl7
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828308594
+      systemVersion: 6.0.0
+      createdTime: 1781832733948
+      modifiedTime: 1781832832219
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!PuPo4H4Dcxigf0fY.1FbU02rRuNLnEDXC'
+    _key: '!actors.items!PuPo4H4Dcxigf0fY.3pysq4SciAXLDhuY'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -907,7 +1005,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171230022

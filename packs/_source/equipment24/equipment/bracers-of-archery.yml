@@ -65,25 +65,27 @@ effects:
     img: icons/weapons/bows/shortbow-recurve-yellow-blue.webp
     _id: qoOJIw0gTdN8DBKB
     type: base
-    system: {}
-    changes:
-      - key: system.traits.weaponProf.value
-        mode: 2
-        value: longbow
-        priority: null
-      - key: system.traits.weaponProf.value
-        mode: 2
-        value: shortbow
-        priority: null
+    system:
+      changes:
+        - key: system.traits.weaponProf.value
+          value: longbow
+          priority: null
+          type: add
+          phase: initial
+          _id: 9EslHgcF3rr90qgA
+        - key: system.traits.weaponProf.value
+          value: shortbow
+          priority: null
+          type: add
+          phase: initial
+          _id: 5SHSMrXpRu1r5if6
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -94,33 +96,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1728922300626
-      modifiedTime: 1728922664705
+      modifiedTime: 1783544094035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgBracersOfArch.qoOJIw0gTdN8DBKB'
   - name: 'Bonus Damage: Bows'
     img: icons/weapons/ammunition/arrow-broadhead-glowing-orange.webp
     _id: PSGGfFEy4CjBVzyX
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.rwak.damage
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.rwak.damage
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: iPZFiWrnKGDTq8dv
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>you gain a +2 bonus to damage rolls on ranged attacks made with a
       Longbow or Shortbow</p>
@@ -133,13 +138,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1728922797477
-      modifiedTime: 1728922955677
+      modifiedTime: 1783544094035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgBracersOfArch.PSGGfFEy4CjBVzyX'
 flags:
   dnd5e:
@@ -148,11 +156,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544094035
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 4400000

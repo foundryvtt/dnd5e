@@ -66,25 +66,27 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/constitution.svg
     _id: hOigjfupZtZR2cy9
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.con.value
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.abilities.con.value
-        mode: 3
-        value: '20'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.con.value
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: mmyzH2v0pjzeqLpn
+        - key: system.abilities.con.value
+          value: 20
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: yhf8n3exnutNFeez
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your Constitution increases by 2, to a maximum of 20, while this pink
       rhomboid orbits your head.</p>
@@ -100,22 +102,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1730481137248
-      modifiedTime: 1759178730379
+      modifiedTime: 1783544095651
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgFortitudeIoun.hOigjfupZtZR2cy9'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712699996
+  modifiedTime: 1783544095651
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 28125

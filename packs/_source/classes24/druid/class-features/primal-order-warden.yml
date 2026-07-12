@@ -36,28 +36,29 @@ effects:
   - name: 'Primal Order: Warden'
     origin: Item.phbPrimalOrderWa
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/items/feature.svg
     _id: j6MsESItx2TEvDju
     type: base
-    system: {}
-    changes:
-      - key: system.traits.armorProf.value
-        mode: 2
-        value: '"med"'
-        priority: null
-      - key: system.traits.weaponProf.value
-        mode: 2
-        value: '"mar"'
-        priority: null
+    system:
+      changes:
+        - key: system.traits.armorProf.value
+          value: med
+          priority: null
+          type: add
+          phase: initial
+          _id: KTtmGiuIfQLEOGwZ
+        - key: system.traits.weaponProf.value
+          value: mar
+          priority: null
+          type: add
+          phase: initial
+          _id: paguP5acvLVhEK3i
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -67,13 +68,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde.ActiveEffect.FZ2cZXwJx1f7bUxQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544100991
+      modifiedTime: 1783544100991
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbPrimalOrderWa.j6MsESItx2TEvDju'
 folder: EXYmwRGoNyMbByN1
 flags:
@@ -83,11 +87,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866366918
-  modifiedTime: 1745256759605
+  modifiedTime: 1783544100991
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1050000

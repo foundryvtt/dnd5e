@@ -37,6 +37,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         actions: {
           placeSummons: SummonActivity.#placeSummons
         },
+        applyEffectsInChat: false,
         dialog: SummonUsageDialog
       }
     }, { inplace: false })
@@ -71,14 +72,6 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     config.summons.creatureSize ??= this.creatureSizes.first() ?? null;
     config.summons.creatureType ??= this.creatureTypes.first() ?? null;
     return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _finalizeMessageConfig(usageConfig, messageConfig, results) {
-    super._finalizeMessageConfig(usageConfig, messageConfig, results);
-    delete messageConfig.data.system?.effects;
   }
 
   /* -------------------------------------------- */
@@ -161,10 +154,6 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     const tokensData = [];
-    const sheet = this.actor?.sheet;
-    const { windowId } = (sheet?.parent ?? sheet)?.window ?? {};
-    const minimize = !windowId && !sheet?._minimized;
-    if ( minimize ) await sheet?.minimize();
     try {
       // Figure out where to place the summons
       const placements = await this.getPlacement(actor.prototypeToken, profile, options);
@@ -206,8 +195,12 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
         tokensData.push(tokenData);
       }
-    } finally {
-      if ( minimize ) sheet?.maximize();
+    } catch(err) {
+      Hooks.onError("SummonActivity#placeSummons", err, {
+        msg: _loc("DND5E.SUMMON.Warning.PlaceTokens"),
+        log: "error",
+        notify: "error"
+      });
     }
 
     const createdTokens = await canvas.scene.createEmbeddedDocuments("Token", tokensData, {
@@ -480,7 +473,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     }
 
     // Add applied effects
-    actorUpdates.effects.push(...this.applicableEffects.map(e => e.toObject()));
+    actorUpdates.effects.push(...(await this.getApplicableEffects()).map(e => e.toObject()));
 
     return { actorUpdates, tokenUpdates };
   }

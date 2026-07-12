@@ -59,21 +59,21 @@ effects:
     img: icons/magic/life/heart-shadow-red.webp
     _id: ObtXWapsou2jYoip
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.con.value
-        mode: 4
-        value: '19'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.con.value
+          value: 19
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 09a3g66WpXITcagZ
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -84,13 +84,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.4
+      systemVersion: 6.0.0
       createdTime: 1728433127976
-      modifiedTime: 1728433290062
+      modifiedTime: 1783544093339
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAmuletOfHealt.ObtXWapsou2jYoip'
 flags:
   dnd5e:
@@ -99,11 +102,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544093339
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1500000

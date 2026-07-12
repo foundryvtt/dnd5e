@@ -1,0 +1,9 @@
+<div class="item-detail effect-value {{#unless ctx.value}}empty{{/unless}}" data-column-id="value">
+    {{#if ctx.value}}
+    {{#if (gt ctx.value.length 15)}}
+    <i class="fa-solid fa-database" data-tooltip aria-label="{{ ctx.value }}"></i>
+    {{else}}
+    <span class="condensed">{{ ctx.value }}</span>
+    {{/if}}
+    {{/if}}
+</div>

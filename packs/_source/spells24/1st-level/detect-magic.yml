@@ -108,20 +108,18 @@ effects:
   - name: Detect Magic
     origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/symbols/runes-carved-stone-green.webp
     _id: BHw91lQmVgdx39WZ
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -131,13 +129,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1727465727470
+      systemVersion: 6.0.0
+      createdTime: 1783543974604
+      modifiedTime: 1783543974604
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplDetectMagi.BHw91lQmVgdx39WZ'
 folder: pBaAAtXBCq9FVEnL
 sort: 4100000
@@ -150,11 +151,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425949563
-  modifiedTime: 1745256790293
+  modifiedTime: 1783543974604
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDetectMagi'

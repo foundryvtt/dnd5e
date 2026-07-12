@@ -29,38 +29,45 @@ system:
       don't trigger the glyph, such as those who say a certain
       password.</p><p>When you inscribe the glyph, choose one of the options
       below for its effect. Once triggered, the glyph glows, filling a
-      60-foot-radius sphere with dim light for 10 minutes, after which time the
-      spell ends. Each creature in the sphere when the glyph activates is
-      targeted by its effect, as is a creature that enters the Sphere for the
-      first time on a turn or ends its turn
-      there.</p><ul><li><strong>Death.</strong> Each target must make a
+      60-foot-radius sphere with &amp;reference[dim light] for 10 minutes, after
+      which time the spell ends. Each creature in the sphere when the glyph
+      activates is targeted by its effect, as is a creature that enters the
+      sphere for the first time on a turn or ends its turn
+      there.</p><ul><li><p><strong>Death.</strong> Each target must make a
       Constitution saving throw, taking 10d10 necrotic damage on a failed save,
       or half as much damage on a successful
-      save.</li><li><strong>Discord.</strong> Each target must make a
+      save.</p></li><li><p><strong>Discord.</strong> Each target must make a
       Constitution saving throw. On a failed save, a target bickers and argues
-      with other creatures for 1 minute. During this time, it is incapable of
-      meaningful communication and has disadvantage on Attack rolls and Ability
-      Checks.</li><li><strong>Fear.</strong> Each target must make a Wisdom
-      saving throw and becomes &amp;Reference[Frightened] for 1 minute on a
-      failed save. While Frightened, the target drops whatever it is holding and
-      must move at least 30 feet away from the glyph on each of its turns, if
-      able.</li><li><strong>Hopelessness.</strong> Each target must make a
-      Charisma saving throw. On a failed save, the target is overwhelmed with
-      despair for 1 minute. During this time, it can't attack or target any
-      creature with harmful Abilities, Spells, or other magical
-      Effects.</li><li><strong>Insanity.</strong> Each target must make an
-      Intelligence saving throw. On a failed save, the target is driven insane
-      for 1 minute. An insane creature can't take Actions, can't understand what
-      other creatures say, can't read, and speaks only in gibberish. The DM
-      controls its Movement, which is erratic.</li><li><strong>Pain.</strong>
-      Each target must make a Constitution saving throw and becomes
-      &amp;Reference[Incapacitated] with excruciating pain for 1 minute on a
-      failed save.</li><li><strong>Sleep.</strong> Each target must make a
-      Wisdom saving throw and falls &amp;Reference[Unconscious] for 10 minutes
-      on a failed save. A creature awakens if it takes damage or if someone uses
-      an action to shake or slap it awake.</li><li><strong>Stunning.</strong>
-      Each target must make a Wisdom saving throw and becomes
-      &amp;Reference[Stunned] for 1 minute on a failed save.</li></ul>
+      with other creatures for [[lookup @labels.duration
+      activity=aQ5gGxhnROMnbUYo]]. During this time, it is incapable of
+      meaningful communication and has disadvantage on attack rolls and ability
+      checks.</p></li><li><p><strong>Fear.</strong> Each target must make a
+      Wisdom saving throw and becomes &amp;Reference[Frightened] for [[lookup
+      @labels.duration activity=JpTNQO6B5su2lz7Q]] on a failed save. While
+      Frightened, the target drops whatever it is holding and must move at least
+      30 feet away from the glyph on each of its turns, if
+      able.</p></li><li><p><strong>Hopelessness.</strong> Each target must make
+      a Charisma saving throw. On a failed save, the target is overwhelmed with
+      despair for [[lookup @labels.duration activity=EbNUoZmq2qyEIE75]]. During
+      this time, it can't attack or target any creature with harmful abilities,
+      spells, or other magical
+      effects.</p></li><li><p><strong>Insanity.</strong> Each target must make
+      an Intelligence saving throw. On a failed save, the target is driven
+      insane for [[lookup @labels.duration activity=l4wdQCsSrKaSzEnP]]. An
+      insane creature can't take actions, can't understand what other creatures
+      say, can't read, and speaks only in gibberish. The DM controls its
+      movement, which is erratic.</p></li><li><p><strong>Pain.</strong> Each
+      target must make a Constitution saving throw and becomes
+      &amp;Reference[Incapacitated] with excruciating pain for [[lookup
+      @labels.duration activity=ileq899HQ5YZKEif]] on a failed
+      save.</p></li><li><p><strong>Sleep.</strong> Each target must make a
+      Wisdom saving throw and falls &amp;Reference[Unconscious] for [[lookup
+      @labels.duration activity=S48Cy0ZHIKduGUUD]] on a failed save. A creature
+      awakens if it takes damage or if someone uses an action to shake or slap
+      it awake.</p></li><li><p><strong>Stunning.</strong> Each target must make
+      a Wisdom saving throw and becomes &amp;Reference[Stunned] for [[lookup
+      @labels.duration activity=SbxsIIBtx25GNijc]] on a failed
+      save.</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -78,11 +85,14 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -104,227 +114,1030 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    BaJXzG5JyqKZvaYY:
+      type: utility
+      name: Inscribe Glyph
+      _id: BaJXzG5JyqKZvaYY
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: ydHIFthrNnlBuOyx
-          onSave: false
-        - _id: pSwauN9UZrF8WPMt
-          onSave: false
-        - _id: yNP9RLi4ym3s5Hrl
-          onSave: false
-        - _id: J8f0JYFInPaKpnMC
-          onSave: false
+      effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    5RxmzaH8a0F2pe0W:
+      type: save
+      name: 'Glyph Effect: Death'
+      _id: 5RxmzaH8a0F2pe0W
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Death</h4><p>Each target must make a Constitution saving
+          throw, taking 10d10 necrotic damage on a failed save, or half as much
+          damage on a successful save.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: sphere
+          size: '60'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
         onSave: half
         parts:
-          - number: 10
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
             denomination: 10
             bonus: ''
             types:
               - necrotic
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
+    aQ5gGxhnROMnbUYo:
+      type: save
+      name: 'Glyph Effect: Discord'
+      img: ''
+      sort: 300000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Discord</h4><p>Each target must make a Constitution
+          saving throw. On a failed save, a target bickers and argues with other
+          creatures for [[lookup @labels.duration activity=aQ5gGxhnROMnbUYo]].
+          During this time, it is incapable of meaningful communication and has
+          disadvantage on attack rolls and ability checks.</p>
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: wBljD0GOI2rgOZgm
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: aQ5gGxhnROMnbUYo
+    JpTNQO6B5su2lz7Q:
+      type: save
+      name: 'Glyph Effect: Fear'
+      img: ''
+      sort: 400000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Fear</h4><p>Each target must make a Wisdom saving throw
+          and becomes &amp;Reference[Frightened] for [[lookup @labels.duration
+          activity=JpTNQO6B5su2lz7Q]] on a failed save. While Frightened, the
+          target drops whatever it is holding and must move at least 30 feet
+          away from the glyph on each of its turns, if able.</p>
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: 22oHewgna1ZehSSx
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: JpTNQO6B5su2lz7Q
+    EbNUoZmq2qyEIE75:
+      type: save
+      name: 'Glyph Effect: Hopelessness'
+      img: ''
+      sort: 500000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Hopelessness</h4><p>Each target must make a Charisma
+          saving throw. On a failed save, the target is overwhelmed with despair
+          for [[lookup @labels.duration activity=EbNUoZmq2qyEIE75]]. During this
+          time, it can't attack or target any creature with harmful abilities,
+          spells, or other magical effects.</p>
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: 1jUvUPVKQ2x66y0d
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: EbNUoZmq2qyEIE75
+    l4wdQCsSrKaSzEnP:
+      type: save
+      name: 'Glyph Effect: Insanity'
+      img: ''
+      sort: 600000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Insanity</h4><p>Each target must make an Intelligence
+          saving throw. On a failed save, the target is driven insane for
+          [[lookup @labels.duration activity=l4wdQCsSrKaSzEnP]]. An insane
+          creature can't take actions, can't understand what other creatures
+          say, can't read, and speaks only in gibberish. The DM controls its
+          movement, which is erratic.</p>
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: Cvg6HrXoZJe9uWQQ
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - int
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: l4wdQCsSrKaSzEnP
+    ileq899HQ5YZKEif:
+      type: save
+      name: 'Glyph Effect: Pain'
+      img: ''
+      sort: 700000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Pain</h4><p>Each target must make a Constitution saving
+          throw and becomes &amp;Reference[Incapacitated] with excruciating pain
+          for [[lookup @labels.duration activity=ileq899HQ5YZKEif]] on a failed
+          save.</p>
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: fH66SK1HAboC2B5Q
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: ileq899HQ5YZKEif
+    S48Cy0ZHIKduGUUD:
+      type: save
+      name: 'Glyph Effect: Sleep'
+      img: ''
+      sort: 800000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Sleep</h4><p>Each target must make a Wisdom saving throw
+          and falls &amp;Reference[Unconscious] for [[lookup @labels.duration
+          activity=S48Cy0ZHIKduGUUD]] on a failed save. A creature awakens if it
+          takes damage or if someone uses an action to shake or slap it
+          awake.</p>
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '10'
+      effects:
+        - _id: S9Jw89F2ZmaC2lsw
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: S48Cy0ZHIKduGUUD
+    SbxsIIBtx25GNijc:
+      type: save
+      name: 'Glyph Effect: Stunning'
+      img: ''
+      sort: 900000
+      activation:
+        type: special
+        override: true
+        condition: When the glyph is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Once triggered, the glyph glows, filling a 60-foot-radius sphere
+          with &amp;reference[dim light] for 10 minutes, after which time the
+          spell ends. Each creature in the sphere when the glyph activates is
+          targeted by its effect, as is a creature that enters the sphere for
+          the first time on a turn or ends its turn
+          there.</p><h4>Stunning</h4><p>Each target must make a Wisdom saving
+          throw and becomes &amp;Reference[Stunned] for [[lookup
+          @labels.duration activity=SbxsIIBtx25GNijc]] on a failed save.</p>
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: zeCgJ2WL6LphCbJd
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '60'
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: SbxsIIBtx25GNijc
   identifier: symbol
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-blue.webp
+img: icons/magic/symbols/rune-sigil-horned-white-purple.webp
 effects:
-  - name: Symbol (fear)
+  - name: Discord
+    img: icons/skills/social/intimidation-impressing.webp
     origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
-    duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
-    _id: ydHIFthrNnlBuOyx
-    changes: []
-    description: >-
-      <p>The target becomes &amp;Reference[Frightened] for 1 minute on a failed
-      save. While Frightened, the target drops whatever it is holding and must
-      move at least 30 feet away from the glyph on each of its turns, if
-      able.</p>
     transfer: false
+    _id: wBljD0GOI2rgOZgm
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.con.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.int.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.wis.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.cha.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You bicker and argue with other creatures for the duration. During this
+      time, you are incapable of meaningful communication and have disadvantage
+      on attack rolls and ability checks.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781467299793
+      modifiedTime: 1783215276690
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!B2kbmgbA2WQR00kx.wBljD0GOI2rgOZgm'
+  - name: Fear
+    img: icons/creatures/magical/spirit-poison-smoke-green.webp
+    origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    transfer: false
+    _id: 22oHewgna1ZehSSx
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;Reference[Frightened apply=false] for the duration. While
+      frightened, you drop whatever you are holding and must move at least 30
+      feet away from the glyph on each of your turns, if able.</p>
+    tint: '#ffffff'
     statuses:
       - frightened
-    flags: {}
-    tint: '#ffffff'
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781467400011
+      modifiedTime: 1783215282034
+      lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
-    img: icons/magic/symbols/runes-star-pentagon-blue.webp
-    type: base
-    system: {}
-    sort: 0
-    _key: '!items.effects!B2kbmgbA2WQR00kx.ydHIFthrNnlBuOyx'
-  - name: Symbol (pain)
+    _key: '!items.effects!B2kbmgbA2WQR00kx.22oHewgna1ZehSSx'
+  - name: Hopelessness
+    img: icons/magic/control/fear-fright-white.webp
     origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
-    duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
-    _id: pSwauN9UZrF8WPMt
-    changes: []
-    description: >-
-      <p>The target becomes Incapacitated with excruciating pain for 1
-      minute.</p>
     transfer: false
+    _id: 1jUvUPVKQ2x66y0d
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are overwhelmed with despair for the duration. During this time,
+      you can't attack or target any creature with harmful abilities, spells, or
+      other magical effects.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781467499122
+      modifiedTime: 1783215286585
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!B2kbmgbA2WQR00kx.1jUvUPVKQ2x66y0d'
+  - name: Insanity
+    img: icons/magic/control/fear-fright-monster-grin-red-orange.webp
+    origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    transfer: false
+    _id: Cvg6HrXoZJe9uWQQ
+    type: base
+    system:
+      changes:
+        - key: system.traits.languages.custom
+          type: add
+          value: ;Can Speak only Gibberish
+          phase: initial
+          priority: null
+        - key: system.traits.languages.custom
+          type: add
+          value: ;Can't Read
+          phase: initial
+          priority: null
+        - key: system.traits.languages.custom
+          type: add
+          value: ;Can't Understand Langauge
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been driven insane for the duration. You creature can't take
+      actions, can't understand what other creatures say, can't read, and speaks
+      only in gibberish. The DM controls your movement, which is erratic.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781467864565
+      modifiedTime: 1783215291274
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!B2kbmgbA2WQR00kx.Cvg6HrXoZJe9uWQQ'
+  - name: Pain
+    img: icons/skills/wounds/bone-broken-marrow-red.webp
+    origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    transfer: false
+    _id: fH66SK1HAboC2B5Q
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[incapacitated apply=false] with excruciating
+      pain for the duration.</p>
+    tint: '#ffffff'
     statuses:
       - incapacitated
-    flags: {}
-    tint: '#ffffff'
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781467986739
+      modifiedTime: 1783215298253
+      lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
-    img: icons/magic/symbols/runes-star-pentagon-blue.webp
-    type: base
-    system: {}
-    sort: 0
-    _key: '!items.effects!B2kbmgbA2WQR00kx.pSwauN9UZrF8WPMt'
-  - name: Symbol (sleep)
+    _key: '!items.effects!B2kbmgbA2WQR00kx.fH66SK1HAboC2B5Q'
+  - name: Sleep
+    img: icons/magic/control/sleep-bubble-purple.webp
     origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
+    transfer: false
+    _id: S9Jw89F2ZmaC2lsw
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
-    _id: yNP9RLi4ym3s5Hrl
-    changes: []
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
     description: >-
-      <p>The target falls Unconscious for 10 minutes. A creature awakens if it
-      takes damage or if someone uses an action to shake or slap it awake.</p>
-    transfer: false
-    statuses:
-      - unconscious
-      - incapacitated
-    flags: {}
+      <p>You fall &amp;reference[unconcious apply=false] for the duration. You
+      awaken if you take damage or if someone uses an action to shake or slap
+      you awake.</p>
     tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781468070813
+      modifiedTime: 1783215305160
+      lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
-    img: icons/magic/symbols/runes-star-pentagon-blue.webp
-    type: base
-    system: {}
-    sort: 0
-    _key: '!items.effects!B2kbmgbA2WQR00kx.yNP9RLi4ym3s5Hrl'
-  - name: Symbol (stunning)
+    _key: '!items.effects!B2kbmgbA2WQR00kx.S9Jw89F2ZmaC2lsw'
+  - name: Stunned
+    img: icons/magic/air/wind-vortex-swirl-blue.webp
     origin: Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx
-    duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
-    _id: J8f0JYFInPaKpnMC
-    changes: []
-    description: <p>The target becomes Stunned for 1 minute.</p>
     transfer: false
+    _id: zeCgJ2WL6LphCbJd
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: <p>You are &amp;reference[stunned apply=false] for the duration.</p>
+    tint: '#ffffff'
     statuses:
       - stunned
-      - incapacitated
-    flags: {}
-    tint: '#ffffff'
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781468174069
+      modifiedTime: 1783215312959
+      lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
       exportSource: null
-    img: icons/magic/symbols/runes-star-pentagon-blue.webp
-    type: base
-    system: {}
-    sort: 0
-    _key: '!items.effects!B2kbmgbA2WQR00kx.J8f0JYFInPaKpnMC'
+    _key: '!items.effects!B2kbmgbA2WQR00kx.zeCgJ2WL6LphCbJd'
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350335
-  modifiedTime: 1725992717934
+  modifiedTime: 1783215254752
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!B2kbmgbA2WQR00kx'

@@ -23,36 +23,36 @@ system:
     value: race
     subtype: ''
   requirements: Halfling
-  properties: []
+  properties:
+    - trait
   activities: {}
   enchant: {}
   prerequisites:
     level: null
   identifier: halfling-nimbleness
 flags: {}
-img: icons/skills/movement/feet-winged-boots-brown.webp
+img: icons/skills/movement/feet-winged-sandals-tan.webp
 effects:
   - name: Halfling Nimbleness
-    img: icons/skills/movement/feet-winged-boots-brown.webp
+    img: icons/skills/movement/feet-winged-sandals-tan.webp
     origin: Compendium.dnd5e.races.Item.PqxZgcJzp1VVgP8t
     _id: 8oJGOvksocvoVzVE
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd5e.halflingNimbleness
-        mode: 5
-        value: 'true'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd5e.halflingNimbleness
+          value: true
+          priority: null
+          type: override
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You can move through the space of any creature that is of a size larger
+      than yours.</p>
     tint: '#ffffff'
     transfer: true
     statuses: []
@@ -65,22 +65,25 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.2.0
       createdTime: 1762280439878
-      modifiedTime: 1762280447210
+      modifiedTime: 1781473213709
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!PqxZgcJzp1VVgP8t.8oJGOvksocvoVzVE'
 folder: kbtbKofcv13crhke
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037392889
-  modifiedTime: 1725992703480
+  modifiedTime: 1781473074122
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!PqxZgcJzp1VVgP8t'

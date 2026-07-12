@@ -93,8 +93,6 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( this.options.types?.length === 0 ) throw new Error("The array of sub-types to restrict to must not be empty");
 
       for ( const type of TYPES ) {
-        // TODO: When `standard` AE type replaces `base`, remove this check for active effect
-        // See https://github.com/foundryvtt/dnd5e/pull/5941
         if ( (this.documentName !== "ActiveEffect") && (type === CONST.BASE_DOCUMENT_TYPE) ) continue;
         if ( this.options.types && !this.options.types.includes(type) ) continue;
         const typeData = { selected: type === defaultType, type };
@@ -121,7 +119,9 @@ export default class CreateDocumentDialog extends Dialog5e {
       }
 
       // Apply default name of documents.
-      context.defaultName = this.documentType.defaultName({ type: defaultType, pack, parent });
+      context.defaultName = this.documentType.defaultName?.({ type: defaultType, pack, parent });
+    } else if ( (TYPES?.length === 1) && !this.options.createData.type ) {
+      this.options.createData.type = defaultType ?? TYPES[0];
     }
 
     return context;
@@ -144,7 +144,7 @@ export default class CreateDocumentDialog extends Dialog5e {
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
 
-    if ( event.target.name === "type" ) {
+    if ( (event.target.name === "type") && this.documentType.defaultName ) {
       const name = this.element.querySelector('[name="name"]');
       const { pack, parent } = this.options.createOptions;
       name.placeholder = this.documentType.defaultName({ type: event.target.value, pack, parent });
@@ -185,7 +185,8 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @param {DatabaseCreateOperation} [createOptions={}]          Document creation options.
    * @param {object} [dialogOptions={}]                           Options forwarded to dialog.
    * @param {object} [dialogOptions.ok={}]                        Options for the OK button.
-   * @returns {Promise<Document>}
+   * @param {DocumentSheet} [dialogOptions.sheet]                 Document sheet to display as detached child.
+   * @returns {Promise<Document|PseudoDocument|object|void>}
    */
   static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, sheet, ...config }={}) {
     const label = _loc(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
@@ -207,17 +208,21 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( !dialog.submitted ) return;
       const { createData, createOptions } = dialog.options;
       if ( !createData.folder ) delete createData.folder;
-      if ( !createData.name?.trim() ) createData.name = documentType.defaultName?.({
-        type: createData.type, parent: createOptions.parent, pack: createOptions.pack
-      });
       // TODO: Temp patch until advancement data is migrated (https://github.com/foundryvtt/dnd5e/issues/5782)
-      else if ( documentType.documentName === "Advancement" ) createData.title = createData.name;
+      if ( documentType.documentName === "Advancement" ) createData.title = createData.name;
+      else if ( (documentType.documentName !== "Activity") && !createData.name?.trim() ) {
+        createData.name = documentType.defaultName?.({
+          type: createData.type, parent: createOptions.parent, pack: createOptions.pack
+        });
+      }
 
       createOptions.renderSheet ??= true;
       if ( foundry.utils.isSubclass(documentType, foundry.abstract.Document) ) {
         resolve(documentType.create(createData, createOptions));
-      } else {
+      } else if ( createOptions.parent?.[`create${documentType.documentName}`] ) {
         resolve(createOptions.parent[`create${documentType.documentName}`](createData.type, createData, createOptions));
+      } else {
+        resolve(createData);
       }
     });
     if ( sheet ) sheet._renderChild(dialog);

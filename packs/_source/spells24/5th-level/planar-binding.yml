@@ -118,20 +118,18 @@ effects:
   - name: Bound to Service
     origin: Compendium.dnd5e.spells24.Item.phbsplPlanarBind
     duration:
-      rounds: null
-      startTime: null
-      seconds: 86400
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
     _id: L72Zv8oIomBPthq7
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>A bound creature must follow your commands to the best of its ability.
       If the creature is Hostile, it strives to twist your commands to achieve
@@ -143,13 +141,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976303
+      modifiedTime: 1783543976303
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplPlanarBind.L72Zv8oIomBPthq7'
 folder: beZ8MTpWY2cMEUlp
 sort: 800000
@@ -162,11 +163,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425966021
-  modifiedTime: 1745256796822
+  modifiedTime: 1783543976303
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPlanarBind'

@@ -105,40 +105,48 @@ effects:
   - name: Bane
     origin: Compendium.dnd5e.spells24.Item.phbsplBane000000
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/voodoo-doll-pain-damage-tan.webp
     _id: 7g3RcuidZG1x5Mvm
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '-1d4'
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: '-1d4'
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '-1d4'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '-1d4'
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: '-1d4'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: '-1d4'
+          priority: null
+          type: add
+          phase: initial
+          _id: HGJGEGBgAgEoUXKz
+        - key: system.bonuses.mwak.attack
+          value: '-1d4'
+          priority: null
+          type: add
+          phase: initial
+          _id: Bvix6pgzPyl99JTF
+        - key: system.bonuses.msak.attack
+          value: '-1d4'
+          priority: null
+          type: add
+          phase: initial
+          _id: XOx5gLg37bobxYmB
+        - key: system.bonuses.rsak.attack
+          value: '-1d4'
+          priority: null
+          type: add
+          phase: initial
+          _id: NWPVKg42J9Fph05g
+        - key: system.bonuses.rwak.attack
+          value: '-1d4'
+          priority: null
+          type: add
+          phase: initial
+          _id: OvjCHrsvUQr2SGOj
+      magical: true
     description: >-
       <p>Whenever a target makes an attack roll or a saving throw before the
       spell ends, the target must subtract 1d4 from the attack roll or save.</p>
@@ -149,13 +157,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974030
+      modifiedTime: 1783543974030
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplBane000000.7g3RcuidZG1x5Mvm'
 folder: pBaAAtXBCq9FVEnL
 sort: 5300000
@@ -168,11 +179,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425942415
-  modifiedTime: 1745256786310
+  modifiedTime: 1783543974030
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBane000000'

@@ -12,7 +12,6 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @import { ActivitiesTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
-
 /**
  * The data definition for Facility items.
  * @extends {ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & FacilityItemSystemData>}

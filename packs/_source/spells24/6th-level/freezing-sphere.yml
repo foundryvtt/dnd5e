@@ -307,17 +307,15 @@ effects:
     transfer: false
     _id: JC3QmmHnM4YKj9ek
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Creatures that were swimming on the surface of frozen water are trapped
       in the ice and have the &amp;Reference[Restrained apply=false] condition.
@@ -331,13 +329,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724781444555
-      modifiedTime: 1724782761235
+      modifiedTime: 1783543976164
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplOtilukesFr.JC3QmmHnM4YKj9ek'
 folder: 8WmlLARx1Df3Ii9v
 sort: 150000
@@ -350,11 +351,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425965185
-  modifiedTime: 1753380921921
+  modifiedTime: 1783543976164
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplOtilukesFr'

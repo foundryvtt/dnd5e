@@ -59,6 +59,10 @@ export default class NPCData extends CreatureTemplate {
         }, { label: "DND5E.HitDice" }),
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
+          bloodied: new NumberField({
+            nullable: false, min: 0, max: 100, persisted: false, initial: () => CONFIG.DND5E.bloodied.threshold,
+            label: "DND5E.HITPOINTS.Bloodied.label"
+          }),
           formula: new FormulaField({ required: true, label: "DND5E.HPFormula" })
         }, { label: "DND5E.HitPoints" }),
         death: new RollConfigField({
@@ -226,6 +230,7 @@ export default class NPCData extends CreatureTemplate {
     NPCData.#migrateSource(source);
     NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
+    AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
     return source;
   }
@@ -348,9 +353,6 @@ export default class NPCData extends CreatureTemplate {
 
   /** @inheritDoc */
   prepareBaseData() {
-    this.details.level = 0;
-    this.attributes.attunement.value = 0;
-
     // Determine hit dice denomination & max from hit points formula
     const [, max, denomination] = this.attributes.hp.formula?.match(/(\d*)d(\d+)/i) ?? [];
     this.attributes.hd.max = Number(max ?? 0);
@@ -419,13 +421,13 @@ export default class NPCData extends CreatureTemplate {
     this.prepareCurrency();
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
+    AttributesFields.prepareSpellcastingAbility.call(this);
     AttributesFields.prepareArmorClass.call(this, rollData);
     AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this, rollData);
-    AttributesFields.prepareSpellcastingAbility.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
@@ -489,6 +491,7 @@ export default class NPCData extends CreatureTemplate {
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     AttributesFields.onUpdateHP.call(this, changed, options, userId);
+    AttributesFields.onUpdateDeathSaves.call(this, changed, options, userId);
   }
 
   /* -------------------------------------------- */
@@ -724,7 +727,7 @@ export default class NPCData extends CreatureTemplate {
           formatter.format([
             ...Object.entries(CONFIG.DND5E.senses)
               .filter(([k]) => this.attributes.senses.ranges[k])
-              .map(([k, label]) =>
+              .map(([k, { label }]) =>
                 prepareMeasured(this.attributes.senses.ranges[k], this.attributes.senses.units, label)
               ),
             ...splitSemicolons(this.attributes.senses.special)

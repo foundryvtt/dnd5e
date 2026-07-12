@@ -126,17 +126,15 @@ effects:
     transfer: false
     _id: Xt8AUh0PfYhGYBvY
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>A &amp;Reference[Restrained apply=false] target makes another [[/save
       ability=con format=long]] at the end of each of its turns. If it
@@ -151,13 +149,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724708938829
-      modifiedTime: 1724709521609
+      modifiedTime: 1783543975172
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplFleshtoSto.Xt8AUh0PfYhGYBvY'
   - name: Unable to Move
     img: icons/magic/life/heart-broken-red.webp
@@ -165,37 +166,45 @@ effects:
     transfer: false
     _id: sFyjp6wt9bjyIl9W
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 3
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: A5oWquY12JbLRdiM
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: VMRl9KHPvsPP4GVQ
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: OKzYOtESVrTV5Qh2
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: tu4MKf4KvzLwEmBp
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: rUOgc8M8CHcBDHv9
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>On a successful save, its Speed is 0 until the start of your next
       turn.</p>
@@ -206,13 +215,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724709070719
-      modifiedTime: 1724709944544
+      modifiedTime: 1783543975172
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplFleshtoSto.sFyjp6wt9bjyIl9W'
 folder: 8WmlLARx1Df3Ii9v
 sort: 1100000
@@ -225,11 +237,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425954533
-  modifiedTime: 1745256793278
+  modifiedTime: 1783543975172
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFleshtoSto'

@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,72 +481,32 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: VlvfR7YD6twoSRhg
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The hag can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!OQqybZoMeDFn5AFD.VlvfR7YD6twoSRhg'
   - _id: XeAyeJsNjKZKPWEN
     name: Horrific Appearance
     type: feat
-    img: icons/creatures/unholy/demon-winged-cyclops-drooling.webp
+    img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
     system:
       description:
         value: >-
-          <p>Any humanoid that starts its turn within 30 feet of the hag and can
-          see the hag's true form must make a [[/save]] saving throw. On a
-          failed save, the creature is &amp;Reference[frightened] for 1 minute.
-          A creature can repeat the saving throw at the end of each of its
-          turns, with disadvantage if the hag is within line of sight, ending
-          the effect on itself on a success.</p><p>If a creature's saving throw
-          is successful or the effect ends for it, the creature is immune to the
-          hag's Horrific Appearance for the next 24 hours. Unless the target is
-          surprised or the revelation of the hag's true form is sudden, the
-          target can avert its eyes and avoid making the initial saving throw.
-          Until the start of its next turn, a creature that averts its eyes has
-          disadvantage on attack rolls against the hag.</p>
+          <p>Any humanoid that starts its turn within [[lookup
+          @target.template.size activity=krnijW9ix8K2d3wp]] feet of the [[lookup
+          @name lowercase]]{monster} and can see the [[lookup @name
+          lowercase]]{monster}'s true form must make a [[/save]] saving throw.
+          On a failed save, the creature is &amp;Reference[frightened] for
+          [[lookup @labels.duration activity=krnijW9ix8K2d3wp]]. A creature can
+          repeat the saving throw at the end of each of its turns, with
+          disadvantage if the [[lookup @name lowercase]]{monster} is within line
+          of sight, ending the effect on itself on a success.</p><p>If a
+          creature's saving throw is successful or the effect ends for it, the
+          creature is immune to the [[lookup @name lowercase]]{monster}'s
+          [[lookup @item.name]] for the next 24 hours. Unless the target is
+          &amp;reference[surprise]{Surprised} or the revelation of the [[lookup
+          @name lowercase]]{monster}'s true form is sudden, the target can avert
+          its eyes and avoid making the initial saving throw. Until the start of
+          its next turn, a creature that averts its eyes has disadvantage on
+          attack rolls against the [[lookup @name lowercase]]{monster}.</p>
         chat: >-
           <p>Any humanoid that starts its turn <strong>within 30 feet</strong>
           of the hag and can see the hag's true form must make a
@@ -566,18 +523,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        krnijW9ix8K2d3wp:
           type: save
           activation:
-            type: ''
+            type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature starts its turn within 30 feet of the [[lookup
+              @name lowercase]]{monster} and can see the [[lookup @name
+              lowercase]]{monster}'s true form.
             override: false
           consumption:
             targets: []
@@ -587,13 +546,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: fmzFys2MSAKRtUIS
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '30'
             units: self
@@ -608,9 +573,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -620,44 +586,102 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Revealed True Form Save
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: krnijW9ix8K2d3wp
       enchant: {}
       prerequisites:
         level: null
       identifier: horrific-appearance
-    effects: []
+    effects:
+      - name: Horrified
+        img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.OQqybZoMeDFn5AFD.Item.XeAyeJsNjKZKPWEN
+        transfer: false
+        _id: fmzFys2MSAKRtUIS
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] for the duration.
+          You can repeat the saving throw at the end of each of your turns, with
+          disadvantage if the sea hag is within line of sight, ending the effect
+          on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781810324887
+          modifiedTime: 1781810384702
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!OQqybZoMeDFn5AFD.XeAyeJsNjKZKPWEN.fmzFys2MSAKRtUIS
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.YShGyidij4sLpyzF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955938735
+      systemVersion: 6.0.0
+      createdTime: 1781810096314
+      modifiedTime: 1781810481979
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.XeAyeJsNjKZKPWEN'
   - _id: a75Ba80yp6Y28AJQ
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Sea Hag attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -720,7 +744,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -729,8 +753,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        7k7bQjTq1tlTh85N:
           type: attack
           activation:
             type: action
@@ -745,10 +768,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -765,7 +789,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -778,24 +803,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 7k7bQjTq1tlTh85N
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -805,24 +843,27 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551622
+      systemVersion: 6.0.0
+      createdTime: 1781810105032
+      modifiedTime: 1781810120234
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.a75Ba80yp6Y28AJQ'
   - _id: 7AGmP2dRLYmORUX7
     name: Death Glare
     type: feat
-    img: icons/magic/death/skull-humanoid-worn-teal.webp
+    img: icons/magic/death/skull-humanoid-white-blue.webp
     system:
       description:
         value: >-
-          <p>The hag targets one frightened creature she can see within 30 ft.
-          of her. If the target can see the hag, it must succeed on a [[/save]]
-          saving throw against this magic or drop to 0 hit points.</p>
+          <p>The [[lookup @name lowercase]]{monster} targets one
+          &amp;reference[frightened apply=false] creature she can see within
+          [[lookup @labels.description.range activity=bkCJcO9MdO88ON0n]] of her.
+          If the target can see the [[lookup @name lowercase]]{monster}, it must
+          succeed on a [[/save]] saving throw against this magic or drop to 0
+          hit points.</p>
         chat: >-
           <p>The hag targets one frightened creature she can see within 30 ft.
           of her. If the target can see the hag, it must make a
@@ -839,13 +880,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bkCJcO9MdO88ON0n:
           type: save
           activation:
             type: action
@@ -860,6 +901,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -880,10 +922,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -893,15 +936,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Focus Gaze
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: bkCJcO9MdO88ON0n
       enchant: {}
       prerequisites:
         level: null
@@ -915,32 +972,32 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.o8G8BNPJOWoCKzR5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955961924
+      systemVersion: 6.0.0
+      createdTime: 1781810164569
+      modifiedTime: 1781810223709
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.7AGmP2dRLYmORUX7'
   - _id: 8s0lGEYZGFEpwt12
     name: Illusory Appearance
     type: feat
-    img: icons/magic/unholy/silhouette-robe-evil-power.webp
+    img: icons/equipment/head/hood-cloth-trimmed-pink-gold.webp
     system:
       description:
         value: >-
-          <p>The hag covers herself and anything she is wearing or carrying with
-          a magical illusion that makes her look like an ugly creature of her
-          general size and humanoid shape. The effect ends if the hag takes a
-          bonus action to end it or if she dies.</p>
-
-          <p>The changes wrought by this effect fail to hold up to physical
-          inspection. For example, the hag could appear to have no claws, but
+          <p>The [[lookup @name lowercase]]{monster} covers herself and anything
+          she is wearing or carrying with a magical illusion that makes her look
+          like an ugly creature of her general size and humanoid shape. The
+          effect ends if the [[lookup @name lowercase]]{monster} takes a bonus
+          action to end it or if she dies.</p><p>The changes wrought by this
+          effect fail to hold up to physical inspection. For example, the
+          [[lookup @name lowercase]]{monster} could appear to have no claws, but
           someone touching her hand might feel the claws. Otherwise, a creature
           must take an action to visually inspect the illusion and succeed on a
-          DC 16 Intelligence (Investigation) check to discern that the hag is
-          disguised.</p>
+          [[/check activity=qwatGWOoJRpKLNtR]] check to discern that the
+          [[lookup @name lowercase]]{monster} is disguised.</p>
         chat: ''
       source:
         custom: ''
@@ -954,64 +1011,143 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        qwatGWOoJRpKLNtR:
+          type: check
+          name: Investigate
+          _id: qwatGWOoJRpKLNtR
+          img: ''
+          sort: 500000
           activation:
-            type: action
-            value: 1
-            condition: ''
+            type: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: ''
               special: ''
-            prompt: true
+              count: '1'
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          check:
+            associated:
+              - inv
+            dc:
+              calculation: ''
+              formula: '16'
+            visible: true
+            ability: ''
+            bonus: ''
+        AnnOjQ8xoMu57URu:
+          type: transform
+          name: Don Illusory Appearance
+          _id: AnnOjQ8xoMu57URu
+          img: ''
+          sort: 400000
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: dstr
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          profiles:
+            - cr: ''
+              name: ''
+              _id: lX8J7ULrjRnWCHF6
+              uuid: null
+              sizes:
+                - med
+              types:
+                - humanoid
+              movement: []
+              level:
+                min: null
+                max: null
+          settings: null
+          transform:
+            customize: false
+            mode: cr
+            preset: polymorphSelf
       enchant: {}
       prerequisites:
         level: null
@@ -1025,14 +1161,67 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.s7kqggp9VLDb39nu
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781810498413
+      modifiedTime: 1781811333589
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.8s0lGEYZGFEpwt12'
+  - _id: mu6H0PnN6ZcY0JMl
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 175000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781825766258
+      modifiedTime: 1781825766258
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!OQqybZoMeDFn5AFD.mu6H0PnN6ZcY0JMl'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
 sort: 0
@@ -1041,7 +1230,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171228511

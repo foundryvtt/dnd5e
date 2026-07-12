@@ -107,17 +107,14 @@ effects:
     origin: Item.mmPetrifyingBrea
     _id: ggyTZHJj11jkOFlX
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Petrified apply=false] condition
       instead of the Restrained condition.</p>
@@ -132,30 +129,30 @@ effects:
     _stats:
       compendiumSource: Item.mmPetrifyingGaze.ActiveEffect.YLFv2Ujss9c0vtMQ
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736074054456
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmPetrifyingBrea.ggyTZHJj11jkOFlX'
   - name: Restrained
     img: systems/dnd5e/icons/svg/statuses/restrained.svg
     origin: Item.mmPetrifyingBrea
     _id: SY6t8UAImw8B9PVT
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Restrained apply=false] condition and
       repeats the save at the end of its next turn if it is still Restrained,
@@ -171,13 +168,22 @@ effects:
     _stats:
       compendiumSource: Item.mmPetrifyingGaze.ActiveEffect.a5kKgU7vfT0v17yF
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736074039504
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!items.effects!mmPetrifyingBrea.SY6t8UAImw8B9PVT'
 flags:
   dnd5e:
@@ -186,7 +192,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

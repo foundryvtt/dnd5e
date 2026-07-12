@@ -33,12 +33,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -58,8 +61,7 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    X0GF7y4MP282Nvlx:
       type: attack
       activation:
         type: action
@@ -73,18 +75,53 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: o7n67yO2Hk4iu7f8
+          level:
+            min: 2
+            max: 2
+        - _id: qpwFpytSMBxaFTD1
+          level:
+            min: 3
+            max: 3
+        - _id: YrTEjADBP8aoI1TJ
+          level:
+            min: 4
+            max: 4
+        - _id: Jrszb8Az8m3l0nYt
+          level:
+            min: 5
+            max: 5
+        - _id: tMhQjFkHljm5KNmd
+          level:
+            min: 6
+            max: 6
+        - _id: e2v5kW8X5DCflr1C
+          level:
+            min: 7
+            max: 7
+        - _id: xcOgzbwUfFXtdDi5
+          level:
+            min: 8
+            max: 8
+        - _id: pefrR8ga75zq3LMU
+          level:
+            min: 9
+            max: 9
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -96,7 +133,7 @@ system:
         flat: false
         type:
           value: ranged
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -117,9 +154,20 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
-    dnd5eactivity200:
-      _id: dnd5eactivity200
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: X0GF7y4MP282Nvlx
+    DD8lxW9OUprGPLts:
       type: damage
       activation:
         type: action
@@ -130,9 +178,10 @@ system:
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -140,11 +189,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -167,20 +218,336 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Additional End of Turn Damage
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: DD8lxW9OUprGPLts
   identifier: acid-arrow
 sort: 0
 flags: {}
-img: icons/magic/acid/projectile-bolts-salvo-green.webp
-effects: []
+img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+effects:
+  - name: 'Acid Arrow Coating: 2nd Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    _id: o7n67yO2Hk4iu7f8
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 2d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218106855
+      modifiedTime: 1781218266743
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.o7n67yO2Hk4iu7f8'
+  - name: 'Acid Arrow Coating: 3rd Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 3d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218269405
+      modifiedTime: 1781218291133
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: qpwFpytSMBxaFTD1
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.qpwFpytSMBxaFTD1'
+  - name: 'Acid Arrow Coating: 4th Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 4d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218276211
+      modifiedTime: 1781218298206
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: YrTEjADBP8aoI1TJ
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.YrTEjADBP8aoI1TJ'
+  - name: 'Acid Arrow Coating: 5th Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 5d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218277069
+      modifiedTime: 1781218311141
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: Jrszb8Az8m3l0nYt
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.Jrszb8Az8m3l0nYt'
+  - name: 'Acid Arrow Coating: 6th Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 6d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218279875
+      modifiedTime: 1781218319969
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: tMhQjFkHljm5KNmd
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.tMhQjFkHljm5KNmd'
+  - name: 'Acid Arrow Coating: 7th Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 7d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218280672
+      modifiedTime: 1781218328086
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: e2v5kW8X5DCflr1C
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.e2v5kW8X5DCflr1C'
+  - name: 'Acid Arrow Coating: 8th Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 8d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218281468
+      modifiedTime: 1781218343038
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: xcOgzbwUfFXtdDi5
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.xcOgzbwUfFXtdDi5'
+  - name: 'Acid Arrow Coating: 9th Level'
+    img: icons/weapons/ammunition/arrow-broadhead-bent-teal.webp
+    origin: Compendium.dnd5e.spells.Item.4H6YgYdKgnX6ZQ8M
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You are covered in acid, and take an additional 9d4 acid damage at the
+      end of your next turn.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218282335
+      modifiedTime: 1781218352922
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: pefrR8ga75zq3LMU
+    _key: '!items.effects!4H6YgYdKgnX6ZQ8M.pefrR8ga75zq3LMU'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347010
-  modifiedTime: 1725992716884
+  modifiedTime: 1781219140041
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!4H6YgYdKgnX6ZQ8M'

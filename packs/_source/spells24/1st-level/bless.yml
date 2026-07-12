@@ -96,36 +96,12 @@ img: icons/magic/holy/prayer-hands-glowing-yellow-white.webp
 effects:
   - _id: 1dzvDffEh8wZ0oQy
     flags: {}
-    changes:
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: 1d4
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      rounds: 10
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.spells24.Item.phbsplBless00000
     tint: '#ffffff'
     transfer: false
@@ -138,17 +114,52 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974187
+      modifiedTime: 1783543974187
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/holy/chalice-glowing-gold-water.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: u5KYhzLQGr0DZxII
+        - key: system.bonuses.mwak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: VgdxKjLlJ5Q6LXYv
+        - key: system.bonuses.msak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: jM3kLTO5Oji6gidO
+        - key: system.bonuses.rsak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: Ywysa8yj9kxepUSR
+        - key: system.bonuses.rwak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: SlZ7LOIlTbuKTxFr
+      magical: true
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplBless00000.1dzvDffEh8wZ0oQy'
 folder: pBaAAtXBCq9FVEnL
 sort: 5200000
@@ -161,11 +172,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425943614
-  modifiedTime: 1740685851017
+  modifiedTime: 1783543974187
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBless00000'

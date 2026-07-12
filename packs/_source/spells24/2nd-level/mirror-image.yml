@@ -101,24 +101,24 @@ effects:
   - name: Duplicate A
     origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/sundries/flags/banner-pink.webp
     _id: VUqQIaiZoIzxUdf1
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd-players-handbook.mirrorImages
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd-players-handbook.mirrorImages
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: JnD9ogJ3MMccyrOD
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -127,35 +127,38 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976047
+      modifiedTime: 1783543976047
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMirrorImag.VUqQIaiZoIzxUdf1'
   - name: Duplicate B
     origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/sundries/flags/banner-green.webp
     _id: XcTQl9DhT9lC3bxI
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd-players-handbook.mirrorImages
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd-players-handbook.mirrorImages
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: MfM9HxtMy0J2UC8z
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -164,35 +167,38 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976047
+      modifiedTime: 1783543976047
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMirrorImag.XcTQl9DhT9lC3bxI'
   - name: Duplicate C
     origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/sundries/flags/banner-blue.webp
     _id: uMsGEsbEZ2hckOKW
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd-players-handbook.mirrorImages
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd-players-handbook.mirrorImages
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: ZZPMn5kdl8xQtCY0
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -201,13 +207,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976047
+      modifiedTime: 1783543976047
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMirrorImag.uMsGEsbEZ2hckOKW'
 folder: 3SjcO2acsFnWegp4
 sort: 5700000
@@ -220,11 +229,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425964208
-  modifiedTime: 1745256796285
+  modifiedTime: 1783543976047
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMirrorImag'

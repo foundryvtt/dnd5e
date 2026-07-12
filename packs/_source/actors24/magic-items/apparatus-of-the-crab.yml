@@ -259,12 +259,9 @@ prototypeToken:
     src: icons/svg/mystery-man.svg
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -308,7 +305,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -329,6 +326,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - name: Claw Attack
     type: feat
@@ -452,10 +450,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!dmgApparatusofKw.fmdWz6RQsUCHneZF'
   - name: Grapple Attack
     type: feat
@@ -625,10 +625,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: tgIjCBtGCZvMu8ij
     _key: '!actors.items!dmgApparatusofKw.tgIjCBtGCZvMu8ij'
 effects:
@@ -636,26 +638,27 @@ effects:
     name: Legs Extended
     origin: Actor.dmgApparatusofKw
     duration:
-      rounds: null
-      startTime: 0
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     img: icons/commodities/tech/transmission.webp
     _id: D6TOlFQbOM6V0Jv8
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 4
-        value: '30'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 30
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: SfzFgoYocvRteJgB
+        - key: system.attributes.movement.swim
+          value: 30
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: ZNyPBp1VBOrt5v7s
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -667,27 +670,35 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544164255
+      modifiedTime: 1783544164255
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!actors.effects!dmgApparatusofKw.D6TOlFQbOM6V0Jv8'
   - type: base
     name: Claws Extended
     origin: Actor.dmgApparatusofKw
     duration:
-      rounds: null
-      startTime: 0
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     img: icons/commodities/tech/coil-steel-grey.webp
     _id: 9Sxe5orNBLhYpDwz
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -699,26 +710,34 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!actors.effects!dmgApparatusofKw.9Sxe5orNBLhYpDwz'
   - type: base
     name: Forward Shutter Open
     origin: Actor.dmgApparatusofKw
     duration:
-      rounds: null
-      startTime: 0
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     img: icons/commodities/tech/metal-blue.webp
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -730,27 +749,35 @@ effects:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: xIiZeSr9KPqMrDFq
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!actors.effects!dmgApparatusofKw.xIiZeSr9KPqMrDFq'
   - type: base
     name: Side Shutters Open
     origin: Actor.dmgApparatusofKw
     duration:
-      rounds: null
-      startTime: 0
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     img: icons/commodities/tech/metal-panel.webp
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -762,27 +789,35 @@ effects:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: sj7HGYh5KeLlZhfr
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!actors.effects!dmgApparatusofKw.sj7HGYh5KeLlZhfr'
   - type: base
     name: Rear Hatch Open
     origin: Actor.dmgApparatusofKw
     duration:
-      rounds: null
-      startTime: 0
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     img: icons/commodities/tech/frame-copper.webp
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -794,28 +829,36 @@ effects:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: pvJazR3MqOCj5fq8
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!actors.effects!dmgApparatusofKw.pvJazR3MqOCj5fq8'
   - type: base
     name: Lights Activated
     origin: Actor.dmgApparatusofKw
     duration:
-      rounds: null
-      startTime: 0
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     img: icons/magic/light/light-lantern-lit-white.webp
     _id: rBFF2F7IQteiU8kL
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: >-
       <p>Eyelike fixtures emit Bright Light in a 30-foot radius and Dim Light
       for an additional 30 feet.</p>
@@ -828,21 +871,32 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    showIcon: 1
+    folder: null
     _key: '!actors.effects!dmgApparatusofKw.rBFF2F7IQteiU8kL'
 folder: 2AjZvlZWDCwSd0ry
 flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452692857
-  modifiedTime: 1771452692857
+  modifiedTime: 1783544164255
   lastModifiedBy: dnd5ebuilder0000
 sort: 100000
 ownership:

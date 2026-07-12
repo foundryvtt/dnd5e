@@ -484,12 +484,9 @@ prototypeToken:
     src: modules/dnd-monster-manual/assets/tokens/priest-acolyte-*.webp
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -533,7 +530,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -553,6 +550,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Mace
     system:
@@ -731,10 +729,12 @@ items:
       compendiumSource: Compendium.dnd-players-handbook.equipment.phbwepMace000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmPriestAcolyte0.epMbuSm8Mv8vsbsu'
   - _id: mmRadiantFlame00
     name: Radiant Flame
@@ -895,10 +895,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRadiantFlame00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -1055,10 +1057,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -1287,10 +1291,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDivineAid00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1398,41 +1404,18 @@ items:
       identifier: bless
       method: spell
       prepared: 0
+      sourceItem: feat:divine-aid
     type: spell
     img: icons/magic/holy/prayer-hands-glowing-yellow-white.webp
     effects:
       - _id: 1dzvDffEh8wZ0oQy
         flags: {}
-        changes:
-          - key: system.bonuses.abilities.save
-            mode: 2
-            value: 1d4
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: 1d4
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: 1d4
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: 1d4
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: 1d4
-            priority: null
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          rounds: 10
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         origin: Compendium.dnd5e.spells24.Item.phbsplBless00000
         tint: '#ffffff'
         transfer: false
@@ -1446,51 +1429,103 @@ items:
             Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182023
+          modifiedTime: 1783544182023
         img: icons/magic/holy/chalice-glowing-gold-water.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.bonuses.abilities.save
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: JA478LhnZkRugozz
+            - key: system.bonuses.mwak.attack
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: pa9XtWKExy8bzKaA
+            - key: system.bonuses.msak.attack
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: WuXlYkO303M9ZT69
+            - key: system.bonuses.rsak.attack
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: 22O9GpEXGN1Lip7z
+            - key: system.bonuses.rwak.attack
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: jmnDJrLWMcxwz29D
+          magical: true
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmPriestAcolyte0.RTN8hls1FRHQEPQh.1dzvDffEh8wZ0oQy
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.V0Qrt1uTAqiU9SCm
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: IGl9VL9AOIoVeaXo
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.V0Qrt1uTAqiU9SCm
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182023
+          modifiedTime: 1783544182023
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmPriestAcolyte0.RTN8hls1FRHQEPQh.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1504,10 +1539,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplBless00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544182023
+      modifiedTime: 1783544182023
     _id: RTN8hls1FRHQEPQh
     _key: '!actors.items!mmPriestAcolyte0.RTN8hls1FRHQEPQh'
   - name: Healing Word
@@ -1615,6 +1652,7 @@ items:
       identifier: healing-word
       method: spell
       prepared: 0
+      sourceItem: feat:divine-aid
     type: spell
     img: icons/magic/life/cross-beam-green.webp
     effects:
@@ -1622,37 +1660,52 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.xlmEmICWCOXh1DRs
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: lR5qolNI7shbqJ2G
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.xlmEmICWCOXh1DRs
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182024
+          modifiedTime: 1783544182024
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmPriestAcolyte0.9Qq8TeGKvHTiEfBc.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1666,10 +1719,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHealingWor
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544182023
+      modifiedTime: 1783544182023
     _id: 9Qq8TeGKvHTiEfBc
     _key: '!actors.items!mmPriestAcolyte0.9Qq8TeGKvHTiEfBc'
   - name: Sanctuary
@@ -1835,6 +1890,7 @@ items:
       identifier: sanctuary
       method: spell
       prepared: 0
+      sourceItem: feat:divine-aid
     effects:
       - name: Warded
         img: icons/skills/social/peace-luck-insult.webp
@@ -1842,17 +1898,15 @@ items:
         transfer: false
         _id: OuM8iKhckcDKavOx
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Until the spell ends, any creature who targets the warded creature
           with an attack roll or a damaging spell must succeed on a [[/save
@@ -1867,43 +1921,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544182024
+          modifiedTime: 1783544182024
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmPriestAcolyte0.Xuc1V3JdoGcGkuam.OuM8iKhckcDKavOx
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.CNGV8z0AGMkv8u8E
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmDivineAid00000.Activity.CNGV8z0AGMkv8u8E
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmPriestAcolyte0.Xuc1V3JdoGcGkuam.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1917,10 +1986,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbSanctuary0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544182024
+      modifiedTime: 1783544182024
     sort: 100391
     ownership:
       default: 0
@@ -2053,6 +2124,7 @@ items:
       identifier: light
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/sundries/lights/candle-pillar-lit-yellow.webp
     effects:
@@ -2060,33 +2132,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmPriestAcolyte0.BVG2rVWSQCWE2lc2.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2100,10 +2182,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLight00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544182024
+      modifiedTime: 1783544182024
     _id: BVG2rVWSQCWE2lc2
     _key: '!actors.items!mmPriestAcolyte0.BVG2rVWSQCWE2lc2'
   - name: Thaumaturgy
@@ -2217,6 +2301,7 @@ items:
       identifier: thaumaturgy
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/environment/people/cleric-orange.webp
     effects:
@@ -2224,33 +2309,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmSpellcasting00.Activity.o8YMf9MB4UV7Oze6
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmPriestAcolyte0.Item.mmSpellcasting00.Activity.o8YMf9MB4UV7Oze6
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmPriestAcolyte0.UVhj7TP2lTUg0CEC.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2267,10 +2362,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544182025
+      modifiedTime: 1783544182025
     _id: UVhj7TP2lTUg0CEC
     _key: '!actors.items!mmPriestAcolyte0.UVhj7TP2lTUg0CEC'
   - name: Chain Shirt
@@ -2344,10 +2441,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbarmChainShirt
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmPriestAcolyte0.4ayLJjyL0iY0jwvu'
   - name: Holy Symbol
     system:
@@ -2403,10 +2502,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbagHolySymbolV
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmPriestAcolyte0.bm5Xk3RgW5IFauNT'
 effects: []
 folder: oq65o5ZsauMtb1JY
@@ -2414,11 +2515,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452711762
-  modifiedTime: 1771452711762
+  systemVersion: 6.0.0
+  createdTime: 1783544182022
+  modifiedTime: 1783544182022
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

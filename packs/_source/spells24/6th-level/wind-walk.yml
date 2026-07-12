@@ -116,41 +116,51 @@ effects:
     transfer: false
     _id: yuAiVeSve8sEy6JQ
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '300'
-        priority: null
-      - key: system.attributes.movement.hover
-        mode: 5
-        value: 'true'
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: prone
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 300
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: JX9vhb5LWu7jq7gn
+        - key: system.attributes.movement.hover
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: 8ntOO67Vvw196Pbo
+        - key: system.traits.ci.value
+          value: prone
+          priority: null
+          type: add
+          phase: initial
+          _id: IiCGaH8mrBfmw17K
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: i2Etvz7C4EjcT7Eg
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: r4Yr5kpxb2mD28NP
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: ofSHLKf63nEybf80
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The only actions a target can take in this form are the
       &amp;Reference[Dash] action or a Magic action to begin reverting to its
@@ -166,13 +176,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724859609679
-      modifiedTime: 1724861948154
+      modifiedTime: 1783543977692
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplWindWalk00.yuAiVeSve8sEy6JQ'
 folder: 8WmlLARx1Df3Ii9v
 sort: 100013
@@ -185,11 +198,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425978077
-  modifiedTime: 1745256800133
+  modifiedTime: 1783543977692
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplWindWalk00'

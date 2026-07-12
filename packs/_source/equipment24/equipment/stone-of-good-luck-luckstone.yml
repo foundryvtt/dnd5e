@@ -61,25 +61,27 @@ effects:
     img: icons/magic/control/buff-luck-fortune-green.webp
     _id: FqUhrsOwuBjoJjwK
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.check
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.check
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: AMeAQoMxGicoal5w
+        - key: system.bonuses.abilities.save
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: VFCpjdh2smR3YH2l
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -93,13 +95,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 6.0.0
       createdTime: 1730665110091
-      modifiedTime: 1745601278536
+      modifiedTime: 1783544098769
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgStoneOfGoodLu.FqUhrsOwuBjoJjwK'
 flags:
   dnd5e:
@@ -108,11 +113,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544098769
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 34800000

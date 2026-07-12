@@ -123,17 +123,15 @@ effects:
     transfer: false
     _id: UpR6gfUl5Qqjddq1
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><em>Source:
       @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtFlames0000]{Flames}</em></p><p>This
@@ -145,13 +143,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729190308338
-      modifiedTime: 1729190625632
+      modifiedTime: 1783544094966
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDmtFlames0000.UpR6gfUl5Qqjddq1'
 folder: XVXuU21XyvevGap7
 sort: 1700000
@@ -160,11 +161,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1729190087505
-  modifiedTime: 1764615886325
+  modifiedTime: 1783544094966
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtFlames0000'

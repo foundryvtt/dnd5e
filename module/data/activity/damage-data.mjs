@@ -63,8 +63,8 @@ export default class BaseDamageActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getDamageConfig(config={}) {
-    const rollConfig = super.getDamageConfig(config);
+  getDamageConfig(config={}, options={}) {
+    const rollConfig = super.getDamageConfig(config, options);
 
     rollConfig.critical ??= {};
     rollConfig.critical.allow ??= this.damage.critical.allow;

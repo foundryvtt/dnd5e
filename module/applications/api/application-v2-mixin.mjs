@@ -62,6 +62,17 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     }
 
     /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    get window() {
+      return { ...super.window, ...this.#window };
+    }
+
+    #window = {
+      subtitle: null
+    };
+
+    /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
 
@@ -90,8 +101,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
           handler = handler.handler;
         }
         yield {
-          label,
-          icon: `<i class="${icon}" inert></i>`,
+          label, icon,
           onClick: (event, target) => {
             if ( onClick ) onClick(event);
             else if ( handler ) handler.call(this, event, target);
@@ -107,6 +117,14 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     _onFirstRender(context, options) {
       super._onFirstRender(context, options);
       this._renderContainers(context, options);
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _onPosition(position) {
+      super._onPosition(position);
+      if ( "width" in position ) this.#scaleTitle();
     }
 
     /* -------------------------------------------- */
@@ -164,6 +182,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
       const subtitle = document.createElement("h2");
       subtitle.classList.add("window-subtitle");
       frame?.querySelector(".window-title")?.insertAdjacentElement("afterend", subtitle);
+      this.#window.subtitle = subtitle;
 
       // Icon
       if ( (options.window?.icon ?? "").includes(".") ) {
@@ -237,9 +256,10 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     /** @inheritDoc */
     _updateFrame(options) {
       super._updateFrame(options);
-      if ( options.window && ("subtitle" in options.window) ) {
-        this.element.querySelector(".window-header > .window-subtitle").innerText = options.window.subtitle;
-      }
+      const win = options.window;
+      if ( !win ) return;
+      if ( ("title" in win) && this.#window.title ) this.#scaleTitle();
+      if ( ("subtitle" in win) && this.#window.subtitle ) this.#window.subtitle.innerText = win.subtitle;
     }
 
     /* -------------------------------------------- */
@@ -252,8 +272,8 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
         control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)
       );
 
-      // Allow multi-select tags to be removed when the whole tag is clicked.
-      this.element.querySelectorAll("multi-select").forEach(select => {
+      // Allow tags to be removed when the whole tag is clicked.
+      this.element.querySelectorAll("multi-select, document-tags, string-tags").forEach(select => {
         if ( select.disabled ) return;
         select.querySelectorAll(".tag").forEach(tag => {
           tag.classList.add("remove");
@@ -291,6 +311,25 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     }
 
     /* -------------------------------------------- */
+
+    /**
+     * Scale the font size of the app's title to ensure it fits.
+     */
+    #scaleTitle() {
+      requestAnimationFrame(() => {
+        const { title } = this.window;
+        if ( !this.element || !title ) return;
+        // Divide by existing font scale to recover original size.
+        const scale = parseFloat(title.style.getPropertyValue("--font-size-scale")) || 1;
+        const range = document.createRange();
+        range.selectNodeContents(title);
+        const fullWidth = range.getBoundingClientRect().width / scale;
+        const maxWidth = this.element.offsetWidth - 60;
+        if ( fullWidth ) title.style.setProperty("--font-size-scale", Math.clamp(maxWidth / fullWidth, 0.5, 1));
+      });
+    }
+
+    /* -------------------------------------------- */
     /*  Event Listeners and Handlers                */
     /* -------------------------------------------- */
 
@@ -324,7 +363,7 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
      * @param {Event} event         Triggering click event.
      * @param {HTMLElement} target  Button that was clicked.
      */
-    static async _onEditImage(_event, target) {
+    static async _onEditImage(event, target) {
       const attr = target.dataset.edit;
       const current = foundry.utils.getProperty(this.document._source, attr);
       const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};
@@ -433,6 +472,30 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
     _renderChild(app, options={}) {
       if ( this.parent ) return this.parent.renderChild(app, options);
       return this.renderChild(app, options);
+    }
+
+    /* -------------------------------------------- */
+    /*  Helpers                                     */
+    /* -------------------------------------------- */
+
+    /**
+     * Replace all matching elements with a new tag, keeping all existing attributes.
+     * @param {string} selector              CSS selector to find elements to replace.
+     * @param {string} tagName               Tag name for the new element to use.
+     * @param {object} [options={}]
+     * @param {Function} [options.callback]  Method called for each new element before it replaces the old one.
+     * @protected
+     */
+    _replaceElements(selector, tagName, { callback }={}) {
+      for ( const oldElement of this.element.querySelectorAll(selector) ) {
+        const newElement = document.createElement(tagName);
+        for ( const attr of oldElement.attributes ) {
+          newElement.setAttribute(attr.name, attr.value);
+        }
+        newElement.innerHTML = oldElement.innerHTML;
+        if ( callback ) callback(newElement);
+        oldElement.replaceWith(newElement);
+      }
     }
   }
   return BaseApplication5e;

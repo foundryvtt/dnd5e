@@ -3,6 +3,7 @@ export {default as CharacterActorSheet} from "./character-sheet.mjs";
 export {default as EncounterActorSheet} from "./encounter-sheet.mjs";
 export {default as GroupActorSheet} from "./group-sheet.mjs";
 export {default as NPCActorSheet} from "./npc-sheet.mjs";
+export {default as PartyRequestDialog} from "./party-request-dialog.mjs";
 export {default as TransformDialog} from "./transform-dialog.mjs";
 export {default as VehicleActorSheet} from "./vehicle-sheet.mjs";
 
@@ -21,6 +22,7 @@ export {default as HitDiceConfig} from "./config/hit-dice-config.mjs";
 export {default as HitPointsConfig} from "./config/hit-points-config.mjs";
 export {default as InitiativeConfig} from "./config/initiative-config.mjs";
 export {default as LanguagesConfig} from "./config/languages-config.mjs";
+export {default as PietyConfig} from "./config/piety-config.mjs";
 export {default as SkillToolConfig} from "./config/skill-tool-config.mjs";
 export {default as SkillsConfig} from "./config/skills-config.mjs";
 export {default as SpellSlotsConfig} from "./config/spell-slots-config.mjs";

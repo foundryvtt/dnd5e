@@ -58,21 +58,20 @@ effects:
     img: icons/creatures/eyes/humanoid-single-blind.webp
     _id: IY36CpEENqnz03c5
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.senses.truesight
-        mode: 4
-        value: '60'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.senses.truesight
+          value: 60
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: Mm341QCPCsE0cK4L
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -83,13 +82,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544088751
+      modifiedTime: 1783544088751
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbBoonofTruesig.IY36CpEENqnz03c5'
 folder: 7zo2bljGLQY3uwXI
 sort: 100098
@@ -102,11 +104,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735865940774
-  modifiedTime: 1752706686208
+  modifiedTime: 1783544088750
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbBoonofTruesig'

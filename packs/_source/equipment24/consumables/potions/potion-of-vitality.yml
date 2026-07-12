@@ -129,17 +129,15 @@ effects:
     transfer: false
     _id: GxutU47JS0FNfeoM
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -151,22 +149,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.1
+      systemVersion: 6.0.0
       createdTime: 1730864551236
-      modifiedTime: 1746118341518
+      modifiedTime: 1783544097615
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgPotionOfVital.GxutU47JS0FNfeoM'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614688854
+  modifiedTime: 1783544097615
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -8,15 +8,19 @@ import { CalendarGreyhawk, CALENDAR_OF_GREYHAWK } from "./data/calendar/calendar
 import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-of-harptos.mjs";
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
+import * as regionBehaviors from "./data/region-behavior/_module.mjs";
+import ActiveEffect5e from "./documents/active-effect.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
+import Adventure5e from "./documents/adventure.mjs";
 import { preLocalize } from "./utils.mjs";
 
 /**
  * @import {
  *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
  *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
+ *   AdventureConfiguration, AdventureImportAction,
  *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
  *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
@@ -1096,6 +1100,26 @@ preLocalize("activityActivationTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * Types of behaviors that can be attached to regions through activities.
+ * @enum {ActivityBehaviorConfiguration}
+ */
+DND5E.activityBehaviorTypes = {
+  applyActiveEffect: {
+    label: "TYPES.RegionBehavior.applyActiveEffect",
+    icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
+    model: regionBehaviors.ApplyActiveEffectActivityBehavior
+  },
+  difficultTerrain: {
+    label: "TYPES.RegionBehavior.dnd5e.difficultTerrain",
+    icon: "systems/dnd5e/icons/svg/behaviors/difficult-terrain.svg",
+    model: regionBehaviors.DifficultTerrainActivityBehavior
+  }
+};
+preLocalize("activityBehaviorTypes", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * Different things that an ability can consume upon use.
  * @enum {string}
  */
@@ -1402,12 +1426,13 @@ preLocalize("itemActionTypes");
  * @enum {string}
  */
 DND5E.itemRarity = {
-  common: "DND5E.ItemRarityCommon",
-  uncommon: "DND5E.ItemRarityUncommon",
-  rare: "DND5E.ItemRarityRare",
-  veryRare: "DND5E.ItemRarityVeryRare",
-  legendary: "DND5E.ItemRarityLegendary",
-  artifact: "DND5E.ItemRarityArtifact"
+  common: "DND5E.ITEM.Rarity.Common",
+  uncommon: "DND5E.ITEM.Rarity.Uncommon",
+  rare: "DND5E.ITEM.Rarity.Rare",
+  veryRare: "DND5E.ITEM.Rarity.VeryRare",
+  legendary: "DND5E.ITEM.Rarity.Legendary",
+  artifact: "DND5E.ITEM.Rarity.Artifact",
+  varies: "DND5E.ITEM.Rarity.Varies"
 };
 preLocalize("itemRarity");
 
@@ -1587,43 +1612,48 @@ DND5E.shieldIds = {
 
 /**
  * Common armor class calculations.
- * @enum {{ label: string, [formula]: string }}
+ * @enum {{ label: string, [formula]: string, [armored]: boolean, [shielded]: boolean }}
  */
 DND5E.armorClasses = {
-  flat: {
-    label: "DND5E.ArmorClassFlat",
-    formula: "@attributes.ac.flat"
-  },
   natural: {
-    label: "DND5E.ArmorClassNatural",
+    label: "DND5E.ARMORCLASS.Calculation.Natural",
     formula: "@attributes.ac.flat"
   },
-  default: {
-    label: "DND5E.ArmorClassEquipment",
-    formula: "@attributes.ac.armor + @attributes.ac.dex"
+  armored: {
+    label: "DND5E.ARMORCLASS.Calculation.Armored",
+    formula: "@attributes.ac.armor + @attributes.ac.clamped.dex",
+    armored: true
+  },
+  unarmored: {
+    label: "DND5E.ARMORCLASS.Calculation.Unarmored",
+    formula: "10 + @abilities.dex.mod",
+    armored: false
   },
   mage: {
-    label: "DND5E.ArmorClassMage",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Mage",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   draconic: {
-    label: "DND5E.ArmorClassDraconic",
-    formula: "13 + @abilities.dex.mod"
+    label: "DND5E.ARMORCLASS.Calculation.Draconic",
+    formula: "13 + @abilities.dex.mod",
+    armored: false
   },
   unarmoredMonk: {
-    label: "DND5E.ArmorClassUnarmoredMonk",
-    formula: "10 + @abilities.dex.mod + @abilities.wis.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredMonk",
+    formula: "10 + @abilities.dex.mod + @abilities.wis.mod",
+    armored: false,
+    shielded: false
   },
   unarmoredBarb: {
-    label: "DND5E.ArmorClassUnarmoredBarbarian",
-    formula: "10 + @abilities.dex.mod + @abilities.con.mod"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBarbarian",
+    formula: "10 + @abilities.dex.mod + @abilities.con.mod",
+    armored: false
   },
   unarmoredBard: {
-    label: "DND5E.ArmorClassUnarmoredBard",
-    formula: "10 + @abilities.dex.mod + @abilities.cha.mod"
-  },
-  custom: {
-    label: "DND5E.ArmorClassCustom"
+    label: "DND5E.ARMORCLASS.Calculation.UnarmoredBard",
+    formula: "10 + @abilities.dex.mod + @abilities.cha.mod",
+    armored: false
   }
 };
 preLocalize("armorClasses", { key: "label" });
@@ -1842,6 +1872,9 @@ DND5E.featureTypes = {
       epicBoon: "DND5E.Feature.Feat.EpicBoon"
     }
   },
+  pietyTrait: {
+    label: "DND5E.Feature.PietyTrait"
+  },
   supernaturalGift: {
     label: "DND5E.Feature.SupernaturalGift.Label",
     subtypes: {
@@ -1876,7 +1909,7 @@ DND5E.itemProperties = {
   },
   concentration: {
     label: "DND5E.ITEM.Property.Concentration",
-    abbreviation: "DND5E.ConcentrationAbbr",
+    abbreviation: "DND5E.CONCENTRATION.Abbreviation",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
@@ -2030,6 +2063,8 @@ DND5E.validProperties = {
     "mgc"
   ])
 };
+
+DND5E.validProperties.consumable.ammo = new Set(["ret"]);
 
 /* -------------------------------------------- */
 
@@ -2833,8 +2868,14 @@ DND5E.areaTargetTypes = {
   radius: {
     label: "DND5E.TARGET.Type.Emanation.Label",
     counted: "DND5E.TARGET.Type.Emanation.Counted",
-    template: "circle",
+    template: "emanation",
     standard: true
+  },
+  ring: {
+    label: "DND5E.TARGET.Type.Ring.Label",
+    counted: "DND5E.TARGET.Type.Ring.Counted",
+    template: "ring",
+    sizes: ["radius", "thickness", "height"]
   },
   sphere: {
     label: "DND5E.TARGET.Type.Sphere.Label",
@@ -2937,15 +2978,31 @@ preLocalize("restTypes", { key: "label" });
 
 /**
  * The set of possible sensory perception types which an Actor may have.
- * @enum {string}
+ * @enum {SenseConfiguration}
  */
 DND5E.senses = {
-  blindsight: "DND5E.SenseBlindsight",
-  darkvision: "DND5E.SenseDarkvision",
-  tremorsense: "DND5E.SenseTremorsense",
-  truesight: "DND5E.SenseTruesight"
+  blindsight: {
+    label: "DND5E.SenseBlindsight",
+    detectionMode: "blindsight"
+  },
+  darkvision: {
+    label: "DND5E.SenseDarkvision",
+    grantsSight: true,
+    visionMode: "darkvision"
+  },
+  tremorsense: {
+    label: "DND5E.SenseTremorsense",
+    detectionMode: "feelTremor"
+  },
+  truesight: {
+    label: "DND5E.SenseTruesight",
+    detectionMode: "seeAll",
+    grantsSight: true,
+    visionMode: "darkvision"
+  }
 };
-preLocalize("senses", { sort: true });
+preLocalize("senses", { key: "label", sort: true });
+patchConfig("senses", "label", { since: "DnD5e 6.0", until: "DnD5e 6.2" });
 
 /* -------------------------------------------- */
 /*  Attacks                                     */
@@ -3610,7 +3667,10 @@ DND5E.conditionTypes = {
     img: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.jSQtPgNm0i4f3Qi3",
     levels: 6,
-    reduction: { rolls: 2, speed: 5 }
+    reduction: { rolls: 2, speed: 5 },
+    conditions: {
+      6: ["dead"]
+    }
   },
   falling: {
     name: "EFFECT.DND5E.StatusFalling",
@@ -3713,23 +3773,23 @@ preLocalize("conditionTypes", { key: "name", sort: true });
 
 /**
  * Various effects of conditions and which conditions apply it. Either keys for the conditions,
- * and with a number appended for a level of exhaustion.
+ * and with a number appended for a level of a leveled condition.
  * @enum {Set<string>}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
-  halfMovement: new Set(["exhaustion-2"]),
+  noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
+  halfMovement: new Set(),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set(["exhaustion-4"]),
+  halfHealth: new Set(),
   dehydrated: new Set(["dehydration"]),
   malnourished: new Set(["malnutrition"]),
-  abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
+  abilityCheckDisadvantage: new Set(["poisoned"]),
   physicalCheckDisadvantage: new Set(["heavilyEncumbered"]),
-  abilitySaveDisadvantage: new Set(["exhaustion-3"]),
+  abilitySaveDisadvantage: new Set(),
   physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
   physicalAttackDisadvantage: new Set(["heavilyEncumbered"]),
-  attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
+  attackDisadvantage: new Set(["poisoned"]),
   dexteritySaveDisadvantage: new Set(["restrained"]),
   dexteritySaveAdvantage: new Set(["dodging"]),
   initiativeAdvantage: new Set(["invisible"]),
@@ -3831,13 +3891,28 @@ DND5E.neverBlockStatuses = new Set();
 
 /**
  * Configuration for the special bloodied status effect.
- * @type {{ name: string, icon: string, threshold: number }}
+ * @type {{ name: string, img: string, threshold: number }}
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
   img: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
-  threshold: .5
+  threshold: 50
 };
+
+/* -------------------------------------------- */
+
+/**
+ * System provided active effect change types.
+ * @enum {ActiveEffectChangeTypeConfig & { [skipConditions]: boolean }}
+ */
+DND5E.activeEffectChangeTypes = Object.freeze({
+  "dnd5e.bonus": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Bonus.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    skipConditions: true
+  }
+});
 
 /* -------------------------------------------- */
 /*  Languages                                   */
@@ -4379,6 +4454,9 @@ DND5E.activityTypes = {
   summon: {
     documentClass: activities.SummonActivity
   },
+  teleport: {
+    documentClass: activities.TeleportActivity
+  },
   transform: {
     documentClass: activities.TransformActivity
   },
@@ -4410,6 +4488,10 @@ DND5E.advancementTypes = {
   },
   ItemGrant: {
     documentClass: advancement.ItemGrantAdvancement,
+    validItemTypes: new Set(_ALL_ITEM_TYPES)
+  },
+  ModifyItem: {
+    documentClass: advancement.ModifyItemAdvancement,
     validItemTypes: new Set(_ALL_ITEM_TYPES)
   },
   ScaleValue: {
@@ -4464,6 +4546,43 @@ DND5E.defaultArtwork = {
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
 };
+
+/* -------------------------------------------- */
+/*  Adventures                                  */
+/* -------------------------------------------- */
+
+/**
+ * Configuration for adventure handling by the system.
+ * @type {{
+ *   config: Record<string, AdventureConfiguration>,
+ *   importActions: Record<string, Omit<AdventureImportAction, "id">>
+ * }}
+ */
+DND5E.adventure = {
+  config: {},
+  importActions: {
+    activateScene: {
+      label: "DND5E.ADVENTURE.ImportAction.ActivateScene",
+      default: true,
+      handler: Adventure5e.activateScene,
+      quickstartHandler: Adventure5e.activateSceneQuickstart,
+      lifecycle: "post"
+    },
+    customizeWorld: {
+      label: "DND5E.ADVENTURE.ImportAction.CustomizeWorld",
+      handler: Adventure5e.customizeWorld,
+      lifecycle: "post"
+    },
+    displayJournal: {
+      label: "DND5E.ADVENTURE.ImportAction.DisplayJournal",
+      default: true,
+      handler: Adventure5e.displayJournal,
+      quickstartHandler: Adventure5e.displayJournalQuickstart,
+      lifecycle: "post"
+    }
+  }
+};
+preLocalize("adventure.importActions", { key: "label" });
 
 /* -------------------------------------------- */
 /*  Calendar                                    */
@@ -4541,6 +4660,20 @@ DND5E.calendar = {
 };
 preLocalize("calendar.calendars", { keys: ["label", "group"] });
 preLocalize("calendar.formatters", { keys: ["label", "group"] });
+
+/* -------------------------------------------- */
+
+/**
+ * Mapping of time deltas created by time passing in the calendar system to limited use recovery periods.
+ * Note: Ordering is important in this entry because it determines the order in which these recovery periods
+ * will be selected if multiple applicable periods are found during the recovery process.
+ * @type {Map<string, string>}
+ */
+DND5E.calendarDeltasRecoveryMapping = new Map([
+  ["midnights", "day"],
+  ["sunrises", "dawn"],
+  ["sunsets", "dusk"]
+]);
 
 /* -------------------------------------------- */
 /*  Requests                                    */
@@ -4826,18 +4959,23 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
     if ( !_enrichmentLookup ) {
       _enrichmentLookup = {
         abilities: foundry.utils.deepClone(DND5E.abilities),
+        damageTypes: Object.fromEntries(
+          Object.keys({ ...DND5E.damageTypes, ...DND5E.healingTypes }).map(k => [slugify(k), k])
+        ),
         languages: _flattenConfig(DND5E.languages, { labelKey: "label", skipEntry: (k, d) => d.selectable === false }),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
         tools: foundry.utils.deepClone(DND5E.tools)
       };
-      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) =>
-        _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k }
-      );
+      const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) => {
+        _enrichmentLookup[key][k].key = k;
+        if ( v.fullKey ) _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k };
+      });
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
-      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label });
+      addFullKeys("tools");
+      Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label, key: k });
     }
     return _enrichmentLookup;
   },

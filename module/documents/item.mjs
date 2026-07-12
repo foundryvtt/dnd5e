@@ -166,6 +166,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* --------------------------------------------- */
 
   /**
+   * Should this item be able to be used?
+   * @type {boolean}
+   */
+  get canUse() {
+    return !this.inCompendium && !this.isHidden;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
    * The item that contains this item, if it is in a container. Returns a promise if the item is located
    * in a compendium pack.
    * @type {Item5e|Promise<Item5e>|void}
@@ -283,6 +293,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isHealing() {
     return this.system.isHealing ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Is this item hidden, preventing it from being used or recovering uses?
+   * @type {boolean}
+   */
+  get isHidden() {
+    if ( this.actor?.hiddenItems.has(this.id) ) return true;
+    if ( this.dependentOrigin?.active === false ) return true;
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -437,7 +459,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   *allApplicableEffects() {
     for ( const effect of this.effects ) {
-      if ( effect.isAppliedEnchantment ) yield effect;
+      if ( effect.applicableType === "Item" ) yield effect;
     }
   }
 
@@ -451,12 +473,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const changes = [];
     for ( const effect of this.allApplicableEffects() ) {
       if ( !effect.active ) continue;
-      changes.push(...effect.changes.map(change => {
-        const c = foundry.utils.deepClone(change);
-        c.effect = effect;
-        c.priority ??= c.mode * 10;
-        return c;
-      }));
+      for ( const change of effect.system.changes ) {
+        if ( change.key === "" ) continue;
+        const copy = foundry.utils.deepClone(change);
+        copy.effect = effect;
+        changes.push(copy);
+      }
     }
     changes.sort((a, b) => a.priority - b.priority);
     foundry.documents.ActiveEffect._shimChanges?.(changes);
@@ -465,9 +487,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const overrides = {};
     const replacementData = this.getRollData();
     for ( const change of changes ) {
-      if ( !change.key ) continue;
-      const changes = change.effect.constructor.applyChange(this, change, { replacementData });
-      Object.assign(overrides, changes);
+      const result = change.effect.constructor.applyChange(this, change, { replacementData });
+      if ( foundry.utils.isPlainObject(result) ) Object.assign(overrides, result);
     }
 
     // Expand the set of final overrides
@@ -481,6 +502,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean}
    */
   get areEffectsSuppressed() {
+    if ( this.isHidden ) return true;
     const requireEquipped = (this.type !== "consumable")
       || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
@@ -501,6 +523,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       item.prepareFinalAttributes();
     }
     return item;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a clone of this item with a certain scaling.
+   * @param {number} scaling       Scaling increase above base level.
+   * @param {object} [options={}]  Additional options for the clone.
+   * @returns {Item5e}
+   */
+  scaledClone(scaling, options={}) {
+    return this.clone({ "flags.dnd5e": { scaling } }, { keepId: true, ...options });
   }
 
   /* -------------------------------------------- */
@@ -656,7 +690,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const existingDamageLabels = new Set();
     let firstDamage = true;
     for ( const activity of this.system.activities ) {
-      if ( !("activation" in activity) || !activity.canUse ) continue;
+      if ( !("activation" in activity) || activity.isHidden ) continue;
       const activationLabels = activity.activationLabels;
       if ( activationLabels ) activations.push({
         ...activationLabels,
@@ -707,8 +741,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *                                                                   activities and was posted directly to chat.
    */
   async use(config={}, dialog={}, message={}) {
-    if ( this.pack ) return;
-
     let event = config.event;
     const activities = this.system.activities?.filter(a => a.canUse);
     if ( activities?.length ) {
@@ -1015,7 +1047,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     let update = { [`system.advancement.${id}`]: updates };
     if ( !source && this._needsAdvancementMigration ) update = {
       "system.advancement": _replace(foundry.utils.mergeObject(
-        this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
+        this.system.toObject().advancement, { [id]: updates }, { applyOperators: true }
       ))
     };
     if ( source ) {
@@ -1228,7 +1260,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static addDirectoryContextOptions(app, entryOptions) {
     entryOptions.push({
       label: "DND5E.Scroll.CreateScroll",
-      icon: '<i class="fa-solid fa-scroll"></i>',
+      icon: "fa-solid fa-scroll",
       group: "system",
       visible: li => {
         let item = game.items.get(li.dataset.entryId);
