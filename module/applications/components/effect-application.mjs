@@ -307,7 +307,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    * @protected
    */
   _prepareEffectData(effect, actor) {
-    const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
+    const originActor = this.chatMessage.getAssociatedActor();
+    const concentration = originActor?.effects.get(this.chatMessage.system.concentration);
     const item = this.chatMessage.getAssociatedItem();
     const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
@@ -350,7 +351,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     // Otherwise, create a new effect on the target
-    return { action: "create", data: foundry.utils.mergeObject({
+    const effectData = foundry.utils.mergeObject({
       ...effect.toObject(),
       ...durationOverride,
       disabled: false,
@@ -360,7 +361,26 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
         [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
       }
-    }, effectFlags) };
+    }, effectFlags);
+
+    const originData = (item ?? originActor)?.getRollData() ?? {};
+    const targetData = actor.getRollData();
+
+    for ( const change of effectData.system.changes ) {
+      // TODO: Needs better evaluation since it can be JSON containing strings.
+      if ( typeof change.value !== "string" ) continue;
+
+      switch ( change.replacement ) {
+        case "target":
+          change.value = Roll.replaceFormulaData(change.value, targetData);
+          break;
+        case "origin":
+          change.value = Roll.replaceFormulaData(change.value, originData);
+          break;
+      }
+    }
+
+    return { action: "create", data: effectData };
   }
 
   /* -------------------------------------------- */

@@ -176,6 +176,22 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     if ( concentration ) flags.dependentOn = concentration.uuid;
     const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
 
+    const originData = this.getRollData();
+    const targetData = item.getRollData();
+    for (const change of enchantmentData.system.changes) {
+      // TODO: Needs better evaluation since it can be JSON containing strings.
+      if ( typeof change.value !== "string" ) continue;
+
+      switch ( change.replacement ) {
+        case "target":
+          change.value = Roll.replaceFormulaData(change.value, targetData);
+          break;
+        case "origin":
+          change.value = Roll.replaceFormulaData(change.value, originData);
+          break;
+      }
+    }
+
     /**
      * Hook that fires before an enchantment is applied to an item.
      * @function dnd5e.preApplyEnchantment
