@@ -477,12 +477,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -526,7 +523,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -546,6 +543,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Carry Weight Adjustment
     type: loot
@@ -589,31 +587,32 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!dmg3x5CarpetofFl.jRXMMWyLsf3cPmSP'
 effects:
   - name: Overloaded
     img: icons/tools/smithing/anvil.webp
     _id: OOJj1Gc67HwjhG7Q
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '0.5'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: t9WQZ00JrOWDblgK
     disabled: true
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The carpet's Fly Speed is halved when carrying more than its normal
       capacity.</p>
@@ -627,10 +626,21 @@ effects:
       compendiumSource: Actor.dmg3x5CarpetofFl.ActiveEffect.OOJj1Gc67HwjhG7Q
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544163974
+      modifiedTime: 1783544163974
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    showIcon: 1
+    folder: null
     _key: '!actors.effects!dmg3x5CarpetofFl.OOJj1Gc67HwjhG7Q'
 folder: 2AjZvlZWDCwSd0ry
 flags:
@@ -639,11 +649,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452692604
-  modifiedTime: 1771452692604
+  modifiedTime: 1783544163974
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

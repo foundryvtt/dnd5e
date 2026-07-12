@@ -6,7 +6,7 @@ const { SchemaField, SetField, StringField } = foundry.data.fields;
 export default class SimpleTraitField extends SchemaField {
   constructor(fields={}, { initialValue=[], ...options }={}) {
     fields = {
-      value: new SetField(new StringField(), { label: "DND5E.TraitsChosen", initial: initialValue }),
+      value: new SetField(new StringField(), { label: options.label ?? "DND5E.TraitsChosen", initial: initialValue }),
       custom: new StringField({ required: true, label: "DND5E.Special" }),
       ...fields
     };

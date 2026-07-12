@@ -702,6 +702,20 @@ export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Construct the markup for a loading tooltip section, displayed as a spinner while the rich tooltip content is fetched.
+ * @param {object} [options={}]
+ * @param {string} [options.uuid]      UUID of the document whose rich tooltip should be displayed.
+ * @param {boolean} [options.passive]  Mark this as a passive tooltip, with data supplied by the hovered element.
+ * @returns {string}
+ */
+export function loadingTooltip({ uuid, passive=false }={}) {
+  const attr = uuid ? ` data-uuid="${uuid}"` : passive ? " data-passive" : "";
+  return `<section class="loading"${attr}><i class="fas fa-spinner fa-spin-pulse" inert></i></section>`;
+}
+
+/* -------------------------------------------- */
 /*  Targeting                                   */
 /* -------------------------------------------- */
 
@@ -726,11 +740,15 @@ export function getTargetDescriptors() {
 
 /**
  * Get currently selected tokens in the scene or user's character's tokens.
- * @param {Actor5e} [actor]  Only allow tokens associated with this specific actor.
+ * @param {Actor5e} [actor]                   Only allow tokens associated with this specific actor.
+ * @param {object} [options={}]
+ * @param {boolean} [options.checkBaseActor]  Also include tokens whose base actor matches the provided actor.
  * @returns {Token5e[]}
  */
-export function getSceneTargets(actor) {
-  let targets = canvas.tokens?.controlled.filter(t => t.actor && (!actor || t.actor === actor)) ?? [];
+export function getSceneTargets(actor, { checkBaseActor }={}) {
+  let targets = canvas.tokens?.controlled.filter(t =>
+    t.actor && (!actor || (t.actor === actor) || (checkBaseActor && (t.document.baseActor === actor)))
+  ) ?? [];
   if ( !targets.length && actor ) targets = actor.getActiveTokens();
   else if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
@@ -967,6 +985,10 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/active-effects.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
     "systems/dnd5e/templates/apps/parts/traits-list.hbs",
+
+    // Active Effect Partials
+    "systems/dnd5e/templates/effects/parts/effect-change-row.hbs",
+    "systems/dnd5e/templates/effects/parts/effect-summary.hbs",
 
     // Actor Sheet Partials
     "systems/dnd5e/templates/actors/parts/actor-classes.hbs",
@@ -1226,7 +1248,8 @@ export function registerHandlebarsHelpers() {
     "dnd5e-numberFormat": (value, options) => formatNumber(value, options.hash),
     "dnd5e-numberParts": (value, options) => formatNumberParts(value, options.hash),
     "dnd5e-object": makeObject,
-    "dnd5e-textFormat": formatText
+    "dnd5e-textFormat": formatText,
+    "dnd5e-tooltip": ({ hash }) => loadingTooltip(hash)
   });
 }
 
@@ -1271,7 +1294,7 @@ export function performPreLocalization(config) {
   }
 
   // Localize & sort status effects
-  CONFIG.statusEffects.forEach(s => s.name = _loc(s.name));
+  for ( const s of Object.values(CONFIG.statusEffects) ) s.name = _loc(s.name);
 }
 
 /* -------------------------------------------- */
@@ -1328,13 +1351,14 @@ const _attributeLabelCache = {
 /**
  * Convert an attribute path to a human-readable label. Assumes paths are on an actor unless an reference item
  * is provided.
- * @param {string} attr              The attribute path.
+ * @param {string} attr                       The attribute path.
  * @param {object} [options]
- * @param {Actor5e} [options.actor]  An optional reference actor.
- * @param {Item5e} [options.item]    An optional reference item.
+ * @param {Actor5e} [options.actor]           An optional reference actor.
+ * @param {Item5e|true} [options.item]        An optional reference item, or `true` to treat it as a generic item.
+ * @param {boolean} [options.prefixItemName]  Prefix label with item name when applied to item or activity.
  * @returns {string|void}
  */
-export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
+export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemName=true }={}) {
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
 
   // Check any actor-specific names first.
@@ -1377,7 +1401,9 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   let type = "actor";
 
   const getSchemaLabel = (attr, type, doc) => {
-    if ( doc ) return doc.system.schema.getField(attr)?.label;
+    if ( attr === "name" ) return "DND5E.BASE.Name";
+    if ( attr === "img" ) return "DND5E.BASE.Image";
+    if ( doc instanceof foundry.abstract.Document ) return doc.system.schema.getField(attr)?.label;
     for ( const model of Object.values(CONFIG[type].dataModels) ) {
       const field = model.schema.getField(attr);
       if ( field ) return field.label;
@@ -1385,20 +1411,27 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   };
 
   // Activity labels
-  if ( item && attr.startsWith("activities.") ) {
+  if ( (item instanceof Item) && attr.startsWith("activities.") ) {
     let [, activityId, ...keyPath] = attr.split(".");
     const activity = item.system.activities?.get(activityId);
     if ( !activity ) return attr;
     attr = keyPath.join(".");
-    name = `${item.name}: ${activity.name}`;
+    name = prefixItemName ? `${item.name}: ${activity.name}` : activity.name;
     type = "activity";
     if ( _attributeLabelCache.activity.has(attr) ) label = _attributeLabelCache.activity.get(attr);
     else if ( attr === "uses.spent" ) label = "DND5E.Uses";
   }
+  else if ( attr.startsWith("activities[") ) {
+    let [type, ...keyPath] = attr.split(".");
+    type = type.replace("activities[", "").replace("]", "");
+    const field = CONFIG.DND5E.activityTypes[type]?.documentClass?.schema.getField(keyPath.join("."));
+    label = field?.label;
+    type = "activity";
+  }
 
   // Item labels
   else if ( item ) {
-    name = item.name;
+    if ( prefixItemName && (item instanceof Item) ) name = item.name;
     type = "item";
     if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
     else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
@@ -1406,7 +1439,13 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     else label = getSchemaLabel(attr, "Item", item);
   }
 
-  // Derived fields.
+  // Flags
+  else if ( attr.startsWith("flags.dnd5e.") ) {
+    const key = attr.replace("flags.dnd5e.", "");
+    if ( key in CONFIG.DND5E.characterFlags ) label = CONFIG.DND5E.characterFlags[key].name;
+  }
+
+  // Derived fields
   else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
   else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
@@ -1414,15 +1453,14 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
 
   // Abilities.
   else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
-    const key = attr.split(".")[attr.startsWith("abilities.") ? 1 : 3];
-    label = _loc("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
+    const [key, ...keyPath] = attr.split(".").slice(attr.startsWith("abilities.") ? 1 : 3);
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("abilities");
+    label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
   // Senses
-  else if ( attr.startsWith("attributes.senses.ranges.") ) {
-    const key = attr.split(".")[3];
-    label = CONFIG.DND5E.senses[key]?.label;
-  }
+  else if ( attr.startsWith("attributes.senses.ranges.") ) label = CONFIG.DND5E.senses[attr.split(".")[3]]?.label;
+  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".")[2]]?.label;
 
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
@@ -1431,10 +1469,22 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
   else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
 
-  // Skills.
+  // Skills
   else if ( attr.startsWith("skills.") ) {
-    const [, key] = attr.split(".");
-    label = _loc("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key].label });
+    const [, key, ...keyPath] = attr.split(".");
+    if ( keyPath.at(-1) === "passive" ) {
+      label = _loc("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key]?.label });
+    } else {
+      const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("skills");
+      label = mapping.getFieldLabel(key, keyPath.toReversed());
+    }
+  }
+
+  // Tools
+  else if ( attr.startsWith("tools.") ) {
+    const [, key, ...keyPath] = attr.split(".");
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("tools");
+    label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
   // Spell slots.
@@ -1455,13 +1505,13 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   }
 
   // Attempt to find the attribute in a data model.
-  if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
+  if ( !label && (type === "actor") ) label = getSchemaLabel(attr, "Actor", actor);
 
   // Call hook if no label is available
   if ( !label ) label = getUnknownLabel(attr, { actor, item });
 
   if ( label ) {
-    label = _loc(label);
+    label = _loc(String(label));
     _attributeLabelCache[type].set(attr, label);
     if ( name ) label = `${name} ${label}`;
   }

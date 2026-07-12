@@ -1,6 +1,7 @@
 /**
  * @import { SpellScrollValues } from "../_types.mjs";
  * @import { ActorUpdatesDescription } from "../data/chat-message/fields/_types.mjs";
+ * @import { WeaponAttackMode } from "../dice/_types.mjs";
  */
 
 /**
@@ -139,9 +140,24 @@
 
 /**
  * @typedef {ItemRollData & Maybe<ActorRollData>} ActivityRollData
- * @property {object} activity    Object containing the activity's data.
- * @property {object} [consumed]  Information on what resources the activity's activation consumed.
- * @property {number} mod         The ability modifier value used by the activity.
+ * @property {object} activity         Object containing the activity's data.
+ * @property {object} [consumed]       Information on what resources the activity's activation consumed.
+ * @property {number} mod              The ability modifier value used by the activity.
+ * @property {RollDescription} [roll]  Data describing a specific roll being performed.
+ */
+
+/**
+ * @typedef RollDescription
+ * @param {object} [attack]
+ * @param {"spell"|"unarmed"|"weapon"} [attack.classification]  Source of the attack.
+ * @param {WeaponAttackMode} [attack.mode]  Selected weapon attack mode.
+ * @param {"melee"|"ranged"} [attack.type]  Whether this is a melee or ranged attack.
+ * @param {string} type                     Type of roll being performed (e.g. "attack", "skill", "tool", etc.).
+ */
+
+/**
+ * @typedef {RollDataOptions} ActivityRollDataOptions
+ * @property {object} [data]  Arbitrary data assigned to the roll data object.
  */
 
 /**

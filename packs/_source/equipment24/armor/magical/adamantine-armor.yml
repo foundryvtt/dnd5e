@@ -122,50 +122,63 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell2.webp
     disabled: true
     _id: nqdPjlPUrizNLhug
-    system: {}
-    changes:
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: name
-        mode: 5
-        value: Adamantine {}
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAdamantineArm
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: ada
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: uncommon
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/chest/breastplate-layered-leather-blue.webp
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '400'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
+    system:
+      changes:
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: kfuU7Hjz9qFR2J8b
+        - key: name
+          value: Adamantine {}
+          priority: null
+          type: override
+          phase: initial
+          _id: KhpANb9lfRsKKQce
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAdamantineArm
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: hCkcjn6ys4PKBcaX
+        - key: system.properties
+          value: ada
+          priority: null
+          type: add
+          phase: initial
+          _id: aTw0KxTF7SI5ELSB
+        - key: system.rarity
+          value: uncommon
+          priority: null
+          type: override
+          phase: initial
+          _id: gZAGrWj29DwAvvi2
+        - key: img
+          value: icons/equipment/chest/breastplate-layered-leather-blue.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: nArDllgRL6bDMUKi
+        - key: system.price.value
+          value: 400
+          priority: null
+          type: add
+          phase: initial
+          _id: 6orMm9m3njUcQgk9
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: jf3ERdWb5ZinZUxS
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -176,13 +189,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729869208805
-      modifiedTime: 1745438836116
+      modifiedTime: 1783544093158
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAdamantineArm.nqdPjlPUrizNLhug'
 folder: 1kn4uV4dTVVduLjA
 sort: 100000
@@ -195,11 +211,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1729869056243
-  modifiedTime: 1745431956207
+  modifiedTime: 1783544093158
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgAdamantineArm'

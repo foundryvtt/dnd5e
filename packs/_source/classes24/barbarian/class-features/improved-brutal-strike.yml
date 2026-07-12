@@ -141,20 +141,17 @@ effects:
   - name: Staggered
     origin: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/items/feature.svg
     _id: L9N4evZo1jt46dap
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: >-
       <p>Hit by a staggering blow, this character has Disadvantage on the next
       Saving Throw it makes, and it can't make Opportunity Attacks until the
@@ -166,31 +163,31 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbImpBrutalS.L9N4evZo1jt46dap'
   - name: Sundered
     origin: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/items/feature.svg
     _id: tUyuyTQGmpUqMcFe
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: >-
       <p>Hit by a sundering blow, the next attack roll made by another creature
       against the target gains a +5 bonus to the roll.</p>
@@ -201,13 +198,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbImpBrutalS.tUyuyTQGmpUqMcFe'
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -217,7 +217,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735865940469

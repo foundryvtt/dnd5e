@@ -208,25 +208,27 @@ effects:
     img: icons/equipment/neck/amulet-geometric-blue-yellow.webp
     _id: GokN8sbCQOAIBrCV
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: 85eaOnqriWjtXXU8
+        - key: system.bonuses.rsak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: CT3qre89Ssdve003
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgTalismanOfPur
     tint: '#ffffff'
@@ -238,22 +240,25 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgTalismanOfUlt.ActiveEffect.tBqJ9VbBK1VpE2JD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730664859128
-      modifiedTime: 1730664976478
+      modifiedTime: 1783544099057
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgTalismanOfPur.GokN8sbCQOAIBrCV'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764617553415
+  modifiedTime: 1783544099057
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 35300000

@@ -108,20 +108,18 @@ effects:
   - name: Detect Evil and Good
     origin: Compendium.dnd5e.spells24.Item.phbsplDetectEvil
     duration:
-      rounds: null
-      startTime: null
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/perception/eye-ringed-green.webp
     _id: pOgbtXbKVGdbwjjE
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -130,13 +128,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1727465710325
+      systemVersion: 6.0.0
+      createdTime: 1783543974582
+      modifiedTime: 1783543974582
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplDetectEvil.pOgbtXbKVGdbwjjE'
 folder: pBaAAtXBCq9FVEnL
 sort: 4200000
@@ -149,11 +150,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425949474
-  modifiedTime: 1745256790241
+  modifiedTime: 1783543974582
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDetectEvil'

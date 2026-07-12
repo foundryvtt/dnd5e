@@ -13,7 +13,6 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import {
  *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
- * @import { ActivityRollData, RollDataOptions } from "../_types.mjs";
  * @import {
  *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
  *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
@@ -39,6 +38,7 @@ export default function ActivityMixin(Base) {
       sheetClass: ActivitySheet,
       usage: {
         actions: {},
+        applyEffectsInChat: true,
         chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
         dialog: ActivityUsageDialog
       }
@@ -96,16 +96,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      if ( this.isRider ) return false;
-      if ( !this.item.canUse ) return false;
-      if ( this.dependentOrigin?.active === false ) return false;
-      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
-      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return false;
-      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
-      const level = this.relevantLevel;
-      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
-        || ((this.visibility?.level?.max ?? Infinity) < level) ) return false;
-      return true;
+      return this.item.canUse && !this.isHidden;
     }
 
     /* -------------------------------------------- */
@@ -126,6 +117,25 @@ export default function ActivityMixin(Base) {
      */
     get dependentOrigin() {
       return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity hidden from display?
+     * @type {boolean}
+     */
+    get isHidden() {
+      if ( this.isRider ) return true;
+      if ( this.item.isHidden ) return true;
+      if ( this.dependentOrigin?.active === false ) return true;
+      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return true;
+      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return true;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return true;
+      const level = this.relevantLevel;
+      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
+        || ((this.visibility?.level?.max ?? Infinity) < level) ) return true;
+      return false;
     }
 
     /* -------------------------------------------- */
@@ -202,9 +212,6 @@ export default function ActivityMixin(Base) {
         data: {
           flags: {
             dnd5e: this.messageFlags
-          },
-          system: {
-            effects: this.applicableEffects?.map(e => e.relativeUUID)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -636,13 +643,13 @@ export default function ActivityMixin(Base) {
         if ( config.concentration.end ) {
           const replacedEffect = effects.find(i => i.id === config.concentration.end);
           if ( !replacedEffect ) errors.push(
-            new ConsumptionError(_loc("DND5E.ConcentratingMissingItem"))
+            new ConsumptionError(_loc("DND5E.CONCENTRATION.Warning.MissingItem"))
           );
         }
 
         // Cannot begin more concentrations than the limit
         else if ( effects.size >= this.actor.system.attributes?.concentration?.limit ) errors.push(
-          new ConsumptionError(_loc("DND5E.ConcentratingLimited"))
+          new ConsumptionError(_loc("DND5E.CONCENTRATION.Limit.Reached"))
         );
       }
 
@@ -719,8 +726,10 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
-      const effects = this.applicableEffects?.map(e => e.relativeUUID);
-      if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      if ( this.metadata.usage.applyEffectsInChat ) {
+        const effects = this.applicableEffects?.map(e => e.relativeUUID);
+        if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      }
     }
 
     /* -------------------------------------------- */
@@ -957,11 +966,11 @@ export default function ActivityMixin(Base) {
       if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
           label: "DND5E.ContextMenuActionEdit",
-          icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
+          icon: "fa-solid fa-pen-to-square",
           onClick: () => this.item.sheet._renderChild(this.sheet)
         }, {
           label: "DND5E.ContextMenuActionDuplicate",
-          icon: '<i class="fas fa-copy fa-fw"></i>',
+          icon: "fa-solid fa-copy",
           onClick: () => {
             const createData = this.toObject();
             delete createData._id;
@@ -969,13 +978,13 @@ export default function ActivityMixin(Base) {
           }
         }, {
           label: "DND5E.ContextMenuActionDelete",
-          icon: '<i class="fas fa-trash fa-fw"></i>',
+          icon: "fa-solid fa-trash",
           onClick: () => this.deleteDialog({ sheet: this.item.sheet })
         });
       } else {
         entries.push({
           label: "DND5E.ContextMenuActionView",
-          icon: '<i class="fas fa-eye fa-fw"></i>',
+          icon: "fa-solid fa-eye",
           onClick: () => this.item.sheet._renderChild(this.sheet)
         });
       }
@@ -985,7 +994,7 @@ export default function ActivityMixin(Base) {
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
           label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-          icon: '<i class="fas fa-bookmark fa-fw"></i>',
+          icon: "fa-solid fa-bookmark",
           group: "state",
           visible: () => this.item.isOwner && !compendiumLocked,
           onClick: () => {
@@ -1201,21 +1210,6 @@ export default function ActivityMixin(Base) {
       if ( !this.actor ) return null;
       relativeUUID ??= this.item.getFlag("dnd5e", "cachedFor");
       return fromUuidSync(relativeUUID, { relative: this.actor, strict: false });
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
-     * @param {RollDataOptions} [options]
-     * @returns {ActivityRollData}
-     */
-    getRollData(options) {
-      const rollData = this.item.getRollData(options);
-      rollData.activity = { ...this };
-      rollData.consumed = this.item.flags.dnd5e?.consumed;
-      rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
-      return rollData;
     }
 
     /* -------------------------------------------- */

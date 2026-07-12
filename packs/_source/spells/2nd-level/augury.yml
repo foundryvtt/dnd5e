@@ -10,26 +10,16 @@ system:
       cards, or employing some other divining tool, you receive an omen from an
       otherworldly entity about the results of a specific course of action that
       you plan to take within the next 30 minutes. The DM chooses from the
-      following possible omens:</p>
-
-      <ul>
-
-      <li>Weal, for good results</li>
-
-      <li>Woe, for bad results</li>
-
-      <li>Weal and woe, for both good and bad results</li>
-
-      <li>Nothing, for results that aren't especially good or bad</li>
-
-      </ul>
-
-      <p>The spell doesn't take into account any possible circumstances that
-      might change the outcome, such as the casting of additional spells or the
-      loss or gain of a companion.</p><p>If you cast the spell two or more times
-      before completing your next long rest, there is a cumulative 25 percent
-      chance for each casting after the first that you get a random reading. The
-      DM makes this roll in secret.</p>
+      following possible omens:</p><ul><li><p>Weal, for good
+      results</p></li><li><p>Woe, for bad results</p></li><li><p>Weal and woe,
+      for both good and bad results</p></li><li><p>Nothing, for results that
+      aren't especially good or bad</p></li></ul><p>The spell doesn't take into
+      account any possible circumstances that might change the outcome, such as
+      the casting of additional spells or the loss or gain of a
+      companion.</p><p>If you cast the spell two or more times before completing
+      your next long rest, there is a cumulative 25 percent chance for each
+      casting after the first that you get a random reading. The DM makes this
+      roll in secret.</p>
     chat: ''
   source:
     custom: ''
@@ -48,11 +38,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -73,8 +66,7 @@ system:
     - material
     - ritual
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    xtZ7B40p40zRMoNc:
       type: utility
       activation:
         type: action
@@ -88,6 +80,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -95,11 +88,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -111,20 +106,32 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: xtZ7B40p40zRMoNc
   identifier: augury
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-teal.webp
+img: icons/sundries/scrolls/scroll-writing-brown-gold.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347219
-  modifiedTime: 1725992716939
+  modifiedTime: 1781219733249
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!4v2H3hHb3Ph9XLNd'

@@ -449,9 +449,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -466,7 +463,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -486,6 +483,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: aap2fFb4b7uX3XAO
     name: Bite
@@ -495,11 +493,12 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          make a DC 13 Constitution saving throw, taking 31 (7d8) poison damage
-          on a failed save, or half as much damage on a successful one.</p>
+          make a [[/save activity=q1kzQBmcMwK6GGVz]] saving throw, taking
+          [[/damage average activity=q1kzQBmcMwK6GGVz]] damage on a failed save,
+          or half as much damage on a successful one.</p>
         chat: >-
-          <p>The Spirit Naga attacks with its Bite. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -562,7 +561,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -571,8 +570,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FXBUBbmCbT7aru9g:
           type: attack
           activation:
             type: action
@@ -587,10 +585,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -607,7 +606,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -620,27 +620,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FXBUBbmCbT7aru9g
+          name: ''
+        q1kzQBmcMwK6GGVz:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -650,10 +661,15 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must make a [[/save activity=q1kzQBmcMwK6GGVz]]
+              saving throw, taking [[/damage average activity=q1kzQBmcMwK6GGVz]]
+              damage on a failed save, or half as much damage on a successful
+              one.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -670,7 +686,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -693,19 +710,29 @@ items:
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: con
               formula: '13'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
           visibility:
             level:
               min: null
               max: null
             identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: q1kzQBmcMwK6GGVz
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -720,65 +747,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826791566
+      systemVersion: 6.0.0
+      createdTime: 1781883286834
+      modifiedTime: 1781883379036
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.aap2fFb4b7uX3XAO'
-  - _id: WqOflwn1ubAMkGdQ
-    name: Rejuvenation
-    type: feat
-    img: icons/magic/control/debuff-energy-hold-levitate-green.webp
-    system:
-      description:
-        value: >-
-          <p>If it dies, the naga returns to life in 1d6 days and regains all
-          its hit points. Only a wish spell can prevent this trait from
-          functioning.</p>
-        chat: >-
-          <p>If it dies, the naga returns to life in 1d6 days and regains all
-          its<strong> hit points</strong>.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: rejuvenation
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826750445
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!BAT6ld8qJZetpycL.WqOflwn1ubAMkGdQ'
   - _id: Fla0ZsaY2HvXWqbR
     name: Spellcasting
     type: feat
@@ -828,18 +804,18 @@ items:
       identifier: spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826764882
+      createdTime: 1781883249909
+      modifiedTime: 1781883249909
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.Fla0ZsaY2HvXWqbR'
@@ -953,7 +929,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1079,7 +1055,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1215,7 +1191,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ctW81uiX56xZR2c5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1335,7 +1311,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1452,7 +1428,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1588,7 +1564,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1732,7 +1708,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1846,7 +1822,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1979,7 +1955,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.IyikgTEOTv701jgQ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2093,7 +2069,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2230,7 +2206,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pybg5MNc3lkerH4Y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2361,7 +2337,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A4RsPuSvB9wFtz1j
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2498,7 +2474,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2506,6 +2482,129 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.91Sw6vOIaO7U8DvM'
+  - _id: 1tcNxiXDdUbfOovR
+    name: Rejuvenation
+    type: feat
+    img: icons/magic/life/ankh-gold-blue.webp
+    system:
+      description:
+        value: >-
+          <p>If it dies, the [[lookup @name lowercase]]{monster} returns to life
+          in 1d6 days and regains all its hit points.</p><p>Only a
+          @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell can
+          prevent this trait from functioning.</p>
+        chat: >-
+          <p>If it dies, the [[lookup @name]]{monster} returns to life in 1d6
+          days and regains all its hit points.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        ySWjzwp54wZZXxgV:
+          type: utility
+          activation:
+            type: special
+            value: null
+            condition: When the [[lookup @name lowercase]]{monster} dies.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: 1d6
+            name: Days until Revival
+            prompt: false
+            visible: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ySWjzwp54wZZXxgV
+          name: ''
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: rejuvenation
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8ExSFCar5Lbhdo7u.Item.GkVxLIsamEXICEeT
+      duplicateSource: Item.76UqU1bgAyB8Kvnj
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781883247963
+      modifiedTime: 1781883249909
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!BAT6ld8qJZetpycL.1tcNxiXDdUbfOovR'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -2514,7 +2613,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171211590

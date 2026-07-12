@@ -445,9 +445,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -462,7 +459,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -482,138 +479,25 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: yxlzyXTpsEf4QiI9
     name: Aberrant Ground
     type: feat
-    img: icons/magic/air/wind-tornado-funnel-damage-blue.webp
+    img: icons/creatures/slimes/slime-movement-splashing-red.webp
     system:
       description:
         value: >-
-          <p>The ground in a 10-foot radius around the mouther is doughlike
-          difficult terrain. Each creature that starts its turn in that area
-          must succeed on a [[/save]] saving throw or have its speed reduced to
-          0 until the start of its next turn.</p>
+          <p>The ground in a [[lookup @labels.description.template
+          activity=uNtJ0Zvj5SXxoaNm]] around the [[lookup @name
+          lowercase]]{monster} is doughlike &amp;reference[difficult terrain].
+          Each creature that starts its turn in that area must succeed on a
+          [[/save]] saving throw or have its speed reduced to 0 until the start
+          of its next turn.</p>
         chat: >-
-          <p>The ground in a <strong>10-foot radius</strong> around the mouther
-          is doughlike difficult terrain. Make a <strong>Strength</strong>
-          saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: special
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '1'
-            units: turn
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: radius
-              size: '10'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: str
-            dc:
-              calculation: ''
-              formula: '10'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: aberrant-ground
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KoBGbIkb2tMZv0ch
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275870570
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!8pX2JhWUpTNNRBVx.yxlzyXTpsEf4QiI9'
-  - _id: SzwWnAgr25vDeHKu
-    name: Gibbering
-    type: feat
-    img: icons/skills/toxins/cup-goblet-poisoned-spilled.webp
-    system:
-      description:
-        value: >-
-          <p>The mouther babbles incoherently while it can see any creature and
-          isn't incapacitated. Each creature that starts its turn within 20 feet
-          of the mouther and can hear the gibbering must succeed on a [[/save]]
-          saving throw. On a failure, the creature can't take reactions until
-          the start of its next turn and rolls a [[/r d8]] to determine what it
-          does during its turn.</p><p>On a 1 to 4, the creature does nothing. On
-          a 5 or 6, the creature takes no action or bonus action and uses all
-          its movement to move in a randomly determined direction. On a 7 or 8,
-          the creature makes a melee attack against a randomly determined
-          creature within its reach or does nothing if it can't make such an
-          attack.</p>
-        chat: >-
-          <p>The mouther babbles incoherently while it can see any creature.
-          Each creature that starts its turn <strong>within 20 feet</strong> of
-          the mouther and can hear the gibbering must succeed on a Wisdom saving
+          <p>The ground in a [[lookup @labels.description.template
+          activity=uNtJ0Zvj5SXxoaNm]] around the [[lookup @name]]{monster} is
+          doughlike &amp;reference[difficult terrain]. Make a Strength saving
           throw.</p>
       source:
         custom: ''
@@ -632,13 +516,12 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        uNtJ0Zvj5SXxoaNm:
           type: save
           activation:
             type: special
             value: null
-            condition: ''
+            condition: When a creature starts its turn in the area.
             override: false
           consumption:
             targets: []
@@ -648,13 +531,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: turn
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: tWfryffXSDg4s5ly
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -664,10 +553,11 @@ items:
               count: ''
               contiguous: false
               type: radius
-              size: '20'
+              size: '10'
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -680,50 +570,138 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '10'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: uNtJ0Zvj5SXxoaNm
+          name: ''
       enchant: {}
       prerequisites:
         level: null
-      identifier: gibbering
-    effects: []
+      identifier: aberrant-ground
+    effects:
+      - name: Aberrant Ground
+        img: icons/creatures/slimes/slime-movement-splashing-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.8pX2JhWUpTNNRBVx.Item.yxlzyXTpsEf4QiI9
+        transfer: false
+        _id: tWfryffXSDg4s5ly
+        type: base
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.swim
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.burrow
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.climb
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.fly
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>Your movement speed is reduced to 0 until the start of your next
+          turn.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781746591503
+          modifiedTime: 1781746659227
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!8pX2JhWUpTNNRBVx.yxlzyXTpsEf4QiI9.tWfryffXSDg4s5ly
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.dPPLbo3Unu3TqZrs
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KoBGbIkb2tMZv0ch
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275911577
+      systemVersion: 6.0.0
+      createdTime: 1781746526511
+      modifiedTime: 1781746984045
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!8pX2JhWUpTNNRBVx.SzwWnAgr25vDeHKu'
-  - _id: qlBBeTku9uoaEv8G
-    name: Multiattack
+    _key: '!actors.items!8pX2JhWUpTNNRBVx.yxlzyXTpsEf4QiI9'
+  - _id: SzwWnAgr25vDeHKu
+    name: Gibbering
     type: feat
-    img: icons/skills/melee/blade-tips-triple-steel.webp
+    img: icons/creatures/magical/spirit-poison-smoke-green.webp
     system:
       description:
         value: >-
-          <p>The gibbering mouther makes one [[/item .lfUDtJ8hdeULQzqa]]{bite}
-          attack and, if it can, uses its [[/item .KQRvDGowc6ihejLu]]{Blinding
-          Spittle}.</p>
-        chat: ''
+          <p>The mouther babbles incoherently while it can see any creature and
+          isn't &amp;reference[incapacitated apply=false]. Each creature that
+          starts its turn within 20 feet of the [[lookup @name
+          lowercase]]{monster} and can hear the gibbering must succeed on a
+          [[/save]] saving throw. On a failure, the creature can't take
+          reactions until the start of its next turn and rolls a [[/r d8]] to
+          determine what it does during its turn.</p><p>On a 1 to 4, the
+          creature does nothing. On a 5 or 6, the creature takes no action or
+          bonus action and uses all its movement to move in a randomly
+          determined direction. On a 7 or 8, the creature makes a melee attack
+          against a randomly determined creature within its reach or does
+          nothing if it can't make such an attack.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} babbles incoherently while it can see
+          any creature. Each creature that starts its turn within 20 feet of the
+          [[lookup @name]]{monster} and can hear the gibbering must succeed on a
+          Wisdom saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -741,8 +719,180 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        w3NYs2he8RDgzzdo:
+          type: save
+          activation:
+            type: special
+            value: null
+            condition: >-
+              When a creature starts their turn within range of the [[lookup
+              @name lowercase]]{monster} and can hear the gibbering.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: turn
+            special: ''
+            override: false
+          effects:
+            - _id: b4b8BkY0x6cpXGKU
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            units: self
+            special: ''
+            override: false
+            value: ''
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: radius
+              size: '20'
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: ''
+              formula: '10'
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: w3NYs2he8RDgzzdo
+          name: Gibbering Save
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: gibbering
+    effects:
+      - name: Gibbering
+        img: icons/creatures/magical/spirit-poison-smoke-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.8pX2JhWUpTNNRBVx.Item.SzwWnAgr25vDeHKu
+        transfer: false
+        _id: b4b8BkY0x6cpXGKU
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You can't take reactions until the start of your next turn and must
+          roll a [[/r d8]] to determine what you do during your turn.</p><p>On a
+          1 to 4, you do nothing. On a 5 or 6, you take no action or bonus
+          action and use all your movement to move in a randomly determined
+          direction. On a 7 or 8, you make a melee attack against a randomly
+          determined creature within your reach or doe nothing if you can't make
+          such an attack.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781746732684
+          modifiedTime: 1781746874257
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!8pX2JhWUpTNNRBVx.SzwWnAgr25vDeHKu.b4b8BkY0x6cpXGKU
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.dPPLbo3Unu3TqZrs
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781746713348
+      modifiedTime: 1781746943368
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!8pX2JhWUpTNNRBVx.SzwWnAgr25vDeHKu'
+  - _id: qlBBeTku9uoaEv8G
+    name: Multiattack
+    type: feat
+    img: icons/skills/melee/blade-tips-triple-steel.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .lfUDtJ8hdeULQzqa]]{Bite} attack and, if it can, uses its [[/item
+          .KQRvDGowc6ihejLu]]{Blinding Spittle}.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        5dMFDsyuT2WTYruy:
           type: utility
           activation:
             type: action
@@ -757,15 +907,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -776,7 +927,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -793,7 +945,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 5dMFDsyuT2WTYruy
       enchant: {}
       prerequisites:
         level: null
@@ -807,29 +967,29 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275914691
+      systemVersion: 6.0.0
+      createdTime: 1781753514599
+      modifiedTime: 1781753737458
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.qlBBeTku9uoaEv8G'
   - _id: lfUDtJ8hdeULQzqa
     name: Bites
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
           Medium or smaller, it must succeed on a [[/save]] saving throw or be
-          knocked prone. If the target is killed by this damage, it is absorbed
-          into the mouther.</p>
+          knocked &amp;reference[prone]. If the target is killed by this damage,
+          it is absorbed into the [[lookup @name lowercase]]{monster}.</p>
         chat: >-
-          <p>The Gibbering Mouther attacks with its Bites. If the target is
-          Medium or smaller, it must make a <strong>Strength</strong> saving
-          throw or be knocked prone.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is Medium or smaller, it must make a
+          Strength saving throw or be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -892,7 +1052,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -901,8 +1061,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        OvjlXOIYK3BASh3A:
           type: attack
           activation:
             type: action
@@ -917,10 +1076,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -937,7 +1097,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -950,27 +1111,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: OvjlXOIYK3BASh3A
+          name: ''
+        e1l3VXsl2AfHvE4g:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -980,10 +1152,15 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If the target is Medium or smaller, it must succeed on a
+              [[/save]] saving throw or be knocked &amp;reference[prone]. If the
+              target is killed by this damage, it is absorbed into the [[lookup
+              @name lowercase]]{monster}.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1000,10 +1177,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1013,14 +1191,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '10'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: e1l3VXsl2AfHvE4g
+          name: Prone Save
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1031,39 +1224,37 @@ items:
     sort: 250000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275935487
+      systemVersion: 6.0.0
+      createdTime: 1781746990606
+      modifiedTime: 1781747061639
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.lfUDtJ8hdeULQzqa'
   - _id: KQRvDGowc6ihejLu
     name: Blinding Spittle
     type: feat
-    img: icons/magic/nature/root-vine-thorned-fire-purple.webp
+    img: icons/magic/acid/projectile-faceted-glob.webp
     system:
       description:
         value: >-
-          <p>The mouther spits a chemical glob at a point it can see within 15
-          feet of it. The glob explodes in a blinding flash of light on impact.
-          Each creature within 5 feet of the flash must succeed on a [[/save]]
-          saving throw or be blinded until the end of the mouther's next
-          turn.</p>
+          <p>The [[lookup @name lowercase]]{monster} spits a chemical glob at a
+          point it can see within [[lookup @labels.description.range
+          activity=lIu1LNYAMT8FLBjR]] of it. The glob explodes in a blinding
+          flash of light on impact. Each creature within 5 feet of the flash
+          must succeed on a [[/save]] saving throw or be &amp;reference[blinded
+          apply=false] until the end of the mouther's next turn.</p>
         chat: >-
-          <p>The mouther spits a chemical glob at a point it can see within 15
-          feet of it. The glob explodes in a blinding flash of light on impact.
-          Each creature within 5 feet of the flash must make a
-          <strong>Dexterity</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} spits a chemical glob at a point it
+          can see within [[lookup @labels.description.range
+          activity=lIu1LNYAMT8FLBjR]] of it. The glob explodes in a blinding
+          flash of light on impact. Each creature within 5 feet of the flash
+          must make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1079,13 +1270,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        lIu1LNYAMT8FLBjR:
           type: save
           activation:
             type: action
@@ -1095,24 +1285,26 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: turn
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: mYKrzvh1Pfu5WIPh
+              level: {}
+              onSave: false
           range:
             value: '15'
             units: ft
@@ -1127,9 +1319,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1139,19 +1332,74 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: lIu1LNYAMT8FLBjR
+          name: Spit Chemical Glob
       enchant: {}
       prerequisites:
         level: null
       identifier: blinding-spittle
-    effects: []
+    effects:
+      - name: Blinding Spittle
+        img: icons/magic/light/explosion-glow-spiral-teal.webp
+        origin: Compendium.dnd5e.monsters.Actor.8pX2JhWUpTNNRBVx.Item.KQRvDGowc6ihejLu
+        transfer: false
+        _id: mYKrzvh1Pfu5WIPh
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[blinded apply=false] until the end of the
+          gibbering mouther's next turn.</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781753423378
+          modifiedTime: 1781753486736
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!8pX2JhWUpTNNRBVx.KQRvDGowc6ihejLu.mYKrzvh1Pfu5WIPh
     folder: null
     sort: 300000
     ownership:
@@ -1160,11 +1408,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0awyZX05OnVLF4k2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275949298
+      systemVersion: 6.0.0
+      createdTime: 1781753351341
+      modifiedTime: 1781753766808
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.KQRvDGowc6ihejLu'
@@ -1176,7 +1424,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171208657

@@ -188,25 +188,27 @@ effects:
     transfer: false
     _id: jXvtCEBoDCydH8fa
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.wis.value
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.abilities.wis.max
-        mode: 4
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.wis.value
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: cjhNJCIcv5mCwNCe
+        - key: system.abilities.wis.max
+          value: 30
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: tBlX0yQWix0lVDvX
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -215,22 +217,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730661923673
-      modifiedTime: 1730692394012
+      modifiedTime: 1783544099235
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgTomeOfUnderst.jXvtCEBoDCydH8fa'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764617584679
+  modifiedTime: 1783544099235
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 37400000

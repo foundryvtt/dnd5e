@@ -104,21 +104,21 @@ effects:
     transfer: false
     _id: nW7Dh0S9wT7QHWCj
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.senses.truesight
-        mode: 4
-        value: '120'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.senses.truesight
+          value: 120
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: YwgrujEe7UWzwOP3
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -127,13 +127,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724801561459
-      modifiedTime: 1724801641412
+      modifiedTime: 1783543977475
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplTrueSeeing.nW7Dh0S9wT7QHWCj'
 folder: 8WmlLARx1Df3Ii9v
 sort: 100098
@@ -146,11 +149,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425976282
-  modifiedTime: 1745256799495
+  modifiedTime: 1783543977475
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTrueSeeing'

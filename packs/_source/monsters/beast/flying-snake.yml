@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,16 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: 5d7uD5cYAPtlPrWh
     name: Flyby
     type: feat
-    img: icons/creatures/mammals/bats-movement-flying-purple.webp
+    img: icons/creatures/abilities/wings-birdlike-blue.webp
     system:
       description:
         value: >-
-          <p>The snake doesn't provoke opportunity attacks when it flies out of
-          an enemy's reach.</p>
+          <p>The [[lookup @name lowercase]]{monster} doesn't provoke
+          &amp;reference[opportunity attacks] when it flies out of an enemy's
+          reach.</p>
         chat: ''
       source:
         custom: ''
@@ -504,10 +503,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: Owl
-      properties: []
+      requirements: ''
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -522,22 +522,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.7WfeHV27l7DMcuTG
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781532265088
+      modifiedTime: 1781532326910
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!SMfgOsfPgf6rb01k.5d7uD5cYAPtlPrWh'
   - _id: ITtDDLuoOyJbDQpA
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/fang-tooth-venomous.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Flying Snake attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -599,9 +601,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -610,8 +611,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ZbckUNSotXiLcDkj:
           type: attack
           activation:
             type: action
@@ -626,6 +626,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -646,7 +647,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -665,8 +667,8 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
@@ -676,14 +678,25 @@ items:
                   enabled: false
                   formula: ''
                 number: 3
-                denomination: '4'
+                denomination: 4
                 bonus: ''
                 types:
                   - poison
-          sort: 0
+                scaling:
+                  number: 1
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ZbckUNSotXiLcDkj
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -694,19 +707,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741117888824
+      systemVersion: 6.0.0
+      createdTime: 1781532352380
+      modifiedTime: 1781532366114
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!SMfgOsfPgf6rb01k.ITtDDLuoOyJbDQpA'
@@ -718,7 +727,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171231941

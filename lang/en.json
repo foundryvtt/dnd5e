@@ -94,6 +94,23 @@
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
   },
+  "Formatter": {
+    "Check": {
+      "AdvantageMode": "{name} Check Advantage Mode",
+      "Bonus": "{name} Check Bonus",
+      "Maximum": "Maximum {name} Check Roll",
+      "Minimum": "Minimum {name} Check Roll"
+    },
+    "Maximum": "Maximum {name}",
+    "Save": {
+      "AdvantageMode": "{name} Save Advantage Mode",
+      "Bonus": "{name} Save Bonus",
+      "Maximum": "Maximum {name} Save Roll",
+      "Minimum": "Minimum {name} Save Roll",
+      "Proficiency": "{name} Save Proficiency"
+    },
+    "Score": "{name} Score"
+  },
   "SECTIONS": {
     "Bonuses": {
       "Label": "{ability} Bonuses",
@@ -272,7 +289,25 @@
 },
 
 "DND5E.ACTIVEEFFECT": {
-  "AttributeKeyTooltip": "For a list of common keys, see <a href=\"{url}\">the wiki</a>.",
+  "AttributeKeyTooltip": "For a list of common keys and their accepted values, see <a href=\"{url}\">the wiki</a>.",
+  "ChangeType": {
+    "Bonus": {
+      "Label": "Rule: Bonus"
+    }
+  },
+  "Expired": "Expired",
+  "Expiry": {
+    "GROUPS": {
+      "General": "General",
+      "Specific": "Specific"
+    },
+    "SourceStart": "Start of Source's Next Turn",
+    "SourceEnd": "End of Source's Next Turn",
+    "TargetStart": "Start of Target's Next Turn",
+    "TargetEnd": "End of Target's Next Turn",
+    "YourStart": "Start of Your Next Turn",
+    "YourEnd": "End of Your Next Turn"
+  },
   "FIELDS": {
     "statuses": {
       "label": "Status Conditions",
@@ -649,6 +684,7 @@
       "AddChange": "Add Change",
       "DeleteChange": "Delete Change"
     },
+    "DropHint": "Drop an Enchantment here",
     "Empty": {
       "WithDropdown": "No changes. Use the <i class=\"fa-solid fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
       "WithoutDropdown": "No changes. Use the <i class=\"fa-solid fa-plus\"></i> button above to create one."
@@ -897,6 +933,27 @@
 "DND5E.AdvancementTitle": "Advancement",
 "DND5E.Advantage": "Advantage",
 "DND5E.AdvantageMode": "Advantage Mode",
+
+"DND5E.ADVENTURE": {
+  "Action": {
+    "Configure": "Configure Adventure",
+    "Launch": "Launch Adventure"
+  },
+  "Finished": {
+    "one": "Finished preparing {adventure}.",
+    "other": "Finished preparing {number} adventures."
+  },
+  "ImportAction": {
+    "ActivateScene": "Activate Initial Scene",
+    "CustomizeWorld": "Customize World Details",
+    "DisplayJournal": "Display Getting Started Journal"
+  },
+  "Warning": {
+    "JournalMissing": "Journal entry `{id}` could not be found to display for {adventure}.",
+    "SceneMissing": "Scene `{id}` could not be found to activate for {adventure}."
+  }
+},
+
 "DND5E.Age": "Age",
 "DND5E.Alignment": "Alignment",
 "DND5E.AlignmentCE": "Chaotic Evil",
@@ -911,6 +968,7 @@
 "DND5E.Amount": "Amount",
 "DND5E.Appearance": "Appearance",
 "DND5E.Apply": "Apply",
+"DND5E.AttributeScores": "Attribute Scores",
 "DND5E.Attunement": "Attunement",
 "DND5E.AttunementMax": "Maximum Attuned Items",
 "DND5E.AttunementNone": "Attunement Not Required",
@@ -971,9 +1029,31 @@
   "FIELDS": {
     "attributes": {
       "ac": {
+        "armor": {
+          "label": "Equipped Armor Value"
+        },
+        "base": {
+          "label": "Base Armor Class"
+        },
+        "bonus": {
+          "label": "AC Bonus"
+        },
+        "calc": {
+          "label": "AC Calculation Method"
+        },
+        "calcs": {
+          "hint": "These formulas will be used when calculating armor class.",
+          "label": "Selected Formulas"
+        },
+        "cover": {
+          "label": "AC from Cover"
+        },
         "flat": {
           "hint": "Number that can be used in an armor class by using @attributes.ac.flat in the formula.",
           "label": "Flat Value"
+        },
+        "formula": {
+          "label": "Extra AC Formula"
         },
         "formulas": {
           "element": {
@@ -997,13 +1077,15 @@
           "label": "Formulas"
         },
         "label": "Armor Class",
+        "min": {
+          "label": "Minimum Armor Class"
+        },
         "override": {
           "hint": "Value that will be used in place of calculated armor class, ignoring cover, shield, and any other bonuses.",
           "label": "Override"
         },
-        "selectedFormulas": {
-          "hint": "These formulas will be used when calculating armor class.",
-          "label": "Selected Formulas"
+        "shield": {
+          "label": "Equipped Shield Value"
         }
       }
     }
@@ -1138,6 +1220,11 @@
 "DND5E.BackgroundName": "Background Name",
 "DND5E.BaseItem": "Base Item",
 
+"DND5E.BASE": {
+  "Image": "Image",
+  "Name": "Name"
+},
+
 "DND5E.Bastion": {
   "Action": {
     "Advance": "Advance Bastion Turn",
@@ -1202,6 +1289,7 @@
     "Create": "Create Behavior",
     "Delete": "Delete Behavior"
   },
+  "Empty": "No associated behaviors. Use the <i class=\"fas fa-plus\"></i> button above to create one.",
   "Hint": "These behaviors will apply to any area of effect placed by this activity.",
   "Label": "Behavior"
 },
@@ -1622,6 +1710,24 @@
 },
 "DND5E.Challenge": "Challenge",
 "DND5E.ChallengeRating": "Challenge Rating",
+
+"DND5E.CHARACTER": {
+  "FIELDS": {
+    "traits": {
+      "weaponProf": {
+        "mastery": {
+          "bonus": {
+            "label": "Bonus Weapon Masteries"
+          },
+          "value": {
+            "label": "Weapon Masteries"
+          }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Charged": "Charged",
 "DND5E.Charges": "Charges",
 "DND5E.ChatContextDamage": "Apply As Damage",
@@ -1853,24 +1959,53 @@
 "DND5E.ConRestrained": "Restrained",
 "DND5E.ConStunned": "Stunned",
 "DND5E.ConUnconscious": "Unconscious",
+
 "DND5E.Concentration": "Concentration",
-"DND5E.ConcentrationAbbr": "C",
-"DND5E.ConcentrationBreak": "Break Concentration",
-"DND5E.ConcentrationBreakWarning": "Breaking concentration on an effect that is active on other creatures requires an active GM to be present.",
-"DND5E.ConcentrationBonus": "Concentration Bonus",
-"DND5E.ConcentrationDuration": "Concentration, up to {duration}",
-"DND5E.ConcentratingOn": "You are maintaining concentration on the effects of the '{name}' {type}.",
-"DND5E.ConcentratingEndChoice": "You are concentrating on effects from more than one source. Pick which effect to end.",
-"DND5E.ConcentratingMissingItem": "The effect that is concentrated on and to be replaced does not exist.",
-"DND5E.ConcentratingLimited": "You are not able to begin concentrating on an additional effect.",
-"DND5E.ConcentrationLimit": "Concentration Limit",
-"DND5E.ConcentrationLost": "Lost Concentration",
-"DND5E.ConcentratingEnd": "End Concentration",
-"DND5E.ConcentratingItemless": "Concentration With No Source",
-"DND5E.ConcentratingWarnLimit": "You cannot maintain concentration on more effects!",
-"DND5E.ConcentratingWarnLimitOptional": "You may end concentration on one of your maintained effects to use this item.",
-"DND5E.ConcentratingWarnLimitZero": "You are not able to maintain concentration on any effects!",
-"DND5E.ConcentrationConfigurationHint": "Configure concentration modifiers and bonuses which apply to this creature.",
+"DND5E.CONCENTRATION": {
+  "Abbreviation": "C",
+  "Action": {
+    "Break": "Break Concentration",
+    "End": "End Concentration"
+  },
+  "Description": "You are maintaining concentration on the effects of the '{name}' {type}.",
+  "Duration": "Concentration, up to {duration}",
+  "EndChoice": "You are concentrating on effects from more than one source. Pick which effect to end.",
+  "FIELDS": {
+    "attributes": {
+      "concentration": {
+        "bonuses": {
+          "label": "Concentration Bonuses",
+          "save": {
+            "label": "Concentration Bonus"
+          }
+        },
+        "label": "Concentration",
+        "limit": {
+          "label": "Concentration Limit"
+        },
+        "roll": {
+          "ability": "Concentration Save Ability",
+          "max": "Maximum Concentration Save Roll",
+          "min": "Minimum Concentration Save Roll",
+          "mode": "Concentration Save Advantage Mode"
+        }
+      }
+    }
+  },
+  "Limit": {
+    "Hard": "You cannot maintain concentration on more effects!",
+    "Optional": "You may end concentration on one of your maintained effects to use this item.",
+    "Reached": "You are not able to begin concentrating on an additional effect.",
+    "Zero": "You are not able to maintain concentration on any effects!"
+  },
+  "Lost": "Lost Concentration",
+  "NoSource": "Concentration With No Source",
+  "Warning": {
+    "BreakWithoutGM": "Breaking concentration on an effect that is active on other creatures requires an active GM to be present.",
+    "MissingItem": "The effect that is concentrated on and to be replaced does not exist."
+  }
+},
+
 "DND5E.ConsumeTitle": "Resource Consumption",
 "DND5E.ConsumeAmount": "Consumption Amount",
 "DND5E.ConsumeHint": {
@@ -1897,6 +2032,42 @@
 "DND5E.CONSUMABLE": {
   "FIELDS": {
     "damage": {
+      "base": {
+        "bonus": {
+          "label": "Base Damage Bonus"
+        },
+        "custom": {
+          "enabled": {
+            "label": "Use Custom Base Damage Formula"
+          },
+          "formula": {
+            "label": "Custom Base Damage Formula"
+          }
+        },
+        "denomination": {
+          "label": "Base Damage Denomination"
+        },
+        "number": {
+          "label": "Base Damage Die Count"
+        },
+        "scaling": {
+          "formula": {
+            "label": "Base Damage Scaling Formula"
+          },
+          "mode": {
+            "label": "Base Damage Scaling Mode"
+          },
+          "number": {
+            "label": "Base Damage Scaling Value"
+          }
+        },
+        "types": {
+          "label": "Base Damage Types"
+        }
+      },
+      "bonus": {
+        "label": "Damage Bonus"
+      },
       "label": "Ammunition Damage",
       "replace": {
         "label": "Replace Weapon Damage",
@@ -2023,6 +2194,7 @@
     "Delete": "Delete Consumption Target",
     "RefundResource": "Refund Resource"
   },
+  "Empty": "No associated consumption. Use the <i class=\"fas fa-plus\"></i> button above to add consumption targets.",
   "Scaling": {
     "Amount": "Amount",
     "Automatic": "Automatic",
@@ -2266,6 +2438,8 @@
       }
     }
   },
+  "Empty": "No damage configured. Use the <i class=\"fas fa-plus\"></i> button above to add damage parts.",
+  "EmptyExceptBase": "Use the <i class=\"fas fa-plus\"></i> button above to add additional damage parts.",
   "Hint": "Damage a creature without any attack or save.",
   "Part": {
     "Action": {
@@ -2422,14 +2596,22 @@
 "DND5E.Dusk": "Dusk",
 
 "DND5E.Effect": "Effect",
-
 "DND5E.EFFECT": {
   "Action": {
-    "Create": "Create Effect",
-    "Delete": "Delete Effect",
-    "Dissociate": "Dissociate Effect",
+    "AddChange": "Add Change",
+    "CreateEffect": "Create Effect",
+    "DeleteEffect": "Delete Effect",
+    "DeleteChange": "Delete Change",
+    "DissociateEffect": "Dissociate Effect",
+    "EditChange": "Edit Change",
+    "EditEffect": "Edit Effect",
+    "RemoveStatus": {
+      "all": "All Sources",
+      "label": "Source"
+    },
     "Search": "Search effects"
   },
+  "AdditionalChanges": "Additional Changes",
   "Application": {
     "Action": {
       "ApplyTokens": "Apply to selected tokens"
@@ -2442,14 +2624,55 @@
   },
   "BASE": {
     "FIELDS": {
+      "changes": {
+        "element": {
+          "conditions": {
+            "hint": "Condition that must be met for this change to apply.",
+            "label": "Change Conditions"
+          },
+          "key": {
+            "label": "Attribute Key"
+          },
+          "phase": {
+            "hint": "The point in data preparation, or another event, at which a change is to be applied.",
+            "label": "Phase"
+          },
+          "priority": {
+            "label": "Priority"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "value": {
+            "label": "Value"
+          }
+        }
+      },
+      "conditions": {
+        "hint": "Conditions that control when the effect will be applied.",
+        "label": "Effect Conditions"
+      },
       "magical": {
         "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
         "label": "Magical"
       }
     }
   },
-  "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, select an existing effect from the drop-down, or drop one from a compendium.",
+  "Category": {
+    "Temporary": "Temporary Effects",
+    "Passive": "Passive Effects",
+    "Inactive": "Inactive Effects",
+    "Unavailable": "Unavailable Effects"
+  },
+  "Change": {
+    "Configuration": "Change Configuration",
+    "Label": "Change",
+    "Title": "{effect} Change #{number}"
+  },
+  "DropHint": "Drop an Active Effect here",
+  "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
   "Label": "Available Effects",
+  "New": "New Effect",
   "RIDER": {
     "Activity": "Enchantment Rider Activity",
     "Effect": "Enchantment Rider Effect",
@@ -2462,9 +2685,23 @@
       }
     }
   },
+  "Status": {
+    "ChangeActive": "Change Active",
+    "ChangeInactive": "Change Inactive",
+    "DeleteDialog": {
+      "hint": "You are under the effects of this condition from more than one source. Pick which effect to end.",
+      "title": "Remove Effect"
+    },
+    "Inactive": "Inactive",
+    "Passive": "Passive",
+    "Temporary": "Temporary",
+    "Unavailable": "Unavailable"
+  },
+  "Suppressed": {
+    "Hint": "Source item must be equipped or attuned to activate these"
+  },
   "Tab": "Effects"
 },
-
 
 "DND5E.ENCHANT": {
   "FIELDS": {
@@ -2608,6 +2845,44 @@
   }
 },
 
+"DND5E.Encumbrance": "Encumbrance",
+"DND5E.ENCUMBRANCE": {
+  "FIELDS": {
+    "attributes": {
+      "encumbrance": {
+        "bonuses": {
+          "encumbered": {
+            "label": "Bonus to Encumbered Threshold"
+          },
+          "heavilyEncumbered": {
+            "label": "Bonus to Heavily Encumbered Threshold"
+          },
+          "maximum": {
+            "label": "Bonus to Maximum Carrying Capacity"
+          },
+          "overall": {
+            "label": "Bonus to All Encumberance Thresholds"
+          }
+        },
+        "multipliers": {
+          "encumbered": {
+            "label": "Encumbered Threshold Multiplier"
+          },
+          "heavilyEncumbered": {
+            "label": "Heavily Encumbered Threshold Multiplier"
+          },
+          "maximum": {
+            "label": "Maximum Carrying Capacity Multiplier"
+          },
+          "overall": {
+            "label": "Multiplier for All Encumberance Thresholds"
+          }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Environment": "Environment",
 
 "DND5E.EQUIPMENT": {
@@ -2666,6 +2941,7 @@
 },
 
 "DND5E.Expertise": "Expertise",
+"DND5E.Eyes": "Eyes",
 
 "DND5E.FACILITY": {
   "Action": {
@@ -2988,6 +3264,7 @@
     "Origin": "Origin Feat"
   },
   "Monster": "Monster Feature",
+  "PietyTrait": "Piety Trait",
   "Species": "Species Feature",
   "SpeciesLegacy": "Race Feature",
   "SupernaturalGift": {
@@ -3030,26 +3307,6 @@
   }
 },
 
-"DND5E.EffectCreate": "Create Effect",
-"DND5E.EffectToggle": "Toggle Effect",
-"DND5E.EffectEdit": "Edit Effect",
-"DND5E.EffectEnable": "Enable Effect",
-"DND5E.EffectDelete": "Delete Effect",
-"DND5E.EffectDisable": "Disable Effect",
-"DND5E.EffectTemporary": "Temporary Effects",
-"DND5E.EffectPassive": "Passive Effects",
-"DND5E.EffectInactive": "Inactive Effects",
-"DND5E.EffectNew": "New Effect",
-"DND5E.EffectType": {
-  "Inactive": "Inactive",
-  "Passive": "Passive",
-  "Temporary": "Temporary",
-  "Unavailable": "Unavailable"
-},
-"DND5E.EffectUnavailable": "Unavailable Effects",
-"DND5E.EffectUnavailableInfo": "Source item must be equipped or attuned to activate these",
-"DND5E.Encumbrance": "Encumbrance",
-"DND5E.Eyes": "Eyes",
 "DND5E.Faith": "Faith",
 "DND5E.FeatureActive": "Active Abilities",
 "DND5E.FeatureAdd": "Create Feature",
@@ -3071,6 +3328,20 @@
 "DND5E.FilterGroupOrigin": "Group by Origin",
 "DND5E.FilterGroupAction": "Group by Action",
 "DND5E.FilterNoSpells": "No spells found for this set of filters.",
+
+"DND5E.FILTER": {
+  "Action": {
+    "Edit": "Edit Filters"
+  },
+  "Empty": "No Filters",
+  "Invalid": "Invalid Filter",
+  "Operator": {
+    "And": "and",
+    "Not": "not",
+    "Or": "or"
+  }
+},
+
 "DND5E.NoSpellLevels": "This character has no spellcaster levels, but you may add spells manually.",
 
 "DND5E.FLAGS": {
@@ -3285,6 +3556,9 @@
 "DND5E.Height": "Height",
 
 "DND5E.HITPOINTS": {
+  "Bloodied": {
+    "label": "Bloodied Threshold"
+  },
   "Counted": {
     "one": "{number} hit point",
     "other": "{number} hit points"
@@ -3400,13 +3674,6 @@
 "DND5E.ItemLootType": "Loot Type",
 "DND5E.ItemName": "Item Name",
 "DND5E.ItemNew": "New {type}",
-"DND5E.ItemRarityCommon": "common",
-"DND5E.ItemRarityMundane": "mundane",
-"DND5E.ItemRarityUncommon": "uncommon",
-"DND5E.ItemRarityRare": "rare",
-"DND5E.ItemRarityVeryRare": "very rare",
-"DND5E.ItemRarityLegendary": "legendary",
-"DND5E.ItemRarityArtifact": "artifact",
 "DND5E.ItemRechargeCheck": "{name} recharge check - {result}",
 "DND5E.ItemRechargeFailure": "failure!",
 "DND5E.ItemRechargeSuccess": "success!",
@@ -3471,6 +3738,16 @@
     "Versatile": "Versatile",
     "Verbal": "Verbal",
     "WeightlessContents": "Weightless Contents"
+  },
+  "Rarity": {
+    "Artifact": "Artifact",
+    "Common": "Common",
+    "Legendary": "Legendary",
+    "Mundane": "Mundane",
+    "Rare": "Rare",
+    "Uncommon": "Uncommon",
+    "Varies": "Varies",
+    "VeryRare": "Very Rare"
   },
   "SECTIONS": {
     "Activities": "Activities",
@@ -3691,6 +3968,18 @@
 "DND5E.PassivePerception": "Passive Perception",
 "DND5E.Period": "Period",
 "DND5E.PersonalityTraits": "Personality Traits",
+
+"DND5E.PIETY": {
+  "Configure": "Configure Piety",
+  "Label": "Piety",
+  "FIELDS": {
+    "value": {
+      "label": "Piety Score",
+      "hint": "This character's current piety score."
+    }
+  }
+},
+
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
 "DND5E.Preparation": "Preparation",
@@ -4004,6 +4293,12 @@
 "DND5E.RitualAbbr": "R",
 
 "DND5E.ROLL": {
+  "Formatter": {
+    "AdvantageMode": "{name} Advantage Mode",
+    "Maximum": "Maximum {name} Roll",
+    "Minimum": "Minimum {name} Roll",
+    "ModifierAbility": "{name} Modifier Ability"
+  },
   "Range": {
     "Label": "Roll Range",
     "Maximum": "Maximum Roll",
@@ -4103,6 +4398,9 @@
       },
       "dc": {
         "label": "Difficulty Class",
+        "bonus": {
+          "label": "DC Bonus"
+        },
         "calculation": {
           "label": "DC Calculation",
           "hint": "Method or ability used to calculate the difficulty class."
@@ -4156,6 +4454,8 @@
 "DND5E.Shape": "Shape",
 
 "DND5E.SheetClass": {
+  "ActiveEffect": "D&D 5e Active Effect Sheet",
+  "AdventureImporter": "D&D 5e Adventure Importer",
   "Character": "D&D 5e Character Sheet",
   "ClassSummary": "D&D 5e Class Summary Sheet",
   "Container": "D&D 5e Container Sheet",
@@ -4210,6 +4510,11 @@
 "DND5E.SizeTinyAbbr": "Tn",
 
 "DND5E.SKILL": {
+  "Formatter": {
+    "CheckBonus": "{name} Check Bonus",
+    "PassiveBonus": "Passive {name} Bonus",
+    "Proficiency": "{name} Proficiency"
+  },
   "SECTIONS": {
     "Details": "{label} Details",
     "Bonuses": {
@@ -4559,6 +4864,14 @@
     "creatureTypes": {
       "label": "Creature Types",
       "hint": "Summoned creature will be changed to this type. If more than one type is selected, then the player will be able to choose from these types when summoning."
+    },
+    "flat": {
+      "attack": {
+        "label": "Flat Attack To Hit"
+      },
+      "save": {
+        "label": "Flat Save DC"
+      }
     },
     "match": {
       "ability": {
@@ -5003,6 +5316,36 @@
   }
 },
 
+"DND5E.TELEPORT": {
+  "Action": {
+    "Teleport": "Teleport"
+  },
+  "FIELDS": {
+    "teleport": {
+      "label": "Distance",
+      "hint": "Set the maximum teleport distance.",
+      "override": {
+        "label": "Override",
+        "hint": "Override the activity's normal range and manually set the maximum teleport distance."
+      },
+      "units": {
+        "label": "Distance Unit"
+      },
+      "value": {
+        "label": "Maximum Distance"
+      }
+    }
+  },
+  "Hint": "Teleport a token to a chosen destination.",
+  "SECTIONS": {
+    "Teleport": "Teleport"
+  },
+  "Title": "Teleport",
+  "Warning": {
+    "InvalidDistance": "Teleport can't be used in scenes without supported movement units."
+  }
+},
+
 "DND5E.Target": "Target",
 "DND5E.TargetPl": "Targets",
 "DND5E.TargetType": "Target Type",
@@ -5040,6 +5383,10 @@
 "DND5E.ToggleDescription": "Toggle Description",
 
 "DND5E.TOOL": {
+  "Formatter": {
+    "CheckBonus": "{name} Check Bonus",
+    "Proficiency": "{name} Proficiency"
+  },
   "SECTIONS": {
     "Details": "{label} Details",
     "Bonuses": {
@@ -5163,15 +5510,20 @@
         "label": "Customize",
         "hint": "Use custom transformation settings rather than the defaults provided by the selected preset."
       },
+      "formless": {
+        "hint": "Allow creature to remove all forms and return to a default state.",
+        "label": "Formless"
+      },
       "identifier": {
         "label": "Class Identifier",
         "hint": "Identifier used to determine whether the character level or a specific class level should be used for profile level limits."
       },
       "mode": {
         "label": "Mode",
-        "hint": "Sets how the transformation source creatures are selected.",
-        "CR": "By Challenge Rating",
-        "Direct": "By Direct Link"
+        "hint": "Sets how the transformation changes are determined.",
+        "CR": "Creature Stats (by Challenge Rating)",
+        "Direct": "Creature Stats (by Direct Link)",
+        "Form": "Select Form"
       },
       "preset": {
         "label": "Preset"
@@ -5179,6 +5531,7 @@
     }
   },
   "Hint": "Change an actor using the stats of another.",
+  "NoForm": "No Form",
   "Preset": {
     "Appearance": {
       "Label": "Appearance Only"
@@ -5336,6 +5689,7 @@
   "TemporaryClass": "Temporary Class",
   "Title": "Transform",
   "Warning": {
+    "FormActive": "{form} already active on {actor}.",
     "NoOwnership": "You do not have permission to transform this actor.",
     "NoPermission": "Transformation permission haven't been granted to players.",
     "OriginalActor": "No original actor was found with ID '{reference}'.",
@@ -5551,9 +5905,6 @@
   }
 },
 
-"DND5E.Unknown": "Unknown",
-"DND5E.Unlimited": "Unlimited",
-
 "DND5E.USAGE": {
   "SECTION": {
     "Consumption": "Consumption",
@@ -5612,6 +5963,7 @@
       "Delete": "Delete Recovery Profile"
     },
     "Combat": "Combat",
+    "Empty": "No recovery specified. Use the <i class=\"fas fa-plus\"></i> button above to add recovery periods.",
     "Never": "Never",
     "Period": {
       "Dawn": {
@@ -5874,6 +6226,42 @@
       }
     },
     "damage": {
+      "base": {
+        "bonus": {
+          "label": "Base Damage Bonus"
+        },
+        "custom": {
+          "enabled": {
+            "label": "Use Custom Base Damage Formula"
+          },
+          "formula": {
+            "label": "Custom Base Damage Formula"
+          }
+        },
+        "denomination": {
+          "label": "Base Damage Denomination"
+        },
+        "number": {
+          "label": "Base Damage Die Count"
+        },
+        "scaling": {
+          "formula": {
+            "label": "Base Damage Scaling Formula"
+          },
+          "mode": {
+            "label": "Base Damage Scaling Mode"
+          },
+          "number": {
+            "label": "Base Damage Scaling Value"
+          }
+        },
+        "types": {
+          "label": "Base Damage Types"
+        }
+      },
+      "bonus": {
+        "label": "Damage Bonus"
+      },
       "hint": "Intrinsic damage dice from the weapon. Ability modifier and additional damage parts will be provided automatically when attacking."
     },
     "mastery": {
@@ -6103,9 +6491,11 @@
 
 "KEYBINDINGS.DND5E.DragCopy": "Force Copy when Dragging Document",
 "KEYBINDINGS.DND5E.DragMove": "Force Move when Dragging Document",
-"KEYBINDINGS.DND5E.SkipDialogNormal": "Skip Dialog",
+"KEYBINDINGS.DND5E.OpenCompendiumBrowser": "Open Compendium Browser",
 "KEYBINDINGS.DND5E.SkipDialogAdvantage": "Skip Dialog (roll with Advantage/Critical)",
 "KEYBINDINGS.DND5E.SkipDialogDisadvantage": "Skip Dialog (roll with Disadvantage/Non-Critical)",
+"KEYBINDINGS.DND5E.SkipDialogNormal": "Skip Dialog",
+"KEYBINDINGS.DND5E.ToggleSheetMode": "Toggle Sheet Mode",
 
 "MACRO.5eMissingTargetWarn": "Your controlled actor '{actor}' does not have an {type} with name '{name}'.",
 "MACRO.5eMultipleTargetsWarn": "Your controlled actor '{actor}' has more than one {type} with name '{name}'. The first match will be chosen.",
@@ -6135,6 +6525,8 @@
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
 "SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
 "SETTINGS.5eNoConcentrationL": "Disable the system's automated tracking of concentration.",
+"SETTINGS.5eNoExhaustionN": "Disable exhaustion automation",
+"SETTINGS.5eNoExhaustionL": "Disable the system's automation of exhaustion effects.",
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
@@ -6176,6 +6568,14 @@
       "Name": "Dexterity Tiebreaker",
       "Hint": "Append the raw Dexterity ability score to break ties in Initiative."
     },
+    "AutoApplyDowned": {
+      "Name": "Auto-Apply Downed",
+      "Hint": "Automatically mark a creature as Dead or Unconscious when it is reduced to 0 HP in combat. Unimportant NPCs are marked Dead. Important NPCs and PCs are marked Unconscious first, and Dead if they fail three death saving throws.",
+      "None": "Never",
+      "DeadOnly": "For NPCs (dead only)",
+      "NPCs": "For NPCs (dead and unconscious)",
+      "All": "Always"
+    },
     "InitiativeScore": {
       "Name": "Initiative Score",
       "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
@@ -6191,6 +6591,9 @@
       "Name": "Roll Once per Creature",
       "Hint": "Use the same initiative roll for identical creatures."
     }
+  },
+  "CONDITIONS": {
+    "Name": "Conditions"
   },
   "CRITICAL": {
     "Name": "Critical Damage",
@@ -6252,6 +6655,10 @@
       "Silent": "Roll without creating chat card",
       "Yes": "Roll and create chat card"
     }
+  },
+  "PIETY": {
+    "Hint": "Enable optional Piety tracking for player characters.",
+    "Name": "Piety Score"
   },
   "THEME": {
     "Name": "Theme",

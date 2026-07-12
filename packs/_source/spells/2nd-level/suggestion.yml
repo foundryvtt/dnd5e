@@ -8,20 +8,21 @@ system:
     value: >-
       <p>You suggest a course of activity (limited to a sentence or two) and
       magically influence a creature you can see within range that can hear and
-      understand you. Creatures that can't be charmed are immune to this effect.
-      The suggestion must be worded in such a manner as to make the course of
-      action sound reasonable. Asking the creature to stab itself, throw itself
-      onto a spear, immolate itself, or do some other obviously harmful act ends
-      the spell.</p><p>The target must make a Wisdom saving throw. On a failed
-      save, it pursues the course of action you described to the best of its
-      ability. The suggested course of action can continue for the entire
-      duration. If the suggested activity can be completed in a shorter time,
-      the spell ends when the subject finishes what it was asked to
-      do.</p><p>You can also specify conditions that will trigger a special
-      activity during the duration. For example, you might suggest that a knight
-      give her warhorse to the first beggar she meets. If the condition isn't
-      met before the spell expires, the activity isn't performed.</p><p>If you
-      or any of your companions damage the target, the spell ends.</p>
+      understand you. Creatures that can't be &amp;reference[charmed
+      apply=false] are immune to this effect. The suggestion must be worded in
+      such a manner as to make the course of action sound reasonable. Asking the
+      creature to stab itself, throw itself onto a spear, immolate itself, or do
+      some other obviously harmful act ends the spell.</p><p>The target must
+      make a Wisdom saving throw. On a failed save, it pursues the course of
+      action you described to the best of its ability. The suggested course of
+      action can continue for the entire duration. If the suggested activity can
+      be completed in a shorter time, the spell ends when the subject finishes
+      what it was asked to do.</p><p>You can also specify conditions that will
+      trigger a special activity during the duration. For example, you might
+      suggest that a knight give her warhorse to the first beggar she meets. If
+      the condition isn't met before the spell expires, the activity isn't
+      performed.</p><p>If you or any of your companions damage the target, the
+      spell ends.</p>
     chat: ''
   source:
     custom: ''
@@ -41,12 +42,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -85,7 +89,10 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: ODGIMpaADKrhr2Ib
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -97,30 +104,78 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Speak Suggestion
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: suggestion
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-pink.webp
-effects: []
+img: icons/magic/unholy/silhouette-light-fire-blue.webp
+effects:
+  - name: Suggested
+    img: icons/magic/unholy/silhouette-light-fire-blue.webp
+    origin: Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4
+    transfer: false
+    _id: ODGIMpaADKrhr2Ib
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You pursue the course of action the caster described to the best of
+      your ability. The suggested course of action can continue for the entire
+      duration. If the suggested activity can be completed in a shorter time,
+      the spell ends when you finish what you were asked to do.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781227367851
+      modifiedTime: 1781227420928
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!zMAWdyc8UVb37BK4.ODGIMpaADKrhr2Ib'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037367183
-  modifiedTime: 1725992723670
+  modifiedTime: 1781227367888
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!zMAWdyc8UVb37BK4'

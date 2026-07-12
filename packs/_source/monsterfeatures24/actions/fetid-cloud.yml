@@ -101,17 +101,14 @@ effects:
     origin: Item.mmFetidCloud0000
     _id: IqfKmepxiah2U3YT
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Poisoned apply=false] condition until
       the end of its next turn. While Poisoned, the creature can take either an
@@ -126,13 +123,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1737867466943
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmFetidCloud0000.IqfKmepxiah2U3YT'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -142,7 +142,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1737580213371

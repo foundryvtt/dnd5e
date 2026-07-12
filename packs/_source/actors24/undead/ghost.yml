@@ -501,12 +501,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -550,7 +547,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -570,6 +567,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: cS4HArQe973kwB9O
     name: Ethereal Sight
@@ -613,10 +611,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEtherealSight0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: -100000
     ownership:
       default: 0
@@ -669,10 +669,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmIncorporealMov
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: -50000
     ownership:
       default: 0
@@ -766,10 +768,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -922,10 +926,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmWitheringTouch
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 3750000
     ownership:
       default: 0
@@ -1035,10 +1041,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEtherealness00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 7500000
     ownership:
       default: 0
@@ -1161,6 +1169,7 @@ items:
       identifier: etherealness
       method: spell
       prepared: 0
+      sourceItem: feat:etherealness
     type: spell
     img: icons/magic/air/wind-vortex-swirl-purple.webp
     effects:
@@ -1170,17 +1179,15 @@ items:
         transfer: false
         _id: louTI4Z9bNUYBa8K
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses:
@@ -1191,59 +1198,82 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544178433
+          modifiedTime: 1783544178433
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmGhost000000000.88qd0Ulz7AMzouDU.louTI4Z9bNUYBa8K
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGhost000000000.Item.pB2kBCFQfO3vNHBI.Activity.N5QCNM4uIBjpu6sD
-        changes:
-          - key: system.ability
-            mode: 5
-            value: cha
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: cha
+              priority: null
+              type: override
+              phase: initial
+              _id: sdlkXpn6VwVrOWhz
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: SGVU0zR03aDSPX2V
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: 7VKSu0nndB1zPnMa
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: TnZu2vfz7htS28I2
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGhost000000000.Item.pB2kBCFQfO3vNHBI.Activity.N5QCNM4uIBjpu6sD
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544178433
+          modifiedTime: 1783544178433
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGhost000000000.88qd0Ulz7AMzouDU.dnd5espellchange
     folder: EdAGMG8IF26PLkD3
@@ -1257,10 +1287,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplEtherealne
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544178433
+      modifiedTime: 1783544178433
     _id: 88qd0Ulz7AMzouDU
     _key: '!actors.items!mmGhost000000000.88qd0Ulz7AMzouDU'
   - _id: 4aPdVm2lhKxkHq7K
@@ -1384,17 +1416,14 @@ items:
         origin: Item.mmHorrificVisage
         _id: lx2ebHyyyaaWf8s1
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Frightened apply=false] condition
           until the start of the attacking creature's next turn.</p>
@@ -1408,10 +1437,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmGhost000000000.4aPdVm2lhKxkHq7K.lx2ebHyyyaaWf8s1
     flags:
@@ -1423,10 +1457,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmHorrificVisage
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 11100000
     ownership:
       default: 0
@@ -1556,17 +1592,14 @@ items:
         origin: Item.mmPossession0000
         _id: EeZIaR3X4cI5glMX
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Incapacitated apply=false]
           condition and loses control of its body.</p>
@@ -1580,10 +1613,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmGhost000000000.MpslHrFN5iU1RjYt.EeZIaR3X4cI5glMX
     folder: GL8jgo3HsAFQZE7Z
@@ -1599,10 +1637,12 @@ items:
       compendiumSource: Item.mmPossession0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmGhost000000000.MpslHrFN5iU1RjYt'
 effects: []
 folder: fSNeRtZ6WOSjk4f8
@@ -1610,11 +1650,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452702561
-  modifiedTime: 1771452702561
+  systemVersion: 6.0.0
+  createdTime: 1783544178432
+  modifiedTime: 1783544178432
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

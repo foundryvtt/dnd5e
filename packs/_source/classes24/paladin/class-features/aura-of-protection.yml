@@ -95,21 +95,20 @@ effects:
     img: icons/magic/defensive/barrier-shield-dome-deflect-teal.webp
     _id: WOJ5r71FCDRmElea
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '@abilities.cha.mod'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: '@abilities.cha.mod'
+          priority: null
+          type: add
+          phase: initial
+          _id: YNfhFQaCpNHc8qhG
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -120,13 +119,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103060
+      modifiedTime: 1783544103060
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbpdnProtection.WOJ5r71FCDRmElea'
 flags:
   dnd5e:
@@ -135,11 +137,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866297701
-  modifiedTime: 1745256763952
+  modifiedTime: 1783544103060
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

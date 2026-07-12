@@ -178,20 +178,18 @@ effects:
   - name: Seared
     origin: Compendium.dnd5e.spells24.Item.phbsplSearingSmi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/fire/flame-burning-skull-orange.webp
     _id: A0tTvLeRetrC708K
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>At the start of each of its turns until the spell ends, the target
       takes [[/damage 1d6 type=fire]] damage and then makes a [[/save
@@ -204,13 +202,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976669
+      modifiedTime: 1783543976669
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplSearingSmi.A0tTvLeRetrC708K'
 folder: pBaAAtXBCq9FVEnL
 sort: 800000
@@ -223,11 +224,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425969823
-  modifiedTime: 1745256797874
+  modifiedTime: 1783543976668
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSearingSmi'

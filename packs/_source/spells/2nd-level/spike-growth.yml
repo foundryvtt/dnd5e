@@ -7,13 +7,13 @@ system:
   description:
     value: >-
       <p>The ground in a 20-foot radius centered on a point within range twists
-      and sprouts hard spikes and thorns. The area becomes difficult terrain for
-      the Duration. When a creature moves into or within the area, it takes 2d4
-      piercing damage for every 5 feet it travels.</p><p>The transformation of
-      the ground is camouflaged to look natural. Any creature that can't see the
-      area at the time the spell is cast must make a Wisdom (Perception) check
-      against your spell save DC to recognize the terrain as hazardous before
-      entering it.</p>
+      and sprouts hard spikes and thorns. The area becomes
+      &amp;reference[difficult terrain] for the Duration. When a creature moves
+      into or within the area, it takes 2d4 piercing damage for every 5 feet it
+      travels.</p><p>The transformation of the ground is camouflaged to look
+      natural. Any creature that can't see the area at the time the spell is
+      cast must make a Wisdom (Perception) check against your spell save DC to
+      recognize the terrain as hazardous before entering it.</p>
     chat: ''
   source:
     custom: ''
@@ -31,14 +31,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -71,7 +74,7 @@ system:
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
@@ -80,49 +83,106 @@ system:
         override: false
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: When a creature moves into or within the area.
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
         critical:
           allow: false
           bonus: ''
         parts:
-          - number: 2
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
             denomination: 4
             bonus: ''
             types:
               - piercing
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Traversal Damage
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    WIxfTSSjYA5bScTl:
+      type: utility
+      name: Cast
+      _id: WIxfTSSjYA5bScTl
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: spike-growth
 sort: 0
 flags: {}
-img: icons/magic/nature/vines-thorned-curled-glow-green.webp
+img: icons/magic/earth/barrier-stone-explosion-debris.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037349482
-  modifiedTime: 1725992717652
+  modifiedTime: 1781227530734
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!9gYGkrL6qFTsE6fw'

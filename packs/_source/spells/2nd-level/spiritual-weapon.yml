@@ -1,7 +1,7 @@
 _id: JbxsYXxSOTZbf9I0
 name: Spiritual Weapon
 type: spell
-img: icons/magic/fire/dagger-rune-enchant-flame-purple.webp
+img: icons/weapons/hammers/hammer-double-glowing-yellow.webp
 system:
   description:
     value: >-
@@ -34,14 +34,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: square
       size: '5'
       contiguous: false
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -60,66 +63,135 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: attack
+    vdlxZxKmIlZiZ2Ij:
+      type: summon
+      name: Conjure Spiritual Weapon
+      _id: vdlxZxKmIlZiZ2Ij
+      img: ''
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      attack:
-        ability: ''
-        bonus: ''
-        critical:
-          threshold: null
-        flat: false
-        type:
-          value: melee
-          classification: spell
-      damage:
-        critical:
-          bonus: ''
-        includeBase: true
-        parts:
-          - number: null
-            denomination: null
-            bonus: ''
-            types:
-              - force
-            custom:
-              enabled: true
-              formula: (floor(@item.level / 2))d8 + @mod
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: (@item.level - 2)d8
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: true
+        disposition: false
+        proficiency: true
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: PF2nMpKVeCspeYH5
+          uuid: Compendium.dnd5e.monsters.Actor.phbsplSpiritualW
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+    edJeSEGfYmZKzrPa:
+      type: utility
+      name: Move & Command Spiritual Weapon
+      _id: edJeSEGfYmZKzrPa
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: ft
+        override: true
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: spiritual-weapon
 effects: []
 folder: Qi4Se3we69ukl2V9
@@ -129,11 +201,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037353312
-  modifiedTime: 1725992718897
+  modifiedTime: 1781230415132
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JbxsYXxSOTZbf9I0'

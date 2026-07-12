@@ -139,38 +139,45 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell2.webp
     disabled: true
     _id: 08fHYdssxOSTW2nC
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} +1'
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: uncommon
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} +1'
+          priority: null
+          type: override
+          phase: initial
+          _id: nBs4rujeEEqQ6eyd
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: JnJnRVaPXcZzIeqQ
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: Mr4tXttyfhvxXhr4
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: n5DkciUxqGE5OEnT
+        - key: system.rarity
+          value: uncommon
+          priority: null
+          type: override
+          phase: initial
+          _id: 5NP1ga7CLvhvzOwO
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -184,51 +191,61 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729871035237
-      modifiedTime: 1729890225858
+      modifiedTime: 1783544093300
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAmmunition12o.08fHYdssxOSTW2nC'
   - type: enchantment
     name: Ammunition +2
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: Ck4FgoSL8VjpYhCx
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} +2'
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '2'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} +2'
+          priority: null
+          type: override
+          phase: initial
+          _id: EB8NnCXBkOqPLwOT
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: ncXaKGDFMoDA96ls
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: YGN7lYzawrW8rMeP
+        - key: system.magicalBonus
+          value: 2
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: W8CXin8sblhisdhW
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: finPSM5BcpT6NCjE
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -242,51 +259,61 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729871042864
-      modifiedTime: 1731107372236
+      modifiedTime: 1783544093301
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAmmunition12o.Ck4FgoSL8VjpYhCx'
   - type: enchantment
     name: Ammunition +3
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
     _id: cAXvvSaUg544GENu
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} +3'
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '3'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} +3'
+          priority: null
+          type: override
+          phase: initial
+          _id: 1OEO3B10NsugqMXq
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAmmunition12o
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 9nEFosZcrMiGjXGe
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: LISEqjL7QQVMIl4s
+        - key: system.magicalBonus
+          value: 3
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: aFu9ZHSFvRjxvakS
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: gjUyXwTFo22kxunB
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -300,13 +327,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729871048604
-      modifiedTime: 1731107379621
+      modifiedTime: 1783544093301
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAmmunition12o.cAXvvSaUg544GENu'
 folder: PVc8RqPP6dm0oGsM
 sort: 300000
@@ -319,11 +349,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1729870520071
-  modifiedTime: 1745256802119
+  modifiedTime: 1783544093300
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgAmmunition12o'

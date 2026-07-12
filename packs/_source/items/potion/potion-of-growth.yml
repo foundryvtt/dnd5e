@@ -6,11 +6,10 @@ system:
   description:
     value: >-
       <p><em>The red in the potion's liquid continuously expands from a tiny
-      bead to color the clear liquid around it and then contracts.  Shaking the
-      bottle fails to interrupt this process.</em></p>
-
-      <p>When you drink this potion, you gain the "enlarge" effect of the
-      @UUID[Compendium.dnd5e.spells.Item.WahI41a3goVUg0x1]{Enlarge/Reduce} spell
+      bead to color the clear liquid around it and then contracts. Shaking the
+      bottle fails to interrupt this process.</em></p><p>When you drink this
+      potion, you gain the "enlarge" effect of the
+      @UUID[Compendium.dnd5e.spells.Item.WahI41a3goVUg0x1]{enlarge/reduce} spell
       for 1d4 hours (no concentration required).</p>
     chat: ''
   source:
@@ -49,14 +48,17 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>The red in the potion's liquid continuously expands from a tiny bead to
+      color the clear liquid around it and then contracts. Shaking the bottle
+      fails to interrupt this process.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    ZgATJF7ZjCGRyL10:
       type: utility
       activation:
         type: action
@@ -68,19 +70,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
-        value: ''
+        value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: HAuNLWE4FAG5lpup
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -93,7 +100,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -110,8 +118,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -119,10 +127,80 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: ZgATJF7ZjCGRyL10
   attuned: false
   identifier: potion-of-growth
-effects: []
+effects:
+  - name: Alchemically Enlarged
+    img: icons/magic/control/silhouette-grow-shrink-tan.webp
+    origin: Compendium.dnd5e.items.Item.gTRFQLdVD1gsKtPi
+    transfer: false
+    _id: HAuNLWE4FAG5lpup
+    type: base
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          type: add
+          value: 1d4
+          phase: initial
+          priority: null
+        - key: system.bonuses.rwak.damage
+          type: add
+          value: 1d4
+          phase: initial
+          priority: null
+        - key: system.abilities.str.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.str.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+      magical: true
+    disabled: false
+    start: null
+    duration:
+      value: 4
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your size doubles in all dimensions, and your weight is multiplied by
+      eight. This growth increases your size by one category—from Medium to
+      Large, for example. If there isn't enough room for you to double its size,
+      you attain the maximum possible size in the space available. You also have
+      advantage on Strength Checks and Strength Saving Throws.</p><p>Your
+      Weapons also grow to match your new size. While these Weapons are
+      enlarged, your attacks with them deal 1d4 extra damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783373369437
+      modifiedTime: 1783376558286
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.WahI41a3goVUg0x1.ActiveEffect.iVWIbqSzCYFAQzV6
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!gTRFQLdVD1gsKtPi.HAuNLWE4FAG5lpup'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -130,11 +208,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037251967
-  modifiedTime: 1764620524351
+  modifiedTime: 1783377130140
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!gTRFQLdVD1gsKtPi'

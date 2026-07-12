@@ -142,17 +142,15 @@ effects:
     transfer: false
     _id: lZOgSICPuR1fKxTL
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -165,22 +163,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.2
+      systemVersion: 6.0.0
       createdTime: 1730864211372
-      modifiedTime: 1778013716715
+      modifiedTime: 1783544097535
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgPotionOfPoiso.lZOgSICPuR1fKxTL'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614705904
+  modifiedTime: 1783544097535
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

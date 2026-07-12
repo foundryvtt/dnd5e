@@ -147,21 +147,20 @@ effects:
     origin: Item.mmIceSpear000000
     _id: 273sG6C6R7qUcL2v
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '-10'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: L4BTLcESOiBi1Ef6
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Until the end of its next turn, the target's speed decreases by 10
       feet.</p>
@@ -173,13 +172,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544086401
+      modifiedTime: 1783544086401
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmIceSpear000000.273sG6C6R7qUcL2v'
 folder: pSCWWdqMX9eUATRJ
 flags:
@@ -189,11 +191,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1737594123963
-  modifiedTime: 1737869756411
+  modifiedTime: 1783544086401
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -30,18 +30,19 @@
 
 /**
  * @typedef ArmorClassData
- * @property {number} armor     AC value provided by equipped armor (not persisted).
- * @property {number} base      Base AC value originating from the formula (not persisted).
- * @property {string} bonus     Bonus AC provided by active effects (not persisted).
- * @property {string} calc      Name of one of the built-in formulas being used or "custom" (not persisted).
- * @property {number} cover     Bonus AC provided by the cover status effect (not persisted).
- * @property {number} flat      Flat value usable by any armor class calculation.
- * @property {string} formula   Extra formula added by legacy active effects (not persisted).
+ * @property {number} armor              AC value provided by equipped armor (not persisted).
+ * @property {number} base               Base AC value originating from the formula (not persisted).
+ * @property {string} bonus              Bonus AC provided by active effects (not persisted).
+ * @property {string} calc               Name of one of the built-in formulas being used or "custom" (not persisted).
+ * @property {Set<string>} calcs         Which of the base AC calculation formulas defined by the system should be
+ *                                       usable.
+ * @property {number} cover              Bonus AC provided by the cover status effect (not persisted).
+ * @property {number} flat               Flat value usable by any armor class calculation.
+ * @property {string} formula            Extra formula added by legacy active effects (not persisted).
  * @property {ACFormulaData[]} formulas  Available armor class formulas, the highest of which is used.
- * @property {string} min       Minimum armor class value after all bonuses have been added (not persisted).
- * @property {number} override  Unmodifiable armor class value that supersedes any entered formulas.
- * @property {Set<string>} selectedFormulas  Which of the base formulas defined by the system should be usable.
- * @property {number} shield    AC value provided by equipped shield (not persisted).
+ * @property {string} min                Minimum armor class value after all bonuses have been added (not persisted).
+ * @property {number} override           Unmodifiable armor class value that supersedes any entered formulas.
+ * @property {number} shield             AC value provided by equipped shield (not persisted).
  */
 
 /**

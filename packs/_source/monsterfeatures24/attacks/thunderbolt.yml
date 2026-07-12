@@ -138,17 +138,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmThunderbolt000
     _id: R2yhnEJ7lKT4VSvK
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Blinded apply=false] and
       &amp;Reference[Deafened apply=false] conditions until the start of the
@@ -163,13 +160,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736185713810
       modifiedTime: 1737856349791
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmThunderbolt000.R2yhnEJ7lKT4VSvK'
 flags:
   dnd5e:
@@ -178,7 +178,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

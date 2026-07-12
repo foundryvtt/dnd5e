@@ -454,7 +454,7 @@ export default class GroupActorSheet extends MultiActorSheet {
   _getEntryContextOptions() {
     return super._getEntryContextOptions().concat([{
       label: "DND5E.Group.Action.SetPrimaryVehicle",
-      icon: '<i class="fa-solid fa-star"></i>',
+      icon: "fa-solid fa-star",
       group: "state",
       visible: li => {
         return foundry.utils.fromUuidSync(li.dataset.uuid)?.system.isVehicle
@@ -465,7 +465,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       })
     }, {
       label: "DND5E.Group.Action.UnsetPrimaryVehicle",
-      icon: '<i class="fa-regular fa-star"></i>',
+      icon: "fa-regular fa-star",
       group: "state",
       visible: li => this.actor.system.primaryVehicle?.uuid === li.dataset.uuid,
       onClick: () => this.actor.update({ "system.primaryVehicle": null })

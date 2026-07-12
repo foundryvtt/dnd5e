@@ -107,20 +107,18 @@ effects:
   - name: Banished
     origin: Compendium.dnd5e.spells24.Item.phbsplBanishment
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/creatures/unholy/demon-fire-horned-clawed.webp
     _id: nwne4bDtD4pSWWPM
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>While there, the target has the &amp;Reference[Incapacitated
       apply=false] condition. When the spell ends, the target reappears in the
@@ -137,13 +135,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974062
+      modifiedTime: 1783543974062
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBanishment.nwne4bDtD4pSWWPM'
 folder: qi3IbnEwap7mRw4b
 sort: 3600000
@@ -156,11 +157,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425942718
-  modifiedTime: 1745256786388
+  modifiedTime: 1783543974062
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBanishment'

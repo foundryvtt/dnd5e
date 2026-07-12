@@ -483,12 +483,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -532,7 +529,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -552,6 +549,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: mmLegendaryResis
     name: Legendary Resistance
@@ -656,10 +654,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -706,10 +706,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -805,10 +807,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -969,10 +973,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1105,10 +1111,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFireBreath0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1450,10 +1458,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1570,26 +1580,25 @@ items:
       identifier: detect-magic
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/symbols/runes-carved-stone-green.webp
     effects:
       - name: Detect Magic
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/symbols/runes-carved-stone-green.webp
         _id: BHw91lQmVgdx39WZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1600,47 +1609,64 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166594
+          modifiedTime: 1783544166594
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.kPLdXUnQxMINrwVs.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.va2Rz2JpO59nzURk
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: kYpoZbAe5VR1AGJX
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.va2Rz2JpO59nzURk
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166595
+          modifiedTime: 1783544166595
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.kPLdXUnQxMINrwVs.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1657,10 +1683,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166594
+      modifiedTime: 1783544166594
     _id: kPLdXUnQxMINrwVs
     _key: '!actors.items!mmAdultGoldDrago.kPLdXUnQxMINrwVs'
   - name: Guiding Bolt
@@ -1789,26 +1817,25 @@ items:
       identifier: guiding-bolt
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/light/projectile-flare-blue.webp
     effects:
       - name: Guiding Bolt
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
         duration:
-          rounds: 1
-          startTime: null
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/skills/targeting/target-strike-triple-blue.webp
         _id: rHzZCeXfdeTcYyk8
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p><span style="font-family:Signika, sans-serif">The next attack roll
           made against the target before the end of your next turn has
@@ -1822,47 +1849,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166596
+          modifiedTime: 1783544166596
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.PsNpUR9S5sbuW1il.rHzZCeXfdeTcYyk8
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.CxVMn80ZaWKN6l5h
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: hQHNJ5hetECyXlUp
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.CxVMn80ZaWKN6l5h
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166597
+          modifiedTime: 1783544166597
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.PsNpUR9S5sbuW1il.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1876,10 +1920,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166596
+      modifiedTime: 1783544166596
     _id: PsNpUR9S5sbuW1il
     _key: '!actors.items!mmAdultGoldDrago.PsNpUR9S5sbuW1il'
   - name: Shapechange
@@ -1996,6 +2042,7 @@ items:
       identifier: shapechange
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/hand-fire-skeleton-pink.webp
     effects:
@@ -2003,41 +2050,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.GUqZkQ1Vnf8WMckz
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-concentration'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: ySg8bnJ49azYKowf
+            - key: system.properties
+              value: '-concentration'
+              priority: null
+              type: add
+              phase: initial
+              _id: H6fhLFJqP4Dls88L
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.GUqZkQ1Vnf8WMckz
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166598
+          modifiedTime: 1783544166598
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.gl6bEE3QKzxsXUNL.dnd5espellchange
     folder: iG0Zia8jh6uK39TB
@@ -2051,10 +2112,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShapechang
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166597
+      modifiedTime: 1783544166597
     _id: gl6bEE3QKzxsXUNL
     _key: '!actors.items!mmAdultGoldDrago.gl6bEE3QKzxsXUNL'
   - name: Flame Strike
@@ -2193,6 +2256,7 @@ items:
       identifier: flame-strike
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/fire/beam-jet-stream-embers.webp
     effects:
@@ -2200,37 +2264,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.4gQeZpIwkm0iYmiC
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: 7PUGejkbIumtYEZT
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.4gQeZpIwkm0iYmiC
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166599
+          modifiedTime: 1783544166599
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.UHVf95GO7pUqRScP.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2247,10 +2323,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFlameStrik
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166598
+      modifiedTime: 1783544166598
     _id: UHVf95GO7pUqRScP
     _key: '!actors.items!mmAdultGoldDrago.UHVf95GO7pUqRScP'
   - name: Zone of Truth
@@ -2363,26 +2441,25 @@ items:
       identifier: zone-of-truth
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/skills/social/diplomacy-unity-alliance.webp
     effects:
       - name: Cannot Lie
         origin: Compendium.dnd5e.spells24.Item.phbsplZoneofTrut
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/skills/social/wave-halt-stop.webp
         _id: BgkyT4A5qyArRveO
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>On a failed save, a creature can’t speak a deliberate lie while in
           the radius. You know whether a creature succeeds or fails on this
@@ -2397,47 +2474,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166600
+          modifiedTime: 1783544166600
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.eauhb52VgrhiI7g9.BgkyT4A5qyArRveO
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.zpiAmuKkl0JxMpDB
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: 2w7Lg3fBYT6GlVzD
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmSpellcasting00.Activity.zpiAmuKkl0JxMpDB
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166600
+          modifiedTime: 1783544166600
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.eauhb52VgrhiI7g9.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2451,10 +2545,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplZoneofTrut
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166600
+      modifiedTime: 1783544166600
     _id: eauhb52VgrhiI7g9
     _key: '!actors.items!mmAdultGoldDrago.eauhb52VgrhiI7g9'
   - _id: mmWeakeningBreat
@@ -2569,21 +2665,20 @@ items:
         origin: Item.mmWeakeningBreat
         _id: wpkp78XzdLs9q2C3
         type: base
-        system: {}
-        changes:
-          - key: system.abilities.str.bonuses.check
-            mode: 2
-            value: '-1d4'
-            priority: null
+        system:
+          changes:
+            - key: system.abilities.str.bonuses.check
+              value: '-1d4'
+              priority: null
+              type: add
+              phase: initial
+              _id: BO66rM41qsFK6jmX
         disabled: false
         duration:
-          startTime: 0
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has Disadvantage on Strength-based D20 Tests and
           subtracts 2 (1d4) from its damage rolls. It repeats the save at the
@@ -2600,10 +2695,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166601
+          modifiedTime: 1783544166601
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.mmWeakeningBreat.wpkp78XzdLs9q2C3
     flags:
@@ -2615,10 +2721,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmWeakeningBreat
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166601
+      modifiedTime: 1783544166601
     ownership:
       default: 0
     sort: 6
@@ -2749,17 +2857,14 @@ items:
         transfer: false
         _id: u5H85me3idut0t3u
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Incapacitated apply=false]
           condition and is transported to a harmless demiplane until the start
@@ -2774,10 +2879,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.mmBanish00000000.u5H85me3idut0t3u
     flags:
@@ -2789,10 +2899,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBanish00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 7
@@ -2900,10 +3012,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmGuidingLight00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 8
@@ -3034,26 +3148,25 @@ items:
       identifier: guiding-bolt
       method: spell
       prepared: 0
+      sourceItem: feat:guiding-light
     type: spell
     img: icons/magic/light/projectile-flare-blue.webp
     effects:
       - name: Guiding Bolt
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
         duration:
-          rounds: 1
-          startTime: null
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/skills/targeting/target-strike-triple-blue.webp
         _id: rHzZCeXfdeTcYyk8
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p><span style="font-family:Signika, sans-serif">The next attack roll
           made against the target before the end of your next turn has
@@ -3067,59 +3180,85 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166602
+          modifiedTime: 1783544166602
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.uqgvLolmdHxEAxzh.rHzZCeXfdeTcYyk8
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmGuidingLight00.Activity.zm9pGaRN3rgfVgGl
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: freMpcpL7rKrxQRo
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: PvfTKKSM2KRkHGi0
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: sxOR1PHrYDPA0iJh
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: 2W53zpAp0iE1a9d2
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultGoldDrago.Item.mmGuidingLight00.Activity.zm9pGaRN3rgfVgGl
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166602
+          modifiedTime: 1783544166602
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultGoldDrago.uqgvLolmdHxEAxzh.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -3133,10 +3272,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166602
+      modifiedTime: 1783544166602
     _id: uqgvLolmdHxEAxzh
     _key: '!actors.items!mmAdultGoldDrago.uqgvLolmdHxEAxzh'
   - _id: mmPounce00000000
@@ -3241,10 +3382,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPounce00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 9
@@ -3257,11 +3400,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452694008
-  modifiedTime: 1771452694008
+  systemVersion: 6.0.0
+  createdTime: 1783544166594
+  modifiedTime: 1783544166594
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

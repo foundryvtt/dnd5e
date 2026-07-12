@@ -102,40 +102,48 @@ effects:
   - name: Hypnotized
     origin: Compendium.dnd5e.spells24.Item.phbsplHypnoticPa
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
     _id: mjAs8ssQlgp0AQOp
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 3
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: 4bmIn7pTXc7o8QP3
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: dTkSYIlZL52bRapI
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: vI4AVqelMSLR56rE
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: zFbAt7zaiabzUUVJ
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: GrhFyvkGAnFgWrNy
+      magical: true
     description: >-
       <p>While &amp;Reference[charmed apply=false], the creature has the
       &amp;Reference[incapacitated apply=false] condition and a Speed of
@@ -151,13 +159,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975684
+      modifiedTime: 1783543975684
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplHypnoticPa.mjAs8ssQlgp0AQOp'
 folder: HCovEE4VoPGlIbKi
 sort: 1500000
@@ -170,11 +181,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425959310
-  modifiedTime: 1745256794922
+  modifiedTime: 1783543975684
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHypnoticPa'

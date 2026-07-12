@@ -1428,25 +1428,27 @@ effects:
     img: icons/magic/life/cross-worn-green.webp
     _id: Jinexib3GfyrMbrP
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: ZsFRowc56dwTXoJz
+        - key: system.bonuses.rsak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: lvLYngiW6KeMP3iq
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmgStaffOfTheMag
     tint: '#ffffff'
@@ -1458,23 +1460,26 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgStaffOfTheWoo.ActiveEffect.r6B9McDx4diFtkOt
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729891302758
-      modifiedTime: 1729891302758
+      modifiedTime: 1783544098603
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgStaffOfTheMag.Jinexib3GfyrMbrP'
 folder: 5p9KrkF39e6vFO4g
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615480721
+  modifiedTime: 1783544098603
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 112500

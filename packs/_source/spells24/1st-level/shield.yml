@@ -101,20 +101,12 @@ img: icons/equipment/shield/heater-crystal-blue.webp
 effects:
   - _id: Bv3EoHGfYCprLdG1
     flags: {}
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '5'
-        priority: null
     disabled: true
     duration:
-      startTime: null
-      rounds: 1
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.spells24.Item.phbsplShield0000
     tint: '#ffffff'
     transfer: false
@@ -128,17 +120,28 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.z1mx84ONwkXKUZd7.ActiveEffect.6pbotGIvqQkraPva
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976775
+      modifiedTime: 1783543976775
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/equipment/shield/heater-steel-crystal-red.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: 5
+          priority: null
+          type: add
+          phase: initial
+          _id: ksKJTeu1kVZikrvL
+      magical: true
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplShield0000.Bv3EoHGfYCprLdG1'
 folder: pBaAAtXBCq9FVEnL
 sort: 700000
@@ -151,11 +154,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425970477
-  modifiedTime: 1745256798096
+  modifiedTime: 1783543976775
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplShield0000'

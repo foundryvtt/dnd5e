@@ -6,11 +6,11 @@ system:
   description:
     value: >-
       <p><em>Agitating this muddy liquid brings little bits into view: a fish
-      scale, hummingbird tongue, a cat claw, or a squirrel hair.</em></p>
-
-      <p>When you drink this potion, you can cast the
-      @UUID[Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B]{Animal Friendship} 
-      spell (save DC 13) for 1 hour at will.</p>
+      scale, hummingbird tongue, a cat claw, or a squirrel hair.</em></p><p>When
+      you drink this potion, you can cast the
+      @UUID[Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B]{animal friendship}
+      spell (save DC 13) for [[lookup @labels.duration
+      activity=f3MtbdmZa35oIm67]] at will.</p>
     chat: ''
   source:
     custom: ''
@@ -48,83 +48,126 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>Agitating this muddy liquid brings little bits into view: a fish scale,
+      hummingbird tongue, a cat claw, or a squirrel hair.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    f3MtbdmZa35oIm67:
+      type: utility
+      name: Drink
+      _id: f3MtbdmZa35oIm67
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: Beast must have an Intelligence of 3 or lower.
         override: false
+        condition: ''
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '1'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: U6yBzHzpfZRh3yZY
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
         units: touch
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: '1'
-          type: creature
           choice: false
+          type: creature
+          count: '1'
           special: ''
-        prompt: true
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: ''
-          formula: '13'
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: potion-of-animal-friendship
-effects: []
+effects:
+  - name: Animal Friend
+    img: icons/creatures/abilities/paw-print-yellow.webp
+    origin: Compendium.dnd5e.items.Item.nXWevqtV6p484N59
+    transfer: false
+    _id: U6yBzHzpfZRh3yZY
+    type: base
+    system:
+      changes: []
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, you can cast the
+      @UUID[Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B]{Animal Friendship}
+      (save DC 13) spell at will.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783374644795
+      modifiedTime: 1783374722882
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!nXWevqtV6p484N59.U6yBzHzpfZRh3yZY'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -132,11 +175,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037282716
-  modifiedTime: 1764620913757
+  modifiedTime: 1783646399495
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!nXWevqtV6p484N59'

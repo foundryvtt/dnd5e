@@ -121,36 +121,12 @@ system:
 effects:
   - _id: dHNT1jBXfvYuNH16
     flags: {}
-    changes:
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: 1d4
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      rounds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.equipment24.Item.dmgPotionOfHeroi
     tint: '#ffffff'
     transfer: false
@@ -163,26 +139,61 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730863613614
-      modifiedTime: 1730863634882
+      modifiedTime: 1783544097423
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/holy/chalice-glowing-gold-water.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: dZUwPKDZfOHhNdhG
+        - key: system.bonuses.mwak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: 7gnO26iwAtuFlQWX
+        - key: system.bonuses.msak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: NUVBfooW53S4fv8m
+        - key: system.bonuses.rsak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: g6xoEIgL1F3iKkgY
+        - key: system.bonuses.rwak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+          _id: 8l7e1p4KXlEhzQX9
+      magical: true
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgPotionOfHeroi.dHNT1jBXfvYuNH16'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614730918
+  modifiedTime: 1783544097423
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

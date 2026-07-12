@@ -111,17 +111,15 @@ effects:
     transfer: false
     _id: 0WW6DMPuabIZh1Tv
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Creatures of those types have Disadvantage on attack rolls against the
       target. The target also can’t be possessed by or gain the
@@ -134,13 +132,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725635400711
-      modifiedTime: 1725636519933
+      modifiedTime: 1783543973697
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbEvilAndGoodPr.0WW6DMPuabIZh1Tv'
 folder: pBaAAtXBCq9FVEnL
 flags:
@@ -150,11 +151,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425939311
-  modifiedTime: 1745256784462
+  modifiedTime: 1783543973697
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100782

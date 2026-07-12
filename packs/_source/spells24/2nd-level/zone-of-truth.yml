@@ -103,20 +103,18 @@ effects:
   - name: Cannot Lie
     origin: Compendium.dnd5e.spells24.Item.phbsplZoneofTrut
     duration:
-      rounds: null
-      startTime: null
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/skills/social/wave-halt-stop.webp
     _id: BgkyT4A5qyArRveO
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>On a failed save, a creature can’t speak a deliberate lie while in the
       radius. You know whether a creature succeeds or fails on this
@@ -130,13 +128,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977748
+      modifiedTime: 1783543977748
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplZoneofTrut.BgkyT4A5qyArRveO'
 folder: 3SjcO2acsFnWegp4
 sort: 103125
@@ -149,11 +150,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425978807
-  modifiedTime: 1745256800310
+  modifiedTime: 1783543977748
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplZoneofTrut'

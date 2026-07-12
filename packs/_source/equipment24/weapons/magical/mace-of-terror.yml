@@ -207,17 +207,15 @@ effects:
     transfer: false
     _id: amYapIKWPpJZ9EuO
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -227,23 +225,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730065036275
-      modifiedTime: 1730065097674
+      modifiedTime: 1783544096720
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgMaceOfTerror0.amYapIKWPpJZ9EuO'
 folder: kie870i5kr7yuxO8
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615174904
+  modifiedTime: 1783544096720
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

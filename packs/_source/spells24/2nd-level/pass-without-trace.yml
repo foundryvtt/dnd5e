@@ -94,24 +94,24 @@ effects:
   - name: Concealed
     origin: Compendium.dnd5e.spells24.Item.phbsplPasswithou
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/nature/stealth-hide-beast-eyes-green.webp
     _id: MDdoug4Lfu8klZRO
     type: base
-    system: {}
-    changes:
-      - key: system.skills.ste.bonuses.check
-        mode: 2
-        value: '10'
-        priority: null
+    system:
+      changes:
+        - key: system.skills.ste.bonuses.check
+          value: 10
+          priority: null
+          type: add
+          phase: initial
+          _id: YggqV9t8Xkrr9TcH
+      magical: true
     description: >-
       <p>While in the aura, you and each creature you choose have a +10 bonus to
       [[/check ability=dex skill=ste]] checks and leave no tracks.</p>
@@ -122,13 +122,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976247
+      modifiedTime: 1783543976247
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplPasswithou.MDdoug4Lfu8klZRO'
 folder: 3SjcO2acsFnWegp4
 sort: 1400000
@@ -141,11 +144,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425965601
-  modifiedTime: 1745256796684
+  modifiedTime: 1783543976247
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPasswithou'

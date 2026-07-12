@@ -94,32 +94,36 @@ effects:
   - name: Stoneskin
     origin: Compendium.dnd5e.spells24.Item.phbsplStoneskin0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/defensive/armor-stone-skin.webp
     _id: DbTCk1h0u86Etlpr
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: vReWmAmLhcixbDTJ
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: rdyUmOr0Nw3t4SM2
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: KGoUFOtCUvwLqCwO
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -128,13 +132,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977248
+      modifiedTime: 1783543977248
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplStoneskin0.DbTCk1h0u86Etlpr'
 folder: qi3IbnEwap7mRw4b
 sort: 700000
@@ -147,11 +154,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425972960
-  modifiedTime: 1745256798803
+  modifiedTime: 1783543977248
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplStoneskin0'

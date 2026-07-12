@@ -99,17 +99,14 @@ effects:
     origin: Item.mmScare000000000
     _id: u8Gu5Oo3a48vKYla
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Frightened apply=false]
       condition.</p>
@@ -122,13 +119,22 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.2
       createdTime: null
       modifiedTime: 1737915304332
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!items.effects!mmScare000000000.u8Gu5Oo3a48vKYla'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -138,7 +144,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1737667012134

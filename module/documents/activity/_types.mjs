@@ -179,6 +179,15 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef TeleportMovementResult
+ * @param {Token5e} token
+ * @param {{ id: string, origin: TokenPosition, destination: TokenPosition, waypoints: TokenMovementWaypoint[] }} plan
+ * @param {boolean} moved
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {ActivityUseConfiguration} TransformUseConfiguration
  * @property {Partial<TransformationUseDetails>} transform  Options for configuring transformation behavior.
  */

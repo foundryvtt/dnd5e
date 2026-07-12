@@ -126,17 +126,15 @@ effects:
     transfer: false
     _id: T9kBIL7LS3j0Upwz
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Until the end of your next turn, it emits Dim Light in a 10-foot radius
       and can’t benefit from the &amp;Reference[Invisible] condition.</p>
@@ -147,13 +145,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725561224825
-      modifiedTime: 1725561513735
+      modifiedTime: 1783543977198
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplStarryWisp.T9kBIL7LS3j0Upwz'
 folder: 4FhsY9FJQd7h7MZb
 sort: 100782
@@ -166,11 +167,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425972403
-  modifiedTime: 1745256798707
+  modifiedTime: 1783543977198
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplStarryWisp'

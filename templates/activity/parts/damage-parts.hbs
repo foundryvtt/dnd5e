@@ -9,6 +9,11 @@
 </fieldset>
 {{else}}
 <div class="empty">
-    {{ localize "DND5E.None" }}
+    {{{ localize "DND5E.DAMAGE.Empty" }}}
 </div>
 {{/each}}
+{{#if (and (eq damageParts.length 1) damageParts.0.locked)}}
+<div class="empty">
+    {{{ localize "DND5E.DAMAGE.EmptyExceptBase" }}}
+</div>
+{{/if}}

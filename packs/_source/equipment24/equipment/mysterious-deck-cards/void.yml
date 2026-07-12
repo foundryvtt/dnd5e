@@ -127,17 +127,15 @@ effects:
     transfer: false
     _id: ZCkhbQFg4H5ePlNm
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><em>Source:
       @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtVoid000000]{Void}</em></p><p>While
@@ -152,13 +150,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729207481799
-      modifiedTime: 1729207648154
+      modifiedTime: 1783544095115
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgDmtVoid000000.ZCkhbQFg4H5ePlNm'
 sort: 1300000
 ownership:
@@ -166,11 +167,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1729207284596
-  modifiedTime: 1764615964603
+  modifiedTime: 1783544095115
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtVoid000000'

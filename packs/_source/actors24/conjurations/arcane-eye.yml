@@ -478,12 +478,9 @@ prototypeToken:
     src: icons/svg/eye.svg
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#9128d7'
     alphaThreshold: 0.75
   lockRotation: false
@@ -527,7 +524,7 @@ prototypeToken:
     brightness: 0
     saturation: -1
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -550,6 +547,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - name: Move
     system:
@@ -663,10 +661,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbsplArcaneEye0.phbaoiWizard0000'
 effects:
   - name: Invisible
@@ -678,17 +678,14 @@ effects:
       @Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u
       inline]
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: 0
-      startTurn: 0
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: null
     tint: '#ffffff'
     transfer: false
@@ -698,10 +695,21 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
+    showIcon: 2
+    start:
+      combat: null
+      round: 0
+      time: 0
+      turn: 0
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!actors.effects!phbsplArcaneEye0.dnd5einvisible00'
 folder: 9mmdDqYZFLIJBacj
 flags:
@@ -710,7 +718,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452721348

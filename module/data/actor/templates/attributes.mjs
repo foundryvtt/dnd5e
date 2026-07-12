@@ -2,13 +2,14 @@ import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
+import ConditionData from "../../active-effect/condition.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ACFormulasField from "../fields/ac-formulas-field.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActorRollData } from "../../../documents/_types.mjs";
@@ -25,27 +26,39 @@ export default class AttributesFields {
    */
   static get armorClass() {
     return {
-      armor: new NumberField({ integer: true, min: 0, initial: 10, persisted: false }),
-      base: new NumberField({ integer: true, initial: -Infinity, persisted: false }),
-      bonus: new FormulaField({ deterministic: true, persisted: false }),
-      calc: new StringField({ persisted: false }),
-      cover: new NumberField({ integer: true, min: 0, initial: 0, persisted: false }),
+      armor: new NumberField({
+        integer: true, min: 0, initial: 10, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.armor.label"
+      }),
+      base: new NumberField({
+        integer: true, initial: -Infinity, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.base.label"
+      }),
+      bonus: new FormulaField({
+        deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.bonus.label"
+      }),
+      calc: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calc.label" }),
+      calcs: new SetField(new StringField(), {
+        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.hint"
+      }),
+      cover: new NumberField({
+        integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.cover.label"
+      }),
       flat: new NumberField({
         required: true, integer: true, min: 0, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.label",
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.hint"
       }),
-      formula: new StringField({ persisted: false }),
+      formula: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formula.label" }),
       formulas: new ACFormulasField(),
-      min: new FormulaField({ deterministic: true, persisted: false }),
+      min: new FormulaField({
+        deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.min.label"
+      }),
       override: new NumberField({
-        min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label",
+        min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label", initial: null,
         hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.hint"
       }),
-      selectedFormulas: new SetField(new StringField(), {
-        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.label",
-        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.selectedFormulas.hint"
-      }),
-      shield: new NumberField({ integer: true, min: 0, initial: 0, persisted: false })
+      shield: new NumberField({
+        integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.shield.label"
+      })
     };
   }
 
@@ -77,16 +90,40 @@ export default class AttributesFields {
       ac: new SchemaField(this.armorClass, { label: "DND5E.ArmorClass" }),
       encumbrance: new SchemaField({
         bonuses: new SchemaField({
-          encumbered: new FormulaField({ deterministic: true }),
-          heavilyEncumbered: new FormulaField({ deterministic: true }),
-          maximum: new FormulaField({ deterministic: true }),
-          overall: new FormulaField({ deterministic: true })
+          encumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.overall.label"
+          })
         }),
         multipliers: new SchemaField({
-          encumbered: new FormulaField({ deterministic: true, initial: "1" }),
-          heavilyEncumbered: new FormulaField({ deterministic: true, initial: "1" }),
-          maximum: new FormulaField({ deterministic: true, initial: "1" }),
-          overall: new FormulaField({ deterministic: true, initial: "1" })
+          encumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.overall.label"
+          })
         })
       }, { persisted: false }),
       init: new RollConfigField({
@@ -124,9 +161,13 @@ export default class AttributesFields {
       concentration: new RollConfigField({
         ability: "",
         bonuses: new SchemaField({
-          save: new FormulaField({ required: true, label: "DND5E.ConcentrationBonus" })
+          save: new FormulaField({
+            required: true, label: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.bonuses.save.label"
+          })
         }),
-        limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.ConcentrationLimit" })
+        limit: new NumberField({
+          integer: true, min: 0, initial: 1, label: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.limit.label"
+        })
       }, { label: "DND5E.Concentration" }),
       loyalty: new SchemaField({
         value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
@@ -161,11 +202,11 @@ export default class AttributesFields {
         break;
       case "default": break;
       case "natural":
-        ac.selectedFormulas = ["natural"];
+        ac.calcs = ["natural"];
         break;
       default:
-        ac.selectedFormulas ??= ["unarmored", "armored"];
-        ac.selectedFormulas.push(ac.calc);
+        ac.calcs ??= ["unarmored", "armored"];
+        ac.calcs.push(ac.calc);
         break;
     }
     delete ac.calc;
@@ -221,11 +262,11 @@ export default class AttributesFields {
     else if ( (ac.calc === "custom") && ac.formula ) ac.formulas.push({
       formula: ac.formula, label: _loc("DND5E.ARMORCLASS.Calculation.Custom")
     });
-    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.selectedFormulas.add(ac.calc);
+    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.calcs.add(ac.calc);
 
     // Add selected formulas
     const baseFormulas = foundry.utils.iterateEntries(CONFIG.DND5E.armorClasses)
-      .filter(([id, data]) => ac.selectedFormulas.has(id))
+      .filter(([id]) => ac.calcs.has(id))
       .map(([id, data]) => ({ ...data, id, type: "base" }));
     ac.formulas.unshift(...baseFormulas);
 
@@ -408,9 +449,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
-    this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+    this.attributes.exhaustion = this.conditions.exhaustion ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -501,8 +540,17 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const units = this.attributes.movement.units ??= defaultUnits("length");
-    let reduction = dnd5e.settings.rulesVersion === "modern" && !this.traits?.ci?.value?.has("exhaustion")
-      ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+
+    let reduction = statuses.reduce((acc, status) => {
+      const immune = this.traits?.ci?.value?.has(status);
+      if ( immune ) return acc;
+
+      const speed = CONFIG.DND5E.conditionTypes[status]?.reduction?.speed ?? 0;
+      const level = ConditionData.hasLevels(status)
+        ? this.parent.system.conditions[status] ?? 0
+        : Boolean(statuses.has(status));
+      return acc + (level * speed);
+    }, 0);
     if ( ((this.attributes.ac?.equippedArmor?.system.strength ?? 0) > (this.abilities?.str?.value ?? Infinity))
       && !this.parent.flags.dnd5e?.ignoreArmorSpeedReduction && this.isCreature ) {
       reduction += CONFIG.DND5E.armorSpeedReduction;
@@ -608,7 +656,10 @@ export default class AttributesFields {
    */
   static async onUpdateHP(changed, options, userId) {
     if ( !changed.system?.attributes?.hp ) return;
-    if ( userId === game.userId ) await this.parent.updateBloodied(options);
+    if ( userId === game.userId ) {
+      await this.parent.updateBloodied(options);
+      await this.parent.updateDowned(options);
+    }
 
     const hp = options.dnd5e?.hp;
     if ( !hp || options.isRest || options.isAdvancement ) return;
@@ -639,5 +690,22 @@ export default class AttributesFields {
      * @param {string} userId                                       Id of the user that performed the update.
      */
     Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this.parent, changes, changed, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger auto-downed logic if failed three death saves.
+   * @this {CharacterData|NPCData}
+   * @param {object} changed  The differential data that was changed relative to the document's prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  static async onUpdateDeathSaves(changed, options, userId) {
+    if ( changed.system?.attributes?.death?.failure !== 3 ) return;
+
+    // If hp update is included, updateDowned will be called in onUpdateHP, so exit early
+    if ( !!changed.system.attributes.hp ) return;
+    if ( userId === game.userId ) await this.parent.updateDowned(options);
   }
 }

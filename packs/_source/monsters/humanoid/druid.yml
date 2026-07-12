@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,6 +480,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 07sdy4qaaW4MaB8W
     name: Spellcasting
@@ -532,7 +530,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
@@ -543,16 +541,18 @@ items:
   - _id: KUP8WEfLxlcY7K2x
     name: Quarterstaff
     type: weapon
-    img: icons/weapons/staves/staff-simple-gold.webp
+    img: icons/weapons/staves/staff-nature-spiral.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]] or [[/damage twoHanded]]
           if wielded with two hands.</p><p>With
           @UUID[.udSiVp4nSrGBSvG1]{shillelagh}, [[/attack extended
-          activity=J8RgDbtkXvXUJDuD]]. [[/damage extended
-          activity=J8RgDbtkXvXUJDuD]].</p>
-        chat: <p>The Druid attacks with its Quarterstaff.</p>
+          activity=hQCHzLhxJpg6id19]]. [[/damage extended
+          activity=hQCHzLhxJpg6id19]].</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -617,7 +617,7 @@ items:
       properties:
         - foc
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -626,8 +626,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        D6fPGYTolLvVDtlG:
           type: attack
           activation:
             type: action
@@ -642,6 +641,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -662,7 +662,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -675,24 +676,33 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: -200000
+          sort: 0
           name: ''
           img: ''
-          appliedEffects: []
-        J8RgDbtkXvXUJDuD:
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: D6fPGYTolLvVDtlG
+        hQCHzLhxJpg6id19:
           type: attack
           activation:
             type: action
@@ -707,6 +717,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -715,7 +726,7 @@ items:
             concentration: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -726,7 +737,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -742,7 +754,7 @@ items:
             flat: false
             type:
               value: ''
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
@@ -752,19 +764,29 @@ items:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '8'
+                denomination: 8
                 bonus: '@mod'
                 types:
                   - bludgeoning
+                scaling:
+                  number: 1
           uses:
             spent: 0
             recovery: []
             max: ''
-          sort: -100000
-          _id: J8RgDbtkXvXUJDuD
+          sort: 100000
           name: Spellcasting Attack
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: hQCHzLhxJpg6id19
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -776,32 +798,29 @@ items:
         img: icons/magic/fire/dagger-rune-enchant-teal.webp
         disabled: true
         _id: siLjGctswI3gx3B2
-        system: {}
-        changes:
-          - key: name
-            mode: 2
-            value: ', Shillelagh'
-            priority: null
-          - key: system.damage.base.number
-            mode: 5
-            value: '1'
-            priority: null
-          - key: system.damage.base.denomination
-            mode: 5
-            value: '8'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: mgc
-            priority: null
+        system:
+          changes:
+            - key: name
+              value: ', Shillelagh'
+              priority: null
+              type: add
+            - key: system.damage.base.number
+              value: 1
+              priority: null
+              type: override
+            - key: system.damage.base.denomination
+              value: 8
+              priority: null
+              type: override
+            - key: system.properties
+              value: mgc
+              priority: null
+              type: add
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         origin: Compendium.dnd5e.monsters.Actor.K15Yl8JmB5iPircc.Item.udSiVp4nSrGBSvG1
         tint: '#ffffff'
@@ -819,32 +838,31 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.monsters.Actor.K15Yl8JmB5iPircc.Item.udSiVp4nSrGBSvG1.ActiveEffect.QPsqj6jfS0iXSrTs
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744141902433
           modifiedTime: 1744142295936
           lastModifiedBy: dnd5ebuilder0000
           exportSource: null
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!K15Yl8JmB5iPircc.KUP8WEfLxlcY7K2x.siLjGctswI3gx3B2
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.g2dWN7PQiMRYWzyk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.3.8
-      createdTime: null
-      modifiedTime: 1744142941675
+      systemVersion: 6.0.0
+      createdTime: 1781821734219
+      modifiedTime: 1781821768876
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!K15Yl8JmB5iPircc.KUP8WEfLxlcY7K2x'
@@ -969,7 +987,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.SbSvZKkJASyk8jKo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1108,7 +1126,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eCPQuQkIabFKTl9u
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1229,7 +1247,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1340,7 +1358,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.B0pnIcc52O6G8hi8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1455,7 +1473,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.aL1F8fvYLtNzUbKu
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1589,7 +1607,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.WTbOQBsarsL1LuXJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1718,7 +1736,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.X8w9EzYLGc4vQ1H2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1825,24 +1843,12 @@ items:
     effects:
       - _id: uM6rgctYpcbCVSkn
         flags: {}
-        changes:
-          - key: system.attributes.ac.formula
-            value: '16'
-            mode: 5
-            priority: null
-          - key: system.attributes.ac.calc
-            value: custom
-            mode: 5
-            priority: null
         disabled: true
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         origin: Item.VQMKMnQDw5rzL0zp
         tint: '#ffffff'
         transfer: false
@@ -1852,7 +1858,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
@@ -1861,8 +1867,20 @@ items:
           exportSource: null
         img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.formula
+              value: 16
+              priority: null
+              type: override
+            - key: system.attributes.ac.calc
+              value: custom
+              priority: null
+              type: override
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!K15Yl8JmB5iPircc.JPwIEfgUPVebr5AH.uM6rgctYpcbCVSkn
     folder: null
@@ -1873,7 +1891,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JPwIEfgUPVebr5AH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2071,32 +2089,29 @@ items:
         img: icons/magic/fire/dagger-rune-enchant-teal.webp
         disabled: false
         _id: QPsqj6jfS0iXSrTs
-        system: {}
-        changes:
-          - key: name
-            mode: 2
-            value: ', Shillelagh'
-            priority: null
-          - key: system.damage.base.number
-            mode: 5
-            value: '1'
-            priority: null
-          - key: system.damage.base.denomination
-            mode: 5
-            value: '8'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: mgc
-            priority: null
+        system:
+          changes:
+            - key: name
+              value: ', Shillelagh'
+              priority: null
+              type: add
+            - key: system.damage.base.number
+              value: 1
+              priority: null
+              type: override
+            - key: system.damage.base.denomination
+              value: 8
+              priority: null
+              type: override
+            - key: system.properties
+              value: mgc
+              priority: null
+              type: add
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -2107,20 +2122,23 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.361'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
           exportSource: null
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!K15Yl8JmB5iPircc.udSiVp4nSrGBSvG1.QPsqj6jfS0iXSrTs
     folder: Z8kZlnggh1PtuF3Y
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.VzgFzcmocr1X1cp4
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: 1744141670539
@@ -2136,7 +2154,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171221276

@@ -680,7 +680,9 @@ export function migrateEffects(parent, migrationData, itemUpdateData, flags={}) 
   if ( !parent.effects ) return [];
   return parent.effects.reduce((arr, e) => {
     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
-    let effectUpdate = migrateEffectData(effectData, migrationData, { parent });
+    let effectUpdate = migrateEffectData(effectData, migrationData, {
+      bypassVersionCheck: flags.bypassVersionCheck, parent
+    });
     if ( effectData.flags?.dnd5e?.rider ) {
       itemUpdateData["flags.dnd5e.riders.effect"] ??= [];
       itemUpdateData["flags.dnd5e.riders.effect"].push(effectData._id);
@@ -732,19 +734,23 @@ export function migrateCopyActorTransferEffects(actor, effects, { actorUuid }={}
  * @param {object} effect            Effect data to migrate.
  * @param {object} [migrationData]   Additional data to perform the migration.
  * @param {object} [options]         Additional options.
+ * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
+ *                                                      version stored in item stats.
  * @param {object} [options.parent]  Parent of this effect.
  * @returns {object}                 The updateData to apply.
  */
-export function migrateEffectData(effect, migrationData, { parent }={}) {
+export function migrateEffectData(effect, migrationData, { bypassVersionCheck, parent }={}) {
   const updateData = {};
-  _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
-  _migrateEffectArmorClass(effect, updateData);
-  if ( foundry.utils.isNewerVersion("6.0.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
-    _migrateEffectMagical(effect, parent, updateData);
-  }
-  if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
+  const version = effect._stats?.systemVersion ?? parent?._stats?.systemVersion;
+  const migrate600 = bypassVersionCheck || foundry.utils.isNewerVersion("6.0.0", version);
+
+  _migrateDocumentIcon(effect, updateData, { ...migrationData, field: "img" });
+  _migrateEffectChanges(effect, updateData, { setIds: migrate600 });
+  if ( migrate600 ) _migrateEffectMagical(effect, parent, updateData);
+  if ( bypassVersionCheck || foundry.utils.isNewerVersion("3.1.0", version) ) {
     _migrateEffectTransfer(effect, parent, updateData);
   }
+
   return updateData;
 }
 
@@ -1024,20 +1030,31 @@ function _migrateDocumentIcon(document, updateData, { iconMap, field="img" }={})
 /* -------------------------------------------- */
 
 /**
- * Change active effects that target AC.
- * @param {object} effect      Effect data to migrate.
- * @param {object} updateData  Existing update to expand upon.
- * @returns {object}           The updateData to apply.
+ * Migrate active effect changes, modifying AC-targeting effects & adding IDs.
+ * @param {object} effect             Effect data to migrate.
+ * @param {object} updateData         Existing update to expand upon.
+ * @param {object} [options={}]
+ * @param {boolean} [options.setIds]  Commit newly created IDs to system data.
+ * @returns {object}                  The updateData to apply.
  */
-function _migrateEffectArmorClass(effect, updateData) {
+function _migrateEffectChanges(effect, updateData, { setIds }={}) {
   let containsUpdates = false;
-  const changes = (effect.changes || []).map(c => {
-    if ( c.key !== "system.attributes.ac.base" ) return c;
-    c.key = "system.attributes.ac.armor";
-    containsUpdates = true;
+  const changes = (effect.system.changes || []).map(c => {
+    // Add ID
+    if ( setIds ) {
+      c._id = foundry.utils.randomID();
+      containsUpdates = true;
+    }
+
+    // Migrate AC keys
+    if ( c.key === "system.attributes.ac.base" ) {
+      c.key = "system.attributes.ac.armor";
+      containsUpdates = true;
+    }
+
     return c;
   });
-  if ( containsUpdates ) updateData.changes = changes;
+  if ( containsUpdates ) updateData["system.changes"] = changes;
   return updateData;
 }
 

@@ -127,40 +127,12 @@ effects:
       dnd5e:
         riders:
           statuses: []
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: +@scale.barbarian.rage-damage
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
     disabled: true
     duration:
-      startTime: null
-      rounds: 10
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.classes24.Item.phbbrbRage000000
     tint: '#ffffff'
     transfer: true
@@ -171,17 +143,57 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO.ActiveEffect.eWhL8hUr0c2ujDUm
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1757446401089
+      systemVersion: 6.0.0
+      createdTime: 1783544101275
+      modifiedTime: 1783544101275
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/abilities/mouth-teeth-human.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: +@scale.barbarian.rage-damage
+          priority: null
+          type: add
+          phase: initial
+          _id: jX3yVZPX2vlLsjEX
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: Rd0ggXL7cVp2BfcT
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: UksM6kBe1FYaZGPx
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: LltJ8w9Ctpp7GerJ
+        - key: system.abilities.str.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: eR72aK4EY8nw2h00
+        - key: system.abilities.str.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: T0SG1PHYWXBAt57G
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbRage000000.G5XZTi4zYTFiHVll'
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -191,11 +203,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735865940469
-  modifiedTime: 1745256760067
+  modifiedTime: 1783544101275
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

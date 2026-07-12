@@ -124,7 +124,7 @@ export default class UsesField extends SchemaField {
     else {
       recoveryOptions.push(
         { rule: true },
-        { value: "@scale", label: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Title") }
+        { value: "@scale", label: _loc("DND5E.ADVANCEMENT.ScaleValue.Title") }
       );
     }
 

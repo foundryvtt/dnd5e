@@ -1,3 +1,4 @@
+import { getHumanReadableAttributeLabel } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
@@ -18,7 +19,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT"];
+  static LOCALIZATION_PREFIXES = ["DND5E.EFFECT.BASE", "DND5E.ENCHANTMENT"];
 
   /* -------------------------------------------- */
 
@@ -160,7 +161,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /** @override */
   onRenderActiveEffectConfig(app, html, context) {
-    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"])');
+    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"], [name="showIcon"])');
     toRemove.forEach(f => f.remove());
   }
 
@@ -185,7 +186,11 @@ export default class EnchantmentData extends ActiveEffectDataModel {
         errors.forEach(err => console.error(err));
         return false;
       }
-      this.parent.updateSource({ disabled: false });
+      const start = this.parent.constructor.getEffectStart();
+      for ( const key of Object.keys(start) ) {
+        if ( data.start?.[key] !== undefined ) delete start[key]; // Prefer user-defined duration data
+      }
+      this.parent.updateSource({ start, disabled: false });
     }
   }
 
@@ -216,10 +221,23 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /**
    * Can an active effect of this type be added to the provided document?
-   * @param {Actor5e|Item5e} doc  Candidate document to which the active effect might be added.
-   * @returns {boolean}           Should this active effect be available?
+   * @param {Actor5e|Item5e} [doc]  Candidate document to which the active effect might be added.
+   * @returns {boolean}             Should this active effect be available?
    */
   static availableForItem(doc) {
-    return doc instanceof Item;
+    return !doc || (doc instanceof Item);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async getSheetChangeContext(change) {
+    return {
+      name: getHumanReadableAttributeLabel(change.key, {
+        item: this.isAppliedEnchantment ? this.item : true, prefixItemName: false
+      })
+    };
   }
 }

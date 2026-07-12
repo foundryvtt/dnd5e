@@ -94,37 +94,44 @@ effects:
     origin: Item.mmSlowingBreath0
     _id: ztGUDHGfoUxlUY53
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 1
-        value: '0.5'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: sfVnxqqd34frvlZ2
+        - key: system.attributes.movement.burrow
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: lJ9eGBGSdaPD7RZ2
+        - key: system.attributes.movement.climb
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: qputkvtYeUMP3P7U
+        - key: system.attributes.movement.fly
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: e8kkBrK8nZcX5jeB
+        - key: system.attributes.movement.swim
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: emHqGEMw9KoZaRFZ
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target can’t take Reactions; its Speed is halved; and it can take
       either an action or a Bonus Action on its turn, not both. This effect
@@ -137,13 +144,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.2
-      createdTime: null
-      modifiedTime: 1738018796931
+      systemVersion: 6.0.0
+      createdTime: 1783544087394
+      modifiedTime: 1783544087394
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmSlowingBreath0.ztGUDHGfoUxlUY53'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -153,11 +163,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1738018586207
-  modifiedTime: 1738018586207
+  modifiedTime: 1783544087394
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -40,21 +40,20 @@ effects:
     img: icons/skills/melee/strike-sword-dagger-runes-yellow.webp
     _id: peNRQizvyp2vL84H
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: 1d8[radiant]
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: 1d8[radiant]
+          priority: null
+          type: add
+          phase: initial
+          _id: jRJaWpnb0t6cv7x1
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -65,13 +64,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103090
+      modifiedTime: 1783544103090
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbpdnRadiantStr.peNRQizvyp2vL84H'
 flags:
   dnd5e:
@@ -80,11 +82,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866297701
-  modifiedTime: 1745256763979
+  modifiedTime: 1783544103090
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

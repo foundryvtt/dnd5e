@@ -458,9 +458,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -475,7 +472,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -495,6 +492,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: BeB04w7ftFRDaMQ6
     name: Hellish Weapons
@@ -503,8 +501,9 @@ items:
     system:
       description:
         value: >-
-          <p>The erinyes's weapon attacks are magical and deal an extra 13 (3d8)
-          poison damage on a hit (included in the attacks).</p>
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical and deal an extra 13 (3d8) poison damage on a hit (included in
+          the attacks).</p>
         chat: >-
           <p>The erinyes's weapon attacks are magical and deal extra <em>poison
           damage</em> on a hit (included in the attacks).</p>
@@ -520,10 +519,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -538,24 +538,26 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.uqoqQJ9NpMCPra6P
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956534789
+      systemVersion: 6.0.0
+      createdTime: 1781666654540
+      modifiedTime: 1781666682819
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.BeB04w7ftFRDaMQ6'
   - _id: dvoOA7jzBnq2Lxza
     name: Longsword
     type: weapon
-    img: icons/weapons/swords/greatsword-crossguard-steel.webp
+    img: icons/weapons/swords/greatsword-crossguard-flanged-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
           attackMode=twoHanded]] damage if used with two hands.</p>
-        chat: <p>The Erinyes attacks with its Longsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -618,8 +620,9 @@ items:
         dt: null
         conditions: ''
       properties:
+        - mgc
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -628,8 +631,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EoN2WQ55OD1EYW9N:
           type: attack
           activation:
             type: action
@@ -644,10 +646,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -664,7 +667,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -677,35 +681,45 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 8
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: EoN2WQ55OD1EYW9N
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: longsword
       mastery: ''
     effects: []
@@ -717,166 +731,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956560897
+      systemVersion: 6.0.0
+      createdTime: 1781666709407
+      modifiedTime: 1781666751310
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.dvoOA7jzBnq2Lxza'
-  - _id: W7sEr3m8MBrzYq2v
-    name: Parry
-    type: feat
-    img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
-    system:
-      description:
-        value: >-
-          <p>The erinyes adds 4 to its AC against one melee Attack that would
-          hit it. To do so, the erinyes must see the attacker and be wielding a
-          melee weapon.</p>
-        chat: >-
-          <p>The erinyes adds 4 to its <strong>AC</strong> against one melee
-          Attack that would hit it.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: reaction
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: parry
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956592936
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!3o2rQBqpzjIHmrBW.W7sEr3m8MBrzYq2v'
-  - _id: WharT2ReFy2FYTG0
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The erinyes has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956540874
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!3o2rQBqpzjIHmrBW.WharT2ReFy2FYTG0'
   - _id: qO61ofcSoMF4uxk8
     name: Plate Armor
     type: equipment
@@ -947,7 +809,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -958,17 +820,18 @@ items:
   - _id: CElneYmOXIzyfv2a
     name: Longbow
     type: weapon
-    img: icons/weapons/bows/longbow-leather-green.webp
+    img: icons/weapons/bows/bow-recurve-black.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           succeed on a [[/save]] saving throw or be &amp;Reference[poisoned].
-          The poison lasts until it is removed by the lesser restoration spell
-          or similar magic.</p>
+          The poison lasts until it is removed by the
+          @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser
+          Restoration} spell or similar magic.</p>
         chat: >-
-          <p>The Erinyes attacks with its Longbow. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1033,8 +896,9 @@ items:
       properties:
         - amm
         - hvy
+        - mgc
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1043,8 +907,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Z4Xacg7E9KTq03mY:
           type: attack
           activation:
             type: action
@@ -1059,10 +922,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1079,7 +943,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1092,39 +957,48 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 8
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Z4Xacg7E9KTq03mY
+          name: ''
+        FSUW5qkqgkRvTUzE:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -1134,18 +1008,28 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save]] saving throw or be
+              &amp;Reference[poisoned]. The poison lasts until it is removed by
+              the @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser
+              Restoration} spell or similar magic.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: o8VWEdzRxZ9UjKls
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '150'
-            units: ft
+            units: spec
             special: ''
-            override: false
+            override: true
           target:
             template:
               count: ''
@@ -1154,10 +1038,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1167,38 +1052,91 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FSUW5qkqgkRvTUzE
+          name: Poison Save
       attuned: false
       ammunition:
         type: ''
-      magicalBonus: null
+      magicalBonus: ''
       identifier: longbow
       mastery: ''
-    effects: []
+    effects:
+      - name: Erinyes Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.3o2rQBqpzjIHmrBW.Item.CElneYmOXIzyfv2a
+        transfer: false
+        _id: o8VWEdzRxZ9UjKls
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false]. This poison lasts
+          until it is removed by the
+          @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser
+          Restoration} spell or similar magic.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781666829544
+          modifiedTime: 1781666870904
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!3o2rQBqpzjIHmrBW.CElneYmOXIzyfv2a.o8VWEdzRxZ9UjKls
     folder: null
     sort: 300000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956586249
+      systemVersion: 6.0.0
+      createdTime: 1781666762093
+      modifiedTime: 1781666906858
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.CElneYmOXIzyfv2a'
@@ -1208,7 +1146,7 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The erinyes makes three attacks.</p>
+        value: <p>The [[lookup @name lowercase]]{monster} makes three attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -1222,13 +1160,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        nVCdmDg1eD7EJp3F:
           type: utility
           activation:
             type: action
@@ -1243,15 +1180,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1262,7 +1200,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1279,7 +1218,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: nVCdmDg1eD7EJp3F
       enchant: {}
       prerequisites:
         level: null
@@ -1293,14 +1240,191 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1747956544623
+      systemVersion: 6.0.0
+      createdTime: 1781666697687
+      modifiedTime: 1781666703062
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.Fp0Jye7Qwk8KOvH7'
+  - _id: XJBhy8LGBs7BF6SR
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781666668481
+      modifiedTime: 1781666668481
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!3o2rQBqpzjIHmrBW.XJBhy8LGBs7BF6SR'
+  - _id: QPblx5JLbidICNT5
+    name: Parry
+    type: feat
+    img: icons/skills/melee/swords-parry-block-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} adds 4 to its AC against
+          one melee attack that would hit it. To do so, the [[lookup @name
+          lowercase]]{monster} must see the attacker and be wielding a melee
+          weapon.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} adds 5 to its AC against one melee
+          attack that would hit it.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        5RUe1bRJr64laA0l:
+          type: utility
+          activation:
+            type: reaction
+            value: 1
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} would be hit by a
+              melee attack while it is wielding a melee weapon.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: Parry Attack
+          _id: 5RUe1bRJr64laA0l
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: parry
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 50000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.egsSDYbqoLCelb0J.Item.lS2o3QOZ2lxKyi0L
+      duplicateSource: Item.45SLiafyQy1HrDdF
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781666999482
+      modifiedTime: 1781667059014
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!3o2rQBqpzjIHmrBW.QPblx5JLbidICNT5'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1309,7 +1433,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200935

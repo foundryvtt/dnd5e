@@ -29,11 +29,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -92,33 +95,40 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: spider-climb
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-chains-blue.webp
+img: icons/creatures/invertebrates/spider-pink-purple.webp
 effects:
   - name: Spider Climb
-    img: icons/magic/control/debuff-chains-blue.webp
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
     origin: Compendium.dnd5e.spells.Item.KJRVzeMQXPj8Gtyx
     _id: ePoOPQwLqzESWoGj
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.climb
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.climb
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>Until the spell ends, you gain the ability to move up, down, and across
+      vertical surfaces and upside down along ceilings, while leaving your hands
+      free. You also gain a climbing speed equal to your walking speed.</p>
     tint: '#ffffff'
     transfer: true
     statuses: []
@@ -131,21 +141,24 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.2.0
       createdTime: 1759793932090
-      modifiedTime: 1759793969523
+      modifiedTime: 1781227589626
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!KJRVzeMQXPj8Gtyx.ePoOPQwLqzESWoGj'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037353393
-  modifiedTime: 1725992718934
+  modifiedTime: 1781227593726
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!KJRVzeMQXPj8Gtyx'

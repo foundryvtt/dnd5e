@@ -127,21 +127,21 @@ effects:
     transfer: true
     _id: nds83KSHN6L236jW
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: fbakTto6TMhBRxJ2
+      magical: true
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>You gain a +2 bonus to Armor Class against ranged attack rolls while
       you wield this Shield. This bonus is in addition to the Shield’s normal
@@ -153,22 +153,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.4
+      systemVersion: 6.0.0
       createdTime: 1728510480139
-      modifiedTime: 1728510907902
+      modifiedTime: 1783544093688
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgArrowcatching.nds83KSHN6L236jW'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614313356
+  modifiedTime: 1783544093688
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: -193750

@@ -483,12 +483,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -532,7 +529,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -552,6 +549,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mmSpiderClimb000
     name: Spider Climb
@@ -596,10 +594,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpiderClimb000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -646,10 +646,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSunlightSensit
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -698,10 +700,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmWebWalker00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -808,10 +812,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -964,10 +970,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmForeleg0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1120,10 +1128,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPoisonBurst000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1361,10 +1371,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicOfTheSpid
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -1474,6 +1486,7 @@ items:
       identifier: darkness
       method: spell
       prepared: 0
+      sourceItem: feat:magic-of-the-spider-queen
     type: spell
     img: icons/magic/unholy/orb-rays-blue.webp
     effects:
@@ -1481,53 +1494,76 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDrider00000000.Item.mmMagicOfTheSpid.Activity.ErB1BoIjo8Wj9KXS
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-          - key: system.ability
-            mode: 5
-            value: wis
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: N9VHbSvvSIqDrP2Y
+            - key: system.ability
+              value: wis
+              priority: null
+              type: override
+              phase: initial
+              _id: DdK4sn6NNyIBs0cW
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: WDtNRTJYB6tczd0P
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: WL9bGdG74DqdL7Ht
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: 7Li2MYIcDQu9Jdnt
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDrider00000000.Item.mmMagicOfTheSpid.Activity.ErB1BoIjo8Wj9KXS
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176607
+          modifiedTime: 1783544176607
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDrider00000000.OMFNXlIWcvgZPTwl.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1541,10 +1577,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDarkness00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176607
+      modifiedTime: 1783544176607
     _id: OMFNXlIWcvgZPTwl
     _key: '!actors.items!mmDrider00000000.OMFNXlIWcvgZPTwl'
   - name: Faerie Fire
@@ -1655,26 +1693,25 @@ items:
       identifier: faerie-fire
       method: spell
       prepared: 0
+      sourceItem: feat:magic-of-the-spider-queen
     type: spell
     img: icons/magic/fire/projectile-meteor-salvo-strong-pink.webp
     effects:
       - name: Outlined
         origin: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/control/silhouette-hold-change-green.webp
         _id: Y2i0OvwOixxag0ed
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>For the duration, objects and affected creatures shed
           &amp;Reference[dimlight] in a 10-foot radius and can’t benefit from
@@ -1688,63 +1725,91 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176608
+          modifiedTime: 1783544176608
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDrider00000000.cTOigW9T4CgF7fb5.Y2i0OvwOixxag0ed
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDrider00000000.Item.mmMagicOfTheSpid.Activity.8Zw5hRXyd8axv5Zs
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-          - key: system.ability
-            mode: 5
-            value: wis
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: SZiIK4ydxOCsaH3m
+            - key: system.ability
+              value: wis
+              priority: null
+              type: override
+              phase: initial
+              _id: myJey7W6F9fkjw8M
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: oc5zQbyrfgNupDt9
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: nt4YTGB58JRhlBcD
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: if7QqkwyA3HNC3QM
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDrider00000000.Item.mmMagicOfTheSpid.Activity.8Zw5hRXyd8axv5Zs
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176608
+          modifiedTime: 1783544176608
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDrider00000000.cTOigW9T4CgF7fb5.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1758,10 +1823,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176607
+      modifiedTime: 1783544176607
     _id: cTOigW9T4CgF7fb5
     _key: '!actors.items!mmDrider00000000.cTOigW9T4CgF7fb5'
   - name: Web
@@ -1898,6 +1965,7 @@ items:
       identifier: web
       method: spell
       prepared: 0
+      sourceItem: feat:magic-of-the-spider-queen
     type: spell
     img: icons/creatures/webs/web-spider-casting-caught-purple.webp
     effects:
@@ -1905,53 +1973,76 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDrider00000000.Item.mmMagicOfTheSpid.Activity.B8OHv2CaawtJoMu7
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-          - key: system.ability
-            mode: 5
-            value: wis
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: sc6Pm1jr4s0cv4Nq
+            - key: system.ability
+              value: wis
+              priority: null
+              type: override
+              phase: initial
+              _id: 9sY5FU2jo1VDNKCc
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: BRPO80ilwp7EzRdQ
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: EB3r41GqsLLpdGby
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: lhygFHddlJhAeA47
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDrider00000000.Item.mmMagicOfTheSpid.Activity.B8OHv2CaawtJoMu7
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176608
+          modifiedTime: 1783544176608
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDrider00000000.gAdVTIyqf9DLBQT4.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1968,10 +2059,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWeb0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176608
+      modifiedTime: 1783544176608
     _id: gAdVTIyqf9DLBQT4
     _key: '!actors.items!mmDrider00000000.gAdVTIyqf9DLBQT4'
 effects: []
@@ -1982,11 +2075,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452700934
-  modifiedTime: 1771452700934
+  systemVersion: 6.0.0
+  createdTime: 1783544176606
+  modifiedTime: 1783544176606
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

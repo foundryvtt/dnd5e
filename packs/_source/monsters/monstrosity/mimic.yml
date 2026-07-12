@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,18 +480,20 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: DOyBdRdgMxLm9BIh
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/containers/barrels/barrel-oak-banded-tan.webp
     system:
       description:
         value: >-
-          <p>The mimic can use its action to polymorph into an object or back
-          into its true, amorphous form. Its statistics are the same in each
-          form.</p><p>Any equipment it is wearing or carrying isn't transformed.
-          It reverts to its true form if it dies.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its action to
+          polymorph into an object or back into its true, amorphous form. Its
+          statistics are the same in each form.</p><p>Any equipment it is
+          wearing or carrying isn't transformed. It reverts to its true form if
+          it dies.</p>
         chat: >-
           <p>The mimic can use its action to <strong>polymorph</strong> into an
           object or back into its true, amorphous form. </p>
@@ -510,7 +509,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
@@ -582,28 +581,31 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826252363
+      systemVersion: 6.0.0
+      createdTime: 1781895475955
+      modifiedTime: 1781895494110
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.DOyBdRdgMxLm9BIh'
   - _id: aPL8wE2ARwh9JFeX
     name: Adhesive (Object Form Only)
     type: feat
-    img: icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp
+    img: icons/creatures/slimes/slime-bubble-green.webp
     system:
       description:
         value: >-
-          <p>The mimic adheres to anything that touches it. A Huge or smaller
-          creature adhered to the mimic is also grappled by it escape DC 13.
-          Ability checks made to escape this grapple have disadvantage.</p>
+          <p>The mimic[[lookup @name lowercase]]{monster} adheres to anything
+          that touches it. A Huge or smaller creature adhered to the [[lookup
+          @name lowercase]]{monster} is also &amp;reference[grappled] by it
+          (escape DC 13). Ability checks made to escape this grapple have
+          disadvantage.</p>
         chat: >-
-          <p>The mimic adheres to anything that touches it. A Huge or smaller
-          creature adhered to the mimic is also grappled by it. Make an escape
-          check, with disadvantage.</p>
+          <p>The [[lookup @name]]{monster} adheres to anything that touches it.
+          A Huge or smaller creature adhered to the [[lookup @name]]{monster} is
+          also &amp;reference[grappled] by it. Make an escape check, with
+          disadvantage.</p>
       source:
         custom: ''
         book: ''
@@ -616,16 +618,117 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        LP48u2yF1QlOIJDZ:
+          type: utility
+          name: Adhere to Creature
+          _id: LP48u2yF1QlOIJDZ
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: When the [[lookup @name lowercase]]{monster} is touched.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: Ekw5qkMxHSiz9sED
+              level: {}
+          flags: {}
+          range:
+            units: touch
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: adhesive-object-form-only
-    effects: []
+    effects:
+      - name: Grappled and Adhered
+        img: icons/creatures/slimes/slime-bubble-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.hx240PG5r5qpRet3.Item.aPL8wE2ARwh9JFeX
+        transfer: false
+        _id: Ekw5qkMxHSiz9sED
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 13).
+          Ability checks made to escape this grapple have disadvantage.</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781895615508
+          modifiedTime: 1781895692230
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!hx240PG5r5qpRet3.aPL8wE2ARwh9JFeX.Ekw5qkMxHSiz9sED
     folder: null
     sort: 0
     ownership:
@@ -634,18 +737,18 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826259264
+      systemVersion: 6.0.0
+      createdTime: 1781895500822
+      modifiedTime: 1781895697688
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.aPL8wE2ARwh9JFeX'
   - _id: 7g1LwEync57GwqV0
     name: False Appearance (Object Form Only)
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/containers/boxes/crate-wooden-grey.webp
     system:
       description:
         value: >-
@@ -664,10 +767,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -682,23 +786,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781895740808
+      modifiedTime: 1781895745285
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.7g1LwEync57GwqV0'
   - _id: sGiOJWWFPPQ6J5Zm
     name: Grappler
     type: feat
-    img: icons/skills/melee/unarmed-punch-fist.webp
+    img: icons/skills/melee/hand-grip-staff-blue.webp
     system:
       description:
         value: >-
-          <p>The mimic has advantage on attack rolls against any creature
-          grappled by it.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on attack
+          rolls against any creature &amp;reference[grappled apply=false] by
+          it.</p>
         chat: ''
       source:
         custom: ''
@@ -712,10 +817,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -730,11 +836,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kP9t6MAeUvBBmoM3
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826266045
+      systemVersion: 6.0.0
+      createdTime: 1781895761478
+      modifiedTime: 1781895782170
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.sGiOJWWFPPQ6J5Zm'
@@ -745,9 +851,13 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the mimic is
-          in object form, the target is subjected to its Adhesive trait.</p>
-        chat: <p>The Mimic attacks with its Pseudopod.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the mimic is
+          in object form, the target is subjected to its
+          @UUID[Compendium.dnd5e.monsters.Actor.hx240PG5r5qpRet3.Item.aPL8wE2ARwh9JFeX]{Adhesive}
+          trait.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -886,6 +996,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: pseudopod
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -895,22 +1006,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552842
+      systemVersion: 6.0.0
+      createdTime: 1781895443639
+      modifiedTime: 1781895451684
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.qHJyEXRC7oExTjES'
   - _id: HgNW3DcqMvGVXO7s
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-lamprey-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Mimic attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -973,7 +1086,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -982,8 +1095,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        yMRXXuFQKH17PUxN:
           type: attack
           activation:
             type: action
@@ -998,10 +1110,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1018,7 +1131,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1031,36 +1145,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 8
                 bonus: ''
                 types:
                   - acid
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: yMRXXuFQKH17PUxN
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1070,11 +1195,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552842
+      systemVersion: 6.0.0
+      createdTime: 1781895410820
+      modifiedTime: 1781895424455
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.HgNW3DcqMvGVXO7s'
@@ -1086,7 +1211,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171250239

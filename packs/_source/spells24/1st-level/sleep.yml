@@ -106,20 +106,18 @@ effects:
   - name: Sleeping
     origin: Compendium.dnd5e.spells24.Item.phbsplSleep00000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/sleep-bubble-purple.webp
     _id: 04Wa4xUzjA31kPno
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The target has the &amp;Reference[incapacitated apply=false] condition
       until the end of its next turn, at which point it must repeat the save. If
@@ -135,13 +133,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977017
+      modifiedTime: 1783543977017
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSleep00000.04Wa4xUzjA31kPno'
 folder: pBaAAtXBCq9FVEnL
 sort: 400000
@@ -154,11 +155,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425971231
-  modifiedTime: 1745256798344
+  modifiedTime: 1783543977017
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSleep00000'

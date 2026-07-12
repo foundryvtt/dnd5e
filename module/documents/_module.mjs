@@ -19,6 +19,7 @@ export {default as HitDice} from "./actor/hit-dice.mjs";
 export {default as Proficiency} from "./actor/proficiency.mjs";
 export {default as SelectChoices} from "./actor/select-choices.mjs";
 export * as Trait from "./actor/trait.mjs";
+export {default as AppliedRules} from "./applied-rules.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export * as macro from "./macro.mjs";
 export {default as Scaling} from "./scaling.mjs";

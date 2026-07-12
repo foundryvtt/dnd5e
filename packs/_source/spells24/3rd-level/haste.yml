@@ -157,13 +157,10 @@ effects:
   - name: Hasted
     origin: Compendium.dnd5e.spells24.Item.phbsplHaste00000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -172,36 +169,51 @@ effects:
     img: icons/magic/time/clock-spinning-gold-pink.webp
     _id: NEFWcyysYgsE6de3
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 1
-        value: '2'
-        priority: null
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.abilities.dex.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: VNjQTf5nemDRVEy1
+        - key: system.attributes.movement.burrow
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: L8tIkGOj0wyI6l0i
+        - key: system.attributes.movement.climb
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: oo3xA2QDgpV3m9C6
+        - key: system.attributes.movement.fly
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: QAv9M3oLNJJSP5v7
+        - key: system.attributes.movement.swim
+          value: 2
+          priority: null
+          type: multiply
+          phase: initial
+          _id: 25aJVhryJj5S8CB7
+        - key: system.attributes.ac.bonus
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: UPblsKx9Njx3JBHN
+        - key: system.abilities.dex.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: gIfPzfbWMMkvwgZy
+      magical: true
     description: >-
       <p>Until the spell ends, the target’s Speed is doubled, it gains a +2
       bonus to Armor Class, it has Advantage on Dexterity saving throws, and it
@@ -218,51 +230,62 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760128875594
+      systemVersion: 6.0.0
+      createdTime: 1783543975435
+      modifiedTime: 1783543975435
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplHaste00000.NEFWcyysYgsE6de3'
   - name: Lethargy
     origin: Compendium.dnd5e.spells24.Item.phbsplHaste00000
     duration:
-      rounds: 1
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/tools/nautical/anchor-blue.webp
     _id: S5XcFawnnNHO8bUr
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 3
-        value: '0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: Y7UNigwv1E20shQR
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: APHi1pYEDqjM2UmU
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: aNsWpK9fcd5jgJFq
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: U9GtZdC1yxypSL1b
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: peTnJBoKqVVUgEgq
+      magical: true
     description: >-
       <p>When the spell ends, the target is &amp;Reference[incapacitated
       apply=false] and has a Speed of 0 until the end of its next turn, as a
@@ -275,13 +298,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975435
+      modifiedTime: 1783543975435
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplHaste00000.S5XcFawnnNHO8bUr'
 folder: HCovEE4VoPGlIbKi
 sort: 1700000
@@ -294,11 +320,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425958065
-  modifiedTime: 1760128878395
+  modifiedTime: 1783543975435
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHaste00000'

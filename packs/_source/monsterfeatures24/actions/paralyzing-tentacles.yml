@@ -100,17 +100,14 @@ effects:
     origin: Item.mmParalyzingTent
     _id: 5ReKSrBu11ume7GP
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Poisoned apply=false] condition and
       repeats the save at the end of each of its turns, ending the effect on
@@ -128,13 +125,22 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736073838491
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!items.effects!mmParalyzingTent.5ReKSrBu11ume7GP'
 flags:
   dnd5e:
@@ -143,7 +149,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956
