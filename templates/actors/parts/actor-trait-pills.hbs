@@ -15,13 +15,14 @@
     </h3>
     <ul class="pills">
         {{#each values}}
-        <li class="pill {{ ../color }} {{ color }} {{~ifThen draggable ' draggable' ''}}">
+        <li class="pill {{ ../color }} {{ color }} {{~ifThen draggable ' draggable' ''}}"
+            {{~#if tooltip}} data-tooltip aria-label="{{ tooltip }}"{{/if}}>
             {{#if link}}<a class="{{ @root.rollableClass }}" {{ dnd5e-dataset link }}>{{/if}}
             {{#each icons}}
             <i class="{{ icon }}" data-tooltip="{{ label }}" aria-label="{{ label }}"></i>
             {{/each}}
             <span class="label">{{ label }}</span>
-            {{#if value}}
+            {{#if (or value displayZero)}}
             <span class="separator">&vert;</span>
             <span class="value">{{ dnd5e-numberFormat value signDisplay=../signDisplay }}</span>
             {{/if}}

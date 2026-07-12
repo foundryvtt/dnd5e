@@ -1,4 +1,4 @@
-import { formatNumber, getPluralRules, simplifyBonus, splitSemicolons } from "../../utils.mjs";
+import { formatLength, formatNumber, getPluralRules, simplifyBonus, splitSemicolons } from "../../utils.mjs";
 import { createCheckboxInput } from "../fields.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
 import HabitatConfig from "./config/habitat-config.mjs";
@@ -370,14 +370,23 @@ export default class NPCActorSheet extends BaseActorSheet {
     context.tools = this._prepareSkillsTools(context, "tools");
 
     // Speed
+    const movementSource = this.actor._source.system.attributes.movement;
     context.speed = [
       ...Object.entries(CONFIG.DND5E.movementTypes).filter(([, m]) => !m.hidden).map(([k, { label }]) => {
         const value = attributes.movement[k];
-        if ( !value ) return null;
+        const base = movementSource[k];
+        if ( !value && !base ) return null;
         const data = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) data.icons = [{
           icon: "fas fa-cloud", label: _loc("DND5E.MOVEMENT.Hover")
         }];
+        if ( !value ) {
+          data.displayZero = true;
+          const sources = this.#movementReducers(k);
+          data.tooltip = sources.length
+            ? _loc("DND5E.MOVEMENT.ReducedBy", { effect: game.i18n.getListFormatter().format(sources) })
+            : _loc("DND5E.MOVEMENT.Reduced", { speed: formatLength(base, attributes.movement.units) });
+        }
         return data;
       }),
       ...splitSemicolons(attributes.movement.special).map(label => ({ label }))
@@ -470,6 +479,25 @@ export default class NPCActorSheet extends BaseActorSheet {
     });
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Identify the active effects currently reducing a movement type to zero.
+   * @param {string} key  The movement type key.
+   * @returns {string[]}  Names of the responsible effects.
+   */
+  #movementReducers(key) {
+    const statuses = new Set(CONFIG.DND5E.conditionEffects.noMovement);
+    if ( key !== "walk" ) CONFIG.DND5E.conditionEffects.crawl.forEach(s => statuses.add(s));
+    const path = `system.attributes.movement.${key}`;
+    const names = new Set();
+    for ( const effect of this.actor.appliedEffects ) {
+      // Conditions zero movement in code (keyed off statuses); custom effects may override the field directly.
+      if ( effect.statuses.intersects(statuses) || effect.changes.some(c => c.key === path) ) names.add(effect.name);
+    }
+    return Array.from(names);
   }
 
   /* -------------------------------------------- */
