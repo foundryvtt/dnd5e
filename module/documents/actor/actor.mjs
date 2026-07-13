@@ -3615,9 +3615,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Handle applying/removing the dead/unconscious status.
    * @param {DocumentModificationContext} options  Additional options supplied with the update.
-   * @returns {Promise<ActiveEffect|boolean|void>|void}
+   * @returns {Promise<ActiveEffect|boolean|void>}
    */
-  updateDowned(options) {
+  async updateDowned(options) {
     const { autoApplyDowned } = dnd5e.settings;
     if ( autoApplyDowned === "none" ) return;
     const hp = this.system.attributes?.hp;
@@ -3642,27 +3642,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     } else if ( (this.type === "character") && (autoApplyDowned === "all") ) {
       toApply = failedDeathSaves ? "dead" : "unconscious";
     }
-    if ( !toApply ) return;
-    if ( toApply === "dead" ) return ActiveEffect.implementation.create({
-      _id: CONFIG.statusEffects.dead._id,
-      img: CONFIG.statusEffects.dead.img,
-      flags: { dnd5e: { autoDowned: true }, core: { overlay: true } },
-      name: CONFIG.statusEffects.dead.name,
-      statuses: ["dead"],
-      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
-      type: "condition",
-      system: { type: "dead" }
-    }, { parent: this, keepId: true });
-    else if ( !isUnconscious ) return ActiveEffect.implementation.create({
-      _id: CONFIG.statusEffects.unconscious._id,
-      img: CONFIG.statusEffects.unconscious.img,
-      flags: { dnd5e: { autoDowned: true } },
-      name: CONFIG.statusEffects.unconscious.name,
-      statuses: ["unconscious"],
-      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
-      type: "condition",
-      system: { type: "unconscious" }
-    }, { parent: this, keepId: true });
+    if ( !toApply || ((toApply === "unconscious") && isUnconscious) ) return;
+    const effect = await ActiveEffect.implementation.fromStatusEffect(toApply);
+    const flags = { dnd5e: { autoDowned: true } };
+    if ( toApply === "dead" ) flags.core = { overlay: true };
+    effect.updateSource({ flags });
+    return ActiveEffect.implementation.create(effect, { parent: this, keepId: true });
   }
 
   /* -------------------------------------------- */
