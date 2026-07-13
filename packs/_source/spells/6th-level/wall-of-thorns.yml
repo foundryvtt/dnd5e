@@ -8,7 +8,7 @@ system:
     value: >-
       <p>You create a wall of tough, pliable, tangled brush bristling with
       needle-sharp thorns. The wall appears within range on a solid surface and
-      lasts for the Duration. You choose to make the wall up to 60 feet long, 10
+      lasts for the duration. You choose to make the wall up to 60 feet long, 10
       feet high, and 5 feet thick or a circle that has a 20-foot diameter and is
       up to 20 feet high and 5 feet thick. The wall blocks line of
       sight.</p><p>When the wall appears, each creature within its area must
@@ -16,7 +16,7 @@ system:
       piercing damage, or half as much damage on a successful save.</p><p>A
       creature can move through the wall, albeit slowly and painfully. For every
       1 foot a creature moves through the wall, it must spend 4 feet of
-      Movement. Furthermore, the first time a creature enters the wall on a turn
+      movement. Furthermore, the first time a creature enters the wall on a turn
       or ends its turn there, the creature must make a Dexterity saving throw.
       It takes 7d8 slashing damage on a failed save, or half as much damage on a
       successful one.</p><p><strong>At Higher Levels</strong>. When you cast
@@ -39,14 +39,19 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: wall
       size: '60'
       contiguous: false
+      width: '5'
+      height: '10'
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -117,23 +122,190 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Conjure Wall of Thorns
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    bW1jTVcJY6Feg9Bg:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+          type: ring
+          size: '10'
+          count: ''
+          width: '5'
+          height: '20'
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+      damage:
+        onSave: half
+        parts:
+          - number: 7
+            denomination: 8
+            bonus: ''
+            types:
+              - piercing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+        visible: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Conjure Circular Wall of Thorns
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: bW1jTVcJY6Feg9Bg
+    8YDZAxCbAqr4etpJ:
+      type: save
+      name: Wall Contact Damage
+      _id: 8YDZAxCbAqr4etpJ
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When a creature moves through the wall on a turn or ends its turn
+          there.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The first time a creature enters the wall on a turn or ends its
+          turn there, the creature must make a Dexterity saving throw. It takes
+          7d8 slashing damage on a failed save, or half as much damage on a
+          successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 7
+            denomination: 8
+            bonus: ''
+            types:
+              - slashing
+            scaling:
+              mode: whole
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
   identifier: wall-of-thorns
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-green-large.webp
+img: icons/magic/nature/root-vine-spiral-thorns-teal.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037349938
-  modifiedTime: 1725992717804
+  modifiedTime: 1783215373664
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!AQsBc94ES7W7s7iG'
