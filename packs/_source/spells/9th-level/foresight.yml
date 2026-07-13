@@ -7,11 +7,12 @@ system:
   description:
     value: >-
       <p>You touch a willing creature and bestow a limited ability to see into
-      the immediate future. For the Duration, the target can't be surprised and
-      has advantage on Attack rolls, Ability Checks, and Saving Throws.
-      Additionally, other creatures have disadvantage on attack rolls against
-      the target for the duration.</p><p>This spell immediately ends if you cast
-      it again before its Duration ends.</p>
+      the immediate future. For the duration, the target can't be
+      &amp;reference[surprise]{Surprised} and has advantage on attack rolls,
+      ability checks, and saving throws. Additionally, other creatures have
+      disadvantage on attack rolls against the target for the
+      duration.</p><p>This spell immediately ends if you cast it again before
+      its duration ends.</p>
     chat: ''
   source:
     custom: ''
@@ -31,11 +32,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,7 +78,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: UTG8MneezBrTcBGo
+          level: {}
       range:
         override: false
       target:
@@ -93,20 +99,134 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: foresight
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
-effects: []
+img: icons/creatures/eyes/slime-cluster-green.webp
+effects:
+  - name: Foresight
+    img: icons/creatures/eyes/slime-cluster-green.webp
+    origin: Compendium.dnd5e.spells.Item.6HEEhLdJz32TL4Js
+    transfer: false
+    _id: UTG8MneezBrTcBGo
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.str.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.con.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.con.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.int.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.int.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.wis.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.wis.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.cha.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.cha.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.traits.ci.value
+          type: add
+          value: surprised
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been bestowed a limited ability to see into the immediate
+      future. For the duration, You can't be &amp;reference[surprise]{Surprised}
+      and have advantage on attack rolls, ability checks, and saving throws.
+      Additionally, other creatures have disadvantage on attack rolls against
+      you for the duration.</p><p>This spell immediately ends if the caster
+      casts it again before its duration ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781381312750
+      modifiedTime: 1783719492681
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!6HEEhLdJz32TL4Js.UTG8MneezBrTcBGo'
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347803
-  modifiedTime: 1725992717114
+  modifiedTime: 1781381511278
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!6HEEhLdJz32TL4Js'
