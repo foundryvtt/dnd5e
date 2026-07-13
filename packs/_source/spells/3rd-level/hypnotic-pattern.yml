@@ -23,14 +23,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '30'
       contiguous: false
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,6 +77,9 @@ system:
       effects:
         - _id: SQnfuD2rHVcyLZ4j
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -92,80 +98,92 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: hypnotic-pattern
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-pink.webp
+img: icons/magic/air/air-burst-spiral-large-pink.webp
 effects:
   - name: Hypnotic Pattern
     origin: Compendium.dnd5e.spells.Item.6g3WLOZ2u0EbaLAd
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: SQnfuD2rHVcyLZ4j
-    changes:
-      - key: system.attributes.movement.burrow
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 5
-        value: '0'
-        priority: null
-      - key: system.attributes.movement.walk
-        mode: 5
-        value: '0'
-        priority: null
     description: >-
-      <p>The creature is Charmed for the duration. While charmed by this spell,
-      the creature is Incapacitated and has a speed of 0.</p>
+      <p>You are &amp;reference[charmed apply=false] for the duration. While
+      charmed by this spell, you are also &amp;reference[incapcitated
+      apply=false] and have a speed of 0.</p>
     transfer: false
     statuses:
       - charmed
       - incapacitated
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781360444026
+      modifiedTime: 1781360444026
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/air-burst-spiral-pink.webp
+    img: icons/magic/air/air-burst-spiral-large-pink.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.movement.burrow
+          value: 0
+          priority: null
+          type: override
+        - key: system.attributes.movement.climb
+          value: 0
+          priority: null
+          type: override
+        - key: system.attributes.movement.fly
+          value: 0
+          priority: null
+          type: override
+        - key: system.attributes.movement.swim
+          value: 0
+          priority: null
+          type: override
+        - key: system.attributes.movement.walk
+          value: 0
+          priority: null
+          type: override
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!6g3WLOZ2u0EbaLAd.SQnfuD2rHVcyLZ4j'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347867
-  modifiedTime: 1725992717137
+  modifiedTime: 1781360447949
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!6g3WLOZ2u0EbaLAd'

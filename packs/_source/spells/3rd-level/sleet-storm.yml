@@ -8,14 +8,14 @@ system:
     value: >-
       <p>Until the spell ends, freezing rain and sleet fall in a 20-foot-tall
       cylinder with a 40-foot radius centered on a point you choose within
-      range. The area is heavily obscured, and exposed flames in the area are
-      doused.</p><p>The ground in the area is covered with slick ice, making it
-      difficult terrain. When a creature enters the spell's area for the first
-      time on a turn or starts its turn there, it must make a Dexterity saving
-      throw. On a failed save, it falls Prone.</p><p>If a creature is
-      concentrating in the spell's area, the creature must make a successful
-      Constitution saving throw against your spell save DC or lose
-      concentration.</p>
+      range. The area is &amp;reference[heavily obscured], and exposed flames in
+      the area are doused.</p><p>The ground in the area is covered with slick
+      ice, making it &amp;reference[difficult terrain]. When a creature enters
+      the spell's area for the first time on a turn or starts its turn there, it
+      must make a Dexterity saving throw. On a failed save, it falls
+      &amp;reference[Prone].</p><p>If a creature is concentrating in the spell's
+      area, the creature must make a successful Constitution saving throw
+      against your spell save DC or lose concentration.</p>
     chat: ''
   source:
     custom: ''
@@ -33,14 +33,18 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cylinder
       size: '40'
       contiguous: false
+      height: ''
+      count: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -65,57 +69,186 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature enters the spell's area for the first time on a turn
+          or starts its turn there.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Slippery Ice Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    PxwopGlJxRFIgDMc:
+      type: utility
+      name: Cast Spell
+      _id: PxwopGlJxRFIgDMc
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    qfj60uYu8bG8nsG9:
+      type: save
+      activation:
+        type: special
+        value: null
+        override: true
+        condition: >-
+          When a concentrating creature enters the spell's area for the first
+          time on a turn or starts its turn there.
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        units: spec
+        special: ''
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+        visible: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      name: Maintain Concentration Save
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: qfj60uYu8bG8nsG9
   identifier: sleet-storm
 sort: 0
 flags: {}
-img: icons/magic/water/projectile-beams-salvo-blue.webp
+img: icons/magic/water/projectile-icecicles-salvo.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037361248
-  modifiedTime: 1725992721507
+  modifiedTime: 1781294652781
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dhqBY4TvVjxVmOZd'

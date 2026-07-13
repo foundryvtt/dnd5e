@@ -104,20 +104,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: tiny-hut
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-blue.webp
+img: icons/environment/settlement/blacksmith.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.3.0
+  systemVersion: 6.0.0
   createdTime: 1725037355072
-  modifiedTime: 1772145870594
+  modifiedTime: 1781292814935
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!NXWWWgHtWb7Nv21F'
