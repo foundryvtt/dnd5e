@@ -142,6 +142,11 @@ effects:
           value: frightened
           phase: initial
           priority: null
+        - key: system.traits.ci.value
+          type: add
+          value: poisoned
+          phase: initial
+          priority: null
         - key: system.traits.di.value
           type: add
           value: poison
