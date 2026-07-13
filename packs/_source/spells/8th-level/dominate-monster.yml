@@ -46,12 +46,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -93,6 +96,14 @@ system:
       effects:
         - _id: fBMLyF7ftAaWmv1s
           onSave: false
+          level:
+            min: 8
+            max: 8
+        - _id: A9gnQnWfCRqoymRm
+          onSave: false
+          level:
+            min: 9
+            max: 9
       range:
         override: false
       target:
@@ -104,66 +115,247 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    Ur3gZKsYU9z2dF3f:
+      type: utility
+      name: Command Creature
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      _id: Ur3gZKsYU9z2dF3f
+    gTWT6EVmsdlCKci4:
+      type: utility
+      name: Assume Direct Control
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You take total and precise control of the target. Until the end of
+          your next turn, the creature takes only the actions you choose, and
+          doesn't do anything that you don't allow it to do. During this time
+          you can also cause the creature to use a reaction, but this requires
+          you to use your own reaction as well.</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      _id: gTWT6EVmsdlCKci4
   identifier: dominate-monster
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-pink.webp
+img: icons/creatures/magical/spirit-undead-ghost-tan-teal.webp
 effects:
-  - name: Dominate Monster
+  - name: 'Dominate Monster: 8th Level'
     origin: Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: fBMLyF7ftAaWmv1s
-    changes: []
     description: >-
-      <p>The target is Charmed and must do its best to obey any commands sent by
-      the caster.</p>
+      <p>You are &amp;reference[charmed apply=false] and the caster has a
+      telepathic link with you as long as the two of you are on the same plane
+      of existence. They can use this telepathic link to issue commands to you,
+      which you must do your best to obey. If you complete your order and don't
+      recieve further direction from the caster, you defend and preserve
+      yourself to the best of your ability.</p><p>Each time you take damage, you
+      make a new Wisdom saving throw against the spell. If the saving throw
+      succeeds, the spell ends.</p>
     transfer: false
     statuses:
       - charmed
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781458596242
+      modifiedTime: 1781458596242
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/air-burst-spiral-large-pink.webp
+    img: icons/creatures/magical/spirit-undead-ghost-tan-teal.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!eEpy1ONlXumKS1mp.fBMLyF7ftAaWmv1s'
+  - name: 'Dominate Monster: 9th Level'
+    origin: Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[charmed apply=false] and the caster has a
+      telepathic link with you as long as the two of you are on the same plane
+      of existence. They can use this telepathic link to issue commands to you,
+      which you must do your best to obey. If you complete your order and don't
+      recieve further direction from the caster, you defend and preserve
+      yourself to the best of your ability.</p><p>Each time you take damage, you
+      make a new Wisdom saving throw against the spell. If the saving throw
+      succeeds, the spell ends.</p>
+    transfer: false
+    statuses:
+      - charmed
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781458598692
+      modifiedTime: 1781458607178
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/creatures/magical/spirit-undead-ghost-tan-teal.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: A9gnQnWfCRqoymRm
+    _key: '!items.effects!eEpy1ONlXumKS1mp.A9gnQnWfCRqoymRm'
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037361593
-  modifiedTime: 1725992721611
+  modifiedTime: 1781458623144
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eEpy1ONlXumKS1mp'
