@@ -6,9 +6,9 @@ type: spell
 system:
   description:
     value: >-
-      <p>You assume the form of a different creature for the Duration. The new
+      <p>You assume the form of a different creature for the duration. The new
       form can be of any creature with a Challenge rating equal to your level or
-      lower. The creature can't be a construct or an Undead, and you must have
+      lower. The creature can't be a construct or an undead, and you must have
       seen the sort of creature at least once. You transform into an average
       example of that creature, one without any class levels or the Spellcasting
       trait.</p><p>Your game statistics are replaced by the statistics of the
@@ -23,22 +23,23 @@ system:
       had before you transformed. If you revert as a result of Dropping to 0 Hit
       Points, any excess damage carries over to your normal form. As long as the
       excess damage doesn't reduce your normal form to 0 Hit Points, you aren't
-      knocked Unconscious.</p><p>You retain the benefit of any features from
-      your class, race, or other source and can use them, provided that your new
-      form is physically capable of doing so. You can't use any Special Senses
-      you have (for example, darkvision) unless your new form also has that
-      sense. You can only speak if the creature can normally speak.</p><p>When
-      you transform, you choose whether your Equipment falls to the ground,
-      merges into the new form, or is worn by it. Worn equipment functions as
-      normal. The DM determines whether it is practical for the new form to wear
-      a piece of equipment, based on the creature's shape and size. Your
-      equipment doesn't change shape or size to match the new form, and any
-      equipment that the new form can't wear must either fall to the ground or
-      merge into your new form. Equipment that merges has no effect in that
-      state.</p><p>During this spell's Duration, you can use your action to
-      assume a different form following the same restrictions and rules for the
-      original form, with one exception: if your new form has more hit points
-      than your current one, your hit points remain at their current value.</p>
+      knocked &amp;reference[Unconscious apply=false].</p><p>You retain the
+      benefit of any features from your class, race, or other source and can use
+      them, provided that your new form is physically capable of doing so. You
+      can't use any Special Senses you have (for example,
+      &amp;reference[darkvision]) unless your new form also has that sense. You
+      can only speak if the creature can normally speak.</p><p>When you
+      transform, you choose whether your Equipment falls to the ground, merges
+      into the new form, or is worn by it. Worn equipment functions as normal.
+      The DM determines whether it is practical for the new form to wear a piece
+      of equipment, based on the creature's shape and size. Your equipment
+      doesn't change shape or size to match the new form, and any equipment that
+      the new form can't wear must either fall to the ground or merge into your
+      new form. Equipment that merges has no effect in that state.</p><p>During
+      this spell's duration, you can use your action to assume a different form
+      following the same restrictions and rules for the original form, with one
+      exception: if your new form has more hit points than your current one,
+      your hit points remain at their current value.</p>
     chat: ''
   source:
     custom: ''
@@ -57,11 +58,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -84,58 +88,150 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    DV7Fh5ovppv9imwJ:
+      type: transform
+      name: Change Shape
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      profiles:
+        - cr: '@details.level'
+          name: ''
+          _id: SbEygzQNI7zvTz8d
+          uuid: null
+          sizes: []
+          types: []
+          movement: []
+          level:
+            min: null
+            max: null
+      settings:
+        preset: ''
+        effects:
+          - all
+        keep:
+          - mental
+          - gearProf
+          - languages
+          - class
+          - feats
+          - items
+          - spells
+          - bio
+          - hp
+          - tempHP
+          - resistances
+          - vision
+        merge:
+          - saves
+          - skills
+        other: []
+        spellLists: []
+        transformTokens: true
+        minimumAC: ''
+        tempFormula: ''
+      transform:
+        customize: true
+        mode: cr
+        preset: ''
+      _id: DV7Fh5ovppv9imwJ
+    Pb2Lx0WUv5zDQ87G:
+      type: utility
+      name: Cast
+      _id: Pb2Lx0WUv5zDQ87G
+      img: null
+      sort: 150000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: shapechange
 sort: 0
 flags: {}
-img: icons/magic/nature/wolf-paw-glow-large-orange.webp
+img: icons/creatures/abilities/paw-print-yellow.webp
 effects: []
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354933
-  modifiedTime: 1725992719435
+  modifiedTime: 1781387336535
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!N2UEFq8X5LRsLcOZ'

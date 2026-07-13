@@ -10,7 +10,7 @@ system:
       wall—up to 90 feet long, 30 feet high, and 1 inch thick—centered on a
       point you can see within range. Alternatively, you can shape the wall into
       a Sphere up to 30 feet in diameter centered on a point you choose within
-      range. The wall remains in place for the Duration. If you position the
+      range. The wall remains in place for the duration. If you position the
       wall so that it passes through a space occupied by a creature, the spell
       fails, and your action and the spell slot are wasted.</p><p>The wall sheds
       bright light out to a range of 100 feet and dim light for an additional
@@ -18,71 +18,58 @@ system:
       can pass through and remain near the wall without harm. If another
       creature that can see the wall moves to within 20 feet of it or starts its
       turn there, the creature must succeed on a Constitution saving throw or
-      become Blinded for 1 minute.</p><p>The wall consists of seven layers, each
-      with a different color. When a creature attempts to reach into or pass
-      through the wall, it does so one layer at a time through all the wall's
-      layers. As it passes or reaches through each layer, the creature must make
-      a Dexterity saving throw or be affected by that layer's properties as
-      described below.</p><p>The wall can be destroyed, also one layer at a
-      time, in order from red to violet, by means specific to each layer. Once a
-      layer is destroyed, it remains so for the Duration of the spell. An
-      Antimagic Field has no effect on the wall, and Dispel Magic works only
-      against the violet layer.</p>
-
-      <ol>
-
-      <li><strong>Red</strong>. The creature takes 10d6 fire damage on a failed
-      save, or half as much damage on a successful one. While this layer is in
-      place, nonmagical Ranged Attacks can't pass through the wall. The layer
-      can be destroyed by dealing at least 25 cold damage to it.</li>
-
-      <li><strong>Orange</strong>. The creature takes 10d6 acid damage on a
-      failed save, or half as much damage on a successful one. While this layer
-      is in place, magical Ranged Attacks can't pass through the wall. The layer
-      is destroyed by a strong wind.</li>
-
-      <li><strong>Yellow</strong>. The creature takes 10d6 lightning damage on a
-      failed save, or half as much damage on a successful one. This layer can be
-      destroyed by dealing at least 60 force damage to it.</li>
-
-      <li><strong>Green</strong>. The creature takes 10d6 poison damage on a
-      failed save, or half as much damage on a successful one. A Passwall spell,
-      or another spell of equal or greater level that can open a portal on a
-      solid surface, destroys this layer.</li>
-
-      <li><strong>Blue</strong>. The creature takes 10d6 cold damage on a failed
-      save, or half as much damage on a successful one. This layer can be
-      destroyed by dealing at least 25 fire damage to it.</li>
-
-      <li><strong>Indigo</strong>. On a failed save, the creature is Restrained.
-      It must then make a Constitution saving throw at the end of each of its
-      turns. If it successfully saves three times, the spell ends. If it fails
-      its save three times, it permanently turns to stone and is subjected to
-      the Petrified condition. The successes and failures don't need to be
-      consecutive; keep track of both until the creature collects three of a
-      kind.
-
-      <ul>
-
-      <li>While this layer is in place, Spells can't be cast through the wall.
-      The layer is destroyed by bright light shed by a Daylight spell or a
-      similar spell of equal or higher level.</li>
-
-      </ul>
-
-      </li>
-
-      <li><strong>Violet</strong>. On a failed save, the creature is Blinded. It
-      must then make a Wisdom saving throw at the start of your next turn. A
-      successful save ends the blindness. If it fails that save, the creature is
-      transported to another plane of the DM's choosing and is no longer
-      Blinded. (Typically, a creature that is on a plane that isn't its home
-      plane is banished home, while other creatures are usually cast into the
-      Astral or Ethereal planes.) This layer is destroyed by a Dispel Magic
-      spell or a similar spell of equal or higher level that can end Spells and
-      magical Effects.</li>
-
-      </ol>
+      become &amp;reference[Blinded] for 1 minute.</p><p>The wall consists of
+      seven layers, each with a different color. When a creature attempts to
+      reach into or pass through the wall, it does so one layer at a time
+      through all the wall's layers. As it passes or reaches through each layer,
+      the creature must make a Dexterity saving throw or be affected by that
+      layer's properties as described below.</p><p>The wall can be destroyed,
+      also one layer at a time, in order from red to violet, by means specific
+      to each layer. Once a layer is destroyed, it remains so for the Duration
+      of the spell. An
+      @UUID[Compendium.dnd5e.spells.Item.Eon0jzGzQRNluTPQ]{Antimagic Field} has
+      no effect on the wall, and
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} works
+      only against the violet layer.</p><ol><li><p><strong>Red</strong>. The
+      creature takes 10d6 fire damage on a failed save, or half as much damage
+      on a successful one. While this layer is in place, nonmagical Ranged
+      Attacks can't pass through the wall. The layer can be destroyed by dealing
+      at least 25 cold damage to it.</p></li><li><p><strong>Orange</strong>. The
+      creature takes 10d6 acid damage on a failed save, or half as much damage
+      on a successful one. While this layer is in place, magical Ranged Attacks
+      can't pass through the wall. The layer is destroyed by a strong
+      wind.</p></li><li><p><strong>Yellow</strong>. The creature takes 10d6
+      lightning damage on a failed save, or half as much damage on a successful
+      one. This layer can be destroyed by dealing at least 60 force damage to
+      it.</p></li><li><p><strong>Green</strong>. The creature takes 10d6 poison
+      damage on a failed save, or half as much damage on a successful one. A
+      @UUID[Compendium.dnd5e.spells.Item.d9MwcXi7Il3HROXd]{Passwall} spell, or
+      another spell of equal or greater level that can open a portal on a solid
+      surface, destroys this layer.</p></li><li><p><strong>Blue</strong>. The
+      creature takes 10d6 cold damage on a failed save, or half as much damage
+      on a successful one. This layer can be destroyed by dealing at least 25
+      fire damage to it.</p></li><li><p><strong>Indigo</strong>. On a failed
+      save, the creature is Restrained. It must then make a Constitution saving
+      throw at the end of each of its turns. If it successfully saves three
+      times, the spell ends. If it fails its save three times, it permanently
+      turns to stone and is subjected to the &amp;reference[Petrified]
+      condition. The successes and failures don't need to be consecutive; keep
+      track of both until the creature collects three of a
+      kind.</p><ul><li><p>While this layer is in place, Spells can't be cast
+      through the wall. The layer is destroyed by bright light shed by a
+      @UUID[Compendium.dnd5e.spells.Item.BP3GCwa66IAw1yTG]{Daylight} spell or a
+      similar spell of equal or higher
+      level.</p></li></ul></li><li><p><strong>Violet</strong>. On a failed save,
+      the creature is &amp;reference[Blinded]. It must then make a Wisdom saving
+      throw at the start of your next turn. A successful save ends the
+      blindness. If it fails that save, the creature is transported to another
+      plane of the DM's choosing and is no longer Blinded. (Typically, a
+      creature that is on a plane that isn't its home plane is banished home,
+      while other creatures are usually cast into the Astral or Ethereal
+      planes.) This layer is destroyed by a
+      @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic} spell
+      or a similar spell of equal or higher level that can end Spells and
+      magical Effects.</p></li></ol>
     chat: ''
   source:
     custom: ''
@@ -100,14 +87,19 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: wall
       size: '90'
       contiguous: false
+      width: '1'
+      height: '30'
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -126,72 +118,805 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    jsTIjPInKlUx8X4d:
+      type: utility
+      name: Conjure Prismatic Wall
+      _id: jsTIjPInKlUx8X4d
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    y3QOrknUXjK6J56o:
+      type: utility
+      name: Conjure Prismatic Sphere
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: sphere
+          size: '15'
+          count: ''
         affects:
           choice: false
-        override: false
-      damage:
-        onSave: half
-        parts:
-          - number: 10
-            denomination: 6
-            bonus: ''
-            types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
-      save:
-        ability: dex
-        dc:
-          calculation: spellcasting
-          formula: ''
+          type: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      _id: y3QOrknUXjK6J56o
+    2mxODgVHMv4whsz4:
+      type: save
+      name: Red Wall
+      _id: 2mxODgVHMv4whsz4
+      img: ''
+      sort: 300000
+      activation:
+        type: special
+        override: true
+        condition: When a creature attempts to pass through the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature attempts to reach into or pass through the wall, it
+          does so one layer at a time through all the wall's layers. As it
+          passes or reaches through each layer, the creature must make a
+          Dexterity saving throw or be affected by that layer's properties as
+          described below.</p><h4>Red Wall</h4><p>The creature takes 10d6 fire
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    J0jN52XDEqUqrLzx:
+      type: save
+      name: Orange Wall
+      img: ''
+      sort: 400000
+      activation:
+        type: special
+        override: true
+        condition: When a creature attempts to pass through the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature attempts to reach into or pass through the wall, it
+          does so one layer at a time through all the wall's layers. As it
+          passes or reaches through each layer, the creature must make a
+          Dexterity saving throw or be affected by that layer's properties as
+          described below.</p><h4>Orange Wall</h4><p>The creature takes 10d6
+          acid damage on a failed save, or half as much damage on a successful
+          one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: J0jN52XDEqUqrLzx
+    y5530lakSgBAHAYL:
+      type: save
+      name: Yellow Wall
+      img: ''
+      sort: 500000
+      activation:
+        type: special
+        override: true
+        condition: When a creature attempts to pass through the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature attempts to reach into or pass through the wall, it
+          does so one layer at a time through all the wall's layers. As it
+          passes or reaches through each layer, the creature must make a
+          Dexterity saving throw or be affected by that layer's properties as
+          described below.</p><h4>Yellow Wall</h4><p>The creature takes 10d6
+          lightning damage on a failed save, or half as much damage on a
+          successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: y5530lakSgBAHAYL
+    P5fBPn8L9H0zlnYS:
+      type: save
+      name: Green Wall
+      img: ''
+      sort: 600000
+      activation:
+        type: special
+        override: true
+        condition: When a creature attempts to pass through the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature attempts to reach into or pass through the wall, it
+          does so one layer at a time through all the wall's layers. As it
+          passes or reaches through each layer, the creature must make a
+          Dexterity saving throw or be affected by that layer's properties as
+          described below.</p><h4>Green Wall</h4><p>The creature takes 10d6
+          poison damage on a failed save, or half as much damage on a successful
+          one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: P5fBPn8L9H0zlnYS
+    cVY0Q4go5GZhbuJz:
+      type: save
+      name: Blue Wall
+      img: ''
+      sort: 700000
+      activation:
+        type: special
+        override: true
+        condition: When a creature attempts to pass through the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature attempts to reach into or pass through the wall, it
+          does so one layer at a time through all the wall's layers. As it
+          passes or reaches through each layer, the creature must make a
+          Dexterity saving throw or be affected by that layer's properties as
+          described below.</p><h4>Blue Wall</h4><p>The creature takes 10d6 cold
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: cVY0Q4go5GZhbuJz
+    bjsIQgJf23u7fslT:
+      type: save
+      name: Indigo Wall
+      _id: bjsIQgJf23u7fslT
+      img: ''
+      sort: 800000
+      activation:
+        type: special
+        override: true
+        condition: When a creature attempts to pass through the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature attempts to reach into or pass through the wall, it
+          does so one layer at a time through all the wall's layers. As it
+          passes or reaches through each layer, the creature must make a
+          Dexterity saving throw or be affected by that layer's properties as
+          described below.</p><h4>Indigo Wall</h4><p>On a failed save, the
+          creature is &amp;reference[Restrained]. It must then make a
+          Constitution saving throw at the end of each of its turns. If it
+          successfully saves three times, the spell ends. If it fails its save
+          three times, it permanently turns to stone and is subjected to the
+          &amp;reference[Petrified] condition. The successes and failures don't
+          need to be consecutive; keep track of both until the creature collects
+          three of a kind.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: XnYc2CO3kl73Rxr9
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: 0lcdF9sc0cBgnvBg
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    WTO4S69BzGKFrs8A:
+      type: save
+      name: Violet Wall
+      img: ''
+      sort: 900000
+      activation:
+        type: special
+        override: true
+        condition: When a creature attempts to pass through the wall.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When a creature attempts to reach into or pass through the wall, it
+          does so one layer at a time through all the wall's layers. As it
+          passes or reaches through each layer, the creature must make a
+          Dexterity saving throw or be affected by that layer's properties as
+          described below.</p><h4>Indigo Wall</h4><p>On a failed save, the
+          creature is &amp;reference[Blinded]. It must then make a Wisdom saving
+          throw at the start of your next turn. A successful save ends the
+          blindness. If it fails that save, the creature is transported to
+          another plane of the DM's choosing and is no longer Blinded.
+          (Typically, a creature that is on a plane that isn't its home plane is
+          banished home, while other creatures are usually cast into the Astral
+          or Ethereal planes.)</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: RyMdtaDljl9zha5P
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: WTO4S69BzGKFrs8A
   identifier: prismatic-wall
 sort: 0
 flags: {}
-img: icons/magic/light/beams-rays-orange-purple.webp
-effects: []
+img: icons/magic/light/explosion-impact-purple.webp
+effects:
+  - name: Failed Petrification Save
+    img: icons/sundries/flags/banner-pink.webp
+    origin: Compendium.dnd5e.spells.Item.jmfu8zj4zjjzUbeh
+    transfer: false
+    _id: XnYc2CO3kl73Rxr9
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have failed a save against the Indigo Wall. If you fail three of
+      these saves, you are &amp;reference[petrified].</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781388224721
+      modifiedTime: 1781388457807
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!jmfu8zj4zjjzUbeh.XnYc2CO3kl73Rxr9'
+  - name: Successful Petrification Save
+    img: icons/sundries/flags/banner-green.webp
+    origin: Compendium.dnd5e.spells.Item.jmfu8zj4zjjzUbeh
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have succeeded a save against the Indigo Wall.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781388461330
+      modifiedTime: 1781388475459
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 0lcdF9sc0cBgnvBg
+    _key: '!items.effects!jmfu8zj4zjjzUbeh.0lcdF9sc0cBgnvBg'
+  - name: Violet Blindness
+    img: icons/magic/light/explosion-star-glow-purple.webp
+    origin: Compendium.dnd5e.spells.Item.jmfu8zj4zjjzUbeh
+    transfer: false
+    _id: RyMdtaDljl9zha5P
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are &amp;reference[blinded apply=false]. At the start of your next
+      turn, you must make a Wisdom saving throw. A successful save ends the
+      blindness. If you fail the save, you are transported to anothe rplane of
+      the DM's choosing and are no longer blinded.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781388531512
+      modifiedTime: 1781388594827
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!jmfu8zj4zjjzUbeh.RyMdtaDljl9zha5P'
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037363776
-  modifiedTime: 1725992722329
+  modifiedTime: 1781389048871
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!jmfu8zj4zjjzUbeh'

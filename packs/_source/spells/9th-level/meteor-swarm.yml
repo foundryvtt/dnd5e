@@ -31,14 +31,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '40'
       contiguous: false
+      count: '4'
   range:
     value: '1'
     units: mi
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -90,39 +93,45 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 20
+          - custom:
+              enabled: false
+              formula: ''
+            number: 20
             denomination: 6
             bonus: ''
             types:
               - bludgeoning
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
+              number: 1
+          - custom:
+              enabled: false
               formula: ''
-          - number: 20
+            number: 20
             denomination: 6
             bonus: ''
             types:
               - fire
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
         ability: dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: meteor-swarm
 sort: 0
 flags: {}
@@ -131,11 +140,11 @@ effects: []
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037364313
-  modifiedTime: 1725992722487
+  modifiedTime: 1781382975743
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!mF52ldF79Cr7wfQo'
