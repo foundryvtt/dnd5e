@@ -89,12 +89,7 @@ system:
         concentration: false
         override: false
         value: '1'
-      effects:
-        - _id: JOw7fImsOhKTI6E2
-          uuid: null
-          level:
-            min: null
-            max: null
+      effects: []
       range:
         override: false
         units: ft
@@ -135,49 +130,7 @@ system:
   identifier: wand-of-enemy-detection
   armor:
     magicalBonus: ''
-effects:
-  - name: Detecting Enemies
-    img: icons/magic/perception/mask-stone-eyes-orange.webp
-    origin: Compendium.dnd5e.items.Item.5Rxo4K9cgpwgW9vZ
-    transfer: false
-    _id: JOw7fImsOhKTI6E2
-    type: base
-    system:
-      changes: []
-      magical: true
-      rider:
-        statuses: []
-    disabled: false
-    start: null
-    duration:
-      value: 1
-      units: minutes
-      expiry: turnStart
-      expired: false
-    description: >-
-      <p>For the duration, you know the direction to the nearest creature
-      hostile to you within 60 feet, but not its distance from you. The wand
-      that granted this effect can sense the presence of hostile creatures that
-      are ethereal, &amp;reference[invisible apply=false], disguised, or hidden,
-      as well as those in plain sight. This effect ends if you stop holding the
-      wand.</p>
-    tint: '#ffffff'
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags: {}
-    _stats:
-      coreVersion: '14.361'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783691771136
-      modifiedTime: 1783691923266
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!5Rxo4K9cgpwgW9vZ.JOw7fImsOhKTI6E2'
+effects: []
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
 ownership:
