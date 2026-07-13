@@ -11,98 +11,32 @@ system:
       throw, which is modified by how well you know the target and the sort of
       physical connection you have to it. If a target knows you're casting this
       spell, it can fail the saving throw voluntarily if it wants to be
-      observed.</p>
-
-      <table border="1">
-
-      <tbody>
-
-      <tr>
-
-      <td><strong>Knowledge</strong></td>
-
-      <td><strong>Save Modifier</strong></td>
-
-      </tr>
-
-      <tr>
-
-      <td>Secondhand (you have heard of the target)</td>
-
-      <td>+5</td>
-
-      </tr>
-
-      <tr>
-
-      <td>Firsthand (you have met the target)</td>
-
-      <td>+0</td>
-
-      </tr>
-
-      <tr>
-
-      <td>Familiar (you know the target well)</td>
-
-      <td>-5</td>
-
-      </tr>
-
-      </tbody>
-
-      </table>
-
-
-      <table border="1">
-
-      <tbody>
-
-      <tr>
-
-      <td><strong>Connection</strong></td>
-
-      <td><strong>Save Modifier</strong></td>
-
-      </tr>
-
-      <tr>
-
-      <td>Likeness or picture</td>
-
-      <td>-2</td>
-
-      </tr>
-
-      <tr>
-
-      <td>Possession or garment</td>
-
-      <td>-4</td>
-
-      </tr>
-
-      <tr>
-
-      <td>Body part, lock of hair, bit of nail, or the like</td>
-
-      <td>-10</td>
-
-      </tr>
-
-      </tbody>
-
-      </table>
-
-      <p>On a successful save, the target isn't affected, and you can't use this
-      spell against it again for 24 hours.</p><p>On a failed save, the spell
-      creates an Invisible sensor within 10 feet of the target. You can see and
-      hear through the sensor as if you were there. The sensor moves with the
-      target, remaining within 10 feet of it for the Duration. A creature that
-      can see Invisile Objects sees the sensor as a luminous orb about the size
-      of your fist.</p><p>Instead of targeting a creature, you can choose a
-      location you have seen before as the target of this spell. When you do,
-      the sensor appears at that location and doesn't move.</p>
+      observed.</p><table
+      border="1"><tbody><tr><td><p><strong>Knowledge</strong></p></td><td><p><strong>Save
+      Modifier</strong></p></td></tr><tr><td><p>Secondhand (you have heard of
+      the target)</p></td><td><p>+5</p></td></tr><tr><td><p>Firsthand (you have
+      met the target)</p></td><td><p>+0</p></td></tr><tr><td><p>Familiar (you
+      know the target
+      well)</p></td><td><p>-5</p></td></tr></tbody></table><table
+      border="1"><tbody><tr><td><p><strong>Connection</strong></p></td><td><p><strong>Save
+      Modifier</strong></p></td></tr><tr><td><p>Likeness or
+      picture</p></td><td><p>-2</p></td></tr><tr><td><p>Possession or
+      garment</p></td><td><p>-4</p></td></tr><tr><td><p>Body part, lock of hair,
+      bit of nail, or the
+      like</p></td><td><p>-10</p></td></tr></tbody></table><p>On a successful
+      save, the target isn't affected, and you can't use this spell against it
+      again for 24 hours.</p><p>On a failed save, the spell creates an Invisible
+      sensor within 10 feet of the target. You can see and hear through the
+      sensor as if you were there. The sensor moves with the target, remaining
+      within 10 feet of it for the Duration. A creature that can see Invisile
+      Objects sees the sensor as a luminous orb about the size of your
+      fist.</p><p>Instead of targeting a creature, you can choose a location you
+      have seen before as the target of this spell. When you do, the sensor
+      appears at that location and doesn't move.</p><section
+      id="secret-7CHPfTUfUEUSvvtS" class="secret"><p><strong>Foundry
+      Note</strong></p><p>You can use the two activities (Configure Knowledge
+      &amp; Configure Connection) to adjust the difficulty of the saving throw
+      of this spell.</p></section>
     chat: ''
   source:
     custom: ''
@@ -122,11 +56,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -149,61 +86,507 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    ALmQH6xe1eXP4yfS:
       type: save
+      name: Cast
+      _id: ALmQH6xe1eXP4yfS
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: spellcasting
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    73BiojjOcZK3adzP:
+      type: enchant
+      name: Configure Knowledge of Target
+      _id: 73BiojjOcZK3adzP
+      img: ''
+      sort: 200000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: swoj95aPKbfvOvzB
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: eIRIAOP6mo2CCkgl
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: aPR8EiMR9S3wbb1I
+          level: {}
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: spell
+    pemgwXnFsWoWUR2e:
+      type: enchant
+      name: Configure Connection of Target
+      img: ''
+      sort: 300000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: sKoP7ypmOp1Wv5m2
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: g6lZ5DEP8bOLRsWZ
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: 16QLcS43oSaMOpnz
+          level: {}
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: spell
+      _id: pemgwXnFsWoWUR2e
   identifier: scrying
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
-effects: []
+img: icons/commodities/treasure/crystal-ball-blue-purple.webp
+effects:
+  - type: enchantment
+    name: 'Knowledge: Secondhand'
+    img: icons/commodities/gems/gem-rough-cushion-red.webp
+    disabled: true
+    _id: swoj95aPKbfvOvzB
+    system:
+      changes:
+        - key: system.activities.ALmQH6xe1eXP4yfS.save.dc.bonus
+          type: add
+          value: -5
+          phase: initial
+          priority: null
+        - key: system.activities.73BiojjOcZK3adzP.name
+          type: override
+          value: 'Knowledge of Target: Secondhand'
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have heard of the target you are Scrying.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781402633015
+      modifiedTime: 1781402843280
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!fVbCxFRaORalHB20.swoj95aPKbfvOvzB'
+  - type: enchantment
+    name: 'Knowledge: Firsthand'
+    img: icons/commodities/gems/gem-rough-oval-red.webp
+    disabled: true
+    system:
+      changes:
+        - key: system.activities.73BiojjOcZK3adzP.name
+          type: override
+          value: 'Knowledge of Target: Firsthand'
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have met the target you are Scrying.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781402856635
+      modifiedTime: 1781402897817
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: eIRIAOP6mo2CCkgl
+    _key: '!items.effects!fVbCxFRaORalHB20.eIRIAOP6mo2CCkgl'
+  - type: enchantment
+    name: 'Knowledge: Familiar'
+    img: icons/commodities/gems/gem-rough-princess-green.webp
+    disabled: true
+    system:
+      changes:
+        - key: system.activities.ALmQH6xe1eXP4yfS.save.dc.bonus
+          type: add
+          value: 5
+          phase: initial
+          priority: null
+        - key: system.activities.73BiojjOcZK3adzP.name
+          type: override
+          value: 'Knowledge of Target: Familiar'
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You are familiar with the target you are Scrying.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781402857869
+      modifiedTime: 1781402928269
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: aPR8EiMR9S3wbb1I
+    _key: '!items.effects!fVbCxFRaORalHB20.aPR8EiMR9S3wbb1I'
+  - type: enchantment
+    name: 'Connection: Likeness or Picture'
+    img: icons/commodities/gems/gem-rough-cushion-red.webp
+    disabled: true
+    system:
+      changes:
+        - key: system.activities.ALmQH6xe1eXP4yfS.save.dc.bonus
+          type: add
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.activities.pemgwXnFsWoWUR2e.name
+          type: override
+          value: 'Connection to Target: Likeness or Picture'
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a likeness or picture of the target you are Scrying.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781402955636
+      modifiedTime: 1781403006547
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: sKoP7ypmOp1Wv5m2
+    _key: '!items.effects!fVbCxFRaORalHB20.sKoP7ypmOp1Wv5m2'
+  - type: enchantment
+    name: 'Connection: Possession or Garment'
+    img: icons/commodities/gems/gem-rough-oval-red.webp
+    disabled: true
+    system:
+      changes:
+        - key: system.activities.pemgwXnFsWoWUR2e.name
+          type: override
+          value: 'Connection to Target: Possession or Garment'
+          phase: initial
+          priority: null
+        - key: system.activities.ALmQH6xe1eXP4yfS.save.dc.bonus
+          type: add
+          value: 4
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a possession or garment of the target you are Scrying.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781402956489
+      modifiedTime: 1781403083070
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: g6lZ5DEP8bOLRsWZ
+    _key: '!items.effects!fVbCxFRaORalHB20.g6lZ5DEP8bOLRsWZ'
+  - type: enchantment
+    name: 'Connection: Body Part'
+    img: icons/commodities/gems/gem-rough-princess-green.webp
+    disabled: true
+    system:
+      changes:
+        - key: system.activities.ALmQH6xe1eXP4yfS.save.dc.bonus
+          type: add
+          value: 10
+          phase: initial
+          priority: null
+        - key: system.activities.pemgwXnFsWoWUR2e.name
+          type: override
+          value: 'Connection to Target: Body Part'
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have a body part, lock of hair, bit of nail, or the like of the
+      target you are Scrying.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781402957389
+      modifiedTime: 1781403135765
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 16QLcS43oSaMOpnz
+    _key: '!items.effects!fVbCxFRaORalHB20.16QLcS43oSaMOpnz'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037362252
-  modifiedTime: 1725992721833
+  modifiedTime: 1781403286870
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!fVbCxFRaORalHB20'

@@ -14,7 +14,7 @@ system:
       when it appears, the creature is pushed to one side of the wall (your
       choice). If a creature would be surrounded on all sides by the wall (or
       the wall and another solid surface), that creature can make a Dexterity
-      saving throw. On a success, it can use its Reaction to move up to its
+      saving throw. On a success, it can use its reaction to move up to its
       speed so that it is no longer enclosed by the wall.</p><p>The wall can
       have any shape you desire, though it can't occupy the same space as a
       creature or object. The wall doesn't need to be vertical or rest on any
@@ -24,10 +24,10 @@ system:
       halve the size of each panel to create supports. You can crudely shape the
       wall to create crenellations, battlements, and so on.</p><p>The wall is an
       object made of stone that can be damaged and thus breached. Each panel has
-      AC 15 and 30 Hit Points per inch of thickness. Reducing a panel to 0 Hit
-      Points destroys it and might cause connected panels to collapse at the
-      DM's discretion.</p><p>If you maintain your Concentration on this spell
-      for its whole Duration, the wall becomes permanent and can't be dispelled.
+      AC 15 and 30 hit points per inch of thickness. Reducing a panel to 0 hit
+      points destroys it and might cause connected panels to collapse at the
+      DM's discretion.</p><p>If you maintain your concentration on this spell
+      for its whole duration, the wall becomes permanent and can't be dispelled.
       Otherwise, the wall disappears when the spell ends.</p>
     chat: ''
   source:
@@ -46,14 +46,19 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: wall
-      size: '100'
+      size: '10'
       contiguous: false
+      width: '6'
+      height: '10'
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -112,23 +117,96 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Conjure Wall of Stone (10 ft. x 10 ft. Panels)
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    d5HiSblAgFL6tu4u:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          stationary: false
+          type: wall
+          size: '10'
+          width: '3'
+          height: '20'
+          count: '10'
+        affects:
+          choice: false
+          type: ''
+        override: true
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+        visible: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Conjure Wall of Stone (10 ft. x 20 ft. Panels)
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: d5HiSblAgFL6tu4u
   identifier: wall-of-stone
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-orange-large.webp
+img: icons/commodities/stone/paver-brick-brown.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355145
-  modifiedTime: 1725992719512
+  modifiedTime: 1783216211591
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!NmoRmM1mhuM3pqnY'

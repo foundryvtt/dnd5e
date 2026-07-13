@@ -5,7 +5,26 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>This spell allows you to change the appearance of any number of creatures that you can see within range. You give each target you choose a new, illusory appearance. An unwilling target can make a Charisma saving throw, and if it succeeds, it is unaffected by this spell.</p><p>The spell disguises physical appearance as well as clothing, armor, Weapons, and Equipment. You can make each creature seem 1 foot shorter or taller and appear thin, fat, or in between. You can't change a target's body type, so you must choose a form that has the same basic arrangement of limbs. Otherwise, the extent of the Illusion is up to you. The spell lasts for the Duration, unless you use your action to dismiss it sooner.</p><p>The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to a creature's outfit, Objects pass through the hat, and anyone who touches it would feel nothing or would feel the creature's head and hair. If you use this spell to appear thinner than you are, the hand of someone who reaches out to touch you would bump into you while it was seemingly still in midair.</p><p>A creature can use its action to inspect a target and make an Intelligence\_ (Investigation) check against your spell save DC. If it succeeds, it becomes aware that the target is disguised.</p>"
+    value: >-
+      <p>This spell allows you to change the appearance of any number of
+      creatures that you can see within range. You give each target you choose a
+      new, illusory appearance. An unwilling target can make a Charisma saving
+      throw, and if it succeeds, it is unaffected by this spell.</p><p>The spell
+      disguises physical appearance as well as clothing, armor, weapons, and
+      equipment. You can make each creature seem 1 foot shorter or taller and
+      appear thin, fat, or in between. You can't change a target's body type, so
+      you must choose a form that has the same basic arrangement of limbs.
+      Otherwise, the extent of the Illusion is up to you. The spell lasts for
+      the duration, unless you use your action to dismiss it sooner.</p><p>The
+      changes wrought by this spell fail to hold up to physical inspection. For
+      example, if you use this spell to add a hat to a creature's outfit,
+      objects pass through the hat, and anyone who touches it would feel nothing
+      or would feel the creature's head and hair. If you use this spell to
+      appear thinner than you are, the hand of someone who reaches out to touch
+      you would bump into you while it was seemingly still in midair.</p><p>A
+      creature can use its action to inspect a target and make an Intelligence
+      (Investigation) check against your spell save DC. If it succeeds, it
+      becomes aware that the target is disguised.</p>
     chat: ''
   source:
     custom: ''
@@ -24,12 +43,16 @@ system:
     affects:
       type: creature
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -67,7 +90,12 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: UT3MlW6CWVpV2BHK
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -79,30 +107,212 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: cha
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    IjGXWoq5nBNgvlSq:
+      type: check
+      name: Investigate Disguise Check
+      img: ''
+      sort: 300000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: IjGXWoq5nBNgvlSq
+    mJZXpJL7dh4EVbur:
+      type: transform
+      name: Change Appearance
+      img: ''
+      sort: 200000
+      activation:
+        type: ''
+        override: true
+        condition: When you cast this spell.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      profiles:
+        - cr: '30'
+          name: ''
+          _id: 4wlJxshCkHQPHyXl
+          uuid: null
+          sizes: []
+          types: []
+          movement: []
+          level:
+            min: null
+            max: null
+      settings: null
+      transform:
+        customize: false
+        mode: cr
+        preset: polymorphSelf
+      _id: mJZXpJL7dh4EVbur
   identifier: seeming
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-pink.webp
-effects: []
+img: icons/equipment/head/mask-carved-wood-pink.webp
+effects:
+  - name: Seeming Disguise
+    img: icons/equipment/head/mask-carved-wood-pink.webp
+    origin: Compendium.dnd5e.spells.Item.mbFw57uyfLkyiw5k
+    type: base
+    _id: UT3MlW6CWVpV2BHK
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been disguised with an illusion.</p><p>The spell disguises
+      your physical appearance as well as clothing, armor, weapons, and
+      equipment. You can seem 1 foot shorter or taller and appear thin, fat, or
+      in between. You body type can't change, so you must have a form that has
+      the same basic arrangement of limbs. Otherwise, the extent of the Illusion
+      is up to the caster. The spell lasts for the duration, unless the caster
+      uses their action to dismiss it sooner.</p><p>The changes wrought by this
+      spell fail to hold up to physical inspection. For example, if the spell
+      adds a hat to a your outfit, objects pass through the hat, and anyone who
+      touches it would feel nothing or would feel the your head and hair. If
+      this spell would make you appear thinner than you are, the hand of someone
+      who reaches out to touch you would bump into you while it was seemingly
+      still in midair.</p><p>A creature can use its action to inspect you and
+      make an [[/check int inv]] check against the caster's spell save DC. If it
+      succeeds, it becomes aware that you are disguised.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781402066716
+      modifiedTime: 1781402234762
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!mbFw57uyfLkyiw5k.UT3MlW6CWVpV2BHK'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037364440
-  modifiedTime: 1725992722527
+  modifiedTime: 1781402078879
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!mbFw57uyfLkyiw5k'
