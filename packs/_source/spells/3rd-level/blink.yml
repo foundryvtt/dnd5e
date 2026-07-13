@@ -72,7 +72,7 @@ system:
       img: ''
       sort: 300000
       activation:
-        type: turnStart
+        type: special
         override: true
         condition: When you end your turn while this spell is active.
       consumption:
