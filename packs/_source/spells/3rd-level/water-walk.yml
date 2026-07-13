@@ -32,12 +32,15 @@ system:
       type: creature
       count: '10'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -58,8 +61,7 @@ system:
     - material
     - ritual
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    ZsjhMgT1mBbAi5yN:
       type: utility
       activation:
         type: action
@@ -73,18 +75,23 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 2WdkWIsjxEWwsGKf
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -96,20 +103,73 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: ZsjhMgT1mBbAi5yN
   identifier: water-walk
 sort: 0
 flags: {}
-img: icons/creatures/slimes/slime-movement-swirling-blue.webp
-effects: []
+img: icons/magic/water/waves-water-blue.webp
+effects:
+  - name: Water Walking
+    img: icons/magic/water/waves-water-blue.webp
+    origin: Compendium.dnd5e.spells.Item.YBda6nLKjxdT1LbS
+    transfer: false
+    _id: 2WdkWIsjxEWwsGKf
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>This spell grants you the ability to move across any liquid
+      surface—such as water, acid, mud, snow, quicksand, or lava—as if it were
+      harmless solid ground (crossing molten lava can still damage you from the
+      heat).</p><p>If you are submerged in a liquid, the spell carries you to
+      the surface of the liquid at a rate of 60 feet per round.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781305802686
+      modifiedTime: 1781305860873
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!YBda6nLKjxdT1LbS.2WdkWIsjxEWwsGKf'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358985
-  modifiedTime: 1725992720750
+  modifiedTime: 1781305802723
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!YBda6nLKjxdT1LbS'

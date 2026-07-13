@@ -39,11 +39,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -62,58 +65,178 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    Vw0IvqP9k2jfsu8n:
       type: utility
+      name: Blink Check
+      _id: Vw0IvqP9k2jfsu8n
+      img: ''
+      sort: 300000
       activation:
-        type: action
-        value: null
-        override: false
+        type: special
+        override: true
+        condition: When you end your turn while this spell is active.
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets: []
       description:
+        value: <p>On a roll of 11 or higher, you vanish to the Ethereal Plane.</p>
+        chatFlavor: ''
+      duration:
+        units: turn
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: KfxYKxbFoCe5HJYS
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Blink Check
+        formula: 1d20
+    16QEMgsGT7SpSMTD:
+      type: utility
+      name: Cast
+      _id: 16QEMgsGT7SpSMTD
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: 1d20
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: blink
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-pink.webp
-effects: []
+img: icons/creatures/magical/spirit-fear-energy-pink.webp
+effects:
+  - name: Blinked into the Ethereal Plane
+    img: icons/creatures/magical/spirit-mischief-fire-blue.webp
+    origin: Compendium.dnd5e.spells.Item.GSvLWcdCZLQkilXT
+    transfer: false
+    _id: KfxYKxbFoCe5HJYS
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have blinked into the Ethereal Plane until the start of your next
+      turn.</p><p>While on the Ethereal Plane, you can see and hear the plane
+      you originated from, which is cast in shades of gray, and you can't see
+      anything there more than 60 feet away. You can only affect and be affected
+      by other creatures on the Ethereal Plane. Creatures that aren't there
+      can't perceive you or interact with you, unless they have the ability to
+      do so.</p>
+    tint: '#ffffff'
+    statuses:
+      - ethereal
+      - invisible
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781357342958
+      modifiedTime: 1783217381043
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!GSvLWcdCZLQkilXT.KfxYKxbFoCe5HJYS'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352006
-  modifiedTime: 1725992718446
+  modifiedTime: 1783720819176
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!GSvLWcdCZLQkilXT'
