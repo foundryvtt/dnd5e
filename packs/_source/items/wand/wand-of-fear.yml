@@ -1,29 +1,33 @@
 _id: EJFql4aNWHHJSxT9
 name: Wand of Fear
 type: equipment
-img: icons/weapons/staves/staff-animal-skull-horned.webp
+img: icons/weapons/staves/staff-animal-skull-horn-brown.webp
 system:
   description:
     value: >-
-      <p><em>Wand (requires attunement)</em></p><p>This wand has 7 charges for
-      the following properties. It regains 1d6 + 1 expended charges daily at
-      dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand
-      crumbles into ashes and is destroyed.</p><p><strong>Command</strong>.
-      While holding the wand, you can use an action to expend 1 charge and
-      command another creature to flee or grovel, as with the
+      <p><em>Wand (requires attunement)</em></p><p>This wand has [[lookup
+      @item.uses.max]] charges for the following properties. It regains 1d6 + 1
+      expended charges daily at dawn. If you expend the wand's last charge, roll
+      a d20. On a 1, the wand crumbles into ashes and is
+      destroyed.</p><p><strong>Command</strong>. While holding the wand, you can
+      use an action to expend 1 charge and command another creature to flee or
+      grovel, as with the
       @UUID[Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43]{Command} spell (save
-      DC 15).</p><p><strong>Cone of Fear</strong>. While holding the wand, you
-      can use an action to expend 2 charges, causing the wand's tip to emit a
-      60-foot cone of amber light. Each creature in the cone must succeed on a
-      DC 15 Wisdom saving throw or become &amp;reference[frightened] of you for
-      1 minute. While it is frightened in this way, a creature must spend its
-      turns trying to move as far away from you as it can, and it can't
-      willingly move to a space within 30 feet of you. It also can't take
-      reactions. For its action, it can use only the Dash action or try to
-      escape from an effect that prevents it from moving. If it has nowhere it
-      can move, the creature can use the Dodge action. At the end of each of its
-      turns, a creature can repeat the saving throw, ending the effect on itself
-      on a success.</p>
+      DC [[lookup @spell.challenge.save
+      activity=J1oQUVbZNLMFnm4f]]).</p><p><strong>Cone of Fear</strong>. While
+      holding the wand, you can use an action to expend 2 charges, causing the
+      wand's tip to emit a [[lookup @labels.description.template
+      activity=zj1bSgRYmMvM3xaO]] of amber light. Each creature in the cone must
+      succeed on a [[/save activity=zj1bSgRYmMvM3xaO]] saving throw or become
+      &amp;reference[frightened] of you for [[lookup @labels.duration
+      activity=zj1bSgRYmMvM3xaO]]. While it is frightened in this way, a
+      creature must spend its turns trying to move as far away from you as it
+      can, and it can't willingly move to a space within 30 feet of you. It also
+      can't take reactions. For its action, it can use only the
+      &amp;reference[Dash] action or try to escape from an effect that prevents
+      it from moving. If it has nowhere it can move, the creature can use the
+      &amp;reference[Dodge] action. At the end of each of its turns, a creature
+      can repeat the saving throw, ending the effect on itself on a success.</p>
     chat: ''
   source:
     custom: ''
@@ -65,82 +69,13 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   properties:
     - foc
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            value: '2'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: '1'
-        units: minute
-        special: ''
-        override: false
-      effects: []
-      range:
-        value: ''
-        units: self
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: cone
-          size: '60'
-          width: ''
-          height: ''
-          units: ft
-        affects:
-          count: ''
-          type: creature
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: ''
-          formula: '15'
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 300000
-      name: Cone of Fear
-      img: ''
-      appliedEffects: []
-      visibility:
-        requireMagic: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-        requireIdentification: true
     J1oQUVbZNLMFnm4f:
       type: cast
       spell:
@@ -197,9 +132,156 @@ system:
           min: null
           max: null
         identifier: ''
+    zj1bSgRYmMvM3xaO:
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: >-
+          <p>While holding the wand, you can use an action to expend 2 charges,
+          causing the wand's tip to emit a [[lookup @labels.description.template
+          activity=zj1bSgRYmMvM3xaO]] of amber light. Each creature in the cone
+          must succeed on a [[/save activity=zj1bSgRYmMvM3xaO]] saving throw or
+          become &amp;reference[frightened] of you for [[lookup @labels.duration
+          activity=zj1bSgRYmMvM3xaO]]. While it is frightened in this way, a
+          creature must spend its turns trying to move as far away from you as
+          it can, and it can't willingly move to a space within 30 feet of you.
+          It also can't take reactions. For its action, it can use only the
+          &amp;reference[Dash] action or try to escape from an effect that
+          prevents it from moving. If it has nowhere it can move, the creature
+          can use the &amp;reference[Dodge] action. At the end of each of its
+          turns, a creature can repeat the saving throw, ending the effect on
+          itself on a success.</p>
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects:
+        - _id: pC15uqif0tfmdlvY
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
+      range:
+        value: ''
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cone
+          size: '60'
+          width: ''
+          height: ''
+          units: ft
+          stationary: false
+        affects:
+          count: ''
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: ''
+          formula: '15'
+        visible: true
+        bonus: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 400000
+      name: Cone of Fear
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: false
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: zj1bSgRYmMvM3xaO
   attuned: false
   identifier: wand-of-fear
-effects: []
+  armor:
+    magicalBonus: ''
+effects:
+  - name: Terrified
+    img: icons/magic/death/skull-energy-light-purple.webp
+    origin: Compendium.dnd5e.items.Item.EJFql4aNWHHJSxT9
+    transfer: false
+    _id: pC15uqif0tfmdlvY
+    type: base
+    system:
+      changes: []
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] of the wand's wielder
+      for the duration. While frightened in this way, you must spend your turns
+      trying to move as far away as you can, and you can't willingly move to a
+      space within 30 feet of the creature that frightened you.</p><p>You also
+      can't take reactions. For your action, you can use only the
+      &amp;reference[dash] action or try to escape from an effect that prevents
+      you from moving. If you have nowhere you can move, you can use the
+      &amp;reference[dodge] action.</p><p>At the end of each of your turns, you
+      can repeat the saving throw, ending the effect on yourself on a
+      success.</p>
+    tint: '#ffffff'
+    statuses:
+      - frightened
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783691239856
+      modifiedTime: 1783691442024
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!EJFql4aNWHHJSxT9.pC15uqif0tfmdlvY'
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
 ownership:
@@ -207,11 +289,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037136851
-  modifiedTime: 1764619405639
+  modifiedTime: 1783700150171
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!EJFql4aNWHHJSxT9'
