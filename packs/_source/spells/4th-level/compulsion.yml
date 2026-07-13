@@ -8,15 +8,16 @@ system:
     value: >-
       <p>Creatures of your choice that you can see within range and that can
       hear you must make a Wisdom saving throw. A target automatically succeeds
-      on this saving throw if it can't be charmed. On a failed save, a target is
-      affected by this spell. Until the spell ends, you can use a bonus action
-      on each of your turns to designate a direction that is horizontal to you.
-      Each affected target must use as much of its movement as possible to move
-      in that direction on its next turn. It can take any action before it
-      moves. After moving in this way, it can make another Wisdom save to try to
-      end the effect.</p><p>A target isn't compelled to move into an obviously
-      deadly hazard, such as a fire or a pit, but it will provoke opportunity
-      attacks to move in the designated direction.</p>
+      on this saving throw if it can't be &amp;reference[charmed apply=false].
+      On a failed save, a target is affected by this spell. Until the spell
+      ends, you can use a bonus action on each of your turns to designate a
+      direction that is horizontal to you. Each affected target must use as much
+      of its movement as possible to move in that direction on its next turn. It
+      can take any action before it moves. After moving in this way, it can make
+      another Wisdom save to try to end the effect.</p><p>A target isn't
+      compelled to move into an obviously deadly hazard, such as a fire or a
+      pit, but it will provoke &amp;reference[opportunity attacks] to move in
+      the designated direction.</p>
     chat: ''
   source:
     custom: ''
@@ -35,12 +36,16 @@ system:
     affects:
       type: creature
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -79,7 +84,10 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: gG6gFVVIuoHKH4J9
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -91,30 +99,202 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    qke4TeKUX3koQVvv:
+      type: utility
+      name: Command Creatures
+      _id: qke4TeKUX3koQVvv
+      img: ''
+      sort: 100000
+      activation:
+        type: bonus
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    J8w3t1ZIa72KHHIu:
+      type: save
+      name: Repeat Save (After Comand)
+      _id: J8w3t1ZIa72KHHIu
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: After a creature is commanded by this spell finishes their movement.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
   identifier: compulsion
 sort: 0
 flags: {}
-img: icons/magic/fire/explosion-fireball-large-purple-pink.webp
-effects: []
+img: icons/magic/control/voodoo-doll-pain-damage-pink.webp
+effects:
+  - name: Compulsion
+    img: icons/magic/control/voodoo-doll-pain-damage-pink.webp
+    origin: Compendium.dnd5e.spells.Item.P6f1PPKPd9BCb742
+    transfer: false
+    _id: gG6gFVVIuoHKH4J9
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Until the spell ends, the caster can use a bonus action on each of your
+      turns to designate a direction that is horizontal to them. You must use as
+      much of your movement as possible to move in that direction on your next
+      turn. You can take any action before you move. After moving in this way,
+      you can make another Wisdom save to try to end this effect.</p><p>You are
+      not compelled to move into an obviously deadly hazard, such as a fire or a
+      pit, but you will provoke &amp;reference[opportunity attacks] to move in
+      the designated direction.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781372178893
+      modifiedTime: 1781372292830
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!P6f1PPKPd9BCb742.gG6gFVVIuoHKH4J9'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355449
-  modifiedTime: 1725992719621
+  modifiedTime: 1781372287315
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!P6f1PPKPd9BCb742'

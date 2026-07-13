@@ -9,7 +9,7 @@ system:
       <p>A sphere of shimmering force encloses a creature or object of Large
       size or smaller within range. An unwilling creature must make a Dexterity
       saving throw. On a failed save, the creature is enclosed for the
-      Duration.</p><p>Nothing—not physical Objects, energy, or other spell
+      duration.</p><p>Nothing—not physical Objects, energy, or other spell
       effects—can pass through the barrier, in or out, though a creature in the
       sphere can breathe there. The sphere is immune to all damage, and a
       creature or object inside can't be damaged by attacks or Effects
@@ -18,8 +18,9 @@ system:
       to contain the creature or object inside. An enclosed creature can use its
       action to push against the sphere's walls and thus roll the sphere at up
       to half the creature's speed. Similarly, the globe can be picked up and
-      moved by other creatures.</p><p>A Disintegrate spell targeting the globe
-      destroys it without harming anything inside it.</p>
+      moved by other creatures.</p><p>A
+      @UUID[Compendium.dnd5e.spells.Item.HBHbOGKNVVprSlwn]{disintegrate} spell
+      targeting the globe destroys it without harming anything inside it.</p>
     chat: ''
   source:
     custom: ''
@@ -39,12 +40,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -86,7 +90,12 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: tMUWOKD27zNJgv99
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -98,30 +107,86 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: resilient-sphere
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-large-pink.webp
-effects: []
+img: icons/commodities/gems/pearl-swirl-teal.webp
+effects:
+  - name: Encased in Resilient Sphere
+    img: icons/commodities/gems/pearl-swirl-teal.webp
+    origin: Compendium.dnd5e.spells.Item.1ADstb0Xec6HHRcU
+    transfer: false
+    _id: tMUWOKD27zNJgv99
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been encased in a sphere of shimmering
+      force.</p><p>Nothing—not physical objects, energy, or other spell
+      effects—can pass through the barrier, in or out, though you can breathe in
+      the sphere. The sphere is immune to all damage, and you or objects inside
+      can't be damaged by attacks or effects originating from outside, nor can
+      you damage anything outside the sphere while within it.</p><p>The sphere
+      is weightless and just large enough to contain the you inside. You can use
+      your action to push against the sphere's walls and thus roll the sphere at
+      up to half your speed. Similarly, the globe can be picked up and moved by
+      other creatures.</p><p>A
+      @UUID[Compendium.dnd5e.spells.Item.HBHbOGKNVVprSlwn]{disintegrate} spell
+      targeting the globe destroys it without harming anything inside it.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781374598213
+      modifiedTime: 1783216755153
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!1ADstb0Xec6HHRcU.tMUWOKD27zNJgv99'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037345454
-  modifiedTime: 1725992716405
+  modifiedTime: 1783216747392
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1ADstb0Xec6HHRcU'

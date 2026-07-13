@@ -36,12 +36,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -110,23 +113,31 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: blight
 sort: 0
 flags: {}
-img: icons/magic/unholy/strike-beam-blood-large-red-green.webp
+img: icons/magic/acid/projectile-smoke-glowing.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365678
-  modifiedTime: 1725992722973
+  modifiedTime: 1781372013119
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pybg5MNc3lkerH4Y'
