@@ -94,6 +94,23 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef FactionActorSystemData
+ * @property {string} identifier            Identifier used to represent the faction in the registry.
+ * @property {FactionMemberData[]} members  Members in this group with associated metadata.
+ * @property {string[]} ranks               Ranks members can achieve within the faction.
+ * @property {SourceData} source            Adventure or sourcebook where this faction originated.
+ */
+
+/**
+ * @typedef FactionMemberData
+ * @property {string} uuid                The UUID to the Actor.
+ * @property {string} rank                Rank of the actor within the faction, from the preset ranks list.
+ * @property {string} role                Freeform role for this actor in the faction (e.g. "Leader", "Guard").
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef GroupActorSystemData
  * @property {object} attributes
  * @property {TravelData} attributes.travel

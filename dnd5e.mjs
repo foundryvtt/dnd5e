@@ -189,6 +189,11 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClass.Vehicle"
   });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.FactionActorSheet, {
+    types: ["faction"],
+    makeDefault: true,
+    label: "DND5E.SheetClass.Faction"
+  });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.GroupActorSheet, {
     types: ["group"],
     makeDefault: true,

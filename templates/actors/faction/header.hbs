@@ -1,0 +1,22 @@
+<header class="sheet-header">
+
+    {{!-- Portrait --}}
+    <div class="left">
+        <div class="portrait">
+            <img src="{{ document.img }}" alt="{{ document.name }}"
+                {{#if editable}}data-action="editImage" data-edit="img"{{/if}}>
+        </div>
+    </div>
+
+    {{!-- Name & Cards --}}
+    <div class="right">
+
+        {{!-- Name --}}
+        {{#if editable}}
+        <input type="text" name="name" class="document-name uninput" value="{{ actor._source.name }}">
+        {{else}}
+        <div class="document-name">{{ document.name }}</div>
+        {{/if}}
+
+    </div>
+</header>
