@@ -28,11 +28,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,6 +77,9 @@ system:
         override: false
       effects:
         - _id: cSVCA9h5OEo5lfBE
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -92,71 +98,81 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: stoneskin
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
+img: icons/magic/earth/strike-fist-stone-gray.webp
 effects:
   - origin: Compendium.dnd5e.spells.ReMbjfeOKoSj3O79
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: cSVCA9h5OEo5lfBE
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
-      - key: system.traits.dr.bypasses
-        mode: 2
-        value: mgc
-        priority: null
     tint: '#ffffff'
     transfer: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     name: Stoneskin
     description: >-
-      <p>The target has resistance to nonmagical bludgeoning, piercing, and
-      slashing damage.</p>
+      <p>Until the spell ends, you have resistance to nonmagical bludgeoning,
+      piercing, and slashing damage.</p>
     statuses: []
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781374318294
+      modifiedTime: 1781374318294
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
+    img: icons/magic/earth/strike-fist-stone-gray.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+        - key: system.traits.dr.bypasses
+          value: mgc
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!ReMbjfeOKoSj3O79.cSVCA9h5OEo5lfBE'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356009
-  modifiedTime: 1725992719794
+  modifiedTime: 1781374321006
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ReMbjfeOKoSj3O79'
