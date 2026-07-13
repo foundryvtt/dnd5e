@@ -32,12 +32,15 @@ system:
       type: creature
       count: '8'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -77,7 +80,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: wv2ZdOUnHIEoBTOD
+          level: {}
       range:
         override: false
       target:
@@ -96,20 +101,68 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: telepathic-bond
 sort: 0
 flags: {}
-img: icons/magic/control/energy-stream-link-blue.webp
-effects: []
+img: icons/magic/movement/trail-streak-impact-blue.webp
+effects:
+  - name: Telepathic Bond
+    img: icons/magic/movement/trail-streak-impact-blue.webp
+    origin: Compendium.dnd5e.spells.Item.uAwtVZkiSTyP6ORB
+    transfer: false
+    _id: wv2ZdOUnHIEoBTOD
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The caster has forged a telepathic link with you, psychically linking
+      you to all the others for the duration.</p><p>Until the spell ends, you
+      can communicate telepathically through the bond whether or not they have a
+      common language. The communication is possible over any distance, though
+      it can't extend to other planes of existence.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781403347154
+      modifiedTime: 1783720452156
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!uAwtVZkiSTyP6ORB.wv2ZdOUnHIEoBTOD'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366095
-  modifiedTime: 1725992723162
+  modifiedTime: 1781403347191
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!uAwtVZkiSTyP6ORB'

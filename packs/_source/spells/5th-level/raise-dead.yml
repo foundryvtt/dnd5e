@@ -40,11 +40,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: spec
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -83,7 +86,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: tiAHzh61HiuYLoYf
+          level: {}
       range:
         override: false
       target:
@@ -110,20 +115,96 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: raise-dead
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-purple-orange.webp
-effects: []
+img: icons/environment/settlement/graveyard-tombstone-night.webp
+effects:
+  - name: Resurrection Sickness
+    img: icons/environment/settlement/graveyard-tombstone-night.webp
+    origin: Compendium.dnd5e.spells.Item.AGFMPAmuzwWO6Dfz
+    transfer: false
+    _id: tiAHzh61HiuYLoYf
+    type: base
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          type: add
+          value: -4
+          phase: initial
+          priority: null
+        - key: system.bonuses.abilities.check
+          type: add
+          value: -4
+          phase: initial
+          priority: null
+        - key: system.bonuses.mwak.attack
+          type: add
+          value: -4
+          phase: initial
+          priority: null
+        - key: system.bonuses.msak.attack
+          type: add
+          value: -4
+          phase: initial
+          priority: null
+        - key: system.bonuses.rwak.attack
+          type: add
+          value: -4
+          phase: initial
+          priority: null
+        - key: system.bonuses.rsak.attack
+          type: add
+          value: -4
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 4
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Coming back from the dead is an ordeal. You take a −4 penalty to all
+      attack rolls, saving throws, and ability checks. Every time you finish a
+      long rest, the penalty is reduced by 1 until it disappears.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781401773080
+      modifiedTime: 1781401848383
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!AGFMPAmuzwWO6Dfz.tiAHzh61HiuYLoYf'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037349865
-  modifiedTime: 1725992717772
+  modifiedTime: 1781401773117
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!AGFMPAmuzwWO6Dfz'

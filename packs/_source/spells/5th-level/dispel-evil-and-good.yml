@@ -6,22 +6,22 @@ type: spell
 system:
   description:
     value: >-
-      <p>Shimmering energy surrounds and protects you from fey, Undead, and
-      creatures originating from Beyond the Material Plane. For the Duration,
-      Celestials, Elementals, fey, Fiends, and undead have disadvantage on
-      Attack rolls against you.</p><p>You can end the spell early by using
+      <p>Shimmering energy surrounds and protects you from fey, undead, and
+      creatures originating from beyond the Material Plane. For the duration,
+      celestials, elementals, fey, fiends, and undead have disadvantage on
+      attack rolls against you.</p><p>You can end the spell early by using
       either of the following special functions.</p><p><strong>Break
       Enchantment</strong>. As your action, you touch a creature you can reach
-      that is Charmed, Frightened, or possessed by a Celestial, an elemental, a
-      fey, a fiend, or an Undead. The creature you touch is no longer charmed,
-      frightened, or possessed by such
-      creatures.</p><p><strong>Dismissal</strong>. As your action, make a melee
-      spell Attack against a Celestial, an elemental, a fey, a fiend, or an
-      Undead you can reach. On a hit, you attempt to drive the creature back to
-      its home plane. The creature must succeed on a Charisma saving throw or be
-      sent back to its home plane (if it isn't there already). If they aren't on
-      their home plane, undead are sent to the Shadowfell, and fey are sent to
-      the Feywild.</p>
+      that is &amp;reference[Charmed apply=false], &amp;reference[Frightened
+      apply=false], or possessed by a celestial, an elemental, a fey, a fiend,
+      or an undead. The creature you touch is no longer charmed, frightened, or
+      possessed by such creatures.</p><p><strong>Dismissal</strong>. As your
+      action, make a melee spell attack against a celestial, an elemental, a
+      fey, a fiend, or an undead you can reach. On a hit, you attempt to drive
+      the creature back to its home plane. The creature must succeed on a
+      Charisma saving throw or be sent back to its home plane (if it isn't there
+      already). If they aren't on their home plane, undead are sent to the
+      Shadowfell, and fey are sent to the Feywild.</p>
     chat: ''
   source:
     custom: ''
@@ -40,11 +40,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -65,109 +68,263 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: attack
+    5nYzFGATnggEH6oq:
+      type: utility
+      name: Break Enchantment
+      _id: 5nYzFGATnggEH6oq
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets: []
       description:
+        value: >-
+          <p>You touch a creature you can reach that is &amp;reference[Charmed
+          apply=false], &amp;reference[Frightened apply=false], or possessed by
+          a celestial, an elemental, a fey, a fiend, or an undead. The creature
+          you touch is no longer charmed, frightened, or possessed by such
+          creatures.</p>
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
+      flags: {}
       range:
-        override: false
+        units: touch
+        override: true
+        special: ''
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    xlms51P5nGb9Rbc0:
+      type: attack
+      name: Dismissal Attack
+      _id: xlms51P5nGb9Rbc0
+      img: ''
+      sort: 200000
+      activation:
+        type: action
         override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Make a melee spell attack against a celestial, an elemental, a fey,
+          a fiend, or an undead you can reach. On a hit, you attempt to drive
+          the creature back to its home plane. The creature must succeed on a
+          Charisma saving throw or be sent back to its home plane (if it isn't
+          there already). If they aren't on their home plane, undead are sent to
+          the Shadowfell, and fey are sent to the Feywild.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       attack:
-        ability: ''
-        bonus: ''
         critical:
           threshold: null
         flat: false
         type:
           value: melee
-          classification: spell
+          classification: ''
+        ability: ''
+        bonus: ''
       damage:
         critical:
           bonus: ''
         includeBase: true
         parts: []
+    vtFdULsqeSCfhN7T:
+      type: save
+      name: Dismissal Save
+      _id: vtFdULsqeSCfhN7T
+      img: ''
+      sort: 300000
+      activation:
+        type: special
+        override: true
+        condition: When a creature is hit by the Dismissal portion of this spell.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The creature must succeed on a Charisma saving throw or be sent
+          back to its home plane (if it isn't there already). If they aren't on
+          their home plane, undead are sent to the Shadowfell, and fey are sent
+          to the Feywild.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - cha
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    knKM6trrjVLF3EOQ:
+      type: utility
+      name: Cast
+      _id: knKM6trrjVLF3EOQ
+      img: null
       sort: 0
-    dnd5eactivity100:
-      _id: dnd5eactivity100
-      type: save
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: cha
-        dc:
-          calculation: spellcasting
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: dispel-evil-and-good
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-blue.webp
+img: icons/magic/symbols/fleur-de-lis-yellow.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357090
-  modifiedTime: 1725992720142
+  modifiedTime: 1783216505613
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TkJ8Wtg1L7TZtspm'
