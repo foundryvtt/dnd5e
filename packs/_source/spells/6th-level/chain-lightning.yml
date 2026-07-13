@@ -25,12 +25,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -102,23 +105,31 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: chain-lightning
 sort: 0
 flags: {}
-img: icons/magic/lightning/bolt-forked-blue.webp
+img: icons/magic/lightning/bolt-strike-sparks-teal.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355797
-  modifiedTime: 1725992719729
+  modifiedTime: 1781435190868
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!QbTxN5dWIbYZ4jLU'

@@ -34,12 +34,15 @@ system:
       type: creature
       count: '6'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '5'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,20 +98,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: word-of-recall
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+img: icons/environment/settlement/gazebo.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347937
-  modifiedTime: 1725992717170
+  modifiedTime: 1781441193593
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!76C0FdcxlU8F9Rl2'
