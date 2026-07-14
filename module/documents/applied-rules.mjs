@@ -72,11 +72,20 @@ export default class AppliedRules extends Map {
   static collect(rule, actor, item) {
     return new RulesIterator(AppliedRules.#collect(rule, actor, item));
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a rules iterator from an iterable object.
+   * @param {Iterable<ActiveEffectChangeData>} rules  Some kind of iterable object containing rules.
+   * @returns {RulesIterator}
+   */
+  static createIterator(rules) {
+    return new RulesIterator(Iterator.from(rules));
+  }
 }
 
 /* -------------------------------------------- */
-
-const CONSUMED = Symbol("consumed");
 
 /**
  * Special iterator for rules that adds some additional helper methods.
@@ -105,35 +114,20 @@ class RulesIterator extends Iterator {
   /* -------------------------------------------- */
 
   /**
-   * Mark all rules as consumed and skip any previously consumed rules.
-   * @returns {RulesIterator}
-   */
-  consume() {
-    return new RulesIterator(this.#iterator.filter(r => r[CONSUMED] ? false : r[CONSUMED] = true));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Filter rules based on effect & change conditions.
    * @param {RollData} rollData
+   * @param {object} [options={}]
+   * @param {Set<ActiveEffectChangeData>} [options.consumed]  Set of consumed rules to skip, selected rules added to.
    * @returns {RulesIterator}
    */
-  filterWith(rollData) {
+  filterWith(rollData, { consumed }={}) {
     return new RulesIterator(this.filter(r => {
+      if ( consumed?.has(r) ) return false;
       if ( r.effect?.system.conditions?.check(rollData) === false ) return false;
       if ( r.conditions?.check(rollData) === false ) return false;
+      if ( consumed ) consumed.add(r);
       return true;
     }));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Reset the consumption for all rules.
-   */
-  reset() {
-    this.forEach(r => delete r[CONSUMED]);
   }
 
   /* -------------------------------------------- */

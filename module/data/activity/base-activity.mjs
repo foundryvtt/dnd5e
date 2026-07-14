@@ -770,20 +770,33 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const rollConfig = foundry.utils.deepClone(config);
     rollData ??= this.getRollData({ roll: { attackMode: config.attackMode } });
     rollData.roll ??= {};
+    rollData.rules = {
+      bonus: AppliedRules.collect("damage:bonus", this.actor, this.item).toArray(),
+      consumed: new Set()
+    };
     Object.assign(rollData.roll, {
       isCritical: rollConfig.isCritical,
       properties: Array.from(this.item.system.properties ?? [])
         .concat(config.properties ?? [])
         .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
     });
-    rollConfig.rolls = this.damage.parts
+    rollConfig.rolls = this._getDamageParts(config)
       .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
 
-    AppliedRules.collect("damage:bonus", this.actor, this.item).reset();
-
     return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the damage parts and apply any necessary modification before they are prepared.
+   * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Roll configuration being built.
+   * @returns {DamageData[]}
+   */
+  _getDamageParts(config={}) {
+    return Array.from(this.damage.parts);
   }
 
   /* -------------------------------------------- */
@@ -827,8 +840,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
     }
 
-    const ruleBonus = AppliedRules.collect("damage:bonus", this.actor, this.item)
-      .filterWith(data).consume().toFormula();
+    const ruleBonus = AppliedRules.createIterator(rollData.rules.bonus)
+      .filterWith(data, { consumed: rollData.rules.consumed })
+      .toFormula();
     if ( ruleBonus ) parts.push(ruleBonus);
 
     return {

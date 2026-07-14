@@ -298,35 +298,37 @@ export default class BaseAttackActivityData extends BaseActivityData {
     options.rollData ??= this.getRollData({ roll: { attackMode: config.attackMode } });
     const rollConfig = super.getDamageConfig(config, options);
 
-    // Add the ammunition's damage
-    if ( ammo?.damage.base.formula ) {
-      const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
-      const damage = ammo.damage.base.clone(ammo.damage.base);
-
-      // If mode is "replace" and base part is present, replace the base part
-      if ( ammo.damage.replace & (basePartIndex !== -1) ) {
-        damage.base = true;
-        rollConfig.rolls.splice(
-          basePartIndex, 1,
-          this._processDamagePart(damage, config, options.rollData, basePartIndex, options.formulaOptions)
-        );
-      }
-
-      // Otherwise stick the ammo damage after base part (or as first part)
-      else {
-        damage.ammo = true;
-        rollConfig.rolls.splice(
-          basePartIndex + 1, 0,
-          this._processDamagePart(damage, rollConfig, options.rollData, basePartIndex + 1, options.formulaOptions)
-        );
-      }
-    }
-
     if ( this.damage.critical.bonus && rollConfig.rolls[0] && !rollConfig.rolls[0].options?.critical?.bonusDamage ) {
       foundry.utils.setProperty(rollConfig.rolls[0], "options.critical.bonusDamage", this.damage.critical.bonus);
     }
 
     return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getDamageParts(config={}) {
+    const ammo = config.ammunition?.system;
+    const parts = super._getDamageParts(config);
+    if ( !ammo?.damage.base.formula ) return parts;
+
+    const basePartIndex = parts.findIndex(i => i.base);
+    const damage = ammo.damage.base.clone(ammo.damage.base);
+
+    // If mode is "replace" and base part is present, replace the base part
+    if ( ammo.damage.replace & (basePartIndex !== -1) ) {
+      damage.base = true;
+      parts.splice(basePartIndex, 1, damage);
+    }
+
+    // Otherwise stick the ammo damage after base part (or as first part)
+    else {
+      damage.ammo = true;
+      parts.splice(basePartIndex + 1, 0, damage);
+    }
+
+    return parts;
   }
 
   /* -------------------------------------------- */
