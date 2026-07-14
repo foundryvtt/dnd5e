@@ -4,6 +4,7 @@ import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
@@ -11,7 +12,8 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import { FavoriteData5e } from "../../data/abstract/_types.mjs";
  * @import { ActorDeltasData } from "../../data/chat-message/fields/_types.mjs";
  * @import {
- *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration,
+ *   DamageRollConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
  *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
@@ -880,8 +882,10 @@ export default function ActivityMixin(Base) {
       rollConfig.hookNames = [...(config.hookNames ?? []), "damage"];
       rollConfig.subject = this;
 
+      const buildConfig = this._buildDamageConfig.bind(this);
       const dialogConfig = foundry.utils.mergeObject({
         options: {
+          buildConfig,
           position: {
             width: 400,
             top: config.event ? config.event.clientY - 80 : null,
@@ -935,6 +939,36 @@ export default function ActivityMixin(Base) {
       Hooks.callAll("dnd5e.rollDamageV2", rolls, { subject: this });
 
       return rolls;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Adjust rules applied to damage parts when damage type is changed.
+     * @param {DamageRollProcessConfiguration} process  Configuration for the entire rolling process.
+     * @param {DamageRollConfiguration} config          Configuration for a specific roll.
+     * @param {FormDataExtended|void} formData          Any data entered into the rolling prompt.
+     * @param {number} index                            Index of the roll within all rolls being prepared.
+     */
+    _buildDamageConfig(process, config, formData, index) {
+      if ( index === 0 ) process.rules = {
+        bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
+        consumed: new Set()
+      };
+
+      config.data.roll.damageType = config.options.type;
+      const ruleBonus = AppliedRules.createIterator(process.rules.bonus)
+        .filterWith(config.data, { consumed: process.rules.consumed })
+        .toFormula();
+      const rulePartIndex = config.parts.findIndex(p => p === "@ruleBonus");
+      if ( ruleBonus ) {
+        config.data.ruleBonus = ruleBonus;
+        if ( rulePartIndex < 0 ) config.parts.push("@ruleBonus");
+      } else if ( rulePartIndex >= 0 ) {
+        config.parts.splice(rulePartIndex, 1);
+      }
+
+      return config;
     }
 
     /* -------------------------------------------- */

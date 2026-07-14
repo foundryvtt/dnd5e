@@ -21,6 +21,11 @@ export default class BaseHealActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static damageRuleCategory = "healing";
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -53,7 +58,7 @@ export default class BaseHealActivityData extends BaseActivityData {
     const rollConfig = foundry.utils.mergeObject({ critical: { allow: false } }, config);
     rollData ??= this.getRollData({ roll: true });
     const rules = {
-      bonus: AppliedRules.collect("healing:bonus", this.actor, this.item).toArray(),
+      bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
       consumed: new Set()
     };
     rollConfig.rolls = [

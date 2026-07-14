@@ -98,6 +98,14 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Category used to fetch rules for damage calculation.
+   * @type {"damage"|"healing"}
+   */
+  static damageRuleCategory = "damage";
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -777,7 +785,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
     });
     const rules = {
-      bonus: AppliedRules.collect("damage:bonus", this.actor, this.item).toArray(),
+      bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
       consumed: new Set()
     };
     rollConfig.rolls = this._getDamageParts(config)
@@ -846,7 +854,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       const ruleBonus = AppliedRules.createIterator(rules.bonus)
         .filterWith(data, { consumed: rules.consumed })
         .toFormula();
-      if ( ruleBonus ) parts.push(ruleBonus);
+      if ( ruleBonus ) {
+        data.ruleBonus = ruleBonus;
+        parts.push("@ruleBonus");
+      }
     }
 
     return {
