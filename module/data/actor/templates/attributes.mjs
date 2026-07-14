@@ -1,5 +1,6 @@
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
+import AppliedRules from "../../../documents/applied-rules.mjs";
 import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import ConditionData from "../../active-effect/condition.mjs";
@@ -508,11 +509,18 @@ export default class AttributesFields {
       AdvantageModeField.setMode(this, "attributes.init.roll.mode", -1);
     }
 
+    // Complete roll data
+    rollData = { ...rollData };
+    rollData.roll = { ability: abilityId, proficient: init.prof.multiplier >= 1, type: "initiative" };
+
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, rollData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
+    const ruleBonus = simplifyBonus(
+      AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+    );
     const quality = this.attributes.quality?.value ?? 0;
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + quality
+    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + ruleBonus + quality
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
     init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);

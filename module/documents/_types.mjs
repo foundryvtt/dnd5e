@@ -143,21 +143,10 @@
  * @property {object} activity         Object containing the activity's data.
  * @property {object} [consumed]       Information on what resources the activity's activation consumed.
  * @property {number} mod              The ability modifier value used by the activity.
- * @property {RollDescription} [roll]  Data describing a specific roll being performed.
- */
-
-/**
- * @typedef RollDescription
- * @param {object} [attack]
- * @param {"spell"|"unarmed"|"weapon"} [attack.classification]  Source of the attack.
- * @param {WeaponAttackMode} [attack.mode]  Selected weapon attack mode.
- * @param {"melee"|"ranged"} [attack.type]  Whether this is a melee or ranged attack.
- * @param {string} type                     Type of roll being performed (e.g. "attack", "skill", "tool", etc.).
  */
 
 /**
  * @typedef {RollDataOptions} ActivityRollDataOptions
- * @property {object} [data]  Arbitrary data assigned to the roll data object.
  */
 
 /**
@@ -189,12 +178,27 @@
 
 /**
  * @typedef RollData
+ * @property {RollDescription} [roll]  Data describing a specific roll being performed.
+ */
+
+/**
+ * @typedef RollDescription
+ * @param {string} [ability]                Ability associated with a D20 roll.
+ * @param {object} [attack]
+ * @param {"spell"|"unarmed"|"weapon"} [attack.classification]  Source of the attack.
+ * @param {WeaponAttackMode} [attack.mode]  Selected weapon attack mode.
+ * @param {"melee"|"ranged"} [attack.type]  Whether this is a melee or ranged attack.
+ * @param {boolean} [proficient]            Whether proficiency was added to the roll.
+ * @param {string} [skill]                  ID of skill associated with the roll.
+ * @param {string} [tool]                   ID of tool associated with the roll.
+ * @param {string} type                     Type of roll being performed (e.g. "attack", "skill", "tool", etc.).
  */
 
 /**
  * @typedef RollDataOptions
  * @property {boolean} [deterministic]  Whether to force deterministic values for data properties that could
  *                                      be either a die term or a flat term.
+ * @property {object} [data]            Arbitrary data assigned to the roll data object.
  */
 
 /* -------------------------------------------- */

@@ -1,4 +1,5 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
+import AppliedRules from "../../../documents/applied-rules.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
@@ -248,23 +249,32 @@ export default class CreatureTemplate extends CommonTemplate {
     ability ??= skillData.ability;
     const abilityData = this.abilities[ability];
     skillData.ability = ability;
-    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
     const originalSkill = originalSkills?.[skillId];
     if ( originalSkill?.value >= 1 ) {
       skillData.merged = true;
       skillData.value = originalSkill?.value;
     }
 
-    // Compute modifier
-    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
-    skillData.effectValue = skillData.value;
-    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
-    skillData.mod = abilityData?.mod ?? 0;
+    // Compute proficiency
     const calculatedProf = this.calculateAbilityCheckProficiency(
       skillData.value, skillData.ability, { skill: skillId }
     );
     skillData.prof = originalSkill?.prof?.multiplier > calculatedProf.multiplier
       ? originalSkill.prof.clone() : calculatedProf;
+
+    // Complete roll data
+    rollData = { ...rollData };
+    rollData.roll = { ability, proficient: skillData.prof.multiplier >= 1, skill: skillId, type: "skill" };
+
+    // Compute modifier
+    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
+    skillData.effectValue = skillData.value;
+    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
+    const ruleBonus = simplifyBonus(
+      AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+    );
+    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus + ruleBonus;
+    skillData.mod = abilityData?.mod ?? 0;
     skillData.value = skillData.proficient = skillData.prof.multiplier;
     skillData.total = skillData.mod + skillData.bonus;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
@@ -304,14 +314,22 @@ export default class CreatureTemplate extends CommonTemplate {
    */
   prepareTools({ rollData={} }={}) {
     const globalCheckBonus = simplifyBonus(this.bonuses.abilities.check, rollData);
-    for ( const tool of Object.values(this.tools) ) {
+    for ( const [id, tool] of Object.entries(this.tools) ) {
       const ability = this.abilities[tool.ability];
+      tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
+
+      // Complete roll data
+      rollData = { ...rollData };
+      rollData.roll = { ability: tool.ability, proficient: tool.prof.multiplier >= 1, tool: id, type: "tool" };
+
       const baseBonus = simplifyBonus(tool.bonuses.check, rollData);
       const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, rollData);
+      const ruleBonus = simplifyBonus(
+        AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+      );
       tool.effectValue = tool.value;
-      tool.bonus = baseBonus + globalCheckBonus + checkBonusAbl;
       tool.mod = ability?.mod ?? 0;
-      tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
+      tool.bonus = baseBonus + globalCheckBonus + checkBonusAbl + ruleBonus;
       tool.total = tool.mod + tool.bonus;
       if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
       tool.value = tool.prof.multiplier;
@@ -323,8 +341,8 @@ export default class CreatureTemplate extends CommonTemplate {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getRollData({ deterministic=false }={}) {
-    const data = super.getRollData({ deterministic });
+  getRollData(options={}) {
+    const data = super.getRollData(options);
     data.classes = {};
     data.subclasses = {};
     for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
