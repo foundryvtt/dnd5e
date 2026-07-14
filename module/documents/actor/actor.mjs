@@ -533,7 +533,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else rollData = { ...super.getRollData() };
     rollData.flags = { ...this.flags };
     rollData.name = this.name;
-    if ( options.data ) Object.assign(rollData, options.data);
+    if ( options.roll ) rollData.roll ??= {};
     rollData.statuses = {};
     for ( const status of this.statuses ) {
       if ( ConditionData.hasLevels(status) ) rollData.statuses[status] = this.system.conditions[status];
@@ -1428,13 +1428,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let prof = calculateSkillToolProficiency(this, abilityId, process);
     const originalProf = calculateSkillToolProficiency(hostActor, abilityId, process);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
-    const rollData = this.getRollData();
-    rollData.roll = {
+    const rollData = this.getRollData({ roll: true });
+    Object.assign(rollData.roll, {
       ability: abilityId,
       proficient: prof.multiplier >= 1,
       [type]: process[type],
       type: type
-    };
+    });
 
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
@@ -1547,12 +1547,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ability = this.system.abilities?.[config.ability];
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
-    const rollData = this.getRollData();
-    rollData.roll = {
+    const rollData = this.getRollData({ roll: true });
+    Object.assign(rollData.roll, {
       ability: config.ability,
       proficient: ability?.[`${type}Prof`]?.multiplier >= 1,
       type: config[`${type}Type`] ?? "ability"
-    };
+    });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
@@ -1870,12 +1870,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const ability = this.system.abilities?.[abilityId];
 
-    const rollData = this.getRollData();
-    rollData.roll = {
+    const rollData = this.getRollData({ roll: true });
+    Object.assign(rollData.roll, {
       ability: abilityId,
       proficient: init.prof.multiplier >= 1,
       type: "initiative"
-    };
+    });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: init?.mod,
       prof: init.prof.hasProficiency ? init.prof.term : null,

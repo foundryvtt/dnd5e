@@ -72,6 +72,17 @@ export default class AppliedRules extends Map {
   static collect(rule, actor, item) {
     return new RulesIterator(AppliedRules.#collect(rule, actor, item));
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a rules iterator from an iterable object.
+   * @param {Iterable<ActiveEffectChangeData>} rules  Some kind of iterable object containing rules.
+   * @returns {RulesIterator}
+   */
+  static createIterator(rules) {
+    return new RulesIterator(Iterator.from(rules));
+  }
 }
 
 /* -------------------------------------------- */
@@ -105,12 +116,16 @@ class RulesIterator extends Iterator {
   /**
    * Filter rules based on effect & change conditions.
    * @param {RollData} rollData
+   * @param {object} [options={}]
+   * @param {Set<ActiveEffectChangeData>} [options.consumed]  Set of consumed rules to skip, selected rules added to.
    * @returns {RulesIterator}
    */
-  filterWith(rollData) {
+  filterWith(rollData, { consumed }={}) {
     return new RulesIterator(this.filter(r => {
+      if ( consumed?.has(r) ) return false;
       if ( r.effect?.system.conditions?.check(rollData) === false ) return false;
       if ( r.conditions?.check(rollData) === false ) return false;
+      if ( consumed ) consumed.add(r);
       return true;
     }));
   }

@@ -118,7 +118,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       rollConfig.mastery = masteryOptions?.[0]?.value;
     }
 
-    const rollData = this.getRollData({ data: { roll: { attack: { mode: rollConfig.attackMode } } } });
+    const rollData = this.getRollData({ roll: { attackMode: rollConfig.attackMode } });
     const { advantage, disadvantage } = this.actor ? AdvantageModeField.combineFields(
       this.actor.system, [],
       AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()
