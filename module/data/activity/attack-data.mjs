@@ -295,7 +295,6 @@ export default class BaseAttackActivityData extends BaseActivityData {
       }
     }
 
-    options.rollData ??= this.getRollData({ roll: { attackMode: config.attackMode } });
     const rollConfig = super.getDamageConfig(config, options);
 
     if ( this.damage.critical.bonus && rollConfig.rolls[0] && !rollConfig.rolls[0].options?.critical?.bonusDamage ) {

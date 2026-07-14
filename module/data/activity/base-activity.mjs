@@ -770,18 +770,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const rollConfig = foundry.utils.deepClone(config);
     rollData ??= this.getRollData({ roll: { attackMode: config.attackMode } });
     rollData.roll ??= {};
-    rollData.rules = {
-      bonus: AppliedRules.collect("damage:bonus", this.actor, this.item).toArray(),
-      consumed: new Set()
-    };
     Object.assign(rollData.roll, {
       isCritical: rollConfig.isCritical,
       properties: Array.from(this.item.system.properties ?? [])
         .concat(config.properties ?? [])
         .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
     });
+    const rules = {
+      bonus: AppliedRules.collect("damage:bonus", this.actor, this.item).toArray(),
+      consumed: new Set()
+    };
     rollConfig.rolls = this._getDamageParts(config)
-      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
+      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, { formulaOptions, rules }))
       .filter(d => d.parts.length)
       .concat(config.rolls ?? []);
 
@@ -822,12 +822,14 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
    * @param {ActivityRollData} rollData                           Roll data to populate with damage data.
    * @param {number} [index=0]                                    Index of the damage part.
-   * @param {DamageFormulaOptions} [options={}]                   Options to configure the formula.
+   * @param {object} [options={}]
+   * @param {DamageFormulaOptions} [options.formulaOptions]       Options to configure the formula.
+   * @param {object} [options.rules]                              Data used to apply rules to each part.
    * @returns {DamageRollConfiguration}
    * @protected
    */
-  _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
-    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, options);
+  _processDamagePart(damage, rollConfig, rollData, index=0, { formulaOptions, rules }={}) {
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, formulaOptions);
     const parts = scaledFormula ? [scaledFormula] : [];
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
     const data = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
@@ -840,10 +842,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
     }
 
-    const ruleBonus = AppliedRules.createIterator(rollData.rules.bonus)
-      .filterWith(data, { consumed: rollData.rules.consumed })
-      .toFormula();
-    if ( ruleBonus ) parts.push(ruleBonus);
+    if ( rules ) {
+      const ruleBonus = AppliedRules.createIterator(rules.bonus)
+        .filterWith(data, { consumed: rules.consumed })
+        .toFormula();
+      if ( ruleBonus ) parts.push(ruleBonus);
+    }
 
     return {
       data, parts,
