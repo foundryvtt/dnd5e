@@ -1334,13 +1334,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const doubleProf = !!relevant?.prof.hasProficiency && !!alternate?.prof.hasProficiency;
     const pace = TravelField.getTravelPaceMode(config.pace, config.skill);
 
+    const rollData = this.getRollData({ roll: true });
+    rollData.roll = {
+      ability: abilityId,
+      proficient: dnd5e.dataModels.actor.CommonTemplate
+        .calculateSkillToolProficiency(this, abilityId, config).multiplier >= 1,
+      [type]: config[type],
+      type
+    };
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll.mode`,
       `${type}s.${type === "skill" ? config.skill : config.tool}.roll.mode`
-    ], {
+    ], AppliedRules.collect("check:advantage", this).filterWith(rollData).toAdvantageCounts({
       advantages: { count: Number(doubleProf) + Number(pace.advantage) },
       disadvantages: { count: Number(pace.disadvantage) }
-    });
+    }));
 
     const rollConfig = foundry.utils.mergeObject({
       advantage, disadvantage,
@@ -1561,9 +1569,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ruleBonus: AppliedRules.collect(`${type}:bonus`, this).filterWith(rollData).toFormula(),
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
+
+    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
+      `abilities.${config.ability}.${type}.roll.mode`
+    ], AppliedRules.collect(`${type}:advantage`, this).filterWith(rollData).toAdvantageCounts());
     const options = {
-      advantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      advantage, disadvantage,
       maximum: ability?.[type]?.roll.max,
       minimum: ability?.[type]?.roll.min
     };
@@ -1889,7 +1900,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll.mode`,
       "attributes.init.roll.mode"
-    ]);
+    ], AppliedRules.collect("check:advantage", this).filterWith(rollData).toAdvantageCounts());
 
     // Add condition reductions
     this.addConditionRollReduction(parts, data);

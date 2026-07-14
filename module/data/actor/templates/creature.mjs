@@ -298,7 +298,7 @@ export default class CreatureTemplate extends CommonTemplate {
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
     const advantageMode = AdvantageModeField.combineFields(this, [
       `abilities.${ability}.check.roll.mode`, `skills.${skillId}.roll.mode`
-    ])?.mode ?? 0;
+    ], AppliedRules.collect("check:advantage", this.parent).filterWith(rollData).toAdvantageCounts())?.mode ?? 0;
     skillData.passive = CONFIG.DND5E.skillPassive.base + skillData.mod + skillData.bonus + skillData.prof.flat
       + passive + passiveBonus + (advantageMode * CONFIG.DND5E.skillPassive.modifier);
 
