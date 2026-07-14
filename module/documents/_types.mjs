@@ -199,6 +199,8 @@
  * @property {boolean} [deterministic]  Whether to force deterministic values for data properties that could
  *                                      be either a die term or a flat term.
  * @property {object} [data]            Arbitrary data assigned to the roll data object.
+ * @property {boolean|object} [roll]               Configuration for a roll or true to indicate data is for a roll.
+ * @property {WeaponAttackMode} [roll.attackMode]  Selected weapon attack mode.
  */
 
 /* -------------------------------------------- */
