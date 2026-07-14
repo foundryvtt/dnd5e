@@ -373,6 +373,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
   getRollData(options={}) {
     const rollData = super.getRollData(options);
     if ( rollData.roll ) {
+      rollData.roll.ability = this.ability;
       rollData.roll.attack ??= {};
       rollData.roll.attack.classification = this.attack.type.classification;
       rollData.roll.attack.type = rollData.roll.attack.mode?.includes("thrown") ? "ranged" : this.attack.type.value;

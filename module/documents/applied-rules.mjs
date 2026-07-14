@@ -1,3 +1,5 @@
+const D20_TESTS = new Set(["attack", "check", "save"]);
+
 /**
  * @import { AdvantageModeData } from "../data/fields/_types.mjs";
  */
@@ -52,6 +54,8 @@ export default class AppliedRules extends Map {
    * @yields {ChangeData}
    */
   static *#collect(rule, actor, item) {
+    const [category, key] = rule.split(":");
+    if ( D20_TESTS.has(category) ) yield* AppliedRules.#collect(`d20:${key}`, actor, item);
     for ( const r of actor?.appliedRules.get(rule) ?? [] ) yield r;
     for ( const r of item?.appliedRules.get(rule) ?? [] ) yield r;
   }

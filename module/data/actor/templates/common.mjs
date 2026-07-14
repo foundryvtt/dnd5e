@@ -1,4 +1,5 @@
 import Proficiency from "../../../documents/actor/proficiency.mjs";
+import AppliedRules from "../../../documents/applied-rules.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
 import ActorDataModel from "../../abstract/actor-data-model.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
@@ -158,14 +159,24 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       const calculatedProf = this.calculateAbilityCheckProficiency(0, id);
       abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.multiplier
         ? originalAbility.checkProf.clone() : calculatedProf;
-      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
-
-      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
-      abl.saveBonus = saveBonusAbl + saveBonus + cover;
-
       abl.saveProf = abl.merged ? originalAbility.saveProf.clone() : new Proficiency(prof, abl.proficient);
+
+      rollData = { ...rollData };
+      rollData.roll = { ability: id, proficient: abl.checkProf.multiplier >= 1, type: "ability" };
+
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
-      abl.checkBonus = checkBonusAbl + checkBonus;
+      const checkBonusRules = simplifyBonus(
+        AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+      );
+      abl.checkBonus = checkBonusAbl + checkBonusRules + checkBonus;
+
+      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
+      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
+      rollData.roll.proficient = abl.saveProf.multiplier >= 1;
+      const saveBonusRules = simplifyBonus(
+        AppliedRules.collect("save:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+      );
+      abl.saveBonus = saveBonusAbl + saveBonusRules + saveBonus + cover;
 
       abl.save.value = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
