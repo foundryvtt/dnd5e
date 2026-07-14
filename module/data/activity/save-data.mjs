@@ -152,7 +152,7 @@ export default class BaseSaveActivityData extends BaseActivityData {
   /** @inheritDoc */
   getRollData(options={}) {
     const rollData = super.getRollData(options);
-    if ( rollData.roll ) rollData.roll.type = "save";
+    if ( options.roll ) foundry.utils.setProperty(rollData, "roll.type", "save");
     return rollData;
   }
 }

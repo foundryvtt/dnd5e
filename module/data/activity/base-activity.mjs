@@ -769,10 +769,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
     const rollConfig = foundry.utils.deepClone(config);
     rollData ??= this.getRollData({ roll: { attackMode: config.attackMode } });
-    rollData = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
+    rollData.roll ??= {};
     Object.assign(rollData.roll, {
       isCritical: rollConfig.isCritical,
-      properties: Array.from(this.item.system.properties ?? []).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
+      properties: Array.from(this.item.system.properties ?? [])
+        .concat(config.properties ?? [])
+        .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
     });
     rollConfig.rolls = this.damage.parts
       .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
