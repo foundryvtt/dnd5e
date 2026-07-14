@@ -168,7 +168,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       const checkBonusRules = simplifyBonus(
         AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
-      abl.checkBonus = checkBonusAbl + checkBonus;
+      abl.checkBonus = checkBonusAbl + checkBonusRules + checkBonus;
 
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
       const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
