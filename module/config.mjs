@@ -3906,6 +3906,12 @@ DND5E.bloodied = {
  * @enum {ActiveEffectChangeTypeConfig & { [skipConditions]: boolean }}
  */
 DND5E.activeEffectChangeTypes = Object.freeze({
+  "dnd5e.advantage": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Advantage.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    skipConditions: true
+  },
   "dnd5e.bonus": {
     label: "DND5E.ACTIVEEFFECT.ChangeType.Bonus.Label",
     defaultPriority: 100,
