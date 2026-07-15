@@ -566,12 +566,12 @@ export default class AttributesFields {
     }
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
+    const multiplier = this.attributes.movement.multiplier * (halfMovement ? 0.5 : 1);
     this.attributes.movement.max = 0;
     for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
       let speed = Math.max(0, speeds[type] - reduction);
-      if ( speed ) {
-        speed = Math.max(0, speed + bonus);
-        if ( halfMovement ) speed *= 0.5;
+      if ( (speed * multiplier) > 0 ) {
+        speed = Math.max(0, speed + bonus) * multiplier;
         if ( heavilyEncumbered ) {
           speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
         } else if ( encumbered ) {
@@ -580,10 +580,12 @@ export default class AttributesFields {
         if ( exceedingCarryingCapacity ) {
           speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
+        speeds[type] = speed;
+      } else {
+        speeds[type] = 0;
       }
-      speeds[type] = speed;
-      this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
-      if ( type === "walk" ) this.attributes.movement.speed = speed;
+      this.attributes.movement.max = Math.max(speeds[type], this.attributes.movement.max);
+      if ( type === "walk" ) this.attributes.movement.speed = speeds[type];
     }
     const baseSpeed = this._source.attributes.movement.speeds.walk || this.attributes.movement.fromSpecies?.walk;
     this.attributes.movement.slowed = speeds.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
