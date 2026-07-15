@@ -86,6 +86,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
   /** @override */
   _getTerrainEffects(token, segment) {
     const ignoredTypes = token.actor?.system.attributes?.movement?.ignoredDifficultTerrain ?? new Set();
+    if ( token.disposition === CONST.TOKEN_DISPOSITIONS.SECRET ) return [];
     if ( this.ignoredDispositions.has(token.disposition) || ignoredTypes.has("all")
       || (this.types.size && !this.types.difference(ignoredTypes).size)
       || (ignoredTypes.has("magical") && this.magical)
@@ -121,11 +122,12 @@ export class DifficultTerrainActivityBehavior extends BaseActivityBehavior {
 
   /** @override */
   createBehaviorData(activity, options={}) {
+    const disposition = activity.actor?.token?.disposition ?? activity.actor?.prototypeToken?.disposition;
     return {
       system: {
+        ignoredDispositions: this.getDispositions(activity.target, { ignored: true, relativeTo: disposition }),
         magical: activity.isSpell || activity.item?.system.properties?.has("mgc"),
         types: this.types
-        // TODO: Set "ignoredDispositions" based on target affects settings
       },
       type: "dnd5e.difficultTerrain"
     };

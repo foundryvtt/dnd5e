@@ -41,6 +41,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
    * @returns {boolean}
    */
   #evaluateConditions(token) {
+    if ( token.disposition === CONST.TOKEN_DISPOSITIONS.SECRET ) return false;
     if ( this.dispositions.size && !this.dispositions.has(token.disposition) ) return false;
     if ( this.sizes.size && !this.sizes.has(token.actor.system.traits?.size) ) return false;
     if ( this.types.size && !this.types.has(token.actor.system.details?.type?.value) ) return false;
@@ -209,12 +210,13 @@ export class ApplyActiveEffectActivityBehavior extends BaseActivityBehavior {
 
   /** @override */
   createBehaviorData(activity, options={}) {
+    const disposition = activity.actor?.token?.disposition ?? activity.actor?.prototypeToken?.disposition;
     return {
       system: {
+        dispositions: this.getDispositions(activity.target, { relativeTo: disposition }),
         effects: this.effects,
         sizes: this.sizes,
         types: this.types
-        // TODO: Set "dispositions" based on target affects settings
       },
       type: "dnd5e.applyActiveEffect"
     };
