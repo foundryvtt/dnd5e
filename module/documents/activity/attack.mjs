@@ -123,13 +123,11 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       this.actor.system, [],
       AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()
     ) : {};
-    const { maximum, minimum } = this.actor
-      ? AppliedRules.collect("attack:range", this.actor, this.item).filterWith(rollData).toRange() : {}
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
       options: {
-        advantage, disadvantage, maximum, minimum,
+        advantage, disadvantage,
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,
         criticalSuccess: this.criticalThreshold,
@@ -261,7 +259,13 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ammunition, attackMode });
-    const options = config.options ?? {};
+    const options = {
+      ...(config.options ?? {}),
+      maximum: this.actor
+        ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).toSmallest() : undefined,
+      minimum: this.actor
+        ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).toLargest() : undefined,
+    };
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
     if ( mastery !== undefined ) options.mastery = mastery;
