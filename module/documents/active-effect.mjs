@@ -2,12 +2,12 @@ import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { parseOrString, staticID } from "../utils.mjs";
+import { parseOrString, simplifyBonus, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
-const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
@@ -342,11 +342,30 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static applyChangeField(model, change, options={}) {
     const current = foundry.utils.getProperty(model, change.key);
-    const { field } = options;
+    const { field, replacementData } = options;
 
     // Replace value when using string interpolation syntax
     if ( (field instanceof StringField) && (change.type === "override") && change.value?.includes?.("{}") ) {
       change.value = change.value.replace("{}", current ?? "");
+    }
+
+    // Handle `<=` when adding and `>=` when subtracting from number fields
+    if ( (field instanceof NumberField)
+      && (((change.type === "add") && change.value.includes?.("<="))
+      || ((change.type === "subtract") && change.value.includes?.(">="))) ) {
+      let [delta, limit] = change.value.split(/<=|>=/);
+      try {
+        delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
+        limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
+      } catch(err) {
+        const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
+        console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
+        return current;
+      }
+      const result = change.type === "add"
+        ? Math.max(current, Math.min(current + delta, limit))
+        : Math.min(current, Math.max(current - delta, limit));
+      return super.applyChangeField(model, { ...change, type: "override", value: result }, options);
     }
 
     // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
