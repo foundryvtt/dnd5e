@@ -1456,10 +1456,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     config.options = {
       ...(config.options ?? {}),
-      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).toSmallest(
+      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).resolve(rollData).toSmallest(
         Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity)
       ),
-      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).toLargest(
+      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).resolve(rollData).toLargest(
         Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
       )
     };
@@ -1580,8 +1580,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     ], AppliedRules.collect(`${type}:advantage`, this).filterWith(rollData).toAdvantageCounts());
     const options = {
       advantage, disadvantage,
-      maximum: AppliedRules.collect(`${type}:maximum`, this).filterWith(rollData).toSmallest(ability?.[type]?.roll.max),
-      minimum: AppliedRules.collect(`${type}:minimum`, this).filterWith(rollData).toLargest(ability?.[type]?.roll.min)
+      maximum: AppliedRules.collect(`${type}:maximum`, this).filterWith(rollData).resolve(rollData).toSmallest(
+        ability?.[type]?.roll.max
+      ),
+      minimum: AppliedRules.collect(`${type}:minimum`, this).filterWith(rollData).resolve(rollData).toLargest(
+        ability?.[type]?.roll.min
+      )
     };
 
     const rollConfig = foundry.utils.mergeObject({
@@ -1923,10 +1927,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
-      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).toSmallest(
+      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).resolve(rollData).toSmallest(
         Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity)
       ),
-      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).toLargest(
+      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).resolve(rollData).toLargest(
         Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
       )
     }, options);

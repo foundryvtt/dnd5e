@@ -1,8 +1,10 @@
-const D20_TESTS = new Set(["attack", "check", "save"]);
+import { simplifyBonus } from "../utils.mjs";
 
 /**
  * @import { AdvantageModeData } from "../data/fields/_types.mjs";
  */
+
+const D20_TESTS = new Set(["attack", "check", "save"]);
 
 /**
  * @extends {Map<string, Map<string, ChangeData[]>>}
@@ -51,7 +53,7 @@ export default class AppliedRules extends Map {
    * @param {string} rule      Rule target and type separated by a colon (e.g. "attack:bonus").
    * @param {Actor5e} [actor]  Actor from which to fetch the rules.
    * @param {Item5e} [item]    Item from which to fetch the rules.
-   * @yields {ChangeData}
+   * @yields {ActiveEffectChangeData}
    */
   static *#collect(rule, actor, item) {
     const [category, key] = rule.split(":");
@@ -67,7 +69,7 @@ export default class AppliedRules extends Map {
    * @param {string} rule      Rule target and type separated by a colon (e.g. "attack:bonus").
    * @param {Actor5e} [actor]  Actor from which to fetch the rules.
    * @param {Item5e} [item]    Item from which to fetch the rules.
-   * @returns {RulesIterator}
+   * @returns {RulesIterator<ActiveEffectChangeData>}
    */
   static collect(rule, actor, item) {
     return new RulesIterator(AppliedRules.#collect(rule, actor, item));
@@ -78,7 +80,7 @@ export default class AppliedRules extends Map {
   /**
    * Create a rules iterator from an iterable object.
    * @param {Iterable<ActiveEffectChangeData>} rules  Some kind of iterable object containing rules.
-   * @returns {RulesIterator}
+   * @returns {RulesIterator<ActiveEffectChangeData>}
    */
   static createIterator(rules) {
     return new RulesIterator(Iterator.from(rules));
@@ -118,7 +120,7 @@ class RulesIterator extends Iterator {
    * @param {RollData} rollData
    * @param {object} [options={}]
    * @param {Set<ActiveEffectChangeData>} [options.consumed]  Set of consumed rules to skip, selected rules added to.
-   * @returns {RulesIterator}
+   * @returns {RulesIterator<ActiveEffectChangeData>}
    */
   filterWith(rollData, { consumed }={}) {
     return new RulesIterator(this.filter(r => {
@@ -198,9 +200,20 @@ class RulesIterator extends Iterator {
   /* -------------------------------------------- */
 
   /**
+   * Use `simplifyBonus` to deterministically resolve all values.
+   * @param {object} data  Data to use for replacing @ strings.
+   * @returns {RulesIterator<number>}
+   */
+  resolve(data) {
+    return new RulesIterator(this.values(String).map(v => simplifyBonus(v, data)));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Transform each rule element into its underlying value.
    * @param {Number|String} [type]  Transform value into specific primitive type.
-   * @returns {RulesIterator}
+   * @returns {RulesIterator<any>}
    */
   values(type) {
     return new RulesIterator(

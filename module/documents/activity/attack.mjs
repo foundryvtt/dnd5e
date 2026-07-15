@@ -262,9 +262,11 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const options = {
       ...(config.options ?? {}),
       maximum: this.actor
-        ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).toSmallest() : undefined,
+        ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
+        : undefined,
       minimum: this.actor
-        ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).toLargest() : undefined,
+        ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).resolve(data).toLargest()
+        : undefined,
     };
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
