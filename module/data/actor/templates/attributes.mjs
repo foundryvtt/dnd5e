@@ -537,10 +537,11 @@ export default class AttributesFields {
     const statuses = this.parent.statuses;
     const noMovement = this.parent.hasConditionEffect("noMovement");
     const crawl = this.parent.hasConditionEffect("crawl");
+    const speeds = this.attributes.movement.speeds;
     for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( noMovement || (crawl && (type !== "walk")) ) this.attributes.movement[type] = 0;
-      else this.attributes.movement[type] = Math.max(0, simplifyBonus(this.attributes.movement[type], rollData));
-      if ( type === "walk" ) this.attributes.movement.speed = this.attributes.movement.walk;
+      if ( noMovement || (crawl && (type !== "walk")) ) speeds[type] = 0;
+      else speeds[type] = Math.max(0, simplifyBonus(speeds[type], rollData));
+      if ( type === "walk" ) this.attributes.movement.speed = speeds.walk;
     }
 
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
@@ -567,7 +568,7 @@ export default class AttributesFields {
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
     this.attributes.movement.max = 0;
     for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      let speed = Math.max(0, this.attributes.movement[type] - reduction);
+      let speed = Math.max(0, speeds[type] - reduction);
       if ( speed ) {
         speed = Math.max(0, speed + bonus);
         if ( halfMovement ) speed *= 0.5;
@@ -580,13 +581,13 @@ export default class AttributesFields {
           speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
       }
-      this.attributes.movement[type] = speed;
+      speeds[type] = speed;
       this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
       if ( type === "walk" ) this.attributes.movement.speed = speed;
     }
-    const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
-    this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
-    this.attributes.movement.jump = (this.abilities?.str.value ?? 0) / 2;
+    const baseSpeed = this._source.attributes.movement.speeds.walk || this.attributes.movement.fromSpecies?.walk;
+    this.attributes.movement.slowed = speeds.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
+    this.attributes.movement.speeds.jump = (this.abilities?.str.value ?? 0) / 2;
   }
 
   /* -------------------------------------------- */
@@ -600,22 +601,23 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareRace(race, { force=false }={}) {
+    const { movement, senses } = race.system;
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && this.attributes.movement[key]) ) continue;
+      if ( !movement.speeds[key] || (!force && this.attributes.movement.speeds[key]) ) continue;
       this.attributes.movement.fromSpecies ??= {};
-      this.attributes.movement[key] = this.attributes.movement.fromSpecies[key] = race.system.movement[key];
+      this.attributes.movement.speeds[key] = this.attributes.movement.fromSpecies[key] = movement.speeds[key];
     }
-    if ( race.system.movement.hover ) this.attributes.movement.hover = true;
-    if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
-    else this.attributes.movement.units ??= race.system.movement.units;
+    if ( movement.hover ) this.attributes.movement.hover = true;
+    if ( force && movement.units ) this.attributes.movement.units = movement.units;
+    else this.attributes.movement.units ??= movement.units;
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( !race.system.senses.ranges[key] || (!force && (this.attributes.senses.ranges[key] !== null)) ) continue;
-      this.attributes.senses.ranges[key] = race.system.senses.ranges[key];
+      if ( !senses.ranges[key] || (!force && (this.attributes.senses.ranges[key] !== null)) ) continue;
+      this.attributes.senses.ranges[key] = senses.ranges[key];
     }
-    this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
-    if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
-    else this.attributes.senses.units ??= race.system.senses.units;
+    this.attributes.senses.special = [this.attributes.senses.special, senses.special].filterJoin(";");
+    if ( force && senses.units ) this.attributes.senses.units = senses.units;
+    else this.attributes.senses.units ??= senses.units;
   }
 
   /* -------------------------------------------- */

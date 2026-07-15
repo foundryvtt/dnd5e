@@ -973,7 +973,7 @@ function _migrateActorFlags(actorData, updateData) {
 function _migrateActorMovementSenses(actorData, updateData) {
   if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("2.4.0", actorData._stats.systemVersion) ) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      const keyPath = `system.attributes.movement.${key}`;
+      const keyPath = `system.attributes.movement.speeds.${key}`;
       if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
     }
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
