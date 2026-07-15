@@ -38,7 +38,7 @@ export default class ActorSizeField extends foundry.data.fields.StringField {
   /** @override */
   _applyChangeSubtract(value, delta, model, change) {
     if ( !Number.isNumeric(delta) ) return value;
-    return this._applyChangeAdd(value, delta * -1, model, change);;
+    return this._applyChangeAdd(value, delta * -1, model, change);
   }
 
   /* -------------------------------------------- */
