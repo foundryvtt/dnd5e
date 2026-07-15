@@ -63,8 +63,8 @@
  * @property {number} [criticalFailure]  The value of the d20 die to be considered a critical failure.
  * @property {boolean} [elvenAccuracy]   Use three dice when rolling with advantage.
  * @property {boolean} [halflingLucky]   Add a re-roll once modifier to the d20 die.
- * @property {number} maximum            Maximum number the d20 die can roll.
- * @property {number} minimum            Minimum number the d20 die can roll.
+ * @property {number} [maximum]          Maximum number the d20 die can roll.
+ * @property {number} [minimum]          Minimum number the d20 die can roll.
  */
 
 /**
