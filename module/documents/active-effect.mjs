@@ -247,24 +247,19 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( (field instanceof NumberField)
       && (((change.type === "add") && change.value.includes?.("<="))
       || ((change.type === "subtract") && change.value.includes?.(">="))) ) {
-      let [value, limit] = change.value.split(/<=|>=/);
+      let [delta, limit] = change.value.split(/<=|>=/);
       try {
+        delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
         limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
       } catch(err) {
         const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
         console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
         return current;
       }
-      const newValue = super.applyChangeField(
-        model, { ...change, value }, { field, ...options, modifyTarget: false }
-      );
-      if ( (change.type === "add") && (newValue > limit) ) {
-        change.value = `max(0, ${value} - ${newValue - limit})`;
-      } else if ( (change.type === "subtract") && (newValue < limit) ) {
-        change.value = `min(0, ${value} + ${limit - newValue})`;
-      } else {
-        change.value = value;
-      }
+      const result = change.type === "add"
+        ? Math.max(current, Math.min(current + delta, limit))
+        : Math.min(current, Math.max(current - delta, limit));
+      return super.applyChangeField(model, { ...change, type: "override", value: result }, options);
     }
 
     // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
