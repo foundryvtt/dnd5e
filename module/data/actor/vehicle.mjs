@@ -1,4 +1,5 @@
 import { convertWeight, defaultUnits, parseDelta } from "../../utils.mjs";
+import MovementField from "../shared/movement-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import TravelField from "./fields/travel-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
@@ -224,6 +225,8 @@ export default class VehicleData extends CommonTemplate {
       units: newUnits
     };
     movement.units = null;
+
+    MovementField._migrate(source.attributes?.movement);
   }
 
   /* -------------------------------------------- */
@@ -264,6 +267,7 @@ export default class VehicleData extends CommonTemplate {
     this.attributes.prof = 0;
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    MovementField._shim(this.attributes.movement);
   }
 
   /* -------------------------------------------- */

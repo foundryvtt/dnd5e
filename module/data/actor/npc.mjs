@@ -5,6 +5,7 @@ import { getRulesVersion } from "../../enrichers.mjs";
 import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import MovementField from "../shared/movement-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
 import SensesField from "../shared/senses-field.mjs";
 import SourceField from "../shared/source-field.mjs";
@@ -197,8 +198,14 @@ export default class NPCData extends CreatureTemplate {
         },
         createFilter: (filters, value, def) => {
           for ( const [k, v] of Object.entries(value ?? {}) ) {
-            if ( v === 1 ) filters.push({ k: `system.attributes.movement.${k}`, o: "gt", v: 0 });
-            if ( v === -1 ) filters.push({ o: "NOT", v: { k: `system.attributes.movement.${k}`, o: "gt", v: 0 } });
+            if ( v === 1 ) filters.push({ o: "OR", v: [
+              { k: `system.attributes.movement.${k}`, o: "gt", v: 0 },
+              { k: `system.attributes.movement.speeds.${k}`, o: "gt", v: 0 }
+            ] });
+            if ( v === -1 ) filters.push({ o: "NOR", v: [
+              { k: `system.attributes.movement.${k}`, o: "gt", v: 0 },
+              { k: `system.attributes.movement.speeds.${k}`, o: "gt", v: 0 }
+            ] });
           }
         }
       }]
@@ -232,6 +239,7 @@ export default class NPCData extends CreatureTemplate {
     NPCData.#migrateTypeData(source);
     AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
+    MovementField._migrate(source.attributes?.movement);
     return source;
   }
 
@@ -390,6 +398,7 @@ export default class NPCData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    MovementField._shim(this.attributes.movement);
     SensesField._shim(this.attributes.senses);
   }
 
@@ -404,7 +413,7 @@ export default class NPCData extends CreatureTemplate {
       AttributesFields.prepareRace.call(this, this.details.race, { force: true });
       this.details.type = this.details.race.system.type;
     }
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement.speeds[key] ??= 0;
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses.ranges[key] ??= 0;
     this.attributes.movement.units ??= defaultUnits("length");
     this.attributes.senses.units ??= defaultUnits("length");
@@ -622,11 +631,11 @@ export default class NPCData extends CreatureTemplate {
 
     const prepareSpeed = () => {
       const standard = formatter.format([
-        prepareMeasured(this.attributes.movement.walk, this.attributes.movement.units),
+        prepareMeasured(this.attributes.movement.speeds.walk, this.attributes.movement.units),
         ...Object.entries(CONFIG.DND5E.movementTypes)
-          .filter(([k, { hidden }]) => this.attributes.movement[k] && (k !== "walk") && !hidden)
+          .filter(([k, { hidden }]) => this.attributes.movement.speeds[k] && (k !== "walk") && !hidden)
           .map(([k, { label }]) => {
-            let prepared = prepareMeasured(this.attributes.movement[k], this.attributes.movement.units, label);
+            let prepared = prepareMeasured(this.attributes.movement.speeds[k], this.attributes.movement.units, label);
             if ( (k === "fly") && this.attributes.movement.hover ) {
               prepared = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: prepared });
             }
