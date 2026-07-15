@@ -1,6 +1,8 @@
 import { getHumanReadableAttributeLabel } from "../utils.mjs";
 import MovementSensesConfig from "./shared/movement-senses-config.mjs";
 
+const { BooleanField } = foundry.data.fields;
+
 /**
  * Custom token configuration application for handling dynamic rings & resource labels.
  */
@@ -10,8 +12,9 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
   async _onRender(context, options) {
     await super._onRender(context, options);
     if ( !this.rendered ) return;
-    this._prepareResourceLabels(this.element);
     this._applySenseSyncNotice(this.element);
+    this._applyTokenScaleLock(this.element);
+    this._prepareResourceLabels(this.element);
   }
 
   /* -------------------------------------------- */
@@ -33,10 +36,34 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
   }
 
   /* -------------------------------------------- */
+  /*  Appearance                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Add control to link token scale to actor scale.
+   * @param {HTMLElement} html  The rendered markup.
+   * @protected
+   */
+  _applyTokenScaleLock(html) {
+    const group = new BooleanField().toFormGroup({
+      hint: _loc("DND5E.TOKEN.LockScale.Hint"),
+      label: _loc("DND5E.TOKEN.LockScale.Label")
+    }, {
+      name: "flags.dnd5e.lockScale",
+      value: this.token._source.flags.dnd5e?.lockScale
+    });
+
+    const lockRotation = html.querySelector('.form-group:has([name="lockRotation"])');
+    lockRotation.after(group);
+  }
+
+  /* -------------------------------------------- */
+  /*  Resources                                   */
+  /* -------------------------------------------- */
 
   /**
    * Adds charge based items as attributes for the current token.
-   * @param {object} attributes The attribute groups to add the item entries to.
+   * @param {object} attributes  The attribute groups to add the item entries to.
    * @protected
    */
   _addItemAttributes(attributes) {
@@ -79,6 +106,8 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
     }
   }
 
+  /* -------------------------------------------- */
+  /*  Vision                                      */
   /* -------------------------------------------- */
 
   /**
@@ -133,8 +162,9 @@ export class PrototypeTokenConfig5e extends foundry.applications.sheets.Prototyp
   async _onRender(context, options) {
     await super._onRender(context, options);
     if ( !this.rendered ) return;
-    TokenConfig5e.prototype._prepareResourceLabels.call(this, this.element);
     TokenConfig5e.prototype._applySenseSyncNotice.call(this, this.element);
+    TokenConfig5e.prototype._applyTokenScaleLock.call(this, this.element);
+    TokenConfig5e.prototype._prepareResourceLabels.call(this, this.element);
   }
 
   /* -------------------------------------------- */

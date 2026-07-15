@@ -330,8 +330,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Apply shims to moved fields
     change = change.effect?._applyChangeShim(change) ?? change;
 
+    // Manually check conditions for changes without associated effects
+    if ( !change.effect && (change.conditions?.check(options.replacementData ?? {}) === false) ) return {};
+
     // Handle special actor flags
-    if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
+    if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect?._prepareFlagChange(model, change);
 
     // Properly handle formulas that don't exist as part of the data model
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
@@ -404,7 +407,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       try {
         delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
         limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
-      } catch(err) {
+      } catch (err) {
         const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
         console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
         return current;

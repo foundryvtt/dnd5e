@@ -155,6 +155,16 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _getReplacementData() {
+    return {
+      ...super._getReplacementData(),
+      token: this
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static getTrackedAttributeChoices(attributes) {
     const groups = super.getTrackedAttributeChoices(attributes);
     const i18n = {
