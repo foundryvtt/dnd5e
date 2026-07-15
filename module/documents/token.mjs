@@ -198,23 +198,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
-
-  /** @override */
-  prepareData() {
-    super.prepareData();
-    if ( !this.hasDynamicRing ) return;
-    let size = this.baseActor?.system.traits?.size;
-    if ( !this.actorLink ) {
-      const deltaSize = this.delta?.system.traits?.size;
-      if ( deltaSize ) size = deltaSize;
-    }
-    if ( !size ) return;
-    const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
-    this.texture.scaleX = this._source.texture.scaleX * dts;
-    this.texture.scaleY = this._source.texture.scaleY * dts;
-  }
-
-  /* -------------------------------------------- */
   /*  Movement                                    */
   /* -------------------------------------------- */
 
