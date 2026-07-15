@@ -44,7 +44,7 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     if ( (delta !== -1) && (delta !== 1) ) return value;
     const counts = this.constructor.getCounts(model, change.key);
     if ( delta === 1 ) counts.advantages.count--;
-    else counts.disadvantage.count--;
+    else counts.disadvantages.count--;
     return this.constructor.resolveMode(model, change, counts);
   }
 
