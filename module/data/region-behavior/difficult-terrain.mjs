@@ -122,9 +122,10 @@ export class DifficultTerrainActivityBehavior extends BaseActivityBehavior {
 
   /** @override */
   createBehaviorData(activity, options={}) {
+    const disposition = activity.actor?.token?.disposition ?? activity.actor?.prototypeToken?.disposition;
     return {
       system: {
-        ignoredDispositions: this.getDispositions(activity.target, { ignored: true }),
+        ignoredDispositions: this.getDispositions(activity.target, { ignored: true, relativeTo: disposition }),
         magical: activity.isSpell || activity.item?.system.properties?.has("mgc"),
         types: this.types
       },
