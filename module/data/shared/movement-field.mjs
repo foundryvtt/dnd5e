@@ -63,16 +63,13 @@ export default class MovementField extends foundry.data.fields.SchemaField {
   /* -------------------------------------------- */
 
   /**
-   * Apply shims to the senses field so old sense locations still work.
-   * @param {SensesData} senses  Senses data object to shim.
+   * Apply shims to the movement field so old movement locations still work.
+   * @param {MovementData} movement  Movement data object to shim.
    */
-  static _shim(senses) {
+  static _shim(movement) {
     for ( const key of MovementField.#DEFAULT_SPEEDS ) {
-      Object.defineProperty(senses, key, {
+      Object.defineProperty(movement, key, {
         get() {
-          foundry.utils.logCompatibilityWarning(`movement.${key} has moved to "movement.speeds.${key}".`, {
-            since: "DnD5e 6.0", until: "DnD5e 7.0", once: true
-          });
           return this.speeds[key];
         },
         set(value) {

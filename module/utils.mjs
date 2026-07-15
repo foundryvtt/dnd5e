@@ -1394,13 +1394,10 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   }
 
   // Movement
-  else if ( attr.startsWith("attributes.movement.speeds.") ) {
-    label = CONFIG.DND5E.movementTypes[attr.split(".")[3]]?.label;
-  } else if ( attr.startsWith("attributes.movement.") ) label = CONFIG.DND5E.movementTypes[attr.split(".")[2]]?.label;
+  else if ( attr.startsWith("attributes.movement.") ) label = CONFIG.DND5E.movementTypes[attr.split(".").at(-1)]?.label;
 
   // Senses
-  else if ( attr.startsWith("attributes.senses.ranges.") ) label = CONFIG.DND5E.senses[attr.split(".")[3]]?.label;
-  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".")[2]]?.label;
+  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".").at(-1)]?.label;
 
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
