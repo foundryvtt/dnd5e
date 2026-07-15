@@ -1202,6 +1202,7 @@ DND5E.actorSizes = {
   sm: {
     label: "DND5E.SizeSmall",
     abbreviation: "DND5E.SizeSmallAbbr",
+    fullKey: "small",
     hitDie: 6,
     dynamicTokenScale: 0.8,
     numerical: 1
@@ -1209,12 +1210,14 @@ DND5E.actorSizes = {
   med: {
     label: "DND5E.SizeMedium",
     abbreviation: "DND5E.SizeMediumAbbr",
+    fullKey: "medium",
     hitDie: 8,
     numerical: 2
   },
   lg: {
     label: "DND5E.SizeLarge",
     abbreviation: "DND5E.SizeLargeAbbr",
+    fullKey: "large",
     hitDie: 10,
     token: 2,
     capacityMultiplier: 2,
@@ -1223,6 +1226,7 @@ DND5E.actorSizes = {
   huge: {
     label: "DND5E.SizeHuge",
     abbreviation: "DND5E.SizeHugeAbbr",
+    fullKey: "huge",
     hitDie: 12,
     token: 3,
     capacityMultiplier: 4,
@@ -1231,6 +1235,7 @@ DND5E.actorSizes = {
   grg: {
     label: "DND5E.SizeGargantuan",
     abbreviation: "DND5E.SizeGargantuanAbbr",
+    fullKey: "gargantuan",
     hitDie: 20,
     token: 4,
     capacityMultiplier: 8,
@@ -1238,6 +1243,29 @@ DND5E.actorSizes = {
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
+
+Object.defineProperty(DND5E.actorSizes, "fullKeys", {
+  get() {
+    const value = Object.entries(this).reduce((obj, [key, config]) => {
+      obj[config.fullKey ?? key] = key;
+      return obj;
+    }, {});
+    Object.defineProperty(DND5E.actorSizes, "fullKeys", { value });
+    return value;
+  },
+  configurable: true
+});
+
+Object.defineProperty(DND5E.actorSizes, "orderedKeys", {
+  get() {
+    const value = Object.entries(this)
+      .sort((lhs, rhs) => (lhs[1].numerical ?? Infinity) - (rhs[1].numerical ?? Infinity))
+      .map(([key]) => key);
+    Object.defineProperty(DND5E.actorSizes, "orderedKeys", { value });
+    return value;
+  },
+  configurable: true
+});
 
 /* -------------------------------------------- */
 /*  Canvas                                      */
