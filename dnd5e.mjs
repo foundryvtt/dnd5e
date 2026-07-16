@@ -24,6 +24,7 @@ import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
+import * as inserts from "./module/inserts.mjs";
 import * as migrations from "./module/migration.mjs";
 import { registerModuleData, registerModuleRedirects, setupModulePacks } from "./module/module-registration.mjs";
 import { default as registry } from "./module/registry.mjs";
@@ -44,6 +45,7 @@ globalThis.dnd5e = {
   documents,
   enrichers,
   Filter,
+  inserts,
   migrations,
   registry,
   ui: {},
@@ -548,6 +550,9 @@ Hooks.once("ready", function() {
   // Adjust sourced items on actors now that compendium UUID redirects have been initialized
   game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
+  // ProseMirror inserts
+  inserts.registerProseMirrorInserts();
+
   // Register items by type
   dnd5e.registry.backgrounds.initialize();
   dnd5e.registry.classes.initialize();
@@ -686,6 +691,7 @@ export {
   documents,
   enrichers,
   Filter,
+  inserts,
   migrations,
   registry,
   utils,

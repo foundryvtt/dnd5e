@@ -200,8 +200,16 @@
         &.round {
           border-radius: 100%;
           background: var(--dnd5e-background-alt-1);
-          border: 4px solid var(--dnd5e-block-border-color);
+          border: 3px solid var(--dnd5e-block-border-color);
           box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+        }
+
+        &.vtt-outline {
+          filter:
+            drop-shadow(1px 1px var(--dnd5e-block-border-color))
+            drop-shadow(-1px 2px var(--dnd5e-block-border-color))
+            drop-shadow(-1px -2px var(--dnd5e-block-border-color))
+            drop-shadow(1px -1px var(--dnd5e-block-border-color));
         }
       }
     }
