@@ -1327,7 +1327,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const alternate = type === "skill" ? this.system.tools?.[config.tool] : this.system.skills?.[config.skill];
     const abilityId = config.ability ?? relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
-    const ability = this.system.abilities?.[abilityId];
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
@@ -1357,12 +1356,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
-    rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
-      options: {
-        maximum: Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
-        minimum: Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
-      }
-    }, config.rolls?.shift())].concat(config.rolls ?? []);
+    rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({ options: {} }, config.rolls?.shift())]
+      .concat(config.rolls ?? []);
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -1458,6 +1453,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Add condition reductions.
     this.addConditionRollReduction(parts, data);
 
+    config.options = foundry.utils.mergeObject({
+      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).resolve(rollData).toSmallest(
+        Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity)
+      ),
+      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).resolve(rollData).toLargest(
+        Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
+      )
+    }, config.options ?? {});
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
     config.data.abilityId = abilityId;
@@ -1575,8 +1578,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     ], AppliedRules.collect(`${type}:advantage`, this).filterWith(rollData).toAdvantageCounts());
     const options = {
       advantage, disadvantage,
-      maximum: ability?.[type]?.roll.max,
-      minimum: ability?.[type]?.roll.min
+      maximum: AppliedRules.collect(`${type}:maximum`, this).filterWith(rollData).resolve(rollData).toSmallest(
+        ability?.[type]?.roll.max
+      ),
+      minimum: AppliedRules.collect(`${type}:minimum`, this).filterWith(rollData).resolve(rollData).toLargest(
+        ability?.[type]?.roll.min
+      )
     };
 
     const rollConfig = foundry.utils.mergeObject({
@@ -1918,8 +1925,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
-      maximum: Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
-      minimum: Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
+      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).resolve(rollData).toSmallest(
+        Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity)
+      ),
+      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).resolve(rollData).toLargest(
+        Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
+      )
     }, options);
 
     const rollConfig = { parts, data, options, subject: this };
