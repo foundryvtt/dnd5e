@@ -344,7 +344,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Handle activity-targeted changes
     if ( (change.key.startsWith("activities[") || change.key.startsWith("system.activities."))
-      && (model instanceof Item) ) return change.effect.applyActivity(model, change, options);
+      && (model instanceof Item) ) return change.effect?.applyActivity(model, change, options);
 
     // Handle hiding items
     if ( (change.key === "items.hidden") && (model instanceof Actor) ) {

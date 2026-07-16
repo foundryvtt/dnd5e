@@ -399,7 +399,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     super.applyActiveEffects(phase);
-    if ( phase !== "initial" ) return;
+    if ( (phase !== "initial") && this.system.isCreature ) return;
 
     // Translate this Actor's size category into Token changes
     const sizeData = CONFIG.DND5E.actorSizes[this.system.traits?.size];

@@ -505,7 +505,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /** @override */
   async _onOverrideSize(changes) {
-    if ( this.persisted ) this.update(changes);
+    if ( this.persisted && !this.object?.isPreview && game.user.isActiveGM ) this.update(changes);
     else this.updateSource(changes);
   }
 

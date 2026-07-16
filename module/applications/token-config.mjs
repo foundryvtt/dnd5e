@@ -45,6 +45,8 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
    * @protected
    */
   _applyTokenScaleLock(html) {
+    if ( html.querySelector('[name="flags.dnd5e.lockScale"]') ) return;
+
     const group = new BooleanField().toFormGroup({
       hint: _loc("DND5E.TOKEN.LockScale.Hint"),
       label: _loc("DND5E.TOKEN.LockScale.Label")
