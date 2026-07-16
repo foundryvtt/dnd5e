@@ -40,20 +40,22 @@ export default class D20RollModificationField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
-   * Combine data from multiple roll modification fields to produce final advantage and range values.
+   * Combine data from multiple roll modification fields to produce final advantage, bonus, and range values.
    * @param {DataModel} model                          The model containing the fields.
    * @param {string[]} keyPaths                        Paths to the individual fields to combine within the model.
    * @param {Partial<AdvantageModeData>} [options={}]  External sources of advantage or disadvantage.
    * @param {RulesDetails} [options.rules]             Data used to fetch rules.
-   * @returns {{ advantage: boolean, disadvantage: boolean, maximum: number, minimum: number }}
+   * @returns {{ advantage: boolean, disadvantage: boolean, bonus: string, maximum: number, minimum: number }}
    */
   static combineFields(model, keyPaths, { rules={}, ...options }={}) {
     let maximum = Infinity;
     let minimum = -Infinity;
+    const parts = [];
     for ( const kp of keyPaths ) {
       const data = foundry.utils.getProperty(model, kp) ?? {};
       maximum = Math.min(maximum, data.max ?? Infinity);
       minimum = Math.max(minimum, data.min ?? -Infinity);
+      if ( data.bonus ) parts.push(data.bonus);
     }
     const { advantage, disadvantage } = AdvantageModeField.combineFields(
       model, keyPaths.map(kp => `${kp}.mode`), rules.actor
@@ -61,6 +63,9 @@ export default class D20RollModificationField extends SchemaField {
     );
     return {
       advantage, disadvantage,
+      bonus: rules.actor
+        ? D20RollModificationField.#makeRulesIterator("bonus", rules).toFormula(parts)
+        : parts.join(" + "),
       maximum: rules.actor
         ? D20RollModificationField.#makeRulesIterator("maximum", rules).resolve(rules.rollData).toSmallest(maximum)
         : maximum,

@@ -486,7 +486,7 @@ export default class AttributesFields {
   static prepareInitiative(rollData) {
     const init = this.attributes.init ??= {};
     const flags = this.parent.flags.dnd5e ?? {};
-    const globalCheckBonus = simplifyBonus(this.roll?.ability?.check?.bonus, rollData);
+    const globalCheckBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
 
     // Compute initiative modifier
     const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;

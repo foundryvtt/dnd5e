@@ -36,44 +36,44 @@ export default class CreatureTemplate extends CommonTemplate {
           dc: new FormulaField({ required: true, deterministic: true })
         })
       }),
-      roll: new SchemaField({
+      rolls: new SchemaField({
         ability: new SchemaField({
           check: new D20RollModificationField({
             proficiency: new NumberField({
               choices: [0, 0.5, 1, 2], initial: 0, persisted: false,
-              label: "DND5E.ROLL.FIELDS.ability.check.proficiency.label"
+              label: "DND5E.ROLL.FIELDS.rolls.ability.check.proficiency.label"
             })
-          }, { labelPrefix: "DND5E.ROLL.FIELDS.ability.check." }),
+          }, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.ability.check." }),
           save: new D20RollModificationField({
             proficiency: new NumberField({
               choices: [0, 1], initial: 0, persisted: false,
-              label: "DND5E.ROLL.FIELDS.ability.save.proficiency.label"
+              label: "DND5E.ROLL.FIELDS.rolls.ability.save.proficiency.label"
             })
-          }, { labelPrefix: "DND5E.ROLL.FIELDS.ability.save." }),
+          }, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.ability.save." }),
           skill: new D20RollModificationField({
             proficiency: new NumberField({
               choices: [0, 0.5, 1, 2], initial: 0, persisted: false,
-              label: "DND5E.ROLL.FIELDS.ability.skill.proficiency.label"
+              label: "DND5E.ROLL.FIELDS.rolls.ability.skill.proficiency.label"
             })
-          }, { labelPrefix: "DND5E.ROLL.FIELDS.ability.skill." }),
+          }, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.ability.skill." }),
           tool: new D20RollModificationField({
             proficiency: new NumberField({
               choices: [0, 0.5, 1, 2], initial: 0, persisted: false,
-              label: "DND5E.ROLL.FIELDS.ability.tool.proficiency.label"
+              label: "DND5E.ROLL.FIELDS.rolls.ability.tool.proficiency.label"
             })
-          }, { labelPrefix: "DND5E.ROLL.FIELDS.ability.tool." })
+          }, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.ability.tool." })
         }, { required: false }),
         attack: new D20RollModificationField({
-          msak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.attack.msak." }),
-          mwak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.attack.mwak." }),
-          rsak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.attack.rsak." }),
-          rwak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.attack.rwak." })
-        }, { labelPrefix: "DND5E.ROLL.FIELDS.attack." }),
+          msak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.attack.msak." }),
+          mwak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.attack.mwak." }),
+          rsak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.attack.rsak." }),
+          rwak: new D20RollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.attack.rwak." })
+        }, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.attack." }),
         damage: new SchemaField({
-          msak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.damage.msak." }),
-          mwak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.damage.mwak." }),
-          rsak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.damage.rsak." }),
-          rwak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.damage.rwak." })
+          msak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.damage.msak." }),
+          mwak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.damage.mwak." }),
+          rsak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.damage.rsak." }),
+          rwak: new DamageRollModificationField({}, { labelPrefix: "DND5E.ROLL.FIELDS.rolls.damage.rwak." })
         }, { required: false })
       }),
       skills: new MappingField(new RollConfigField({
@@ -199,8 +199,8 @@ export default class CreatureTemplate extends CommonTemplate {
     for ( const [original, updated] of CreatureTemplate.#BONUS_FIELD_PATHS ) {
       const value = foundry.utils.getProperty(source.bonuses, original)
       if ( !value ) continue;
-      source.roll ??= {};
-      foundry.utils.setProperty(source.roll, updated, value);
+      source.rolls ??= {};
+      foundry.utils.setProperty(source.rolls, updated, value);
     }
   }
 
@@ -276,10 +276,10 @@ export default class CreatureTemplate extends CommonTemplate {
       this.bonuses[category] ??= {};
       Object.defineProperty(this.bonuses[category], key, {
         get() {
-          foundry.utils.logCompatibilityWarning(`bonuses.${original} has moved to "roll.${updated}".`, {
+          foundry.utils.logCompatibilityWarning(`bonuses.${original} has moved to "rolls.${updated}".`, {
             since: "DnD5e 6.0", until: "DnD5e 7.0", once: true
           });
-          return foundry.utils.getProperty(this.roll, updated) ?? "";
+          return foundry.utils.getProperty(this.rolls, updated) ?? "";
         }
       });
     }
@@ -296,7 +296,7 @@ export default class CreatureTemplate extends CommonTemplate {
    * @param {object} [options.originalSkills]      Original skills data for transformed actors.
    */
   prepareSkills({ rollData={}, originalSkills }={}) {
-    const globalBonuses = this.roll.ability;
+    const globalBonuses = this.rolls.ability;
     const globalCheckBonus = simplifyBonus(globalBonuses?.check?.bonus, rollData);
     const globalSkillBonus = simplifyBonus(globalBonuses?.skill?.bonus, rollData);
     for ( const [id, skillData] of Object.entries(this.skills) ) {
@@ -336,7 +336,7 @@ export default class CreatureTemplate extends CommonTemplate {
     skillData ??= foundry.utils.deepClone(this.skills[skillId]);
     rollData ??= this.parent.getRollData();
     originalSkills ??= flags.originalActor ? game.actors?.get(flags.originalActor)?.system?.skills : null;
-    globalBonuses ??= this.roll.ability ?? {};
+    globalBonuses ??= this.rolls.ability ?? {};
     globalCheckBonus ??= simplifyBonus(globalBonuses.check?.bonus, rollData);
     globalSkillBonus ??= simplifyBonus(globalBonuses.skill?.bonus, rollData);
     ability ??= skillData.ability;
@@ -391,7 +391,7 @@ export default class CreatureTemplate extends CommonTemplate {
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
     const advantageMode = AdvantageModeField.combineFields(this, [
       `abilities.${ability}.check.roll.mode`, `skills.${skillId}.roll.mode`,
-      "roll.ability.check.mode", "roll.ability.skill.mode"
+      "rolls.ability.check.mode", "rolls.ability.skill.mode"
     ], AppliedRules.collect("check:advantage", this.parent).filterWith(rollData).toAdvantageCounts())?.mode ?? 0;
     skillData.passive = CONFIG.DND5E.skillPassive.base + skillData.mod + skillData.bonus + skillData.prof.flat
       + passive + passiveBonus + (advantageMode * CONFIG.DND5E.skillPassive.modifier);
@@ -407,8 +407,8 @@ export default class CreatureTemplate extends CommonTemplate {
    * @param {ActorRollData} [options.rollData={}]  Roll data used to calculate bonuses.
    */
   prepareTools({ rollData={} }={}) {
-    const globalCheckBonus = simplifyBonus(this.roll.ability?.check?.bonus, rollData);
-    const globalToolBonus = simplifyBonus(this.roll.ability?.tool?.bonus, rollData);
+    const globalCheckBonus = simplifyBonus(this.rolls.ability?.check?.bonus, rollData);
+    const globalToolBonus = simplifyBonus(this.rolls.ability?.tool?.bonus, rollData);
     for ( const [id, tool] of Object.entries(this.tools) ) {
       const ability = this.abilities[tool.ability];
       tool.prof = this.calculateToolProficiency(tool.value, tool.ability);

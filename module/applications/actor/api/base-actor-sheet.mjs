@@ -387,7 +387,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       });
     };
     addBonus(this.document.system.schema.fields.bonuses);
-    addBonus(this.document.system.schema.fields.roll, true);
+    addBonus(this.document.system.schema.fields.rolls, true);
     if ( globals.length ) sections[_loc("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
     flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));

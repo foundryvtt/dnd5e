@@ -4295,81 +4295,83 @@
     "type": "Roll Type"
   },
   "FIELDS": {
-    "ability": {
-      "check": {
-        "bonus": { "label": "Global Ability Check Bonus" },
-        "max": { "label": "Maximum Global Ability Check Roll" },
-        "min": { "label": "Minimum Global Ability Check Roll" },
-        "mode": { "label": "Global Ability Check Advantage Mode" },
-        "proficiency": { "label": "Global Ability Check Proficiency" }
+    "rolls": {
+      "ability": {
+        "check": {
+          "bonus": { "label": "Global Ability Check Bonus" },
+          "max": { "label": "Maximum Global Ability Check Roll" },
+          "min": { "label": "Minimum Global Ability Check Roll" },
+          "mode": { "label": "Global Ability Check Advantage Mode" },
+          "proficiency": { "label": "Global Ability Check Proficiency" }
+        },
+        "label": "Ability Roll Modification",
+        "save": {
+          "bonus": { "label": "Global Ability Save Bonus" },
+          "max": { "label": "Maximum Global Ability Save Roll" },
+          "min": { "label": "Minimum Global Ability Save Roll" },
+          "mode": { "label": "Global Ability Save Advantage Mode" },
+          "proficiency": { "label": "Global Ability Save Proficiency" }
+        },
+        "skill": {
+          "bonus": { "label": "Global Skill Check Bonus" },
+          "max": { "label": "Maximum Global Skill Check Roll" },
+          "min": { "label": "Minimum Global Skill Check Roll" },
+          "mode": { "label": "Global Skill Check Advantage Mode" },
+          "proficiency": { "label": "Global Skill Check Proficiency" }
+        },
+        "tool": {
+          "bonus": { "label": "Global Tool Check Bonus" },
+          "max": { "label": "Maximum Global Tool Check Roll" },
+          "min": { "label": "Minimum Global Tool Check Roll" },
+          "mode": { "label": "Global Tool Check Advantage Mode" },
+          "proficiency": { "label": "Global Tool Check Proficiency" }
+        }
       },
-      "label": "Ability Roll Modification",
-      "save": {
-        "bonus": { "label": "Global Ability Save Bonus" },
-        "max": { "label": "Maximum Global Ability Save Roll" },
-        "min": { "label": "Minimum Global Ability Save Roll" },
-        "mode": { "label": "Global Ability Save Advantage Mode" },
-        "proficiency": { "label": "Global Ability Save Proficiency" }
+      "attack": {
+        "bonus": { "label": "Global Attack Bonus" },
+        "label": "Attack Roll Modification",
+        "max": { "label": "Maximum Global Attack Roll" },
+        "min": { "label": "Minimum Global Attack Roll" },
+        "mode": { "label": "Global Attack Advantage Mode" },
+        "msak": {
+          "bonus": { "label": "Melee Spell Attack Bonus" },
+          "max": { "label": "Maximum Melee Spell Attack Roll" },
+          "min": { "label": "Minimum Melee Spell Attack Roll" },
+          "mode": { "label": "Melee Spell Attack Advantage Mode" }
+        },
+        "mwak": {
+          "bonus": { "label": "Melee Weapon Attack Bonus" },
+          "max": { "label": "Maximum Melee Weapon Attack Roll" },
+          "min": { "label": "Minimum Melee Weapon Attack Roll" },
+          "mode": { "label": "Melee Weapon Attack Advantage Mode" }
+        },
+        "rsak": {
+          "bonus": { "label": "Ranged Spell Attack Bonus" },
+          "max": { "label": "Maximum Ranged Spell Attack Roll" },
+          "min": { "label": "Minimum Ranged Spell Attack Roll" },
+          "mode": { "label": "Ranged Spell Attack Advantage Mode" }
+        },
+        "rwak": {
+          "bonus": { "label": "Ranged Weapon Attack Bonus" },
+          "max": { "label": "Maximum Ranged Weapon Attack Roll" },
+          "min": { "label": "Minimum Ranged Weapon Attack Roll" },
+          "mode": { "label": "Ranged Weapon Attack Advantage Mode" }
+        }
       },
-      "skill": {
-        "bonus": { "label": "Global Skill Check Bonus" },
-        "max": { "label": "Maximum Global Skill Check Roll" },
-        "min": { "label": "Minimum Global Skill Check Roll" },
-        "mode": { "label": "Global Skill Check Advantage Mode" },
-        "proficiency": { "label": "Global Skill Check Proficiency" }
-      },
-      "tool": {
-        "bonus": { "label": "Global Tool Check Bonus" },
-        "max": { "label": "Maximum Global Tool Check Roll" },
-        "min": { "label": "Minimum Global Tool Check Roll" },
-        "mode": { "label": "Global Tool Check Advantage Mode" },
-        "proficiency": { "label": "Global Tool Check Proficiency" }
-      }
-    },
-    "attack": {
-      "bonus": { "label": "Global Attack Bonus" },
-      "label": "Attack Roll Modification",
-      "max": { "label": "Maximum Global Attack Roll" },
-      "min": { "label": "Minimum Global Attack Roll" },
-      "mode": { "label": "Global Attack Advantage Mode" },
-      "msak": {
-        "bonus": { "label": "Melee Spell Attack Bonus" },
-        "max": { "label": "Maximum Melee Spell Attack Roll" },
-        "min": { "label": "Minimum Melee Spell Attack Roll" },
-        "mode": { "label": "Melee Spell Attack Advantage Mode" }
-      },
-      "mwak": {
-        "bonus": { "label": "Melee Weapon Attack Bonus" },
-        "max": { "label": "Maximum Melee Weapon Attack Roll" },
-        "min": { "label": "Minimum Melee Weapon Attack Roll" },
-        "mode": { "label": "Melee Weapon Attack Advantage Mode" }
-      },
-      "rsak": {
-        "bonus": { "label": "Ranged Spell Attack Bonus" },
-        "max": { "label": "Maximum Ranged Spell Attack Roll" },
-        "min": { "label": "Minimum Ranged Spell Attack Roll" },
-        "mode": { "label": "Ranged Spell Attack Advantage Mode" }
-      },
-      "rwak": {
-        "bonus": { "label": "Ranged Weapon Attack Bonus" },
-        "max": { "label": "Maximum Ranged Weapon Attack Roll" },
-        "min": { "label": "Minimum Ranged Weapon Attack Roll" },
-        "mode": { "label": "Ranged Weapon Attack Advantage Mode" }
-      }
-    },
-    "damage": {
-      "label": "Damage Roll Modification",
-      "msak": {
-        "bonus": { "label": "Melee Spell Attack Damage Bonus" }
-      },
-      "mwak": {
-        "bonus": { "label": "Melee Weapon Attack Damage Bonus" }
-      },
-      "rsak": {
-        "bonus": { "label": "Ranged Spell Attack Damage Bonus" }
-      },
-      "rwak": {
-        "bonus": { "label": "Ranged Weapon Attack Damage Bonus" }
+      "damage": {
+        "label": "Damage Roll Modification",
+        "msak": {
+          "bonus": { "label": "Melee Spell Attack Damage Bonus" }
+        },
+        "mwak": {
+          "bonus": { "label": "Melee Weapon Attack Damage Bonus" }
+        },
+        "rsak": {
+          "bonus": { "label": "Ranged Spell Attack Damage Bonus" }
+        },
+        "rwak": {
+          "bonus": { "label": "Ranged Weapon Attack Damage Bonus" }
+        }
       }
     }
   },

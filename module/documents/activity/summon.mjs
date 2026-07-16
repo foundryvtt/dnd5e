@@ -416,7 +416,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             rollData.abilities?.[this.ability]?.mod,
             prof,
             CONFIG.Dice.BasicRoll.replaceFormulaData(
-              rollData.roll?.attack?.[typeMapping[actionType] ?? actionType]?.bonus ?? "", rollData
+              rollData.rolls?.attack?.[typeMapping[actionType] ?? actionType]?.bonus ?? "", rollData
             )
           ].filter(p => p);
           attack = parts.join(" + ");

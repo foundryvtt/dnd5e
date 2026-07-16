@@ -80,17 +80,17 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.attributes.senses.blindsight": { key: "system.attributes.senses.ranges.blindsight" },
     "system.attributes.senses.tremorsense": { key: "system.attributes.senses.ranges.tremorsense" },
     "system.attributes.senses.truesight": { key: "system.attributes.senses.ranges.truesight" },
-    "system.bonuses.mwak.attack": { key: "system.roll.attack.mwak.bonus" },
-    "system.bonuses.msak.attack": { key: "system.roll.attack.msak.bonus" },
-    "system.bonuses.rwak.attack": { key: "system.roll.attack.rwak.bonus" },
-    "system.bonuses.rsak.attack": { key: "system.roll.attack.rsak.bonus" },
-    "system.bonuses.mwak.damage": { key: "system.roll.damage.mwak.bonus" },
-    "system.bonuses.msak.damage": { key: "system.roll.damage.msak.bonus" },
-    "system.bonuses.rwak.damage": { key: "system.roll.damage.rwak.bonus" },
-    "system.bonuses.rsak.damage": { key: "system.roll.damage.rsak.bonus" },
-    "system.bonuses.abilities.check": { key: "system.roll.ability.check.bonus" },
-    "system.bonuses.abilities.save": { key: "system.roll.ability.save.bonus" },
-    "system.bonuses.abilities.skill": { key: "system.roll.ability.skill.bonus" }
+    "system.bonuses.mwak.attack": { key: "system.rolls.attack.mwak.bonus" },
+    "system.bonuses.msak.attack": { key: "system.rolls.attack.msak.bonus" },
+    "system.bonuses.rwak.attack": { key: "system.rolls.attack.rwak.bonus" },
+    "system.bonuses.rsak.attack": { key: "system.rolls.attack.rsak.bonus" },
+    "system.bonuses.mwak.damage": { key: "system.rolls.damage.mwak.bonus" },
+    "system.bonuses.msak.damage": { key: "system.rolls.damage.msak.bonus" },
+    "system.bonuses.rwak.damage": { key: "system.rolls.damage.rwak.bonus" },
+    "system.bonuses.rsak.damage": { key: "system.rolls.damage.rsak.bonus" },
+    "system.bonuses.abilities.check": { key: "system.rolls.ability.check.bonus" },
+    "system.bonuses.abilities.save": { key: "system.rolls.ability.save.bonus" },
+    "system.bonuses.abilities.skill": { key: "system.rolls.ability.skill.bonus" }
   };
 
   /* -------------------------------------------- */

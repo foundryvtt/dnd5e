@@ -68,8 +68,8 @@ export default class BaseProficiencyConfig extends BaseConfigSheet {
     context.label = this.propertyLabel;
     context.prefix = `system.${keyPath}.${this.options.key}.`;
 
-    const globalAbilityField = this.document.system.schema.getField("roll.ability");
-    if ( globalAbilityField ) context.global = { data: source.roll?.ability ?? {}, fields: globalAbilityField.fields };
+    const globalAbilityField = this.document.system.schema.getField("rolls.ability");
+    if ( globalAbilityField ) context.global = { data: source.rolls?.ability ?? {}, fields: globalAbilityField.fields };
 
     return context;
   }

@@ -446,10 +446,10 @@ export default class NPCActorSheet extends BaseActorSheet {
     context = await super._prepareSpellsContext(context, options);
     context.classSpellcasting = Object.values(this.actor.classes).some(c => c.spellcasting?.levels);
 
-    const { abilities, attributes, roll } = this.actor.system;
+    const { abilities, attributes, rolls } = this.actor.system;
     context.spellcasting = [];
-    const msak = simplifyBonus(roll.attack?.msak?.bonus, context.rollData);
-    const rsak = simplifyBonus(roll.attack?.rsak?.bonus, context.rollData);
+    const msak = simplifyBonus(rolls.attack?.msak?.bonus, context.rollData);
+    const rsak = simplifyBonus(rolls.attack?.rsak?.bonus, context.rollData);
     const spellcaster = Object.values(this.actor.spellcastingClasses)[0];
     const ability = spellcaster?.spellcasting.ability ?? attributes.spellcasting;
     const spellAbility = abilities[ability];

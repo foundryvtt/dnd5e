@@ -167,10 +167,11 @@ class RulesIterator extends Iterator {
 
   /**
    * Convert each value of the iterator to a single formula.
+   * @param {string[]} [parts]  Additional parts to combine.
    * @returns {string}
    */
-  toFormula() {
-    return this.values(String).toArray().join(" + ");
+  toFormula(parts) {
+    return this.values(String).toArray().concat(parts ?? []).join(" + ");
   }
 
   /* -------------------------------------------- */

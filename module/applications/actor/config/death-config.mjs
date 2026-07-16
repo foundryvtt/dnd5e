@@ -42,8 +42,8 @@ export default class DeathConfig extends BaseConfigSheet {
     context.data = source.attributes?.death ?? {};
     context.fields = this.document.system.schema.getField("attributes.death").fields;
 
-    const globalAbilityField = this.document.system.schema.getField("roll.ability");
-    if ( globalAbilityField ) context.global = { data: source.roll?.ability ?? {}, fields: globalAbilityField.fields };
+    const globalAbilityField = this.document.system.schema.getField("rolls.ability");
+    if ( globalAbilityField ) context.global = { data: source.rolls?.ability ?? {}, fields: globalAbilityField.fields };
 
     return context;
   }

@@ -1346,8 +1346,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
     const { advantage, disadvantage } = D20RollModificationField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll`,
-      "roll.ability.check",
-      `roll.ability.${type}`,
+      "rolls.ability.check",
+      `rolls.ability.${type}`,
       `${type}s.${type === "skill" ? config.skill : config.tool}.roll`
     ], {
       advantages: { count: Number(doubleProf) + Number(pace.advantage) },
@@ -1451,8 +1451,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       [`${config[type]}Bonus`]: relevant?.bonuses?.check,
       extraBonus: process.bonus,
       [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
-      [`${type}Bonus`]: this.system.roll?.ability?.[type]?.bonus,
-      abilityCheckBonus: this.system.roll?.ability?.check?.bonus,
+      [`${type}Bonus`]: this.system.rolls?.ability?.[type]?.bonus,
+      abilityCheckBonus: this.system.rolls?.ability?.check?.bonus,
       ruleBonus: AppliedRules.collect("check:bonus", this).filterWith(rollData).toFormula()
     }, { ...rollData });
 
@@ -1461,8 +1461,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const { maximum, minimum } = D20RollModificationField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll`,
-      "roll.ability.check",
-      `roll.ability.${type}`,
+      "rolls.ability.check",
+      `rolls.ability.${type}`,
       `${type}s.${type === "skill" ? process.skill : process.tool}.roll`
     ], { rules: { category: "check", actor: this, rollData } });
 
@@ -1574,13 +1574,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
       [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
-      [`${type}Bonus`]: this.system.roll?.ability?.[type]?.bonus,
+      [`${type}Bonus`]: this.system.rolls?.ability?.[type]?.bonus,
       ruleBonus: AppliedRules.collect(`${type}:bonus`, this).filterWith(rollData).toFormula(),
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
 
     const options = D20RollModificationField.combineFields(this.system, [
-      `abilities.${config.ability}.${type}.roll`, `roll.ability.${type}`
+      `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
     ], { rules: { category: type, actor: this, rollData } });
 
     const rollConfig = foundry.utils.mergeObject({
@@ -1660,7 +1660,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const parts = [];
     let data = {};
     const options = D20RollModificationField.combineFields(this.system, [
-      "attributes.death.roll", "roll.ability.save"
+      "attributes.death.roll", "rolls.ability.save"
     ]);
 
     // Diamond Soul adds proficiency
@@ -1893,7 +1893,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       prof: init.prof.hasProficiency ? init.prof.term : null,
       initiativeBonus: init.bonus,
       [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
-      abilityCheckBonus: this.system.roll?.ability?.check?.bonus,
+      abilityCheckBonus: this.system.rolls?.ability?.check?.bonus,
       ruleBonus: AppliedRules.collect("check:bonus", this).filterWith(rollData).toFormula(),
       alert: flags.initiativeAlert && (dnd5e.settings.rulesVersion === "legacy") ? 5 : null
     }, rollData);
@@ -1911,7 +1911,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     options = foundry.utils.mergeObject({
       ...D20RollModificationField.combineFields(this.system, [
-        `abilities.${abilityId}.check.roll`, "attributes.init.roll", "roll.ability.check"
+        `abilities.${abilityId}.check.roll`, "attributes.init.roll", "rolls.ability.check"
       ], { rules: { category: "check", actor: this, rollData } }),
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),

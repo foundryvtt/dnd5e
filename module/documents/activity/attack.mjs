@@ -121,7 +121,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
 
     const rollData = this.getRollData({ roll: { attackMode: rollConfig.attackMode } });
     const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
-      "roll.attack", `roll.attack.${this.getActionType(rollConfig.attackMode)}`
+      "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
@@ -260,7 +260,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
 
     let { parts, data } = this.getAttackData({ ammunition, attackMode });
     const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
-      "roll.attack", `roll.attack.${this.getActionType(attackMode)}`
+      "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData: data } }) : {};
     const options = CONFIG.Dice.D20Roll.mergeOptions({ maximum, minimum }, config.options);
     if ( ammunition !== undefined ) options.ammunition = ammunition;
