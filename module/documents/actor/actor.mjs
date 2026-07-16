@@ -531,7 +531,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let rollData;
     if ( this.system.getRollData ) rollData = this.system.getRollData(options);
     else rollData = { ...super.getRollData() };
-    rollData.flags = { ...this.flags };
+    rollData.flags = this.flags;
     rollData.name = this.name;
     if ( options.roll ) rollData.roll ??= {};
     rollData.statuses = {};
