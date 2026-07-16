@@ -14,6 +14,17 @@ const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry
  */
 
 /**
+ * Get the type of a user-defined conditional flag.
+ * @param {string} key  Flag key relative to `flags.dnd5e`.
+ * @returns {Function|undefined}
+ */
+function getConditionalFlagType(key) {
+  const [, type, id] = key.match(/^conditional\.([^.]+)\.(.+)$/) ?? [];
+  if ( !id ) return;
+  return CONFIG.DND5E.conditionalFlagTypes[type];
+}
+
+/**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
 export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect) {
@@ -485,24 +496,28 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   _prepareFlagChange(actor, change) {
     const { key, value } = change;
-    const data = CONFIG.DND5E.characterFlags[key.replace("flags.dnd5e.", "")];
-    if ( !data ) return change;
+    const flagKey = key.replace("flags.dnd5e.", "");
+    const data = CONFIG.DND5E.characterFlags[flagKey];
+    const type = data?.type ?? getConditionalFlagType(flagKey);
+    if ( !type ) return change;
 
     // Set flag to initial value if it isn't present
     const current = foundry.utils.getProperty(actor, key) ?? null;
     if ( current === null ) {
       let initialValue = null;
-      if ( data.placeholder ) initialValue = data.placeholder;
-      else if ( data.type === Boolean ) initialValue = false;
-      else if ( data.type === Number ) initialValue = 0;
+      if ( data?.placeholder ) initialValue = data.placeholder;
+      else if ( type === Boolean ) initialValue = false;
+      else if ( type === Number ) initialValue = 0;
+      else if ( type === String ) initialValue = "";
       foundry.utils.setProperty(actor, key, initialValue);
     }
 
     // Coerce change data into the correct type
-    if ( data.type === Boolean ) {
+    if ( type === Boolean ) {
       if ( value === "false" ) change.value = false;
       else change.value = Boolean(value);
     }
+    else if ( type === Number ) change.value = Number(value);
     return change;
   }
 

@@ -4428,6 +4428,18 @@ preLocalize("characterFlags", { keys: ["name", "hint", "section"] });
 /* -------------------------------------------- */
 
 /**
+ * Types available for user-defined conditional flags.
+ * @enum {Function}
+ */
+DND5E.conditionalFlagTypes = {
+  boolean: Boolean,
+  number: Number,
+  string: String
+};
+
+/* -------------------------------------------- */
+
+/**
  * Different types of actor structures that groups can represent.
  * @enum {object}
  */
