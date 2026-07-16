@@ -1,5 +1,10 @@
+import AppliedRules from "../../documents/applied-rules.mjs";
 import AdvantageModeField from "../fields/advantage-mode-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+
+/**
+ * @import { RulesDetails } from "./_types.mjs";
+ */
 
 const { NumberField, SchemaField } = foundry.data.fields;
 
@@ -36,14 +41,13 @@ export default class D20RollModificationField extends SchemaField {
 
   /**
    * Combine data from multiple roll modification fields to produce final advantage and range values.
-   * @param {DataModel} model                 The model containing the fields.
-   * @param {string[]} keyPaths               Paths to the individual fields to combine within the model.
-   * @param {object} [options={}]
-   * @param {number} [options.advantages]     External sources of advantage.
-   * @param {number} [options.disadvantages]  External sources of disadvantage.
+   * @param {DataModel} model                          The model containing the fields.
+   * @param {string[]} keyPaths                        Paths to the individual fields to combine within the model.
+   * @param {Partial<AdvantageModeData>} [options={}]  External sources of advantage or disadvantage.
+   * @param {RulesDetails} [options.rules]             Data used to fetch rules.
    * @returns {{ advantage: boolean, disadvantage: boolean, maximum: number, minimum: number }}
    */
-  static combineFields(model, keyPaths, options={}) {
+  static combineFields(model, keyPaths, { rules={}, ...options }={}) {
     let maximum = Infinity;
     let minimum = -Infinity;
     for ( const kp of keyPaths ) {
@@ -52,8 +56,28 @@ export default class D20RollModificationField extends SchemaField {
       minimum = Math.max(minimum, data.min ?? -Infinity);
     }
     const { advantage, disadvantage } = AdvantageModeField.combineFields(
-      model, keyPaths.map(kp => `${kp}.mode`), options
+      model, keyPaths.map(kp => `${kp}.mode`), rules.actor
+        ? D20RollModificationField.#makeRulesIterator("advantage", rules).toAdvantageCounts(options) : options
     );
-    return { advantage, disadvantage, maximum, minimum };
+    return {
+      advantage, disadvantage,
+      maximum: rules.actor
+        ? D20RollModificationField.#makeRulesIterator("maximum", rules).resolve(rules.rollData).toSmallest(maximum)
+        : maximum,
+      minimum: rules.actor
+        ? D20RollModificationField.#makeRulesIterator("minimum", rules).resolve(rules.rollData).toLargest(minimum)
+        : minimum
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Helper to create a rules iterator from a category and the provided rules configuration.
+   * @param {string} type         Rules type to fetch (e.g. "advantage" or "bonus").
+   * @param {RulesDetails} rules  Data used to configure the rules object.
+   */
+  static #makeRulesIterator(type, rules) {
+    return AppliedRules.collect(`${rules.category}:${type}`, rules.actor, rules.item).filterWith(rules.rollData);
   }
 }

@@ -93,6 +93,14 @@
  */
 
 /**
+ * @typedef RulesDetails
+ * @property {string} category    Category of rules to retrieve (e.g. "attack" or "check").
+ * @property {Actor5e} actor      Actor from which to fetch rules.
+ * @property {Item5e} [item]      Item from which to fetch rules.
+ * @property {RollData} rollData  Roll data with which to filter the rules.
+ */
+
+/**
  * @typedef SensesData
  * @property {Record<string, number} ranges  Ranges of various senses.
  * @property {string} units                  Distance units used to measure senses.

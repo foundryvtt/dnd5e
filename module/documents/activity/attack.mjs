@@ -122,7 +122,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const rollData = this.getRollData({ roll: { attackMode: rollConfig.attackMode } });
     const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
       "roll.attack", `roll.attack.${this.getActionType(rollConfig.attackMode)}`
-    ], AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()) : {};
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
@@ -259,14 +259,10 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ammunition, attackMode });
-    const options = CONFIG.Dice.D20Roll.mergeOptions({
-      maximum: this.actor
-        ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
-        : undefined,
-      minimum: this.actor
-        ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).resolve(data).toLargest()
-        : undefined,
-    }, config.options);
+    const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      "roll.attack", `roll.attack.${this.getActionType(attackMode)}`
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData: data } }) : {};
+    const options = CONFIG.Dice.D20Roll.mergeOptions({ maximum, minimum }, config.options);
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
     if ( mastery !== undefined ) options.mastery = mastery;
