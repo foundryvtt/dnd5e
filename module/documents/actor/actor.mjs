@@ -1445,26 +1445,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       type: type
     });
 
+    const { bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`,
+      "rolls.ability.check",
+      `rolls.ability.${type}`,
+      `${type}s.${type === "skill" ? process.skill : process.tool}.roll`
+    ], { rules: { category: "check", actor: this, rollData } });
+
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: prof?.hasProficiency ? prof.term : null,
       [`${config[type]}Bonus`]: relevant?.bonuses?.check,
       extraBonus: process.bonus,
       [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
-      [`${type}Bonus`]: this.system.rolls?.ability?.[type]?.bonus,
-      abilityCheckBonus: this.system.rolls?.ability?.check?.bonus,
-      ruleBonus: AppliedRules.collect("check:bonus", this).filterWith(rollData).toFormula()
+      ruleBonus: bonus
     }, { ...rollData });
 
     // Add condition reductions.
     this.addConditionRollReduction(parts, data);
-
-    const { maximum, minimum } = D20RollModificationField.combineFields(this.system, [
-      `abilities.${abilityId}.check.roll`,
-      "rolls.ability.check",
-      `rolls.ability.${type}`,
-      `${type}s.${type === "skill" ? process.skill : process.tool}.roll`
-    ], { rules: { category: "check", actor: this, rollData } });
 
     config.options = CONFIG.Dice.D20Roll.mergeOptions({ maximum, minimum }, config.options ?? {});
     config.parts = [...(config.parts ?? []), ...parts];
@@ -1570,18 +1568,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       proficient: ability?.[`${type}Prof`]?.multiplier >= 1,
       type: config[`${type}Type`] ?? "ability"
     });
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
+    ], { rules: { category: type, actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
       [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
-      [`${type}Bonus`]: this.system.rolls?.ability?.[type]?.bonus,
-      ruleBonus: AppliedRules.collect(`${type}:bonus`, this).filterWith(rollData).toFormula(),
+      ruleBonus: bonus,
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
-
-    const options = D20RollModificationField.combineFields(this.system, [
-      `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
-    ], { rules: { category: type, actor: this, rollData } });
 
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
@@ -1888,13 +1884,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       proficient: init.prof.multiplier >= 1,
       type: "initiative"
     });
+    const { advantage, disadvantage, bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`, "attributes.init.roll", "rolls.ability.check"
+    ], { rules: { category: "check", actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: init?.mod,
       prof: init.prof.hasProficiency ? init.prof.term : null,
       initiativeBonus: init.bonus,
       [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
-      abilityCheckBonus: this.system.rolls?.ability?.check?.bonus,
-      ruleBonus: AppliedRules.collect("check:bonus", this).filterWith(rollData).toFormula(),
+      ruleBonus: bonus,
       alert: flags.initiativeAlert && (dnd5e.settings.rulesVersion === "legacy") ? 5 : null
     }, rollData);
 
@@ -1910,9 +1908,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && this.system.isNPC);
 
     options = foundry.utils.mergeObject({
-      ...D20RollModificationField.combineFields(this.system, [
-        `abilities.${abilityId}.check.roll`, "attributes.init.roll", "rolls.ability.check"
-      ], { rules: { category: "check", actor: this, rollData } }),
+      advantage, disadvantage, maximum, minimum,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
