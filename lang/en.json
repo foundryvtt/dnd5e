@@ -5634,8 +5634,12 @@
     "LightDimRadius": "Light Dim Radius"
   },
   "LockScale": {
-    "Hint": "Prevent this Token's size and scale from being modified when its Actor's size is changed.",
-    "Label": "Lock Size & Scale"
+    "Hint": "Prevent a scaling adjustment from being applied to Token if Actor's size is small.",
+    "Label": "Lock Scale"
+  },
+  "LockSize": {
+    "Hint": "Prevent this Token's size from being modified when its Actor's size is changed.",
+    "Label": "Lock Size"
   }
 },
 

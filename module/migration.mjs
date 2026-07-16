@@ -512,7 +512,7 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
   const updateData = {};
   _migrateTokenImage(actorData, updateData);
   if ( (flags.bypassVersionCheck || foundry.utils.isNewerVersion("6.0.0", actorData._stats?.systemVersion))
-    && (actor.system.traits?.size === "sm") && (actor.prototypeToken.texture.scaleX !== 0.8) ) {
+    && !actor.isToken && (actor.system.traits?.size === "sm") && !actorData.prototypeToken.ring.enabled ) {
     updateData["prototypeToken.flags.dnd5e.lockScale"] = true;
   }
   _migrateActorAC(actorData, updateData);
@@ -955,8 +955,8 @@ export function migrateSceneData(scene, migrationData, { bypassVersionCheck }={}
     const update = {};
     _migrateTokenImage(t, update);
     const size = t.delta?.system?.traits?.size ?? game.actors.get(t.actorId)?.system?.traits?.size;
-    if ( (bypassVersionCheck || foundry.utils.isNewerVersion("6.0.0", token._stats?.systemVersion))
-      && (size === "sm") && (t.texture.scaleX !== 0.8) ) update["flags.dnd5e.lockScale"] = true;
+    if ( (bypassVersionCheck || foundry.utils.isNewerVersion("6.0.0", scene._stats?.systemVersion))
+      && (size === "sm") && !t.ring.enabled ) update["flags.dnd5e.lockScale"] = true;
     if ( !game.actors.has(t.actorId) ) update.actorId = null;
     if ( !foundry.utils.isEmpty(update) ) arr.push({ ...update, _id: t._id });
     return arr;

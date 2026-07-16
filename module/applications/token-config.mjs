@@ -47,7 +47,14 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
   _applyTokenScaleLock(html) {
     if ( html.querySelector('[name="flags.dnd5e.lockScale"]') ) return;
 
-    const group = new BooleanField().toFormGroup({
+    const lockSize = new BooleanField().toFormGroup({
+      hint: _loc("DND5E.TOKEN.LockSize.Hint"),
+      label: _loc("DND5E.TOKEN.LockSize.Label")
+    }, {
+      name: "flags.dnd5e.lockSize",
+      value: this.token._source.flags.dnd5e?.lockSize
+    });
+    const lockScale = new BooleanField().toFormGroup({
       hint: _loc("DND5E.TOKEN.LockScale.Hint"),
       label: _loc("DND5E.TOKEN.LockScale.Label")
     }, {
@@ -56,7 +63,7 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
     });
 
     const lockRotation = html.querySelector('.form-group:has([name="lockRotation"])');
-    lockRotation.after(group);
+    lockRotation.after(lockSize, lockScale);
   }
 
   /* -------------------------------------------- */

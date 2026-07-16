@@ -334,7 +334,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( !change.effect && (change.conditions?.check(options.replacementData ?? {}) === false) ) return {};
 
     // Handle special actor flags
-    if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect?._prepareFlagChange(model, change);
+    if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect?._prepareFlagChange(model, change) ?? change;
 
     // Properly handle formulas that don't exist as part of the data model
     if ( ActiveEffect5e.FORMULA_FIELDS.has(change.key) ) {
