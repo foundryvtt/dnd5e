@@ -337,7 +337,7 @@ export default class FeatData extends ItemDataModel.mixin(
     // If a feature has item pre-requisites, make sure the other items exist on the actor
     if ( this.prerequisites.items.size ) prerequisites.set("items", {
       label: _loc("DND5E.Prerequisites.FIELDS.prerequisites.items.display", {
-        items:  game.i18n.getListFormatter({ type: "disjunction" }).format(
+        items: game.i18n.getListFormatter({ type: "disjunction" }).format(
           Array.from(this.prerequisites.items).map(i => dnd5e.registry.identifiers.get(i) ?? i)
         )
       }),

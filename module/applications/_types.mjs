@@ -89,9 +89,9 @@
 
 /**
  * @typedef PrerequisiteValidationResult
- * @param {string} label           Label describing the prerequisite.
- * @param {boolean} [quiet=false]  Only display in mark compendium browser if invalid.
- * @param {boolean|null} valid     Whether the prerequisite is valid or not, or `null` if it couldn't be evaluated.
+ * @property {string} label           Label describing the prerequisite.
+ * @property {boolean} [quiet=false]  Only display in mark compendium browser if invalid.
+ * @property {boolean|null} valid     Whether the prerequisite is valid or not, or `null` if it couldn't be evaluated.
  */
 
 /**
@@ -101,7 +101,7 @@
 /**
  * @callback ValidatePrerequisitesCallback
  * @param {Document|object} doc  Document for which to evaluate the prerequisites.
- * @returns {PrerequisiteValidationResults}
+ * @returns {PrerequisiteValidationResults|void}
  */
 
 /* -------------------------------------------- */

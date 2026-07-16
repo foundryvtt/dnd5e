@@ -50,6 +50,41 @@ export function roundCurrency(value, denomination) {
 }
 
 /* -------------------------------------------- */
+/*  Documents                                   */
+/* -------------------------------------------- */
+
+/**
+ * Bulk version of `fromUuid` that performs only a single fetch per compendium.
+ * @param {string[]} uuids           UUIDs of documents to retrieve.
+ * @returns {Map<string, Document>}  Documents mapped to the provided UUID.
+ */
+export async function bulkFromUuid(uuids) {
+  const collections = new Map();
+  const redirected = new Map();
+
+  for ( const uuid of uuids ) {
+    const { collection, id, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid);
+    if ( !collections.has(collection) ) collections.set(collection, []);
+    collections.get(collection).push(id);
+    redirected.set(redirectedUuid, uuid);
+  }
+
+  const fetches = [];
+  for ( const [collection, ids] of collections.entries() ) {
+    if ( collection instanceof foundry.documents.collections.CompendiumCollection ) {
+      fetches.push(collection.getDocuments({ _id__in: ids }));
+    } else {
+      fetches.push(ids.map(id => collection.get(id)));
+    }
+  }
+
+  return (await Promise.all(fetches)).flat().reduce((map, doc) => {
+    map.set(redirected.get(doc.uuid), doc);
+    return map;
+  }, new Map());
+}
+
+/* -------------------------------------------- */
 /*  Formatters                                  */
 /* -------------------------------------------- */
 

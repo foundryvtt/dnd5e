@@ -276,8 +276,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       filters,
       prerequisites: {
         validate: item => {
-          if ( !item.system.prerequisiteLabels ) return [];
-          return item.system.prerequisiteLabels({ actor: this.advancement.actor, level: this.level });
+          if ( !item.system.prerequisiteLabels ) return;
+          return item.system.prerequisiteLabels({ actor: this.advancement.actor, level: this.featureLevel });
         }
       },
       selection: { min: 1, max: max - current }

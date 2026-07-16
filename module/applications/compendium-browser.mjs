@@ -1,6 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import { getPluralRules, loadingTooltip } from "../utils.mjs";
+import { bulkFromUuid, getPluralRules, loadingTooltip } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
@@ -676,9 +676,9 @@ export default class CompendiumBrowser extends Application5e {
     };
     if ( this.options.prerequisites.validate ) {
       const results = this.options.prerequisites.validate(entry);
-      if ( results.size ) {
+      if ( results?.size ) {
         context.prerequisites = results.values().reduce((r, result) => {
-          if ( result.valid === false) {
+          if ( result.valid === false ) {
             r.disabled = this.options.prerequisites.enforce;
             r.invalid = true;
             r.valid = false;
@@ -1162,13 +1162,13 @@ export default class CompendiumBrowser extends Application5e {
             && (!p.metadata.flags.dnd5e?.types || p.metadata.flags.dnd5e.types.includes(i.type))))
             && (!filters.length || Filter.performCheck(i, filters))
         )
-
-        // If full documents are required, retrieve those, otherwise stick with the indices
-        .map(async i => index ? i : await fromUuid(i.uuid))
       ));
 
     // Wait for everything to finish loading and flatten the arrays
     documents = (await Promise.all(documents)).flat();
+
+    // If full documents are required, retrieve those, otherwise stick with the indices
+    if ( !index ) documents = (await bulkFromUuid(documents.map(d => d.uuid))).values().toArray();
 
     if ( sort ) {
       if ( sort === true ) sort = "name";

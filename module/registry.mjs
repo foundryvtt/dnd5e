@@ -206,12 +206,11 @@ class IdentifierRegistry {
     this.#status = STATUS_STATES.LOADING;
 
     const indexes = await CompendiumBrowser.fetch(Item, {
-      // types: new Set([this.#itemType]),
       indexFields: new Set(["system.identifier"]),
       sort: false
     });
     for ( const item of indexes ) {
-      const identifier = item.system?.identifier ?? formatIdentifier(item.name);
+      const identifier = item.system?.identifier || formatIdentifier(item.name);
       if ( !this.#identifiers.has(item.type) ) this.#identifiers.set(item.type, new Map());
       this.#identifiers.get("*").set(identifier, item.name);
       this.#identifiers.get(item.type).set(identifier, item.name);
@@ -339,7 +338,7 @@ class ItemRegistry {
       sort: false
     });
     for ( const item of indexes ) {
-      const identifier = item.system?.identifier ?? formatIdentifier(item.name);
+      const identifier = item.system?.identifier || formatIdentifier(item.name);
       if ( !this.#items.has(identifier) ) this.#items.set(identifier, { sources: [] });
       const itemData = this.#items.get(identifier);
       itemData.name = item.name;
