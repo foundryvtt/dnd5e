@@ -2411,9 +2411,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
 
     // Expire active effects
-    const restConfig = CONFIG.DND5E.restTypes[config.type ?? "long"];
-    for ( const event of restConfig.expiryEvents ?? [] ) {
-      await ActiveEffect.registry.refresh(event, { actors: new Set([this]) });
+    const expiryEvents = CONFIG.DND5E.restTypes[config.type ?? "long"].expiryEvents ?? [];
+    if ( expiryEvents.length ) {
+      const expired = new Map();
+      for ( const effect of this.allApplicableEffects() ) {
+        for ( const event of expiryEvents ) {
+          if ( !effect.isExpiryEvent(event) ) continue;
+          if ( !expired.has(effect.parent) ) expired.set(effect.parent, []);
+          expired.get(effect.parent).push(effect.id);
+        }
+      }
+      const operations = expired.entries()
+        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }));
+      await foundry.documents.modifyBatch(operations.toArray());
     }
 
     // Advance the game clock
