@@ -8,9 +8,9 @@
 function buildEnricherInserts(prefix, record, html) {
   return Object.entries(record).map(([key, { label }]) => ({
     action: `${prefix}-${key}`,
-    title: label,
+    html: html(key),
     inline: true,
-    html: html(key)
+    title: label
   }));
 }
 
@@ -27,7 +27,7 @@ const STAT_ORDERED = new Set(["dnd5e-enricher-check", "dnd5e-enricher-save", "dn
  * @param {object[]} inserts  The insert entries to sort in place.
  */
 function sortInserts(inserts) {
-  inserts.sort((a, b) => game.i18n.localize(a.title).localeCompare(game.i18n.localize(b.title)));
+  inserts.sort((a, b) => _loc(a.title).localeCompare(_loc(b.title), game.i18n.lang));
   for ( const insert of inserts ) {
     if ( insert.children && !STAT_ORDERED.has(insert.action) ) sortInserts(insert.children);
   }
@@ -48,17 +48,21 @@ async function buildReferenceInserts() {
     const seen = new Set();
     const children = [];
     for ( const [key, source] of Object.entries(record) ) {
-      const uuid = foundry.utils.getType(source) === "Object" ? source.reference : source;
+      // Both spellComponent and spellTag reference the whole itemProperties record, so we check isTag in order to
+      // filter out duplicates.
+      if ( (type === "spellComponent") && source.isTag ) continue;
+      if ( (type === "spellTag") && !source.isTag ) continue;
+      const uuid = foundry.utils.isPlainObject(source) ? source.reference : source;
       if ( !uuid || seen.has(uuid) ) continue;
       seen.add(uuid);
       children.push({
         action: `dnd5e-reference-${type}-${key}`,
-        title: source?.label ?? source?.name ?? (await fromUuid(uuid))?.name ?? key,
+        html: `&amp;Reference[${type}=${key}]`,
         inline: true,
-        html: `&amp;Reference[${type}=${key}]`
+        title: source?.label ?? source?.name ?? (await fromUuid(uuid))?.name ?? key
       });
     }
-    if ( children.length ) groups.push({ action: `dnd5e-reference-${type}`, title: label, children });
+    if ( children.length ) groups.push({ children, action: `dnd5e-reference-${type}`, title: label });
   }
   return groups;
 }
@@ -87,13 +91,19 @@ export async function registerProseMirrorInserts() {
       {
         action: "dnd5e-block-quest",
         title: "EDITOR.DND5E.Inserts.Quest",
-        html: '<section class="quest"><figure class="icon"><img class="round" src="icons/svg/book.svg"></figure>'
-          + "<article><h4>Quest</h4><selection><p>Quest description.</p></selection></article></section>"
+        html: '<section class="quest"><figure class="icon"><img class="round" src="icons/svg/hanging-sign.svg">'
+          + "</figure><article><h4>Quest</h4><selection><p>Quest description.</p></selection></article></section>"
       },
       {
         action: "dnd5e-block-advice",
         title: "EDITOR.DND5E.Inserts.Advice",
         html: '<section class="advice"><figure class="icon"><img class="round" src="icons/svg/book.svg"></figure>'
+          + "<article><h4>Advice</h4><selection><p>Advice content.</p></selection></article></section>"
+      },
+      {
+        action: "dnd5e-block-vtt-advice",
+        title: "EDITOR.DND5E.Inserts.VTTAdvice",
+        html: '<section class="advice"><figure class="icon"><img class="vtt-outline" src="icons/vtt-512.png"></figure>'
           + "<article><h4>Advice</h4><selection><p>Advice content.</p></selection></article></section>"
       },
       {
@@ -129,12 +139,16 @@ export async function registerProseMirrorInserts() {
       {
         action: "dnd5e-enricher-check",
         title: "EDITOR.DND5E.Inserts.Check",
-        children: buildEnricherInserts("dnd5e-enricher-check", CONFIG.DND5E.abilities, key => `[[/check ability=${key}]]`)
+        children: buildEnricherInserts("dnd5e-enricher-check", CONFIG.DND5E.abilities, key => {
+          return `[[/check ability=${key}]]`;
+        })
       },
       {
         action: "dnd5e-enricher-save",
         title: "EDITOR.DND5E.Inserts.Save",
-        children: buildEnricherInserts("dnd5e-enricher-save", CONFIG.DND5E.abilities, key => `[[/save ability=${key}]]`)
+        children: buildEnricherInserts("dnd5e-enricher-save", CONFIG.DND5E.abilities, key => {
+          return `[[/save ability=${key}]]`;
+        })
       },
       {
         action: "dnd5e-enricher-skill",
@@ -144,11 +158,16 @@ export async function registerProseMirrorInserts() {
       {
         action: "dnd5e-enricher-damage",
         title: "EDITOR.DND5E.Inserts.Damage",
-        children: buildEnricherInserts("dnd5e-enricher-damage", {
-          ...CONFIG.DND5E.damageTypes,
-          ...Object.fromEntries(Object.entries(CONFIG.DND5E.healingTypes)
-            .map(([key, type]) => [key, { ...type, label: type.labelShort ?? type.label }]))
-        }, key => `[[/damage type=${key}]]`)
+        children: buildEnricherInserts("dnd5e-enricher-damage", CONFIG.DND5E.damageTypes, key => {
+          return `[[/damage 1d6 ${key}]]`;
+        })
+      },
+      {
+        action: "dnd5e-enricher-healing",
+        title: "EDITOR.DND5E.Inserts.Healing",
+        children: buildEnricherInserts("dnd5e-enricher-healing", CONFIG.DND5E.healingTypes, key => {
+          return `[[/heal 2d4 ${key}]]`;
+        })
       },
       {
         action: "dnd5e-enricher-attack",

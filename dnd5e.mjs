@@ -246,9 +246,6 @@ Hooks.once("init", function() {
   // Enrichers
   enrichers.registerCustomEnrichers();
 
-  // ProseMirror inserts
-  inserts.registerProseMirrorInserts();
-
   // Set up token movement actions
   documents.TokenDocument5e.registerMovementActions();
 
@@ -568,7 +565,7 @@ Hooks.once("ready", function() {
   // Adjust sourced items on actors now that compendium UUID redirects have been initialized
   game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
-  // ProseMirror inserts (after compendia are available so reference rule titles can resolve)
+  // ProseMirror inserts
   inserts.registerProseMirrorInserts();
 
   // Register items by type
