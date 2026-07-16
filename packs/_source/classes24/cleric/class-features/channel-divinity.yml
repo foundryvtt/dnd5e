@@ -291,17 +291,14 @@ effects:
     transfer: false
     _id: iUeSbfduM7K8XrCF
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>For that duration, it tries to move as far from you as it can on its
       turns. This effect ends early on the creature if it takes any damage, if
@@ -318,18 +315,21 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.1.1
       createdTime: 1725377184193
       modifiedTime: 1755538106434
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbclcChannelDiv.iUeSbfduM7K8XrCF'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.4
   createdTime: 1735866373481

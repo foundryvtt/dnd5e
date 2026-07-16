@@ -220,17 +220,15 @@ effects:
     transfer: false
     _id: Z49QSPjltZ1NT28K
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>On a successful save, the creature has the &amp;Reference[Frightened
       apply=false] condition until the end of your next turn.</p>
@@ -242,23 +240,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1731082154282
-      modifiedTime: 1731082338693
+      modifiedTime: 1783544096679
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgMaceOfDisrupt.Z49QSPjltZ1NT28K'
 folder: kie870i5kr7yuxO8
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615183500
+  modifiedTime: 1783544096679
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

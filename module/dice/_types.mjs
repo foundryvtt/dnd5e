@@ -80,7 +80,7 @@
  */
 
 /**
- * @typedef {"oneHanded"|"twoHanded"|"offhand"|"thrown"|"thrown-offhand"} WeaponAttackMode
+ * @typedef {"oneHanded"|"twoHanded"|"offhand"|"thrown"|"thrown-offhand"|"ranged"} WeaponAttackMode
  */
 
 /**
@@ -106,6 +106,7 @@
  * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
  * @property {DamageRollConfiguration[]} rolls         Configuration data for individual rolls.
  * @property {CriticalDamageConfiguration} [critical]  Critical configuration for all rolls.
+ * @property {string[]} [properties]                   Properties applied to all rolls.
  * @property {boolean} [isCritical]                    Treat each roll as a critical unless otherwise specified.
  * @property {number} [scaling=0]                      Scale increase above base damage.
  */

@@ -160,52 +160,67 @@ effects:
     img: icons/skills/melee/weapons-crossed-swords-teal.webp
     disabled: true
     _id: QElum2XYhYUYQ5l2
-    system: {}
-    changes:
-      - key: name
-        mode: 2
-        value: ', Pact Weapon'
-        priority: null
-      - key: system.proficient
-        mode: 5
-        value: '1'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: foc
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: necrotic
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: psychic
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: radiant
-        priority: null
-      - key: system.damage.versatile.types
-        mode: 2
-        value: necrotic
-        priority: null
-      - key: system.damage.versatile.types
-        mode: 2
-        value: psychic
-        priority: null
-      - key: system.damage.versatile.types
-        mode: 2
-        value: radiant
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: ', Pact Weapon'
+          priority: null
+          type: add
+          phase: initial
+          _id: y94nZgqUe7Yy9geT
+        - key: system.proficient
+          value: 1
+          priority: null
+          type: override
+          phase: initial
+          _id: X5sk4LXtZX779wDd
+        - key: system.properties
+          value: foc
+          priority: null
+          type: add
+          phase: initial
+          _id: iU6EUPSr8U4EA1fP
+        - key: system.damage.base.types
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: eWzOUfbK9gxtOOgq
+        - key: system.damage.base.types
+          value: psychic
+          priority: null
+          type: add
+          phase: initial
+          _id: 0qgzJL2k4P8exBWM
+        - key: system.damage.base.types
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: aaqOjsd1b6V8asuQ
+        - key: system.damage.versatile.types
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: Psluz2LyOW7mzZe6
+        - key: system.damage.versatile.types
+          value: psychic
+          priority: null
+          type: add
+          phase: initial
+          _id: WFN1Sfc4ID6yXFZj
+        - key: system.damage.versatile.types
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: HJI3JBaaU5eLBE7S
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -216,13 +231,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102422
+      modifiedTime: 1783544102422
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvPactBlade0.QElum2XYhYUYQ5l2'
 folder: BjeMHiqnKNWkWhox
 flags:
@@ -233,11 +251,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866281378
-  modifiedTime: 1745256762495
+  modifiedTime: 1783544102422
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

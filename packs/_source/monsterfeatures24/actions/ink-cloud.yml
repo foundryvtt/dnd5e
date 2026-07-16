@@ -93,17 +93,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmInkCloud000000
     _id: JttKvsdAlGpcrFx0
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>You have the &amp;Reference[Blinded apply=false] condition while trying
       to see something in a Heavily Obscured space. </p>
@@ -117,13 +114,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmGiantSquid0000.Item.mmInkCloud000000.ActiveEffect.ix1fTDDx7fkT1OGI
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.2
       createdTime: 1737997355698
       modifiedTime: 1737997355698
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmInkCloud000000.JttKvsdAlGpcrFx0'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -133,7 +133,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1737767116358

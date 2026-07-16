@@ -459,9 +459,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -476,7 +473,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -496,66 +493,24 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
-  - _id: lPywASGOeP26s2D9
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The kraken can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!kVg37NlPcACAzjCT.lPywASGOeP26s2D9'
   - _id: uxrpcslS4BkraMVB
     name: Freedom of Movement
     type: feat
-    img: icons/skills/movement/feet-winged-boots-brown.webp
+    img: icons/skills/movement/arrow-upward-yellow.webp
     system:
       description:
         value: >-
-          <p>The kraken ignores difficult terrain, and magical effects can't
-          reduce its speed or cause it to be restrained. It can spend 5 feet of
-          movement to escape from nonmagical restraints or being grappled.</p>
+          <p>The [[lookup @name lowercase]]{monster} ignores
+          &amp;reference[difficult terrain], and magical effects can't reduce
+          its speed or cause it to be &amp;reference[restrained apply=false]. It
+          can spend 5 feet of movement to escape from nonmagical restraints or
+          being &amp;reference[grappled apply=false].</p>
         chat: >-
-          <p>The kraken ignores difficult terrain, and magical effects can't
-          reduce its speed or cause it to be restrained. </p>
+          <p>The [[lookup @name]]{monster} ignores &amp;reference[difficult
+          terrain], and magical effects can't reduce its speed or cause it to be
+          &amp;reference[restrained apply=false].</p>
       source:
         custom: ''
         book: ''
@@ -568,10 +523,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -579,18 +535,18 @@ items:
       identifier: freedom-of-movement
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fUMY4b9snsiKl30e
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676965
+      systemVersion: 6.0.0
+      createdTime: 1781883627940
+      modifiedTime: 1781883759706
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.uxrpcslS4BkraMVB'
@@ -600,7 +556,9 @@ items:
     img: icons/creatures/magical/construct-iron-stomping-yellow.webp
     system:
       description:
-        value: <p>The kraken deals double damage to objects and structures.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} deals double damage to
+          objects and structures.</p>
         chat: ''
       source:
         custom: ''
@@ -625,19 +583,19 @@ items:
       identifier: siege-monster
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781883627941
+      modifiedTime: 1781883703347
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.1oNtSpRA4XS3L6to'
   - _id: j4xzhdYjtz2migUE
@@ -647,9 +605,9 @@ items:
     system:
       description:
         value: >-
-          <p>The kraken makes three [[/item .lfg28JvVAru30yJ4]]{tentacle}
-          attacks, each of which it can replace with one use of [[/item
-          .bwwyMBn4QwiNd4SM]]{Fling}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
+          .lfg28JvVAru30yJ4]]{tentacle} attacks, each of which it can replace
+          with one use of [[/item .bwwyMBn4QwiNd4SM]]{Fling}.</p>
         chat: ''
       source:
         custom: ''
@@ -663,13 +621,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        yUq1c6qtgvK55HAJ:
           type: utility
           activation:
             type: action
@@ -684,15 +641,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -703,7 +661,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -720,7 +679,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: yUq1c6qtgvK55HAJ
       enchant: {}
       prerequisites:
         level: null
@@ -734,37 +701,44 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273656875
+      systemVersion: 6.0.0
+      createdTime: 1781886120676
+      modifiedTime: 1783367032977
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.j4xzhdYjtz2migUE'
   - _id: r51OovswZTVF8Yna
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a Large or smaller creature grappled by the kraken, that creature is
-          swallowed, and the grapple ends. While swallowed, the creature is
-          blinded and restrained, it has total cover against attacks and other
-          effects outside the kraken, and it takes 42 (12d6) acid damage at the
-          start of each of the kraken's turns. If the kraken takes 50 damage or
-          more on a single turn from a creature inside it, the kraken must
-          succeed on a DC 25 Constitution saving throw at the end of that turn
-          or regurgitate all swallowed creatures, which fall prone in a space
-          within 10 feet of the kraken. If the kraken dies, a swallowed creature
-          is no longer restrained by it and can escape from the corpse using 15
-          feet of movement, exiting prone.</p>
+          a Large or smaller creature &amp;reference[grappled apply=false] by
+          the [[lookup @name lowercase]]{monster}, that creature is swallowed,
+          and the grapple ends. While swallowed, the creature is
+          &amp;reference[blinded] and &amp;reference[restrained], it has
+          &amp;reference[total cover] against attacks and other effects outside
+          the [[lookup @name lowercase]]{monster}, and it takes [[/damage
+          average activity=VTJvMyMKrJPYYlkL]] damage at the start of each of the
+          [[lookup @name lowercase]]{monster}'s turns.</p><p>If the [[lookup
+          @name lowercase]]{monster} takes 50 damage or more on a single turn
+          from a creature inside it, the [[lookup @name lowercase]]{monster}
+          must succeed on a [[/save activity=taaOeSxgB6hWSvep]] saving throw at
+          the end of that turn or regurgitate all swallowed creatures, which
+          fall &amp;reference[prone] in a space within 10 feet of the [[lookup
+          @name lowercase]]{monster}. If the [[lookup @name lowercase]]{monster}
+          dies, a swallowed creature is no longer restrained by it and can
+          escape from the corpse using 15 feet of movement, exiting
+          &amp;reference[prone].</p>
         chat: >-
-          <p>The Kraken attacks with its Bite. If the target is a Large or
-          smaller creature grappled by the kraken, that creature is swallowed,
-          and the grapple ends.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a Large or smaller creature
+          &amp;reference[grappled] by the [[lookup @name]]{monster}, that
+          creature is swallowed, and the grapple ends.</p>
       source:
         custom: ''
         book: ''
@@ -827,7 +801,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -836,8 +810,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FltCH12NM3zL7QDg:
           type: attack
           activation:
             type: action
@@ -852,10 +825,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -872,7 +846,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -885,29 +860,42 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        7NqsOwtHOcmvjNFZ:
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FltCH12NM3zL7QDg
+          name: ''
+        VTJvMyMKrJPYYlkL:
           type: damage
-          name: Swallowed Damage
-          _id: 7NqsOwtHOcmvjNFZ
-          sort: 0
+          name: Start of Turn Digestion Damage
+          sort: 200000
           activation:
-            type: turnStart
+            type: special
             override: false
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts its turn while
+              it has a creature swallowed.
           consumption:
             scaling:
               allowed: false
@@ -915,6 +903,7 @@ items:
             targets: []
           description:
             chatFlavor: ''
+            value: ''
           duration:
             units: inst
             concentration: false
@@ -929,6 +918,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               type: ''
@@ -958,13 +948,144 @@ items:
                 bonus: ''
                 types:
                   - acid
+                scaling:
+                  number: 1
           img: ''
+          _id: VTJvMyMKrJPYYlkL
+        taaOeSxgB6hWSvep:
+          type: save
+          name: Regurgitate Creature Save
+          img: ''
+          sort: 300000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} takes 50 or more
+              damage on a single turn form a swallowed creature.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>If the [[lookup @name lowercase]]{monster} takes 50 damage or
+              more on a single turn from a creature inside it, the [[lookup
+              @name lowercase]]{monster} must succeed on a [[/save
+              activity=taaOeSxgB6hWSvep]] saving throw at the end of that turn
+              or regurgitate all swallowed creatures, which fall
+              &amp;reference[prone] in a space within 10 feet of the [[lookup
+              @name lowercase]]{monster}. If the [[lookup @name
+              lowercase]]{monster} dies, a swallowed creature is no longer
+              restrained by it and can escape from the corpse by using 20 feet
+              of movement, exiting &amp;reference[prone].</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '25'
+            visible: true
+            bonus: ''
+          _id: taaOeSxgB6hWSvep
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
       mastery: ''
-    effects: []
+    effects:
+      - name: Swallowed
+        img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.kVg37NlPcACAzjCT.Item.r51OovswZTVF8Yna
+        transfer: false
+        _id: TfOGDuAj2ntBiYFa
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been swallowed by the kraken. You are
+          &amp;reference[blinded apply=false], &amp;reference[restrained
+          apply=false], and have &amp;reference[total cover] against attacks and
+          other effects outside the kraken.</p><p>You also take [[/damage
+          average 12d6 acid]] damage at the start of each of the kraken's
+          turns.</p><p>If the kraken takes 50 damage or more on a single turn
+          from you, the kraken must succceed on a Constitution saving throw or
+          regurgitate you, causing you to fall &amp;reference[prone] in a space
+          within 10 feet of the purple worm. If the kraken dies, you are no
+          longer restrained by it and can escape from the corpse by using 15
+          feet of movement, exiting &amp;reference[prone].</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+          - restrained
+          - coverTotal
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781885663959
+          modifiedTime: 1781885715459
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.6aBDwlIsxceFMXxL.ActiveEffect.5YoZO3QgfMTcLhgh
+          duplicateSource: Item.ePcEJFaXQWlel7lw.ActiveEffect.5YoZO3QgfMTcLhgh
+          exportSource: null
+        _key: >-
+          !actors.items.effects!kVg37NlPcACAzjCT.r51OovswZTVF8Yna.TfOGDuAj2ntBiYFa
     folder: null
     sort: 0
     ownership:
@@ -973,29 +1094,32 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825889060
+      systemVersion: 6.0.0
+      createdTime: 1781883765194
+      modifiedTime: 1781886103907
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.r51OovswZTVF8Yna'
   - _id: lfg28JvVAru30yJ4
     name: Tentacle
     type: weapon
-    img: icons/creatures/tentacles/tentacles-thing-green.webp
+    img: icons/commodities/biological/tentacle-purple-white.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
-          grappled (escape DC 18). Until this grapple ends, the target is
-          restrained. The kraken has ten tentacles, each of which can grapple
-          one target.</p>
+          &amp;reference[grappled] (escape DC 18). Until this grapple ends, the
+          target is &amp;reference[restrained]. The [[lookup @name
+          lowercase]]{monster} has ten [[lookup @item.name
+          lowercase]]{monster}s, each of which can grapple one target.</p>
         chat: >-
-          <p>The Kraken attacks with its Tentacle. The target is grappled. Until
-          this grapple ends, the target is restrained. The kraken has ten
-          tentacles, each of which can grapple one target.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled]. Until this
+          grapple ends, the target is &amp;reference[restrained]. The [[lookup
+          @name]]{monster} has ten [[lookup @item.name lowercase]]s, each of
+          which can grapple one target.</p>
       source:
         custom: ''
         book: ''
@@ -1057,9 +1181,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1068,8 +1191,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        3DduUcVgHehbNLfl:
           type: attack
           activation:
             type: action
@@ -1084,13 +1206,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: VoLmuqv703GF6cmn
+              level: {}
           range:
             value: '30'
             units: ft
@@ -1104,7 +1229,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -1117,26 +1243,80 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 3DduUcVgHehbNLfl
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tentacle
       mastery: ''
-    effects: []
+    effects:
+      - name: Grappled by Tentacle
+        img: icons/commodities/biological/tentacle-purple-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.kVg37NlPcACAzjCT.Item.lfg28JvVAru30yJ4
+        transfer: false
+        _id: VoLmuqv703GF6cmn
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 18). While
+          grappled in this way, you are also &amp;reference[restrained
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781883913953
+          modifiedTime: 1781883949081
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!kVg37NlPcACAzjCT.lfg28JvVAru30yJ4.VoLmuqv703GF6cmn
     folder: null
     sort: 0
     ownership:
@@ -1145,34 +1325,38 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553020
+      systemVersion: 6.0.0
+      createdTime: 1781883796321
+      modifiedTime: 1781883913984
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.lfg28JvVAru30yJ4'
   - _id: bwwyMBn4QwiNd4SM
     name: Fling
     type: feat
-    img: icons/creatures/webs/webthin-blue.webp
+    img: icons/magic/earth/projectile-boulder-yellow.webp
     system:
       description:
         value: >-
-          <p>One Large or smaller object held or creature grappled by the kraken
-          is thrown up to 60 feet in a random direction and knocked
-          prone.</p><p>If a thrown target strikes a solid surface, the target
-          takes 3 (1d6) bludgeoning damage for every 10 feet it was thrown. If
+          <p>One Large or smaller object held or creature
+          &amp;reference[grappled apply=false] by the [[lookup @name lowercase]]
+          is thrown up to [[lookup @labels.description.range
+          activity=sJvtsq6W2RMb5ekp]] in a random direction and knocked
+          &amp;reference[prone].</p><p>If a thrown target strikes a solid
+          surface, the target takes [[/damage average
+          activity=sJvtsq6W2RMb5ekp]] damage for every 10 feet it was thrown. If
           the target is thrown at another creature, that creature must succeed
-          on a DC 18 Dexterity saving throw or take the same damage and be
-          knocked prone.</p>
+          on a [[/save activity=POuIOxIPF4zYDksd]] saving throw or take the same
+          damage and be knocked &amp;reference[prone].</p>
         chat: >-
-          <p>One Large or smaller object held or creature grappled by the kraken
-          is thrown up to 60 feet in a random direction and knocked prone. If
-          the target is thrown at another creature, that creature must make a
-          <strong>Dexterity</strong> saving throw or take the same damage and be
-          knocked prone.</p>
+          <p>One Large or smaller object held or creature grappled by the
+          [[lookup @name]]{monster} is thrown up to [[lookup
+          @labels.description.range activity=sJvtsq6W2RMb5ekp]] in a random
+          direction and knocked &amp;reference[prone]. If the target is thrown
+          at another creature, that creature must make a Dexterity saving throw
+          or take the same damage and be knocked prone.</p>
       source:
         custom: ''
         book: ''
@@ -1185,15 +1369,17 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        nDEUGK9GxUWfn6xM:
-          type: save
-          _id: nDEUGK9GxUWfn6xM
-          sort: 0
+        sJvtsq6W2RMb5ekp:
+          type: damage
+          name: Solid Surface Collision
+          _id: sJvtsq6W2RMb5ekp
+          img: ''
+          sort: 200000
           activation:
             type: action
             override: false
@@ -1205,7 +1391,77 @@ items:
             spellSlot: true
             targets: []
           description:
+            value: ''
             chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: ft
+            override: false
+            special: ''
+            value: '60'
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 6
+                bonus: ''
+                types:
+                  - bludgeoning
+                scaling:
+                  mode: whole
+                  number: 1
+        POuIOxIPF4zYDksd:
+          type: save
+          sort: 300000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the creature tossed by the [[lookup @name
+              lowercase]]{monster} is thrown at another creature.
+          consumption:
+            scaling:
+              allowed: true
+              max: '6'
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+            value: ''
           duration:
             units: inst
             concentration: false
@@ -1222,9 +1478,12 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               type: creature
+              count: '1'
+              special: ''
             override: false
             prompt: true
           uses:
@@ -1260,8 +1519,11 @@ items:
             dc:
               calculation: ''
               formula: '18'
-          name: ''
+            visible: true
+            bonus: ''
+          name: Creature Collision Save
           img: ''
+          _id: POuIOxIPF4zYDksd
       enchant: {}
       prerequisites:
         level: null
@@ -1275,30 +1537,32 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hxXzd3KCfnqnT89w
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825974517
+      systemVersion: 6.0.0
+      createdTime: 1781883958200
+      modifiedTime: 1781884191764
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.bwwyMBn4QwiNd4SM'
   - _id: wVCkpBj5omvdfaMm
     name: Lightning Storm
     type: feat
-    img: icons/magic/lightning/bolts-forked-large-blue-yellow.webp
+    img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
     system:
       description:
         value: >-
           <p>The kraken magically creates three bolts of lightning, each of
-          which can strike a target the kraken can see within 120 feet of
-          it.</p><p>A target must make a DC 23 Dexterity saving throw, taking 22
-          (4d10) lightning damage on a failed save, or half as much damage on a
-          successful one.</p>
+          which can strike a target the kraken can see within [[lookup
+          @labels.description.range activity=TwlWJt0B9uRQsZta]] of it.</p><p>A
+          target must make a [[/save activity=TwlWJt0B9uRQsZta]] saving throw,
+          taking [[/damage average activity=TwlWJt0B9uRQsZta]] damage on a
+          failed save, or half as much damage on a successful one.</p>
         chat: >-
-          <p>The kraken magically creates three bolts of lightning, each of
-          which can strike a target the kraken can see within 120 feet of it. A
-          target must make a <strong>Dexterity</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} magically creates three bolts of
+          lightning, each of which can strike a target the kraken can see within
+          [[lookup @labels.description.range activity=TwlWJt0B9uRQsZta]] of it.
+          A target must make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -1311,17 +1575,264 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - mgc
+      activities:
+        TwlWJt0B9uRQsZta:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '120'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '3'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 4
+                denomination: 10
+                bonus: ''
+                types:
+                  - lightning
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '23'
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: TwlWJt0B9uRQsZta
+          name: Conjure Lightning Bolts
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: lightning-storm
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781884200128
+      modifiedTime: 1781886258313
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!kVg37NlPcACAzjCT.wVCkpBj5omvdfaMm'
+  - _id: e2EtrJsAPZ19WuE7
+    name: Tentacle Attack or Fling
+    type: feat
+    img: icons/creatures/tentacles/tentacles-thing-green.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .lfg28JvVAru30yJ4]]{tentacle} attack or uses its [[/item
+          .bwwyMBn4QwiNd4SM]]{Fling}.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        JjYCf59VYHAywvtN:
+          type: utility
+          activation:
+            type: legendary
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 100000
+          name: Strike
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: JjYCf59VYHAywvtN
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: tentacle-attack-or-fling
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.czKwBo1qw5O2gCNy
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781884282783
+      modifiedTime: 1783367039961
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!kVg37NlPcACAzjCT.e2EtrJsAPZ19WuE7'
+  - _id: OKGAJSxcW9xQiwyj
+    name: Lightning Storm
+    type: feat
+    img: icons/magic/lightning/bolt-strike-forked-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} uses [[/item
+          .wVCkpBj5omvdfaMm]]{Lightning Storm}.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
-          type: save
+          type: utility
           activation:
-            type: action
-            value: 1
+            type: legendary
+            value: 2
             condition: ''
             override: false
           consumption:
@@ -1340,179 +1851,6 @@ items:
             override: false
           effects: []
           range:
-            value: '120'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: '3'
-              type: creature
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - number: 4
-                denomination: 10
-                bonus: ''
-                types:
-                  - lightning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          save:
-            ability: dex
-            dc:
-              calculation: ''
-              formula: '23'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lightning-storm
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825995013
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!kVg37NlPcACAzjCT.wVCkpBj5omvdfaMm'
-  - _id: ojhTng7wa5ehcJz3
-    name: Legendary Actions
-    type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
-    system:
-      description:
-        value: >-
-          <p>The kraken can take 3 legendary actions. Only one legendary action
-          option can be used at a time and only at the end of another creature's
-          turn. The kraken regains spent legendary actions at the start of its
-          turn.</p>
-        chat: <p>The kraken can take 3 legendary actions.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676965
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!kVg37NlPcACAzjCT.ojhTng7wa5ehcJz3'
-  - _id: e2EtrJsAPZ19WuE7
-    name: Tentacle Attack or Fling
-    type: feat
-    img: icons/creatures/tentacles/tentacles-thing-green.webp
-    system:
-      description:
-        value: >-
-          <p>The kraken makes one [[/item .lfg28JvVAru30yJ4]]{tentacle} attack
-          or uses its [[/item .bwwyMBn4QwiNd4SM]]{Fling}.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
             units: ''
             special: ''
             override: false
@@ -1542,111 +1880,13 @@ items:
             prompt: false
             visible: false
           sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: tentacle-attack-or-fling
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.czKwBo1qw5O2gCNy
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826041280
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!kVg37NlPcACAzjCT.e2EtrJsAPZ19WuE7'
-  - _id: OKGAJSxcW9xQiwyj
-    name: Lightning Storm
-    type: feat
-    img: icons/magic/lightning/bolts-forked-large-blue-yellow.webp
-    system:
-      description:
-        value: <p>The kraken uses [[/item .wVCkpBj5omvdfaMm]]{Lightning Storm}.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 2
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          name: Call Lightning
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -1660,29 +1900,32 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826015645
+      systemVersion: 6.0.0
+      createdTime: 1781884301100
+      modifiedTime: 1781893664323
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.OKGAJSxcW9xQiwyj'
   - _id: K0T5NDyi2n8Yt8Ts
     name: Ink Cloud
     type: feat
-    img: icons/magic/air/wind-vortex-swirl-purple.webp
+    img: icons/commodities/materials/liquid-purple.webp
     system:
       description:
         value: >-
-          <p>While Underwater, the Kraken expels an ink cloud in a 60-foot
-          radius. The cloud spreads around corners, and that area is heavily
-          obscured to creatures other than the Kraken. Each creature other than
-          the Kraken that ends its turn there must succeed on a DC 23
-          Constitution saving throw, taking 16 (3d10) poison damage on a failed
-          save, or half as much damage on a successful one. A strong current
-          disperses the cloud, which otherwise disappears at the end of the
-          kraken's next turn.</p>
+          <p>While underwater, the [[lookup @name lowercase]]{monster} expels an
+          ink cloud in a [[lookup @labels.description.template
+          activity=hiENaqOgCBRB5rlo]]. The cloud spreads around corners, and
+          that area is &amp;reference[heavily obscured] to creatures other than
+          the [[lookup @name lowercase]]{monster}. Each creature other than the
+          [[lookup @name lowercase]]{monster} that ends its turn there must
+          succeed on a [[/save activity=qfZqaaSpH5AIxvFM]] saving throw, taking
+          [[/damage average activity=qfZqaaSpH5AIxvFM]] damage on a failed save,
+          or half as much damage on a successful one. A strong current disperses
+          the cloud, which otherwise disappears at the end of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p>
         chat: >-
           <p>The Kraken expels an ink cloud. The cloud spreads around corners,
           and that area is heavily obscured to creatures other than the Kraken.
@@ -1705,45 +1948,112 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
+        hiENaqOgCBRB5rlo:
+          type: utility
+          name: Expel Ink Cloud
+          _id: hiENaqOgCBRB5rlo
+          img: ''
+          sort: 100000
           activation:
             type: legendary
-            value: 3
+            override: false
             condition: ''
+            value: 3
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: round
+            concentration: false
+            override: false
+            value: '1'
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: true
+              units: ft
+              type: radius
+              size: '60'
+              count: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+        qfZqaaSpH5AIxvFM:
+          type: save
+          activation:
+            type: special
+            value: null
+            condition: >-
+              When a creature other than the [[lookup @name lowercase]]{monster}
+              ends their turn in the area.
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '3'
-                target: resources.legact.value
+            targets: []
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>Each creature other than the [[lookup @name
+              lowercase]]{monster} that ends its turn in the ink must succeed on
+              a [[/save activity=qfZqaaSpH5AIxvFM]] saving throw, taking
+              [[/damage average activity=qfZqaaSpH5AIxvFM]] damage on a failed
+              save, or half as much damage on a successful one.</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: self
+            units: spec
             special: ''
             override: false
           target:
             template:
               count: ''
               contiguous: false
-              type: radius
+              type: ''
               size: '60'
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: creature
@@ -1766,19 +2076,29 @@ items:
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '23'
-          sort: 0
-          name: ''
+            bonus: ''
+            visible: true
+          sort: 300000
+          name: Start of Turn Ink Poisoning Save
           img: ''
           visibility:
             level:
               min: null
               max: null
             identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: qfZqaaSpH5AIxvFM
       enchant: {}
       prerequisites:
         level: null
@@ -1792,14 +2112,118 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bojUXmNOZ2rJVujD
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826060635
+      systemVersion: 6.0.0
+      createdTime: 1781884333677
+      modifiedTime: 1781885306571
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.K0T5NDyi2n8Yt8Ts'
+  - _id: RUz9ZKreZFNasH0I
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781883626708
+      modifiedTime: 1781883627940
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!kVg37NlPcACAzjCT.RUz9ZKreZFNasH0I'
+  - _id: i2Ck12oznqdwTHzl
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: <p>The [[lookup @name]]{monster} can take 3 legendary actions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 600000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781883689923
+      modifiedTime: 1781883721699
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!kVg37NlPcACAzjCT.i2Ck12oznqdwTHzl'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -1808,7 +2232,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 5.2.3
   createdTime: 1726171252481

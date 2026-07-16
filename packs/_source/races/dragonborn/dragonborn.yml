@@ -18,20 +18,29 @@ system:
       villains.</p><p><em><strong>Size.</strong></em> Dragonborn are taller and
       heavier than humans, standing well over 6 feet tall and averaging almost
       250 pounds. Your size is Medium.</p><p><em><strong>Speed.</strong></em>
-      Your base walking speed is 30 feet.</p><table><caption>Draconic
-      Ancestry</caption><thead><tr><td>Dragon</td><td>Damage Type</td><td>Breath
-      Weapon</td></tr></thead><tbody><tr><td>Black</td><td>Acid</td><td>5 by 30
-      ft. line (Dex. save)</td></tr><tr><td>Blue</td><td>Lightning</td><td>5 by
-      30 ft. line (Dex. save)</td></tr><tr><td>Brass</td><td>Fire</td><td>5 by
-      30 ft. line (Dex.
-      save)</td></tr><tr><td>Bronze</td><td>Lightning</td><td>5 by 30 ft. line
-      (Dex. save)</td></tr><tr><td>Copper</td><td>Acid</td><td>5 by 30 ft. line
-      (Dex. save)</td></tr><tr><td>Gold</td><td>Fire</td><td>15 ft. cone (Dex.
-      save)</td></tr><tr><td>Green</td><td>Poison</td><td>15 ft. cone (Con.
-      save)</td></tr><tr><td>Red</td><td>Fire</td><td>15 ft. cone (Dex.
-      save)</td></tr><tr><td>Silver</td><td>Cold</td><td>15 ft. cone (Con.
-      save)</td></tr><tr><td>White</td><td>Cold</td><td>15 ft. cone (Con.
-      save)</td></tr></tbody></table><p><em><strong>Draconic
+      Your base walking speed is 30 feet.</p><table><caption><p>Draconic
+      Ancestry</p></caption><thead><tr><td><p>Dragon</p></td><td><p>Damage
+      Type</p></td><td><p>Breath
+      Weapon</p></td></tr></thead><tbody><tr><td><p>Black</p></td><td><p>Acid</p></td><td><p>5
+      by 30 ft. line (Dex.
+      save)</p></td></tr><tr><td><p>Blue</p></td><td><p>Lightning</p></td><td><p>5
+      by 30 ft. line (Dex.
+      save)</p></td></tr><tr><td><p>Brass</p></td><td><p>Fire</p></td><td><p>5
+      by 30 ft. line (Dex.
+      save)</p></td></tr><tr><td><p>Bronze</p></td><td><p>Lightning</p></td><td><p>5
+      by 30 ft. line (Dex.
+      save)</p></td></tr><tr><td><p>Copper</p></td><td><p>Acid</p></td><td><p>5
+      by 30 ft. line (Dex.
+      save)</p></td></tr><tr><td><p>Gold</p></td><td><p>Fire</p></td><td><p>15
+      ft. cone (Dex.
+      save)</p></td></tr><tr><td><p>Green</p></td><td><p>Poison</p></td><td><p>15
+      ft. cone (Con.
+      save)</p></td></tr><tr><td><p>Red</p></td><td><p>Fire</p></td><td><p>15
+      ft. cone (Dex.
+      save)</p></td></tr><tr><td><p>Silver</p></td><td><p>Cold</p></td><td><p>15
+      ft. cone (Con.
+      save)</p></td></tr><tr><td><p>White</p></td><td><p>Cold</p></td><td><p>15
+      ft. cone (Con. save)</p></td></tr></tbody></table><p><em><strong>Draconic
       Ancestry.</strong></em> You have draconic ancestry. Choose one type of
       dragon from the Draconic Ancestry table. Your breath weapon and damage
       resistance are determined by the dragon type, as shown in the
@@ -61,7 +70,8 @@ system:
     rules: '2014'
   identifier: dragonborn
   advancement:
-    - _id: QIrBmvSmNOTEJLWn
+    QIrBmvSmNOTEJLWn:
+      _id: QIrBmvSmNOTEJLWn
       type: ItemChoice
       configuration:
         choices:
@@ -83,23 +93,27 @@ system:
           - uuid: Compendium.dnd5e.races.KL7wx9Q8XNJQir0k
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
         restriction:
           type: race
           subtype: ''
           level: ''
+          list: []
       value:
         added: {}
         replaced: {}
       title: Draconic Ancestry
       hint: >-
-        You have draconic ancestry. Choose one type of dragon from the list.
+        <p>You have draconic ancestry. Choose one type of dragon from the list.
         Your breath weapon and damage resistance are determined by the dragon
-        type.
-    - _id: Z9hvZFkWUNvowbQX
+        type.</p>
+      flags: {}
+    Z9hvZFkWUNvowbQX:
+      _id: Z9hvZFkWUNvowbQX
       type: AbilityScoreImprovement
       configuration:
         points: 0
@@ -112,10 +126,14 @@ system:
           cha: 1
         cap: 2
         locked: []
+        recommendation: null
       value: {}
       level: 0
       title: ''
-    - _id: rXLC7smebN2zPOBT
+      flags: {}
+      hint: ''
+    rXLC7smebN2zPOBT:
+      _id: rXLC7smebN2zPOBT
       type: ScaleValue
       configuration:
         identifier: breath-weapon
@@ -141,7 +159,10 @@ system:
             modifiers: []
       value: {}
       title: Breath Weapon
-    - _id: 9D8XNnmTLWfzN32K
+      flags: {}
+      hint: ''
+    9D8XNnmTLWfzN32K:
+      _id: 9D8XNnmTLWfzN32K
       type: Size
       configuration:
         sizes:
@@ -153,7 +174,9 @@ system:
       hint: >-
         Dragonborn are taller and heavier than humans, standing well over 6 feet
         tall and averaging almost 250 pounds. Your size is Medium.
-    - _id: 6WUcKNSLh5WJ3Q24
+      flags: {}
+    6WUcKNSLh5WJ3Q24:
+      _id: 6WUcKNSLh5WJ3Q24
       type: Trait
       configuration:
         mode: default
@@ -166,7 +189,10 @@ system:
       title: ''
       value:
         chosen: []
-    - _id: 2f4dkpTYlhOgRgxu
+      flags: {}
+      hint: ''
+    2f4dkpTYlhOgRgxu:
+      _id: 2f4dkpTYlhOgRgxu
       type: Trait
       configuration:
         mode: default
@@ -187,6 +213,7 @@ system:
       hint: >-
         You have resistance to the damage type associated with your draconic
         ancestry.
+      flags: {}
   movement:
     burrow: null
     climb: null
@@ -212,11 +239,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037392732
-  modifiedTime: 1725992703354
+  modifiedTime: 1781473902373
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

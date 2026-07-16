@@ -9,15 +9,18 @@ import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-o
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
 import * as regionBehaviors from "./data/region-behavior/_module.mjs";
+import ActiveEffect5e from "./documents/active-effect.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
+import Adventure5e from "./documents/adventure.mjs";
 import { preLocalize } from "./utils.mjs";
 
 /**
  * @import {
  *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
  *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
+ *   AdventureConfiguration, AdventureImportAction,
  *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
  *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
@@ -1199,6 +1202,7 @@ DND5E.actorSizes = {
   sm: {
     label: "DND5E.SizeSmall",
     abbreviation: "DND5E.SizeSmallAbbr",
+    fullKey: "small",
     hitDie: 6,
     dynamicTokenScale: 0.8,
     numerical: 1
@@ -1206,12 +1210,14 @@ DND5E.actorSizes = {
   med: {
     label: "DND5E.SizeMedium",
     abbreviation: "DND5E.SizeMediumAbbr",
+    fullKey: "medium",
     hitDie: 8,
     numerical: 2
   },
   lg: {
     label: "DND5E.SizeLarge",
     abbreviation: "DND5E.SizeLargeAbbr",
+    fullKey: "large",
     hitDie: 10,
     token: 2,
     capacityMultiplier: 2,
@@ -1220,6 +1226,7 @@ DND5E.actorSizes = {
   huge: {
     label: "DND5E.SizeHuge",
     abbreviation: "DND5E.SizeHugeAbbr",
+    fullKey: "huge",
     hitDie: 12,
     token: 3,
     capacityMultiplier: 4,
@@ -1228,6 +1235,7 @@ DND5E.actorSizes = {
   grg: {
     label: "DND5E.SizeGargantuan",
     abbreviation: "DND5E.SizeGargantuanAbbr",
+    fullKey: "gargantuan",
     hitDie: 20,
     token: 4,
     capacityMultiplier: 8,
@@ -1235,6 +1243,29 @@ DND5E.actorSizes = {
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
+
+Object.defineProperty(DND5E.actorSizes, "fullKeys", {
+  get() {
+    const value = Object.entries(this).reduce((obj, [key, config]) => {
+      obj[config.fullKey ?? key] = key;
+      return obj;
+    }, {});
+    Object.defineProperty(DND5E.actorSizes, "fullKeys", { value });
+    return value;
+  },
+  configurable: true
+});
+
+Object.defineProperty(DND5E.actorSizes, "orderedKeys", {
+  get() {
+    const value = Object.entries(this)
+      .sort((lhs, rhs) => (lhs[1].numerical ?? Infinity) - (rhs[1].numerical ?? Infinity))
+      .map(([key]) => key);
+    Object.defineProperty(DND5E.actorSizes, "orderedKeys", { value });
+    return value;
+  },
+  configurable: true
+});
 
 /* -------------------------------------------- */
 /*  Canvas                                      */
@@ -1423,12 +1454,13 @@ preLocalize("itemActionTypes");
  * @enum {string}
  */
 DND5E.itemRarity = {
-  common: "DND5E.ItemRarityCommon",
-  uncommon: "DND5E.ItemRarityUncommon",
-  rare: "DND5E.ItemRarityRare",
-  veryRare: "DND5E.ItemRarityVeryRare",
-  legendary: "DND5E.ItemRarityLegendary",
-  artifact: "DND5E.ItemRarityArtifact"
+  common: "DND5E.ITEM.Rarity.Common",
+  uncommon: "DND5E.ITEM.Rarity.Uncommon",
+  rare: "DND5E.ITEM.Rarity.Rare",
+  veryRare: "DND5E.ITEM.Rarity.VeryRare",
+  legendary: "DND5E.ITEM.Rarity.Legendary",
+  artifact: "DND5E.ITEM.Rarity.Artifact",
+  varies: "DND5E.ITEM.Rarity.Varies"
 };
 preLocalize("itemRarity");
 
@@ -1868,6 +1900,9 @@ DND5E.featureTypes = {
       epicBoon: "DND5E.Feature.Feat.EpicBoon"
     }
   },
+  pietyTrait: {
+    label: "DND5E.Feature.PietyTrait"
+  },
   supernaturalGift: {
     label: "DND5E.Feature.SupernaturalGift.Label",
     subtypes: {
@@ -1902,7 +1937,7 @@ DND5E.itemProperties = {
   },
   concentration: {
     label: "DND5E.ITEM.Property.Concentration",
-    abbreviation: "DND5E.ConcentrationAbbr",
+    abbreviation: "DND5E.CONCENTRATION.Abbreviation",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
@@ -2056,6 +2091,8 @@ DND5E.validProperties = {
     "mgc"
   ])
 };
+
+DND5E.validProperties.consumable.ammo = new Set(["ret"]);
 
 /* -------------------------------------------- */
 
@@ -3582,19 +3619,6 @@ preLocalize("cover");
 /* -------------------------------------------- */
 
 /**
- * A selection of actor attributes that can be tracked on token resource bars.
- * @type {string[]}
- * @deprecated since v10
- */
-DND5E.trackableAttributes = [
-  "attributes.ac.value", "attributes.init.bonus", "attributes.movement", "attributes.senses",
-  "attributes.spell.attack", "attributes.spell.dc", "attributes.spell.level", "details.cr",
-  "details.xp.value", "skills.*.passive", "abilities.*.value"
-];
-
-/* -------------------------------------------- */
-
-/**
  * A selection of actor and item attributes that are valid targets for item resource consumption.
  * @type {string[]}
  */
@@ -3658,7 +3682,10 @@ DND5E.conditionTypes = {
     img: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.jSQtPgNm0i4f3Qi3",
     levels: 6,
-    reduction: { rolls: 2, speed: 5 }
+    reduction: { rolls: 2, speed: 5 },
+    conditions: {
+      6: ["dead"]
+    }
   },
   falling: {
     name: "EFFECT.DND5E.StatusFalling",
@@ -3761,23 +3788,23 @@ preLocalize("conditionTypes", { key: "name", sort: true });
 
 /**
  * Various effects of conditions and which conditions apply it. Either keys for the conditions,
- * and with a number appended for a level of exhaustion.
+ * and with a number appended for a level of a leveled condition.
  * @enum {Set<string>}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
-  halfMovement: new Set(["exhaustion-2"]),
+  noMovement: new Set(["grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
+  halfMovement: new Set(),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set(["exhaustion-4"]),
+  halfHealth: new Set(),
   dehydrated: new Set(["dehydration"]),
   malnourished: new Set(["malnutrition"]),
-  abilityCheckDisadvantage: new Set(["poisoned", "exhaustion-1"]),
+  abilityCheckDisadvantage: new Set(["poisoned"]),
   physicalCheckDisadvantage: new Set(["heavilyEncumbered"]),
-  abilitySaveDisadvantage: new Set(["exhaustion-3"]),
+  abilitySaveDisadvantage: new Set(),
   physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
   physicalAttackDisadvantage: new Set(["heavilyEncumbered"]),
-  attackDisadvantage: new Set(["poisoned", "exhaustion-3"]),
+  attackDisadvantage: new Set(["poisoned"]),
   dexteritySaveDisadvantage: new Set(["restrained"]),
   dexteritySaveAdvantage: new Set(["dodging"]),
   initiativeAdvantage: new Set(["invisible"]),
@@ -3879,13 +3906,34 @@ DND5E.neverBlockStatuses = new Set();
 
 /**
  * Configuration for the special bloodied status effect.
- * @type {{ name: string, icon: string, threshold: number }}
+ * @type {{ name: string, img: string, threshold: number }}
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
   img: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
-  threshold: .5
+  threshold: 50
 };
+
+/* -------------------------------------------- */
+
+/**
+ * System provided active effect change types.
+ * @enum {ActiveEffectChangeTypeConfig & { [skipConditions]: boolean }}
+ */
+DND5E.activeEffectChangeTypes = Object.freeze({
+  "dnd5e.advantage": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Advantage.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    skipConditions: true
+  },
+  "dnd5e.bonus": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Bonus.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    skipConditions: true
+  }
+});
 
 /* -------------------------------------------- */
 /*  Languages                                   */
@@ -4427,6 +4475,9 @@ DND5E.activityTypes = {
   summon: {
     documentClass: activities.SummonActivity
   },
+  teleport: {
+    documentClass: activities.TeleportActivity
+  },
   transform: {
     documentClass: activities.TransformActivity
   },
@@ -4516,6 +4567,43 @@ DND5E.defaultArtwork = {
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
 };
+
+/* -------------------------------------------- */
+/*  Adventures                                  */
+/* -------------------------------------------- */
+
+/**
+ * Configuration for adventure handling by the system.
+ * @type {{
+ *   config: Record<string, AdventureConfiguration>,
+ *   importActions: Record<string, Omit<AdventureImportAction, "id">>
+ * }}
+ */
+DND5E.adventure = {
+  config: {},
+  importActions: {
+    activateScene: {
+      label: "DND5E.ADVENTURE.ImportAction.ActivateScene",
+      default: true,
+      handler: Adventure5e.activateScene,
+      quickstartHandler: Adventure5e.activateSceneQuickstart,
+      lifecycle: "post"
+    },
+    customizeWorld: {
+      label: "DND5E.ADVENTURE.ImportAction.CustomizeWorld",
+      handler: Adventure5e.customizeWorld,
+      lifecycle: "post"
+    },
+    displayJournal: {
+      label: "DND5E.ADVENTURE.ImportAction.DisplayJournal",
+      default: true,
+      handler: Adventure5e.displayJournal,
+      quickstartHandler: Adventure5e.displayJournalQuickstart,
+      lifecycle: "post"
+    }
+  }
+};
+preLocalize("adventure.importActions", { key: "label" });
 
 /* -------------------------------------------- */
 /*  Calendar                                    */

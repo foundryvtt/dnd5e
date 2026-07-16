@@ -118,17 +118,15 @@ effects:
     transfer: false
     _id: SRez59EeCZRy66QS
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Each target’s body is left behind in a state of suspended animation; it
       has the &amp;Reference[Unconscious apply=false] condition, doesn’t need
@@ -141,13 +139,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725372000223
-      modifiedTime: 1725372505585
+      modifiedTime: 1783543973982
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplAstralProj.SRez59EeCZRy66QS'
 folder: iG0Zia8jh6uK39TB
 sort: 100000
@@ -160,11 +161,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425941749
-  modifiedTime: 1745256785975
+  modifiedTime: 1783543973982
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAstralProj'

@@ -5,7 +5,7 @@ ownership:
 type: spell
 system:
   description:
-    value: "<p>You can cast this spell only at night. Choose up to three corpses of Medium or Small humanoids within range. Each corpse becomes a ghoul under your control. (The DM has game statistics for these creatures.)</p><p>As a bonus action on each of your turns, you can mentally command any creature you animated with this spell if the creature is within 120 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p><p>The creature is under your control for 24 hours, after which it stops obeying any command you have given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature before the current 24-hour period ends. This use of the spell reasserts your control over up to three creatures you have animated with this spell, rather than animating new ones.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a 7th-level spell slot, you can animate or reassert control over four ghouls. When you cast this spell using an 8th-level spell slot, you can animate or reassert control over five ghouls or two ghasts or wights. When you cast this spell using a 9th-level spell slot, you can animate or reassert control over six ghouls, three ghasts or wights, or two mummies.</p>"
+    value: "<p>You can cast this spell only at night. Choose up to three corpses of Medium or Small humanoids within range. Each corpse becomes a @UUID[Compendium.dnd5e.monsters.Actor.OBujQLLPSmlJiZnL]{ghoul} under your control. (The DM has game statistics for these creatures.)</p><p>As a bonus action on each of your turns, you can mentally command any creature you animated with this spell if the creature is within 120 feet of you (if you control multiple creatures, you can command any or all of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move during its next turn, or you can issue a general command, such as to guard a particular chamber or corridor. If you issue no commands, the creature only defends itself against hostile creatures. Once given an order, the creature continues to follow it until its task is complete.</p><p>The creature is under your control for 24 hours, after which it stops obeying any command you have given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature before the current 24-hour period ends. This use of the spell reasserts your control over up to three creatures you have animated with this spell, rather than animating new ones.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a 7th-level spell slot, you can animate or reassert control over four ghouls. When you cast this spell using an 8th-level spell slot, you can animate or reassert control over five ghouls or two @UUID[Compendium.dnd5e.monsters.Actor.IyIybE5t2adMEVUM]{ghasts} or @UUID[Compendium.dnd5e.monsters.Actor.rbyp54px2D0ql4QK]{wights}. When you cast this spell using a 9th-level spell slot, you can animate or reassert control over six ghouls, three ghasts or wights, or two @UUID[Compendium.dnd5e.monsters.Actor.t8WYD7ak07X7xpx8]{mummies}.</p>"
     chat: ''
   source:
     custom: ''
@@ -25,12 +25,15 @@ system:
       type: creature
       count: '3'
       choice: false
+      special: ''
     template:
       units: spec
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -94,6 +97,7 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        ability: ''
       profiles:
         - count: '@item.level - 6'
           name: ''
@@ -134,20 +138,125 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast Animate Remains
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
+      effects:
+        - _id: tcvcliUzqg19mdCv
+          level: {}
+    3zXKdZYunkVxWMeN:
+      type: utility
+      name: 'Cast: Reassert Control'
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: tcvcliUzqg19mdCv
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: 1 + @scaling.increase * 2
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      _id: 3zXKdZYunkVxWMeN
   identifier: create-undead
 sort: 0
 flags: {}
-img: icons/magic/control/fear-fright-monster-grin-red-orange.webp
-effects: []
+img: icons/magic/death/undead-skeleton-lich-armor.webp
+effects:
+  - name: Controlled Undead
+    img: icons/magic/death/undead-skeleton-deformed-red.webp
+    origin: Compendium.dnd5e.spells.Item.E4NXux0RHvME1XgP
+    transfer: false
+    _id: tcvcliUzqg19mdCv
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>You are under the caster's control for the next 24 hours.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781435708000
+      modifiedTime: 1781435708000
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.oyE5nVppa5mde5gT.ActiveEffect.Gz4NTcpPjakj03qY
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!E4NXux0RHvME1XgP.tcvcliUzqg19mdCv'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351363
-  modifiedTime: 1725992718229
+  modifiedTime: 1783216058482
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!E4NXux0RHvME1XgP'

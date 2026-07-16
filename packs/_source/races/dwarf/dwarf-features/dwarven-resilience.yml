@@ -23,24 +23,25 @@ system:
     value: race
     subtype: ''
   requirements: Dwarf
-  properties: []
+  properties:
+    - trait
   activities: {}
   enchant: {}
   prerequisites:
     level: null
   identifier: dwarven-resilience
 flags: {}
-img: icons/creatures/abilities/stinger-poison-green.webp
+img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
 effects: []
 folder: bYq316CbmhMdFGG4
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037393333
-  modifiedTime: 1725992703760
+  modifiedTime: 1781472628676
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ufysTkqet2Ctmtyi'

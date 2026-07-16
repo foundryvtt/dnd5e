@@ -524,7 +524,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareSidebarContext(context, options) {
-    const { attributes } = this.actor.system;
+    const { attributes, conditions } = this.actor.system;
     context.portrait = await this._preparePortrait(context);
 
     // Death Saves
@@ -556,7 +556,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
         const label = _loc("DND5E.ExhaustionLevel", { n });
         const classes = ["pip"];
-        const filled = attributes.exhaustion >= n;
+        const filled = conditions.exhaustion >= n;
         if ( filled ) classes.push("filled");
         if ( n === max ) classes.push("death");
         const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };
@@ -573,7 +573,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { hidden, label }]) => {
       if ( hidden ) return obj;
-      const value = attributes.movement[k];
+      const value = attributes.movement.speeds[k];
       if ( (k === "fly") && attributes.movement.hover ) {
         label = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: label });
       }
@@ -1336,7 +1336,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   canExpand(item) {
-    return !["background", "race", "facility"].includes(item.type) && super.canExpand(item);
+    return !["background", "race", "facility", "container"].includes(item.type) && super.canExpand(item);
   }
 
   /* -------------------------------------------- */

@@ -100,21 +100,20 @@ effects:
     transfer: false
     _id: SAbuNo2AO3XXtkdv
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.senses.tremorsense
-        mode: 2
-        value: '60'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.senses.tremorsense
+          value: 60
+          priority: null
+          type: add
+          phase: initial
+          _id: gILat0kKKoVbxaVp
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -123,13 +122,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544082118
+      modifiedTime: 1783544082118
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsptStonecunni.SAbuNo2AO3XXtkdv'
 sort: 100000
 ownership:
@@ -141,11 +143,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866718338
-  modifiedTime: 1745256777763
+  modifiedTime: 1783544082117
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptStonecunni'

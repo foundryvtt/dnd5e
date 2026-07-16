@@ -7,15 +7,16 @@ system:
   description:
     value: >-
       <p>Squirming, ebony tentacles fill a 20-foot square on ground that you can
-      see within range. For the Duration, these tentacles turn the ground in the
-      area into difficult terrain.</p><p>When a creature enters the affected
-      area for the first time on a turn or starts its turn there, the creature
-      must succeed on a Dexterity saving throw or take 3d6 bludgeoning damage
-      and be &amp;Reference[Restrained] by the tentacles until the spell ends. A
-      creature that starts its turn in the area and is already Restrained by the
-      tentacles takes 3d6 bludgeoning damage.</p><p>A creature Restrained by the
-      tentacles can use its action to make a Strength or Dexterity check (its
-      choice) against your spell save DC. On a success, it frees itself.</p>
+      see within range. For the duration, these tentacles turn the ground in the
+      area into &amp;reference[difficult terrain].</p><p>When a creature enters
+      the affected area for the first time on a turn or starts its turn there,
+      the creature must succeed on a Dexterity saving throw or take 3d6
+      bludgeoning damage and be &amp;Reference[Restrained] by the tentacles
+      until the spell ends. A creature that starts its turn in the area and is
+      already Restrained by the tentacles takes 3d6 bludgeoning damage.</p><p>A
+      creature Restrained by the tentacles can use its action to make a Strength
+      or Dexterity check (its choice) against your spell save DC. On a success,
+      it frees itself.</p>
     chat: ''
   source:
     custom: ''
@@ -33,14 +34,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: square
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '90'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -65,108 +69,176 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature enters the affected area for the first time on a turn
+          or starts its turn there.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects:
         - _id: WTgRpzj4EQGJokA6
           onSave: false
+          level:
+            min: null
+            max: null
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
         onSave: half
         parts:
-          - number: 3
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
             denomination: 6
             bonus: ''
             types:
               - bludgeoning
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
         ability: dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Restraining Tentacles
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    KIaQMflFsm0wjCzT:
+      type: utility
+      name: Cast
+      _id: KIaQMflFsm0wjCzT
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: black-tentacles
 sort: 0
 flags: {}
-img: icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp
+img: icons/creatures/tentacles/tentacles-suctioncups-pink.webp
 effects:
-  - name: Black Tentacles
+  - name: Restrained by Black Tentacles
     origin: Compendium.dnd5e.spells.Item.DGONTFbk5eORs5qv
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: WTgRpzj4EQGJokA6
-    changes: []
     description: >-
-      <p>The creature is Restrained by the tentacles until the spell ends or it
-      uses its action to make a Strength or Dexterity check (its choice) to
-      escape.</p>
+      <p>You are &amp;reference[restrained apply=false] by tentacles until the
+      spell ends or you use your action to make a [[/check Strength]] or
+      [[/check Dexterity]] check (your choice) against the caster's spell save
+      DC to escape. On a success, you free yourself.</p>
     transfer: false
     statuses:
       - restrained
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781371818985
+      modifiedTime: 1781371893008
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp
+    img: icons/creatures/tentacles/tentacles-suctioncups-pink.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!DGONTFbk5eORs5qv.WTgRpzj4EQGJokA6'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351157
-  modifiedTime: 1725992718161
+  modifiedTime: 1781371938131
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!DGONTFbk5eORs5qv'

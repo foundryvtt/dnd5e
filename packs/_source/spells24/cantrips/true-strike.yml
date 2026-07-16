@@ -232,32 +232,39 @@ effects:
     img: icons/magic/unholy/hand-weapon-glow-black-green.webp
     disabled: false
     _id: SouQfUgwb9LlUraq
-    system: {}
-    changes:
-      - key: system.damage.base.types
-        mode: 2
-        value: radiant
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} (True Strike)'
-        priority: null
-      - key: system.damage.parts
-        mode: 2
-        value: '[["(floor((@details.level + 1) / 6))d6", "radiant"]]'
-        priority: null
-      - key: activities[attack].attack.ability
-        mode: 5
-        value: spellcasting
-        priority: null
+    system:
+      changes:
+        - key: system.damage.base.types
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: NqPYDvYbRpTtg6YE
+        - key: name
+          value: '{} (True Strike)'
+          priority: null
+          type: override
+          phase: initial
+          _id: beEX5KQ4LurYy6xo
+        - key: system.damage.parts
+          value:
+            - - (floor((@details.level + 1) / 6))d6
+              - radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: rzGxK5IPNeHBwkwR
+        - key: activities[attack].attack.ability
+          value: spellcasting
+          priority: null
+          type: override
+          phase: initial
+          _id: dGQhUxdn5EEAAmem
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -268,40 +275,46 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725569956584
-      modifiedTime: 1725572087216
+      modifiedTime: 1783543977503
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplTrueStrike.SouQfUgwb9LlUraq'
   - type: enchantment
     name: Ranged Weapon
     img: icons/skills/ranged/arrow-strike-glowing-teal.webp
     disabled: false
-    system: {}
-    changes:
-      - key: system.damage.base.types
-        mode: 2
-        value: radiant
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} (True Strike)'
-        priority: null
-      - key: system.damage.base.bonus
-        mode: 2
-        value: (floor((@details.level + 1) / 6))d6[radiant]
-        priority: null
+    system:
+      changes:
+        - key: system.damage.base.types
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: 2FVE25dNNx55RNCB
+        - key: name
+          value: '{} (True Strike)'
+          priority: null
+          type: override
+          phase: initial
+          _id: scvchDGqZDWNGn5x
+        - key: system.damage.base.bonus
+          value: (floor((@details.level + 1) / 6))d6[radiant]
+          priority: null
+          type: add
+          phase: initial
+          _id: gOksBhqQo3z8qwfC
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -313,14 +326,17 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplTrueStrike.ActiveEffect.SouQfUgwb9LlUraq
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725572096560
-      modifiedTime: 1725572184460
+      modifiedTime: 1783543977503
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: Zsx8UvC9DmdrA1E1
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplTrueStrike.Zsx8UvC9DmdrA1E1'
 folder: 4FhsY9FJQd7h7MZb
 sort: 100025
@@ -335,11 +351,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425976371
-  modifiedTime: 1745256799544
+  modifiedTime: 1783543977503
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTrueStrike'

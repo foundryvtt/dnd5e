@@ -127,17 +127,15 @@ effects:
     transfer: false
     _id: G813GhbtXMeZfUHe
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>A creature &amp;Reference[Blinded apply=false] by this spell makes
       another [[/save ability=con format=long]] at the end of each of its turns,
@@ -150,13 +148,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725310020925
-      modifiedTime: 1725310153859
+      modifiedTime: 1783543977343
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSunburst00.G813GhbtXMeZfUHe'
 folder: M5CvwK9zVtzx6Dnn
 sort: 100007
@@ -169,11 +170,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425974212
-  modifiedTime: 1745256798971
+  modifiedTime: 1783543977343
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSunburst00'

@@ -488,12 +488,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -538,10 +535,10 @@ prototypeToken:
     saturation: 0
     contrast: 0
   detectionModes:
-    - id: basicSight
+    basicSight:
       range: 60
       enabled: true
-    - id: blindsight
+    blindsight:
       range: 30
       enabled: true
   occludable:
@@ -563,6 +560,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - name: Shared Resistances
     system:
@@ -891,21 +889,20 @@ items:
         transfer: false
         _id: 7cJTSbk7inXzZrgc
         type: base
-        system: {}
-        changes:
-          - key: system.traits.dr.value
-            mode: 2
-            value: acid
-            priority: null
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: acid
+              priority: null
+              type: add
+              phase: initial
+              _id: mhlVzN0qjfuFhqiP
         disabled: false
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -915,10 +912,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184623
+          modifiedTime: 1783544184623
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.7cJTSbk7inXzZrgc
       - name: Shared Cold Resistance
@@ -926,21 +928,20 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.phbmobDraconicSp.Item.phbaoiSharedResi
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.traits.dr.value
-            mode: 2
-            value: cold
-            priority: null
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: cold
+              priority: null
+              type: add
+              phase: initial
+              _id: X8b3uCwqIsS5NvXu
         disabled: false
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -950,11 +951,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184623
+          modifiedTime: 1783544184623
         _id: RhMVHKsPIntvMb9t
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.RhMVHKsPIntvMb9t
       - name: Shared Fire Resistance
@@ -962,21 +968,20 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.phbmobDraconicSp.Item.phbaoiSharedResi
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.traits.dr.value
-            mode: 2
-            value: fire
-            priority: null
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: fire
+              priority: null
+              type: add
+              phase: initial
+              _id: G1GyptWxSrktX6xK
         disabled: false
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -986,11 +991,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184623
+          modifiedTime: 1783544184623
         _id: 88nNini6vAbvuYpW
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.88nNini6vAbvuYpW
       - name: Shared Lightning Resistance
@@ -998,21 +1008,20 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.phbmobDraconicSp.Item.phbaoiSharedResi
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.traits.dr.value
-            mode: 2
-            value: lightning
-            priority: null
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: lightning
+              priority: null
+              type: add
+              phase: initial
+              _id: aVRQamPH2zXgcX6n
         disabled: false
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -1022,11 +1031,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184623
+          modifiedTime: 1783544184623
         _id: aM5KtLpDsfmHWiz2
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.aM5KtLpDsfmHWiz2
       - name: Shared Poison Resistance
@@ -1034,21 +1048,20 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.phbmobDraconicSp.Item.phbaoiSharedResi
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.traits.dr.value
-            mode: 2
-            value: poison
-            priority: null
+        system:
+          changes:
+            - key: system.traits.dr.value
+              value: poison
+              priority: null
+              type: add
+              phase: initial
+              _id: C8HTD30Uw6aFwErj
         disabled: false
         duration:
-          startTime: null
-          seconds: 3600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -1058,11 +1071,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184623
+          modifiedTime: 1783544184623
         _id: C73Xnt0qigfb1tiy
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.C73Xnt0qigfb1tiy
     folder: null
@@ -1078,10 +1096,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544184623
+      modifiedTime: 1783544184623
     _key: '!actors.items!phbmobDraconicSp.phbaoiSharedResi'
   - name: Multiattack
     system:
@@ -1196,10 +1216,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiMultiattac'
   - name: Rend
     system:
@@ -1332,10 +1354,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiRend000000'
   - name: Breath Weapon
     system:
@@ -1467,10 +1491,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiBreathWeap'
 effects: []
 folder: UkOGmZEiXrlLv29I
@@ -1488,10 +1514,10 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452720419
-  modifiedTime: 1771452720419
+  systemVersion: 6.0.0
+  createdTime: 1783544184622
+  modifiedTime: 1783544184622
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbmobDraconicSp'

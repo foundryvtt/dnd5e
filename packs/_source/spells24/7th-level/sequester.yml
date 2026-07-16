@@ -111,17 +111,15 @@ effects:
     transfer: false
     _id: DWu3UoqOICFFQA1W
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If the target is a creature, it enters a state of suspended animation;
       it has the &amp;Reference[Unconscious apply=false] condition, doesn’t age,
@@ -136,13 +134,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724970035225
-      modifiedTime: 1724970321949
+      modifiedTime: 1783543976752
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSequester0.DWu3UoqOICFFQA1W'
 folder: EdAGMG8IF26PLkD3
 sort: 500000
@@ -155,11 +156,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425970199
-  modifiedTime: 1745256797997
+  modifiedTime: 1783543976751
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSequester0'

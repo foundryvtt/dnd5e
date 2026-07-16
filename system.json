@@ -25,6 +25,7 @@
   ],
   "documentTypes": {
     "ActiveEffect": {
+      "condition": {},
       "enchantment": {}
     },
     "Actor": {
@@ -487,6 +488,15 @@
           "types": ["feat", "weapon"]
         }
       }
+    },
+    {
+      "name": "effects",
+      "label": "Active Effects",
+      "system": "dnd5e",
+      "path": "packs/effects",
+      "type": "ActiveEffect",
+      "private": false,
+      "flags": {}
     }
   ],
   "packFolders": [
@@ -503,7 +513,8 @@
         "tables24",
         "actors24",
         "equipment24",
-        "monsterfeatures24"
+        "monsterfeatures24",
+        "effects"
       ]
     },
     {
@@ -590,7 +601,7 @@
         "SRD 5.2": "SOURCE.BOOK.SRD52"
       }
     },
-    "needsMigrationVersion": "5.3.0",
+    "needsMigrationVersion": "6.0.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],

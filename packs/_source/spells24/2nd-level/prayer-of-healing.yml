@@ -103,20 +103,18 @@ effects:
   - name: Healed by Prayer
     origin: Compendium.dnd5e.spells24.Item.phbsplPrayerofHe
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/holy/prayer-hands-glowing-yellow.webp
     _id: BrBVse9ezicC6IVW
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>A creature can’t be affected by the
       @UUID[Compendium.dnd5e.spells24.Item.phbsplPrayerofHe] spell again until
@@ -128,13 +126,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976354
+      modifiedTime: 1783543976354
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplPrayerofHe.BrBVse9ezicC6IVW'
 folder: 3SjcO2acsFnWegp4
 sort: 1300000
@@ -147,11 +148,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425966923
-  modifiedTime: 1745256797072
+  modifiedTime: 1783543976354
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPrayerofHe'

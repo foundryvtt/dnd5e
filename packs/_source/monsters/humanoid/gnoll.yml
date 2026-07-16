@@ -445,9 +445,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -462,7 +459,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -482,6 +479,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: WlaPkHNlq3vBfxnk
     name: Hide Armor
@@ -551,7 +549,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.n1V07puo0RQxPGuF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -627,7 +625,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -635,63 +633,16 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!R2GPY9BhRmmwZwkh.sSs3hSzkKBMNBgTs'
-  - _id: iBhjlawEB5iwUmoS
-    name: Rampage
-    type: feat
-    img: icons/skills/melee/strike-axe-blood-red.webp
-    system:
-      description:
-        value: >-
-          <p>When the gnoll reduces a creature to 0 hit points with a melee
-          attack on its turn, the gnoll can take a bonus action to move up to
-          half its speed and make a bite attack.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: rampage
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.BnuDkgCOeGvAoYhy
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403415294
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!R2GPY9BhRmmwZwkh.iBhjlawEB5iwUmoS'
   - _id: fVB2xcZ4wVwiqEYf
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Gnoll attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -754,7 +705,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -763,8 +714,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        xqwbeew9JLSO64kf:
           type: attack
           activation:
             type: action
@@ -779,10 +729,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -799,7 +750,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -812,24 +764,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 300000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: xqwbeew9JLSO64kf
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -839,25 +804,27 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551735
+      systemVersion: 6.0.0
+      createdTime: 1781823642374
+      modifiedTime: 1781823663619
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!R2GPY9BhRmmwZwkh.fVB2xcZ4wVwiqEYf'
   - _id: lsZzJMqxUIjbczLM
     name: Spear
     type: weapon
-    img: icons/weapons/polearms/spear-flared-worn-grey.webp
+    img: icons/weapons/polearms/spear-hooked-simple.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
           attackMode=twoHanded]] if used with two hands to make a melee
           attack.</p>
-        chat: <p>The Gnoll attacks with its Spear.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -889,7 +856,7 @@ items:
       damage:
         versatile:
           number: null
-          denomination: 0
+          denomination: null
           bonus: ''
           types: []
           custom:
@@ -922,7 +889,7 @@ items:
       properties:
         - thr
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -931,8 +898,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        RPuyKzShFwKtCyfZ:
           type: attack
           activation:
             type: action
@@ -947,10 +913,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -967,7 +934,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -980,20 +948,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: RPuyKzShFwKtCyfZ
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1008,11 +988,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173655713
+      systemVersion: 6.0.0
+      createdTime: 1781823609923
+      modifiedTime: 1781823635751
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!R2GPY9BhRmmwZwkh.lsZzJMqxUIjbczLM'
@@ -1023,7 +1003,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Gnoll attacks with its Longbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1089,7 +1071,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1098,8 +1080,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        rkTuxh6joHqF2KNt:
           type: attack
           activation:
             type: action
@@ -1114,10 +1095,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1134,7 +1116,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1147,24 +1130,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: rkTuxh6joHqF2KNt
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1174,14 +1171,136 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385407
+      systemVersion: 6.0.0
+      createdTime: 1781823668598
+      modifiedTime: 1781823684324
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!R2GPY9BhRmmwZwkh.2Squ8wLvm5nSzA8w'
+  - _id: TGAlVMJcaZCRp7TI
+    name: Rampage
+    type: feat
+    img: icons/skills/melee/strike-axe-blood-red.webp
+    system:
+      description:
+        value: >-
+          <p>When the [[lookup @name lowercase]]{monster} reduces a creature to
+          0 hit points with a melee attack on its turn, the [[lookup @name
+          lowercase]]{monster} can take a bonus action to move up to half its
+          speed and make a [[/item .fVB2xcZ4wVwiqEYf]]{bite} attack.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        H1SfZj6B8IeNXZRA:
+          type: utility
+          activation:
+            type: bonus
+            value: null
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} reduces a creature to
+              0 hit points with a melee attack on its turn.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: H1SfZj6B8IeNXZRA
+          name: Rush Prey
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: rampage
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 93750
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.R2GPY9BhRmmwZwkh.Item.w16uSwRaLmYNcOX4
+      duplicateSource: Item.OkU9zrYly6LlE6Z0
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781823604189
+      modifiedTime: 1783370059788
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!R2GPY9BhRmmwZwkh.TGAlVMJcaZCRp7TI'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -1190,7 +1309,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171230918

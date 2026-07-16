@@ -448,9 +448,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -465,7 +462,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -485,55 +482,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: mZf3scqsBLavvot1
-    name: Stone Camouflage
-    type: feat
-    img: icons/environment/settlement/stone-stairs.webp
-    system:
-      description:
-        value: >-
-          <p>The grick has advantage on Dexterity (Stealth) checks made to hide
-          in rocky terrain.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: stone-camouflage
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825566277
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!tFJX45zj3QDc3Zli.mZf3scqsBLavvot1'
   - _id: dw5lQaT8ySNuOVd4
     name: Multiattack
     type: feat
@@ -541,10 +491,10 @@ items:
     system:
       description:
         value: >-
-          <p>The grick makes one attack with its [[/item
-          .tkVlxJxg4LBVJvuX]]{tentacles}. If that attack hits, the grick can
-          make one [[/item .AGLjE9RSCjg1vQ6R]]{beak} attack against the same
-          target.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes one attack with its
+          [[/item .tkVlxJxg4LBVJvuX]]{tentacles}. If that attack hits, the
+          [[lookup @name lowercase]]{monster} can make one [[/item
+          .AGLjE9RSCjg1vQ6R]]{beak} attack against the same target.</p>
         chat: ''
       source:
         custom: ''
@@ -558,13 +508,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        xk83NpXZV79URZsj:
           type: utility
           activation:
             type: action
@@ -579,15 +528,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -598,7 +548,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -615,7 +566,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: xk83NpXZV79URZsj
       enchant: {}
       prerequisites:
         level: null
@@ -629,11 +588,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657485
+      systemVersion: 6.0.0
+      createdTime: 1781864664779
+      modifiedTime: 1783366982134
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tFJX45zj3QDc3Zli.dw5lQaT8ySNuOVd4'
@@ -644,7 +603,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Grick attacks with its Tentacles.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -707,7 +668,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -716,8 +677,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        OAD78uTfJrmNBFxr:
           type: attack
           activation:
             type: action
@@ -732,10 +692,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -752,7 +713,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -765,24 +727,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: OAD78uTfJrmNBFxr
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tentacles
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -792,11 +767,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nKpLMXS9E10TSGhU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553852
+      systemVersion: 6.0.0
+      createdTime: 1781864595731
+      modifiedTime: 1781876365860
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tFJX45zj3QDc3Zli.tkVlxJxg4LBVJvuX'
@@ -807,7 +782,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Grick attacks with its Beak.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -870,7 +847,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -879,8 +856,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        P7zfFG0OTE7irDTs:
           type: attack
           activation:
             type: action
@@ -895,10 +871,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -915,7 +892,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -934,18 +912,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: P7zfFG0OTE7irDTs
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: beak
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -955,14 +946,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553852
+      systemVersion: 6.0.0
+      createdTime: 1781864629540
+      modifiedTime: 1781876361746
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tFJX45zj3QDc3Zli.AGLjE9RSCjg1vQ6R'
+  - _id: GZoCoZEY1RqP2mAU
+    name: Stone Camouflage
+    type: feat
+    img: icons/commodities/stone/ore-pile-gold-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Dexterity
+          (Stealth) checks made to &amp;reference[hide] in rocky terrain.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: stone-camouflage
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 123438
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.SOin81NWijHRvXFK.Item.zqsYu35qYHNNeTWE
+      duplicateSource: Item.7T3eyubaB1KmDJ3R
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781864675535
+      modifiedTime: 1781864675535
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!tFJX45zj3QDc3Zli.GZoCoZEY1RqP2mAU'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -971,7 +1015,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171263247

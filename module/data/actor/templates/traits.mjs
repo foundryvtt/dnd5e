@@ -1,6 +1,7 @@
 import { defaultUnits, formatLength, splitSemicolons } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
+import ActorSizeField from "../fields/actor-size-field.mjs";
 import DamageTraitField from "../fields/damage-trait-field.mjs";
 import SimpleTraitField from "../fields/simple-trait-field.mjs";
 
@@ -20,12 +21,14 @@ export default class TraitsField {
    */
   static get common() {
     return {
-      size: new StringField({ required: true, initial: "med", label: "DND5E.Size" }),
+      size: new ActorSizeField({ required: true, initial: "med", label: "DND5E.Size" }),
       di: new DamageTraitField({}, { label: "DND5E.DamImm" }),
       dr: new DamageTraitField({}, { label: "DND5E.DamRes" }),
       dv: new DamageTraitField({}, { label: "DND5E.DamVuln" }),
       dm: new SchemaField({
-        amount: new MappingField(new FormulaField({ deterministic: true }), { label: "DND5E.DamMod" }),
+        amount: new MappingField(new FormulaField({ deterministic: true }), {
+          label: "DND5E.DamMod", labels: { value: "DND5E.DamMod" }
+        }),
         bypasses: new SetField(new StringField(), {
           label: "DND5E.DAMAGE.PhysicalBypass.Label", hint: "DND5E.DAMAGE.PhysicalBypass.Hint"
         })

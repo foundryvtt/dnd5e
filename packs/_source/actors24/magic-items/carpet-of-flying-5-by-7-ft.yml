@@ -477,12 +477,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -526,7 +523,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -546,27 +543,27 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items: []
 effects:
   - name: Overloaded
     img: icons/tools/smithing/anvil.webp
     _id: x31gxhzQK4X86k0a
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '0.5'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: qolF3w7aT6KGaDZH
     disabled: true
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The carpet's Fly Speed is halved when carrying more than its normal
       capacity.</p>
@@ -580,10 +577,21 @@ effects:
       compendiumSource: Actor.dmg3x5CarpetofFl.ActiveEffect.OOJj1Gc67HwjhG7Q
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544164112
+      modifiedTime: 1783544164112
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    showIcon: 1
+    folder: null
     _key: '!actors.effects!dmg5x7CarpetofFl.x31gxhzQK4X86k0a'
 folder: 2AjZvlZWDCwSd0ry
 flags:
@@ -592,11 +600,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452692729
-  modifiedTime: 1771452692729
+  modifiedTime: 1783544164112
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

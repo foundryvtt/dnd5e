@@ -130,25 +130,27 @@ effects:
     img: icons/creatures/invertebrates/spider-skull-green.webp
     _id: 6ZKscgdcc55OsAuN
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: NdJ0qS92pzJyrunz
+        - key: system.attributes.movement.climb
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 81dJZfKzbOLUyvJX
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><strong>Poison Resistance.</strong> You have Resistance to Poison
       damage.</p><p><strong>Spider Climb.</strong> You have a Climb Speed equal
@@ -168,22 +170,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1728946973777
-      modifiedTime: 1759793507922
+      modifiedTime: 1783544094319
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgCloakOfArachn.6ZKscgdcc55OsAuN'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764616709863
+  modifiedTime: 1783544094319
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7500000

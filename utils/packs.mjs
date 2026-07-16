@@ -1,8 +1,8 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import logger from "fancy-log";
-import YAML from "js-yaml";
-import path from "path";
+import * as YAML from "js-yaml";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { compilePack, extractPack } from "@foundryvtt/foundryvtt-cli";

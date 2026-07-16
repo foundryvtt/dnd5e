@@ -99,21 +99,20 @@ effects:
     transfer: true
     _id: WtiHwWONdmCOeSDR
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.spell.dc
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.spell.dc
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: faT4gguO90Xotw1m
     disabled: true
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The spell save DC of your Sorcerer spells increases by 1.
       (Automated)</p><p>You have Advantage on the attack rolls of Sorcerer
@@ -125,13 +124,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103671
+      modifiedTime: 1783544103671
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbscrInnateSorc.WtiHwWONdmCOeSDR'
 flags:
   dnd5e:
@@ -140,11 +142,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866286897
-  modifiedTime: 1745256765528
+  modifiedTime: 1783544103671
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

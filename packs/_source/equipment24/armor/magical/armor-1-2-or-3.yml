@@ -140,42 +140,51 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: 6JbAzK6YBkyx73iy
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} +1'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.armor.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} +1'
+          priority: null
+          type: override
+          phase: initial
+          _id: tWbKPZdxoVTtvIhb
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: oFjgv3JsYSKUTOjw
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: qhUHXC1eroj6Egpb
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: DSOW3L6HPlYxj58e
+        - key: system.armor.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: xRfd8DNxvCu0bjb0
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: xQcqHjZZCGuJHN0A
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -186,54 +195,66 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730225455493
-      modifiedTime: 1730772443529
+      modifiedTime: 1783544093471
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgArmor12or3000.6JbAzK6YBkyx73iy'
   - type: enchantment
     name: Armor +2
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} +2'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.armor.magicalBonus
-        mode: 4
-        value: '2'
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '40000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} +2'
+          priority: null
+          type: override
+          phase: initial
+          _id: 5G6c3HiOxzMQl1AU
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: hioFmJDRuhaMEMi2
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: e7JrzrSrAOtCN6Tj
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: zLOvS3neNcpodWdS
+        - key: system.armor.magicalBonus
+          value: 2
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: y6E4bbEEcPUYJTpT
+        - key: system.price.value
+          value: 40000
+          priority: null
+          type: add
+          phase: initial
+          _id: 59PmfLV3FxyUpQ3o
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -244,55 +265,67 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730226092493
-      modifiedTime: 1730772454304
+      modifiedTime: 1783544093472
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: s6yzQ9QFFOgfttAH
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgArmor12or3000.s6yzQ9QFFOgfttAH'
   - type: enchantment
     name: Armor +3
     img: systems/dnd5e/icons/spell-tiers/spell5.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} +3'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: legendary
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.armor.magicalBonus
-        mode: 4
-        value: '3'
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '200000'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} +3'
+          priority: null
+          type: override
+          phase: initial
+          _id: Bh5gnfyRL9ZAP02R
+        - key: system.rarity
+          value: legendary
+          priority: null
+          type: override
+          phase: initial
+          _id: YscE4Mq6sLxJbiEy
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgArmor12or3000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: n1DNvmCqWqO0npmB
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: Q0pz7RCVNh9XwHdL
+        - key: system.armor.magicalBonus
+          value: 3
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: FcF6ZWtdYVMsQMUp
+        - key: system.price.value
+          value: 200000
+          priority: null
+          type: add
+          phase: initial
+          _id: RWVPlPOkkZrg3C5K
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -303,14 +336,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730226095734
-      modifiedTime: 1730772463952
+      modifiedTime: 1783544093472
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: eyS8vFIbKlo0Sbci
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgArmor12or3000.eyS8vFIbKlo0Sbci'
 folder: 1kn4uV4dTVVduLjA
 sort: 300000
@@ -323,11 +359,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1730225368357
-  modifiedTime: 1745431975750
+  modifiedTime: 1783544093471
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgArmor12or3000'

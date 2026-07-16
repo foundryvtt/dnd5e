@@ -6,7 +6,7 @@ system:
   description:
     value: >-
       <p><em>The potion's red liquid glimmers when agitated.</em></p><p>You
-      regain 4d4+4 hit points when you drink this potion.</p>
+      regain [[/healing]] when you drink this potion.</p>
     chat: ''
   source:
     custom: ''
@@ -49,14 +49,14 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>The potion's red liquid glimmers when agitated.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    fWvDOSK8Cpfx6EkF:
       type: heal
       activation:
         type: action
@@ -68,12 +68,14 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
@@ -93,7 +95,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -114,12 +117,13 @@ system:
           mode: whole
           number: null
           formula: ''
+        modifiers: []
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -127,7 +131,11 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: fWvDOSK8Cpfx6EkF
   attuned: false
   identifier: potion-of-greater-healing
 effects: []
@@ -138,11 +146,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037164386
-  modifiedTime: 1764619665798
+  modifiedTime: 1783373715631
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!L887NdWEP5NqHCrQ'

@@ -1,24 +1,22 @@
 _id: FIDyR0kZnxGy7bj8
 name: Oil of Slipperiness
 type: consumable
-img: icons/consumables/potions/bottle-circular-corked-labeled-green.webp
+img: icons/consumables/potions/potion-tube-corked-blue.webp
 system:
   description:
     value: >-
       <p><em>This sticky black unguent is thick and heavy in the container, but
-      it flows quickly when poured. </em></p>
-
-      <p>The oil can cover a Medium or smaller creature, along with the
-      equipment it's wearing and carrying (one additional vial is required for
-      each size category above Medium).  Applying the oil takes 10 minutes.  The
+      it flows quickly when poured.</em></p><p>The oil can cover a Medium or
+      smaller creature, along with the equipment it's wearing and carrying (one
+      additional vial is required for each size category above Medium). Applying
+      the oil takes [[lookup @labels.activation activity=OMSMC85UR5All9Vz]]. The
       affected creature then gains the effect of a
       @UUID[Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT]{Freedom of Movement}
-      spell for 8 hours.</p>
-
-      <p>Alternatively, the oil can be poured on the ground as an action, where
-      it covers a 10‑foot square, duplicating the effect of the
-      @UUID[Compendium.dnd5e.spells.Item.etgcR9wqmrhyZ0tx]{Grease} spell in that
-      area for 8 hours.</p>
+      spell for [[lookup @labels.duration
+      activity=OMSMC85UR5All9Vz]].</p><p>Alternatively, the oil can be poured on
+      the ground as an action, where it covers a 10‑foot square, duplicating the
+      effect of the @UUID[Compendium.dnd5e.spells.Item.etgcR9wqmrhyZ0tx]{Grease}
+      spell in that area for 8 hours.</p>
     chat: ''
   source:
     custom: ''
@@ -56,18 +54,20 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This sticky black unguent is thick and heavy in the container, but it
+      flows quickly when poured.</p>
+    name: Unidentified Oil
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    OMSMC85UR5All9Vz:
       type: utility
       activation:
-        type: action
-        value: 1
+        type: minute
+        value: 10
         condition: ''
         override: false
       consumption:
@@ -75,19 +75,32 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>The oil can cover a Medium or smaller creature, along with the
+          equipment it's wearing and carrying (one additional vial is required
+          for each size category above Medium). Applying the oil takes [[lookup
+          @labels.activation activity=OMSMC85UR5All9Vz]]. The affected creature
+          then gains the effect of a
+          @UUID[Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT]{Freedom of
+          Movement} spell for [[lookup @labels.duration
+          activity=OMSMC85UR5All9Vz]].</p>
       duration:
         concentration: false
         value: '8'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: 4OOm3lGF9n4bLHyt
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -100,7 +113,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -117,8 +131,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Apply Oil
       img: ''
       visibility:
         requireMagic: true
@@ -126,10 +140,144 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: OMSMC85UR5All9Vz
+    OCcBVLFoBjsgBp2r:
+      type: cast
+      name: Pour Oil Out
+      _id: OCcBVLFoBjsgBp2r
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>This oil can be poured on the ground as an action, where it covers
+          a 10‑foot square, duplicating the effect of the
+          @UUID[Compendium.dnd5e.spells.Item.etgcR9wqmrhyZ0tx]{Grease} spell in
+          that area for 8 hours.</p>
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: true
+        value: '8'
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: square
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      spell:
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+        uuid: Compendium.dnd5e.spells.Item.etgcR9wqmrhyZ0tx
+        ability: ''
+        level: 1
   attuned: false
   identifier: oil-of-slipperiness
-effects: []
+effects:
+  - name: Alchemical Slipperiness
+    origin: Compendium.dnd5e.items.Item.FIDyR0kZnxGy7bj8
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: false
+    _id: 4OOm3lGF9n4bLHyt
+    description: >-
+      <p>Your movement is unaffected by &amp;reference[difficult terrain], and
+      spells and other magical effects can neither reduce your speed nor cause
+      you to be &amp;reference[Paralyzed apply=false] or
+      &amp;reference[Restrained apply=false].</p><p>You can also spend 5 feet of
+      Movement to automatically escape from nonmagical restraints, such as
+      Manacles or a creature that has you &amp;reference[Grappled apply=false].
+      Finally, being Underwater imposes no penalties on your movement or
+      attacks.</p>
+    transfer: false
+    statuses: []
+    flags:
+      dnd5e:
+        riders: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT.ActiveEffect.OnWa3f4IQ3pneB5T
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783375150202
+      modifiedTime: 1783376644491
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/skills/movement/arrow-upward-yellow.webp
+    type: base
+    system:
+      changes:
+        - key: system.traits.di.value
+          value: paralyzed
+          priority: null
+          type: add
+          phase: initial
+        - key: system.traits.di.value
+          value: restrained
+          priority: null
+          type: add
+          phase: initial
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          value: all
+          priority: null
+          type: add
+          phase: initial
+      rider:
+        statuses: []
+      magical: true
+    sort: 0
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!FIDyR0kZnxGy7bj8.4OOm3lGF9n4bLHyt'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -137,11 +285,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037142391
-  modifiedTime: 1764619463583
+  modifiedTime: 1783375200344
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!FIDyR0kZnxGy7bj8'

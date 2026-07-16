@@ -6,9 +6,10 @@ type: spell
 system:
   description:
     value: >-
-      <p>For the duration, you see invisible creatures and objects as if they
-      were visible, and you can see into the Ethereal Plane. Ethereal creatures
-      and objects appear ghostly and translucent.</p>
+      <p>For the duration, you see &amp;reference[invisible apply=false]
+      creatures and objects as if they were visible, and you can see into the
+      Ethereal Plane. Ethereal creatures and objects appear ghostly and
+      translucent.</p>
     chat: ''
   source:
     custom: ''
@@ -27,11 +28,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -70,7 +74,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 3omf4AjcV8DOMCgO
+          level: {}
       range:
         override: false
       target:
@@ -89,20 +95,67 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: see-invisibility
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-teal.webp
-effects: []
+img: icons/creatures/eyes/humanoid-single-blue.webp
+effects:
+  - name: See Invisibility
+    img: icons/creatures/eyes/humanoid-single-blue.webp
+    origin: Compendium.dnd5e.spells.Item.DQzlB5Y3k791W5bH
+    transfer: false
+    _id: 3omf4AjcV8DOMCgO
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, you see &amp;reference[invisible apply=false]
+      creatures and objects as if they were visible, and you can see into the
+      Ethereal Plane. Ethereal creatures and objects appear ghostly and
+      translucent.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781227700139
+      modifiedTime: 1781227716012
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!DQzlB5Y3k791W5bH.3omf4AjcV8DOMCgO'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351226
-  modifiedTime: 1725992718181
+  modifiedTime: 1781227700173
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!DQzlB5Y3k791W5bH'

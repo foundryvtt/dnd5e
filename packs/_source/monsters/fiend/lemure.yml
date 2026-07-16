@@ -452,9 +452,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -469,7 +466,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -489,64 +486,23 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: zEGUljO44aDmj8z5
-    name: Devil's Sight
-    type: feat
-    img: icons/creatures/eyes/lizard-single-slit-blue.webp
-    system:
-      description:
-        value: <p>Magical darkness doesn't impede the lemure's darkvision.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: Lemure
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: devils-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!tubcO7kaQ4w0soxS.zEGUljO44aDmj8z5'
   - _id: 7gfe5c1qGIvai12V
     name: Hellish Rejuvenation
     type: feat
-    img: icons/skills/wounds/anatomy-organ-heart-red.webp
+    img: icons/creatures/unholy/demon-fanged-horned-yellow.webp
     system:
       description:
         value: >-
-          <p>A lemure that dies in the Nine Hells sometimes comes back to comes
-          back to life with all its hit points in [[/r 1d10]] days unless it is
-          killed by a good-aligned creature with a bless spell cast on that
-          creature or its remains are sprinkled with holy water.</p>
+          <p>A [[lookup @name lowercase]]{monster} that dies in the Nine Hells
+          sometimes comes back to comes back to life with all its hit points in
+          [[/r 1d10 #Days until the lemure revives.]] days unless it is killed
+          by a good-aligned creature with a
+          @UUID[Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr]{Bless} spell cast
+          on that creature or its remains are sprinkled with
+          @UUID[Compendium.dnd5e.equipment24.Item.nshr9PBVyB03T7wB]{Holy
+          Water}.</p>
         chat: >-
           <p>A lemure that dies in the Nine Hells sometimes comes back to
           life.</p>
@@ -562,93 +518,43 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: Lemure
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 1d10
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
       enchant: {}
       prerequisites:
         level: null
       identifier: hellish-rejuvenation
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.XmLuhZYd9WnCWBlU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957510158
+      systemVersion: 6.0.0
+      createdTime: 1781640254426
+      modifiedTime: 1781640343967
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tubcO7kaQ4w0soxS.7gfe5c1qGIvai12V'
   - _id: TypCj0S846TqsHzI
     name: Fist
     type: weapon
-    img: icons/magic/fire/flame-burning-fist-strike.webp
+    img: icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Lemure attacks with its Fist.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -711,17 +617,16 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        qHbmwJZFvVxyvKy3:
           type: attack
           activation:
             type: action
@@ -736,10 +641,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -756,7 +662,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -769,24 +676,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: qHbmwJZFvVxyvKy3
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: fist
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -796,14 +716,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553926
+      systemVersion: 6.0.0
+      createdTime: 1781640380641
+      modifiedTime: 1781640406035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!tubcO7kaQ4w0soxS.TypCj0S846TqsHzI'
+  - _id: Di9DB6UXL4OOVV0b
+    name: Devil Sight
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Magical &amp;reference[darkness] doesn't impede the [[lookup @name
+          lowercase]]{monster}'s &amp;reference[Darkvision].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: devil-sight
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/creatures/eyes/lizard-single-slit-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781640251133
+      modifiedTime: 1781640251133
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.UjbgbOnd6ltjagZm
+    _key: '!actors.items!tubcO7kaQ4w0soxS.Di9DB6UXL4OOVV0b'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -812,7 +785,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171264005

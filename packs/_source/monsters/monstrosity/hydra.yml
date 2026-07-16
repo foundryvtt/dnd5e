@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,14 +478,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: xr59rWl3oCOLdQBQ
     name: Hold Breath
     type: feat
-    img: icons/magic/water/orb-water-transparent.webp
+    img: icons/magic/water/orb-ice-opaque.webp
     system:
       description:
-        value: <p>The hydra can hold its breath for 1 hour.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can hold its breath for 1
+          hour.</p>
         chat: ''
       source:
         custom: ''
@@ -502,10 +502,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -520,30 +521,41 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781893693801
+      modifiedTime: 1781893706768
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!K4vsSlHqbBAHUDHY.xr59rWl3oCOLdQBQ'
   - _id: fsAeJDaI0a6sBeFk
     name: Multiple Heads
     type: feat
-    img: icons/skills/melee/strike-sword-stabbed-brown.webp
+    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
     system:
       description:
         value: >-
-          <p>The hydra has five heads. While it has more than one head, the
-          hydra has advantage on saving throws against being blinded, charmed,
-          deafened, frightened, stunned, and knocked unconscious.</p><p>Whenever
-          the hydra takes 25 or more damage in a single turn, one of its heads
-          dies. If all its heads die, the hydra dies.</p><p>At the end of its
-          turn, it grows two heads for each of its heads that died since its
-          last turn, unless it has taken <em>fire damage</em> since its last
-          turn. The hydra regains 10 hit points for each head regrown in this
-          way.</p>
+          <p>The [[lookup @name lowercase]]{monster} has five heads. While it
+          has more than one head, the hydra has advantage on saving throws
+          against being &amp;reference[blinded apply=false],
+          &amp;reference[charmed apply=false], &amp;reference[deafened
+          apply=false], &amp;reference[frightened apply=false],
+          &amp;reference[stunned apply=false], and knocked
+          &amp;reference[unconscious apply=false].</p><p>Whenever the [[lookup
+          @name lowercase]]{monster} takes 25 or more damage in a single turn,
+          one of its heads dies. If all its heads die, the [[lookup @name
+          lowercase]]{monster} dies.</p><p>At the end of its turn, it grows two
+          heads for each of its heads that died since its last turn, unless it
+          has taken fire damage since its last turn. The [[lookup @name
+          lowercase]]{monster} regains [[/healing]] for each head regrown in
+          this way.</p><section id="secret-fb7Nmscdc6QqsOXy"
+          class="secret"><p><strong>Foundry Note</strong></p><p>The [[lookup
+          @name lowercase]]{monster}'s heads can be kept track of via the
+          @UUID[Compendium.dnd5e.monsters.Actor.K4vsSlHqbBAHUDHY.Item.fsAeJDaI0a6sBeFk.ActiveEffect.jALTzc0GXXaDjFNQ]{Hydra
+          Head} active effects on it. Apply or remove this effect each time the
+          [[lookup @name lowercase]]{monster} regrows or loses
+          heads.</p></section>
         chat: >-
           <p>The hydra has five heads. While it has more than one head, the
           hydra has<strong> advantage </strong>on saving throws <strong>against
@@ -561,16 +573,134 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        YGrfwEdzrY2p41LN:
+          type: heal
+          name: Regrow Heads & Regenerate
+          _id: YGrfwEdzrY2p41LN
+          img: ''
+          sort: 0
+          activation:
+            type: turnEnd
+            override: false
+            condition: >-
+              If the [[lookup @name lowercase]]{monster} has lost one or more
+              heads.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>At the end of its turn, it grows two heads for each of its
+              heads that died since its last turn, unless it has taken fire
+              damage since its last turn. The [[lookup @name
+              lowercase]]{monster} regains [[/healing]] for each head regrown in
+              this
+              way.</p><p>@UUID[Compendium.dnd5e.monsters.Actor.K4vsSlHqbBAHUDHY.Item.fsAeJDaI0a6sBeFk.ActiveEffect.jALTzc0GXXaDjFNQ]{Hydra
+              Head}</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: jALTzc0GXXaDjFNQ
+              level:
+                min: null
+                max: null
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          healing:
+            types:
+              - healing
+            custom:
+              enabled: false
+            scaling:
+              number: 1
+            number: null
+            denomination: null
+            bonus: '10'
       enchant: {}
       prerequisites:
         level: null
       identifier: multiple-heads
-    effects: []
+    effects:
+      - name: Hydra Head
+        img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.K4vsSlHqbBAHUDHY.Item.fsAeJDaI0a6sBeFk
+        transfer: false
+        _id: jALTzc0GXXaDjFNQ
+        type: base
+        system:
+          changes:
+            - key: flags.world.hydra-head-count
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have a living head. You die if you lose all of your heads.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781893877572
+          modifiedTime: 1781893937924
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!K4vsSlHqbBAHUDHY.fsAeJDaI0a6sBeFk.jALTzc0GXXaDjFNQ
     folder: null
     sort: 0
     ownership:
@@ -579,23 +709,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dvSoAF3bOeUeIrxf
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825763088
+      systemVersion: 6.0.0
+      createdTime: 1781893724862
+      modifiedTime: 1781894381550
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!K4vsSlHqbBAHUDHY.fsAeJDaI0a6sBeFk'
   - _id: bE965DuMt1ReAulm
     name: Reactive Heads
     type: feat
-    img: icons/magic/death/skull-trio-badge-purple.webp
+    img: icons/creatures/reptiles/serpent-horned-green.webp
     system:
       description:
         value: >-
-          <p>For each head the hydra has beyond one, it gets an extra reaction
-          that can be used only for opportunity attacks.</p>
+          <p>For each head the [[lookup @name lowercase]]{monster} has beyond
+          one, it gets an extra reaction that can be used only for
+          &amp;reference[opportunity attacks].</p>
         chat: ''
       source:
         custom: ''
@@ -609,10 +740,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -627,21 +759,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.miIjsa984tZ0Mil6
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781894156811
+      modifiedTime: 1781894184942
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!K4vsSlHqbBAHUDHY.bE965DuMt1ReAulm'
   - _id: cLcVpNuZOHIxLfPP
     name: Wakeful
     type: feat
-    img: icons/creatures/eyes/lizard-single-slit-blue.webp
+    img: icons/creatures/eyes/lizard-single-slit-green.webp
     system:
       description:
-        value: <p>While the hydra sleeps, at least one of its heads is awake.</p>
+        value: >-
+          <p>While the [[lookup @name lowercase]]{monster} sleeps, at least one
+          of its heads is awake.</p>
         chat: ''
       source:
         custom: ''
@@ -655,10 +789,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -673,12 +808,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.T2gLBBjrHTbLTdGc
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781894119550
+      modifiedTime: 1781894131876
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!K4vsSlHqbBAHUDHY.cLcVpNuZOHIxLfPP'
   - _id: USl5HDilKxVI4BHh
@@ -689,7 +824,7 @@ items:
       description:
         value: >-
           <p>The hydra makes as many [[/item .fYE4f0Oa2I0MetId]]{bite} attacks
-          as it has heads.</p>
+          as it has heads ([[lookup @flags.world.hydra-head-count]]{1}).</p>
         chat: ''
       source:
         custom: ''
@@ -703,13 +838,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        RZOVs3SnKpQg6otG:
           type: utility
           activation:
             type: action
@@ -724,15 +858,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -743,7 +878,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -760,7 +896,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: RZOVs3SnKpQg6otG
       enchant: {}
       prerequisites:
         level: null
@@ -774,22 +918,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655752
+      systemVersion: 6.0.0
+      createdTime: 1781894233636
+      modifiedTime: 1783367020210
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!K4vsSlHqbBAHUDHY.USl5HDilKxVI4BHh'
   - _id: fYE4f0Oa2I0MetId
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Hydra attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -813,7 +959,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -851,9 +997,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -862,8 +1007,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        RuswIbMTHwQjttYU:
           type: attack
           activation:
             type: action
@@ -878,10 +1022,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -898,7 +1043,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -911,24 +1057,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: RuswIbMTHwQjttYU
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -938,15 +1097,250 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551141
+      systemVersion: 6.0.0
+      createdTime: 1781894256684
+      modifiedTime: 1781894274506
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!K4vsSlHqbBAHUDHY.fYE4f0Oa2I0MetId'
-effects: []
+effects:
+  - name: Hydra Head
+    _id: 3dYEatAuBib3c6FB
+    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+    type: base
+    system:
+      changes:
+        - key: flags.world.hydra-head-count
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start:
+      time: 24
+      combat: null
+      combatant: null
+      initiative: null
+      round: null
+      turn: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a living head. You die if you lose all of your heads.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781894054767
+      modifiedTime: 1781894403901
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!actors.effects!K4vsSlHqbBAHUDHY.3dYEatAuBib3c6FB'
+  - name: Hydra Head
+    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+    type: base
+    system:
+      changes:
+        - key: flags.world.hydra-head-count
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start:
+      time: 24
+      combat: null
+      combatant: null
+      initiative: null
+      round: null
+      turn: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a living head. You die if you lose all of your heads.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781894073457
+      modifiedTime: 1781894409592
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 9CBlGehfEb970RQi
+    _key: '!actors.effects!K4vsSlHqbBAHUDHY.9CBlGehfEb970RQi'
+  - name: Hydra Head
+    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+    type: base
+    system:
+      changes:
+        - key: flags.world.hydra-head-count
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start:
+      time: 24
+      combat: null
+      combatant: null
+      initiative: null
+      round: null
+      turn: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a living head. You die if you lose all of your heads.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781894074758
+      modifiedTime: 1781894407695
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: DrW5Xoq9GMgWz27O
+    _key: '!actors.effects!K4vsSlHqbBAHUDHY.DrW5Xoq9GMgWz27O'
+  - name: Hydra Head
+    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+    type: base
+    system:
+      changes:
+        - key: flags.world.hydra-head-count
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start:
+      time: 24
+      combat: null
+      combatant: null
+      initiative: null
+      round: null
+      turn: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a living head. You die if you lose all of your heads.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781894075659
+      modifiedTime: 1781894405864
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: KC8JCApAH9x0JxIL
+    _key: '!actors.effects!K4vsSlHqbBAHUDHY.KC8JCApAH9x0JxIL'
+  - name: Hydra Head
+    img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
+    type: base
+    system:
+      changes:
+        - key: flags.world.hydra-head-count
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start:
+      time: 24
+      combat: null
+      combatant: null
+      initiative: null
+      round: null
+      turn: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a living head. You die if you lose all of your heads.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781894076468
+      modifiedTime: 1781894413771
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: UGQKqZq1BCUTPQOT
+    _key: '!actors.effects!K4vsSlHqbBAHUDHY.UGQKqZq1BCUTPQOT'
 folder: MMKVDW6XI98WdIVu
 sort: 0
 ownership:
@@ -954,7 +1348,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171221522

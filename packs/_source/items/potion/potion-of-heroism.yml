@@ -1,18 +1,16 @@
 _id: wNKYbKYwOHbA7SH8
 name: Potion of Heroism
 type: consumable
-img: icons/consumables/potions/potion-bottle-corked-fancy-orange.webp
+img: icons/consumables/potions/potion-flask-capped-yellow-green.webp
 system:
   description:
     value: >-
-      <p><em>This blue potion bubbles and steams as if boiling.</em></p><p>For 1
-      hour after drinking it, you gain 10 temporary hit points that last for 1
-      hour. For the same duration, you are under the effect of the
-      @UUID[Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr]{Bless} spell (no
-      concentration required)</p><section class="secret foundry-note"
-      id="secret-bF4l2V0GJ0rrbVZK"><p><strong>Foundry Note</strong></p><p>The
-      Other Formula button can be used to roll the bonus 1d4 received from
-      Bless.</p></section>
+      <p><em>This blue potion bubbles and steams as if boiling.</em></p><p>For
+      [[lookup @labels.duration activity=HXZpxqQDRfm5EL0r]] after drinking it,
+      you gain 10 temporary hit points that last for [[lookup @labels.duration
+      activity=HXZpxqQDRfm5EL0r]]. For the same duration, you are under the
+      effect of the @UUID[Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr]{bless}
+      spell (no concentration required)</p>
     chat: ''
   source:
     custom: ''
@@ -55,14 +53,14 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>This blue potion bubbles and steams as if boiling.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    HXZpxqQDRfm5EL0r:
       type: heal
       activation:
         type: action
@@ -74,19 +72,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: KKcIKvHCHET79fEp
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -99,7 +102,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -120,12 +124,13 @@ system:
           mode: whole
           number: null
           formula: ''
+        modifiers: []
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -133,75 +138,81 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
-    dnd5eactivity300:
-      _id: dnd5eactivity300
-      type: utility
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: '1'
-        units: hour
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: touch
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: '1'
-          type: creature
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      roll:
-        formula: 1d4
-        name: ''
-        prompt: false
-        visible: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
-      img: ''
-      visibility:
-        requireMagic: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: HXZpxqQDRfm5EL0r
   attuned: false
   identifier: potion-of-heroism
-effects: []
+effects:
+  - _id: KKcIKvHCHET79fEp
+    flags:
+      dnd5e:
+        riders: {}
+    disabled: false
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    origin: Compendium.dnd5e.items.Item.wNKYbKYwOHbA7SH8
+    tint: '#ffffff'
+    transfer: false
+    name: Blessed
+    description: >-
+      <p>For the duration, whenever you make an attack roll or a saving throw,
+      you can roll 1d4 and add the number rolled to the attack roll or saving
+      throw.</p>
+    statuses: []
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783376977839
+      modifiedTime: 1783646540715
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/symbols/runes-carved-stone-yellow.webp
+    type: base
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+        - key: system.bonuses.mwak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+        - key: system.bonuses.msak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+        - key: system.bonuses.rsak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+        - key: system.bonuses.rwak.attack
+          value: 1d4
+          priority: null
+          type: add
+          phase: initial
+      rider:
+        statuses: []
+      magical: true
+    sort: 0
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!wNKYbKYwOHbA7SH8.KKcIKvHCHET79fEp'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -209,11 +220,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037318297
-  modifiedTime: 1764621300816
+  modifiedTime: 1783377090084
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wNKYbKYwOHbA7SH8'

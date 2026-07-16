@@ -485,12 +485,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -534,7 +531,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -554,6 +551,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: mmLegendaryResis
     name: Legendary Resistance
@@ -658,10 +656,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -758,10 +758,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 100000
@@ -922,10 +924,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 200000
@@ -1059,10 +1063,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAcidBreath0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 300000
@@ -1459,10 +1465,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 500000
@@ -1579,26 +1587,25 @@ items:
       identifier: detect-magic
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/symbols/runes-carved-stone-green.webp
     effects:
       - name: Detect Magic
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/symbols/runes-carved-stone-green.webp
         _id: BHw91lQmVgdx39WZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1609,47 +1616,64 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166142
+          modifiedTime: 1783544166142
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.VfJl4waJI38BhqP4.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.pFqrNChLLaLcVLTh
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: r67qZDs4P0Ul0xlM
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.pFqrNChLLaLcVLTh
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166143
+          modifiedTime: 1783544166143
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.VfJl4waJI38BhqP4.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1666,10 +1690,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166142
+      modifiedTime: 1783544166142
     _id: VfJl4waJI38BhqP4
     _key: '!actors.items!mmAdultCopperDra.VfJl4waJI38BhqP4'
   - name: Mind Spike
@@ -1796,26 +1822,25 @@ items:
       identifier: mind-spike
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/beam-ringed-impact-purple.webp
     effects:
       - name: Spiked
         origin: Compendium.dnd5e.spells24.Item.phbsplMindSpike0
         duration:
-          rounds: null
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/skills/targeting/target-strike-gray.webp
         _id: AbNgTsT2gRxwmBpg
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>You always know the target’s location until the spell ends, but
           only while the two of you are on the same plane of existence. While
@@ -1830,47 +1855,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166143
+          modifiedTime: 1783544166143
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.S0YZChDQCTi9ATIc.AbNgTsT2gRxwmBpg
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.AbpsvPf1bYAOnJWQ
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: CXv5A0MCiCIF3GDB
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.AbpsvPf1bYAOnJWQ
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166143
+          modifiedTime: 1783544166143
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.S0YZChDQCTi9ATIc.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1884,10 +1926,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMindSpike0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166143
+      modifiedTime: 1783544166143
     _id: S0YZChDQCTi9ATIc
     _key: '!actors.items!mmAdultCopperDra.S0YZChDQCTi9ATIc'
   - name: Minor Illusion
@@ -2038,6 +2082,7 @@ items:
       identifier: minor-illusion
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/sundries/gaming/playing-cards.webp
     effects:
@@ -2045,37 +2090,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.WdAwufRFzWkTzm5X
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: fdYtaCjuEMDS5voj
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.WdAwufRFzWkTzm5X
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166143
+          modifiedTime: 1783544166143
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.AkRlo4XlaWlqEYf8.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2089,10 +2146,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMinorIllus
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166143
+      modifiedTime: 1783544166143
     _id: AkRlo4XlaWlqEYf8
     _key: '!actors.items!mmAdultCopperDra.AkRlo4XlaWlqEYf8'
   - name: Shapechange
@@ -2209,6 +2268,7 @@ items:
       identifier: shapechange
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/hand-fire-skeleton-pink.webp
     effects:
@@ -2216,41 +2276,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.aQqbBA2qkQtZzh2d
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-concentration'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: tGXiN4wvH8OakTB1
+            - key: system.properties
+              value: '-concentration'
+              priority: null
+              type: add
+              phase: initial
+              _id: psM0JdBWyveHVHK9
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.aQqbBA2qkQtZzh2d
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166144
+          modifiedTime: 1783544166144
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.5i8frrcUR4K2iO1t.dnd5espellchange
     folder: iG0Zia8jh6uK39TB
@@ -2264,10 +2338,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShapechang
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166144
+      modifiedTime: 1783544166144
     _id: 5i8frrcUR4K2iO1t
     _key: '!actors.items!mmAdultCopperDra.5i8frrcUR4K2iO1t'
   - name: Greater Restoration
@@ -2371,6 +2447,7 @@ items:
       identifier: greater-restoration
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/life/heart-hand-gold-green-light.webp
     effects:
@@ -2378,37 +2455,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.MnK0EgBYeiFAV0fT
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: ePfMF3nGJPGG9snv
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.MnK0EgBYeiFAV0fT
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166144
+          modifiedTime: 1783544166144
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.YF3zC2V8YrdUIHAN.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2422,10 +2511,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGreaterRes
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166144
+      modifiedTime: 1783544166144
     _id: YF3zC2V8YrdUIHAN
     _key: '!actors.items!mmAdultCopperDra.YF3zC2V8YrdUIHAN'
   - name: Major Image
@@ -2590,6 +2681,7 @@ items:
       identifier: major-image
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/light/orbs-smoke-pink.webp
     effects:
@@ -2597,37 +2689,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.qfxui7AXdORSuf30
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: YnQ0zNXJQU2IhDfj
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmSpellcasting00.Activity.qfxui7AXdORSuf30
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166144
+          modifiedTime: 1783544166144
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.OmtcK0JqIEMMgd85.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2641,10 +2745,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMajorImage
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166144
+      modifiedTime: 1783544166144
     _id: OmtcK0JqIEMMgd85
     _key: '!actors.items!mmAdultCopperDra.OmtcK0JqIEMMgd85'
   - _id: mmGigglingMagic0
@@ -2766,37 +2872,44 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmGigglingMagic0
         _id: kJRvXVPZ8vkRrrsa
         type: base
-        system: {}
-        changes:
-          - key: system.bonuses.abilities.check
-            mode: 2
-            value: '-1d6'
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: '-1d6'
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: '-1d6'
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: '-1d6'
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: '-1d6'
-            priority: null
+        system:
+          changes:
+            - key: system.bonuses.abilities.check
+              value: '-1d6'
+              priority: null
+              type: add
+              phase: initial
+              _id: qIjpAUPUG1UEGQKk
+            - key: system.bonuses.msak.attack
+              value: '-1d6'
+              priority: null
+              type: add
+              phase: initial
+              _id: lYYCldGsmI5KszpC
+            - key: system.bonuses.mwak.attack
+              value: '-1d6'
+              priority: null
+              type: add
+              phase: initial
+              _id: 5ceKkVPNee6QYlMQ
+            - key: system.bonuses.rsak.attack
+              value: '-1d6'
+              priority: null
+              type: add
+              phase: initial
+              _id: mh7mFqyOaah4qJFb
+            - key: system.bonuses.rwak.attack
+              value: '-1d6'
+              priority: null
+              type: add
+              phase: initial
+              _id: MR1KiEpel3NpyxqM
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Until the end of its next turn, the target rolls [[/r 1d6]]
           whenever it makes an ability check or attack and subtracts the number
@@ -2810,10 +2923,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166145
+          modifiedTime: 1783544166145
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.mmGigglingMagic0.kJRvXVPZ8vkRrrsa
     flags:
@@ -2825,10 +2943,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmGigglingMagic0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166145
+      modifiedTime: 1783544166145
     ownership:
       default: 0
     sort: 5
@@ -2937,10 +3057,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMindJolt000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -3069,26 +3191,25 @@ items:
       identifier: mind-spike
       method: spell
       prepared: 0
+      sourceItem: feat:mind-jolt
     type: spell
     img: icons/magic/unholy/beam-ringed-impact-purple.webp
     effects:
       - name: Spiked
         origin: Compendium.dnd5e.spells24.Item.phbsplMindSpike0
         duration:
-          rounds: null
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/skills/targeting/target-strike-gray.webp
         _id: AbNgTsT2gRxwmBpg
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>You always know the target’s location until the spell ends, but
           only while the two of you are on the same plane of existence. While
@@ -3103,59 +3224,85 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166145
+          modifiedTime: 1783544166145
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.BJrBa0MNK8aLqGPX.AbNgTsT2gRxwmBpg
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmMindJolt000000.Activity.f3Q5Cky4bKFVdOT2
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: wjpSBT4qMQSjTmej
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: kO2tSM2aCT6NGkGz
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: JKjI1FEnyKGtQjCd
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: pdaqL2NmdVxnIDeb
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmMindJolt000000.Activity.f3Q5Cky4bKFVdOT2
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166145
+          modifiedTime: 1783544166145
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.BJrBa0MNK8aLqGPX.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -3169,10 +3316,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMindSpike0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166145
+      modifiedTime: 1783544166145
     _id: BJrBa0MNK8aLqGPX
     _key: '!actors.items!mmAdultCopperDra.BJrBa0MNK8aLqGPX'
   - _id: mmPounce00000000
@@ -3277,10 +3426,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPounce00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 7
@@ -3393,37 +3544,44 @@ items:
         origin: Item.mmSlowingBreath0
         _id: ztGUDHGfoUxlUY53
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.burrow
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.climb
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.fly
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.swim
-            mode: 1
-            value: '0.5'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: lprKeaIjOIH1MWzD
+            - key: system.attributes.movement.burrow
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: pAVWMHMTGMSJbgIi
+            - key: system.attributes.movement.climb
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: kpxjtCXFz6pE0lEr
+            - key: system.attributes.movement.fly
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: jc1ZfvbXHgGMoNwA
+            - key: system.attributes.movement.swim
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: 11kmPVyoH87dN5Qu
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target can’t take Reactions; its Speed is halved; and it can
           take either an action or a Bonus Action on its turn, not both. This
@@ -3437,10 +3595,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544166146
+          modifiedTime: 1783544166146
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultCopperDra.mmSlowingBreath0.ztGUDHGfoUxlUY53
     folder: 4T18pEvubPMQLzvD
@@ -3453,10 +3616,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSlowingBreath0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544166145
+      modifiedTime: 1783544166145
     ownership:
       default: 0
     sort: 400000
@@ -3469,11 +3634,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452693897
-  modifiedTime: 1771452693897
+  systemVersion: 6.0.0
+  createdTime: 1783544166142
+  modifiedTime: 1783544166142
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

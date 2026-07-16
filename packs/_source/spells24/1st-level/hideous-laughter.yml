@@ -112,20 +112,18 @@ effects:
   - name: Uncontrollable Laughter
     origin: Compendium.dnd5e.spells24.Item.phbsplTashasHide
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/silhouette-fall-slip-prone.webp
     _id: 5nrcjxzmy3FCLCkV
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>has the &amp;Reference[prone apply=false] and
       &amp;Reference[incapacitated apply=false] conditions for the duration.
@@ -144,13 +142,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977396
+      modifiedTime: 1783543977396
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplTashasHide.5nrcjxzmy3FCLCkV'
 folder: pBaAAtXBCq9FVEnL
 sort: 200000
@@ -163,11 +164,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425974666
-  modifiedTime: 1753380690811
+  modifiedTime: 1783543977396
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTashasHide'

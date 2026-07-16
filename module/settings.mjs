@@ -41,6 +41,29 @@ export function registerSystemKeybindings() {
     name: "KEYBINDINGS.DND5E.DragMove",
     editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }, { key: "OsLeft" }, { key: "OsRight" }]
   });
+
+  game.keybindings.register("dnd5e", "toggleSheetMode", {
+    name: "KEYBINDINGS.DND5E.ToggleSheetMode",
+    editable: [{ key: "KeyE", modifiers: ["Shift"] }],
+    onDown: () => {
+      const app = ui.activeWindow;
+      if ( !app?.rendered || !app.changeMode || !app.isEditable ) return false;
+      app.changeMode();
+      return true;
+    }
+  });
+
+  game.keybindings.register("dnd5e", "openCompendiumBrowser", {
+    name: "KEYBINDINGS.DND5E.OpenCompendiumBrowser",
+    editable: [{ key: "KeyB", modifiers: ["Shift"] }],
+    onDown: () => {
+      const existing = Array.from(foundry.applications.instances.values())
+        .find(app => app instanceof CompendiumBrowser && app.rendered);
+      if ( existing ) existing.bringToFront();
+      else new CompendiumBrowser().render({ force: true });
+      return true;
+    }
+  });
 }
 
 /* -------------------------------------------- */
@@ -123,7 +146,17 @@ export function registerSystemSettings() {
     name: "SETTINGS.DND5E.LOYALTY.Name",
     hint: "SETTINGS.DND5E.LOYALTY.Hint",
     scope: "world",
-    config: true,
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
+  // Piety
+  game.settings.register("dnd5e", "pietyScore", {
+    name: "SETTINGS.DND5E.PIETY.Name",
+    hint: "SETTINGS.DND5E.PIETY.Hint",
+    scope: "world",
+    config: false,
     default: false,
     type: Boolean
   });
@@ -146,6 +179,17 @@ export function registerSystemSettings() {
     config: true,
     default: false,
     type: Boolean
+  });
+
+  // Disable Exhaustion Automation
+  game.settings.register("dnd5e", "disableExhaustion", {
+    name: "SETTINGS.5eNoExhaustionN",
+    hint: "SETTINGS.5eNoExhaustionL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    requiresReload: true
   });
 
   // Collapse Item Cards (by default)
@@ -443,6 +487,21 @@ export function registerSystemSettings() {
       none: "SETTINGS.DND5E.COMBAT.InitiativeScore.None",
       npcs: "SETTINGS.DND5E.COMBAT.InitiativeScore.NPCs",
       all: "SETTINGS.DND5E.COMBAT.InitiativeScore.All"
+    }
+  });
+
+  game.settings.register("dnd5e", "autoApplyDowned", {
+    name: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Name",
+    hint: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.None",
+      deadOnly: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.DeadOnly",
+      npcs: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.NPCs",
+      all: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.All"
     }
   });
 
@@ -744,6 +803,15 @@ export function applyLegacyRules() {
   DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
   DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
 
+  // Add exhaustion effects.
+  DND5E.conditionEffects.noMovement.add("exhaustion-5");
+  DND5E.conditionEffects.halfMovement.add("exhaustion-2");
+  DND5E.conditionEffects.halfHealth.add("exhaustion-4");
+  DND5E.conditionEffects.abilityCheckDisadvantage.add("exhaustion-1");
+  DND5E.conditionEffects.abilitySaveDisadvantage.add("exhaustion-3");
+  DND5E.conditionEffects.attackDisadvantage.add("exhaustion-3");
+  delete DND5E.conditionTypes.exhaustion.reduction;
+
   // Incapacitated creatures within 2 size categories still cannot be moved through in legacy
   delete DND5E.conditionTypes.incapacitated.neverBlockMovement;
 
@@ -762,6 +830,29 @@ export function applyLegacyRules() {
 
   // Swap spell lists.
   DND5E.SPELL_LISTS = LEGACY.SPELL_LISTS;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Disable exhaustion automation if applicable.
+ */
+export function disableExhaustionAutomation() {
+  const DND5E = CONFIG.DND5E;
+
+  // Roll and speed reductions (modern) and death at maximum level.
+  delete DND5E.conditionTypes.exhaustion.reduction;
+  delete DND5E.conditionTypes.exhaustion.conditions;
+
+  // Graded condition effects (legacy).
+  for ( const effects of Object.values(DND5E.conditionEffects) ) {
+    for ( const key of effects ) {
+      if ( key.startsWith("exhaustion-") ) effects.delete(key);
+    }
+  }
+
+  // Exhaustion recovered on a long rest.
+  delete DND5E.restTypes.long.exhaustionDelta;
 }
 
 /* -------------------------------------------- */

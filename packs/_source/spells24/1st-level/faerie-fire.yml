@@ -100,20 +100,18 @@ effects:
   - name: Outlined
     origin: Compendium.dnd5e.spells24.Item.phbsplFaerieFire
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/silhouette-hold-change-green.webp
     _id: Y2i0OvwOixxag0ed
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>For the duration, objects and affected creatures shed
       &amp;Reference[dimlight] in a 10-foot radius and can’t benefit from the
@@ -126,13 +124,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975074
+      modifiedTime: 1783543975074
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplFaerieFire.Y2i0OvwOixxag0ed'
 folder: pBaAAtXBCq9FVEnL
 sort: 3200000
@@ -145,11 +146,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425952878
-  modifiedTime: 1745256792676
+  modifiedTime: 1783543975074
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFaerieFire'

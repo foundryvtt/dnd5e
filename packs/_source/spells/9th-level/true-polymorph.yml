@@ -11,7 +11,7 @@ system:
       nonmagical object, or the object into a creature (the object must be
       neither worn nor carried by another creature). The transformation lasts
       for the duration, or until the target drops to 0 hit points or dies. If
-      you concentrate on this spell for the full Duration, the transformation
+      you concentrate on this spell for the full duration, the transformation
       lasts until it is dispelled.</p><p>This spell has no effect on a target
       with 0 Hit Points. An unwilling creature can make a Wisdom saving throw,
       and if it succeeds, it isn't affected by this
@@ -26,25 +26,25 @@ system:
       Hit Points it had before it transformed. If it reverts as a result of
       dropping to 0 hit points, any excess damage carries over to its normal
       form. As long as the excess damage doesn't reduce the creature's normal
-      form to 0 hit points, it isn't knocked Unconscious.</p><p>The creature is
-      limited in the Actions it can perform by the nature of its new form, and
-      it can't speak, cast Spells, or take any other action that requires hands
-      or speech, unless its new form is capable of such Actions.</p><p>The
-      target's gear melds into the new form. The creature can't activate, use,
-      wield, or otherwise benefit from any of its
-      Equipment.</p><p><strong>Object into Creature</strong>. You can turn an
-      object into any kind of creature, as long as the creature's size is no
+      form to 0 hit points, it isn't knocked &amp;reference[Unconscious
+      apply=false].</p><p>The creature is limited in the Actions it can perform
+      by the nature of its new form, and it can't speak, cast Spells, or take
+      any other action that requires hands or speech, unless its new form is
+      capable of such Actions.</p><p>The target's gear melds into the new form.
+      The creature can't activate, use, wield, or otherwise benefit from any of
+      its Equipment.</p><p><strong>Object into Creature</strong>. You can turn
+      an object into any kind of creature, as long as the creature's size is no
       larger than the object's size and the creature's Challenge rating is 9 or
       lower. The creature is friendly to you and your companions. It acts on
       each of your turns. You decide what action it takes and how it moves. The
       DM has the creature's Statistics and resolves all of its Actions and
       Movement.</p><p>If the spell becomes permanent, you no longer control the
       creature. It might remain friendly to you, depending on how you have
-      treated it.</p><p>Creature into Object. If you turn a creature into an
-      object, it transforms along with whatever it is wearing and carrying into
-      that form. The creature's statistics become those of the object, and the
-      creature has no memory of time spent in this form, after the spell ends
-      and it returns to its normal form.</p>
+      treated it.</p><p><strong>Creature into Object.</strong> If you turn a
+      creature into an object, it transforms along with whatever it is wearing
+      and carrying into that form. The creature's statistics become those of the
+      object, and the creature has no memory of time spent in this form, after
+      the spell ends and it returns to its normal form.</p>
     chat: ''
   source:
     custom: ''
@@ -64,12 +64,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -128,23 +131,196 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    Y7gjcDvz2X1fknbC:
+      type: transform
+      name: Creature to Creature
+      _id: Y7gjcDvz2X1fknbC
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You turn a creature into another kind of creature, the new form can
+          be any kind you choose whose challenge rating is equal to or less than
+          the target's (or its level, if the target doesn't have a Challenge
+          rating). The target's game statistics, including mental Ability
+          Scores, are replaced by the statistics of the new form. It retains its
+          Alignment and personality.</p><p>The target assumes the hit points of
+          its new form, and when it reverts to its normal form, the creature
+          returns to the number of Hit Points it had before it transformed. If
+          it reverts as a result of dropping to 0 hit points, any excess damage
+          carries over to its normal form. As long as the excess damage doesn't
+          reduce the creature's normal form to 0 hit points, it isn't knocked
+          &amp;reference[Unconscious apply=false].</p><p>The creature is limited
+          in the Actions it can perform by the nature of its new form, and it
+          can't speak, cast Spells, or take any other action that requires hands
+          or speech, unless its new form is capable of such Actions.</p><p>The
+          target's gear melds into the new form. The creature can't activate,
+          use, wield, or otherwise benefit from any of its Equipment.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      profiles:
+        - cr: '30'
+          name: ''
+          _id: Oj9qE80YSKcufsiw
+          uuid: null
+          sizes: []
+          types: []
+          movement: []
+          level:
+            min: null
+            max: null
+      settings: null
+      transform:
+        customize: false
+        mode: cr
+        preset: polymorph
+    gEBSNPjhtGsBtHCx:
+      type: summon
+      name: Object into Creature
+      _id: gEBSNPjhtGsBtHCx
+      img: systems/dnd5e/icons/svg/activity/transform.svg
+      sort: 200000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+        value: null
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>You can turn an object into any kind of creature, as long as the
+          creature's size is no larger than the object's size and the creature's
+          Challenge rating is 9 or lower. The creature is friendly to you and
+          your companions. It acts on each of your turns. You decide what action
+          it takes and how it moves. The DM has the creature's Statistics and
+          resolves all of its Actions and Movement.</p><p>If the spell becomes
+          permanent, you no longer control the creature. It might remain
+          friendly to you, depending on how you have treated it.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          cr: '30'
+          name: ''
+          _id: rO9mJSG0UGRdCoTi
+          uuid: null
+          types: []
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: cr
+      tempHP: ''
   identifier: true-polymorph
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-snare-purple-pink.webp
+img: icons/creatures/reptiles/dragon-horned-blue.webp
 effects: []
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355728
-  modifiedTime: 1725992719711
+  modifiedTime: 1783214249602
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!QbQZKoXOgHWN06aa'

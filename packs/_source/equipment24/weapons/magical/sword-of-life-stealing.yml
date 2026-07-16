@@ -138,54 +138,69 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: fSXff5Y6ILs6gJT7
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of Life Stealing'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSwordOfLifeSt
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: activities[attack].damage.critical.bonus
-        mode: 2
-        value: 15[necrotic]
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/swords/sword-guard-worn.webp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of Life Stealing'
+          priority: null
+          type: override
+          phase: initial
+          _id: 0HcWG3BJ66APpZX1
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: ymAufwFyLpXK4gM9
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSwordOfLifeSt
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 81cDYecyIPqHQROr
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: 6pEMvAtnwXr1cFRS
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: MPSsifyxROndship
+        - key: activities[attack].damage.critical.bonus
+          value: 15[necrotic]
+          priority: null
+          type: add
+          phase: initial
+          _id: gBC3eIhpMEwmMZB8
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: z8WaLK7BCfB8ZNEa
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: YXd8UpwiUCcYM9tb
+        - key: img
+          value: icons/weapons/swords/sword-guard-worn.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: N2SgtGgzU1MxFP4s
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -196,13 +211,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730940719606
-      modifiedTime: 1745438837051
+      modifiedTime: 1783544098944
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgSwordOfLifeSt.fSXff5Y6ILs6gJT7'
 folder: kie870i5kr7yuxO8
 flags:
@@ -212,11 +230,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704105
+  modifiedTime: 1783544098944
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 15100000

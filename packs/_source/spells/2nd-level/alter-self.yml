@@ -24,11 +24,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -67,7 +70,13 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 14Qp5HLSat31r3uM
+          level: {}
+        - _id: V6Y9a1LElOYZc4J7
+          level: {}
+        - _id: nQT9INSQxHJZQfFS
+          level: {}
       range:
         override: false
       target:
@@ -86,20 +95,158 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: alter-self
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-green.webp
-effects: []
+img: icons/commodities/claws/claw-brown-black.webp
+effects:
+  - name: Aquatic Adaptation
+    img: icons/magic/water/water-elemental-blue-teeth.webp
+    origin: Compendium.dnd5e.spells.Item.8RTDOt80u8aBv9qx
+    transfer: false
+    _id: 14Qp5HLSat31r3uM
+    type: base
+    system:
+      changes:
+        - key: system.attributes.movement.swim
+          type: upgrade
+          value: '@attributes.movement.walk'
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your body has been adapted to an aquatic environment, sprouting gills
+      and growing webbing between your fingers. You can breathe underwater and
+      gain a swimming speed equal to your walking speed.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781269573126
+      modifiedTime: 1781269665515
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!8RTDOt80u8aBv9qx.14Qp5HLSat31r3uM'
+  - name: Changed Appearance
+    img: icons/creatures/slimes/slime-face-hollow-green.webp
+    origin: Compendium.dnd5e.spells.Item.8RTDOt80u8aBv9qx
+    transfer: false
+    _id: V6Y9a1LElOYZc4J7
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have transformed your appearance. You decide what you look like,
+      including your height, weight, facial features, sound of your voice, hair
+      length, coloration, and distinguishing characteristics, if any. You can
+      make yourself appear as a member of another race, though none of your
+      statistics change.</p><p>You also can't appear as a creature of a
+      different size than you, and your basic shape stays the same; if you're
+      bipedal, you can't use this spell to become quadrupedal, for instance. At
+      any time for the duration of the spell, you can use your action to change
+      your appearance in this way again.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781269666679
+      modifiedTime: 1781269720512
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!8RTDOt80u8aBv9qx.V6Y9a1LElOYZc4J7'
+  - name: Natural Weapons
+    img: icons/commodities/claws/claw-brown-black.webp
+    origin: Compendium.dnd5e.spells.Item.8RTDOt80u8aBv9qx
+    transfer: false
+    _id: nQT9INSQxHJZQfFS
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have grown claws, fangs, spines, horns, or a different natural
+      weapon of your choice. Your unarmed strikes deal 1d6 bludgeoning,
+      piercing, or slashing damage, as appropriate to the natural weapon you
+      chose, and you are proficient with your unarmed strikes. Finally, the
+      natural weapon is magic and you have a +1 bonus to the attack and damage
+      rolls you make using it.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781269727405
+      modifiedTime: 1781269754829
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!8RTDOt80u8aBv9qx.nQT9INSQxHJZQfFS'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348854
-  modifiedTime: 1725992717459
+  modifiedTime: 1781269727442
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8RTDOt80u8aBv9qx'

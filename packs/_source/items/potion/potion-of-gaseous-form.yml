@@ -1,19 +1,15 @@
 _id: bqZ6NTLDCUB98YjV
 name: Potion of Gaseous Form
 type: consumable
-img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
+img: icons/consumables/potions/bottle-conical-corked-cyan.webp
 system:
   description:
     value: >-
       <p><em>This potion's container seems to hold fog that moves and pours like
-      water.</em></p>
-
-      <p>When you drink this potion, you gain the effect of the
-      @UUID[Compendium.dnd5e.spells.Item.2IWiZAJtOGDoKjiz]{Gaseous Form} spell
-      for 1 hour (no concentration required) or until you end the effect as a
-      bonus action. </p>
-
-      <p> </p>
+      water.</em></p><p>When you drink this potion, you gain the effect of the
+      @UUID[Compendium.dnd5e.spells.Item.2IWiZAJtOGDoKjiz]{gaseous form} spell
+      for [[lookup @labels.duration activity=CvPLbEm6AY14aSst]] (no
+      concentration required) or until you end the effect as a bonus action.</p>
     chat: ''
   source:
     custom: ''
@@ -51,14 +47,16 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This potion's container seems to hold fog that moves and pours like
+      water.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    CvPLbEm6AY14aSst:
       type: utility
       activation:
         type: action
@@ -70,19 +68,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: SffmmlIyQEG7jM0r
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -95,7 +98,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -112,8 +116,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -121,10 +125,128 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: CvPLbEm6AY14aSst
   attuned: false
   identifier: potion-of-gaseous-form
-effects: []
+effects:
+  - name: Gaseous Form
+    img: icons/magic/air/wind-tornado-cyclone-white.webp
+    origin: Compendium.dnd5e.items.Item.bqZ6NTLDCUB98YjV
+    transfer: false
+    _id: SffmmlIyQEG7jM0r
+    type: base
+    system:
+      changes:
+        - key: system.abilities.str.save.roll.mode
+          type: add
+          value: ''
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: ''
+          phase: initial
+          priority: null
+        - key: system.abilities.con.save.roll.mode
+          type: add
+          value: ''
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.fly
+          type: override
+          value: 10
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.walk
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.swim
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.climb
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.burrow
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: bludgeoning
+          phase: initial
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: piercing
+          phase: initial
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: slashing
+          phase: initial
+          priority: null
+        - key: system.traits.dr.bypasses
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+      magical: true
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been transformed, along with everything you are wearing and
+      carrying, into a misty cloud for the duration. This effect ends if you
+      drop to 0 hit points.</p><p>While in this form, your only method of
+      movement is a flying speed of 10 feet. You can enter and occupy the space
+      of another creature. You have resistance to nonmagical damage, and you
+      have advantage on Strength, Dexterity, and Constitution saving throws. You
+      can pass through small holes, narrow openings, and even mere cracks,
+      though you treat liquids as though they were solid surfaces. You can't
+      fall and remain hovering in the air even when &amp;reference[stunned
+      apply=false] or otherwise &amp;reference[incapacitated
+      apply=false].</p><p>While in the form of a misty cloud, you can't talk or
+      manipulate objects, and any objects you were carrying or holding can't be
+      dropped, used, or otherwise interacted with. You can't attack or cast
+      spells.</p>
+    tint: '#ffffff'
+    statuses:
+      - transformed
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783373753012
+      modifiedTime: 1783376576756
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.2IWiZAJtOGDoKjiz.ActiveEffect.gICakgyAi1hrs8ug
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!bqZ6NTLDCUB98YjV.SffmmlIyQEG7jM0r'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -132,11 +254,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037229250
-  modifiedTime: 1764620298092
+  modifiedTime: 1783377141305
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!bqZ6NTLDCUB98YjV'

@@ -34,29 +34,32 @@ effects:
     img: icons/skills/movement/feet-winged-sandals-tan.webp
     _id: J9RWCSmYGnP0fkn1
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '10'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 10
+          priority: null
+          type: add
+          phase: initial
+          _id: cFB3VgybBHLB981s
+        - key: system.attributes.movement.climb
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: i1MafrYl8OdKEkWG
+        - key: system.attributes.movement.swim
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: I8fbJmkb4iPdjxlx
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -70,13 +73,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1759793135157
+      systemVersion: 6.0.0
+      createdTime: 1783544103503
+      modifiedTime: 1783544103503
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbrgrRoving0000.J9RWCSmYGnP0fkn1'
 flags:
   dnd5e:
@@ -85,11 +91,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1735932734523
-  modifiedTime: 1759793154279
+  modifiedTime: 1783544103503
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

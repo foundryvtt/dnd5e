@@ -120,17 +120,15 @@ effects:
     transfer: false
     _id: louTI4Z9bNUYBa8K
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -140,13 +138,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724883904852
-      modifiedTime: 1724884047228
+      modifiedTime: 1783543975004
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplEtherealne.louTI4Z9bNUYBa8K'
 folder: EdAGMG8IF26PLkD3
 sort: 1800000
@@ -159,11 +160,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425952418
-  modifiedTime: 1745256792447
+  modifiedTime: 1783543975004
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEtherealne'

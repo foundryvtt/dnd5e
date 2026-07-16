@@ -40,12 +40,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -88,6 +91,9 @@ system:
       effects:
         - _id: bckYDthT7sAOQBNO
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -106,59 +112,74 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: banishment
 sort: 0
 flags: {}
-img: icons/magic/control/energy-stream-link-spiral-teal.webp
+img: icons/magic/control/silhouette-fall-slip-prone.webp
 effects:
-  - name: Banishment
+  - name: Banished
     origin: Compendium.dnd5e.spells.Item.pxpb2eOB6bv4phAf
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: bckYDthT7sAOQBNO
-    changes: []
     description: >-
       <p>The target native to this plane is banished to a harmless demiplane
-      plane and is Incapacitated for the duration.</p>
+      plane and is Incapacitated for the duration.</p><p>You have been banished
+      to a harmless demiplane. While there, you are &amp;reference[incapacitated
+      apply=fasle]. You remain there until the spell ends, at which point you
+      repappear in the space you left or in the nearest unoccupied space if that
+      space is occupied.</p>
     transfer: false
     statuses:
       - incapacitated
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781371532535
+      modifiedTime: 1781371553749
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/control/energy-stream-link-spiral-teal.webp
+    img: icons/magic/control/silhouette-fall-slip-prone.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!pxpb2eOB6bv4phAf.bckYDthT7sAOQBNO'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365620
-  modifiedTime: 1725992722955
+  modifiedTime: 1781371539894
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pxpb2eOB6bv4phAf'

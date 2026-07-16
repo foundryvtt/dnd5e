@@ -37,11 +37,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -101,20 +104,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: legend-lore
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-orange-purple.webp
+img: icons/sundries/books/book-tooled-eye-gold-red.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357652
-  modifiedTime: 1725992720296
+  modifiedTime: 1781391050758
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!W4Qx5z0id6da0vqg'

@@ -476,12 +476,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -525,7 +522,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -545,6 +542,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - name: Greatsword
     system:
@@ -718,11 +716,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepGreatsword
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1778013628147
+      createdTime: null
     _key: '!actors.items!dmggwsDancingSwo.W8EZZZznFN8X4gGD'
   - name: Longsword
     system:
@@ -895,11 +894,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepLongsword0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1778013637394
+      createdTime: null
     _key: '!actors.items!dmggwsDancingSwo.DPH6ngFfFJHdxMYe'
   - name: Rapier
     system:
@@ -1072,11 +1072,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepRapier0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1778013662281
+      createdTime: null
     _key: '!actors.items!dmggwsDancingSwo.dlSKamvVAPMCCTbC'
   - name: Scimitar
     system:
@@ -1250,11 +1251,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepScimitar00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1778013670158
+      createdTime: null
     _key: '!actors.items!dmggwsDancingSwo.aYun8JFJxhdpFw14'
   - name: Shortsword
     system:
@@ -1428,11 +1430,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepShortsword
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1778013653134
+      createdTime: null
     _key: '!actors.items!dmggwsDancingSwo.237FLmvncdVOhDKY'
 effects: []
 folder: 2AjZvlZWDCwSd0ry
@@ -1442,7 +1445,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452693207

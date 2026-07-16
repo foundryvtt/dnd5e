@@ -113,28 +113,31 @@ effects:
     img: icons/skills/melee/strike-weapons-orange.webp
     disabled: true
     _id: sEWDFOuWn47L5860
-    system: {}
-    changes:
-      - key: name
-        mode: 2
-        value: ', Sacred Weapon'
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: radiant
-        priority: null
-      - key: activities[attack].attack.bonus
-        mode: 2
-        value: (max(1,@abilities.cha.mod))
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: ', Sacred Weapon'
+          priority: null
+          type: add
+          phase: initial
+          _id: Yr5wphM5gvIy3y6n
+        - key: system.damage.base.types
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: 5QqndFGftPaI3u8U
+        - key: activities[attack].attack.bonus
+          value: (max(1,@abilities.cha.mod))
+          priority: null
+          type: add
+          phase: initial
+          _id: F6hOnhARG2HlC74o
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -145,22 +148,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103117
+      modifiedTime: 1783544103117
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbpdnSacredWeap.sEWDFOuWn47L5860'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.4
   createdTime: 1735866569467
-  modifiedTime: 1768925775689
+  modifiedTime: 1783544103117
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

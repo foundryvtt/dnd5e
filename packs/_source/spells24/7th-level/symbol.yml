@@ -481,17 +481,15 @@ effects:
     transfer: false
     _id: YAwLt85sPQpUCIBI
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target is incapable of meaningful communication and has
       Disadvantage on attack rolls and ability checks.</p>
@@ -502,13 +500,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725033158201
-      modifiedTime: 1725033325053
+      modifiedTime: 1783543977369
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplSymbol0000.YAwLt85sPQpUCIBI'
   - name: Frightened
     img: systems/dnd5e/icons/svg/statuses/frightened.svg
@@ -516,17 +517,15 @@ effects:
     transfer: false
     _id: C5k5nGmPclTf9tZn
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>While Frightened, the target must move at least 30 feet away from the
       glyph on each of its turns, if able.</p>
@@ -538,13 +537,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725033560427
-      modifiedTime: 1725033606274
+      modifiedTime: 1783543977369
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSymbol0000.C5k5nGmPclTf9tZn'
   - name: Incapacitated
     img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
@@ -552,17 +554,15 @@ effects:
     transfer: false
     _id: D8tOj85XIpMRp3Yl
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -572,13 +572,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725033642176
-      modifiedTime: 1725033710545
+      modifiedTime: 1783543977369
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSymbol0000.D8tOj85XIpMRp3Yl'
   - name: Sleeping
     img: systems/dnd5e/icons/svg/statuses/unconscious.svg
@@ -586,17 +589,15 @@ effects:
     transfer: false
     _id: A1VA7t5gB7ODNsr6
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>A creature awakens if it takes damage or if someone takes an action to
       shake it awake.</p>
@@ -608,13 +609,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725033723183
-      modifiedTime: 1725033802474
+      modifiedTime: 1783543977369
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSymbol0000.A1VA7t5gB7ODNsr6'
   - name: Stunned
     img: systems/dnd5e/icons/svg/statuses/stunned.svg
@@ -622,17 +626,15 @@ effects:
     transfer: false
     _id: zZerWADc4a5rGJ9r
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -642,13 +644,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725033817116
-      modifiedTime: 1725033932035
+      modifiedTime: 1783543977369
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSymbol0000.zZerWADc4a5rGJ9r'
 folder: EdAGMG8IF26PLkD3
 sort: 300000
@@ -661,11 +666,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425974390
-  modifiedTime: 1745256799010
+  modifiedTime: 1783543977368
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSymbol0000'

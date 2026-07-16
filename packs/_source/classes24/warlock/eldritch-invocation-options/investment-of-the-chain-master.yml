@@ -255,21 +255,20 @@ effects:
     transfer: false
     _id: Ziuu5P6LoAvevtuN
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '40'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 40
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: G0ULKzkzgO6uw216
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -278,13 +277,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.Ziuu5P6LoAvevtuN'
   - name: Investment of Swimming
     img: icons/magic/control/debuff-chains-orb-movement-blue.webp
@@ -292,21 +294,20 @@ effects:
     transfer: false
     _id: VxM3FsirIcd3Of7q
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '40'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.swim
+          value: 40
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 1opJ7cLiYt1oMMDL
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -315,13 +316,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.VxM3FsirIcd3Of7q'
   - name: Resist Acid
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
@@ -329,21 +333,20 @@ effects:
     transfer: false
     _id: chVfpaM9kmt2hOWW
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: zyBzJdkGF4eCNnOD
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -353,34 +356,36 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.jZGIulxQFLY7uRDe
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.chVfpaM9kmt2hOWW'
   - name: Resist Bludgeoning
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: jH4dB3yWWfD45FEB
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -390,35 +395,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.HybTLXiZgGa3t61e
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: SzrV0ZUdpHCl8ury
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.SzrV0ZUdpHCl8ury'
   - name: Resist Cold
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: vWp3hOAr9qJKdFnf
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -428,35 +435,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.6z5fLOHiOiHHcuac
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: dNB2b7C34xZ8f1VC
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.dNB2b7C34xZ8f1VC'
   - name: Resist Fire
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: RblgwhyTzPyTtxiL
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -466,35 +475,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.DW6JJBsbBtR1Z75R
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: J9HrAcFSX8Oiz5Os
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.J9HrAcFSX8Oiz5Os'
   - name: Resist Force
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: force
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: ggRgtJGtIjaP5D5P
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -504,35 +515,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.2kTlaPSpacxduIm7
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 931L7kMtCmfeKCke
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.931L7kMtCmfeKCke'
   - name: Resist Lightning
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: 8E2BmYp6zcjKFmqU
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -542,35 +555,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.5ZizSWuVy8cy77K1
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102306
+      modifiedTime: 1783544102306
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: ftnhEVvBRxrbAfa3
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.ftnhEVvBRxrbAfa3'
   - name: Resist Necrotic
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: necrotic
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: HIojTwhFYC4WPByi
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -580,35 +595,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.fcFLysPw4llFTQsg
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102307
+      modifiedTime: 1783544102307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: wNoq81xzNrVLdSGT
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.wNoq81xzNrVLdSGT'
   - name: Resist Piercing
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: nR2r7tBPoDz8g0EE
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -618,35 +635,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.8Uf0Dw8A3l7CI8Fd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102307
+      modifiedTime: 1783544102307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 8tJH6UHt7riDLp1q
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.8tJH6UHt7riDLp1q'
   - name: Resist Poison
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: Y837cRUECVqRYF6g
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -656,35 +675,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.PpWYucbhugNEIBJ7
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102307
+      modifiedTime: 1783544102307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: W1jLBRVt0gryqFMJ
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.W1jLBRVt0gryqFMJ'
   - name: Resist Psychic
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: psychic
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: psychic
+          priority: null
+          type: add
+          phase: initial
+          _id: IBaC008IK5RDcIOX
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -694,35 +715,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.BbvC3rh4RDmi06XI
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102307
+      modifiedTime: 1783544102307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: XYrQSl0kdJtV6Bf0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.XYrQSl0kdJtV6Bf0'
   - name: Resist Radiant
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: radiant
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: 5PN0M1eDqHn25dOm
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -732,35 +755,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.IFg9ae4ZyhMDPa3m
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102307
+      modifiedTime: 1783544102307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: hNA4gzQMT9cM2ALU
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.hNA4gzQMT9cM2ALU'
   - name: Resist Slashing
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: eAjHBBttBoa8UNKQ
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -770,35 +795,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.30KWef6vBjF8RChr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102307
+      modifiedTime: 1783544102307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: QDl6CxMONYK8Kru1
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.QDl6CxMONYK8Kru1'
   - name: Resist Thunder
     img: icons/magic/defensive/shield-barrier-deflect-teal.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: thunder
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: thunder
+          priority: null
+          type: add
+          phase: initial
+          _id: 3IHpHCTLEUmObQX8
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -808,14 +835,17 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.P7YUT6Y1NXGpo5Er
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544102307
+      modifiedTime: 1783544102307
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 0vsrMfL3s6IQtWcM
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvInvestment.0vsrMfL3s6IQtWcM'
 folder: BjeMHiqnKNWkWhox
 flags:
@@ -825,11 +855,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735866281378
-  modifiedTime: 1752706856655
+  modifiedTime: 1783544102306
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

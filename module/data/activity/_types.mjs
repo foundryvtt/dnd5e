@@ -218,6 +218,16 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {ActivityData} TeleportActivityData
+ * @property {object} teleport
+ * @property {boolean} teleport.override    Use custom maximum distance rather than the activity's range.
+ * @property {string} teleport.units        Units used to measure teleport distance.
+ * @property {string} teleport.value        Maximum distance the token can teleport.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {ActivityData} TransformActivityData
  * @property {TransformProfile[]} profiles         Information on transformation methods and sources.
  * @property {TransformationSettingData} settings  Settings data to use when summoning.

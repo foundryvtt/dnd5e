@@ -306,8 +306,8 @@ export default class ItemDataModel extends SystemDataModel {
    * @param {RollDataOptions} [options]
    * @returns {ItemRollData}
    */
-  getRollData({ deterministic=false }={}) {
-    const actorRollData = this.parent.actor?.getRollData({ deterministic }) ?? {};
+  getRollData(options={}) {
+    const actorRollData = this.parent.actor?.getRollData(options) ?? {};
     const data = { ...actorRollData, item: { ...this } };
     return data;
   }

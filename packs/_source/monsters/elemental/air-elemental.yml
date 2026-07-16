@@ -460,9 +460,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -477,7 +474,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -497,17 +494,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: 8FHVwYBJY7dxIv9D
     name: Air Form
     type: feat
-    img: icons/magic/control/debuff-energy-hold-levitate-yellow.webp
+    img: icons/magic/air/air-wave-gust-blue.webp
     system:
       description:
         value: >-
-          <p>The elemental can enter a hostile creature's space and stop there.
-          It can move through a space as narrow as 1 inch wide without
-          squeezing.</p>
+          <p>The [[lookup @name lowercase]]{monster} can enter a hostile
+          creature's space and stop there. It can move through a space as narrow
+          as 1 inch wide without &amp;reference[squeezing]{Squeezing}.</p>
         chat: ''
       source:
         custom: ''
@@ -521,16 +519,58 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
       identifier: air-form
-    effects: []
+    effects:
+      - name: Air Form
+        img: icons/magic/air/air-wave-gust-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.banHjKDMCegbUwYE.Item.8FHVwYBJY7dxIv9D
+        type: base
+        _id: vpfm0NeYtG6CcTKD
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You can enter a hostile creature's space and stop there. You can
+          move through a space as narrow as 1 inch wide without
+          &amp;reference[squeezing]{Squeezing}.</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses:
+          - ethereal
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781811427623
+          modifiedTime: 1781811451971
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!banHjKDMCegbUwYE.8FHVwYBJY7dxIv9D.vpfm0NeYtG6CcTKD
     folder: null
     sort: 0
     ownership:
@@ -539,12 +579,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.TyDSfYTJeKv7c8lB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781811399051
+      modifiedTime: 1781811455340
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!banHjKDMCegbUwYE.8FHVwYBJY7dxIv9D'
   - _id: IyR3c30mCbL8VMCo
@@ -554,8 +594,8 @@ items:
     system:
       description:
         value: >-
-          <p>The elemental makes two [[/item .qzLZFBO75loU77TZ]]{slam}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .qzLZFBO75loU77TZ]]{slam} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -569,13 +609,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        zI6bS5K8ChereaUx:
           type: utility
           activation:
             type: action
@@ -590,15 +629,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -609,7 +649,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -626,7 +667,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: zI6bS5K8ChereaUx
       enchant: {}
       prerequisites:
         level: null
@@ -640,22 +689,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273656473
+      systemVersion: 6.0.0
+      createdTime: 1781811468994
+      modifiedTime: 1781811476192
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!banHjKDMCegbUwYE.IyR3c30mCbL8VMCo'
   - _id: qzLZFBO75loU77TZ
     name: Slam
     type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/magic/air/air-pressure-shield-blue.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Air Elemental attacks with its Slam.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -717,9 +768,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -728,8 +778,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        3mDZxjv6zjBnFhP1:
           type: attack
           activation:
             type: action
@@ -744,10 +793,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -764,7 +814,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -777,24 +828,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 3mDZxjv6zjBnFhP1
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: slam
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -804,11 +868,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552342
+      systemVersion: 6.0.0
+      createdTime: 1781811491009
+      modifiedTime: 1781811508236
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!banHjKDMCegbUwYE.qzLZFBO75loU77TZ'
@@ -819,23 +883,26 @@ items:
     system:
       description:
         value: >-
-          <p>Each creature in the elemental's space must make a [[/save]] saving
-          throw. On a failure, a target takes [[/damage average]] damage and is
-          flung up 20 feet away from the elemental in a random direction and
-          knocked prone.</p><p>If a thrown target strikes an object, such as a
-          wall or floor, the target takes [[/damage activity=dnd5eactivity000
-          average]] damage for every 10 feet it was thrown. If the target is
-          thrown at another creature, that creature must succeed on a [[/save
-          activity=k9fqQYuxbnT3pwT3]] saving throw or take the same damage and
-          be knocked prone. If the saving throw is successful, the target takes
-          half the bludgeoning damage and isn't flung away or knocked prone.</p>
+          <p>Each creature in the [[lookup @name lowercase]]{monster}'s space
+          must make a [[/save activity=O0oP6dlhQ4kdTAGU]] saving throw. On a
+          failure, a target takes [[/damage average activity=O0oP6dlhQ4kdTAGU]]
+          damage and is flung up 20 feet away from the [[lookup @name
+          lowercase]]{monster} in a random direction and knocked
+          &amp;reference[prone].</p><p>If a thrown target strikes an object,
+          such as a wall or floor, the target takes [[/damage
+          activity=dnd5eactivity000 average]] damage for every 10 feet it was
+          thrown. If the target is thrown at another creature, that creature
+          must succeed on a [[/save activity=k9fqQYuxbnT3pwT3]] saving throw or
+          take the same damage and be knocked &amp;reference[prone]. If the
+          saving throw is successful, the target takes half the bludgeoning
+          damage and isn't flung away or knocked prone.</p>
         chat: >-
-          <p>Each creature in the elemental's space must make a
-          <strong>Strength</strong> saving throw. On a failure, a target is
-          flung up 20 feet away from the elemental in a random direction and
-          knocked prone. If the target is thrown at another creature, that
-          creature must make a <strong>Dexterity</strong> saving throw or take
-          the same damage and be knocked prone.</p>
+          <p>Each creature in the [[lookup @name]]{monster}'s space must make a
+          Strength saving throw. On a failure, a target is flung up 20 feet away
+          from the [[lookup @name]]{monster} in a random direction and knocked
+          &amp;reference[prone]. If the target is thrown at another creature,
+          that creature must make a Dexterity saving throw or take the same
+          damage and be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -851,13 +918,168 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        k9fqQYuxbnT3pwT3:
+          type: save
+          name: Creature Collision Save
+          _id: k9fqQYuxbnT3pwT3
+          sort: 300000
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: true
+              max: '2'
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: 8
+                bonus: ''
+                types:
+                  - bludgeoning
+                scaling:
+                  mode: whole
+                  number: 1
+            onSave: half
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '13'
+            bonus: ''
+          img: ''
+          appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+        O0oP6dlhQ4kdTAGU:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: 8
+                bonus: ''
+                types:
+                  - bludgeoning
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - str
+            dc:
+              calculation: ''
+              formula: '13'
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Whirlwind Save
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: O0oP6dlhQ4kdTAGU
+        NrSJOK3Mb0qPtERy:
           type: damage
           activation:
             type: action
@@ -872,15 +1094,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -891,7 +1114,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -918,130 +1142,21 @@ items:
                   - bludgeoning
                 scaling:
                   mode: whole
-          sort: 200000
-          name: Object Damage
-          img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                value: '1'
-                target: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: none
-            parts:
-              - custom:
-                  enabled: false
+                  number: 1
                   formula: ''
-                number: 3
-                denomination: 8
-                bonus: ''
-                types:
-                  - bludgeoning
-          save:
-            ability: str
-            dc:
-              calculation: ''
-              formula: '13'
-          sort: 100000
-          name: ''
+          sort: 250000
+          name: Object Collision Damage
           img: ''
-          appliedEffects: []
-        k9fqQYuxbnT3pwT3:
-          type: save
-          name: Creature Save
-          _id: k9fqQYuxbnT3pwT3
-          sort: 300000
-          activation:
-            type: action
-            override: false
-            condition: ''
-          consumption:
-            scaling:
-              allowed: false
-            spellSlot: true
-            targets: []
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects: []
-          range:
-            units: self
-            override: false
-            special: ''
-          target:
-            template:
-              contiguous: false
-              units: ft
-              type: ''
-            affects:
-              choice: false
-              type: ''
-            override: false
-            prompt: true
-          uses:
-            spent: 0
-            recovery: []
-            max: ''
-          damage:
-            parts: []
-            onSave: half
-          save:
-            ability:
-              - dex
-            dc:
-              calculation: ''
-              formula: '13'
-          img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: NrSJOK3Mb0qPtERy
       enchant: {}
       prerequisites:
         level: null
@@ -1051,19 +1166,15 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ocmSrMY2NX3e43uN
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747954564495
+      systemVersion: 6.0.0
+      createdTime: 1781811546059
+      modifiedTime: 1781819793917
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!banHjKDMCegbUwYE.PVdWTEQBuiAglD7l'
@@ -1075,7 +1186,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171241306

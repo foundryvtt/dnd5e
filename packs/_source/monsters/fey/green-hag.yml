@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,53 +481,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: TwdKEVj1NjVefyq9
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The hag can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!saq6WM959pKHuaqP.TwdKEVj1NjVefyq9'
   - _id: 9HX1VdEInbRUnBVL
     name: Innate Spellcasting
     type: feat
@@ -569,18 +521,18 @@ items:
       identifier: innate-spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447015973
+      createdTime: 1781811115103
+      modifiedTime: 1781811115103
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.9HX1VdEInbRUnBVL'
@@ -591,9 +543,9 @@ items:
     system:
       description:
         value: >-
-          <p>The hag can mimic animal sounds and humanoid voices. A creature
-          that hears the sounds can tell they are imitations with a successful
-          [[/check]] check.</p>
+          <p>The [[lookup @name lowercase]]{monster} can mimic animal sounds and
+          humanoid voices. A creature that hears the sounds can tell they are
+          imitations with a successful [[/check]] check.</p>
         chat: >-
           <p>The hag can mimic animal sounds and humanoid voices. A creature
           that hears the sounds can tell they are imitations with a successful
@@ -610,10 +562,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         0eU0qHrzuJTbqxUP:
           type: check
@@ -669,7 +622,7 @@ items:
       identifier: mimicry
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -680,22 +633,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zZkNtL97hn1P6OJC
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955871763
+      systemVersion: 6.0.0
+      createdTime: 1781811115103
+      modifiedTime: 1781811268275
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.C2ZJ3Oe30dyU2o7E'
   - _id: gtixTr9i63RtsSCv
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Green Hag attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -758,7 +713,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -767,8 +722,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        uEdUVUQ62x0Da5Vd:
           type: attack
           activation:
             type: action
@@ -783,10 +737,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -803,7 +758,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -816,24 +772,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: uEdUVUQ62x0Da5Vd
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -843,32 +812,32 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553825
+      systemVersion: 6.0.0
+      createdTime: 1781810731630
+      modifiedTime: 1781810754151
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.gtixTr9i63RtsSCv'
   - _id: cvdyEyn0s7hKwIcN
     name: Illusory Appearance
     type: feat
-    img: icons/creatures/mammals/humanoid-cat-skulking-teal.webp
+    img: icons/equipment/head/hood-cloth-trimmed-pink-gold.webp
     system:
       description:
         value: >-
-          <p>The hag covers herself and anything she is wearing or carrying with
-          a magical illusion that makes her look like another creature of her
-          general size and humanoid shape. The illusion ends if the hag takes a
-          bonus action to end it or if she dies.</p>
-
-          <p>The changes wrought by this effect fail to hold up to physical
-          inspection. For example, the hag could appear to have smooth skin, but
-          someone touching her would feel her rough flesh. Otherwise, a creature
-          must take an action to visually inspect the illusion and succeed on a
-          DC 20 Intelligence (Investigation) check to discern that the hag is
-          disguised.</p>
+          <p>The [[lookup @name lowercase]]{monster} covers herself and anything
+          she is wearing or carrying with a magical illusion that makes her look
+          like another creature of her general size and humanoid shape. The
+          illusion ends if the [[lookup @name lowercase]]{monster} takes a bonus
+          action to end it or if she dies.</p><p>The changes wrought by this
+          effect fail to hold up to physical inspection. For example, the
+          [[lookup @name lowercase]]{monster} could appear to have smooth skin,
+          but someone touching her would feel her rough flesh. Otherwise, a
+          creature must take an action to visually inspect the illusion and
+          succeed on a [[/check activity=kV9ZxzkLNTRogVW9]] check to discern
+          that the [[lookup @name lowercase]]{monster} is disguised.</p>
         chat: ''
       source:
         custom: ''
@@ -882,64 +851,143 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        ZZU7Do4OA9sFFQb1:
+          type: transform
+          name: Don Illusory Appearance
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: dstr
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          profiles:
+            - cr: ''
+              name: ''
+              _id: lX8J7ULrjRnWCHF6
+              uuid: null
+              sizes:
+                - med
+              types:
+                - humanoid
+              movement: []
+              level:
+                min: null
+                max: null
+          settings: null
+          transform:
+            customize: false
+            mode: cr
+            preset: polymorphSelf
+          _id: ZZU7Do4OA9sFFQb1
+        kV9ZxzkLNTRogVW9:
+          type: check
+          name: Investigate
+          img: ''
+          sort: 200000
+          activation:
+            type: ''
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              count: '1'
+              type: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          check:
+            associated:
+              - inv
+            dc:
+              calculation: ''
+              formula: '20'
+            visible: true
+            ability: ''
+            bonus: ''
+          _id: kV9ZxzkLNTRogVW9
       enchant: {}
       prerequisites:
         level: null
@@ -953,12 +1001,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.s7kqggp9VLDb39nu
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781810777459
+      modifiedTime: 1781811323347
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.cvdyEyn0s7hKwIcN'
   - _id: Cdis1lnjFvqfoScV
@@ -968,11 +1016,12 @@ items:
     system:
       description:
         value: >-
-          <p>The hag magically turns invisible until she attacks or casts a
-          spell, or until her concentration ends (as if concentrating on a
-          spell). While invisible, she leaves no physical evidence of her
-          passage, so she can be tracked only by magic. Any equipment she wears
-          or carries is invisible with her.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically turns
+          &amp;reference[invisible] until she attacks or casts a spell, or until
+          her concentration ends (as if concentrating on a spell). While
+          invisible, she leaves no physical evidence of her passage, so she can
+          be tracked only by magic. Any equipment she wears or carries is
+          invisible with her.</p>
         chat: >-
           <p>The hag magically turns invisible. Any equipment she wears or
           carries is invisible with her.</p>
@@ -988,10 +1037,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -1015,7 +1065,11 @@ items:
             units: ''
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: M15UoRAnmUX21B5N
+              level:
+                min: null
+                max: null
           range:
             units: ''
             special: ''
@@ -1031,7 +1085,7 @@ items:
               units: ''
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1046,11 +1100,62 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: Become Invisible
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireMagic: true
       enchant: {}
       prerequisites:
         level: null
       identifier: invisible-passage
-    effects: []
+    effects:
+      - name: Invisible Passage
+        img: icons/magic/perception/silhouette-stealth-shadow.webp
+        origin: Compendium.dnd5e.monsters.Actor.saq6WM959pKHuaqP.Item.Cdis1lnjFvqfoScV
+        transfer: false
+        _id: M15UoRAnmUX21B5N
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[invisible apply=false] until you attack,
+          cast a spell, or until your concentration ends (as if concentrating on
+          a spell). While invisible, you leave no physical evidence of your
+          passage, so you can be tracked only by magic. Any equipment you are
+          wearing or carrying becomes invisible with you.</p>
+        tint: '#ffffff'
+        statuses:
+          - invisible
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781811151205
+          modifiedTime: 1781811235515
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!saq6WM959pKHuaqP.Cdis1lnjFvqfoScV.M15UoRAnmUX21B5N
     folder: null
     sort: 0
     ownership:
@@ -1059,11 +1164,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FRIASnssihfMTZ7q
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676755
+      systemVersion: 6.0.0
+      createdTime: 1781811140345
+      modifiedTime: 1781811246951
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.Cdis1lnjFvqfoScV'
@@ -1177,7 +1282,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CAxSzHWizrafT033
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1303,7 +1408,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1433,7 +1538,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.cdrYKaFi98YWaBMw
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1441,6 +1546,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.cdrYKaFi98YWaBMw'
+  - _id: v7WLd38u9z94vJXR
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 175000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781825771606
+      modifiedTime: 1781825771606
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!saq6WM959pKHuaqP.v7WLd38u9z94vJXR'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
 sort: 0
@@ -1449,7 +1607,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171262458

@@ -153,46 +153,59 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
     _id: KDZFGFsxEOF5WvbJ
-    system: {}
-    changes:
-      - key: system.damage.parts
-        mode: 2
-        value: '[["1d6","cold"]]'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgFrostBrand000
-          caption=false]</p>
-        priority: null
-      - key: name
-        mode: 5
-        value: Frost Brand {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/swords/greatsword-flamberge.webp
-        priority: null
+    system:
+      changes:
+        - key: system.damage.parts
+          value:
+            - - 1d6
+              - cold
+          priority: null
+          type: add
+          phase: initial
+          _id: PXn0K0NaScNdDUan
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: JlAbCDUspR6kEBOd
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: rBQxd1TrKXLHNARR
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgFrostBrand000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: gAv4QH2QYUCGjCnN
+        - key: name
+          value: Frost Brand {}
+          priority: null
+          type: override
+          phase: initial
+          _id: MNje3SmmHopNxddO
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: evKOPbdr7vczR4Uw
+        - key: img
+          value: icons/weapons/swords/greatsword-flamberge.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: uLzONki52IIMwvZY
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -203,33 +216,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729820793014
-      modifiedTime: 1745438836485
+      modifiedTime: 1783544095687
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgFrostBrand000.KDZFGFsxEOF5WvbJ'
   - name: Fire Resistance
     img: icons/magic/water/snowflake-ice-gray.webp
     _id: 6iBMqwU8is1D54T3
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: KW50WRDgg6IsEXtv
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -240,13 +256,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729820998551
-      modifiedTime: 1729821420075
+      modifiedTime: 1783544095687
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgFrostBrand000.6iBMqwU8is1D54T3'
 folder: kie870i5kr7yuxO8
 flags:
@@ -257,11 +276,11 @@ flags:
         - 6iBMqwU8is1D54T3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745433564683
+  modifiedTime: 1783544095687
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8100000

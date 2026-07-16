@@ -6,16 +6,16 @@ type: spell
 system:
   description:
     value: >-
-      <p>Magical darkness spreads from a point you choose within range to fill a
-      15-foot-radius sphere for the duration. The darkness spreads around
-      corners. A creature with darkvision can't see through this darkness, and
-      nonmagical light can't illuminate it.</p><p>If the point you choose is on
-      an object you are holding or one that isn't being worn or carried, the
-      darkness emanates from the object and moves with it. Completely covering
-      the source of the darkness with an opaque object, such as a bowl or a
-      helm, blocks the darkness.</p><p>If any of this spell's area overlaps with
-      an area of light created by a spell of 2nd level or lower, the spell that
-      created the light is dispelled.</p>
+      <p>Magical &amp;reference[darkness] spreads from a point you choose within
+      range to fill a 15-foot-radius sphere for the duration. The darkness
+      spreads around corners. A creature with &amp;reference[darkvision] can't
+      see through this darkness, and nonmagical light can't illuminate
+      it.</p><p>If the point you choose is on an object you are holding or one
+      that isn't being worn or carried, the darkness emanates from the object
+      and moves with it. Completely covering the source of the darkness with an
+      opaque object, such as a bowl or a helm, blocks the darkness.</p><p>If any
+      of this spell's area overlaps with an area of light created by a spell of
+      2nd level or lower, the spell that created the light is dispelled.</p>
     chat: ''
   source:
     custom: ''
@@ -102,20 +102,202 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    wTFlqIa1q030bdJe:
+      type: enchant
+      name: Cast (Conjure Darkness on Object)
+      _id: wTFlqIa1q030bdJe
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Tm6GfEu4JKv0pU8U
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - xxbzHLlG7wj1GCvI
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: object
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
   identifier: darkness
 sort: 0
-flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-red.webp
-effects: []
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - xxbzHLlG7wj1GCvI
+img: icons/magic/unholy/orb-rays-blue.webp
+effects:
+  - type: enchantment
+    name: Darkness
+    img: icons/magic/unholy/orb-rays-blue.webp
+    disabled: true
+    _id: Tm6GfEu4JKv0pU8U
+    system:
+      changes:
+        - key: system.description.value
+          type: override
+          value: >-
+            {} <p><strong>Darkness.</strong> This item is spreading magical
+            &reference[darkness] to fill a 15-foot-radius sphere for the
+            duration of the spell. The darkness spreads around corners and moves
+            with the object. Completely covering this object with an opaque
+            object, such as a bowl or a helm, blocks the darkness.</p> <p>If any
+            of this spell's area overlaps with an area of light created by a
+            spell of 2nd level or lower, the spell that created the light is
+            dispelled.</p>
+          phase: initial
+          priority: null
+    start: null
+    duration:
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>This item is spreading magical &amp;reference[darkness] to fill a
+      15-foot-radius sphere for the duration of the spell. The darkness spreads
+      around corners and moves with the object. Completely covering this object
+      with an opaque object, such as a bowl or a helm, blocks the
+      darkness.</p><p>If any of this spell's area overlaps with an area of light
+      created by a spell of 2nd level or lower, the spell that created the light
+      is dispelled.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781267608203
+      modifiedTime: 1781269431698
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!S7VbUetIfVT7B6Eq.Tm6GfEu4JKv0pU8U'
+  - name: Wielding Darkness Covered Object
+    img: icons/magic/unholy/orb-rays-blue.webp
+    origin: Compendium.dnd5e.spells.Item.S7VbUetIfVT7B6Eq
+    type: base
+    _id: xxbzHLlG7wj1GCvI
+    system:
+      changes:
+        - key: token.light.negative
+          type: override
+          value: true
+          phase: initial
+          priority: null
+        - key: token.light.dim
+          type: upgrade
+          value: 15
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>The object you are carrying has the
+      @UUID[Compendium.dnd5e.spells.Item.S7VbUetIfVT7B6Eq]{Darkness} spell cast
+      upon it.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781267677200
+      modifiedTime: 1781267749235
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!S7VbUetIfVT7B6Eq.xxbzHLlG7wj1GCvI'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037356237
-  modifiedTime: 1731016464670
+  modifiedTime: 1781267765178
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!S7VbUetIfVT7B6Eq'

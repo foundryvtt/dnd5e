@@ -3,7 +3,7 @@ import AttackRollConfigurationDialog from "./applications/dice/attack-configurat
 import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
-import { formatNumber, getSceneTargets, getTargetDescriptors, log, simplifyBonus } from "./utils.mjs";
+import { formatNumber, getSceneTargets, getTargetDescriptors, loadingTooltip, log, simplifyBonus } from "./utils.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 const logWarning = (msg, options) =>
@@ -1432,10 +1432,15 @@ export async function enrichItem(config, label, options) {
   const givenItem = config.values.join(" ");
   let parsed = foundry.utils.parseUuid(givenItem);
 
-  const makeLink = (label, dataset) => {
+  const makeLink = (label, dataset, uuid) => {
     const span = document.createElement("span");
     span.classList.add("roll-link-group");
     _addDataset(span, dataset);
+    if ( uuid ) {
+      span.dataset.tooltipHtml = loadingTooltip({ uuid });
+      span.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
+      span.dataset.tooltipDirection = "LEFT";
+    }
     span.append(createRollLink(label));
     return span;
   };
@@ -1459,7 +1464,9 @@ export async function enrichItem(config, label, options) {
       if ( doc instanceof Item ) label = doc.name;
       else label = _loc("EDITOR.DND5E.Inline.ItemActivity", { item: doc.item.name, activity: doc.name });
     }
-    return makeLink(label, { type: "item", rollItemActor: ownerActor, [`roll${doc.documentName}Uuid`]: doc.uuid });
+    return makeLink(label, {
+      type: "item", rollItemActor: ownerActor, [`roll${doc.documentName}Uuid`]: doc.uuid
+    }, doc instanceof Item ? doc.uuid : doc.item?.uuid);
   }
 
   const foundActor = options.relativeTo instanceof Item
@@ -1472,7 +1479,9 @@ export async function enrichItem(config, label, options) {
   if ( givenItem.startsWith(".") ) {
     try {
       foundItem = await fromUuid(givenItem, { relative: options.relativeTo });
-    } catch(err) { return null; }
+    } catch {
+      return null;
+    }
   }
 
   if ( !foundItem && !givenItem && (options.relativeTo instanceof Item) ) foundItem = options.relativeTo;
@@ -1488,11 +1497,11 @@ export async function enrichItem(config, label, options) {
       if ( !label ) label = _loc("EDITOR.DND5E.Inline.ItemActivity", {
         item: foundItem.name, activity: foundActivity.name
       });
-      return makeLink(label, { type: "item", rollActivityUuid: foundActivity.uuid });
+      return makeLink(label, { type: "item", rollActivityUuid: foundActivity.uuid }, foundItem.uuid);
     }
 
     if ( !label ) label = foundItem.name;
-    return makeLink(label, { type: "item", rollItemUuid: foundItem.uuid });
+    return makeLink(label, { type: "item", rollItemUuid: foundItem.uuid }, foundItem.uuid);
   }
 
   // Finally, if config is an item name
@@ -1501,7 +1510,7 @@ export async function enrichItem(config, label, options) {
   }) : givenItem;
   return makeLink(label, {
     type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem, rollActivityName: config.activity
-  });
+  }, foundActor?.items.getName(givenItem)?.uuid);
 }
 
 /* -------------------------------------------- */
@@ -1579,9 +1588,7 @@ function createPassiveTag(label, dataset) {
   span.classList.add("passive-check");
   _addDataset(span, {
     ...dataset,
-    tooltip: `
-      <section class="loading" data-passive><i class="fas fa-spinner fa-spin-pulse"></i></section>
-    `
+    tooltipHtml: loadingTooltip({ passive: true })
   });
   span.innerText = label;
   return span;

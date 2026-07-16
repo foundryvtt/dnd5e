@@ -43,29 +43,32 @@ effects:
     img: icons/magic/life/ankh-shadow-green.webp
     _id: 7fucT9vgkryEEoxI
     type: base
-    system: {}
-    changes:
-      - key: system.scale.cleric.cantrips-known.value
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.skills.arc.bonuses.check
-        mode: 2
-        value: (max(1,@abilities.wis.mod))
-        priority: null
-      - key: system.skills.rel.bonuses.check
-        mode: 2
-        value: (max(1,@abilities.wis.mod))
-        priority: null
+    system:
+      changes:
+        - key: system.scale.cleric.cantrips-known.value
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: k3ohnfGoXYIYc5hv
+        - key: system.skills.arc.bonuses.check
+          value: (max(1,@abilities.wis.mod))
+          priority: null
+          type: add
+          phase: initial
+          _id: D0rfzFnL94kxvIWe
+        - key: system.skills.rel.bonuses.check
+          value: (max(1,@abilities.wis.mod))
+          priority: null
+          type: add
+          phase: initial
+          _id: 993UBoBWNJuPzfPl
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -76,13 +79,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544100904
+      modifiedTime: 1783544100904
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbDivineOrderTh.7fucT9vgkryEEoxI'
 folder: 3wY92TRgyyyDkpmF
 flags:
@@ -92,11 +98,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866373481
-  modifiedTime: 1745256759495
+  modifiedTime: 1783544100904
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1400000

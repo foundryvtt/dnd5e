@@ -30,12 +30,15 @@ system:
       type: creature
       count: '6'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,20 +102,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: prayer-of-healing
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-green.webp
+img: icons/magic/life/cross-beam-green.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354665
-  modifiedTime: 1725992719333
+  modifiedTime: 1781229883421
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MOEmz9N0j0QPkKEE'

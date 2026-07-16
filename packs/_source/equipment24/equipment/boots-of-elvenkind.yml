@@ -60,20 +60,20 @@ effects:
     origin: Compendium.dnd5e.equipment24.Item.dmgBootsOfElvenk
     _id: gHyJQGFKkZJ2rbUe
     type: base
-    system: {}
-    changes:
-      - key: ''
-        value: ''
-        mode: 2
+    system:
+      changes:
+        - key: ''
+          value: ''
+          type: add
+          phase: initial
+          _id: RHoNEHxHTNzZMBHD
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -87,21 +87,24 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1768925670296
-      modifiedTime: 1768925673220
+      modifiedTime: 1783544093872
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgBootsOfElvenk.gHyJQGFKkZJ2rbUe'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544093872
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 3700000

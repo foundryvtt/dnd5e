@@ -1,4 +1,5 @@
 import Proficiency from "../../../documents/actor/proficiency.mjs";
+import AppliedRules from "../../../documents/applied-rules.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
 import ActorDataModel from "../../abstract/actor-data-model.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
@@ -32,24 +33,32 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     return this.mergeSchema(super.defineSchema(), {
       abilities: new MappingField(new SchemaField({
         value: new NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
+          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore",
+          labelFormatter: "DND5E.ABILITY.Formatter.Score"
         }),
         proficient: new NumberField({
-          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel",
+          labelFormatter: "DND5E.ABILITY.Formatter.Save.Proficiency"
         }),
         max: new NumberField({
-          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
+          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax",
+          labelFormatter: "DND5E.ABILITY.Formatter.Maximum"
         }),
         bonuses: new SchemaField({
-          check: new FormulaField({ required: true, label: "DND5E.AbilityCheckBonus" }),
-          save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
+          check: new FormulaField({
+            required: true, label: "DND5E.AbilityCheckBonus", labelFormatter: "DND5E.ABILITY.Formatter.Check.Bonus"
+          }),
+          save: new FormulaField({
+            required: true, label: "DND5E.SaveBonus", labelFormatter: "DND5E.ABILITY.Formatter.Save.Bonus"
+          })
         }, { label: "DND5E.AbilityBonuses" }),
-        check: new RollConfigField({ ability: false }),
-        save: new RollConfigField({ ability: false })
+        check: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check." }),
+        save: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Save." })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
-        initialKeysOnly: true, label: "DND5E.Abilities"
-      })
+        initialKeysOnly: true, label: "DND5E.Abilities", entryLabel: key => CONFIG.DND5E.abilities[key]?.label
+      }),
+      conditions: new MappingField(new NumberField({ integer: true, min: 1 }), { persisted: false })
     });
   }
 
@@ -116,10 +125,12 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   static #migrateMovementData(source) {
     const original = source.attributes?.speed?.value ?? source.attributes?.speed;
-    if ( (typeof original !== "string") || (source.attributes.movement?.walk !== undefined) ) return;
+    if ( (typeof original !== "string") || (source.attributes.movement?.walk !== undefined)
+      || (source.attributes.movement?.speeds?.walk !== undefined) ) return;
     source.attributes.movement ??= {};
+    source.attributes.movement.speeds ??= {};
     const s = original.split(" ");
-    if ( s.length > 0 ) source.attributes.movement.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
+    if ( s.length > 0 ) source.attributes.movement.speeds.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
   }
 
   /* -------------------------------------------- */
@@ -150,14 +161,24 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       const calculatedProf = this.calculateAbilityCheckProficiency(0, id);
       abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.multiplier
         ? originalAbility.checkProf.clone() : calculatedProf;
-      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
-
-      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
-      abl.saveBonus = saveBonusAbl + saveBonus + cover;
-
       abl.saveProf = abl.merged ? originalAbility.saveProf.clone() : new Proficiency(prof, abl.proficient);
+
+      rollData = { ...rollData };
+      rollData.roll = { ability: id, proficient: abl.checkProf.multiplier >= 1, type: "ability" };
+
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
-      abl.checkBonus = checkBonusAbl + checkBonus;
+      const checkBonusRules = simplifyBonus(
+        AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+      );
+      abl.checkBonus = checkBonusAbl + checkBonusRules + checkBonus;
+
+      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
+      const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
+      rollData.roll.proficient = abl.saveProf.multiplier >= 1;
+      const saveBonusRules = simplifyBonus(
+        AppliedRules.collect("save:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+      );
+      abl.saveBonus = saveBonusAbl + saveBonusRules + saveBonus + cover;
 
       abl.save.value = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
@@ -199,7 +220,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   calculateAbilityCheckProficiency(multiplier, ability, options={}) {
     let roundDown = true;
-    if ( (multiplier < 1) && ((game.settings.get("dnd5e", "rulesVersion") === "legacy") || options.skill) ) {
+    if ( (multiplier < 1) && ((dnd5e.settings.rulesVersion === "legacy") || options.skill) ) {
       if ( this.parent._isRemarkableAthlete(ability) ) {
         multiplier = .5;
         roundDown = false;

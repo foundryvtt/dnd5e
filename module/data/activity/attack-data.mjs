@@ -1,4 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import AppliedRules from "../../documents/applied-rules.mjs";
 import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -257,7 +258,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData({ ammunition, attackMode, situational }={}) {
-    const rollData = this.getRollData();
+    const rollData = this.getRollData({ roll: { attackMode } });
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
@@ -269,11 +270,12 @@ export default class BaseAttackActivityData extends BaseActivityData {
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
       actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
+      ruleBonus: AppliedRules.collect("attack:bonus", this.actor, this.item).filterWith(rollData).toFormula(),
       situational
     }, rollData);
 
     // Add exhaustion reduction
-    this.actor?.addRollExhaustion(parts, data);
+    this.actor?.addConditionRollReduction(parts, data);
 
     return { data, parts };
   }
@@ -282,52 +284,50 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /** @override */
   getDamageConfig(config={}, options={}) {
-    const rollConfig = super.getDamageConfig(config, options);
-
-    // Handle ammunition
+    // Copy properties from selected ammunition
     const ammo = config.ammunition?.system;
     if ( ammo ) {
       const properties = Array.from(ammo.properties).filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical);
       if ( this.item.system.properties?.has("mgc") && !properties.includes("mgc") ) properties.push("mgc");
-
-      // Add any new physical properties from the ammunition to the damage properties
-      for ( const roll of rollConfig.rolls ) {
-        for ( const property of properties ) {
-          if ( !roll.options.properties.includes(property) ) roll.options.properties.push(property);
-        }
-      }
-
-      // Add the ammunition's damage
-      if ( ammo.damage.base.formula ) {
-        const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
-        const damage = ammo.damage.base.clone(ammo.damage.base);
-        const rollData = this.getRollData();
-
-        // If mode is "replace" and base part is present, replace the base part
-        if ( ammo.damage.replace & (basePartIndex !== -1) ) {
-          damage.base = true;
-          rollConfig.rolls.splice(
-            basePartIndex, 1,
-            this._processDamagePart(damage, config, rollData, basePartIndex, options.formulaOptions)
-          );
-        }
-
-        // Otherwise stick the ammo damage after base part (or as first part)
-        else {
-          damage.ammo = true;
-          rollConfig.rolls.splice(
-            basePartIndex + 1, 0,
-            this._processDamagePart(damage, rollConfig, rollData, basePartIndex + 1, options.formulaOptions)
-          );
-        }
+      config.properties ??= [];
+      for ( const property of properties ) {
+        if ( !config.properties.includes(property) ) config.properties.push(property);
       }
     }
+
+    const rollConfig = super.getDamageConfig(config, options);
 
     if ( this.damage.critical.bonus && rollConfig.rolls[0] && !rollConfig.rolls[0].options?.critical?.bonusDamage ) {
       foundry.utils.setProperty(rollConfig.rolls[0], "options.critical.bonusDamage", this.damage.critical.bonus);
     }
 
     return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getDamageParts(config={}) {
+    const ammo = config.ammunition?.system;
+    const parts = super._getDamageParts(config);
+    if ( !ammo?.damage.base.formula ) return parts;
+
+    const basePartIndex = parts.findIndex(i => i.base);
+    const damage = ammo.damage.base.clone(ammo.damage.base);
+
+    // If mode is "replace" and base part is present, replace the base part
+    if ( ammo.damage.replace & (basePartIndex !== -1) ) {
+      damage.base = true;
+      parts.splice(basePartIndex, 1, damage);
+    }
+
+    // Otherwise stick the ammo damage after base part (or as first part)
+    else {
+      damage.ammo = true;
+      parts.splice(basePartIndex + 1, 0, damage);
+    }
+
+    return parts;
   }
 
   /* -------------------------------------------- */
@@ -363,6 +363,24 @@ export default class BaseAttackActivityData extends BaseActivityData {
     }
 
     return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(options={}) {
+    const rollData = super.getRollData(options);
+    if ( options.roll ) {
+      rollData.roll ??= {};
+      rollData.roll.ability = this.ability;
+      rollData.roll.attack ??= {};
+      rollData.roll.attack.classification = this.attack.type.classification;
+      rollData.roll.attack.mode = options.roll.attackMode;
+      rollData.roll.attack.type = options.roll.attackMode?.includes("thrown") || (options.roll.attackMode === "ranged")
+        ? "ranged" : this.attack.type.value;
+      rollData.roll.type = "attack";
+    }
+    return rollData;
   }
 
   /* -------------------------------------------- */

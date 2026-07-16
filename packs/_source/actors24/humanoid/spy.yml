@@ -482,12 +482,9 @@ prototypeToken:
     src: modules/dnd-monster-manual/assets/tokens/spy-master-*.webp
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -531,7 +528,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -551,6 +548,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Shortsword
     system:
@@ -730,10 +728,12 @@ items:
       compendiumSource: Compendium.dnd-players-handbook.equipment.phbwepShortsword
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmSpy00000000000.cZowYloP5f2fxbtI'
   - name: Hand Crossbow
     system:
@@ -915,10 +915,12 @@ items:
       compendiumSource: Compendium.dnd-players-handbook.equipment.phbwepHandCrossb
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmSpy00000000000.8XNaqNwy1n0AUrl5'
   - _id: mmCunningAction0
     name: Cunning Action
@@ -1018,10 +1020,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCunningAction0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -1149,10 +1153,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbtulThievesToo
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmSpy00000000000.NHMv5kWuMNacIv5i'
 effects: []
 folder: oq65o5ZsauMtb1JY
@@ -1160,7 +1166,7 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452714815

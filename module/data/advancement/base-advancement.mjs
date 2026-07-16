@@ -44,9 +44,7 @@ export default class BaseAdvancementData extends SparseDataModel {
       icon: new FilePathField({
         initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon", base64: true
       }),
-      classRestriction: new StringField({
-        initial: undefined, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"
-      })
+      classRestriction: new StringField({ initial: undefined, label: "DND5E.AdvancementClassRestriction" })
     };
   }
 

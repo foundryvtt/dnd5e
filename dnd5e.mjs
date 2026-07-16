@@ -12,7 +12,8 @@
 // Import Configuration
 import DND5E from "./module/config.mjs";
 import {
-  applyLegacyRules, registerDeferredSettings, registerSystemKeybindings, registerSystemSettings
+  applyLegacyRules, disableExhaustionAutomation, registerDeferredSettings, registerSystemKeybindings,
+  registerSystemSettings
 } from "./module/settings.mjs";
 
 // Import Submodules
@@ -60,7 +61,6 @@ Hooks.once("init", function() {
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
   CONFIG.ActiveEffect.documentClass = documents.ActiveEffect5e;
-  CONFIG.ActiveEffect.legacyTransferral = false;
   CONFIG.Actor.collection = dataModels.collection.Actors5e;
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;
@@ -74,6 +74,7 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
+  CONFIG.Token.hudClass = applications.hud.TokenHUD5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.Token.rulerClass = canvas.TokenRuler5e;
   CONFIG.Token.movement.TerrainData = dataModels.TerrainData5e;
@@ -109,6 +110,9 @@ Hooks.once("init", function() {
   // Legacy rules.
   if ( dnd5e.settings.rulesVersion === "legacy" ) applyLegacyRules();
 
+  // Remove exhaustion automation if disabled. Must run after legacy rules are applied.
+  if ( dnd5e.settings.disableExhaustion ) disableExhaustionAutomation();
+
   // Register system
   DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
 
@@ -120,6 +124,7 @@ Hooks.once("init", function() {
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
 
   // Hook up system data types
+  Object.assign(CONFIG.ActiveEffect.changeTypes, DND5E.activeEffectChangeTypes);
   Object.assign(CONFIG.ActiveEffect.dataModels, dataModels.activeEffect.config);
   CONFIG.Actor.dataModels = dataModels.actor.config;
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
@@ -133,6 +138,11 @@ Hooks.once("init", function() {
 
   // Register sheet application classes
   const DocumentSheetConfig = foundry.applications.apps.DocumentSheetConfig;
+  DocumentSheetConfig.registerSheet(ActiveEffect, "dnd5e", applications.activeEffect.ActiveEffectSheet5e, {
+    makeDefault: true,
+    label: "DND5E.SheetClass.ActiveEffect"
+  });
+
   DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.CharacterActorSheet, {
     types: ["character"],
@@ -158,6 +168,11 @@ Hooks.once("init", function() {
     types: ["encounter"],
     makeDefault: true,
     label: "DND5E.SheetClass.Encounter"
+  });
+
+  DocumentSheetConfig.registerSheet(Adventure, "dnd5e", applications.adventure.AdventureImporter5e, {
+    canBeDefault: false,
+    label: "DND5E.SheetClass.AdventureImporter"
   });
 
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
@@ -229,9 +244,6 @@ Hooks.once("init", function() {
   // Enrichers
   enrichers.registerCustomEnrichers();
 
-  // Exhaustion handling
-  documents.ActiveEffect5e.registerHUDListeners();
-
   // Set up token movement actions
   documents.TokenDocument5e.registerMovementActions();
 
@@ -281,7 +293,7 @@ function _configureTrackableAttributes() {
     bar: [],
     value: [
       ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
-      ...Object.keys(DND5E.movementTypes).map(movement => `attributes.movement.${movement}`),
+      ...Object.keys(DND5E.movementTypes).map(movement => `attributes.movement.speeds.${movement}`),
       "attributes.ac.value", "attributes.init.total"
     ]
   };
@@ -403,25 +415,26 @@ function _configureFonts() {
  * Configure system status effects.
  */
 function _configureStatusEffects() {
-  const addEffect = (effects, {special, ...data}) => {
+  const statusEffects = {};
+  const addEffect = ({special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
     data.order ??= Infinity;
-    effects.push(data);
+    statusEffects[data.id] = data;
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
     if ( data.neverBlockMovement ) DND5E.neverBlockStatuses.add(data.id);
   };
-  CONFIG.statusEffects = Object.entries(CONFIG.DND5E.statusEffects).reduce((arr, [id, data]) => {
-    const original = CONFIG.statusEffects.find(s => s.id === id);
-    addEffect(arr, foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
-    return arr;
-  }, []);
+  for ( const [id, data] of Object.entries(CONFIG.DND5E.statusEffects) ) {
+    const original = CONFIG.statusEffects[id];
+    addEffect(foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
+  }
   for ( const [id, data] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
-    addEffect(CONFIG.statusEffects, { id, ...data });
+    addEffect({ id, ...data });
   }
   for ( const [id, data] of Object.entries(CONFIG.DND5E.encumbrance.effects) ) {
-    addEffect(CONFIG.statusEffects, { id, ...data, hud: false });
+    addEffect({ id, ...data, hud: false });
   }
+  CONFIG.statusEffects = statusEffects;
 }
 
 /* -------------------------------------------- */
@@ -436,7 +449,6 @@ Hooks.once("setup", function() {
   _configureTrackableAttributes();
   _configureConsumableAttributes();
 
-  CONFIG.DND5E.trackableAttributes = expandAttributeList(CONFIG.DND5E.trackableAttributes);
   Tooltips5e.activateListeners();
   game.dnd5e.tooltips.observe();
 
@@ -460,20 +472,6 @@ Hooks.once("setup", function() {
   `;
   document.head.append(style);
 });
-
-/* --------------------------------------------- */
-
-/**
- * Expand a list of attribute paths into an object that can be traversed.
- * @param {string[]} attributes  The initial attributes configuration.
- * @returns {object}  The expanded object structure.
- */
-function expandAttributeList(attributes) {
-  return attributes.reduce((obj, attr) => {
-    foundry.utils.setProperty(obj, attr, true);
-    return obj;
-  }, {});
-}
 
 /* --------------------------------------------- */
 
@@ -568,8 +566,19 @@ Hooks.once("ready", function() {
     dnd5e.ui.calendar.render({ force: true });
   }
 
-  // Determine whether a system migration is required and feasible
+  // Run migrations & post-import actions for quickstarted adventures
+  _handleMigration()
+    .then(() => applications.adventure.AdventureQuickstartDialog.handleQuickstart());
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether a system migration is required and feasible and run it.
+ */
+async function _handleMigration() {
   if ( !game.user.isGM ) return;
+
   const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
@@ -584,8 +593,9 @@ Hooks.once("ready", function() {
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
     ui.notifications.error("MIGRATION.DND5E.Warning.VersionTooOld", { permanent: true });
   }
-  migrations.migrateWorld();
-});
+
+  await migrations.migrateWorld();
+}
 
 /* -------------------------------------------- */
 /*  System Styling                              */

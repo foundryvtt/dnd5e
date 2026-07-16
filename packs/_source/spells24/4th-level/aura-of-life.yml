@@ -110,24 +110,24 @@ effects:
   - name: Aura of Life
     origin: Compendium.dnd5e.spells24.Item.phbsplAuraofLife
     duration:
-      rounds: null
-      startTime: null
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/life/ankh-gold-blue.webp
     _id: GV4hKah5zwQ3Bisx
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: necrotic
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: necrotic
+          priority: null
+          type: add
+          phase: initial
+          _id: RtFuCaHQuPMcusGJ
+      magical: true
     description: >-
       <p>While in the aura, you and your allies have Resistance to Necrotic
       damage, and your Hit Point maximums can’t be reduced. If an ally with 0
@@ -140,13 +140,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974005
+      modifiedTime: 1783543974005
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAuraofLife.GV4hKah5zwQ3Bisx'
 folder: qi3IbnEwap7mRw4b
 sort: 3800000
@@ -159,11 +162,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425941996
-  modifiedTime: 1745256786201
+  modifiedTime: 1783543974005
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAuraofLife'

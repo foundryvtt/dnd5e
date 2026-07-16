@@ -104,20 +104,18 @@ effects:
   - name: Charmed
     origin: Compendium.dnd5e.spells24.Item.phbsplAnimalFrie
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 86400
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/charmed.svg
     _id: 55NWwccKvMKQPL4h
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p><span style="font-family:Signika, sans-serif">The target has the
       &amp;Reference[charmed apply=false] condition for the duration. If you or
@@ -130,13 +128,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543973874
+      modifiedTime: 1783543973874
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplAnimalFrie.55NWwccKvMKQPL4h'
 folder: pBaAAtXBCq9FVEnL
 sort: 5600000
@@ -149,11 +150,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425940341
-  modifiedTime: 1745256785241
+  modifiedTime: 1783543973874
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAnimalFrie'

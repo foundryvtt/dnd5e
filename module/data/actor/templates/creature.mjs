@@ -1,3 +1,5 @@
+import * as Trait from "../../../documents/actor/trait.mjs";
+import AppliedRules from "../../../documents/applied-rules.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
@@ -43,32 +45,40 @@ export default class CreatureTemplate extends CommonTemplate {
       }),
       skills: new MappingField(new RollConfigField({
         value: new NumberField({
-          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel",
+          labelFormatter: "DND5E.SKILL.Formatter.Proficiency"
         }),
         ability: "dex",
         bonuses: new SchemaField({
-          check: new FormulaField({ required: true, label: "DND5E.SkillBonusCheck" }),
-          passive: new FormulaField({ required: true, label: "DND5E.SkillBonusPassive" })
+          check: new FormulaField({
+            required: true, label: "DND5E.SkillBonusCheck", labelFormatter: "DND5E.SKILL.Formatter.CheckBonus"
+          }),
+          passive: new FormulaField({
+            required: true, label: "DND5E.SkillBonusPassive", labelFormatter: "DND5E.SKILL.Formatter.PassiveBonus"
+          })
         }, { label: "DND5E.SkillBonuses" })
       }), {
         initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue,
-        initialKeysOnly: true, label: "DND5E.Skills"
+        initialKeysOnly: true, label: "DND5E.Skills", entryLabel: key => CONFIG.DND5E.skills[key]?.label
       }),
       tools: new MappingField(new RollConfigField({
         value: new NumberField({
-          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel",
+          labelFormatter: "DND5E.TOOL.Formatter.Proficiency"
         }),
         ability: "int",
         bonuses: new SchemaField({
-          check: new FormulaField({ required: true, label: "DND5E.CheckBonus" })
+          check: new FormulaField({
+            required: true, label: "DND5E.CheckBonus", labelFormatter: "DND5E.TOOL.Formatter.CheckBonus"
+          })
         }, { label: "DND5E.ToolBonuses" })
-      })),
+      }), { entryLabel: key => Trait.keyLabel(key, { trait: "tool" }) }),
       spells: new MappingField(new SchemaField({
         value: new NumberField({
           nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
         }),
         override: new NumberField({
-          integer: true, min: 0, label: "DND5E.SpellProgOverride"
+          integer: true, min: 0, initial: null, label: "DND5E.SpellProgOverride"
         })
       }), { initialKeys: this._spellLevels, label: "DND5E.SpellLevels" })
     });
@@ -239,23 +249,32 @@ export default class CreatureTemplate extends CommonTemplate {
     ability ??= skillData.ability;
     const abilityData = this.abilities[ability];
     skillData.ability = ability;
-    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
     const originalSkill = originalSkills?.[skillId];
     if ( originalSkill?.value >= 1 ) {
       skillData.merged = true;
       skillData.value = originalSkill?.value;
     }
 
-    // Compute modifier
-    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
-    skillData.effectValue = skillData.value;
-    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
-    skillData.mod = abilityData?.mod ?? 0;
+    // Compute proficiency
     const calculatedProf = this.calculateAbilityCheckProficiency(
       skillData.value, skillData.ability, { skill: skillId }
     );
     skillData.prof = originalSkill?.prof?.multiplier > calculatedProf.multiplier
       ? originalSkill.prof.clone() : calculatedProf;
+
+    // Complete roll data
+    rollData = { ...rollData };
+    rollData.roll = { ability, proficient: skillData.prof.multiplier >= 1, skill: skillId, type: "skill" };
+
+    // Compute modifier
+    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
+    skillData.effectValue = skillData.value;
+    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
+    const ruleBonus = simplifyBonus(
+      AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+    );
+    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus + ruleBonus;
+    skillData.mod = abilityData?.mod ?? 0;
     skillData.value = skillData.proficient = skillData.prof.multiplier;
     skillData.total = skillData.mod + skillData.bonus;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
@@ -268,7 +287,7 @@ export default class CreatureTemplate extends CommonTemplate {
       skillData.total += difference;
     }
 
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const isLegacy = dnd5e.settings.rulesVersion === "legacy";
     if ( flags.remarkableAthlete
       && CONFIG.DND5E.characterFlags.remarkableAthlete.skills.includes(skillId) && !isLegacy ) {
       AdvantageModeField.setMode(this, `skills.${skillId}.roll.mode`, 1);
@@ -279,7 +298,7 @@ export default class CreatureTemplate extends CommonTemplate {
     const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
     const advantageMode = AdvantageModeField.combineFields(this, [
       `abilities.${ability}.check.roll.mode`, `skills.${skillId}.roll.mode`
-    ])?.mode ?? 0;
+    ], AppliedRules.collect("check:advantage", this.parent).filterWith(rollData).toAdvantageCounts())?.mode ?? 0;
     skillData.passive = CONFIG.DND5E.skillPassive.base + skillData.mod + skillData.bonus + skillData.prof.flat
       + passive + passiveBonus + (advantageMode * CONFIG.DND5E.skillPassive.modifier);
 
@@ -295,14 +314,22 @@ export default class CreatureTemplate extends CommonTemplate {
    */
   prepareTools({ rollData={} }={}) {
     const globalCheckBonus = simplifyBonus(this.bonuses.abilities.check, rollData);
-    for ( const tool of Object.values(this.tools) ) {
+    for ( const [id, tool] of Object.entries(this.tools) ) {
       const ability = this.abilities[tool.ability];
+      tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
+
+      // Complete roll data
+      rollData = { ...rollData };
+      rollData.roll = { ability: tool.ability, proficient: tool.prof.multiplier >= 1, tool: id, type: "tool" };
+
       const baseBonus = simplifyBonus(tool.bonuses.check, rollData);
       const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, rollData);
+      const ruleBonus = simplifyBonus(
+        AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+      );
       tool.effectValue = tool.value;
-      tool.bonus = baseBonus + globalCheckBonus + checkBonusAbl;
       tool.mod = ability?.mod ?? 0;
-      tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
+      tool.bonus = baseBonus + globalCheckBonus + checkBonusAbl + ruleBonus;
       tool.total = tool.mod + tool.bonus;
       if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
       tool.value = tool.prof.multiplier;
@@ -314,8 +341,8 @@ export default class CreatureTemplate extends CommonTemplate {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getRollData({ deterministic=false }={}) {
-    const data = super.getRollData({ deterministic });
+  getRollData(options={}) {
+    const data = super.getRollData(options);
     data.classes = {};
     data.subclasses = {};
     for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {

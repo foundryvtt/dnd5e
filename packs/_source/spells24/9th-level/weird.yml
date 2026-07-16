@@ -189,17 +189,15 @@ effects:
     transfer: false
     _id: 6bCIQhmzYmSR5Ck1
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>A &amp;Reference[Frightened apply=false] target makes a [[/save
       ability=wis format=long]] at the end of each of its turns. On a failed
@@ -213,13 +211,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725391147917
-      modifiedTime: 1725391296086
+      modifiedTime: 1783543977667
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplWeird00000.6bCIQhmzYmSR5Ck1'
 folder: iG0Zia8jh6uK39TB
 sort: 100013
@@ -232,11 +233,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425977990
-  modifiedTime: 1745256800076
+  modifiedTime: 1783543977667
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplWeird00000'

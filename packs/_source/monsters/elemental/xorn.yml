@@ -449,9 +449,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -466,7 +463,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -486,15 +483,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: ODAa1IROPs40MUI2
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Xorn attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -557,7 +557,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -566,8 +566,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ToWwlIKLPbwuDPzM:
           type: attack
           activation:
             type: action
@@ -582,10 +581,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -602,7 +602,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -615,24 +616,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ToWwlIKLPbwuDPzM
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -642,22 +656,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747955653942
+      systemVersion: 6.0.0
+      createdTime: 1781816871453
+      modifiedTime: 1781816894969
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.ODAa1IROPs40MUI2'
   - _id: LRjB7lk0aa4TOd16
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-straight-brown.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Xorn attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -720,7 +736,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -729,8 +745,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        V8AJRmzcYEgQL1Ds:
           type: attack
           activation:
             type: action
@@ -745,10 +760,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -765,7 +781,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -778,24 +795,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: V8AJRmzcYEgQL1Ds
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -805,24 +835,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747955653942
+      systemVersion: 6.0.0
+      createdTime: 1781816906382
+      modifiedTime: 1781816918174
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.LRjB7lk0aa4TOd16'
   - _id: a5CLV8aL4SowIich
     name: Earth Glide
     type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
+    img: icons/environment/wilderness/terrain-rocks-brown.webp
     system:
       description:
         value: >-
-          <p>The xorn can burrow through nonmagical, unworked earth and stone.
-          While doing so, the xorn doesn't disturb the material it moves
-          through.</p>
+          <p>The [[lookup @name lowercase]]{monster} can burrow through
+          nonmagical, unworked earth and stone. While doing so, the xorn doesn't
+          disturb the material it moves through.</p>
         chat: ''
       source:
         custom: ''
@@ -836,10 +866,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -854,12 +885,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yrpqazOHqI4BrYW4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781816766748
+      modifiedTime: 1781816777807
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.a5CLV8aL4SowIich'
   - _id: kRGZU8eMwOBt3kVd
@@ -869,8 +900,9 @@ items:
     system:
       description:
         value: >-
-          <p>The xorn makes three [[/item .LRjB7lk0aa4TOd16]]{claw} attacks and
-          one [[/item .ODAa1IROPs40MUI2]]{bite} attack.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes three [[/item
+          .LRjB7lk0aa4TOd16]]{claw} attacks and one [[/item
+          .ODAa1IROPs40MUI2]]{bite} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -884,13 +916,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        3bw36Uo33m00bLjL:
           type: utility
           activation:
             type: action
@@ -905,15 +936,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -924,7 +956,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -941,7 +974,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 3bw36Uo33m00bLjL
       enchant: {}
       prerequisites:
         level: null
@@ -955,23 +996,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747955654714
+      systemVersion: 6.0.0
+      createdTime: 1781816942060
+      modifiedTime: 1781816946981
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.kRGZU8eMwOBt3kVd'
   - _id: ryNcNrIgtkYHRKWj
     name: Stone Camouflage
     type: feat
-    img: icons/environment/settlement/stone-stairs.webp
+    img: icons/commodities/stone/stone-cratered-brown.webp
     system:
       description:
         value: >-
-          <p>The xorn has advantage on Dexterity (Stealth) checks made to hide
-          in rocky terrain.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Dexterity
+          (Stealth) checks made to &amp;reference[hide] in rocky terrain.</p>
         chat: ''
       source:
         custom: ''
@@ -985,10 +1026,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -1003,23 +1045,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955644495
+      systemVersion: 6.0.0
+      createdTime: 1781816797979
+      modifiedTime: 1781816822867
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.ryNcNrIgtkYHRKWj'
   - _id: x6Hd2pSXy7TDwgjR
     name: Treasure Sense
     type: feat
-    img: icons/skills/social/theft-pickpocket-bribery-brown.webp
+    img: icons/commodities/currency/coins-plain-stack-gold.webp
     system:
       description:
         value: >-
-          <p>The xorn can pinpoint, by scent, the location of precious metals
-          and stones, such as coins and gems, within 60 ft. of it.</p>
+          <p>The [[lookup @name lowercase]]{monster} can pinpoint, by scent, the
+          location of precious metals and stones, such as coins and gems, within
+          60 feet of it.</p>
         chat: ''
       source:
         custom: ''
@@ -1033,10 +1076,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -1051,11 +1095,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Enhb3XowXPMsVapw
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955650390
+      systemVersion: 6.0.0
+      createdTime: 1781816843960
+      modifiedTime: 1781816865661
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.x6Hd2pSXy7TDwgjR'
@@ -1067,7 +1111,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171199834

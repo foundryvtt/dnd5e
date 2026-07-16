@@ -95,21 +95,20 @@ effects:
     origin: Item.mmWhirlwindOfSan
     _id: Xy0tzgObrMRF2lHm
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: wFFxeT1FiF7Q6hId
     disabled: true
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The attacking creature adds 2 to its AC against the attack, possibly
       causing the attack to miss.</p>
@@ -123,30 +122,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1737798761439
+      systemVersion: 6.0.0
+      createdTime: 1783544087921
+      modifiedTime: 1783544087921
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmWhirlwindOfSan.Xy0tzgObrMRF2lHm'
   - name: Blinded
     img: systems/dnd5e/icons/svg/statuses/blinded.svg
     origin: Item.mmWhirlwindOfSan
     _id: MMp7IK5bYYPYtSdL
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Each creature of the attacking creature's choice that it can see within
       5 ft. of its destination space has the &amp;Reference[Blinded apply=long]
@@ -162,13 +167,22 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1737798772534
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!items.effects!mmWhirlwindOfSan.MMp7IK5bYYPYtSdL'
 flags:
   dnd5e:
@@ -177,11 +191,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1737515542020
+  modifiedTime: 1783544087921
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 24800000

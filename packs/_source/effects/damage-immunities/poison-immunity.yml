@@ -1,0 +1,36 @@
+folder: w70rfvAVNHLuTPv3
+name: Poison Immunity
+type: base
+img: systems/dnd5e/icons/svg/damage/poison.svg
+system:
+  changes:
+    - key: system.traits.di.value
+      type: add
+      value: poison
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1769815804302
+  modifiedTime: 1769815804302
+_id: 3ij8dEuXERjU4eb4
+_key: '!effects!3ij8dEuXERjU4eb4'

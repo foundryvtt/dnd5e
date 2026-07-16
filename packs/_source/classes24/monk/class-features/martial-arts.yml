@@ -180,32 +180,37 @@ effects:
     img: icons/skills/melee/maneuver-sword-katana-yellow.webp
     disabled: true
     _id: VnV6opO1b3apq6wt
-    system: {}
-    changes:
-      - key: system.properties
-        mode: 2
-        value: fin
-        priority: null
-      - key: system.damage.base.custom.enabled
-        mode: 5
-        value: 'true'
-        priority: null
-      - key: system.damage.base.custom.formula
-        mode: 5
-        value: '@scale.monk.die + @mod'
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} (Martial Arts)'
-        priority: null
+    system:
+      changes:
+        - key: system.properties
+          value: fin
+          priority: null
+          type: add
+          phase: initial
+          _id: bvOMMWdBF5rVRf5k
+        - key: system.damage.base.custom.enabled
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: VxbQQBKUdtQfwD1P
+        - key: system.damage.base.custom.formula
+          value: '@scale.monk.die + @mod'
+          priority: null
+          type: override
+          phase: initial
+          _id: u58nJx6t8vjGmWYR
+        - key: name
+          value: '{} (Martial Arts)'
+          priority: null
+          type: override
+          phase: initial
+          _id: SuB6scR5qWZZ6swj
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><strong>Martial Arts Die.</strong> You can roll [[lookup
       @scale.monk.die]] in place of the normal damage of your Unarmed Strike or
@@ -228,13 +233,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 6.0.0
       createdTime: 1726772286789
-      modifiedTime: 1755021875050
+      modifiedTime: 1783544102739
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbmnkMartialArt.VnV6opO1b3apq6wt'
 flags:
   dnd5e:
@@ -244,11 +252,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425979197
-  modifiedTime: 1755023122347
+  modifiedTime: 1783544102739
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

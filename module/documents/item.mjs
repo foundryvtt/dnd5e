@@ -473,12 +473,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const changes = [];
     for ( const effect of this.allApplicableEffects() ) {
       if ( !effect.active ) continue;
-      changes.push(...effect.changes.map(change => {
-        const c = foundry.utils.deepClone(change);
-        c.effect = effect;
-        c.priority ??= c.mode * 10;
-        return c;
-      }));
+      for ( const change of effect.system.changes ) {
+        if ( change.key === "" ) continue;
+        const copy = foundry.utils.deepClone(change);
+        copy.effect = effect;
+        changes.push(copy);
+      }
     }
     changes.sort((a, b) => a.priority - b.priority);
     foundry.documents.ActiveEffect._shimChanges?.(changes);
@@ -487,9 +487,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const overrides = {};
     const replacementData = this.getRollData();
     for ( const change of changes ) {
-      if ( !change.key ) continue;
-      const changes = change.effect.constructor.applyChange(this, change, { replacementData });
-      Object.assign(overrides, changes);
+      const result = change.effect.constructor.applyChange(this, change, { replacementData });
+      if ( foundry.utils.isPlainObject(result) ) Object.assign(overrides, result);
     }
 
     // Expand the set of final overrides
@@ -691,7 +690,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const existingDamageLabels = new Set();
     let firstDamage = true;
     for ( const activity of this.system.activities ) {
-      if ( !("activation" in activity) || !activity.canUse ) continue;
+      if ( !("activation" in activity) || activity.isHidden ) continue;
       const activationLabels = activity.activationLabels;
       if ( activationLabels ) activations.push({
         ...activationLabels,
@@ -884,10 +883,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {RollDataOptions} [options]
    * @returns {ItemRollData}
    */
-  getRollData({ deterministic=false }={}) {
+  getRollData(options={}) {
     let data;
-    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
-    else data = { ...(this.actor?.getRollData({ deterministic }) ?? {}), item: { ...this.system } };
+    if ( this.system.getRollData ) data = this.system.getRollData(options);
+    else data = { ...(this.actor?.getRollData(options) ?? {}), item: { ...this.system } };
     if ( data?.item ) {
       data.item.flags = this.flags;
       data.item.name = this.name;
@@ -1261,7 +1260,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static addDirectoryContextOptions(app, entryOptions) {
     entryOptions.push({
       label: "DND5E.Scroll.CreateScroll",
-      icon: '<i class="fa-solid fa-scroll"></i>',
+      icon: "fa-solid fa-scroll",
       group: "system",
       visible: li => {
         let item = game.items.get(li.dataset.entryId);

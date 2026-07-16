@@ -103,37 +103,44 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmGigglingMagic0
     _id: 3W5EIHf9CRJQ3NyK
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.check
-        mode: 2
-        value: '-1d6'
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '-1d6'
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: '-1d6'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '-1d6'
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: '-1d6'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.check
+          value: '-1d6'
+          priority: null
+          type: add
+          phase: initial
+          _id: FQY96FLwV1K8JViv
+        - key: system.bonuses.msak.attack
+          value: '-1d6'
+          priority: null
+          type: add
+          phase: initial
+          _id: mkXNnMh3qe1eUef8
+        - key: system.bonuses.mwak.attack
+          value: '-1d6'
+          priority: null
+          type: add
+          phase: initial
+          _id: hE7gSd3wH6ATHc9c
+        - key: system.bonuses.rsak.attack
+          value: '-1d6'
+          priority: null
+          type: add
+          phase: initial
+          _id: fpY4NZX6x7xDqJ3k
+        - key: system.bonuses.rwak.attack
+          value: '-1d6'
+          priority: null
+          type: add
+          phase: initial
+          _id: ZRRPccoJCMeQDPj2
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Until the end of its next turn, the target rolls [[/r 1d6]] whenever it
       makes an ability check or attack and subtracts the number rolled from the
@@ -147,13 +154,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmAdultCopperDra.Item.mmGigglingMagic0.ActiveEffect.kJRvXVPZ8vkRrrsa
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.2
+      systemVersion: 6.0.0
       createdTime: 1737751312729
-      modifiedTime: 1737751312729
+      modifiedTime: 1783544086239
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmGigglingMagic0.3W5EIHf9CRJQ3NyK'
 flags:
   dnd5e:
@@ -162,11 +172,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956
-  modifiedTime: 1737803360376
+  modifiedTime: 1783544086239
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 3000000

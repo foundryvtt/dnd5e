@@ -10,7 +10,7 @@ system:
       it into a hemispherical dome or a sphere with a radius of up to 10 feet,
       or you can shape a flat surface made up of ten 10-foot-square panels. Each
       panel must be contiguous with another panel. In any form, the wall is 1
-      foot thick and lasts for the Duration.</p><p>If the wall cuts through a
+      foot thick and lasts for the duration.</p><p>If the wall cuts through a
       creature's space when it appears, the creature within its area is pushed
       to one side of the wall and must make a Dexterity saving throw. On a
       failed save, the creature takes 10d6 cold damage, or half as much damage
@@ -21,10 +21,11 @@ system:
       the wall occupied. A creature moving through the sheet of frigid air for
       the first time on a turn must make a Constitution saving throw. That
       creature takes 5d6 cold damage on a failed save, or half as much damage on
-      a successful one.</p><p>At Higher Levels. When you cast this spell using a
-      spell slot of 7th level or higher, the damage the wall deals when it
-      appears increases by 2d6, and the damage from passing through the sheet of
-      frigid air increases by 1d6, for each slot level above 6th.</p>
+      a successful one.</p><p><strong>At Higher Levels.</strong> When you cast
+      this spell using a spell slot of 7th level or higher, the damage the wall
+      deals when it appears increases by 2d6, and the damage from passing
+      through the sheet of frigid air increases by 1d6, for each slot level
+      above 6th.</p>
     chat: ''
   source:
     custom: ''
@@ -42,14 +43,19 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: wall
-      size: '100'
+      size: '10'
       contiguous: false
+      width: '1'
+      height: '10'
+      count: '10'
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -120,13 +126,91 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Conjure Wall of Ice
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
     dnd5eactivity200:
       _id: dnd5eactivity200
       type: damage
+      activation:
+        type: special
+        value: null
+        override: true
+        condition: >-
+          When a creature moves through the sheet of frigid air for the first
+          time on a turn.
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+        value: >-
+          <p>A creature moving through the sheet of frigid air for the first
+          time on a turn must make a Constitution saving throw. That creature
+          takes 5d6 cold damage on a failed save, or half as much damage on a
+          successful one.</p>
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: true
+        special: ''
+        units: spec
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 6
+            bonus: ''
+            types: []
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      name: Frigid Air Damage
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    QaMcKZp0TzrGWLZ1:
+      type: save
       activation:
         type: action
         value: null
@@ -139,6 +223,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -146,23 +231,28 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: sphere
+          size: '10'
+          count: ''
         affects:
           choice: false
-        override: false
+          type: ''
+        override: true
       damage:
-        critical:
-          allow: false
-          bonus: ''
+        onSave: half
         parts:
-          - number: 5
+          - number: 10
             denomination: 6
             bonus: ''
-            types: []
+            types:
+              - cold
             custom:
               enabled: false
               formula: ''
@@ -170,23 +260,43 @@ system:
               mode: whole
               number: 2
               formula: ''
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Conjure Dome of Ice
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: QaMcKZp0TzrGWLZ1
   identifier: wall-of-ice
 sort: 0
 flags: {}
-img: icons/magic/light/beam-rays-blue-large.webp
+img: icons/magic/water/barrier-ice-crystal-wall-faceted.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037362399
-  modifiedTime: 1725992721895
+  modifiedTime: 1781439702537
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!fzZnVKLmBMo2f5up'

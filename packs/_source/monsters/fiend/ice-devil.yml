@@ -458,9 +458,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -475,7 +472,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -495,15 +492,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: DV4KS0OE541vGOtI
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-white.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ice Devil attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -566,17 +566,16 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: natural
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dBx1TXvYYuXNKM65:
           type: attack
           activation:
             type: action
@@ -591,10 +590,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -611,7 +611,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -624,36 +625,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dBx1TXvYYuXNKM65
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -663,148 +675,58 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747956711108
+      systemVersion: 6.0.0
+      createdTime: 1781671421612
+      modifiedTime: 1781696276217
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.DV4KS0OE541vGOtI'
-  - _id: WAGF3evP6GTYDvM0
-    name: Devil's Sight
-    type: feat
-    img: icons/magic/perception/eye-slit-pink.webp
-    system:
-      description:
-        value: <p>Magical darkness doesn't impede the devil's darkvision.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: devils-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!1zzRQps9jZdLZGqI.WAGF3evP6GTYDvM0'
-  - _id: IKaEdLLHwVL0s9UP
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The devil has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956708871
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!1zzRQps9jZdLZGqI.IKaEdLLHwVL0s9UP'
   - _id: nCTze3rZpWcTeuYQ
     name: Wall of Ice
     type: feat
-    img: icons/magic/water/barrier-ice-crystal-wall-jagged-blue.webp
+    img: icons/magic/water/barrier-ice-crystal-wall-faceted.webp
     system:
       description:
         value: >-
-          <p>The devil magically forms an opaque wall of ice on a solid surface
-          it can see within 60 feet of it. The wall is 1 foot thick and up to 30
-          feet long and 10 feet high, or it's a hemispherical dome up to 20 feet
-          in diameter.</p><p>When the wall appears, each creature in its space
-          is pushed out of it by the shortest route. The creature chooses which
-          side of the wall to end up on, unless the creature is incapacitated.
+          <p>The [[lookup @name lowercase]]{monster} magically forms an opaque
+          wall of ice on a solid surface it can see within [[lookup
+          @labels.description.range activity=epHS9JFnK0K3AOh0]] of it. The wall
+          is 1 foot thick and up to 30 feet long and 10 feet high, or it's a
+          hemispherical dome up to 20 feet in diameter.</p><p>When the wall
+          appears, each creature in its space is pushed out of it by the
+          shortest route. The creature chooses which side of the wall to end up
+          on, unless the creature is &amp;reference[incapacitated apply=false].
           The creature then makes a [[/save]] saving throw, taking [[/damage
           average]] damage on a failed save, or half as much damage on a
-          successful one.</p><p>The wall lasts for 1 minute or until the devil
-          is incapacitated or dies. The wall can be damaged and breached; each
-          10-foot section has AC 5, 30 hit points, vulnerability to fire damage,
-          and immunity to acid, cold, necrotic, poison, and psychic damage. If a
-          section is destroyed, it leaves behind a sheet of frigid air in the
-          space the wall occupied. Whenever a creature finishes moving through
-          the frigid air on a turn, willingly or otherwise, the creature must
-          make a [[/save activity=1sgpSnbxz7JYshd3]] saving throw, taking
-          [[/damage activity=1sgpSnbxz7JYshd3 average]] damage on a failed save,
-          or half as much damage on a successful one. The frigid air dissipates
-          when the rest of the wall vanishes.</p>
+          successful one.</p><p>The wall lasts for [[lookup @labels.duration
+          activity=epHS9JFnK0K3AOh0]] or until the [[lookup @name
+          lowercase]]{monster} is &amp;reference[incapacitated apply=false] or
+          dies. The wall can be damaged and breached; each 10-foot section has
+          AC 5, 30 hit points, vulnerability to fire damage, and immunity to
+          acid, cold, necrotic, poison, and psychic damage. If a section is
+          destroyed, it leaves behind a sheet of frigid air in the space the
+          wall occupied. Whenever a creature finishes moving through the frigid
+          air on a turn, willingly or otherwise, the creature must make a
+          [[/save activity=qJljbNLNFhF1xbDV]] saving throw, taking [[/damage
+          activity=qJljbNLNFhF1xbDV average]] damage on a failed save, or half
+          as much damage on a successful one. The frigid air dissipates when the
+          rest of the wall vanishes.</p>
         chat: >-
-          <p>The devil magically forms an opaque wall of ice on a solid surface
-          it can see within 60 feet of it. The wall is 1 foot thick and up to 30
-          feet long and 10 feet high, or it's a hemispherical dome up to 20 feet
-          in diameter.When the wall appears, each creature in its space is
-          pushed out of it by the shortest route. The creature chooses which
-          side of the wall to end up on, unless the creature is incapacitated.
-          The creature then makes a Dexterity saving throw.</p>
-
-          <p>The wall can be damaged and breached. If a section is destroyed, it
-          leaves behind a sheet of frigid air in the space the wall occupied.
-          Whenever a creature finishes moving through the frigid air on a turn,
-          willingly or otherwise, the creature must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} magically forms an opaque wall of ice
+          on a solid surface it can see within [[lookup
+          @labels.description.range activity=epHS9JFnK0K3AOh0]] of it. The wall
+          is 1 foot thick and up to 30 feet long and 10 feet high, or it's a
+          hemispherical dome up to 20 feet in diameter. When the wall appears,
+          each creature in its space is pushed out of it by the shortest route.
+          The creature chooses which side of the wall to end up on, unless the
+          creature is &amp;reference[incapacitated apply=false]. The creature
+          then makes a Dexterity saving throw.</p><p>The wall can be damaged and
+          breached. If a section is destroyed, it leaves behind a sheet of
+          frigid air in the space the wall occupied. Whenever a creature
+          finishes moving through the frigid air on a turn, willingly or
+          otherwise, the creature must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -817,13 +739,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        epHS9JFnK0K3AOh0:
           type: save
           activation:
             type: action
@@ -838,6 +760,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
@@ -846,7 +769,7 @@ items:
             override: false
           effects: []
           range:
-            value: '30'
+            value: '60'
             units: ft
             special: ''
             override: false
@@ -859,6 +782,7 @@ items:
               width: '1'
               height: '10'
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -881,24 +805,39 @@ items:
                 bonus: ''
                 types:
                   - cold
+                scaling:
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '17'
-          sort: 0
-          name: Create Wall
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Create Wall of Ice
           img: ''
-          appliedEffects: []
-        1sgpSnbxz7JYshd3:
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: epHS9JFnK0K3AOh0
+        qJljbNLNFhF1xbDV:
           type: save
-          name: Pass Through Wall
-          _id: 1sgpSnbxz7JYshd3
-          sort: 0
+          name: Pass Through Frigid Air Save
+          sort: 400000
           activation:
-            type: ''
+            type: special
             override: false
-            condition: ''
+            condition: >-
+              When a creature moves through the sheet of frigid air for the
+              first time on a turn.
           consumption:
             scaling:
               allowed: false
@@ -906,13 +845,22 @@ items:
             targets: []
           description:
             chatFlavor: ''
+            value: >-
+              <p>If a section of the wall is destroyed, it leaves behind a sheet
+              of frigid air in the space the wall occupied. Whenever a creature
+              finishes moving through the frigid air on a turn, willingly or
+              otherwise, the creature must make a [[/save
+              activity=qJljbNLNFhF1xbDV]] saving throw, taking [[/damage
+              activity=qJljbNLNFhF1xbDV average]] damage on a failed save, or
+              half as much damage on a successful one. The frigid air dissipates
+              when the rest of the wall vanishes.</p>
           duration:
             units: inst
             concentration: false
             override: false
           effects: []
           range:
-            units: self
+            units: spec
             override: false
             special: ''
           target:
@@ -920,9 +868,12 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
-              type: ''
+              type: creature
+              count: '1'
+              special: ''
             override: false
             prompt: true
           uses:
@@ -939,15 +890,111 @@ items:
                 bonus: ''
                 types:
                   - cold
+                scaling:
+                  number: 1
             onSave: half
           save:
             ability:
               - con
             dc:
+              calculation: cha
+              formula: '17'
+            visible: true
+            bonus: ''
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: qJljbNLNFhF1xbDV
+        ctGJJGIvlgeN42Va:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: a solid surface it can see within 60 ft.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: minute
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '60'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: sphere
+              size: '10'
+              width: '1'
+              height: '10'
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 10
+                denomination: 6
+                bonus: ''
+                types:
+                  - cold
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - dex
+            dc:
               calculation: ''
               formula: '17'
+            visible: true
+            bonus: ''
+          sort: 250000
+          name: Create Dome of Ice
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: ctGJJGIvlgeN42Va
       enchant: {}
       prerequisites:
         level: null
@@ -957,30 +1004,28 @@ items:
     sort: 500000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Kwt8YDIBHg6JO2v2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956871882
+      systemVersion: 6.0.0
+      createdTime: 1781671442506
+      modifiedTime: 1781696151713
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.nCTze3rZpWcTeuYQ'
   - _id: AQ551xglVn90BdwU
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-swipe-green.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ice Devil attacks with its Tail.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1004,7 +1049,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -1042,9 +1087,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1053,8 +1097,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FHOOWrMPxW40D20z:
           type: attack
           activation:
             type: action
@@ -1069,10 +1112,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1089,7 +1133,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1102,36 +1147,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FHOOWrMPxW40D20z
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 400000
@@ -1141,22 +1197,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747956711108
+      systemVersion: 6.0.0
+      createdTime: 1781671432469
+      modifiedTime: 1781696204349
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.AQ551xglVn90BdwU'
   - _id: E6iXljYXLdQyfk1l
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-lizard-white-black.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Ice Devil attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1218,9 +1276,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1229,8 +1286,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        XPzKvnxmI7skPDUz:
           type: attack
           activation:
             type: action
@@ -1245,10 +1301,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1265,7 +1322,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1278,36 +1336,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: XPzKvnxmI7skPDUz
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 200000
@@ -1317,11 +1386,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747956725985
+      systemVersion: 6.0.0
+      createdTime: 1781671426484
+      modifiedTime: 1781696241091
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.E6iXljYXLdQyfk1l'
@@ -1349,13 +1418,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        sh0AsZ5AQZJVFdPN:
           type: utility
           activation:
             type: action
@@ -1370,15 +1438,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1389,7 +1458,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1406,7 +1476,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: sh0AsZ5AQZJVFdPN
       enchant: {}
       prerequisites:
         level: null
@@ -1420,14 +1498,120 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1747956711842
+      systemVersion: 6.0.0
+      createdTime: 1781696286104
+      modifiedTime: 1781696292060
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.vLQAjoewGE5MAHn2'
+  - _id: xQcDItxuubU3H6Cr
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 200000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781671407919
+      modifiedTime: 1781671413003
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!1zzRQps9jZdLZGqI.xQcDItxuubU3H6Cr'
+  - _id: i6GFKFUS8gJQQ849
+    name: Devil Sight
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Magical &amp;reference[darkness] doesn't impede the [[lookup @name
+          lowercase]]{monster}'s &amp;reference[Darkvision].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: devil-sight
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/creatures/eyes/lizard-single-slit-pink.webp
+    effects: []
+    folder: null
+    sort: 100000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781671410868
+      modifiedTime: 1781671411930
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.UjbgbOnd6ltjagZm
+    _key: '!actors.items!1zzRQps9jZdLZGqI.i6GFKFUS8gJQQ849'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1436,7 +1620,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171199419

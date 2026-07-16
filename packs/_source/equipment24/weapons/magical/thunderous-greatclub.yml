@@ -501,21 +501,21 @@ effects:
     img: icons/magic/control/buff-strength-muscle-damage.webp
     _id: c8qf2gTNGwdg4hTP
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.value
-        mode: 4
-        value: '20'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: 20
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: qEp95hAKtyNvXCns
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -526,13 +526,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729880382268
-      modifiedTime: 1729882427373
+      modifiedTime: 1783544099129
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgThunderousGre.c8qf2gTNGwdg4hTP'
   - name: Prone
     img: icons/magic/lightning/bolt-cloud-sky-green.webp
@@ -540,17 +543,15 @@ effects:
     transfer: false
     _id: Rg9qnmIespepasJN
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -560,23 +561,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729880727744
-      modifiedTime: 1729880809003
+      modifiedTime: 1783544099129
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgThunderousGre.Rg9qnmIespepasJN'
 folder: kie870i5kr7yuxO8
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615270010
+  modifiedTime: 1783544099128
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

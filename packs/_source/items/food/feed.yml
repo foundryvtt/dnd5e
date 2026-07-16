@@ -1,6 +1,6 @@
 name: Feed
 type: consumable
-img: icons/consumables/grains/sack-rice-flour-brown.webp
+img: icons/containers/bags/sack-open-grain-tan.webp
 system:
   description:
     value: >-
@@ -59,11 +59,9 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -105,7 +103,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Eat
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: feed
 effects: []
@@ -117,11 +123,11 @@ flags: {}
 _id: KJuLguMZCThrQOEx
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037162367
-  modifiedTime: 1725992504656
+  modifiedTime: 1781985847570
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!KJuLguMZCThrQOEx'

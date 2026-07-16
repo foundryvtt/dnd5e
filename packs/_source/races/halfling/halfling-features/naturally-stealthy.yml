@@ -6,8 +6,8 @@ type: feat
 system:
   description:
     value: >-
-      <p>You can attempt to hide even when you are obscured only by a creature
-      that is at least one size larger than you.</p>
+      <p>You can attempt to &amp;reference[hide] even when you are obscured only
+      by a creature that is at least one size larger than you.</p>
     chat: ''
   source:
     custom: ''
@@ -23,8 +23,69 @@ system:
     value: race
     subtype: ''
   requirements: Lightfoot Halfling
-  properties: []
-  activities: {}
+  properties:
+    - trait
+  activities:
+    moMqvNCYkZDv6RMP:
+      type: check
+      name: Hide
+      _id: moMqvNCYkZDv6RMP
+      img: ''
+      sort: 0
+      activation:
+        type: special
+        override: false
+        condition: When you are obscured by a creature at least one size larger than you.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      check:
+        associated:
+          - ste
+        dc:
+          calculation: ''
+          formula: ''
+        visible: true
+        ability: ''
+        bonus: ''
   enchant: {}
   prerequisites:
     level: null
@@ -36,11 +97,11 @@ folder: kbtbKofcv13crhke
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037392648
-  modifiedTime: 1725992703317
+  modifiedTime: 1781473316851
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!GWPjKFeIthBBeCFJ'

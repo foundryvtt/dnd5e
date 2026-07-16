@@ -44,7 +44,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
    * @type {string|null}
    */
   get subPath() {
-    return this.options.type === "movement" ? null : "ranges";
+    return this.options.type === "movement" ? "speeds" : "ranges";
   }
 
   /* -------------------------------------------- */

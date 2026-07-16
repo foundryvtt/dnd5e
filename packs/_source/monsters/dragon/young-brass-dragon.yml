@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,15 +481,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: dYJy66Ftt58qpTUi
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Young Brass Dragon attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -555,7 +555,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -564,8 +564,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        CJfLU5RwQsSvSlt1:
           type: attack
           activation:
             type: action
@@ -580,10 +579,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -600,7 +600,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -613,24 +614,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: CJfLU5RwQsSvSlt1
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -640,221 +654,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745451010621
+      systemVersion: 6.0.0
+      createdTime: 1781562337440
+      modifiedTime: 1781562349607
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.dYJy66Ftt58qpTUi'
-  - _id: h8ocFdixa3iZVj0m
-    name: Breath Weapons
-    type: feat
-    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
-    system:
-      description:
-        value: >-
-          <p>The dragon uses one of the following breath
-          weapons.</p><p><strong>Fire Breath.</strong> The dragon exhales fire
-          in a 40-foot line that is 5 feet wide. Each creature in that line must
-          make a [[/save activity=Es6C2unaFSW7LHd3]] saving throw, taking
-          [[/damage average activity=Es6C2unaFSW7LHd3]] damage on a failed save,
-          or half as much damage on a successful one.</p><p><strong>Sleep
-          Breath.</strong> The dragon exhales sleep gas in a 30-foot cone. Each
-          creature in that area must succeed on a [[/save
-          activity=6xecSNeczVQ2Wtcg]] saving throw or fall
-          &amp;Reference[unconscious] for 5 minutes. This effect ends for a
-          creature if the creature takes damage or someone uses an action to
-          wake it.</p>
-        chat: <p>The dragon breathes in!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: '1'
-        recovery:
-          - period: recharge
-            formula: '5'
-            type: recoverAll
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        Es6C2unaFSW7LHd3:
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: Breath weapon must be charged
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                value: '1'
-                target: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: line
-              size: '40'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 12
-                denomination: '6'
-                bonus: ''
-                types:
-                  - fire
-          save:
-            ability:
-              - dex
-            dc:
-              calculation: ''
-              formula: '14'
-          sort: 0
-          _id: Es6C2unaFSW7LHd3
-          name: Fire Breath
-          img: ''
-          appliedEffects: []
-        6xecSNeczVQ2Wtcg:
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: Breath Weapon must be charged
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                value: '1'
-                target: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: cone
-              size: '30'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability:
-              - con
-            dc:
-              calculation: ''
-              formula: '14'
-          sort: 0
-          _id: 6xecSNeczVQ2Wtcg
-          name: Sleep Breath
-          img: ''
-          appliedEffects: []
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 400000
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745451239220
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!FzvZ6xl3U9GoL9ju.h8ocFdixa3iZVj0m'
   - _id: YHom7FFObzrKEBLQ
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Young Brass Dragon attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -917,7 +734,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -926,8 +743,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        bYNQf8JH8hyuEm9B:
           type: attack
           activation:
             type: action
@@ -942,10 +758,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -962,7 +779,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -975,24 +793,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: bYNQf8JH8hyuEm9B
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -1002,11 +833,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745451010621
+      systemVersion: 6.0.0
+      createdTime: 1781562364357
+      modifiedTime: 1781562376519
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.YHom7FFObzrKEBLQ'
@@ -1017,8 +848,8 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon makes three attacks: one with its [[/item
-          .dYJy66Ftt58qpTUi]]{bite} and two with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks: one
+          with its [[/item .dYJy66Ftt58qpTUi]]{bite} and two with its [[/item
           .YHom7FFObzrKEBLQ]]{claws}.</p>
         chat: ''
       source:
@@ -1033,13 +864,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        lyyHQyxxDV8CoMrC:
           type: utility
           activation:
             type: action
@@ -1054,15 +884,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1073,7 +904,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1090,7 +922,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 200000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: lyyHQyxxDV8CoMrC
       enchant: {}
       prerequisites:
         level: null
@@ -1104,14 +944,304 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745451011333
+      systemVersion: 6.0.0
+      createdTime: 1781562401846
+      modifiedTime: 1783370668048
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.oyNvUJRyGRVF22t8'
+  - _id: K9vktdgJkPWfYjwa
+    name: Breath Weapons
+    type: feat
+    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} uses one of the following
+          breath weapons.</p><p><strong>Fire Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales fire in an [[lookup
+          @labels.description.template activity=NBdXGRF1vahbq4p8]]. Each
+          creature in that line must make a [[/save activity=NBdXGRF1vahbq4p8]]
+          saving throw, taking [[/damage average activity=NBdXGRF1vahbq4p8]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p><p><strong>Sleep Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales sleep gas in a [[lookup
+          @labels.description.template activity=O02zuaLvAqtmgutQ]]. Each
+          creature in that area must succeed on a [[/save
+          activity=O02zuaLvAqtmgutQ]] saving throw or fall
+          &amp;Reference[unconscious] for [[lookup @labels.duration
+          activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if the
+          creature takes damage or someone uses an action to wake it.</p>
+        chat: <p>The [[lookup @name]]{monster} breathes in!</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '1'
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        NBdXGRF1vahbq4p8:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales fire in an
+              [[lookup @labels.description.template activity=NBdXGRF1vahbq4p8]].
+              Each creature in that line must make a [[/save
+              activity=NBdXGRF1vahbq4p8]] saving throw, taking [[/damage average
+              activity=NBdXGRF1vahbq4p8]] damage on a failed save, or half as
+              much damage on a successful one.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: line
+              size: '40'
+              width: '5'
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 12
+                denomination: 6
+                bonus: ''
+                types:
+                  - fire
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: con
+              formula: '11'
+            bonus: ''
+            visible: true
+          sort: 0
+          _id: NBdXGRF1vahbq4p8
+          name: Fire Breath
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+        O02zuaLvAqtmgutQ:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales sleep gas in a
+              [[lookup @labels.description.template activity=O02zuaLvAqtmgutQ]].
+              Each creature in that area must succeed on a [[/save
+              activity=O02zuaLvAqtmgutQ]] saving throw or fall
+              &amp;Reference[unconscious] for [[lookup @labels.duration
+              activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if
+              the creature takes damage or someone uses an action to wake
+              it.</p>
+          duration:
+            concentration: false
+            value: '5'
+            units: minute
+            special: ''
+            override: false
+          effects:
+            - _id: P1rGrKiV7x2OMiN0
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: cone
+              size: '30'
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: con
+              formula: '11'
+            bonus: ''
+            visible: true
+          sort: 0
+          _id: O02zuaLvAqtmgutQ
+          name: Sleep Breath
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: breath-weapons
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Sleep Breath
+        img: icons/magic/control/sleep-bubble-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.azCbLQt5LAYwTI7U.Item.JmVLjWM4G6OOQxl4
+        transfer: false
+        _id: P1rGrKiV7x2OMiN0
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 5
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[unconcious apply=false] for 5 minutes. This
+          effect ends for you when you take damage or when someone uses and
+          action to wake you.</p>
+        tint: '#ffffff'
+        statuses:
+          - unconscious
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781562219369
+          modifiedTime: 1781621257264
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!FzvZ6xl3U9GoL9ju.K9vktdgJkPWfYjwa.P1rGrKiV7x2OMiN0
+    folder: null
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781562219369
+      modifiedTime: 1781631786130
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!FzvZ6xl3U9GoL9ju.K9vktdgJkPWfYjwa'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1120,7 +1250,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171216952

@@ -10,11 +10,11 @@ system:
       illusory creatures in their minds, visible only to them. Each creature in
       a 30-foot-radius sphere centered on a point of your choice within range
       must make a Wisdom saving throw. On a failed save, a creature becomes
-      Frightened for the Duration. The illusion calls on the creature's deepest
-      fears, manifesting its worst nightmares as an implacable threat. At the
-      end of each of the Frightened creature's turns, it must succeed on a
-      Wisdom saving throw or take 4d10 psychic damage. On a successful save, the
-      spell ends for that creature.</p>
+      &amp;reference[Frightened] for the Duration. The illusion calls on the
+      creature's deepest fears, manifesting its worst nightmares as an
+      implacable threat. At the end of each of the Frightened creature's turns,
+      it must succeed on a Wisdom saving throw or take 4d10 psychic damage. On a
+      successful save, the spell ends for that creature.</p>
     chat: ''
   source:
     custom: ''
@@ -32,14 +32,17 @@ system:
   target:
     affects:
       choice: false
+      type: creature
     template:
       units: ft
       type: sphere
       size: '30'
       contiguous: false
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -78,7 +81,10 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: YQNznF5HERSuMOj6
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -90,42 +96,160 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
-        parts:
-          - number: 4
-            denomination: 10
-            bonus: ''
-            types:
-              - psychic
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
+        onSave: none
+        parts: []
       save:
         ability: wis
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    IdPqCJyxclpJDc5O:
+      type: save
+      name: End of Turn Save
+      _id: IdPqCJyxclpJDc5O
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When a creature &reference[frightened apply=false] by this spell ends
+          their turn.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>At the end of each of the &amp;reference[Frightened apply=false]
+          creature's turns, it must succeed on a Wisdom saving throw or take
+          4d10 psychic damage. On a successful save, the spell ends for that
+          creature.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+        value: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
   identifier: weird
 sort: 0
 flags: {}
-img: icons/magic/control/fear-fright-monster-grin-green.webp
-effects: []
+img: icons/magic/death/skull-energy-light-purple.webp
+effects:
+  - name: Weird
+    img: icons/magic/death/skull-energy-light-purple.webp
+    origin: Compendium.dnd5e.spells.Item.Wl2vtJ4hCt2tpWfR
+    transfer: false
+    _id: YQNznF5HERSuMOj6
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] for the duration. The
+      illusion calls on your deepest fears, manifesting your worst nightmares as
+      an implacable threat.</p><p>At the end of each of your turns, you must
+      succeed on a Wisdom saving throw or take 4d10 psychic damage. On a
+      successful save, the spell ends for you.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781384386119
+      modifiedTime: 1781384470300
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Wl2vtJ4hCt2tpWfR.YQNznF5HERSuMOj6'
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357923
-  modifiedTime: 1725992720397
+  modifiedTime: 1781384553360
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Wl2vtJ4hCt2tpWfR'

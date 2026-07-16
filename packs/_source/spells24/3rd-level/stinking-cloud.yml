@@ -166,20 +166,18 @@ effects:
   - name: Stinking Poison
     origin: Compendium.dnd5e.spells24.Item.phbsplStinkingCl
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/acid/dissolve-vomit-green-brown.webp
     _id: gFid0DG5HydORpr3
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>While &amp;Reference[poisoned apply=false] in this way, the creature
       can’t take an action or a Bonus Action.</p>
@@ -191,13 +189,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1725649527395
+      systemVersion: 6.0.0
+      createdTime: 1783543977223
+      modifiedTime: 1783543977223
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplStinkingCl.gFid0DG5HydORpr3'
 folder: HCovEE4VoPGlIbKi
 sort: 100782
@@ -210,11 +211,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425972615
-  modifiedTime: 1745256798739
+  modifiedTime: 1783543977223
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplStinkingCl'

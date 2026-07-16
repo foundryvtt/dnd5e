@@ -14,22 +14,24 @@ system:
       container, either returning to your living body (and ending the spell) or
       attempting to possess a humanoids body.</p><p>You can attempt to possess
       any humanoid within 100 feet of you that you can see (creatures warded by
-      a protection from evil and good or magic circle spell can't be possessed).
-      The target must make a Charisma saving throw. On a failure, your soul
-      moves into the target's body, and the target's soul becomes trapped in the
-      container. On a success, the target resists your efforts to possess it,
-      and you can't attempt to possess it again for 24 hours.</p><p>Once you
-      possess a creature's body, you control it. Your game statistics are
-      replaced by the statistics of the creature, though you retain your
-      alignment and your Intelligence, Wisdom, and Charisma scores. You retain
-      the benefit of your own class features. If the target has any class
-      levels, you can't use any of its class features.</p><p>Meanwhile, the
-      possessed creature's soul can perceive from the container using its own
-      senses, but it can't move or take actions at all.</p><p>While possessing a
-      body, you can use your action to return from the host body to the
-      container if it is within 100 feet of you, returning the host creature's
-      soul to its body. If the host body dies while you're in it, the creature
-      dies, and you must make a Charisma saving throw against your own
+      a @UUID[Compendium.dnd5e.spells.Item.xmDBqZhRVrtLP8h2]{protection from
+      evil and good} or
+      @UUID[Compendium.dnd5e.spells.Item.y8A4HfTwd93ypdEz]{magic circle} spell
+      can't be possessed). The target must make a Charisma saving throw. On a
+      failure, your soul moves into the target's body, and the target's soul
+      becomes trapped in the container. On a success, the target resists your
+      efforts to possess it, and you can't attempt to possess it again for 24
+      hours.</p><p>Once you possess a creature's body, you control it. Your game
+      statistics are replaced by the statistics of the creature, though you
+      retain your alignment and your Intelligence, Wisdom, and Charisma scores.
+      You retain the benefit of your own class features. If the target has any
+      class levels, you can't use any of its class features.</p><p>Meanwhile,
+      the possessed creature's soul can perceive from the container using its
+      own senses, but it can't move or take actions at all.</p><p>While
+      possessing a body, you can use your action to return from the host body to
+      the container if it is within 100 feet of you, returning the host
+      creature's soul to its body. If the host body dies while you're in it, the
+      creature dies, and you must make a Charisma saving throw against your own
       spellcasting DC. On a success, you return to the container if it is within
       100 feet of you. Otherwise, you die.</p><p>If the container is destroyed
       or the spell ends, your soul immediately returns to your body. If your
@@ -56,11 +58,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -82,100 +87,251 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    H4fo2hIFxKybx7zU:
       type: utility
+      name: Cast
+      _id: H4fo2hIFxKybx7zU
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: qouBiD1Bd8bM3lzS
+          level: {}
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
-    dnd5eactivity100:
-      _id: dnd5eactivity100
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    KP2dpK9GVYQN8V7W:
       type: save
+      name: Possess Creature
+      _id: KP2dpK9GVYQN8V7W
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets: []
       description:
+        value: >-
+          <p>You can attempt to possess any humanoid within 100 feet of you that
+          you can see (creatures warded by a
+          @UUID[Compendium.dnd5e.spells.Item.xmDBqZhRVrtLP8h2]{Protection from
+          Evil and Good} or
+          @UUID[Compendium.dnd5e.spells.Item.y8A4HfTwd93ypdEz]{Magic Circle}
+          spell can't be possessed). The target must make a Charisma saving
+          throw. On a failure, your soul moves into the target's body, and the
+          target's soul becomes trapped in the container. On a success, the
+          target resists your efforts to possess it, and you can't attempt to
+          possess it again for 24 hours.</p><p>Once you possess a creature's
+          body, you control it. Your game statistics are replaced by the
+          statistics of the creature, though you retain your alignment and your
+          Intelligence, Wisdom, and Charisma scores. You retain the benefit of
+          your own class features. If the target has any class levels, you can't
+          use any of its class features.</p><p>Meanwhile, the possessed
+          creature's soul can perceive from the container using its own senses,
+          but it can't move or take actions at all.</p><p>While possessing a
+          body, you can use your action to return from the host body to the
+          container if it is within 100 feet of you, returning the host
+          creature's soul to its body. If the host body dies while you're in it,
+          the creature dies, and you must make a Charisma saving throw against
+          your own spellcasting DC. On a success, you return to the container if
+          it is within 100 feet of you. Otherwise, you die.</p>
         chatFlavor: ''
       duration:
-        units: inst
+        units: disp
         concentration: false
-        override: false
-      effects: []
+        override: true
+      effects:
+        - _id: WOqZ4GoBhC7fBd91
+          level: {}
+          onSave: false
+      flags: {}
       range:
-        override: false
+        units: ft
+        override: true
+        special: ''
+        value: '100'
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: humanoid
+        override: true
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: cha
+        ability:
+          - cha
         dc:
           calculation: spellcasting
           formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
+        visible: true
+        bonus: ''
   identifier: magic-jar
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-pentagon-teal-purple.webp
-effects: []
+img: icons/containers/kitchenware/jug-bottle-clay-brown-gold-blue.webp
+effects:
+  - name: Inhabiting Soul Jar
+    img: icons/creatures/magical/spirit-mischief-fire-ice-blue.webp
+    origin: Compendium.dnd5e.spells.Item.ej6wyY4G1gOcb1U6
+    transfer: false
+    _id: qouBiD1Bd8bM3lzS
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>Your body falls into a catatonic state as your soul leaves it and
+      enters the container you used for the spell's material component. While
+      your soul inhabits the container, you are aware of your surroundings as if
+      you were in the container's space. You can't move or use reactions. The
+      only action you can take is to project your soul up to 100 feet out of the
+      container, either returning to your living body (and ending the spell) or
+      attempting to possess a humanoids body.</p><p>You can attempt to possess
+      any humanoid within 100 feet of you that you can see (creatures warded by
+      a @UUID[Compendium.dnd5e.spells.Item.xmDBqZhRVrtLP8h2]{protection from
+      evil and good} or
+      @UUID[Compendium.dnd5e.spells.Item.y8A4HfTwd93ypdEz]{magic circle} spell
+      can't be possessed). The target must make a Charisma saving throw. On a
+      failure, your soul moves into the target's body, and the target's soul
+      becomes trapped in the container. On a success, the target resists your
+      efforts to possess it, and you can't attempt to possess it again for 24
+      hours.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781446558873
+      modifiedTime: 1783215505808
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ej6wyY4G1gOcb1U6.qouBiD1Bd8bM3lzS'
+  - name: Magic Jar Possession
+    img: icons/magic/death/undead-ghost-scream-teal.webp
+    origin: Compendium.dnd5e.spells.Item.ej6wyY4G1gOcb1U6
+    transfer: false
+    _id: WOqZ4GoBhC7fBd91
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>Your body has been possessed, and your soul has been trapped within the
+      container used to cast this spell. Your soul can perceive from the
+      container using your own senses, but you can't move or take actions at
+      all.</p><p>If the host body dies while the caster is in it, you
+      die.</p><p>If the container is destroyed or the spell ends, your soul
+      returns to your body if the body is alive and within 100 feet. Otherwise,
+      you die.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781446687654
+      modifiedTime: 1781446828763
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ej6wyY4G1gOcb1U6.WOqZ4GoBhC7fBd91'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037361977
-  modifiedTime: 1725992721730
+  modifiedTime: 1783215489961
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ej6wyY4G1gOcb1U6'
