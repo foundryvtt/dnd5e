@@ -2411,14 +2411,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
 
     // Expire active effects
-    const expiryEvents = CONFIG.DND5E.restTypes[config.type ?? "long"].expiryEvents ?? [];
+    const expiryEvents = CONFIG.DND5E.restTypes[config.type ?? "long"]?.expiryEvents ?? [];
     if ( expiryEvents.length ) {
       const expired = new Map();
-      for ( const effect of this.allApplicableEffects() ) {
+      const expireEffect = effect => {
         for ( const event of expiryEvents ) {
           if ( !effect.isExpiryEvent(event) ) continue;
           if ( !expired.has(effect.parent) ) expired.set(effect.parent, []);
           expired.get(effect.parent).push(effect.id);
+        }
+      };
+      for ( const effect of this.effects ) {
+        if ( !effect.getFlag("dnd5e", "dependentOn") ) expireEffect(effect);
+      }
+      for ( const item of this.items ) {
+        for ( const effect of item.effects ) {
+          if ( effect.getFlag("dnd5e", "dependentOn") ) continue;
+          if ( effect.isAppliedEnchantment || effect.transfer ) expireEffect(effect);
         }
       }
       const operations = expired.entries()
