@@ -205,7 +205,7 @@ class RulesIterator extends Iterator {
    * @returns {RulesIterator<number>}
    */
   resolve(data) {
-    return new RulesIterator(this.values(String).map(v => simplifyBonus(v, data)));
+    return new RulesIterator(this.values(String).map(v => simplifyBonus(v, data)).filter(v => v));
   }
 
   /* -------------------------------------------- */

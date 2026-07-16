@@ -1327,7 +1327,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const alternate = type === "skill" ? this.system.tools?.[config.tool] : this.system.skills?.[config.skill];
     const abilityId = config.ability ?? relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
-    const ability = this.system.abilities?.[abilityId];
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
@@ -1454,15 +1453,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Add condition reductions.
     this.addConditionRollReduction(parts, data);
 
-    config.options = {
-      ...(config.options ?? {}),
+    config.options = foundry.utils.mergeObject({
       maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).resolve(rollData).toSmallest(
         Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity)
       ),
       minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).resolve(rollData).toLargest(
         Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
       )
-    };
+    }, config.options ?? {});
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
     config.data.abilityId = abilityId;

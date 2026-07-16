@@ -259,15 +259,14 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ammunition, attackMode });
-    const options = {
-      ...(config.options ?? {}),
+    const options = foundry.utils.mergeObject({
       maximum: this.actor
         ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
         : undefined,
       minimum: this.actor
         ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).resolve(data).toLargest()
         : undefined,
-    };
+    }, config.options ?? {});
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
     if ( mastery !== undefined ) options.mastery = mastery;
