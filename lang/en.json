@@ -4002,19 +4002,28 @@
   "FIELDS": {
     "prerequisites": {
       "items": {
+        "display": "{items}",
         "hint": "Identifiers for items that the character must have before selecting this item.",
         "label": "Required Items"
       },
       "label": "Prerequisites",
       "level": {
+        "display": "Level {level}+",
+        "displayLegacy": "{levelOrdinal} level",
         "hint": "Character or class level required to select this feature when levelling up.",
         "label": "Required Level"
       },
       "repeatable": {
+        "display": "Not already taken",
         "hint": "This feature can be chosen more than once.",
         "label": "Repeatable"
       }
     }
+  },
+  "Status": {
+    "Invalid": "Prerequisite Validation Failed",
+    "Unknown": "Prerequisite Validation Incomplete",
+    "Valid": "Prerequisite Validation Succeeded"
   },
   "Warning": {
     "InvalidLevel": "must be at least level {level}",

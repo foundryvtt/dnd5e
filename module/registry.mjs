@@ -5,6 +5,12 @@ import { formatIdentifier } from "./utils.mjs";
  * @import { RegisteredItemData } from "./_types.mjs";
  */
 
+const STATUS_STATES = Object.freeze({
+  NONE: 0,
+  LOADING: 1,
+  READY: 2
+});
+
 /* -------------------------------------------- */
 /*  Dependents                                  */
 /* -------------------------------------------- */
@@ -155,10 +161,26 @@ class ItemRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Items grouped by identifiers.
-   * @type {Map<string, RegisteredItemData>}
+   * Item types that track icon and a list of sources in addition to the name and identifier.
+   * @type {Set<string>}
    */
-  #items = new Map();
+  static #extendedData = new Set(["background", "class", "race", "subclass"]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Core registry of item data, shared across types.
+   * @type {Map<string, Map<string, RegisteredItemData>>}
+   */
+  static #items = new Map([["*", new Map()]]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Has initial loading been completed?
+   * @type {number}
+   */
+  static #status = STATUS_STATES.NONE;
 
   /* -------------------------------------------- */
 
@@ -167,24 +189,6 @@ class ItemRegistry {
    * @type {string}
    */
   #itemType;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Has initial loading been completed?
-   * @type {number}
-   */
-  #status = ItemRegistry.#STATUS_STATES.NONE;
-
-  /**
-   * Possible preparation states for the item registry.
-   * @enum {number}
-   */
-  static #STATUS_STATES = Object.freeze({
-    NONE: 0,
-    LOADING: 1,
-    READY: 2
-  });
 
   /* -------------------------------------------- */
 
@@ -215,13 +219,25 @@ class ItemRegistry {
 
   /**
    * All items formatted for a select input.
+   * @type {Iterator<FormSelectOption>}
+   */
+  get #options() {
+    return (ItemRegistry.#items.get(this.#itemType)?.entries() ?? [].values())
+      .map(([value, data]) => ({ value, label: data.name }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * All items formatted for a select input.
    * @type {FormSelectOption[]}
    */
   get options() {
-    return Array.from(this.#items.entries())
-      .map(([value, data]) => ({ value, label: data.name }))
+    return this.#options.toArray()
       .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
   }
+
+  /* -------------------------------------------- */
 
   /**
    * All items formatted for a select input with grouping.
@@ -229,11 +245,28 @@ class ItemRegistry {
    */
   get groupedOptions() {
     // TODO: Group subclasses by parent class
-    return this.options.map(o => ({ ...o, group: this.label }));
+    return this.#options.map(o => ({ ...o, group: this.label }))
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
   }
 
   /* -------------------------------------------- */
   /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get an item descriptor based on identifier. Accepts optional type as either separate option or using
+   * the colon-separated format (e.g. `spell:blade-ward`).
+   * @param {string} key             Identifier to find.
+   * @param {object} [options={}]
+   * @param {string} [options.type]  Type of items to check.
+   * @returns {RegisteredItemData|void}
+   */
+  static get(key, { type }={}) {
+    if ( !key ) return;
+    if ( key.includes(":") && !type ) [type, key] = key.split(":", 2);
+    return this.#items.get(type ?? "*")?.get(key);
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -242,17 +275,17 @@ class ItemRegistry {
    * @returns {RegisteredItemData|void}
    */
   get(identifier) {
-    return this.#items.get(identifier);
+    return ItemRegistry.get(identifier, { type: this.#itemType });
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Scan compendium packs to register matching items of this type.
+   * Scan compendium packs to register item identifiers.
    */
-  async initialize() {
-    if ( this.#status > ItemRegistry.#STATUS_STATES.NONE ) return;
-    RegistryStatus.set(this.#itemType, false);
+  static async initialize() {
+    if ( this.#status > STATUS_STATES.NONE ) return;
+    RegistryStatus.set("items", false);
     if ( game.modules.get("babele")?.active && (game.babele?.initialized === false) ) {
       Hooks.once("babele.ready", () => this.initialize());
       return;
@@ -260,25 +293,30 @@ class ItemRegistry {
       Hooks.once("ready", () => this.initialize());
       return;
     }
-    this.#status = ItemRegistry.#STATUS_STATES.LOADING;
+    this.#status = STATUS_STATES.LOADING;
 
     const indexes = await CompendiumBrowser.fetch(Item, {
-      types: new Set([this.#itemType]),
       indexFields: new Set(["system.identifier", "system.source"]),
       sort: false
     });
     for ( const item of indexes ) {
-      const identifier = item.system?.identifier ?? formatIdentifier(item.name);
-      if ( !this.#items.has(identifier) ) this.#items.set(identifier, { sources: [] });
-      const itemData = this.#items.get(identifier);
-      itemData.name = item.name;
-      itemData.img = item.img;
-      itemData.identifier = identifier;
-      itemData.sources.push(item.uuid);
+      const identifier = item.system?.identifier || formatIdentifier(item.name);
+      const generalCollection = this.#items.get("*");
+      const typeCollection = this.#items.getOrInsert(item.type, new Map());
+      for ( const collection of [generalCollection, typeCollection] ) {
+        const itemData = collection.getOrInsert(identifier, {});
+        itemData.name = item.name;
+        itemData.identifier = identifier;
+        if ( this.#extendedData.has(item.type) ) {
+          itemData.img = item.img;
+          itemData.sources ??= [];
+          itemData.sources.push(item.uuid);
+        }
+      }
     }
 
-    this.#status = ItemRegistry.#STATUS_STATES.READY;
-    RegistryStatus.set(this.#itemType, true);
+    this.#status = STATUS_STATES.READY;
+    RegistryStatus.set("items", true);
   }
 }
 
@@ -739,6 +777,7 @@ export default {
   classes: new ItemRegistry("class"),
   dependents: DependentsRegistry,
   enchantments: EnchantmentRegisty,
+  items: ItemRegistry,
   messages: MessageRegistry,
   ready: RegistryStatus.ready,
   species: new ItemRegistry("race"),
