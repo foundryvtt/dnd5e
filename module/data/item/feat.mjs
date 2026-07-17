@@ -332,7 +332,7 @@ export default class FeatData extends ItemDataModel.mixin(
     if ( results.get("items")?.valid === false ) {
       messages.push(_loc("DND5E.Prerequisites.Warning.MissingItem", {
         items: game.i18n.getListFormatter({ type: "disjunction" }).format(
-          Array.from(this.prerequisites.items).map(i => dnd5e.registry.identifiers.get(i) ?? i)
+          Array.from(this.prerequisites.items).map(i => dnd5e.registry.items.get(i)?.name ?? i)
         )
       }));
     }
@@ -398,7 +398,7 @@ export default class FeatData extends ItemDataModel.mixin(
     if ( this.prerequisites.items.size ) prerequisites.set("items", {
       label: _loc("DND5E.Prerequisites.FIELDS.prerequisites.items.display", {
         items: game.i18n.getListFormatter({ type: "disjunction" }).format(
-          Array.from(this.prerequisites.items).map(i => dnd5e.registry.identifiers.get(i) ?? i)
+          Array.from(this.prerequisites.items).map(i => dnd5e.registry.items.get(i)?.name ?? i)
         )
       }),
       valid: actor ? Array.from(this.prerequisites.items).some(i => actor.identifiedItems.get(i)?.size) : null

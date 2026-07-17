@@ -554,11 +554,7 @@ Hooks.once("ready", function() {
   inserts.registerProseMirrorInserts();
 
   // Register items by type
-  dnd5e.registry.backgrounds.initialize();
-  dnd5e.registry.classes.initialize();
-  dnd5e.registry.species.initialize();
-  dnd5e.registry.subclasses.initialize();
-  dnd5e.registry.identifiers.initialize();
+  dnd5e.registry.items.initialize();
 
   // Chat message listeners
   documents.ChatMessage5e.activateListeners();
