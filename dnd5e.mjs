@@ -28,6 +28,7 @@ import * as inserts from "./module/inserts.mjs";
 import * as migrations from "./module/migration.mjs";
 import { registerModuleData, registerModuleRedirects, setupModulePacks } from "./module/module-registration.mjs";
 import { default as registry } from "./module/registry.mjs";
+import * as rules from "./module/rules/_module.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
 import DragDrop5e from "./module/drag-drop.mjs";
@@ -48,6 +49,7 @@ globalThis.dnd5e = {
   inserts,
   migrations,
   registry,
+  rules,
   ui: {},
   utils
 };
