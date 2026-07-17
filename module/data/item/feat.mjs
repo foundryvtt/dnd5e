@@ -382,7 +382,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
     const { actor, added=[], level=actor?.system?.details?.level } = context;
     const prerequisites = new Map();
-    const legacy = this.source.rules === "2014" || dnd5e.settings.rulesVersion === "legacy" ? "Legacy" : "";
+    const legacy = (this.source.rules === "2014") || (dnd5e.settings.rulesVersion === "legacy") ? "Legacy" : "";
 
     // If a feature has a level pre-requisite, make sure it is less than or equal to current level
     if ( Number.isFinite(this.prerequisites.level) ) prerequisites.set("level", {

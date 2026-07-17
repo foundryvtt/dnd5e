@@ -222,7 +222,7 @@ class ItemRegistry {
    * @type {Iterator<FormSelectOption>}
    */
   get #options() {
-    return ItemRegistry.#items.get(this.#itemType).entries()
+    return (ItemRegistry.#items.get(this.#itemType)?.entries() ?? [].values())
       .map(([value, data]) => ({ value, label: data.name }));
   }
 
@@ -254,7 +254,7 @@ class ItemRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Get the name of an item based on identifier. Accepts optional type as either separate option or using
+   * Get an item descriptor based on identifier. Accepts optional type as either separate option or using
    * the colon-separated format (e.g. `spell:blade-ward`).
    * @param {string} key             Identifier to find.
    * @param {object} [options={}]

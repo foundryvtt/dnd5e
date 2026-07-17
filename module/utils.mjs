@@ -79,7 +79,7 @@ export async function bulkFromUuid(uuids) {
   }
 
   return (await Promise.all(fetches)).flat().reduce((map, doc) => {
-    map.set(redirected.get(doc.uuid), doc);
+    if ( doc ) map.set(redirected.get(doc.uuid), doc);
     return map;
   }, new Map());
 }
