@@ -197,7 +197,8 @@ export default class CreatureTemplate extends CommonTemplate {
   static #migrateBonusData(source) {
     if ( !source.bonuses ) return;
     for ( const [original, updated] of CreatureTemplate.#BONUS_FIELD_PATHS ) {
-      const value = foundry.utils.getProperty(source.bonuses, original)
+      if ( foundry.utils.hasProperty(source.rolls, updated) ) continue;
+      const value = foundry.utils.getProperty(source.bonuses, original);
       if ( !value ) continue;
       source.rolls ??= {};
       foundry.utils.setProperty(source.rolls, updated, value);
@@ -275,7 +276,7 @@ export default class CreatureTemplate extends CommonTemplate {
       const [category, key] = original.split(".");
       this.bonuses[category] ??= {};
       Object.defineProperty(this.bonuses[category], key, {
-        get() {
+        get: () => {
           foundry.utils.logCompatibilityWarning(`bonuses.${original} has moved to "rolls.${updated}".`, {
             since: "DnD5e 6.0", until: "DnD5e 7.0", once: true
           });

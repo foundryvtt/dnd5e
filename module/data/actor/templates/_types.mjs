@@ -84,11 +84,11 @@
  * @property {ProficientRollModificationData} rolls.ability.save   Modifications to ability saves.
  * @property {ProficientRollModificationData} rolls.ability.skill  Modifications to skill checks.
  * @property {ProficientRollModificationData} rolls.ability.tool   Modifications to tool checks.
- * @property {D20ModificationData} rolls.attack       Modifications to attack rolls.
- * @property {D20ModificationData} rolls.attack.msak  Modifications to melee spell attack rolls.
- * @property {D20ModificationData} rolls.attack.mwak  Modifications to melee weapon attack rolls.
- * @property {D20ModificationData} rolls.attack.rsak  Modifications to ranged spell attack rolls.
- * @property {D20ModificationData} rolls.attack.rwak  Modifications to ranged weapon attack rolls.
+ * @property {D20RollModificationData} rolls.attack       Modifications to attack rolls.
+ * @property {D20RollModificationData} rolls.attack.msak  Modifications to melee spell attack rolls.
+ * @property {D20RollModificationData} rolls.attack.mwak  Modifications to melee weapon attack rolls.
+ * @property {D20RollModificationData} rolls.attack.rsak  Modifications to ranged spell attack rolls.
+ * @property {D20RollModificationData} rolls.attack.rwak  Modifications to ranged weapon attack rolls.
  * @property {object} rolls.damage
  * @property {DamageRollModificationData} rolls.damage.msak  Damage bonuses to melee spell attacks.
  * @property {DamageRollModificationData} rolls.damage.mwak  Damage bonuses to melee weapon attacks.
@@ -101,7 +101,7 @@
 
 /**
  * @typedef {D20RollModificationData} ProficientRollModificationData
- * @property {number} melee   Damage bonus for melee attacks in this category.
+ * @property {number} proficiency  Minimum proficiency level for this roll.
  */
 
 /**

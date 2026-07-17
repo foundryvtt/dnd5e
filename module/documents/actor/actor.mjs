@@ -1653,20 +1653,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return null;
     }
 
-    const parts = [];
-    let data = {};
-    const options = D20RollModificationField.combineFields(this.system, [
-      "attributes.death.roll", "rolls.ability.save"
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      "attributes.death.roll"
     ]);
-
-    // Diamond Soul adds proficiency
-    if ( this.getFlag("dnd5e", "diamondSoul") ) {
-      parts.push("@prof");
-      data.prof = new Proficiency(this.system.attributes.prof, 1).term;
-    }
-
-    // Death save bonus
-    if ( death.bonuses.save ) parts.push(death.bonuses.save);
+    const { parts, data } = CONFIG.Dice.D20Roll.constructParts({
+      prof: this.getFlag("dnd5e", "diamondSoul") ? new Proficiency(this.system.attributes.prof, 1).term : null,
+      deathBonus: death.bonuses.save
+    }, {});
 
     const rollConfig = foundry.utils.mergeObject({ saveType: "death", target: 10 }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];

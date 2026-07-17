@@ -18,7 +18,7 @@ export default class D20RollModificationField extends SchemaField {
     const opts = { initial: null, nullable: true, min: 1, max: 20, integer: true };
     fields = {
       bonus: new FormulaField({
-        label: `${labelPrefix}bonus.label`, labelFomatter: `${labelFormatterPrefix}Bonus`
+        label: `${labelPrefix}bonus.label`, labelFormatter: `${labelFormatterPrefix}Bonus`
       }),
       min: new NumberField({
         ...opts, label: `${labelPrefix}min.label`, labelFormatter: `${labelFormatterPrefix}Minimum`
