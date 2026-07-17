@@ -158,6 +158,7 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   async _drawEffect(src, tint) {
     const icon = await super._drawEffect(src, tint);
+    if ( !game.user.isGM ) return icon;
     if ( icon && src && (src === CONFIG.statusEffects.falling?.img) ) {
       icon.eventMode = "static";
       icon.cursor = "pointer";

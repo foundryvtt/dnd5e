@@ -263,25 +263,25 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /**
-   * Find the highest movement-restricting surface at or below the given elevation whose 2D footprint contains at least
-   * 75% of this token's containment points. This is the surface the token is either standing on (when its elevation
-   * matches it) or hovering above. When no defined surface is found beneath the token, the floor of the lowest level
-   * visible from the token's own level is returned as a synthetic surface.
+   * Find the supporting surface this token rests on or would fall onto, and the level it comes to rest on. A scene that
+   * defines any movement surface uses those surfaces as its only floors. As a heuristic to accommodate older scenes
+   * without levels or surfaces, the base of each level is considered a floor in scenes with no surfaces.
    * @param {object} [options]
    * @param {TokenCoordinates} [options.position]  The position to evaluate against. Defaults to the token's source
    *                                               position.
-   * @returns {RegionSurface|{ region: null, elevation: number }|null}
+   * @returns {{ elevation: number, region: RegionDocument|null, level: Level }|null}
    * @internal
    */
   _findSupportingSurface({ position=this._source }={}) {
     const scene = this.parent;
     if ( !scene ) return null;
     const { elevation, level } = position;
-    const surfaces = scene.getSurfaces({ level, type: "move" });
 
     // Walk surfaces from highest to lowest and return the first whose footprint contains the required share of the
     // token. Scene#getSurfaces already orders surfaces by elevation.
-    if ( surfaces.length ) {
+    if ( scene.getSurfaces({ type: "move" }).length ) {
+      const surfaces = scene.getSurfaces({ level, type: "move" });
+      if ( !surfaces.length ) return null;
       const points = this.getContainmentTestPoints(position);
       const required = Math.ceil(points.length * .75);
       const allowedMisses = points.length - required;
@@ -293,24 +293,56 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
         let missed = 0;
         for ( const p of points ) {
           if ( surface.region.polygonTree.testPoint(p) ) {
-            if ( ++inside >= required ) return surface;
+            if ( ++inside >= required ) return {
+              elevation: surface.elevation,
+              level: this.#findRestingLevel(surface.region, surface.elevation, level),
+              region: surface.region
+            };
           } else if ( ++missed > allowedMisses ) {
             break;
           }
         }
       }
+      return null;
     }
 
-    // No defined surface was found beneath the token. Fall back to the floor of the lowest level visible from the
-    // token's own level.
-    const ownLevel = scene.levels.get(level);
-    if ( !ownLevel ) return null;
-    let { base } = ownLevel.elevation;
-    for ( const id of ownLevel.visibility.levels ) {
-      const visible = scene.levels.get(id);
-      if ( visible ) base = Math.min(base, visible.elevation.base);
+    // With no surfaces defined, the base of every level is an implied floor. The supporting surface is the highest
+    // level base at or below the token.
+    let floorLevel = null;
+    for ( const l of scene.levels ) {
+      if ( l.elevation.base > elevation ) continue;
+      if ( !floorLevel || (l.elevation.base > floorLevel.elevation.base) ) floorLevel = l;
     }
-    return elevation > base ? { region: null, elevation: base } : null;
+    if ( !floorLevel ) return null;
+    return { elevation: floorLevel.elevation.base, level: floorLevel, region: null };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Resolve the level a token comes to rest on when landing on a surface region at a given elevation. Checks every
+   * level the surface region belongs to. The result is the single candidate whose elevation range is home to the
+   * landing elevation, or the current level when there is no unambiguous home.
+   * @param {RegionDocument} region  The landed surface's region.
+   * @param {number} elevation       The landing elevation.
+   * @param {string} levelId         The token's current level ID.
+   * @returns {Level|null}           The level the token rests on.
+   */
+  #findRestingLevel(region, elevation, levelId) {
+    const scene = this.parent;
+    const current = scene.levels.get(levelId) ?? null;
+    const candidates = region.levels.size
+      ? Array.from(region.levels, id => scene.levels.get(id))
+      : scene.levels.contents;
+    let home = null;
+    for ( const level of candidates ) {
+      if ( !level ) continue;
+      if ( (elevation >= level.elevation.bottom) && (elevation < level.elevation.top) ) {
+        if ( home ) return current; // Ambiguous: more than one candidate level is home to this elevation.
+        home = level;
+      }
+    }
+    return home ?? current;
   }
 
   /* -------------------------------------------- */
@@ -355,9 +387,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
 
     const distance = this.elevation - surface.elevation;
-    await this.move({ action: "fall", elevation: surface.elevation }, {
-      animate: false, dnd5e: { fall: { distance } }
-    });
+    const waypoint = { action: "fall", elevation: surface.elevation };
+    if ( surface.level && (surface.level.id !== this._source.level) ) waypoint.level = surface.level.id;
+    await this.move(waypoint, { animate: false, dnd5e: { fall: { distance } } });
     await actor.toggleStatusEffect("falling", { active: false });
     await actor.toggleStatusEffect("prone", { active: true });
     await postFallDamage([this], distance);
@@ -471,7 +503,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @inheritDoc */
   async _onUpdateMovement(movement, operation, user) {
     await super._onUpdateMovement(movement, operation, user);
-    if ( !user.isSelf || dnd5e.settings.disableFalling ) return;
+    if ( !user.isSelf || dnd5e.settings.disableFalling || (movement.passed.waypoints.at(-1)?.action === "fall") ) {
+      return;
+    }
     const { actor } = this;
     if ( !actor ) return;
     const shouldFall = this.#shouldFall(movement);
