@@ -27,21 +27,12 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       priority: 1000,
       template: "systems/dnd5e/templates/effects/columns/controls.hbs"
     },
-    source: {
-      id: "source",
+    detail: {
+      id: "detail",
       width: 150,
       order: 100,
       priority: 600,
-      label: "DND5E.SOURCE.FIELDS.source.label",
-      template: "systems/dnd5e/templates/effects/columns/source.hbs"
-    },
-    value: {
-      id: "value",
-      width: 70,
-      order: 200,
-      priority: 500,
-      label: "DND5E.Value",
-      template: "systems/dnd5e/templates/effects/columns/value.hbs"
+      template: "systems/dnd5e/templates/effects/columns/detail.hbs"
     }
   };
 
