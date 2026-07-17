@@ -146,6 +146,22 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async _drawEffect(src, tint) {
+    const icon = await super._drawEffect(src, tint);
+    if ( icon && src && (src === CONFIG.statusEffects.falling?.img) ) {
+      icon.eventMode = "static";
+      icon.cursor = "pointer";
+      icon.on("pointerdown", event => {
+        event.stopPropagation();
+        this.document.plummet();
+      });
+    }
+    return icon;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Specialized drawing function for HP bars.
    * @param {number} number      The Bar number
