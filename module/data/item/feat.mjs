@@ -314,13 +314,73 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /**
    * Validate the prerequisites specified on this item.
+   * @param {Actor5e} actor                        Actor against which the prerequisites should be checked.
+   * @param {object} [options={}]
+   * @param {Item5e[]} [options.added]             Items that are pending addition to the Actor.
+   * @param {number} [options.level]               Level to validate. Falls back to character level.
+   * @param {Item5e[]} [options.removed]           Items that are pending removal from the Actor.
+   * @param {boolean} [options.showMessage=false]  Show a UI message if the validation fails.
+   * @param {boolean} [options.throwError=false]   Throw an error if validation fails.
+   * @returns {true|string[]}  True if the item is valid or a list of invalid descriptions if validation failed.
+   */
+  assertPrerequisites(actor, {
+    added=[], level=actor.system?.details?.level, removed=[], showMessage=false, throwError=false
+  }={}) {
+    const results = this.validatePrerequisites({ actor, added, level });
+    const messages = [];
+
+    if ( results.get("items")?.valid === false ) {
+      messages.push(_loc("DND5E.Prerequisites.Warning.MissingItem", {
+        items: game.i18n.getListFormatter({ type: "disjunction" }).format(
+          Array.from(this.prerequisites.items).map(i => dnd5e.registry.identifiers.get(i) ?? i)
+        )
+      }));
+    }
+
+    if ( results.get("repeatable")?.valid === false ) {
+      messages.push(_loc("DND5E.Prerequisites.Warning.NotRepeatable", { name: this.parent.name }));
+    }
+
+    if ( results.get("level")?.valid === false ) {
+      messages.push(_loc("DND5E.Prerequisites.Warning.InvalidLevel", { level: this.prerequisites.level }));
+    }
+
+    if ( !messages.length ) return true;
+
+    if ( showMessage || throwError ) {
+      const message = _loc("DND5E.Prerequisites.Warning.Message", {
+        actor: actor.name,
+        requirements: game.i18n.getListFormatter().format(messages),
+        type: _loc(CONFIG.Item.typeLabels[this.parent.type]).toLowerCase()
+      });
+      if ( showMessage ) ui.notifications.warn(message);
+      if ( throwError ) throw new Error(message);
+    }
+
+    return messages;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Validate the prerequisites specified on this item.
    * @param {object} [context={}]
    * @param {Actor5e} [context.actor]   Actor against which the prerequisites should be checked.
    * @param {Item5e[]} [context.added]  Items that are pending addition to the Actor.
    * @param {number} [context.level]    Level to validate. Falls back to character level if actor is provided.
+   * @param {object} [_options]
    * @returns {PrerequisiteValidationResults}
    */
-  prerequisiteLabels({ actor, added=[], level=actor?.system?.details?.level }) {
+  validatePrerequisites(context={}, _options) {
+    if ( context instanceof Actor ) {
+      foundry.utils.logCompatibilityWarning(
+        "`FeatData#validatePrerequisites` has been renamed `assertPrerequisites`.",
+        { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+      );
+      return this.assertPrerequisites(context, _options);
+    }
+
+    const { actor, added=[], level=actor?.system?.details?.level } = context;
     const prerequisites = new Map();
     const legacy = this.source.rules === "2014" || dnd5e.settings.rulesVersion === "legacy" ? "Legacy" : "";
 
@@ -352,54 +412,6 @@ export default class FeatData extends ItemDataModel.mixin(
     });
 
     return prerequisites;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Validate the prerequisites specified on this item.
-   * @param {Actor5e} actor                        Actor against which the prerequisites should be checked.
-   * @param {object} [options={}]
-   * @param {Item5e[]} [options.added]             Items that are pending addition to the Actor.
-   * @param {number} [options.level]               Level to validate. Falls back to character level.
-   * @param {Item5e[]} [options.removed]           Items that are pending removal from the Actor.
-   * @param {boolean} [options.showMessage=false]  Show a UI message if the validation fails.
-   * @param {boolean} [options.throwError=false]   Throw an error if validation fails.
-   * @returns {true|string[]}  True if the item is valid or a list of invalid descriptions if validation failed.
-   */
-  validatePrerequisites(actor, {
-    added=[], level=actor.system?.details?.level, removed=[], showMessage=false, throwError=false
-  }={}) {
-    const results = this.prerequisiteLabels({ actor, added, level });
-    const messages = [];
-
-    if ( results.get("items")?.valid === false ) {
-      messages.push(_loc("DND5E.Prerequisites.Warning.MissingItem", {
-        items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))
-      }));
-    }
-
-    if ( results.get("repeatable")?.valid === false ) {
-      messages.push(_loc("DND5E.Prerequisites.Warning.NotRepeatable", { name: this.parent.name }));
-    }
-
-    if ( results.get("level")?.valid === false ) {
-      messages.push(_loc("DND5E.Prerequisites.Warning.InvalidLevel", { level: this.prerequisites.level }));
-    }
-
-    if ( !messages.length ) return true;
-
-    if ( showMessage || throwError ) {
-      const message = _loc("DND5E.Prerequisites.Warning.Message", {
-        actor: actor.name,
-        requirements: game.i18n.getListFormatter().format(messages),
-        type: _loc(CONFIG.Item.typeLabels[this.parent.type]).toLowerCase()
-      });
-      if ( showMessage ) ui.notifications.warn(message);
-      if ( throwError ) throw new Error(message);
-    }
-
-    return messages;
   }
 
   /* -------------------------------------------- */

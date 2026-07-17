@@ -152,7 +152,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     for ( const item of data.items ?? [] ) {
       const original = await fromUuid(item.flags.dnd5e.sourceId);
       try {
-        original?.system.validatePrerequisites?.(this.actor, {
+        original?.system.assertPrerequisites?.(this.actor, {
           level: level || this.actor.system.details?.level, throwError: true
         });
         items.push(item);

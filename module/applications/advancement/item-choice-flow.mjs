@@ -154,7 +154,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       items: [...this.pool, ...dropped].reduce((arr, item) => {
         const { id, name, img } = item;
         const uuid = item.flags.dnd5e?.sourceId ?? item.uuid;
-        const validFeature = !item.system.validatePrerequisites || (item.system.validatePrerequisites(
+        const validFeature = !item.system.assertPrerequisites || (item.system.assertPrerequisites(
           this.advancement.actor, { added, removed, level: this.featureLevel }
         ) === true);
         const validSpell = !validateSpellLevel
@@ -276,8 +276,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       filters,
       prerequisites: {
         validate: item => {
-          if ( !item.system.prerequisiteLabels ) return;
-          return item.system.prerequisiteLabels({ actor: this.advancement.actor, level: this.featureLevel });
+          if ( !item.system.validatePrerequisites ) return;
+          return item.system.validatePrerequisites({ actor: this.advancement.actor, level: this.featureLevel });
         }
       },
       selection: { min: 1, max: max - current }
