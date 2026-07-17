@@ -3933,6 +3933,14 @@ DND5E.falling = {
 /* -------------------------------------------- */
 
 /**
+ * Visually scale tokens smaller the farther they are below the viewed level, to convey depth.
+ * @type {boolean}
+ */
+DND5E.elevationScaling = true;
+
+/* -------------------------------------------- */
+
+/**
  * System provided active effect change types.
  * @enum {ActiveEffectChangeTypeConfig & { [group]: string, [skipConditions]: boolean }}
  */
