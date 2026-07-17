@@ -178,7 +178,7 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
 
     // Special durations imply their own value & units, so the normal duration fields are not configurable.
     const duration = this.element.querySelector("[data-duration]");
-    if ( duration ) duration.hidden = !!this.document.specialDuration;
+    if ( duration ) duration.hidden = !this.document.expirySupportsDuration();
 
     this.element.querySelectorAll("[data-context-menu]").forEach(control =>
       control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)
