@@ -2977,6 +2977,7 @@ DND5E.restTypes = {
     icon: "fa-solid fa-utensils",
     dialogClass: ShortRestDialog,
     activationPeriods: ["shortRest"],
+    expiryEvents: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
   },
@@ -2992,6 +2993,7 @@ DND5E.restTypes = {
     dialogClass: LongRestDialog,
     newDay: true,
     activationPeriods: ["longRest"],
+    expiryEvents: ["longRest", "shortRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
@@ -4707,6 +4709,19 @@ DND5E.calendarDeltasRecoveryMapping = new Map([
   ["sunrises", "dawn"],
   ["sunsets", "dusk"]
 ]);
+
+/* -------------------------------------------- */
+/*  Expiry Events                               */
+/* -------------------------------------------- */
+
+/**
+ * Active effect expiry events provided by the system.
+ * @enum {string}
+ */
+DND5E.expiryEvents = Object.seal({
+  longRest: "DND5E.EFFECT.Expiry.LongRest",
+  shortRest: "DND5E.EFFECT.Expiry.ShortRest"
+});
 
 /* -------------------------------------------- */
 /*  Requests                                    */
