@@ -118,6 +118,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Falling automation
+  game.settings.register("dnd5e", "disableFalling", {
+    config: true,
+    default: false,
+    hint: "SETTINGS.DND5E.AUTOMATION.Falling.Hint",
+    name: "SETTINGS.DND5E.AUTOMATION.Falling.Name",
+    scope: "world",
+    type: Boolean
+  });
+
   // Sense-to-token vision sync
   game.settings.register("dnd5e", "senseVisionSync", {
     name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",

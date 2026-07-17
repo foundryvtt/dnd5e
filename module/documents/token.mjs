@@ -363,6 +363,20 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Determine whether this token should be considered falling after its movement. Movement that ends with a fly or
+   * burrow action does not leave the token falling, regardless of elevation.
+   * @param {TokenMovementOperation} movement  The concluded movement.
+   * @returns {boolean}
+   */
+  #shouldFall(movement) {
+    const { action } = movement.passed.waypoints.at(-1) ?? {};
+    if ( (action === "fly") || (action === "burrow") ) return false;
+    return this._isHoveringAboveSurface({ position: movement.destination });
+  }
+
+  /* -------------------------------------------- */
   /*  Ring Animations                             */
   /* -------------------------------------------- */
 
@@ -449,6 +463,19 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     if ( !this.parent?.isView ) return;
     this.reset();
     this.object?.initializeVisionSource();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onUpdateMovement(movement, operation, user) {
+    await super._onUpdateMovement(movement, operation, user);
+    if ( !user.isSelf || dnd5e.settings.disableFalling ) return;
+    const { actor } = this;
+    if ( !actor ) return;
+    const shouldFall = this.#shouldFall(movement);
+    if ( shouldFall === actor.statuses.has("falling") ) return;
+    await actor.toggleStatusEffect("falling", { active: shouldFall });
   }
 
   /* -------------------------------------------- */
