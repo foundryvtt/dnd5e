@@ -2427,7 +2427,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const item of this.items ) {
         for ( const effect of item.effects ) {
           if ( effect.getFlag("dnd5e", "dependentOn") ) continue;
-          if ( effect.isAppliedEnchantment || effect.transfer ) expireEffect(effect);
+          if ( effect.isAppliedEnchantment ) expireEffect(effect);
         }
       }
       const operations = expired.entries()
