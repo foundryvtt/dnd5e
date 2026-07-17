@@ -70,6 +70,7 @@ Hooks.once("init", function() {
   CONFIG.Actor.documentClass = documents.Actor5e;
   CONFIG.Adventure.documentClass = documents.Adventure5e;
   CONFIG.Canvas.layers.tokens.layerClass = canvas.layers.TokenLayer5e;
+  CONFIG.Canvas.vfx.enabled = true;
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;

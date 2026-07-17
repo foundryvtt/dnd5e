@@ -1,3 +1,4 @@
+import { playLandingVfx } from "../canvas/landing-vfx.mjs";
 import { postFallDamage } from "../rules/falling.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
@@ -476,6 +477,15 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const shouldFall = this.#shouldFall(movement);
     if ( shouldFall === actor.statuses.has("falling") ) return;
     await actor.toggleStatusEffect("falling", { active: shouldFall });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    const distance = foundry.utils.getProperty(options, "dnd5e.fall.distance");
+    if ( distance ) playLandingVfx(this, distance);
   }
 
   /* -------------------------------------------- */
