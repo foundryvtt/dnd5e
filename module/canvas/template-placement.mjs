@@ -150,6 +150,7 @@ export default class TemplatePlacement extends BasePlacement {
       highlightMode: "coverage",
       flags: {
         dnd5e: {
+          caster: activity.getUsageToken()?.uuid,
           dimensions: {
             size: templateData.size,
             width: templateData.width,
