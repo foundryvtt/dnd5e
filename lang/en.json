@@ -3217,7 +3217,11 @@
 },
 
 "DND5E.FALLING": {
-  "DamageFlavor": "Fell {distance}"
+  "DamageFlavor": "Fell {distance}",
+  "MovementAction": "Fall",
+  "Warning": {
+    "NoLandingSurface": "Cannot plummet {name}, there is no surface below them."
+  }
 },
 
 "DND5E.Favorite": "Favorite",

@@ -1,3 +1,4 @@
+import { postFallDamage } from "../rules/falling.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -219,6 +220,20 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     };
     CONFIG.Token.movement.actions.jump.deriveTerrainDifficulty = () => 1;
     CONFIG.Token.movement.actions.jump.getCostFunction = () => cost => cost;
+
+    // Falling is involuntary, so it cannot be selected by the user and never consumes movement.
+    CONFIG.Token.movement.actions.fall = {
+      canSelect: false,
+      costMultiplier: 0,
+      icon: "fa-solid fa-arrow-down-long",
+      img: "systems/dnd5e/icons/svg/statuses/falling.svg",
+      label: "DND5E.FALLING.MovementAction",
+      measure: false,
+      order: 9,
+      teleport: false,
+      terrainAction: null,
+      visualize: true
+    };
   }
 
   /* -------------------------------------------- */
@@ -240,6 +255,111 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     return noAutomation || !actor?.system.isCreature || !hasMovement || speed || (!speed && !walkFallback)
       ? cost => cost
       : (cost, _from, _to, distance) => cost + distance;
+  }
+
+  /* -------------------------------------------- */
+  /*  Falling                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Find the highest movement-restricting surface at or below the given elevation whose 2D footprint contains at least
+   * 75% of this token's containment points. This is the surface the token is either standing on (when its elevation
+   * matches it) or hovering above. When no defined surface is found beneath the token, the floor of the lowest level
+   * visible from the token's own level is returned as a synthetic surface.
+   * @param {object} [options]
+   * @param {TokenCoordinates} [options.position]  The position to evaluate against. Defaults to the token's source
+   *                                               position.
+   * @returns {RegionSurface|{ region: null, elevation: number }|null}
+   * @internal
+   */
+  _findSupportingSurface({ position=this._source }={}) {
+    const scene = this.parent;
+    if ( !scene ) return null;
+    const { elevation, level } = position;
+    const surfaces = scene.getSurfaces({ level, type: "move" });
+
+    // Walk surfaces from highest to lowest and return the first whose footprint contains the required share of the
+    // token. Scene#getSurfaces already orders surfaces by elevation.
+    if ( surfaces.length ) {
+      const points = this.getContainmentTestPoints(position);
+      const required = Math.ceil(points.length * .75);
+      const allowedMisses = points.length - required;
+
+      for ( let i = surfaces.length; i--; ) {
+        const surface = surfaces[i];
+        if ( surface.elevation > elevation ) continue;
+        let inside = 0;
+        let missed = 0;
+        for ( const p of points ) {
+          if ( surface.region.polygonTree.testPoint(p) ) {
+            if ( ++inside >= required ) return surface;
+          } else if ( ++missed > allowedMisses ) {
+            break;
+          }
+        }
+      }
+    }
+
+    // No defined surface was found beneath the token. Fall back to the floor of the lowest level visible from the
+    // token's own level.
+    const ownLevel = scene.levels.get(level);
+    if ( !ownLevel ) return null;
+    let { base } = ownLevel.elevation;
+    for ( const id of ownLevel.visibility.levels ) {
+      const visible = scene.levels.get(id);
+      if ( visible ) base = Math.min(base, visible.elevation.base);
+    }
+    return elevation > base ? { region: null, elevation: base } : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether this token is hovering above a movement-restricting surface in the current scene. Returns false
+   * when the token is on the ground, over a void with no surface below it, or is otherwise exempt from falling.
+   * @param {object} [options]
+   * @param {TokenCoordinates} [options.position]  The position to evaluate against. Defaults to the token's source
+   *                                               position.
+   * @returns {boolean}
+   * @internal
+   */
+  _isHoveringAboveSurface({ position=this._source }={}) {
+    const { actor } = this;
+    if ( !actor ) return false;
+    const { BURROW, FLY, HOVER } = CONFIG.specialStatusEffects;
+    let exempt = actor.statuses.has(BURROW);
+    exempt ||= actor.statuses.has(FLY);
+    exempt ||= actor.statuses.has(HOVER);
+    exempt ||= foundry.utils.getProperty(actor, "system.traits.ci.value")?.has("falling");
+    if ( exempt ) return false;
+    const surface = this._findSupportingSurface({ position });
+    return !!surface && (surface.elevation < position.elevation);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Plummet this token straight down to the highest movement-restricting surface beneath it, knocking it prone and
+   * posting fall damage to chat.
+   * @returns {Promise<void>}
+   */
+  async plummet() {
+    const { actor } = this;
+    if ( !actor?.statuses.has("falling") || !actor.canUserModify(game.user, "update") ) return;
+
+    const surface = this._findSupportingSurface();
+    if ( !surface || (surface.elevation >= this.elevation) ) {
+      ui.notifications.warn("DND5E.FALLING.Warning.NoLandingSurface", { format: { name: this.name } });
+      return;
+    }
+
+    const distance = this.elevation - surface.elevation;
+    await this.move({ action: "fall", elevation: surface.elevation }, {
+      animate: false, dnd5e: { fall: { distance } }
+    });
+    await actor.toggleStatusEffect("falling", { active: false });
+    await actor.toggleStatusEffect("prone", { active: true });
+    await postFallDamage([this], distance);
   }
 
   /* -------------------------------------------- */
