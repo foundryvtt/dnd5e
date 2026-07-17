@@ -444,10 +444,10 @@
 
 /**
  * @typedef RegisteredItemData
- * @property {string} name        Name of the item.
- * @property {string} identifier  Item identifier.
- * @property {string} img         Item's icon.
- * @property {string[]} sources   UUIDs of different compendium items matching this identifier.
+ * @property {string} name         Name of the item.
+ * @property {string} identifier   Item identifier.
+ * @property {string} [img]        Item's icon.
+ * @property {string[]} [sources]  UUIDs of different compendium items matching this identifier.
  */
 
 /* -------------------------------------------- */

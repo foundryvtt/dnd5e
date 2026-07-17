@@ -107,7 +107,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     let replacement;
     if ( retainedData.replaced ) ({ original, replacement } = retainedData.replaced);
 
-    await super.apply(level, { ...data, retainedData }, options);
+    await super.apply(level, { ...data, retainedData, skipExisting: false }, options);
 
     if ( original ) {
       const replaced = this.value.replaced[level] ?? {};
@@ -152,7 +152,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     for ( const item of data.items ?? [] ) {
       const original = await fromUuid(item.flags.dnd5e.sourceId);
       try {
-        original?.system.validatePrerequisites?.(this.actor, {
+        original?.system.assertPrerequisites?.(this.actor, {
           level: level || this.actor.system.details?.level, throwError: true
         });
         items.push(item);
@@ -227,7 +227,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       for ( const [id, uuid] of Object.entries(this.value.added[level] ?? {}) ) {
         const item = this.actor.items.get(id);
         if ( !item ) continue;
-        const isValid = item.system.validatePrerequisites?.(this.actor, {
+        const isValid = item.system.assertPrerequisites?.(this.actor, {
           added, removed, level: level || this.actor.system.details?.level, showMessage
         }) ?? true;
         if ( isValid !== true ) await this.reverse(level, { skipEvaluation: true, uuid });
