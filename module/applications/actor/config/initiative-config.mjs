@@ -60,9 +60,9 @@ export default class InitiativeConfig extends BaseConfigSheet {
         value: source.system.rolls?.ability?.check?.bonus
       },
       local: {
-        field: this.document.system.schema.fields.abilities.model.fields.bonuses.fields.check,
-        name: `system.abilities.${ability}.bonuses.check`,
-        value: source.system.abilities[ability]?.bonuses.check
+        field: this.document.system.schema.fields.abilities.model.fields.check.fields.roll.fields.bonus,
+        name: `system.abilities.${ability}.check.roll.bonus`,
+        value: source.system.abilities[ability]?.check.roll.bonus
       }
     };
 

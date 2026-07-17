@@ -1455,9 +1455,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: prof?.hasProficiency ? prof.term : null,
-      [`${config[type]}Bonus`]: relevant?.bonuses?.check,
       extraBonus: process.bonus,
-      [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
       ruleBonus: bonus
     }, { ...rollData });
 
@@ -1574,7 +1572,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
-      [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
       ruleBonus: bonus,
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
@@ -1658,7 +1655,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     ]);
     const { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       prof: this.getFlag("dnd5e", "diamondSoul") ? new Proficiency(this.system.attributes.prof, 1).term : null,
-      deathBonus: death.bonuses.save
+      deathBonus: bonus
     }, {});
 
     const rollConfig = foundry.utils.mergeObject({ saveType: "death", target: 10 }, config);
@@ -1784,18 +1781,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const conc = this.system.attributes?.concentration;
     if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
-    let data = {};
-    const parts = [];
-    const options = {
-      advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-      isConcentration: true,
-      maximum: conc.roll.max,
-      minimum: conc.roll.min
-    };
-
-    // Concentration bonus
-    if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      "attributes.concentration.roll"
+    ]);
+    options.isConcentration = true;
+    const { parts, data } = CONFIG.Dice.D20Roll.constructParts({ concentrationBonus: bonus }, {});
 
     const rollConfig = foundry.utils.mergeObject({
       ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
@@ -1883,8 +1873,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: init?.mod,
       prof: init.prof.hasProficiency ? init.prof.term : null,
-      initiativeBonus: init.bonus,
-      [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
       ruleBonus: bonus,
       alert: flags.initiativeAlert && (dnd5e.settings.rulesVersion === "legacy") ? 5 : null
     }, rollData);

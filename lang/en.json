@@ -94,6 +94,28 @@
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
   },
+  "FIELDS": {
+    "abilities": {
+      "element": {
+        "check": {
+          "roll": {
+            "bonus": { "label": "Check Bonus" },
+            "max": { "label": "Maximum Check Roll" },
+            "min": { "label": "Minimum Check Roll" },
+            "mode": { "label": "Check Advantage Mode" }
+          }
+        },
+        "save": {
+          "roll": {
+            "bonus": { "label": "Save Bonus" },
+            "max": { "label": "Maximum Save Roll" },
+            "min": { "label": "Minimum Save Roll" },
+            "mode": { "label": "Save Advantage Mode" }
+          }
+        }
+      }
+    }
+  },
   "Formatter": {
     "Check": {
       "AdvantageMode": "{name} Check Advantage Mode",
@@ -164,7 +186,6 @@
 "DND5E.AbilityCheckConfigure": "{ability} Ability Checks",
 "DND5E.AbilityCheckConfigurationHint": "Configure check bonuses.",
 "DND5E.AbilityConfigurationHint": "Configure ability saving throw proficiency, saving throw bonuses, and check bonuses.",
-"DND5E.AbilityCheckBonus": "Check Bonus",
 "DND5E.AbilityCheckGlobalBonusHint": "This bonus applies to all ability checks made by this actor.",
 "DND5E.Action": "Action",
 "DND5E.ActionAbbr": "A",
@@ -1766,8 +1787,6 @@
   "Title": "Check"
 },
 
-"DND5E.CheckBonus": "Check Bonus",
-
 "DND5E.CLASS": {
   "Multiclass": {
     "Title": "Multiclassing"
@@ -1940,21 +1959,14 @@
   "FIELDS": {
     "attributes": {
       "concentration": {
-        "bonuses": {
-          "label": "Concentration Bonuses",
-          "save": {
-            "label": "Concentration Bonus"
-          }
-        },
         "label": "Concentration",
-        "limit": {
-          "label": "Concentration Limit"
-        },
+        "limit": { "label": "Concentration Limit" },
         "roll": {
-          "ability": "Concentration Save Ability",
-          "max": "Maximum Concentration Save Roll",
-          "min": "Minimum Concentration Save Roll",
-          "mode": "Concentration Save Advantage Mode"
+          "ability": { "label": "Concentration Ability" },
+          "bonus": { "label": "Concentration Bonus" },
+          "max": { "label": "Maximum Concentration Roll" },
+          "min": { "label": "Minimum Concentration Roll" },
+          "mode": { "label": "Concentration Advantage Mode" }
         }
       }
     }
@@ -2475,7 +2487,6 @@
 "DND5E.Dawn": "Dawn",
 "DND5E.Day": "Day",
 "DND5E.DeathSave": "Death Saves",
-"DND5E.DeathSaveBonus": "Death Save Bonus",
 "DND5E.DeathSaveConfigure": "Configure Death Saves",
 "DND5E.DeathSaveCriticalSuccess": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
 "DND5E.DeathSaveHide": "Hide Death Saves",
@@ -2495,6 +2506,22 @@
 "DND5E.DeathSaveRoll": "Roll a Death Saving Throw",
 "DND5E.DeathSavingThrow": "Death Saving Throw",
 "DND5E.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
+
+"DND5E.DEATH": {
+  "FIELDS": {
+    "attributes": {
+      "death": {
+        "roll": {
+          "bonus": { "label": "Death Save Bonus" },
+          "max": { "label": "Maximum Death Save Roll" },
+          "min": { "label": "Minimum Death Save Roll" },
+          "mode": { "label": "Death Save Advantage Mode" }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Default": "Default",
 "DND5E.DefaultSpecific": "Default ({default})",
 "DND5E.DefaultAbilityCheck": "Default Ability Check",
@@ -3601,10 +3628,25 @@
 "DND5E.Immunities": "Immunities",
 "DND5E.Initiative": "Initiative",
 "DND5E.InitiativeAbbr": "Init",
-"DND5E.InitiativeBonus": "Initiative Bonus",
 "DND5E.InitiativeRoll": "Initiative Roll",
 "DND5E.InitiativeConfig": "Configure Initiative",
 "DND5E.InitiativeConfigHint": "Configure initiative modifiers and bonuses which apply to this Actor.",
+
+"DND5E.INITIATIVE": {
+  "FIELDS": {
+    "attributes": {
+      "init": {
+        "roll": {
+          "bonus": { "label": "Initiative Bonus" },
+          "max": { "label": "Maximum Initiative Roll" },
+          "min": { "label": "Minimum Initiative Roll" },
+          "mode": { "label": "Initiative Advantage Mode" }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Inspiration": "Inspiration",
 "DND5E.Inventory": "Inventory",
 "DND5E.InventorySearch": "Search inventory",
@@ -4523,7 +4565,6 @@
   }
 },
 
-"DND5E.SaveBonus": "Saving Throw Bonus",
 "DND5E.SaveGlobalBonusHint": "This bonus applies to all saving throws made by this actor.",
 "DND5E.Scroll": {
   "CreateFrom": "Create Scroll from {spell}",
@@ -4607,6 +4648,18 @@
 "DND5E.SizeTinyAbbr": "Tn",
 
 "DND5E.SKILL": {
+  "FIELDS": {
+    "skills": {
+      "element": {
+        "roll": {
+          "bonus": { "label": "Skill Check Bonus" },
+          "max": { "label": "Maximum Skill Check Roll" },
+          "min": { "label": "Minimum Skill Check Roll" },
+          "mode": { "label": "Skill Check Advantage Mode" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "CheckBonus": "{name} Check Bonus",
     "PassiveBonus": "Passive {name} Bonus",
@@ -4652,7 +4705,6 @@
 "DND5E.SkillConfigure": "Configure Skill",
 "DND5E.SkillsConfig": "Configure Skills",
 "DND5E.SkillBonuses": "Skill Bonuses",
-"DND5E.SkillBonusCheck": "Check Bonus",
 "DND5E.SkillBonusPassive": "Passive Bonus",
 "DND5E.SkillConfigurationHint": "Configure skill proficiency and bonuses.",
 "DND5E.SkillGlobalBonusCheckHint": "This bonus applies to all skill checks made by this actor.",
@@ -5480,6 +5532,18 @@
 "DND5E.ToggleDescription": "Toggle Description",
 
 "DND5E.TOOL": {
+  "FIELDS": {
+    "tools": {
+      "element": {
+        "roll": {
+          "bonus": { "label": "Tool Check Bonus" },
+          "max": { "label": "Maximum Tool Check Roll" },
+          "min": { "label": "Minimum Tool Check Roll" },
+          "mode": { "label": "Tool Check Advantage Mode" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "CheckBonus": "{name} Check Bonus",
     "Proficiency": "{name} Proficiency"

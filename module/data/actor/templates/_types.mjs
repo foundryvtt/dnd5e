@@ -9,8 +9,6 @@
  * @typedef AttributesCommonData
  * @property {ArmorClassData} ac       Armor class configuration.
  * @property {RollConfigData} init
- * @property {string} init.ability     The ability used for initiative rolls.
- * @property {string} init.bonus       The bonus provided to initiative rolls.
  * @property {MovementData} movement
  */
 
@@ -22,9 +20,6 @@
  * @property {string} spellcasting                Primary spellcasting ability.
  * @property {number} exhaustion                  Creature's exhaustion level.
  * @property {RollConfigData} concentration
- * @property {string} concentration.ability       The ability used for concentration saving throws.
- * @property {object} concentration.bonuses
- * @property {string} concentration.bonuses.save  The bonus provided to concentration saving throws.
  * @property {number} concentration.limit         The amount of items this actor can concentrate on.
  * @property {object} loyalty
  * @property {number} loyalty.value               The creature's loyalty score.
@@ -66,11 +61,8 @@
  * @property {number} value          Ability score.
  * @property {number} proficient     Proficiency value for saves.
  * @property {number} max            Maximum possible score for the ability.
- * @property {object} bonuses        Bonuses that modify ability checks and saves.
- * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
- * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
- * @property {RollConfigData} check    Properties related to ability checks.
- * @property {RollConfigData} save     Properties related to saving throws.
+ * @property {Omit<RollConfigData, "ability">} check  Properties related to ability checks.
+ * @property {Omit<RollConfigData, "ability">} save   Properties related to saving throws.
  */
 
 /**
@@ -108,15 +100,12 @@
  * @typedef {RollConfigData} SkillData
  * @property {number} value            Proficiency level creature has in this skill.
  * @property {object} bonuses          Bonuses for this skill.
- * @property {string} bonuses.check    Numeric or dice bonus to skill's check.
  * @property {string} bonuses.passive  Numeric bonus to skill's passive check.
  */
 
 /**
  * @typedef {RollConfigData} ToolData
  * @property {number} value            Proficiency level creature has in this tool.
- * @property {object} bonuses          Bonuses for this tool.
- * @property {string} bonuses.check    Numeric or dice bonus to tool's check.
  */
 
 /**

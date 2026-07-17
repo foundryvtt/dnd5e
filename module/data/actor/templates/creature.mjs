@@ -77,35 +77,30 @@ export default class CreatureTemplate extends CommonTemplate {
         }, { required: false })
       }),
       skills: new MappingField(new RollConfigField({
-        value: new NumberField({
-          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel",
-          labelFormatter: "DND5E.SKILL.Formatter.Proficiency"
-        }),
         ability: "dex",
         bonuses: new SchemaField({
-          check: new FormulaField({
-            required: true, label: "DND5E.SkillBonusCheck", labelFormatter: "DND5E.SKILL.Formatter.CheckBonus"
-          }),
           passive: new FormulaField({
             required: true, label: "DND5E.SkillBonusPassive", labelFormatter: "DND5E.SKILL.Formatter.PassiveBonus"
           })
-        }, { label: "DND5E.SkillBonuses" })
-      }), {
+        }, { label: "DND5E.SkillBonuses" }),
+        value: new NumberField({
+          required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel",
+          labelFormatter: "DND5E.SKILL.Formatter.Proficiency"
+        })
+      }, { labelPrefix: "DND5E.SKILL.FIELDS.skills.element.roll." }), {
         initialKeys: CONFIG.DND5E.skills, initialValue: this._initialSkillValue,
         initialKeysOnly: true, label: "DND5E.Skills", entryLabel: key => CONFIG.DND5E.skills[key]?.label
       }),
       tools: new MappingField(new RollConfigField({
+        ability: "int",
+        bonuses: new SchemaField({}, { persisted: false }),
         value: new NumberField({
           required: true, nullable: false, min: 0, max: 2, step: 0.5, initial: 0, label: "DND5E.ProficiencyLevel",
           labelFormatter: "DND5E.TOOL.Formatter.Proficiency"
-        }),
-        ability: "int",
-        bonuses: new SchemaField({
-          check: new FormulaField({
-            required: true, label: "DND5E.CheckBonus", labelFormatter: "DND5E.TOOL.Formatter.CheckBonus"
-          })
-        }, { label: "DND5E.ToolBonuses" })
-      }), { entryLabel: key => Trait.keyLabel(key, { trait: "tool" }) }),
+        })
+      }, { labelPrefix: "DND5E.TOOL.FIELDS.tools.element.roll." }), {
+        entryLabel: key => Trait.keyLabel(key, { trait: "tool" })
+      }),
       spells: new MappingField(new SchemaField({
         value: new NumberField({
           nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellProgAvailable"
@@ -116,26 +111,6 @@ export default class CreatureTemplate extends CommonTemplate {
       }), { initialKeys: this._spellLevels, label: "DND5E.SpellLevels" })
     });
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrated paths from `bonuses` to `roll`.
-   * @type {Array}
-   */
-  static #BONUS_FIELD_PATHS = [
-    ["mwak.attack", "attack.mwak.bonus"],
-    ["mwak.damage", "damage.mwak.bonus"],
-    ["rwak.attack", "attack.rwak.bonus"],
-    ["rwak.damage", "damage.rwak.bonus"],
-    ["msak.attack", "attack.msak.bonus"],
-    ["msak.damage", "damage.msak.bonus"],
-    ["rsak.attack", "attack.rsak.bonus"],
-    ["rsak.damage", "damage.rsak.bonus"],
-    ["abilities.check", "ability.check.bonus"],
-    ["abilities.save", "ability.save.bonus"],
-    ["abilities.skill", "ability.skill.bonus"]
-  ];
 
   /* -------------------------------------------- */
 
@@ -182,27 +157,9 @@ export default class CreatureTemplate extends CommonTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
-    CreatureTemplate.#migrateBonusData(source);
     CreatureTemplate.#migrateSensesData(source);
     CreatureTemplate.#migrateToolData(source);
     return source;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Migrate roll bonus data from `bonuses` to `roll`.
-   * @param {object} source  The candidate source data from which the model will be constructed.
-   */
-  static #migrateBonusData(source) {
-    if ( !source.bonuses ) return;
-    for ( const [original, updated] of CreatureTemplate.#BONUS_FIELD_PATHS ) {
-      if ( foundry.utils.hasProperty(source.rolls, updated) ) continue;
-      const value = foundry.utils.getProperty(source.bonuses, original);
-      if ( !value ) continue;
-      source.rolls ??= {};
-      foundry.utils.setProperty(source.rolls, updated, value);
-    }
   }
 
   /* -------------------------------------------- */
@@ -260,29 +217,6 @@ export default class CreatureTemplate extends CommonTemplate {
         ability: "int",
         bonuses: {check: ""}
       };
-    }
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Shims                                  */
-  /* -------------------------------------------- */
-
-  /**
-   * Apply shims for the old bonus locations.
-   */
-  shimBonusData() {
-    this.bonuses ??= {};
-    for ( const [original, updated] of CreatureTemplate.#BONUS_FIELD_PATHS ) {
-      const [category, key] = original.split(".");
-      this.bonuses[category] ??= {};
-      Object.defineProperty(this.bonuses[category], key, {
-        get: () => {
-          foundry.utils.logCompatibilityWarning(`bonuses.${original} has moved to "rolls.${updated}".`, {
-            since: "DnD5e 6.0", until: "DnD5e 7.0", once: true
-          });
-          return foundry.utils.getProperty(this.rolls, updated) ?? "";
-        }
-      });
     }
   }
 
@@ -361,9 +295,9 @@ export default class CreatureTemplate extends CommonTemplate {
     rollData.roll = { ability, proficient: skillData.prof.multiplier >= 1, skill: skillId, type: "skill" };
 
     // Compute modifier
-    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
+    const checkBonusAbl = simplifyBonus(abilityData?.check?.roll?.bonus, rollData);
     skillData.effectValue = skillData.value;
-    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
+    const baseBonus = simplifyBonus(skillData.roll?.bonus, rollData);
     const ruleBonus = simplifyBonus(
       AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
     );
@@ -376,7 +310,7 @@ export default class CreatureTemplate extends CommonTemplate {
     // If we merged skills when transforming, take the highest bonus
     const difference = (originalSkill?.total ?? 0) - skillData.total;
     if ( originalSkill && (difference > 0) ) {
-      skillData.bonuses.check = `${skillData.bonuses.check ?? ""} + ${difference}`;
+      skillData.roll.bonus = `${skillData.roll.bonus ?? ""} + ${difference}`;
       skillData.bonus += difference;
       skillData.total += difference;
     }
@@ -418,8 +352,8 @@ export default class CreatureTemplate extends CommonTemplate {
       rollData = { ...rollData };
       rollData.roll = { ability: tool.ability, proficient: tool.prof.multiplier >= 1, tool: id, type: "tool" };
 
-      const baseBonus = simplifyBonus(tool.bonuses.check, rollData);
-      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, rollData);
+      const baseBonus = simplifyBonus(tool.roll.bonus, rollData);
+      const checkBonusAbl = simplifyBonus(ability?.check?.roll?.bonus, rollData);
       const ruleBonus = simplifyBonus(
         AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );

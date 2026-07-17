@@ -85,11 +85,8 @@
 
 /**
  * @typedef RollConfigData
- * @property {string} [ability]  Default ability associated with this roll.
- * @property {object} roll
- * @property {number} roll.min   Minimum number on the die rolled.
- * @property {number} roll.max   Maximum number on the die rolled.
- * @property {number} roll.mode  Should the roll be with disadvantage or advantage by default?
+ * @property {string} ability    Default ability associated with this roll.
+ * @property {D20RollModificationData} roll
  */
 
 /**

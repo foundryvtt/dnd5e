@@ -3,7 +3,7 @@
     <fieldset class="card">
         <legend>{{ localize "DND5E.Concentration" }}</legend>
         {{ formField fields.ability value=data.ability options=abilityOptions localize=true rootId=partId }}
-        {{ formField fields.bonuses.fields.save value=data.bonuses.save localize=true rootId=partId }}
+        {{ formField fields.roll.fields.bonus value=data.roll.bonus localize=true rootId=partId }}
         {{ formField fields.limit value=data.limit placeholder="1" localize=true rootId=partId }}
     </fieldset>
 
