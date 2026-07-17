@@ -876,8 +876,14 @@
   /* ---------------------------------- */
 
   &.sidebar-info {
-    .theme-dark :not(.themed) & h4 { color: var(--color-light-1); }
-    .theme-light :not(.themed) & h4 { color: var(--color-dark-1); }
+    --sidebar-info-link-color: #ff6400;
+
+    h4 { color: var(--color-light-1); }
+
+    .themed.theme-light & {
+      --sidebar-info-link-color: var(--dnd5e-color-maroon);
+      h4 { color: var(--color-dark-1); }
+    }
 
     ul.links {
       flex: 1;
@@ -889,6 +895,8 @@
       text-transform: uppercase;
       font-size: var(--font-size-11);
       justify-content: center;
+      color: var(--sidebar-info-link-color);
+      a { color: inherit; }
     }
   }
 
