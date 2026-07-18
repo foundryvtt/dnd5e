@@ -2,12 +2,12 @@ import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { parseOrString, staticID } from "../utils.mjs";
+import { parseOrString, simplifyBonus, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
-const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
@@ -23,6 +23,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {string}
    */
   static DEFAULT_ICON = "systems/dnd5e/icons/svg/documents/active-effect.svg";
+
+  /* -------------------------------------------- */
+
+  /**
+   * System-specific "expiry" choices which should not display duration.
+   * @type {Set<string>}
+   */
+  static DURATIONLESS_EXPIRIES = new Set(["longRest", "shortRest"]);
 
   /* -------------------------------------------- */
 
@@ -61,6 +69,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static SHIM_FIELDS = {
     "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
+    "system.attributes.movement.burrow": { key: "system.attributes.movement.speeds.burrow" },
+    "system.attributes.movement.climb": { key: "system.attributes.movement.speeds.climb" },
+    "system.attributes.movement.fly": { key: "system.attributes.movement.speeds.fly" },
+    "system.attributes.movement.jump": { key: "system.attributes.movement.speeds.jump" },
+    "system.attributes.movement.swim": { key: "system.attributes.movement.speeds.swim" },
+    "system.attributes.movement.walk": { key: "system.attributes.movement.speeds.walk" },
     "system.attributes.senses.darkvision": { key: "system.attributes.senses.ranges.darkvision" },
     "system.attributes.senses.blindsight": { key: "system.attributes.senses.ranges.blindsight" },
     "system.attributes.senses.tremorsense": { key: "system.attributes.senses.ranges.tremorsense" },
@@ -204,7 +218,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {string[]}
    */
   getDurationParts() {
-    if ( this.specialDuration ) return [this.duration.label];
+    if ( !this.expirySupportsDuration() ) return [this.duration.label];
     return Number.isFinite(this.duration.remaining) ? this.duration.label.split(", ") : [];
   }
 
@@ -336,11 +350,30 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static applyChangeField(model, change, options={}) {
     const current = foundry.utils.getProperty(model, change.key);
-    const { field } = options;
+    const { field, replacementData } = options;
 
     // Replace value when using string interpolation syntax
     if ( (field instanceof StringField) && (change.type === "override") && change.value?.includes?.("{}") ) {
       change.value = change.value.replace("{}", current ?? "");
+    }
+
+    // Handle `<=` when adding and `>=` when subtracting from number fields
+    if ( (field instanceof NumberField)
+      && (((change.type === "add") && change.value.includes?.("<="))
+      || ((change.type === "subtract") && change.value.includes?.(">="))) ) {
+      let [delta, limit] = change.value.split(/<=|>=/);
+      try {
+        delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
+        limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
+      } catch(err) {
+        const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
+        console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
+        return current;
+      }
+      const result = change.type === "add"
+        ? Math.max(current, Math.min(current + delta, limit))
+        : Math.min(current, Math.max(current - delta, limit));
+      return super.applyChangeField(model, { ...change, type: "override", value: result }, options);
     }
 
     // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
@@ -517,14 +550,21 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   _prepareDuration(duration, context) {
     duration = super._prepareDuration(duration, context);
-    const special = this.constructor.PSEUDO_EXPIRIES.has(duration.expiry) ? duration.expiry : null;
     if ( duration.expired && !Number.isFinite(duration.value) ) {
       duration.label = _loc("DND5E.ACTIVEEFFECT.Expired");
-    } else if ( special ) {
+    }
+
+    // Pseudo expires adjust label based on relationship to actor
+    else if ( this.constructor.PSEUDO_EXPIRIES.has(duration.expiry) ) {
       const useYour = (this.modifiesActor || this.isAppliedEnchantment)
-        && (special.startsWith("target") || (this.getSourceActor() === this.actor));
-      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.Your${special.slice(6)}`);
-      else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${special.capitalize()}`);
+        && (duration.expiry.startsWith("target") || (this.getSourceActor() === this.actor));
+      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.Your${duration.expiry.slice(6)}`);
+      else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${duration.expiry.capitalize()}`);
+    }
+
+    // Durationless expiries just use expiry name
+    else if ( this.constructor.DURATIONLESS_EXPIRIES.has(duration.expiry) ) {
+      duration.label = _loc(CONFIG.ActiveEffect.expiryEvents[duration.expiry]);
     }
     return duration;
   }
@@ -675,7 +715,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
     const { units, expiry } = this.duration;
-    if ( this.constructor.PSEUDO_EXPIRIES.has(expiry) ) this.updateSource({ "duration.value": null });
+    if ( expiry && !this.expirySupportsDuration(expiry) ) this.updateSource({ "duration.value": null });
 
     // Default combat-duration expiry to turnStart to avoid effect expiry at round turnover
     const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
@@ -717,8 +757,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( await super._preUpdate(changed, options, user) === false ) return false;
-    const newExpiry = foundry.utils.getProperty(changed, "duration.expiry");
-    if ( this.constructor.PSEUDO_EXPIRIES.has(newExpiry) ) foundry.utils.setProperty(changed, "duration.value", null);
+    const expiry = foundry.utils.getProperty(changed, "duration.expiry");
+    if ( expiry && !this.expirySupportsDuration(expiry) ) foundry.utils.setProperty(changed, "duration.value", null);
   }
 
   /* -------------------------------------------- */
@@ -1079,11 +1119,23 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
+   * Determine whether the provided expiry should be able to display duration fields.
+   * @param {string} [expiry]  Active effect expiry event to check, defaults to this effect's current expiry.
+   * @returns {boolean}
+   */
+  expirySupportsDuration(expiry=this.duration.expiry) {
+    return !this.constructor.PSEUDO_EXPIRIES.has(expiry) && !this.constructor.DURATIONLESS_EXPIRIES.has(expiry);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare an object of chat data used to display a card for the Item in the chat log.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {object}              An object of chat data to render.
    */
-  async getPreviewContext(enrichmentOptions={}) {
+  async getPreviewContext({ extras, ...enrichmentOptions }={}) {
     let properties = [];
     if ( this.isSuppressed ) properties.push("DND5E.EFFECT.Status.Unavailable");
     else if ( this.disabled ) properties.push("DND5E.EFFECT.Status.Inactive");
@@ -1095,7 +1147,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     properties.unshift(...this.statuses.map(id => CONFIG.statusEffects[id]?.name).filter(_ => _));
 
     return {
-      properties,
+      extras, properties,
       description: await TextEditor.enrichHTML(this.description ?? "", {
         ...enrichmentOptions,
         relativeTo: this
@@ -1120,7 +1172,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       id, name, img, disabled, duration, source,
       changes: await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))),
       durationParts: this.getDurationParts(),
-      showDuration: !!this.specialDuration || Number.isFinite(this.duration.value),
+      showDuration: !this.expirySupportsDuration() || Number.isFinite(this.duration.value),
       effect: this
     };
   }
@@ -1147,12 +1199,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Render a rich tooltip for this effect.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {Promise<{content: string, classes: string[]}>}
    */
   async richTooltip(enrichmentOptions={}) {
     const context = await this.getPreviewContext(enrichmentOptions);
     context.durationParts = this.getDurationParts();
-    context.showDuration = !!this.specialDuration || Number.isFinite(this.duration.value);
+    context.showDuration = !this.expirySupportsDuration() || Number.isFinite(this.duration.value);
 
     return {
       content: await foundry.applications.handlebars.renderTemplate(

@@ -35,12 +35,15 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -96,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: demiplane
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-blue.webp
+img: icons/environment/wilderness/altar-hidden.webp
 effects: []
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366694
-  modifiedTime: 1725992723458
+  modifiedTime: 1781450203356
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!xNM9CzQQr2CieM4B'

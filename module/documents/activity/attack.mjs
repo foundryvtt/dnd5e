@@ -1,7 +1,9 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
+import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
+import AppliedRules from "../applied-rules.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -116,9 +118,16 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       rollConfig.mastery = masteryOptions?.[0]?.value;
     }
 
+    const rollData = this.getRollData({ roll: { attackMode: rollConfig.attackMode } });
+    const { advantage, disadvantage } = this.actor ? AdvantageModeField.combineFields(
+      this.actor.system, [],
+      AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()
+    ) : {};
+
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
       options: {
+        advantage, disadvantage,
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,
         criticalSuccess: this.criticalThreshold,
@@ -250,7 +259,14 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ammunition, attackMode });
-    const options = config.options ?? {};
+    const options = foundry.utils.mergeObject({
+      maximum: this.actor
+        ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
+        : undefined,
+      minimum: this.actor
+        ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).resolve(data).toLargest()
+        : undefined,
+    }, config.options ?? {});
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
     if ( mastery !== undefined ) options.mastery = mastery;

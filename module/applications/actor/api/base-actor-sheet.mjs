@@ -265,7 +265,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return arr;
     }, []);
 
-    const columns = [EffectsElement.COLUMNS.source, EffectsElement.COLUMNS.value, EffectsElement.COLUMNS.controls];
+    const columns = [EffectsElement.COLUMNS.detail, EffectsElement.COLUMNS.controls];
     for ( const category of Object.values(context.effects) ) {
       category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {

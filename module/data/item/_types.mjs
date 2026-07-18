@@ -123,7 +123,7 @@
 
 /**
  * @typedef RaceItemSystemData
- * @property {Omit<MovementData, "special">} movement
+ * @property {Omit<MovementData, "bonus"|"multiplier"|"special">} movement
  * @property {SensesData} senses
  * @property {Omit<CreatureTypeData, "swarm">} type
  */

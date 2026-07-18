@@ -28,12 +28,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -90,20 +94,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: create-food-and-water
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-teal.webp
+img: icons/consumables/fruit/apple-core-red-white.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350569
-  modifiedTime: 1725992718001
+  modifiedTime: 1781305525485
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!BV0mpbHh29IbbIj5'

@@ -32,14 +32,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -109,23 +112,31 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: fireball
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-fireball-smoke-large-orange.webp
+img: icons/magic/fire/barrier-shield-explosion-yellow.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037367345
-  modifiedTime: 1725992723738
+  modifiedTime: 1781289195602
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ztgcdrWPshKRpFd0'

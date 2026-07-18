@@ -46,6 +46,17 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /** @override */
+  _applyChangeSubtract(value, delta, model, change) {
+    if ( (delta !== -1) && (delta !== 1) ) return value;
+    const counts = this.constructor.getCounts(model, change.key);
+    if ( delta === 1 ) counts.advantages.count--;
+    else counts.disadvantages.count--;
+    return this.constructor.resolveMode(model, change, counts);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   _applyChangeDowngrade(value, delta, model, change) {
     // Downgrade the roll so that it can no longer benefit from advantage.
     if ( (delta !== -1) && (delta !== 0) ) return value;
@@ -187,8 +198,8 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     const { override, advantages, disadvantages } = counts ?? this.getCounts(model, keyPath);
     if ( override !== null ) return override;
     const src = foundry.utils.getProperty(model._source, keyPath) ?? 0;
-    const advantageCount = advantages.suppressed ? 0 : advantages.count + Number(src === 1);
-    const disadvantageCount = disadvantages.suppressed ? 0 : disadvantages.count + Number(src === -1);
+    const advantageCount = advantages.suppressed ? 0 : Math.max(0, advantages.count + Number(src === 1));
+    const disadvantageCount = disadvantages.suppressed ? 0 : Math.max(0, disadvantages.count + Number(src === -1));
     return Math.sign(advantageCount) - Math.sign(disadvantageCount);
   }
 

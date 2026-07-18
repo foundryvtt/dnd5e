@@ -171,6 +171,8 @@ export default class ItemDataModel extends SystemDataModel {
   /**
    * Render a rich tooltip for this item.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {Activity} [enrichmentOptions.activity]     Specific activity on item to use for customizing the data.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {{content: string, classes: string[]}}
    */
   async richTooltip(enrichmentOptions={}) {
@@ -188,9 +190,10 @@ export default class ItemDataModel extends SystemDataModel {
    * Prepare item card template data.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
    * @param {Activity} [enrichmentOptions.activity]     Specific activity on item to use for customizing the data.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {Promise<object>}
    */
-  async getCardData({ activity, ...enrichmentOptions }={}) {
+  async getCardData({ activity, extras, ...enrichmentOptions }={}) {
     const { name, type, img } = this.parent;
     let {
       price, weight, uses, identified, unidentified, description, school, materials
@@ -202,7 +205,7 @@ export default class ItemDataModel extends SystemDataModel {
 
     enrichmentOptions = { rollData, relativeTo: this.parent, ...enrichmentOptions };
     const context = {
-      name, type, img, price, weight, uses, school, materials,
+      name, type, img, price, weight, uses, school, materials, extras,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
@@ -306,8 +309,8 @@ export default class ItemDataModel extends SystemDataModel {
    * @param {RollDataOptions} [options]
    * @returns {ItemRollData}
    */
-  getRollData({ deterministic=false }={}) {
-    const actorRollData = this.parent.actor?.getRollData({ deterministic }) ?? {};
+  getRollData(options={}) {
+    const actorRollData = this.parent.actor?.getRollData(options) ?? {};
     const data = { ...actorRollData, item: { ...this } };
     return data;
   }

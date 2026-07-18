@@ -876,8 +876,14 @@
   /* ---------------------------------- */
 
   &.sidebar-info {
-    .theme-dark :not(.themed) & h4 { color: var(--color-light-1); }
-    .theme-light :not(.themed) & h4 { color: var(--color-dark-1); }
+    --sidebar-info-link-color: #ff6400;
+
+    h4 { color: var(--color-light-1); }
+
+    .themed.theme-light & {
+      --sidebar-info-link-color: var(--dnd5e-color-maroon);
+      h4 { color: var(--color-dark-1); }
+    }
 
     ul.links {
       flex: 1;
@@ -889,6 +895,8 @@
       text-transform: uppercase;
       font-size: var(--font-size-11);
       justify-content: center;
+      color: var(--sidebar-info-link-color);
+      a { color: inherit; }
     }
   }
 
@@ -1958,7 +1966,11 @@ dialog.dnd5e2.application {
   overflow-y: unset;
 
   .effects-list { flex-grow: 1; }
-  .effect-source { font-size: var(--font-size-12); }
+
+  .effect-source {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-12);
+  }
 
   .conditions-list {
     display: grid;
@@ -2081,6 +2093,11 @@ dialog.dnd5e2.application {
 
   ul { box-shadow: 0 3px 6px var(--dnd5e-shadow-45); }
   li.divider { border-color: #ddd; }
+
+  ul:has(> li[data-action^="dnd5e-"]):not(:has(> li > ul)) {
+    max-height: 50vh;
+    overflow: hidden auto;
+  }
 
   &.theme-dark {
     --dropdown-background: var(--dnd5e-color-blue-gray-2);

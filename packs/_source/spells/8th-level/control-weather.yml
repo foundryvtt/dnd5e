@@ -82,13 +82,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: mi
       type: radius
       size: '5'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -147,7 +150,72 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    2vQLk7ux8nGczdj2:
+      type: utility
+      name: Begin Weather Change
+      _id: 2vQLk7ux8nGczdj2
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: true
+        condition: Takes 1d4 x 10 minutes.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: true
+        special: ''
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+          special: ''
+          count: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Time Required (Minutes)
+        formula: 1d4 * 10
   identifier: control-weather
 sort: 0
 flags: {}
@@ -156,11 +224,11 @@ effects: []
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037359191
-  modifiedTime: 1725992720807
+  modifiedTime: 1781450179283
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZPd73HtKF3At11jh'

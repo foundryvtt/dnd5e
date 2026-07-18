@@ -8,14 +8,14 @@ system:
     value: >-
       <p>You gain the ability to enter a tree and move from inside it to inside
       another tree of the same kind within 500 feet. Both trees must be living
-      and at least the same size as you. You must use 5 feet of Movement to
+      and at least the same size as you. You must use 5 feet of movement to
       enter a tree. You instantly know the location of all other trees of the
       same kind within 500 feet and, as part of the move used to enter the tree,
       can either pass into one of those trees or step out of the tree you're in.
       You appear in a spot of your choice within 5 feet of the destination tree,
       using another 5 feet of movement. If you have no movement left, you appear
       within 5 feet of the tree you entered.</p><p>You can use this
-      transportation ability once per round for the Duration. You must end each
+      transportation ability once per round for the duration. You must end each
       turn outside a tree.</p>
     chat: ''
   source:
@@ -35,11 +35,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -97,20 +100,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: tree-stride
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-maple-orange-purple.webp
+img: icons/magic/nature/tree-bare-glow-yellow.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351296
-  modifiedTime: 1725992718211
+  modifiedTime: 1781403560421
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!DUBgwHPakcLDkB6W'

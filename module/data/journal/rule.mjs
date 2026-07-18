@@ -25,9 +25,10 @@ export default class RuleJournalPageData extends foundry.abstract.TypeDataModel 
   /**
    * Render a rich tooltip for this page.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {{content: string, classes: string[]}}
    */
-  async richTooltip(enrichmentOptions={}) {
+  async richTooltip({ extras, ...enrichmentOptions }={}) {
     const context = {
       page: this.parent,
       type: CONFIG.DND5E.ruleTypes[this.type].label,

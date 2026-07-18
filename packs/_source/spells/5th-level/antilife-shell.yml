@@ -30,13 +30,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '10'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -56,8 +59,7 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    rWFWCeE82ZmimvF4:
       type: utility
       activation:
         type: action
@@ -71,6 +73,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -78,11 +81,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -94,20 +99,32 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: rWFWCeE82ZmimvF4
   identifier: antilife-shell
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp
+img: icons/magic/defensive/barrier-shield-dome-pink.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366436
-  modifiedTime: 1725992723347
+  modifiedTime: 1781398491409
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wXzkqpeFP8eWgJzK'

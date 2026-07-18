@@ -721,10 +721,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /**
    * Render a rich tooltip for this item.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {Promise<{content: string, classes: string[]}>|null}
    */
   richTooltip(enrichmentOptions={}) {
-    return this.system.richTooltip?.() ?? null;
+    return this.system.richTooltip?.(enrichmentOptions) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -883,10 +884,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {RollDataOptions} [options]
    * @returns {ItemRollData}
    */
-  getRollData({ deterministic=false }={}) {
+  getRollData(options={}) {
     let data;
-    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
-    else data = { ...(this.actor?.getRollData({ deterministic }) ?? {}), item: { ...this.system } };
+    if ( this.system.getRollData ) data = this.system.getRollData(options);
+    else data = { ...(this.actor?.getRollData(options) ?? {}), item: { ...this.system } };
     if ( data?.item ) {
       data.item.flags = this.flags;
       data.item.name = this.name;

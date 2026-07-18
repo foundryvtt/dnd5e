@@ -45,12 +45,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -71,97 +74,82 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    xaPQ40shXqBqfbfy:
+      type: transform
+      name: Cast
+      _id: xaPQ40shXqBqfbfy
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: tM8Yj0dw52paxVc4
-          onSave: false
+      effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: spellcasting
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      profiles:
+        - cr: ''
+          name: Polymorph
+          _id: wSYICNSQ9beXr7de
+          uuid: null
+          sizes: []
+          types:
+            - beast
+          movement: []
+          level:
+            min: null
+            max: null
+      settings: null
+      transform:
+        customize: false
+        mode: cr
+        preset: polymorph
   identifier: polymorph
 sort: 0
 flags: {}
-img: icons/magic/control/energy-stream-link-large-teal.webp
-effects:
-  - name: Polymorph
-    origin: Compendium.dnd5e.spells.Item.04nMsTWkIFvkbXlY
-    duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
-    _id: tM8Yj0dw52paxVc4
-    changes: []
-    description: ''
-    transfer: false
-    statuses:
-      - transformed
-    flags: {}
-    tint: '#ffffff'
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    img: icons/magic/control/energy-stream-link-large-teal.webp
-    type: base
-    system: {}
-    sort: 0
-    _key: '!items.effects!04nMsTWkIFvkbXlY.tM8Yj0dw52paxVc4'
+img: icons/creatures/mammals/ox-buffalo-horned-green.webp
+effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037345165
-  modifiedTime: 1725992716313
+  modifiedTime: 1781374947705
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!04nMsTWkIFvkbXlY'

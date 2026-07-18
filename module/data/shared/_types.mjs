@@ -54,13 +54,10 @@
 
 /**
  * @typedef MovementData
- * @property {number} walk                          Actor walking speed.
- * @property {number} burrow                        Actor burrowing speed.
- * @property {number} climb                         Actor climbing speed.
- * @property {number} fly                           Actor flying speed.
- * @property {number} swim                          Actor swimming speed.
  * @property {string} bonus                         Bonus applied to all movement types that already have a speed.
+ * @property {number} multiplier                    Multiplier for each movement type.
  * @property {string} special                       Semi-colon separated list of special movement information.
+ * @property {Record<string, string>} speeds        Speeds for various movement types.
  * @property {string} units                         Movement used to measure the various speeds.
  * @property {boolean} hover                        This flying creature able to hover in place.
  * @property {Set<string>} ignoredDifficultTerrain  Types of difficult terrain ignored.

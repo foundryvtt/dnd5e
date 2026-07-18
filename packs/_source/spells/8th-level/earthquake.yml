@@ -10,33 +10,34 @@ system:
       see within range. For the Duration, an intense tremor rips through the
       ground in a 100-foot-radius circle centered on that point and shakes
       creatures and structures in contact with the ground in that
-      area.</p><p>The ground in the area becomes difficult terrain. Each
-      creature on the ground that is concentrating must make a Constitution
-      saving throw. On a failed save, the creature's Concentration is
-      broken.</p><p>When you cast this spell and at the end of each turn you
+      area.</p><p>The ground in the area becomes &amp;reference[difficult
+      terrain]. Each creature on the ground that is concentrating must make a
+      Constitution saving throw. On a failed save, the creature's concentration
+      is broken.</p><p>When you cast this spell and at the end of each turn you
       spend concentrating on it, each creature on the ground in the area must
       make a Dexterity saving throw. On a failed save, the creature is knocked
-      prone.</p><p>This spell can have additional Effects depending on the
-      terrain in the area, as determined by the
+      &amp;reference[prone].</p><p>This spell can have additional effects
+      depending on the terrain in the area, as determined by the
       DM.</p><p><strong>Fissures</strong>. Fissures open throughout the spell's
       area at the start of your next turn after you cast the spell. A total of
-      1d6 such fissures open in locations chosen by the DM. Each is 1d10 × 10
-      feet deep, 10 feet wide, and extends from one edge of the spell's area to
-      the opposite side. A creature standing on a spot where a fissure opens
-      must succeed on a Dexterity saving throw or fall in. A creature that
-      successfully saves moves with the fissure's edge as it opens.</p><p>A
-      fissure that opens beneath a structure causes it to automatically collapse
-      (see below).</p><p><strong>Structures</strong>. The tremor deals 50
-      bludgeoning damage to any structure in contact with the ground in the area
-      when you cast the spell and at the start of each of your turns until the
-      spell ends. If a structure drops to 0 Hit Points, it collapses and
-      potentially damages nearby creatures. A creature within half the distance
-      of a structure's height must make a Dexterity saving throw. On a failed
-      save, the creature takes 5d6 bludgeoning damage, is knocked prone, and is
-      buried in the rubble, requiring a DC 20 Strength (Athletics) check as an
-      action to escape. The DM can adjust the DC higher or lower, depending on
-      the Nature of the rubble. On a successful save, the creature takes half as
-      much damage and doesn't fall prone or become buried.</p>
+      [[/r 1d6 #Number of Fissures]] such fissures open in locations chosen by
+      the DM. Each is 1d10 × 10 feet deep, 10 feet wide, and extends from one
+      edge of the spell's area to the opposite side. A creature standing on a
+      spot where a fissure opens must succeed on a Dexterity saving throw or
+      fall in. A creature that successfully saves moves with the fissure's edge
+      as it opens.</p><p>A fissure that opens beneath a structure causes it to
+      automatically collapse (see below).</p><p><strong>Structures</strong>. The
+      tremor deals 50 bludgeoning damage to any structure in contact with the
+      ground in the area when you cast the spell and at the start of each of
+      your turns until the spell ends. If a structure drops to 0 Hit Points, it
+      collapses and potentially damages nearby creatures. A creature within half
+      the distance of a structure's height must make a Dexterity saving throw.
+      On a failed save, the creature takes 5d6 bludgeoning damage, is knocked
+      &amp;reference[prone], and is buried in the rubble, requiring a DC 20
+      Strength (Athletics) check as an action to escape. The DM can adjust the
+      DC higher or lower, depending on the nature of the rubble. On a successful
+      save, the creature takes half as much damage and doesn't fall prone or
+      become buried.</p>
     chat: ''
   source:
     custom: ''
@@ -54,14 +55,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '100'
       contiguous: false
+      count: ''
   range:
     value: '500'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -82,61 +86,402 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    J2GoEuGZ1iEynVgD:
+      type: utility
+      name: Cast
+      _id: J2GoEuGZ1iEynVgD
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: dex
-        dc:
-          calculation: spellcasting
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    M7H3M7MXUHpkDYsi:
+      type: save
+      name: Prone / Concentration Save
+      _id: M7H3M7MXUHpkDYsi
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: At the end of each of your turns.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>When you cast this spell and at the end of each turn you spend
+          concentrating on it, each creature on the ground in the area must make
+          a Dexterity saving throw. On a failed save, the creature is knocked
+          &amp;reference[prone].</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    BKMYGE8ul9RaBNQd:
+      type: save
+      name: Open Fissures
+      _id: BKMYGE8ul9RaBNQd
+      img: ''
+      sort: 300000
+      activation:
+        type: special
+        override: true
+        condition: At the start of next turn when you cast this spell.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Fissures open throughout the spell's area at the start of your next
+          turn after you cast the spell. A total of [[/r 1d6 #Number of
+          Fissures]] such fissures open in locations chosen by the DM. Each is
+          1d10 × 10 feet deep, 10 feet wide, and extends from one edge of the
+          spell's area to the opposite side. A creature standing on a spot where
+          a fissure opens must succeed on a Dexterity saving throw or fall in. A
+          creature that successfully saves moves with the fissure's edge as it
+          opens.</p><p>A fissure that opens beneath a structure causes it to
+          automatically collapse.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: line
+          size: '200'
+          width: '10'
+          count: '1'
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    Yc7FnztObhVeuslM:
+      type: save
+      name: Falling Debris
+      _id: Yc7FnztObhVeuslM
+      img: ''
+      sort: 400000
+      activation:
+        type: special
+        override: true
+        condition: When a structure collapses while a creature is near it.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>A creature within half the distance of a collapsing structure's
+          height must make a Dexterity saving throw. On a failed save, the
+          creature takes 5d6 bludgeoning damage, is knocked
+          &amp;reference[prone], and is buried in the rubble, requiring a DC 20
+          Strength (Athletics) check as an action to escape. The DM can adjust
+          the DC higher or lower, depending on the nature of the rubble. On a
+          successful save, the creature takes half as much damage and doesn't
+          fall prone or become buried.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: 8CWoAkynZV7USN3N
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+    xIIRL1ckzWTxHikd:
+      type: damage
+      name: Structure Damage
+      _id: xIIRL1ckzWTxHikd
+      img: ''
+      sort: 350000
+      activation:
+        type: special
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The tremor deals 50 bludgeoning damage to any structure in contact
+          with the ground in the area when you cast the spell and at the start
+          of each of your turns until the spell ends. If a structure drops to 0
+          Hit Points, it collapses and potentially damages nearby creatures.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: object
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: null
+            bonus: '50'
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+              number: 1
   identifier: earthquake
 sort: 0
 flags: {}
-img: icons/magic/earth/projectile-spiked-stone-boulder-orange.webp
-effects: []
+img: icons/magic/earth/explosion-lava-stone-red.webp
+effects:
+  - name: Buried under Rubble
+    img: icons/commodities/stone/clay-grey.webp
+    origin: Compendium.dnd5e.spells.Item.x5JNBSyIBBZsjcGT
+    transfer: false
+    _id: 8CWoAkynZV7USN3N
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are buried until rubble, requiring a [[/check 20 str ath]] check as
+      an action to escape. The DM can adjust the DC higher or lower, depending
+      on the nature of the rubble.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses:
+            - prone
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781458217545
+      modifiedTime: 1781458296582
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!x5JNBSyIBBZsjcGT.8CWoAkynZV7USN3N'
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366644
-  modifiedTime: 1725992723440
+  modifiedTime: 1781458431011
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!x5JNBSyIBBZsjcGT'

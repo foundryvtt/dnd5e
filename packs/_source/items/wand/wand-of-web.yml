@@ -6,8 +6,8 @@ system:
   description:
     value: >-
       <p><em>Wand (requires attunement by a spellcaster)</em></p><p>This wand
-      has 7 charges. While holding it, you can use an action to expend 1 of its
-      charges to cast the
+      has [[lookup @item.uses.max]] charges. While holding it, you can use an
+      action to expend 1 of its charges to cast the
       @UUID[Compendium.dnd5e.spells.Item.UJJu9c2UvCzVljiP]{Web} spell (save DC
       15) from it.</p><p>The wand regains 1d6 + 1 expended charges daily at
       dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand
@@ -53,6 +53,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   properties:
     - foc
@@ -117,6 +118,8 @@ system:
         identifier: ''
   attuned: false
   identifier: wand-of-web
+  armor:
+    magicalBonus: ''
 effects: []
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
@@ -125,11 +128,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037099540
-  modifiedTime: 1764618951469
+  modifiedTime: 1783700183799
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!4sR5HOah6KwVPHOb'
