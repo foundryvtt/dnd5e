@@ -20,3 +20,6 @@
                  placeholder=(localize "DND5E.DURATION.FIELDS.duration.special.label") rootId=partId }}
     {{/if}}
 </div>
+
+{{!-- Expiry Options --}}
+{{ formField fields.expiry value=data.expiry options=expiryOptions rootId=partId }}

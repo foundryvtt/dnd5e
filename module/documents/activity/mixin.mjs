@@ -1192,6 +1192,25 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Retrieve any modifications to be made to an applied effect.
+     * @param {ActiveEffect5e} effect                The base effect that will be applied.
+     * @param {object} [options={}]
+     * @param {ChatMessage5e} [options.chatMessage]  Message associated with the application.
+     * @param {Actor5e|Item5e} [options.target]      Actor or item to which the effect will be applied.
+     * @returns {object}
+     */
+    getAppliedEffectChanges(effect, { chatMessage, target }={}) {
+      const changes = {};
+      if ( !Number.isFinite(effect.duration.value) && !effect.duration.expiry ) {
+        const duration = this.duration?.getEffectData();
+        if ( !foundry.utils.isEmpty(duration) ) changes.duration = duration;
+      }
+      return changes;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Prepare activity favorite data.
      * @returns {Promise<FavoriteData5e>}
      */

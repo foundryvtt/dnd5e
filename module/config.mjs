@@ -3946,31 +3946,31 @@ DND5E.elevationScaling = true;
  */
 DND5E.activeEffectChangeTypes = Object.freeze({
   "dnd5e.advantage": {
-    label: "DND5E.ACTIVEEFFECT.ChangeType.Advantage.Label",
+    label: "DND5E.EFFECT.Change.Type.Advantage.Label",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
-    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    group: "DND5E.EFFECT.Change.Group.Rules",
     skipConditions: true
   },
   "dnd5e.bonus": {
-    label: "DND5E.ACTIVEEFFECT.ChangeType.Bonus.Label",
+    label: "DND5E.EFFECT.Change.Type.Bonus.Label",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
-    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    group: "DND5E.EFFECT.Change.Group.Rules",
     skipConditions: true
   },
   "dnd5e.maximum": {
-    label: "DND5E.ACTIVEEFFECT.ChangeType.Maximum.Label",
+    label: "DND5E.EFFECT.Change.Type.Maximum.Label",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
-    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    group: "DND5E.EFFECT.Change.Group.Rules",
     skipConditions: true
   },
   "dnd5e.minimum": {
-    label: "DND5E.ACTIVEEFFECT.ChangeType.Minimum.Label",
+    label: "DND5E.EFFECT.Change.Type.Minimum.Label",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
-    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    group: "DND5E.EFFECT.Change.Group.Rules",
     skipConditions: true
   }
 });
@@ -4745,9 +4745,24 @@ DND5E.calendarDeltasRecoveryMapping = new Map([
  * @enum {string}
  */
 DND5E.expiryEvents = Object.seal({
-  longRest: "DND5E.EFFECT.Expiry.LongRest",
-  shortRest: "DND5E.EFFECT.Expiry.ShortRest"
+  longRest: "DND5E.EFFECT.Expiry.Type.LongRest",
+  shortRest: "DND5E.EFFECT.Expiry.Type.ShortRest"
 });
+
+/* -------------------------------------------- */
+
+/**
+ * System-specific "expiry" choices which do not require registration or custom expiry events, and instead
+ * are handled dynamically in `ActiveEffect#isExpiryEvent`.
+ * @type {Record<string>}
+ */
+DND5E.pseudoExpiryEvents = Object.seal({
+  sourceStart: "DND5E.EFFECT.Expiry.Type.SourceStart",
+  sourceEnd: "DND5E.EFFECT.Expiry.Type.SourceEnd",
+  targetStart: "DND5E.EFFECT.Expiry.Type.TargetStart",
+  targetEnd: "DND5E.EFFECT.Expiry.Type.TargetEnd"
+});
+preLocalize("pseudoExpiryEvents");
 
 /* -------------------------------------------- */
 /*  Requests                                    */
