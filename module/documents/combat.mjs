@@ -207,8 +207,7 @@ export default class Combat5e extends Combat {
     for ( const combatant of this.combatants ) {
       const key = combatant.getGroupingKey();
       if ( key === null ) continue;
-      if ( !groups.has(key) ) groups.set(key, { combatants: [], expanded: this.expandedGroups.has(key) });
-      groups.get(key).combatants.push(combatant);
+      groups.getOrInsert(key, { combatants: [], expanded: this.expandedGroups.has(key) }).combatants.push(combatant);
     }
 
     for ( const [key, { combatants }] of groups.entries() ) {

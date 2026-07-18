@@ -322,14 +322,7 @@ export function reparentCompendiums(from, to) {
   const compendiumFolders = new Map();
   for ( const folder of game.folders ) {
     if ( folder.type !== "Compendium" ) continue;
-    if ( folder.folder ) {
-      let folders = compendiumFolders.get(folder.folder);
-      if ( !folders ) {
-        folders = [];
-        compendiumFolders.set(folder.folder, folders);
-      }
-      folders.push(folder);
-    }
+    if ( folder.folder ) compendiumFolders.getOrInsert(folder.folder, []).push(folder);
     if ( folder.name === from ) from = folder;
     else if ( folder.name === to ) to = folder;
   }
