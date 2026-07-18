@@ -2428,8 +2428,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const expireEffect = effect => {
         for ( const event of expiryEvents ) {
           if ( !effect.isExpiryEvent(event) ) continue;
-          if ( !expired.has(effect.parent) ) expired.set(effect.parent, []);
-          expired.get(effect.parent).push(effect.id);
+          expired.getOrInsert(effect.parent, []).push(effect.id);
         }
       };
       for ( const effect of this.effects ) {

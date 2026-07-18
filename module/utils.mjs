@@ -64,8 +64,7 @@ export async function bulkFromUuid(uuids) {
 
   for ( const uuid of uuids ) {
     const { collection, id, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid);
-    if ( !collections.has(collection) ) collections.set(collection, []);
-    collections.get(collection).push(id);
+    collections.getOrInsert(collection, []).push(id);
     redirected.set(redirectedUuid, uuid);
   }
 

@@ -72,8 +72,7 @@ class DependentsRegistry {
   static track(idOrUuid, dependent) {
     const uuid = DependentsRegistry.#resolveDependentID(idOrUuid, dependent);
     if ( !uuid ) return;
-    if ( !DependentsRegistry.#dependents.has(uuid) ) DependentsRegistry.#dependents.set(uuid, new Set());
-    DependentsRegistry.#dependents.get(uuid).add(dependent.uuid);
+    DependentsRegistry.#dependents.getOrInsert(uuid, new Set()).add(dependent.uuid);
   }
 
   /* -------------------------------------------- */
@@ -129,10 +128,7 @@ class EnchantmentRegisty {
    */
   static track(source, enchanted) {
     if ( enchanted.startsWith("Compendium.") ) return;
-    if ( !EnchantmentRegisty.#appliedEnchantments.has(source) ) {
-      EnchantmentRegisty.#appliedEnchantments.set(source, new Set());
-    }
-    EnchantmentRegisty.#appliedEnchantments.get(source).add(enchanted);
+    EnchantmentRegisty.#appliedEnchantments.getOrInsert(source, new Set()).add(enchanted);
   }
 
   /* -------------------------------------------- */
@@ -362,10 +358,9 @@ class MessageRegistry {
     const origin = message.getFlag("dnd5e", "originatingMessage");
     const type = message.getFlag("dnd5e", "roll.type");
     if ( !origin || !type ) return;
-    if ( !MessageRegistry.#messages.has(origin) ) MessageRegistry.#messages.set(origin, new Map());
-    const originMap = MessageRegistry.#messages.get(origin);
-    if ( !originMap.has(type) ) originMap.set(type, new Set());
-    originMap.get(type).add(message.id);
+    MessageRegistry.#messages
+      .getOrInsert(origin, new Map())
+      .getOrInsert(type, new Set()).add(message.id);
   }
 
   /* -------------------------------------------- */
@@ -487,17 +482,13 @@ class SpellListRegistry {
     if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
     if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
 
-    if ( !SpellListRegistry.#byType.has(page.system.type) ) SpellListRegistry.#byType.set(page.system.type, new Map());
-
-    const type = SpellListRegistry.#byType.get(page.system.type);
-    if ( !type.has(page.system.identifier) ) type.set(page.system.identifier, new SpellList({
-      identifier: page.system.identifier, name: page.name, type: page.system.type
-    }));
-
-    const list = type.get(page.system.identifier);
+    const list = SpellListRegistry.#byType
+      .getOrInsert(page.system.type, new Map())
+      .getOrInsertComputed(page.system.identifier, () => new SpellList({
+        identifier: page.system.identifier, name: page.name, type: page.system.type
+      }));
     await Promise.all(Array.from(list.contribute(page)).map(async uuid => {
-      if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
-      SpellListRegistry.#bySpell.get(uuid).add(list);
+      SpellListRegistry.#bySpell.getOrInsert(uuid, new Set()).add(list);
       const { collection } = foundry.utils.parseUuid(uuid);
       if ( (collection instanceof foundry.documents.collections.CompendiumCollection)
         && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
@@ -700,10 +691,7 @@ class SummonRegistry {
    */
   static track(summoner, summoned) {
     if ( summoned.startsWith("Compendium.") ) return;
-    if ( !SummonRegistry.#creatures.has(summoner) ) {
-      SummonRegistry.#creatures.set(summoner, new Set());
-    }
-    SummonRegistry.#creatures.get(summoner).add(summoned);
+    SummonRegistry.#creatures.getOrInsert(summoner, new Set()).add(summoned);
   }
 
   /* -------------------------------------------- */

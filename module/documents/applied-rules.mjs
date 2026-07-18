@@ -16,9 +16,7 @@ export default class AppliedRules extends Map {
    */
   add(change) {
     const type = change.type.startsWith("dnd5e.") ? change.type.split(".")[1] : change.type;
-    if ( !this.has(change.key) ) super.set(change.key, new Map());
-    if ( this.get(change.key).has(type) ) this.get(change.key).get(type).push(change);
-    else this.get(change.key).set(type, [change]);
+    this.getOrInsert(change.key, new Map()).getOrInsert(type, []).push(change);
   }
 
   /* -------------------------------------------- */
