@@ -31,6 +31,12 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef GenericMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef HitDieMessageSystemData
  */
 
