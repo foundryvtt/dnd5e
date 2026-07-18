@@ -31,6 +31,12 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef HitDieMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef HitPointsMessageSystemData
  */
 

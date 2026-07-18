@@ -816,6 +816,12 @@ export function migrateMessageData(messageData) {
     updateData["flags.dnd5e.bastion"] = _del;
   }
 
+  else if ( (flags?.dnd5e?.roll?.type === "hitDie") && (messageData.type === "base") ) {
+    updateData.type = "hitDie";
+    updateData.system = _replace({});
+    updateData["flags.dnd5e.roll"] = _del;
+  }
+
   else if ( (flags?.dnd5e?.roll?.type === "hitPoints") && (messageData.type === "base") ) {
     updateData.type = "hitPoints";
     updateData.system = _replace({});
