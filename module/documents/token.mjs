@@ -1,4 +1,4 @@
-import { playLandingVfx } from "../canvas/landing-vfx.mjs";
+import { playLandingVfx } from "../canvas/vfx/landing-vfx.mjs";
 import { postFallDamage } from "../rules/falling.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
@@ -348,32 +348,31 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /**
-   * Determine whether this token is hovering above a movement-restricting surface in the current scene. Returns false
-   * when the token is on the ground, over a void with no surface below it, or is otherwise exempt from falling.
+   * Determine whether this token should be considered falling given a position and its actor's condition. A creature
+   * suspended in the air falls unless it can keep itself aloft, i.e. has a fly speed.
    * @param {object} [options]
    * @param {TokenCoordinates} [options.position]  The position to evaluate against. Defaults to the token's source
    *                                               position.
    * @returns {boolean}
    * @internal
    */
-  _isHoveringAboveSurface({ position=this._source }={}) {
+  _isFalling({ position=this._source }={}) {
     const { actor } = this;
     if ( !actor ) return false;
-    const { BURROW, FLY, HOVER } = CONFIG.specialStatusEffects;
-    let exempt = actor.statuses.has(BURROW);
-    exempt ||= actor.statuses.has(FLY);
-    exempt ||= actor.statuses.has(HOVER);
-    exempt ||= foundry.utils.getProperty(actor, "system.traits.ci.value")?.has("falling");
-    if ( exempt ) return false;
     const surface = this._findSupportingSurface({ position });
-    return !!surface && (surface.elevation < position.elevation);
+    if ( !surface || (surface.elevation >= position.elevation) ) return false;
+    if ( foundry.utils.getProperty(actor, "system.traits.ci.value")?.has("falling") ) return false;
+    const { hover, speeds } = actor.system.attributes?.movement ?? {};
+    if ( actor.statuses.has("prone") || actor.statuses.has("incapacitated") ) return !hover;
+    return !speeds?.fly;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Plummet this token straight down to the highest movement-restricting surface beneath it, knocking it prone and
-   * posting fall damage to chat.
+   * Plummet this token straight down to the highest movement-restricting surface beneath it and post fall damage to
+   * chat. Landing prone is deferred to the point at which that damage is applied, as a creature is only knocked prone
+   * if the fall actually deals damage.
    * @returns {Promise<void>}
    */
   async plummet() {
@@ -391,22 +390,39 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     if ( surface.level && (surface.level.id !== this._source.level) ) waypoint.level = surface.level.id;
     await this.move(waypoint, { animate: false, dnd5e: { fall: { distance } } });
     await actor.toggleStatusEffect("falling", { active: false });
-    await actor.toggleStatusEffect("prone", { active: true });
     await postFallDamage([this], distance);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Determine whether this token should be considered falling after its movement. Movement that ends with a fly or
-   * burrow action does not leave the token falling, regardless of elevation.
+   * Determine whether this token should be considered falling after its movement. Movement that ends with a climb
+   * action, or that takes place while transiting a level-change region, is a deliberate reposition and does not leave
+   * the token falling.
    * @param {TokenMovementOperation} movement  The concluded movement.
    * @returns {boolean}
    */
   #shouldFall(movement) {
-    const { action } = movement.passed.waypoints.at(-1) ?? {};
-    if ( (action === "fly") || (action === "burrow") ) return false;
-    return this._isHoveringAboveSurface({ position: movement.destination });
+    if ( movement.passed.waypoints.at(-1)?.action === "climb" ) return false;
+    if ( this.#inLevelChangeRegion() ) return false;
+    return this._isFalling({ position: movement.destination });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this token currently occupies a region that relocates tokens between levels, such as a ladder or
+   * stairwell. Such a region moves the token through open space to reach the destination level, and those transient
+   * airborne positions are part of the relocation rather than a fall.
+   * @returns {boolean}
+   */
+  #inLevelChangeRegion() {
+    for ( const region of this.regions ?? [] ) {
+      for ( const behavior of region.behaviors ) {
+        if ( !behavior.disabled && (behavior.type === "changeLevel") ) return true;
+      }
+    }
+    return false;
   }
 
   /* -------------------------------------------- */

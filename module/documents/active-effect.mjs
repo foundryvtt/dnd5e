@@ -740,7 +740,26 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( userId === game.userId ) {
       if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
       if ( this.isAppliedEnchantment ) await this.createRiderEnchantments(options);
+      await this.#updateFalling();
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Re-evaluate whether the actor should be falling after this effect was applied or removed. A creature that becomes
+   * prone or incapacitated while airborne starts falling unless it can hover.
+   * @returns {Promise<void>}
+   */
+  async #updateFalling() {
+    if ( dnd5e.settings.disableFalling || this.statuses.has("falling") ) return;
+    const actor = this.parent;
+    if ( !(actor instanceof Actor) ) return;
+    const falling = actor.statuses.has("falling");
+    if ( !falling && !actor.statuses.has("prone") && !actor.statuses.has("incapacitated") ) return;
+    const shouldFall = actor.getActiveTokens(false, true).some(token => token._isFalling());
+    if ( shouldFall === falling ) return;
+    await actor.toggleStatusEffect("falling", { active: shouldFall });
   }
 
   /* -------------------------------------------- */
@@ -815,6 +834,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
+    if ( userId === game.userId ) this.#updateFalling();
   }
 
   /* -------------------------------------------- */

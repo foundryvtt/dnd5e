@@ -1,6 +1,7 @@
 import { convertLength, formatLength, getTargetDescriptors } from "../utils.mjs";
 
 /**
+ * @import Actor5e from "../documents/actor/actor.mjs";
  * @import Token5e from "../canvas/token.mjs";
  * @import DamageRoll from "../dice/damage-roll.mjs";
  * @import TokenDocument5e from "../documents/token.mjs";
@@ -48,7 +49,12 @@ export async function postFallDamage(targets, distance) {
   }, { configure: false }, {
     create: true,
     data: {
-      flags: { dnd5e: { messageType: "roll", roll: { type: "damage" }, targets: getTargetDescriptors(targets) } },
+      flags: {
+        dnd5e: {
+          context: { fall: true }, messageType: "roll", roll: { type: "damage" },
+          targets: getTargetDescriptors(targets)
+        }
+      },
       flavor: game.i18n.format("DND5E.FALLING.DamageFlavor", {
         distance: formatLength(Math.round(distance), units)
       }),
@@ -59,4 +65,16 @@ export async function postFallDamage(targets, distance) {
   Hooks.callAll("dnd5e.rollDamage", rolls);
   Hooks.callAll("dnd5e.rollDamageV2", rolls);
   return rolls;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Knock an actor prone when it takes damage from a fall.
+ * @param {Actor5e} actor                        The actor whose hit points changed.
+ * @param {DocumentModificationContext} options  The update options.
+ * @returns {Promise<ActiveEffect|boolean|void>|void}
+ */
+export function applyFallProne(actor, options) {
+  if ( options.dnd5e?.fall ) return actor.toggleStatusEffect("prone", { active: true });
 }

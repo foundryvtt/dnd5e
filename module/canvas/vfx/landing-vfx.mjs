@@ -18,7 +18,7 @@ const DUST_TINTS = [0x6B5238, 0x4A3826, 0x2A1E14];
  */
 export function playLandingVfx(token, distance) {
   if ( !canvas.ready || !CONFIG.Canvas.vfx?.enabled ) return;
-  if ( distance <= 0 ) return;
+  if ( (distance <= 0) || matchMedia("(prefers-reduced-motion: reduce)").matches ) return;
 
   const center = token.getCenterPoint();
   const gridSize = canvas.grid?.size ?? 100;
