@@ -1,5 +1,6 @@
 import BastionAttackMessageData from "./bastion-attack-message-data.mjs";
 import BastionTurnMessageData from "./bastion-turn-message-data.mjs";
+import HitPointsMessageData from "./hit-points-message-data.mjs";
 import RequestMessageData from "./request-message-data.mjs";
 import RestMessageData from "./rest-message-data.mjs";
 import TimePassedMessageData from "./time-passed-message-data.mjs";
@@ -9,6 +10,7 @@ import UsageMessageData from "./usage-message-data.mjs";
 export {
   BastionAttackMessageData,
   BastionTurnMessageData,
+  HitPointsMessageData,
   RequestMessageData,
   RestMessageData,
   TimePassedMessageData,
@@ -20,6 +22,7 @@ export * as fields from "./fields/_module.mjs";
 export const config = {
   bastionAttack: BastionAttackMessageData,
   bastionTurn: BastionTurnMessageData,
+  hitPoints: HitPointsMessageData,
   request: RequestMessageData,
   rest: RestMessageData,
   timePassed: TimePassedMessageData,

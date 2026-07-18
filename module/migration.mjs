@@ -1,6 +1,14 @@
 import { formatIdentifier, log } from "./utils.mjs";
 
 /**
+ * Number of chat messages to update per batch during world migration.
+ * @type {number}
+ */
+const MESSAGE_MIGRATION_BATCH_SIZE = 64;
+
+/* -------------------------------------------- */
+
+/**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs.
  * @param {object} [options={}]
  * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
@@ -106,19 +114,27 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
     incrementProgress();
   }
 
-  // Migrate World Messages
+  // Migrate World Messages in batches
+  let messageBatch = [];
+  const flushMessageBatch = async () => {
+    if ( !messageBatch.length ) return;
+    await ChatMessage.implementation.updateDocuments(messageBatch, { enforceTypes: false, render: false });
+    messageBatch = [];
+  };
   for ( const m of game.messages ) {
     try {
-      const updateData = migrateMessageData(m.toObject(), migrationData);
+      const updateData = migrateMessageData(m.toObject());
       if ( !foundry.utils.isEmpty(updateData) ) {
         log(`Migrating Message document ${m.id}`);
-        await m.update(updateData, { enforceTypes: false, render: false });
+        messageBatch.push({ _id: m.id, ...updateData });
+        if ( messageBatch.length >= MESSAGE_MIGRATION_BATCH_SIZE ) await flushMessageBatch();
       }
     } catch(err) {
       err.message = `Failed dnd5e system migration for Message ${m.id}: ${err.message}`;
       console.error(err);
     }
   }
+  await flushMessageBatch();
 
   // Migrate World Roll Tables
   for ( const table of game.tables ) {
@@ -805,6 +821,12 @@ export function migrateMessageData(messageData) {
     updateData.type = "orders" in bastion ? "bastionTurn" : "bastionAttack";
     updateData.system = _replace(bastion);
     updateData["flags.dnd5e.bastion"] = _del;
+  }
+
+  else if ( (flags?.dnd5e?.roll?.type === "hitPoints") && (messageData.type === "base") ) {
+    updateData.type = "hitPoints";
+    updateData.system = _replace({});
+    updateData["flags.dnd5e.roll"] = _del;
   }
 
   return updateData;
