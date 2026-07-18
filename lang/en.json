@@ -4316,6 +4316,18 @@
 "DND5E.RitualAbbr": "R",
 
 "DND5E.ROLL": {
+  "Description": {
+    "ability": "Roll Ability",
+    "attack": {
+      "classification": "Attack Classification",
+      "mode": "Attack Mode",
+      "type": "Attack Type"
+    },
+    "proficient": "Proficient",
+    "skill": "Rolled Skill",
+    "tool": "Rolled Tool",
+    "type": "Roll Type"
+  },
   "Formatter": {
     "AdvantageMode": "{name} Advantage Mode",
     "Maximum": "Maximum {name} Roll",

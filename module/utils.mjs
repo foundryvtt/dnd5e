@@ -1459,6 +1459,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
   else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
 
+  // Rolls
+  else if ( attr.startsWith("roll.") ) {
+    const key = `DND5E.ROLL.Description.${attr.slice(5)}`;
+    if ( game.i18n.has(key) ) label = key;
+  }
+
   // Skills
   else if ( attr.startsWith("skills.") ) {
     const [, key, ...keyPath] = attr.split(".");
