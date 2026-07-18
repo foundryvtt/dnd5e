@@ -117,7 +117,10 @@ export default class EffectChangeConfig extends DocumentSheet5e {
     });
 
     context.typeOptions = Object.entries(ActiveEffect.CHANGE_TYPES)
-      .map(([value, { label }]) => ({ value, label: _loc(label) }))
+      .map(([value, { group, label }]) => ({ value, label: _loc(label), group: _loc(
+        CONFIG.ActiveEffect.changeTypes[value]?.group
+          ?? `DND5E.ACTIVEEFFECT.ChangeType.Group.${value in CONST.ACTIVE_EFFECT_CHANGE_TYPES ? "Standard" : "Custom"}`
+      ) }))
       .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
 
     return context;
