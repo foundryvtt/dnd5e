@@ -11,8 +11,8 @@ import D20RollConfigurationDialog from "./d20-configuration-dialog.mjs";
 export default class AttackRollConfigurationDialog extends D20RollConfigurationDialog {
   /** @override */
   static DEFAULT_OPTIONS = {
-    ammunitionOptions: [],
     abilityOptions: [],
+    ammunitionOptions: [],
     attackModeOptions: [],
     masteryOptions: []
   };
