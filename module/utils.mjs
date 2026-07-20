@@ -792,6 +792,56 @@ export function getSceneTargets(actor, { checkBaseActor }={}) {
 }
 
 /* -------------------------------------------- */
+/*  Measurement                                 */
+/* -------------------------------------------- */
+
+/**
+ * Measure the minimum distance between two token spaces.
+ * @param {TokenDocument5e} source  The source token document.
+ * @param {TokenDocument5e} target  The target token document.
+ * @returns {number}  Distance in scene grid units, or {@link Infinity} if unmeasurable.
+ */
+export function measureTokenDistance(source, target) {
+  const grid = source.parent?.grid;
+  if ( !grid ) return Infinity;
+
+  // Determine the optimal elevation pair by choosing the closest endpoints between the two vertical extents.
+  // If the ranges overlap, the elevation difference is 0.
+  const sourceBottom = source.elevation;
+  const sourceTop    = source.elevation + (source.depth ?? 0) * grid.distance;
+  const targetBottom = target.elevation;
+  const targetTop    = target.elevation + (target.depth ?? 0) * grid.distance;
+
+  let sourceElevation;
+  let targetElevation;
+  if ( sourceBottom <= targetTop && targetBottom <= sourceTop ) {
+    // Elevation ranges overlap - use the same elevation for both points.
+    const sharedElevation = Math.max(sourceBottom, targetBottom);
+    sourceElevation = targetElevation = sharedElevation;
+  } else if ( sourceBottom > targetTop ) {
+    // Source is entirely above the target.
+    sourceElevation = sourceBottom;
+    targetElevation = targetTop;
+  } else {
+    // Target is entirely above the source.
+    sourceElevation = sourceTop;
+    targetElevation = targetBottom;
+  }
+
+  const sourcePoints = source.getContainmentTestPoints().map(point => ({ ...point, elevation: sourceElevation }));
+  const targetPoints = target.getContainmentTestPoints().map(point => ({ ...point, elevation: targetElevation }));
+
+  let minimumDistance = Infinity;
+  for ( const sourcePoint of sourcePoints ) {
+    for ( const targetPoint of targetPoints ) {
+      const distance = grid.measurePath([sourcePoint, targetPoint]).cost;
+      if ( distance < minimumDistance ) minimumDistance = distance;
+    }
+  }
+  return minimumDistance === Infinity ? Infinity : Math.max(0, minimumDistance.toNearest(0.01));
+}
+
+/* -------------------------------------------- */
 /*  Conversions                                 */
 /* -------------------------------------------- */
 
