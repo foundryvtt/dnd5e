@@ -316,9 +316,9 @@ export async function enrichAward(config, label, options) {
     entries.push(`<span class="award-entry">${amount} <i class="currency ${
       key}" data-tooltip aria-label="${label}"></i></span>`);
   }
-  if ( parsed.xp ) {
-    entries.push(`<span class="award-entry">${formatNumber(parsed.xp)} ${_loc("DND5E.ExperiencePoints.Abbreviation")}</span>`);
-  }
+  if ( parsed.xp ) entries.push(
+    `<span class="award-entry">${formatNumber(parsed.xp)} ${_loc("DND5E.ExperiencePoints.Abbreviation")}</span>`
+  );
 
   let award = game.i18n.getListFormatter({ type: "unit" }).format(entries);
   if ( parsed.each ) award = _loc("EDITOR.DND5E.Inline.AwardEach", { award });
