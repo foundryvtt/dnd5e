@@ -1182,7 +1182,7 @@ export default function ActivityMixin(Base) {
       const behaviors = activity?.applicableBehaviors;
       if ( !behaviors?.length ) return;
 
-      const caster = await fromUuid(region.getFlag("dnd5e", "caster"));
+      const caster = fromUuidSync(region.getFlag("dnd5e", "caster"));
       const toCreate = [];
       for ( const behavior of behaviors ) {
         const data = behavior.config.createBehaviorData(activity, { caster });
