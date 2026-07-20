@@ -76,8 +76,6 @@
  * @typedef {D20RollProcessConfiguration} AttackRollProcessConfiguration
  * @property {Item5e|boolean} [ammunition]    Specific ammunition to consume, or `false` to prevent any ammo usage.
  * @property {WeaponAttackMode} [attackMode]  Mode to use for making the attack and rolling damage.
- * @property {string} [ability]               ID of the ability to roll as found in `CONFIG.DND5E.abilities`.
- * @property {FormSelectOption[]} [abilityOptions]  Ability options that can be selected for this attack.
  * @property {string} [mastery]               Weapon mastery option to use.
  */
 
@@ -197,6 +195,7 @@
 
 /**
  * @typedef {BasicRollConfigurationDialogOptions} AttackRollConfigurationDialogOptions
+ * @property {FormSelectOption[]} abilityOptions     Ability options that can be selected for this attack.
  * @property {FormSelectOption[]} ammunitionOptions  Ammunition that can be used with the attack.
  * @property {FormSelectOption[]} attackModeOptions  Different modes of attack.
  * @property {FormSelectOption[]} masteryOptions     Available masteries for the attacking weapon.

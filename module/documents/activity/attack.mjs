@@ -103,12 +103,10 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     }, config);
 
     const ammunitionOptions = this.item.system.ammunitionOptions ?? [];
-    rollConfig.abilityOptions = this._prepareAbilityOptions();
-    if ( rollConfig.abilityOptions.length && !rollConfig.abilityOptions.some(a => a.value === rollConfig.ability) ) {
-      rollConfig.ability = rollConfig.abilityOptions[0]?.value;
+    const abilityOptions = this._prepareAbilityOptions();
+    if ( abilityOptions.length && !abilityOptions.some(a => a.value === rollConfig.ability) ) {
+      rollConfig.ability = abilityOptions[0]?.value;
     }
-    rollConfig.elvenAccuracy = this.actor?.getFlag("dnd5e", "elvenAccuracy")
-      && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(rollConfig.ability);
     if ( ammunitionOptions.length ) ammunitionOptions.unshift({ value: "", label: "" });
     if ( rollConfig.ammunition === undefined ) rollConfig.ammunition = ammunitionOptions?.[1]?.value;
     else if ( !ammunitionOptions?.find(m => m.value === rollConfig.ammunition) ) {
@@ -144,7 +142,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const dialogConfig = foundry.utils.mergeObject({
       applicationClass: AttackRollConfigurationDialog,
       options: {
-        abilityOptions: rollConfig.abilityOptions,
+        abilityOptions,
         ammunitionOptions: rollConfig.ammunition !== false ? ammunitionOptions : [],
         attackModeOptions,
         buildConfig,
@@ -179,7 +177,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const rolls = await CONFIG.Dice.D20Roll.buildConfigure(rollConfig, dialogConfig, messageConfig);
     await CONFIG.Dice.D20Roll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return null;
-    for ( const key of ["ammunition", "attackMode", "mastery"] ) {
+    for ( const key of ["ability", "ammunition", "attackMode", "mastery"] ) {
       if ( !rolls[0].options[key] ) continue;
       foundry.utils.setProperty(messageConfig.data, `flags.dnd5e.roll.${key}`, rolls[0].options[key]);
     }
@@ -267,7 +265,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     process.ability = ability;
-    let { parts, data } = this.getAttackData({ ammunition, ability, attackMode });
+    let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
     const options = foundry.utils.mergeObject({
       maximum: this.actor
         ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
