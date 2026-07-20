@@ -3805,11 +3805,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     });
     if ( !foundry.utils.isEmpty(updates.delete) ) operations.push({
       action: "delete", documentName: "Item", ids: updates.delete, parent: this,
-      ...options, ...updateOptions
+      ...options, ...deleteOptions
     });
     if ( !foundry.utils.isEmpty(updates.item) ) operations.push({
       action: "update", documentName: "Item", updates: updates.item, parent: this,
-      ...options, ...deleteOptions
+      ...options, ...updateOptions
     });
     return foundry.documents.modifyBatch(operations);
   }

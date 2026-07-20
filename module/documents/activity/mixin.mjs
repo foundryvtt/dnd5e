@@ -404,7 +404,7 @@ export default function ActivityMixin(Base) {
       const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 
       // Update documents with consumption
-      this.actor.performBulkUpdate(updates);
+      await this.actor.performBulkUpdate(updates);
 
       return consumed;
     }

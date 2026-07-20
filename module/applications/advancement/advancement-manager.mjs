@@ -910,7 +910,7 @@ export default class AdvancementManager extends Application5e {
     }
 
     // Apply changes from clone to original actor
-    this.actor.performBulkUpdate(
+    await this.actor.performBulkUpdate(
       { actor: updates, create: toCreate, delete: toDelete, item: toUpdate },
       { isAdvancement: true, updateOptions: { diff: false, recursive: false } }
     );
