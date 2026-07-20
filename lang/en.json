@@ -3216,6 +3216,14 @@
   }
 },
 
+"DND5E.FALLING": {
+  "DamageFlavor": "Fell {distance}",
+  "MovementAction": "Fall",
+  "Warning": {
+    "NoLandingSurface": "Cannot plummet {name}, there is no surface below them."
+  }
+},
+
 "DND5E.Favorite": "Favorite",
 "DND5E.FavoriteDrop": "Drop Favorite",
 "DND5E.FavoriteRemove": "Remove Favorite",
@@ -6598,6 +6606,10 @@
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
   "AUTOMATION": {
+    "Falling": {
+      "Name": "Disable Falling Automation",
+      "Hint": "Do not track the falling status of tokens."
+    },
     "Movement": {
       "Name": "Movement Automation",
       "Hint": "Configure the amount of movement automation used by the system: Full automation including token blocking, partial automation of difficult terrain only, or off entirely.",
