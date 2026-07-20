@@ -617,7 +617,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
-    (context.itemCategories.spells ?? []).forEach(spell => {
+    (context.itemCategories.spells ?? []).sort((lhs, rhs) => lhs.system.level - rhs.system.level).forEach(spell => {
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
