@@ -32,8 +32,9 @@ import ConditionData from "../../data/active-effect/condition.mjs";
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
- *   ActorRollData, DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
- *   RestConfiguration, RestResult, RollDataOptions, SpellcastingDescription
+ *   ActorRollData, ActorUpdatesDescription, DamageAffectCategory, DamageApplicationOptions,
+ *   DamageDescription, DamageSummary, RestConfiguration, RestResult, RollDataOptions,
+ *   SpellcastingDescription
  * } from "../_types.mjs";
  */
 
@@ -2416,13 +2417,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.preRestCompleted", this, result, config) === false ) return result;
 
-    // Perform updates
-    await this.update(result.updateData, { isRest: true });
-    await this.deleteEmbeddedDocuments("Item", result.deleteItems, { isRest: true });
-    await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
-
     // Expire active effects
     const expiryEvents = CONFIG.DND5E.restTypes[config.type ?? "long"]?.expiryEvents ?? [];
+    let operations = [];
     if ( expiryEvents.length ) {
       const expired = new Map();
       const expireEffect = effect => {
@@ -2440,10 +2437,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           if ( effect.isAppliedEnchantment ) expireEffect(effect);
         }
       }
-      const operations = expired.entries()
-        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }));
-      await foundry.documents.modifyBatch(operations.toArray());
+      operations = expired.entries()
+        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }))
+        .toArray();
     }
+
+    // Perform updates
+    await this.performBulkUpdate(
+      { actor: result.updateData, delete: result.deleteItems, item: result.updateItems, operations }, { isRest: true }
+    );
 
     // Advance the game clock
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
@@ -3770,6 +3772,46 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static getDefaultArtwork(actorData={}) {
     const img = CONFIG.DND5E.defaultArtwork.Actor[actorData.type];
     return img ? { img, texture: { src: img } } : super.getDefaultArtwork(actorData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Perform bulk updates on the actor and its embedded documents.
+   * @param {ActorUpdatesDescription} updates
+   * @param {DatabaseUpdateOperation[]} [updates.operations=[]]    Additional database operations to perform.
+   * @param {object} [options]                                     Options passed to all database operations.
+   * @param {Partial<DatabaseCreateOperation>} [options.createOptions={}]  Options passed to item creation operation. By
+   *                                                                       default the `keepId` option is set to `true`.
+   * @param {Partial<DatabaseDeleteOperation>} [options.deleteOptions={}]  Options passed to item deletion operation.
+   * @param {Partial<DatabaseUpdateOperation>} [options.updateOptions={}]  Options passed to item update operation.
+   * @returns {Promise<Document[][]>}
+   */
+  performBulkUpdate(
+    { operations=[], ...updates }, { createOptions={}, deleteOptions={}, updateOptions={}, ...options }={}
+  ) {
+    if ( !foundry.utils.isEmpty(updates.actor) ) operations.push(this.parent
+      ? {
+        action: "update", documentName: "ActorDelta", parent: this.parent,
+        updates: [{ _id: this.parent.delta.id, ...updates.actor }], ...options
+      }
+      : { action: "update", documentName: "Actor", updates: [{ _id: this.id, ...updates.actor }], ...options }
+    );
+    if ( !foundry.utils.isEmpty(updates.create) ) operations.push({
+      action: "create", documentName: "Item", data: updates.create, parent: this, keepId: true,
+      ...options, ...createOptions
+    });
+    if ( !foundry.utils.isEmpty(updates.delete) ) operations.push({
+      action: "delete", documentName: "Item", ids: updates.delete, parent: this,
+      ...options, ...deleteOptions
+    });
+    if ( !foundry.utils.isEmpty(updates.item) ) operations.push({
+      action: "update", documentName: "Item", updates: updates.item, parent: this,
+      ...options, ...updateOptions
+    });
+    return foundry.documents.modifyBatch(operations);
   }
 }
 

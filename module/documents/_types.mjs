@@ -1,8 +1,17 @@
 /**
  * @import { SpellScrollValues } from "../_types.mjs";
- * @import { ActorUpdatesDescription } from "../data/chat-message/fields/_types.mjs";
  * @import { WeaponAttackMode } from "../dice/_types.mjs";
  */
+
+/**
+ * @typedef ActorUpdatesDescription
+ * @property {object} actor       Updates applied to the actor.
+ * @property {object[]} [create]  Full data for Items to create (with IDs maintained).
+ * @property {string[]} [delete]  IDs of items to be deleted from the actor.
+ * @property {object[]} item      Updates applied to items on the actor.
+ */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef BastionTurnResult

@@ -619,6 +619,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @param {object} options  Options passed to the effect creation.
    */
   async createRiderEnchantments(options={}) {
+    const batchedUpdates = [];
     let item;
     let profile;
     const { chatMessageOrigin } = options;
@@ -655,11 +656,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       riderActivities[activityData._id] = activityData;
     }
     if ( !foundry.utils.isEmpty(riderActivities) ) {
-      await this.item.update({ "system.activities": riderActivities });
-      const createdActivities = Object.keys(riderActivities).map(id => this.item.system.activities?.get(id));
-      createdActivities.forEach(a => a.effects?.forEach(e => {
-        if ( !this.item.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
-      }));
+      batchedUpdates.push({
+        action: "update", documentName: "Item", parent: this.item.actor,
+        updates: [{ _id: this.item.id, "system.activities": riderActivities }]
+      });
+      riderEffects = Object.values(riderActivities).flatMap(a =>
+        a.effects?.map(e => item.effects.get(e._id)?.toObject())
+      ).filter(e => e && !this.item.effects.has(e._id));
     }
 
     // Create Effects
@@ -674,7 +677,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }));
     riderEffects = riderEffects.filter(_ => _);
     riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
-    await this.item.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
+    batchedUpdates.push({
+      action: "create", documentName: "ActiveEffect", data: riderEffects, parent: this.item, keepId: true
+    });
 
     // Create Items
     if ( this.item.isEmbedded ) {
@@ -688,8 +693,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           }
         }
       );
-      await this.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
+      batchedUpdates.push({
+        action: "create", documentName: "Item", data: riderItems, parent: this.actor, keepId: true
+      });
     }
+
+    await foundry.documents.modifyBatch(batchedUpdates);
   }
 
   /* -------------------------------------------- */
