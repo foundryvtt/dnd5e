@@ -2417,13 +2417,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.preRestCompleted", this, result, config) === false ) return result;
 
-    // Perform updates
-    await this.performBulkUpdate(
-      { actor: result.updateData, delete: result.deleteItems, item: result.updateItems }, { isRest: true }
-    );
-
     // Expire active effects
     const expiryEvents = CONFIG.DND5E.restTypes[config.type ?? "long"]?.expiryEvents ?? [];
+    let operations = [];
     if ( expiryEvents.length ) {
       const expired = new Map();
       const expireEffect = effect => {
@@ -2441,10 +2437,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           if ( effect.isAppliedEnchantment ) expireEffect(effect);
         }
       }
-      const operations = expired.entries()
-        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }));
-      await foundry.documents.modifyBatch(operations.toArray());
+      operations = expired.entries()
+        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }))
+        .toArray();
     }
+
+    // Perform updates
+    await this.performBulkUpdate(
+      { actor: result.updateData, delete: result.deleteItems, item: result.updateItems, operations }, { isRest: true }
+    );
 
     // Advance the game clock
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
@@ -3780,15 +3781,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Perform bulk updates on the actor and its embedded documents.
    * @param {ActorUpdatesDescription} updates
+   * @param {DatabaseUpdateOperation[]} [updates.operations=[]]    Additional database operations to perform.
    * @param {object} [options]                                     Options passed to all database operations.
-   * @param {Partial<DatabaseCreateOperation>} [createOptions={}]  Options passed to item creation operation.
-   *                                                               By default the `keepId` option is set to `true`.
-   * @param {Partial<DatabaseDeleteOperation>} [deleteOptions={}]  Options passed to item deletion operation.
-   * @param {Partial<DatabaseUpdateOperation>} [updateOptions={}]  Options passed to item update operation.
+   * @param {Partial<DatabaseCreateOperation>} [options.createOptions={}]  Options passed to item creation operation. By
+   *                                                                       default the `keepId` option is set to `true`.
+   * @param {Partial<DatabaseDeleteOperation>} [options.deleteOptions={}]  Options passed to item deletion operation.
+   * @param {Partial<DatabaseUpdateOperation>} [options.updateOptions={}]  Options passed to item update operation.
    * @returns {Promise<Document[][]>}
    */
-  performBulkUpdate(updates, { createOptions={}, deleteOptions={}, updateOptions={}, ...options }={}) {
-    const operations = [];
+  performBulkUpdate(
+    { operations=[], ...updates }, { createOptions={}, deleteOptions={}, updateOptions={}, ...options }={}
+  ) {
     if ( !foundry.utils.isEmpty(updates.actor) ) operations.push(this.parent
       ? {
         action: "update", documentName: "ActorDelta", parent: this.parent,
