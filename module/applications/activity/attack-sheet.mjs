@@ -69,7 +69,7 @@ export default class AttackSheet extends ActivitySheet {
 
   /* -------------------------------------------- */
 
-/** @inheritDoc */
+  /** @inheritDoc */
   async _prepareIdentityContext(context, options) {
     context = await super._prepareIdentityContext(context, options);
 

@@ -163,7 +163,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     return this.item.system.validAttackTypes ?? new Set();
   }
 
-/* -------------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @override */
   static transformTypeData(source, activityData, options) {
@@ -206,6 +206,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareData() {
+    this.#abilities = undefined;
     super.prepareData();
     this.attack.type.value ||= this.item.system.attackType ?? "melee";
     this.attack.type.classification ||= this.item.system.attackClassification ?? "weapon";
