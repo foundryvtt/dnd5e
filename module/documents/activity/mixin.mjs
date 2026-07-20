@@ -404,12 +404,7 @@ export default function ActivityMixin(Base) {
       const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 
       // Update documents with consumption
-      if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
-      if ( !foundry.utils.isEmpty(updates.create) ) {
-        await this.actor.createEmbeddedDocuments("Item", updates.create, { keepId: true });
-      }
-      if ( !foundry.utils.isEmpty(updates.delete) ) await this.actor.deleteEmbeddedDocuments("Item", updates.delete);
-      if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+      await this.actor.performBulkUpdate(updates);
 
       return consumed;
     }
