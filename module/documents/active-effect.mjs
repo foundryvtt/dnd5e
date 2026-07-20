@@ -10,6 +10,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import Actor5e from "./actor/actor.mjs";
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
  */
 
@@ -588,10 +589,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Create conditions that are applied separately from an effect.
-   * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
+   * Gather batch entries for conditions that are applied separately from an effect.
+   * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
    */
-  async createRiderConditions() {
+  async collectRiderConditions() {
     const riders = new Set(this.system.rider?.statuses ?? []);
 
     for ( const status of this.statuses ) {
@@ -608,17 +609,19 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return effect.toObject();
     };
 
-    const effectData = await Promise.all(Array.from(riders).map(createRider));
-    return ActiveEffect5e.createDocuments(effectData.filter(_ => _), { keepId: true, parent: this.parent });
+    const data = (await Promise.all(Array.from(riders).map(createRider))).filter(_ => _);
+    if ( !data.length ) return [];
+    return [{ action: "create", documentName: "ActiveEffect", data, parent: this.parent, keepId: true }];
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Create additional activities, effects, and items that are applied separately from an enchantment.
-   * @param {object} options  Options passed to the effect creation.
+   * Gather batch entries for additional activities, effects, and items applied separately from an enchantment.
+   * @param {object} options                       Options passed to the effect creation.
+   * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
    */
-  async createRiderEnchantments(options={}) {
+  async collectRiderEnchantments(options={}) {
     const batchedUpdates = [];
     let item;
     let profile;
@@ -643,7 +646,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       profile = activity?.effects.find(e => e._id === enchantmentProfile);
     }
 
-    if ( !profile || !item ) return;
+    if ( !profile || !item ) return [];
 
     // Create Activities
     const riderActivities = {};
@@ -698,7 +701,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       });
     }
 
-    await foundry.documents.modifyBatch(batchedUpdates);
+    return batchedUpdates;
   }
 
   /* -------------------------------------------- */
@@ -734,27 +737,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _onCreate(data, options, userId) {
-    super._onCreate(data, options, userId);
-    if ( userId === game.userId ) {
-      if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
-      if ( this.isAppliedEnchantment ) await this.createRiderEnchantments(options);
-      await this.#updateFalling();
-    }
-  }
-
-  /* -------------------------------------------- */
-
   /**
-   * Re-evaluate whether the actor should be falling after this effect was applied or removed. A creature that becomes
-   * prone or incapacitated while airborne starts falling unless it can hover.
+   * Re-evaluate whether an actor should have the falling status. A creature that becomes prone or incapacitated while
+   * airborne starts falling unless it can hover.
+   * @param {Actor5e} actor  The actor to re-evaluate.
    * @returns {Promise<void>}
    */
-  async #updateFalling() {
-    if ( dnd5e.settings.disableFalling || this.statuses.has("falling") ) return;
-    const actor = this.parent;
-    if ( !(actor instanceof Actor) ) return;
+  static async #updateFalling(actor) {
+    if ( dnd5e.settings.disableFalling || !(actor instanceof Actor) ) return;
     const falling = actor.statuses.has("falling");
     if ( !falling && !actor.statuses.has("prone") && !actor.statuses.has("incapacitated") ) return;
     const shouldFall = actor.getActiveTokens(false, true).some(token => token._isFalling());
@@ -768,16 +758,22 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static async _onCreateOperation(documents, operation, user) {
     await super._onCreateOperation(documents, operation, user);
     if ( user.id !== game.userId ) return;
-    // Prompt to end concentration at most once per actor, even when several incapacitating effects are created in the
-    // same operation.
+    const batch = [];
+    const actors = new Set();
     const prompted = new Set();
     for ( const effect of documents ) {
-      if ( !effect._shouldPromptConcentrationEnd() ) continue;
-      const actor = effect.parent;
-      if ( prompted.has(actor) ) continue;
-      prompted.add(actor);
-      await actor.promptConcentrationEnd();
+      if ( effect._shouldPromptConcentrationEnd() && !prompted.has(effect.parent) ) {
+        prompted.add(effect.parent);
+        await effect.parent.promptConcentrationEnd();
+      }
+      if ( effect.active && (effect.parent instanceof Actor) ) {
+        batch.push(...await effect.collectRiderConditions());
+        actors.add(effect.parent);
+      }
+      if ( effect.isAppliedEnchantment ) batch.push(...await effect.collectRiderEnchantments(operation));
     }
+    if ( batch.length ) await foundry.documents.modifyBatch(batch);
+    for ( const actor of actors ) await ActiveEffect5e.#updateFalling(actor);
   }
 
   /* -------------------------------------------- */
@@ -831,10 +827,29 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onDelete(options, userId) {
-    super._onDelete(options, userId);
-    if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
-    if ( userId === game.userId ) this.#updateFalling();
+  static async _onDeleteOperation(documents, operation, user) {
+    await super._onDeleteOperation(documents, operation, user);
+    if ( game.user === game.users.activeGM ) {
+      const dependents = new Map();
+      for ( const effect of documents ) {
+        for ( const dependent of effect.getDependents() ) {
+          dependents.getOrInsert(dependent.parent, new Set()).add(dependent.id);
+        }
+      }
+      const batch = dependents.entries()
+        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids: [...ids], parent }))
+        .toArray();
+      if ( batch.length ) await foundry.documents.modifyBatch(batch);
+    }
+
+    if ( user.id !== game.userId ) return;
+
+    // Re-evaluate falling once per affected actor, since removing prone or incapacitating effects can end a fall.
+    const actors = new Set();
+    for ( const effect of documents ) {
+      if ( !effect.statuses.has("falling") && (effect.parent instanceof Actor) ) actors.add(effect.parent);
+    }
+    for ( const actor of actors ) await ActiveEffect5e.#updateFalling(actor);
   }
 
   /* -------------------------------------------- */
@@ -1261,5 +1276,44 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }, dialogOptions);
     if ( sheet ) return sheet._confirmDialog(config);
     return foundry.applications.api.DialogV2.confirm(config);
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Create conditions that are applied separately from an effect.
+   * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
+   * @deprecated since DnD5e 6.0
+   */
+  async createRiderConditions() {
+    foundry.utils.logCompatibilityWarning(
+      "The `createRiderConditions` method has been deprecated in favor of `collectRiderConditions`, which returns "
+      + "batch entries rather than creating documents.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+    );
+    const created = [];
+    for ( const { data, keepId, parent } of await this.collectRiderConditions() ) {
+      created.push(...await ActiveEffect5e.createDocuments(data, { keepId, parent }));
+    }
+    return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create additional activities, effects, and items that are applied separately from an enchantment.
+   * @param {object} options  Options passed to the effect creation.
+   * @deprecated since DnD5e 6.0
+   */
+  async createRiderEnchantments(options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `createRiderEnchantments` method has been deprecated in favor of `collectRiderEnchantments`, which returns "
+      + "batch entries rather than applying them.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+    );
+    const batch = await this.collectRiderEnchantments(options);
+    if ( batch.length ) await foundry.documents.modifyBatch(batch);
   }
 }

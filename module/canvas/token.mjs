@@ -162,10 +162,13 @@ export default class Token5e extends foundry.canvas.placeables.Token {
     if ( icon && src && (src === CONFIG.statusEffects.falling?.img) ) {
       icon.eventMode = "static";
       icon.cursor = "pointer";
+      const baseTint = icon.tint;
       icon.on("pointerdown", event => {
         event.stopPropagation();
         this.document.plummet();
       });
+      icon.on("pointerover", () => icon.tint = 0xFF9500);
+      icon.on("pointerout", () => icon.tint = baseTint);
     }
     return icon;
   }
