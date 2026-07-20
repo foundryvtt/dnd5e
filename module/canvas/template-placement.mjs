@@ -150,7 +150,7 @@ export default class TemplatePlacement extends BasePlacement {
       highlightMode: "coverage",
       flags: {
         dnd5e: {
-          caster: activity.getUsageToken()?.uuid,
+          activity: activity.uuid,
           dimensions: {
             size: templateData.size,
             width: templateData.width,
@@ -158,7 +158,7 @@ export default class TemplatePlacement extends BasePlacement {
             units: canvas.scene.grid.units
           },
           item: activity.item.uuid,
-          origin: activity.uuid,
+          origin: activity.getUsageToken()?.uuid,
           spellLevel: rollData.item.level
         }
       }
