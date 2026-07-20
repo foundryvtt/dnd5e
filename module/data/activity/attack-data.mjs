@@ -5,7 +5,7 @@ import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { AttackDamageRollProcessConfiguration } from "../../dice/_types.mjs";
@@ -18,13 +18,14 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * @mixes AttackActivityData
  */
 export default class BaseAttackActivityData extends BaseActivityData {
-  #abilities;
+
   /** @inheritDoc */
   static defineSchema() {
     return {
       ...super.defineSchema(),
       attack: new SchemaField({
         ability: new StringField(),
+        abilities: new SetField(new StringField(), { persisted: false }),
         bonus: new FormulaField(),
         critical: new SchemaField({
           threshold: new NumberField({ integer: true, positive: true })
@@ -52,34 +53,15 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /** @override */
   get ability() {
     const configuredAbilities = this.abilities;
-    if ( (configuredAbilities.size === 1) && configuredAbilities.has("none") ) return null;
-    if ( configuredAbilities.size === 1 ) return configuredAbilities.first();
+    if ( this.attack.ability === "none" ) return null;
 
-    const availableAbilities = configuredAbilities.size ? configuredAbilities : new Set(this.availableAbilities);
-    availableAbilities.delete("none");
+    const availableAbilities = this.attack.abilities.size ? this.attack.abilities : new Set(this.availableAbilities);
     if ( !availableAbilities?.size ) return null;
     if ( availableAbilities?.size === 1 ) return availableAbilities.first();
     const abilities = this.actor?.system.abilities ?? {};
     return availableAbilities.reduce((largest, ability) =>
       (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
     , availableAbilities.first());
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Configured abilities that can be used with this attack.
-   * @type {Set<string>}
-   */
-  get abilities() {
-    if ( this.#abilities ) return this.#abilities;
-    const abilities = this.#abilities = new Set([this.attack.ability]);
-    abilities.delete("");
-    if ( abilities.delete("default") ) {
-      for ( const ability of this.availableAbilities ) abilities.add(ability);
-    }
-    if ( abilities.delete("spellcasting") && this.spellcastingAbility ) abilities.add(this.spellcastingAbility);
-    return abilities;
   }
 
   /* -------------------------------------------- */
@@ -164,6 +146,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
 
   /** @override */
   static transformTypeData(source, activityData, options) {
@@ -206,10 +190,17 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareData() {
-    this.#abilities = undefined;
     super.prepareData();
     this.attack.type.value ||= this.item.system.attackType ?? "melee";
     this.attack.type.classification ||= this.item.system.attackClassification ?? "weapon";
+
+    if ( this.attack.ability === "spellcasting" ) {
+      this.attack.abilities.add(this.spellcastingAbility);
+    } else if ( this.attack.ability in CONFIG.DND5E.abilities ) {
+      this.attack.abilities.add(this.attack.ability);
+    } else if ( !this.attack.ability ) {
+      for ( const ability of this.availableAbilities ) this.attack.abilities.add(ability);
+    }
   }
 
   /* -------------------------------------------- */
@@ -302,14 +293,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
-  /**
-   * Get the roll parts used to create the damage rolls.
-   * @param {Partial<AttackDamageRollProcessConfiguration>} [config={}]
-   * @returns {AttackDamageRollProcessConfiguration}
-   */
+  /** @inheritDoc */
   getDamageConfig(config={}, options={}) {
-    const rollConfig = super.getDamageConfig(config, options);
-
     // Copy properties from selected ammunition
     const ammo = config.ammunition?.system;
     if ( ammo ) {
@@ -320,6 +305,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
         if ( !config.properties.includes(property) ) config.properties.push(property);
       }
     }
+
+    const rollConfig = super.getDamageConfig(config, options);
 
     if ( this.damage.critical.bonus && rollConfig.rolls[0] && !rollConfig.rolls[0].options?.critical?.bonusDamage ) {
       foundry.utils.setProperty(rollConfig.rolls[0], "options.critical.bonusDamage", this.damage.critical.bonus);

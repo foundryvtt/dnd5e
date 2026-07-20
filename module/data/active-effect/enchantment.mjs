@@ -87,36 +87,8 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     switch ( change.key ) {
       case "system.ability":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          const useDefault = (change.type === "add") && !activity.attack.ability.size;
-          let abilities;
-          if ( useDefault ) {
-            const added = [];
-            const removed = [];
-            for ( const value of [change.value].flat().filter(a => a) ) {
-              const neg = value.replace(/^\s*-\s*/, "");
-              if ( neg === value ) added.push(value);
-              else removed.push(neg);
-            }
-            abilities = removed.length ? Array.from(activity.availableAbilities) : ["default"];
-            abilities.push(...added);
-            abilities = abilities.filter(a => !removed.includes(a));
-            for ( const ability of abilities ) activity.attack.ability.add(ability);
-          }
-          else if ( change.type === "subtract" ) {
-            const values = new Set(activity.attack.ability.size ? activity.attack.ability : activity.availableAbilities);
-            if ( values.delete("default") ) {
-              for ( const ability of activity.availableAbilities ) values.add(ability);
-            }
-            for ( const ability of [change.value].flat().filter(a => a) ) values.delete(ability);
-            activity.attack.ability.clear();
-            for ( const ability of values ) activity.attack.ability.add(ability);
-            abilities = Array.from(values);
-          }
-          else {
-            const ability = applyField(activity, { ...change, key: "attack.ability" });
-            abilities = foundry.utils.getType(ability) === "string" ? ability ? [ability] : [] : ability;
-          }
-          changes[`system.activities.${activity.id}.attack.ability`] = abilities;
+          const field = change.type === "override" ? "attack.ability" : "attack.abilities";
+          changes[`system.activities.${activity.id}.${field}`] = applyField(activity, { ...change, key: field });
         }
         return false;
       case "system.attack.bonus":

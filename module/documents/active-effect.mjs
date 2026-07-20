@@ -331,16 +331,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   applyActivity(item, change, options) {
     const changes = {};
     const apply = (activity, key) => {
-      if ( (key === "attack.ability") && (activity.type === "attack") ) {
-        const abilities = activity.abilities;
-        if ( change.type === "override" ) abilities.clear();
-        for ( const value of [change.value].flat().filter(a => a) ) {
-          const ability = value.replace(/^\s*-\s*/, "");
-          if ( (change.type === "subtract") || (ability !== value) ) abilities.delete(ability);
-          else abilities.add(ability);
-        }
-        return;
-      }
       const c = this.constructor.applyChange(activity, { ...change, key }, options);
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
     };

@@ -45,7 +45,7 @@ export default class AttackSheet extends ActivitySheet {
     const availableAbilities = this.activity.availableAbilities;
     context.abilityOptions = [
       {
-        value: "default", label: _loc("DND5E.DefaultSpecific", {
+        value: "", label: _loc("DND5E.DefaultSpecific", {
           default: this.activity.attack.type.classification === "spell"
             ? _loc("DND5E.Spellcasting").toLowerCase()
             : availableAbilities.size
@@ -53,7 +53,7 @@ export default class AttackSheet extends ActivitySheet {
                 Array.from(availableAbilities).map(a => CONFIG.DND5E.abilities[a].label.toLowerCase())
               )
               : _loc("DND5E.None").toLowerCase()
-        })
+        }), rule: true
       },
       { value: "none", label: _loc("DND5E.None") },
       { value: "spellcasting", label: _loc("DND5E.Spellcasting") },

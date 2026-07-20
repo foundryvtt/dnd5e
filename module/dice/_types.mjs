@@ -74,6 +74,7 @@
 
 /**
  * @typedef {D20RollProcessConfiguration} AttackRollProcessConfiguration
+ * @property {string} [ability]               Ability to use with the attack.
  * @property {Item5e|boolean} [ammunition]    Specific ammunition to consume, or `false` to prevent any ammo usage.
  * @property {WeaponAttackMode} [attackMode]  Mode to use for making the attack and rolling damage.
  * @property {string} [mastery]               Weapon mastery option to use.

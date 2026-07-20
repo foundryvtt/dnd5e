@@ -94,19 +94,19 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const buildConfig = this._buildAttackConfig.bind(this);
 
     const rollConfig = foundry.utils.mergeObject({
+      ability: this.item.getFlag("dnd5e", `last.${this.id}.ability`),
       ammunition: this.item.getFlag("dnd5e", `last.${this.id}.ammunition`),
-      ability: this.ability,
       attackMode: this.item.getFlag("dnd5e", `last.${this.id}.attackMode`),
       halflingLucky: this.actor?.getFlag("dnd5e", "halflingLucky"),
       mastery: this.item.getFlag("dnd5e", `last.${this.id}.mastery`),
       target: targets.length === 1 ? targets[0].ac : undefined
     }, config);
 
-    const ammunitionOptions = this.item.system.ammunitionOptions ?? [];
-    const abilityOptions = this._prepareAbilityOptions();
-    if ( abilityOptions.length && !abilityOptions.some(a => a.value === rollConfig.ability) ) {
+    const abilityOptions = this._getAbilityOptions();
+    if ( abilityOptions.length && !abilityOptions.find(a => a.value === rollConfig.ability) ) {
       rollConfig.ability = abilityOptions[0]?.value;
     }
+    const ammunitionOptions = this.item.system.ammunitionOptions ?? [];
     if ( ammunitionOptions.length ) ammunitionOptions.unshift({ value: "", label: "" });
     if ( rollConfig.ammunition === undefined ) rollConfig.ammunition = ammunitionOptions?.[1]?.value;
     else if ( !ammunitionOptions?.find(m => m.value === rollConfig.ammunition) ) {
@@ -181,13 +181,13 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       if ( !rolls[0].options[key] ) continue;
       foundry.utils.setProperty(messageConfig.data, `flags.dnd5e.roll.${key}`, rolls[0].options[key]);
     }
-    if ( rolls[0].options.ability ) foundry.utils.setProperty(messageConfig.data, "flags.dnd5e.roll.ability", rolls[0].options.ability);
     await CONFIG.Dice.D20Roll.buildPost(rolls, rollConfig, messageConfig);
 
     const flags = {};
     let ammoUpdate = null;
 
     const canUpdate = this.item.isOwner && !this.item.inCompendium;
+    if ( rolls[0].options.ability ) flags.ability = rolls[0].options.ability;
     if ( rolls[0].options.ammunition ) {
       const ammo = this.actor?.items.get(rolls[0].options.ammunition);
       if ( ammo ) {
@@ -259,14 +259,15 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
    * @param {number} index                                 Index of the roll within all rolls being prepared.
    */
   _buildAttackConfig(process, config, formData, index) {
-    const ammunition = formData?.get("ammunition") ?? process.ammunition;
     const ability = formData?.get("ability") ?? process.ability;
+    const ammunition = formData?.get("ammunition") ?? process.ammunition;
     const attackMode = formData?.get("attackMode") ?? process.attackMode;
     const mastery = formData?.get("mastery") ?? process.mastery;
 
-    process.ability = ability;
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
     const options = foundry.utils.mergeObject({
+      elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy") &&
+        CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
       maximum: this.actor
         ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
         : undefined,
@@ -274,12 +275,10 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
         ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).resolve(data).toLargest()
         : undefined,
     }, config.options ?? {});
-    if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( ability !== undefined ) options.ability = ability;
+    if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
     if ( mastery !== undefined ) options.mastery = mastery;
-    if ( ability !== undefined ) options.elvenAccuracy = this.actor?.getFlag("dnd5e", "elvenAccuracy")
-      && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability);
 
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
@@ -341,9 +340,8 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
    * @returns {FormSelectOption[]}
    * @protected
    */
-  _prepareAbilityOptions() {
-    const abilities = this.abilities.size ? new Set(this.abilities) : new Set(this.availableAbilities);
-    const hasNone = abilities.delete("none");
+  _getAbilityOptions() {
+    const abilities = this.attack.abilities.size ? new Set(this.attack.abilities) : new Set(this.availableAbilities);
     const actorAbilities = this.actor?.system.abilities ?? {};
     const options = Array.from(abilities)
       .filter(ability => ability in CONFIG.DND5E.abilities)
@@ -353,9 +351,11 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
         return largestMod - abilityMod;
       })
       .map(value => ({ value, label: CONFIG.DND5E.abilities[value].label }));
-    if ( hasNone ) options.push({ value: "none", label: _loc("DND5E.None") });
+    if ( this.attack.ability === "none" ) options.push({ value: "none", label: _loc("DND5E.None") });
     return options;
   }
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   async getFavoriteData() {
