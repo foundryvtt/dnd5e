@@ -776,7 +776,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.deepClone(config);
-    rollData ??= this.getRollData({ roll: { attackMode: config.attackMode } });
+    rollData ??= this.getRollData({ ability: config.ability, roll: { attackMode: config.attackMode } });
     rollData.roll ??= {};
     Object.assign(rollData.roll, {
       isCritical: rollConfig.isCritical,
@@ -818,7 +818,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const rollData = this.item.getRollData(options);
     rollData.activity = { ...this };
     rollData.consumed = this.item.flags.dnd5e?.consumed;
-    rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
+    rollData.mod = this.actor?.system.abilities?.[options.ability ?? this.ability]?.mod ?? 0;
     return rollData;
   }
 

@@ -147,6 +147,7 @@
 
 /**
  * @typedef {RollDataOptions} ActivityRollDataOptions
+ * @property {string} [ability]  Ability used to calculate the roll modifier.
  */
 
 /**

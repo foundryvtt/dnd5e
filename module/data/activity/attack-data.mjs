@@ -276,10 +276,9 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData({ ammunition, ability, attackMode, situational }={}) {
-    const rollData = this.getRollData({ roll: { attackMode } });
+    const rollData = this.getRollData({ ability, roll: { attackMode } });
     if ( ability && (ability in CONFIG.DND5E.abilities) ) {
       rollData.roll.ability = ability;
-      rollData.mod = this.actor?.system.abilities?.[ability]?.mod ?? 0;
     }
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
@@ -310,15 +309,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {AttackDamageRollProcessConfiguration}
    */
   getDamageConfig(config={}, options={}) {
-    const ability = config.ability;
-    let { rollData } = options;
-    rollData ??= ability !== undefined ? this.getRollData({ roll: { attackMode: config.attackMode } }) : null;
-    if ( rollData ) {
-      rollData.roll ??= {};
-      rollData.roll.ability = ability;
-      rollData.mod = ability in CONFIG.DND5E.abilities ? this.actor?.system.abilities?.[ability]?.mod ?? 0 : null;
-    }
-    const rollConfig = super.getDamageConfig(config, { ...options, rollData });
+    const rollConfig = super.getDamageConfig(config, options);
 
     // Copy properties from selected ammunition
     const ammo = config.ammunition?.system;
