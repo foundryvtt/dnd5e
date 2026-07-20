@@ -278,9 +278,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    */
   getAttackData({ ammunition, ability, attackMode, situational }={}) {
     const rollData = this.getRollData({ ability, roll: { attackMode } });
-    if ( ability && (ability in CONFIG.DND5E.abilities) ) {
-      rollData.roll.ability = ability;
-    }
+    if ( ability && (ability in CONFIG.DND5E.abilities) ) rollData.roll.ability = ability;
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
