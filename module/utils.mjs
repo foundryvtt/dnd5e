@@ -758,11 +758,12 @@ export function loadingTooltip({ uuid, passive=false }={}) {
 
 /**
  * Grab the targeted tokens and return relevant information on them.
+ * @param {Iterable<Token5e|TokenDocument5e>} [tokens]  Tokens to describe. Defaults to the user's current targets.
  * @returns {TargetDescriptor5e[]}
  */
-export function getTargetDescriptors() {
+export function getTargetDescriptors(tokens=game.user.targets) {
   const targets = new Map();
-  for ( const token of game.user.targets ) {
+  for ( const token of tokens ) {
     const { name } = token;
     const { img, system, uuid, statuses } = token.actor ?? {};
     if ( uuid ) {

@@ -769,7 +769,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       isBar: true
     }, updates) === false ) return this;
 
-    await this.update(updates);
+    const context = options.origin?.getFlag?.("dnd5e", "context");
+    await this.update(updates, context ? { dnd5e: context } : {});
 
     /**
      * A hook event that fires after damage has been applied to an actor.

@@ -1,6 +1,6 @@
-import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import AppliedRules from "../../../documents/applied-rules.mjs";
+import { applyFallProne } from "../../../rules/falling.mjs";
 import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import ConditionData from "../../active-effect/condition.mjs";
@@ -671,6 +671,7 @@ export default class AttributesFields {
     if ( userId === game.userId ) {
       await this.parent.updateBloodied(options);
       await this.parent.updateDowned(options);
+      await applyFallProne(this.parent, options);
     }
 
     const hp = options.dnd5e?.hp;
