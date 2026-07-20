@@ -17,6 +17,7 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
     const schema = super.defineSchema();
     schema.changes.element.extendFields({
       _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
+      conditions: new FiltersField(),
       replacement: new StringField({
         required: true,
         blank: true,
@@ -24,8 +25,7 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
           origin: "DND5E.EFFECT.Replacement.Origin",
           target: "DND5E.EFFECT.Replacement.Target"
         }
-      }),
-      conditions: new FiltersField()
+      })
     });
     return schema;
   }
