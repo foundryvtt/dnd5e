@@ -69,17 +69,7 @@ export default class AttackSheet extends ActivitySheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _prepareSubmitData(event, formData) {
-    const submitData = super._prepareSubmitData(event, formData);
-    const ability = submitData.attack?.ability;
-    if ( ability ) submitData.attack.ability = Array.from(new Set([ability].flat().filter(a => a)));
-    return submitData;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
+/** @inheritDoc */
   async _prepareIdentityContext(context, options) {
     context = await super._prepareIdentityContext(context, options);
 

@@ -5,7 +5,7 @@ import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { AttackDamageRollProcessConfiguration } from "../../dice/_types.mjs";
@@ -18,12 +18,13 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @mixes AttackActivityData
  */
 export default class BaseAttackActivityData extends BaseActivityData {
+  #abilities;
   /** @inheritDoc */
   static defineSchema() {
     return {
       ...super.defineSchema(),
       attack: new SchemaField({
-        ability: new SetField(new StringField()),
+        ability: new StringField(),
         bonus: new FormulaField(),
         critical: new SchemaField({
           threshold: new NumberField({ integer: true, positive: true })
@@ -71,10 +72,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @type {Set<string>}
    */
   get abilities() {
-    const values = foundry.utils.getType(this.attack.ability) === "string"
-      ? [this.attack.ability]
-      : this.attack.ability;
-    const abilities = new Set(values);
+    if ( this.#abilities ) return this.#abilities;
+    const abilities = this.#abilities = new Set([this.attack.ability]);
     abilities.delete("");
     if ( abilities.delete("default") ) {
       for ( const ability of this.availableAbilities ) abilities.add(ability);
@@ -164,21 +163,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     return this.item.system.validAttackTypes ?? new Set();
   }
 
-  /* -------------------------------------------- */
-  /*  Data Migration                              */
-  /* -------------------------------------------- */
-
-  /** @override */
-  static migrateData(source) {
-    super.migrateData(source);
-    if ( foundry.utils.getType(source.attack?.ability) === "string" ) {
-      if ( source.attack.ability ) source.attack.ability = [source.attack.ability];
-      else source.attack.ability = [];
-    }
-    return source;
-  }
-
-  /* -------------------------------------------- */
+/* -------------------------------------------- */
 
   /** @override */
   static transformTypeData(source, activityData, options) {
@@ -194,7 +179,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
     return foundry.utils.mergeObject(activityData, {
       attack: {
-        ability: source.system.ability ? [source.system.ability] : [],
+        ability: source.system.ability ?? "",
         bonus: source.system.attack?.bonus ?? "",
         critical: {
           threshold: source.system.critical?.threshold

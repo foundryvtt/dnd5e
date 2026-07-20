@@ -51,7 +51,7 @@
 /**
  * @typedef {ActivityData} AttackActivityData
  * @property {object} attack
- * @property {Set<string>} attack.ability         Abilities used to make the attack and determine damage.
+ * @property {string} attack.ability              Ability used to make the attack and determine damage.
  * @property {string} attack.bonus                Arbitrary bonus added to the attack.
  * @property {object} attack.critical
  * @property {number} attack.critical.threshold   Minimum value on the D20 needed to roll a critical hit.

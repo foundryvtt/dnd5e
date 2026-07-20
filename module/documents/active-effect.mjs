@@ -332,33 +332,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const changes = {};
     const apply = (activity, key) => {
       if ( (key === "attack.ability") && (activity.type === "attack") ) {
-        let abilities;
-        if ( (change.type === "add") && !activity.attack.ability.size ) {
-          const added = [];
-          const removed = [];
-          for ( const value of [change.value].flat().filter(a => a) ) {
-            const neg = value.replace(/^\s*-\s*/, "");
-            if ( neg === value ) added.push(value);
-            else removed.push(neg);
-          }
-          abilities = removed.length ? Array.from(activity.availableAbilities) : ["default"];
-          abilities.push(...added);
-          abilities = abilities.filter(a => !removed.includes(a));
-          for ( const ability of abilities ) activity.attack.ability.add(ability);
-        } else if ( change.type === "subtract" ) {
-          const values = new Set(activity.attack.ability.size ? activity.attack.ability : activity.availableAbilities);
-          if ( values.delete("default") ) {
-            for ( const ability of activity.availableAbilities ) values.add(ability);
-          }
-          for ( const ability of [change.value].flat().filter(a => a) ) values.delete(ability);
-          activity.attack.ability.clear();
-          for ( const ability of values ) activity.attack.ability.add(ability);
-          abilities = Array.from(values);
+        const abilities = activity.abilities;
+        if ( change.type === "override" ) abilities.clear();
+        for ( const value of [change.value].flat().filter(a => a) ) {
+          const ability = value.replace(/^\s*-\s*/, "");
+          if ( (change.type === "subtract") || (ability !== value) ) abilities.delete(ability);
+          else abilities.add(ability);
         }
-        if ( abilities ) {
-          changes[`system.activities.${activity.id}.${key}`] = abilities;
-          return;
-        }
+        return;
       }
       const c = this.constructor.applyChange(activity, { ...change, key }, options);
       Object.entries(c).forEach(([k, v]) => changes[`system.activities.${activity.id}.${k}`] = v);
