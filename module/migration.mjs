@@ -823,6 +823,7 @@ export function migrateMessageData(messageData) {
     updateData["flags.dnd5e.bastion"] = _del;
   }
 
+  /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.
   else if ( (flags?.dnd5e?.roll?.type === "generic") && (messageData.type === "base") ) {
     updateData.type = "generic";
     updateData.system = _replace({});
@@ -839,7 +840,7 @@ export function migrateMessageData(messageData) {
     updateData.type = "hitPoints";
     updateData.system = _replace({});
     updateData["flags.dnd5e.roll"] = _del;
-  }
+  }*/
 
   return updateData;
 }
