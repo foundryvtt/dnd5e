@@ -209,8 +209,8 @@ export class ApplyActiveEffectActivityBehavior extends BaseActivityBehavior {
   /* -------------------------------------------- */
 
   /** @override */
-  createBehaviorData(activity, options={}) {
-    const disposition = activity.actor?.token?.disposition ?? activity.actor?.prototypeToken?.disposition;
+  createBehaviorData(activity, { token }={}) {
+    const { disposition } = token ?? activity.actor?.token ?? activity.actor?.prototypeToken ?? {};
     return {
       system: {
         dispositions: this.getDispositions(activity.target, { relativeTo: disposition }),
