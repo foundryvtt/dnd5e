@@ -35,6 +35,7 @@ export default class IdentifierField extends foundry.data.fields.StringField {
 
   /** @override */
   _toInput(config) {
+    if ( config.options || config.choices || this.choices ) return super._toInput(config);
     if ( this.types?.length ) config.types ??= this.types;
     if ( foundry.utils.getType(config.types) === "string" ) config.types = config.types.split(",");
     return createIdentifierInput(config);
