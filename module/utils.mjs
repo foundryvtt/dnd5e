@@ -765,11 +765,9 @@ export function getTargetDescriptors(tokens=game.user.targets) {
   const targets = new Map();
   for ( const token of tokens ) {
     const { name } = token;
-    const { img, system, uuid, statuses } = token.actor ?? {};
-    if ( uuid ) {
-      const ac = statuses.has("coverTotal") ? null : system.attributes?.ac?.value;
-      targets.set(uuid, { name, img, uuid, ac: ac ?? null });
-    }
+    const actor = token.actor;
+    const { img, system, uuid } = actor ?? {};
+    if ( uuid ) targets.set(uuid, { name, img, uuid, ac: system.attributes?.ac?.value ?? null, cover: actor.coverLevel ?? 0 });
   }
   return Array.from(targets.values());
 }

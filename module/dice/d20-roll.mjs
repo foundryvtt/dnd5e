@@ -52,6 +52,7 @@ export default class D20Roll extends BasicRoll {
     config.options.criticalFailure ??= CONFIG.Dice.D20Die.CRITICAL_FAILURE_TOTAL;
     config.options.elvenAccuracy ??= process.elvenAccuracy;
     config.options.halflingLucky ??= process.halflingLucky;
+    config.options.ignoreTotalCover ??= process.ignoreTotalCover ?? false;
     config.options.reliableTalent ??= process.reliableTalent;
     config.options.target ??= process.target;
     return new this(formula, config.data, config.options);
@@ -166,6 +167,24 @@ export default class D20Roll extends BasicRoll {
    */
   get isFumble() {
     return this.d20.isCriticalFailure;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get isFailure() {
+    if ( !this._evaluated ) return;
+    if ( this.options.autoFail ) return true;
+    return super.isFailure;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get isSuccess() {
+    if ( !this._evaluated ) return;
+    if ( this.options.autoFail ) return false;
+    return super.isSuccess;
   }
 
   /* -------------------------------------------- */

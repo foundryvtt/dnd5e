@@ -171,6 +171,11 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     }, message);
 
     const rolls = await CONFIG.Dice.D20Roll.buildConfigure(rollConfig, dialogConfig, messageConfig);
+    if ( (targets.length === 1) && (targets[0].cover === CONFIG.DND5E.statusEffects.coverTotal?.cover) ) {
+      for ( const roll of rolls ) {
+        if ( !roll.options.ignoreTotalCover ) roll.options.autoFail = true;
+      }
+    }
     await CONFIG.Dice.D20Roll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return null;
     for ( const key of ["ammunition", "attackMode", "mastery"] ) {
@@ -310,7 +315,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
         : actor.items.get(lastAttack.getFlag("dnd5e", "roll.ammunition"));
     }
 
-    const isCritical = lastAttack?.rolls[0]?.isCritical;
+    const isCritical = lastAttack?.rolls[0]?.isCritical && !lastAttack.rolls[0].isFailure;
     const dialogConfig = {};
     if ( isCritical ) dialogConfig.options = { defaultButton: "critical" };
 

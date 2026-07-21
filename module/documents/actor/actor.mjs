@@ -134,6 +134,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Determine the highest level of cover affecting this actor.
+   * @type {number}
+   */
+  get coverLevel() {
+    return Math.max(0, ...Array.from(this.statuses, id => CONFIG.DND5E.statusEffects[id]?.cover ?? 0));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Highest ability associated with a spellcasting class.
    * @type {string}
    */

@@ -585,6 +585,7 @@
  * @property {string} [exclusiveGroup]       Any status effects with the same group will not be able to be applied at
  *                                           the same time through the token HUD (multiple statuses applied through
  *                                           other effects can still coexist).
+ * @property {number} [cover]                The level of cover this condition provides.
  * @property {number} [coverBonus]           A bonus this condition provides to AC and dexterity saving throws.
  * @property {boolean} [neverBlockMovement]  If true, a token with this status will not block movement for other tokens.
  */
@@ -632,7 +633,8 @@
  * @property {string} uuid  The UUID of the target.
  * @property {string} img   The target's image.
  * @property {string} name  The target's name.
- * @property {number} ac    The target's armor class, if applicable.
+ * @property {number|null} ac  The target's armor class, if applicable.
+ * @property {number} cover  The target's level of cover.
  */
 
 /* -------------------------------------------- */

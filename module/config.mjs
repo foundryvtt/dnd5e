@@ -3836,6 +3836,7 @@ DND5E.statusEffects = {
     img: "systems/dnd5e/icons/svg/statuses/cover-half.svg",
     order: 2,
     exclusiveGroup: "cover",
+    cover: 0.5,
     coverBonus: 2
   },
   coverThreeQuarters: {
@@ -3843,13 +3844,15 @@ DND5E.statusEffects = {
     img: "systems/dnd5e/icons/svg/statuses/cover-three-quarters.svg",
     order: 3,
     exclusiveGroup: "cover",
+    cover: 0.75,
     coverBonus: 5
   },
   coverTotal: {
     name: "EFFECT.DND5E.StatusTotalCover",
     img: "systems/dnd5e/icons/svg/statuses/cover-total.svg",
     order: 4,
-    exclusiveGroup: "cover"
+    exclusiveGroup: "cover",
+    cover: 1
   },
   dead: {
     name: "EFFECT.DND5E.StatusDead",

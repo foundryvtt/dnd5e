@@ -244,7 +244,7 @@ export default class ChatMessage5e extends ChatMessage {
         if ( d20Roll.isSuccess || forceSuccess ) total.classList.add("success");
         else total.classList.add("failure");
       }
-      if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
+      if ( canCrit && d20Roll.isCritical && !d20Roll.isFailure ) total.classList.add("critical");
       if ( canCrit && d20Roll.isFumble && !forceSuccess ) total.classList.add("fumble");
 
       const icons = document.createElement("div");
@@ -460,8 +460,11 @@ export default class ChatMessage5e extends ChatMessage {
       </div>
     `;
     const evaluation = tray.querySelector("ul");
-    const rows = targets.map(({ name, ac, uuid }) => {
-      const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
+    const rows = targets.map(({ name, ac, cover=0, uuid }) => {
+      const totalCover = (cover === CONFIG.DND5E.statusEffects.coverTotal?.cover) && !attackRoll.options.ignoreTotalCover;
+      const isMiss = totalCover || (!attackRoll.isCritical && (attackRoll.isFumble
+        || (Number.isNumeric(ac) && (attackRoll.total < ac))));
+      if ( totalCover ) ac = null;
       if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const li = document.createElement("li");
       Object.assign(li.dataset, { uuid, miss: isMiss });
