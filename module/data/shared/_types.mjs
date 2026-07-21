@@ -23,6 +23,14 @@
  */
 
 /**
+ * @typedef D20RollModificationData
+ * @property {string} bonus  Bonus added to the roll.
+ * @property {number} min    Minimum number on the die rolled.
+ * @property {number} max    Maximum number on the die rolled.
+ * @property {number} mode   Should the roll be with disadvantage or advantage by default?
+ */
+
+/**
  * @typedef DamageData
  * @property {number} number           Number of dice to roll.
  * @property {number} denomination     Die denomination to roll.
@@ -43,6 +51,11 @@
  * @typedef DamageFormulaOptions
  * @property {Set<string>|false} modifiers  Additional modifiers to apply to the formula, if possible.
  *                                          A `false` value will remove modifiers provided by damage data.
+ */
+
+/**
+ * @typedef DamageRollModificationData
+ * @property {string} bonus  Bonus added to the roll.
  */
 
 /**
@@ -72,11 +85,16 @@
 
 /**
  * @typedef RollConfigData
- * @property {string} [ability]  Default ability associated with this roll.
- * @property {object} roll
- * @property {number} roll.min   Minimum number on the die rolled.
- * @property {number} roll.max   Maximum number on the die rolled.
- * @property {number} roll.mode  Should the roll be with disadvantage or advantage by default?
+ * @property {string} ability    Default ability associated with this roll.
+ * @property {D20RollModificationData} roll
+ */
+
+/**
+ * @typedef RulesDetails
+ * @property {string} category    Category of rules to retrieve (e.g. "attack" or "check").
+ * @property {Actor5e} actor      Actor from which to fetch rules.
+ * @property {Item5e} [item]      Item from which to fetch rules.
+ * @property {RollData} rollData  Roll data with which to filter the rules.
  */
 
 /**

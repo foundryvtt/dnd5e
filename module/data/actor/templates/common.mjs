@@ -44,16 +44,15 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
           required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax",
           labelFormatter: "DND5E.ABILITY.Formatter.Maximum"
         }),
-        bonuses: new SchemaField({
-          check: new FormulaField({
-            required: true, label: "DND5E.AbilityCheckBonus", labelFormatter: "DND5E.ABILITY.Formatter.Check.Bonus"
-          }),
-          save: new FormulaField({
-            required: true, label: "DND5E.SaveBonus", labelFormatter: "DND5E.ABILITY.Formatter.Save.Bonus"
-          })
-        }, { label: "DND5E.AbilityBonuses" }),
-        check: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check." }),
-        save: new RollConfigField({ ability: false, labelFormatterPrefix: "DND5E.ABILITY.Formatter.Save." })
+        bonuses: new SchemaField({}, { label: "DND5E.AbilityBonuses", persisted: false }),
+        check: new RollConfigField({ ability: false }, {
+          labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.check.roll.",
+          labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check."
+        }),
+        save: new RollConfigField({ ability: false }, {
+          labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.save.roll.",
+          labelFormatterPrefix: "DND5E.ABILITY.Formatter.Save."
+        })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities", entryLabel: key => CONFIG.DND5E.abilities[key]?.label
@@ -61,6 +60,50 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       conditions: new MappingField(new NumberField({ integer: true, min: 1 }), { persisted: false })
     });
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrated paths for various bonuses.
+   * @type {Array}
+   */
+  static #BONUS_FIELD_PATHS = [
+    ["attributes.concentration.bonuses.save", "attributes.concentration.roll.bonus"],
+    ["attributes.death.bonuses.save", "attributes.death.roll.bonus"],
+    ["attributes.init.bonus", "attributes.init.roll.bonus"],
+    ["bonuses.mwak.attack", "rolls.attack.mwak.bonus"],
+    ["bonuses.mwak.damage", "rolls.damage.mwak.bonus"],
+    ["bonuses.rwak.attack", "rolls.attack.rwak.bonus"],
+    ["bonuses.rwak.damage", "rolls.damage.rwak.bonus"],
+    ["bonuses.msak.attack", "rolls.attack.msak.bonus"],
+    ["bonuses.msak.damage", "rolls.damage.msak.bonus"],
+    ["bonuses.rsak.attack", "rolls.attack.rsak.bonus"],
+    ["bonuses.rsak.damage", "rolls.damage.rsak.bonus"],
+    ["bonuses.abilities.check", "rolls.ability.check.bonus"],
+    ["bonuses.abilities.save", "rolls.ability.save.bonus"],
+    ["bonuses.abilities.skill", "rolls.ability.skill.bonus"]
+  ];
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrated paths for abilities.
+   * @type {Array}
+   */
+  static #ABILITY_BONUS_FIELD_PATHS = [
+    ["bonuses.check", "check.roll.bonus"],
+    ["bonuses.save", "save.roll.bonus"]
+  ];
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrated paths for skills & tools.
+   * @type {Array}
+   */
+  static #SKILL_TOOL_BONUS_FIELD_PATHS = [
+    ["bonuses.check", "check.roll.bonus"]
+  ];
 
   /* -------------------------------------------- */
 
@@ -90,6 +133,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   static _migrateData(source) {
     super._migrateData(source);
     CommonTemplate.#migrateACData(source);
+    CommonTemplate.#migrateBonusData(source);
     CommonTemplate.#migrateMovementData(source);
     return source;
   }
@@ -120,6 +164,32 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   /* -------------------------------------------- */
 
   /**
+   * Migrate roll bonus data from `bonuses` to `roll` as well as various other bonuses into roll fields.
+   * @param {object} source       The candidate source data from which the model will be constructed.
+   * @param {string[][]} [paths]  Field re-mappings.
+   */
+  static #migrateBonusData(source, paths) {
+    for ( const [original, updated] of paths ?? CommonTemplate.#BONUS_FIELD_PATHS ) {
+      if ( foundry.utils.hasProperty(source, updated) ) continue;
+      const value = foundry.utils.getProperty(source, original);
+      if ( !value ) continue;
+      foundry.utils.setProperty(source, updated, value);
+    }
+    if ( paths ) return;
+    for ( const value of Object.values(source.abilities ?? {}) ) {
+      CommonTemplate.#migrateBonusData(value, CommonTemplate.#ABILITY_BONUS_FIELD_PATHS)
+    }
+    for ( const value of Object.values(source.skills ?? {}) ) {
+      CommonTemplate.#migrateBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS)
+    }
+    for ( const value of Object.values(source.tools ?? {}) ) {
+      CommonTemplate.#migrateBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS)
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Migrate the actor speed string to movement object.
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
@@ -131,6 +201,44 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     source.attributes.movement.speeds ??= {};
     const s = original.split(" ");
     if ( s.length > 0 ) source.attributes.movement.speeds.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Shims                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Apply shims for the old bonus locations.
+   * @param {object} [data]       Base data model to shim.
+   * @param {string[][]} [paths]  Field re-mappings.
+   * @param {string} [prefix]     Path prefix for the deprecation warnings.
+   */
+  shimBonusData(data=this, paths=null, prefix="") {
+    for ( const [original, updated] of paths ?? CommonTemplate.#BONUS_FIELD_PATHS ) {
+      const parts = original.split(".");
+      const key = parts.pop();
+      const objectPath = parts.join(".");
+      const container = foundry.utils.getProperty(data, objectPath);
+      if ( !container ) continue;
+      Object.defineProperty(container, key, {
+        get: () => {
+          foundry.utils.logCompatibilityWarning(`${prefix}${original} has moved to "${prefix}${updated}".`, {
+            since: "DnD5e 6.0", until: "DnD5e 7.0", once: true
+          });
+          return foundry.utils.getProperty(data, updated) ?? "";
+        }
+      });
+    }
+    if ( paths ) return;
+    for ( const [key, value] of Object.entries(this.abilities ?? {}) ) {
+      this.shimBonusData(value, CommonTemplate.#ABILITY_BONUS_FIELD_PATHS, `abilities.${key}.`);
+    }
+    for ( const [key, value] of Object.entries(this.skills ?? {}) ) {
+      this.shimBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS, `skills.${key}.`);
+    }
+    for ( const [key, value] of Object.entries(this.tools ?? {}) ) {
+      this.shimBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS, `tools.${key}.`);
+    }
   }
 
   /* -------------------------------------------- */
@@ -147,11 +255,12 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const flags = this.parent.flags.dnd5e ?? {};
     const { prof = 0, ac } = this.attributes ?? {};
     Object.values(this.abilities).forEach(a => a.mod = Math.floor((a.value - 10) / 2));
-    const checkBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
-    const saveBonus = simplifyBonus(this.bonuses?.abilities?.save, rollData);
+    const checkBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
+    const saveBonus = simplifyBonus(this.rolls?.ability?.save?.bonus, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
+      abl.proficient = Math.max(abl.proficient, this.rolls?.ability?.save?.proficiency ?? -Infinity);
       const originalAbility = originalSaves?.[id];
       if ( originalAbility?.proficient ) {
         abl.merged = true;
@@ -166,13 +275,13 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       rollData = { ...rollData };
       rollData.roll = { ability: id, proficient: abl.checkProf.multiplier >= 1, type: "ability" };
 
-      const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
+      const checkBonusAbl = simplifyBonus(abl.check?.roll?.bonus, rollData);
       const checkBonusRules = simplifyBonus(
         AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
       abl.checkBonus = checkBonusAbl + checkBonusRules + checkBonus;
 
-      const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
+      const saveBonusAbl = simplifyBonus(abl.save?.roll?.bonus, rollData);
       const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
       rollData.roll.proficient = abl.saveProf.multiplier >= 1;
       const saveBonusRules = simplifyBonus(
@@ -220,6 +329,8 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   calculateAbilityCheckProficiency(multiplier, ability, options={}) {
     let roundDown = true;
+    multiplier = Math.max(multiplier, this.rolls?.ability?.check?.proficiency ?? -Infinity);
+    if ( options.skill ) multiplier = Math.max(multiplier, this.rolls?.ability?.skill?.proficiency ?? -Infinity);
     if ( (multiplier < 1) && ((dnd5e.settings.rulesVersion === "legacy") || options.skill) ) {
       if ( this.parent._isRemarkableAthlete(ability) ) {
         multiplier = .5;
@@ -242,6 +353,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    * @returns {Proficiency}
    */
   calculateToolProficiency(multiplier, ability, options={}) {
+    multiplier = Math.max(multiplier, this.rolls?.ability?.tool?.proficiency ?? -Infinity);
     if ( (multiplier === 1) && this.parent.flags.dnd5e?.toolExpertise ) {
       return new Proficiency(this.attributes.prof, 2, true);
     }

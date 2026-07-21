@@ -33,7 +33,7 @@ export default class CharacterData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.CHARACTER"];
+  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.ROLL", "DND5E.CHARACTER"];
 
   /* -------------------------------------------- */
 
@@ -78,10 +78,8 @@ export default class CharacterData extends CreatureTemplate {
           failure: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
           }),
-          bonuses: new SchemaField({
-            save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
-          })
-        }, { label: "DND5E.DeathSave" }),
+          bonuses: new SchemaField({}, { persisted: false })
+        }, { label: "DND5E.DeathSave", labelPrefix: "DND5E.DEATH.FIELDS.attributes.death.roll." }),
         inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" }),
         piety: new SchemaField({
           value: new NumberField({
@@ -201,6 +199,7 @@ export default class CharacterData extends CreatureTemplate {
     AttributesFields.prepareBaseEncumbrance.call(this);
     MovementField._shim(this.attributes.movement);
     SensesField._shim(this.attributes.senses);
+    this.shimBonusData();
   }
 
   /* -------------------------------------------- */

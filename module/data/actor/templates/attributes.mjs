@@ -128,9 +128,8 @@ export default class AttributesFields {
         })
       }, { persisted: false }),
       init: new RollConfigField({
-        ability: "",
-        bonus: new FormulaField({ required: true, label: "DND5E.InitiativeBonus" })
-      }, { label: "DND5E.Initiative" }),
+        bonuses: new SchemaField({}, { persisted: false })
+      }, { label: "DND5E.Initiative", labelPrefix: "DND5E.INITIATIVE.FIELDS.attributes.init.roll." }),
       movement: new MovementField()
     };
   }
@@ -160,16 +159,11 @@ export default class AttributesFields {
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
       }),
       concentration: new RollConfigField({
-        ability: "",
-        bonuses: new SchemaField({
-          save: new FormulaField({
-            required: true, label: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.bonuses.save.label"
-          })
-        }),
+        bonuses: new SchemaField({}, { persisted: false }),
         limit: new NumberField({
           integer: true, min: 0, initial: 1, label: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.limit.label"
         })
-      }, { label: "DND5E.Concentration" }),
+      }, { label: "DND5E.Concentration", labelPrefix: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.roll." }),
       loyalty: new SchemaField({
         value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
       })
@@ -224,8 +218,9 @@ export default class AttributesFields {
   static _migrateInitiative(source) {
     const init = source?.init;
     if ( !init?.value || (typeof init?.bonus === "string") ) return;
-    if ( init.bonus ) init.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
-    else init.bonus = `${init.value}`;
+    init.roll ??= {};
+    if ( init.roll.bonus ) init.roll.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
+    else init.roll.bonus = `${init.value}`;
   }
 
   /* -------------------------------------------- */
@@ -360,7 +355,7 @@ export default class AttributesFields {
     const { concentration } = this.attributes;
     const abilityId = concentration.ability || CONFIG.DND5E.defaultAbilities.concentration;
     const ability = this.abilities?.[abilityId] || {};
-    const bonus = simplifyBonus(concentration.bonuses.save, rollData);
+    const bonus = simplifyBonus(concentration.roll.bonus, rollData);
     concentration.save = (ability.save?.value ?? 0) + bonus;
   }
 
@@ -486,7 +481,7 @@ export default class AttributesFields {
   static prepareInitiative(rollData) {
     const init = this.attributes.init ??= {};
     const flags = this.parent.flags.dnd5e ?? {};
-    const globalCheckBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
+    const globalCheckBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
 
     // Compute initiative modifier
     const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
@@ -514,8 +509,8 @@ export default class AttributesFields {
     rollData.roll = { ability: abilityId, proficient: init.prof.multiplier >= 1, type: "initiative" };
 
     // Total initiative includes all numeric terms
-    const initBonus = simplifyBonus(init.bonus, rollData);
-    const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
+    const initBonus = simplifyBonus(init.roll.bonus, rollData);
+    const abilityBonus = simplifyBonus(ability.check?.roll?.bonus, rollData);
     const ruleBonus = simplifyBonus(
       AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
     );

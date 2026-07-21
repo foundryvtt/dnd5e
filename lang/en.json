@@ -94,6 +94,28 @@
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
   },
+  "FIELDS": {
+    "abilities": {
+      "element": {
+        "check": {
+          "roll": {
+            "bonus": { "label": "Check Bonus" },
+            "max": { "label": "Maximum Check Roll" },
+            "min": { "label": "Minimum Check Roll" },
+            "mode": { "label": "Check Advantage Mode" }
+          }
+        },
+        "save": {
+          "roll": {
+            "bonus": { "label": "Save Bonus" },
+            "max": { "label": "Maximum Save Roll" },
+            "min": { "label": "Minimum Save Roll" },
+            "mode": { "label": "Save Advantage Mode" }
+          }
+        }
+      }
+    }
+  },
   "Formatter": {
     "Check": {
       "AdvantageMode": "{name} Check Advantage Mode",
@@ -164,7 +186,6 @@
 "DND5E.AbilityCheckConfigure": "{ability} Ability Checks",
 "DND5E.AbilityCheckConfigurationHint": "Configure check bonuses.",
 "DND5E.AbilityConfigurationHint": "Configure ability saving throw proficiency, saving throw bonuses, and check bonuses.",
-"DND5E.AbilityCheckBonus": "Check Bonus",
 "DND5E.AbilityCheckGlobalBonusHint": "This bonus applies to all ability checks made by this actor.",
 "DND5E.Action": "Action",
 "DND5E.ActionAbbr": "A",
@@ -1325,54 +1346,6 @@
     "bonuses": {
       "label": "Global Bonuses",
       "hint": "Global bonuses as formulas which are added to certain rolls.",
-      "abilities": {
-        "label": "Global Ability Bonuses",
-        "check": {
-          "label": "Global Ability Check Bonus"
-        },
-        "save": {
-          "label": "Global Saving Throw Bonus"
-        },
-        "skill": {
-          "label": "Global Skill Check Bonus"
-        }
-      },
-      "msak": {
-        "label": "Melee Spell Bonuses",
-        "attack": {
-          "label": "Melee Spell Attack Bonus"
-        },
-        "damage": {
-          "label": "Melee Spell Damage Bonus"
-        }
-      },
-      "mwak": {
-        "label": "Melee Weapon Bonuses",
-        "attack": {
-          "label": "Melee Weapon Attack Bonus"
-        },
-        "damage": {
-          "label": "Melee Weapon Damage Bonus"
-        }
-      },
-      "rsak": {
-        "label": "Ranged Spell Bonuses",
-        "attack": {
-          "label": "Ranged Spell Attack Bonus"
-        },
-        "damage": {
-          "label": "Ranged Spell Damage Bonus"
-        }
-      },
-      "rwak": {
-        "label": "Ranged Weapon Bonuses",
-        "attack": {
-          "label": "Ranged Weapon Attack Bonus"
-        },
-        "damage": {
-          "label": "Ranged Weapon Damage Bonus"
-        }
-      },
       "spell": {
         "label": "Global Spell Bonuses",
         "dc": {
@@ -1814,8 +1787,6 @@
   "Title": "Check"
 },
 
-"DND5E.CheckBonus": "Check Bonus",
-
 "DND5E.CLASS": {
   "Multiclass": {
     "Title": "Multiclassing"
@@ -1988,21 +1959,14 @@
   "FIELDS": {
     "attributes": {
       "concentration": {
-        "bonuses": {
-          "label": "Concentration Bonuses",
-          "save": {
-            "label": "Concentration Bonus"
-          }
-        },
         "label": "Concentration",
-        "limit": {
-          "label": "Concentration Limit"
-        },
+        "limit": { "label": "Concentration Limit" },
         "roll": {
-          "ability": "Concentration Save Ability",
-          "max": "Maximum Concentration Save Roll",
-          "min": "Minimum Concentration Save Roll",
-          "mode": "Concentration Save Advantage Mode"
+          "ability": { "label": "Concentration Ability" },
+          "bonus": { "label": "Concentration Bonus" },
+          "max": { "label": "Maximum Concentration Roll" },
+          "min": { "label": "Minimum Concentration Roll" },
+          "mode": { "label": "Concentration Advantage Mode" }
         }
       }
     }
@@ -2523,7 +2487,6 @@
 "DND5E.Dawn": "Dawn",
 "DND5E.Day": "Day",
 "DND5E.DeathSave": "Death Saves",
-"DND5E.DeathSaveBonus": "Death Save Bonus",
 "DND5E.DeathSaveConfigure": "Configure Death Saves",
 "DND5E.DeathSaveCriticalSuccess": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
 "DND5E.DeathSaveHide": "Hide Death Saves",
@@ -2543,6 +2506,22 @@
 "DND5E.DeathSaveRoll": "Roll a Death Saving Throw",
 "DND5E.DeathSavingThrow": "Death Saving Throw",
 "DND5E.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
+
+"DND5E.DEATH": {
+  "FIELDS": {
+    "attributes": {
+      "death": {
+        "roll": {
+          "bonus": { "label": "Death Save Bonus" },
+          "max": { "label": "Maximum Death Save Roll" },
+          "min": { "label": "Minimum Death Save Roll" },
+          "mode": { "label": "Death Save Advantage Mode" }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Default": "Default",
 "DND5E.DefaultSpecific": "Default ({default})",
 "DND5E.DefaultAbilityCheck": "Default Ability Check",
@@ -3649,10 +3628,25 @@
 "DND5E.Immunities": "Immunities",
 "DND5E.Initiative": "Initiative",
 "DND5E.InitiativeAbbr": "Init",
-"DND5E.InitiativeBonus": "Initiative Bonus",
 "DND5E.InitiativeRoll": "Initiative Roll",
 "DND5E.InitiativeConfig": "Configure Initiative",
 "DND5E.InitiativeConfigHint": "Configure initiative modifiers and bonuses which apply to this Actor.",
+
+"DND5E.INITIATIVE": {
+  "FIELDS": {
+    "attributes": {
+      "init": {
+        "roll": {
+          "bonus": { "label": "Initiative Bonus" },
+          "max": { "label": "Maximum Initiative Roll" },
+          "min": { "label": "Minimum Initiative Roll" },
+          "mode": { "label": "Initiative Advantage Mode" }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Inspiration": "Inspiration",
 "DND5E.Inventory": "Inventory",
 "DND5E.InventorySearch": "Search inventory",
@@ -4329,6 +4323,7 @@
 "DND5E.RitualAbbr": "R",
 
 "DND5E.ROLL": {
+  "Bonus": "Roll Bonus",
   "Description": {
     "ability": "Roll Ability",
     "attack": {
@@ -4341,11 +4336,104 @@
     "tool": "Rolled Tool",
     "type": "Roll Type"
   },
+  "FIELDS": {
+    "rolls": {
+      "ability": {
+        "check": {
+          "bonus": { "label": "Global Ability Check Bonus" },
+          "max": { "label": "Maximum Global Ability Check Roll" },
+          "min": { "label": "Minimum Global Ability Check Roll" },
+          "mode": { "label": "Global Ability Check Advantage Mode" },
+          "proficiency": { "label": "Global Ability Check Proficiency" }
+        },
+        "label": "Ability Roll Modification",
+        "save": {
+          "bonus": { "label": "Global Ability Save Bonus" },
+          "max": { "label": "Maximum Global Ability Save Roll" },
+          "min": { "label": "Minimum Global Ability Save Roll" },
+          "mode": { "label": "Global Ability Save Advantage Mode" },
+          "proficiency": { "label": "Global Ability Save Proficiency" }
+        },
+        "skill": {
+          "bonus": { "label": "Global Skill Check Bonus" },
+          "max": { "label": "Maximum Global Skill Check Roll" },
+          "min": { "label": "Minimum Global Skill Check Roll" },
+          "mode": { "label": "Global Skill Check Advantage Mode" },
+          "proficiency": { "label": "Global Skill Check Proficiency" }
+        },
+        "tool": {
+          "bonus": { "label": "Global Tool Check Bonus" },
+          "max": { "label": "Maximum Global Tool Check Roll" },
+          "min": { "label": "Minimum Global Tool Check Roll" },
+          "mode": { "label": "Global Tool Check Advantage Mode" },
+          "proficiency": { "label": "Global Tool Check Proficiency" }
+        }
+      },
+      "attack": {
+        "bonus": { "label": "Global Attack Bonus" },
+        "label": "Attack Roll Modification",
+        "max": { "label": "Maximum Global Attack Roll" },
+        "min": { "label": "Minimum Global Attack Roll" },
+        "mode": { "label": "Global Attack Advantage Mode" },
+        "msak": {
+          "bonus": { "label": "Melee Spell Attack Bonus" },
+          "max": { "label": "Maximum Melee Spell Attack Roll" },
+          "min": { "label": "Minimum Melee Spell Attack Roll" },
+          "mode": { "label": "Melee Spell Attack Advantage Mode" }
+        },
+        "mwak": {
+          "bonus": { "label": "Melee Weapon Attack Bonus" },
+          "max": { "label": "Maximum Melee Weapon Attack Roll" },
+          "min": { "label": "Minimum Melee Weapon Attack Roll" },
+          "mode": { "label": "Melee Weapon Attack Advantage Mode" }
+        },
+        "rsak": {
+          "bonus": { "label": "Ranged Spell Attack Bonus" },
+          "max": { "label": "Maximum Ranged Spell Attack Roll" },
+          "min": { "label": "Minimum Ranged Spell Attack Roll" },
+          "mode": { "label": "Ranged Spell Attack Advantage Mode" }
+        },
+        "rwak": {
+          "bonus": { "label": "Ranged Weapon Attack Bonus" },
+          "max": { "label": "Maximum Ranged Weapon Attack Roll" },
+          "min": { "label": "Minimum Ranged Weapon Attack Roll" },
+          "mode": { "label": "Ranged Weapon Attack Advantage Mode" }
+        }
+      },
+      "damage": {
+        "label": "Damage Roll Modification",
+        "msak": {
+          "bonus": { "label": "Melee Spell Attack Damage Bonus" }
+        },
+        "mwak": {
+          "bonus": { "label": "Melee Weapon Attack Damage Bonus" }
+        },
+        "rsak": {
+          "bonus": { "label": "Ranged Spell Attack Damage Bonus" }
+        },
+        "rwak": {
+          "bonus": { "label": "Ranged Weapon Attack Damage Bonus" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "AdvantageMode": "{name} Advantage Mode",
+    "Bonus": "{name} Roll Bonus",
     "Maximum": "Maximum {name} Roll",
     "Minimum": "Minimum {name} Roll",
     "ModifierAbility": "{name} Modifier Ability"
+  },
+  "Generic": {
+    "D20": {
+      "bonus": { "label": "Roll Bonus" },
+      "max": { "label": "Maximum Roll" },
+      "min": { "label": "Minimum Roll" },
+      "mode": { "label": "Advantage Mode" }
+    },
+    "Damage": {
+      "bonus": { "label": "Damage Bonus" }
+    }
   },
   "Range": {
     "Label": "Roll Range",
@@ -4477,7 +4565,6 @@
   }
 },
 
-"DND5E.SaveBonus": "Saving Throw Bonus",
 "DND5E.SaveGlobalBonusHint": "This bonus applies to all saving throws made by this actor.",
 "DND5E.Scroll": {
   "CreateFrom": "Create Scroll from {spell}",
@@ -4561,6 +4648,18 @@
 "DND5E.SizeTinyAbbr": "Tn",
 
 "DND5E.SKILL": {
+  "FIELDS": {
+    "skills": {
+      "element": {
+        "roll": {
+          "bonus": { "label": "Skill Check Bonus" },
+          "max": { "label": "Maximum Skill Check Roll" },
+          "min": { "label": "Minimum Skill Check Roll" },
+          "mode": { "label": "Skill Check Advantage Mode" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "CheckBonus": "{name} Check Bonus",
     "PassiveBonus": "Passive {name} Bonus",
@@ -4606,7 +4705,6 @@
 "DND5E.SkillConfigure": "Configure Skill",
 "DND5E.SkillsConfig": "Configure Skills",
 "DND5E.SkillBonuses": "Skill Bonuses",
-"DND5E.SkillBonusCheck": "Check Bonus",
 "DND5E.SkillBonusPassive": "Passive Bonus",
 "DND5E.SkillConfigurationHint": "Configure skill proficiency and bonuses.",
 "DND5E.SkillGlobalBonusCheckHint": "This bonus applies to all skill checks made by this actor.",
@@ -5434,6 +5532,18 @@
 "DND5E.ToggleDescription": "Toggle Description",
 
 "DND5E.TOOL": {
+  "FIELDS": {
+    "tools": {
+      "element": {
+        "roll": {
+          "bonus": { "label": "Tool Check Bonus" },
+          "max": { "label": "Maximum Tool Check Roll" },
+          "min": { "label": "Minimum Tool Check Roll" },
+          "mode": { "label": "Tool Check Advantage Mode" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "CheckBonus": "{name} Check Bonus",
     "Proficiency": "{name} Proficiency"

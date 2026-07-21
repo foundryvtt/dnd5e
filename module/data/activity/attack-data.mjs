@@ -2,6 +2,7 @@ import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 import AppliedRules from "../../documents/applied-rules.mjs";
 import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import D20RollModificationField from "../shared/d20-roll-modification-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
@@ -263,14 +264,16 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
     const weapon = this.item.system;
     const ammo = this.actor?.items.get(ammunition)?.system;
+    const { bonus } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: this.attack.ability !== "none" ? rollData.mod : null,
       prof: weapon.prof?.term,
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
-      actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
-      ruleBonus: AppliedRules.collect("attack:bonus", this.actor, this.item).filterWith(rollData).toFormula(),
+      ruleBonus: bonus,
       situational
     }, rollData);
 
