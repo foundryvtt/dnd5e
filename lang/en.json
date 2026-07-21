@@ -1149,6 +1149,9 @@
   "FIELDS": {
     "attack": {
       "label": "Attack Details",
+      "abilities": {
+        "label": "Ability Options"
+      },
       "ability": {
         "label": "Attack Ability",
         "hint": "Ability used for make the attack and determine damage. Available using @mod in formulas."

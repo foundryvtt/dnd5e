@@ -1,15 +1,13 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import AppliedRules from "../../documents/applied-rules.mjs";
 import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import D20RollModificationField from "../shared/d20-roll-modification-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
-const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { AttackDamageRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { AttackActivityData } from "./_types.mjs";
  */
 
@@ -25,6 +23,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       ...super.defineSchema(),
       attack: new SchemaField({
         ability: new StringField(),
+        abilities: new SetField(new StringField(), { persisted: false }),
         bonus: new FormulaField(),
         critical: new SchemaField({
           threshold: new NumberField({ integer: true, positive: true })
@@ -52,16 +51,13 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /** @override */
   get ability() {
     if ( this.attack.ability === "none" ) return null;
-    if ( this.attack.ability === "spellcasting" ) return this.spellcastingAbility;
-    if ( this.attack.ability in CONFIG.DND5E.abilities ) return this.attack.ability;
 
-    const availableAbilities = this.availableAbilities;
-    if ( !availableAbilities?.size ) return null;
-    if ( availableAbilities?.size === 1 ) return availableAbilities.first();
+    if ( !this.attack.abilities?.size ) return null;
+    if ( this.attack.abilities?.size === 1 ) return this.attack.abilities.first();
     const abilities = this.actor?.system.abilities ?? {};
-    return availableAbilities.reduce((largest, ability) =>
+    return this.attack.abilities.reduce((largest, ability) =>
       (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
-    , availableAbilities.first());
+    , this.attack.abilities.first());
   }
 
   /* -------------------------------------------- */
@@ -193,12 +189,23 @@ export default class BaseAttackActivityData extends BaseActivityData {
     super.prepareData();
     this.attack.type.value ||= this.item.system.attackType ?? "melee";
     this.attack.type.classification ||= this.item.system.attackClassification ?? "weapon";
+
+    if ( this.attack.ability in CONFIG.DND5E.abilities ) this.attack.abilities.add(this.attack.ability);
+    else if ( !this.attack.ability ) {
+      for ( const ability of this.availableAbilities ) this.attack.abilities.add(ability);
+    }
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
+    // Must be resolved here because we do not know all spellcasting classes and their spellcasting abilities until
+    // class items have finished preparing.
+    if ( (this.attack.ability === "spellcasting") && this.spellcastingAbility ) {
+      this.attack.abilities.add(this.spellcastingAbility);
+    }
+
     if ( this.damage.includeBase && this.item.system.offersBaseDamage && this.item.system.damage.base.formula ) {
       const basePart = this.item.system.damage.base.clone(this.item.system.damage.base.toObject(false));
       basePart.base = true;
@@ -253,13 +260,14 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /**
    * Get the roll parts used to create the attack roll.
    * @param {object} [config={}]
+   * @param {string} [config.ability]
    * @param {string} [config.ammunition]
    * @param {string} [config.attackMode]
    * @param {string} [config.situational]
    * @returns {{ data: object, parts: string[] }}
    */
-  getAttackData({ ammunition, attackMode, situational }={}) {
-    const rollData = this.getRollData({ roll: { attackMode } });
+  getAttackData({ ability, ammunition, attackMode, situational }={}) {
+    const rollData = this.getRollData({ roll: { ability, attackMode } });
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
@@ -268,7 +276,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
-      mod: this.attack.ability !== "none" ? rollData.mod : null,
+      mod: rollData.roll.ability ? rollData.mod : null,
       prof: weapon.prof?.term,
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
@@ -285,7 +293,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   getDamageConfig(config={}, options={}) {
     // Copy properties from selected ammunition
     const ammo = config.ammunition?.system;
@@ -374,8 +382,9 @@ export default class BaseAttackActivityData extends BaseActivityData {
   getRollData(options={}) {
     const rollData = super.getRollData(options);
     if ( options.roll ) {
+      const ability = options.roll.ability ?? this.ability;
       rollData.roll ??= {};
-      rollData.roll.ability = this.ability;
+      rollData.roll.ability = ability === "none" ? null : ability;
       rollData.roll.attack ??= {};
       rollData.roll.attack.classification = this.attack.type.classification;
       rollData.roll.attack.mode = options.roll.attackMode;

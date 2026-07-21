@@ -15,6 +15,7 @@ const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry
  */
 
 const BONUS_SHIM_REGEX = new RegExp(/system\.(abilities|skills|tools)\.(\w+)\.bonuses\.(check|save)/);
+const ATTACK_ABILITY_SHIM_REGEX = new RegExp(/system\.activities\.\w+\.attack\.ability/);
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
@@ -95,7 +96,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.bonuses.rsak.damage": { key: "system.rolls.damage.rsak.bonus" },
     "system.bonuses.abilities.check": { key: "system.rolls.ability.check.bonus" },
     "system.bonuses.abilities.save": { key: "system.rolls.ability.save.bonus" },
-    "system.bonuses.abilities.skill": { key: "system.rolls.ability.skill.bonus" }
+    "system.bonuses.abilities.skill": { key: "system.rolls.ability.skill.bonus" },
+    "activities[attack].attack.ability": { key: "activities[attack].attack.abilities" }
   };
 
   /* -------------------------------------------- */
@@ -469,6 +471,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   _applyChangeShim(change) {
     let shim = ActiveEffect5e.SHIM_FIELDS[change.key];
+    if ( !shim && ATTACK_ABILITY_SHIM_REGEX.test(change.key) ) {
+      shim = { key: change.key.replace(/\.ability$/, ".abilities") };
+    }
     if ( !shim ) {
       const [, category, key, type] = change.key.match(BONUS_SHIM_REGEX) ?? [];
       if ( !category ) return change;
