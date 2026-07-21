@@ -311,7 +311,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
    */
   static #rollDamage(event, target, message) {
     const lastAttack = message.getAssociatedRolls("attack").pop();
-    const ability = lastAttack?.rolls[0]?.options.ability ?? lastAttack?.getFlag("dnd5e", "roll.ability");
+    const ability = lastAttack?.getFlag("dnd5e", "roll.ability");
     const attackMode = lastAttack?.getFlag("dnd5e", "roll.attackMode");
 
     // Fetch the ammunition used with the last attack roll
@@ -341,9 +341,8 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
    * @protected
    */
   _getAbilityOptions() {
-    const abilities = this.attack.abilities.size ? new Set(this.attack.abilities) : new Set(this.availableAbilities);
     const actorAbilities = this.actor?.system.abilities ?? {};
-    const options = Array.from(abilities)
+    const options = Array.from(this.attack.abilities)
       .filter(ability => ability in CONFIG.DND5E.abilities)
       .sort((ability, largest) => {
         const abilityMod = actorAbilities[ability]?.mod ?? -Infinity;

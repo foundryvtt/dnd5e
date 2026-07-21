@@ -18,7 +18,6 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @mixes AttackActivityData
  */
 export default class BaseAttackActivityData extends BaseActivityData {
-
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -52,16 +51,14 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /** @override */
   get ability() {
-    const configuredAbilities = this.abilities;
     if ( this.attack.ability === "none" ) return null;
 
-    const availableAbilities = this.attack.abilities.size ? this.attack.abilities : new Set(this.availableAbilities);
-    if ( !availableAbilities?.size ) return null;
-    if ( availableAbilities?.size === 1 ) return availableAbilities.first();
+    if ( !this.attack.abilities?.size ) return null;
+    if ( this.attack.abilities?.size === 1 ) return this.attack.abilities.first();
     const abilities = this.actor?.system.abilities ?? {};
-    return availableAbilities.reduce((largest, ability) =>
+    return this.attack.abilities.reduce((largest, ability) =>
       (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
-    , availableAbilities.first());
+    , this.attack.abilities.first());
   }
 
   /* -------------------------------------------- */
@@ -261,13 +258,13 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /**
    * Get the roll parts used to create the attack roll.
    * @param {object} [config={}]
-   * @param {string} [config.ammunition]
    * @param {string} [config.ability]
+   * @param {string} [config.ammunition]
    * @param {string} [config.attackMode]
    * @param {string} [config.situational]
    * @returns {{ data: object, parts: string[] }}
    */
-  getAttackData({ ammunition, ability, attackMode, situational }={}) {
+  getAttackData({ ability, ammunition, attackMode, situational }={}) {
     const rollData = this.getRollData({ ability, roll: { attackMode } });
     if ( ability && (ability in CONFIG.DND5E.abilities) ) rollData.roll.ability = ability;
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
