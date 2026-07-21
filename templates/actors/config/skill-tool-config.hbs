@@ -18,7 +18,7 @@
         {{ formField fields.bonuses.fields.passive name=(concat prefix "bonuses.passive") value=data.bonuses.passive
                      localize=true rootId=partId }}
         {{/if}}
-        {{ formField fields.bonuses.fields.check name=(concat prefix "bonuses.check") value=data.bonuses.check
+        {{ formField fields.roll.fields.bonus name=(concat prefix "roll.bonus") value=data.roll.bonus
                      localize=true rootId=partId }}
     </fieldset>
 
@@ -47,9 +47,11 @@
         <div class="form-group">
             <p class="hint">{{ localize (concat section "Global.Hint") }}</p>
         </div>
-        {{ formField global.fields.check value=global.data.check localize=true rootId=partId }}
+        {{ formField global.fields.check.fields.bonus value=global.data.check.bonus localize=true rootId=partId }}
         {{#if global.skill}}
-        {{ formField global.fields.skill value=global.data.skill localize=true rootId=partId }}
+        {{ formField global.fields.skill.fields.bonus value=global.data.skill.bonus localize=true rootId=partId }}
+        {{else}}
+        {{ formField global.fields.tool.fields.bonus value=global.data.tool.bonus localize=true rootId=partId }}
         {{/if}}
     </fieldset>
     {{/if}}
