@@ -50,7 +50,6 @@ export default class D20Roll extends BasicRoll {
     const formula = [new CONFIG.Dice.D20Die().formula].concat(config.parts ?? []).join(" + ");
     config.options.criticalSuccess ??= CONFIG.Dice.D20Die.CRITICAL_SUCCESS_TOTAL;
     config.options.criticalFailure ??= CONFIG.Dice.D20Die.CRITICAL_FAILURE_TOTAL;
-    config.options.elvenAccuracy ??= process.elvenAccuracy;
     config.options.halflingLucky ??= process.halflingLucky;
     config.options.reliableTalent ??= process.reliableTalent;
     config.options.target ??= process.target;

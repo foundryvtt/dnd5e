@@ -1,5 +1,4 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
-import AppliedRules from "../../documents/applied-rules.mjs";
 import { convertLength, formatLength, formatNumber, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import D20RollModificationField from "../shared/d20-roll-modification-field.mjs";
@@ -9,7 +8,6 @@ import BaseActivityData from "./base-activity.mjs";
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { AttackDamageRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { AttackActivityData } from "./_types.mjs";
  */
 
@@ -192,11 +190,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
     this.attack.type.value ||= this.item.system.attackType ?? "melee";
     this.attack.type.classification ||= this.item.system.attackClassification ?? "weapon";
 
-    if ( this.attack.ability === "spellcasting" ) {
-      this.attack.abilities.add(this.spellcastingAbility);
-    } else if ( this.attack.ability in CONFIG.DND5E.abilities ) {
-      this.attack.abilities.add(this.attack.ability);
-    } else if ( !this.attack.ability ) {
+    if ( this.attack.ability in CONFIG.DND5E.abilities ) this.attack.abilities.add(this.attack.ability);
+    else if ( !this.attack.ability ) {
       for ( const ability of this.availableAbilities ) this.attack.abilities.add(ability);
     }
   }
@@ -205,6 +200,12 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
+    // Must be resolved here because we do not know all spellcasting classes and their spellcasting abilities until
+    // class items have finished preparing.
+    if ( (this.attack.ability === "spellcasting") && this.spellcastingAbility ) {
+      this.attack.abilities.add(this.spellcastingAbility);
+    }
+
     if ( this.damage.includeBase && this.item.system.offersBaseDamage && this.item.system.damage.base.formula ) {
       const basePart = this.item.system.damage.base.clone(this.item.system.damage.base.toObject(false));
       basePart.base = true;
@@ -266,8 +267,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
    * @returns {{ data: object, parts: string[] }}
    */
   getAttackData({ ability, ammunition, attackMode, situational }={}) {
-    const rollData = this.getRollData({ ability, roll: { attackMode } });
-    if ( ability && (ability in CONFIG.DND5E.abilities) ) rollData.roll.ability = ability;
+    const rollData = this.getRollData({ roll: { ability, attackMode } });
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
     const weapon = this.item.system;
@@ -276,7 +276,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
-      mod: ability !== "none" ? rollData.mod : null,
+      mod: rollData.roll.ability ? rollData.mod : null,
       prof: weapon.prof?.term,
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
@@ -382,8 +382,9 @@ export default class BaseAttackActivityData extends BaseActivityData {
   getRollData(options={}) {
     const rollData = super.getRollData(options);
     if ( options.roll ) {
+      const ability = options.roll.ability ?? this.ability;
       rollData.roll ??= {};
-      rollData.roll.ability = this.ability;
+      rollData.roll.ability = ability === "none" ? null : ability;
       rollData.roll.attack ??= {};
       rollData.roll.attack.classification = this.attack.type.classification;
       rollData.roll.attack.mode = options.roll.attackMode;

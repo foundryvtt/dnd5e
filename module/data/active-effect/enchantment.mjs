@@ -87,8 +87,9 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     switch ( change.key ) {
       case "system.ability":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          const field = change.type === "override" ? "attack.ability" : "attack.abilities";
-          changes[`system.activities.${activity.id}.${field}`] = applyField(activity, { ...change, key: field });
+          changes[`system.activities.${activity.id}.attack.abilities`] = applyField(
+            activity, { ...change, key: "attack.abilities" }
+          );
         }
         return false;
       case "system.attack.bonus":

@@ -1,10 +1,8 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
-import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
-import AppliedRules from "../applied-rules.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -122,7 +120,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       rollConfig.mastery = masteryOptions?.[0]?.value;
     }
 
-    const rollData = this.getRollData({ roll: { attackMode: rollConfig.attackMode } });
+    const rollData = this.getRollData({ roll: { ability: rollConfig.ability, attackMode: rollConfig.attackMode } });
     const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
       "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
@@ -343,11 +341,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const actorAbilities = this.actor?.system.abilities ?? {};
     const options = Array.from(this.attack.abilities)
       .filter(ability => ability in CONFIG.DND5E.abilities)
-      .sort((ability, largest) => {
-        const abilityMod = actorAbilities[ability]?.mod ?? -Infinity;
-        const largestMod = actorAbilities[largest]?.mod ?? -Infinity;
-        return largestMod - abilityMod;
-      })
+      .sort((a, b) => (actorAbilities[b]?.mod ?? 0) - (actorAbilities[a]?.mod ?? 0))
       .map(value => ({ value, label: CONFIG.DND5E.abilities[value].label }));
     if ( this.attack.ability === "none" ) options.push({ value: "none", label: _loc("DND5E.None") });
     return options;
