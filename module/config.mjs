@@ -3919,6 +3919,28 @@ DND5E.bloodied = {
 /* -------------------------------------------- */
 
 /**
+ * Configuration for falling damage. A creature takes `damageDie` of `damageType` damage for every whole
+ * `distancePerDie` feet it falls, up to a maximum of `maximumDice` dice.
+ * @type {{ damageDie: string, damageType: string, distancePerDie: number, maximumDice: number }}
+ */
+DND5E.falling = {
+  damageDie: "d6",
+  damageType: "bludgeoning",
+  distancePerDie: 10,
+  maximumDice: 20
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Visually scale tokens smaller the farther they are below the viewed level, to convey depth.
+ * @type {boolean}
+ */
+DND5E.elevationScaling = true;
+
+/* -------------------------------------------- */
+
+/**
  * System provided active effect change types.
  * @enum {ActiveEffectChangeTypeConfig & { [group]: string, [skipConditions]: boolean }}
  */

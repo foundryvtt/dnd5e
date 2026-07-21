@@ -6,6 +6,7 @@ import TravelField from "../../data/actor/fields/travel-field.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
+import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import {
@@ -32,8 +33,9 @@ import ConditionData from "../../data/active-effect/condition.mjs";
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
- *   ActorRollData, DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
- *   RestConfiguration, RestResult, RollDataOptions, SpellcastingDescription
+ *   ActorRollData, ActorUpdatesDescription, DamageAffectCategory, DamageApplicationOptions,
+ *   DamageDescription, DamageSummary, RestConfiguration, RestResult, RollDataOptions,
+ *   SpellcastingDescription
  * } from "../_types.mjs";
  */
 
@@ -768,7 +770,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       isBar: true
     }, updates) === false ) return this;
 
-    await this.update(updates);
+    const context = options.origin?.getFlag?.("dnd5e", "context");
+    await this.update(updates, context ? { dnd5e: context } : {});
 
     /**
      * A hook event that fires after damage has been applied to an actor.
@@ -1341,13 +1344,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       [type]: config[type],
       type
     };
-    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
-      `abilities.${abilityId}.check.roll.mode`,
-      `${type}s.${type === "skill" ? config.skill : config.tool}.roll.mode`
-    ], AppliedRules.collect("check:advantage", this).filterWith(rollData).toAdvantageCounts({
+    const { advantage, disadvantage } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`,
+      "rolls.ability.check",
+      `rolls.ability.${type}`,
+      `${type}s.${type === "skill" ? config.skill : config.tool}.roll`
+    ], {
       advantages: { count: Number(doubleProf) + Number(pace.advantage) },
-      disadvantages: { count: Number(pace.disadvantage) }
-    }));
+      disadvantages: { count: Number(pace.disadvantage) },
+      rules: { category: "check", actor: this, rollData }
+    });
 
     const rollConfig = foundry.utils.mergeObject({
       advantage, disadvantage,
@@ -1439,28 +1445,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       type: type
     });
 
+    const { bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`,
+      "rolls.ability.check",
+      `rolls.ability.${type}`,
+      `${type}s.${type === "skill" ? process.skill : process.tool}.roll`
+    ], { rules: { category: "check", actor: this, rollData } });
+
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: prof?.hasProficiency ? prof.term : null,
-      [`${config[type]}Bonus`]: relevant?.bonuses?.check,
       extraBonus: process.bonus,
-      [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
-      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-      abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      ruleBonus: AppliedRules.collect("check:bonus", this).filterWith(rollData).toFormula()
+      ruleBonus: bonus
     }, { ...rollData });
 
     // Add condition reductions.
     this.addConditionRollReduction(parts, data);
 
-    config.options = foundry.utils.mergeObject({
-      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).resolve(rollData).toSmallest(
-        Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity)
-      ),
-      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).resolve(rollData).toLargest(
-        Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
-      )
-    }, config.options ?? {});
+    config.options = CONFIG.Dice.D20Roll.mergeOptions({ maximum, minimum }, config.options ?? {});
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
     config.data.abilityId = abilityId;
@@ -1564,27 +1566,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       proficient: ability?.[`${type}Prof`]?.multiplier >= 1,
       type: config[`${type}Type`] ?? "ability"
     });
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
+    ], { rules: { category: type, actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
-      [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
-      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-      ruleBonus: AppliedRules.collect(`${type}:bonus`, this).filterWith(rollData).toFormula(),
+      ruleBonus: bonus,
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
-
-    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
-      `abilities.${config.ability}.${type}.roll.mode`
-    ], AppliedRules.collect(`${type}:advantage`, this).filterWith(rollData).toAdvantageCounts());
-    const options = {
-      advantage, disadvantage,
-      maximum: AppliedRules.collect(`${type}:maximum`, this).filterWith(rollData).resolve(rollData).toSmallest(
-        ability?.[type]?.roll.max
-      ),
-      minimum: AppliedRules.collect(`${type}:minimum`, this).filterWith(rollData).resolve(rollData).toLargest(
-        ability?.[type]?.roll.min
-      )
-    };
 
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
@@ -1660,23 +1650,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return null;
     }
 
-    const parts = [];
-    let data = {};
-    const options = {
-      advantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-      maximum: death.roll.max,
-      minimum: death.roll.min
-    };
-
-    // Diamond Soul adds proficiency
-    if ( this.getFlag("dnd5e", "diamondSoul") ) {
-      parts.push("@prof");
-      data.prof = new Proficiency(this.system.attributes.prof, 1).term;
-    }
-
-    // Death save bonus
-    if ( death.bonuses.save ) parts.push(death.bonuses.save);
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      "attributes.death.roll"
+    ]);
+    const { parts, data } = CONFIG.Dice.D20Roll.constructParts({
+      prof: this.getFlag("dnd5e", "diamondSoul") ? new Proficiency(this.system.attributes.prof, 1).term : null,
+      deathBonus: bonus
+    }, {});
 
     const rollConfig = foundry.utils.mergeObject({ saveType: "death", target: 10 }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];
@@ -1801,18 +1781,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const conc = this.system.attributes?.concentration;
     if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
-    let data = {};
-    const parts = [];
-    const options = {
-      advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-      isConcentration: true,
-      maximum: conc.roll.max,
-      minimum: conc.roll.min
-    };
-
-    // Concentration bonus
-    if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      "attributes.concentration.roll"
+    ]);
+    options.isConcentration = true;
+    const { parts, data } = CONFIG.Dice.D20Roll.constructParts({ concentrationBonus: bonus }, {});
 
     const rollConfig = foundry.utils.mergeObject({
       ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
@@ -1894,20 +1867,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       proficient: init.prof.multiplier >= 1,
       type: "initiative"
     });
+    const { advantage, disadvantage, bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`, "attributes.init.roll", "rolls.ability.check"
+    ], { rules: { category: "check", actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: init?.mod,
       prof: init.prof.hasProficiency ? init.prof.term : null,
-      initiativeBonus: init.bonus,
-      [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
-      abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      ruleBonus: AppliedRules.collect("check:bonus", this).filterWith(rollData).toFormula(),
+      ruleBonus: bonus,
       alert: flags.initiativeAlert && (dnd5e.settings.rulesVersion === "legacy") ? 5 : null
     }, rollData);
-
-    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
-      `abilities.${abilityId}.check.roll.mode`,
-      "attributes.init.roll.mode"
-    ], AppliedRules.collect("check:advantage", this).filterWith(rollData).toAdvantageCounts());
 
     // Add condition reductions
     this.addConditionRollReduction(parts, data);
@@ -1921,16 +1889,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && this.system.isNPC);
 
     options = foundry.utils.mergeObject({
-      advantage, disadvantage,
+      advantage, disadvantage, maximum, minimum,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
-      maximum: AppliedRules.collect("check:maximum", this).filterWith(rollData).resolve(rollData).toSmallest(
-        Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity)
-      ),
-      minimum: AppliedRules.collect("check:minimum", this).filterWith(rollData).resolve(rollData).toLargest(
-        Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
-      )
     }, options);
 
     const rollConfig = { parts, data, options, subject: this };
@@ -2416,13 +2378,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.preRestCompleted", this, result, config) === false ) return result;
 
-    // Perform updates
-    await this.update(result.updateData, { isRest: true });
-    await this.deleteEmbeddedDocuments("Item", result.deleteItems, { isRest: true });
-    await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
-
     // Expire active effects
     const expiryEvents = CONFIG.DND5E.restTypes[config.type ?? "long"]?.expiryEvents ?? [];
+    let operations = [];
     if ( expiryEvents.length ) {
       const expired = new Map();
       const expireEffect = effect => {
@@ -2440,10 +2398,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           if ( effect.isAppliedEnchantment ) expireEffect(effect);
         }
       }
-      const operations = expired.entries()
-        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }));
-      await foundry.documents.modifyBatch(operations.toArray());
+      operations = expired.entries()
+        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }))
+        .toArray();
     }
+
+    // Perform updates
+    await this.performBulkUpdate(
+      { actor: result.updateData, delete: result.deleteItems, item: result.updateItems, operations }, { isRest: true }
+    );
 
     // Advance the game clock
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
@@ -3770,6 +3733,46 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static getDefaultArtwork(actorData={}) {
     const img = CONFIG.DND5E.defaultArtwork.Actor[actorData.type];
     return img ? { img, texture: { src: img } } : super.getDefaultArtwork(actorData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Perform bulk updates on the actor and its embedded documents.
+   * @param {ActorUpdatesDescription} updates
+   * @param {DatabaseUpdateOperation[]} [updates.operations=[]]    Additional database operations to perform.
+   * @param {object} [options]                                     Options passed to all database operations.
+   * @param {Partial<DatabaseCreateOperation>} [options.createOptions={}]  Options passed to item creation operation. By
+   *                                                                       default the `keepId` option is set to `true`.
+   * @param {Partial<DatabaseDeleteOperation>} [options.deleteOptions={}]  Options passed to item deletion operation.
+   * @param {Partial<DatabaseUpdateOperation>} [options.updateOptions={}]  Options passed to item update operation.
+   * @returns {Promise<Document[][]>}
+   */
+  performBulkUpdate(
+    { operations=[], ...updates }, { createOptions={}, deleteOptions={}, updateOptions={}, ...options }={}
+  ) {
+    if ( !foundry.utils.isEmpty(updates.actor) ) operations.push(this.parent
+      ? {
+        action: "update", documentName: "ActorDelta", parent: this.parent,
+        updates: [{ _id: this.parent.delta.id, ...updates.actor }], ...options
+      }
+      : { action: "update", documentName: "Actor", updates: [{ _id: this.id, ...updates.actor }], ...options }
+    );
+    if ( !foundry.utils.isEmpty(updates.create) ) operations.push({
+      action: "create", documentName: "Item", data: updates.create, parent: this, keepId: true,
+      ...options, ...createOptions
+    });
+    if ( !foundry.utils.isEmpty(updates.delete) ) operations.push({
+      action: "delete", documentName: "Item", ids: updates.delete, parent: this,
+      ...options, ...deleteOptions
+    });
+    if ( !foundry.utils.isEmpty(updates.item) ) operations.push({
+      action: "update", documentName: "Item", updates: updates.item, parent: this,
+      ...options, ...updateOptions
+    });
+    return foundry.documents.modifyBatch(operations);
   }
 }
 

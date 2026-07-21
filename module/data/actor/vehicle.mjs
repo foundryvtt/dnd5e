@@ -268,6 +268,7 @@ export default class VehicleData extends CommonTemplate {
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
     MovementField._shim(this.attributes.movement);
+    this.shimBonusData();
   }
 
   /* -------------------------------------------- */

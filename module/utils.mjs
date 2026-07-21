@@ -758,11 +758,12 @@ export function loadingTooltip({ uuid, passive=false }={}) {
 
 /**
  * Grab the targeted tokens and return relevant information on them.
+ * @param {Iterable<Token5e|TokenDocument5e>} [tokens]  Tokens to describe. Defaults to the user's current targets.
  * @returns {TargetDescriptor5e[]}
  */
-export function getTargetDescriptors() {
+export function getTargetDescriptors(tokens=game.user.targets) {
   const targets = new Map();
-  for ( const token of game.user.targets ) {
+  for ( const token of tokens ) {
     const { name } = token;
     const { img, system, uuid, statuses } = token.actor ?? {};
     if ( uuid ) {
@@ -1433,7 +1434,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   }
 
   // Derived fields
-  else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( attr === "attributes.init.total" ) label = "DND5E.INITIATIVE.FIELDS.attributes.init.roll.bonus.label";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
   else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
   else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";

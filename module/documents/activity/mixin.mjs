@@ -404,12 +404,7 @@ export default function ActivityMixin(Base) {
       const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 
       // Update documents with consumption
-      if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
-      if ( !foundry.utils.isEmpty(updates.create) ) {
-        await this.actor.createEmbeddedDocuments("Item", updates.create, { keepId: true });
-      }
-      if ( !foundry.utils.isEmpty(updates.delete) ) await this.actor.deleteEmbeddedDocuments("Item", updates.delete);
-      if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+      await this.actor.performBulkUpdate(updates);
 
       return consumed;
     }
@@ -1178,13 +1173,14 @@ export default function ActivityMixin(Base) {
     static async placeTemplateBehaviors(region, options, userId) {
       if ( !game.user.isActiveGM || (options.dnd5e?.createActivityBehaviors === false) ) return;
 
-      const activity = await fromUuid(region.getFlag("dnd5e", "origin"));
+      const activity = await fromUuid(region.getFlag("dnd5e", "activity"));
       const behaviors = activity?.applicableBehaviors;
       if ( !behaviors?.length ) return;
 
+      const token = fromUuidSync(region.getFlag("dnd5e", "origin"));
       const toCreate = [];
       for ( const behavior of behaviors ) {
-        const data = behavior.config.createBehaviorData(activity);
+        const data = behavior.config.createBehaviorData(activity, { token });
         if ( !data ) continue;
         data.name ??= behavior.name;
         toCreate.push(data);

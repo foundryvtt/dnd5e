@@ -10,8 +10,11 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import Actor5e from "./actor/actor.mjs";
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
  */
+
+const BONUS_SHIM_REGEX = new RegExp(/system\.(abilities|skills|tools)\.(\w+)\.bonuses\.(check|save)/);
 
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
@@ -68,6 +71,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {Record<string, { key: string, [type]: string, [value]: Function, [warning]: object }>}
    */
   static SHIM_FIELDS = {
+    "system.attributes.concentration.bonuses.save": { key: "system.attributes.concentration.roll.bonus" },
+    "system.attributes.death.bonuses.save": { key: "system.attributes.death.roll.bonus" },
+    "system.attributes.init.bonus": { key: "system.attributes.init.roll.bonus" },
     "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
     "system.attributes.movement.burrow": { key: "system.attributes.movement.speeds.burrow" },
     "system.attributes.movement.climb": { key: "system.attributes.movement.speeds.climb" },
@@ -78,7 +84,18 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.attributes.senses.darkvision": { key: "system.attributes.senses.ranges.darkvision" },
     "system.attributes.senses.blindsight": { key: "system.attributes.senses.ranges.blindsight" },
     "system.attributes.senses.tremorsense": { key: "system.attributes.senses.ranges.tremorsense" },
-    "system.attributes.senses.truesight": { key: "system.attributes.senses.ranges.truesight" }
+    "system.attributes.senses.truesight": { key: "system.attributes.senses.ranges.truesight" },
+    "system.bonuses.mwak.attack": { key: "system.rolls.attack.mwak.bonus" },
+    "system.bonuses.msak.attack": { key: "system.rolls.attack.msak.bonus" },
+    "system.bonuses.rwak.attack": { key: "system.rolls.attack.rwak.bonus" },
+    "system.bonuses.rsak.attack": { key: "system.rolls.attack.rsak.bonus" },
+    "system.bonuses.mwak.damage": { key: "system.rolls.damage.mwak.bonus" },
+    "system.bonuses.msak.damage": { key: "system.rolls.damage.msak.bonus" },
+    "system.bonuses.rwak.damage": { key: "system.rolls.damage.rwak.bonus" },
+    "system.bonuses.rsak.damage": { key: "system.rolls.damage.rsak.bonus" },
+    "system.bonuses.abilities.check": { key: "system.rolls.ability.check.bonus" },
+    "system.bonuses.abilities.save": { key: "system.rolls.ability.save.bonus" },
+    "system.bonuses.abilities.skill": { key: "system.rolls.ability.skill.bonus" }
   };
 
   /* -------------------------------------------- */
@@ -451,8 +468,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @protected
    */
   _applyChangeShim(change) {
-    const shim = ActiveEffect5e.SHIM_FIELDS[change.key];
-    if ( !shim ) return change;
+    let shim = ActiveEffect5e.SHIM_FIELDS[change.key];
+    if ( !shim ) {
+      const [, category, key, type] = change.key.match(BONUS_SHIM_REGEX) ?? [];
+      if ( !category ) return change;
+      shim = { key: `system.${category}.${key}.${category === "abilities" ? `${type}.` : ""}roll.bonus` };
+    }
     if ( shim.warning ) foundry.utils.logCompatibilityWarning(
       `The active effect key "${change.key}" has been deprecated and should be changed to "${shim.key}".`,
       shim.warning
@@ -588,10 +609,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /**
-   * Create conditions that are applied separately from an effect.
-   * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
+   * Gather batch entries for conditions that are applied separately from an effect.
+   * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
    */
-  async createRiderConditions() {
+  async collectRiderConditions() {
     const riders = new Set(this.system.rider?.statuses ?? []);
 
     for ( const status of this.statuses ) {
@@ -608,17 +629,20 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return effect.toObject();
     };
 
-    const effectData = await Promise.all(Array.from(riders).map(createRider));
-    return ActiveEffect5e.createDocuments(effectData.filter(_ => _), { keepId: true, parent: this.parent });
+    const data = (await Promise.all(Array.from(riders).map(createRider))).filter(_ => _);
+    if ( !data.length ) return [];
+    return [{ action: "create", documentName: "ActiveEffect", data, parent: this.parent, keepId: true }];
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Create additional activities, effects, and items that are applied separately from an enchantment.
-   * @param {object} options  Options passed to the effect creation.
+   * Gather batch entries for additional activities, effects, and items applied separately from an enchantment.
+   * @param {object} options                       Options passed to the effect creation.
+   * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
    */
-  async createRiderEnchantments(options={}) {
+  async collectRiderEnchantments(options={}) {
+    const batchedUpdates = [];
     let item;
     let profile;
     const { chatMessageOrigin } = options;
@@ -642,7 +666,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       profile = activity?.effects.find(e => e._id === enchantmentProfile);
     }
 
-    if ( !profile || !item ) return;
+    if ( !profile || !item ) return [];
 
     // Create Activities
     const riderActivities = {};
@@ -655,11 +679,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       riderActivities[activityData._id] = activityData;
     }
     if ( !foundry.utils.isEmpty(riderActivities) ) {
-      await this.item.update({ "system.activities": riderActivities });
-      const createdActivities = Object.keys(riderActivities).map(id => this.item.system.activities?.get(id));
-      createdActivities.forEach(a => a.effects?.forEach(e => {
-        if ( !this.item.effects.has(e._id) ) riderEffects.push(item.effects.get(e._id)?.toObject());
-      }));
+      batchedUpdates.push({
+        action: "update", documentName: "Item", parent: this.item.actor,
+        updates: [{ _id: this.item.id, "system.activities": riderActivities }]
+      });
+      riderEffects = Object.values(riderActivities).flatMap(a =>
+        a.effects?.map(e => item.effects.get(e._id)?.toObject())
+      ).filter(e => e && !this.item.effects.has(e._id));
     }
 
     // Create Effects
@@ -674,7 +700,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }));
     riderEffects = riderEffects.filter(_ => _);
     riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
-    await this.item.createEmbeddedDocuments("ActiveEffect", riderEffects, { keepId: true });
+    batchedUpdates.push({
+      action: "create", documentName: "ActiveEffect", data: riderEffects, parent: this.item, keepId: true
+    });
 
     // Create Items
     if ( this.item.isEmbedded ) {
@@ -688,8 +716,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
           }
         }
       );
-      await this.actor.createEmbeddedDocuments("Item", riderItems, { keepId: true });
+      batchedUpdates.push({
+        action: "create", documentName: "Item", data: riderItems, parent: this.actor, keepId: true
+      });
     }
+
+    return batchedUpdates;
   }
 
   /* -------------------------------------------- */
@@ -725,13 +757,19 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _onCreate(data, options, userId) {
-    super._onCreate(data, options, userId);
-    if ( userId === game.userId ) {
-      if ( this.active && (this.parent instanceof Actor) ) await this.createRiderConditions();
-      if ( this.isAppliedEnchantment ) await this.createRiderEnchantments(options);
-    }
+  /**
+   * Re-evaluate whether an actor should have the falling status. A creature that becomes prone or incapacitated while
+   * airborne starts falling unless it can hover.
+   * @param {Actor5e} actor  The actor to re-evaluate.
+   * @returns {Promise<void>}
+   */
+  static async #updateFalling(actor) {
+    if ( dnd5e.settings.disableFalling || !(actor instanceof Actor) ) return;
+    const falling = actor.statuses.has("falling");
+    if ( !falling && !actor.statuses.has("prone") && !actor.statuses.has("incapacitated") ) return;
+    const shouldFall = actor.getActiveTokens(false, true).some(token => token._isFalling());
+    if ( shouldFall === falling ) return;
+    await actor.toggleStatusEffect("falling", { active: shouldFall });
   }
 
   /* -------------------------------------------- */
@@ -740,16 +778,22 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static async _onCreateOperation(documents, operation, user) {
     await super._onCreateOperation(documents, operation, user);
     if ( user.id !== game.userId ) return;
-    // Prompt to end concentration at most once per actor, even when several incapacitating effects are created in the
-    // same operation.
+    const batch = [];
+    const actors = new Set();
     const prompted = new Set();
     for ( const effect of documents ) {
-      if ( !effect._shouldPromptConcentrationEnd() ) continue;
-      const actor = effect.parent;
-      if ( prompted.has(actor) ) continue;
-      prompted.add(actor);
-      await actor.promptConcentrationEnd();
+      if ( effect._shouldPromptConcentrationEnd() && !prompted.has(effect.parent) ) {
+        prompted.add(effect.parent);
+        await effect.parent.promptConcentrationEnd();
+      }
+      if ( effect.active && (effect.parent instanceof Actor) ) {
+        batch.push(...await effect.collectRiderConditions());
+        actors.add(effect.parent);
+      }
+      if ( effect.isAppliedEnchantment ) batch.push(...await effect.collectRiderEnchantments(operation));
     }
+    if ( batch.length ) await foundry.documents.modifyBatch(batch);
+    for ( const actor of actors ) await ActiveEffect5e.#updateFalling(actor);
   }
 
   /* -------------------------------------------- */
@@ -803,9 +847,29 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onDelete(options, userId) {
-    super._onDelete(options, userId);
-    if ( game.user === game.users.activeGM ) this.getDependents().forEach(e => e.delete());
+  static async _onDeleteOperation(documents, operation, user) {
+    await super._onDeleteOperation(documents, operation, user);
+    if ( game.user === game.users.activeGM ) {
+      const dependents = new Map();
+      for ( const effect of documents ) {
+        for ( const dependent of effect.getDependents() ) {
+          dependents.getOrInsert(dependent.parent, new Set()).add(dependent.id);
+        }
+      }
+      const batch = dependents.entries()
+        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids: [...ids], parent }))
+        .toArray();
+      if ( batch.length ) await foundry.documents.modifyBatch(batch);
+    }
+
+    if ( user.id !== game.userId ) return;
+
+    // Re-evaluate falling once per affected actor, since removing prone or incapacitating effects can end a fall.
+    const actors = new Set();
+    for ( const effect of documents ) {
+      if ( !effect.statuses.has("falling") && (effect.parent instanceof Actor) ) actors.add(effect.parent);
+    }
+    for ( const actor of actors ) await ActiveEffect5e.#updateFalling(actor);
   }
 
   /* -------------------------------------------- */
@@ -1232,5 +1296,44 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     }, dialogOptions);
     if ( sheet ) return sheet._confirmDialog(config);
     return foundry.applications.api.DialogV2.confirm(config);
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * Create conditions that are applied separately from an effect.
+   * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
+   * @deprecated since DnD5e 6.0
+   */
+  async createRiderConditions() {
+    foundry.utils.logCompatibilityWarning(
+      "The `createRiderConditions` method has been deprecated in favor of `collectRiderConditions`, which returns "
+      + "batch entries rather than creating documents.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+    );
+    const created = [];
+    for ( const { data, keepId, parent } of await this.collectRiderConditions() ) {
+      created.push(...await ActiveEffect5e.createDocuments(data, { keepId, parent }));
+    }
+    return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create additional activities, effects, and items that are applied separately from an enchantment.
+   * @param {object} options  Options passed to the effect creation.
+   * @deprecated since DnD5e 6.0
+   */
+  async createRiderEnchantments(options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `createRiderEnchantments` method has been deprecated in favor of `collectRiderEnchantments`, which returns "
+      + "batch entries rather than applying them.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+    );
+    const batch = await this.collectRiderEnchantments(options);
+    if ( batch.length ) await foundry.documents.modifyBatch(batch);
   }
 }

@@ -107,11 +107,11 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     if ( Hooks.call("dnd5e.preTeleport", this, config) === false ) return;
 
     const plans = [];
-    for ( const token of tokens ) {
+    for ( const token of config.tokens ) {
       const plan = await token.planMovement({
-        maxDistance,
         allowedActions: ["blink"],
         direct: true,
+        maxDistance: config.maxDistance,
         preventDrop: true
       });
       if ( !plan ) continue;

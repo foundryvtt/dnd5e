@@ -366,7 +366,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     // Skills & Tools
     const skillSetting = game.settings.get("dnd5e", "defaultSkills");
     context.skills = this._prepareSkillsTools(context, "skills")
-      .filter(v => v.prof.multiplier || skillSetting.has(v.key) || v.bonuses.check || v.bonuses.passive);
+      .filter(v => v.prof.multiplier || skillSetting.has(v.key) || v.roll.bonus || v.bonuses.passive);
     context.tools = this._prepareSkillsTools(context, "tools");
 
     // Speed
@@ -417,14 +417,18 @@ export default class NPCActorSheet extends BaseActorSheet {
         name: "system.traits.important",
         value: context.source.traits.important
       }, {
-        label: "DND5E.NPC.FIELDS.attributes.price.label",
-        hint: "DND5E.NPC.FIELDS.attributes.price.hint",
+        group: {
+          label: "DND5E.NPC.FIELDS.attributes.price.label",
+          hint: "DND5E.NPC.FIELDS.attributes.price.hint"
+        },
         fields: [{
+          classes: "label-top",
           field: fields.attributes.fields.price.fields.value,
           name: "system.attributes.price.value",
           value: context.source.attributes.price.value
         }, {
           choices: CONFIG.DND5E.currencies,
+          classes: "label-top",
           field: fields.attributes.fields.price.fields.denomination,
           name: "system.attributes.price.denomination",
           value: context.source.attributes.price.denomination
@@ -442,10 +446,10 @@ export default class NPCActorSheet extends BaseActorSheet {
     context = await super._prepareSpellsContext(context, options);
     context.classSpellcasting = Object.values(this.actor.classes).some(c => c.spellcasting?.levels);
 
-    const { abilities, attributes, bonuses } = this.actor.system;
+    const { abilities, attributes, rolls } = this.actor.system;
     context.spellcasting = [];
-    const msak = simplifyBonus(bonuses.msak.attack, context.rollData);
-    const rsak = simplifyBonus(bonuses.rsak.attack, context.rollData);
+    const msak = simplifyBonus(rolls.attack?.msak?.bonus, context.rollData);
+    const rsak = simplifyBonus(rolls.attack?.rsak?.bonus, context.rollData);
     const spellcaster = Object.values(this.actor.spellcastingClasses)[0];
     const ability = spellcaster?.spellcasting.ability ?? attributes.spellcasting;
     const spellAbility = abilities[ability];

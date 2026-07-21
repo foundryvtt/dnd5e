@@ -2,6 +2,7 @@ import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
+import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
 import AppliedRules from "../applied-rules.mjs";
 import ActivityMixin from "./mixin.mjs";
@@ -122,10 +123,9 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     }
 
     const rollData = this.getRollData({ roll: { attackMode: rollConfig.attackMode } });
-    const { advantage, disadvantage } = this.actor ? AdvantageModeField.combineFields(
-      this.actor.system, [],
-      AppliedRules.collect("attack:advantage", this.actor, this.item).filterWith(rollData).toAdvantageCounts()
-    ) : {};
+    const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
@@ -265,16 +265,15 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
-    const options = foundry.utils.mergeObject({
-      elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy") &&
-        CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
-      maximum: this.actor
-        ? AppliedRules.collect("attack:maximum", this.actor, this.item).filterWith(data).resolve(data).toSmallest()
-        : undefined,
-      minimum: this.actor
-        ? AppliedRules.collect("attack:minimum", this.actor, this.item).filterWith(data).resolve(data).toLargest()
-        : undefined,
-    }, config.options ?? {});
+    const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData: data } }) : {};
+    const options = CONFIG.Dice.D20Roll.mergeOptions({
+      elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
+        && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
+      maximum,
+      minimum
+    }, config.options);
     if ( ability !== undefined ) options.ability = ability;
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;

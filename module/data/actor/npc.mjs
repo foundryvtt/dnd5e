@@ -33,7 +33,7 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.NPC", "DND5E.BONUSES", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.NPC", "DND5E.BONUSES", "DND5E.ROLL", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -74,10 +74,8 @@ export default class NPCData extends CreatureTemplate {
           failure: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
           }),
-          bonuses: new SchemaField({
-            save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
-          })
-        }, { label: "DND5E.DeathSave" }),
+          bonuses: new SchemaField({}, { persisted: false })
+        }, { label: "DND5E.DeathSave", labelPrefix: "DND5E.DEATH.FIELDS.attributes.death.roll." }),
         price: new SchemaField({
           value: new NumberField({ initial: null, min: 0 }),
           denomination: new StringField({ required: true, blank: false, initial: () => CONFIG.DND5E.defaultCurrency })
@@ -400,6 +398,7 @@ export default class NPCData extends CreatureTemplate {
     AttributesFields.prepareBaseEncumbrance.call(this);
     MovementField._shim(this.attributes.movement);
     SensesField._shim(this.attributes.senses);
+    this.shimBonusData();
   }
 
   /* -------------------------------------------- */
