@@ -253,7 +253,7 @@ export default class CreatureTemplate extends CommonTemplate {
    *                                             If undefined, the skills of the actor identified by
    *                                             `this.flags.dnd5e.originalActor` are used.
    * @param {object} [options.globalBonuses]     Global ability bonuses for this actor.
-   *                                             If undefined, `this.system.bonuses.abilities` is used.
+   *                                             If undefined, `this.system.rolls.ability` is used.
    * @param {number} [options.globalCheckBonus]  Global check bonus for this actor.
    *                                             If undefined, `globalBonuses.check` will be evaluated using `rollData`.
    * @param {number} [options.globalSkillBonus]  Global skill bonus for this actor.

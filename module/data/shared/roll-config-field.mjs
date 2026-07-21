@@ -1,4 +1,4 @@
-import D2RollModificationField from "./d20-roll-modification-field.mjs";
+import D20RollModificationField from "./d20-roll-modification-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
 
@@ -16,7 +16,7 @@ export default class RollConfigField extends SchemaField {
         label: "DND5E.AbilityModifier",
         labelFormatter: `${labelFormatterPrefix}ModifierAbility`
       }),
-      roll: new D2RollModificationField(roll, { labelPrefix, labelFormatterPrefix, required: true }),
+      roll: new D20RollModificationField(roll, { labelPrefix, labelFormatterPrefix, required: true }),
       ...fields
     };
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);

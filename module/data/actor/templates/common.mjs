@@ -71,17 +71,17 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     ["attributes.concentration.bonuses.save", "attributes.concentration.roll.bonus"],
     ["attributes.death.bonuses.save", "attributes.death.roll.bonus"],
     ["attributes.init.bonus", "attributes.init.roll.bonus"],
-    ["bonuses.mwak.attack", "roll.attack.mwak.bonus"],
-    ["bonuses.mwak.damage", "roll.damage.mwak.bonus"],
-    ["bonuses.rwak.attack", "roll.attack.rwak.bonus"],
-    ["bonuses.rwak.damage", "roll.damage.rwak.bonus"],
-    ["bonuses.msak.attack", "roll.attack.msak.bonus"],
-    ["bonuses.msak.damage", "roll.damage.msak.bonus"],
-    ["bonuses.rsak.attack", "roll.attack.rsak.bonus"],
-    ["bonuses.rsak.damage", "roll.damage.rsak.bonus"],
-    ["bonuses.abilities.check", "roll.ability.check.bonus"],
-    ["bonuses.abilities.save", "roll.ability.save.bonus"],
-    ["bonuses.abilities.skill", "roll.ability.skill.bonus"]
+    ["bonuses.mwak.attack", "rolls.attack.mwak.bonus"],
+    ["bonuses.mwak.damage", "rolls.damage.mwak.bonus"],
+    ["bonuses.rwak.attack", "rolls.attack.rwak.bonus"],
+    ["bonuses.rwak.damage", "rolls.damage.rwak.bonus"],
+    ["bonuses.msak.attack", "rolls.attack.msak.bonus"],
+    ["bonuses.msak.damage", "rolls.damage.msak.bonus"],
+    ["bonuses.rsak.attack", "rolls.attack.rsak.bonus"],
+    ["bonuses.rsak.damage", "rolls.damage.rsak.bonus"],
+    ["bonuses.abilities.check", "rolls.ability.check.bonus"],
+    ["bonuses.abilities.save", "rolls.ability.save.bonus"],
+    ["bonuses.abilities.skill", "rolls.ability.skill.bonus"]
   ];
 
   /* -------------------------------------------- */
@@ -102,8 +102,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    * @type {Array}
    */
   static #SKILL_TOOL_BONUS_FIELD_PATHS = [
-    ["bonuses.check", "check.roll.bonus"],
-    ["bonuses.save", "save.roll.bonus"]
+    ["bonuses.check", "check.roll.bonus"]
   ];
 
   /* -------------------------------------------- */
