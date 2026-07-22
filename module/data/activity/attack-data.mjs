@@ -283,7 +283,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     const ammo = this.actor?.items.get(ammunition)?.system;
     const rollFields = [
       ...(rollData.roll.ability ? [`abilities.${rollData.roll.ability}.attack.roll`] : []),
-      "rolls.ability.attack", "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
+      "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
     ];
     const { bonus } = this.actor ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
       rules: { category: "attack", actor: this.actor, item: this.item, rollData }

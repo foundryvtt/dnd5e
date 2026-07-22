@@ -258,7 +258,6 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const flags = this.parent.flags.dnd5e ?? {};
     const { prof = 0, ac } = this.attributes ?? {};
     Object.values(this.abilities).forEach(a => a.mod = Math.floor((a.value - 10) / 2));
-    const attackBonus = simplifyBonus(this.rolls?.ability?.attack?.bonus, rollData);
     const checkBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
     const saveBonus = simplifyBonus(this.rolls?.ability?.save?.bonus, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
@@ -296,7 +295,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       abl.save.value = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
-      abl.attack.value = abl.mod + prof + attackBonusAbl + attackBonus;
+      abl.attack.value = abl.mod + prof + attackBonusAbl;
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
