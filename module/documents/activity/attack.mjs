@@ -273,8 +273,6 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const options = CONFIG.Dice.D20Roll.mergeOptions({
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
-      advantage,
-      disadvantage,
       maximum,
       minimum
     }, config.options);
