@@ -73,7 +73,7 @@ system:
       activation:
         type: action
         override: false
-        condition: ''
+        condition: When you speak the ring's command word.
       behaviors: []
       consumption:
         scaling:
@@ -125,7 +125,7 @@ system:
           min: null
           max: null
         requireAttunement: false
-        requireIdentification: false
+        requireIdentification: true
         requireMagic: true
         identifier: ''
       roll:
@@ -209,7 +209,7 @@ system:
       activation:
         type: action
         override: true
-        condition: ''
+        condition: When you speak the ring's command word.
       behaviors: []
       consumption:
         scaling:
@@ -229,7 +229,7 @@ system:
           min: null
           max: null
         requireAttunement: false
-        requireIdentification: false
+        requireIdentification: true
         requireMagic: true
         identifier: ''
       activity:
@@ -286,11 +286,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.361'
+  coreVersion: '14.365'
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037258989
-  modifiedTime: 1783737276456
+  modifiedTime: 1784686283952
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!i3njMqHc689GvHDn'

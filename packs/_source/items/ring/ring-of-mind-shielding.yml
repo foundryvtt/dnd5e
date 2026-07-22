@@ -148,7 +148,7 @@ effects:
       changes:
         - key: name
           type: override
-          value: Concealed {}
+          value: '{} (concealed)'
           phase: initial
           _id: PzCOO4Cd0h1JSIca
           conditions: '{}'
@@ -177,11 +177,11 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      coreVersion: '14.361'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783737552954
-      modifiedTime: 1783737587178
+      modifiedTime: 1784686103475
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null

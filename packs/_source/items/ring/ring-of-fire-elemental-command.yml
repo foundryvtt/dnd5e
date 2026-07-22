@@ -380,7 +380,7 @@ system:
           min: null
           max: null
         requireAttunement: false
-        requireIdentification: false
+        requireIdentification: true
         requireMagic: true
         identifier: ''
       enchant:
@@ -471,7 +471,7 @@ effects:
           priority: null
         - key: system.activities.Ms02k1Fhvm6G1j6w.name
           type: override
-          value: '{} (Currently Empowered)'
+          value: Disempower Ring
           phase: initial
           _id: wLlWMnzoPHZO24z1
           conditions: '{}'
@@ -501,11 +501,11 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      coreVersion: '14.361'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
       createdTime: 1783789184620
-      modifiedTime: 1783789447338
+      modifiedTime: 1784686050492
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -570,11 +570,11 @@ flags:
         - q6cXIKdSWR0t6Y3b
 _stats:
   duplicateSource: null
-  coreVersion: '14.361'
+  coreVersion: '14.365'
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037164666
-  modifiedTime: 1783789794873
+  modifiedTime: 1784686045061
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!L9KBLub5vfb3mTDz'

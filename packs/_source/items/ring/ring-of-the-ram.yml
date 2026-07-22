@@ -17,7 +17,7 @@ system:
       the target takes 2d10 force damage and is pushed 5 feet away from
       you.</p><p>Alternatively, you can expend 1 to 3 of the ring's charges as
       an action to try to break an object you can see within [[lookup
-      @labels.description.range activity=NYLW0YyjhgBeOgv3]] of you that isn't
+      @labels.description.range activity=rmJ1x2WSFEXZxiGF]] of you that isn't
       being worn or carried. The ring makes a Strength check with a +5 bonus for
       each charge you spend.</p>
     chat: ''
@@ -175,12 +175,12 @@ system:
       behaviors: []
       flags: {}
       _id: zREIi21mwelFnaOK
-    NYLW0YyjhgBeOgv3:
-      type: check
+    rmJ1x2WSFEXZxiGF:
+      type: utility
       name: Break Object Check
-      _id: NYLW0YyjhgBeOgv3
+      _id: rmJ1x2WSFEXZxiGF
       img: ''
-      sort: 300000
+      sort: 400000
       activation:
         type: action
         override: false
@@ -189,7 +189,7 @@ system:
       consumption:
         scaling:
           allowed: true
-          max: '3'
+          max: '@item.uses.value'
         spellSlot: true
         targets:
           - type: itemUses
@@ -242,14 +242,11 @@ system:
         requireIdentification: true
         requireMagic: true
         identifier: ''
-      check:
-        associated: []
-        dc:
-          calculation: ''
-          formula: ''
+      roll:
+        prompt: true
         visible: true
-        ability: str
-        bonus: 3 * @scaling
+        name: Ring's Strength Check
+        formula: 1d20 + (3 * @scaling)
   attuned: false
   identifier: ring-of-the-ram
 effects: []
@@ -260,11 +257,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.361'
+  coreVersion: '14.365'
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037296791
-  modifiedTime: 1783737155739
+  modifiedTime: 1784686228064
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!qw05Om9XWqTMoio2'

@@ -108,7 +108,7 @@ system:
       name: ''
       img: ''
       visibility:
-        requireIdentification: false
+        requireIdentification: true
         level:
           min: null
           max: null
@@ -123,11 +123,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.361'
+  coreVersion: '14.365'
   systemId: dnd5e
   systemVersion: 6.0.0
   createdTime: 1725037244371
-  modifiedTime: 1783378968919
+  modifiedTime: 1784686238086
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ewXgnWiYQhS8KArS'
