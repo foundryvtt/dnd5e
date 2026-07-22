@@ -133,9 +133,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,
         criticalSuccess: this.criticalThreshold,
-        mastery: rollConfig.mastery,
-        maximum,
-        minimum
+        mastery: rollConfig.mastery
       }
     }, config.rolls?.shift())].concat(config.rolls ?? []);
     rollConfig.subject = this;
