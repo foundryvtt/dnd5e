@@ -293,8 +293,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
       prof: weapon.prof?.term,
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
+      ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
       ruleBonus: bonus,
-
       situational
     }, rollData);
 

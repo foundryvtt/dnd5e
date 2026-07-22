@@ -32,7 +32,6 @@ export default class CreatureTemplate extends CommonTemplate {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       bonuses: new SchemaField({
-
         spell: new SchemaField({
           dc: new FormulaField({ required: true, deterministic: true })
         })

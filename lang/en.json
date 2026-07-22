@@ -100,6 +100,14 @@
   "FIELDS": {
     "abilities": {
       "element": {
+        "attack": {
+          "roll": {
+            "bonus": { "label": "Attack Bonus" },
+            "max": { "label": "Maximum Attack Roll" },
+            "min": { "label": "Minimum Attack Roll" },
+            "mode": { "label": "Attack Advantage Mode" }
+          }
+        },
         "check": {
           "roll": {
             "bonus": { "label": "Check Bonus" },
@@ -120,6 +128,12 @@
     }
   },
   "Formatter": {
+    "Attack": {
+      "AdvantageMode": "{name} Attack Advantage Mode",
+      "Bonus": "{name} Attack Bonus",
+      "Maximum": "Maximum {name} Attack Roll",
+      "Minimum": "Minimum {name} Attack Roll"
+    },
     "Check": {
       "AdvantageMode": "{name} Check Advantage Mode",
       "Bonus": "{name} Check Bonus",

@@ -44,8 +44,6 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
           required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax",
           labelFormatter: "DND5E.ABILITY.Formatter.Maximum"
         }),
-        bonuses: new SchemaField({}, { label: "DND5E.AbilityBonuses", persisted: false }),
-
         attack: new RollConfigField({ ability: false, value: new NumberField({ integer: true, persisted: false }) }, {
           labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.attack.roll.",
           labelFormatterPrefix: "DND5E.ABILITY.Formatter.Attack."
@@ -299,7 +297,6 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       abl.save.value = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
       abl.attack.value = abl.mod + prof + attackBonusAbl + attackBonus;
-
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
