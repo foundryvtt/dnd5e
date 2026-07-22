@@ -174,7 +174,7 @@ export default class D20Roll extends BasicRoll {
   /** @override */
   get isFailure() {
     if ( !this._evaluated ) return;
-    if ( this.options.autoFail ) return true;
+    if ( this.options.autoFailure ) return true;
     return super.isFailure;
   }
 
@@ -183,7 +183,7 @@ export default class D20Roll extends BasicRoll {
   /** @override */
   get isSuccess() {
     if ( !this._evaluated ) return;
-    if ( this.options.autoFail ) return false;
+    if ( this.options.autoFailure ) return false;
     return super.isSuccess;
   }
 

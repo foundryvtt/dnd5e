@@ -56,10 +56,10 @@
  * Options that describe a d20 roll.
  *
  * @typedef {BasicRollOptions} D20RollOptions
- * @property {boolean} [autoFail]        Force the roll to fail, including on a critical success.
  * @property {boolean} [advantage]       Does this roll potentially have advantage?
  * @property {boolean} [disadvantage]    Does this roll potentially have disadvantage?
  * @property {D20Roll.ADV_MODE} [advantageMode]  Final advantage mode.
+ * @property {boolean} [autoFailure]     Force the roll to fail, including on a critical success.
  * @property {number} [criticalSuccess]  The value of the d20 die to be considered a critical success.
  * @property {number} [criticalFailure]  The value of the d20 die to be considered a critical failure.
  * @property {boolean} [elvenAccuracy]   Use three dice when rolling with advantage.

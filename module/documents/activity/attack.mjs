@@ -173,7 +173,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const rolls = await CONFIG.Dice.D20Roll.buildConfigure(rollConfig, dialogConfig, messageConfig);
     if ( (targets.length === 1) && (targets[0].cover === CONFIG.DND5E.statusEffects.coverTotal?.cover) ) {
       for ( const roll of rolls ) {
-        if ( !roll.options.ignoreTotalCover ) roll.options.autoFail = true;
+        if ( !roll.options.ignoreTotalCover ) roll.options.autoFailure = true;
       }
     }
     await CONFIG.Dice.D20Roll.buildEvaluate(rolls, rollConfig, messageConfig);
