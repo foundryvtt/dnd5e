@@ -121,7 +121,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       ...(rollConfig.ability ? [`abilities.${rollConfig.ability}.attack.roll`] : []),
       "rolls.ability.attack", "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
     ];
-    const { advantage, disadvantage, maximum, minimum } = this.actor
+    const { advantage, disadvantage } = this.actor
       ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
         rules: { category: "attack", actor: this.actor, item: this.item, rollData }
       }) : {};
