@@ -258,7 +258,6 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const attackMode = formData?.get("attackMode") ?? process.attackMode;
     const mastery = formData?.get("mastery") ?? process.mastery;
 
-    process.ability = ability;
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
     const rollFields = [
       ...(ability ? [`abilities.${ability}.attack.roll`] : []),
