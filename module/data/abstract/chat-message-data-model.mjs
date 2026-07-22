@@ -28,6 +28,16 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
   /* -------------------------------------------- */
 
   /**
+   * Whether the results of this message can be applied as damage or healing.
+   * @type {boolean}
+   */
+  get canApplyDamage() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Template to use when rendering this message.
    * @type {string}
    */

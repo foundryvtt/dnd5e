@@ -1379,19 +1379,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
-        flags: {
-          dnd5e: {
-            messageType: "roll",
-            roll: {
-              [`${type}Id`]: config[type],
-              type
-            }
-          }
-        },
         flavor: type === "skill"
           ? _loc("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
           : _loc("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
-        speaker: ChatMessage.getSpeaker({ actor: this })
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        system: { ability: abilityId, [type]: config[type] },
+        type: "check"
       }
     }, message);
 
@@ -1588,24 +1581,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const dialogConfig = foundry.utils.deepClone(dialog);
 
-    const messageConfig = foundry.utils.mergeObject({
-      create: true,
-      data: {
-        flags: {
-          dnd5e: {
-            messageType: "roll",
-            roll: {
-              ability: config.ability,
-              type: type === "check" ? "ability" : "save"
-            }
-          }
-        },
-        flavor: _loc(
-          `DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, { ability: abilityConfig?.label ?? "" }
-        ),
-        speaker: ChatMessage.getSpeaker({ actor: this })
-      }
-    }, message);
+    const messageData = {
+      flavor: _loc(`DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, {
+        ability: abilityConfig?.label ?? ""
+      }),
+      speaker: ChatMessage.getSpeaker({ actor: this })
+    };
+    if ( type === "check" ) Object.assign(messageData, { system: { ability: config.ability }, type: "check" });
+    else messageData.flags = { dnd5e: { messageType: "roll", roll: { ability: config.ability, type: "save" } } };
+
+    const messageConfig = foundry.utils.mergeObject({ create: true, data: messageData }, message);
 
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
 
