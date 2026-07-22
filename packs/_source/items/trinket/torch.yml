@@ -5,9 +5,11 @@ img: icons/sundries/lights/torch-black.webp
 system:
   description:
     value: >-
-      <p>A torch burns for 1 hour, providing bright light in a 20-foot radius
-      and dim light for an additional 20 feet. If you make a melee attack with a
-      burning torch and hit, it deals 1 fire damage.</p>
+      <p>A torch burns for [[lookup @labels.duration
+      activity=KuAqRDuAyULZSAt7]], providing &amp;reference[bright light] in a
+      20-foot radius and &amp;reference[dim light] for an additional 20 feet. If
+      you make a melee attack with a burning torch and hit, it deals 1 fire
+      damage.</p>
     chat: ''
   source:
     custom: ''
@@ -29,7 +31,7 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: false
+    autoDestroy: true
     spent: 0
   damage:
     base:
@@ -55,88 +57,144 @@ system:
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: attack
+    KuAqRDuAyULZSAt7:
+      type: utility
+      name: Light Torch
+      _id: KuAqRDuAyULZSAt7
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '1'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: o5qSN6SNyqu3oB3l
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: self
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: radius
-          size: '40'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
-        affects:
-          count: ''
           type: ''
+        affects:
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      attack:
-        ability: str
-        bonus: ''
-        critical:
-          threshold: null
-        flat: false
-        type:
-          value: melee
-          classification: weapon
-      damage:
-        critical:
-          bonus: ''
-        includeBase: true
-        parts:
-          - number: null
-            denomination: null
-            bonus: ''
-            types:
-              - fire
-            custom:
-              enabled: true
-              formula: '1'
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: torch
-effects: []
+effects:
+  - name: Lit Torch
+    img: icons/sundries/lights/torch-brown-lit.webp
+    origin: Compendium.dnd5e.items.Item.BnOCLuNWhVvzHLjl
+    system:
+      magical: true
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 40
+          phase: initial
+          _id: 0fN2o6xZ5WxotKyV
+          conditions: '{}'
+          priority: null
+        - key: token.light.animate.type
+          type: override
+          value: torch
+          phase: initial
+          _id: 5erMXskUdvwVsAve
+          conditions: '{}'
+          priority: null
+        - key: token.light.color
+          type: override
+          value: '#983d16'
+          phase: initial
+          _id: OfE07vMohT3nUcx6
+          conditions: '{}'
+          priority: null
+        - key: token.light.bright
+          type: upgrade
+          value: 20
+          phase: initial
+          conditions: '{}'
+          priority: null
+          _id: qesdmOVfaOaCim5T
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: o5qSN6SNyqu3oB3l
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>This candle sheds &amp;reference[bright light] in a 5-foot radius and
+      &amp;reference[dim light] for an additional 5 feet.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784678783929
+      modifiedTime: 1784678813887
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.ZoUVmRA3HfAK2eZy.ActiveEffect.ePqMPVOf2ueRhmcI
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!BnOCLuNWhVvzHLjl.o5qSN6SNyqu3oB3l'
 folder: UnUwTG4YIgd0kaUJ
 sort: 2400000
 ownership:
@@ -144,11 +202,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037125533
-  modifiedTime: 1725992492355
+  modifiedTime: 1784678863312
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!BnOCLuNWhVvzHLjl'

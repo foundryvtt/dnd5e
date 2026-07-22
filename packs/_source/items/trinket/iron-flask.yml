@@ -1,38 +1,39 @@
 _id: lvLrkAR7k8DS7J3W
 name: Iron Flask
-type: consumable
-img: icons/consumables/potions/bottle-round-empty-glass.webp
+type: equipment
+img: icons/consumables/drinks/wine-amphora-clay-blue.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This iron bottle has a brass stopper. You can use an action to speak
-      the flask's command word, targeting a creature that you can see within 60
-      feet of you. If the target is native to a plane of existence other than
-      the one you're on, the target must succeed on a DC 17 Wisdom saving throw
-      or be trapped in the flask. If the target has been trapped by the flask
-      before, it has advantage on the saving throw. Once trapped, a creature
-      remains in the flask until released. The flask can hold only one creature
-      at a time. A creature trapped in the flask doesn't need to breathe, eat,
-      or drink and doesn't age.</p>
-
-      <p>You can use an action to remove the flask's stopper and release the
-      creature the flask contains. The creature is friendly to you and your
-      companions for 1 hour and obeys your commands for that duration. If you
-      give no commands or give it a command that is likely to result in its
-      death, it defends itself but otherwise takes no actions. At the end of the
-      duration, the creature acts in accordance with its normal disposition and
-      alignment.</p>
-
-      <p>An @UUID[Compendium.dnd5e.spells.Item.3OZnNhunvRtPOQmH]{Identify} spell
+      <p><em>Wondrous item</em></p><p>This iron bottle has a brass stopper. You
+      can use an action to speak the flask's command word, targeting [[lookup
+      @labels.description.affects activity=AgucFlZ6PUt2QPm3]] that you can see
+      within [[lookup @labels.description.range activity=AgucFlZ6PUt2QPm3]] of
+      you. If the target is native to a plane of existence other than the one
+      you're on, the target must succeed on a [[/save
+      activity=AgucFlZ6PUt2QPm3]] saving throw or be trapped in the flask. If
+      the target has been trapped by the flask before, it has advantage on the
+      saving throw. Once trapped, a creature remains in the flask until
+      released. The flask can hold only one creature at a time. A creature
+      trapped in the flask doesn't need to breathe, eat, or drink and doesn't
+      age.</p><p>You can use an action to remove the flask's stopper and release
+      the creature the flask contains. The creature is friendly to you and your
+      companions for [[lookup @labels.duration activity=UOXpMMzKfELvlWP3]] and
+      obeys your commands for that duration. If you give no commands or give it
+      a command that is likely to result in its death, it defends itself but
+      otherwise takes no actions. At the end of the duration, the creature acts
+      in accordance with its normal disposition and alignment.</p><p>An
+      @UUID[Compendium.dnd5e.spells.Item.3OZnNhunvRtPOQmH]{identify} spell
       reveals that a creature is inside the flask, but the only way to determine
       the type of creature is to open the flask. A newly discovered bottle might
       already contain a creature chosen by the GM or determined randomly from
       the @UUID[Compendium.dnd5e.tables.RollTable.JDtZNDaAirupdm2O]{Iron Flask}
-      table.
-
-      </p><p> </p>
+      table.</p><section id="secret-uh6rCGhQVjUxhYX1"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The
+      <em><strong>"Release Captured Creature"</strong></em> activity can be
+      configured to summon a specific creature by navigating to the Summoning
+      Tab, and filling the Summoning Profile with the creature that was
+      captured.</p></section>
     chat: ''
   source:
     custom: ''
@@ -40,6 +41,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 0.1
@@ -54,30 +56,18 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: <p>This iron bottle has a brass stopper.</p>
+    name: Unidentified Iron Bottle
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    AgucFlZ6PUt2QPm3:
       type: save
       activation:
         type: action
@@ -92,10 +82,11 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -112,7 +103,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -121,19 +113,22 @@ system:
         prompt: true
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: ''
           formula: '17'
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Capture Creature
       img: ''
       visibility:
         requireMagic: true
@@ -141,10 +136,151 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: AgucFlZ6PUt2QPm3
+    UOXpMMzKfELvlWP3:
+      type: summon
+      name: Release Captured Creature
+      _id: UOXpMMzKfELvlWP3
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '1'
+      effects:
+        - _id: uA3A7nUKy3dzqIQu
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '1'
+          name: ''
+          _id: TW5U2gK0mCQov5RO
+          uuid: null
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   attuned: false
   identifier: iron-flask
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Released from Iron Flask
+    img: icons/consumables/drinks/wine-amphora-clay-blue.webp
+    origin: Compendium.dnd5e.items.Item.lvLrkAR7k8DS7J3W
+    transfer: false
+    _id: uA3A7nUKy3dzqIQu
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have been released from the Iron Flask. You consider the creature
+      that freed you and their allies as friendly for the duration, and must
+      obey their commands. If they give you no commands or give you a command
+      that is likely to result in your death, you defend yourself but otherwise
+      take no actions. At the end of this duration, you act in accordance with
+      your normal disposition and alignment.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784595852095
+      modifiedTime: 1784596065972
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!lvLrkAR7k8DS7J3W.uA3A7nUKy3dzqIQu'
 folder: UnUwTG4YIgd0kaUJ
 sort: 8000000
 ownership:
@@ -152,11 +288,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037276543
-  modifiedTime: 1764620858528
+  modifiedTime: 1784596330241
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!lvLrkAR7k8DS7J3W'

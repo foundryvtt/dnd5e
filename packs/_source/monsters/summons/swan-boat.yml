@@ -1,0 +1,476 @@
+name: Swan Boat
+type: vehicle
+_id: irodIc8jrVZ3q5qA
+img: systems/dnd5e/icons/svg/actors/vehicle.svg
+system:
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    dex:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    con:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    int:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    wis:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    cha:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+  attributes:
+    ac:
+      calcs:
+        - unarmored
+        - armored
+      flat: null
+      formulas: []
+      override: null
+      calc: flat
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: ''
+    movement:
+      speeds:
+        walk: ''
+        burrow: ''
+        climb: ''
+        fly: ''
+        jump: ''
+        swim: ''
+      units: ft
+      hover: false
+      ignoredDifficultTerrain: []
+      bonus: ''
+      special: ''
+    hp:
+      max: null
+      temp: 0
+      tempmax: 0
+      value: null
+      mt: null
+    actions:
+      max: 3
+      spent: 0
+      stations: true
+      thresholds:
+        '0': null
+        '1': null
+        '2': null
+    capacity:
+      cargo:
+        units: lb
+        value: null
+      creature: ''
+    price:
+      value: null
+      denomination: gp
+    quality:
+      value: 4
+    travel:
+      paces:
+        land: ''
+        water: ''
+        air: ''
+      speeds:
+        land: ''
+        water: '6'
+        air: ''
+      time: 24
+      units: mph
+  crew:
+    value: []
+    max: null
+  details:
+    biography:
+      value: >-
+        <p>Created from a
+        @UUID[Compendium.dnd5e.items.Item.UgnUJhu0tW1tLt7g]{Feather Token Swan
+        Boat}</p><p>@embed[Compendium.dnd5e.items.Item.UgnUJhu0tW1tLt7g
+        inline]</p>
+      public: ''
+    type: water
+  draft:
+    value: []
+  passengers:
+    value: []
+    max: 32
+  source:
+    revision: 1
+    rules: '2014'
+  traits:
+    size: lg
+    di:
+      value: []
+      custom: ''
+      bypasses: []
+    dr:
+      value: []
+      custom: ''
+      bypasses: []
+    dv:
+      value: []
+      custom: ''
+      bypasses: []
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value: []
+      custom: ''
+    weight:
+      units: lb
+      value: null
+    keel:
+      units: ft
+      value: 20
+    beam:
+      units: ft
+      value: 50
+    dimensions: ''
+  cargo:
+    crew: []
+    passengers: []
+prototypeToken:
+  name: Vehicle
+  displayName: 0
+  actorLink: false
+  width: 2
+  height: 2
+  depth: 1
+  texture:
+    src: systems/dnd5e/icons/svg/actors/vehicle.svg
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    scaleX: 1
+    scaleY: 1
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: false
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: {}
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+  flags: {}
+  randomImg: false
+  appendNumber: false
+  prependAdjective: false
+items:
+  - name: Capacity
+    type: feat
+    _id: 5vhfSBY7H5sjGqjp
+    img: icons/containers/boxes/crate-wooden-grey.webp
+    system:
+      activities: {}
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      advancement: {}
+      description:
+        value: >-
+          <p>The boat can carry up to thirty-two Medium or smaller creatures. A
+          Large creature counts as four Medium creatures, while a Huge creature
+          counts as nine.</p>
+        chat: ''
+      identifier: capacity
+      source:
+        revision: 1
+        rules: '2014'
+        book: ''
+        page: ''
+        custom: ''
+        license: ''
+      crewed: false
+      enchant: {}
+      prerequisites:
+        items: []
+        repeatable: false
+        level: null
+      properties:
+        - trait
+      requirements: ''
+      type:
+        value: vehicle
+        subtype: ''
+      cover: 0
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784665422961
+      modifiedTime: 1784665422961
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!actors.items!irodIc8jrVZ3q5qA.5vhfSBY7H5sjGqjp'
+  - name: 'Command Boat: Turn'
+    type: feat
+    _id: An9WRNn6BEt9hyPx
+    img: icons/tools/navigation/sextant-complex-brown.webp
+    system:
+      activities:
+        LPsgtkdjTliE84tw:
+          type: utility
+          name: Turn Boat
+          _id: LPsgtkdjTliE84tw
+          img: null
+          sort: 0
+          activation:
+            type: action
+            override: false
+          behaviors: []
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          roll:
+            prompt: false
+            visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      advancement: {}
+      description:
+        value: >-
+          <p>You can use an action while on the boat to command it to move or to
+          turn up to 90 degrees.</p>
+        chat: ''
+      identifier: new-item
+      source:
+        revision: 1
+        rules: '2014'
+      crewed: false
+      enchant: {}
+      prerequisites:
+        items: []
+        repeatable: false
+        level: null
+      properties: []
+      requirements: ''
+      type:
+        value: vehicle
+        subtype: ''
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784665422961
+      modifiedTime: 1784665422961
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!actors.items!irodIc8jrVZ3q5qA.An9WRNn6BEt9hyPx'
+effects: []
+folder: 89daM0oezivxN75Y
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.365'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1784665422961
+  modifiedTime: 1784671989613
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+sort: 0
+_key: '!actors!irodIc8jrVZ3q5qA'

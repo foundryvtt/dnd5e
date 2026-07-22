@@ -1,21 +1,17 @@
 _id: OcjcplcUWH07Kn9k
 name: Brazier of Commanding Fire Elementals
-type: consumable
-img: icons/tools/laboratory/bowl-liquid-orange.webp
+type: equipment
+img: icons/magic/fire/flame-burning-fence.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>While a fire burns in this brazier, you can use an action to speak the
-      brazier's command word and summon a
-      @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{Fire Elemental},
+      <p><em>Wondrous item</em></p><p>While a fire burns in this brazier, you
+      can use an action to speak the brazier's command word and summon a
+      @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{fire elemental},
       as if you had cast the
-      <em>@UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure
-      Elemental}</em> spell. The brazier can't be used this way again until the
-      next dawn.</p>
-
-      <p>The brazier weighs 5 pounds.</p>
+      @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{conjure elemental}
+      spell. The brazier can't be used this way again until the next
+      dawn.</p><p>The brazier weighs 5 pounds.</p>
     chat: ''
   source:
     custom: ''
@@ -23,6 +19,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 5
@@ -39,97 +36,89 @@ system:
     recovery:
       - period: day
         type: recoverAll
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: <p>The brazier weighs 5 pounds.</p>
+    name: Unidentified Brazier
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    Xc1ARGb751HnJ4ly:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: Command word.
-        override: false
+        override: true
+        condition: When you speak the brazier's command word.
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: '1'
-        units: hour
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        value: '90'
-        units: ft
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: square
-          size: '10'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: false
+        identifier: ''
+      name: Conjure Fire Elemental
+      _id: Xc1ARGb751HnJ4ly
   attuned: false
   identifier: brazier-of-commanding-fire-elementals
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 4500000
@@ -138,11 +127,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037177644
-  modifiedTime: 1764619879558
+  modifiedTime: 1784645581109
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!OcjcplcUWH07Kn9k'

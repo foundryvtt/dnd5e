@@ -1,38 +1,36 @@
 _id: nvhk1quD0Dg1ZtSH
 name: Pipes of the Sewers
-type: consumable
+type: equipment
 img: icons/tools/instruments/flute-simple-wood.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>You must be proficient with wind instruments to use these pipes. While
-      you are attuned to the pipes, ordinary rats and giant rats are indifferent
-      toward you and will not attack you unless you threaten or harm them.</p>
-
-      <p>The pipes have 3 charges. If you play the pipes as an action, you can
-      use a bonus action to expend 1 to 3 charges, calling forth one
+      <p><em>Wondrous item (requires attunement)</em></p><p>You must be
+      proficient with wind instruments to use these pipes. While you are attuned
+      to the pipes, ordinary rats and giant rats are indifferent toward you and
+      will not attack you unless you threaten or harm them.</p><p>The pipes have
+      3 charges. If you play the pipes as an action, you can use a bonus action
+      to expend 1 to 3 charges, calling forth one
       @UUID[Compendium.dnd5e.monsters.Actor.8ihbbjkaOFTPbI73]{Swarm of Rats}
       with each expended charge, provided that enough rats are within half a
       mile of you to be called in this fashion (as determined by the GM). If
       there aren't enough rats to form a swarm, the charge is wasted. Called
       swarms move toward the music by the shortest available route but aren't
       under your control otherwise. The pipes regain 1d3 expended charges daily
-      at dawn.</p>
-
-      <p>Whenever a swarm of rats that isn't under another creature's control
-      comes within 30 feet of you while you are playing the pipes, you can make
-      a Charisma check contested by the swarm's Wisdom check. If you lose the
-      contest, the swarm behaves as it normally would and can't be swayed by the
-      pipes' music for the next 24 hours. If you win the contest, the swarm is
-      swayed by the pipes' music and becomes friendly to you and your companions
-      for as long as you continue to play the pipes each round as an action. A
-      friendly swarm obeys your commands. If you issue no commands to a friendly
-      swarm, it defends itself but otherwise takes no actions. If a friendly
-      swarm starts its turn and can't hear the pipes' music, your control over
-      that swarm ends, and the swarm behaves as it normally would and can't be
-      swayed by the pipes' music for the next 24 hours.</p>
+      at dawn.</p><p>Whenever a swarm of rats that isn't under another
+      creature's control comes within [[lookup @labels.description.range
+      activity=vXfOLWsW6NW1ktXz]] of you while you are playing the pipes, you
+      can make a Charisma check contested by the swarm's Wisdom check. If you
+      lose the contest, the swarm behaves as it normally would and can't be
+      swayed by the pipes' music for the next 24 hours. If you win the contest,
+      the swarm is swayed by the pipes' music and becomes friendly to you and
+      your companions for as long as you continue to play the pipes each round
+      as an action. A friendly swarm obeys your commands. If you issue no
+      commands to a friendly swarm, it defends itself but otherwise takes no
+      actions. If a friendly swarm starts its turn and can't hear the pipes'
+      music, your control over that swarm ends, and the swarm behaves as it
+      normally would and can't be swayed by the pipes' music for the next 24
+      hours.</p>
     chat: ''
   source:
     custom: ''
@@ -40,6 +38,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 1
@@ -54,59 +53,155 @@ system:
   uses:
     max: '3'
     recovery:
-      - period: lr
+      - period: dawn
         type: formula
         formula: 1d3
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Pipes
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    VFcZge4wSwY2tvyX:
+      type: summon
+      name: Call Swarm of Rats
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: '1'
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '@scaling'
+          name: ''
+          _id: QmfkDuOIMcdt4GFK
+          uuid: Compendium.dnd5e.monsters.Actor.8ihbbjkaOFTPbI73
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: VFcZge4wSwY2tvyX
+    vXfOLWsW6NW1ktXz:
       type: check
       activation:
         type: bonus
         value: 1
-        condition: Proficiency with wind instruments.
+        condition: Requires proficiency with wind instruments.
         override: false
       consumption:
         targets:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>Whenever a swarm of rats that isn't under another creature's
+          control comes within [[lookup @labels.description.range
+          activity=vXfOLWsW6NW1ktXz]] of you while you are playing the pipes,
+          you can make a Charisma check contested by the swarm's Wisdom check.
+          If you lose the contest, the swarm behaves as it normally would and
+          can't be swayed by the pipes' music for the next 24 hours. If you win
+          the contest, the swarm is swayed by the pipes' music and becomes
+          friendly to you and your companions for as long as you continue to
+          play the pipes each round as an action. A friendly swarm obeys your
+          commands. If you issue no commands to a friendly swarm, it defends
+          itself but otherwise takes no actions. If a friendly swarm starts its
+          turn and can't hear the pipes' music, your control over that swarm
+          ends, and the swarm behaves as it normally would and can't be swayed
+          by the pipes' music for the next 24 hours.</p>
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: Rd8jD0J5zPA4uqRe
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
-        value: '0.5'
+        value: '30'
         units: mi
         special: ''
         override: false
@@ -118,25 +213,29 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
-          count: ''
-          type: ''
+          count: '1'
+          type: creature
           choice: false
           special: ''
         prompt: true
         override: false
       check:
-        ability: ''
+        ability: cha
         dc:
           calculation: ''
           formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 500000
+      name: Sway Rats
       img: ''
       visibility:
         requireMagic: true
@@ -144,80 +243,64 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
-    dnd5eactivity100:
-      _id: dnd5eactivity100
-      type: save
-      activation:
-        type: bonus
-        value: 1
-        condition: Proficiency with wind instruments.
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: ''
-        special: ''
-        override: false
-      effects: []
-      range:
-        value: '0.5'
-        units: mi
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: ''
-          type: ''
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: cha
-          formula: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
-      img: ''
-      visibility:
-        requireMagic: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-        requireIdentification: true
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: vXfOLWsW6NW1ktXz
   attuned: false
   identifier: pipes-of-the-sewers
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Swayed Swarm
+    img: icons/creatures/mammals/rodent-rat-diseaed-gray.webp
+    origin: Compendium.dnd5e.items.Item.nvhk1quD0Dg1ZtSH
+    transfer: false
+    _id: Rd8jD0J5zPA4uqRe
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been swayed by the Pipes of the Sewer. You are friendly to the
+      player of the pipes and obey their commands. If they issue no commands to
+      you, you defend yourself but otherwise take no actions.</p><p>If you start
+      your turn and can't hear the pipes' music, their control over you
+      ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784683844329
+      modifiedTime: 1784683933216
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!nvhk1quD0Dg1ZtSH.Rd8jD0J5zPA4uqRe'
 folder: UnUwTG4YIgd0kaUJ
 sort: 8400000
 ownership:
@@ -225,11 +308,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037284913
-  modifiedTime: 1764620933766
+  modifiedTime: 1784683986175
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!nvhk1quD0Dg1ZtSH'

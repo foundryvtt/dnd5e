@@ -1,39 +1,35 @@
 _id: 2YNqk5zm9jDTvd7q
 name: Sphere of Annihilation
-type: consumable
+type: equipment
 img: icons/magic/unholy/orb-beam-pink.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This 2-foot-diameter black sphere is a hole in the multiverse, hovering
-      in space and stabilized by a magical field surrounding it.</p>
-
-      <p>The sphere obliterates all matter it passes through and all matter that
-      passes through it. Artifacts are the exception. Unless an artifact is
-      susceptible to damage from a Sphere of Annihilation, it passes through the
-      sphere unscathed. Anything else that touches the sphere but isn't wholly
-      engulfed and obliterated by it takes 4d10 force damage.</p>
-
-      <p>The sphere is stationary until someone controls it. If you are within
-      60 feet of an uncontrolled sphere, you can use an action to make a DC 25
-      Intelligence (Arcana) check. On a success, the sphere levitates in one
-      direction of your choice, up to a number of feet equal to 5 × your
+      <p><em>Wondrous item</em></p><p>This 2-foot-diameter black sphere is a
+      hole in the multiverse, hovering in space and stabilized by a magical
+      field surrounding it.</p><p>The sphere obliterates all matter it passes
+      through and all matter that passes through it. Artifacts are the
+      exception. Unless an artifact is susceptible to damage from a Sphere of
+      Annihilation, it passes through the sphere unscathed. Anything else that
+      touches the sphere but isn't wholly engulfed and obliterated by it takes
+      [[/damage activity=WHOA3keIbG3sTIrB]] damage.</p><p>The sphere is
+      stationary until someone controls it. If you are within [[lookup
+      @labels.description.range activity=PDhBrsHGJhPBcRAE]] of an uncontrolled
+      sphere, you can use an action to make a [[/check
+      activity=PDhBrsHGJhPBcRAE]] check. On a success, the sphere levitates in
+      one direction of your choice, up to a number of feet equal to 5 × your
       Intelligence modifier (minimum 5 feet). On a failure, the sphere moves 10
       feet toward you. A creature whose space the sphere enters must succeed on
-      a DC 13 Dexterity saving throw or be touched by it, taking 4d10 force
-      damage.</p>
-
-      <p>If you attempt to control a sphere that is under another creature's
-      control, you make an Intelligence (Arcana) check contested by the other
-      creature's Intelligence (Arcana) check. The winner of the contest gains
-      control of the sphere and can levitate it as normal.</p>
-
-      <p>If the sphere comes into contact with a planar portal, such as that
-      created by the @UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{Gate}
-      spell, or an extradimensional space, such as that within a portable hole,
-      the GM determines randomly what happens, using the
+      a [[/save activity=KnJt0XmxSbBdX49M]] saving throw or be touched by it,
+      taking [[/damage activity=KnJt0XmxSbBdX49M]] damage.</p><p>If you attempt
+      to control a sphere that is under another creature's control, you make an
+      Intelligence (Arcana) check contested by the other creature's Intelligence
+      (Arcana) check. The winner of the contest gains control of the sphere and
+      can levitate it as normal.</p><p>If the sphere comes into contact with a
+      planar portal, such as that created by the
+      @UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{gate} spell, or an
+      extradimensional space, such as that within a portable hole, the GM
+      determines randomly what happens, using the
       @UUID[Compendium.dnd5e.tables.RollTable.hHR0Zw75o9PXYl4c]{Sphere of
       Annihilation} table.</p>
     chat: ''
@@ -43,6 +39,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 0
@@ -57,79 +54,80 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: 4
-      denomination: 10
-      bonus: ''
-      types:
-        - force
-      custom:
-        enabled: false
-        formula: ''
-      scaling:
-        mode: ''
-        number: null
-        formula: ''
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Black Sphere
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    WHOA3keIbG3sTIrB:
+      type: damage
+      name: Sphere Contact Damage
+      _id: WHOA3keIbG3sTIrB
+      img: ''
+      sort: 100000
       activation:
-        type: action
-        value: 1
-        condition: An uncontrolled sphere requires a DC 25 Intelligence (Arcana) check.
+        type: special
         override: false
+        condition: When something touches the sphere.
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: >-
+          <p>The sphere obliterates all matter it passes through and all matter
+          that passes through it. Artifacts are the exception. Unless an
+          artifact is susceptible to damage from a Sphere of Annihilation, it
+          passes through the sphere unscathed. Anything else that touches the
+          sphere but isn't wholly engulfed and obliterated by it takes [[/damage
+          activity=WHOA3keIbG3sTIrB]] damage.</p>
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
-        value: '60'
-        units: ft
-        special: ''
+        units: touch
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: '1'
-          type: object
           choice: false
+          count: '1'
+          type: creature
           special: ''
-        prompt: true
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
       damage:
-        onSave: half
+        critical:
+          allow: false
         parts:
           - custom:
               enabled: false
@@ -137,29 +135,187 @@ system:
             number: 4
             denomination: 10
             bonus: ''
+            modifiers: []
             types:
               - force
-      save:
-        ability: dex
-        dc:
-          calculation: ''
-          formula: '13'
+            scaling:
+              number: 1
+    PDhBrsHGJhPBcRAE:
+      type: check
+      name: Control Sphere Check
+      _id: PDhBrsHGJhPBcRAE
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>The sphere is stationary until someone controls it. If you are
+          within [[lookup @labels.description.range activity=PDhBrsHGJhPBcRAE]]
+          of an uncontrolled sphere, you can use an action to make a [[/check
+          activity=PDhBrsHGJhPBcRAE]] check. On a success, the sphere levitates
+          in one direction of your choice, up to a number of feet equal to 5 ×
+          your Intelligence modifier (minimum 5 feet). On a failure, the sphere
+          moves 10 feet toward you. A creature whose space the sphere enters
+          must succeed on a DC 13 Dexterity saving throw or be touched by it,
+          taking 4d10 force damage.</p><p>If you attempt to control a sphere
+          that is under another creature's control, you make an Intelligence
+          (Arcana) check contested by the other creature's Intelligence (Arcana)
+          check. The winner of the contest gains control of the sphere and can
+          levitate it as normal.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: ft
+        override: false
+        special: ''
+        value: '60'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: object
+          count: ''
+          special: ''
+        override: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      check:
+        associated:
+          - arc
+        dc:
+          calculation: ''
+          formula: '25'
+        visible: true
+        ability: ''
+        bonus: ''
+    KnJt0XmxSbBdX49M:
+      type: save
+      name: Moving Sphere Save
+      _id: KnJt0XmxSbBdX49M
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>The sphere is stationary until someone controls it. If you are
+          within [[lookup @labels.description.range activity=PDhBrsHGJhPBcRAE]]
+          of an uncontrolled sphere, you can use an action to make a [[/check
+          activity=PDhBrsHGJhPBcRAE]] check. On a success, the sphere levitates
+          in one direction of your choice, up to a number of feet equal to 5 ×
+          your Intelligence modifier (minimum 5 feet). On a failure, the sphere
+          moves 10 feet toward you. A creature whose space the sphere enters
+          must succeed on a DC 13 Dexterity saving throw or be touched by it,
+          taking 4d10 force damage.</p><p>If you attempt to control a sphere
+          that is under another creature's control, you make an Intelligence
+          (Arcana) check contested by the other creature's Intelligence (Arcana)
+          check. The winner of the contest gains control of the sphere and can
+          levitate it as normal.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creatureOrObject
+          count: ''
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      damage:
+        onSave: none
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 10
+            bonus: ''
+            modifiers: []
+            types:
+              - force
+            scaling:
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: ''
+          formula: '13'
+        visible: true
+        bonus: ''
   attuned: false
   identifier: sphere-of-annihilation
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 500000
@@ -168,11 +324,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037089464
-  modifiedTime: 1764618839172
+  modifiedTime: 1784683395042
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2YNqk5zm9jDTvd7q'

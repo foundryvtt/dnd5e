@@ -5,8 +5,9 @@ img: icons/sundries/lights/candle-unlit-tan.webp
 system:
   description:
     value: >-
-      <p>For 1 hour, a candle sheds bright light in a 5-foot radius and dim
-      light for an additional 5 feet.</p>
+      <p>For [[lookup @labels.duration activity=OHQks18UhzZzTPSY]], a candle
+      sheds &amp;reference[bright light] in a 5-foot radius and
+      &amp;reference[dim light] for an additional 5 feet.</p>
     chat: ''
   source:
     custom: ''
@@ -49,8 +50,7 @@ system:
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    OHQks18UhzZzTPSY:
       type: utility
       activation:
         type: action
@@ -60,37 +60,40 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: GyEMzAsJlLqHffAM
+          uuid: null
+          level: {}
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
         template:
           count: ''
           contiguous: false
-          type: radius
+          type: ''
           size: '10'
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -106,10 +109,92 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: OHQks18UhzZzTPSY
+      name: Light Candle
   attuned: false
   identifier: candle
-effects: []
+effects:
+  - name: Lit Candle
+    img: icons/sundries/lights/candle-lit-red.webp
+    origin: Compendium.dnd5e.items.Item.0NoBBP3MMkvJlwZY
+    system:
+      magical: true
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 10
+          phase: initial
+          _id: 0fN2o6xZ5WxotKyV
+          conditions: '{}'
+          priority: null
+        - key: token.light.animate.type
+          type: override
+          value: torch
+          phase: initial
+          _id: 5erMXskUdvwVsAve
+          conditions: '{}'
+          priority: null
+        - key: token.light.color
+          type: override
+          value: '#983d16'
+          phase: initial
+          _id: OfE07vMohT3nUcx6
+          conditions: '{}'
+          priority: null
+        - key: token.light.bright
+          type: upgrade
+          value: 5
+          phase: initial
+          conditions: '{}'
+          priority: null
+          _id: qesdmOVfaOaCim5T
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: GyEMzAsJlLqHffAM
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>This candle sheds &amp;reference[bright light] in a 5-foot radius and
+      &amp;reference[dim light] for an additional 5 feet.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784672490098
+      modifiedTime: 1784672524820
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.ZoUVmRA3HfAK2eZy.ActiveEffect.ePqMPVOf2ueRhmcI
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!0NoBBP3MMkvJlwZY.GyEMzAsJlLqHffAM'
 folder: UnUwTG4YIgd0kaUJ
 sort: 100000
 ownership:
@@ -117,11 +202,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037082489
-  modifiedTime: 1725992477909
+  modifiedTime: 1784672561945
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!0NoBBP3MMkvJlwZY'

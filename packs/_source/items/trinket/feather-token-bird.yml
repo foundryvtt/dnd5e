@@ -12,17 +12,13 @@ system:
       Token} table.</p><p><strong>Bird.</strong> You can use an action to toss
       the token 5 feet into the air. The token disappears and an enormous,
       multicolored bird takes its place. The bird has the statistics of a
-      @UUID[Compendium.dnd5e.monsters.Actor.p980augbCIdpK9ZX]{Roc}, but it obeys
+      @UUID[Compendium.dnd5e.monsters.Actor.p980augbCIdpK9ZX]{roc}, but it obeys
       your simple commands and can't attack. It can carry up to 500 pounds while
       flying at its maximum speed (16 miles an hour for a maximum of 144 miles
       per day, with a one-hour rest for every 3 hours of flying), or 1,000
       pounds at half that speed. The bird disappears after flying its maximum
       distance for a day or if it drops to 0 hit points. You can dismiss the
-      bird as an action.</p><section class="secret foundry-note"
-      id="secret-MSLq8LtzkIiyNC0O"><p><strong>Foundry Note</strong></p><p>The
-      144 charges represent the 144 miles the bird can travel when being able to
-      travel at maximum speed to enable accurate distance-tracking as
-      required.</p></section>
+      bird as an action.</p>
     chat: ''
   source:
     custom: ''
@@ -42,7 +38,7 @@ system:
   rarity: rare
   identified: true
   uses:
-    max: '144'
+    max: '1'
     recovery: []
     autoDestroy: true
     spent: 0
@@ -57,7 +53,7 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -66,76 +62,153 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    egTnkhUWqBvQzxXu:
+      type: summon
+      name: Conjure Roc
+      _id: egTnkhUWqBvQzxXu
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: >-
+          <p>You can use an action to toss the token 5 feet into the air. The
+          token disappears and an enormous, multicolored bird takes its place.
+          The bird has the statistics of a
+          @UUID[Compendium.dnd5e.monsters.Actor.p980augbCIdpK9ZX]{roc}, but it
+          obeys your simple commands and can't attack. It can carry up to 500
+          pounds while flying at its maximum speed (16 miles an hour for a
+          maximum of 144 miles per day, with a one-hour rest for every 3 hours
+          of flying), or 1,000 pounds at half that speed. The bird disappears
+          after flying its maximum distance for a day or if it drops to 0 hit
+          points. You can dismiss the bird as an action.</p>
         chatFlavor: ''
       duration:
+        units: day
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: pBjuoZfjIdWneQhr
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
-        value: '5'
         units: ft
-        special: ''
         override: false
+        special: ''
+        value: '5'
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-        requireIdentification: true
-      appliedEffects: []
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: y6KuA4u6IdxmFmnA
+          uuid: Compendium.dnd5e.monsters.Actor.p980augbCIdpK9ZX
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   attuned: false
   identifier: feather-token-bird
-effects: []
+effects:
+  - name: Feather Token Roc
+    img: icons/commodities/materials/feather-yellow.webp
+    origin: Compendium.dnd5e.items.Item.hWqImieUaLo08l9l
+    transfer: false
+    _id: pBjuoZfjIdWneQhr
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: days
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You obeys your summoner's simple commands and can't attack. You can
+      carry up to 500 pounds while flying at your maximum speed (16 miles an
+      hour for a maximum of 144 miles per day, with a one-hour rest for every 3
+      hours of flying), or 1,000 pounds at half that speed. You disappear after
+      flying your maximum distance for a day or if you drop to 0 hit points.
+      Your summoner can dismiss you as an action.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784651483806
+      modifiedTime: 1784651544078
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!hWqImieUaLo08l9l.pBjuoZfjIdWneQhr'
 folder: UnUwTG4YIgd0kaUJ
 sort: 7200000
 ownership:
@@ -143,11 +216,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037257011
-  modifiedTime: 1764620574338
+  modifiedTime: 1784665521196
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hWqImieUaLo08l9l'

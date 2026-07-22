@@ -1,30 +1,24 @@
 _id: 9Ifr8fGvJ1bArzOW
 name: Bag of Tricks (Grey)
-type: consumable
+type: equipment
 img: icons/containers/bags/coinpouch-leather-grey.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This ordinary bag, made from gray cloth, appears empty. Reaching inside
-      the bag, however, reveals the presence of a small, fuzzy object. The bag
-      weighs 1/2 pound.</p>
-
-      <p>You can use an action to pull the fuzzy object from the bag and throw
-      it up to 20 feet. When the object lands, it transforms into a creature you
-      determine by rolling on the
+      <p><em>Wondrous item</em></p><p>This ordinary bag, made from gray cloth,
+      appears empty. Reaching inside the bag, however, reveals the presence of a
+      small, fuzzy object. The bag weighs 1/2 pound.</p><p>You can use an action
+      to pull the fuzzy object from the bag and throw it up to [[lookup
+      @labels.description.range activity=eGL4lnSu34oTEp78]]. When the object
+      lands, it transforms into a creature you determine by rolling on the
       @UUID[Compendium.dnd5e.tables.RollTable.VPGP621PW7k03YfB]{Grey Bag of
-      Tricks} table.</p>
-
-      <p>The creature is friendly to you and your companions, and it acts on
-      your turn. You can use a bonus action to command how the creature moves
-      and what action it takes on its next turn, or to give it general orders,
-      such as to attack your enemies. In the absence of such orders, the
-      creature acts in a fashion appropriate to its nature.</p>
-
-      <p>Once three fuzzy objects have been pulled from the bag, the bag can't
-      be used again until the next dawn.</p>
+      Tricks} table.</p><p>The creature is friendly to you and your companions,
+      and it acts on your turn. You can use a bonus action to command how the
+      creature moves and what action it takes on its next turn, or to give it
+      general orders, such as to attack your enemies. In the absence of such
+      orders, the creature acts in a fashion appropriate to its
+      nature.</p><p>Once three fuzzy objects have been pulled from the bag, the
+      bag can't be used again until the next dawn.</p>
     chat: ''
   source:
     custom: ''
@@ -32,6 +26,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 0.5
@@ -46,99 +41,172 @@ system:
   uses:
     max: '3'
     recovery:
-      - period: day
+      - period: dawn
         type: recoverAll
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This ordinary bag, made from gray cloth, appears empty. Reaching inside
+      the bag, however, reveals the presence of a small, fuzzy object. The bag
+      weighs 1/2 pound.</p>
+    name: Unidentified Gray Bag
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    eGL4lnSu34oTEp78:
+      type: summon
+      name: Summon Creature
+      _id: eGL4lnSu34oTEp78
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
+        override: false
         value: ''
-        units: ''
-        special: ''
-        override: false
       effects: []
+      flags: {}
       range:
-        value: '20'
         units: ft
-        special: ''
         override: false
+        value: '20'
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
+          stationary: false
           units: ft
+          type: ''
         affects:
-          count: '5'
-          type: space
           choice: false
+          count: '1'
+          type: space
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
         prompt: false
-        visible: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: false
-      appliedEffects: []
+        requireMagic: true
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: ExIpDDSDIJ8NO4os
+          uuid: Compendium.dnd5e.monsters.Actor.WOdeacKCYVhgLDuN
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: v4Xe68HwoFhVdtE7
+          uuid: Compendium.dnd5e.monsters.Actor.oQvORD924obyPdCc
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: fbiBV244V0JzYldR
+          uuid: Compendium.dnd5e.monsters.Actor.q1YJIeIt6rK8fCKn
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: cUbyvEW2xJonFKc5
+          uuid: Compendium.dnd5e.monsters.Actor.lZR4lhNmYSf89s4Q
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: Ga6vm6reEOHs1Bbc
+          uuid: Compendium.dnd5e.monsters.Actor.AijNdqMurWxDxUSl
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: BOxcplnw9WQG0Iez
+          uuid: Compendium.dnd5e.monsters.Actor.cJGY1ZywUOo6heNR
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: GpYdosumRQ6DF9LH
+          uuid: Compendium.dnd5e.monsters.Actor.hQt3qIahnB1Odb40
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: wN89a9pZV52AQQgQ
+          uuid: Compendium.dnd5e.monsters.Actor.EYiQZ3rFL25fEJY5
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   attuned: false
   identifier: bag-of-tricks-grey
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 1800000
@@ -147,11 +215,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037117348
-  modifiedTime: 1764619132497
+  modifiedTime: 1784642680765
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!9Ifr8fGvJ1bArzOW'

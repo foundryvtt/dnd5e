@@ -1,0 +1,195 @@
+name: Grappling Apparatus Claws
+type: weapon
+system:
+  type:
+    value: siege
+    baseItem: ''
+  activities:
+    641q4Lpueg4bWtWP:
+      _id: 641q4Lpueg4bWtWP
+      type: attack
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: wfgfO5Cg4vo2h8WG
+          uuid: null
+          level: {}
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      attack:
+        critical:
+          threshold: null
+        flat: true
+        type:
+          value: melee
+          classification: ''
+        ability: ''
+        bonus: '8'
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+  damage:
+    base:
+      types: []
+      custom:
+        enabled: false
+      modifiers: []
+      scaling:
+        number: 1
+      number: null
+      denomination: null
+      bonus: ''
+    versatile:
+      types: []
+      custom:
+        enabled: false
+      modifiers: []
+      scaling:
+        number: 1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: ''
+    chat: ''
+  identifier: new-item
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+    max: null
+  ammunition: {}
+  armor:
+    value: null
+  properties: []
+  proficient: null
+  range:
+    units: ft
+    value: 5
+    long: null
+    reach: null
+  mastery: ''
+  cover: 0
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+img: icons/commodities/claws/claw-pincer-pink.webp
+effects:
+  - name: Grappled by Apparatus Claws
+    img: icons/commodities/claws/claw-pincer-pink.webp
+    origin: Actor.oq3zdeL9PnrKjti3.Item.yqTOGvMjhPhURU77
+    transfer: false
+    _id: wfgfO5Cg4vo2h8WG
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You are &amp;reference[grappled apply=false] (escape DC 15).</p>
+    tint: '#ffffff'
+    statuses:
+      - grappled
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784684301647
+      modifiedTime: 1784684301647
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Fc3YcjEu1xMII19A.wfgfO5Cg4vo2h8WG'
+folder: fNie4LCXK3X2lb9F
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.365'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1784684301647
+  modifiedTime: 1784684301762
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_id: Fc3YcjEu1xMII19A
+sort: 200000
+_key: '!items!Fc3YcjEu1xMII19A'

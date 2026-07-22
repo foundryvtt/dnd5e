@@ -1,14 +1,15 @@
 _id: trmWAdUoR6Y2B7rA
 name: Hooded Lantern
-type: consumable
+type: equipment
 img: icons/sundries/lights/lantern-iron-yellow.webp
 system:
   description:
     value: >-
-      <p>A hooded lantern casts bright light in a 30-foot radius and dim light
-      for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1
-      pint) of oil. As an action, you can lower the hood, reducing the light to
-      dim light in a 5-foot radius.</p>
+      <p>A hooded lantern casts &amp;reference[bright light] in a 30-foot radius
+      and &amp;reference[dim light] for an additional 30 feet. Once lit, it
+      burns for [[lookup @labels.duration activity=bnzeJREEKdKxNUOJ]] on a flask
+      (1 pint) of oil. As an action, you can lower the hood, reducing the light
+      to dim light in a 5-foot radius.</p>
     chat: ''
   source:
     custom: ''
@@ -16,6 +17,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 2
@@ -28,102 +30,418 @@ system:
   rarity: ''
   identified: true
   uses:
-    max: '1'
+    max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
     value: trinket
-    subtype: ''
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Hooden Lantern
   container: null
   properties: []
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    bnzeJREEKdKxNUOJ:
+      type: enchant
+      name: Light Lantern
+      img: icons/magic/fire/flame-burning-campfire-orange.webp
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
       consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: oil-flask
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        concentration: false
-        value: '6'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '6'
+      effects:
+        - _id: FH5W2cAo2E23nNdA
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - 2xQKEeVODLcgVObw
+            effect:
+              - OMo2dDGzVLHY1JmL
+            item: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: self
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: radius
-          size: '60'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
-        affects:
-          count: ''
           type: ''
+        affects:
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      behaviors: []
+      _id: bnzeJREEKdKxNUOJ
+    2xQKEeVODLcgVObw:
+      type: enchant
+      name: Lower / Raise Lantern Hood
+      img: icons/commodities/tech/metal-barrel.webp
+      sort: 300000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: pU43VuMXrZVqj31U
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - XsyFqqGbGOpnwPJf
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      behaviors: []
+      _id: 2xQKEeVODLcgVObw
   attuned: false
   identifier: hooded-lantern
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+  proficient: null
+  strength: null
+effects:
+  - type: enchantment
+    name: Light Lantern
+    img: icons/magic/fire/flame-burning-campfire-orange.webp
+    disabled: true
+    _id: FH5W2cAo2E23nNdA
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Lit {}
+          phase: initial
+          _id: 7lGrnM4aQdmrxmkI
+          conditions: '{}'
+          priority: null
+        - key: system.activities.bnzeJREEKdKxNUOJ.name
+          type: override
+          value: Extinguish Lantern
+          phase: initial
+          _id: AuVPtsZYbeljkFCY
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: 6
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784677540524
+      modifiedTime: 1784677656410
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!trmWAdUoR6Y2B7rA.FH5W2cAo2E23nNdA'
+  - name: Lit Hooded Lantern
+    img: icons/magic/fire/flame-burning-campfire-orange.webp
+    origin: Compendium.dnd5e.items.Item.trmWAdUoR6Y2B7rA
+    type: base
+    _id: OMo2dDGzVLHY1JmL
+    system:
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 30
+          phase: initial
+          priority: null
+          _id: qAVv1GJIlek6tdaf
+          conditions: '{}'
+        - key: token.light.bright
+          type: upgrade
+          value: 30
+          phase: initial
+          priority: null
+          _id: eVYnyjh3nWWnFNaM
+          conditions: '{}'
+        - key: token.light.color
+          type: override
+          value: '#b79471'
+          phase: initial
+          priority: null
+          _id: WjI4NUrPS23IFX7h
+          conditions: '{}'
+        - key: token.light.luminosity
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+          _id: XZnNK21CtqQqq18V
+          conditions: '{}'
+        - key: token.light.animation.type
+          type: add
+          value: torch
+          phase: initial
+          priority: null
+          _id: glRK3kJbaZeE9pMm
+          conditions: '{}'
+        - key: token.light.animation.intensity
+          type: override
+          value: 2
+          phase: initial
+          priority: null
+          _id: pwJqay303jUeXK95
+          conditions: '{}'
+        - key: token.light.animation.speed
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+          _id: BinsjzeHDus5evXz
+          conditions: '{}'
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: false
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A hooded lantern casts &amp;reference[bright light] in a 30-foot radius
+      and &amp;reference[dim light] for an additional 30 feet. Once lit, it
+      burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower
+      the hood, reducing the light to dim light in a 5-foot radius.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784677611532
+      modifiedTime: 1784677649680
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!trmWAdUoR6Y2B7rA.OMo2dDGzVLHY1JmL'
+  - name: Lowered Lantern Hooded
+    img: icons/commodities/tech/metal-barrel.webp
+    origin: Compendium.dnd5e.items.Item.trmWAdUoR6Y2B7rA
+    type: base
+    _id: XsyFqqGbGOpnwPJf
+    system:
+      changes:
+        - key: token.light.dim
+          type: downgrade
+          value: 5
+          phase: initial
+          priority: 45
+          _id: Pv4HRsYl2XNhwriX
+          conditions: '{}'
+        - key: token.light.bright
+          type: downgrade
+          value: 0
+          phase: initial
+          priority: 45
+          _id: E1FCfc9wtjiiHnz6
+          conditions: '{}'
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: false
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784677613834
+      modifiedTime: 1784677698348
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!trmWAdUoR6Y2B7rA.XsyFqqGbGOpnwPJf'
+  - type: enchantment
+    name: Lower / Raise Lantern Hood
+    img: icons/commodities/tech/metal-barrel.webp
+    disabled: true
+    _id: pU43VuMXrZVqj31U
+    system:
+      changes: []
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784677680875
+      modifiedTime: 1784677680875
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!trmWAdUoR6Y2B7rA.pU43VuMXrZVqj31U'
 folder: UnUwTG4YIgd0kaUJ
 sort: 10200000
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - OMo2dDGzVLHY1JmL
+        - XsyFqqGbGOpnwPJf
+      activity:
+        - 2xQKEeVODLcgVObw
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037309801
-  modifiedTime: 1725992554217
+  modifiedTime: 1784678649448
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!trmWAdUoR6Y2B7rA'

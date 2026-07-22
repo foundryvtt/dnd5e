@@ -1,29 +1,24 @@
 _id: 29e6gHwWKNLaRUoz
 name: Rope of Climbing
-type: consumable
+type: equipment
 img: icons/sundries/survival/rope-wrapped-loops-grey.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This 60-foot length of silk rope weighs 3 pounds and can hold up to
-      3,000 pounds. If you hold one end of the rope and use an action to speak
-      the command word, the rope animates. As a bonus action, you can command
-      the other end to move toward a destination you choose. That end moves 10
-      feet on your turn when you first command it and 10 feet on each of your
-      turns until reaching its destination, up to its maximum length away, or
-      until you tell it to stop. You can also tell the rope to fasten itself
-      securely to an object or to unfasten itself, to knot or unknot itself, or
-      to coil itself for carrying.</p>
-
-      <p>If you tell the rope to knot, large knots appear at 1- foot intervals
-      along the rope. While knotted, the rope shortens to a 50-foot length and
-      grants advantage on checks made to climb it.</p>
-
-      <p>The rope has AC 20 and 20 hit points. It regains 1 hit point every 5
-      minutes as long as it has at least 1 hit point. If the rope drops to 0 hit
-      points, it is destroyed.</p>
+      <p><em>Wondrous item</em></p><p>This 60-foot length of silk rope weighs 3
+      pounds and can hold up to 3,000 pounds. If you hold one end of the rope
+      and use an action to speak the command word, the rope animates. As a bonus
+      action, you can command the other end to move toward a destination you
+      choose. That end moves 10 feet on your turn when you first command it and
+      10 feet on each of your turns until reaching its destination, up to its
+      maximum length away, or until you tell it to stop. You can also tell the
+      rope to fasten itself securely to an object or to unfasten itself, to knot
+      or unknot itself, or to coil itself for carrying.</p><p>If you tell the
+      rope to knot, large knots appear at 1- foot intervals along the rope.
+      While knotted, the rope shortens to a 50-foot length and grants advantage
+      on checks made to climb it.</p><p>The rope has AC 20 and 20 hit points. It
+      regains 1 hit point every 5 minutes as long as it has at least 1 hit
+      point. If the rope drops to 0 hit points, it is destroyed.</p>
     chat: ''
   source:
     custom: ''
@@ -31,6 +26,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 3
@@ -45,96 +41,154 @@ system:
   uses:
     max: '20'
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This 60-foot length of silk rope weighs 3 pounds and can hold up to
+      3,000 pounds.</p>
+    name: Unidentified Rope
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    jJx3Jp9BLf3DX6g5:
       type: utility
+      name: 'Speak Command Word:  Animate Rope'
+      _id: jJx3Jp9BLf3DX6g5
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: Command word. A bonus action to move one end 10 ft.
         override: false
+        condition: When you speak the rope's command word.
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: touch
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: self
           choice: false
+          type: object
+          count: '1'
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    BtDd2Gnzmtgm5nLn:
+      type: utility
+      name: 'Command Rope: Reposition'
+      img: ''
+      sort: 200000
+      activation:
+        type: bonus
+        override: false
+        condition: While the rope is animated.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>As a bonus action, you can command the other end to move toward a
+          destination you choose. That end moves 10 feet on your turn when you
+          first command it and 10 feet on each of your turns until reaching its
+          destination, up to its maximum length away, or until you tell it to
+          stop. You can also tell the rope to fasten itself securely to an
+          object or to unfasten itself, to knot or unknot itself, or to coil
+          itself for carrying.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: BtDd2Gnzmtgm5nLn
   attuned: false
   identifier: rope-of-climbing
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 300000
@@ -143,11 +197,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037088284
-  modifiedTime: 1764618810598
+  modifiedTime: 1784594003570
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!29e6gHwWKNLaRUoz'

@@ -1,21 +1,18 @@
 _id: sXEkkTDXWQDUMzsC
 name: Censer of Controlling Air Elementals
-type: consumable
-img: icons/commodities/treasure/goblet-worn-gold.webp
+type: equipment
+img: icons/commodities/treasure/goblet-coins-gold.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>While incense is burning in this censer, you can use an action to speak
-      the censer's command word and summon an
-      @UUID[Compendium.dnd5e.monsters.Actor.banHjKDMCegbUwYE]{Air Elemental}, as
+      <p><em>Wondrous item</em></p><p>While incense is burning in this censer,
+      you can use an action to speak the censer's command word and summon an
+      @UUID[Compendium.dnd5e.monsters.Actor.banHjKDMCegbUwYE]{air elemental}, as
       if you had cast the
-      @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure Elemental}
-      spell. The censer can't be used this way again until the next dawn.</p>
-
-      <p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with a
-      decorated lid. It weighs 1 pound.</p>
+      @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{conjure elemental}
+      spell. The censer can't be used this way again until the next
+      dawn.</p><p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with
+      a decorated lid. It weighs 1 pound.</p>
     chat: ''
   source:
     custom: ''
@@ -23,6 +20,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 1
@@ -37,99 +35,94 @@ system:
   uses:
     max: '1'
     recovery:
-      - period: day
+      - period: dawn
         type: recoverAll
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This 6-inch-wide, 1-foot-high vessel resembles a chalice with a
+      decorated lid. It weighs 1 pound.</p>
+    name: Unidentified Censer
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    uEd4fChDHof4lMKN:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: Command word.
-        override: false
+        override: true
+        condition: When you speak the censer's command word.
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: '1'
-        units: hour
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        value: '90'
-        units: ft
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: square
-          size: '10'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: false
+        identifier: ''
+      name: Conjure Air Elemental
+      _id: uEd4fChDHof4lMKN
   attuned: false
   identifier: censer-of-controlling-air-elementals
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 9600000
@@ -138,11 +131,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037302560
-  modifiedTime: 1764621122559
+  modifiedTime: 1784645445411
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!sXEkkTDXWQDUMzsC'

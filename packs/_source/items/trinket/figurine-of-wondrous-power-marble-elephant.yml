@@ -4,7 +4,7 @@ type: consumable
 img: icons/commodities/bones/horn-simple-grey.webp
 system:
   description:
-    value: "<p><em>Wondrous item</em></p>\n<p>A\_<em>figurine of wondrous power</em>\_is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p>\n<p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p>\n<p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p>\n<p><strong>Marble Elephant</strong>. This marble statuette is about 4 inches high and long. It can become an @UUID[Compendium.dnd5e.monsters.Actor.jLPhaBnMtAbB5dp1]{Elephant} for up to 24 hours. Once it has been used, it can't be used again until 7 days have passed.</p>"
+    value: "<p><em>Wondrous item</em></p><p>A\_<em>figurine of wondrous power</em>\_is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within [[lookup @labels.description.range activity=vJJ5LzbufiFqQAxC]] of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p><p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p><p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p><p><strong>Marble Elephant</strong>. This marble statuette is about 4 inches high and long. It can become an @UUID[Compendium.dnd5e.monsters.Actor.jLPhaBnMtAbB5dp1]{elephant} for up to [[lookup @labels.duration activity=vJJ5LzbufiFqQAxC]]. Once it has been used, it can't be used again until 7 days have passed.</p>"
     chat: ''
   source:
     custom: ''
@@ -42,82 +42,156 @@ system:
     value: trinket
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>This marble statuette is about 4 inches high and long.</p>
+    name: Unidentified Elephant Figurine
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    vJJ5LzbufiFqQAxC:
+      type: summon
+      name: Summon Marble Elephant
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: When you speak the figurine's command word.
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '24'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '24'
+      effects:
+        - _id: RCwINtMRx3RGcsrF
+          uuid: null
+          level:
+            min: null
+            max: null
+        - _id: SYpLD7GgOzbNaIBB
+          uuid: null
+          level: {}
+      flags: {}
       range:
-        value: '60'
         units: ft
-        special: ''
         override: false
+        special: ''
+        value: '60'
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
+          stationary: false
           units: ft
+          type: ''
         affects:
-          count: '15'
-          type: space
           choice: false
+          type: space
+          count: '1'
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: true
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: uIEu6OVsgQRfr1fv
+          uuid: Compendium.dnd5e.monsters.Actor.jLPhaBnMtAbB5dp1
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: vJJ5LzbufiFqQAxC
   attuned: false
   identifier: figurine-of-wondrous-power-marble-elephant
-effects: []
+effects:
+  - name: Marble Elephant
+    img: icons/commodities/bones/horn-simple-grey.webp
+    origin: Compendium.dnd5e.items.Item.GP2bvHlxVi30OEmo
+    transfer: false
+    _id: SYpLD7GgOzbNaIBB
+    type: base
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Marble {}
+          phase: initial
+          _id: HL2zYHdIjchnw18Y
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784650256962
+      modifiedTime: 1784650291419
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!GP2bvHlxVi30OEmo.SYpLD7GgOzbNaIBB'
 folder: UnUwTG4YIgd0kaUJ
 sort: 3300000
 ownership:
@@ -125,11 +199,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037147446
-  modifiedTime: 1764619502807
+  modifiedTime: 1784667921879
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!GP2bvHlxVi30OEmo'

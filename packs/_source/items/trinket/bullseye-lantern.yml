@@ -1,13 +1,13 @@
 _id: UkWdyJYQTfVX2cJW
 name: Bullseye Lantern
-type: consumable
-img: icons/sundries/lights/lantern-iron-yellow.webp
+type: equipment
+img: icons/sundries/lights/lantern-bullseye-signal-copper.webp
 system:
   description:
     value: >-
-      <p>A bullseye lantern casts bright light in a 60-foot cone and dim light
-      for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1
-      pint) of oil.</p>
+      <p>A bullseye lantern casts &amp;reference[bright light] in a 60-foot cone
+      and &amp;reference[dim light] for an additional 60 feet. Once lit, it
+      burns for 6 hours on a flask (1 pint) of oil.</p>
     chat: ''
   source:
     custom: ''
@@ -15,6 +15,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 2
@@ -27,102 +28,267 @@ system:
   rarity: ''
   identified: true
   uses:
-    max: '1'
+    max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
     value: trinket
-    subtype: ''
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Lantern
   container: null
   properties: []
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    Mz8g0l9V6z0dP0BB:
+      type: enchant
+      name: Light Lantern
+      img: icons/magic/fire/flame-burning-campfire-orange.webp
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
       consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: oil-flask
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        concentration: false
-        value: '6'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '6'
+      effects:
+        - _id: cX1OhWGLNDNPkefF
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - lIuRq3lTORAiuVCM
+            item: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: self
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: cone
-          size: '120'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
-        affects:
-          count: ''
           type: ''
+        affects:
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: false
+        categories: []
+        properties: []
+        type: ''
+      behaviors: []
+      _id: Mz8g0l9V6z0dP0BB
   attuned: false
   identifier: bullseye-lantern
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+  proficient: null
+  strength: null
+effects:
+  - type: enchantment
+    name: Lit Lantern
+    img: icons/magic/fire/flame-burning-campfire-orange.webp
+    disabled: true
+    _id: cX1OhWGLNDNPkefF
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Lit {}
+          phase: initial
+          _id: BMrllN71a6ZSg9PR
+          conditions: '{}'
+          priority: null
+        - key: system.activities.Mz8g0l9V6z0dP0BB.name
+          type: override
+          value: Extinguish Lantern
+          phase: initial
+          _id: iHXc4GJserWMTRmm
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: 6
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>A bullseye lantern casts &amp;reference[bright light] in a 60-foot cone
+      and &amp;reference[dim light] for an additional 60 feet. Once lit, it
+      burns for 6 hours on a flask (1 pint) of oil.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784677371912
+      modifiedTime: 1784677445130
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!UkWdyJYQTfVX2cJW.cX1OhWGLNDNPkefF'
+  - name: Lit Bullseye Lantern
+    img: icons/sundries/lights/lantern-bullseye-signal-copper.webp
+    origin: Compendium.dnd5e.items.Item.UkWdyJYQTfVX2cJW
+    type: base
+    _id: lIuRq3lTORAiuVCM
+    system:
+      changes:
+        - key: token.light.angle
+          type: override
+          value: 53.13
+          phase: initial
+          priority: null
+          _id: gFI1xxZWElTJDSC6
+          conditions: '{}'
+        - key: token.light.dim
+          type: upgrade
+          value: 120
+          phase: initial
+          priority: null
+          _id: 0GUfIfWZ5dIs9s34
+          conditions: '{}'
+        - key: token.light.bright
+          type: upgrade
+          value: 60
+          phase: initial
+          priority: null
+          _id: SrgfNNhLiZjvP33e
+          conditions: '{}'
+        - key: token.light.color
+          type: override
+          value: '#b79471'
+          phase: initial
+          priority: null
+          _id: Mj2mmNAOiyaP58Yt
+          conditions: '{}'
+        - key: token.light.luminosity
+          type: override
+          value: 0
+          phase: initial
+          priority: null
+          _id: 3YNqCMiWyxPPDztd
+          conditions: '{}'
+        - key: token.light.animation.type
+          type: override
+          value: torch
+          phase: initial
+          priority: null
+          _id: zTUU5LOwycZup434
+          conditions: '{}'
+        - key: token.light.animation.intensity
+          type: override
+          value: 2
+          phase: initial
+          priority: null
+          _id: jdPJVZhWvkujxJ9P
+          conditions: '{}'
+        - key: token.light.animation.speed
+          type: override
+          value: 8
+          phase: initial
+          priority: null
+          _id: vE6SBCgjGyyFkA4g
+          conditions: '{}'
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: false
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>A bullseye lantern casts &amp;reference[bright light] in a 60-foot cone
+      and &amp;reference[dim light] for an additional 60 feet. Once lit, it
+      burns for 6 hours on a flask (1 pint) of oil.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784677417749
+      modifiedTime: 1784677436824
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!UkWdyJYQTfVX2cJW.lIuRq3lTORAiuVCM'
 folder: UnUwTG4YIgd0kaUJ
 sort: 5800000
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - lIuRq3lTORAiuVCM
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037198803
-  modifiedTime: 1725992516961
+  modifiedTime: 1784678668638
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!UkWdyJYQTfVX2cJW'

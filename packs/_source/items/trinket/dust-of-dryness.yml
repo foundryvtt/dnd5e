@@ -1,25 +1,21 @@
 _id: eMR6B4bIoJPUDJG8
 name: Dust of Dryness
 type: consumable
-img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+img: icons/commodities/materials/bowl-powder-gold.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This small packet contains 1d6 + 4 pinches of dust. You can use an
-      action to sprinkle a pinch of it over water. The dust turns a cube of
-      water 15 feet on a side into one marble-sized pellet, which floats or
-      rests near where the dust was sprinkled. The pellet's weight is
-      negligible.</p>
-
-      <p>Someone can use an action to smash the pellet against a hard surface,
-      causing the pellet to shatter and release the water the dust absorbed.
-      Doing so ends that pellet's magic.</p>
-
-      <p>An elemental composed mostly of water that is exposed to a pinch of the
-      dust must make a DC 13 Constitution saving throw, taking 10d6 necrotic
-      damage on a failed save, or half as much damage on a successful one.</p>
+      <p><em>Wondrous item</em></p><p>This small packet contains 1d6 + 4 pinches
+      of dust. You can use an action to sprinkle a pinch of it over water. The
+      dust turns a cube of water [[lookup @target.template.size
+      activity=qx3lxTAgf3gxohEZ]] feet on a side into one marble-sized pellet,
+      which floats or rests near where the dust was sprinkled. The pellet's
+      weight is negligible.</p><p>Someone can use an action to smash the pellet
+      against a hard surface, causing the pellet to shatter and release the
+      water the dust absorbed. Doing so ends that pellet's magic.</p><p>An
+      elemental composed mostly of water that is exposed to a pinch of the dust
+      must make a DC 13 Constitution saving throw, taking 10d6 necrotic damage
+      on a failed save, or half as much damage on a successful one.</p>
     chat: ''
   source:
     custom: ''
@@ -59,43 +55,47 @@ system:
         formula: ''
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Packet of Dust
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    qx3lxTAgf3gxohEZ:
       type: save
       activation:
         type: action
         value: 1
-        condition: ''
+        condition: >-
+          When an elemental composed mostly of water is exposed to a pinch of
+          this dust.
         override: false
       consumption:
         targets:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
-        chatFlavor: ''
+        chatFlavor: Only elementals composed mostly of water make this saving throw.
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -107,9 +107,10 @@ system:
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
-          count: ''
-          type: ''
+          count: '1'
+          type: creature
           choice: false
           special: ''
         prompt: true
@@ -125,17 +126,23 @@ system:
             bonus: ''
             types:
               - necrotic
+            modifiers: []
+            scaling:
+              number: 1
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: ''
           formula: '13'
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Dehydrate Water
       img: ''
       visibility:
         requireMagic: true
@@ -143,7 +150,11 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: qx3lxTAgf3gxohEZ
   attuned: false
   identifier: dust-of-dryness
 effects: []
@@ -154,11 +165,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037240323
-  modifiedTime: 1764620439897
+  modifiedTime: 1784653427351
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eMR6B4bIoJPUDJG8'

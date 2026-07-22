@@ -5,102 +5,29 @@ img: icons/sundries/books/book-eye-purple.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This tome contains information and incantations necessary to make a
-      particular type of golem. The GM chooses the type or determines it
-      randomly from the
+      <p><em>Wondrous item</em></p><p>This tome contains information and
+      incantations necessary to make a particular type of golem. The GM chooses
+      the type or determines it randomly from the
       @UUID[Compendium.dnd5e.tables.RollTable.htMPUPPABjI6fwck]{Manual of
       Golems} table. Refer to the table below for a detailed description on each
       golem. To decipher and use the manual, you must be a spellcaster with at
       least two 5th-level spell slots. A creature that can't use a Manual of
-      Golems and attempts to read it takes 6d6 psychic damage.</p>
-
-      <table>
-
-      <thead>
-
-      <tr>
-
-      <th>d20</th>
-
-      <th>Golem</th>
-
-      <th>Time</th>
-
-      <th>Cost</th>
-
-      </tr>
-
-      </thead>
-
-      <tbody>
-
-      <tr>
-
-      <td>1-5</td>
-
-      <td>@UUID[Compendium.dnd5e.monsters.Actor.YOqhbf8WsX0jH9Fu]{Clay
-      Golem}</td>
-
-      <td>30 days</td>
-
-      <td>65,000 gp</td>
-
-      </tr>
-
-      <tr>
-
-      <td>6-17</td>
-
-      <td>@UUID[Compendium.dnd5e.monsters.Actor.Hm4o2FgPZsdbXjLq]{Flesh
-      Golem}</td>
-
-      <td>60 days</td>
-
-      <td>50,000 gp</td>
-
-      </tr>
-
-      <tr>
-
-      <td>18</td>
-
-      <td>@UUID[Compendium.dnd5e.monsters.Actor.h98AuPfomEPcCibP]{Iron
-      Golem}</td>
-
-      <td>120 days</td>
-
-      <td>100,000 gp</td>
-
-      </tr>
-
-      <tr>
-
-      <td>19-20</td>
-
-      <td>@UUID[Compendium.dnd5e.monsters.Actor.z3gSIXHHWYaHjfBT]{Stone
-      Golem}</td>
-
-      <td>90 days</td>
-
-      <td>80,000 gp</td>
-
-      </tr>
-
-      </tbody>
-
-      </table>
-
-      <p>To create a golem, you must spend the time shown on the table, working
-      without interruption with the manual at hand and resting no more than 8
-      hours per day. You must also pay the specified cost to purchase
-      supplies.</p>
-
-      <p>Once you finish creating the golem, the book is consumed in eldritch
-      flames. The golem becomes animate when the ashes of the manual are
-      sprinkled on it. It is under your control, and it understands and obeys
-      your spoken commands.</p>
+      Golems and attempts to read it takes [[/damage activity=bTlMWXymAGeM5q7l]]
+      damage.</p><table><thead><tr><th><p>d20</p></th><th><p>Golem</p></th><th><p>Time</p></th><th><p>Cost</p></th></tr></thead><tbody><tr><td><p>1-5</p></td><td><p>@UUID[Compendium.dnd5e.monsters.Actor.YOqhbf8WsX0jH9Fu]{Clay
+      Golem}</p></td><td><p>30 days</p></td><td><p>65,000
+      gp</p></td></tr><tr><td><p>6-17</p></td><td><p>@UUID[Compendium.dnd5e.monsters.Actor.Hm4o2FgPZsdbXjLq]{Flesh
+      Golem}</p></td><td><p>60 days</p></td><td><p>50,000
+      gp</p></td></tr><tr><td><p>18</p></td><td><p>@UUID[Compendium.dnd5e.monsters.Actor.h98AuPfomEPcCibP]{Iron
+      Golem}</p></td><td><p>120 days</p></td><td><p>100,000
+      gp</p></td></tr><tr><td><p>19-20</p></td><td><p>@UUID[Compendium.dnd5e.monsters.Actor.z3gSIXHHWYaHjfBT]{Stone
+      Golem}</p></td><td><p>90 days</p></td><td><p>80,000
+      gp</p></td></tr></tbody></table><p>To create a golem, you must spend the
+      time shown on the table, working without interruption with the manual at
+      hand and resting no more than 8 hours per day. You must also pay the
+      specified cost to purchase supplies.</p><p>Once you finish creating the
+      golem, the book is consumed in eldritch flames. The golem becomes animate
+      when the ashes of the manual are sprinkled on it. It is under your
+      control, and it understands and obeys your spoken commands.</p>
     chat: ''
   source:
     custom: ''
@@ -140,7 +67,7 @@ system:
         formula: ''
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -149,56 +76,170 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: damage
+    f5RyL5Z6g45XI3qQ:
+      type: summon
+      name: Create Golem
+      _id: f5RyL5Z6g45XI3qQ
+      img: ''
+      sort: 0
       activation:
         type: special
-        value: null
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: touch
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: T5koMfhRshLYVd5B
+          uuid: Compendium.dnd5e.monsters.Actor.Hm4o2FgPZsdbXjLq
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: pwwyZkiwkN97nEIR
+          uuid: Compendium.dnd5e.monsters.Actor.h98AuPfomEPcCibP
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: i9uYBfHFYtUTZPrS
+          uuid: Compendium.dnd5e.monsters.Actor.z3gSIXHHWYaHjfBT
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: pmfvqKVxA7wtWmBD
+          uuid: Compendium.dnd5e.monsters.Actor.YOqhbf8WsX0jH9Fu
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+    bTlMWXymAGeM5q7l:
+      type: damage
+      name: Unqualified Creator Damage
+      _id: bTlMWXymAGeM5q7l
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: false
+        condition: When a creature that can't use this manual attempts to read it.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
       damage:
         critical:
           allow: false
-          bonus: ''
         parts:
           - custom:
               enabled: false
@@ -206,22 +247,11 @@ system:
             number: 6
             denomination: 6
             bonus: ''
+            modifiers: []
             types:
               - psychic
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
-      img: ''
-      visibility:
-        requireMagic: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-      appliedEffects: []
+            scaling:
+              number: 1
   attuned: false
   identifier: manual-of-golems
 effects: []
@@ -232,11 +262,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037199912
-  modifiedTime: 1764620072279
+  modifiedTime: 1784684137028
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!UxkP6FvDzPbsIY6o'

@@ -5,22 +5,19 @@ img: icons/commodities/gems/pearl-water.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>The crystal ball is about 6 inches in diameter. While touching it, you
-      can cast the @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying}
-      spell (save DC 17) with it.</p>
-
-      <p>While Scrying with the Crystal Ball, you can communicate telepathically
-      with creatures you can see within 30 feet of the spell's sensor. You can
-      also use an action to cast the
-      @UUID[Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4]{Suggestion} spell
-      (save DC 17) through the sensor on one of those creatures. You don't need
-      to concentrate on this Suggestion to maintain it during its duration, but
-      it ends if Scrying ends.</p>
-
-      <p>Once used, the Suggestion power of the Crystal Ball can't be used again
-      until the next dawn.</p>
+      <p><em>Wondrous item, (requires attunement)</em></p><p>The crystal ball is
+      about 6 inches in diameter. While touching it, you can cast the
+      @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{scrying} spell (save
+      DC [[lookup @spell.challenge.save activity=gYpXMExP1crA0hHe]]) with
+      it.</p><p>While scrying with the Crystal Ball, you can communicate
+      telepathically with creatures you can see within 30 feet of the spell's
+      sensor. You can also use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4]{suggestion} spell
+      (save DC [[lookup @spell.challenge.save activity=5OrwGscvIsTh4piO]])
+      through the sensor on one of those creatures. You don't need to
+      concentrate on this suggestion to maintain it during its duration, but it
+      ends if scrying ends.</p><p>Once used, the suggestion power of the Crystal
+      Ball can't be used again until the next dawn.</p>
     chat: ''
   source:
     custom: ''
@@ -38,7 +35,7 @@ system:
   attunement: required
   equipped: false
   rarity: legendary
-  identified: true
+  identified: false
   uses:
     max: '1'
     recovery:
@@ -61,6 +58,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Crystal Ball
   container: null
   properties:
     - mgc
@@ -124,7 +122,7 @@ system:
       spell:
         uuid: Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4
         challenge:
-          attack: null
+          attack: ''
           save: 17
           override: true
         level: '2'
@@ -132,6 +130,7 @@ system:
           - vocal
           - somatic
           - material
+          - concentration
         ability: ''
       _id: 5OrwGscvIsTh4piO
       sort: 0
@@ -139,7 +138,7 @@ system:
         type: action
         value: null
         override: true
-        condition: While you are Scrying with the Crystal Ball
+        condition: While you are scrying with the Crystal Ball.
       consumption:
         scaling:
           allowed: false
@@ -153,7 +152,7 @@ system:
         units: spec
         concentration: false
         override: true
-        special: As long as the Scrying spell is active
+        special: As long as the scrying spell is active.
       range:
         override: false
       target:
@@ -169,7 +168,7 @@ system:
         recovery:
           - period: dawn
             type: recoverAll
-        max: ''
+        max: '1'
       name: ''
       img: ''
       visibility:
@@ -188,11 +187,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037100710
-  modifiedTime: 1764618974730
+  modifiedTime: 1784649242534
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5KiRtMMSTnJmMtBr'

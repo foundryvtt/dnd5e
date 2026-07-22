@@ -1,31 +1,29 @@
 _id: lTfo6OVvAY2iJ4oq
 name: Silver Horn of Valhalla
-type: consumable
-img: icons/tools/instruments/flute-simple-wood.webp
+type: equipment
+img: icons/commodities/bones/horn-drinking-white.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>You can use an action to blow this horn. In response, warrior spirits
-      from the Valhalla appear within 60 feet of you. They use the statistics of
-      a @UUID[Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2]{Berserker}. They
-      return to Valhalla after 1 hour or when they drop to 0 hit points. Once
-      you use the horn, it can't be used again until 7 days have passed.</p>
-
-      <p>Four types of Horn of Valhalla are known to exist, each made of a
-      different metal. The horn's type determines how many berserkers answer its
-      summons, as well as the requirement for its use. The GM chooses the horn's
-      type or determines it randomly from the
+      <p><em>Wondrous item</em></p><p>You can use an action to blow this horn.
+      In response, warrior spirits from the Valhalla appear within [[lookup
+      @labels.description.range activity=vyGo3viD8zgzo9Ya]] of you. They use the
+      statistics of a
+      @UUID[Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2]{berserker}. They
+      return to Valhalla after [[lookup @labels.duration
+      activity=vyGo3viD8zgzo9Ya]] or when they drop to 0 hit points. Once you
+      use the horn, it can't be used again until 7 days have passed.</p><p>Four
+      types of Horn of Valhalla are known to exist, each made of a different
+      metal. The horn's type determines how many berserkers answer its summons,
+      as well as the requirement for its use. The GM chooses the horn's type or
+      determines it randomly from the
       @UUID[Compendium.dnd5e.tables.RollTable.RwerG95cIk2uRpsQ]{Horn of
-      Valhalla} table.</p>
-
-      <p><strong>Silver Horn of Valhalla.</strong>This silver horn summons [[/r
-      3d4 + 3]] berserkers when blown and has no other requirements.</p>
-
-      <p>If you blow the horn without meeting its requirement, the summoned
-      berserkers attack you. If you meet the requirement, they are friendly to
-      you and your companions and follow your commands.</p>
+      Valhalla} table.</p><p><strong>Silver Horn of Valhalla. </strong>This
+      silver horn summons [[lookup @profiles.0.count activity=vyGo3viD8zgzo9Ya]]
+      berserkers when blown and has no other requirements.</p><p>If you blow the
+      horn without meeting its requirement, the summoned berserkers attack you.
+      If you meet the requirement, they are friendly to you and your companions
+      and follow your commands.</p>
     chat: ''
   source:
     custom: ''
@@ -33,6 +31,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 3
@@ -47,108 +46,171 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: 2
-      denomination: 4
-      bonus: '2'
-      types: []
-      custom:
-        enabled: false
-        formula: ''
-      scaling:
-        mode: ''
-        number: null
-        formula: ''
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Silver Horn
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: damage
+    vyGo3viD8zgzo9Ya:
+      type: summon
+      name: Blow Horn
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '1'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: S9BGWbL01N55bMCh
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
-        value: '60'
         units: ft
-        special: ''
         override: false
+        special: ''
+        value: '60'
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: ''
           choice: false
+          type: space
+          count: ''
           special: ''
-        prompt: true
         override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - custom:
-              enabled: false
-              formula: ''
-            number: 2
-            denomination: 4
-            bonus: '2'
-            types: []
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: 2d4 + 2
+          name: ''
+          _id: XOhOlyS5qn0EuThL
+          uuid: Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: vyGo3viD8zgzo9Ya
   attuned: false
   identifier: silver-horn-of-valhalla
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Called from Valhalla
+    img: icons/equipment/head/helm-barbute-horned-grey.webp
+    origin: Compendium.dnd5e.items.Item.lTfo6OVvAY2iJ4oq
+    transfer: false
+    _id: S9BGWbL01N55bMCh
+    type: base
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Valhalla Warrior Spirit
+          phase: initial
+          _id: QAzRZtR27XSbzD4O
+          conditions: '{}'
+          priority: null
+        - key: token.name
+          type: override
+          value: Valhalla Warrior Spirit
+          phase: initial
+          _id: nnC3DNNo8FQfnY91
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been called from Valhalla, and return there at the end of this
+      effect or until you drop to 0 hit points.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784646325906
+      modifiedTime: 1784646325906
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.QYJyQCnIQeLiMrmJ.ActiveEffect.xXpYsnxGSNkFDGeU
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!lTfo6OVvAY2iJ4oq.S9BGWbL01N55bMCh'
 folder: UnUwTG4YIgd0kaUJ
 sort: 7900000
 ownership:
@@ -156,11 +218,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037274276
-  modifiedTime: 1764620841304
+  modifiedTime: 1784646721724
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!lTfo6OVvAY2iJ4oq'

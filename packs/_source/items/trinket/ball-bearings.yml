@@ -6,9 +6,10 @@ system:
   description:
     value: >-
       <p>As an action, you can spill these 1,000 tiny metal balls from their
-      pouch to cover a level area 10 feet square. A creature moving across the
-      covered area must succeed on a DC 10 Dexterity saving throw or fall prone.
-      A creature moving through the area at half speed doesn't need to make the
+      pouch to cover a level area [[lookup @labels.description.template
+      activity=qchpvUgbujc7iAkd]]. A creature moving across the covered area
+      must succeed on a [[/save]] saving throw or fall &amp;reference[prone]. A
+      creature moving through the area at half speed doesn't need to make the
       saving throw.</p>
     chat: ''
   source:
@@ -52,67 +53,142 @@ system:
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    qchpvUgbujc7iAkd:
+      type: utility
+      name: Spill Ball Bearings
+      _id: qchpvUgbujc7iAkd
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
+            value: '1000'
             target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: square
+          size: '10'
+          count: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    gemnwgImzbVLzwyT:
+      type: save
+      activation:
+        type: special
+        value: 1
+        condition: When a creature moves through the ball bearings.
+        override: false
+      consumption:
+        targets: []
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: spec
         special: ''
         override: false
       target:
         template:
           count: ''
           contiguous: false
-          type: square
+          type: ''
           size: '10'
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
-          count: ''
-          type: ''
+          count: '1'
+          type: creature
           choice: false
           special: ''
         prompt: true
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: ''
           formula: '10'
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 300000
+      name: Prone Save
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        identifier: ''
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: gemnwgImzbVLzwyT
   attuned: false
   identifier: ball-bearings
 effects: []
@@ -123,11 +199,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037094429
-  modifiedTime: 1725992481901
+  modifiedTime: 1784647191088
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!3YSUIp4eFo26YxJr'

@@ -5,14 +5,13 @@ img: icons/commodities/treasure/trinket-wing-white.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>While holding this fan, you can use an action to cast the
+      <p><em>Wondrous item</em></p><p>While holding this fan, you can use an
+      action to cast the
       @UUID[Compendium.dnd5e.spells.Item.FSMy6VAjDnXY9vWz]{Gust of Wind} spell
-      (save DC 13) from it. Once used, the fan shouldn't be used again until the
-      next dawn. Each time it is used again before then, it has a cumulative 20
-      percent chance of not working and tearing into useless, nonmagical
-      tatters.</p>
+      (save DC [[lookup @spell.challenge.save activity=dxPPfFQVmolUFAcE]]) from
+      it. Once used, the fan shouldn't be used again until the next dawn. Each
+      time it is used again before then, it has a cumulative 20 percent chance
+      of not working and tearing into useless, nonmagical tatters.</p>
     chat: ''
   source:
     custom: ''
@@ -47,170 +46,26 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Fan
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: '1'
-        units: minute
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: self
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: line
-          size: '60'
-          width: ''
-          height: ''
-          units: ft
-        affects:
-          count: ''
-          type: ''
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: str
-        dc:
-          calculation: ''
-          formula: '13'
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
-      img: ''
-      visibility:
-        requireIdentification: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-        requireMagic: true
-      appliedEffects: []
-    dnd5eactivity200:
-      _id: dnd5eactivity200
-      type: damage
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: '1'
-        units: minute
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: self
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: line
-          size: '60'
-          width: ''
-          height: ''
-          units: ft
-        affects:
-          count: ''
-          type: ''
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - custom:
-              enabled: false
-              formula: ''
-            number: 1
-            denomination: 4
-            bonus: '1'
-            types: []
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
-      img: ''
-      visibility:
-        requireMagic: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-        requireIdentification: true
-      appliedEffects: []
     dnd5eactivity300:
       _id: dnd5eactivity300
       type: utility
       activation:
-        type: action
+        type: special
         value: 1
         condition: ''
         override: false
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
+        targets: []
         scaling:
           allowed: false
           max: ''
@@ -232,20 +87,20 @@ system:
         template:
           count: ''
           contiguous: false
-          type: line
+          type: ''
           size: '60'
           width: ''
           height: ''
           units: ft
         affects:
-          count: ''
-          type: ''
+          count: '1'
+          type: object
           choice: false
           special: ''
-        prompt: true
+        prompt: false
         override: false
       roll:
-        formula: 1d5
+        formula: 1d100
         name: ''
         prompt: false
         visible: false
@@ -253,8 +108,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 200000
+      name: Fan Destruction Check
       img: ''
       visibility:
         requireMagic: true
@@ -264,6 +119,69 @@ system:
         identifier: ''
         requireIdentification: true
       appliedEffects: []
+    dxPPfFQVmolUFAcE:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.FSMy6VAjDnXY9vWz
+        challenge:
+          override: true
+          attack: ''
+          save: '13'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 2
+      _id: dxPPfFQVmolUFAcE
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: ''
   attuned: false
   identifier: wind-fan
 effects: []
@@ -274,11 +192,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037278778
-  modifiedTime: 1764620888089
+  modifiedTime: 1784669955216
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!mYFfH24uzuKh4IPS'

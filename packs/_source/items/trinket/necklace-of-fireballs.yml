@@ -1,27 +1,28 @@
 _id: 3ALOhh6JNInIK4o7
 name: Necklace of Fireballs
 type: consumable
-img: icons/equipment/neck/pendant-faceted-red.webp
+img: icons/equipment/neck/collar-rounded-red.webp
 system:
   description:
     value: >-
       <p><em>Wondrous item</em></p><p>This necklace has 1d6 + 3 beads hanging
-      from it. You can use an action to detach a bead and throw it up to 60 feet
-      away. When it reaches the end of its trajectory, the bead detonates as a
-      3rd-level @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball}
-      spell (save DC 15).</p><p>You can hurl multiple beads, or even the whole
-      necklace, as one action. When you do so, increase the level of the
-      fireball by 1 for each bead beyond the first.</p><section class="secret
-      foundry-note" id="secret-BPYFYGO4aUSbDiBj"><p><strong>Foundry
-      Note</strong></p><p>The 9 charges represent the maximum number of beads
-      possible to find; please adjust as required. The Other Formula button can
-      be used to roll the additional damage for extra beads
-      thrown.</p><p>Additionally, here is a price guide depending on the number
-      of beads still remaining. These prices are a guide only and should be
-      adjusted accordingly to reflect the Dungeon Master's
-      world:</p><table><thead><tr><td><strong>Number of
-      Beads</strong></td><td><strong>Price
-      (gp)</strong></td></tr></thead><tbody><tr><td>8</td><td>30,720</td></tr><tr><td>7</td><td>15,360</td></tr><tr><td>6</td><td>7680</td></tr><tr><td>5</td><td>3840</td></tr><tr><td>4</td><td>1600</td></tr><tr><td>3</td><td>960</td></tr><tr><td>2</td><td>480</td></tr><tr><td>1</td><td>300</td></tr></tbody></table></section>
+      from it. You can use an action to detach a bead and throw it up to
+      [[lookup @labels.description.range activity=C8zhwUVACrcYrfbe]] away. When
+      it reaches the end of its trajectory, the bead detonates as a 3rd-level
+      @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{fireball} spell (save
+      DC [[lookup @spell.challenge.save activity=C8zhwUVACrcYrfbe]]).</p><p>You
+      can hurl multiple beads, or even the whole necklace, as one action. When
+      you do so, increase the level of the fireball by 1 for each bead beyond
+      the first.</p><section id="secret-BPYFYGO4aUSbDiBj" class="secret
+      foundry-note"><p><strong>Foundry Note</strong></p><p>The 9 charges
+      represent the maximum number of beads possible to find; please adjust as
+      required. The Other Formula button can be used to roll the additional
+      damage for extra beads thrown.</p><p>Additionally, here is a price guide
+      depending on the number of beads still remaining. These prices are a guide
+      only and should be adjusted accordingly to reflect the Dungeon Master's
+      world:</p><table><thead><tr><td><p><strong>Number of
+      Beads</strong></p></td><td><p><strong>Price
+      (gp)</strong></p></td></tr></thead><tbody><tr><td><p>8</p></td><td><p>30,720</p></td></tr><tr><td><p>7</p></td><td><p>15,360</p></td></tr><tr><td><p>6</p></td><td><p>7680</p></td></tr><tr><td><p>5</p></td><td><p>3840</p></td></tr><tr><td><p>4</p></td><td><p>1600</p></td></tr><tr><td><p>3</p></td><td><p>960</p></td></tr><tr><td><p>2</p></td><td><p>480</p></td></tr><tr><td><p>1</p></td><td><p>300</p></td></tr></tbody></table></section>
     chat: ''
   source:
     custom: ''
@@ -61,10 +62,11 @@ system:
         formula: ''
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>This necklace has 1d6 + 3 beads hanging from it.</p>
+    name: Unidentified Necklace
   container: null
   properties:
     - mgc
@@ -76,7 +78,7 @@ system:
         uuid: Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0
         challenge:
           override: true
-          attack: null
+          attack: ''
           save: 15
         properties:
           - vocal
@@ -92,12 +94,16 @@ system:
         override: false
       consumption:
         scaling:
-          allowed: false
+          allowed: true
+          max: '@item.uses.value'
         spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
+            scaling:
+              mode: amount
+              formula: '1'
       description:
         chatFlavor: ''
       duration:
@@ -106,8 +112,10 @@ system:
         override: false
       flags: {}
       range:
-        units: self
-        override: false
+        units: ft
+        override: true
+        special: ''
+        value: '60'
       target:
         template:
           contiguous: false
@@ -140,11 +148,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037092424
-  modifiedTime: 1764618892524
+  modifiedTime: 1784594443900
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!3ALOhh6JNInIK4o7'

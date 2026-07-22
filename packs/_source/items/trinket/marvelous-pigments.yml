@@ -8,27 +8,26 @@ system:
       brush (weighing 1 pound in total), these pigments allow you to create
       three-dimensional objects by painting them in two dimensions. The paint
       flows from the brush to form the desired object as you concentrate on its
-      image.</p>
-
-      <p>Each pot of paint is sufficient to cover 1,000 square feet of a
-      surface, which lets you create inanimate objects or terrain features—such
-      as a door, a pit, flowers, trees, cells, rooms, or weapons—that are up to
-      10,000 cubic feet. It takes 10 minutes to cover 100 square feet.</p>
-
-      <p>When you complete the painting, the object or terrain feature depicted
-      becomes a real, nonmagical object. Thus, painting a door on a wall creates
-      an actual door that can be opened to whatever is beyond. Painting a pit on
-      a floor creates a real pit, and its depth counts against the total area of
-      objects you create.</p>
-
-      <p>Nothing created by the pigments can have a value greater than 25 gp. If
-      you paint an object of greater value (such as a diamond or a pile of
-      gold), the object looks authentic, but close inspection reveals it is made
-      from paste, bone, or some other worthless material.</p>
-
-      <p>If you paint a form of energy such as fire or lightning, the energy
-      appears but dissipates as soon as you complete the painting, doing no harm
-      to anything.</p>
+      image.</p><p>Each pot of paint is sufficient to cover 1,000 square feet of
+      a surface, which lets you create inanimate objects or terrain
+      features—such as a door, a pit, flowers, trees, cells, rooms, or
+      weapons—that are up to 10,000 cubic feet. It takes 10 minutes to cover 100
+      square feet.</p><p>When you complete the painting, the object or terrain
+      feature depicted becomes a real, nonmagical object. Thus, painting a door
+      on a wall creates an actual door that can be opened to whatever is beyond.
+      Painting a pit on a floor creates a real pit, and its depth counts against
+      the total area of objects you create.</p><p>Nothing created by the
+      pigments can have a value greater than 25 gp. If you paint an object of
+      greater value (such as a diamond or a pile of gold), the object looks
+      authentic, but close inspection reveals it is made from paste, bone, or
+      some other worthless material.</p><p>If you paint a form of energy such as
+      fire or lightning, the energy appears but dissipates as soon as you
+      complete the painting, doing no harm to anything.</p><section
+      id="secret-cQCHWYiJZD5puPbH" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This item has 1000 initial charges, representing the
+      1000 square feet that it can cover. The <em><strong>"Paint
+      Surface"</strong></em> activity allows you to use any number of the pot's
+      uses.</p></section>
     chat: ''
   source:
     custom: ''
@@ -48,7 +47,7 @@ system:
   rarity: veryRare
   identified: true
   uses:
-    max: ''
+    max: '1000'
     autoDestroy: false
     spent: 0
     recovery: []
@@ -63,15 +62,82 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Pot of Pigment
   container: null
   properties:
     - mgc
   magicalBonus: null
-  activities: {}
+  activities:
+    MnZNq4bxkTGxnQwp:
+      type: utility
+      name: Paint Surface
+      _id: MnZNq4bxkTGxnQwp
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: '1'
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: space
+          special: ''
+          count: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: marvelous-pigments
 effects: []
@@ -83,11 +149,11 @@ ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037237709
-  modifiedTime: 1750697344647
+  modifiedTime: 1784594692959
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!e3XQygrXkzNvkDGF'

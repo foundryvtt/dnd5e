@@ -1,0 +1,327 @@
+folder: 89daM0oezivxN75Y
+name: Carpet of Flying (4x6)
+type: vehicle
+img: systems/dnd5e/tokens/construct/RugOfSmotheringIdle.webp
+system:
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    dex:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    con:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    int:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    wis:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    cha:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+  attributes:
+    ac:
+      calcs:
+        - unarmored
+        - armored
+      flat: null
+      formulas: []
+      override: null
+      calc: flat
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: ''
+    movement:
+      speeds:
+        walk: ''
+        burrow: ''
+        climb: ''
+        fly: '60'
+        jump: ''
+        swim: ''
+      units: ft
+      hover: false
+      ignoredDifficultTerrain: []
+      bonus: ''
+      special: ''
+    hp:
+      max: null
+      temp: 0
+      tempmax: 0
+      value: null
+      mt: null
+    actions:
+      max: 3
+      spent: 0
+      stations: true
+      thresholds:
+        '0': null
+        '1': null
+        '2': null
+    capacity:
+      cargo:
+        units: lb
+        value: 800
+      creature: ''
+    price:
+      value: null
+      denomination: gp
+    quality:
+      value: 4
+    travel:
+      paces:
+        land: ''
+        water: ''
+        air: ''
+      speeds:
+        land: ''
+        water: ''
+        air: ''
+      time: 24
+      units: mph
+  crew:
+    value: []
+    max: null
+  details:
+    biography:
+      value: >-
+        <p>An animated
+        @UUID[Compendium.dnd5e.items.Item.DeK9uQvNJj3JzFwe]{Carpet of Flying
+        (4x6)}</p><p>@embed[Compendium.dnd5e.items.Item.DeK9uQvNJj3JzFwe
+        inline]</p>
+      public: ''
+    type: air
+  draft:
+    value: []
+  passengers:
+    value: []
+    max: null
+  source:
+    revision: 1
+    rules: '2014'
+  traits:
+    size: lg
+    di:
+      value: []
+      custom: ''
+      bypasses: []
+    dr:
+      value: []
+      custom: ''
+      bypasses: []
+    dv:
+      value: []
+      custom: ''
+      bypasses: []
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value: []
+      custom: ''
+    weight:
+      units: lb
+      value: null
+    keel:
+      units: ft
+      value: null
+    beam:
+      units: ft
+      value: null
+    dimensions: ''
+  cargo:
+    crew: []
+    passengers: []
+prototypeToken:
+  name: Carpet of Flying (4x6)
+  displayName: 20
+  actorLink: false
+  width: 2
+  height: 2
+  depth: 1
+  texture:
+    src: systems/dnd5e/tokens/construct/RugOfSmotheringIdle.webp
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    scaleX: 1
+    scaleY: 1
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: false
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: {}
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 0
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+  flags: {}
+  randomImg: false
+  appendNumber: false
+  prependAdjective: false
+items: []
+effects: []
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.365'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1784670439659
+  modifiedTime: 1784670439659
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_id: 7oZoDLuT3QQAqXPt
+sort: 0
+_key: '!actors!7oZoDLuT3QQAqXPt'

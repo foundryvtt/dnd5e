@@ -1,17 +1,17 @@
 _id: oN4Glcmi4BhdAI3k
 name: Tome of Leadership and Influence
-type: consumable
+type: equipment
 img: icons/sundries/books/book-symbol-triangle-silver-purple.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This book contains guidelines for influencing and charming others, and
-      its words are charged with magic. If you spend 48 hours over a period of 6
-      days or fewer studying the book's contents and practicing its guidelines,
-      your Charisma score increases by 2, as does your maximum for that score.
-      The manual then loses its magic, but regains it in a century.</p>
+      <p><em>Wondrous item</em></p><p>This book contains guidelines for
+      influencing and charming others, and its words are charged with magic. If
+      you spend [[lookup @labels.activation activity=YXAVbkZO13C8u9n8]] over a
+      period of 6 days or fewer studying the book's contents and practicing its
+      guidelines, your Charisma score increases by 2, as does your maximum for
+      that score. The manual then loses its magic, but regains it in a
+      century.</p>
     chat: ''
   source:
     custom: ''
@@ -19,6 +19,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 1
@@ -33,30 +34,18 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: true
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Tome
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    YXAVbkZO13C8u9n8:
       type: utility
       activation:
         type: hour
@@ -68,21 +57,28 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: dr6JSLPO08RS9KbX
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -93,13 +89,14 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
           choice: false
           special: ''
-        prompt: true
+        prompt: false
         override: false
       roll:
         formula: ''
@@ -110,8 +107,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Study Tome
       img: ''
       visibility:
         requireMagic: true
@@ -119,10 +116,75 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: YXAVbkZO13C8u9n8
   attuned: false
   identifier: tome-of-leadership-and-influence
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Blessing of Leadership and Influence
+    img: icons/sundries/books/book-symbol-triangle-silver-purple.webp
+    origin: Compendium.dnd5e.items.Item.oN4Glcmi4BhdAI3k
+    system:
+      magical: false
+      changes:
+        - key: system.abilities.cha.value
+          type: add
+          value: 2
+          phase: initial
+          _id: QtoqbFAEz3ojdtuj
+          conditions: '{}'
+          priority: null
+        - key: system.abilities.cha.max
+          type: add
+          value: 2
+          phase: initial
+          _id: 6q6iazHhOBclxhuc
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: dr6JSLPO08RS9KbX
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>Your Charisma score increases by 2, as does your maximum for that
+      score.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783793284256
+      modifiedTime: 1783793321924
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!oN4Glcmi4BhdAI3k.dr6JSLPO08RS9KbX'
 folder: UnUwTG4YIgd0kaUJ
 sort: 8500000
 ownership:
@@ -130,11 +192,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037285779
-  modifiedTime: 1764620945692
+  modifiedTime: 1784591141505
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!oN4Glcmi4BhdAI3k'

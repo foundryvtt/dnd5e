@@ -1,14 +1,14 @@
 _id: xwUWrV15s9jLnmfZ
 name: Lock
-type: consumable
-img: icons/sundries/misc/lock-bronze-reinforced.webp
+type: equipment
+img: icons/sundries/misc/lock-steel-blue.webp
 system:
   description:
     value: >-
       <p>A key is provided with the lock. Without the key, a creature proficient
-      with thieves' tools can pick this lock with a successful DC 15 Dexterity
-      check. Your DM may decide that better locks are available for higher
-      prices.</p>
+      with thieves' tools can pick this lock with a successful [[/check
+      activity=iVCq8JI5tO99Y9aR]] check. Your DM may decide that better locks
+      are available for higher prices.</p>
     chat: ''
   source:
     custom: ''
@@ -16,6 +16,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 1
@@ -30,29 +31,17 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
     value: trinket
-    subtype: ''
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Lock
   container: null
   properties: []
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    iVCq8JI5tO99Y9aR:
       type: check
       activation:
         type: action
@@ -62,21 +51,20 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -93,6 +81,7 @@ system:
           width: ''
           height: ''
           units: touch
+          stationary: false
         affects:
           count: ''
           type: object
@@ -101,75 +90,40 @@ system:
         prompt: true
         override: false
       check:
-        ability: ''
-        dc: {}
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
-    dnd5eactivity100:
-      _id: dnd5eactivity100
-      type: save
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: ''
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: touch
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: touch
-        affects:
-          count: ''
-          type: object
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
         ability: dex
         dc:
           calculation: ''
           formula: '15'
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: iVCq8JI5tO99Y9aR
+      name: Pick Lock Check
   attuned: false
   identifier: lock
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 10900000
@@ -178,11 +132,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037325128
-  modifiedTime: 1725992559617
+  modifiedTime: 1784594890221
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!xwUWrV15s9jLnmfZ'

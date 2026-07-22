@@ -5,37 +5,29 @@ img: icons/commodities/cloth/cloth-roll-worn-blue.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This fine black cloth, soft as silk, is folded up to the dimensions of
-      a handkerchief. It unfolds into a circular sheet 6 feet in diameter.</p>
-
-      <p>You can use an action to unfold a Portable Hole and place it on or
-      against a solid surface, whereupon the Portable Hole creates an
-      extradimensional hole 10 feet deep. The cylindrical space within the hole
-      exists on a different plane, so it can't be used to create open passages.
-      Any creature inside an open Portable Hole can exit the hole by climbing
-      out of it.</p>
-
-      <p>You can use an action to close a Portable Hole by taking hold of the
-      edges of the cloth and folding it up. Folding the cloth closes the hole,
-      and any creatures or objects within remain in the extradimensional space.
-      No matter what's in it, the hole weighs next to nothing.</p>
-
-      <p>If the hole is folded up, a creature within the hole's extradimensional
-      space can use an action to make a DC 10 Strength check. On a successful
-      check, the creature forces its way out and appears within 5 feet of the
-      portable hole or the creature carrying it. A breathing creature within a
-      closed Portable Hole can survive for up to 10 minutes, after which time it
-      begins to suffocate.</p>
-
-      <p>Placing a portable hole inside an extradimensional space created by a
-      bag of holding, handy haversack, or similar item instantly destroys both
-      items and opens a gate to the Astral Plane. The gate originates where the
-      one item was placed inside the other. Any creature within 10 feet of the
-      gate is sucked through it and deposited in a random location on the Astral
-      Plane. The gate then closes. The gate is one-way only and can't be
-      reopened.</p>
+      <p><em>Wondrous item</em></p><p>This fine black cloth, soft as silk, is
+      folded up to the dimensions of a handkerchief. It unfolds into a circular
+      sheet 6 feet in diameter.</p><p>You can use an action to unfold a Portable
+      Hole and place it on or against a solid surface, whereupon the Portable
+      Hole creates an extradimensional hole 10 feet deep. The cylindrical space
+      within the hole exists on a different plane, so it can't be used to create
+      open passages. Any creature inside an open Portable Hole can exit the hole
+      by climbing out of it.</p><p>You can use an action to close a Portable
+      Hole by taking hold of the edges of the cloth and folding it up. Folding
+      the cloth closes the hole, and any creatures or objects within remain in
+      the extradimensional space. No matter what's in it, the hole weighs next
+      to nothing.</p><p>If the hole is folded up, a creature within the hole's
+      extradimensional space can use an action to make a DC 10 Strength check.
+      On a successful check, the creature forces its way out and appears within
+      5 feet of the portable hole or the creature carrying it. A breathing
+      creature within a closed Portable Hole can survive for up to 10 minutes,
+      after which time it begins to suffocate.</p><p>Placing a portable hole
+      inside an extradimensional space created by a bag of holding, handy
+      haversack, or similar item instantly destroys both items and opens a gate
+      to the Astral Plane. The gate originates where the one item was placed
+      inside the other. Any creature within 10 feet of the gate is sucked
+      through it and deposited in a random location on the Astral Plane. The
+      gate then closes. The gate is one-way only and can't be reopened.</p>
     chat: ''
   source:
     custom: ''
@@ -73,17 +65,19 @@ system:
     value: trinket
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This fine black cloth, soft as silk, is folded up to the dimensions of
+      a handkerchief. It unfolds into a circular sheet 6 feet in diameter.</p>
+    name: Unidentified Black Handkerchief
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    V7IBfbfF7onpAhZO:
       type: check
       activation:
-        type: action
+        type: special
         value: 1
         condition: ''
         override: false
@@ -95,109 +89,49 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
-        value: '10'
-        units: minute
+        value: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: touch
         special: ''
         override: false
       target:
         template:
           count: ''
           contiguous: false
-          type: radius
+          type: ''
           size: '3'
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
-          count: ''
-          type: ''
+          count: '1'
+          type: creature
           choice: false
           special: ''
         prompt: true
         override: false
       check:
-        ability: ''
-        dc:
-          calculation: ''
-          formula: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
-      img: ''
-      visibility:
-        requireMagic: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-      appliedEffects: []
-    dnd5eactivity100:
-      _id: dnd5eactivity100
-      type: save
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: '10'
-        units: minute
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: ''
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: radius
-          size: '3'
-          width: ''
-          height: ''
-          units: ft
-        affects:
-          count: ''
-          type: ''
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
         ability: str
         dc:
           calculation: ''
           formula: '10'
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 300000
+      name: Force Way Out Check
       img: ''
       visibility:
         requireMagic: true
@@ -205,7 +139,71 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: V7IBfbfF7onpAhZO
+    zCfUCtu1ZJbPkUBc:
+      type: utility
+      name: Unfold Handkerchief
+      _id: zCfUCtu1ZJbPkUBc
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: cylinder
+          size: '3'
+          height: '10'
+          count: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: portable-hole
 effects: []
@@ -216,11 +214,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037300564
-  modifiedTime: 1764621102162
+  modifiedTime: 1784678997295
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!rvxGvcUzoQXVNbAu'

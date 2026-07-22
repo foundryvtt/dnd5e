@@ -12,10 +12,10 @@ system:
       glue can cover a 1-foot square surface. The glue takes 1 minute to set.
       Once it has done so, the bond it creates can be broken only by the
       application of universal solvent or oil of etherealness, or with a
-      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish}
-      spell.</p><section class="secret foundry-note"
-      id="secret-s3MCPshCsEZEYTHn"><p><strong>Foundry Note</strong></p><p>The 7
-      charges reflect the maximum amount a character can find. Please adjust as
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{wish}
+      spell.</p><section id="secret-s3MCPshCsEZEYTHn" class="secret
+      foundry-note"><p><strong>Foundry Note</strong></p><p>The 7 charges reflect
+      the maximum amount a character can find. Please adjust as
       required.</p></section>
     chat: ''
   source:
@@ -34,7 +34,7 @@ system:
   attunement: ''
   equipped: false
   rarity: legendary
-  identified: true
+  identified: false
   uses:
     max: '7'
     recovery: []
@@ -51,17 +51,17 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>A vial of viscous, milky-white substance.</p>
+    name: Unidentified Vial of Milky Substance
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    muPknpr9XPTwQMRr:
       type: utility
       activation:
         type: action
@@ -73,16 +73,18 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -99,6 +101,7 @@ system:
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -115,8 +118,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Pour out Liquid
       img: ''
       visibility:
         requireMagic: true
@@ -124,7 +127,11 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: muPknpr9XPTwQMRr
   attuned: false
   identifier: sovereign-glue
 effects: []
@@ -135,11 +142,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037329958
-  modifiedTime: 1764621448655
+  modifiedTime: 1784683320920
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!zJ5LhDvTxYKzPIx4'

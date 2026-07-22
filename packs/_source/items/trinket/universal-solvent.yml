@@ -5,12 +5,11 @@ img: icons/consumables/potions/potion-bottle-corked-white.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This tube holds milky liquid with a strong alcohol smell. You can use
-      an action to pour the contents of the tube onto a surface within reach.
-      The liquid instantly dissolves up to 1 square foot of adhesive it touches,
-      including Sovereign Glue.</p>
+      <p><em>Wondrous item</em></p><p>This tube holds milky liquid with a strong
+      alcohol smell. You can use an action to pour the contents of the tube onto
+      a surface within reach. The liquid instantly dissolves up to [[lookup
+      @labels.description.template activity=TRhFSfxXHacoWs6K]] of adhesive it
+      touches, including Sovereign Glue.</p>
     chat: ''
   source:
     custom: ''
@@ -45,17 +44,17 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>This tube holds milky liquid with a strong alcohol smell.</p>
+    name: Unidentified Solvent
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    TRhFSfxXHacoWs6K:
       type: utility
       activation:
         type: action
@@ -67,16 +66,18 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -93,6 +94,7 @@ system:
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -109,8 +111,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Pour out Contents
       img: ''
       visibility:
         requireMagic: true
@@ -118,7 +120,11 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: TRhFSfxXHacoWs6K
   attuned: false
   identifier: universal-solvent
 effects: []
@@ -129,11 +135,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037169569
-  modifiedTime: 1764619708064
+  modifiedTime: 1784656718387
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MAwoj2suj6cvb9Ti'

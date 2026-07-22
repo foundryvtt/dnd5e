@@ -1,6 +1,6 @@
 _id: LiOD83I4MIZlpoQQ
 name: Hunting Trap
-type: consumable
+type: equipment
 img: icons/environment/traps/trap-jaw-green.webp
 system:
   description:
@@ -9,12 +9,12 @@ system:
       ring that snaps shut when a creature steps on a pressure plate in the
       center. The trap is affixed by a heavy chain to an immobile object, such
       as a tree or a spike driven into the ground. A creature that steps on the
-      plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing
-      damage and stop moving. Thereafter, until the creature breaks free of the
-      trap, its movement is limited by the length of the chain (typically 3 feet
-      long). A creature can use its action to make a DC 13 Strength check,
-      freeing itself or another creature within its reach on a success. Each
-      failed check deals 1 piercing damage to the trapped creature.</p>
+      plate must succeed on a [[/save]] saving throw or take [[/damage]] damage
+      and stop moving. Thereafter, until the creature breaks free of the trap,
+      its movement is limited by the length of the chain (typically 3 feet
+      long). A creature can use its action to make a [[/check]] check, freeing
+      itself or another creature within its reach on a success. Each failed
+      check deals [[/damage 1 piercing]] damage to the trapped creature.</p>
     chat: ''
   source:
     custom: ''
@@ -22,6 +22,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 25
@@ -34,179 +35,211 @@ system:
   rarity: ''
   identified: true
   uses:
-    max: '1'
+    max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: 1
-      denomination: 4
-      bonus: ''
-      types:
-        - piercing
-      custom:
-        enabled: false
-        formula: ''
-      scaling:
-        mode: ''
-        number: null
-        formula: ''
-    replace: false
   type:
     value: trinket
-    subtype: ''
+    baseItem: ''
   unidentified:
     description: ''
   container: null
   properties: []
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    L2rpgtJDAfJhxuE0:
       type: save
+      name: Avoid Trap Save
+      _id: L2rpgtJDAfJhxuE0
+      img: ''
+      sort: 100000
       activation:
-        type: action
-        value: 1
-        condition: ''
+        type: special
         override: false
+        condition: When a creature steps on this trap.
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
-      effects: []
+      effects:
+        - _id: uGbuQqEIC1qZubuw
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
         units: touch
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
+          choice: false
           count: '1'
           type: creature
-          choice: false
           special: ''
-        prompt: true
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
       damage:
-        onSave: half
+        onSave: none
         parts:
-          - number: 1
-            denomination: 4
-            bonus: ''
-            types:
-              - piercing
-            custom:
+          - custom:
               enabled: false
               formula: ''
+            number: 1
+            denomination: 4
+            bonus: ''
+            modifiers: []
+            types:
+              - piercing
             scaling:
-              mode: whole
-              number: null
-              formula: ''
+              number: 1
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: ''
           formula: '13'
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
-    dnd5eactivity200:
-      _id: dnd5eactivity200
-      type: damage
+        visible: true
+        bonus: ''
+    mjFI1bBlmatRfmKO:
+      type: check
+      name: Escape Trap Check
+      _id: mjFI1bBlmatRfmKO
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            target: ''
-            value: '1'
-            scaling:
-              mode: ''
-              formula: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
         units: touch
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
+          choice: false
           count: '1'
           type: creature
-          choice: false
           special: ''
-        prompt: true
         override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: null
-            denomination: null
-            bonus: ''
-            types: []
-            custom:
-              enabled: true
-              formula: '1'
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: '13'
+        visible: true
+        ability: str
+        bonus: ''
   attuned: false
   identifier: hunting-trap
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+  proficient: null
+  strength: null
+effects:
+  - name: Caught in Hunting Trap
+    img: icons/environment/traps/trap-jaw-tan.webp
+    origin: Compendium.dnd5e.items.Item.LiOD83I4MIZlpoQQ
+    transfer: false
+    _id: uGbuQqEIC1qZubuw
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been caught in a hunting trap. A creature can use its action
+      to make a [[/check 13 str]] check, freeing you on a successful check. Each
+      failed check deals [[/damage 1 piercing]] damage to you.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784676489455
+      modifiedTime: 1784676546779
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!LiOD83I4MIZlpoQQ.uGbuQqEIC1qZubuw'
 folder: UnUwTG4YIgd0kaUJ
 sort: 4000000
 ownership:
@@ -214,11 +247,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037167567
-  modifiedTime: 1725992506361
+  modifiedTime: 1784676633388
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!LiOD83I4MIZlpoQQ'

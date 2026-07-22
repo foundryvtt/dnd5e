@@ -5,19 +5,15 @@ img: icons/commodities/materials/feather-colored-green.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This tiny object looks like a feather. Different types of feather
-      tokens exist, each with a different single-use effect. The GM chooses the
-      kind of token or determines it randomly from the
-      @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather Token}
-      table.</p>
-
-      <p><strong>Tree.</strong> You must be outdoors to use this token. You can
-      use an action to touch it to an unoccupied space on the ground. The token
-      disappears, and in its place a nonmagical oak tree springs into existence.
-      The tree is 60 feet tall and has a 5-foot-diameter trunk, and its branches
-      at the top spread out in a 20-foot radius.</p>
+      <p><em>Wondrous item</em></p><p>This tiny object looks like a feather.
+      Different types of feather tokens exist, each with a different single-use
+      effect. The GM chooses the kind of token or determines it randomly from
+      the @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather
+      Token} table.</p><p><strong>Tree.</strong> You must be outdoors to use
+      this token. You can use an action to touch it to an unoccupied space on
+      the ground. The token disappears, and in its place a nonmagical oak tree
+      springs into existence. The tree is 60 feet tall and has a 5-foot-diameter
+      trunk, and its branches at the top spread out in a 20-foot radius.</p>
     chat: ''
   source:
     custom: ''
@@ -52,7 +48,7 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -61,8 +57,7 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    Iwf0YuQSeZLzQGfH:
       type: utility
       activation:
         type: action
@@ -74,16 +69,23 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>You must be outdoors to use this token. You can use an action to
+          touch it to an unoccupied space on the ground. The token disappears,
+          and in its place a nonmagical oak tree springs into existence. The
+          tree is 60 feet tall and has a 5-foot-diameter trunk, and its branches
+          at the top spread out in a 20-foot radius.</p>
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -95,13 +97,14 @@ system:
         template:
           count: ''
           contiguous: false
-          type: ''
-          size: ''
+          type: cylinder
+          size: '2.5'
           width: ''
-          height: ''
+          height: '60'
           units: ft
+          stationary: false
         affects:
-          count: '5'
+          count: '1'
           type: space
           choice: false
           special: ''
@@ -116,8 +119,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Plant Feather
       img: ''
       visibility:
         requireMagic: true
@@ -125,8 +128,11 @@ system:
           min: null
           max: null
         identifier: ''
-        requireIdentification: true
-      appliedEffects: []
+        requireIdentification: false
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: Iwf0YuQSeZLzQGfH
   attuned: false
   identifier: feather-token-tree
 effects: []
@@ -137,11 +143,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037175057
-  modifiedTime: 1764619753643
+  modifiedTime: 1784665597289
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!NjTgPn2o0M1TGk93'

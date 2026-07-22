@@ -1,30 +1,24 @@
 _id: DxIdfGoJEYQj8o3D
 name: Bag of Tricks (Rust)
-type: consumable
+type: equipment
 img: icons/containers/bags/sack-simple-leather-tan.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This ordinary bag, made from rust-colored cloth, appears empty.
-      Reaching inside the bag, however, reveals the presence of a small, fuzzy
-      object. The bag weighs 1/2 pound.</p>
-
-      <p>You can use an action to pull the fuzzy object from the bag and throw
-      it up to 20 feet. When the object lands, it transforms into a creature you
-      determine by rolling on the
-      @UUID[Compendium.dnd5e.tables.RollTable.PLHwT9dC6fCZqkeo]{Rust Bag of
-      Tricks} table.</p>
-
-      <p>The creature is friendly to you and your companions, and it acts on
-      your turn. You can use a bonus action to command how the creature moves
-      and what action it takes on its next turn, or to give it general orders,
-      such as to attack your enemies. In the absence of such orders, the
-      creature acts in a fashion appropriate to its nature.</p>
-
-      <p>Once three fuzzy objects have been pulled from the bag, the bag can't
-      be used again until the next dawn.</p>
+      <p><em>Wondrous item</em></p><p>This ordinary bag, made from rust-colored
+      cloth, appears empty. Reaching inside the bag, however, reveals the
+      presence of a small, fuzzy object. The bag weighs 1/2 pound.</p><p>You can
+      use an action to pull the fuzzy object from the bag and throw it up to
+      [[lookup @labels.description.range activity=3w55EKvjsvHaYZXn]]. When the
+      object lands, it transforms into a creature you determine by rolling on
+      the @UUID[Compendium.dnd5e.tables.RollTable.PLHwT9dC6fCZqkeo]{Rust Bag of
+      Tricks} table.</p><p>The creature is friendly to you and your companions,
+      and it acts on your turn. You can use a bonus action to command how the
+      creature moves and what action it takes on its next turn, or to give it
+      general orders, such as to attack your enemies. In the absence of such
+      orders, the creature acts in a fashion appropriate to its
+      nature.</p><p>Once three fuzzy objects have been pulled from the bag, the
+      bag can't be used again until the next dawn.</p>
     chat: ''
   source:
     custom: ''
@@ -32,6 +26,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 0.5
@@ -46,98 +41,140 @@ system:
   uses:
     max: '3'
     recovery:
-      - period: day
+      - period: dawn
         type: recoverAll
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This ordinary bag, made from rust-colored cloth, appears empty.
+      Reaching inside the bag, however, reveals the presence of a small, fuzzy
+      object. The bag weighs 1/2 pound.</p>
+    name: Unidentified Rust Colored Bag
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    3w55EKvjsvHaYZXn:
+      type: summon
+      name: Summon Creature
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
+        override: false
         value: ''
-        units: ''
-        special: ''
-        override: false
       effects: []
+      flags: {}
       range:
-        value: '20'
         units: ft
-        special: ''
         override: false
+        value: '20'
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
+          stationary: false
           units: ft
+          type: ''
         affects:
-          count: '5'
-          type: space
           choice: false
+          count: '1'
+          type: space
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
         prompt: false
-        visible: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - _id: mnNYbxMKdpAIqmvI
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.pozQUPTnLZW8epox
+        - _id: 2y4JKiFtjV7g49x7
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.hjhERRzafCiFFVLA
+        - _id: r7N7TMX7Wi1FKpTg
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.d0prpsGSAorDadec
+        - _id: BGDDUNi1uxCO4EWt
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.YTpL2c3NO4sOn2UA
+        - _id: WFDCBtBFGkiefWSA
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.y8sRU8Ks2lcrGsaf
+        - _id: Zo6LUpFXs1z5sVn8
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.rjqk7ToMD8sGr3n4
+        - _id: zi4FnLf99xwTHWRL
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.SsuCaF2fIEoDdFA3
+        - _id: xFQWEE9aBpgrrR21
+          level: {}
+          types: []
+          uuid: Compendium.dnd5e.monsters.Actor.omcDpBoB69esCXeM
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: 3w55EKvjsvHaYZXn
   attuned: false
   identifier: bag-of-tricks-rust
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 2900000
@@ -146,11 +183,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037135128
-  modifiedTime: 1764619387602
+  modifiedTime: 1784645161778
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!DxIdfGoJEYQj8o3D'

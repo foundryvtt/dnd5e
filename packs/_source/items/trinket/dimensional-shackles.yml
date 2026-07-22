@@ -1,24 +1,21 @@
 _id: wGKykLRS8UqChNXI
 name: Dimensional Shackles
-type: consumable
+type: equipment
 img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>You can use an action to place these shackles on an incapacitated
-      creature. The shackles adjust to fit a creature of Small to Large size. In
-      addition to serving as mundane manacles, the shackles prevent a creature
-      bound by them from using any method of extradimensional movement,
-      including teleportation or travel to a different plane of existence. They
-      don't prevent the creature from passing through an interdimensional
-      portal.</p>
-
-      <p>You and any creature you designate when you use the shackles can use an
-      action to remove them. Once every 30 days, the bound creature can make a
-      DC 30 Strength (Athletics) check. On a success, the creature breaks free
-      and destroys the shackles.</p>
+      <p><em>Wondrous item</em></p><p>You can use an action to place these
+      shackles on an &amp;reference[incapacitated apply=false] creature. The
+      shackles adjust to fit a creature of Small to Large size. In addition to
+      serving as mundane manacles, the shackles prevent a creature bound by them
+      from using any method of extradimensional movement, including
+      teleportation or travel to a different plane of existence. They don't
+      prevent the creature from passing through an interdimensional
+      portal.</p><p>You and any creature you designate when you use the shackles
+      can use an action to remove them. Once every 30 days, the bound creature
+      can make a [[/check]] check. On a success, the creature breaks free and
+      destroys the shackles.</p>
     chat: ''
   source:
     custom: ''
@@ -26,6 +23,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 5
@@ -40,96 +38,197 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    cl9Don897EPR9zQb:
+      type: check
+      name: Escape Shackles Check
+      _id: cl9Don897EPR9zQb
+      img: ''
+      sort: 300000
       activation:
         type: action
-        value: 1
-        condition: Creature of Small to Large and must be incapacitated.
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: '30'
-        units: day
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: touch
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: ''
           choice: false
+          type: creature
+          count: '1'
           special: ''
-        prompt: true
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: str
-        dc:
-          calculation: ''
-          formula: '30'
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
         identifier: ''
-      appliedEffects: []
+      check:
+        associated:
+          - ath
+        dc:
+          calculation: ''
+          formula: '30'
+        visible: true
+        ability: ''
+        bonus: ''
+    NjOnfAe9OFbL5nbE:
+      type: utility
+      name: Shackle Creature
+      _id: NjOnfAe9OFbL5nbE
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 779oLbNMgMbAtP1p
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: dimensional-shackles
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Bound by Dimensional Shackles
+    img: icons/magic/control/debuff-chains-shackles-movement-blue.webp
+    origin: Compendium.dnd5e.items.Item.wGKykLRS8UqChNXI
+    transfer: false
+    _id: 779oLbNMgMbAtP1p
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are bound by magical shackles, preventing you from using any method
+      of extradimensional movement, including teleportation or travel to a
+      different plane of existence. They do not prevent you from passing through
+      an interdimensional portal.</p><p>Once every 30 days, you can use an
+      action to make a [[/check 30 ath]] check. On a success, you break free and
+      destroy the shackles.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784653542849
+      modifiedTime: 1784653682883
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!wGKykLRS8UqChNXI.779oLbNMgMbAtP1p'
 folder: UnUwTG4YIgd0kaUJ
 sort: 10600000
 ownership:
@@ -137,11 +236,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037318013
-  modifiedTime: 1764621292669
+  modifiedTime: 1784653699344
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wGKykLRS8UqChNXI'
