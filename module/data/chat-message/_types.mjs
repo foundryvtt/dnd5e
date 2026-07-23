@@ -31,6 +31,15 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef CheckMessageSystemData
+ * @property {string} ability      Ability used for the check.
+ * @property {string|null} skill   Skill used for the check, if any.
+ * @property {string|null} tool    Tool used for the check, if any.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef GenericMessageSystemData
  */
 

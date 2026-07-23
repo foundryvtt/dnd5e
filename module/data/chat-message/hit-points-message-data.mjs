@@ -1,4 +1,4 @@
-import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
+import RollMessageData from "./roll-message-data.mjs";
 
 /**
  * @import { HitPointsMessageSystemData } from "./_types.mjs";
@@ -6,10 +6,10 @@ import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 
 /**
  * Data stored in a hit points roll chat message.
- * @extends {ChatMessageDataModel<HitPointsMessageSystemData>}
+ * @extends {RollMessageData<HitPointsMessageSystemData>}
  * @mixes HitPointsMessageSystemData
  */
-export default class HitPointsMessageData extends ChatMessageDataModel {
+export default class HitPointsMessageData extends RollMessageData {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -26,16 +26,4 @@ export default class HitPointsMessageData extends ChatMessageDataModel {
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     template: "systems/dnd5e/templates/chat/hit-points-card.hbs"
   }, { inplace: false }));
-
-  /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _prepareContext(options) {
-    const isPrivate = !this.parent.isContentVisible;
-    return {
-      rolls: await Promise.all(this.parent.rolls.map(roll => roll.render({ isPrivate, message: this.parent })))
-    };
-  }
 }

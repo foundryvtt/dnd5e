@@ -1329,7 +1329,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const alternate = type === "skill" ? this.system.tools?.[config.tool] : this.system.skills?.[config.skill];
-    const abilityId = config.ability ?? relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
+    const abilityId = config.ability ?? relevant?.ability
+      ?? (type === "skill" ? skillConfig.ability : toolConfig.ability) ?? "int";
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
@@ -1379,19 +1380,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
-        flags: {
-          dnd5e: {
-            messageType: "roll",
-            roll: {
-              [`${type}Id`]: config[type],
-              type
-            }
-          }
-        },
         flavor: type === "skill"
           ? _loc("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
           : _loc("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
-        speaker: ChatMessage.getSpeaker({ actor: this })
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        system: { ability: abilityId, skill: config.skill, tool: config.tool },
+        type: "check"
       }
     }, message);
 
@@ -1410,7 +1404,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {string} [data.tool]    ID of the tool that was rolled as defined in `CONFIG.DND5E.tools`.
      * @param {Actor5e} data.subject  Actor for which the roll has been performed.
      */
-    const data = { ability: rollConfig.ability, [type]: rollConfig[type], subject: this };
+    const data = {
+      ability: rollConfig.ability, skill: rollConfig.skill, subject: this, tool: rollConfig.tool
+    };
     Hooks.callAll(`dnd5e.roll${name}`, rolls, data);
     Hooks.callAll(`dnd5e.roll${name}V2`, rolls, data);
 
@@ -1588,24 +1584,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const dialogConfig = foundry.utils.deepClone(dialog);
 
-    const messageConfig = foundry.utils.mergeObject({
-      create: true,
-      data: {
-        flags: {
-          dnd5e: {
-            messageType: "roll",
-            roll: {
-              ability: config.ability,
-              type: type === "check" ? "ability" : "save"
-            }
-          }
-        },
-        flavor: _loc(
-          `DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, { ability: abilityConfig?.label ?? "" }
-        ),
-        speaker: ChatMessage.getSpeaker({ actor: this })
-      }
-    }, message);
+    const messageData = {
+      flavor: _loc(`DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, {
+        ability: abilityConfig?.label ?? ""
+      }),
+      speaker: ChatMessage.getSpeaker({ actor: this })
+    };
+    if ( type === "check" ) Object.assign(messageData, { system: { ability: config.ability }, type: "check" });
+    else messageData.flags = { dnd5e: { messageType: "roll", roll: { ability: config.ability, type: "save" } } };
+
+    const messageConfig = foundry.utils.mergeObject({ create: true, data: messageData }, message);
 
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
 

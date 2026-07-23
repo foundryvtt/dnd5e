@@ -788,6 +788,7 @@ export function migrateMacroData(macro, migrationData) {
 export function migrateMessageData(messageData) {
   const updateData = {};
   const { flags } = messageData;
+  const rollType = foundry.utils.getProperty(flags, "dnd5e.roll.type");
 
   if ( (flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
     const use = flags.dnd5e.use;
@@ -814,6 +815,19 @@ export function migrateMessageData(messageData) {
     updateData.type = "orders" in bastion ? "bastionTurn" : "bastionAttack";
     updateData.system = _replace(bastion);
     updateData["flags.dnd5e.bastion"] = _del;
+  }
+
+  else if ( ((rollType === "ability") || (rollType === "skill") || (rollType === "tool"))
+    && (messageData.type === "base") ) {
+    const roll = flags.dnd5e.roll;
+    const ability = roll.ability
+      ?? CONFIG.DND5E.skills[roll.skillId]?.ability
+      ?? CONFIG.DND5E.tools[roll.toolId]?.ability
+      ?? "int";
+    updateData.type = "check";
+    updateData.system = _replace({ ability, skill: roll.skillId, tool: roll.toolId });
+    updateData["flags.dnd5e.messageType"] = _del;
+    updateData["flags.dnd5e.roll"] = _del;
   }
 
   /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.

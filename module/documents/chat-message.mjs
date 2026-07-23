@@ -27,6 +27,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {boolean}
    */
   get canApplyDamage() {
+    if ( this.system?.canApplyDamage === false ) return false;
     const type = this.flags.dnd5e?.roll?.type;
     if ( type && (type !== "damage") ) return false;
     return this.isRoll && this.isContentVisible && !!canvas.tokens?.controlled.length;
