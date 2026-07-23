@@ -820,8 +820,12 @@ export function migrateMessageData(messageData) {
   else if ( ((rollType === "ability") || (rollType === "skill") || (rollType === "tool"))
     && (messageData.type === "base") ) {
     const roll = flags.dnd5e.roll;
+    const ability = roll.ability
+      ?? CONFIG.DND5E.skills[roll.skillId]?.ability
+      ?? CONFIG.DND5E.tools[roll.toolId]?.ability
+      ?? "int";
     updateData.type = "check";
-    updateData.system = _replace({ ability: roll.ability, skill: roll.skillId, tool: roll.toolId });
+    updateData.system = _replace({ ability, skill: roll.skillId, tool: roll.toolId });
     updateData["flags.dnd5e.messageType"] = _del;
     updateData["flags.dnd5e.roll"] = _del;
   }
