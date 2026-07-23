@@ -39,9 +39,13 @@ export default class SkillToolRollConfigurationDialog extends D20RollConfigurati
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
-    if ( this.config.skill && (event.target?.name === "ability") ) {
+    if ( event.target?.name !== "ability" ) return;
+
+    const ability = event.target.value ?? this.config.ability;
+    foundry.utils.setProperty(this.message, "data.system.ability", ability);
+
+    if ( this.config.skill ) {
       const skillLabel = CONFIG.DND5E.skills[this.config.skill]?.label ?? "";
-      const ability = event.target.value ?? this.config.ability;
       const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
       const flavor = _loc("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel });
       foundry.utils.setProperty(this.message, "data.flavor", flavor);

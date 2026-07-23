@@ -996,6 +996,7 @@ export async function preloadHandlebarsTemplates() {
     // Chat Message Partials
     "systems/dnd5e/templates/chat/parts/card-activities.hbs",
     "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
+    "systems/dnd5e/templates/chat/parts/roll.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/details/details-background.hbs",
