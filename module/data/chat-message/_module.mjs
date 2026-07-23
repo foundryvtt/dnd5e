@@ -7,6 +7,7 @@ import HitPointsMessageData from "./hit-points-message-data.mjs";
 import RequestMessageData from "./request-message-data.mjs";
 import RestMessageData from "./rest-message-data.mjs";
 import RollMessageData from "./roll-message-data.mjs";
+import SaveMessageData from "./save-message-data.mjs";
 import TimePassedMessageData from "./time-passed-message-data.mjs";
 import TurnMessageData from "./turn-message-data.mjs";
 import UsageMessageData from "./usage-message-data.mjs";
@@ -21,6 +22,7 @@ export {
   RequestMessageData,
   RestMessageData,
   RollMessageData,
+  SaveMessageData,
   TimePassedMessageData,
   TurnMessageData,
   UsageMessageData
@@ -36,6 +38,7 @@ export const config = {
   hitPoints: HitPointsMessageData,
   request: RequestMessageData,
   rest: RestMessageData,
+  save: SaveMessageData,
   timePassed: TimePassedMessageData,
   turn: TurnMessageData,
   usage: UsageMessageData

@@ -1590,8 +1590,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }),
       speaker: ChatMessage.getSpeaker({ actor: this })
     };
-    if ( type === "check" ) Object.assign(messageData, { system: { ability: config.ability }, type: "check" });
-    else messageData.flags = { dnd5e: { messageType: "roll", roll: { ability: config.ability, type: "save" } } };
+    Object.assign(messageData, { type, system: { ability: config.ability } });
 
     const messageConfig = foundry.utils.mergeObject({ create: true, data: messageData }, message);
 

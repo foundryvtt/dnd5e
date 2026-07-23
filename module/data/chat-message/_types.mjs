@@ -88,6 +88,14 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef SaveMessageSystemData
+ * @property {string} ability    Ability used for the save.
+ * @property {boolean} resisted  Whether the save was turned into a success by spending a legendary resistance.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef TimePassedMessageSystemData
  * @property {DocumentDeltasData[]} changes  Item recovery from this time change.
  */
