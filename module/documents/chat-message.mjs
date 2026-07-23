@@ -381,7 +381,6 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
-      this._enrichSaveTooltip(html);
       this._enrichConcentrationTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
@@ -627,48 +626,6 @@ export default class ChatMessage5e extends ChatMessage {
     }
     if ( hasMultiplication ) aggregate.constant = null;
     return aggregate;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Display option to resist a failed save using a legendary resistance.
-   * @param {HTMLLIElement} html  The chat card.
-   * @protected
-   */
-  _enrichSaveTooltip(html) {
-    const actor = this.getAssociatedActor();
-    const roll = this.getFlag("dnd5e", "roll");
-    if ( !actor?.system.isNPC || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
-
-    const content = document.createElement("div");
-    content.classList.add("chat-card");
-
-    // If message has the `forceSuccess` flag, mark it as resisted
-    if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
-      <p class="supplement">
-        <strong>${_loc("DND5E.ROLL.Status")}</strong>
-        ${_loc("DND5E.LegendaryResistance.Resisted")}
-      </p>
-    `);
-
-    // Otherwise if actor has legendary resistances remaining, display resist button
-    else if ( actor.system.resources.legres.value && actor.isOwner ) {
-      content.insertAdjacentHTML("beforeend", `
-        <div class="card-buttons">
-          <button type="button">
-            <i class="fa-solid fa-dragon" inert></i>
-            ${_loc("DND5E.LegendaryResistance.Action.Resist")}
-          </button>
-        </div>
-      `);
-      const button = content.querySelector("button");
-      button.addEventListener("click", () => actor.system.resistSave(this));
-    }
-
-    else return;
-
-    html.querySelector(".message-content").append(content);
   }
 
   /* -------------------------------------------- */
