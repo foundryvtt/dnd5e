@@ -1,5 +1,5 @@
 /**
- * @import { BastionTurnItem } from "../../documents/_types.mjs";
+ * @import { BastionTurnItem, DeathSaveOutcome } from "../../documents/_types.mjs";
  * @import { ActivationsData, ActorDeltasData } from "./fields/_types.mjs";
  */
 
@@ -89,8 +89,10 @@
 
 /**
  * @typedef SaveMessageSystemData
- * @property {string} ability    Ability used for the save.
- * @property {boolean} resisted  Whether the save was turned into a success by spending a legendary resistance.
+ * @property {string} ability            Ability used for the save, or "death" for a death saving throw.
+ * @property {ActorDeltasData} deltas    Actor changes recorded by this save (death saves only).
+ * @property {DeathSaveOutcome} outcome  Terminal death-save outcome shown on the card, if any.
+ * @property {boolean} resisted          Whether the save was turned into a success by spending a legendary resistance.
  */
 
 /* -------------------------------------------- */

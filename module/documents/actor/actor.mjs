@@ -3,9 +3,9 @@ import CreateDocumentDialog from "../../applications/create-document-dialog.mjs"
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import TravelField from "../../data/actor/fields/travel-field.mjs";
+import AttributesFields from "../../data/actor/templates/attributes.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
-import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
@@ -13,7 +13,6 @@ import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
 } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
-import AppliedRules from "../applied-rules.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
@@ -34,7 +33,7 @@ import ConditionData from "../../data/active-effect/condition.mjs";
  * } from "../../dice/_types.mjs";
  * @import {
  *   ActorRollData, ActorUpdatesDescription, DamageAffectCategory, DamageApplicationOptions,
- *   DamageDescription, DamageSummary, RestConfiguration, RestResult, RollDataOptions,
+ *   DamageDescription, DamageSummary, DeathSaveOutcome, RestConfiguration, RestResult, RollDataOptions,
  *   SpellcastingDescription
  * } from "../_types.mjs";
  */
@@ -1655,14 +1654,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const messageConfig = foundry.utils.mergeObject({
       data: {
-        flags: {
-          dnd5e: {
-            roll: {
-              type: "death"
-            }
-          }
-        },
-        flavor: _loc("DND5E.DeathSavingThrow")
+        flavor: _loc("DND5E.DeathSavingThrow"),
+        system: { ability: "death" }
       }
     }, message);
 
@@ -1673,71 +1666,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const details = { subject: this };
     const roll = rolls[0];
     const returnValue = oldFormat ? roll : rolls;
+    const card = roll.parent;
 
-    // Save success
-    if ( roll.total >= (roll.options.target ?? 10) ) {
-      let successes = (death.success || 0) + 1;
-
-      // Critical Success = revive with 1hp
-      if ( roll.isCritical ) {
-        details.updates = {
-          "system.attributes.death.success": 0,
-          "system.attributes.death.failure": 0,
-          "system.attributes.hp.value": 1
-        };
-        details.chatString = "DND5E.DeathSaveCriticalSuccess";
-      }
-
-      // 3 Successes = survive and reset checks
-      else if ( successes === 3 ) {
-        details.updates = {
-          "system.attributes.death.success": 0,
-          "system.attributes.death.failure": 0
-        };
-        details.chatString = "DND5E.DeathSaveSuccess";
-      }
-
-      // Increment successes
-      else details.updates = {"system.attributes.death.success": Math.clamp(successes, 0, 3)};
-    }
-
-    // Save failure
-    else {
-      let failures = (death.failure || 0) + (roll.isFumble ? 2 : 1);
-      details.updates = {"system.attributes.death.failure": Math.clamp(failures, 0, 3)};
-      if ( failures >= 3 ) {  // 3 Failures = death
-        details.chatString = "DND5E.DeathSaveFailure";
-      }
-    }
+    const { deltas, outcome, updates } = AttributesFields.applyDeathSaveResult(death, {
+      isSuccess: roll.total >= (roll.options.target ?? 10),
+      isCritical: roll.isCritical,
+      isFumble: roll.isFumble
+    });
+    details.updates = updates;
+    details.outcome = outcome;
 
     /**
      * A hook event that fires after a death saving throw has been rolled for an Actor, but before
      * updates have been performed.
      * @function dnd5e.rollDeathSave
      * @memberof hookEvents
-     * @param {D20Roll[]} rolls         The resulting rolls.
+     * @param {D20Roll[]} rolls                The resulting rolls.
      * @param {object} data
-     * @param {string} data.chatString  Localizable string displayed in the create chat message. If not set, then
-     *                                  no chat message will be displayed.
-     * @param {object} data.updates     Updates that will be applied to the actor as a result of this save.
-     * @param {Actor5e} data.subject    Actor for which the death saving throw has been rolled.
-     * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
+     * @param {DeathSaveOutcome} data.outcome  Terminal outcome rendered on the save card, if any.
+     * @param {object} data.updates            Updates that will be applied to the actor as a result of this save.
+     * @param {Actor5e} data.subject           Actor for which the death saving throw has been rolled.
+     * @returns {boolean}                      Explicitly return `false` to prevent updates from being performed.
      */
     if ( Hooks.call("dnd5e.rollDeathSave", rolls, details) === false ) return returnValue;
     if ( Hooks.call("dnd5e.rollDeathSaveV2", rolls, details) === false ) return returnValue;
 
     if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
-
-    // Display success/failure chat message
-    let resultsMessage;
-    if ( details.chatString ) {
-      const chatData = {
-        content: _loc(details.chatString, { name: this.name }),
-        speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
-      };
-      ChatMessage.applyMode(chatData, messageConfig.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode());
-      resultsMessage = await ChatMessage.create(chatData);
-    }
+    if ( card ) await card.update({ "system.deltas": deltas, "system.outcome": details.outcome ?? null });
 
     /**
      * A hook event that fires after a death saving throw has been rolled and after changes have been applied.
@@ -1745,10 +1700,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @memberof hookEvents
      * @param {D20Roll[]} rolls                  The resulting rolls.
      * @param {object} data
-     * @param {ChatMessage5e|void} data.message  The created results chat message.
+     * @param {ChatMessage5e|void} data.message  The save card chat message, if one was created.
      * @param {Actor5e} data.subject             Actor for which the death saving throw has been rolled.
      */
-    Hooks.callAll("dnd5e.postRollDeathSave", rolls, { message: resultsMessage, subject: this });
+    Hooks.callAll("dnd5e.postRollDeathSave", rolls, { message: card, subject: this });
 
     return returnValue;
   }

@@ -1,3 +1,4 @@
+import { ActorDeltasField } from "./fields/deltas-field.mjs";
 import RollMessageData from "./roll-message-data.mjs";
 
 const { BooleanField, StringField } = foundry.data.fields;
@@ -21,6 +22,10 @@ export default class SaveMessageData extends RollMessageData {
   static defineSchema() {
     return {
       ability: new StringField({ blank: false, required: true }),
+      deltas: new ActorDeltasField(),
+      outcome: new StringField({
+        blank: false, choices: ["death", "revive", "stable"], initial: null, nullable: true, required: false
+      }),
       resisted: new BooleanField()
     };
   }
@@ -52,6 +57,13 @@ export default class SaveMessageData extends RollMessageData {
   /* -------------------------------------------- */
 
   /** @override */
+  get canCrit() {
+    return this.ability === "death";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   get forceSuccess() {
     return this.resisted;
   }
@@ -64,7 +76,16 @@ export default class SaveMessageData extends RollMessageData {
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const { canResist, resisted } = this;
+    const actor = this.parent.getAssociatedActor();
     Object.assign(context, { canResist, resisted });
+    context.death = this.ability === "death";
+    if ( actor ) {
+      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, actor, this.parent.rolls);
+      context.deltasHeading = "DND5E.DeathSave";
+    }
+    if ( this.outcome ) context.outcome = game.i18n.format(`DND5E.DEATH.Outcome.${this.outcome}`, {
+      name: actor?.name ?? ""
+    });
     return context;
   }
 

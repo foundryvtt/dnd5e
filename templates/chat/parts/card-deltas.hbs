@@ -1,5 +1,7 @@
 <section class="deltas">
-    <strong class="roboto-condensed-upper">{{ localize "DND5E.CHATMESSAGE.Deltas.Recovery" }}</strong>
+    <strong class="roboto-condensed-upper">
+        {{ localize (ifThen deltasHeading deltasHeading "DND5E.CHATMESSAGE.Deltas.Recovery") }}
+    </strong>
     <ul class="unlist">
         {{#each deltas}}
         <li class="delta delta-{{ type }} operation-{{ operation }}">
