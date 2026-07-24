@@ -83,7 +83,7 @@ export default class SaveMessageData extends RollMessageData {
       context.deltas = ActorDeltasField.processDeltas.call(this.deltas, actor, this.parent.rolls);
       context.deltasHeading = "DND5E.DeathSave";
     }
-    if ( this.outcome ) context.outcome = game.i18n.format(`DND5E.DEATH.Outcome.${this.outcome}`, {
+    if ( this.outcome ) context.outcome = _loc(`DND5E.DEATH.Outcome.${this.outcome}`, {
       name: actor?.name ?? ""
     });
     return context;
