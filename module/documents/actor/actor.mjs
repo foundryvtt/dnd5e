@@ -1749,7 +1749,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, dialog);
 
-    const messageConfig = foundry.utils.deepClone(message);
+    const messageConfig = foundry.utils.mergeObject({
+      data: { system: { isConcentration: true } }
+    }, message);
 
     const rolls = await this.rollSavingThrow(rollConfig, dialogConfig, messageConfig);
     if ( !rolls?.length ) return null;
