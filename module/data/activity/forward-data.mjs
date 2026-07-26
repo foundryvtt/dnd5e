@@ -21,19 +21,54 @@ export default class BaseForwardActivityData extends BaseActivityData {
     delete schema.target;
     return {
       ...schema,
-      targetItem: new StringField({ 
-        required: false, 
-        nullable: true, 
-        initial: null, 
-        label: "DND5E.ACTIVITY.FIELDS.Forward.Item.Label" 
+      targetItem: new StringField({
+        nullable: true,
+        initial: null,
+        label: "DND5E.FORWARD.FIELDS.targetItem.label",
+        hint: "DND5E.FORWARD.FIELDS.targetItem.hint"
       }),
-      activity: new DocumentIdField({ 
-        required: true, 
-        nullable: true, 
-        initial: null, 
-        label: "DND5E.ACTIVITY.FIELDS.Forward.Activity.Label" 
+      activity: new DocumentIdField({
+        nullable: true,
+        initial: null,
+        label: "DND5E.FORWARD.FIELDS.activity.label",
+        hint: "DND5E.FORWARD.FIELDS.activity.hint"
       })
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Item containing the activity to forward to.
+   * @type {Item5e|undefined}
+   */
+  get targetItemDocument() {
+    if ( !this.targetItem ) return this.item;
+    const target = this._remapConsumptionTarget(this.targetItem);
+    return this.actor?.items.get(target);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Activity to forward to.
+   * @type {Activity|undefined}
+   */
+  get targetActivity() {
+    return this.targetItemDocument?.system.activities.get(this.activity);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( foundry.utils.getType(source.activity) === "Object" ) source.activity = source.activity.id ?? null;
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -42,10 +77,7 @@ export default class BaseForwardActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
-    const actor = this.actor;
-    
-    const targetItem = actor?.items.get(this.targetItem) ?? this.item;
-    const activity = targetItem.system.activities.get(this.activity.id);
+    const activity = this.targetActivity;
     if ( activity && activity.activation.override ) this.activation = activity.toObject().activation;
 
     super.prepareFinalData(rollData);

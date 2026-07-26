@@ -132,8 +132,8 @@
 
 /**
  * @typedef {Omit<ActivityData, "duration"|"effects"|"range"|"target">} ForwardActivityData
- * @property {object} activity
- * @property {string} activity.id  ID of the activity to forward to.
+ * @property {string|null} activity    ID of the activity to forward to.
+ * @property {string|null} targetItem  ID, UUID, or identifier of the item containing the target activity.
  */
 
 /* -------------------------------------------- */

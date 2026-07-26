@@ -3305,28 +3305,32 @@
 
 "DND5E.FORWARD": {
   "FIELDS": {
-    "Activity": {
+    "activity": {
       "label": "Target Activity",
-      "Placeholder": "Activity ID"
+      "hint": "Activity ID on the target item."
     },
-    "Item": {
+    "targetItem": {
       "label": "Target Item",
-      "Placeholder": "Item ID, UUID, or Identifier (empty = current item)"
+      "hint": "Choose an item on this actor. For an unembedded item, enter an item identifier, type-prefixed identifier, or UUID that will be linked automatically."
     },
     "target": {
       "label": "Forward Target"
     }
   },
-  "Target":{
+  "Target": {
+    "Activity": {
+      "Placeholder": "Activity ID"
+    },
     "Item": {
-      "Current": "Current Item"
+      "Current": "Current Item",
+      "Placeholder": "Item identifier, type:identifier, or UUID"
     }
   },
   "Hint": "Trigger another activity from this item or another item you possess, with different consumption and scaling details.",
   "Title": "Forward",
   "Warning": {
     "NoActivity": "Linked activity must be configured before Forward activity can be used.",
-    "ItemNotFound": "Target item with ID {id} not found on this actor."
+    "ItemNotFound": "Target item {target} was not found on this actor."
   }
 },
 

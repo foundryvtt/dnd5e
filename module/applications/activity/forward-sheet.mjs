@@ -41,122 +41,66 @@ export default class ForwardSheet extends ActivitySheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-    _resolveTargetItem(actor, target) {
-      if (!target || !actor || actor.items.has(target)) return target;
-
-      // Re-link UUID target
-      const { type } = foundry.utils.parseUuid(target) ?? {};
-      if (type === "Item") {
-          const item = actor.sourcedItems?.get(target)?.first();
-          if (item) return item.id;
-      }
-
-      // Re-link identifier target
-      else {
-          const item = actor.identifiedItems?.get(target)?.first();
-          if (item) return item.id;
-      }
-
-      return target;
-  }
-
-  /* -------------------------------------------- */
-  
-  /** @inheritDoc */
   async _prepareEffectContext(context, options) {
     context = await super._prepareEffectContext(context, options);
 
-    const actor = this.item?.actor;
-    const currentItemId = this.item.id;
-    const currentTargetItem = this.activity._source.targetItem;
-    const targetId = this._resolveTargetItem(actor, currentTargetItem);
-    const currentTarget = targetId || currentItemId;
-    const currentActivityId = this.activity._source.activity;
+    const actor = this.item.actor;
+    const sourceTarget = this.activity._source.targetItem;
+    const selectedTarget = this.activity._remapConsumptionTarget(sourceTarget);
+    let targetItem;
 
-    let itemOptions = [];
-    let activityOptions = [{ value: "", label: "" }];
-    let showActivitySelect = false;
-    let availableActivities = [];
-
-    let displayTargetId = currentTargetItem;
-    const isCurrentItem = !currentTargetItem || currentTargetItem === currentItemId || targetId === currentItemId;
-    if (targetId && targetId !== currentTargetItem) {
-      displayTargetId = targetId;
-    } else if (isCurrentItem) {
-      displayTargetId = "";
-    }
-
-    const validateAndUpdateActivity = (activities) => {
-      const isValid = activities.some(a => a.id === currentActivityId);
-
-      if (!currentActivityId || !isValid) {
-        const defaultActivityId = activities.length > 0 ? activities[0].id : null;
-        if (currentActivityId !== defaultActivityId) {
-          this.activity.updateSource({ activity: defaultActivityId });
-        }
-      }
-    };
-
-    if (actor) {
-      const validItems = actor.items.contents.filter(i => i.system.activities?.size > 0 );
-      itemOptions = [
-        { value: "", label: game.i18n.localize("DND5E.FORWARD.Target.Item.Current") },
-        ...validItems.filter(i => i.uuid !== this.item.uuid)
-        .map(i => ({ value: i.id, label: i.name, selected: i.id === displayTargetId }))
+    if ( actor ) {
+      const validItems = actor.items.filter(item => this.#getAvailableActivities(item).length);
+      context.itemOptions = [
+        { value: "", label: _loc("DND5E.FORWARD.Target.Item.Current") },
+        ...validItems
+          .filter(item => item !== this.item)
+          .map(item => ({ value: item.id, label: item.name }))
       ];
-      const isInOptions = itemOptions.some(opt => opt.value === currentTarget);
-      if (currentTarget && !isInOptions) {
-        const label = actor?.items.get(currentTarget)?.name ?? currentTarget;
-        itemOptions.unshift({ value: currentTarget, label: `[${label}]` });
+
+      if ( sourceTarget && (selectedTarget !== this.item.id)
+        && !context.itemOptions.some(option => option.value === selectedTarget) ) {
+        context.itemOptions.unshift({ value: selectedTarget, label: `[${sourceTarget}]` });
       }
-
-      const targetItem = actor?.items?.get(currentTarget) ?? this.item;
-      const activities = targetItem?.system.activities?.contents ?? [];
-      availableActivities = targetItem.system.activities?.contents.filter(
-        a => a.type !== "forward" && CONFIG.DND5E.activityTypes[a.type] !== false
-      ) ?? [];
-
-      showActivitySelect = true;
-      validateAndUpdateActivity(availableActivities);
-
+      targetItem = sourceTarget ? actor.items.get(selectedTarget) : this.item;
     } else {
-      if (!targetId || targetId === currentItemId) {
-        availableActivities = this.item.system.activities?.contents.filter(
-          a => a.type !== "forward" && CONFIG.DND5E.activityTypes[a.type] !== false
-        ) ?? [];
-
-        showActivitySelect = true;
-        validateAndUpdateActivity(availableActivities);
-      } else {
-        showActivitySelect = false;
-      }
+      context.itemOptions = null;
+      targetItem = sourceTarget ? null : this.item;
     }
 
-    if (showActivitySelect && availableActivities.length > 0) {
-      activityOptions = [
-        { value: "", label: "" },
-        ...availableActivities.map(a => ({ value: a.id, label: a.name }))
-      ];
-    }
+    const availableActivities = targetItem ? this.#getAvailableActivities(targetItem) : [];
+    context.activityOptions = [
+      { value: "", label: "" },
+      ...availableActivities.map(activity => ({ value: activity.id, label: activity.name }))
+    ];
+    context.selectedTargetItem = targetItem === this.item ? "" : selectedTarget ?? "";
+    context.showActivitySelect = !!targetItem;
 
-    context.itemOptions = itemOptions;
-    context.activityOptions = activityOptions;
-    context.actor = actor;
-    context.showActivitySelect = showActivitySelect;
-    
     return context;
   }
 
   /* -------------------------------------------- */
 
+  /**
+   * Get activities on an item that may be forwarded to.
+   * @param {Item5e} item  Item containing the activities.
+   * @returns {Activity[]}
+   */
+  #getAvailableActivities(item) {
+    return (item.system.activities?.contents ?? []).filter(activity =>
+      (activity.type !== "forward") && (CONFIG.DND5E.activityTypes[activity.type] !== false)
+    );
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
-  _onChangeForm(formConfig, event) {
-    if (event.target.name === "targetItem") {
-      this.activity.update({ targetItem: event.target.value });
-      this.render({ force: true });
-      return;
+  async _onChangeForm(formConfig, event) {
+    if ( event.target.name === "targetItem" ) {
+      await this.activity.update({ targetItem: event.target.value || null });
+      return this.render({ force: true });
     }
-    super._onChangeForm(formConfig, event);
+    return super._onChangeForm(formConfig, event);
   }
 
   /* -------------------------------------------- */
