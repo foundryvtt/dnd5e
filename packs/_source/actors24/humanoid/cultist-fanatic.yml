@@ -484,12 +484,9 @@ prototypeToken:
     src: modules/dnd-monster-manual/assets/tokens/cultist-fanatic-*.webp
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -533,7 +530,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -553,6 +550,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmPactBlade00000
     name: Pact Blade
@@ -714,10 +712,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPactBlade00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -994,10 +994,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -1107,10 +1109,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpiritualWeapo
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1247,6 +1251,7 @@ items:
       identifier: spiritual-weapon
       method: spell
       prepared: 0
+      sourceItem: feat:spiritual-weapon
     type: spell
     img: icons/weapons/axes/axe-double-gold.webp
     effects:
@@ -1254,37 +1259,52 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpiritualWeapo.Activity.X8EhZV0KcZv64V4J
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: LKWLBvH3g2D1DtnI
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpiritualWeapo.Activity.X8EhZV0KcZv64V4J
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175007
+          modifiedTime: 1783544175007
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.z817Et9IPt6qHawH.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1301,10 +1321,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpiritualW
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175007
+      modifiedTime: 1783544175007
     _id: z817Et9IPt6qHawH
     _key: '!actors.items!mmCultistFanatic.z817Et9IPt6qHawH'
   - name: Light
@@ -1434,6 +1456,7 @@ items:
       identifier: light
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/sundries/lights/candle-pillar-lit-yellow.webp
     effects:
@@ -1441,33 +1464,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.7Hk3xmtV1lhTEMu6.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1481,10 +1514,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLight00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175007
+      modifiedTime: 1783544175007
     _id: 7Hk3xmtV1lhTEMu6
     _key: '!actors.items!mmCultistFanatic.7Hk3xmtV1lhTEMu6'
   - name: Thaumaturgy
@@ -1598,6 +1633,7 @@ items:
       identifier: thaumaturgy
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/environment/people/cleric-orange.webp
     effects:
@@ -1605,33 +1641,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.onvTWamS398c51Rq
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.onvTWamS398c51Rq
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.XLyCWW9vPAQwvaGr.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1648,10 +1694,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175007
+      modifiedTime: 1783544175007
     _id: XLyCWW9vPAQwvaGr
     _key: '!actors.items!mmCultistFanatic.XLyCWW9vPAQwvaGr'
   - name: Command
@@ -1769,6 +1817,7 @@ items:
       identifier: command
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/sonic/scream-wail-shout-teal.webp
     effects:
@@ -1776,33 +1825,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.NsBX7tBXlDfi2BWV
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.NsBX7tBXlDfi2BWV
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.uW5SgMN0N4BGrkkl.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1816,10 +1875,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommand000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175008
+      modifiedTime: 1783544175008
     _id: uW5SgMN0N4BGrkkl
     _key: '!actors.items!mmCultistFanatic.uW5SgMN0N4BGrkkl'
   - name: Hold Person
@@ -1925,26 +1986,25 @@ items:
       identifier: hold-person
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/control/encase-creature-humanoid-hold.webp
     effects:
       - name: Paralyzed
         origin: Compendium.dnd5e.spells24.Item.phbsplHoldPerson
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/paralyzed.svg
         _id: PklwZi3SKQ3JU2M2
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>At the end of each of its turns, the target repeats the [[/save
           ability=wis]] save, ending the spell on itself on a success.</p>
@@ -1957,43 +2017,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175008
+          modifiedTime: 1783544175008
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.usukVMEiBvOYV5GI.PklwZi3SKQ3JU2M2
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.RmN0E36r5loY1n21
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmCultistFanatic.Item.mmSpellcasting00.Activity.RmN0E36r5loY1n21
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.usukVMEiBvOYV5GI.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2007,10 +2082,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHoldPerson
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175008
+      modifiedTime: 1783544175008
     _id: usukVMEiBvOYV5GI
     _key: '!actors.items!mmCultistFanatic.usukVMEiBvOYV5GI'
   - name: Holy Symbol
@@ -2067,10 +2144,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbagHolySymbolV
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmCultistFanatic.mbdm4GtNbqQMnBWg'
   - name: Leather Armor
     system:
@@ -2143,10 +2222,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd-players-handbook.equipment.Item.phbarmLeatherArm
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmCultistFanatic.ypPPvrAxDJVPnmWQ'
 effects: []
 folder: oq65o5ZsauMtb1JY
@@ -2154,11 +2235,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452700040
-  modifiedTime: 1771452700040
+  systemVersion: 6.0.0
+  createdTime: 1783544175007
+  modifiedTime: 1783544175007
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

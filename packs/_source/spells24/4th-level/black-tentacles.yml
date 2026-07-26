@@ -124,20 +124,18 @@ effects:
   - name: Restrained
     origin: Compendium.dnd5e.spells24.Item.phbsplEvardsBlac
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/restrained.svg
     _id: NDytclFrNmC418CS
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>A &amp;Reference[Restrained apply=false] creature can take an action to
       make a [[/check ability=str skill=ath dc=@attributes.spell.dc]] check
@@ -151,13 +149,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975026
+      modifiedTime: 1783543975026
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplEvardsBlac.NDytclFrNmC418CS'
 folder: qi3IbnEwap7mRw4b
 sort: 2400000
@@ -170,11 +171,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425952514
-  modifiedTime: 1753380837456
+  modifiedTime: 1783543975026
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEvardsBlac'

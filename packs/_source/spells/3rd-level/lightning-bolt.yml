@@ -31,13 +31,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: line
       size: '100'
       contiguous: false
+      width: ''
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -107,23 +111,31 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: lightning-bolt
 sort: 0
 flags: {}
-img: icons/magic/lightning/bolt-forked-large-blue.webp
+img: icons/magic/lightning/bolt-strike-sparks-blue.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352644
-  modifiedTime: 1725992718668
+  modifiedTime: 1781292009740
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!IyikgTEOTv701jgQ'

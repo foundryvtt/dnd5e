@@ -215,24 +215,24 @@ effects:
   - name: Flying Steed
     origin: Compendium.dnd5e.spells24.Item.phbsplFindSteed0
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/svg/wing.svg
     _id: SgNNVLaKxZOVKyKx
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '60'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 60
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: rleCxwtCK7SuesbT
+      magical: true
     description: >-
       <p>The steed has a Fly speed of 60ft. when summoned by a level 4+
       spell.</p>
@@ -243,13 +243,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975120
+      modifiedTime: 1783543975120
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplFindSteed0.SgNNVLaKxZOVKyKx'
 folder: 3SjcO2acsFnWegp4
 sort: 3500000
@@ -262,11 +265,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425953437
-  modifiedTime: 1745256792900
+  modifiedTime: 1783543975120
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFindSteed0'

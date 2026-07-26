@@ -384,17 +384,15 @@ effects:
     transfer: false
     _id: cN85nWiTzfGzWR7D
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -404,45 +402,54 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544093247
+      modifiedTime: 1783544093247
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgAirRingOfElem.cN85nWiTzfGzWR7D'
   - name: Air Focus
     img: icons/magic/air/fog-gas-smoke-blue-gray.webp
     _id: d5aFCMPqEUaUQ37L
     type: base
-    system: {}
-    changes:
-      - key: system.traits.languages.value
-        mode: 2
-        value: auran
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
-      - key: system.attributes.movement.hover
-        mode: 5
-        value: 'true'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.traits.languages.value
+          value: auran
+          priority: null
+          type: add
+          phase: initial
+          _id: gQFCuqoLFcc71nAG
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: 7x3OlYbxwqBPXBSE
+        - key: system.attributes.movement.hover
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: zEw36U02cV7BgWxx
+        - key: system.attributes.movement.fly
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: dMmy9PylO0pvsUn8
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -456,23 +463,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1730685122369
-      modifiedTime: 1759793661174
+      modifiedTime: 1783544093247
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAirRingOfElem.d5aFCMPqEUaUQ37L'
 folder: DC1x1wAm0NLFudA6
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1730684815591
-  modifiedTime: 1764616009617
+  modifiedTime: 1783544093247
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

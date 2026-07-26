@@ -204,24 +204,25 @@ effects:
     img: icons/magic/fire/projectile-wave-arrow.webp
     disabled: true
     _id: FTQVlTQlkrgD3rwq
-    system: {}
-    changes:
-      - key: name
-        mode: 2
-        value: ', Signature'
-        priority: null
-      - key: system.preparation.mode
-        mode: 5
-        value: always
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: ', Signature'
+          priority: null
+          type: add
+          phase: initial
+          _id: jBk4j7YiVFINn78w
+        - key: system.preparation.mode
+          value: always
+          priority: null
+          type: override
+          phase: initial
+          _id: qIBFwGl3l97dZVky
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Choose two level 3 spells in your spellbook as your signature spells.
       You always have these spells prepared, and you can cast each of them once
@@ -237,13 +238,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103945
+      modifiedTime: 1783544103945
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwzdSignatureS.FTQVlTQlkrgD3rwq'
 flags:
   dnd5e:
@@ -252,11 +256,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866273692
-  modifiedTime: 1745256770147
+  modifiedTime: 1783544103945
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

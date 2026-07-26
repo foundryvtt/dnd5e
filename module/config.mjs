@@ -9,6 +9,7 @@ import { CalendarHarptos, CALENDAR_OF_HARPTOS } from "./data/calendar/calendar-o
 import { CalendarKhorvaire, CALENDAR_OF_KHORVAIRE } from "./data/calendar/calendar-of-khorvaire.mjs";
 import MappingField from "./data/fields/mapping-field.mjs";
 import * as regionBehaviors from "./data/region-behavior/_module.mjs";
+import ActiveEffect5e from "./documents/active-effect.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
@@ -1201,6 +1202,7 @@ DND5E.actorSizes = {
   sm: {
     label: "DND5E.SizeSmall",
     abbreviation: "DND5E.SizeSmallAbbr",
+    fullKey: "small",
     hitDie: 6,
     dynamicTokenScale: 0.8,
     numerical: 1
@@ -1208,12 +1210,14 @@ DND5E.actorSizes = {
   med: {
     label: "DND5E.SizeMedium",
     abbreviation: "DND5E.SizeMediumAbbr",
+    fullKey: "medium",
     hitDie: 8,
     numerical: 2
   },
   lg: {
     label: "DND5E.SizeLarge",
     abbreviation: "DND5E.SizeLargeAbbr",
+    fullKey: "large",
     hitDie: 10,
     token: 2,
     capacityMultiplier: 2,
@@ -1222,6 +1226,7 @@ DND5E.actorSizes = {
   huge: {
     label: "DND5E.SizeHuge",
     abbreviation: "DND5E.SizeHugeAbbr",
+    fullKey: "huge",
     hitDie: 12,
     token: 3,
     capacityMultiplier: 4,
@@ -1230,6 +1235,7 @@ DND5E.actorSizes = {
   grg: {
     label: "DND5E.SizeGargantuan",
     abbreviation: "DND5E.SizeGargantuanAbbr",
+    fullKey: "gargantuan",
     hitDie: 20,
     token: 4,
     capacityMultiplier: 8,
@@ -1237,6 +1243,29 @@ DND5E.actorSizes = {
   }
 };
 preLocalize("actorSizes", { keys: ["label", "abbreviation"] });
+
+Object.defineProperty(DND5E.actorSizes, "fullKeys", {
+  get() {
+    const value = Object.entries(this).reduce((obj, [key, config]) => {
+      obj[config.fullKey ?? key] = key;
+      return obj;
+    }, {});
+    Object.defineProperty(DND5E.actorSizes, "fullKeys", { value });
+    return value;
+  },
+  configurable: true
+});
+
+Object.defineProperty(DND5E.actorSizes, "orderedKeys", {
+  get() {
+    const value = Object.entries(this)
+      .sort((lhs, rhs) => (lhs[1].numerical ?? Infinity) - (rhs[1].numerical ?? Infinity))
+      .map(([key]) => key);
+    Object.defineProperty(DND5E.actorSizes, "orderedKeys", { value });
+    return value;
+  },
+  configurable: true
+});
 
 /* -------------------------------------------- */
 /*  Canvas                                      */
@@ -1425,12 +1454,13 @@ preLocalize("itemActionTypes");
  * @enum {string}
  */
 DND5E.itemRarity = {
-  common: "DND5E.ItemRarityCommon",
-  uncommon: "DND5E.ItemRarityUncommon",
-  rare: "DND5E.ItemRarityRare",
-  veryRare: "DND5E.ItemRarityVeryRare",
-  legendary: "DND5E.ItemRarityLegendary",
-  artifact: "DND5E.ItemRarityArtifact"
+  common: "DND5E.ITEM.Rarity.Common",
+  uncommon: "DND5E.ITEM.Rarity.Uncommon",
+  rare: "DND5E.ITEM.Rarity.Rare",
+  veryRare: "DND5E.ITEM.Rarity.VeryRare",
+  legendary: "DND5E.ITEM.Rarity.Legendary",
+  artifact: "DND5E.ITEM.Rarity.Artifact",
+  varies: "DND5E.ITEM.Rarity.Varies"
 };
 preLocalize("itemRarity");
 
@@ -1870,6 +1900,9 @@ DND5E.featureTypes = {
       epicBoon: "DND5E.Feature.Feat.EpicBoon"
     }
   },
+  pietyTrait: {
+    label: "DND5E.Feature.PietyTrait"
+  },
   supernaturalGift: {
     label: "DND5E.Feature.SupernaturalGift.Label",
     subtypes: {
@@ -2058,6 +2091,8 @@ DND5E.validProperties = {
     "mgc"
   ])
 };
+
+DND5E.validProperties.consumable.ammo = new Set(["ret"]);
 
 /* -------------------------------------------- */
 
@@ -2942,6 +2977,7 @@ DND5E.restTypes = {
     icon: "fa-solid fa-utensils",
     dialogClass: ShortRestDialog,
     activationPeriods: ["shortRest"],
+    expiryEvents: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
   },
@@ -2957,6 +2993,7 @@ DND5E.restTypes = {
     dialogClass: LongRestDialog,
     newDay: true,
     activationPeriods: ["longRest"],
+    expiryEvents: ["longRest", "shortRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
@@ -3584,19 +3621,6 @@ preLocalize("cover");
 /* -------------------------------------------- */
 
 /**
- * A selection of actor attributes that can be tracked on token resource bars.
- * @type {string[]}
- * @deprecated since v10
- */
-DND5E.trackableAttributes = [
-  "attributes.ac.value", "attributes.init.bonus", "attributes.movement", "attributes.senses",
-  "attributes.spell.attack", "attributes.spell.dc", "attributes.spell.level", "details.cr",
-  "details.xp.value", "skills.*.passive", "abilities.*.value"
-];
-
-/* -------------------------------------------- */
-
-/**
  * A selection of actor and item attributes that are valid targets for item resource consumption.
  * @type {string[]}
  */
@@ -3884,13 +3908,72 @@ DND5E.neverBlockStatuses = new Set();
 
 /**
  * Configuration for the special bloodied status effect.
- * @type {{ name: string, icon: string, threshold: number }}
+ * @type {{ name: string, img: string, threshold: number }}
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
   img: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
-  threshold: .5
+  threshold: 50
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration for falling damage. A creature takes `damageDie` of `damageType` damage for every whole
+ * `distancePerDie` feet it falls, up to a maximum of `maximumDice` dice.
+ * @type {{ damageDie: string, damageType: string, distancePerDie: number, maximumDice: number }}
+ */
+DND5E.falling = {
+  damageDie: "d6",
+  damageType: "bludgeoning",
+  distancePerDie: 10,
+  maximumDice: 20
+};
+
+/* -------------------------------------------- */
+
+/**
+ * Visually scale tokens smaller the farther they are below the viewed level, to convey depth.
+ * @type {boolean}
+ */
+DND5E.elevationScaling = true;
+
+/* -------------------------------------------- */
+
+/**
+ * System provided active effect change types.
+ * @enum {ActiveEffectChangeTypeConfig & { [group]: string, [skipConditions]: boolean }}
+ */
+DND5E.activeEffectChangeTypes = Object.freeze({
+  "dnd5e.advantage": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Advantage.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    skipConditions: true
+  },
+  "dnd5e.bonus": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Bonus.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    skipConditions: true
+  },
+  "dnd5e.maximum": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Maximum.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    skipConditions: true
+  },
+  "dnd5e.minimum": {
+    label: "DND5E.ACTIVEEFFECT.ChangeType.Minimum.Label",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    group: "DND5E.ACTIVEEFFECT.ChangeType.Group.Rules",
+    skipConditions: true
+  }
+});
 
 /* -------------------------------------------- */
 /*  Languages                                   */
@@ -4652,6 +4735,19 @@ DND5E.calendarDeltasRecoveryMapping = new Map([
   ["sunrises", "dawn"],
   ["sunsets", "dusk"]
 ]);
+
+/* -------------------------------------------- */
+/*  Expiry Events                               */
+/* -------------------------------------------- */
+
+/**
+ * Active effect expiry events provided by the system.
+ * @enum {string}
+ */
+DND5E.expiryEvents = Object.seal({
+  longRest: "DND5E.EFFECT.Expiry.LongRest",
+  shortRest: "DND5E.EFFECT.Expiry.ShortRest"
+});
 
 /* -------------------------------------------- */
 /*  Requests                                    */

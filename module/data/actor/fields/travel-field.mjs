@@ -72,8 +72,8 @@ export default class TravelField extends foundry.data.fields.SchemaField {
 
     if ( !movement ) return;
     for ( const [type, { travel: travelType="land" }] of Object.entries(CONFIG.DND5E.movementTypes) ) {
-      if ( !movement[type] ) continue;
-      const speed = TravelField.convertMovementToTravel(movement[type], movement.units, units);
+      if ( !movement.speeds?.[type] ) continue;
+      const speed = TravelField.convertMovementToTravel(movement.speeds[type], movement.units, units);
       const pace = travel.paces[travelType] ||= TravelField.applyPaceMultiplier(
         speed * travel.time, paceMode, CONFIG.DND5E.movementUnits[movement.units]?.type
       );

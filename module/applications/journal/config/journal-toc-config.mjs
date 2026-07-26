@@ -46,7 +46,7 @@ export default class JournalTOCConfig extends DocumentSheet5e {
 
   /** @override */
   get title() {
-    return game.i18n.localize(this.options.window.title);
+    return _loc(this.options.window.title);
   }
 
   /* --------------------------------------------- */
@@ -67,6 +67,7 @@ export default class JournalTOCConfig extends DocumentSheet5e {
     const { chapterOptions } = await TableOfContentsCompendium._getEntryBreakdown(this.compendium);
 
     const data = this.document.flags.dnd5e ?? {};
+    const appendedSpecial = (data.type === "special") && Number.isNumeric(data.append);
     context.fields = [
       {
         field: new StringField(),
@@ -79,14 +80,14 @@ export default class JournalTOCConfig extends DocumentSheet5e {
       },
       {
         field: new NumberField({ integer: true }),
-        label: game.i18n.localize("DND5E.TABLEOFCONTENTS.FIELDS.position.label"),
+        label: _loc("DND5E.TABLEOFCONTENTS.FIELDS.position.label"),
         name: "position",
         value: data.position,
         visible: (data.type === "appendix") || (data.type === "chapter")
       },
       {
         field: new NumberField(),
-        label: game.i18n.localize("DND5E.TABLEOFCONTENTS.FIELDS.position.label"),
+        label: _loc("DND5E.TABLEOFCONTENTS.FIELDS.position.label"),
         name: "append",
         options: chapterOptions,
         value: data.append,
@@ -94,14 +95,14 @@ export default class JournalTOCConfig extends DocumentSheet5e {
       },
       {
         field: new NumberField({ integer: true }),
-        label: game.i18n.localize("DND5E.TABLEOFCONTENTS.FIELDS.order.label"),
+        label: _loc("DND5E.TABLEOFCONTENTS.FIELDS.order.label"),
         name: "order",
         value: data.order,
         visible: data.type === "special"
       },
       {
         field: new StringField(),
-        label: game.i18n.localize("DND5E.TABLEOFCONTENTS.FIELDS.title.label"),
+        label: _loc("DND5E.TABLEOFCONTENTS.FIELDS.title.label"),
         name: "title",
         placeholder: this.document.name,
         value: data.title,
@@ -110,22 +111,22 @@ export default class JournalTOCConfig extends DocumentSheet5e {
       {
         field: new BooleanField(),
         input: createCheckboxInput,
-        label: game.i18n.localize("DND5E.TABLEOFCONTENTS.HideAllPages"),
+        label: _loc("DND5E.TABLEOFCONTENTS.HideAllPages"),
         name: "hidePages",
         value: data.showPages === false,
-        visible: data.type === "chapter"
+        visible: (data.type !== "header") && !appendedSpecial
       },
       {
         field: new BooleanField(),
         input: createCheckboxInput,
-        label: game.i18n.localize("DND5E.TABLEOFCONTENTS.FIELDS.showPages.label"),
+        label: _loc("DND5E.TABLEOFCONTENTS.FIELDS.showPages.label"),
         name: "showPages",
         value: data.showPages === true,
-        visible: (data.type === "appendix") || (data.type === "special")
+        visible: appendedSpecial
       },
       {
         field: new SetField(new StringField()),
-        label: game.i18n.localize("DND5E.TABLEOFCONTENTS.HiddenPages"),
+        label: _loc("DND5E.TABLEOFCONTENTS.HiddenPages"),
         name: "hiddenPages",
         options: this.document.pages
           .map(page => {
@@ -133,14 +134,16 @@ export default class JournalTOCConfig extends DocumentSheet5e {
             if ( this.document.categories.size ) {
               const category = this.document.categories.get(page.category);
               option.groupSort = category?.sort ?? -Infinity;
-              option.group = category?.name ?? game.i18n.localize("JOURNAL.Uncategorized");
+              option.group = category?.name ?? _loc("JOURNAL.Uncategorized");
             }
             return option;
           })
           .sort((lhs, rhs) => (lhs.groupSort - rhs.groupSort) || (lhs.sort - rhs.sort)),
         value: this.#getHiddenPages(),
-        visible: ((data.type === "chapter") && (data.showPages !== false))
-          || (((data.type === "appendix") || (data.type === "special")) && (data.showPages === true))
+        visible: (data.showPages !== false) && (
+          ((data.type === "chapter") || (data.type === "appendix") || ((data.type === "special") && !appendedSpecial))
+          || (appendedSpecial && (data.showPages === true))
+        )
       }
     ];
 

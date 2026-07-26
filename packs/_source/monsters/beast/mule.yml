@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,16 +478,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: nIYcqw8lbaWP1sSJ
     name: Beast of Burden
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/containers/bags/pack-leather-brown.webp
     system:
       description:
         value: >-
-          <p>The mule is considered to be a Large animal for the purpose of
-          determining its carrying capacity.</p>
+          <p>The [[lookup @name lowercase]]{monster} is considered to be a Large
+          animal for the purpose of determining its carrying capacity.</p>
         chat: ''
       source:
         custom: ''
@@ -504,10 +502,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -522,23 +521,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.mUwZfxiOyao1Xuxt
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781533686228
+      modifiedTime: 1781533699695
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Vk7uHVkJ5b26gaTh.nIYcqw8lbaWP1sSJ'
   - _id: PWqvlPCG9P9edPYi
     name: Sure-Footed
     type: feat
-    img: icons/magic/nature/root-vine-entangle-foot-green.webp
+    img: icons/equipment/feet/boots-leather-laced-brown.webp
     system:
       description:
         value: >-
-          <p>The mule has<strong> advantage </strong>on Strength and Dexterity
-          saving throws made against effects that would knock it prone.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Strength
+          and Dexterity saving throws made against effects that would knock it
+          &amp;reference[prone apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -552,10 +552,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -570,12 +571,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nJHx2fudYhZeexDP
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781533646043
+      modifiedTime: 1781533665892
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Vk7uHVkJ5b26gaTh.PWqvlPCG9P9edPYi'
   - _id: Ou2VI9ORGu2JnZqj
@@ -585,7 +586,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Mule attacks with its Hooves.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -648,7 +651,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -657,8 +660,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        J7T6qdeM3XjKp1kD:
           type: attack
           activation:
             type: action
@@ -673,10 +675,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -693,7 +696,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -706,20 +710,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: J7T6qdeM3XjKp1kD
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -734,11 +750,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741122424518
+      systemVersion: 6.0.0
+      createdTime: 1781533737695
+      modifiedTime: 1781533747543
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Vk7uHVkJ5b26gaTh.Ou2VI9ORGu2JnZqj'
@@ -747,14 +763,16 @@ folder: g8DmtGW2tiBpzCMk
 sort: 0
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    powerfulBuild: true
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 6.0.0
   createdTime: 1726171236292
-  modifiedTime: 1741122399097
+  modifiedTime: 1781533730745
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!Vk7uHVkJ5b26gaTh'

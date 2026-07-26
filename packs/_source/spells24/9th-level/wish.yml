@@ -154,21 +154,21 @@ effects:
     transfer: false
     _id: f16Ek2U8XKeGL7vB
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.value
-        mode: 3
-        value: '3'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: 3
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: VwegtOLP07Qi4PVj
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Each time you cast a spell until you finish a Long Rest, you take
       [[/damage 1d10 type=necrotic]] damage per level of that spell. This damage
@@ -181,13 +181,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725392477694
-      modifiedTime: 1725392659017
+      modifiedTime: 1783543977718
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplWish000000.f16Ek2U8XKeGL7vB'
 folder: iG0Zia8jh6uK39TB
 sort: 100007
@@ -200,11 +203,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425978258
-  modifiedTime: 1745256800213
+  modifiedTime: 1783543977717
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplWish000000'

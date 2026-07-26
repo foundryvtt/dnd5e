@@ -162,25 +162,27 @@ effects:
     transfer: false
     _id: L0OzTUZwZz9nzNwe
     type: base
-    system: {}
-    changes:
-      - key: system.traits.ci.value
-        mode: 2
-        value: charmed
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: frightened
-        priority: null
+    system:
+      changes:
+        - key: system.traits.ci.value
+          value: charmed
+          priority: null
+          type: add
+          phase: initial
+          _id: 8giIvMRNRuj3iOZ3
+        - key: system.traits.ci.value
+          value: frightened
+          priority: null
+          type: add
+          phase: initial
+          _id: c47vGVjlF7CRjweq
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The spirits look like living, breathing warriors, and they have
       Immunity to the &amp;Reference[Charmed apply=false] and
@@ -193,22 +195,25 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgHornofValhall.ActiveEffect.7da5gsAdyzIIfWBL
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730408078360
-      modifiedTime: 1730408078360
+      modifiedTime: 1783544094160
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgBronzeHornOfV.L0OzTUZwZz9nzNwe'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615783153
+  modifiedTime: 1783544094160
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

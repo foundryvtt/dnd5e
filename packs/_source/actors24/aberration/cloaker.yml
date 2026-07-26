@@ -480,12 +480,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -529,7 +526,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -549,6 +546,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mmLightSensitivi
     name: Light Sensitivity
@@ -592,10 +590,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLightSensitivi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -689,10 +689,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -902,17 +904,14 @@ items:
         transfer: false
         _id: m1rBdxxAM8FGk5gI
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>While attached, the target has the &amp;Reference[Blinded
           apply=false] condition.</p>
@@ -925,10 +924,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmCloaker0000000.mmAttach00000000.m1rBdxxAM8FGk5gI
     flags:
@@ -940,10 +944,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAttach00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1079,10 +1085,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTail0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1197,10 +1205,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPhantasms00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1315,30 +1325,31 @@ items:
       identifier: mirror-image
       method: spell
       prepared: 0
+      sourceItem: feat:phantasms
     type: spell
     img: icons/magic/defensive/illusion-evasion-echo-purple.webp
     effects:
       - name: Duplicate A
         origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/sundries/flags/banner-pink.webp
         _id: VUqQIaiZoIzxUdf1
         type: base
-        system: {}
-        changes:
-          - key: flags.dnd-players-handbook.mirrorImages
-            mode: 2
-            value: '1'
-            priority: null
+        system:
+          changes:
+            - key: flags.dnd-players-handbook.mirrorImages
+              value: 1
+              priority: null
+              type: add
+              phase: initial
+              _id: s3qwRvHu4oUgX1iP
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1348,33 +1359,38 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544173788
+          modifiedTime: 1783544173788
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCloaker0000000.jluXgJ7dG39ONk0R.VUqQIaiZoIzxUdf1
       - name: Duplicate B
         origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/sundries/flags/banner-green.webp
         _id: XcTQl9DhT9lC3bxI
         type: base
-        system: {}
-        changes:
-          - key: flags.dnd-players-handbook.mirrorImages
-            mode: 2
-            value: '1'
-            priority: null
+        system:
+          changes:
+            - key: flags.dnd-players-handbook.mirrorImages
+              value: 1
+              priority: null
+              type: add
+              phase: initial
+              _id: 8jMlGVCmhAGICAb6
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1384,33 +1400,38 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544173788
+          modifiedTime: 1783544173788
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCloaker0000000.jluXgJ7dG39ONk0R.XcTQl9DhT9lC3bxI
       - name: Duplicate C
         origin: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/sundries/flags/banner-blue.webp
         _id: uMsGEsbEZ2hckOKW
         type: base
-        system: {}
-        changes:
-          - key: flags.dnd-players-handbook.mirrorImages
-            mode: 2
-            value: '1'
-            priority: null
+        system:
+          changes:
+            - key: flags.dnd-players-handbook.mirrorImages
+              value: 1
+              priority: null
+              type: add
+              phase: initial
+              _id: L9CBgA628DPJRM2o
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1420,63 +1441,91 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544173788
+          modifiedTime: 1783544173788
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCloaker0000000.jluXgJ7dG39ONk0R.uMsGEsbEZ2hckOKW
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmCloaker0000000.Item.mmPhantasms00000.Activity.4GBMAwbnCOrMQ4Gf
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-          - key: system.ability
-            mode: 5
-            value: wis
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: aBDYAZdVOOcl7zzj
+            - key: system.ability
+              value: wis
+              priority: null
+              type: override
+              phase: initial
+              _id: L8TYWbfR0Z4JZAhg
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: NO2iow9sg3TTPr4h
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: XcyhYiMjpEsuv0ms
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: qcWRY9PoGeZAHnRp
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmCloaker0000000.Item.mmPhantasms00000.Activity.4GBMAwbnCOrMQ4Gf
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544173789
+          modifiedTime: 1783544173789
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmCloaker0000000.jluXgJ7dG39ONk0R.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1490,10 +1539,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMirrorImag
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544173788
+      modifiedTime: 1783544173788
     _id: jluXgJ7dG39ONk0R
     _key: '!actors.items!mmCloaker0000000.jluXgJ7dG39ONk0R'
   - _id: mmMoan0000000000
@@ -1610,17 +1661,14 @@ items:
         origin: Item.mmMoan0000000000
         _id: ozk8flGDR2kAITEI
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Frightened apply=false] condition
           until the end of the attacking creature's next turn.</p>
@@ -1634,10 +1682,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmCloaker0000000.mmMoan0000000000.ozk8flGDR2kAITEI
     flags:
@@ -1649,10 +1708,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMoan0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1663,11 +1724,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452699250
-  modifiedTime: 1771452699250
+  systemVersion: 6.0.0
+  createdTime: 1783544173787
+  modifiedTime: 1783544173787
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

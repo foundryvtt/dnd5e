@@ -404,7 +404,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
         content: this.generateTimePassageMessage(timePassageData),
         rolls,
         system: { changes },
-        title: game.i18n.localize("DND5E.CALENDAR.TimePassage.Title"),
+        title: _loc("DND5E.CALENDAR.TimePassage.Title"),
         type: "timePassed"
       }
     };
@@ -437,20 +437,20 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       const pr = getPluralRules();
       const { value, unit } = convertTime(timePassageData.midnights, "day", { strict: false });
       const number = formatTime(value, unit, { words: true });
-      message = game.i18n.format(`DND5E.CALENDAR.TimePassage.TimePassed.${pr.select(value)}`, {
+      message = _loc(`DND5E.CALENDAR.TimePassage.TimePassed.${pr.select(value)}`, {
         number: number.capitalize(), numberLc: number
       });
     }
 
     // Sun has set and risen again
     else if ( timePassageData.sunsets && timePassageData.sunrises ) {
-      message = game.i18n.localize("DND5E.CALENDAR.TimePassage.SunsetSunrise");
+      message = _loc("DND5E.CALENDAR.TimePassage.SunsetSunrise");
     }
 
     // Sun has set, risen, or midnight has been passed
-    else if ( timePassageData.sunsets ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Sunset");
-    else if ( timePassageData.sunrises ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Sunrise");
-    else if ( timePassageData.midnights ) message = game.i18n.localize("DND5E.CALENDAR.TimePassage.Midnight");
+    else if ( timePassageData.sunsets ) message = _loc("DND5E.CALENDAR.TimePassage.Sunset");
+    else if ( timePassageData.sunrises ) message = _loc("DND5E.CALENDAR.TimePassage.Sunrise");
+    else if ( timePassageData.midnights ) message = _loc("DND5E.CALENDAR.TimePassage.Midnight");
 
     return message ? `<p>${message}</p>` : undefined;
   }

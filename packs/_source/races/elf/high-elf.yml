@@ -1,7 +1,7 @@
 _id: A69KxdH1renVPrQV
 name: High Elf
 type: race
-img: icons/commodities/treasure/statue-gold-laurel-wreath.webp
+img: icons/commodities/treasure/brooch-gold-ruby.webp
 system:
   description:
     value: >-
@@ -21,18 +21,20 @@ system:
       Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is
       30 feet.</p><p><em><strong>Darkvision.</strong></em> Accustomed to twilit
       forests and the night sky, you have superior vision in dark and dim
-      conditions. You can see in dim light within 60 feet of you as if it were
-      bright light, and in darkness as if it were dim light. You can't discern
-      color in darkness, only shades of gray.</p><p><em><strong>Keen
+      conditions. You can see in &amp;reference[dim light] within 60 feet of you
+      as if it were &amp;reference[bright light], and in
+      &amp;reference[darkness] as if it were dim light. You can't discern color
+      in darkness, only shades of gray.</p><p><em><strong>Keen
       Senses.</strong></em> You have proficiency in the Perception
       skill.</p><p><em><strong>Fey Ancestry.</strong></em> You have advantage on
-      saving throws against being charmed, and magic can't put you to
-      sleep.</p><p><em><strong>Trance.</strong></em> Elves don't need to sleep.
-      Instead, they meditate deeply, remaining semiconscious, for 4 hours a day.
-      (The Common word for such meditation is "trance.") While meditating, you
-      can dream after a fashion; such dreams are actually mental exercises that
-      have become reflexive through years of practice. After resting in this
-      way, you gain the same benefit that a human does from 8 hours of
+      saving throws against being &amp;reference[charmed apply=false], and magic
+      can't put you to sleep.</p><p><em><strong>Trance.</strong></em> Elves
+      don't need to sleep. Instead, they meditate deeply, remaining
+      semiconscious, for 4 hours a day. (The Common word for such meditation is
+      "trance.") While meditating, you can dream after a fashion; such dreams
+      are actually mental exercises that have become reflexive through years of
+      practice. After resting in this way, you gain the same benefit that a
+      human does from 8 hours of
       sleep.</p><p><em><strong>Languages.</strong></em> You can speak, read, and
       write Common and Elvish. Elvish is fluid, with subtle intonations and
       intricate grammar. Elven literature is rich and varied, and their songs
@@ -60,7 +62,8 @@ system:
     rules: '2014'
   identifier: high-elf
   advancement:
-    - type: ItemGrant
+    9SgUOZ9mjqyA8Q2d:
+      type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.races.cnTbpPPeGW7vGjOV
@@ -70,15 +73,19 @@ system:
         optional: false
         spell:
           ability: []
-          preparation: ''
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          prepared: 0
       value: {}
       level: 0
       title: Grant Items
       _id: 9SgUOZ9mjqyA8Q2d
-    - _id: l1Pw82BvhrSkYiyF
+      flags: {}
+      hint: ''
+    l1Pw82BvhrSkYiyF:
+      _id: l1Pw82BvhrSkYiyF
       type: ItemChoice
       configuration:
         choices:
@@ -91,22 +98,28 @@ system:
         spell:
           ability:
             - int
-          preparation: innate
           uses:
             max: ''
             per: ''
+            requireSlot: false
+          method: innate
+          prepared: 0
         restriction:
           type: ''
           subtype: ''
           level: '0'
+          list:
+            - class:wizard
       value:
         added: {}
         replaced: {}
       title: Cantrip
       hint: >-
-        You know one cantrip of your choice from the wizard spell list.
-        Intelligence is your spellcasting ability for it.
-    - _id: Z9hvZFkWUNvowbQX
+        <p>You know one cantrip of your choice from the wizard spell list.
+        Intelligence is your spellcasting ability for it.</p>
+      flags: {}
+    Z9hvZFkWUNvowbQX:
+      _id: Z9hvZFkWUNvowbQX
       type: AbilityScoreImprovement
       configuration:
         points: 0
@@ -119,10 +132,14 @@ system:
           cha: 0
         cap: 2
         locked: []
+        recommendation: null
       value: {}
       level: 0
       title: ''
-    - _id: eqSwyWvm0gYgBzJJ
+      flags: {}
+      hint: ''
+    eqSwyWvm0gYgBzJJ:
+      _id: eqSwyWvm0gYgBzJJ
       type: Size
       configuration:
         sizes:
@@ -134,7 +151,9 @@ system:
       hint: >-
         Elves range from under 5 to over 6 feet tall and have slender builds.
         Your size is Medium.
-    - _id: eAv9eLr0ackU7WO2
+      flags: {}
+    eAv9eLr0ackU7WO2:
+      _id: eAv9eLr0ackU7WO2
       type: Trait
       configuration:
         mode: default
@@ -146,7 +165,10 @@ system:
       title: Keen Senses
       value:
         chosen: []
-    - _id: vNyszlmxQeXRjYIH
+      flags: {}
+      hint: ''
+    vNyszlmxQeXRjYIH:
+      _id: vNyszlmxQeXRjYIH
       type: Trait
       configuration:
         mode: default
@@ -162,7 +184,10 @@ system:
       title: ''
       value:
         chosen: []
-    - _id: ZwJOJ5Ywagq7rWNI
+      flags: {}
+      hint: ''
+    ZwJOJ5Ywagq7rWNI:
+      _id: ZwJOJ5Ywagq7rWNI
       type: Trait
       configuration:
         mode: default
@@ -177,6 +202,8 @@ system:
       title: Elf Weapon Training
       value:
         chosen: []
+      flags: {}
+      hint: ''
   senses:
     darkvision: 60
     blindsight: null
@@ -194,7 +221,7 @@ system:
     hover: false
   type:
     value: humanoid
-    subtype: elf
+    subtype: Elf
     custom: ''
 effects: []
 ownership:
@@ -202,11 +229,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037392601
-  modifiedTime: 1725992703287
+  modifiedTime: 1781473662445
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

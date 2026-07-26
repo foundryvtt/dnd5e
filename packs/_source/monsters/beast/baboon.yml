@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: yb6o6KfKlg9bGhqA
     name: Pack Tactics
@@ -489,9 +487,10 @@ items:
     system:
       description:
         value: >-
-          <p>The baboon has<strong> advantage </strong>on an attack roll against
-          a creature if at least one of the baboon's allies is within <strong>5
-          ft.</strong> of the creature and the ally isn't incapacitated.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on an attack
+          roll against a creature if at least one of the [[lookup @name
+          lowercase]]{monster}'s allies is within 5 feet of the creature and the
+          ally isn't &amp;reference[incapacitated apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -505,10 +504,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: Baboon
-      properties: []
+      requirements: ''
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -523,22 +523,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781523913141
+      modifiedTime: 1781525774428
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!JW8bXggOMBx1S6tF.yb6o6KfKlg9bGhqA'
   - _id: EXVZptAEHLscbODF
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Baboon attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -601,7 +603,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -610,8 +612,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dUiyR5egbZF1Uu6d:
           type: attack
           activation:
             type: action
@@ -626,6 +627,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -646,7 +648,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -665,14 +668,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dUiyR5egbZF1Uu6d
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -687,11 +702,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741116932388
+      systemVersion: 6.0.0
+      createdTime: 1781523955368
+      modifiedTime: 1781524093183
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!JW8bXggOMBx1S6tF.EXVZptAEHLscbODF'
@@ -703,7 +718,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171221037

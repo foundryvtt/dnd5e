@@ -97,24 +97,24 @@ effects:
   - name: Universal Communication
     origin: Compendium.dnd5e.spells24.Item.phbsplTongues000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/environment/settlement/pyramid.webp
     _id: bmESvtHHL0Su7gn4
     type: base
-    system: {}
-    changes:
-      - key: system.traits.languages.custom
-        mode: 2
-        value: ;all spoken or signed languages
-        priority: null
+    system:
+      changes:
+        - key: system.traits.languages.custom
+          value: ;all spoken or signed languages
+          priority: null
+          type: add
+          phase: initial
+          _id: galmEKJNbyCb1FWU
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -123,13 +123,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977451
+      modifiedTime: 1783543977451
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplTongues000.bmESvtHHL0Su7gn4'
 folder: HCovEE4VoPGlIbKi
 sort: 100098
@@ -142,11 +145,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.2
   createdTime: 1724425975847
-  modifiedTime: 1777481653177
+  modifiedTime: 1783543977451
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTongues000'

@@ -267,7 +267,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
     const { movement } = context.system.attributes;
     const units = movement.units || defaultUnits("length");
     let combatSpeed = formatLength(movement.max, units, { parts: true });
-    if ( movement.hover && (movement.fly > 0) && (movement.fly >= movement.max) ) {
+    if ( movement.hover && (movement.speeds.fly > 0) && (movement.speeds.fly >= movement.max) ) {
       combatSpeed = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: combatSpeed });
     }
     context.combatSpeed = combatSpeed;

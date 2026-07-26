@@ -181,17 +181,15 @@ effects:
     transfer: false
     _id: JYlrfQOPp5jRIFK2
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The shackles prevent a creature bound by them from using any method of
       extradimensional movement, including teleportation or travel to a
@@ -207,22 +205,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729279459349
-      modifiedTime: 1729280174762
+      modifiedTime: 1783544094793
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDimensionalSh.JYlrfQOPp5jRIFK2'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764616835042
+  modifiedTime: 1783544094793
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 10800000

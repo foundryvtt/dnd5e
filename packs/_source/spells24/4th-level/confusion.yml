@@ -110,20 +110,18 @@ effects:
   - name: Confused
     origin: Compendium.dnd5e.spells24.Item.phbsplConfusion0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/symbols/question-stone-yellow.webp
     _id: VxmsgUz9OIUet6WC
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The target can’t take Bonus Actions or Reactions and must roll 1d10 at
       the start of each of its turns to determine its behavior for that turn,
@@ -139,13 +137,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974461
+      modifiedTime: 1783543974461
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplConfusion0.VxmsgUz9OIUet6WC'
 folder: qi3IbnEwap7mRw4b
 sort: 3200000
@@ -158,11 +159,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425946258
-  modifiedTime: 1745256788584
+  modifiedTime: 1783543974461
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplConfusion0'

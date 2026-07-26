@@ -147,17 +147,15 @@ effects:
     transfer: false
     _id: RCuPR9PN6DD1YDFc
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target is entombed beneath the earth in a hollow globe of magical
       force that is just large enough to contain the target. Nothing can pass
@@ -169,13 +167,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725377202254
-      modifiedTime: 1725377685519
+      modifiedTime: 1783543975709
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplImprisonme.RCuPR9PN6DD1YDFc'
   - name: Chaining
     img: systems/dnd5e/icons/svg/statuses/restrained.svg
@@ -183,17 +184,15 @@ effects:
     transfer: false
     _id: VrrFIk47pnm9qKuX
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Chains firmly rooted in the ground hold the target in place. The target
       has the &amp;Reference[Restrained apply=false] condition and can’t be
@@ -206,13 +205,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725377278825
-      modifiedTime: 1725377816655
+      modifiedTime: 1783543975709
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplImprisonme.VrrFIk47pnm9qKuX'
   - name: Hedged Prison
     img: systems/dnd5e/icons/svg/activity/summon.svg
@@ -220,17 +222,15 @@ effects:
     transfer: false
     _id: 6P8mzDayeidhwod7
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target is trapped in a demiplane that is warded against
       teleportation and planar travel. The demiplane is your choice of a
@@ -242,13 +242,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725377410322
-      modifiedTime: 1725377849364
+      modifiedTime: 1783543975709
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplImprisonme.6P8mzDayeidhwod7'
   - name: Minimus Containment
     img: icons/svg/down.svg
@@ -256,17 +259,15 @@ effects:
     transfer: false
     _id: ApXXZFLy8fD2cWO0
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target becomes 1 inch tall and is trapped inside an indestructible
       gemstone or a similar object. Light can pass through the gemstone
@@ -279,13 +280,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725377435545
-      modifiedTime: 1725377954713
+      modifiedTime: 1783543975709
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplImprisonme.ApXXZFLy8fD2cWO0'
   - name: Slumber
     img: systems/dnd5e/icons/svg/statuses/unconscious.svg
@@ -293,17 +297,15 @@ effects:
     transfer: false
     _id: R4BMRAXaadQwpvwk
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Unconscious apply=false] condition
       and can’t be awoken.</p>
@@ -315,13 +317,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725377501907
-      modifiedTime: 1725377972756
+      modifiedTime: 1783543975709
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplImprisonme.R4BMRAXaadQwpvwk'
 folder: iG0Zia8jh6uK39TB
 sort: 125000
@@ -334,11 +339,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425959776
-  modifiedTime: 1745256795109
+  modifiedTime: 1783543975709
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplImprisonme'

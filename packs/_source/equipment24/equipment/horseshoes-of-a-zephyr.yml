@@ -119,21 +119,21 @@ effects:
     origin: Compendium.dnd5e.equipment24.Item.dmgHorseshoesOfA
     _id: AYtAkgcEHRws0Qeo
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.ignoredDifficultTerrain
-        mode: 2
-        value: all
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          value: all
+          priority: null
+          type: add
+          phase: initial
+          _id: Xgv15bzYmR8kZOLS
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -147,12 +147,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 6.0.0
       createdTime: 1753119088835
-      modifiedTime: 1753119138361
+      modifiedTime: 1783544096357
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHorseshoesOfA.AYtAkgcEHRws0Qeo'
 flags:
   dnd5e:
@@ -161,11 +164,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1727883376108
-  modifiedTime: 1753119142354
+  modifiedTime: 1783544096357
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 18800000

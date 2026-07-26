@@ -41,6 +41,29 @@ export function registerSystemKeybindings() {
     name: "KEYBINDINGS.DND5E.DragMove",
     editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }, { key: "OsLeft" }, { key: "OsRight" }]
   });
+
+  game.keybindings.register("dnd5e", "toggleSheetMode", {
+    name: "KEYBINDINGS.DND5E.ToggleSheetMode",
+    editable: [{ key: "KeyE", modifiers: ["Shift"] }],
+    onDown: () => {
+      const app = ui.activeWindow;
+      if ( !app?.rendered || !app.changeMode || !app.isEditable ) return false;
+      app.changeMode();
+      return true;
+    }
+  });
+
+  game.keybindings.register("dnd5e", "openCompendiumBrowser", {
+    name: "KEYBINDINGS.DND5E.OpenCompendiumBrowser",
+    editable: [{ key: "KeyB", modifiers: ["Shift"] }],
+    onDown: () => {
+      const existing = Array.from(foundry.applications.instances.values())
+        .find(app => app instanceof CompendiumBrowser && app.rendered);
+      if ( existing ) existing.bringToFront();
+      else new CompendiumBrowser().render({ force: true });
+      return true;
+    }
+  });
 }
 
 /* -------------------------------------------- */
@@ -95,6 +118,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Falling automation
+  game.settings.register("dnd5e", "disableFalling", {
+    config: true,
+    default: false,
+    hint: "SETTINGS.DND5E.AUTOMATION.Falling.Hint",
+    name: "SETTINGS.DND5E.AUTOMATION.Falling.Name",
+    scope: "world",
+    type: Boolean
+  });
+
   // Sense-to-token vision sync
   game.settings.register("dnd5e", "senseVisionSync", {
     name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",
@@ -123,7 +156,17 @@ export function registerSystemSettings() {
     name: "SETTINGS.DND5E.LOYALTY.Name",
     hint: "SETTINGS.DND5E.LOYALTY.Hint",
     scope: "world",
-    config: true,
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
+  // Piety
+  game.settings.register("dnd5e", "pietyScore", {
+    name: "SETTINGS.DND5E.PIETY.Name",
+    hint: "SETTINGS.DND5E.PIETY.Hint",
+    scope: "world",
+    config: false,
     default: false,
     type: Boolean
   });
@@ -454,6 +497,21 @@ export function registerSystemSettings() {
       none: "SETTINGS.DND5E.COMBAT.InitiativeScore.None",
       npcs: "SETTINGS.DND5E.COMBAT.InitiativeScore.NPCs",
       all: "SETTINGS.DND5E.COMBAT.InitiativeScore.All"
+    }
+  });
+
+  game.settings.register("dnd5e", "autoApplyDowned", {
+    name: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Name",
+    hint: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.None",
+      deadOnly: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.DeadOnly",
+      npcs: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.NPCs",
+      all: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.All"
     }
   });
 

@@ -494,12 +494,9 @@ prototypeToken:
     src: modules/dnd-monster-manual/assets/tokens/succubus-*.webp
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -543,7 +540,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -563,6 +560,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmIncubusForm000
     name: Incubus Form
@@ -686,10 +684,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmIncubusForm000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -792,10 +792,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -948,10 +950,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFiendishTouch0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1062,10 +1066,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCharm000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1193,10 +1199,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDrainingKiss00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1303,10 +1311,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShapeshift0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1429,26 +1439,25 @@ items:
       identifier: dominate-person
       method: spell
       prepared: 0
+      sourceItem: feat:charm
     type: spell
     img: icons/magic/control/control-influence-puppet.webp
     effects:
       - name: Dominated
         origin: Compendium.dnd5e.spells24.Item.phbsplDominatePe
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/control/control-influence-puppet.webp
         _id: Edq07kTLIVkuDjtn
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>Whenever the &amp;Reference[charmed apply=false] target takes
           damage, it repeats the [[/save ability=wis]] save, ending the spell on
@@ -1462,59 +1471,82 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544183478
+          modifiedTime: 1783544183478
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmSuccubus000000.ngMn9mjUa63VWbHY.Edq07kTLIVkuDjtn
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmSuccubus000000.Item.mmCharm000000000.Activity.o1l4tzAnLGufXAfu
-        changes:
-          - key: system.ability
-            mode: 5
-            value: cha
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: cha
+              priority: null
+              type: override
+              phase: initial
+              _id: Le44CPlNvXPXssK3
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: Et24yf4DbmYGSfrw
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: zfakOLQ0K0j5zeA9
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: SrSDaHtZfdwhMWid
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmSuccubus000000.Item.mmCharm000000000.Activity.o1l4tzAnLGufXAfu
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544183478
+          modifiedTime: 1783544183478
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmSuccubus000000.ngMn9mjUa63VWbHY.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -1528,10 +1560,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDominatePe
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544183478
+      modifiedTime: 1783544183478
     _id: ngMn9mjUa63VWbHY
     _key: '!actors.items!mmSuccubus000000.ngMn9mjUa63VWbHY'
 effects: []
@@ -1540,11 +1574,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452715288
-  modifiedTime: 1771452715288
+  systemVersion: 6.0.0
+  createdTime: 1783544183477
+  modifiedTime: 1783544183477
   lastModifiedBy: dnd5ebuilder0000
 sort: 175000
 ownership:

@@ -1,7 +1,15 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
+import ConditionData from "../../../data/active-effect/condition.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
-  formatLength, formatNumber, getPluralRules, loadingTooltip, parseInputDelta, simplifyBonus, splitSemicolons, staticID
+  formatLength,
+  formatNumber,
+  getPluralRules,
+  loadingTooltip,
+  parseInputDelta,
+  simplifyBonus,
+  splitSemicolons,
+  staticID
 } from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
@@ -9,7 +17,7 @@ import AdvancementManager from "../../advancement/advancement-manager.mjs";
 import ApplicationV2Mixin from "../../api/application-v2-mixin.mjs";
 import PrimarySheetMixin from "../../api/primary-sheet-mixin.mjs";
 import EffectsElement from "../../components/effects.mjs";
-import { createCheckboxInput } from "../../fields.mjs";
+import {createCheckboxInput} from "../../fields.mjs";
 import CreatureTypeConfig from "../../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../../shared/movement-senses-config.mjs";
 import SourceConfig from "../../shared/source-config.mjs";
@@ -23,6 +31,7 @@ import HitDiceConfig from "../config/hit-dice-config.mjs";
 import HitPointsConfig from "../config/hit-points-config.mjs";
 import InitiativeConfig from "../config/initiative-config.mjs";
 import LanguagesConfig from "../config/languages-config.mjs";
+import PietyConfig from "../config/piety-config.mjs";
 import SkillsConfig from "../config/skills-config.mjs";
 import SkillToolConfig from "../config/skill-tool-config.mjs";
 import SpellSlotsConfig from "../config/spell-slots-config.mjs";
@@ -37,6 +46,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 /**
  * @import { DropEffectValue } from "../../../_types.mjs"
  * @import { InventorySectionDescriptor } from "../../components/_types.mjs";
+ * @import ContainerSheet from "../../item/container-sheet.mjs";
  */
 
 /**
@@ -71,7 +81,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       togglePip: BaseActorSheet.#togglePip,
       toggleSidebar: BaseActorSheet.#toggleSidebar
     },
-    classes: ["actor", "standard-form"],
+    classes: ["actor", "standard-form", "hidden-title"],
     elements: {
       effects: "dnd5e-effects",
       inventory: "dnd5e-inventory"
@@ -244,16 +254,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       conditionIds.add(id);
       const existing = this.actor.effects.get(id);
       const { disabled } = existing ?? {};
-      arr.push({
+      const condition = {
         name, reference,
         id: k,
         img: existing?.img ?? img,
         disabled: existing ? disabled : true
-      });
+      };
+      if ( ConditionData.hasLevels(k) ) condition.level = this.actor.system.conditions?.[k] ?? 0;
+      arr.push(condition);
       return arr;
     }, []);
 
-    const columns = [EffectsElement.COLUMNS.source, EffectsElement.COLUMNS.value, EffectsElement.COLUMNS.controls];
+    const columns = [EffectsElement.COLUMNS.detail, EffectsElement.COLUMNS.controls];
     for ( const category of Object.values(context.effects) ) {
       category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {
@@ -367,11 +379,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Global Bonuses
     const globals = [];
-    const addBonus = field => {
-      if ( field instanceof SchemaField ) Object.values(field.fields).forEach(f => addBonus(f));
-      else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
+    const addBonus = (field, checkName=false) => {
+      if ( field instanceof SchemaField ) Object.values(field.fields).forEach(f => addBonus(f, checkName));
+      else if ( !checkName || (field.name === "bonus") ) globals.push({
+        field, disabled: context.flags.disabled, localize: true, name: field.fieldPath,
+        value: foundry.utils.getProperty(source, field.fieldPath)
+      });
     };
     addBonus(this.document.system.schema.fields.bonuses);
+    addBonus(this.document.system.schema.fields.rolls, true);
     if ( globals.length ) sections[_loc("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
     flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));
@@ -605,7 +621,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
-    (context.itemCategories.spells ?? []).forEach(spell => {
+    (context.itemCategories.spells ?? []).sort((lhs, rhs) => lhs.system.level - rhs.system.level).forEach(spell => {
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
@@ -833,7 +849,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Activities
     ctx.activities = item.system.activities
-      ?.filter(a => a.canUse)
+      ?.filter(a => !a.isHidden)
       ?.map(this._prepareActivity.bind(this));
 
     // Concentration
@@ -1511,6 +1527,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this._renderChild(new HitPointsConfig(config));
       case "initiative":
         return this._renderChild(new InitiativeConfig(config));
+      case "piety":
+        return this._renderChild(new PietyConfig(config));
       case "movement":
       case "senses":
         return this._renderChild(new MovementSensesConfig({ ...config, type: target.dataset.config }));
@@ -2040,13 +2058,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItems(items, filters) {
-    const actions = ["action", "bonus", "reaction", "lair", "legendary"];
     const recoveries = ["lr", "sr"];
-    const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
-    const schoolFilter = spellSchools.intersection(filters);
-    const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
-    const classFilter = spellcastingClasses.intersection(filters);
-    const actionFilter = new Set(actions).intersection(filters);
+    if ( !filters.size ) return items.filter(item => this._filterItem(item, filters) !== false);
+    const { included, excluded } = ItemListControlsElement.partitionFilters(filters);
+    const schoolFilter = new Set(Object.keys(CONFIG.DND5E.spellSchools)).intersection(included);
+    const classFilter = new Set(Object.keys(this.actor.spellcastingClasses)).intersection(included);
+    const actions = new Set(["action", "bonus", "reaction", "lair", "legendary"]);
+    const actionFilter = actions.intersection(included);
+    const actionExclude = actions.intersection(excluded);
+    const passes = ItemListControlsElement.passesFilter;
 
     return items.filter(item => {
 
@@ -2058,27 +2078,40 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( actionFilter.size ) {
         if ( item.type === "spell" ) {
           if ( !actionFilter.has(item.system.activation.type) ) return false;
+        } else if ( !item.system.activities?.size
+          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) {
+          return false;
         }
-        else if ( !item.system.activities?.size
-          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) return false;
+      }
+      if ( actionExclude.size ) {
+        if ( item.type === "spell" ) {
+          if ( actionExclude.has(item.system.activation.type) ) return false;
+        } else if ( item.system.activities?.some(a => actionExclude.has(a.activation?.type)) ) {
+          return false;
+        }
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
-      if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
+      if ( !passes(included, excluded, "ritual", item.system.properties?.has("ritual")) ) return false;
+      if ( !passes(included, excluded, "concentration", item.system.properties?.has("concentration")) ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
+      if ( excluded.has(item.system.school) ) return false;
       if ( classFilter.size && !classFilter.has(item.system.classIdentifier) ) return false;
-      if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
+      if ( excluded.has(item.system.classIdentifier) ) return false;
+      if ( !passes(included, excluded, "prepared", item.system.canPrepare && item.system.prepared) ) return false;
 
       // Equipment-specific filters
-      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
-      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+      if ( !passes(included, excluded, "equipped", item.system.equipped === true) ) return false;
+      if ( !passes(included, excluded, "mgc", item.system.properties?.has("mgc")) ) return false;
 
       // Recovery
       for ( const f of recoveries ) {
-        if ( !filters.has(f) ) continue;
+        const inc = included.has(f);
+        const exc = excluded.has(f);
+        if ( !inc && !exc ) continue;
         if ( !item.system.uses?.recovery.length ) return false;
-        if ( item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( inc && item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( exc && item.system.uses.recovery.every(r => r.period === f) ) return false;
       }
 
       return true;
@@ -2095,8 +2128,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItem(item, filters) {
-    /** @import ContainerSheet from "../../item/container-sheet.mjs" */
-
     /**
      * A hook event that fires when a sheet filters an item.
      * @function dnd5e.filterItem
@@ -2106,7 +2137,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
      * @param {Set<string>} filters                     Filters applied to the Item.
      * @returns {false|void} Return false to hide the item, otherwise other filters will continue to apply.
      */
-    if ( Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
+    if ( ("dnd5e.filterItem" in Hooks.events)
+      && (Hooks.call("dnd5e.filterItem", this, item, filters) === false) ) return false;
   }
 
   /* -------------------------------------------- */

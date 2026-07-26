@@ -131,20 +131,18 @@ effects:
   - name: Infected (Strength)
     origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 604800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 604800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/strength.svg
     _id: S8jxTZQbT8KKSg5V
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
       Disadvantage on saving throws made with the chosen
@@ -163,30 +161,31 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974487
+      modifiedTime: 1783543974487
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplContagion0.S8jxTZQbT8KKSg5V'
   - name: Infected (Dexterity)
     origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 604800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 604800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/dexterity.svg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
       Disadvantage on saving throws made with the chosen
@@ -206,31 +205,32 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974487
+      modifiedTime: 1783543974487
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: pqGQCk5wZx196HuY
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplContagion0.pqGQCk5wZx196HuY'
   - name: Infected (Constitution)
     origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 604800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 604800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/constitution.svg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
       Disadvantage on saving throws made with the chosen
@@ -250,31 +250,32 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974487
+      modifiedTime: 1783543974487
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 5aPQT5DlL6Igaxh4
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplContagion0.5aPQT5DlL6Igaxh4'
   - name: Infected (Intelligence)
     origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 604800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 604800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/intelligence.svg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
       Disadvantage on saving throws made with the chosen
@@ -294,31 +295,32 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974487
+      modifiedTime: 1783543974487
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: EruTLG8AjsLULgHj
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplContagion0.EruTLG8AjsLULgHj'
   - name: Infected (Wisdom)
     origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 604800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 604800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/wisdom.svg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
       Disadvantage on saving throws made with the chosen
@@ -338,31 +340,32 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974487
+      modifiedTime: 1783543974487
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: J77AMHW5tROddZQg
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplContagion0.J77AMHW5tROddZQg'
   - name: Infected (Charisma)
     origin: Compendium.dnd5e.spells24.Item.phbsplContagion0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 604800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 604800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/abilities/charisma.svg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <ul><li><p>While &amp;Reference[Poisoned apply=false], the target has
       Disadvantage on saving throws made with the chosen
@@ -382,14 +385,17 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplContagion0.ActiveEffect.S8jxTZQbT8KKSg5V
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974487
+      modifiedTime: 1783543974487
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: xewLYmHBxPTEKPlU
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplContagion0.xewLYmHBxPTEKPlU'
 folder: beZ8MTpWY2cMEUlp
 sort: 2600000
@@ -402,11 +408,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425947437
-  modifiedTime: 1745256789095
+  modifiedTime: 1783543974486
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplContagion0'

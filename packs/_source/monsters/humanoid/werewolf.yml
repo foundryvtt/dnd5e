@@ -55,7 +55,7 @@ system:
       value: 58
       max: 58
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 9d8 + 18
     init:
       ability: ''
@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,11 +484,12 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: tWfR8uJNnQxpXgDw
     name: Bite (Wolf or Hybrid Form Only)
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -499,8 +497,8 @@ items:
           a humanoid, it must succeed on a [[/save]] saving throw or be cursed
           with werewolf lycanthropy.</p>
         chat: >-
-          <p>The Werewolf attacks with its Bite. If the target is a humanoid, it
-          must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its Bite. If the target
+          is a humanoid, it must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -563,7 +561,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -572,8 +570,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        9uTPD4hARRwFVuEZ:
           type: attack
           activation:
             type: action
@@ -588,69 +585,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
           duration:
             concentration: false
             value: ''
@@ -671,7 +606,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -683,22 +619,160 @@ items:
             spent: 0
             max: ''
             recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
           damage:
-            onSave: half
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 100000
+          name: ''
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 9uTPD4hARRwFVuEZ
+        BrwqAgBWISYdCwC1:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a humanoid is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>If the target is a humanoid, it must succeed on a [[/save]]
+              saving throw or be cursed with werewolf lycanthropy.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects:
+            - _id: ALVeCJ1zSZMmfq3w
+              uuid: null
+              onSave: false
+              level:
+                min: null
+                max: null
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '12'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Curse Save
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: BrwqAgBWISYdCwC1
       attuned: false
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: bite-wolf-or-hybrid-form-only
-    effects: []
+      identifier: bite
+    effects:
+      - name: Werewolf Lycanthrope
+        img: icons/creatures/mammals/wolf-shadow-black.webp
+        origin: Compendium.dnd5e.monsters.Actor.7tRhrxuknTpHpYcA.Item.tWfR8uJNnQxpXgDw
+        transfer: false
+        _id: ALVeCJ1zSZMmfq3w
+        type: base
+        system:
+          changes: []
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have been cursed with werewolf lycanthropy.</p>
+        tint: '#ffffff'
+        statuses:
+          - cursed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783361710730
+          modifiedTime: 1783361738700
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!7tRhrxuknTpHpYcA.tWfR8uJNnQxpXgDw.ALVeCJ1zSZMmfq3w
     folder: null
     sort: 250000
     ownership:
@@ -707,11 +781,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403976224
+      systemVersion: 6.0.0
+      createdTime: 1783361670364
+      modifiedTime: 1783445188405
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.tWfR8uJNnQxpXgDw'
@@ -722,8 +796,8 @@ items:
     system:
       description:
         value: >-
-          <p>The werewolf makes two attacks: one with its [[/item
-          .tWfR8uJNnQxpXgDw]]{bite} and one with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .tWfR8uJNnQxpXgDw]]{bite} and one with its [[/item
           .36H4LGNMMEYS1Irm]]{claws} or [[/item .TiKtAuqd6urQ45Ds]]{spear}.</p>
         chat: ''
       source:
@@ -799,7 +873,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-humanoid-or-hybrid-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 200000
@@ -809,24 +883,24 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749404017921
+      systemVersion: 6.0.0
+      createdTime: 1783362271035
+      modifiedTime: 1783445182816
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.abhGXKzA0XGprXED'
   - _id: TiKtAuqd6urQ45Ds
     name: Spear (Humanoid Form Only)
     type: weapon
-    img: icons/weapons/polearms/spear-flared-worn-grey.webp
+    img: icons/weapons/polearms/spear-barbed-silver.webp
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>6 (1d8 + 2)
-          <em>piercing damage</em></strong> if used with two hands to make a
-          melee attack.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] if used with two hands to make a melee
+          attack.</p>
         chat: <p>The Werewolf attacks with its Spear.</p>
       source:
         custom: ''
@@ -892,17 +966,16 @@ items:
       properties:
         - thr
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
         value: simpleM
-        baseItem: ''
+        baseItem: spear
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        LZuT0kb3akVQ18gE:
           type: attack
           activation:
             type: action
@@ -917,10 +990,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -937,7 +1011,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -950,24 +1025,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: LZuT0kb3akVQ18gE
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: spear-humanoid-form-only
+      identifier: spear
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -977,22 +1066,22 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1749403964841
+      systemVersion: 6.0.0
+      createdTime: 1783361563307
+      modifiedTime: 1783445193379
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.TiKtAuqd6urQ45Ds'
   - _id: 36H4LGNMMEYS1Irm
     name: Claws (Hybrid Form Only)
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Werewolf attacks with its Claws.</p>
+        chat: <p>The [[lookup @name]]{monster} attacks with its Claws.</p>
       source:
         custom: ''
         book: ''
@@ -1055,7 +1144,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1064,8 +1153,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        PgCGBioCQjiFzkux:
           type: attack
           activation:
             type: action
@@ -1080,10 +1168,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1100,7 +1189,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1113,24 +1203,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: PgCGBioCQjiFzkux
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: claws-hybrid-form-only
+      identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 400000
@@ -1140,28 +1244,28 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1749403964841
+      systemVersion: 6.0.0
+      createdTime: 1783361778390
+      modifiedTime: 1783445198231
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.36H4LGNMMEYS1Irm'
   - _id: 2kHNI1T4gg879fDv
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/magic/nature/symbol-moon-stars-white.webp
     system:
       description:
         value: >-
-          <p>The werewolf can use its action to polymorph into a wolf-humanoid
-          hybrid or into a wolf, or back into its true form, which is
-          humanoid.</p><p>Its statistics, other than its AC, are the same in
-          each form. Any equipment it is wearing or carrying isn't transformed.
-          It reverts to its true form if it dies.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its action to
+          polymorph into a wolf-humanoid hybrid or into a wolf, or back into its
+          true form, which is humanoid.</p><p>Its statistics, other than its AC,
+          are the same in each form. Any equipment it is wearing or carrying
+          isn't transformed. It reverts to its true form if it dies.</p>
         chat: >-
-          <p>The werewolf can use its action to <strong>polymorph</strong>, or
+          <p>The [[lookup @name]]{monster} can use its action to polymorph, or
           return to its true form.</p>
       source:
         custom: ''
@@ -1175,70 +1279,243 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        o3bdPkrOfVNf8N31:
+          type: transform
+          name: Change Form
+          _id: o3bdPkrOfVNf8N31
+          img: ''
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
+          behaviors: []
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
-          effects: []
+          effects:
+            - _id: wobMCqAriIDoX5zV
+              uuid: null
+              level: {}
+            - _id: PM833qdHNhYXS4Q6
+              uuid: null
+              level: {}
+            - _id: yUtUCn3TPecpu4SI
+              uuid: null
+              level: {}
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          profiles: []
+          settings: null
+          transform:
+            customize: false
+            formless: false
+            mode: form
+            preset: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: shapechanger
-    effects: []
+    effects:
+      - name: True Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.7tRhrxuknTpHpYcA.Item.2kHNI1T4gg879fDv
+        transfer: true
+        _id: wobMCqAriIDoX5zV
+        type: base
+        system:
+          changes:
+            - key: items.hidden
+              type: add
+              value: claws
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: bite
+              phase: initial
+              priority: null
+            - key: token.texture.src
+              type: override
+              value: systems/dnd5e/tokens/humanoid/Commoner.webp
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have transformed into your true form, which is humanoid.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783361329477
+          modifiedTime: 1783445210817
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!7tRhrxuknTpHpYcA.2kHNI1T4gg879fDv.wobMCqAriIDoX5zV
+      - name: Hybrid Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.7tRhrxuknTpHpYcA.Item.2kHNI1T4gg879fDv
+        transfer: false
+        _id: PM833qdHNhYXS4Q6
+        type: base
+        system:
+          changes:
+            - key: items.hidden
+              type: add
+              value: spear
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have transformed in your hybrid form, which is a wolf-humanoid
+          hybrid.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783361329831
+          modifiedTime: 1783445214601
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!7tRhrxuknTpHpYcA.2kHNI1T4gg879fDv.PM833qdHNhYXS4Q6
+      - name: Wolf Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.7tRhrxuknTpHpYcA.Item.2kHNI1T4gg879fDv
+        transfer: false
+        _id: yUtUCn3TPecpu4SI
+        type: base
+        system:
+          changes:
+            - key: items.hidden
+              type: add
+              value: multiattack
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: spear
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: claws
+              phase: initial
+              priority: null
+            - key: token.texture.src
+              type: override
+              value: systems/dnd5e/tokens/beast/Wolf.webp
+              phase: initial
+              priority: null
+            - key: system.attributes.ac.flat
+              type: override
+              value: 13
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have transformed into your wolf form.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783361330159
+          modifiedTime: 1783445221680
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!7tRhrxuknTpHpYcA.2kHNI1T4gg879fDv.yUtUCn3TPecpu4SI
     folder: null
     sort: 0
     ownership:
@@ -1247,11 +1524,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403958330
+      systemVersion: 6.0.0
+      createdTime: 1783361287434
+      modifiedTime: 1783361999049
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.2kHNI1T4gg879fDv'
@@ -1262,8 +1539,8 @@ items:
     system:
       description:
         value: >-
-          <p>The werewolf has advantage on Wisdom (Perception) checks that rely
-          on hearing or smell.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on hearing or smell.</p>
         chat: ''
       source:
         custom: ''
@@ -1277,10 +1554,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -1295,11 +1573,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403962723
+      systemVersion: 6.0.0
+      createdTime: 1783361993443
+      modifiedTime: 1783361995997
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7tRhrxuknTpHpYcA.9v8vBxcPazXyBUmo'
@@ -1311,11 +1589,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1726171206002
-  modifiedTime: 1726171440146
+  modifiedTime: 1783361874988
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!7tRhrxuknTpHpYcA'

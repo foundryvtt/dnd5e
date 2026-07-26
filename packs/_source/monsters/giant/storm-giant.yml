@@ -449,9 +449,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -466,7 +463,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -486,6 +483,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: PMXLrGDWGu9amL2X
     name: Scale Mail
@@ -556,7 +554,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.XmnlF5fgIO3tg6TG
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -564,60 +562,16 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.PMXLrGDWGu9amL2X'
-  - _id: 3vDo83oAycRGB85G
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The giant can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!68bAMIpe4jvDeR9G.3vDo83oAycRGB85G'
   - _id: iwN0z7f5LF9AAbRJ
     name: Greatsword
     type: weapon
-    img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+    img: icons/weapons/swords/greatsword-guard-gold-worn.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Storm Giant attacks with its Greatsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -680,7 +634,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -689,8 +643,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        E2i5pPsf2Ob2O2bq:
           type: attack
           activation:
             type: action
@@ -705,10 +658,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -725,7 +679,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -738,24 +693,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: E2i5pPsf2Ob2O2bq
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: greatsword
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -765,11 +733,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107550034
+      systemVersion: 6.0.0
+      createdTime: 1781806160228
+      modifiedTime: 1781806173518
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.iwN0z7f5LF9AAbRJ'
@@ -814,198 +782,21 @@ items:
       identifier: innate-spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447015542
+      createdTime: 1781806407423
+      modifiedTime: 1781806407423
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.2tzFjiAiXJLEpuCn'
-  - _id: k0g8uqoYdJ4LVxcn
-    name: Lightning Strike
-    type: weapon
-    img: icons/magic/lightning/bolt-forked-blue-yellow.webp
-    system:
-      description:
-        value: >-
-          <p>The giant hurls a magical lightning bolt at a point it can see
-          within 500 feet of it.</p><p>Each creature within 10 feet of that
-          point must make a [[/save]] saving throw, taking [[/damage average]]
-          damage on a failed save, or half as much damage on a successful
-          one.</p>
-        chat: >-
-          <p>The Storm Giant attacks with its Lightning Strike. Each creature
-          within 10 feet of that point must make a <strong>Dexterity</strong>
-          saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: 500
-        long: null
-        units: ft
-        reach: null
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: 12
-          denomination: 8
-          bonus: ''
-          types:
-            - lightning
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
-      type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '500'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 12
-                denomination: 8
-                bonus: ''
-                types:
-                  - lightning
-                scaling:
-                  number: 1
-          save:
-            ability: dex
-            dc:
-              calculation: ''
-              formula: '17'
-          sort: 0
-          name: ''
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
-      mastery: ''
-      identifier: lightning-strike
-    effects: []
-    folder: null
-    sort: 350000
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402719371
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!68bAMIpe4jvDeR9G.k0g8uqoYdJ4LVxcn'
   - _id: KUffpBEiNWnVK3W6
     name: Multiattack
     type: feat
@@ -1099,7 +890,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -1110,11 +901,13 @@ items:
   - _id: bRdk2uZ6iTuNGUIL
     name: Rock
     type: weapon
-    img: icons/magic/earth/projectile-stone-ball-brown.webp
+    img: icons/magic/earth/projectile-boulder-yellow.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Storm Giant attacks with its Rock.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1176,18 +969,18 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
-      proficient: 1
+      properties:
+        - thr
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleR
+        value: improv
         baseItem: ''
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        GShPalhZWLUwJGyZ:
           type: attack
           activation:
             type: action
@@ -1202,10 +995,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1222,7 +1016,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1235,20 +1030,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: GShPalhZWLUwJGyZ
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1263,11 +1070,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173384919
+      systemVersion: 6.0.0
+      createdTime: 1781806180850
+      modifiedTime: 1781806194517
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.bRdk2uZ6iTuNGUIL'
@@ -1380,7 +1187,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1494,7 +1301,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pub0OWVEB71XQx1n
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1622,7 +1429,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MRxldJd6C4bsBo3O
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1741,7 +1548,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1919,7 +1726,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2041,7 +1848,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2049,6 +1856,199 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.13uVuBQP6VaiSPvC'
+  - name: Lightning Strike
+    type: feat
+    _id: 0JPMyUkBeRw3elVe
+    img: icons/magic/lightning/bolt-strike-sparks-teal.webp
+    system:
+      activities:
+        Y2GMAvtp4yB0QcvH:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '500'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: radius
+              size: '10'
+              width: ''
+              height: ''
+              units: ft
+              stationary: true
+            affects:
+              count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 12
+                denomination: 8
+                bonus: ''
+                types:
+                  - lightning
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '17'
+            visible: true
+            bonus: ''
+          sort: 0
+          name: Hurl Lightning
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: Y2GMAvtp4yB0QcvH
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      advancement: {}
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} hurls a magical lightning
+          bolt at a point it can see within [[lookup @labels.description.range
+          activity=Y2GMAvtp4yB0QcvH]] of it.</p><p>Each creature within [[lookup
+          @target.template.size activity=Y2GMAvtp4yB0QcvH]] feet of that point
+          must make a [[/save]] saving throw, taking [[/damage average]] damage
+          on a failed save, or half as much damage on a successful one.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. Each creature within [[lookup @target.template.size
+          activity=Y2GMAvtp4yB0QcvH]] feet of that point must make a Dexterity
+          saving throw.</p>
+      identifier: lightning-strike
+      source:
+        revision: 1
+        rules: '2014'
+      crewed: false
+      enchant: {}
+      prerequisites:
+        items: []
+        repeatable: false
+        level: null
+      properties:
+        - mgc
+      requirements: ''
+      type:
+        value: monster
+        subtype: ''
+    effects: []
+    folder: null
+    sort: 325000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781806236279
+      modifiedTime: 1781806396620
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.0JPMyUkBeRw3elVe'
+  - _id: cO04gKkMlOPTSz11
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 175000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781825755399
+      modifiedTime: 1781825755399
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.cO04gKkMlOPTSz11'
 effects: []
 folder: v8gFGdEluEFQdRQg
 sort: 0
@@ -2057,7 +2057,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171204245

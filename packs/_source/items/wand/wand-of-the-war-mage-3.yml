@@ -7,7 +7,8 @@ system:
     value: >-
       <p><em>Wand (requires attunement by a spellcaster)</em></p><p>While
       holding this wand, you gain a bonus to spell attack rolls of +3. In
-      addition, you ignore half cover when making a spell attack.</p>
+      addition, you ignore &amp;reference[half cover] when making a spell
+      attack.</p>
     chat: ''
   source:
     custom: ''
@@ -34,7 +35,7 @@ system:
   armor:
     value: 0
     dex: null
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -50,6 +51,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   crewed: false
   properties:
@@ -59,31 +61,31 @@ system:
   attuned: false
   identifier: wand-of-the-war-mage-3
 effects:
-  - name: Wand of the War Mage +3
-    img: icons/weapons/wands/wand-carved-stone-shard.webp
+  - name: War Mage's Accuracy +3
+    img: icons/magic/lightning/bolt-beam-strike-blue.webp
     origin: Compendium.dnd5e.items.Item.IuVaBrq17AqxpXc4
     _id: 57wol3ftCtHAGwV5
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '3'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '3'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 3
+          priority: null
+          type: add
+        - key: system.bonuses.rsak.attack
+          value: 3
+          priority: null
+          type: add
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You gain a +3 bonus to spell attack rolls and ignore
+      &amp;reference[half cover] when making a spell attack roll.</p>
     tint: '#ffffff'
     transfer: true
     statuses: []
@@ -96,12 +98,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 6.0.0
       createdTime: 1745449985182
-      modifiedTime: 1745450005088
+      modifiedTime: 1783692584846
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!IuVaBrq17AqxpXc4.57wol3ftCtHAGwV5'
 folder: 1aDgsGVwDbPdxG2V
 sort: 100000
@@ -110,11 +115,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037158041
-  modifiedTime: 1750697344647
+  modifiedTime: 1783700187978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!IuVaBrq17AqxpXc4'

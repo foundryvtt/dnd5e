@@ -109,13 +109,10 @@ effects:
   - name: Unrestricted Movement
     origin: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -124,24 +121,33 @@ effects:
     img: icons/skills/movement/feet-bladed-boots-fire.webp
     _id: bcTPZ6dJ4kHwaBRD
     type: base
-    system: {}
-    changes:
-      - key: system.traits.ci.value
-        mode: 2
-        value: paralyzed
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: restrained
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
-      - key: system.attributes.movement.ignoredDifficultTerrain
-        mode: 2
-        value: all
-        priority: null
+    system:
+      changes:
+        - key: system.traits.ci.value
+          value: paralyzed
+          priority: null
+          type: add
+          phase: initial
+          _id: iuBB9q0P9lG84qEL
+        - key: system.traits.ci.value
+          value: restrained
+          priority: null
+          type: add
+          phase: initial
+          _id: Giipbxums5KcP5D7
+        - key: system.attributes.movement.swim
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 6gj4UCUQ0Rg6Zo8U
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          value: all
+          priority: null
+          type: add
+          phase: initial
+          _id: n9YzyKopKuY8hAuH
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -150,13 +156,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1759794006820
+      systemVersion: 6.0.0
+      createdTime: 1783543975244
+      modifiedTime: 1783543975244
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplFreedomofM.bcTPZ6dJ4kHwaBRD'
 folder: qi3IbnEwap7mRw4b
 sort: 2000000
@@ -169,11 +178,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1724425955725
-  modifiedTime: 1759794000182
+  modifiedTime: 1783543975243
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFreedomofM'

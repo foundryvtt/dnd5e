@@ -484,12 +484,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -534,7 +531,7 @@ prototypeToken:
     saturation: 0
     contrast: 0
   detectionModes:
-    - id: blindsight
+    blindsight:
       range: 30
       enabled: true
   occludable:
@@ -556,6 +553,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Slam
     system:
@@ -685,10 +683,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmaoAnimatedOb.phbaoiSlam000000'
 effects: []
 folder: iGILeV3hU3r3LBLW
@@ -704,7 +704,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452720351

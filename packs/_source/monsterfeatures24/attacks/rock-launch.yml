@@ -137,17 +137,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmRockLaunch0000
     _id: fdpMlJbmkKQfJlME
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If the target is a Large or smaller creature, it has the
       &amp;Reference[Prone apply=false] condition.</p>
@@ -160,13 +157,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736271712129
       modifiedTime: 1736271757904
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmRockLaunch0000.fdpMlJbmkKQfJlME'
 flags:
   dnd5e:
@@ -175,7 +175,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

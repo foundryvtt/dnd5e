@@ -94,21 +94,20 @@ effects:
     origin: Item.mmShimmeringShie
     _id: sGQwUaOCcVnE2PA7
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: LD2j1AP7L5aypveZ
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target's AC increases by 2 until the end of the bestower's next
       turn.</p>
@@ -122,13 +121,22 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1737515982624
+      systemVersion: 6.0.0
+      createdTime: 1783544087321
+      modifiedTime: 1783544087321
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmShimmeringShie.sGQwUaOCcVnE2PA7'
 flags:
   dnd5e:
@@ -137,11 +145,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1737515973552
+  modifiedTime: 1783544087321
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,16 +480,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Jwx7Sfs5m3RDWckF
     name: Fey Ancestry
     type: feat
-    img: icons/creatures/mammals/elk-moose-marked-green.webp
+    img: icons/consumables/plants/leaf-veins-glowing-green.webp
     system:
       description:
         value: >-
-          <p>The drow has advantage on saving throws against being charmed, and
-          magic can't put the drow to sleep.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against being &amp;reference[charmed apply=false], and magic
+          can't put the [[lookup @name lowercase]]{monster} to sleep.</p>
         chat: ''
       source:
         custom: ''
@@ -506,10 +505,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -524,11 +524,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403096263
+      systemVersion: 6.0.0
+      createdTime: 1781821345225
+      modifiedTime: 1781821371455
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.Jwx7Sfs5m3RDWckF'
@@ -578,7 +578,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -589,12 +589,13 @@ items:
   - _id: Up2YzkDn0uBKQj6K
     name: Sunlight Sensitivity
     type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
+    img: icons/magic/light/beam-rays-yellow.webp
     system:
       description:
         value: >-
-          <p>While in sunlight, the drow has disadvantage on attack rolls, as
-          well as on Wisdom (Perception) checks that rely on sight.</p>
+          <p>While in sunlight, the [[lookup @name lowercase]]{monster} has
+          disadvantage on attack rolls, as well as on Wisdom (Perception) checks
+          that rely on sight.</p>
         chat: ''
       source:
         custom: ''
@@ -608,10 +609,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -626,22 +628,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403101585
+      systemVersion: 6.0.0
+      createdTime: 1781821693410
+      modifiedTime: 1781821710248
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.Up2YzkDn0uBKQj6K'
   - _id: G2nFsJdp1Q3gshyr
     name: Shortsword
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/sword-guard-engraved-worn.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Drow attacks with its Shortsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -703,18 +707,19 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
-      proficient: 1
+      properties:
+        - fin
+        - lgt
+      proficient: null
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: martialM
         baseItem: shortsword
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        fSVIvLjUDeVKbduF:
           type: attack
           activation:
             type: action
@@ -729,10 +734,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -749,7 +755,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -762,24 +769,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: fSVIvLjUDeVKbduF
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shortsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -789,30 +809,30 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107549815
+      systemVersion: 6.0.0
+      createdTime: 1781821415467
+      modifiedTime: 1781821443170
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.G2nFsJdp1Q3gshyr'
   - _id: LqnhZjRtRqhLIFTm
     name: Hand Crossbow
     type: weapon
-    img: icons/weapons/crossbows/crossbow-simple-brown.webp
+    img: icons/weapons/crossbows/crossbow-blue.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
-          1 hour. If the saving throw fails by 5 or more, the target is also
-          &amp;Reference[unconscious] while poisoned in this way. The target
-          wakes up if it takes damage or if another creature takes an action to
-          shake it awake.</p>
+          succeed on a [[/save activity=k2VWbxuUXUpfkpoz]] saving throw or be
+          &amp;Reference[poisoned] for 1 hour. If the saving throw fails by 5 or
+          more, the target is also &amp;Reference[unconscious] while poisoned in
+          this way. The target wakes up if it takes damage or if another
+          creature takes an action to shake it awake.</p>
         chat: >-
-          <p>The Drow attacks with its Hand Crossbow. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -887,8 +907,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        p4QyZ1LIYTeRESQ5:
           type: attack
           activation:
             type: action
@@ -903,10 +922,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -923,7 +943,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -936,27 +957,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: p4QyZ1LIYTeRESQ5
+          name: ''
+        k2VWbxuUXUpfkpoz:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -966,13 +998,30 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save
+              activity=k2VWbxuUXUpfkpoz]] saving throw or be
+              &amp;Reference[poisoned] for 1 hour. If the saving throw fails by
+              5 or more, the target is also &amp;Reference[unconscious] while
+              poisoned in this way. The target wakes up if it takes damage or if
+              another creature takes an action to shake it awake.</p>
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: hour
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: yjNxc3DxFYNIUZ7n
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: WhpwrXwRiHSvIXXZ
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '30'
             units: ft
@@ -986,10 +1035,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -999,38 +1049,130 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: k2VWbxuUXUpfkpoz
+          name: Poison Save
       attuned: false
       ammunition:
         type: ''
       magicalBonus: null
       identifier: hand-crossbow
       mastery: ''
-    effects: []
+    effects:
+      - name: Drow Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.LqnhZjRtRqhLIFTm
+        transfer: false
+        _id: yjNxc3DxFYNIUZ7n
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: <p>You are &amp;reference[poisoned apply=false] for the duration.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781821499640
+          modifiedTime: 1781821536332
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!1vaBSMUfOy6JPJ14.LqnhZjRtRqhLIFTm.yjNxc3DxFYNIUZ7n
+      - name: Potent Drow Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.LqnhZjRtRqhLIFTm
+        transfer: false
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false] for the duration. You
+          also fall &amp;reference[unconcious apply=false] for the same
+          duration.</p><p>You wake up if you take damage or if another creature
+          takes an action to shake you awake.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses:
+                - unconscious
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781821542499
+          modifiedTime: 1781821603915
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: WhpwrXwRiHSvIXXZ
+        _key: >-
+          !actors.items.effects!1vaBSMUfOy6JPJ14.LqnhZjRtRqhLIFTm.WhpwrXwRiHSvIXXZ
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403124953
+      systemVersion: 6.0.0
+      createdTime: 1781821461647
+      modifiedTime: 1781821636817
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1vaBSMUfOy6JPJ14.LqnhZjRtRqhLIFTm'
@@ -1103,7 +1245,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.p2zChy24ZJdVqMSH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1231,7 +1373,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1359,7 +1501,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1477,7 +1619,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CAxSzHWizrafT033
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1493,7 +1635,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171199159

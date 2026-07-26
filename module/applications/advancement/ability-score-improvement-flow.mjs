@@ -185,7 +185,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     // TODO: Remove this unnecessary check when https://github.com/foundryvtt/dnd5e/issues/5139 is implemented
     const item = await fromUuid(result);
-    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    const isValid = item.system.assertPrerequisites?.(this.advancement.actor, { showMessage: true });
     if ( isValid === true ) {
       await this.advancement.apply(this.level, {
         retainedItems: this.retainedData?.retainedItems, type: "feat", uuid: result
@@ -290,7 +290,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       return null;
     }
 
-    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    const isValid = item.system.assertPrerequisites?.(this.advancement.actor, { showMessage: true });
     if ( isValid !== true ) return null;
 
     await this.advancement.apply(this.level, {

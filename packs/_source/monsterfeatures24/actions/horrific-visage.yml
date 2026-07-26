@@ -105,17 +105,14 @@ effects:
     origin: Item.mmHorrificVisage
     _id: lx2ebHyyyaaWf8s1
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Frightened apply=false] condition
       until the start of the attacking creature's next turn.</p>
@@ -128,13 +125,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1737792485212
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmHorrificVisage.lx2ebHyyyaaWf8s1'
 flags:
   dnd5e:
@@ -143,7 +143,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

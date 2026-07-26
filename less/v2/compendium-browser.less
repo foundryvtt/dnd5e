@@ -238,6 +238,15 @@
       z-index: 1;
     }
 
+    .items-section .item-prerequisites {
+      width: 20px;
+
+      .prerequisites-result {
+        &.fa-circle-check { color: var(--dnd5e-color-success); }
+        &.fa-circle-xmark { color: var(--dnd5e-color-failure); }
+      }
+    }
+
     .items-section .item-controls {
       width: 50px;
       align-items: center;

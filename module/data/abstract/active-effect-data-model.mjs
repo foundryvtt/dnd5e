@@ -1,8 +1,27 @@
+import { getHumanReadableAttributeLabel } from "../../utils.mjs";
+import FiltersField from "../fields/filters-field.mjs";
+
+const { DocumentIdField } = foundry.data.fields;
+
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
  * @abstract
  */
 export default class ActiveEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static defineSchema() {
+    const schema = super.defineSchema();
+    schema.changes.element.extendFields({
+      _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
+      conditions: new FiltersField()
+    });
+    return schema;
+  }
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -39,6 +58,16 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   /* -------------------------------------------- */
 
   /**
+   * Is there some system logic that makes this Active Effect ineligible for application?
+   * @type {boolean}
+   */
+  get isSuppressed() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Item within which this effect is contained, if any.
    * @type {Item5e|void}
    */
@@ -57,4 +86,28 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
    * @param {ApplicationRenderContext} context  The app's rendering context.
    */
   onRenderActiveEffectConfig(app, html, context) {}
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the context for individual changes to display on actor, item, or active effect sheets.
+   * @param {object} change  Change to prepare.
+   * @returns {object}       An object of chat data to render.
+   */
+  async getSheetChangeContext(change) {
+    return {
+      name: getHumanReadableAttributeLabel(change.key, { actor: this.actor, prefixItemName: false })
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare type-specific data for the Active Effect config sheet.
+   * @param {ApplicationRenderContext} context  Sheet context data.
+   * @returns {Promise<void>}
+   */
+  async getSheetData(context) {}
 }

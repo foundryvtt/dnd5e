@@ -35,20 +35,12 @@ system:
   identifier: reliable-talent
 effects:
   - _id: TIw25thHBYEPdKR1
-    changes:
-      - key: flags.dnd5e.reliableTalent
-        mode: 5
-        value: 'true'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.classes24.Item.phbrgeReliableTa
     transfer: true
     flags: {}
@@ -60,17 +52,27 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.YN9xm6MCvse4Y60u.ActiveEffect.vMMZHZQ0qT7MT4I4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103229
+      modifiedTime: 1783544103229
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: flags.dnd5e.reliableTalent
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: 69Zcm7BOEgvBUtLW
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbrgeReliableTa.TIw25thHBYEPdKR1'
 flags:
   dnd5e:
@@ -79,11 +81,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866292069
-  modifiedTime: 1745256764370
+  modifiedTime: 1783544103229
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

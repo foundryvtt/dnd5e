@@ -148,9 +148,7 @@ export default class Combatant5e extends Combatant {
 
     const deltas = ActorDeltasField.getDeltas(this.actor, results);
 
-    if ( !foundry.utils.isEmpty(results.actor) ) await this.actor.update(results.actor);
-    if ( results.delete.length ) await this.actor.deleteEmbeddedDocuments("Item", results.delete);
-    if ( results.item.length ) await this.actor.updateEmbeddedDocuments("Item", results.item);
+    await this.actor.performBulkUpdate(results);
 
     const message = await this.createTurnMessage({ deltas, periods, rolls: results.rolls });
 

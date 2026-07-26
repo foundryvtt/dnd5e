@@ -92,21 +92,20 @@ effects:
     origin: Compendium.dnd5e.classes24.Item.phbmnkDiscipline
     _id: Js4phYMTL714onqn
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd5e.diamondSoul
-        mode: 5
-        value: 'true'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd5e.diamondSoul
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: F7SIeHevEt2DrdNi
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your physical and mental discipline grant you proficiency in all saving
       throws.</p><p>Additionally, whenever you make a saving throw and fail, you
@@ -124,12 +123,15 @@ effects:
         Compendium.dnd5e.classes24.Item.phbmnkDiscipline.ActiveEffect.Js4phYMTL714onqn
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1761846933462
-      modifiedTime: 1761846933462
+      modifiedTime: 1783544102645
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbmnkDiscipline.Js4phYMTL714onqn'
 flags:
   dnd5e:
@@ -138,11 +140,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866307724
-  modifiedTime: 1745256762987
+  modifiedTime: 1783544102645
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 500000

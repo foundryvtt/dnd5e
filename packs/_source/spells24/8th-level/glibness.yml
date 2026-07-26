@@ -103,17 +103,15 @@ effects:
     transfer: false
     _id: tWt9b1JlQpDYbhfj
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -122,13 +120,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725302248130
-      modifiedTime: 1725302490813
+      modifiedTime: 1783543975318
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplGlibness00.tWt9b1JlQpDYbhfj'
 folder: M5CvwK9zVtzx6Dnn
 sort: 100391
@@ -141,11 +142,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425956480
-  modifiedTime: 1745256793764
+  modifiedTime: 1783543975317
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGlibness00'

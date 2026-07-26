@@ -218,17 +218,14 @@ effects:
     transfer: false
     _id: wWFV1p8u9C1TUPg5
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>On its next turn, the target can do only one of the following: move or
       take an action or a Bonus Action.</p>
@@ -239,13 +236,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbrgeDeviousStr.wWFV1p8u9C1TUPg5'
   - name: 'Devious Strikes: Knocked Out'
     img: icons/skills/melee/strike-sword-stabbed-brown.webp
@@ -253,17 +253,14 @@ effects:
     transfer: false
     _id: C2IGgt4PnRMxZVey
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the Unconscious condition for 1 minute or until it takes
       any damage. The Unconscious target repeats the save at the end of each of
@@ -276,13 +273,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbrgeDeviousStr.C2IGgt4PnRMxZVey'
   - name: 'Devious Strikes: Blinded'
     img: icons/skills/melee/strike-sword-stabbed-brown.webp
@@ -290,17 +290,14 @@ effects:
     transfer: false
     _id: Fb1n6Yk2MlOAckf0
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: <p>The target has the Blinded condition until the end of its next turn</p>
     tint: '#ffffff'
     statuses:
@@ -310,13 +307,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbrgeDeviousStr.Fb1n6Yk2MlOAckf0'
 flags:
   dnd5e:
@@ -325,7 +325,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866292069

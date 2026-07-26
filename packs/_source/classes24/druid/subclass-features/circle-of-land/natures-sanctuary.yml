@@ -157,24 +157,23 @@ effects:
   - name: 'Nature''s Ward: Arid'
     origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/nature/vines-thorned-curled-glow-green.webp
     _id: h0xW0mOYF8frKgHf
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: BDhBCz3WXru4rDgZ
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -185,35 +184,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.J6hYOcVvZlLKuWab
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101769
+      modifiedTime: 1783544101769
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbdrdNaturesSan.h0xW0mOYF8frKgHf'
   - name: 'Nature''s Ward: Polar'
     origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/nature/vines-thorned-curled-glow-green.webp
     _id: 7YVMASgXswIFXNs2
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: rpZWkckVjtNua4TG
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -224,35 +225,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.XLIRgAYPO1ARo5pb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101769
+      modifiedTime: 1783544101769
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbdrdNaturesSan.7YVMASgXswIFXNs2'
   - name: 'Nature''s Ward: Temperate'
     origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/nature/vines-thorned-curled-glow-green.webp
     _id: Gqgjm2NswU6f7qVL
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: VkJLuhOWEnmrmfaQ
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -263,35 +266,37 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.yruAlaBCduO8AcnU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101769
+      modifiedTime: 1783544101769
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbdrdNaturesSan.Gqgjm2NswU6f7qVL'
   - name: 'Nature''s Ward: Tropical'
     origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/nature/vines-thorned-curled-glow-green.webp
     _id: LKxwXqkEIXJR2XAa
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: RbcvscAaJGhxB31q
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -302,13 +307,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.lDVYGRNqqw3HwcKM
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101769
+      modifiedTime: 1783544101769
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbdrdNaturesSan.LKxwXqkEIXJR2XAa'
 flags:
   dnd5e:
@@ -317,11 +325,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866583501
-  modifiedTime: 1745256761250
+  modifiedTime: 1783544101769
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

@@ -140,17 +140,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmRam00000000000
     _id: HUmtXTzr92ZaAvf3
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
     tint: '#ffffff'
     transfer: false
@@ -161,13 +158,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736275952265
       modifiedTime: 1737765598726
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmRam00000000000.HUmtXTzr92ZaAvf3'
 flags:
   dnd5e:
@@ -176,7 +176,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

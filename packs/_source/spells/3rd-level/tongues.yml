@@ -29,11 +29,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -52,8 +55,7 @@ system:
     - vocal
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    005QMRt20A7doIaC:
       type: utility
       activation:
         type: action
@@ -67,18 +69,23 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 9h8p0npULTRN0IDw
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -90,20 +97,76 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 005QMRt20A7doIaC
   identifier: tongues
 sort: 0
 flags: {}
-img: icons/commodities/currency/coin-engraved-sun-smile-copper.webp
-effects: []
+img: icons/environment/settlement/pyramid.webp
+effects:
+  - name: Speaking in Tongues
+    img: icons/environment/settlement/pyramid.webp
+    origin: Compendium.dnd5e.spells.Item.gopnZvS0c2jD5FP8
+    transfer: false
+    _id: 9h8p0npULTRN0IDw
+    type: base
+    system:
+      changes:
+        - key: system.traits.languages.custom
+          type: add
+          value: ;all spoken or signed languages
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have gained the ability to understand any spoken language you hear.
+      Moreover, when you speak, any creature that knows at least one language
+      and can hear you understands what you say.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781305972859
+      modifiedTime: 1781307017031
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!gopnZvS0c2jD5FP8.9h8p0npULTRN0IDw'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037362865
-  modifiedTime: 1725992722024
+  modifiedTime: 1781305972894
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!gopnZvS0c2jD5FP8'

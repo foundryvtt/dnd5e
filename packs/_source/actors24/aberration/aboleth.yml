@@ -480,12 +480,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -529,7 +526,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -549,6 +546,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mmAmphibious0000
     name: Amphibious
@@ -591,10 +589,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -699,10 +699,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEldritchRestor
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -810,10 +812,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -997,17 +1001,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmMucusCloud0000
         _id: VesaHwtQEHKpxdAB
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>While the cursed creature is outside a body of water, the creature
           takes [[/damage 1d12 Acid average]] damage at the end of every 10
@@ -1023,10 +1024,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAboleth0000000.mmMucusCloud0000.VesaHwtQEHKpxdAB
     flags:
@@ -1038,10 +1044,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMucusCloud0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1090,10 +1098,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmProbingTelepat
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1305,17 +1315,14 @@ items:
         transfer: false
         _id: KxcWsIHohpNmagLJ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p><strong>Escape Tests (see origin item for
           DC)</strong></p><p>[[/check skill=ath ability=str]]</p><p>[[/check
@@ -1330,10 +1337,15 @@ items:
             Compendium.dnd-monster-manual.features.Item.mmConstrict00000.ActiveEffect.Hd0Gy3wJtPfObERq
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAboleth0000000.mmTentacle000000.KxcWsIHohpNmagLJ
     flags:
@@ -1345,10 +1357,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTentacle000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1443,10 +1457,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -1572,17 +1588,14 @@ items:
         origin: Item.mmDominateMind00
         _id: 85n0EJTGfngNSLLl
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Charmed apply=false] condition.
           While Charmed, the target acts as an ally to the dominator and is
@@ -1598,10 +1611,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAboleth0000000.yiiKNaJ2svcUWqLi.85n0EJTGfngNSLLl
     folder: null
@@ -1614,10 +1638,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDominateMind00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -1745,10 +1771,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmConsumeMemorie
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 4400000
     ownership:
       default: 0
@@ -1850,10 +1878,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLash0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 3100000
     ownership:
       default: 0
@@ -1963,10 +1993,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPsychicDrain00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 100000
     ownership:
       default: 0
@@ -1977,7 +2009,7 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452693355

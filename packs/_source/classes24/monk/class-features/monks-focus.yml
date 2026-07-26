@@ -273,17 +273,14 @@ effects:
     transfer: false
     _id: UYHRNxrU74xiUJAy
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -293,13 +290,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbmnkMonksFocus.UYHRNxrU74xiUJAy'
   - name: Disengaged
     img: systems/dnd5e/icons/svg/items/feature.svg
@@ -307,17 +307,14 @@ effects:
     transfer: false
     _id: 92bFICMzRpJmnO56
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -326,18 +323,21 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbmnkMonksFocus.92bFICMzRpJmnO56'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1735866307724

@@ -50,21 +50,20 @@ effects:
     img: icons/magic/symbols/star-solid-gold.webp
     _id: FZWFvTtuOvMIj003
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.attunement.max
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.attunement.max
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: oxRZBTBdVy7jar8F
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The Use Magic Device feature allows you to attune to up to four magic
       items at once.</p>
@@ -77,13 +76,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103346
+      modifiedTime: 1783544103346
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbrgeUseMagicDe.FZWFvTtuOvMIj003'
 flags:
   dnd5e:
@@ -92,11 +94,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866560489
-  modifiedTime: 1745256764672
+  modifiedTime: 1783544103346
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

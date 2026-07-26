@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: 8NY9Oy7LGoZ1f7gW
     name: Studded Leather Armor
@@ -549,7 +547,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -564,10 +562,10 @@ items:
     system:
       description:
         value: >-
-          <p>The captain makes three melee attacks: two with its [[/item
-          .tSPkVJScEndipsFU]]{scimitar} and one with its [[/item
-          .mBUKIzY6aUW5Fnlm]]{dagger}. Or the captain makes two ranged attacks
-          with its daggers.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes three melee attacks:
+          two with its [[/item .tSPkVJScEndipsFU]]{scimitar} and one with its
+          [[/item .mBUKIzY6aUW5Fnlm]]{dagger}. Or the [[lookup @name
+          lowercase]]{monster} makes two ranged attacks with its daggers.</p>
         chat: ''
       source:
         custom: ''
@@ -581,13 +579,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        GxXmCYtztEyiyEQK:
           type: utility
           activation:
             type: action
@@ -602,15 +599,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -621,7 +619,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -638,7 +637,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: GxXmCYtztEyiyEQK
       enchant: {}
       prerequisites:
         level: null
@@ -652,22 +659,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273657380
+      systemVersion: 6.0.0
+      createdTime: 1781820495086
+      modifiedTime: 1783365859573
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.u3rhYD4gsxWEFbMc'
   - _id: tSPkVJScEndipsFU
     name: Scimitar
     type: weapon
-    img: icons/weapons/swords/sword-katana.webp
+    img: icons/weapons/swords/scimitar-guard.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Bandit Captain attacks with their Scimitar.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -732,7 +741,7 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -741,8 +750,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        465ehp02Pgw0rrHQ:
           type: attack
           activation:
             type: action
@@ -757,10 +765,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -777,7 +786,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -790,24 +800,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 465ehp02Pgw0rrHQ
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: scimitar
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -817,11 +840,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553733
+      systemVersion: 6.0.0
+      createdTime: 1781820410811
+      modifiedTime: 1781820422436
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.tSPkVJScEndipsFU'
@@ -832,7 +855,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Bandit Captain attacks with their Dagger.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -898,7 +923,7 @@ items:
         - fin
         - lgt
         - thr
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -907,8 +932,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        1HSvCXm1vFGVjVAx:
           type: attack
           activation:
             type: action
@@ -923,10 +947,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -943,7 +968,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -956,24 +982,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 1HSvCXm1vFGVjVAx
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: dagger
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -983,25 +1022,28 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.0E565kQUBmndJ1a2
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385725
+      systemVersion: 6.0.0
+      createdTime: 1781820429351
+      modifiedTime: 1781820438997
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.mBUKIzY6aUW5Fnlm'
-  - _id: mGcPB4SMyYkHFK9N
+  - _id: VAwElWvqJg63fWL2
     name: Parry
     type: feat
-    img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+    img: icons/skills/melee/swords-parry-block-yellow.webp
     system:
       description:
         value: >-
-          <p>The captain adds 2 to its AC against one melee attack that would
-          hit it. To do so, the captain must see the attacker and be wielding a
-          melee weapon.</p>
-        chat: ''
+          <p>The [[lookup @name lowercase]]{monster} adds 2 to its AC against
+          one melee attack that would hit it. To do so, the [[lookup @name
+          lowercase]]{monster} must see the attacker and be wielding a melee
+          weapon.</p>
+        chat: >-
+          <p>The [[lookup @name lowercase]]{monster} adds 2 to its AC against
+          one melee attack that would hit it.</p>
       source:
         custom: ''
         book: ''
@@ -1014,18 +1056,19 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        5RUe1bRJr64laA0l:
           type: utility
           activation:
             type: reaction
             value: 1
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} would be hit by a
+              melee attack while it is wielding a melee weapon.
             override: false
           consumption:
             targets: []
@@ -1035,15 +1078,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1054,10 +1098,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1071,28 +1116,44 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: Parry Attack
+          _id: 5RUe1bRJr64laA0l
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: parry
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 50000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.egsSDYbqoLCelb0J.Item.lS2o3QOZ2lxKyi0L
+      duplicateSource: Item.45SLiafyQy1HrDdF
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781820444691
+      modifiedTime: 1781820516589
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!rb7OJt822wIO52qY.mGcPB4SMyYkHFK9N'
+    _key: '!actors.items!rb7OJt822wIO52qY.VAwElWvqJg63fWL2'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -1101,7 +1162,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171261393

@@ -126,17 +126,15 @@ effects:
     img: icons/tools/nautical/anchor-blue-orange.webp
     _id: Fvj9Ua7rVEqdfPz5
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>@Embed[Compendium.dnd5e.equipment24.Item.dmgAnchorQuaalsF
       caption=false]</p>
@@ -149,22 +147,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730755411111
-      modifiedTime: 1730755609479
+      modifiedTime: 1783544093389
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAnchorQuaalsF.Fvj9Ua7rVEqdfPz5'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.4
   createdTime: 1727883376108
-  modifiedTime: 1768930144855
+  modifiedTime: 1783544093389
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

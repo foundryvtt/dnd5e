@@ -117,17 +117,14 @@ effects:
     origin: Item.mmHorrorNimbus00
     _id: ahNNQZ2FHPsRpYbH
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Frightened apply=false] condition for
       1 minute, until it takes damage, or until it ends its turn with the
@@ -141,13 +138,22 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736055249315
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!items.effects!mmHorrorNimbus00.ahNNQZ2FHPsRpYbH'
 flags:
   dnd5e:
@@ -156,7 +162,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

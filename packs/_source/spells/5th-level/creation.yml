@@ -20,17 +20,21 @@ system:
   duration:
     value: ''
     units: spec
+    special: ''
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '5'
       contiguous: false
+      count: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -88,20 +92,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: creation
 sort: 0
 flags: {}
-img: icons/magic/nature/vines-thorned-entwined-glow-teal-purple.webp
+img: icons/commodities/gems/gem-rough-pendeloque-blue.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037364252
-  modifiedTime: 1725992722460
+  modifiedTime: 1781392779012
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!lnaGnxMzpYnbw1uU'

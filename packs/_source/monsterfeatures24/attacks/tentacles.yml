@@ -186,17 +186,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmTentacles00000
     _id: GyZrmzBP0NB8oRZI
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Grappled apply=false] condition
       (escape DC [[/check ability=str skill=ath format=long]], see source item
@@ -210,13 +207,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736187223504
       modifiedTime: 1737767484814
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmTentacles00000.GyZrmzBP0NB8oRZI'
 flags:
   dnd5e:
@@ -225,7 +225,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

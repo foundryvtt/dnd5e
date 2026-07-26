@@ -50,6 +50,40 @@ export function roundCurrency(value, denomination) {
 }
 
 /* -------------------------------------------- */
+/*  Documents                                   */
+/* -------------------------------------------- */
+
+/**
+ * Bulk version of `fromUuid` that performs only a single fetch per compendium.
+ * @param {string[]} uuids           UUIDs of documents to retrieve.
+ * @returns {Map<string, Document>}  Documents mapped to the provided UUID.
+ */
+export async function bulkFromUuid(uuids) {
+  const collections = new Map();
+  const redirected = new Map();
+
+  for ( const uuid of uuids ) {
+    const { collection, id, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid);
+    collections.getOrInsert(collection, []).push(id);
+    redirected.set(redirectedUuid, uuid);
+  }
+
+  const fetches = [];
+  for ( const [collection, ids] of collections.entries() ) {
+    if ( collection instanceof foundry.documents.collections.CompendiumCollection ) {
+      fetches.push(collection.getDocuments({ _id__in: ids }));
+    } else {
+      fetches.push(ids.map(id => collection.get(id)));
+    }
+  }
+
+  return (await Promise.all(fetches)).flat().reduce((map, doc) => {
+    if ( doc ) map.set(redirected.get(doc.uuid), doc);
+    return map;
+  }, new Map());
+}
+
+/* -------------------------------------------- */
 /*  Formatters                                  */
 /* -------------------------------------------- */
 
@@ -501,16 +535,19 @@ export function replaceFormulaData(formula, data, { actor, item, missing="0", pr
  * Convert a bonus value to a simple integer for displaying on the sheet.
  * @param {number|string|null} bonus  Bonus formula.
  * @param {object} [data={}]          Data to use for replacing @ strings.
+ * @param {object} [options={}]
+ * @param {boolean} [option.strict]   Throw error if evaluation fails.
  * @returns {number}                  Simplified bonus as an integer.
  * @protected
  */
-export function simplifyBonus(bonus, data={}) {
+export function simplifyBonus(bonus, data={}, { strict }={}) {
   if ( !bonus ) return 0;
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
     return roll.isDeterministic ? roll.evaluateSync().total : 0;
   } catch(error) {
+    if ( strict ) throw error;
     console.error(error);
     return 0;
   }
@@ -721,11 +758,12 @@ export function loadingTooltip({ uuid, passive=false }={}) {
 
 /**
  * Grab the targeted tokens and return relevant information on them.
+ * @param {Iterable<Token5e|TokenDocument5e>} [tokens]  Tokens to describe. Defaults to the user's current targets.
  * @returns {TargetDescriptor5e[]}
  */
-export function getTargetDescriptors() {
+export function getTargetDescriptors(tokens=game.user.targets) {
   const targets = new Map();
-  for ( const token of game.user.targets ) {
+  for ( const token of tokens ) {
     const { name } = token;
     const { img, system, uuid, statuses } = token.actor ?? {};
     if ( uuid ) {
@@ -958,6 +996,7 @@ export async function preloadHandlebarsTemplates() {
     // Chat Message Partials
     "systems/dnd5e/templates/chat/parts/card-activities.hbs",
     "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
+    "systems/dnd5e/templates/chat/parts/roll.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/details/details-background.hbs",
@@ -1244,7 +1283,7 @@ export function performPreLocalization(config) {
   }
 
   // Localize & sort status effects
-  CONFIG.statusEffects.forEach(s => s.name = _loc(s.name));
+  for ( const s of Object.values(CONFIG.statusEffects) ) s.name = _loc(s.name);
 }
 
 /* -------------------------------------------- */
@@ -1344,7 +1383,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     return item?.name ?? getUnknownLabel(attr, { actor, item });
   }
 
-  // Check if the attribute is already in cache.
+  // Check if the attribute is already in cache
   let label = item ? null : _attributeLabelCache.actor.get(attr);
   if ( label ) return label;
   let name;
@@ -1396,21 +1435,23 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   }
 
   // Derived fields
-  else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( attr === "attributes.init.total" ) label = "DND5E.INITIATIVE.FIELDS.attributes.init.roll.bonus.label";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
   else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
   else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
-  // Abilities.
+  // Abilities
   else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
     const [key, ...keyPath] = attr.split(".").slice(attr.startsWith("abilities.") ? 1 : 3);
     const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("abilities");
     label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
+  // Movement
+  else if ( attr.startsWith("attributes.movement.") ) label = CONFIG.DND5E.movementTypes[attr.split(".").at(-1)]?.label;
+
   // Senses
-  else if ( attr.startsWith("attributes.senses.ranges.") ) label = CONFIG.DND5E.senses[attr.split(".")[3]]?.label;
-  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".")[2]]?.label;
+  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".").at(-1)]?.label;
 
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
@@ -1418,6 +1459,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   else if ( attr === "resources.legres.spent" ) label = "DND5E.LegendaryResistance.LabelPl";
   else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
   else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
+
+  // Rolls
+  else if ( attr.startsWith("roll.") ) {
+    const key = `DND5E.ROLL.Description.${attr.slice(5)}`;
+    if ( game.i18n.has(key) ) label = key;
+  }
 
   // Skills
   else if ( attr.startsWith("skills.") ) {
@@ -1437,7 +1484,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
-  // Spell slots.
+  // Spell slots
   else if ( attr.startsWith("spells.") ) {
     const [, key] = attr.split(".");
     if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
@@ -1454,7 +1501,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     label = CONFIG.DND5E.currencies[key]?.label;
   }
 
-  // Attempt to find the attribute in a data model.
+  // Attempt to find the attribute in a data model
   if ( !label && (type === "actor") ) label = getSchemaLabel(attr, "Actor", actor);
 
   // Call hook if no label is available

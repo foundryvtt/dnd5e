@@ -31,7 +31,10 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      movement: new MovementField({ bonus: false, special: false }, { initialUnits: defaultUnits("length") }),
+      movement: new MovementField(
+        { bonus: false, multiplier: false, special: false },
+        { initialUnits: defaultUnits("length") }
+      ),
       senses: new SensesField({}, { initialUnits: defaultUnits("length") }),
       type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } })
     });
@@ -73,7 +76,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   get movementLabels() {
     const units = this.movement.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, { label }]) => {
-      const value = this.movement[k];
+      const value = this.movement.speeds[k];
       if ( value ) obj[k] = `${label} ${formatLength(value, units)}`;
       return obj;
     }, {});
@@ -112,6 +115,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   static _migrateData(source) {
     super._migrateData(source);
     AdvancementTemplate.migrateAdvancement(source);
+    MovementField._migrate(source.movement);
     SensesField._migrate(source.senses);
     return source;
   }
@@ -124,6 +128,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    MovementField._shim(this.movement);
     SensesField._shim(this.senses);
   }
 
@@ -148,7 +153,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
       config: "movement",
       tooltip: "DND5E.MOVEMENT.Action.Configure",
       value: Object.entries(CONFIG.DND5E.movementTypes).reduce((str, [k, { label }]) => {
-        const value = this.movement[k];
+        const value = this.movement.speeds[k];
         if ( !value ) return str;
         return `${str}
           <span class="key">${label}</span>

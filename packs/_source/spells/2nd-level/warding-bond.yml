@@ -33,11 +33,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -78,7 +81,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 32YeLueknbdTmm6Y
+          level: {}
       range:
         override: false
       target:
@@ -97,20 +102,82 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: warding-bond
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
-effects: []
+img: icons/equipment/finger/ring-band-studded-silver.webp
+effects:
+  - name: Warding Bond
+    img: icons/equipment/finger/ring-band-studded-silver.webp
+    origin: Compendium.dnd5e.spells.Item.JVhKeanAXZH62DrF
+    transfer: false
+    _id: 32YeLueknbdTmm6Y
+    type: base
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.bonuses.abilities.save
+          mode: 2
+          value: '+1'
+          priority: null
+        - key: system.traits.dr.value
+          type: add
+          value: ALL
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You gain a +1 bonus to AC and saving throws, and have resistance to all
+      damage. Also, each time you take damage, the caster takes the same amount
+      of damage. The spell ends if the caster drops to 0 hit points or if you or
+      the caster become seperated by more than 60 feet. It also ends if the
+      spell is cast again on either you or the caster.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781266182507
+      modifiedTime: 1783644066113
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!JVhKeanAXZH62DrF.32YeLueknbdTmm6Y'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037353165
-  modifiedTime: 1725992718855
+  modifiedTime: 1781266182544
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JVhKeanAXZH62DrF'

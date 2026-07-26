@@ -120,17 +120,15 @@ effects:
     transfer: false
     _id: aAbTb2vkRQiBp9Oz
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Whenever the target takes damage, it repeats the [[/save ability=wis]]
       save, ending the spell on itself on a success.</p>
@@ -142,13 +140,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725297126094
-      modifiedTime: 1725297791681
+      modifiedTime: 1783543974774
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplDominateMo.aAbTb2vkRQiBp9Oz'
 folder: M5CvwK9zVtzx6Dnn
 sort: 101563
@@ -161,11 +162,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425950820
-  modifiedTime: 1745256791502
+  modifiedTime: 1783543974774
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDominateMo'

@@ -32,7 +32,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       showIcon: ItemSheet5e.#showIcon,
       toggleState: ItemSheet5e.#toggleState
     },
-    classes: ["item"],
+    classes: ["item", "hidden-title"],
     editingDescriptionTarget: null,
     elements: {
       activities: "dnd5e-activities",
@@ -402,7 +402,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const riderIds = new Set(this.item.getFlag("dnd5e", "riders.effect") ?? []);
     context.tab = context.tabs.effects;
     context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
-    const columns = [EffectsElement.COLUMNS.source, EffectsElement.COLUMNS.value, EffectsElement.COLUMNS.controls];
+    const columns = [EffectsElement.COLUMNS.detail, EffectsElement.COLUMNS.controls];
     for ( const category of Object.values(context.effects) ) {
       category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {

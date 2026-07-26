@@ -13,15 +13,16 @@
  * @typedef CharacterActorSystemData
  * @property {Union<AttributesCommonData, AttributesCreatureData>} attributes
  * @property {HitPointsData} attributes.hp
+ * @property {number} attributes.hp.bloodied              HP percentage at or below which the creature is bloodied.
  * @property {object} attributes.hp.bonuses
  * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
  * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
  * @property {Omit<RollConfigData, "ability">} attributes.death
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
- * @property {object} attributes.death.bonuses
- * @property {string} attributes.death.bonuses.save       Numeric or dice bonus to death saving throws.
  * @property {number} attributes.inspiration              Does this character have inspiration?
+ * @property {object} attributes.piety
+ * @property {number} attributes.piety.value              The creature's piety score.
  * @property {object} bastion
  * @property {string} bastion.name                        The name of the character's bastion.
  * @property {string} bastion.description                 Additional description and details for the character's
@@ -132,12 +133,11 @@
  * @property {object} attributes.hd
  * @property {number} attributes.hd.spent        Number of hit dice spent.
  * @property {HitPointsData} attributes.hp
+ * @property {number} attributes.hp.bloodied     HP percentage at or below which the creature is bloodied.
  * @property {string} attributes.hp.formula      Formula used to determine hit points.
  * @property {Omit<RollConfigData, "ability">} attributes.death
  * @property {number} attributes.death.success        Number of successful death saves.
  * @property {number} attributes.death.failure        Number of failed death saves.
- * @property {object} attributes.death.bonuses
- * @property {string} attributes.death.bonuses.save   Numeric or dice bonus to death saving throws.
  * @property {object} attributes.price
  * @property {number|null} attributes.price.value     The creature's value in the specified denomination.
  * @property {string} attributes.price.denomination   The currency denomination.

@@ -486,12 +486,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -535,7 +532,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -555,6 +552,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: mmLegendaryResis
     name: Legendary Resistance
@@ -659,10 +657,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -759,10 +759,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -923,10 +925,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1058,10 +1062,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFireBreath0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1174,10 +1180,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCommandingPres
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1297,6 +1305,7 @@ items:
       identifier: command
       method: spell
       prepared: 0
+      sourceItem: feat:commanding-presence
     type: spell
     img: icons/magic/sonic/scream-wail-shout-teal.webp
     effects:
@@ -1304,49 +1313,70 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmCommandingPres.Activity.Ouie1mEfXPRou9cj
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: jXtzkOXM2OtQS3e9
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: 43IxYOF6tCW7GmRX
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: GSEtZfewfKJpcRHs
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: wWo3W0NR7pCDDyc7
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmCommandingPres.Activity.Ouie1mEfXPRou9cj
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544167348
+          modifiedTime: 1783544167348
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultRedDragon.XdmqM6EC8IQGORA7.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1360,10 +1390,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommand000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544167348
+      modifiedTime: 1783544167348
     _id: XdmqM6EC8IQGORA7
     _key: '!actors.items!mmAdultRedDragon.XdmqM6EC8IQGORA7'
   - _id: mmSpellcasting00
@@ -1638,10 +1670,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1761,6 +1795,7 @@ items:
       identifier: command
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/sonic/scream-wail-shout-teal.webp
     effects:
@@ -1768,37 +1803,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.wjUmU9dX4sy0f4SF
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: xdiSAkuq4EJTXg7e
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.wjUmU9dX4sy0f4SF
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544167349
+          modifiedTime: 1783544167349
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultRedDragon.96FsmcQizygzJObm.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1812,10 +1859,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommand000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544167348
+      modifiedTime: 1783544167348
     _id: 96FsmcQizygzJObm
     _key: '!actors.items!mmAdultRedDragon.96FsmcQizygzJObm'
   - name: Detect Magic
@@ -1930,26 +1979,25 @@ items:
       identifier: detect-magic
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/symbols/runes-carved-stone-green.webp
     effects:
       - name: Detect Magic
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/symbols/runes-carved-stone-green.webp
         _id: BHw91lQmVgdx39WZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1960,47 +2008,64 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544167350
+          modifiedTime: 1783544167350
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultRedDragon.XSQvtfHscntDlwUz.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.NHrfagsqSLT32oSk
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: rOpbcVCRj5l6dxni
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.NHrfagsqSLT32oSk
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544167350
+          modifiedTime: 1783544167350
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultRedDragon.XSQvtfHscntDlwUz.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2017,10 +2082,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544167350
+      modifiedTime: 1783544167350
     _id: XSQvtfHscntDlwUz
     _key: '!actors.items!mmAdultRedDragon.XSQvtfHscntDlwUz'
   - name: Scorching Ray
@@ -2142,6 +2209,7 @@ items:
       identifier: scorching-ray
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/fire/projectiles-salvo-trio-orange.webp
     effects:
@@ -2149,37 +2217,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.Jaz0gSib4KNHVzjz
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: EEOOk5QXsNJzRxBn
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.Jaz0gSib4KNHVzjz
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544167351
+          modifiedTime: 1783544167351
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultRedDragon.cZAd3i7LBGyErsZb.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2193,10 +2273,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScorchingR
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544167351
+      modifiedTime: 1783544167351
     _id: cZAd3i7LBGyErsZb
     _key: '!actors.items!mmAdultRedDragon.cZAd3i7LBGyErsZb'
   - name: Fireball
@@ -2323,6 +2405,7 @@ items:
       identifier: fireball
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/fire/barrier-shield-explosion-yellow.webp
     effects:
@@ -2330,37 +2413,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.NYI0XAuSZOULfXoN
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: OAZW0tQvAvUrj5OO
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmSpellcasting00.Activity.NYI0XAuSZOULfXoN
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544167352
+          modifiedTime: 1783544167352
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultRedDragon.ovOl8m4PyxnQNcMs.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2374,10 +2469,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFireball00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544167352
+      modifiedTime: 1783544167352
     _id: ovOl8m4PyxnQNcMs
     _key: '!actors.items!mmAdultRedDragon.ovOl8m4PyxnQNcMs'
   - _id: mmFieryRays00000
@@ -2484,10 +2581,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFieryRays00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -2611,6 +2710,7 @@ items:
       identifier: scorching-ray
       method: spell
       prepared: 0
+      sourceItem: feat:fiery-rays
     type: spell
     img: icons/magic/fire/projectiles-salvo-trio-orange.webp
     effects:
@@ -2618,49 +2718,70 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmFieryRays00000.Activity.EA1U9O6Z71z2lUZV
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: rflF7vlhk4ZvbGnb
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: fDWsH1KNu7ZXK3tU
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: kvTHnYs5WxgcX6bz
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: aTTfj85Lg4Bsx9yT
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAdultRedDragon.Item.mmFieryRays00000.Activity.EA1U9O6Z71z2lUZV
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544167353
+          modifiedTime: 1783544167353
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAdultRedDragon.xAtxnx1heKJdMFCH.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2674,10 +2795,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScorchingR
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544167353
+      modifiedTime: 1783544167353
     _id: xAtxnx1heKJdMFCH
     _key: '!actors.items!mmAdultRedDragon.xAtxnx1heKJdMFCH'
   - _id: mmPounce00000000
@@ -2782,10 +2905,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPounce00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 7
@@ -2798,11 +2923,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452694220
-  modifiedTime: 1771452694220
+  systemVersion: 6.0.0
+  createdTime: 1783544167347
+  modifiedTime: 1783544167347
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

@@ -23,6 +23,14 @@
  */
 
 /**
+ * @typedef D20RollModificationData
+ * @property {string} bonus  Bonus added to the roll.
+ * @property {number} min    Minimum number on the die rolled.
+ * @property {number} max    Maximum number on the die rolled.
+ * @property {number} mode   Should the roll be with disadvantage or advantage by default?
+ */
+
+/**
  * @typedef DamageData
  * @property {number} number           Number of dice to roll.
  * @property {number} denomination     Die denomination to roll.
@@ -46,6 +54,11 @@
  */
 
 /**
+ * @typedef DamageRollModificationData
+ * @property {string} bonus  Bonus added to the roll.
+ */
+
+/**
  * @typedef DurationData
  * @property {string} value             Scalar value for the activity's duration.
  * @property {string} units             Units that are used for the duration.
@@ -54,13 +67,10 @@
 
 /**
  * @typedef MovementData
- * @property {number} walk                          Actor walking speed.
- * @property {number} burrow                        Actor burrowing speed.
- * @property {number} climb                         Actor climbing speed.
- * @property {number} fly                           Actor flying speed.
- * @property {number} swim                          Actor swimming speed.
  * @property {string} bonus                         Bonus applied to all movement types that already have a speed.
+ * @property {number} multiplier                    Multiplier for each movement type.
  * @property {string} special                       Semi-colon separated list of special movement information.
+ * @property {Record<string, string>} speeds        Speeds for various movement types.
  * @property {string} units                         Movement used to measure the various speeds.
  * @property {boolean} hover                        This flying creature able to hover in place.
  * @property {Set<string>} ignoredDifficultTerrain  Types of difficult terrain ignored.
@@ -75,11 +85,16 @@
 
 /**
  * @typedef RollConfigData
- * @property {string} [ability]  Default ability associated with this roll.
- * @property {object} roll
- * @property {number} roll.min   Minimum number on the die rolled.
- * @property {number} roll.max   Maximum number on the die rolled.
- * @property {number} roll.mode  Should the roll be with disadvantage or advantage by default?
+ * @property {string} ability    Default ability associated with this roll.
+ * @property {D20RollModificationData} roll
+ */
+
+/**
+ * @typedef RulesDetails
+ * @property {string} category    Category of rules to retrieve (e.g. "attack" or "check").
+ * @property {Actor5e} actor      Actor from which to fetch rules.
+ * @property {Item5e} [item]      Item from which to fetch rules.
+ * @property {RollData} rollData  Roll data with which to filter the rules.
  */
 
 /**

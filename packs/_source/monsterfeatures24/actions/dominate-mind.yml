@@ -106,17 +106,14 @@ effects:
     origin: Item.mmDominateMind00
     _id: 85n0EJTGfngNSLLl
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Charmed apply=false] condition. While
       Charmed, the target acts as an ally to the dominator and is under its
@@ -131,13 +128,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmDominateMind00.85n0EJTGfngNSLLl'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -147,7 +147,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1736987392653

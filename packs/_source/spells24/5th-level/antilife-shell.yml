@@ -96,20 +96,18 @@ effects:
   - name: Antilife Shell
     origin: Compendium.dnd5e.spells24.Item.phbsplAntilifeSh
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/silhouette-hold-beam-blue.webp
     _id: IrE5td3goSQtcc0U
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -118,13 +116,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543973924
+      modifiedTime: 1783543973924
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAntilifeSh.IrE5td3goSQtcc0U'
 folder: beZ8MTpWY2cMEUlp
 sort: 3800000
@@ -137,11 +138,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425940827
-  modifiedTime: 1745256785558
+  modifiedTime: 1783543973924
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAntilifeSh'

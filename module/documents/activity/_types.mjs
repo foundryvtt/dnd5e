@@ -1,7 +1,7 @@
 /**
  * @import { TransformationConfiguration } from "../../_types.mjs";
  * @import { TokenPlacementData } from "../../canvas/_types.mjs";
- * @import { ActorUpdatesDescription } from "../../data/chat-message/fields/_types.mjs";
+ * @import { ActorUpdatesDescription } from "../../documents/actor/_types.mjs";
  * @import { PseudoDocumentsMetadata } from "../mixins/_types.mjs";
  */
 

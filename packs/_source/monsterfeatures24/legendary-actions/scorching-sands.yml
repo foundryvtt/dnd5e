@@ -105,37 +105,44 @@ effects:
     origin: Item.mmScorchingSands
     _id: n3I76HfSH6eKLALf
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 1
-        value: '0.5'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: 0hoAGQZxymsf6xJD
+        - key: system.attributes.movement.swim
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: cfMTPjmGveAmb3NH
+        - key: system.attributes.movement.fly
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: 0bqnMzCwp6YYqlJQ
+        - key: system.attributes.movement.climb
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: vqYuYJjhORsopaUz
+        - key: system.attributes.movement.burrow
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: 5OmiQbnW6vDEHGXb
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: <p>The target’s Speed is halved until the end of its next turn</p>
     tint: '#ffffff'
     transfer: false
@@ -147,13 +154,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1738088014090
+      systemVersion: 6.0.0
+      createdTime: 1783544087251
+      modifiedTime: 1783544087251
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmScorchingSands.n3I76HfSH6eKLALf'
 flags:
   dnd5e:
@@ -162,11 +172,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956
-  modifiedTime: 1737802401970
+  modifiedTime: 1783544087251
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1000000

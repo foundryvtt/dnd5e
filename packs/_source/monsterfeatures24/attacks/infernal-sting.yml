@@ -146,17 +146,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmInfernalSting0
     _id: 96f41YwmHtjW8P0o
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>the target has the &amp;Reference[Poisoned apply=false] condition until
       the start of the attacking creature’s next turn.</p>
@@ -169,13 +166,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736372344990
       modifiedTime: 1736372428603
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmInfernalSting0.96f41YwmHtjW8P0o'
 flags:
   dnd5e:
@@ -184,7 +184,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

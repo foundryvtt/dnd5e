@@ -42,12 +42,15 @@ system:
       type: object
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -108,20 +111,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: magic-mouth
 sort: 0
 flags: {}
-img: icons/magic/air/wind-vortex-swirl-purple.webp
+img: icons/commodities/treasure/mask-wood-tan.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348572
-  modifiedTime: 1725992717389
+  modifiedTime: 1781226916126
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7v06rdmUakoTk1LQ'

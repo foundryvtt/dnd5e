@@ -9,8 +9,8 @@ system:
       <p>Your body becomes blurred, shifting and wavering to all who can see
       you. For the duration, any creature has disadvantage on attack rolls
       against you. An attacker is immune to this effect if it doesn't rely on
-      sight, as with blindsight, or can see through illusions, as with
-      truesight.</p>
+      sight, as with &amp;reference[blindsight], or can see through illusions,
+      as with &amp;reference[truesight].</p>
     chat: ''
   source:
     custom: ''
@@ -29,11 +29,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -71,7 +74,9 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: X4jof8gIhjMeaX9E
+          level: {}
       range:
         override: false
       target:
@@ -90,20 +95,68 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: blur
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-blue-gray.webp
-effects: []
+img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+effects:
+  - name: Blur
+    img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+    origin: Compendium.dnd5e.spells.Item.UDUnlfPsOAbq2RSE
+    transfer: false
+    _id: X4jof8gIhjMeaX9E
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your body has become blurred, shifting and wavering to all who can see
+      you. For the duration, any creature has disadvantage on attack rolls
+      against you. An attacker is immune to this effect if it doesn't rely on
+      sight, as with &amp;reference[blindsight], or can see through illusions,
+      as with &amp;reference[truesight].</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781220153860
+      modifiedTime: 1781220199250
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!UDUnlfPsOAbq2RSE.X4jof8gIhjMeaX9E'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357236
-  modifiedTime: 1725992720184
+  modifiedTime: 1781220153897
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!UDUnlfPsOAbq2RSE'

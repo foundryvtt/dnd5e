@@ -1,3 +1,5 @@
+import { playLandingVfx } from "../canvas/vfx/landing-vfx.mjs";
+import { postFallDamage } from "../rules/falling.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -219,6 +221,20 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     };
     CONFIG.Token.movement.actions.jump.deriveTerrainDifficulty = () => 1;
     CONFIG.Token.movement.actions.jump.getCostFunction = () => cost => cost;
+
+    // Falling is involuntary, so it cannot be selected by the user and never consumes movement.
+    CONFIG.Token.movement.actions.fall = {
+      canSelect: false,
+      costMultiplier: 0,
+      icon: "fa-solid fa-arrow-down-long",
+      img: "systems/dnd5e/icons/svg/statuses/falling.svg",
+      label: "DND5E.FALLING.MovementAction",
+      measure: false,
+      order: 9,
+      teleport: false,
+      terrainAction: null,
+      visualize: true
+    };
   }
 
   /* -------------------------------------------- */
@@ -240,6 +256,173 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     return noAutomation || !actor?.system.isCreature || !hasMovement || speed || (!speed && !walkFallback)
       ? cost => cost
       : (cost, _from, _to, distance) => cost + distance;
+  }
+
+  /* -------------------------------------------- */
+  /*  Falling                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Find the supporting surface this token rests on or would fall onto, and the level it comes to rest on. A scene that
+   * defines any movement surface uses those surfaces as its only floors. As a heuristic to accommodate older scenes
+   * without levels or surfaces, the base of each level is considered a floor in scenes with no surfaces.
+   * @param {object} [options]
+   * @param {TokenCoordinates} [options.position]  The position to evaluate against. Defaults to the token's source
+   *                                               position.
+   * @returns {{ elevation: number, region: RegionDocument|null, level: Level }|null}
+   * @internal
+   */
+  _findSupportingSurface({ position=this._source }={}) {
+    const scene = this.parent;
+    if ( !scene ) return null;
+    const { elevation, level } = position;
+
+    // Walk surfaces from highest to lowest and return the first whose footprint contains the required share of the
+    // token. Scene#getSurfaces already orders surfaces by elevation.
+    if ( scene.getSurfaces({ type: "move" }).length ) {
+      const surfaces = scene.getSurfaces({ level, type: "move" });
+      if ( !surfaces.length ) return null;
+      const points = this.getContainmentTestPoints(position);
+      const required = Math.ceil(points.length * .75);
+      const allowedMisses = points.length - required;
+
+      for ( let i = surfaces.length; i--; ) {
+        const surface = surfaces[i];
+        if ( surface.elevation > elevation ) continue;
+        let inside = 0;
+        let missed = 0;
+        for ( const p of points ) {
+          if ( surface.region.polygonTree.testPoint(p) ) {
+            if ( ++inside >= required ) return {
+              elevation: surface.elevation,
+              level: this.#findRestingLevel(surface.region, surface.elevation, level),
+              region: surface.region
+            };
+          } else if ( ++missed > allowedMisses ) {
+            break;
+          }
+        }
+      }
+      return null;
+    }
+
+    // With no surfaces defined, the base of every level is an implied floor. The supporting surface is the highest
+    // level base at or below the token.
+    let floorLevel = null;
+    for ( const l of scene.levels ) {
+      if ( l.elevation.base > elevation ) continue;
+      if ( !floorLevel || (l.elevation.base > floorLevel.elevation.base) ) floorLevel = l;
+    }
+    if ( !floorLevel ) return null;
+    return { elevation: floorLevel.elevation.base, level: floorLevel, region: null };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Resolve the level a token comes to rest on when landing on a surface region at a given elevation. Checks every
+   * level the surface region belongs to. The result is the single candidate whose elevation range is home to the
+   * landing elevation, or the current level when there is no unambiguous home.
+   * @param {RegionDocument} region  The landed surface's region.
+   * @param {number} elevation       The landing elevation.
+   * @param {string} levelId         The token's current level ID.
+   * @returns {Level|null}           The level the token rests on.
+   */
+  #findRestingLevel(region, elevation, levelId) {
+    const scene = this.parent;
+    const current = scene.levels.get(levelId) ?? null;
+    const candidates = region.levels.size
+      ? Array.from(region.levels, id => scene.levels.get(id))
+      : scene.levels.contents;
+    let home = null;
+    for ( const level of candidates ) {
+      if ( !level ) continue;
+      if ( (elevation >= level.elevation.bottom) && (elevation < level.elevation.top) ) {
+        if ( home ) return current; // Ambiguous: more than one candidate level is home to this elevation.
+        home = level;
+      }
+    }
+    return home ?? current;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether this token should be considered falling given a position and its actor's condition. A creature
+   * suspended in the air falls unless it can keep itself aloft, i.e. has a fly speed.
+   * @param {object} [options]
+   * @param {TokenCoordinates} [options.position]  The position to evaluate against. Defaults to the token's source
+   *                                               position.
+   * @returns {boolean}
+   * @internal
+   */
+  _isFalling({ position=this._source }={}) {
+    const { actor } = this;
+    if ( !actor ) return false;
+    const surface = this._findSupportingSurface({ position });
+    if ( !surface || (surface.elevation >= position.elevation) ) return false;
+    if ( foundry.utils.getProperty(actor, "system.traits.ci.value")?.has("falling") ) return false;
+    const { hover, speeds } = actor.system.attributes?.movement ?? {};
+    if ( actor.statuses.has("prone") || actor.statuses.has("incapacitated") ) return !hover;
+    return !speeds?.fly;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Plummet this token straight down to the highest movement-restricting surface beneath it and post fall damage to
+   * chat. Landing prone is deferred to the point at which that damage is applied, as a creature is only knocked prone
+   * if the fall actually deals damage.
+   * @returns {Promise<void>}
+   */
+  async plummet() {
+    const { actor } = this;
+    if ( !actor?.statuses.has("falling") || !actor.canUserModify(game.user, "update") ) return;
+
+    const surface = this._findSupportingSurface();
+    if ( !surface || (surface.elevation >= this.elevation) ) {
+      ui.notifications.warn("DND5E.FALLING.Warning.NoLandingSurface", { format: { name: this.name } });
+      return;
+    }
+
+    const distance = this.elevation - surface.elevation;
+    const waypoint = { action: "fall", elevation: surface.elevation };
+    if ( surface.level && (surface.level.id !== this._source.level) ) waypoint.level = surface.level.id;
+    await this.move(waypoint, { animate: false, dnd5e: { fall: { distance } } });
+    await actor.toggleStatusEffect("falling", { active: false });
+    await postFallDamage([this], distance);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether this token should be considered falling after its movement. Movement that ends with a climb
+   * action, or that takes place while transiting a level-change region, is a deliberate reposition and does not leave
+   * the token falling.
+   * @param {TokenMovementOperation} movement  The concluded movement.
+   * @returns {boolean}
+   */
+  #shouldFall(movement) {
+    if ( movement.passed.waypoints.at(-1)?.action === "climb" ) return false;
+    if ( this.#inLevelChangeRegion() ) return false;
+    return this._isFalling({ position: movement.destination });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this token currently occupies a region that relocates tokens between levels, such as a ladder or
+   * stairwell. Such a region moves the token through open space to reach the destination level, and those transient
+   * airborne positions are part of the relocation rather than a fall.
+   * @returns {boolean}
+   */
+  #inLevelChangeRegion() {
+    for ( const region of this.regions ?? [] ) {
+      for ( const behavior of region.behaviors ) {
+        if ( !behavior.disabled && (behavior.type === "changeLevel") ) return true;
+      }
+    }
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -329,6 +512,30 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     if ( !this.parent?.isView ) return;
     this.reset();
     this.object?.initializeVisionSource();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onUpdateMovement(movement, operation, user) {
+    await super._onUpdateMovement(movement, operation, user);
+    if ( !user.isSelf || dnd5e.settings.disableFalling || (movement.passed.waypoints.at(-1)?.action === "fall") ) {
+      return;
+    }
+    const { actor } = this;
+    if ( !actor ) return;
+    const shouldFall = this.#shouldFall(movement);
+    if ( shouldFall === actor.statuses.has("falling") ) return;
+    await actor.toggleStatusEffect("falling", { active: shouldFall });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    const distance = foundry.utils.getProperty(options, "dnd5e.fall.distance");
+    if ( distance ) playLandingVfx(this, distance);
   }
 
   /* -------------------------------------------- */

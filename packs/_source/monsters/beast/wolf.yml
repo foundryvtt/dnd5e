@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: z1WFJdHb8OXvW2yy
     name: Keen Hearing and Smell
@@ -489,8 +487,8 @@ items:
     system:
       description:
         value: >-
-          <p>The wolf has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on hearing or smell.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on hearing or smell.</p>
         chat: ''
       source:
         custom: ''
@@ -504,10 +502,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -522,67 +521,18 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781525331462
+      modifiedTime: 1781525339834
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yawTeS8u2FCfzzZH.z1WFJdHb8OXvW2yy'
-  - _id: GtradZW0Fk8JKMAe
-    name: Pack Tactics
-    type: feat
-    img: icons/creatures/abilities/paw-print-orange.webp
-    system:
-      description:
-        value: >-
-          <p>The wolf has<strong> advantage </strong>on an attack roll against a
-          creature if at least one of the wolf's allies is within <strong>5
-          ft.</strong> of the creature and the ally isn't incapacitated.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: pack-tactics
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!yawTeS8u2FCfzzZH.GtradZW0Fk8JKMAe'
   - _id: MuH5aMoKOyZanrFf
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -590,9 +540,9 @@ items:
           a creature, it must succeed on a [[/save]] saving throw or be knocked
           &amp;Reference[prone].</p>
         chat: >-
-          <p>The Wolf attacks with its Bite. If the target is a creature, it
-          must make a <strong>Strength</strong> saving throw or be knocked
-          prone.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it must make a Strength
+          saving throw or be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -665,8 +615,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        CcVzqjxxl2sy6JK1:
           type: attack
           activation:
             type: action
@@ -681,10 +630,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -701,7 +651,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -714,27 +665,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: CcVzqjxxl2sy6JK1
+          name: ''
+        3lI4GEtZEEPgehgy:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -744,10 +706,13 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If the target is a creature, it must succeed on a [[/save]]
+              saving throw or be knocked &amp;Reference[prone].</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -764,10 +729,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -777,14 +743,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 3lI4GEtZEEPgehgy
+          name: Prone Save
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -795,22 +776,73 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123975483
+      systemVersion: 6.0.0
+      createdTime: 1781525349277
+      modifiedTime: 1781525415703
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yawTeS8u2FCfzzZH.MuH5aMoKOyZanrFf'
+  - _id: wuSyn1WGzdOHoRym
+    name: Pack Tactics
+    type: feat
+    img: icons/creatures/abilities/paw-print-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on an attack
+          roll against a creature if at least one of the [[lookup @name
+          lowercase]]{monster}'s allies is within 5 feet of the creature and the
+          ally isn't &amp;reference[incapacitated apply=false].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: pack-tactics
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.JW8bXggOMBx1S6tF.Item.yb6o6KfKlg9bGhqA
+      duplicateSource: Item.bYY0d7kkeVIYaNof
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781525344852
+      modifiedTime: 1781525761705
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!yawTeS8u2FCfzzZH.wuSyn1WGzdOHoRym'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -819,7 +851,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171266835

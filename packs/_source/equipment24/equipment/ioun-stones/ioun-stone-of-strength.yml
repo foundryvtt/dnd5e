@@ -66,25 +66,27 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/strength.svg
     _id: AvjFlc6qmwT82JXZ
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.value
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.abilities.str.value
-        mode: 3
-        value: '20'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: gNpWVf1bRkWxw8Q0
+        - key: system.abilities.str.value
+          value: 20
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: ykCRUK0p7zKj31oF
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your Strength increases by 2, to a maximum of 20, while this pale blue
       rhomboid orbits your head.</p>
@@ -97,22 +99,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730490283407
-      modifiedTime: 1730490410159
+      modifiedTime: 1783544098873
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgStrengthIounS.AvjFlc6qmwT82JXZ'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712703956
+  modifiedTime: 1783544098873
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

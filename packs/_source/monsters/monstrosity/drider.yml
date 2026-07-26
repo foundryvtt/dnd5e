@@ -449,9 +449,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -466,7 +463,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -486,55 +483,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: 3Fnspq3GjJ5g41lM
-    name: Fey Ancestry
-    type: feat
-    img: icons/creatures/mammals/elk-moose-marked-green.webp
-    system:
-      description:
-        value: >-
-          <p>The drider has advantage on saving throws against being charmed,
-          and magic can't put the drider to sleep.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: fey-ancestry
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825367312
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!1OQbxoZI5BtlB2ME.3Fnspq3GjJ5g41lM'
   - _id: uRaC62ut3Hk63e7m
     name: Innate Spellcasting
     type: feat
@@ -574,163 +524,21 @@ items:
       identifier: innate-spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 450000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447015471
+      createdTime: 1781864750316
+      modifiedTime: 1781864750316
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.uRaC62ut3Hk63e7m'
-  - _id: 3wBoA7GvO2fw1Qnu
-    name: Spider Climb
-    type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
-    system:
-      description:
-        value: >-
-          <p>The drider can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: spider-climb
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!1OQbxoZI5BtlB2ME.3wBoA7GvO2fw1Qnu'
-  - _id: tnQSw6SXTbUKi6vN
-    name: Sunlight Sensitivity
-    type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
-    system:
-      description:
-        value: >-
-          <p>While in sunlight, the drider has disadvantage on attack rolls, as
-          well as on Wisdom (Perception) checks that rely on sight.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: sunlight-sensitivity
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825379856
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!1OQbxoZI5BtlB2ME.tnQSw6SXTbUKi6vN'
-  - _id: 4fZJqIbZDoAx8Yix
-    name: Web Walker
-    type: feat
-    img: icons/magic/nature/tree-bare-glow-yellow.webp
-    system:
-      description:
-        value: <p>The drider ignores movement restrictions caused by webbing.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: web-walker
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!1OQbxoZI5BtlB2ME.4fZJqIbZDoAx8Yix'
   - _id: ThVO3VFsGgg3GLc5
     name: Multiattack
     type: feat
@@ -738,8 +546,8 @@ items:
     system:
       description:
         value: >-
-          <p>The drider makes three attacks, either with its [[/item
-          .xqwxVn28J0zx8Y7H]]{longsword} or its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks, either
+          with its [[/item .xqwxVn28J0zx8Y7H]]{longsword} or its [[/item
           .3XAtYmmaED1rxaaE]]{longbow}. It can replace one of those attacks with
           a [[/item .rUvv8Vnh7XbqbCLd]]{bite} attack.</p>
         chat: ''
@@ -755,13 +563,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        QjQaqrnO3Ir5ywB2:
           type: utility
           activation:
             type: action
@@ -776,15 +583,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -795,7 +603,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -812,7 +621,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: QjQaqrnO3Ir5ywB2
       enchant: {}
       prerequisites:
         level: null
@@ -826,22 +643,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273654865
+      systemVersion: 6.0.0
+      createdTime: 1781864947630
+      modifiedTime: 1783366958477
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.ThVO3VFsGgg3GLc5'
   - _id: rUvv8Vnh7XbqbCLd
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Drider attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -904,7 +723,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -913,8 +732,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BIC2AYcNH0OI1Qr5:
           type: attack
           activation:
             type: action
@@ -929,6 +747,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -949,7 +768,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -968,8 +788,8 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
@@ -979,49 +799,59 @@ items:
                   enabled: false
                   formula: ''
                 number: 2
-                denomination: '8'
+                denomination: 8
                 bonus: ''
                 types:
                   - poison
-          sort: 0
+                scaling:
+                  number: 1
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: BIC2AYcNH0OI1Qr5
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107660028
+      systemVersion: 6.0.0
+      createdTime: 1781864759274
+      modifiedTime: 1781876381068
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.rUvv8Vnh7XbqbCLd'
   - _id: xqwxVn28J0zx8Y7H
     name: Longsword
     type: weapon
-    img: icons/weapons/swords/greatsword-crossguard-steel.webp
+    img: icons/weapons/swords/sword-guard-flanged.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
           attackMode=twoHanded]] damage if used with two hands.</p>
-        chat: <p>The Drider attacks with its Longsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1085,7 +915,7 @@ items:
         conditions: ''
       properties:
         - ver
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1094,8 +924,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        LGW3t2X2nfUFJZds:
           type: attack
           activation:
             type: action
@@ -1110,10 +939,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1130,7 +960,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1143,24 +974,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: LGW3t2X2nfUFJZds
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -1170,22 +1014,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173384521
+      systemVersion: 6.0.0
+      createdTime: 1781864846059
+      modifiedTime: 1781876373585
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.xqwxVn28J0zx8Y7H'
   - _id: 3XAtYmmaED1rxaaE
     name: Longbow
     type: weapon
-    img: icons/weapons/bows/longbow-leather-green.webp
+    img: icons/weapons/bows/bow-recurve-black.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Drider attacks with its Longbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1251,7 +1097,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1260,8 +1106,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        wUbkfkNeWbJ8jCwb:
           type: attack
           activation:
             type: action
@@ -1276,10 +1121,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1296,7 +1142,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1309,36 +1156,48 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 8
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: wUbkfkNeWbJ8jCwb
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
     sort: 400000
@@ -1348,11 +1207,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173384521
+      systemVersion: 6.0.0
+      createdTime: 1781864881469
+      modifiedTime: 1781876377378
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.3XAtYmmaED1rxaaE'
@@ -1466,7 +1325,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CAxSzHWizrafT033
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1594,7 +1453,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1722,7 +1581,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1730,6 +1589,221 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.nqBDWkVOfcGZt4YU'
+  - _id: ZloTCAgY29cSTZuv
+    name: Fey Ancestry
+    type: feat
+    img: icons/consumables/plants/leaf-veins-glowing-green.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against being &amp;reference[charmed apply=false], and magic
+          can't put the [[lookup @name lowercase]]{monster} to sleep.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: fey-ancestry
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 1563
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.Jwx7Sfs5m3RDWckF
+      duplicateSource: Item.zG5TnmHqyB9O1U65
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781864715795
+      modifiedTime: 1781864715795
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!1OQbxoZI5BtlB2ME.ZloTCAgY29cSTZuv'
+  - _id: yIU4b1qZZevKoFLX
+    name: Spider Climb
+    type: feat
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including upside down on ceilings, without needing to make
+          an ability check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: spider-climb
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 150000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.0Oap13hi3sDNwVZn
+      duplicateSource: Item.lDSSf3aXXmZYJsk1
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781864719973
+      modifiedTime: 1781864719973
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!1OQbxoZI5BtlB2ME.yIU4b1qZZevKoFLX'
+  - _id: pGPhMpmW6Ib83Dyi
+    name: Web Walker
+    type: feat
+    img: icons/creatures/webs/web-thin-pruple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} ignores movement
+          restrictions caused by webbing.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: web-walker
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 250000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.GQ8a63ou7VwIGrvv
+      duplicateSource: Item.qHPwkAgbpzDzN0P6
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781864725629
+      modifiedTime: 1781864727287
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!1OQbxoZI5BtlB2ME.pGPhMpmW6Ib83Dyi'
+  - _id: utDSjYtAdPyR8rKZ
+    name: Sunlight Sensitivity
+    type: feat
+    img: icons/magic/light/beam-rays-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>While in sunlight, the [[lookup @name lowercase]]{monster} has
+          disadvantage on attack rolls, as well as on Wisdom (Perception) checks
+          that rely on sight.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: sunlight-sensitivity
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 350000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.1vaBSMUfOy6JPJ14.Item.Up2YzkDn0uBKQj6K
+      duplicateSource: Item.O2X2jlQHc9cUVKbR
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781864733796
+      modifiedTime: 1781864736386
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!1OQbxoZI5BtlB2ME.utDSjYtAdPyR8rKZ'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -1738,7 +1812,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 5.1.3
   createdTime: 1726171198662

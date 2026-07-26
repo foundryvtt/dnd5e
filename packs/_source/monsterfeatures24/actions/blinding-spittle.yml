@@ -112,17 +112,14 @@ effects:
     transfer: false
     _id: ZsONDi9D0HnUuZKa
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>the target has the &amp;Reference[Blinded apply=false] condition until
       the end of the user’s next turn.</p>
@@ -135,13 +132,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.monsterfeatures24.Item.mmBlindingFlash0.ActiveEffect.ru1Dxgrjeu1wB0QP
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1735006974121
       modifiedTime: 1735006974121
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmBlindingSpittl.ZsONDi9D0HnUuZKa'
 flags:
   dnd5e:
@@ -150,7 +150,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

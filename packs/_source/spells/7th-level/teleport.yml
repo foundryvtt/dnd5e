@@ -253,7 +253,85 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    FRz2LntLdKnrnVvH:
+      type: damage
+      name: Mishap Damage
+      _id: FRz2LntLdKnrnVvH
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: true
+        condition: When a mishap occurs.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The spell's unpredictable magic results in a difficult journey.
+          Each teleporting creature (or the target object) takes 3d10 force
+          damage, and the DM rerolls on the table to see where you wind up
+          (multiple mishaps can occur, dealing damage each time).</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: ''
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 10
+            bonus: ''
+            types:
+              - force
+            scaling:
+              mode: ''
+              number: 1
   identifier: teleport
 sort: 0
 flags: {}
@@ -262,11 +340,11 @@ effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037353873
-  modifiedTime: 1725992719090
+  modifiedTime: 1781466180970
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!L4J89JXqbKs6puEV'

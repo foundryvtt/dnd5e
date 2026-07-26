@@ -123,17 +123,14 @@ effects:
     transfer: false
     _id: ePppPvhLU1DnHySS
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.mPBGM1vguT5IPzxT
       caption=false]</p>
@@ -145,13 +142,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1735329663307
       modifiedTime: 1735329887934
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmBurn0000000000.ePppPvhLU1DnHySS'
 flags:
   dnd5e:
@@ -160,7 +160,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

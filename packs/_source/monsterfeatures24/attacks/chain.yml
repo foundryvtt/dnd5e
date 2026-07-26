@@ -136,17 +136,14 @@ effects:
     origin: Item.mmChain000000000
     _id: 07IW8bZzgQ4Jk3sW
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If the target is a Large or smaller creature, it has the
       &amp;Reference[Grappled apply=false] condition (escape DC [[/check
@@ -163,13 +160,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmChain000000000.07IW8bZzgQ4Jk3sW'
 folder: pSCWWdqMX9eUATRJ
 flags:
@@ -179,7 +179,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1737577946329

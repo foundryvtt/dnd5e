@@ -116,17 +116,14 @@ effects:
     img: icons/magic/holy/saint-glass-portrait-halo.webp
     _id: hr8wnlgs3uXphCnI
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -137,13 +134,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbpdnChannelDiv.hr8wnlgs3uXphCnI'
 flags:
   dnd5e:
@@ -152,7 +152,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.10
   createdTime: 1735866297701

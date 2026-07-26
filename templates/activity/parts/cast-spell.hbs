@@ -1,6 +1,6 @@
+{{#if spell}}
 <ul class="separated-list spell-details">
     <li>
-        {{#if spell}}
         <div class="details flexrow">
             <img class="gold-icon" src="{{ spell.img }}" alt="{{ spell.name }}">
             {{{ contentLink }}}
@@ -11,8 +11,9 @@
                 </button>
             </div>
         </div>
-        {{else}}
-        {{ formInput fields.spell.fields.uuid value=source.spell.uuid }}
-        {{/if}}
     </li>
 </ul>
+{{else}}
+{{ formInput fields.spell.fields.uuid value=source.spell.uuid classes="drop-area"
+             dataset=(dnd5e-object dropHint=(localize "DND5E.CAST.Action.DropSpell")) }}
+{{/if}}

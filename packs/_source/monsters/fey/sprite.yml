@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,6 +481,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: qlTIjSkjmEDQTj1x
     name: Leather Armor (tiny)
@@ -553,7 +551,7 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -564,17 +562,19 @@ items:
   - _id: YN8cO9SCNOIFJcmw
     name: Shortbow
     type: weapon
-    img: icons/weapons/bows/shortbow-recurve.webp
+    img: icons/weapons/bows/shortbow-recurve-leather.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], and the target must
           succeed on a [[/save]] saving throw or become &amp;Reference[poisoned]
-          for 1 minute. If its saving throw result is 5 or lower, the poisoned
-          target falls &amp;Reference[unconscious] for the same duration, or
-          until it takes damage or another creature takes an action to shake it
-          awake.</p>
-        chat: <p>The Sprite attacks with its Shortbow.</p>
+          for [[lookup @labels.duration activity=vMfBrhdjnxaKy0Wn]]. If its
+          saving throw result is 5 or lower, the poisoned target falls
+          &amp;Reference[unconscious] for the same duration, or until it takes
+          damage or another creature takes an action to shake it awake.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -637,7 +637,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -646,8 +646,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        CSPHSvLsdzkanbSC:
           type: attack
           activation:
             type: action
@@ -662,6 +661,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
@@ -682,7 +682,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -701,21 +702,32 @@ items:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: CSPHSvLsdzkanbSC
+          name: ''
+        vMfBrhdjnxaKy0Wn:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -725,13 +737,30 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must succeed on a [[/save]] saving throw or become
+              &amp;Reference[poisoned] for 1 minute. If its saving throw result
+              is 5 or lower, the poisoned target falls
+              &amp;Reference[unconscious] for the same duration, or until it
+              takes damage or another creature takes an action to shake it
+              awake.</p>
           duration:
             concentration: false
             value: '1'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: ncfr9hbuEu2mr5kI
+              onSave: false
+              level:
+                min: null
+                max: null
+            - _id: pw6HjjLVGg9RII4U
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '40'
             units: ft
@@ -745,10 +774,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -758,37 +788,129 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: spellcasting
               formula: '10'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: vMfBrhdjnxaKy0Wn
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shortbow
       mastery: ''
-    effects: []
+    effects:
+      - name: Sprite's Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.MUpBNDoJEr09bLaO.Item.YN8cO9SCNOIFJcmw
+        transfer: false
+        _id: ncfr9hbuEu2mr5kI
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: <p>You are &amp;reference[poisoned apply=false] for the duration.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781809574710
+          modifiedTime: 1781809628388
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!MUpBNDoJEr09bLaO.YN8cO9SCNOIFJcmw.ncfr9hbuEu2mr5kI
+      - name: Sprite's Sleeping Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.MUpBNDoJEr09bLaO.Item.YN8cO9SCNOIFJcmw
+        transfer: false
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false] for the duration.
+          While poisoned in this way, you fall &amp;reference[unconscious
+          apply=false] for the same duration, or until you take damage or
+          another creature takes an action to shake you awake.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses:
+                - unconscious
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781809632106
+          modifiedTime: 1781809744147
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: pw6HjjLVGg9RII4U
+        _key: >-
+          !actors.items.effects!MUpBNDoJEr09bLaO.YN8cO9SCNOIFJcmw.pw6HjjLVGg9RII4U
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745174638780
+      systemVersion: 6.0.0
+      createdTime: 1781809539822
+      modifiedTime: 1781809794125
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MUpBNDoJEr09bLaO.YN8cO9SCNOIFJcmw'
@@ -799,7 +921,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Sprite attacks with its Longsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -862,7 +986,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -871,8 +995,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FRX8H4ZTJBdkplcX:
           type: attack
           activation:
             type: action
@@ -887,6 +1010,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -895,7 +1019,7 @@ items:
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -906,7 +1030,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -925,17 +1050,26 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FRX8H4ZTJBdkplcX
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -946,33 +1080,30 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745174681869
+      systemVersion: 6.0.0
+      createdTime: 1781809813769
+      modifiedTime: 1781809837560
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MUpBNDoJEr09bLaO.mT8SL7VHsG6qY5G7'
   - _id: qLd01BTjVwH6NUfH
     name: Invisibility
     type: feat
-    img: icons/creatures/webs/webthin-blue.webp
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
     system:
       description:
         value: >-
-          <p>The sprite magically turns invisible until it attacks or casts a
-          spell, or until its concentration ends (as if concentrating on a
-          spell). Any equipment the sprite wears or carries is invisible with
-          it.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically turns
+          &amp;reference[invisible] until it attacks or casts a spell, or until
+          its concentration ends (as if concentrating on a spell). Any equipment
+          the [[lookup @name lowercase]]{monster} wears or carries is invisible
+          with it.</p>
         chat: >-
           <p>The sprite magically turns invisible. Any equipment the sprite
           wears or carries is invisible with it.</p>
@@ -988,13 +1119,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        KoAbPzGOJ6vf7w7p:
           type: utility
           activation:
             type: action
@@ -1009,15 +1140,20 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: woi3Je0nZ2KaHaJq
+              level:
+                min: null
+                max: null
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1028,10 +1164,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1045,12 +1182,66 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: KoAbPzGOJ6vf7w7p
+          name: Become Invisible
       enchant: {}
       prerequisites:
         level: null
       identifier: invisibility
-    effects: []
+    effects:
+      - name: Invisibility
+        img: icons/creatures/magical/spirit-undead-ghost-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.MUpBNDoJEr09bLaO.Item.qLd01BTjVwH6NUfH
+        transfer: false
+        _id: woi3Je0nZ2KaHaJq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[invisible] until you attack, cast a spell,
+          or until your concentration ends (as if concentrating on a spell). Any
+          equipment you are wearing or carrying is invisible as well.</p>
+        tint: '#ffffff'
+        statuses:
+          - invisible
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781809939617
+          modifiedTime: 1781809971038
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.dLQiESMsfsXijD5c.Item.ABjkKWIBbRYp2fy5.ActiveEffect.dJA0IOGziAr9Onj9
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!MUpBNDoJEr09bLaO.qLd01BTjVwH6NUfH.woi3Je0nZ2KaHaJq
     folder: null
     sort: 0
     ownership:
@@ -1059,24 +1250,25 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676890
+      systemVersion: 6.0.0
+      createdTime: 1781809906531
+      modifiedTime: 1781809982979
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MUpBNDoJEr09bLaO.qLd01BTjVwH6NUfH'
   - _id: qJHrH8Q3q1JB5xe5
     name: Heart Sight
     type: feat
-    img: icons/magic/control/hypnosis-mesmerism-eye.webp
+    img: icons/magic/life/heart-pink.webp
     system:
       description:
         value: >-
-          <p>The sprite touches a creature and magically knows the creature's
-          current emotional state.</p><p>If the target fails a [[/save]] saving
-          throw, the sprite also knows the creature's alignment. Celestials,
+          <p>The [[lookup @name lowercase]]{monster} touches a creature and
+          magically knows the creature's current emotional state.</p><p>If the
+          target fails a [[/save]] saving throw, the [[lookup @name
+          lowercase]]{monster} also knows the creature's alignment. Celestials,
           fiends, and undead automatically fail the saving throw.</p>
         chat: >-
           <p>The sprite touches a creature. target must make a
@@ -1093,13 +1285,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        WgvJpjzeNyJLFBHm:
           type: save
           activation:
             type: action
@@ -1114,6 +1306,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1133,7 +1326,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1146,15 +1340,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: cha
+            ability:
+              - cha
             dc:
               calculation: ''
               formula: '10'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Peer into Heart
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: WgvJpjzeNyJLFBHm
       enchant: {}
       prerequisites:
         level: null
@@ -1168,11 +1376,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iCae1IDxHvRmjEgi
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747955988926
+      systemVersion: 6.0.0
+      createdTime: 1781809846059
+      modifiedTime: 1781809878325
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MUpBNDoJEr09bLaO.qJHrH8Q3q1JB5xe5'
@@ -1184,7 +1392,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171225738

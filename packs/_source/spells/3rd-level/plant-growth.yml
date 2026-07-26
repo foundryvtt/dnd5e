@@ -34,14 +34,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '100'
       contiguous: false
+      count: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -60,8 +63,7 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    7LSLjVemL20laO4P:
       type: utility
       activation:
         type: action
@@ -75,6 +77,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -82,11 +85,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -98,20 +103,91 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: 'Cast: Action'
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 7LSLjVemL20laO4P
+    QCOidGIiPcyNjj9Y:
+      type: utility
+      name: 'Cast: 8 Hours'
+      _id: QCOidGIiPcyNjj9Y
+      img: ''
+      sort: 200000
+      activation:
+        type: hour
+        override: true
+        condition: ''
+        value: 8
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: year
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: mi
+          type: radius
+          size: '0.5'
+          count: ''
+        affects:
+          choice: false
+          type: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: plant-growth
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-triple-green.webp
+img: icons/magic/nature/plant-sprout-snow-green.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037359048
-  modifiedTime: 1725992720772
+  modifiedTime: 1781294841973
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!YWtwzp6ZnQJMEmVW'

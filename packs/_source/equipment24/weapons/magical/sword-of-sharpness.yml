@@ -137,50 +137,63 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
     _id: nxid1s2CZrB06HH8
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of Sharpness'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSwordOfSharpn
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: activities[attack].damage.critical.bonus
-        mode: 2
-        value: 14d1[necrotic]
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '40000'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of Sharpness'
+          priority: null
+          type: override
+          phase: initial
+          _id: szP3W5WFNxRsLom4
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: 6TiVueVvYOWKPrV2
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgSwordOfSharpn
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: twEH2y86xmKho9wI
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: vfgLmYjL83u7cP3m
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: cFIBdhYcBrTuxJsW
+        - key: activities[attack].damage.critical.bonus
+          value: 14d1[necrotic]
+          priority: null
+          type: add
+          phase: initial
+          _id: CSihtEEK0AwHfJzX
+        - key: system.price.value
+          value: 40000
+          priority: null
+          type: add
+          phase: initial
+          _id: B5jMtIrggBfmTSaM
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: jP72Cqv9USrREAgm
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -191,13 +204,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730941512837
-      modifiedTime: 1730941811204
+      modifiedTime: 1783544098978
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgSwordOfSharpn.nxid1s2CZrB06HH8'
 folder: kie870i5kr7yuxO8
 flags:
@@ -207,11 +223,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704133
+  modifiedTime: 1783544098978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 15200000

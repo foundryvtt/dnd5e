@@ -103,20 +103,18 @@ effects:
   - name: Charmed
     origin: Compendium.dnd5e.spells24.Item.phbsplCompulsion
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/charmed.svg
     _id: VMGUJweP1J6ZQUsG
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>You can take a Bonus Action to designate a direction that is horizontal
       to you. Each &amp;Reference[Charmed apply=false] target must use as much
@@ -131,13 +129,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974431
+      modifiedTime: 1783543974431
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplCompulsion.VMGUJweP1J6ZQUsG'
 folder: qi3IbnEwap7mRw4b
 sort: 3300000
@@ -150,11 +151,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425946062
-  modifiedTime: 1745256788467
+  modifiedTime: 1783543974431
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplCompulsion'

@@ -25,12 +25,15 @@ system:
       type: space
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -50,7 +53,6 @@ system:
     - somatic
     - material
     - concentration
-    - mgc
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -87,14 +89,17 @@ system:
         attackDamage: ''
         saveDamage: ''
         healing: ''
+        hd: ''
       creatureSizes: []
       creatureTypes: []
       match:
         proficiency: false
         attacks: true
         saves: false
+        ability: ''
       profiles:
-        - name: ''
+        - count: ''
+          name: ''
           _id: M8uQaRVLa9er5zMP
           uuid: Compendium.dnd5e.monsters.Actor.iHj5Tkm6HRgXuaWP
           level:
@@ -108,20 +113,28 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Summon Hand
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+      tempHP: ''
   identifier: arcane-hand
 sort: 0
 flags: {}
-img: icons/magic/fire/projectile-fireball-smoke-strong-teal.webp
+img: icons/magic/fire/flame-burning-hand-white.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037359535
-  modifiedTime: 1725992720905
+  modifiedTime: 1781398405361
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!a2KJHCIbY5Mi4Dmn'

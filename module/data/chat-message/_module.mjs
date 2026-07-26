@@ -1,7 +1,13 @@
 import BastionAttackMessageData from "./bastion-attack-message-data.mjs";
 import BastionTurnMessageData from "./bastion-turn-message-data.mjs";
+import CheckMessageData from "./check-message-data.mjs";
+import GenericMessageData from "./generic-message-data.mjs";
+import HitDieMessageData from "./hit-die-message-data.mjs";
+import HitPointsMessageData from "./hit-points-message-data.mjs";
 import RequestMessageData from "./request-message-data.mjs";
 import RestMessageData from "./rest-message-data.mjs";
+import RollMessageData from "./roll-message-data.mjs";
+import SaveMessageData from "./save-message-data.mjs";
 import TimePassedMessageData from "./time-passed-message-data.mjs";
 import TurnMessageData from "./turn-message-data.mjs";
 import UsageMessageData from "./usage-message-data.mjs";
@@ -9,8 +15,14 @@ import UsageMessageData from "./usage-message-data.mjs";
 export {
   BastionAttackMessageData,
   BastionTurnMessageData,
+  CheckMessageData,
+  GenericMessageData,
+  HitDieMessageData,
+  HitPointsMessageData,
   RequestMessageData,
   RestMessageData,
+  RollMessageData,
+  SaveMessageData,
   TimePassedMessageData,
   TurnMessageData,
   UsageMessageData
@@ -20,8 +32,13 @@ export * as fields from "./fields/_module.mjs";
 export const config = {
   bastionAttack: BastionAttackMessageData,
   bastionTurn: BastionTurnMessageData,
+  check: CheckMessageData,
+  generic: GenericMessageData,
+  hitDie: HitDieMessageData,
+  hitPoints: HitPointsMessageData,
   request: RequestMessageData,
   rest: RestMessageData,
+  save: SaveMessageData,
   timePassed: TimePassedMessageData,
   turn: TurnMessageData,
   usage: UsageMessageData

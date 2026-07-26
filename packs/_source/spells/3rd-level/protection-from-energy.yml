@@ -27,11 +27,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -51,8 +54,7 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    RavTrvsFDKAO6eCY:
       type: utility
       activation:
         type: action
@@ -66,18 +68,39 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: e0Ibmfgv8aTzvxiE
+          level:
+            min: null
+            max: null
+        - _id: u8CWVEZ9xQXeg7EU
+          level:
+            min: null
+            max: null
+        - _id: Md45M3QzPeWi5GsR
+          level:
+            min: null
+            max: null
+        - _id: mpQ2ucBu1e2zw56V
+          level:
+            min: null
+            max: null
+        - _id: Bi9lRQMuk1qVlWes
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -89,20 +112,237 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: RavTrvsFDKAO6eCY
   identifier: protection-from-energy
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-flaming-diamond-teal.webp
-effects: []
+img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
+effects:
+  - name: Protection from Acid
+    img: icons/magic/acid/projectile-faceted-glob.webp
+    origin: Compendium.dnd5e.spells.Item.j8NtLXOOJ3GAKF8I
+    transfer: false
+    _id: e0Ibmfgv8aTzvxiE
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: acid
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>For the duration, you have resistance to acid damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781360630818
+      modifiedTime: 1781360682855
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!j8NtLXOOJ3GAKF8I.e0Ibmfgv8aTzvxiE'
+  - name: Protection from Cold
+    img: icons/magic/water/snowflake-ice-blue-white.webp
+    origin: Compendium.dnd5e.spells.Item.j8NtLXOOJ3GAKF8I
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: cold
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>For the duration, you have resistance to cold damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781360684607
+      modifiedTime: 1781360702499
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: u8CWVEZ9xQXeg7EU
+    _key: '!items.effects!j8NtLXOOJ3GAKF8I.u8CWVEZ9xQXeg7EU'
+  - name: Protection from Fire
+    img: icons/magic/fire/flame-burning-earth-yellow.webp
+    origin: Compendium.dnd5e.spells.Item.j8NtLXOOJ3GAKF8I
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: fire
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>For the duration, you have resistance to fire damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781360704430
+      modifiedTime: 1781360725112
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: Md45M3QzPeWi5GsR
+    _key: '!items.effects!j8NtLXOOJ3GAKF8I.Md45M3QzPeWi5GsR'
+  - name: Protection from Lightning
+    img: icons/magic/lightning/bolt-blue.webp
+    origin: Compendium.dnd5e.spells.Item.j8NtLXOOJ3GAKF8I
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: lightning
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>For the duration, you have resistance to lightning damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781360711068
+      modifiedTime: 1781360775151
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: mpQ2ucBu1e2zw56V
+    _key: '!items.effects!j8NtLXOOJ3GAKF8I.mpQ2ucBu1e2zw56V'
+  - name: Protection from Thunder
+    img: icons/magic/sonic/explosion-shock-wave-teal.webp
+    origin: Compendium.dnd5e.spells.Item.j8NtLXOOJ3GAKF8I
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: thunder
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: <p>For the duration, you have resistance to thunder damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781360712048
+      modifiedTime: 1781360764471
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: Bi9lRQMuk1qVlWes
+    _key: '!items.effects!j8NtLXOOJ3GAKF8I.Bi9lRQMuk1qVlWes'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037363407
-  modifiedTime: 1725992722213
+  modifiedTime: 1781360808277
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!j8NtLXOOJ3GAKF8I'

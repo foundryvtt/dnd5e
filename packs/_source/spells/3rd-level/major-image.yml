@@ -47,14 +47,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -75,8 +78,7 @@ system:
     - material
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    tZTK1MKVEboN0uKu:
       type: utility
       activation:
         type: action
@@ -90,6 +92,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -97,11 +100,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -113,20 +118,92 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: tZTK1MKVEboN0uKu
+      name: Cast
+    yERIYrOq4Z2AzoCU:
+      type: check
+      name: Investigate Illusion Check
+      img: ''
+      sort: 200000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      check:
+        associated:
+          - inv
+        dc:
+          calculation: spellcasting
+          formula: ''
+        ability: ''
+        visible: true
+      _id: yERIYrOq4Z2AzoCU
   identifier: major-image
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+img: icons/commodities/treasure/glass-cube-teal.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037364833
-  modifiedTime: 1725992722652
+  modifiedTime: 1781360984696
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!nslx2nT3p4lNkmdp'

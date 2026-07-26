@@ -444,10 +444,10 @@
 
 /**
  * @typedef RegisteredItemData
- * @property {string} name        Name of the item.
- * @property {string} identifier  Item identifier.
- * @property {string} img         Item's icon.
- * @property {string[]} sources   UUIDs of different compendium items matching this identifier.
+ * @property {string} name         Name of the item.
+ * @property {string} identifier   Item identifier.
+ * @property {string} [img]        Item's icon.
+ * @property {string[]} [sources]  UUIDs of different compendium items matching this identifier.
  */
 
 /* -------------------------------------------- */
@@ -469,6 +469,7 @@
  * @property {boolean} [advanceTime=false]          Should the game clock be advanced by the rest duration?
  * @property {boolean} [autoHD=false]               Should hit dice be spent automatically during the rest?
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
+ * @property {string[]} [expiryEvents]              Active effect expiry events fired by the rest.
  * @property {number} [exhaustionDelta]             Delta exhaustion to apply to creatures undergoing the rest.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?

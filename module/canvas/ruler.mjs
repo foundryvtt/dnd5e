@@ -90,7 +90,7 @@ export default class TokenRuler5e extends foundry.canvas.placeables.tokens.Token
       || CONFIG.Token.movement.actions[waypoint.action]?.teleport ) return style;
 
     // Get actor's movement speed for currently selected token movement action
-    const movement = this.token.actor?.system.attributes?.movement;
+    const movement = this.token.actor?.system.attributes?.movement?.speeds;
     if ( !movement || !this.token.actor?.system.isCreature ) return style;
     let currActionSpeed = movement[waypoint.action] ?? 0;
 

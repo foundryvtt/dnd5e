@@ -90,6 +90,7 @@
  *                                  data is present, it will be used rather than fetching new data from the source.
  * @property {string[]} [selected]  UUIDs of items to add. If none provided, then will fall back to the items
  *                                  provided in the `items` object.
+ * @property {boolean} [skipExisting=true]  Don't add items if item with same source UUID has already been added.
  */
 
 /**

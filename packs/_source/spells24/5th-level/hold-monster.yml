@@ -102,20 +102,18 @@ effects:
   - name: Paralyzed
     origin: Compendium.dnd5e.spells24.Item.phbsplHoldMonste
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/paralyzed.svg
     _id: vC7qgyy8cjgi3t0T
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>At the end of each of its turns, the target repeats the [[/save
       ability=wis]] save, ending the spell on itself on a success.</p>
@@ -127,13 +125,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975575
+      modifiedTime: 1783543975575
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplHoldMonste.vC7qgyy8cjgi3t0T'
 folder: beZ8MTpWY2cMEUlp
 sort: 1600000
@@ -146,11 +147,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425958797
-  modifiedTime: 1745256794751
+  modifiedTime: 1783543975575
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHoldMonste'

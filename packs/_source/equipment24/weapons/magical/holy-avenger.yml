@@ -149,54 +149,71 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell5.webp
     disabled: true
     _id: I7Iwl7awPq2wftoF
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Holy Avenger {}
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgHolyAvenger00
-          caption=false]</p>
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: legendary
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '3'
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/swords/greatsword-guard-gem-blue.webp
-        priority: null
-      - key: activities[attack].description.chatFlavor
-        mode: 5
-        value: '{} Bonus Damage: 2d10 Radiant vs Fiend/Undead'
-        priority: null
-      - key: system.damage.parts
-        mode: 2
-        value: '[["0", "radiant"]]'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Holy Avenger {}
+          priority: null
+          type: override
+          phase: initial
+          _id: 1EGnSVNaZVlKJgQy
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgHolyAvenger00
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 1ECt8fnhBTq6TIK1
+        - key: system.rarity
+          value: legendary
+          priority: null
+          type: override
+          phase: initial
+          _id: szLMDXcjLHmH3NMZ
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: rm7GH7wFHK5AafhM
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: wpmDtYANmaHCR9bV
+        - key: system.magicalBonus
+          value: 3
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: fJw0XTYF1vrKfzaM
+        - key: img
+          value: icons/weapons/swords/greatsword-guard-gem-blue.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: M4AuTJMbEg4eVu9f
+        - key: activities[attack].description.chatFlavor
+          value: '{} Bonus Damage: 2d10 Radiant vs Fiend/Undead'
+          priority: null
+          type: override
+          phase: initial
+          _id: hElecDCOil7pKeKs
+        - key: system.damage.parts
+          value:
+            - - '0'
+              - radiant
+          priority: null
+          type: add
+          phase: initial
+          _id: GS2C38y2B59EOHS2
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -207,13 +224,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730147062199
-      modifiedTime: 1745438836668
+      modifiedTime: 1783544096250
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHolyAvenger00.I7Iwl7awPq2wftoF'
 folder: kie870i5kr7yuxO8
 flags:
@@ -224,11 +244,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700745
+  modifiedTime: 1783544096250
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8400000

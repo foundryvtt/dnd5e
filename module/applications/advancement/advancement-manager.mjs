@@ -910,12 +910,10 @@ export default class AdvancementManager extends Application5e {
     }
 
     // Apply changes from clone to original actor
-    await Promise.all([
-      this.actor.update(updates, { isAdvancement: true }),
-      this.actor.createEmbeddedDocuments("Item", toCreate, { keepId: true, isAdvancement: true }),
-      this.actor.updateEmbeddedDocuments("Item", toUpdate, { diff: false, recursive: false, isAdvancement: true }),
-      this.actor.deleteEmbeddedDocuments("Item", toDelete, { isAdvancement: true })
-    ]);
+    await this.actor.performBulkUpdate(
+      { actor: updates, create: toCreate, delete: toDelete, item: toUpdate },
+      { isAdvancement: true, updateOptions: { diff: false, recursive: false } }
+    );
 
     /**
      * A hook event that fires when an AdvancementManager is done modifying an actor.

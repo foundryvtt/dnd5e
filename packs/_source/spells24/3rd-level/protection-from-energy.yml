@@ -112,21 +112,21 @@ effects:
     transfer: false
     _id: RrJ5b1A9TghFe5QK
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: acid
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: R9xzpW7WZFvtm3je
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -135,34 +135,37 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725642969078
-      modifiedTime: 1725643201422
+      modifiedTime: 1783543973757
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbProtectionFro.RrJ5b1A9TghFe5QK'
   - name: Cold Protection
     img: icons/magic/water/snowflake-ice-snow-white.webp
     origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: cold
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+          phase: initial
+          _id: EuB8cZyihFt9Ao3V
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -171,35 +174,38 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725643027341
-      modifiedTime: 1725643220725
+      modifiedTime: 1783543973758
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: xDm8bqlMGiPq7nlt
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbProtectionFro.xDm8bqlMGiPq7nlt'
   - name: Fire Protection
     img: icons/magic/fire/flame-burning-skull-orange.webp
     origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: 4fCDtTNKAxR2i2hh
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -208,35 +214,38 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725643030302
-      modifiedTime: 1725643261565
+      modifiedTime: 1783543973758
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: DsflUNYKqETaLgxG
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbProtectionFro.DsflUNYKqETaLgxG'
   - name: Lightning Protection
     img: icons/magic/lightning/bolt-strike-blue-white.webp
     origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: lightning
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+          phase: initial
+          _id: fDOdMY2nTmLppyHl
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -245,35 +254,38 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725643035852
-      modifiedTime: 1725643280384
+      modifiedTime: 1783543973758
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 0ODEqmz3M45lwd8q
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbProtectionFro.0ODEqmz3M45lwd8q'
   - name: Thunder Protection
     img: icons/magic/sonic/explosion-shock-wave-teal.webp
     origin: Compendium.dnd5e.spells24.Item.phbProtectionFro
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: thunder
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: thunder
+          priority: null
+          type: add
+          phase: initial
+          _id: Mxtz25AuwQ9mdjbb
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -282,14 +294,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725643038391
-      modifiedTime: 1725643295217
+      modifiedTime: 1783543973758
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: M13rFIPjAIMwKzQp
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbProtectionFro.M13rFIPjAIMwKzQp'
 folder: HCovEE4VoPGlIbKi
 flags:
@@ -299,11 +314,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425939781
-  modifiedTime: 1745256784718
+  modifiedTime: 1783543973757
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 3900000

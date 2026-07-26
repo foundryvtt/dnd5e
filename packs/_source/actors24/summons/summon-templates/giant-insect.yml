@@ -478,12 +478,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -527,7 +524,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -547,6 +544,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - name: Spider Climb
     system:
@@ -593,10 +591,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiSpiderClim'
   - name: Multiattack
     system:
@@ -709,10 +709,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiMultiattac'
   - name: Poison Jab
     system:
@@ -855,10 +857,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiPoisonJab0'
   - name: Web Bolt
     system:
@@ -984,40 +988,47 @@ items:
       - name: Webbed
         origin: Compendium.dnd5e.actors24.Actor.phbmobGiantInsec.Item.phbaoiWebBoltSpi
         duration:
-          rounds: 1
-          startTime: null
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/creatures/invertebrates/spider-web-black.webp
         _id: Gvwt9wpCcJgC0yMl
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 3
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.burrow
-            mode: 3
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.climb
-            mode: 3
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.fly
-            mode: 3
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.swim
-            mode: 3
-            value: '0'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 0
+              priority: null
+              type: downgrade
+              phase: initial
+              _id: IKiZkNTKBtDTIm4O
+            - key: system.attributes.movement.burrow
+              value: 0
+              priority: null
+              type: downgrade
+              phase: initial
+              _id: ajDUNdNYiGRTE0ZA
+            - key: system.attributes.movement.climb
+              value: 0
+              priority: null
+              type: downgrade
+              phase: initial
+              _id: 9yKtj289ZloJ5XXq
+            - key: system.attributes.movement.fly
+              value: 0
+              priority: null
+              type: downgrade
+              phase: initial
+              _id: UTHrRE7UHLcJ0wL2
+            - key: system.attributes.movement.swim
+              value: 0
+              priority: null
+              type: downgrade
+              phase: initial
+              _id: b6f4ZiB88KetfuDn
         description: >-
           <p><span style="font-family:Signika, sans-serif">The target’s Speed is
           reduced to 0 until the start of the insect’s next turn.</span></p>
@@ -1029,10 +1040,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184759
+          modifiedTime: 1783544184759
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!phbmobGiantInsec.phbaoiWebBoltSpi.Gvwt9wpCcJgC0yMl
     folder: null
@@ -1044,10 +1060,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544184759
+      modifiedTime: 1783544184759
     _key: '!actors.items!phbmobGiantInsec.phbaoiWebBoltSpi'
   - name: Venomous Spew
     system:
@@ -1162,17 +1180,14 @@ items:
         transfer: false
         _id: jVWtHTrlPNi4dpDi
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Poisoned apply=false] condition
           until the start of the insect’s next turn.</p>
@@ -1186,10 +1201,15 @@ items:
             Compendium.dnd5e.actors24.Actor.phbginGiantCenti.Item.phbaoiVenomousSp.ActiveEffect.uUvxWKSj8qQRIbTK
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!phbmobGiantInsec.phbaoiVenomousSp.jVWtHTrlPNi4dpDi
     folder: null
@@ -1205,10 +1225,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiVenomousSp'
 effects: []
 folder: 4Lxoa4gitE28qJLk
@@ -1221,10 +1243,10 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452720611
-  modifiedTime: 1771452720611
+  systemVersion: 6.0.0
+  createdTime: 1783544184758
+  modifiedTime: 1783544184758
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbmobGiantInsec'
