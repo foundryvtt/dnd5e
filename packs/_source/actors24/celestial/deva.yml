@@ -482,12 +482,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -531,7 +528,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -551,6 +548,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmExaltedRestora
     name: Exalted Restoration
@@ -596,10 +594,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmExaltedRestora
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -646,10 +646,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -743,10 +745,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -909,10 +913,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmHolyMace000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1198,10 +1204,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1317,26 +1325,25 @@ items:
       identifier: detect-evil-and-good
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/perception/eye-ringed-green.webp
     effects:
       - name: Detect Evil and Good
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectEvil
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/perception/eye-ringed-green.webp
         _id: pOgbtXbKVGdbwjjE
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1346,47 +1353,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175471
+          modifiedTime: 1783544175471
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.b1uBxAcirNnGh1ik.pOgbtXbKVGdbwjjE
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.PUW703NwdwkuwC6U
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: JqSiE0BjBcX54A5p
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.PUW703NwdwkuwC6U
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175471
+          modifiedTime: 1783544175471
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.b1uBxAcirNnGh1ik.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1403,10 +1427,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectEvil
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175470
+      modifiedTime: 1783544175470
     _id: b1uBxAcirNnGh1ik
     _key: '!actors.items!mmDeva0000000000.b1uBxAcirNnGh1ik'
   - name: Shapechange
@@ -1523,6 +1549,7 @@ items:
       identifier: shapechange
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/hand-fire-skeleton-pink.webp
     effects:
@@ -1530,41 +1557,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.LniP0xUbiPhDd1VY
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-concentration'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: qCskcLq8IkNxEWNE
+            - key: system.properties
+              value: '-concentration'
+              priority: null
+              type: add
+              phase: initial
+              _id: ZBq7uhMHtKG8Qfn7
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.LniP0xUbiPhDd1VY
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175471
+          modifiedTime: 1783544175471
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.8NbTvaM4cujIXUzT.dnd5espellchange
     folder: iG0Zia8jh6uK39TB
@@ -1578,10 +1619,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShapechang
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175471
+      modifiedTime: 1783544175471
     _id: 8NbTvaM4cujIXUzT
     _key: '!actors.items!mmDeva0000000000.8NbTvaM4cujIXUzT'
   - name: Commune
@@ -1692,6 +1735,7 @@ items:
       identifier: commune
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/tools/laboratory/bowl-liquid-orange.webp
     effects:
@@ -1699,37 +1743,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.hng5jM1B74ylJxor
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: nMYvLggER4qoXvyc
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.hng5jM1B74ylJxor
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175472
+          modifiedTime: 1783544175472
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.RIzW4Hz3llGsevNc.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -1743,10 +1799,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommune000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175472
+      modifiedTime: 1783544175472
     _id: RIzW4Hz3llGsevNc
     _key: '!actors.items!mmDeva0000000000.RIzW4Hz3llGsevNc'
   - name: Raise Dead
@@ -1871,6 +1929,7 @@ items:
       identifier: raise-dead
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/death/skull-fire-white-yellow.webp
     effects:
@@ -1878,45 +1937,57 @@ items:
         img: icons/svg/stoned.svg
         _id: etY0sDrXe6DcFEzc
         type: base
-        system: {}
-        changes:
-          - key: system.bonuses.abilities.check
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.abilities.save
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.attributes.init.bonus
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
+        system:
+          changes:
+            - key: system.bonuses.abilities.check
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: grnvtYfM5IpFsm8C
+            - key: system.bonuses.abilities.save
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: CpKUoKHQMekOXXhd
+            - key: system.attributes.init.bonus
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: iHZJB0u6OA4r7FaG
+            - key: system.bonuses.mwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: E0TWIeUtxy0wOQdd
+            - key: system.bonuses.msak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: UjtPBzOxQ0YythYm
+            - key: system.bonuses.rsak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: Zb3rlEvJ5YtN08Ve
+            - key: system.bonuses.rwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: i2awG2VdkEtcWbvX
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>Coming back from the dead is an ordeal. The target takes a −4
           penalty to D20 Tests. Every time the target finishes a Long Rest, the
@@ -1931,54 +2002,71 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175473
+          modifiedTime: 1783544175473
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.t2FrmBjeFeQrFYPL.etY0sDrXe6DcFEzc
       - name: Resurrection Sickness (Day 2)
         img: icons/svg/stoned.svg
         type: base
-        system: {}
-        changes:
-          - key: system.bonuses.abilities.check
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.abilities.save
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.attributes.init.bonus
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
+        system:
+          changes:
+            - key: system.bonuses.abilities.check
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: BCeQn8cdCvzavqWM
+            - key: system.bonuses.abilities.save
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: Jgt9Z92Sv4nyObbk
+            - key: system.attributes.init.bonus
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: DmYhDmmkgLexLCxG
+            - key: system.bonuses.mwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: SsYLpjxZJcauuPbW
+            - key: system.bonuses.msak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: hRIJOzFdsIPMqeEg
+            - key: system.bonuses.rsak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: jP1BXtzd5WGjnxoo
+            - key: system.bonuses.rwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: lm326QCjndeFcTd3
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>Coming back from the dead is an ordeal. The target takes a −4
           penalty to D20 Tests. Every time the target finishes a Long Rest, the
@@ -1994,55 +2082,72 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175473
+          modifiedTime: 1783544175473
         _id: QUWVMgg2HidYsUxy
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.t2FrmBjeFeQrFYPL.QUWVMgg2HidYsUxy
       - name: Resurrection Sickness (Day 4)
         img: icons/svg/stoned.svg
         type: base
-        system: {}
-        changes:
-          - key: system.bonuses.abilities.check
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.abilities.save
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.attributes.init.bonus
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
+        system:
+          changes:
+            - key: system.bonuses.abilities.check
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: mAL4CdR5ovnfBq7a
+            - key: system.bonuses.abilities.save
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: DxsXu4AKB0Ll8W7U
+            - key: system.attributes.init.bonus
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: 7Lz27eIFa19TZedo
+            - key: system.bonuses.mwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: W7iSnsd55dipbv5B
+            - key: system.bonuses.msak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: qATchSnb6zoRT0iv
+            - key: system.bonuses.rsak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: I9A5jta7HeZ7Ty8l
+            - key: system.bonuses.rwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: NEyp9vPh7zK8CSBX
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>Coming back from the dead is an ordeal. The target takes a −4
           penalty to D20 Tests. Every time the target finishes a Long Rest, the
@@ -2058,55 +2163,72 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175474
+          modifiedTime: 1783544175474
         _id: vyf4vVVoGkZPyAqa
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.t2FrmBjeFeQrFYPL.vyf4vVVoGkZPyAqa
       - name: Resurrection Sickness (Day 3)
         img: icons/svg/stoned.svg
         type: base
-        system: {}
-        changes:
-          - key: system.bonuses.abilities.check
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.abilities.save
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.attributes.init.bonus
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.mwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.msak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rsak.attack
-            mode: 2
-            value: '-1'
-            priority: null
-          - key: system.bonuses.rwak.attack
-            mode: 2
-            value: '-1'
-            priority: null
+        system:
+          changes:
+            - key: system.bonuses.abilities.check
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: svFQ9TNVI9LthK4P
+            - key: system.bonuses.abilities.save
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: LALDqRJXLe9sHrAS
+            - key: system.attributes.init.bonus
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: JrD57wI8JAacsiVi
+            - key: system.bonuses.mwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: gSVMRFr5iwbxO7L6
+            - key: system.bonuses.msak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: bNRJnaFGbBLaLN6P
+            - key: system.bonuses.rsak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: QwCLTvIMVOaRyVK8
+            - key: system.bonuses.rwak.attack
+              value: -1
+              priority: null
+              type: add
+              phase: initial
+              _id: ELXxzcP19mTex0FK
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>Coming back from the dead is an ordeal. The target takes a −4
           penalty to D20 Tests. Every time the target finishes a Long Rest, the
@@ -2122,48 +2244,65 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplRaiseDead0.ActiveEffect.etY0sDrXe6DcFEzc
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175474
+          modifiedTime: 1783544175474
         _id: 0EAyGy8YaKbvgvkm
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.t2FrmBjeFeQrFYPL.0EAyGy8YaKbvgvkm
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.ul6rUb7jfPvlJjKv
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: uoJR9B6fSDBc9Mau
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.mmSpellcasting00.Activity.ul6rUb7jfPvlJjKv
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175474
+          modifiedTime: 1783544175474
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.t2FrmBjeFeQrFYPL.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2177,10 +2316,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRaiseDead0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175473
+      modifiedTime: 1783544175473
     _id: t2FrmBjeFeQrFYPL
     _key: '!actors.items!mmDeva0000000000.t2FrmBjeFeQrFYPL'
   - _id: fTAjzP4gCUSu149P
@@ -2400,7 +2541,7 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.monsterfeatures24.Item.mmDivineAid00000
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       createdTime: 1778174066166
@@ -2516,34 +2657,56 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.fTAjzP4gCUSu149P.Activity.mV8EoRveUz19SU1p
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: vEBK1a2tuCzF4jZV
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              type: override
+              phase: initial
+              _id: X6ATehQKHG9CS3fA
         disabled: false
         duration:
-          startTime: 284400
-          combat: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.fTAjzP4gCUSu149P.Activity.mV8EoRveUz19SU1p
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.2
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175474
+          modifiedTime: 1783544175474
+        start:
+          combat: null
+          time: 284400
+          combatant: null
+          initiative: null
+          round: null
+          turn: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.mH23ndCIXLPrvNkM.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2560,11 +2723,11 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLesserRest
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       createdTime: 1778174066300
-      modifiedTime: 1778174066300
+      modifiedTime: 1783544175474
       lastModifiedBy: dnd5ebuilder0000
     _id: mH23ndCIXLPrvNkM
     _key: '!actors.items!mmDeva0000000000.mH23ndCIXLPrvNkM'
@@ -2686,35 +2849,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.fTAjzP4gCUSu149P.Activity.rS3OtNIMk2OU66QP
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","condition":""}'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: XXHsc4TxG8E0p5uz
+            - key: system.activation
+              value:
+                type: bonus
+                condition: ''
+              type: override
+              phase: initial
+              _id: 2ePgKwotPQxJlbSE
         disabled: false
         duration:
-          startTime: 284400
-          combat: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.fTAjzP4gCUSu149P.Activity.rS3OtNIMk2OU66QP
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.2
+          systemVersion: 6.0.0
           lastModifiedBy: dnd5ebuilder0000
-          modifiedTime: 1778174170374
+          modifiedTime: 1783544175475
+          createdTime: 1783544175475
+        start:
+          combat: null
+          time: 284400
+          combatant: null
+          initiative: null
+          round: null
+          turn: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.BeGSMs1GVEiu4IgP.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2731,11 +2914,11 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCureWounds
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       createdTime: 1778174148150
-      modifiedTime: 1778174148150
+      modifiedTime: 1783544175475
       lastModifiedBy: dnd5ebuilder0000
     _id: BeGSMs1GVEiu4IgP
     _key: '!actors.items!mmDeva0000000000.BeGSMs1GVEiu4IgP'
@@ -2851,35 +3034,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.fTAjzP4gCUSu149P.Activity.CwqLoHE2zcOmilrW
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","condition":""}'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: kC7RvETPEyWANCyC
+            - key: system.activation
+              value:
+                type: bonus
+                condition: ''
+              type: override
+              phase: initial
+              _id: DTl4HpvRgclmIVmx
         disabled: false
         duration:
-          startTime: 284400
-          combat: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDeva0000000000.Item.fTAjzP4gCUSu149P.Activity.CwqLoHE2zcOmilrW
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.2
+          systemVersion: 6.0.0
           lastModifiedBy: dnd5ebuilder0000
-          modifiedTime: 1778174172351
+          modifiedTime: 1783544175475
+          createdTime: 1783544175475
+        start:
+          combat: null
+          time: 284400
+          combatant: null
+          initiative: null
+          round: null
+          turn: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDeva0000000000.7eVbHabgeTUA6Vvh.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2896,11 +3099,11 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRemoveCurs
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       createdTime: 1778174149825
-      modifiedTime: 1778174149825
+      modifiedTime: 1783544175475
       lastModifiedBy: dnd5ebuilder0000
     _id: 7eVbHabgeTUA6Vvh
     _key: '!actors.items!mmDeva0000000000.7eVbHabgeTUA6Vvh'
@@ -2912,11 +3115,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452700347
-  modifiedTime: 1771452700347
+  systemVersion: 6.0.0
+  createdTime: 1783544175470
+  modifiedTime: 1783544175470
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

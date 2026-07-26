@@ -529,10 +529,7 @@ prototypeToken:
   texture:
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
     src: systems/dnd5e/icons/svg/actors/character.svg
@@ -579,7 +576,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -601,6 +598,7 @@ prototypeToken:
   randomImg: false
   appendNumber: false
   prependAdjective: false
+  depth: 1
 items:
   - name: Human
     system:
@@ -738,10 +736,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbspHuman000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.cMEhIqzMYKu7zlaO'
@@ -787,10 +787,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptResourcefu
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 100000
     ownership:
       default: 0
@@ -841,10 +843,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptSkillful00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 200000
     ownership:
       default: 0
@@ -898,10 +902,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptVersatile0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 150000
     ownership:
       default: 0
@@ -974,10 +980,12 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbftSkilled0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.x2ry76h0dhnBKBt1'
@@ -1139,10 +1147,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.caFi0Tslu7qxmXTK'
@@ -1193,21 +1203,20 @@ items:
         img: icons/creatures/eyes/human-single-brown.webp
         _id: uvZy4Zzi0oPd54qs
         type: base
-        system: {}
-        changes:
-          - key: flags.dnd5e.initiativeAlert
-            mode: 2
-            value: 'true'
-            priority: null
+        system:
+          changes:
+            - key: flags.dnd5e.initiativeAlert
+              value: true
+              priority: null
+              type: add
+              phase: initial
+              _id: sQlXFslQUSGTEHF7
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -1222,10 +1231,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122405
+          modifiedTime: 1783544122405
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.J42CWbBer23HsBL9.uvZy4Zzi0oPd54qs
     folder: d5jrO8A6QpjEV9rn
@@ -1239,10 +1259,12 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbftAlert000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122405
+      modifiedTime: 1783544122405
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.J42CWbBer23HsBL9'
@@ -1968,10 +1990,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdDruid00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -2066,10 +2090,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdSpellcasti
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 800000
     ownership:
       default: 0
@@ -2128,10 +2154,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdDruidic000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 300000
     ownership:
       default: 0
@@ -2189,10 +2217,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 700000
     ownership:
       default: 0
@@ -2309,24 +2339,24 @@ items:
       - name: Bestial Communication
         origin: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/creatures/mammals/dog-husky-white-blue.webp
         _id: lHx55SIuimKR3ALR
         type: base
-        system: {}
-        changes:
-          - key: system.traits.languages.custom
-            mode: 2
-            value: ;comprehend and verbally communicate with Beasts
-            priority: null
+        system:
+          changes:
+            - key: system.traits.languages.custom
+              value: ;comprehend and verbally communicate with Beasts
+              priority: null
+              type: add
+              phase: initial
+              _id: N9BR2P6Ps3DUYJL2
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -2336,10 +2366,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122406
+          modifiedTime: 1783544122406
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.n8vESdT4PJtiFw1F.lHx55SIuimKR3ALR
     folder: pBaAAtXBCq9FVEnL
@@ -2353,10 +2388,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122406
+      modifiedTime: 1783544122406
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.n8vESdT4PJtiFw1F'
@@ -2401,28 +2438,29 @@ items:
       - name: 'Primal Order: Warden'
         origin: Item.phbPrimalOrderWa
         duration:
-          rounds: null
-          startTime: 0
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/items/feature.svg
         _id: j6MsESItx2TEvDju
         type: base
-        system: {}
-        changes:
-          - key: system.traits.armorProf.value
-            mode: 2
-            value: '"med"'
-            priority: null
-          - key: system.traits.weaponProf.value
-            mode: 2
-            value: '"mar"'
-            priority: null
+        system:
+          changes:
+            - key: system.traits.armorProf.value
+              value: med
+              priority: null
+              type: add
+              phase: initial
+              _id: cKDVrzSUGDOV7Ds5
+            - key: system.traits.weaponProf.value
+              value: mar
+              priority: null
+              type: add
+              phase: initial
+              _id: KANsWM2qBf9EwsrG
         description: ''
         tint: '#ffffff'
         transfer: true
@@ -2432,10 +2470,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122406
+          modifiedTime: 1783544122406
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.GBSFN896aPOdii01.j6MsESItx2TEvDju
     folder: EXYmwRGoNyMbByN1
@@ -2448,10 +2497,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbPrimalOrderWa
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122406
+      modifiedTime: 1783544122406
     sort: 1050000
     ownership:
       default: 0
@@ -2511,10 +2562,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagCaseMaporSc
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.sLcRTHOgDG0K2gYH'
@@ -2561,10 +2614,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagBlanket0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.ga9jjjbiSB4CWulw'
@@ -2634,10 +2689,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagClothesTrav
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.ACvsOKJUvEvAtZcl'
@@ -2762,10 +2819,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbtulHerbalismK
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.fksmE2j9z26bbTaM'
@@ -2834,42 +2893,51 @@ items:
         img: systems/dnd5e/icons/spell-tiers/spell2.webp
         disabled: false
         _id: BUmKKixz42XPFONq
-        system: {}
-        changes:
-          - key: name
-            mode: 5
-            value: '{} +1'
-            priority: null
-          - key: system.rarity
-            mode: 5
-            value: uncommon
-            priority: null
-          - key: system.description.value
-            mode: 5
-            value: >-
-              {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgShield12or300
-              caption=false]</p>
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: mgc
-            priority: null
-          - key: system.armor.magicalBonus
-            mode: 4
-            value: '1'
-            priority: null
-          - key: system.price.value
-            mode: 2
-            value: '400'
-            priority: null
+        system:
+          changes:
+            - key: name
+              value: '{} +1'
+              priority: null
+              type: override
+              phase: initial
+              _id: 9LhXlVa3lGyjagnL
+            - key: system.rarity
+              value: uncommon
+              priority: null
+              type: override
+              phase: initial
+              _id: A1VjIncrDSnvOqBi
+            - key: system.description.value
+              value: >-
+                {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgShield12or300
+                caption=false]</p>
+              priority: null
+              type: override
+              phase: initial
+              _id: PXt9zVZXtMhBiZrH
+            - key: system.properties
+              value: mgc
+              priority: null
+              type: add
+              phase: initial
+              _id: eT2zA60raE1yHexz
+            - key: system.armor.magicalBonus
+              value: 1
+              priority: null
+              type: upgrade
+              phase: initial
+              _id: GtkeY1zdI1EUFOOo
+            - key: system.price.value
+              value: 400
+              priority: null
+              type: add
+              phase: initial
+              _id: jwqWPUKOKoyj93DE
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         origin: Compendium.dnd5e.equipment24.Item.dmgShield12or300
         tint: '#ffffff'
@@ -2882,10 +2950,15 @@ items:
             Compendium.dnd5e.equipment24.Item.dmgShield12or300.ActiveEffect.9X6TAHEQJAzN96cl
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122407
+          modifiedTime: 1783544122407
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.OkPGEgZet5e8Yvds.BUmKKixz42XPFONq
     sort: 100000
@@ -2894,10 +2967,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmShield0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122407
+      modifiedTime: 1783544122407
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.OkPGEgZet5e8Yvds'
@@ -3061,10 +3136,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepSickle0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.6PiUEjxGjS0uAI7h'
@@ -3213,48 +3290,61 @@ items:
         name: Shillelagh (1d10)
         img: icons/magic/nature/root-vine-coiled-crook.webp
         disabled: false
-        system: {}
-        changes:
-          - key: system.damage.base.denomination
-            mode: 5
-            value: '10'
-            priority: null
-          - key: system.damage.base.types
-            mode: 2
-            value: force
-            priority: null
-          - key: system.damage.base.number
-            mode: 5
-            value: '1'
-            priority: null
-          - key: name
-            mode: 5
-            value: '{} (Shillelagh)'
-            priority: null
-          - key: system.damage.base.custom.enabled
-            mode: 5
-            value: '0'
-            priority: null
-          - key: activities[attack].attack.ability
-            mode: 5
-            value: none
-            priority: null
-          - key: activities[attack].attack.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
-          - key: system.damage.base.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
+        system:
+          changes:
+            - key: system.damage.base.denomination
+              value: 10
+              priority: null
+              type: override
+              phase: initial
+              _id: oJc2u891ITXud1cc
+            - key: system.damage.base.types
+              value: force
+              priority: null
+              type: add
+              phase: initial
+              _id: lGnFaEaEl4PRR4VL
+            - key: system.damage.base.number
+              value: 1
+              priority: null
+              type: override
+              phase: initial
+              _id: YOKCPG93BNQdsWIp
+            - key: name
+              value: '{} (Shillelagh)'
+              priority: null
+              type: override
+              phase: initial
+              _id: mLlVc7Jcl1JWFLOn
+            - key: system.damage.base.custom.enabled
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: Z796ZhYLmF9Sc8gC
+            - key: activities[attack].attack.ability
+              value: none
+              priority: null
+              type: override
+              phase: initial
+              _id: 9qyeBAKXw6Xf00qn
+            - key: activities[attack].attack.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: WvVd4KjB7sjsCtGy
+            - key: system.damage.base.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: TC4lDcLEnGFp6iwm
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         origin: Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.dwMaTtPq9jnWmVLG
         tint: '#ffffff'
@@ -3267,11 +3357,16 @@ items:
             Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.dwMaTtPq9jnWmVLG.ActiveEffect.Oy8fnNNzPmehxXio
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122407
+          modifiedTime: 1783544122407
         _id: P7mOjEEGO5el92Be
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.hJhbXaZdpO3FQxzb.P7mOjEEGO5el92Be
     sort: 0
@@ -3280,10 +3375,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122407
+      modifiedTime: 1783544122407
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.hJhbXaZdpO3FQxzb'
@@ -3350,10 +3447,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.f9Ql0O4GwOIoaj7s'
@@ -3479,10 +3578,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagTinderbox00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.oQ33sOFbaYOJIVkQ'
@@ -3722,10 +3823,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagRope0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.5FWKCtyB8xQdFtiZ'
@@ -3772,10 +3875,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagBedroll0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.vsbVmwogcDr9PBTx'
@@ -3832,10 +3937,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagWaterskin00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.09TlVNQUiMsgsjNX'
@@ -3953,10 +4060,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbWaterpint0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: Hg98zbyUsAnPgvde
     sort: 100000
     ownership:
@@ -4108,10 +4217,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagTorch000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.fjnGiHB9KwgOgzq8'
@@ -4326,10 +4437,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagOil00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.Pi97S5euSOQEvz6e'
@@ -4394,10 +4507,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagRations0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.ZJsiwoEvh2PMbj5z'
@@ -4521,10 +4636,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCureWounds
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.13KeNgoeriSW45ZW'
@@ -4766,10 +4883,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdWildCompan
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 900000
     ownership:
       default: 0
@@ -4897,10 +5016,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdCirland000
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 100000
     ownership:
       default: 0
@@ -4985,10 +5106,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdLandSpells
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 200000
     ownership:
       default: 0
@@ -5193,10 +5316,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdLandsAid00
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 100000
     ownership:
       default: 0
@@ -5402,10 +5527,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdWildResurg
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 1000000
     ownership:
       default: 0
@@ -5543,10 +5670,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLightningB
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.CnW7pVHXp3IPlDnP'
@@ -5660,10 +5789,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMistyStep0
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.NHXpP5jkn7z7xils'
@@ -5792,20 +5923,18 @@ items:
       - name: Sleeping
         origin: Compendium.dnd5e.spells24.Item.phbsplSleep00000
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/control/sleep-bubble-purple.webp
         _id: 04Wa4xUzjA31kPno
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>The target has the &amp;Reference[incapacitated apply=false]
           condition until the end of its next turn, at which point it must
@@ -5822,10 +5951,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122407
+          modifiedTime: 1783544122407
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.BEfDOU3fod1g2mXZ.04Wa4xUzjA31kPno
     folder: pBaAAtXBCq9FVEnL
@@ -5835,10 +5969,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSleep00000
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122407
+      modifiedTime: 1783544122407
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.BEfDOU3fod1g2mXZ'
@@ -5980,17 +6116,15 @@ items:
         transfer: false
         _id: DQCAm67ck1GEKHtE
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target can’t make Opportunity Attacks until the start of its
           next turn.</p>
@@ -6002,10 +6136,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122408
+          modifiedTime: 1783544122408
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.0yKtuDmblHthSHBC.DQCAm67ck1GEKHtE
     folder: 4FhsY9FJQd7h7MZb
@@ -6015,10 +6154,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShockingGr
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122408
+      modifiedTime: 1783544122408
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.0yKtuDmblHthSHBC'
@@ -6170,21 +6311,21 @@ items:
         transfer: false
         _id: GezMMzvZhWXEYyGm
         type: base
-        system: {}
-        changes:
-          - key: system.skills.acr.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.acr.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: 0U7YGhDlpKQZFu6c
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6194,10 +6335,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122410
+          modifiedTime: 1783544122410
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.GezMMzvZhWXEYyGm
       - name: Animal Handling Guidance
@@ -6205,21 +6351,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.ani.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.ani.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: SU1R7ejkXrLhKlyo
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6229,11 +6375,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122410
+          modifiedTime: 1783544122410
         _id: y6aODSkiubtFt6Ap
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.y6aODSkiubtFt6Ap
       - name: Arcana Guidance
@@ -6241,21 +6392,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.arc.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.arc.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: bm8MNRLgAnqDClhQ
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6265,11 +6416,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122410
+          modifiedTime: 1783544122410
         _id: Vlfh8IFOezrSpeBZ
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.Vlfh8IFOezrSpeBZ
       - name: Athletic Guidance
@@ -6277,21 +6433,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.ath.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.ath.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: P2aW8FJzAY7uNezS
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6301,11 +6457,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122411
+          modifiedTime: 1783544122411
         _id: sPkLWVpkJ7NqDQT0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.sPkLWVpkJ7NqDQT0
       - name: Deception Guidance
@@ -6313,21 +6474,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.dec.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.dec.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: Iu2O49QSJd5KqAWK
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6337,11 +6498,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122411
+          modifiedTime: 1783544122411
         _id: Je4xWElmaiSDsOjU
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.Je4xWElmaiSDsOjU
       - name: History Guidance
@@ -6349,21 +6515,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.his.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.his.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: 340E5OcbB0hG9HvN
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6373,11 +6539,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122411
+          modifiedTime: 1783544122411
         _id: cw02ZbuiRn6GyoEv
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.cw02ZbuiRn6GyoEv
       - name: Insight Guidance
@@ -6385,21 +6556,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.ins.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.ins.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: GX3Sw9kVQJZs1ZXZ
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6409,11 +6580,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122412
+          modifiedTime: 1783544122412
         _id: VsU5vUhMioT9pCwG
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.VsU5vUhMioT9pCwG
       - name: Investigation Guidance
@@ -6421,21 +6597,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.inv.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.inv.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: Ta7L2OHA5La7txRV
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6445,11 +6621,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122412
+          modifiedTime: 1783544122412
         _id: UQixxmOdHUDjVYNh
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.UQixxmOdHUDjVYNh
       - name: Intimidation Guidance
@@ -6457,21 +6638,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.itm.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.itm.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: YThOPtwLKbiVrgJY
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6481,11 +6662,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: Cpte6tynFFJbraX2
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.Cpte6tynFFJbraX2
       - name: Medicine Guidance
@@ -6493,21 +6679,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.med.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.med.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: PhB0DCv9vI1J8lXg
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6517,11 +6703,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: Vl1YSG1DlZvx9nSI
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.Vl1YSG1DlZvx9nSI
       - name: Nature Guidance
@@ -6529,21 +6720,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.nat.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.nat.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: imsCf7zKGThqIqWC
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6553,11 +6744,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: IqxGXju1tYDWoda6
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.IqxGXju1tYDWoda6
       - name: Persuasion Guidance
@@ -6565,21 +6761,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.per.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.per.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: K1WKGJGltTmQeS7M
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6589,11 +6785,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: fCdLUO5DoSIT4wVK
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.fCdLUO5DoSIT4wVK
       - name: Perception Guidance
@@ -6601,21 +6802,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.prc.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.prc.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: 2osIDOARuPkIO4AQ
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6625,11 +6826,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: qPowjrduxnzKpH8x
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.qPowjrduxnzKpH8x
       - name: Performance Guidance
@@ -6637,21 +6843,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.prf.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.prf.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: z2mquqt3p63p3Ocn
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6661,11 +6867,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: E4BqoCkyoKLJbGmb
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.E4BqoCkyoKLJbGmb
       - name: Religion Guidance
@@ -6673,21 +6884,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.rel.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.rel.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: 4jFgDXXcRAZveude
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6697,11 +6908,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: jVKWknHHFuMwvTct
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.jVKWknHHFuMwvTct
       - name: Sleight of Hand Guidance
@@ -6709,21 +6925,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.slt.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.slt.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: Xzl19NfQ5K1fO1T0
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6733,11 +6949,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: pwFahx7uqM4DOgnu
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.pwFahx7uqM4DOgnu
       - name: Stealth Guidance
@@ -6745,21 +6966,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.ste.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.ste.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: xWJNWAMX8niOhQA4
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6769,11 +6990,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: Vb4iRJ73Nw78UUMW
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.Vb4iRJ73Nw78UUMW
       - name: Survival Guidance
@@ -6781,21 +7007,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplGuidance00
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.skills.sur.bonuses.check
-            mode: 2
-            value: 1d4
-            priority: null
+        system:
+          changes:
+            - key: system.skills.sur.bonuses.check
+              value: 1d4
+              priority: null
+              type: add
+              phase: initial
+              _id: Ic8po8CDWUyWasXG
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -6805,11 +7031,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122413
+          modifiedTime: 1783544122413
         _id: A1T0X0DUFIxx3qhE
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.vypxLIVJ7z7lS6qF.A1T0X0DUFIxx3qhE
     folder: 4FhsY9FJQd7h7MZb
@@ -6819,10 +7050,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGuidance00
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122410
+      modifiedTime: 1783544122410
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.vypxLIVJ7z7lS6qF'
@@ -6964,17 +7197,15 @@ items:
         transfer: false
         _id: T9kBIL7LS3j0Upwz
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Until the end of your next turn, it emits Dim Light in a 10-foot
           radius and can’t benefit from the &amp;Reference[Invisible]
@@ -6987,10 +7218,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122414
+          modifiedTime: 1783544122414
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.eTQlzMLdqIOiq4a5.T9kBIL7LS3j0Upwz
     folder: 4FhsY9FJQd7h7MZb
@@ -7000,10 +7236,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplStarryWisp
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122414
+      modifiedTime: 1783544122414
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.eTQlzMLdqIOiq4a5'
@@ -7229,48 +7467,61 @@ items:
         img: icons/magic/nature/root-vine-coiled-crook.webp
         disabled: false
         _id: QPsqj6jfS0iXSrTs
-        system: {}
-        changes:
-          - key: system.damage.base.denomination
-            mode: 5
-            value: '8'
-            priority: null
-          - key: system.damage.base.types
-            mode: 2
-            value: force
-            priority: null
-          - key: system.damage.base.number
-            mode: 5
-            value: '1'
-            priority: null
-          - key: name
-            mode: 5
-            value: '{} Shillelagh'
-            priority: null
-          - key: system.damage.base.custom.enabled
-            mode: 5
-            value: '0'
-            priority: null
-          - key: activities[attack].attack.ability
-            mode: 5
-            value: none
-            priority: null
-          - key: activities[attack].attack.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
-          - key: system.damage.base.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
+        system:
+          changes:
+            - key: system.damage.base.denomination
+              value: 8
+              priority: null
+              type: override
+              phase: initial
+              _id: 3NCbnKzEpE4MWZQz
+            - key: system.damage.base.types
+              value: force
+              priority: null
+              type: add
+              phase: initial
+              _id: 81YSU2KXArUdwawg
+            - key: system.damage.base.number
+              value: 1
+              priority: null
+              type: override
+              phase: initial
+              _id: yUtWR81mjEAVxdXI
+            - key: name
+              value: '{} Shillelagh'
+              priority: null
+              type: override
+              phase: initial
+              _id: HFu4nH9MYFEwJUid
+            - key: system.damage.base.custom.enabled
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: agQPiqrcsiue1Ad0
+            - key: activities[attack].attack.ability
+              value: none
+              priority: null
+              type: override
+              phase: initial
+              _id: qKw1BA9FpUo257G6
+            - key: activities[attack].attack.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: SW3H7ILeJFTCMnc8
+            - key: system.damage.base.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: yF4W2Sdqxoqf1K7r
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -7282,58 +7533,76 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122415
+          modifiedTime: 1783544122415
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.dwMaTtPq9jnWmVLG.QPsqj6jfS0iXSrTs
       - type: enchantment
         name: Shillelagh (1d10)
         img: icons/magic/nature/root-vine-coiled-crook.webp
         disabled: false
-        system: {}
-        changes:
-          - key: system.damage.base.denomination
-            mode: 5
-            value: '10'
-            priority: null
-          - key: system.damage.base.types
-            mode: 2
-            value: force
-            priority: null
-          - key: system.damage.base.number
-            mode: 5
-            value: '1'
-            priority: null
-          - key: name
-            mode: 5
-            value: '{} (Shillelagh)'
-            priority: null
-          - key: system.damage.base.custom.enabled
-            mode: 5
-            value: '0'
-            priority: null
-          - key: activities[attack].attack.ability
-            mode: 5
-            value: none
-            priority: null
-          - key: activities[attack].attack.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
-          - key: system.damage.base.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
+        system:
+          changes:
+            - key: system.damage.base.denomination
+              value: 10
+              priority: null
+              type: override
+              phase: initial
+              _id: DURKm8dx7hXpCSVa
+            - key: system.damage.base.types
+              value: force
+              priority: null
+              type: add
+              phase: initial
+              _id: u7TZz7VCGAQLgsZx
+            - key: system.damage.base.number
+              value: 1
+              priority: null
+              type: override
+              phase: initial
+              _id: 6vY54GV8leNwCAJv
+            - key: name
+              value: '{} (Shillelagh)'
+              priority: null
+              type: override
+              phase: initial
+              _id: 8CaJAiMrV9nWxhbE
+            - key: system.damage.base.custom.enabled
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: nYSjjZgbVWDMaewI
+            - key: activities[attack].attack.ability
+              value: none
+              priority: null
+              type: override
+              phase: initial
+              _id: rajvboGPuOHkxV5J
+            - key: activities[attack].attack.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: mZ4GOdW4ANrXiI8U
+            - key: system.damage.base.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: EWakW4qCePhzgYOd
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -7346,59 +7615,77 @@ items:
             Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.dwMaTtPq9jnWmVLG.ActiveEffect.Oy8fnNNzPmehxXio
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122415
+          modifiedTime: 1783544122415
         _id: Oy8fnNNzPmehxXio
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.dwMaTtPq9jnWmVLG.Oy8fnNNzPmehxXio
       - type: enchantment
         name: Shillelagh (1d12)
         img: icons/magic/nature/root-vine-coiled-crook.webp
         disabled: false
-        system: {}
-        changes:
-          - key: system.damage.base.denomination
-            mode: 5
-            value: '12'
-            priority: null
-          - key: system.damage.base.types
-            mode: 2
-            value: force
-            priority: null
-          - key: system.damage.base.number
-            mode: 5
-            value: '1'
-            priority: null
-          - key: name
-            mode: 5
-            value: '{} (Shillelagh)'
-            priority: null
-          - key: system.damage.base.custom.enabled
-            mode: 5
-            value: '0'
-            priority: null
-          - key: activities[attack].attack.ability
-            mode: 5
-            value: none
-            priority: null
-          - key: activities[attack].attack.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
-          - key: system.damage.base.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
+        system:
+          changes:
+            - key: system.damage.base.denomination
+              value: 12
+              priority: null
+              type: override
+              phase: initial
+              _id: 8oer6J4RptsbJ4oi
+            - key: system.damage.base.types
+              value: force
+              priority: null
+              type: add
+              phase: initial
+              _id: bfDGm3EJXnbinMCV
+            - key: system.damage.base.number
+              value: 1
+              priority: null
+              type: override
+              phase: initial
+              _id: gkV7GgnX6LYnNdub
+            - key: name
+              value: '{} (Shillelagh)'
+              priority: null
+              type: override
+              phase: initial
+              _id: iZNekS533tuXWo3w
+            - key: system.damage.base.custom.enabled
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: NYwuoAWHfuwrGMxe
+            - key: activities[attack].attack.ability
+              value: none
+              priority: null
+              type: override
+              phase: initial
+              _id: MfmOhcgDJOiXHUDF
+            - key: activities[attack].attack.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: jVKCClnfgJKe1PTR
+            - key: system.damage.base.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: iko1bVW6q6L27eV2
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -7410,59 +7697,77 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122415
+          modifiedTime: 1783544122415
         _id: advnpQaBnsbuv02y
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.dwMaTtPq9jnWmVLG.advnpQaBnsbuv02y
       - type: enchantment
         name: Shillelagh (2d6)
         img: icons/magic/nature/root-vine-coiled-crook.webp
         disabled: false
-        system: {}
-        changes:
-          - key: system.damage.base.denomination
-            mode: 5
-            value: '6'
-            priority: null
-          - key: system.damage.base.types
-            mode: 2
-            value: force
-            priority: null
-          - key: system.damage.base.number
-            mode: 5
-            value: '2'
-            priority: null
-          - key: name
-            mode: 5
-            value: '{} (Shillelagh)'
-            priority: null
-          - key: system.damage.base.custom.enabled
-            mode: 5
-            value: '0'
-            priority: null
-          - key: activities[attack].attack.ability
-            mode: 5
-            value: none
-            priority: null
-          - key: activities[attack].attack.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
-          - key: system.damage.base.bonus
-            mode: 2
-            value: max(@abilities.str.mod, @attributes.spell.mod)
-            priority: null
+        system:
+          changes:
+            - key: system.damage.base.denomination
+              value: 6
+              priority: null
+              type: override
+              phase: initial
+              _id: QGZefFW6OCPJpgrn
+            - key: system.damage.base.types
+              value: force
+              priority: null
+              type: add
+              phase: initial
+              _id: DwPoSrS1qfSfTouB
+            - key: system.damage.base.number
+              value: 2
+              priority: null
+              type: override
+              phase: initial
+              _id: 7TaaLjsxF3rRKajV
+            - key: name
+              value: '{} (Shillelagh)'
+              priority: null
+              type: override
+              phase: initial
+              _id: slhoFp1ymfLAv3uz
+            - key: system.damage.base.custom.enabled
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: WOgRQVa6SFE55hIp
+            - key: activities[attack].attack.ability
+              value: none
+              priority: null
+              type: override
+              phase: initial
+              _id: SZXMOo3arC8t2N9e
+            - key: activities[attack].attack.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: i3YiOqjqRaS7ijDH
+            - key: system.damage.base.bonus
+              value: max(@abilities.str.mod, @attributes.spell.mod)
+              priority: null
+              type: add
+              phase: initial
+              _id: 1Aj1wPmiiATzRBPU
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -7474,11 +7779,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122415
+          modifiedTime: 1783544122415
         _id: X9xoN8qHUiCc4SZR
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.dwMaTtPq9jnWmVLG.X9xoN8qHUiCc4SZR
     folder: 4FhsY9FJQd7h7MZb
@@ -7488,10 +7798,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplShillelagh
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122415
+      modifiedTime: 1783544122415
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.dwMaTtPq9jnWmVLG'
@@ -7651,21 +7963,21 @@ items:
         transfer: false
         _id: XyGKCCrIhrFlixG8
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '5'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 5
+              priority: null
+              type: add
+              phase: initial
+              _id: hT9oXcR4aEhwAHmI
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7675,10 +7987,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122416
+          modifiedTime: 1783544122416
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.XyGKCCrIhrFlixG8
       - name: 'Level 3: +10 Max HP'
@@ -7686,21 +8003,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '10'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 10
+              priority: null
+              type: add
+              phase: initial
+              _id: 2OyzvD9nrTAiDAGz
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7711,11 +8028,16 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122416
+          modifiedTime: 1783544122416
         _id: cTNQ2KRJLj4CRpQJ
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.cTNQ2KRJLj4CRpQJ
       - name: 'Level 4: +15 Max HP'
@@ -7723,21 +8045,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '15'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 15
+              priority: null
+              type: add
+              phase: initial
+              _id: 7hnDU2qknBFdXmdw
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7748,11 +8070,16 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122416
+          modifiedTime: 1783544122416
         _id: 6hOGzq87iQntkHE5
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.6hOGzq87iQntkHE5
       - name: 'Level 5: +20 Max HP'
@@ -7760,21 +8087,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '20'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 20
+              priority: null
+              type: add
+              phase: initial
+              _id: 2aW6aIxxF8XJ9WYJ
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7785,11 +8112,16 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122416
+          modifiedTime: 1783544122416
         _id: Fs7zeTW4u9SvteWO
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.Fs7zeTW4u9SvteWO
       - name: 'Level 6: +25 Max HP'
@@ -7797,21 +8129,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '25'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 25
+              priority: null
+              type: add
+              phase: initial
+              _id: K1a0Mf7IBxcqT9sN
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7822,11 +8154,16 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122416
+          modifiedTime: 1783544122416
         _id: o1Gvp7nIrEHqdn3g
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.o1Gvp7nIrEHqdn3g
       - name: 'Level 7: +30 Max HP'
@@ -7834,21 +8171,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '30'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 30
+              priority: null
+              type: add
+              phase: initial
+              _id: FfbPgIBYV5e4Au33
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7859,11 +8196,16 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122417
+          modifiedTime: 1783544122417
         _id: n4jjrd9bNOaDkos7
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.n4jjrd9bNOaDkos7
       - name: 'Level 8: +35 Max HP'
@@ -7871,21 +8213,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '35'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 35
+              priority: null
+              type: add
+              phase: initial
+              _id: GOMi6gnekxE6JN9g
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7896,11 +8238,16 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122417
+          modifiedTime: 1783544122417
         _id: EHMDA2J47jwUUTKu
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.EHMDA2J47jwUUTKu
       - name: 'Level 9: +40 Max HP'
@@ -7908,21 +8255,21 @@ items:
         origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
         transfer: false
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.hp.tempmax
-            mode: 2
-            value: '40'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.hp.tempmax
+              value: 40
+              priority: null
+              type: add
+              phase: initial
+              _id: L2ab8w0dqHjkkbIL
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: <p>The target's Hit Point maximum is increased for the duration.</p>
         tint: '#ffffff'
         statuses: []
@@ -7933,11 +8280,16 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122417
+          modifiedTime: 1783544122417
         _id: YnQP5Rd6w5NwZVLN
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.nU7zYRnuAgjEivkD.YnQP5Rd6w5NwZVLN
     folder: 3SjcO2acsFnWegp4
@@ -7947,10 +8299,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplAid0000000
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122416
+      modifiedTime: 1783544122416
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.nU7zYRnuAgjEivkD'
@@ -8060,20 +8414,12 @@ items:
       - name: Darkvision
         origin: Compendium.dnd5e.spells24.Item.phbsplDarkvision
         duration:
-          startTime: null
-          seconds: 28800
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 28800
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         _id: ZWNC1jxea2RuIRVc
-        changes:
-          - key: system.attributes.senses.darkvision
-            mode: 4
-            value: '120'
-            priority: null
         description: >-
           <p>For the duration, a willing creature you touch has
           &amp;Reference[darkvision] with a range of 150 feet.</p>
@@ -8086,14 +8432,27 @@ items:
             Compendium.dnd5e.spells.Item.hJ6ZiA3fpoY8v9cp.ActiveEffect.9qaZQFN5xP8Gig8f
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122417
+          modifiedTime: 1783544122417
         img: icons/magic/perception/eye-winged-pink.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.senses.darkvision
+              value: 120
+              priority: null
+              type: upgrade
+              phase: initial
+              _id: Z1PGFl7IlDhgHNuU
+          magical: true
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.CJPKs70OC8R9cUBg.ZWNC1jxea2RuIRVc
     folder: 3SjcO2acsFnWegp4
@@ -8103,10 +8462,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDarkvision
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122417
+      modifiedTime: 1783544122417
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.CJPKs70OC8R9cUBg'
@@ -8226,10 +8587,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGoodberry0
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.yDaWiUJVN8aheNCz'
@@ -8341,10 +8704,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLesserRest
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.jSrk8wuL2GPCz6gy'
@@ -8461,24 +8826,24 @@ items:
       - name: Longstrider
         origin: Compendium.dnd5e.spells24.Item.phbsplLongstride
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/equipment/feet/boots-leather-laced-brown.webp
         _id: I746neZVrgJFkRco
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 2
-            value: '10'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 10
+              priority: null
+              type: add
+              phase: initial
+              _id: hF3S6RrPqrNjRza9
+          magical: true
         description: <p>The target’s Speed increases by 10 feet until the spell ends.</p>
         tint: '#ffffff'
         transfer: false
@@ -8488,10 +8853,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122417
+          modifiedTime: 1783544122417
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.DSt1Z1RmUpA0AUiS.I746neZVrgJFkRco
     folder: pBaAAtXBCq9FVEnL
@@ -8501,10 +8871,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLongstride
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122417
+      modifiedTime: 1783544122417
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.DSt1Z1RmUpA0AUiS'
@@ -8646,10 +9018,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMoonbeam00
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.0tmfhbIWjoS84FTu'
@@ -8779,10 +9153,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRevivify00
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.9rwOfsb7o56Bd8Ir'
@@ -8922,10 +9298,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpikeGrowt
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.ZdxCCQoKHfamMhU1'
@@ -8965,10 +9343,12 @@ items:
       compendiumSource: Compendium.dnd5e.actors24.Actor.AkraLv0500000000.Item.RPp29n5xcp561IN9
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.yUxNTNSdUaUPnAsy'
@@ -9037,10 +9417,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmScaleMail0
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!AothLv0500000000.h6alsplWcefIdmiJ'
@@ -9170,10 +9552,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgPotionOfHeali
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 100000
     ownership:
       default: 0
@@ -9290,10 +9674,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: 4PRqCmv0J7XYfEuk
     sort: 0
     ownership:
@@ -9419,17 +9805,15 @@ items:
         transfer: false
         _id: 0WW6DMPuabIZh1Tv
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: 600
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>Creatures of those types have Disadvantage on attack rolls against
           the target. The target also can’t be possessed by or gain the
@@ -9443,68 +9827,108 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122418
+          modifiedTime: 1783544122418
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.d2lGbpc0IyATHflY.0WW6DMPuabIZh1Tv
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.4PRqCmv0J7XYfEuk.Activity.dnd5escrollspell
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-          - key: system.properties
-            mode: 2
-            value: '-material'
-          - key: activities[attack].attack.bonus
-            mode: 5
-            value: '5'
-          - key: activities[attack].attack.flat
-            mode: 5
-            value: 'true'
-          - key: activities[summon].flat.attack
-            mode: 5
-            value: '5'
-          - key: activities[save].save.dc.calculation
-            mode: 5
-            value: ''
-          - key: activities[save].save.dc.formula
-            mode: 5
-            value: '13'
-          - key: activities[summon].flat.save
-            mode: 5
-            value: '13'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: fD8Xg9PY5WYQHsOM
+            - key: system.properties
+              value: '-vocal'
+              type: add
+              phase: initial
+              _id: fbirB6EAcFuU1OdD
+            - key: system.properties
+              value: '-somatic'
+              type: add
+              phase: initial
+              _id: 8KJCbxUTgXaIdnpi
+            - key: system.properties
+              value: '-material'
+              type: add
+              phase: initial
+              _id: 7JuR9wJmUka0Y48m
+            - key: activities[attack].attack.bonus
+              value: 5
+              type: override
+              phase: initial
+              _id: cpyCGNRSmSIa7DaD
+            - key: activities[attack].attack.flat
+              value: true
+              type: override
+              phase: initial
+              _id: g7UGKtEW9DNHB3qP
+            - key: activities[summon].flat.attack
+              value: 5
+              type: override
+              phase: initial
+              _id: L1R6PgddeI9EBaxY
+            - key: activities[save].save.dc.calculation
+              value: ''
+              type: override
+              phase: initial
+              _id: ZDXStUkMgRaSN48m
+            - key: activities[save].save.dc.formula
+              value: 13
+              type: override
+              phase: initial
+              _id: bvkDp8BctcZdBT98
+            - key: activities[summon].flat.save
+              value: 13
+              type: override
+              phase: initial
+              _id: IIirXchrOxcUKP8i
         disabled: false
         duration:
-          startTime: 0
-          combat: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.4PRqCmv0J7XYfEuk.Activity.dnd5escrollspell
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122418
+          modifiedTime: 1783544122418
+        start:
+          combat: null
+          time: 0
+          combatant: null
+          initiative: null
+          round: null
+          turn: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.d2lGbpc0IyATHflY.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -9515,10 +9939,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122418
+      modifiedTime: 1783544122418
     sort: 100782
     _id: d2lGbpc0IyATHflY
     ownership:
@@ -9636,10 +10062,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: i2guMiFsRbXTalfg
     sort: 0
     ownership:
@@ -9758,58 +10186,93 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.i2guMiFsRbXTalfg.Activity.dnd5escrollspell
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-          - key: system.properties
-            mode: 2
-            value: '-material'
-          - key: activities[attack].attack.bonus
-            mode: 5
-            value: '5'
-          - key: activities[attack].attack.flat
-            mode: 5
-            value: 'true'
-          - key: activities[summon].flat.attack
-            mode: 5
-            value: '5'
-          - key: activities[save].save.dc.calculation
-            mode: 5
-            value: ''
-          - key: activities[save].save.dc.formula
-            mode: 5
-            value: '13'
-          - key: activities[summon].flat.save
-            mode: 5
-            value: '13'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: z4WM5jj1MkXQdgEX
+            - key: system.properties
+              value: '-vocal'
+              type: add
+              phase: initial
+              _id: jyyZrI6R77GkI56Y
+            - key: system.properties
+              value: '-somatic'
+              type: add
+              phase: initial
+              _id: QgHWWSB18lCPORnj
+            - key: system.properties
+              value: '-material'
+              type: add
+              phase: initial
+              _id: 5SJUrNztCOlY9aaJ
+            - key: activities[attack].attack.bonus
+              value: 5
+              type: override
+              phase: initial
+              _id: 3K4ntJnMknaCg9AW
+            - key: activities[attack].attack.flat
+              value: true
+              type: override
+              phase: initial
+              _id: kZ5fAcheKk8sgupr
+            - key: activities[summon].flat.attack
+              value: 5
+              type: override
+              phase: initial
+              _id: 1eeaWPUMu9sdjpny
+            - key: activities[save].save.dc.calculation
+              value: ''
+              type: override
+              phase: initial
+              _id: pEwJ7hCiNxt4mg5J
+            - key: activities[save].save.dc.formula
+              value: 13
+              type: override
+              phase: initial
+              _id: 1wUZBW82yMfO7xlP
+            - key: activities[summon].flat.save
+              value: 13
+              type: override
+              phase: initial
+              _id: I0seIMimThKZ3EMU
         disabled: false
         duration:
-          startTime: 0
-          combat: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.i2guMiFsRbXTalfg.Activity.dnd5escrollspell
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122418
+          modifiedTime: 1783544122418
+        start:
+          combat: null
+          time: 0
+          combatant: null
+          initiative: null
+          round: null
+          turn: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.36qJn9y7zDaMHmsB.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -9821,10 +10284,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCreateorDe
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122418
+      modifiedTime: 1783544122418
     _id: 36qJn9y7zDaMHmsB
     ownership:
       default: 0
@@ -9941,10 +10406,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: jflCe3EvlJMoKU01
     sort: 0
     ownership:
@@ -10069,20 +10536,18 @@ items:
       - name: Detect Magic
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/symbols/runes-carved-stone-green.webp
         _id: BHw91lQmVgdx39WZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -10093,68 +10558,108 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122419
+          modifiedTime: 1783544122419
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.gcChXXqirreatYKt.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.jflCe3EvlJMoKU01.Activity.dnd5escrollspell
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-          - key: system.properties
-            mode: 2
-            value: '-material'
-          - key: activities[attack].attack.bonus
-            mode: 5
-            value: '5'
-          - key: activities[attack].attack.flat
-            mode: 5
-            value: 'true'
-          - key: activities[summon].flat.attack
-            mode: 5
-            value: '5'
-          - key: activities[save].save.dc.calculation
-            mode: 5
-            value: ''
-          - key: activities[save].save.dc.formula
-            mode: 5
-            value: '13'
-          - key: activities[summon].flat.save
-            mode: 5
-            value: '13'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: u5lasxsVuJFYNXSK
+            - key: system.properties
+              value: '-vocal'
+              type: add
+              phase: initial
+              _id: EfUufH9uBOzK4HkJ
+            - key: system.properties
+              value: '-somatic'
+              type: add
+              phase: initial
+              _id: 2zrhPzCMBbD0TpSz
+            - key: system.properties
+              value: '-material'
+              type: add
+              phase: initial
+              _id: HFIV7vQHepgpQO5R
+            - key: activities[attack].attack.bonus
+              value: 5
+              type: override
+              phase: initial
+              _id: ovRIYTmmu4P57b9Z
+            - key: activities[attack].attack.flat
+              value: true
+              type: override
+              phase: initial
+              _id: Hf3RUzp6RsC0pgJ8
+            - key: activities[summon].flat.attack
+              value: 5
+              type: override
+              phase: initial
+              _id: BRpeTeMZWHJPPl26
+            - key: activities[save].save.dc.calculation
+              value: ''
+              type: override
+              phase: initial
+              _id: z9hlLfYCbMREfLC5
+            - key: activities[save].save.dc.formula
+              value: 13
+              type: override
+              phase: initial
+              _id: JkbYI0408GtAgzAR
+            - key: activities[summon].flat.save
+              value: 13
+              type: override
+              phase: initial
+              _id: Hd6BYkaQsMCE2tuw
         disabled: false
         duration:
-          startTime: 0
-          combat: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.jflCe3EvlJMoKU01.Activity.dnd5escrollspell
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122419
+          modifiedTime: 1783544122419
+        start:
+          combat: null
+          time: 0
+          combatant: null
+          initiative: null
+          round: null
+          turn: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.gcChXXqirreatYKt.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -10166,10 +10671,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122419
+      modifiedTime: 1783544122419
     _id: gcChXXqirreatYKt
     ownership:
       default: 0
@@ -10286,10 +10793,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.equipment24.Item.dmgSpellScroll1s
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: r7p7IwwuFaHcpaD9
     sort: 0
     ownership:
@@ -10413,20 +10922,18 @@ items:
       - name: Detect Poison and Disease
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectPois
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/skills/toxins/poison-bottle-open-fire-purple.webp
         _id: zSS8rmsXm5JCaM5x
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -10437,68 +10944,108 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122419
+          modifiedTime: 1783544122419
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.LQM6ZCftddbBdBKY.zSS8rmsXm5JCaM5x
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.r7p7IwwuFaHcpaD9.Activity.dnd5escrollspell
-        changes:
-          - key: system.method
-            mode: 5
-            value: spell
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-          - key: system.properties
-            mode: 2
-            value: '-material'
-          - key: activities[attack].attack.bonus
-            mode: 5
-            value: '5'
-          - key: activities[attack].attack.flat
-            mode: 5
-            value: 'true'
-          - key: activities[summon].flat.attack
-            mode: 5
-            value: '5'
-          - key: activities[save].save.dc.calculation
-            mode: 5
-            value: ''
-          - key: activities[save].save.dc.formula
-            mode: 5
-            value: '13'
-          - key: activities[summon].flat.save
-            mode: 5
-            value: '13'
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.method
+              value: spell
+              type: override
+              phase: initial
+              _id: 3tQXpp55sThU0fNi
+            - key: system.properties
+              value: '-vocal'
+              type: add
+              phase: initial
+              _id: A9qLUxat1j0qJV8l
+            - key: system.properties
+              value: '-somatic'
+              type: add
+              phase: initial
+              _id: 65pEM5mKwJaMQL1N
+            - key: system.properties
+              value: '-material'
+              type: add
+              phase: initial
+              _id: HwFIx0Qk0Ij9Xx5w
+            - key: activities[attack].attack.bonus
+              value: 5
+              type: override
+              phase: initial
+              _id: JXF38cDeS8OuzrxV
+            - key: activities[attack].attack.flat
+              value: true
+              type: override
+              phase: initial
+              _id: dQyRSI5pRfTdml4P
+            - key: activities[summon].flat.attack
+              value: 5
+              type: override
+              phase: initial
+              _id: sTCpWph1aaJvXZC7
+            - key: activities[save].save.dc.calculation
+              value: ''
+              type: override
+              phase: initial
+              _id: yiw2CDqcx3Rh0SrK
+            - key: activities[save].save.dc.formula
+              value: 13
+              type: override
+              phase: initial
+              _id: zn1gGlwnGrSGQFfG
+            - key: activities[summon].flat.save
+              value: 13
+              type: override
+              phase: initial
+              _id: UU52OwtzvcHBsbeh
         disabled: false
         duration:
-          startTime: 0
-          combat: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.AothLv0500000000.Item.r7p7IwwuFaHcpaD9.Activity.dnd5escrollspell
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544122420
+          modifiedTime: 1783544122420
+        start:
+          combat: null
+          time: 0
+          combatant: null
+          initiative: null
+          round: null
+          turn: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!AothLv0500000000.LQM6ZCftddbBdBKY.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -10510,10 +11057,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectPois
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544122419
+      modifiedTime: 1783544122419
     _id: LQM6ZCftddbBdBKY
     ownership:
       default: 0
@@ -10549,7 +11098,7 @@ items:
           @UUID[Compendium.dnd5e.actors24.Actor.mmWolf0000000000]{Wolf} are
           recommended. Whenever you finish a Long Rest, you can replace one of
           your known forms with another eligible form.</p><section class="fvtt
-          advice"><figure class="icon"><img src="icons/vtt-512.png"
+          advice"><figure class="icon"><img class="vtt-outline" src="icons/vtt-512.png"
           /></figure><article><h3>Wild Shape Automation</h3><p>When you've
           selected the creature you would like to wild shape into you can drag
           it onto your character sheet, select the Wild Shape option, and
@@ -10731,10 +11280,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.classes24.Item.phbdrdWildShape0
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 1200000
     ownership:
       default: 0
@@ -10744,11 +11295,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452682875
-  modifiedTime: 1771452682875
+  systemVersion: 6.0.0
+  createdTime: 1783544122404
+  modifiedTime: 1783544122404
   lastModifiedBy: dnd5ebuilder0000
 img: null
 folder: JRPsXXWuBa56FSZb

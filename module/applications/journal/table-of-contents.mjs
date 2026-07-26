@@ -254,10 +254,10 @@ export default class TableOfContentsCompendium extends foundry.applications.side
         }
         if ( (flags.type === "appendix") || (flags.type === "chapter") ) {
           const sort = TableOfContentsCompendium.TYPES[flags.type] + (flags.position ?? 0);
-          arr.push({ label: game.i18n.format("DND5E.TABLEOFCONTENTS.Special.After", { chapter: doc.name }), sort });
+          arr.push({ label: _loc("DND5E.TABLEOFCONTENTS.Special.After", { chapter: doc.name }), sort });
         }
         return arr;
-      }, [{ value: null, label: game.i18n.localize("DND5E.TABLEOFCONTENTS.Special.End"), rule: true }])
+      }, [{ value: null, label: _loc("DND5E.TABLEOFCONTENTS.Special.End"), rule: true }])
       .sort((lhs, rhs) => lhs.sort - rhs.sort)
       .map((option, value) => ({ ...option, value: option.value === null ? null : value }));
 

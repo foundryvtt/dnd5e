@@ -131,20 +131,18 @@ effects:
   - name: Memory Modification
     origin: Compendium.dnd5e.spells24.Item.phbsplModifyMemo
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/incapacitated.svg
     _id: ayfixWGhTtaIUusk
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p><span style="font-family:Signika, sans-serif">While
       &amp;Reference[Charmed apply=false] in this way, the target also has the
@@ -161,13 +159,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976097
+      modifiedTime: 1783543976097
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplModifyMemo.ayfixWGhTtaIUusk'
 folder: beZ8MTpWY2cMEUlp
 sort: 1000000
@@ -180,11 +181,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425964591
-  modifiedTime: 1745256796378
+  modifiedTime: 1783543976097
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplModifyMemo'

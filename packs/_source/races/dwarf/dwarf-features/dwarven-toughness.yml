@@ -1,0 +1,92 @@
+folder: bYq316CbmhMdFGG4
+name: Dwarven Toughness
+type: feat
+_id: G7hkETvAYFLSLIVW
+img: icons/consumables/meat/heart-organ-red.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  advancement: {}
+  description:
+    value: >-
+      <p>Your hit point maximum increases by 1, and it increases by 1 every time
+      you gain a level.</p>
+    chat: ''
+  identifier: dwarven-toughness
+  source:
+    revision: 1
+    rules: '2014'
+  crewed: false
+  enchant: {}
+  prerequisites:
+    items: []
+    repeatable: false
+    level: null
+  properties:
+    - trait
+  requirements: Hill Dwarf
+  type:
+    value: race
+    subtype: ''
+effects:
+  - name: Dwarven Toughness
+    img: icons/consumables/meat/heart-organ-red.webp
+    origin: Compendium.dnd5e.races.Item.G7hkETvAYFLSLIVW
+    type: base
+    _id: uNu8nD32necK43bp
+    system:
+      changes:
+        - key: system.attributes.hp.bonuses.level
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>Your hit point maximum increases by 1, and it increases by 1 every time
+      you gain a level.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781474293567
+      modifiedTime: 1781474293567
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.races.Item.ufysTkqet2Ctmtyi.ActiveEffect.1EUx7qFzY9g0a6RL
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!G7hkETvAYFLSLIVW.uNu8nD32necK43bp'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1781474254178
+  modifiedTime: 1781474278340
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!G7hkETvAYFLSLIVW'

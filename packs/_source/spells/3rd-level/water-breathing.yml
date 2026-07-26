@@ -28,12 +28,15 @@ system:
       type: creature
       count: '10'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -54,8 +57,7 @@ system:
     - material
     - ritual
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    aBbGitiN7HQtF57g:
       type: utility
       activation:
         type: action
@@ -69,18 +71,23 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: 9oWdcb2bnPF5z36Z
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -92,20 +99,70 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: aBbGitiN7HQtF57g
   identifier: water-breathing
 sort: 0
 flags: {}
-img: icons/magic/water/pseudopod-swirl-blue.webp
-effects: []
+img: icons/magic/water/orb-water-bubbles.webp
+effects:
+  - name: Water Breathing
+    img: icons/magic/water/orb-water-bubbles.webp
+    origin: Compendium.dnd5e.spells.Item.13uVuBQP6VaiSPvC
+    transfer: false
+    _id: 9oWdcb2bnPF5z36Z
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You can breathe underwater until the spell ends. You also retain your
+      normal mode of respiration.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781305889032
+      modifiedTime: 1781305921212
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!13uVuBQP6VaiSPvC.9oWdcb2bnPF5z36Z'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037345317
-  modifiedTime: 1725992716367
+  modifiedTime: 1781305889075
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!13uVuBQP6VaiSPvC'

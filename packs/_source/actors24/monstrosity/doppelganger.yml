@@ -484,12 +484,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -533,7 +530,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -553,6 +550,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmMultiattack000
     name: Multiattack
@@ -652,10 +650,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -812,10 +812,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSlam0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -923,10 +925,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmReadThoughts00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1113,6 +1117,7 @@ items:
       identifier: detect-thoughts
       method: spell
       prepared: 0
+      sourceItem: feat:read-thoughts
     type: spell
     img: icons/skills/social/diplomacy-handshake-yellow.webp
     effects:
@@ -1120,49 +1125,67 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDoppelganger00.Item.mmReadThoughts00.Activity.pZvAlG6vpOmPZ3KP
-        changes:
-          - key: system.ability
-            mode: 5
-            value: cha
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: cha
+              priority: null
+              type: override
+              phase: initial
+              _id: r3z1ecqlCJBXM3iZ
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: nRipUSShV3pR368L
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: up01CUqSU7EHsT4g
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: w2UWOhJyjWTxAWD4
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDoppelganger00.Item.mmReadThoughts00.Activity.pZvAlG6vpOmPZ3KP
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176405
+          modifiedTime: 1783544176405
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDoppelganger00.JzXf0s9NH8nAxwh4.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1179,10 +1202,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectThou
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176405
+      modifiedTime: 1783544176405
     _id: JzXf0s9NH8nAxwh4
     _key: '!actors.items!mmDoppelganger00.JzXf0s9NH8nAxwh4'
   - _id: mmUnsettlingVisa
@@ -1307,17 +1332,14 @@ items:
         origin: Item.mmUnsettlingVisa
         _id: t3d77s2YYM0OgsvZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Frightened apply=false] condition
           and repeats the save at the end of each of its turns, ending the
@@ -1335,10 +1357,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmDoppelganger00.mmUnsettlingVisa.t3d77s2YYM0OgsvZ
     flags:
@@ -1350,10 +1383,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmUnsettlingVisa
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1460,10 +1495,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShapeshift0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1474,11 +1511,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452700636
-  modifiedTime: 1771452700636
+  systemVersion: 6.0.0
+  createdTime: 1783544176404
+  modifiedTime: 1783544176404
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

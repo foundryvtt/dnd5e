@@ -1,3 +1,4 @@
+import { formatNumber } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -322,30 +323,26 @@ export default class FeatData extends ItemDataModel.mixin(
    * @param {boolean} [options.throwError=false]   Throw an error if validation fails.
    * @returns {true|string[]}  True if the item is valid or a list of invalid descriptions if validation failed.
    */
-  validatePrerequisites(actor, {
+  assertPrerequisites(actor, {
     added=[], level=actor.system?.details?.level, removed=[], showMessage=false, throwError=false
   }={}) {
+    const results = this.validatePrerequisites({ actor, added, level });
     const messages = [];
 
-    // If a feature has item pre-requisites, make sure the other items exist on the actor
-    if ( this.prerequisites.items.size
-      && !Array.from(this.prerequisites.items).some(i => actor.identifiedItems.get(i)?.size) ) {
+    if ( results.get("items")?.valid === false ) {
       messages.push(_loc("DND5E.Prerequisites.Warning.MissingItem", {
-        items: game.i18n.getListFormatter({ type: "disjunction" }).format(Array.from(this.prerequisites.items))
+        items: game.i18n.getListFormatter({ type: "disjunction" }).format(
+          Array.from(this.prerequisites.items).map(i => dnd5e.registry.items.get(i)?.name ?? i)
+        )
       }));
     }
 
-    // Check to ensure the item doesn't already exist on actor if it is not repeatable
-    if ( !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size
-      && !added.find(a => a.uuid === this.parent.uuid) ) {
+    if ( results.get("repeatable")?.valid === false ) {
       messages.push(_loc("DND5E.Prerequisites.Warning.NotRepeatable", { name: this.parent.name }));
     }
 
-    // If a feature has a level pre-requisite, make sure it is less than or equal to current level
-    if ( (this.prerequisites.level ?? -Infinity) > (level ?? Infinity) ) {
-      messages.push(_loc("DND5E.Prerequisites.Warning.InvalidLevel", {
-        level: this.prerequisites.level
-      }));
+    if ( results.get("level")?.valid === false ) {
+      messages.push(_loc("DND5E.Prerequisites.Warning.InvalidLevel", { level: this.prerequisites.level }));
     }
 
     if ( !messages.length ) return true;
@@ -361,6 +358,60 @@ export default class FeatData extends ItemDataModel.mixin(
     }
 
     return messages;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Validate the prerequisites specified on this item.
+   * @param {object} [context={}]
+   * @param {Actor5e} [context.actor]   Actor against which the prerequisites should be checked.
+   * @param {Item5e[]} [context.added]  Items that are pending addition to the Actor.
+   * @param {number} [context.level]    Level to validate. Falls back to character level if actor is provided.
+   * @param {object} [_options]
+   * @returns {PrerequisiteValidationResults}
+   */
+  validatePrerequisites(context={}, _options) {
+    if ( context instanceof Actor ) {
+      foundry.utils.logCompatibilityWarning(
+        "`FeatData#validatePrerequisites` has been renamed `assertPrerequisites`.",
+        { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+      );
+      return this.assertPrerequisites(context, _options);
+    }
+
+    const { actor, added=[], level=actor?.system?.details?.level } = context;
+    const prerequisites = new Map();
+    const legacy = (this.source.rules === "2014") || (dnd5e.settings.rulesVersion === "legacy") ? "Legacy" : "";
+
+    // If a feature has a level pre-requisite, make sure it is less than or equal to current level
+    if ( Number.isFinite(this.prerequisites.level) ) prerequisites.set("level", {
+      label: _loc(`DND5E.Prerequisites.FIELDS.prerequisites.level.display${legacy}`, {
+        level: formatNumber(this.prerequisites.level),
+        levelOrdinal: formatNumber(this.prerequisites.level, { ordinal: true })
+      }),
+      quiet: true,
+      valid: Number.isFinite(level) ? level >= this.prerequisites.level : null
+    });
+
+    // If a feature has item pre-requisites, make sure the other items exist on the actor
+    if ( this.prerequisites.items.size ) prerequisites.set("items", {
+      label: _loc("DND5E.Prerequisites.FIELDS.prerequisites.items.display", {
+        items: game.i18n.getListFormatter({ type: "disjunction" }).format(
+          Array.from(this.prerequisites.items).map(i => dnd5e.registry.items.get(i)?.name ?? i)
+        )
+      }),
+      valid: actor ? Array.from(this.prerequisites.items).some(i => actor.identifiedItems.get(i)?.size) : null
+    });
+
+    // Check to ensure the item doesn't already exist on actor if it is not repeatable
+    if ( actor && !this.prerequisites.repeatable && actor.sourcedItems?.get(this.parent.uuid)?.size
+      && !added.find(a => a.uuid === this.parent.uuid) ) prerequisites.set("repeatable", {
+      label: _loc("DND5E.Prerequisites.FIELDS.prerequisites.repeatable.display"),
+      valid: false
+    });
+
+    return prerequisites;
   }
 
   /* -------------------------------------------- */

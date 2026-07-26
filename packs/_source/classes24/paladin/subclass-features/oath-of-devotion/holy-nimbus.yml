@@ -167,17 +167,14 @@ effects:
     img: icons/magic/light/explosion-star-glow-blue-purple.webp
     _id: aWH0EeuCWFgttRma
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: true
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -188,13 +185,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbpdnHolyNimbus.aWH0EeuCWFgttRma'
 flags:
   dnd5e:
@@ -203,7 +203,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866569467

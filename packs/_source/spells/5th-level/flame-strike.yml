@@ -31,14 +31,18 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cylinder
       size: '10'
       contiguous: false
+      height: '40'
+      count: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -91,39 +95,57 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 4
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
             denomination: 6
             bonus: ''
             types:
               - radiant
-            custom:
+            scaling:
+              mode: ''
+              number: 1
+          - custom:
               enabled: false
               formula: ''
-            scaling:
-              mode: whole
-              number: 1
-              formula: ''
-          - number: 4
+            number: 4
             denomination: 6
             bonus: ''
             types:
               - fire
-            custom:
+            scaling:
+              mode: ''
+              number: 1
+          - custom:
               enabled: false
               formula: ''
+            number: 0
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+              - radiant
             scaling:
               mode: whole
               number: 1
-              formula: ''
       save:
         ability: dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: flame-strike
 sort: 0
 flags: {}
@@ -132,11 +154,11 @@ effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347523
-  modifiedTime: 1725992717019
+  modifiedTime: 1781391986702
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5e1xTohkzqFqbYH4'

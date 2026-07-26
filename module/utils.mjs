@@ -50,6 +50,40 @@ export function roundCurrency(value, denomination) {
 }
 
 /* -------------------------------------------- */
+/*  Documents                                   */
+/* -------------------------------------------- */
+
+/**
+ * Bulk version of `fromUuid` that performs only a single fetch per compendium.
+ * @param {string[]} uuids           UUIDs of documents to retrieve.
+ * @returns {Map<string, Document>}  Documents mapped to the provided UUID.
+ */
+export async function bulkFromUuid(uuids) {
+  const collections = new Map();
+  const redirected = new Map();
+
+  for ( const uuid of uuids ) {
+    const { collection, id, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid);
+    collections.getOrInsert(collection, []).push(id);
+    redirected.set(redirectedUuid, uuid);
+  }
+
+  const fetches = [];
+  for ( const [collection, ids] of collections.entries() ) {
+    if ( collection instanceof foundry.documents.collections.CompendiumCollection ) {
+      fetches.push(collection.getDocuments({ _id__in: ids }));
+    } else {
+      fetches.push(ids.map(id => collection.get(id)));
+    }
+  }
+
+  return (await Promise.all(fetches)).flat().reduce((map, doc) => {
+    if ( doc ) map.set(redirected.get(doc.uuid), doc);
+    return map;
+  }, new Map());
+}
+
+/* -------------------------------------------- */
 /*  Formatters                                  */
 /* -------------------------------------------- */
 
@@ -501,16 +535,19 @@ export function replaceFormulaData(formula, data, { actor, item, missing="0", pr
  * Convert a bonus value to a simple integer for displaying on the sheet.
  * @param {number|string|null} bonus  Bonus formula.
  * @param {object} [data={}]          Data to use for replacing @ strings.
+ * @param {object} [options={}]
+ * @param {boolean} [option.strict]   Throw error if evaluation fails.
  * @returns {number}                  Simplified bonus as an integer.
  * @protected
  */
-export function simplifyBonus(bonus, data={}) {
+export function simplifyBonus(bonus, data={}, { strict }={}) {
   if ( !bonus ) return 0;
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
     return roll.isDeterministic ? roll.evaluateSync().total : 0;
   } catch(error) {
+    if ( strict ) throw error;
     console.error(error);
     return 0;
   }
@@ -702,16 +739,31 @@ export function linkForUuid(uuid, { tooltip, renderBroken }={}) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Construct the markup for a loading tooltip section, displayed as a spinner while the rich tooltip content is fetched.
+ * @param {object} [options={}]
+ * @param {string} [options.uuid]      UUID of the document whose rich tooltip should be displayed.
+ * @param {boolean} [options.passive]  Mark this as a passive tooltip, with data supplied by the hovered element.
+ * @returns {string}
+ */
+export function loadingTooltip({ uuid, passive=false }={}) {
+  const attr = uuid ? ` data-uuid="${uuid}"` : passive ? " data-passive" : "";
+  return `<section class="loading"${attr}><i class="fas fa-spinner fa-spin-pulse" inert></i></section>`;
+}
+
+/* -------------------------------------------- */
 /*  Targeting                                   */
 /* -------------------------------------------- */
 
 /**
  * Grab the targeted tokens and return relevant information on them.
+ * @param {Iterable<Token5e|TokenDocument5e>} [tokens]  Tokens to describe. Defaults to the user's current targets.
  * @returns {TargetDescriptor5e[]}
  */
-export function getTargetDescriptors() {
+export function getTargetDescriptors(tokens=game.user.targets) {
   const targets = new Map();
-  for ( const token of game.user.targets ) {
+  for ( const token of tokens ) {
     const { name } = token;
     const { img, system, uuid, statuses } = token.actor ?? {};
     if ( uuid ) {
@@ -726,11 +778,15 @@ export function getTargetDescriptors() {
 
 /**
  * Get currently selected tokens in the scene or user's character's tokens.
- * @param {Actor5e} [actor]  Only allow tokens associated with this specific actor.
+ * @param {Actor5e} [actor]                   Only allow tokens associated with this specific actor.
+ * @param {object} [options={}]
+ * @param {boolean} [options.checkBaseActor]  Also include tokens whose base actor matches the provided actor.
  * @returns {Token5e[]}
  */
-export function getSceneTargets(actor) {
-  let targets = canvas.tokens?.controlled.filter(t => t.actor && (!actor || t.actor === actor)) ?? [];
+export function getSceneTargets(actor, { checkBaseActor }={}) {
+  let targets = canvas.tokens?.controlled.filter(t =>
+    t.actor && (!actor || (t.actor === actor) || (checkBaseActor && (t.document.baseActor === actor)))
+  ) ?? [];
   if ( !targets.length && actor ) targets = actor.getActiveTokens();
   else if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
@@ -918,6 +974,10 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
     "systems/dnd5e/templates/apps/parts/traits-list.hbs",
 
+    // Active Effect Partials
+    "systems/dnd5e/templates/effects/parts/effect-change-row.hbs",
+    "systems/dnd5e/templates/effects/parts/effect-summary.hbs",
+
     // Actor Sheet Partials
     "systems/dnd5e/templates/actors/parts/actor-classes.hbs",
     "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs",
@@ -936,6 +996,7 @@ export async function preloadHandlebarsTemplates() {
     // Chat Message Partials
     "systems/dnd5e/templates/chat/parts/card-activities.hbs",
     "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
+    "systems/dnd5e/templates/chat/parts/roll.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/details/details-background.hbs",
@@ -1176,7 +1237,8 @@ export function registerHandlebarsHelpers() {
     "dnd5e-numberFormat": (value, options) => formatNumber(value, options.hash),
     "dnd5e-numberParts": (value, options) => formatNumberParts(value, options.hash),
     "dnd5e-object": makeObject,
-    "dnd5e-textFormat": formatText
+    "dnd5e-textFormat": formatText,
+    "dnd5e-tooltip": ({ hash }) => loadingTooltip(hash)
   });
 }
 
@@ -1221,7 +1283,7 @@ export function performPreLocalization(config) {
   }
 
   // Localize & sort status effects
-  CONFIG.statusEffects.forEach(s => s.name = _loc(s.name));
+  for ( const s of Object.values(CONFIG.statusEffects) ) s.name = _loc(s.name);
 }
 
 /* -------------------------------------------- */
@@ -1278,13 +1340,14 @@ const _attributeLabelCache = {
 /**
  * Convert an attribute path to a human-readable label. Assumes paths are on an actor unless an reference item
  * is provided.
- * @param {string} attr              The attribute path.
+ * @param {string} attr                       The attribute path.
  * @param {object} [options]
- * @param {Actor5e} [options.actor]  An optional reference actor.
- * @param {Item5e} [options.item]    An optional reference item.
+ * @param {Actor5e} [options.actor]           An optional reference actor.
+ * @param {Item5e|true} [options.item]        An optional reference item, or `true` to treat it as a generic item.
+ * @param {boolean} [options.prefixItemName]  Prefix label with item name when applied to item or activity.
  * @returns {string|void}
  */
-export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
+export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemName=true }={}) {
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
 
   // Check any actor-specific names first.
@@ -1320,14 +1383,16 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     return item?.name ?? getUnknownLabel(attr, { actor, item });
   }
 
-  // Check if the attribute is already in cache.
+  // Check if the attribute is already in cache
   let label = item ? null : _attributeLabelCache.actor.get(attr);
   if ( label ) return label;
   let name;
   let type = "actor";
 
   const getSchemaLabel = (attr, type, doc) => {
-    if ( doc ) return doc.system.schema.getField(attr)?.label;
+    if ( attr === "name" ) return "DND5E.BASE.Name";
+    if ( attr === "img" ) return "DND5E.BASE.Image";
+    if ( doc instanceof foundry.abstract.Document ) return doc.system.schema.getField(attr)?.label;
     for ( const model of Object.values(CONFIG[type].dataModels) ) {
       const field = model.schema.getField(attr);
       if ( field ) return field.label;
@@ -1335,20 +1400,27 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   };
 
   // Activity labels
-  if ( item && attr.startsWith("activities.") ) {
+  if ( (item instanceof Item) && attr.startsWith("activities.") ) {
     let [, activityId, ...keyPath] = attr.split(".");
     const activity = item.system.activities?.get(activityId);
     if ( !activity ) return attr;
     attr = keyPath.join(".");
-    name = `${item.name}: ${activity.name}`;
+    name = prefixItemName ? `${item.name}: ${activity.name}` : activity.name;
     type = "activity";
     if ( _attributeLabelCache.activity.has(attr) ) label = _attributeLabelCache.activity.get(attr);
     else if ( attr === "uses.spent" ) label = "DND5E.Uses";
   }
+  else if ( attr.startsWith("activities[") ) {
+    let [type, ...keyPath] = attr.split(".");
+    type = type.replace("activities[", "").replace("]", "");
+    const field = CONFIG.DND5E.activityTypes[type]?.documentClass?.schema.getField(keyPath.join("."));
+    label = field?.label;
+    type = "activity";
+  }
 
   // Item labels
   else if ( item ) {
-    name = item.name;
+    if ( prefixItemName && (item instanceof Item) ) name = item.name;
     type = "item";
     if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
     else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
@@ -1356,23 +1428,30 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     else label = getSchemaLabel(attr, "Item", item);
   }
 
-  // Derived fields.
-  else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  // Flags
+  else if ( attr.startsWith("flags.dnd5e.") ) {
+    const key = attr.replace("flags.dnd5e.", "");
+    if ( key in CONFIG.DND5E.characterFlags ) label = CONFIG.DND5E.characterFlags[key].name;
+  }
+
+  // Derived fields
+  else if ( attr === "attributes.init.total" ) label = "DND5E.INITIATIVE.FIELDS.attributes.init.roll.bonus.label";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
   else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
   else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
-  // Abilities.
+  // Abilities
   else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
-    const key = attr.split(".")[attr.startsWith("abilities.") ? 1 : 3];
-    label = _loc("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
+    const [key, ...keyPath] = attr.split(".").slice(attr.startsWith("abilities.") ? 1 : 3);
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("abilities");
+    label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
+  // Movement
+  else if ( attr.startsWith("attributes.movement.") ) label = CONFIG.DND5E.movementTypes[attr.split(".").at(-1)]?.label;
+
   // Senses
-  else if ( attr.startsWith("attributes.senses.ranges.") ) {
-    const key = attr.split(".")[3];
-    label = CONFIG.DND5E.senses[key]?.label;
-  }
+  else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".").at(-1)]?.label;
 
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
@@ -1381,13 +1460,31 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
   else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
 
-  // Skills.
-  else if ( attr.startsWith("skills.") ) {
-    const [, key] = attr.split(".");
-    label = _loc("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key].label });
+  // Rolls
+  else if ( attr.startsWith("roll.") ) {
+    const key = `DND5E.ROLL.Description.${attr.slice(5)}`;
+    if ( game.i18n.has(key) ) label = key;
   }
 
-  // Spell slots.
+  // Skills
+  else if ( attr.startsWith("skills.") ) {
+    const [, key, ...keyPath] = attr.split(".");
+    if ( keyPath.at(-1) === "passive" ) {
+      label = _loc("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key]?.label });
+    } else {
+      const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("skills");
+      label = mapping.getFieldLabel(key, keyPath.toReversed());
+    }
+  }
+
+  // Tools
+  else if ( attr.startsWith("tools.") ) {
+    const [, key, ...keyPath] = attr.split(".");
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("tools");
+    label = mapping.getFieldLabel(key, keyPath.toReversed());
+  }
+
+  // Spell slots
   else if ( attr.startsWith("spells.") ) {
     const [, key] = attr.split(".");
     if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
@@ -1404,14 +1501,14 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     label = CONFIG.DND5E.currencies[key]?.label;
   }
 
-  // Attempt to find the attribute in a data model.
-  if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
+  // Attempt to find the attribute in a data model
+  if ( !label && (type === "actor") ) label = getSchemaLabel(attr, "Actor", actor);
 
   // Call hook if no label is available
   if ( !label ) label = getUnknownLabel(attr, { actor, item });
 
   if ( label ) {
-    label = _loc(label);
+    label = _loc(String(label));
     _attributeLabelCache[type].set(attr, label);
     if ( name ) label = `${name} ${label}`;
   }

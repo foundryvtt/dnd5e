@@ -6,7 +6,16 @@
  * @property {Set<string>} types         If not empty, only apply effects to tokens with these creature types.
  */
 
-/* ---------------------------------------- */
+/* -------------------------------------------- */
+
+/**
+ * @typedef ApplyActiveEffectActivityBehaviorData
+ * @property {Set<string>} effects  UUIDs of effects to apply.
+ * @property {Set<string>} sizes    If not empty, only apply effects to tokens with these sizes.
+ * @property {Set<string>} types    If not empty, only apply effects to tokens with these creature types.
+ */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef DifficultTerrainRegionBehaviorSystemData
@@ -15,7 +24,14 @@
  * @property {Set<number>} ignoredDispositions  Token dispositions that won't be affected by this difficult terrain.
  */
 
-/* ---------------------------------------- */
+/* -------------------------------------------- */
+
+/**
+ * @typedef DifficultTerrainActivityBehaviorData
+ * @property {Set<string>} types  Types of difficult terrain represented.
+ */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef RotateAreaRegionBehaviorSystemData

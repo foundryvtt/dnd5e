@@ -111,17 +111,14 @@ effects:
     origin: Item.mmWhirlwind00000
     _id: qihlGD6RZ55pZY9n
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target is pushed up to 20-ft. straight away from the attacking
       creature and has the &amp;Reference[Prone apply=false] condition.</p>
@@ -136,13 +133,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736140468841
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmWhirlwind00000.qihlGD6RZ55pZY9n'
 flags:
   dnd5e:
@@ -151,7 +151,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

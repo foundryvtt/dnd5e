@@ -20,8 +20,8 @@ system:
       25 feet.</p><p><em><strong>Lucky.</strong></em> When you roll a 1 on the
       d20 for an attack roll, ability check, or saving throw, you can reroll the
       die and must use the new roll.</p><p><em><strong>Brave.</strong></em> You
-      have advantage on saving throws against being
-      frightened.</p><p><em><strong>Halfling Nimbleness.</strong></em> You can
+      have advantage on saving throws against being &amp;reference[frightened
+      apply=false].</p><p><em><strong>Halfling Nimbleness.</strong></em> You can
       move through the space of any creature that is of a size larger than
       yours.</p><p><em><strong>Languages.</strong></em> You can speak, read, and
       write Common and Halfling. The Halfling language isn't secret, but
@@ -36,8 +36,8 @@ system:
       take up a nomadic life.</p><p><em><strong>Ability Score
       Increase.</strong></em> Your Charisma score increases by
       1.</p><p><em><strong>Naturally Stealthy.</strong></em> You can attempt to
-      hide even when you are obscured only by a creature that is at least one
-      size larger than you.</p>
+      &amp;reference[hide] even when you are obscured only by a creature that is
+      at least one size larger than you.</p>
     chat: ''
   source:
     custom: ''
@@ -135,11 +135,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037393019
-  modifiedTime: 1725992703550
+  modifiedTime: 1781473741858
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

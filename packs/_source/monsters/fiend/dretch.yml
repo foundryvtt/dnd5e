@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,6 +484,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Ex0UN9pj0w7p4D9F
     name: Multiattack
@@ -582,7 +580,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -593,11 +591,13 @@ items:
   - _id: 2So9DIMKKgeGHVru
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Dretch attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -660,7 +660,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -669,8 +669,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        o1neeolx8p8YS6Xq:
           type: attack
           activation:
             type: action
@@ -685,10 +684,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -705,7 +705,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -724,18 +725,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: o1neeolx8p8YS6Xq
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -745,22 +759,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553039
+      systemVersion: 6.0.0
+      createdTime: 1781666608027
+      modifiedTime: 1781666622256
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kz2fW9xb5CcvXLX4.2So9DIMKKgeGHVru'
   - _id: 5fa9Rdzy2YYpkAgS
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Dretch attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -823,7 +839,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -832,8 +848,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        KlF5M94TQaJQnqxZ:
           type: attack
           activation:
             type: action
@@ -848,10 +863,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -868,7 +884,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -887,18 +904,31 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: KlF5M94TQaJQnqxZ
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -908,34 +938,37 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107553039
+      systemVersion: 6.0.0
+      createdTime: 1781666548069
+      modifiedTime: 1781666600430
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kz2fW9xb5CcvXLX4.5fa9Rdzy2YYpkAgS'
   - _id: JVbj7KABKYi3Z8U3
     name: Fetid Cloud
     type: feat
-    img: icons/magic/acid/projectile-glowing-bubbles.webp
+    img: icons/magic/acid/orb-bubble-smoke-drip.webp
     system:
       description:
         value: >-
-          <p>A 10-foot radius of disgusting green gas extends out from the
-          dretch. The gas spreads around corners, and its area is lightly
-          obscured. It lasts for 1 minute or until a strong wind disperses
-          it.</p><p>Any creature that starts its turn in that area must succeed
-          on a [[/save]] saving throw or be &amp;Reference[poisoned] until the
-          start of its next turn. While poisoned in this way, the target can
-          take either an action or a bonus action on its turn, not both, and
-          can't take reactions. 1 use per day.</p>
+          <p>A [[lookup @labels.description.template activity=UmjK0kfobgLTjdOu]]
+          of disgusting green gas extends out from the [[lookup @name
+          lowercase]]{monster}. The gas spreads around corners, and its area is
+          &amp;reference[lightly obscured]. It lasts for [[lookup
+          @labels.duration activity=UmjK0kfobgLTjdOu]] or until a strong wind
+          disperses it.</p><p>Any creature that starts its turn in that area
+          must succeed on a [[/save]] saving throw or be
+          &amp;Reference[poisoned] until the start of its next turn. While
+          poisoned in this way, the target can take either an action or a bonus
+          action on its turn, not both, and can't take reactions.</p>
         chat: >-
-          <p>A 10-foot radius of disgusting green gas extends out from the
-          dretch. The gas spreads around corners, and its area is lightly
-          obscured. Any creature that starts its turn in that area must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>A [[lookup @labels.description.template activity=UmjK0kfobgLTjdOu]]
+          of disgusting green gas extends out from the [[lookup
+          @name]]{monster}. The gas spreads around corners, and its area is
+          &amp;reference[lightly obscured]. Any creature that starts its turn in
+          that area must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -950,40 +983,48 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        ZwNb6VN8YJEZdHV1:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature starts its turn in the area.
             override: false
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>Any creature that starts its turn in that area must succeed on
+              a [[/save]] saving throw or be &amp;Reference[poisoned] until the
+              start of its next turn. While poisoned in this way, the target can
+              take either an action or a bonus action on its turn, not both, and
+              can't take reactions.</p>
           duration:
             concentration: false
             value: '1'
-            units: minute
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: XzGwAeU1HCPp89tA
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -997,9 +1038,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1009,19 +1051,142 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
-              calculation: ''
+              calculation: con
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 300000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: ZwNb6VN8YJEZdHV1
+          name: Poison Save
+        UmjK0kfobgLTjdOu:
+          type: utility
+          name: Exude Gas
+          _id: UmjK0kfobgLTjdOu
+          img: ''
+          sort: 200000
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: minute
+            concentration: false
+            override: false
+            value: '1'
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+            value: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: radius
+              size: '10'
+              count: ''
+            affects:
+              choice: false
+              type: creature
+              count: ''
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: fetid-cloud
-    effects: []
+    effects:
+      - name: Fetid Gas Poisoning
+        img: icons/magic/acid/orb-bubble-smoke-drip.webp
+        origin: Compendium.dnd5e.monsters.Actor.kz2fW9xb5CcvXLX4.Item.JVbj7KABKYi3Z8U3
+        transfer: false
+        _id: XzGwAeU1HCPp89tA
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false] until the start of
+          your next turn. While poisoned in this way, you can take either an
+          action or a bonus action on your turn, not both, and you can't take
+          reactions.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781666362960
+          modifiedTime: 1781666435698
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!kz2fW9xb5CcvXLX4.JVbj7KABKYi3Z8U3.XzGwAeU1HCPp89tA
     folder: null
     sort: 0
     ownership:
@@ -1030,11 +1195,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.XwcFK21aM2BThgSk
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956514689
+      systemVersion: 6.0.0
+      createdTime: 1781664598196
+      modifiedTime: 1781667498151
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kz2fW9xb5CcvXLX4.JVbj7KABKYi3Z8U3'
@@ -1046,7 +1211,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171253121

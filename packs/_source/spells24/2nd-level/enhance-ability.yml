@@ -113,13 +113,10 @@ effects:
   - name: Enhanced Strength
     origin: Compendium.dnd5e.spells24.Item.phbsplEnhanceAbi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -128,12 +125,15 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/strength.svg
     _id: gg9dU0SnvU03C803
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: AkcqH7hULxgokY4c
+      magical: true
     description: >-
       <p>The target has Advantage on ability checks made with the chosen
       ability.</p>
@@ -145,24 +145,24 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.ljMTBKPVmEnLPX1b
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760127912887
+      systemVersion: 6.0.0
+      createdTime: 1783543974887
+      modifiedTime: 1783543974887
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnhanceAbi.gg9dU0SnvU03C803'
   - name: Enhanced Dexterity
     origin: Compendium.dnd5e.spells24.Item.phbsplEnhanceAbi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -171,12 +171,15 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/dexterity.svg
     _id: GGEj4zNginSIp6VV
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.dex.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.dex.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: qk12W6qK1EhHCpzl
+      magical: true
     description: >-
       <p>The target has Advantage on ability checks made with the chosen
       ability.</p>
@@ -188,24 +191,24 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.Mmss2SPIy7wtt2PV
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760127923521
+      systemVersion: 6.0.0
+      createdTime: 1783543974887
+      modifiedTime: 1783543974887
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnhanceAbi.GGEj4zNginSIp6VV'
   - name: Enhanced Intelligence
     origin: Compendium.dnd5e.spells24.Item.phbsplEnhanceAbi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -214,12 +217,15 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/intelligence.svg
     _id: NTaFTBr1uam93jHS
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.int.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.int.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: w6jqTDsF8wK8SSox
+      magical: true
     description: >-
       <p>The target has Advantage on ability checks made with the chosen
       ability.</p>
@@ -231,24 +237,24 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.FfVB2Yyb7wfgpsQB
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760127934378
+      systemVersion: 6.0.0
+      createdTime: 1783543974887
+      modifiedTime: 1783543974887
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnhanceAbi.NTaFTBr1uam93jHS'
   - name: Enhanced Wisdom
     origin: Compendium.dnd5e.spells24.Item.phbsplEnhanceAbi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -257,12 +263,15 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/wisdom.svg
     _id: EGnngHgGBzTyThW6
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.wis.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.wis.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: GC6VnOVv88IXVVOy
+      magical: true
     description: >-
       <p>The target has Advantage on ability checks made with the chosen
       ability.</p>
@@ -274,24 +283,24 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.k2569xtIeXKRReLU
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760127944860
+      systemVersion: 6.0.0
+      createdTime: 1783543974887
+      modifiedTime: 1783543974887
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnhanceAbi.EGnngHgGBzTyThW6'
   - name: Enhanced Charisma
     origin: Compendium.dnd5e.spells24.Item.phbsplEnhanceAbi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -300,12 +309,15 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/charisma.svg
     _id: e02u2XLDltCT5D5x
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.cha.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.cha.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: kTdrxAlrDsMCuFVq
+      magical: true
     description: >-
       <p>The target has Advantage on ability checks made with the chosen
       ability.</p>
@@ -317,13 +329,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplHex0000000.ActiveEffect.sC2IXWDs07oTt5JN
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760127954753
+      systemVersion: 6.0.0
+      createdTime: 1783543974887
+      modifiedTime: 1783543974887
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplEnhanceAbi.e02u2XLDltCT5D5x'
 folder: 3SjcO2acsFnWegp4
 sort: 3800000
@@ -336,11 +351,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425951951
-  modifiedTime: 1760127962341
+  modifiedTime: 1783543974887
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEnhanceAbi'

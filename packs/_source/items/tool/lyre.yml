@@ -46,8 +46,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    D9aVwHAVOXxcX4xc:
       type: check
       activation:
         type: ''
@@ -62,15 +61,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -81,7 +81,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -91,11 +92,30 @@ system:
         override: false
       check:
         ability: cha
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: D9aVwHAVOXxcX4xc
+      name: Play Instrument
   attuned: false
   identifier: lyre
 effects: []
@@ -106,11 +126,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037139486
-  modifiedTime: 1725992496952
+  modifiedTime: 1783649324686
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!EwG1EtmbgR3bM68U'

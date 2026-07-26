@@ -1,7 +1,7 @@
 _id: Uv0ilmzbWvqmlCVH
 name: Waterskin
 type: consumable
-img: icons/sundries/survival/wetskin-leather-purple.webp
+img: icons/sundries/survival/wetskin-leather-red.webp
 system:
   description:
     value: >-
@@ -61,11 +61,9 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -107,7 +105,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Drink
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: waterskin
 effects: []
@@ -118,11 +124,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037199639
-  modifiedTime: 1725992517233
+  modifiedTime: 1781985926717
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Uv0ilmzbWvqmlCVH'

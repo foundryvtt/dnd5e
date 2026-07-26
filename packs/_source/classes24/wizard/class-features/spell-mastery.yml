@@ -104,24 +104,25 @@ effects:
     img: icons/magic/unholy/beam-impact-purple.webp
     disabled: true
     _id: P5SxPZNi4KPzW8dD
-    system: {}
-    changes:
-      - key: name
-        mode: 2
-        value: ', Mastered'
-        priority: null
-      - key: system.preparation.mode
-        mode: 5
-        value: always
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: ', Mastered'
+          priority: null
+          type: add
+          phase: initial
+          _id: lKHICaE1K0Z4JaDq
+        - key: system.preparation.mode
+          value: always
+          priority: null
+          type: override
+          phase: initial
+          _id: Uszwgx5FR5n8R07Z
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -132,13 +133,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103965
+      modifiedTime: 1783544103965
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbwzdSpellMaste.P5SxPZNi4KPzW8dD'
 flags:
   dnd5e:
@@ -147,11 +151,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866273692
-  modifiedTime: 1745256770314
+  modifiedTime: 1783544103965
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

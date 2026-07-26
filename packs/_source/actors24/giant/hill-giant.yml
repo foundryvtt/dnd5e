@@ -478,12 +478,9 @@ prototypeToken:
     src: modules/dnd-monster-manual/assets/tokens/hill-giant-*.webp
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -527,7 +524,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -547,6 +544,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: mmMultiattack000
     name: Multiattack
@@ -646,10 +644,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -802,17 +802,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmTreeClub000000
         _id: 7GhARrr7f6zhJjqy
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>If the target is a Large or smaller creature, it has the
           &amp;Reference[Prone apply=false] condition.</p>
@@ -826,10 +823,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmHillGiant00000.mmTreeClub000000.7GhARrr7f6zhJjqy
     flags:
@@ -841,11 +843,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTreeClub000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.2
       lastModifiedBy: dnd5ebuilder0000
       modifiedTime: 1776704446105
+      createdTime: null
     ownership:
       default: 0
     sort: 1
@@ -997,17 +1000,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmTrashLob000000
         _id: BMs7Yw88gCikNkXO
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Poisoned apply=false] condition
           until the end of its next turn.</p>
@@ -1021,10 +1021,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmHillGiant00000.mmTrashLob000000.BMs7Yw88gCikNkXO
     flags:
@@ -1036,10 +1041,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTrashLob000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1052,7 +1059,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452706619

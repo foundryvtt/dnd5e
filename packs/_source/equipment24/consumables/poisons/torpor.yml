@@ -120,17 +120,14 @@ effects:
     transfer: false
     _id: 4fBr9e0P9LVogtyq
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -141,13 +138,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgAssassinsBloo.ActiveEffect.zpDCMRInMzrnRAAd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: 1730742013611
       modifiedTime: 1730742174638
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgTorpor0000000.4fBr9e0P9LVogtyq'
 folder: bRhjJ3GivNsz0GTF
 flags:
@@ -157,7 +157,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1728419101980

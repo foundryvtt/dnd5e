@@ -88,14 +88,15 @@ export default class ItemGrantAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  async apply(level, { ability, retainedData={}, selected=Object.keys(retainedData) }={}, options={}) {
+  async apply(level, { ability, retainedData={}, selected, skipExisting=true }={}, options={}) {
     if ( options.initial ) {
-      ability = retainedData.ability ?? this.value.ability ?? this.configuration.spell?.ability?.first();
-      selected = this.configuration.items?.reduce((arr, { optional, uuid }) => {
+      ability ??= retainedData.ability ?? this.value.ability ?? this.configuration.spell?.ability?.first();
+      selected ??= this.configuration.items?.reduce((arr, { optional, uuid }) => {
         if ( !this.configuration.optional || !optional ) arr.push(uuid);
         return arr;
       }, []) ?? [];
     }
+    selected ??= Object.keys(retainedData);
 
     const added = foundry.utils.getProperty(this, this.storagePath(level)) ?? {};
     if ( ability && (ability !== this.value?.ability) ) {
@@ -109,7 +110,7 @@ export default class ItemGrantAdvancement extends Advancement {
     const itemUpdates = {};
     const existing = new Set(Object.values(added));
     for ( const uuid of selected ) {
-      if ( existing.has(uuid) ) continue;
+      if ( existing.has(uuid) && skipExisting ) continue;
       let itemData = retainedData.items?.find(i => i.flags?.dnd5e?.sourceId ?? i._stats?.compendiumSource);
       if ( !itemData ) {
         itemData = await this.createItemData(uuid);

@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,18 +478,22 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: MB7KUNGnxz6mw1J5
     name: Charge
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the sea horse moves at least 20 ft. straight toward a target and
-          then hits it with a ram attack on the same turn, the target takes an
-          extra [[/damage average]] damage.</p><p>If the target is a creature,
-          it must succeed on a [[/save]] saving throw or be knocked prone.</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a target and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.c9XDGsTJRy9HUaxQ.Item.tTZCmbeeSHXXFZGJ]{ram}
+          attack on the same turn, the target takes an extra [[/damage average
+          activity=fQJO3rGN8hBWzvpN]] damage.</p><p>If the target is a creature,
+          it must succeed on a [[/save activity=fQJO3rGN8hBWzvpN]] saving throw
+          or be knocked &amp;reference[prone].</p>
         chat: >-
           <p>If the sea horse moves at least 20 ft. straight toward a target and
           then hits it with a ram attack on the same turn, the target takes
@@ -516,121 +517,83 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        fQJO3rGN8hBWzvpN:
           type: save
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: str
-            dc:
-              calculation: ''
-              formula: '11'
-          sort: 200000
-          name: ''
+          name: Charge Save
+          _id: fQJO3rGN8hBWzvpN
           img: ''
-          appliedEffects: []
-        djeuuB0KX1WtfTRV:
-          type: damage
-          _id: djeuuB0KX1WtfTRV
-          sort: 100000
+          sort: 300000
           activation:
-            type: ''
-            value: null
+            type: special
             override: false
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 20
+              feet straight toward a target and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.c9XDGsTJRy9HUaxQ.Item.tTZCmbeeSHXXFZGJ]{ram}
+              attack on the same turn.
           consumption:
             scaling:
               allowed: false
             spellSlot: true
             targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
             units: inst
             concentration: false
             override: false
           effects: []
+          flags: {}
           range:
+            units: spec
             override: false
-            units: self
             special: ''
           target:
             template:
               contiguous: false
+              stationary: false
               units: ft
               type: ''
             affects:
               choice: false
-              type: ''
+              type: creature
+              count: '1'
+              special: ''
             override: false
             prompt: true
           uses:
             spent: 0
             recovery: []
             max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            critical:
-              allow: true
-              bonus: ''
+            onSave: full
             parts:
               - custom:
                   enabled: false
                   formula: ''
                 number: 2
-                denomination: '6'
+                denomination: 6
                 bonus: ''
-                types:
-                  - bludgeoning
-          name: ''
-          img: ''
-          appliedEffects: []
+                types: []
+                scaling:
+                  number: 1
+          save:
+            ability:
+              - str
+            dc:
+              calculation: ''
+              formula: '11'
+            visible: true
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -640,76 +603,28 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121563161
+      systemVersion: 6.0.0
+      createdTime: 1781538751103
+      modifiedTime: 1783369659781
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!c9XDGsTJRy9HUaxQ.MB7KUNGnxz6mw1J5'
-  - _id: yCZ6sgHxxIr0zIxO
-    name: Water Breathing
-    type: feat
-    img: icons/magic/water/bubbles-air-water-blue.webp
-    system:
-      description:
-        value: <p>The sea horse can breathe only underwater.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: water-breathing
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!c9XDGsTJRy9HUaxQ.yCZ6sgHxxIr0zIxO'
   - _id: tTZCmbeeSHXXFZGJ
     name: Ram
     type: weapon
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/environment/creatures/fish-striped-purple-teal.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Giant Sea Horse attacks with its Ram.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -772,7 +687,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -781,8 +696,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Ul5OcRYLScWZrprl:
           type: attack
           activation:
             type: action
@@ -797,10 +711,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -817,7 +732,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -830,20 +746,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Ul5OcRYLScWZrprl
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -858,14 +786,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121595669
+      systemVersion: 6.0.0
+      createdTime: 1781538716007
+      modifiedTime: 1781538734586
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!c9XDGsTJRy9HUaxQ.tTZCmbeeSHXXFZGJ'
+  - _id: Bol5fJ3zdZv6BFmj
+    name: Water Breathing
+    type: feat
+    img: icons/magic/water/orb-water-bubbles.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe only
+          underwater.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: water-breathing
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 175000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.FWSDiq9SZsdiBAa8.Item.PBYkvhJmi5ACi2MO
+      duplicateSource: Item.SYAPC9BqPkYwLplq
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781538746325
+      modifiedTime: 1781538746325
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!c9XDGsTJRy9HUaxQ.Bol5fJ3zdZv6BFmj'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -874,7 +855,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171242626

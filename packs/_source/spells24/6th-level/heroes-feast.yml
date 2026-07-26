@@ -179,29 +179,33 @@ effects:
     transfer: false
     _id: wGsbKojtJs43Pjyx
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: frightened
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: poisoned
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
+          phase: initial
+          _id: wD3eGV3YbsUQJNYP
+        - key: system.traits.ci.value
+          value: frightened
+          priority: null
+          type: add
+          phase: initial
+          _id: g1sHm5U5wlcOfZDC
+        - key: system.traits.ci.value
+          value: poisoned
+          priority: null
+          type: add
+          phase: initial
+          _id: nXpsBXcCYaBZ5yRk
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The creature has &amp;Reference[damageResistance]{Resistance} to Poison
       damage, and it has Immunity to the &amp;Reference[Frightened] and
@@ -214,13 +218,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724773715492
-      modifiedTime: 1724774447270
+      modifiedTime: 1783543975495
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplHeroesFeas.wGsbKojtJs43Pjyx'
 folder: 8WmlLARx1Df3Ii9v
 sort: 500000
@@ -233,11 +240,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425958524
-  modifiedTime: 1745256794591
+  modifiedTime: 1783543975495
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHeroesFeas'

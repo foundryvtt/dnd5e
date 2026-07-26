@@ -62,21 +62,21 @@ effects:
     origin: Compendium.dnd5e.equipment24.Item.dmgRingOfFreeAct
     _id: 4dTBPTD5GinKr7kC
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.ignoredDifficultTerrain
-        mode: 2
-        value: all
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          value: all
+          priority: null
+          type: add
+          phase: initial
+          _id: L0XWWXtNC6jAYxkQ
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: <p>Difficult Terrain doesn't cost you extra movement.</p>
     tint: '#ffffff'
     transfer: true
@@ -90,12 +90,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
+      systemVersion: 6.0.0
       createdTime: 1753119218372
-      modifiedTime: 1753119243789
+      modifiedTime: 1783544097719
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRingOfFreeAct.4dTBPTD5GinKr7kC'
 flags:
   dnd5e:
@@ -104,11 +107,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745256808110
+  modifiedTime: 1783544097719
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 700000

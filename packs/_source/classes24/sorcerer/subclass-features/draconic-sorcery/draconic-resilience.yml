@@ -40,20 +40,12 @@ system:
   identifier: draconic-resilience
 effects:
   - _id: ZoJYjZ3KGM30khz3
-    changes:
-      - key: system.attributes.ac.calc
-        mode: 5
-        value: unarmoredBard
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.classes24.Item.phbscrDraconicRe
     transfer: true
     flags: {}
@@ -65,32 +57,34 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK.ActiveEffect.hEgUnQNVxtBo2zkK
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103586
+      modifiedTime: 1783544103586
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/claws/claw-scaled-red.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.calc
+          value: unarmoredBard
+          priority: null
+          type: override
+          phase: initial
+          _id: F9WtikEbYNEGwDe4
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbscrDraconicRe.ZoJYjZ3KGM30khz3'
-  - changes:
-      - key: system.attributes.hp.bonuses.overall
-        mode: 2
-        value: '@classes.sorcerer.levels'
-        priority: null
-    disabled: false
+  - disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.classes24.Item.phbscrDraconicRe
     transfer: true
     flags: {}
@@ -102,18 +96,28 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK.ActiveEffect.hEgUnQNVxtBo2zkK
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103586
+      modifiedTime: 1783544103586
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/life/cross-area-circle-green-white.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.hp.bonuses.overall
+          value: '@classes.sorcerer.levels'
+          priority: null
+          type: add
+          phase: initial
+          _id: vAmL09C0VhaCD8Yx
     sort: 0
     _id: vMrqtNbCcIgCcl1Q
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbscrDraconicRe.vMrqtNbCcIgCcl1Q'
 flags:
   dnd5e:
@@ -122,11 +126,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866556244
-  modifiedTime: 1745256765328
+  modifiedTime: 1783544103586
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

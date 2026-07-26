@@ -1,7 +1,9 @@
+import BaseActivityBehavior from "./base-activity-behavior.mjs";
+
 const { DocumentUUIDField, NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ApplyActiveEffectRegionBehaviorSystemData } from "./_types.mjs";
+ * @import { ApplyActiveEffectActivityBehaviorData, ApplyActiveEffectRegionBehaviorSystemData } from "./_types.mjs";
  */
 
 /**
@@ -14,7 +16,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
   /** @override */
   static LOCALIZATION_PREFIXES = ["DND5E.REGIONBEHAVIORS.APPLYACTIVEEFFECT"];
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @override */
   static defineSchema() {
@@ -29,9 +31,9 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     };
   }
 
-  /* ---------------------------------------- */
-  /*  Methods                                 */
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
 
   /**
    * Check the conditions to decide if effects should be added to this token.
@@ -39,13 +41,14 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
    * @returns {boolean}
    */
   #evaluateConditions(token) {
+    if ( token.disposition === CONST.TOKEN_DISPOSITIONS.SECRET ) return false;
     if ( this.dispositions.size && !this.dispositions.has(token.disposition) ) return false;
     if ( this.sizes.size && !this.sizes.has(token.actor.system.traits?.size) ) return false;
     if ( this.types.size && !this.types.has(token.actor.system.details?.type?.value) ) return false;
     return true;
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Apply the Active Effects when the Token enters the Region.
@@ -64,7 +67,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     await resumeMovement?.();
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Un-apply the Active Effects when the Token exits the Region.
@@ -83,7 +86,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     await resumeMovement?.();
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @override */
   static events = {
@@ -91,7 +94,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     [CONST.REGION_EVENTS.TOKEN_EXIT]: this.#onTokenExit
   };
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
@@ -100,7 +103,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     this.#recreateEffectsForAllTokens();
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Recreate the effects of tokens within the region.
@@ -135,7 +138,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     await foundry.documents.modifyBatch(operations);
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Get Active Effects that should be created for the Actor.
@@ -163,7 +166,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     return toCreate;
   }
 
-  /* ---------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Get Active Effects that should be deleted from the Actor.
@@ -175,5 +178,60 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
       if ( effect.origin === this.behavior.uuid ) ids.push(effect.id);
       return ids;
     }, []);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Data model representing the active effect activity behavior configuration.
+ * @extends {foundry.abstract.DataModel<ApplyActiveEffectActivityBehaviorData>}
+ * @mixes ApplyActiveEffectActivityBehaviorData
+ */
+export class ApplyActiveEffectActivityBehavior extends BaseActivityBehavior {
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.REGIONBEHAVIORS.APPLYACTIVEEFFECT"];
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static defineSchema() {
+    return {
+      effects: new SetField(new DocumentUUIDField({ type: "ActiveEffect", nullable: false })),
+      sizes: new SetField(new StringField()),
+      types: new SetField(new StringField())
+    };
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  createBehaviorData(activity, { token }={}) {
+    const { disposition } = token ?? activity.actor?.token ?? activity.actor?.prototypeToken ?? {};
+    return {
+      system: {
+        dispositions: this.getDispositions(activity.target, { relativeTo: disposition }),
+        effects: this.effects,
+        sizes: this.sizes,
+        types: this.types
+      },
+      type: "dnd5e.applyActiveEffect"
+    };
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  customizeField(field, data) {
+    if ( field.name === "sizes" ) {
+      data.options = Object.entries(CONFIG.DND5E.actorSizes).map(([value, { label }]) => ({ value, label }));
+    } else if ( field.name === "types" ) {
+      data.options = Object.entries(CONFIG.DND5E.creatureTypes).map(([value, { label }]) => ({ value, label }));
+    }
   }
 }

@@ -182,17 +182,15 @@ effects:
     img: systems/dnd5e/icons/svg/statuses/unconscious.svg
     _id: 5btX5iwwleMMzkvj
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Unconscious apply=false] condition.
       It wakes up if it takes any damage or if another creature takes an action
@@ -207,29 +205,30 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724704205512
-      modifiedTime: 1724705060011
+      modifiedTime: 1783543975050
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplEyebite000.5btX5iwwleMMzkvj'
   - name: Panicked
     img: systems/dnd5e/icons/svg/statuses/frightened.svg
     _id: Kj1GwWXD5k0Zen75
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Frightened apply=false] condition. On
       each of its turns, the Frightened target must take the
@@ -246,29 +245,30 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724704219239
-      modifiedTime: 1724705080996
+      modifiedTime: 1783543975050
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplEyebite000.Kj1GwWXD5k0Zen75'
   - name: Sickened
     img: systems/dnd5e/icons/svg/statuses/poisoned.svg
     _id: 5ZKeVyumUK0i76am
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target has the &amp;Reference[Poisoned apply=false] condition.</p>
     origin: null
     tint: '#ffffff'
@@ -280,13 +280,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724704244632
-      modifiedTime: 1724705101567
+      modifiedTime: 1783543975050
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplEyebite000.5ZKeVyumUK0i76am'
 folder: 8WmlLARx1Df3Ii9v
 sort: 1300000
@@ -299,11 +302,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425952698
-  modifiedTime: 1745256792583
+  modifiedTime: 1783543975050
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEyebite000'

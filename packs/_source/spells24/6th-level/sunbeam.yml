@@ -184,17 +184,15 @@ effects:
     transfer: false
     _id: RZmnRyi6pyjIRN1i
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Blinded apply=false] condition until
       the start of your next turn.</p>
@@ -206,13 +204,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724798213021
-      modifiedTime: 1724798277064
+      modifiedTime: 1783543977318
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSunbeam000.RZmnRyi6pyjIRN1i'
 folder: 8WmlLARx1Df3Ii9v
 sort: 100782
@@ -225,11 +226,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425974121
-  modifiedTime: 1745256798940
+  modifiedTime: 1783543977318
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSunbeam000'

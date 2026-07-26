@@ -1,5 +1,6 @@
-import GroupTemplate from "./templates/group.mjs";
+import { bulkFromUuid } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import GroupTemplate from "./templates/group.mjs";
 
 const { ArrayField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
 
@@ -127,31 +128,10 @@ export default class EncounterData extends GroupTemplate {
 
   /** @override */
   async getMembers() {
-    // Batch compendium lookups when retrieving members.
-    const collections = new Map();
-    const members = new Map();
-
-    for ( const { uuid, ...rest } of this.members ) {
-      const { collection, id } = foundry.utils.parseUuid(uuid);
-      let ids = collections.get(collection);
-      if ( !ids ) {
-        ids = [];
-        collections.set(collection, ids);
-      }
-      ids.push(id);
-      rest.collection = collection;
-      members.set(id, rest);
-    }
-
-    for ( const [collection, ids] of collections.entries() ) {
-      if ( collection instanceof foundry.documents.collections.CompendiumCollection ) {
-        await collection.getDocuments({ _id__in: ids });
-      }
-    }
-
-    return Array.from(members.entries().map(([id, { collection, ...data }]) => {
-      return { actor: collection.get(id), ...foundry.utils.deepClone(data) };
-    }).filter(d => d.actor));
+    const members = await bulkFromUuid(this.members.map(m => m.uuid));
+    return this.members.map(data => ({
+      actor: members.get(data.uuid), ...foundry.utils.deepClone(data)
+    })).filter(d => d.actor);
   }
 
   /* -------------------------------------------- */

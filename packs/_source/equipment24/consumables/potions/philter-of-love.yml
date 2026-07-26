@@ -126,17 +126,15 @@ effects:
     transfer: false
     _id: MLhvjPiSXOX1tkUr
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -146,22 +144,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730745235571
-      modifiedTime: 1730745249148
+      modifiedTime: 1783544097235
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgPhilterOfLove.MLhvjPiSXOX1tkUr'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614768200
+  modifiedTime: 1783544097235
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

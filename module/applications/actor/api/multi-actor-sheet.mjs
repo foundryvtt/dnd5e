@@ -195,11 +195,11 @@ export default class MultiActorSheet extends BaseActorSheet {
   _getEntryContextOptions() {
     return [{
       label: "DND5E.Group.Action.View",
-      icon: '<i class="fa-solid fa-eye"></i>',
+      icon: "fa-solid fa-eye",
       onClick: async (_, target) => (await fromUuid(target.dataset.uuid))?.sheet.render({ force: true })
     }, {
       label: "DND5E.Group.Action.Remove",
-      icon: '<i class="fa-solid fa-xmark"></i>',
+      icon: "fa-solid fa-xmark",
       onClick: async (_, target) => this.actor.system.removeMember(await fromUuid(target.dataset.uuid))
     }];
   }

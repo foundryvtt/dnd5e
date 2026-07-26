@@ -96,20 +96,18 @@ effects:
   - name: Paralyzed
     origin: Compendium.dnd5e.spells24.Item.phbsplHoldPerson
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/paralyzed.svg
     _id: PklwZi3SKQ3JU2M2
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>At the end of each of its turns, the target repeats the [[/save
       ability=wis]] save, ending the spell on itself on a success.</p>
@@ -121,13 +119,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975608
+      modifiedTime: 1783543975608
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplHoldPerson.PklwZi3SKQ3JU2M2'
 folder: 3SjcO2acsFnWegp4
 sort: 2800000
@@ -140,11 +141,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425958892
-  modifiedTime: 1745256794789
+  modifiedTime: 1783543975608
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHoldPerson'

@@ -1,21 +1,16 @@
 _id: eTNc8XPtvZNe3yQs
 name: Potion of Flying
 type: consumable
-img: icons/consumables/potions/potion-tube-corked-bat-gold-red.webp
+img: icons/consumables/potions/potion-flask-corked-cyan.webp
 system:
   description:
     value: >-
       <p><em>This potion's clear liquid floats at the top of its container and
-      has cloudy white impurities drifting in it.</em></p>
-
-      <p>When you drink this potion, you gain a flying speed equal to your
-      walking speed for 1 hour and can hover. If you're in the air when the
-      potion wears off, you fall unless you have some other means of staying
-      aloft. </p>
-
-      <p> </p>
-
-      <p> </p>
+      has cloudy white impurities drifting in it.</em></p><p>When you drink this
+      potion, you gain a flying speed equal to your walking speed for [[lookup
+      @labels.duration activity=dQ5KoAo9EfRNjkIg]] and can hover. If you're in
+      the air when the potion wears off, you fall unless you have some other
+      means of staying aloft.</p>
     chat: ''
   source:
     custom: ''
@@ -53,14 +48,16 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This potion's clear liquid floats at the top of its container and has
+      cloudy white impurities drifting in it.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    dQ5KoAo9EfRNjkIg:
       type: utility
       activation:
         type: action
@@ -72,19 +69,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: UumpsHK33ePtvz3s
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -97,7 +99,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -114,8 +117,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -123,54 +126,63 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: dQ5KoAo9EfRNjkIg
   attuned: false
   identifier: potion-of-flying
 effects:
-  - name: Flying
-    img: icons/consumables/potions/potion-tube-corked-bat-gold-red.webp
+  - name: Alchemical Flight
+    img: icons/creatures/abilities/wings-birdlike-blue.webp
     origin: Compendium.dnd5e.items.Item.eTNc8XPtvZNe3yQs
-    _id: EfRsYOQoBVRth2Hv
+    transfer: false
+    _id: UumpsHK33ePtvz3s
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
-      - key: system.attributes.movement.hover
-        mode: 5
-        value: 'true'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          type: upgrade
+          value: '@attributes.movement.walk'
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.hover
+          type: override
+          value: 1
+          phase: initial
+          priority: null
+      magical: true
+      rider:
+        statuses: []
     disabled: false
+    start: null
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>For the duration, you gain a flying speed equal to your walking speed
+      and can hover. If you're in the air when the potion wears off, you fall
+      unless you have some other means of staying aloft.</p>
     tint: '#ffffff'
-    transfer: true
     statuses: []
+    showIcon: 1
+    folder: null
     sort: 0
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
+    flags: {}
     _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783373930475
+      modifiedTime: 1783374083017
+      lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.350'
-      systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: 1759793328544
-      modifiedTime: 1759793381173
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!items.effects!eTNc8XPtvZNe3yQs.EfRsYOQoBVRth2Hv'
+    _key: '!items.effects!eTNc8XPtvZNe3yQs.UumpsHK33ePtvz3s'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -178,11 +190,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037241439
-  modifiedTime: 1764620454112
+  modifiedTime: 1783374202146
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eTNc8XPtvZNe3yQs'

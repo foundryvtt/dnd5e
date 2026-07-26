@@ -92,20 +92,18 @@ effects:
   - name: Invisible
     origin: Compendium.dnd5e.spells24.Item.phbsplGreaterInv
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/invisible.svg
     _id: NDpw6r63ZdEgks1a
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -115,13 +113,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975340
+      modifiedTime: 1783543975340
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplGreaterInv.NDpw6r63ZdEgks1a'
 folder: qi3IbnEwap7mRw4b
 sort: 1700000
@@ -134,11 +135,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425957037
-  modifiedTime: 1745256793973
+  modifiedTime: 1783543975340
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGreaterInv'

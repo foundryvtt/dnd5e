@@ -78,21 +78,20 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
 
   /** @inheritDoc */
   _buildConfig(config, formData, index) {
-    config = super._buildConfig(config, formData, index);
     const damageType = formData?.get(`roll.${index}.damageType`);
     if ( damageType ) config.options.type = damageType;
+    config = super._buildConfig(config, formData, index);
     return config;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  _finalizeRolls(action) {
-    this.config.isCritical = action === "critical";
-    return this.rolls.map(roll => {
-      roll.options.isCritical = this.config.isCritical;
-      roll.configureDamage({ critical: this.config.critical });
-      return roll;
-    });
+  _finalizeConfig(config, action) {
+    config.isCritical = action === "critical";
+    for ( const roll of config.rolls ?? [] ) {
+      roll.options ??= {};
+      roll.options.isCritical = config.isCritical;
+    }
   }
 }

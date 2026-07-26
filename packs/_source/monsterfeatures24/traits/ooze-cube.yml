@@ -203,17 +203,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmOozeCube000000
     _id: Nqpxg74Yw9uEVMxQ
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: <p>Creatures inside the attacking creature have Total Cover.</p>
     tint: '#ffffff'
     transfer: false
@@ -224,13 +221,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736290489388
       modifiedTime: 1736290537932
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmOozeCube000000.Nqpxg74Yw9uEVMxQ'
 flags:
   dnd5e:
@@ -239,7 +239,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

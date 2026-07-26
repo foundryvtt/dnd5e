@@ -228,17 +228,14 @@ effects:
     origin: Item.mmSwallow0000000
     _id: VOHv1LyO3hHolZXo
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>While swallowed, a creature has the &amp;Reference[Blinded apply=false]
       and &amp;Reference[Restrained apply=false] conditions, has
@@ -256,30 +253,30 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1737152967007
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmSwallow0000000.VOHv1LyO3hHolZXo'
   - name: Prone
     img: systems/dnd5e/icons/svg/statuses/prone.svg
     origin: Item.mmSwallow0000000
     _id: aS5FyMP72vn3OKf1
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If you are regurgitated, you fall into a space within 10 ft. and are
       &amp;Reference[Prone apply=false].</p>
@@ -294,13 +291,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736123357118
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmSwallow0000000.aS5FyMP72vn3OKf1'
 flags:
   dnd5e:
@@ -309,7 +309,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

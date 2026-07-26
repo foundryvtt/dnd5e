@@ -127,17 +127,15 @@ effects:
     transfer: false
     _id: u2mf5JowVgwqCARq
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -149,30 +147,31 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551373305
-      modifiedTime: 1725551555583
+      modifiedTime: 1783543976609
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.u2mf5JowVgwqCARq'
   - name: Bludgeoning Protection
     img: systems/dnd5e/icons/svg/damage/bludgeoning.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -184,31 +183,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551591108
-      modifiedTime: 1725551688036
+      modifiedTime: 1783543976609
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: XYOXUUgKLjXXGt9W
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.XYOXUUgKLjXXGt9W'
   - name: Cold Protection
     img: systems/dnd5e/icons/svg/damage/cold.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -220,31 +220,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551593754
-      modifiedTime: 1725551714981
+      modifiedTime: 1783543976609
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: Wpc5zvXyw2FSCJSD
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.Wpc5zvXyw2FSCJSD'
   - name: Fire Protection
     img: systems/dnd5e/icons/svg/damage/fire.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -256,31 +257,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551597498
-      modifiedTime: 1725551830212
+      modifiedTime: 1783543976609
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: S7XVvtgRT8uEP1iw
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.S7XVvtgRT8uEP1iw'
   - name: Lightning Protection
     img: systems/dnd5e/icons/svg/damage/lightning.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -292,31 +294,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551662612
-      modifiedTime: 1725551856463
+      modifiedTime: 1783543976609
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: E8jlVJoTlfjKcz1r
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.E8jlVJoTlfjKcz1r'
   - name: Necrotic Protection
     img: systems/dnd5e/icons/svg/damage/necrotic.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -328,31 +331,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551665402
-      modifiedTime: 1725551873564
+      modifiedTime: 1783543976609
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 2TZhhhCDUC2pqqNg
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.2TZhhhCDUC2pqqNg'
   - name: Piercing Protection
     img: systems/dnd5e/icons/svg/damage/piercing.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -364,31 +368,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551880484
-      modifiedTime: 1725551895776
+      modifiedTime: 1783543976609
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: iR95ZjBkbXXD3Ena
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.iR95ZjBkbXXD3Ena'
   - name: Poison Protection
     img: systems/dnd5e/icons/svg/damage/poison.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -400,31 +405,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551899996
-      modifiedTime: 1725551916975
+      modifiedTime: 1783543976610
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: KZdzty5DTXdpGukZ
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.KZdzty5DTXdpGukZ'
   - name: Radiant Protection
     img: systems/dnd5e/icons/svg/damage/radiant.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -436,31 +442,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551922340
-      modifiedTime: 1725551940590
+      modifiedTime: 1783543976610
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 9EhogBhAM9yIoREK
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.9EhogBhAM9yIoREK'
   - name: Slashing Protection
     img: systems/dnd5e/icons/svg/damage/slashing.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -472,31 +479,32 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551943954
-      modifiedTime: 1725551956227
+      modifiedTime: 1783543976610
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: sBrdZmXfn33LhYwh
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.sBrdZmXfn33LhYwh'
   - name: Thunder Protection
     img: systems/dnd5e/icons/svg/damage/thunder.svg
     origin: Compendium.dnd5e.spells24.Item.phbsplResistance
     transfer: false
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When the creature takes damage of the chosen type before the spell
       ends, the creature reduces the total damage taken by [[/r 1d4]]. A
@@ -508,14 +516,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725551960140
-      modifiedTime: 1725551972880
+      modifiedTime: 1783543976610
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: jP1TZyrEYtskdWXf
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplResistance.jP1TZyrEYtskdWXf'
 folder: 4FhsY9FJQd7h7MZb
 sort: 150000
@@ -528,11 +539,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425969088
-  modifiedTime: 1745256797599
+  modifiedTime: 1783543976609
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplResistance'

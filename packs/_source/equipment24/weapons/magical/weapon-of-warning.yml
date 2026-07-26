@@ -146,50 +146,63 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell2.webp
     disabled: true
     _id: 5rHVxAXfNzLO5zxx
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of Warning'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: uncommon
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgWeaponOfWarni
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/hammers/hammer-double-engraved-ruby.webp
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '400'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of Warning'
+          priority: null
+          type: override
+          phase: initial
+          _id: 9grimRM9zOynEHoS
+        - key: system.rarity
+          value: uncommon
+          priority: null
+          type: override
+          phase: initial
+          _id: cd21wOi136NsiqdN
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: tKaqeZp2bFMMoVXh
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgWeaponOfWarni
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 7zLC9RaDbtiBg5Xw
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: 3sKAfUg5dRoKr2p2
+        - key: img
+          value: icons/weapons/hammers/hammer-double-engraved-ruby.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: Tb5ZTvmRIGQJW2ac
+        - key: system.price.value
+          value: 400
+          priority: null
+          type: add
+          phase: initial
+          _id: PawWnWeX3x7m6NOH
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: OwWYxUAPHNZjUn4S
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -200,33 +213,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730223961558
-      modifiedTime: 1745438837227
+      modifiedTime: 1783544099501
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgWeaponOfWarni.5rHVxAXfNzLO5zxx'
   - name: 'Supernatural Readiness: Initiative Advantage'
     img: icons/magic/symbols/runes-etched-steel-blade.webp
     _id: n5EfmSzKBsi01b7Z
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.init.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.init.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: NgBC9TqHAaYVZU6q
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Each ally (including you) has Advantage on its Initiative rolls when
       within 30 feet.</p>
@@ -239,13 +255,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730224444582
-      modifiedTime: 1730224874646
+      modifiedTime: 1783544099501
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgWeaponOfWarni.n5EfmSzKBsi01b7Z'
 folder: kie870i5kr7yuxO8
 flags:
@@ -256,11 +275,11 @@ flags:
         - n5EfmSzKBsi01b7Z
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704911
+  modifiedTime: 1783544099501
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 17900000

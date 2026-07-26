@@ -43,14 +43,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '60'
       contiguous: false
+      count: ''
   range:
     value: '300'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -89,7 +92,10 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: N2YjmVRCv4gVvuk8
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -120,23 +126,70 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: freezing-sphere
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-blue-large.webp
-effects: []
+img: icons/commodities/gems/pearl-water.webp
+effects:
+  - name: Frozen in Ice
+    img: icons/magic/water/water-iceberg-bubbles.webp
+    origin: Compendium.dnd5e.spells.Item.MImfWCzEPRMYD3Xp
+    transfer: false
+    _id: N2YjmVRCv4gVvuk8
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have been frozen in a body of water and are trapped within it. You
+      can make a [[/check str]] check against the caster's spell save DC to
+      break free.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781447453438
+      modifiedTime: 1781447511342
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!MImfWCzEPRMYD3Xp.N2YjmVRCv4gVvuk8'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354540
-  modifiedTime: 1725992719294
+  modifiedTime: 1781447453490
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MImfWCzEPRMYD3Xp'

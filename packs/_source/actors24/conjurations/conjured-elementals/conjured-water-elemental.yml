@@ -478,12 +478,9 @@ prototypeToken:
     src: ''
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -527,7 +524,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -550,6 +547,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - name: Water Element
     type: feat
@@ -742,20 +740,18 @@ items:
       - name: Restrained
         origin: Compendium.dnd5e.actors24.Actor.phbsplConjuredEl.Item.BeXR1DiQaXVIpgxp
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/restrained.svg
         _id: fwIobATMREr7g26x
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>At the start of each of its turns, the &amp;Reference[Restrained
           apply=false] target repeats the [[/save ability=dex]] save. On a
@@ -772,10 +768,15 @@ items:
             Compendium.dnd5e.actors24.Actor.phbsplConjuredEl.Item.1sm4KQqflaDX7MEu.ActiveEffect.NGnrAr3HdReYoTjS
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544184420
+          modifiedTime: 1783544184420
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!phbConjuredWater.BeXR1DiQaXVIpgxp.fwIobATMREr7g26x
     folder: null
@@ -787,10 +788,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544184420
+      modifiedTime: 1783544184420
     _id: BeXR1DiQaXVIpgxp
     _key: '!actors.items!phbConjuredWater.BeXR1DiQaXVIpgxp'
 effects: []
@@ -804,10 +807,10 @@ ownership:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452719598
-  modifiedTime: 1771452719598
+  systemVersion: 6.0.0
+  createdTime: 1783544184420
+  modifiedTime: 1783544184420
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbConjuredWater'

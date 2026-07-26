@@ -113,17 +113,14 @@ effects:
     origin: Item.mmPossession0000
     _id: EeZIaR3X4cI5glMX
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Incapacitated apply=false] condition
       and loses control of its body.</p>
@@ -136,13 +133,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmPossession0000.EeZIaR3X4cI5glMX'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -152,7 +152,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1736987392653

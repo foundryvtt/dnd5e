@@ -3,6 +3,48 @@
  */
 
 /**
+ * Class for storing a filter definition for easy evaluation.
+ */
+export class Filter {
+  constructor(definition) {
+    this.#definition = definition;
+  }
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The underlying filter definition.
+   * @type {FilterDescription|FilterDescription[]}
+   */
+  #definition;
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Check some data against the filter to determine if it matches.
+   * @param {object} data  Arbitrary data object to check.
+   * @returns {boolean}
+   */
+  check(data) {
+    try {
+      if ( foundry.utils.isEmpty(this.#definition) ) return true;
+      else return performCheck(data, this.#definition);
+    } catch(err) {
+      console.error(err);
+      return false;
+    }
+  }
+}
+
+/* -------------------------------------------- */
+/*  Checking Functions                          */
+/* -------------------------------------------- */
+
+/**
  * Check some data against a filter to determine if it matches.
  * @param {object} data                                   Data to check.
  * @param {FilterDescription|FilterDescription[]} filter  Filter to compare against.
@@ -39,15 +81,15 @@ export function uniqueKeys(filter=[]) {
 
 /**
  * Internal check implementation.
- * @param {object} data             Data to check.
- * @param {string} [keyPath]        Path to individual piece within data to check.
- * @param {*} value                 Value to compare against or additional filters.
- * @param {string} [operation="_"]  Checking function to use.
+ * @param {object} data                 Data to check.
+ * @param {string} [keyPath]            Path to individual piece within data to check.
+ * @param {*} value                     Value to compare against or additional filters.
+ * @param {string} [operation="exact"]  Checking function to use.
  * @returns {boolean}
  * @internal
  * @throws
  */
-function _check(data, keyPath, value, operation="_") {
+function _check(data, keyPath, value, operation="exact") {
   const operator = OPERATOR_FUNCTIONS[operation];
   if ( operator ) return operator(data, value);
 
@@ -156,7 +198,7 @@ export function NOT(data, filter) {
  * @enum {Function}
  */
 export const COMPARISON_FUNCTIONS = {
-  _: exact, exact, contains, icontains, startswith, istartswith, endswith,
+  exact, contains, icontains, startswith, istartswith, endswith, iendswith,
   has, hasany, hasall, in: in_, gt, gte, lt, lte
 };
 
@@ -230,6 +272,18 @@ export function istartswith(data, value) {
  */
 export function endswith(data, value) {
   return String(data).endsWith(String(value));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Case-insensitive check that data ends with value.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function iendswith(data, value) {
+  return endswith(String(data).toLocaleLowerCase(game.i18n.lang), String(value).toLocaleLowerCase(game.i18n.lang));
 }
 
 /* -------------------------------------------- */

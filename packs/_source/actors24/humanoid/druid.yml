@@ -484,12 +484,9 @@ prototypeToken:
     src: modules/dnd-monster-manual/assets/tokens/druid-*.webp
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -533,7 +530,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -553,6 +550,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Studded Leather Armor
     system:
@@ -619,10 +617,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: WTE6JehXQfziMo17
     sort: 0
     _key: '!actors.items!mmDruid000000000.WTE6JehXQfziMo17'
@@ -724,10 +724,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -888,10 +890,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmVineStaff00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -1054,10 +1058,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmVerdantWisp000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1508,10 +1514,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1632,6 +1640,7 @@ items:
       identifier: druidcraft
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/nature/plant-seed-hands-glow-yellow.webp
     effects:
@@ -1639,33 +1648,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.3MkhXZwZstyLUC3q
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.TJRGXmcjfvHAliH6.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1679,10 +1698,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDruidcraft
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176887
+      modifiedTime: 1783544176887
     _id: TJRGXmcjfvHAliH6
     _key: '!actors.items!mmDruid000000000.TJRGXmcjfvHAliH6'
   - name: Speak with Animals
@@ -1789,30 +1810,31 @@ items:
       identifier: speak-with-animals
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/creatures/mammals/dog-husky-white-blue.webp
     effects:
       - name: Bestial Communication
         origin: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/creatures/mammals/dog-husky-white-blue.webp
         _id: lHx55SIuimKR3ALR
         type: base
-        system: {}
-        changes:
-          - key: system.traits.languages.custom
-            mode: 2
-            value: ;comprehend and verbally communicate with Beasts
-            priority: null
+        system:
+          changes:
+            - key: system.traits.languages.custom
+              value: ;comprehend and verbally communicate with Beasts
+              priority: null
+              type: add
+              phase: initial
+              _id: Kfwdgqz9Z72qMxJp
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1822,43 +1844,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176888
+          modifiedTime: 1783544176888
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.rnHaNNaeCidsdNoG.lHx55SIuimKR3ALR
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.2HDHPkwefVWFOzlW
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.2HDHPkwefVWFOzlW
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.rnHaNNaeCidsdNoG.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1872,10 +1909,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpeakwithA
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176888
+      modifiedTime: 1783544176888
     _id: rnHaNNaeCidsdNoG
     _key: '!actors.items!mmDruid000000000.rnHaNNaeCidsdNoG'
   - name: Entangle
@@ -1990,26 +2029,25 @@ items:
       identifier: entangle
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/nature/root-vine-entangle-foot-green.webp
     effects:
       - name: Restrained
         origin: Compendium.dnd5e.spells24.Item.phbsplEntangle00
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/restrained.svg
         _id: wn7K2m4XhXhItgPT
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>A Restrained creature can take an action to make a [[/check
           ability=str skill=ath]] check against your spell save DC. On a
@@ -2024,43 +2062,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176889
+          modifiedTime: 1783544176889
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.NtmJOdVVNW4jyd24.wn7K2m4XhXhItgPT
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.kRFj55nvsQK6tgYJ
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.kRFj55nvsQK6tgYJ
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.NtmJOdVVNW4jyd24.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2074,10 +2127,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplEntangle00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176889
+      modifiedTime: 1783544176889
     _id: NtmJOdVVNW4jyd24
     _key: '!actors.items!mmDruid000000000.NtmJOdVVNW4jyd24'
   - name: Thunderwave
@@ -2202,6 +2257,7 @@ items:
       identifier: thunderwave
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/sonic/explosion-shock-wave-teal.webp
     effects:
@@ -2209,33 +2265,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.nkTQoVkqdDGCEbsC
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.nkTQoVkqdDGCEbsC
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.kdc53KLaLU9CW6dh.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2249,10 +2315,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThunderwav
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176889
+      modifiedTime: 1783544176889
     _id: kdc53KLaLU9CW6dh
     _key: '!actors.items!mmDruid000000000.kdc53KLaLU9CW6dh'
   - name: Animal Messenger
@@ -2358,26 +2426,25 @@ items:
       identifier: animal-messenger
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/creatures/mammals/rabbit-movement-glowing-green.webp
     effects:
       - name: Carrying Message
         origin: Compendium.dnd5e.spells24.Item.phbsplAnimalMess
         duration:
-          rounds: null
-          startTime: null
-          seconds: 86400
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 86400
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/sundries/documents/envelope-sealed-red-brown.webp
         _id: jubviBNu11G84UZd
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>The Beast travels for the duration toward the specified location,
           covering about 25 miles per 24 hours or 50 miles if the Beast can
@@ -2393,43 +2460,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176890
+          modifiedTime: 1783544176890
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.2wnXlRyaVnQFLOji.jubviBNu11G84UZd
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.mknEHePWqzWQ3BAI
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.mknEHePWqzWQ3BAI
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.2wnXlRyaVnQFLOji.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2443,10 +2525,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplAnimalMess
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176890
+      modifiedTime: 1783544176890
     _id: 2wnXlRyaVnQFLOji
     _key: '!actors.items!mmDruid000000000.2wnXlRyaVnQFLOji'
   - name: Longstrider
@@ -2554,30 +2638,31 @@ items:
       identifier: longstrider
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/equipment/feet/boots-leather-laced-brown.webp
     effects:
       - name: Longstrider
         origin: Compendium.dnd5e.spells24.Item.phbsplLongstride
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/equipment/feet/boots-leather-laced-brown.webp
         _id: I746neZVrgJFkRco
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 2
-            value: '10'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 10
+              priority: null
+              type: add
+              phase: initial
+              _id: YskJzHWnXFvjjcFh
+          magical: true
         description: <p>The target’s Speed increases by 10 feet until the spell ends.</p>
         tint: '#ffffff'
         transfer: false
@@ -2587,43 +2672,58 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544176890
+          modifiedTime: 1783544176890
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.TrVoUfhvvvEWG2fS.I746neZVrgJFkRco
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.k6VQ3W6iKHSqJlZg
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.k6VQ3W6iKHSqJlZg
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.TrVoUfhvvvEWG2fS.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2637,10 +2737,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLongstride
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176890
+      modifiedTime: 1783544176890
     _id: TrVoUfhvvvEWG2fS
     _key: '!actors.items!mmDruid000000000.TrVoUfhvvvEWG2fS'
   - name: Moonbeam
@@ -2769,6 +2871,7 @@ items:
       identifier: moonbeam
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/light/beam-rays-yellow-blue-large.webp
     effects:
@@ -2776,33 +2879,43 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.qhGxfRb2sww4YJKs
-        changes: []
-        system: {}
+        origin: null
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDruid000000000.Item.mmSpellcasting00.Activity.qhGxfRb2sww4YJKs
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDruid000000000.0KWA94HrnX1qAj50.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2816,10 +2929,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMoonbeam00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544176891
+      modifiedTime: 1783544176891
     _id: 0KWA94HrnX1qAj50
     _key: '!actors.items!mmDruid000000000.0KWA94HrnX1qAj50'
 effects: []
@@ -2830,11 +2945,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452701030
-  modifiedTime: 1771452701030
+  systemVersion: 6.0.0
+  createdTime: 1783544176887
+  modifiedTime: 1783544176887
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

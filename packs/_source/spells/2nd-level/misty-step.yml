@@ -24,14 +24,18 @@ system:
     units: inst
   target:
     affects:
-      type: space
+      type: ''
       count: '30'
       choice: false
+      special: ''
     template:
       units: ft
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
+    value: '30'
   uses:
     max: ''
     recovery: []
@@ -49,58 +53,74 @@ system:
   properties:
     - vocal
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    jJNyKYNO9N4a3PZh:
+      type: teleport
+      name: Cast
+      _id: jJNyKYNO9N4a3PZh
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
-        override: false
+        units: ft
+        override: true
+        special: ''
+        value: '30'
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+          type: self
+          special: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: false
+        units: ft
   identifier: misty-step
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-snare-brown.webp
+img: icons/magic/lightning/orb-ball-blue.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366542
-  modifiedTime: 1725992723385
+  modifiedTime: 1783217643612
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!wqfAVANuQonNBgnL'

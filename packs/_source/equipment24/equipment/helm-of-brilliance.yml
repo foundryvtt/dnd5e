@@ -517,20 +517,19 @@ effects:
     img: icons/magic/fire/blast-jet-stream-splash.webp
     disabled: true
     _id: oZBFpi117yOXca3k
-    system: {}
-    changes:
-      - key: ''
-        mode: 2
-        value: ''
-        priority: null
+    system:
+      changes:
+        - key: ''
+          value: ''
+          priority: null
+          type: add
+          phase: initial
+          _id: CQfhMiihd5g68pj8
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -541,33 +540,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730696745413
-      modifiedTime: 1730696974775
+      modifiedTime: 1783544096129
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHelmOfBrillia.oZBFpi117yOXca3k'
   - name: Ruby Resistance
     img: icons/commodities/gems/gem-faceted-radiant-red.webp
     _id: MxOB3as0nJAw2AVI
     type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: fire
-        priority: null
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+          phase: initial
+          _id: Qw6xSJnylxoDZy0T
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -578,22 +580,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730697009876
-      modifiedTime: 1730697052686
+      modifiedTime: 1783544096129
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHelmOfBrillia.MxOB3as0nJAw2AVI'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764617036824
+  modifiedTime: 1783544096129
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 18200000

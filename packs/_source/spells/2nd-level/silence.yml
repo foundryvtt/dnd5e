@@ -9,8 +9,9 @@ system:
       <p>For the Duration, no sound can be created within or pass through a
       20-foot-radius sphere centered on a point you choose within range. Any
       creature or object entirely inside the sphere is immune to thunder damage,
-      and creatures are Deafened while entirely inside it. Casting a Spell that
-      includes a verbal component is impossible there.</p>
+      and creatures are &amp;reference[Deafened apply=false] while entirely
+      inside it. Casting a Spell that includes a verbal component is impossible
+      there.</p>
     chat: ''
   source:
     custom: ''
@@ -28,14 +29,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '20'
       contiguous: false
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -53,8 +57,8 @@ system:
   properties:
     - vocal
     - somatic
-    - ritual
     - concentration
+    - ritual
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -94,20 +98,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: silence
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-triangle-magenta.webp
+img: icons/magic/unholy/orb-glowing-purple.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347451
-  modifiedTime: 1725992717001
+  modifiedTime: 1781227629273
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5VhqFROQYjr1P9lp'

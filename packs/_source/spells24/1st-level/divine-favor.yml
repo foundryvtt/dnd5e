@@ -99,28 +99,30 @@ effects:
   - name: Divine Favor
     origin: Compendium.dnd5e.spells24.Item.phbsplDivineFavo
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/holy/projectiles-blades-salvo-yellow.webp
     _id: xvEfaqPYJUNKaM58
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: 1d4[radiant]
-        priority: null
-      - key: system.bonuses.rwak.damage
-        mode: 2
-        value: 1d4[radiant]
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: 1d4[radiant]
+          priority: null
+          type: add
+          phase: initial
+          _id: NLzNJjjZwzrC4iyD
+        - key: system.bonuses.rwak.damage
+          value: 1d4[radiant]
+          priority: null
+          type: add
+          phase: initial
+          _id: sZBqiIQFR0db6uN4
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -129,13 +131,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974700
+      modifiedTime: 1783543974700
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplDivineFavo.xvEfaqPYJUNKaM58'
 folder: pBaAAtXBCq9FVEnL
 sort: 3700000
@@ -148,11 +153,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425950458
-  modifiedTime: 1745256791131
+  modifiedTime: 1783543974700
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDivineFavo'

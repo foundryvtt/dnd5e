@@ -31,6 +31,33 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef CheckMessageSystemData
+ * @property {string} ability      Ability used for the check.
+ * @property {string|null} skill   Skill used for the check, if any.
+ * @property {string|null} tool    Tool used for the check, if any.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef GenericMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef HitDieMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef HitPointsMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef RequestMessageSystemData
  * @property {object} button
  * @property {string} [button.icon]         Font awesome code or path to SVG icon for the request button.
@@ -56,6 +83,14 @@
  * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
  * @property {ChatMessage5e} [request]      Rest request chat message for which this rest was performed.
  * @property {string} type                  Type of rest performed.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef SaveMessageSystemData
+ * @property {string} ability    Ability used for the save.
+ * @property {boolean} resisted  Whether the save was turned into a success by spending a legendary resistance.
  */
 
 /* -------------------------------------------- */
@@ -87,5 +122,5 @@
  * @typedef UsageMessageSystemData
  * @property {string} [cause]          Relative ID of the activity that caused this one on the same actor.
  * @property {ActorDeltasData} deltas  Actor/item consumption from this turn change.
- * @property {string[]} effects        Relative UUIDs of effects that can be applied.
+ * @property {string[]} effects        Relative or absolute UUIDs of effects that can be applied.
  */

@@ -122,21 +122,21 @@ effects:
     transfer: false
     _id: TdKyE2tB9wNdh86t
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '-2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: -2
+          priority: null
+          type: add
+          phase: initial
+          _id: lVixj4ErzNIjyVL4
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>You take a −2 penalty to saving throws while cursed in this way. Only a
       god or the magic of the Fates card can end this curse.</p>
@@ -148,13 +148,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729189011919
-      modifiedTime: 1729189454264
+      modifiedTime: 1783544094910
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgDmtEuryale000.TdKyE2tB9wNdh86t'
 folder: XVXuU21XyvevGap7
 sort: 1900000
@@ -163,11 +166,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1729188934076
-  modifiedTime: 1764615877898
+  modifiedTime: 1783544094910
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtEuryale000'

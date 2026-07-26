@@ -121,17 +121,15 @@ effects:
     transfer: false
     _id: kkxX701wci61fEvH
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Charmed apply=false] condition for
       the duration or until you or your allies deal damage to the target. Each
@@ -144,13 +142,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724779473216
-      modifiedTime: 1724779565694
+      modifiedTime: 1783543975920
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplMassSugges.kkxX701wci61fEvH'
 folder: 8WmlLARx1Df3Ii9v
 sort: 300000
@@ -163,11 +164,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425963056
-  modifiedTime: 1745256795972
+  modifiedTime: 1783543975920
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMassSugges'

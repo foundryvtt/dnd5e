@@ -84,7 +84,10 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: pEY6ZwxlbDrRPp6h
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -96,30 +99,79 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: con
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: levitate
 sort: 0
 flags: {}
 img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
-effects: []
+effects:
+  - name: Levitating
+    img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+    origin: Compendium.dnd5e.spells.Item.MRxldJd6C4bsBo3O
+    transfer: false
+    _id: pEY6ZwxlbDrRPp6h
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 10
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are levitating. You can move only by pushing or pulling against a
+      fixed object or surface within reach (such as a wall or a ceiling), which
+      allows you to move as if you were climbing. The caster can change your
+      altitude by up to 20 feet in either direction on their turn. If you are
+      the caster, you can move up or down as part of your move.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781226744533
+      modifiedTime: 1781226818177
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!MRxldJd6C4bsBo3O.pEY6ZwxlbDrRPp6h'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354733
-  modifiedTime: 1725992719362
+  modifiedTime: 1781226744570
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MRxldJd6C4bsBo3O'

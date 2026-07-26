@@ -127,17 +127,15 @@ effects:
     transfer: false
     _id: dJN7ArhjS5DHmArT
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><em>Source:
       @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtDonjon0000]{Donjon}</em></p><p>You
@@ -155,13 +153,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729188510567
-      modifiedTime: 1729188888227
+      modifiedTime: 1783544094871
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgDmtDonjon0000.dJN7ArhjS5DHmArT'
 folder: XVXuU21XyvevGap7
 sort: 2000000
@@ -170,11 +171,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1729187354163
-  modifiedTime: 1764615872790
+  modifiedTime: 1783544094871
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtDonjon0000'

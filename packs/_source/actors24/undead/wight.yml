@@ -489,12 +489,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -538,7 +535,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -558,6 +555,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Studded Leather Armor
     system:
@@ -624,10 +622,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: H1F8HwTAk3IA9UoP
     sort: 0
     _key: '!actors.items!mmWight000000000.H1F8HwTAk3IA9UoP'
@@ -673,10 +673,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSunlightSensit
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -772,10 +774,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 100000
@@ -938,10 +942,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmNecroticSword0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 200000
@@ -1145,10 +1151,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLifeDrain00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 400000
@@ -1315,10 +1323,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmNecroticBow000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 300000
@@ -1331,7 +1341,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452718051

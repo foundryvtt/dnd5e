@@ -125,25 +125,27 @@ effects:
     transfer: false
     _id: GIybtF2qEmtPCOZj
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.hover
-        mode: 5
-        value: 'true'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.hover
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: GWdsjr3p5tCWIoi2
+        - key: system.attributes.movement.fly
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: Ish40XX5MZ12ySti
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -155,22 +157,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1730862909967
-      modifiedTime: 1759793416091
+      modifiedTime: 1783544097388
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgPotionOfFlyin.GIybtF2qEmtPCOZj'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614747068
+  modifiedTime: 1783544097388
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

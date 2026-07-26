@@ -3,6 +3,10 @@ import MappingField from "../fields/mapping-field.mjs";
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
+ * @import { SensesData } from "./_types.mjs";
+ */
+
+/**
  * Field for storing senses data.
  */
 export default class SensesField extends foundry.data.fields.SchemaField {
@@ -60,9 +64,6 @@ export default class SensesField extends foundry.data.fields.SchemaField {
     for ( const key of SensesField.#DEFAULT_SENSES ) {
       Object.defineProperty(senses, key, {
         get() {
-          foundry.utils.logCompatibilityWarning(`senses.${key} has moved to "senses.ranges.${key}".`, {
-            since: "DnD5e 5.3", until: "DnD5e 6.1", once: true
-          });
           return this.ranges[key];
         },
         set(value) {

@@ -70,7 +70,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
         label: "DND5E.Rarity",
         type: "set",
         config: {
-          blank: _loc("DND5E.ItemRarityMundane").capitalize(),
+          blank: _loc("DND5E.ITEM.Rarity.Mundane").capitalize(),
           choices: Object.entries(CONFIG.DND5E.itemRarity).reduce((obj, [key, label]) => {
             obj[key] = { label: label.capitalize() };
             return obj;

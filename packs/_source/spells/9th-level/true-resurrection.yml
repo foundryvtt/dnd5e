@@ -35,11 +35,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -99,20 +102,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: true-resurrection
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-flame-blue.webp
+img: icons/magic/life/ankh-gold-blue.webp
 effects: []
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365730
-  modifiedTime: 1725992723002
+  modifiedTime: 1781384088831
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!qLeEXZDbW5y4bmLY'

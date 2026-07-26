@@ -485,12 +485,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -534,7 +531,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -554,6 +551,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Dagger
     system:
@@ -724,10 +722,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepDagger0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!mmPirate00000000.MC6uJTSfGDW6jSdI'
   - name: Leather Armor
     system:
@@ -794,10 +794,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: 4y9CrrA47dPASaoC
     sort: 0
     _key: '!actors.items!mmPirate00000000.4y9CrrA47dPASaoC'
@@ -899,10 +901,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 100000
@@ -1016,17 +1020,14 @@ items:
         origin: Item.mmEnthrallingPan
         _id: sxNoZcfI2KVb3zHr
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Charmed apply=false] condition
           until the start of the attacking creature’s next turn.</p>
@@ -1040,10 +1041,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmPirate00000000.mmEnthrallingPan.sxNoZcfI2KVb3zHr
     flags:
@@ -1055,10 +1061,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEnthrallingPan
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 300000
@@ -1071,7 +1079,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452711060

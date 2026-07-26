@@ -142,42 +142,51 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: ZveR6kPKafjcwQdY
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Dragon Slayer {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDragonSlayer0
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: activities[attack].description.chatFlavor
-        mode: 5
-        value: '{} Bonus Damage: 3d6 vs Dragon'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Dragon Slayer {}
+          priority: null
+          type: override
+          phase: initial
+          _id: 6uz9b9ygljnIyB1o
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: Y2PWM1K3w3YLOjIo
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDragonSlayer0
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: lAR917ynR7X2EKN8
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: x0zI9z8N92wVtRIp
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: xOT39tuutCxkhcX6
+        - key: activities[attack].description.chatFlavor
+          value: '{} Bonus Damage: 3d6 vs Dragon'
+          priority: null
+          type: override
+          phase: initial
+          _id: GFG028om485tHjIz
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -188,13 +197,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730137042510
-      modifiedTime: 1731016629831
+      modifiedTime: 1783544095213
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDragonSlayer0.ZveR6kPKafjcwQdY'
 folder: kie870i5kr7yuxO8
 flags:
@@ -205,11 +217,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712699414
+  modifiedTime: 1783544095213
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7400000

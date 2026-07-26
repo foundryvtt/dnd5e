@@ -187,17 +187,15 @@ effects:
     transfer: false
     _id: 3M7d2VBW3htCp7Aj
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If you reduce your foe to 0 Hit Points during that combat, you have
       Advantage on Death Saving Throws for 1 year.</p>
@@ -209,13 +207,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729184146197
-      modifiedTime: 1729185015772
+      modifiedTime: 1783544094836
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgDmtComet00000.3M7d2VBW3htCp7Aj'
   - name: 'Comet Card: Death Save Advantage'
     img: icons/magic/control/control-influence-rally-purple.webp
@@ -223,17 +224,15 @@ effects:
     transfer: false
     _id: asqZlVwoKSS1ckCU
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><em>Source:
       @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtComet00000]{Comet}</em></p><p>You
@@ -245,13 +244,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729186254079
-      modifiedTime: 1729186500527
+      modifiedTime: 1783544094836
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDmtComet00000.asqZlVwoKSS1ckCU'
 folder: XVXuU21XyvevGap7
 sort: 2100000
@@ -260,11 +262,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1729183692427
-  modifiedTime: 1764615867604
+  modifiedTime: 1783544094835
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtComet00000'

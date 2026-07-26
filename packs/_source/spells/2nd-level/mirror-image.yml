@@ -1,31 +1,26 @@
 _id: X4c8xCkmF8U9HUMz
 name: Mirror Image
 type: spell
-img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+img: icons/magic/defensive/illusion-evasion-echo-purple.webp
 system:
   description:
     value: >-
       <p>Three illusory duplicates of yourself appear in your space. Until the
       spell ends, the duplicates move with you and mimic your actions, shifting
       position so it's impossible to track which image is real. You can use your
-      action to dismiss the illusory duplicates.</p>
-
-      <p>Each time a creature targets you with an attack during the spell's
-      duration, roll a [[/r 1d20 # Mirror Image Check]] to determine whether the
-      attack instead targets one of your duplicates.</p>
-
-      <p>If you have three duplicates, you must roll a 6 or higher to change the
-      attack's target to a duplicate. With two duplicates, you must roll an 8 or
-      higher. With one duplicate, you must roll an 11 or higher.</p>
-
-      <p>A duplicate's AC equals 10 + your Dexterity modifier. If an attack hits
-      a duplicate, the duplicate is destroyed. A duplicate can be destroyed only
-      by an attack that hits it. It ignores all other damage and effects. The
-      spell ends when all three duplicates are destroyed.</p>
-
-      <p>A creature is unaffected by this spell if it can't see, if it relies on
-      senses other than sight, such as blindsight, or if it can perceive
-      illusions as false, as with truesight.</p>
+      action to dismiss the illusory duplicates.</p><p>Each time a creature
+      targets you with an attack during the spell's duration, roll a 1d20 to
+      determine whether the attack instead targets one of your
+      duplicates.</p><p>If you have three duplicates, you must roll a 6 or
+      higher to change the attack's target to a duplicate. With two duplicates,
+      you must roll an 8 or higher. With one duplicate, you must roll an 11 or
+      higher.</p><p>A duplicate's AC equals 10 + your Dexterity modifier. If an
+      attack hits a duplicate, the duplicate is destroyed. A duplicate can be
+      destroyed only by an attack that hits it. It ignores all other damage and
+      effects. The spell ends when all three duplicates are destroyed.</p><p>A
+      creature is unaffected by this spell if it can't see, if it relies on
+      senses other than sight, such as &amp;reference[blindsight], or if it can
+      perceive illusions as false, as with &amp;reference[truesight].</p>
     chat: ''
   source:
     custom: ''
@@ -44,11 +39,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -86,7 +84,19 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: I5Cgu5m0knHmdXge
+          level:
+            min: null
+            max: null
+        - _id: uFd6X0bNcmjRKqu1
+          level:
+            min: null
+            max: null
+        - _id: n89eid0r3Ui0XvJb
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -98,16 +108,249 @@ system:
           choice: false
         override: false
       roll:
-        formula: 1d20
+        formula: ''
         name: ''
         prompt: false
         visible: false
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    rQbzIAnDXYbVe48y:
+      type: utility
+      name: Mirror Image Interception
+      _id: rQbzIAnDXYbVe48y
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When a creature targets you with an attack during this spell's
+          duration.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>Each time a creature targets you with an attack during the spell's
+          duration, roll a 1d20 to determine whether the attack instead targets
+          one of your duplicates.</p><p>If you have three duplicates, you must
+          roll a 6 or higher to change the attack's target to a duplicate. With
+          two duplicates, you must roll an 8 or higher. With one duplicate, you
+          must roll an 11 or higher.</p><h4><strong>Amount of Mirror
+          Images:</strong> [[lookup @flags.world.mirror-image]]{0}</h4>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: Mirror Image Destruction Check
+        formula: 1d20
   identifier: mirror-image
-effects: []
+effects:
+  - name: Mirror Image 1
+    origin: Compendium.dnd5e.spells.Item.X4c8xCkmF8U9HUMz
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: false
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/sundries/flags/banner-pink.webp
+    _id: I5Cgu5m0knHmdXge
+    type: base
+    system:
+      changes:
+        - key: flags.world.mirror-image
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    description: >-
+      <p>You have an illusory duplicate in your space. The duplicates move with
+      you and mimic your actions, shifting position so it's impossible to track
+      which image is real. You can use your action to dismiss the illusory
+      duplicates.</p><p>Each time a creature targets you with an attack during
+      the spell's duration, roll a 1d20 to determine whether the attack instead
+      targets one of your duplicates.</p><p>A duplicate's AC equals 10 + your
+      Dexterity modifier. If an attack hits a duplicate, the duplicate is
+      destroyed. A duplicate can be destroyed only by an attack that hits it. It
+      ignores all other damage and effects. The spell ends when all three
+      duplicates are destroyed.</p><p>A creature is unaffected by this spell if
+      it can't see, if it relies on senses other than sight, such as
+      &amp;reference[blindsight], or if it can perceive illusions as false, as
+      with &amp;reference[truesight].</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplMirrorImag.ActiveEffect.VUqQIaiZoIzxUdf1
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781362576214
+      modifiedTime: 1781363327740
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!X4c8xCkmF8U9HUMz.I5Cgu5m0knHmdXge'
+  - name: Mirror Image 2
+    origin: Compendium.dnd5e.spells.Item.X4c8xCkmF8U9HUMz
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: false
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/sundries/flags/banner-green.webp
+    _id: uFd6X0bNcmjRKqu1
+    type: base
+    system:
+      changes:
+        - key: flags.world.mirror-image
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    description: >-
+      <p>You have an illusory duplicate in your space. The duplicates move with
+      you and mimic your actions, shifting position so it's impossible to track
+      which image is real. You can use your action to dismiss the illusory
+      duplicates.</p><p>Each time a creature targets you with an attack during
+      the spell's duration, roll a 1d20 to determine whether the attack instead
+      targets one of your duplicates.</p><p>A duplicate's AC equals 10 + your
+      Dexterity modifier. If an attack hits a duplicate, the duplicate is
+      destroyed. A duplicate can be destroyed only by an attack that hits it. It
+      ignores all other damage and effects. The spell ends when all three
+      duplicates are destroyed.</p><p>A creature is unaffected by this spell if
+      it can't see, if it relies on senses other than sight, such as
+      &amp;reference[blindsight], or if it can perceive illusions as false, as
+      with &amp;reference[truesight].</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplMirrorImag.ActiveEffect.XcTQl9DhT9lC3bxI
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781362578608
+      modifiedTime: 1781363332005
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!X4c8xCkmF8U9HUMz.uFd6X0bNcmjRKqu1'
+  - name: Mirror Image 3
+    origin: Compendium.dnd5e.spells.Item.X4c8xCkmF8U9HUMz
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: false
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    img: icons/sundries/flags/banner-blue.webp
+    _id: n89eid0r3Ui0XvJb
+    type: base
+    system:
+      changes:
+        - key: flags.world.mirror-image
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    description: >-
+      <p>You have an illusory duplicate in your space. The duplicates move with
+      you and mimic your actions, shifting position so it's impossible to track
+      which image is real. You can use your action to dismiss the illusory
+      duplicates.</p><p>Each time a creature targets you with an attack during
+      the spell's duration, roll a 1d20 to determine whether the attack instead
+      targets one of your duplicates.</p><p>A duplicate's AC equals 10 + your
+      Dexterity modifier. If an attack hits a duplicate, the duplicate is
+      destroyed. A duplicate can be destroyed only by an attack that hits it. It
+      ignores all other damage and effects. The spell ends when all three
+      duplicates are destroyed.</p><p>A creature is unaffected by this spell if
+      it can't see, if it relies on senses other than sight, such as
+      &amp;reference[blindsight], or if it can perceive illusions as false, as
+      with &amp;reference[truesight].</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells24.Item.phbsplMirrorImag.ActiveEffect.uMsGEsbEZ2hckOKW
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781362580142
+      modifiedTime: 1781363334041
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!X4c8xCkmF8U9HUMz.n89eid0r3Ui0XvJb'
 folder: Qi4Se3we69ukl2V9
 sort: 0
 ownership:
@@ -115,11 +358,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358212
-  modifiedTime: 1725992720488
+  modifiedTime: 1781363109620
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!X4c8xCkmF8U9HUMz'

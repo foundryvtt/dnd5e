@@ -10,21 +10,26 @@
     "compile": "npm run build:db",
     "dist": "node ./utils/dist.mjs",
     "extract": "npm run build:source",
-    "lint": "eslint --ext .mjs --ignore-path .gitignore ./",
-    "lint:fix": "eslint --ext .mjs --ignore-path .gitignore ./ --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "postinstall": "npm run build:css && npm run build:db",
     "watch": "less-watch-compiler less/ ./ dnd5e.less --source-map"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.22.15",
-    "@foundryvtt/foundryvtt-cli": "^1.0.0-rc.4",
-    "@rollup/plugin-node-resolve": "^15.2.1",
-    "eslint-plugin-jsdoc": "^46.5.0",
+    "@foundryvtt/foundryvtt-cli": "^3.0.4",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.6.0",
+    "eslint-plugin-jsdoc": "^63.0.10",
     "fancy-log": "^2.0.0",
-    "js-yaml": "^4.1.0",
-    "less": "^4.2.0",
-    "less-watch-compiler": "^1.16.3",
-    "rollup": "^3.29.5",
-    "yargs": "^17.7.2"
+    "globals": "^17.7.0",
+    "js-yaml": "^5.2.0",
+    "less": "^4.6.7",
+    "less-watch-compiler": "^1.17.5",
+    "rollup": "^4.62.2",
+    "yargs": "^18.0.0"
+  },
+  "allowScripts": {
+    "classic-level@3.0.0": true
   }
 }

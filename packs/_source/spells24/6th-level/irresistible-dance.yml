@@ -120,17 +120,15 @@ effects:
     transfer: false
     _id: MpToumiJ2o3S16K7
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>While &amp;Reference[Charmed apply=false], the target dances comically,
       must use all its movement to dance in place, and has Disadvantage on
@@ -146,13 +144,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724789517489
-      modifiedTime: 1724789668232
+      modifiedTime: 1783543976221
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplOttosIrres.MpToumiJ2o3S16K7'
   - name: Short Dance
     img: icons/magic/time/clock-analog-gray.webp
@@ -160,17 +161,15 @@ effects:
     transfer: false
     _id: UhFtBDEZEDpVgz9G
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target dances comically until the end of its next turn, during
       which it must spend all its movement to dance in place.</p>
@@ -181,13 +180,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724789679356
-      modifiedTime: 1724789813441
+      modifiedTime: 1783543976221
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplOttosIrres.UhFtBDEZEDpVgz9G'
 folder: 8WmlLARx1Df3Ii9v
 sort: 112500
@@ -200,11 +202,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425965394
-  modifiedTime: 1753380719688
+  modifiedTime: 1783543976221
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplOttosIrres'

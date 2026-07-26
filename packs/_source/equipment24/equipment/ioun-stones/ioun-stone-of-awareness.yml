@@ -66,21 +66,21 @@ effects:
     img: systems/dnd5e/icons/svg/activity/check.svg
     _id: P2rx8Fq56YpwQfSm
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.init.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.init.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: aiior5yZ4QPxC4Lo
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>While this dark-blue rhomboid orbits your head, you have Advantage on
       Initiative rolls and Wisdom (Perception) checks.</p>
@@ -93,22 +93,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730480937418
-      modifiedTime: 1730481077119
+      modifiedTime: 1783544093739
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAwarenessIoun.P2rx8Fq56YpwQfSm'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712697931
+  modifiedTime: 1783544093739
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 29688

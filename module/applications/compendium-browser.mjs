@@ -1,6 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import { getPluralRules } from "../utils.mjs";
+import { bulkFromUuid, getPluralRules, loadingTooltip } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
@@ -70,6 +70,11 @@ export default class CompendiumBrowser extends Application5e {
         documentClass: "Item",
         types: new Set(["class"])
       }
+    },
+    prerequisites: {
+      enforce: true,
+      fullDocuments: true,
+      validate: null
     },
     selection: {
       min: null,
@@ -256,6 +261,16 @@ export default class CompendiumBrowser extends Application5e {
    */
   get displaySelection() {
     return !!this.options.selection.min || !!this.options.selection.max;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Should the prerequisites column be displayed?
+   * @type {boolean}
+   */
+  get displayPrerequisites() {
+    return !!this.options.prerequisites.validate;
   }
 
   /* -------------------------------------------- */
@@ -591,8 +606,10 @@ export default class CompendiumBrowser extends Application5e {
     this.#results = CompendiumBrowser.fetch(CONFIG[context.filters.documentClass].documentClass, {
       filters,
       types: context.filters.types,
+      index: !this.options.prerequisites.validate || !this.options.prerequisites.fullDocuments,
       indexFields: new Set(["system.source"])
     });
+    context.displayPrerequisites = this.displayPrerequisites;
     context.displaySelection = this.displaySelection;
     context.hint = this.options.hint;
     return context;
@@ -653,21 +670,40 @@ export default class CompendiumBrowser extends Application5e {
     const source = system?.source?.value ?? "";
     const context = {
       entry: { img, name, subtitle, uuid, source },
+      displayPrerequisites: this.displayPrerequisites,
       displaySelection: this.displaySelection,
       selected: this.#selected.has(uuid)
     };
+    if ( this.options.prerequisites.validate ) {
+      const results = this.options.prerequisites.validate(entry);
+      if ( results?.size ) {
+        context.prerequisites = results.values().reduce((r, result) => {
+          if ( result.valid === false ) {
+            r.disabled = this.options.prerequisites.enforce;
+            r.invalid = true;
+            r.valid = false;
+          } else if ( result.valid === null ) {
+            r.indeterminate = true;
+          }
+          r.display ||= (result.quiet !== true) || (r.valid === false);
+          return r;
+        }, { disabled: false, display: false, indeterminate: false, invalid: false, valid: true });
+        context.prerequisites.results = results;
+      }
+    }
     const html = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/compendium/browser-entry.hbs", context
     );
     const element = foundry.utils.parseHTML(html);
     if ( documentClass !== "Item" ) return element;
-    element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}">
-        <i class="fa-solid fa-spinner fa-spin-pulse" inert></i>
-      </section>
-    `;
+    element.dataset.tooltipHtml = loadingTooltip({ uuid });
     element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
     element.dataset.tooltipDirection ??= "RIGHT";
+    if ( context.prerequisites ) element.dataset.tooltipExtras = game.i18n.getListFormatter({ type: "unit" }).format(
+      context.prerequisites.results.values().map(r =>
+        `<span class="prerequisite${r.valid ? " valid" : r.valid === false ? " invalid" : ""}">${r.label}</span>`
+      )
+    );
     return element;
   }
 
@@ -1126,13 +1162,13 @@ export default class CompendiumBrowser extends Application5e {
             && (!p.metadata.flags.dnd5e?.types || p.metadata.flags.dnd5e.types.includes(i.type))))
             && (!filters.length || Filter.performCheck(i, filters))
         )
-
-        // If full documents are required, retrieve those, otherwise stick with the indices
-        .map(async i => index ? i : await fromUuid(i.uuid))
       ));
 
     // Wait for everything to finish loading and flatten the arrays
     documents = (await Promise.all(documents)).flat();
+
+    // If full documents are required, retrieve those, otherwise stick with the indices
+    if ( !index ) documents = (await bulkFromUuid(documents.map(d => d.uuid))).values().toArray();
 
     if ( sort ) {
       if ( sort === true ) sort = "name";

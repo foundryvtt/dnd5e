@@ -32,12 +32,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: passwall
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-blue.webp
+img: icons/sundries/misc/key-jeweled-gold-purple.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037360864
-  modifiedTime: 1725992721376
+  modifiedTime: 1781401426290
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!d9MwcXi7Il3HROXd'

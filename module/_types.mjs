@@ -48,6 +48,14 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef ActivityBehaviorConfiguration
+ * @param {string} label  Localized label for the behavior.
+ * @param {string} icon   Icon representing the behavior.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef ActivityConsumptionTargetConfiguration
  * @property {string} label                                     Localized label for the target type.
  * @property {ConsumptionConsumeFunction} consume               Function used to consume according to this type.
@@ -124,6 +132,57 @@
  * @property {typeof Advancement} documentClass  The advancement's document class.
  * @property {Set<string>} validItemTypes        What item types this advancement can be used with.
  * @property {boolean} [hidden]                  Should this advancement type be hidden in the selection dialog?
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef AdventureConfiguration
+ * @property {AdventureImportAction[]} importActions  Actions performed when the adventure is imported.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef AdventureImportAction
+ * @property {string} id                   Unique ID for this import action.
+ * @property {AdventureImportPreHandler|AdventureImportPostHandler} handler  Handler function to call.
+ * @property {"pre"|"post"} lifecycle      Should this handler be called before or after importing?
+ * @property {boolean} [default=false]     Should this option be checked by default on the adventure importer?
+ * @property {string} [label]              Localized label for the option. Required if `silent` isn't `true`.
+ * @property {AdventureImportQuickstartHandler} [quickstartHandler]  Handler called when after quickstarting a module.
+ *                                                                   Must be set to use an action during quickstart.
+ * @property {boolean} [silent=false]      Silent actions aren't displayed in the dialog and are always run.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportPostHandler
+ * @this {Adventure}
+ * @param {AdventureImportAction} config
+ * @param {AdventureImportResult} importResult
+ * @param {AdventureImportOptions} importOptions
+ * @returns {Promise<*>}
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportPreHandler
+ * @this {Adventure}
+ * @param {AdventureImportAction} config
+ * @param {AdventureImportData} importData
+ * @param {AdventureImportOptions} importOptions
+ * @returns {Promise<*>}
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback AdventureImportQuickstartHandler
+ * @param {{ adventure: Adventure, config: AdventureImportAction }[]} adventures
+ * @returns {Promise<*>}
  */
 
 /* -------------------------------------------- */
@@ -385,10 +444,10 @@
 
 /**
  * @typedef RegisteredItemData
- * @property {string} name        Name of the item.
- * @property {string} identifier  Item identifier.
- * @property {string} img         Item's icon.
- * @property {string[]} sources   UUIDs of different compendium items matching this identifier.
+ * @property {string} name         Name of the item.
+ * @property {string} identifier   Item identifier.
+ * @property {string} [img]        Item's icon.
+ * @property {string[]} [sources]  UUIDs of different compendium items matching this identifier.
  */
 
 /* -------------------------------------------- */
@@ -410,6 +469,7 @@
  * @property {boolean} [advanceTime=false]          Should the game clock be advanced by the rest duration?
  * @property {boolean} [autoHD=false]               Should hit dice be spent automatically during the rest?
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
+ * @property {string[]} [expiryEvents]              Active effect expiry events fired by the rest.
  * @property {number} [exhaustionDelta]             Delta exhaustion to apply to creatures undergoing the rest.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
@@ -544,6 +604,8 @@
  *                                                           when using the modern rules. Speed reduction is measured
  *                                                           in the default imperial units and converted to metric
  *                                                           if necessary.
+ * @property {Record<number, string[]>} [conditions]  Additional statuses applied at given
+ *                                                    levels of a condition, e.g., 'dead' at Exhaustion 6.
  */
 
 /**

@@ -160,17 +160,14 @@ effects:
     origin: Item.mmSpores00000000
     _id: DeVYxc3BdGlZNeD9
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Poisoned apply=false] condition and
       repeats the save at the end of each of its turns, ending the effect on
@@ -186,13 +183,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1737921026210
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmSpores00000000.DeVYxc3BdGlZNeD9'
 flags:
   dnd5e:
@@ -201,7 +201,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

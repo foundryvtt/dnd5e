@@ -118,17 +118,14 @@ effects:
     transfer: false
     _id: DzWVacNiq6ggXbU9
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -137,13 +134,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: 1725846653216
       modifiedTime: 1725846664457
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbagAntitoxin00.DzWVacNiq6ggXbU9'
 sort: 7200000
 ownership:
@@ -155,7 +155,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425905028

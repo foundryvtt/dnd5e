@@ -278,50 +278,63 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell5.webp
     disabled: true
     _id: 3hRQ0o8Q1nmj5WwB
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Luck Blade ({})
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: legendary
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgLuckBlade0000
-          caption=false]</p>
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '200000'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Luck Blade ({})
+          priority: null
+          type: override
+          phase: initial
+          _id: aRcWofGJ8Flb1QQX
+        - key: system.rarity
+          value: legendary
+          priority: null
+          type: override
+          phase: initial
+          _id: Il5BnTYDFzMk74g1
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgLuckBlade0000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: juXozUvts5OUruKy
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: 2aleSOCZ7z1KkspO
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 3nPlbcwcNkrqQohT
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: V1fLj30DPnsaxa3P
+        - key: system.price.value
+          value: 200000
+          priority: null
+          type: add
+          phase: initial
+          _id: uA21izXRzxBe3swB
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: b5uNsTUMoVpA5TZv
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -332,33 +345,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730492541932
-      modifiedTime: 1731079884800
+      modifiedTime: 1783544096639
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgLuckBlade0000.3hRQ0o8Q1nmj5WwB'
   - name: Saving Throw Bonus
     img: icons/magic/control/buff-luck-fortune-green-gold.webp
     _id: bDZufQP0jaHOUY6j
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: BVPyZjj9KEFGWZMf
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>While the weapon is on your person, you also gain a +1 bonus to saving
       throws.</p>
@@ -371,13 +387,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730492875228
-      modifiedTime: 1730493351051
+      modifiedTime: 1783544096639
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgLuckBlade0000.bDZufQP0jaHOUY6j'
 folder: kie870i5kr7yuxO8
 flags:
@@ -390,11 +409,11 @@ flags:
         - bDZufQP0jaHOUY6j
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615145824
+  modifiedTime: 1783544096639
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 8600000

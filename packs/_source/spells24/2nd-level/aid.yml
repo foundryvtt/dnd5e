@@ -156,21 +156,21 @@ effects:
     transfer: false
     _id: XyGKCCrIhrFlixG8
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '5'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 5
+          priority: null
+          type: add
+          phase: initial
+          _id: RXk92d3oTLKt1lkW
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -179,34 +179,37 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588424796
-      modifiedTime: 1726588936699
+      modifiedTime: 1783543973813
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.XyGKCCrIhrFlixG8'
   - name: 'Level 3: +10 Max HP'
     img: icons/magic/life/cross-flared-green.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '10'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 10
+          priority: null
+          type: add
+          phase: initial
+          _id: eGPpbKj0BV1ZxHmN
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -216,35 +219,38 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588960220
-      modifiedTime: 1726588990105
+      modifiedTime: 1783543973813
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: cTNQ2KRJLj4CRpQJ
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.cTNQ2KRJLj4CRpQJ'
   - name: 'Level 4: +15 Max HP'
     img: icons/magic/life/cross-flared-green.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '15'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 15
+          priority: null
+          type: add
+          phase: initial
+          _id: mA1X3j7mBAtLOu6T
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -254,35 +260,38 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588962046
-      modifiedTime: 1726589005323
+      modifiedTime: 1783543973813
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 6hOGzq87iQntkHE5
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.6hOGzq87iQntkHE5'
   - name: 'Level 5: +20 Max HP'
     img: icons/magic/life/cross-flared-green.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '20'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 20
+          priority: null
+          type: add
+          phase: initial
+          _id: 3kK8RQWBCPqAOMLI
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -292,35 +301,38 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588963158
-      modifiedTime: 1726589034445
+      modifiedTime: 1783543973813
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: Fs7zeTW4u9SvteWO
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.Fs7zeTW4u9SvteWO'
   - name: 'Level 6: +25 Max HP'
     img: icons/magic/life/cross-flared-green.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '25'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 25
+          priority: null
+          type: add
+          phase: initial
+          _id: qZVw1I8q27THdBZ9
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -330,35 +342,38 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588964298
-      modifiedTime: 1726589050475
+      modifiedTime: 1783543973813
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: o1Gvp7nIrEHqdn3g
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.o1Gvp7nIrEHqdn3g'
   - name: 'Level 7: +30 Max HP'
     img: icons/magic/life/cross-flared-green.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 30
+          priority: null
+          type: add
+          phase: initial
+          _id: 84YNUC4Kn5xrklcW
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -368,35 +383,38 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588965427
-      modifiedTime: 1726589064353
+      modifiedTime: 1783543973814
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: n4jjrd9bNOaDkos7
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.n4jjrd9bNOaDkos7'
   - name: 'Level 8: +35 Max HP'
     img: icons/magic/life/cross-flared-green.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '35'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 35
+          priority: null
+          type: add
+          phase: initial
+          _id: UVJPJfaGk6bxZOsA
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -406,35 +424,38 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588966507
-      modifiedTime: 1726589099671
+      modifiedTime: 1783543973814
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: EHMDA2J47jwUUTKu
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.EHMDA2J47jwUUTKu'
   - name: 'Level 9: +40 Max HP'
     img: icons/magic/life/cross-flared-green.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplAid0000000
     transfer: false
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.tempmax
-        mode: 2
-        value: '40'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          value: 40
+          priority: null
+          type: add
+          phase: initial
+          _id: cYNcQEtEfwX15OHi
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>The target's Hit Point maximum is increased for the duration.</p>
     tint: '#ffffff'
     statuses: []
@@ -444,14 +465,17 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplAid0000000.ActiveEffect.XyGKCCrIhrFlixG8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726588967537
-      modifiedTime: 1726589092759
+      modifiedTime: 1783543973814
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: YnQP5Rd6w5NwZVLN
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAid0000000.YnQP5Rd6w5NwZVLN'
 folder: 3SjcO2acsFnWegp4
 sort: 100000
@@ -460,11 +484,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1724425940061
-  modifiedTime: 1763149735102
+  modifiedTime: 1783543973813
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAid0000000'

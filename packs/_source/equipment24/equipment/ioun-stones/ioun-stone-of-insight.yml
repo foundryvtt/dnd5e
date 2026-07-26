@@ -66,25 +66,27 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/wisdom.svg
     _id: 47SuTikkluIDzGhZ
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.wis.value
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.abilities.wis.value
-        mode: 3
-        value: '20'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.wis.value
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: 1tA4FgOH6eyXBlSb
+        - key: system.abilities.wis.value
+          value: 20
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: YuQ3cNZim0NNwXdj
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your Wisdom increases by 2, to a maximum of 20, while this incandescent
       blue sphere orbits your head.</p>
@@ -97,22 +99,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730481544102
-      modifiedTime: 1730481604810
+      modifiedTime: 1783544096427
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgInsightIounSt.47SuTikkluIDzGhZ'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700920
+  modifiedTime: 1783544096427
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 31250

@@ -490,12 +490,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -539,7 +536,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -559,6 +556,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
   - _id: mmAmphibious0000
     name: Amphibious
@@ -601,10 +599,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -712,10 +712,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -762,10 +764,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSiegeMonster00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -868,10 +872,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1085,17 +1091,14 @@ items:
         transfer: false
         _id: KxcWsIHohpNmagLJ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p><span style="font-family:'Roboto Condensed', sans-serif">The target
           has the </span>&amp;Reference[Grappled apply=false] <span
@@ -1118,10 +1121,15 @@ items:
             Compendium.dnd-monster-manual.features.Item.mmConstrict00000.ActiveEffect.Hd0Gy3wJtPfObERq
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmKraken00000000.mmTentacle000000.KxcWsIHohpNmagLJ
     flags:
@@ -1133,10 +1141,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTentacle000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1266,17 +1276,14 @@ items:
         origin: Item.mmFling000000000
         _id: UovyViBfR9aAlt0y
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: <p>The target has the &amp;Reference[Prone apply=false] condition.</p>
         tint: '#ffffff'
         transfer: false
@@ -1288,10 +1295,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmKraken00000000.mmFling000000000.UovyViBfR9aAlt0y
     flags:
@@ -1303,10 +1315,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFling000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1429,10 +1443,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLightningStrik
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -1751,17 +1767,14 @@ items:
         origin: Item.mmSwallow0000000
         _id: VOHv1LyO3hHolZXo
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>While swallowed, a creature has the &amp;Reference[Restrained
           apply=false] condition, has &amp;Reference[Total Cover apply=false]
@@ -1779,10 +1792,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmKraken00000000.mmSwallow0000000.VOHv1LyO3hHolZXo
       - name: Prone
@@ -1790,17 +1808,14 @@ items:
         origin: Item.mmSwallow0000000
         _id: aS5FyMP72vn3OKf1
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>If you are regurgitated, you fall into a space within 10 ft. and
           are &amp;Reference[Prone apply=false].</p>
@@ -1816,10 +1831,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmKraken00000000.mmSwallow0000000.aS5FyMP72vn3OKf1
       - name: 'Escape: Prone'
@@ -1827,17 +1847,14 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.mmKraken00000000.Item.mmSwallow0000000
         _id: afivY2VBJc5HUyt1
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>Any swallowed creature no longer has the Restrained condition and
           can escape from the corpse using 15 feet of movement, exiting
@@ -1852,10 +1869,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmKraken00000000.mmSwallow0000000.afivY2VBJc5HUyt1
     flags:
@@ -1867,10 +1889,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSwallow0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 7
@@ -1968,17 +1992,14 @@ items:
         origin: Item.mmStormBolt00000
         _id: UXwZ02kqy96aH3dZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>If the target is a Large or smaller creature, it has the
           &amp;Reference[Prone apply=false] condition.</p>
@@ -1994,10 +2015,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmKraken00000000.mmStormBolt00000.UXwZ02kqy96aH3dZ
     flags:
@@ -2009,10 +2035,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmStormBolt00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 8
@@ -2133,17 +2161,14 @@ items:
         origin: Item.mmToxicInk000000
         _id: 6eeusiffMtDU3C3c
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Blinded apply=false] and
           &amp;Reference[Poisoned apply=false] conditions until the end of the
@@ -2161,10 +2186,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmKraken00000000.mmToxicInk000000.6eeusiffMtDU3C3c
     flags:
@@ -2176,10 +2212,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmToxicInk000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 9
@@ -2192,7 +2230,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452708087

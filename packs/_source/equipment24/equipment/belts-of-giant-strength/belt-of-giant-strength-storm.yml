@@ -61,21 +61,21 @@ effects:
     img: icons/magic/control/buff-strength-muscle-damage-red.webp
     _id: dVP7XiBERjMWs7xK
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.value
-        mode: 4
-        value: '29'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: 29
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: qYNayLIVW6wtfKJi
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -87,13 +87,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgBeltOfGiantSt.ActiveEffect.dVP7XiBERjMWs7xK
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.4
-      createdTime: null
-      modifiedTime: 1728595063934
+      systemVersion: 6.0.0
+      createdTime: 1783544099749
+      modifiedTime: 1783544099749
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgstmBeltofGian.dVP7XiBERjMWs7xK'
 flags:
   dnd5e:
@@ -105,11 +108,11 @@ ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1728594623619
-  modifiedTime: 1745256810173
+  modifiedTime: 1783544099749
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgstmBeltofGian'

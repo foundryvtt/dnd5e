@@ -167,41 +167,51 @@ effects:
     transfer: false
     _id: csA26qg5YSsji1ZZ
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.dex.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.con.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.int.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.wis.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.cha.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: HORkT3BebgGm685E
+        - key: system.abilities.dex.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: iUICMTfrVBzAHRNO
+        - key: system.abilities.con.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: wOXzAVh720Z1057V
+        - key: system.abilities.int.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 0YTiqe2iuDBpw3VO
+        - key: system.abilities.wis.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: y7McdUDwOQorGA7M
+        - key: system.abilities.cha.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: jrtnBvW3RK2zspWS
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -213,13 +223,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
+      systemVersion: 6.0.0
       createdTime: 1725305728157
-      modifiedTime: 1760129009586
+      modifiedTime: 1783543975632
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplHolyAura00.csA26qg5YSsji1ZZ'
   - name: Blinded
     img: systems/dnd5e/icons/svg/statuses/blinded.svg
@@ -227,17 +240,15 @@ effects:
     transfer: false
     _id: wqBjgsd2xRnmSm8Z
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The attacker has the &amp;Reference[Blinded apply=false] condition
       until the end of its next turn.</p>
@@ -249,13 +260,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725306554545
-      modifiedTime: 1725306662364
+      modifiedTime: 1783543975632
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplHolyAura00.wqBjgsd2xRnmSm8Z'
 folder: M5CvwK9zVtzx6Dnn
 sort: 100196
@@ -264,11 +278,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425959000
-  modifiedTime: 1760129012237
+  modifiedTime: 1783543975632
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHolyAura00'

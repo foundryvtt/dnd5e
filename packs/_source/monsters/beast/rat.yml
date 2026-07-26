@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,63 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
-  - _id: mll5ghZVkPuiyBoa
-    name: Keen Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The rat has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: Rat
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!pozQUPTnLZW8epox.mll5ghZVkPuiyBoa'
   - _id: QpysqgoHq9LXsShc
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Rat attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -600,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -609,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        smbdvxmzv03gCUIZ:
           type: attack
           activation:
             type: action
@@ -625,6 +576,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -645,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -658,23 +611,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: none
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: true
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: smbdvxmzv03gCUIZ
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -685,22 +647,71 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744916839560
+      systemVersion: 6.0.0
+      createdTime: 1781532959115
+      modifiedTime: 1781532983422
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!pozQUPTnLZW8epox.QpysqgoHq9LXsShc'
+  - _id: RVjS4sppV3Xdc3J6
+    name: Keen Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.oQvORD924obyPdCc.Item.hwviWX3lRj9wqENj
+      duplicateSource: Item.gcfYCrt0yFVt4QF4
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781532950723
+      modifiedTime: 1781532950723
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!pozQUPTnLZW8epox.RVjS4sppV3Xdc3J6'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -709,7 +720,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171259028

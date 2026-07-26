@@ -27,6 +27,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {boolean}
    */
   get canApplyDamage() {
+    if ( this.system?.canApplyDamage === false ) return false;
     const type = this.flags.dnd5e?.roll?.type;
     if ( type && (type !== "damage") ) return false;
     return this.isRoll && this.isContentVisible && !!canvas.tokens?.controlled.length;
@@ -380,7 +381,6 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
-      this._enrichSaveTooltip(html);
       this._enrichConcentrationTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
@@ -631,48 +631,6 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
-   * Display option to resist a failed save using a legendary resistance.
-   * @param {HTMLLIElement} html  The chat card.
-   * @protected
-   */
-  _enrichSaveTooltip(html) {
-    const actor = this.getAssociatedActor();
-    const roll = this.getFlag("dnd5e", "roll");
-    if ( !actor?.system.isNPC || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
-
-    const content = document.createElement("div");
-    content.classList.add("chat-card");
-
-    // If message has the `forceSuccess` flag, mark it as resisted
-    if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
-      <p class="supplement">
-        <strong>${_loc("DND5E.ROLL.Status")}</strong>
-        ${_loc("DND5E.LegendaryResistance.Resisted")}
-      </p>
-    `);
-
-    // Otherwise if actor has legendary resistances remaining, display resist button
-    else if ( actor.system.resources.legres.value && actor.isOwner ) {
-      content.insertAdjacentHTML("beforeend", `
-        <div class="card-buttons">
-          <button type="button">
-            <i class="fa-solid fa-dragon" inert></i>
-            ${_loc("DND5E.LegendaryResistance.Action.Resist")}
-          </button>
-        </div>
-      `);
-      const button = content.querySelector("button");
-      button.addEventListener("click", () => actor.system.resistSave(this));
-    }
-
-    else return;
-
-    html.querySelector(".message-content").append(content);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Display option to break concentration on a failed concentration saving throw.
    * @param {HTMLLIElement} html  The chat card.
    * @protected
@@ -689,7 +647,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( roll?.concentrationBroken ) content.insertAdjacentHTML("beforeend", `
       <p class="supplement">
         <strong>${_loc("DND5E.ROLL.Status")}</strong>
-        ${_loc("DND5E.ConcentrationLost")}
+        ${_loc("DND5E.CONCENTRATION.Lost")}
       </p>
     `);
 
@@ -699,7 +657,7 @@ export default class ChatMessage5e extends ChatMessage {
         <div class="card-buttons">
           <button type="button">
             <i class="fa-solid fa-ban" inert></i>
-            ${_loc("DND5E.ConcentrationBreak")}
+            ${_loc("DND5E.CONCENTRATION.Action.Break")}
           </button>
         </div>
       `);
@@ -734,49 +692,49 @@ export default class ChatMessage5e extends ChatMessage {
     options.push(
       {
         label: _loc("DND5E.ChatContextDamage"),
-        icon: '<i class="fas fa-user-minus"></i>',
+        icon: "fa-solid fa-user-minus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 1)
       },
       {
         label: _loc("DND5E.ChatContextHealing"),
-        icon: '<i class="fas fa-user-plus"></i>',
+        icon: "fa-solid fa-user-plus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, -1)
       },
       {
         label: _loc("DND5E.ChatContextTempHP"),
-        icon: '<i class="fas fa-user-clock"></i>',
+        icon: "fa-solid fa-user-clock",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardTemp(target)
       },
       {
         label: _loc("DND5E.ChatContextDoubleDamage"),
-        icon: '<i class="fas fa-user-injured"></i>',
+        icon: "fa-solid fa-user-injured",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 2)
       },
       {
         label: _loc("DND5E.ChatContextHalfDamage"),
-        icon: '<i class="fas fa-user-shield"></i>',
+        icon: "fa-solid fa-user-shield",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 0.5)
       },
       {
         label: _loc("DND5E.ChatContextSelectHit"),
-        icon: '<i class="fas fa-bullseye"></i>',
+        icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "hit")
       },
       {
         label: _loc("DND5E.ChatContextSelectMiss"),
-        icon: '<i class="fas fa-bullseye"></i>',
+        icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "miss")

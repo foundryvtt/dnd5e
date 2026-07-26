@@ -456,9 +456,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -473,7 +470,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -493,6 +490,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: bUkTkdnQ3XbRcXkD
     name: Innate Spellcasting
@@ -542,7 +540,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -735,7 +733,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -743,62 +741,16 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.9Gf1hal94HjuAHMN'
-  - _id: OMZ6qNK1bdpI8ryh
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The hag has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957153574
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!xvh2UOKv1bh03Gih.OMZ6qNK1bdpI8ryh'
   - _id: Um3cK4i4ZQSTqodb
     name: Claws (Hag Form Only)
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Night Hag attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -861,7 +813,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -870,8 +822,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        x7F4Avg3BO3HExQX:
           type: attack
           activation:
             type: action
@@ -886,10 +837,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -906,7 +858,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -919,24 +872,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: x7F4Avg3BO3HExQX
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws-hag-form-only
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -946,25 +912,26 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107554139
+      systemVersion: 6.0.0
+      createdTime: 1781797148332
+      modifiedTime: 1781797197662
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.Um3cK4i4ZQSTqodb'
   - _id: ftmaVOSJXvHPhraJ
     name: Change Shape
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     system:
       description:
         value: >-
-          <p>The hag magically polymorphs into a Small or Medium female
-          humanoid, or back into her true form. Her statistics are the same in
-          each form. Any equipment she is wearing or carrying isn't transformed.
-          She reverts to her true form if she dies.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically polymorphs into a
+          Small or Medium female humanoid, or back into her true form. Her
+          statistics are the same in each form. Any equipment she is wearing or
+          carrying isn't transformed. She reverts to her true form if she
+          dies.</p>
         chat: ''
       source:
         custom: ''
@@ -978,64 +945,78 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        CTYIMIlC30bYuq9I:
+          type: transform
+          name: Transform
+          _id: CTYIMIlC30bYuq9I
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          profiles:
+            - name: ''
+              _id: 38uM2l8UeX75XsYT
+              uuid: Compendium.dnd5e.monsters.Actor.SqZRuJ8lt2KGJBbq
+              level:
+                min: null
+                max: null
+              movement: []
+              sizes: []
+              types: []
+          settings: null
+          transform:
+            customize: false
+            mode: ''
+            preset: polymorphSelf
       enchant: {}
       prerequisites:
         level: null
@@ -1049,28 +1030,30 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957160662
+      systemVersion: 6.0.0
+      createdTime: 1781797230538
+      modifiedTime: 1781797406783
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.ftmaVOSJXvHPhraJ'
   - _id: 0blKOND2AnsMsZa6
     name: Etherealness
     type: feat
-    img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+    img: icons/magic/unholy/silhouette-robe-evil-glow.webp
     system:
       description:
         value: >-
-          <p>The hag magically enters the Ethereal Plane from the Material
-          Plane, or vice versa. To do so, the hag must have a
-          <em>heartstone</em> in her possession.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically enters the
+          Ethereal Plane from the Material Plane, or vice versa. To do so, the
+          [[lookup @name lowercase]]{monster} must have a <em>heartstone</em> in
+          her possession.</p>
         chat: >-
-          <section class="secret"><p></p></section><p>The hag magically enters
-          the Ethereal Plane from the Material Plane, or vice versa. To do so,
-          the hag must have a heartstone in her possession.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically enters the
+          Ethereal Plane from the Material Plane, or vice versa. To do so, the
+          [[lookup @name lowercase]]{monster} must have a heartstone in her
+          possession.</p>
       source:
         custom: ''
         book: ''
@@ -1083,13 +1066,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        yFm9Vg5vVLjCxS7q:
           type: utility
           activation:
             type: action
@@ -1104,15 +1087,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1123,7 +1107,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1140,7 +1125,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          name: Traverse Planes
+          _id: yFm9Vg5vVLjCxS7q
       enchant: {}
       prerequisites:
         level: null
@@ -1154,32 +1151,36 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957200757
+      systemVersion: 6.0.0
+      createdTime: 1781793642303
+      modifiedTime: 1781799194867
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.0blKOND2AnsMsZa6'
   - _id: tYZggJHgAbixP5rs
     name: Nightmare Haunting
     type: feat
-    img: icons/commodities/tech/smoke-bomb-purple.webp
+    img: icons/magic/unholy/silhouette-light-fire-blue.webp
     system:
       description:
         value: >-
-          <p>While on the Ethereal Plane, the hag magically touches a sleeping
-          humanoid on the Material Plane. A protection from evil and good spell
-          cast on the target prevents this contact, as does a magic circle.
-          </p><p>As long as the contact persists, the target has dreadful
-          visions. If these visions last for at least 1 hour, the target gains
-          no benefit from its rest, and its hit point maximum is reduced by 5
-          (1d10). If this effect reduces the target's hit point maximum to 0,
-          the target dies, and if the target was evil, its soul is trapped in
-          the hag's soul bag. The reduction to the target's hit point maximum
-          lasts until removed by the greater restoration spell or similar
-          magic.</p>
+          <p>While on the Ethereal Plane, the [[lookup @name
+          lowercase]]{monster} magically touches a sleeping humanoid on the
+          Material Plane. A
+          @UUID[Compendium.dnd5e.spells.Item.xmDBqZhRVrtLP8h2]{Protection from
+          Evil and Good} spell cast on the target prevents this contact, as does
+          a @UUID[Compendium.dnd5e.spells.Item.y8A4HfTwd93ypdEz]{Magic
+          Circle}.</p><p>As long as the contact persists, the target has
+          dreadful visions. If these visions last for at least 1 hour, the
+          target gains no benefit from its rest, and its hit point maximum is
+          reduced by 5 (1d10). If this effect reduces the target's hit point
+          maximum to 0, the target dies, and if the target was evil, its soul is
+          trapped in the hag's soul bag. The reduction to the target's hit point
+          maximum lasts until removed by the
+          @UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
+          Restoration} spell or similar magic.</p>
         chat: >-
           <p>While on the Ethereal Plane, the hag magically touches a sleeping
           humanoid on the Material Plane. As long as the contact persists, the
@@ -1198,13 +1199,13 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        sqyzSx2CwAVKAFE1:
           type: utility
           activation:
             type: action
@@ -1214,26 +1215,25 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1244,7 +1244,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1261,7 +1262,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: sqyzSx2CwAVKAFE1
+          name: Induce Nightmares
       enchant: {}
       prerequisites:
         level: null
@@ -1275,11 +1288,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VbBHypDc0eLWbsNE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676758
+      systemVersion: 6.0.0
+      createdTime: 1781793662770
+      modifiedTime: 1781799201174
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.tYZggJHgAbixP5rs'
@@ -1392,7 +1405,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1513,7 +1526,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.41JIhpDyM9Anm7cs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1695,7 +1708,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ODhLKBxLnvvLOnw1
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1839,7 +1852,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1847,6 +1860,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!xvh2UOKv1bh03Gih.KhwiSi9fwVfUPtku'
+  - _id: F9SUUafNFPf0hmqr
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781793604022
+      modifiedTime: 1781793604022
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!xvh2UOKv1bh03Gih.F9SUUafNFPf0hmqr'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1855,7 +1921,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171266109

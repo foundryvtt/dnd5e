@@ -9,7 +9,7 @@ system:
       <p>You unleash a virulent disease on a creature that you can see within
       range. The target must make a Constitution saving throw. On a failed save,
       it takes 14d6 necrotic damage, or half as much damage on a successful
-      save. The damage can't reduce the target's Hit Points below 1. If the
+      save. The damage can't reduce the target's hit points below 1. If the
       target fails the saving throw, its hit point maximum is reduced for 1 Hour
       by an amount equal to the necrotic damage it took. Any effect that removes
       a disease allows a creature's hit point maximum to return to normal before
@@ -33,12 +33,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -90,40 +93,47 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 14
+          - custom:
+              enabled: false
+              formula: ''
+            number: 14
             denomination: 6
             bonus: ''
             types:
               - necrotic
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
         ability: con
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: harm
 sort: 0
 flags: {}
-img: icons/magic/unholy/strike-beam-blood-large-red-purple.webp
+img: icons/magic/death/hand-undead-skeleton-fire-pink.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366045
-  modifiedTime: 1725992723142
+  modifiedTime: 1781438360783
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!tMH6Ivn4GmE1naMj'

@@ -10,9 +10,16 @@ system:
       within range. You can make the wall up to 50 feet long, 15 feet high, and
       1 foot thick. You can shape the wall in any way you choose so long as it
       makes one continuous path along the ground. The wall lasts for the
-      Duration.</p>
-              <p>When the wall appears, each creature within its area must make a Strength saving throw. A creature takes 3d8 bludgeoning damage on a failed save, or half as much damage on a successful one.</p>
-              <p>The strong wind keeps fog, smoke, and other gases at bay. Small or smaller flying creatures or objects can't pass through the wall. Loose, lightweight materials brought into the wall fly upward. Arrows, bolts, and other ordinary projectiles launched at targets behind the wall are deflected upward and automatically miss. (Boulders hurled by Giants or siege engines, and similar projectiles, are unaffected.) Creatures in gaseous form can't pass through it.</p>
+      duration.</p><p>When the wall appears, each creature within its area must
+      make a Strength saving throw. A creature takes 3d8 bludgeoning damage on a
+      failed save, or half as much damage on a successful one.</p><p>The strong
+      wind keeps fog, smoke, and other gases at bay. Small or smaller flying
+      creatures or objects can't pass through the wall. Loose, lightweight
+      materials brought into the wall fly upward. Arrows, bolts, and other
+      ordinary projectiles launched at targets behind the wall are deflected
+      upward and automatically miss. (Boulders hurled by Giants or siege
+      engines, and similar projectiles, are unaffected.) Creatures in gaseous
+      form can't pass through it.</p>
     chat: ''
   source:
     custom: ''
@@ -30,14 +37,19 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: wall
       size: '50'
       contiguous: false
+      width: '1'
+      height: '15'
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -91,40 +103,47 @@ system:
       damage:
         onSave: half
         parts:
-          - number: 3
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
             denomination: 8
             bonus: ''
             types:
               - bludgeoning
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
         ability: str
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: wind-wall
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-swirling-white.webp
+img: icons/magic/air/wind-tornado-wall-blue.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037362124
-  modifiedTime: 1725992721786
+  modifiedTime: 1781362046119
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ew6GA8dJy2spQmFW'

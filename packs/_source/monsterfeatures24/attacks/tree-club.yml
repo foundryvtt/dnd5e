@@ -138,17 +138,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmTreeClub000000
     _id: 7GhARrr7f6zhJjqy
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If the target is a Large or smaller creature, it has the
       &amp;Reference[Prone apply=false] condition.</p>
@@ -161,13 +158,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1735948873799
       modifiedTime: 1735948910958
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmTreeClub000000.7GhARrr7f6zhJjqy'
 flags:
   dnd5e:
@@ -176,7 +176,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.2
   createdTime: 1733432292956

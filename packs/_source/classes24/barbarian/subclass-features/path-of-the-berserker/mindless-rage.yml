@@ -39,28 +39,29 @@ effects:
   - name: Mindless Rage
     origin: Compendium.dnd5e.classes24.Item.phbbrbMindlessRa
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     flags: {}
     img: systems/dnd5e/icons/svg/items/feature.svg
     _id: Y9LOXK6Q4vot2cxi
     type: base
-    system: {}
-    changes:
-      - key: system.traits.ci.value
-        mode: 2
-        value: charmed
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: frightened
-        priority: null
+    system:
+      changes:
+        - key: system.traits.ci.value
+          value: charmed
+          priority: null
+          type: add
+          phase: initial
+          _id: kipPk4MNHx4spTZB
+        - key: system.traits.ci.value
+          value: frightened
+          priority: null
+          type: add
+          phase: initial
+          _id: pd26UsD7SmVjOQgo
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -69,13 +70,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101211
+      modifiedTime: 1783544101211
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbMindlessRa.Y9LOXK6Q4vot2cxi'
 folder: bEMqmmgGROsTGe0J
 flags:
@@ -85,11 +89,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866492370
-  modifiedTime: 1745256759982
+  modifiedTime: 1783544101211
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -53,9 +53,8 @@ export default class AttackSheet extends ActivitySheet {
                 Array.from(availableAbilities).map(a => CONFIG.DND5E.abilities[a].label.toLowerCase())
               )
               : _loc("DND5E.None").toLowerCase()
-        })
+        }), rule: true
       },
-      { rule: true },
       { value: "none", label: _loc("DND5E.None") },
       { value: "spellcasting", label: _loc("DND5E.Spellcasting") },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, config]) => ({

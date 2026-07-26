@@ -728,17 +728,19 @@
 /*  Enchantment                       */
 /* ---------------------------------- */
 
-enchantment-application {
+enchantment-application.dnd5e2 {
   margin: 4px;
 
   .drop-area {
-    display: grid;
+    background: var(--dnd5e-color-card);
+    border: 1px dashed var(--dnd5e-color-crimson);
+    color: inherit;
+    font-size: inherit;
+    font-style: normal;
     gap: 4px;
     min-block-size: 40px;
-    border: 1px dashed var(--dnd5e-color-crimson);
-    border-radius: 4px;
-    padding: 4px;
-    background: var(--dnd5e-color-card);
+    place-content: normal;
+    text-align: start;
 
     p {
       place-content: center;

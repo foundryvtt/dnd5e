@@ -1,7 +1,7 @@
 /**
  * @import { TransformationConfiguration } from "../../_types.mjs";
  * @import { TokenPlacementData } from "../../canvas/_types.mjs";
- * @import { ActorUpdatesDescription } from "../../data/chat-message/fields/_types.mjs";
+ * @import { ActorUpdatesDescription } from "../../documents/actor/_types.mjs";
  * @import { PseudoDocumentsMetadata } from "../mixins/_types.mjs";
  */
 
@@ -174,6 +174,15 @@
  * @property {TokenPlacementData} placement  Information on the location to summon the token.
  * @property {object} tokenUpdates           Additional updates that will be applied to token data.
  * @property {object} actorUpdates           Updates that will be applied to actor delta.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef TeleportMovementResult
+ * @param {Token5e} token
+ * @param {{ id: string, origin: TokenPosition, destination: TokenPosition, waypoints: TokenMovementWaypoint[] }} plan
+ * @param {boolean} moved
  */
 
 /* -------------------------------------------- */

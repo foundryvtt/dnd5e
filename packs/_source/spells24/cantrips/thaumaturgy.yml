@@ -115,21 +115,21 @@ effects:
     transfer: false
     _id: WUkq6HS8v9DK6fQz
     type: base
-    system: {}
-    changes:
-      - key: system.skills.itm.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.skills.itm.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: NZpeFFePQ7BQkVPM
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 60
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Your voice booms up to three times as loud as normal for 1 minute. For
       the duration, you have Advantage on [[/check ability=cha skill=itm]]
@@ -145,12 +145,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
+      systemVersion: 6.0.0
       createdTime: 1760127609488
-      modifiedTime: 1760127840291
+      modifiedTime: 1783543977424
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplThaumaturg.WUkq6HS8v9DK6fQz'
 folder: 4FhsY9FJQd7h7MZb
 sort: 100391
@@ -159,11 +162,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425975220
-  modifiedTime: 1760127609524
+  modifiedTime: 1783543977424
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplThaumaturg'
