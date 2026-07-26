@@ -40,21 +40,20 @@ effects:
     img: icons/equipment/chest/breastplate-gorget-steel.webp
     _id: W0ObItz7sS8ZJ09Y
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 2384dB1ugEEysQp9
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -65,13 +64,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544088791
+      modifiedTime: 1783544088791
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbfstDefense000.W0ObItz7sS8ZJ09Y'
 folder: O942K0m1gZMIIoMB
 sort: 150000
@@ -84,11 +86,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1735866298107
-  modifiedTime: 1752706627369
+  modifiedTime: 1783544088790
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbfstDefense000'

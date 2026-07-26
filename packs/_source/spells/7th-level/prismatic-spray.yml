@@ -10,32 +10,32 @@ system:
       different color and has a different power and purpose. Each creature in a
       60-foot cone must make a Dexterity saving throw. For each target, roll a
       d8 to determine which color ray affects
-      it.</p><ol><li><strong>Red</strong>. The target takes 10d6 fire damage on
-      a failed save, or half as much damage on a successful
-      one.</li><li><strong>Orange</strong>. The target takes 10d6 acid damage on
-      a failed save, or half as much damage on a successful
-      one.</li><li><strong>Yellow</strong>. The target takes 10d6 lightning
-      damage on a failed save, or half as much damage on a successful
-      one.</li><li><strong>Green</strong>. The target takes 10d6 poison damage
+      it.</p><ol><li><p><strong>Red</strong>. The target takes 10d6 fire damage
       on a failed save, or half as much damage on a successful
-      one.</li><li><strong>Blue</strong>. The target takes 10d6 cold damage on a
-      failed save, or half as much damage on a successful
-      one.</li><li><strong>Indigo</strong>. On a failed save, the target is
-      &amp;Reference[Restrained]. It must then make a Constitution saving throw
-      at the end of each of its turns. If it successfully saves three times, the
-      spell ends. If it fails its save three times, it permanently turns to
-      stone and is subjected to the &amp;Reference[Petrified] condition. The
-      successes and failures don't need to be consecutive; keep track of both
-      until the target collects three of a
-      kind.</li><li><strong>Violet</strong>. On a failed save, the target is
-      &amp;Reference[Blinded]. It must then make a Wisdom saving throw at the
+      one.</p></li><li><p><strong>Orange</strong>. The target takes 10d6 acid
+      damage on a failed save, or half as much damage on a successful
+      one.</p></li><li><p><strong>Yellow</strong>. The target takes 10d6
+      lightning damage on a failed save, or half as much damage on a successful
+      one.</p></li><li><p><strong>Green</strong>. The target takes 10d6 poison
+      damage on a failed save, or half as much damage on a successful
+      one.</p></li><li><p><strong>Blue</strong>. The target takes 10d6 cold
+      damage on a failed save, or half as much damage on a successful
+      one.</p></li><li><p><strong>Indigo</strong>. On a failed save, the target
+      is &amp;Reference[Restrained]. It must then make a Constitution saving
+      throw at the end of each of its turns. If it successfully saves three
+      times, the spell ends. If it fails its save three times, it permanently
+      turns to stone and is subjected to the &amp;Reference[Petrified]
+      condition. The successes and failures don't need to be consecutive; keep
+      track of both until the target collects three of a
+      kind.</p></li><li><p><strong>Violet</strong>. On a failed save, the target
+      is &amp;Reference[Blinded]. It must then make a Wisdom saving throw at the
       start of your next turn. A successful save ends the blindness. If it fails
       that save, the creature is transported to another plane of existence of
       the DM's choosing and is no longer Blinded. (Typically, a creature that is
       on a plane that isn't its home plane is banished home, while other
       creatures are usually cast into the Astral or Ethereal
-      planes.)</li><li><strong>Special</strong>. The target is struck by two
-      rays. Roll twice more, rerolling any 8.</li></ol>
+      planes.)</p></li><li><p><strong>Special</strong>. The target is struck by
+      two rays. Roll twice more, rerolling any 8.</p></li></ol>
     chat: ''
   source:
     custom: ''
@@ -53,13 +53,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cone
       size: '60'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -97,11 +100,7 @@ system:
         units: inst
         concentration: false
         override: false
-      effects:
-        - _id: 6bNxvdxYMSZK9N0A
-          onSave: false
-        - _id: Y5OA9lzI3tMHA3KF
-          onSave: false
+      effects: []
       range:
         override: false
       target:
@@ -113,46 +112,575 @@ system:
           choice: false
         override: false
       damage:
-        onSave: half
-        parts:
-          - number: 10
-            denomination: 6
-            bonus: ''
-            types: []
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
+        onSave: none
+        parts: []
       save:
         ability: dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    WFNmU0MtjhWZKAYS:
+      type: save
+      name: 1. Red Ray
+      img: ''
+      sort: 100000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The creature takes 10d6 fire damage on a failed save, or half as
+          much damage on a successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: WFNmU0MtjhWZKAYS
+    N8AK4vdXfbyS574t:
+      type: save
+      name: 2. Orange Ray
+      img: ''
+      sort: 200000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The creature takes 10d6 acid damage on a failed save, or half as
+          much damage on a successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - acid
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: N8AK4vdXfbyS574t
+    tYusMXr4FdtALeTo:
+      type: save
+      name: 3. Yellow Ray
+      img: ''
+      sort: 300000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The creature takes 10d6 lightning damage on a failed save, or half
+          as much damage on a successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - lightning
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: tYusMXr4FdtALeTo
+    qCIXgNLao3xnZsje:
+      type: save
+      name: 4. Green Ray
+      img: ''
+      sort: 400000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The creature takes 10d6 poison damage on a failed save, or half as
+          much damage on a successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: qCIXgNLao3xnZsje
+    fDlRH0y6EqJqjhgQ:
+      type: save
+      name: 5. Blue Ray
+      img: ''
+      sort: 500000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>The creature takes 10d6 cold damage on a failed save, or half as
+          much damage on a successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: fDlRH0y6EqJqjhgQ
+    KAF37jhizSZzcjhj:
+      type: save
+      name: 6. Indigo Ray
+      img: ''
+      sort: 600000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>On a failed save, the creature is &amp;reference[Restrained]. It
+          must then make a Constitution saving throw at the end of each of its
+          turns. If it successfully saves three times, the spell ends. If it
+          fails its save three times, it permanently turns to stone and is
+          subjected to the &amp;reference[Petrified] condition. The successes
+          and failures don't need to be consecutive; keep track of both until
+          the creature collects three of a kind.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: KhVHkGeHijwInogC
+          onSave: false
+          level:
+            min: null
+            max: null
+        - _id: fLn8u0YSR14RNskW
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: KAF37jhizSZzcjhj
+    Hwrf7958jBf5s8rV:
+      type: save
+      name: 7. Violet Ray
+      img: ''
+      sort: 700000
+      activation:
+        type: ''
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: >-
+          <p>On a failed save, the creature is &amp;reference[Blinded]. It must
+          then make a Wisdom saving throw at the start of your next turn. A
+          successful save ends the blindness. If it fails that save, the
+          creature is transported to another plane of the DM's choosing and is
+          no longer Blinded. (Typically, a creature that is on a plane that
+          isn't its home plane is banished home, while other creatures are
+          usually cast into the Astral or Ethereal planes.)</p>
+        chatFlavor: ''
+      duration:
+        units: round
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: BXVaxwA9fG3a4YXW
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
+      _id: Hwrf7958jBf5s8rV
   identifier: prismatic-spray
 sort: 0
 flags: {}
-img: icons/magic/light/projectile-beams-salvo-yellow.webp
+img: icons/magic/control/buff-luck-fortune-rainbow.webp
 effects:
   - name: Prismatic Spray (indigo)
     origin: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: true
     _id: 6bNxvdxYMSZK9N0A
-    changes: []
     description: >-
       <p>The target is Restrained. It must then make a Constitution saving throw
       at the end of each of its turns. If it successfully saves three times, the
@@ -166,7 +694,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -175,22 +703,22 @@ effects:
       exportSource: null
     img: icons/magic/light/projectile-beams-salvo-yellow.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!eGMhwmuleAM46C6L.6bNxvdxYMSZK9N0A'
   - name: Prismatic Spray (violet)
     origin: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: Y5OA9lzI3tMHA3KF
-    changes: []
     description: >-
       <p>The target is Blinded. It must then make a Wisdom saving throw at the
       start of the caster's next turn. A successful save ends the blindness. If
@@ -204,7 +732,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -213,17 +741,139 @@ effects:
       exportSource: null
     img: icons/magic/light/projectile-beams-salvo-yellow.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!eGMhwmuleAM46C6L.Y5OA9lzI3tMHA3KF'
+  - name: Failed Petrification Save
+    img: icons/sundries/flags/banner-pink.webp
+    origin: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
+    transfer: false
+    _id: KhVHkGeHijwInogC
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have failed a save against the Indigo ray. If you fail three of
+      these saves, you are &amp;reference[petrified].</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781465201812
+      modifiedTime: 1781465208755
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.jmfu8zj4zjjzUbeh.ActiveEffect.XnYc2CO3kl73Rxr9
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!eGMhwmuleAM46C6L.KhVHkGeHijwInogC'
+  - name: Successful Petrification Save
+    img: icons/sundries/flags/banner-green.webp
+    origin: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
+    transfer: false
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have succeeded a save against the Indigo ray.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781465202587
+      modifiedTime: 1781465212536
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.jmfu8zj4zjjzUbeh.ActiveEffect.0lcdF9sc0cBgnvBg
+      duplicateSource: null
+      exportSource: null
+    _id: fLn8u0YSR14RNskW
+    _key: '!items.effects!eGMhwmuleAM46C6L.fLn8u0YSR14RNskW'
+  - name: Violet Blindness
+    img: icons/magic/light/explosion-star-glow-purple.webp
+    origin: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
+    transfer: false
+    _id: BXVaxwA9fG3a4YXW
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are &amp;reference[blinded apply=false]. At the start of your next
+      turn, you must make a Wisdom saving throw. A successful save ends the
+      blindness. If you fail the save, you are transported to anothe rplane of
+      the DM's choosing and are no longer blinded.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781465203478
+      modifiedTime: 1781465203478
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.jmfu8zj4zjjzUbeh.ActiveEffect.RyMdtaDljl9zha5P
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!eGMhwmuleAM46C6L.BXVaxwA9fG3a4YXW'
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037361670
-  modifiedTime: 1725992721644
+  modifiedTime: 1781465505350
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eGMhwmuleAM46C6L'

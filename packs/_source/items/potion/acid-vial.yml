@@ -6,7 +6,8 @@ system:
   description:
     value: >-
       <p>As an action, you can splash the contents of this vial onto a creature
-      within 5 feet of you or throw the vial up to 20 feet, shattering it on
+      within 5 feet of you or throw the vial up to [[lookup
+      @labels.description.range activity=6wCdPWZTzKh8mN0m]], shattering it on
       impact. In either case, make a ranged attack against a creature or object,
       treating the acid as an improvised weapon. On a hit, the target takes 2d6
       acid damage.</p>
@@ -57,8 +58,7 @@ system:
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    6wCdPWZTzKh8mN0m:
       type: attack
       activation:
         type: action
@@ -73,10 +73,11 @@ system:
         spellSlot: true
       description:
         chatFlavor: improvised weapon
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -93,7 +94,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -127,10 +129,20 @@ system:
               mode: whole
               number: null
               formula: ''
+            modifiers: []
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      sort: 100000
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 6wCdPWZTzKh8mN0m
   attuned: false
   identifier: acid-vial
 effects: []
@@ -141,11 +153,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037191870
-  modifiedTime: 1725992514681
+  modifiedTime: 1783376448949
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Sx5E6utixHdAbGNb'

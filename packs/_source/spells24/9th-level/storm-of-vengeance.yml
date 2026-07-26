@@ -373,17 +373,15 @@ effects:
     transfer: false
     _id: ujpteFz6imf8RZsj
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses:
@@ -393,13 +391,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725386260763
-      modifiedTime: 1725386286562
+      modifiedTime: 1783543977270
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplStormofVen.ujpteFz6imf8RZsj'
 folder: iG0Zia8jh6uK39TB
 sort: 100196
@@ -412,11 +413,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425973107
-  modifiedTime: 1745256798836
+  modifiedTime: 1783543977270
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplStormofVen'

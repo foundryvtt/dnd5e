@@ -122,46 +122,57 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell2.webp
     disabled: true
     _id: iopwvJrcnzObDYSR
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Mithral {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: uncommon
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgMithralArmor0
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.strength
-        mode: 3
-        value: '0'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: '-stealthDisadvantage'
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '400'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Mithral {}
+          priority: null
+          type: override
+          phase: initial
+          _id: 42s5aXbvwiswFVtt
+        - key: system.rarity
+          value: uncommon
+          priority: null
+          type: override
+          phase: initial
+          _id: Nx82HNcN6kS1Z2FJ
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgMithralArmor0
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: RBlZTKLi0gmTRBSm
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: 9B9tZ6SRM8PVjWq0
+        - key: system.strength
+          value: 0
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: w04s2trgHaToQ3Yb
+        - key: system.properties
+          value: '-stealthDisadvantage'
+          priority: null
+          type: add
+          phase: initial
+          _id: O5BzFpj0MZNb1sQT
+        - key: system.price.value
+          value: 400
+          priority: null
+          type: add
+          phase: initial
+          _id: 0cuD6LqNyj0U3jMY
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -172,13 +183,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730154623425
-      modifiedTime: 1731099548949
+      modifiedTime: 1783544096936
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgMithralArmor0.iopwvJrcnzObDYSR'
 flags:
   dnd5e:
@@ -187,11 +201,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745256806583
+  modifiedTime: 1783544096936
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 137500

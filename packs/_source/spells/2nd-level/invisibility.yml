@@ -6,12 +6,13 @@ type: spell
 system:
   description:
     value: >-
-      <p>A creature you touch becomes invisible until the spell ends. Anything
-      the target is wearing or carrying is invisible as long as it is on the
-      target's person. The spell ends for a target that attacks or casts a
-      spell.</p><p><strong>At Higher Levels.</strong> When you cast this spell
-      using a spell slot of 3rd level or higher, you can target one additional
-      creature for each slot level above 2nd.</p>
+      <p>A creature you touch becomes &amp;reference[invisible apply=false]
+      until the spell ends. Anything the target is wearing or carrying is
+      invisible as long as it is on the target's person. The spell ends for a
+      target that attacks or casts a spell.</p><p><strong>At Higher
+      Levels.</strong> When you cast this spell using a spell slot of 3rd level
+      or higher, you can target one additional creature for each slot level
+      above 2nd.</p>
     chat: ''
   source:
     custom: ''
@@ -102,53 +103,56 @@ system:
   identifier: invisibility
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+img: icons/creatures/magical/spirit-undead-ghost-blue.webp
 effects:
   - name: Invisibility
     origin: Compendium.dnd5e.spells.Item.1N8dDMMgZ1h1YJ3B
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: TeFxBRKYKIXtg6pS
-    changes: []
     description: >-
-      <p>The target becomes Invisible until the spell ends. Anything the target
-      is wearing or carrying is invisible as long as it is on the target's
-      person. The spell ends for a target that attacks or casts a spell.</p>
+      <p>You become &amp;reference[Invisible apply=false] until the spell ends.
+      Anything you are wearing or carrying is invisible as long as it is on your
+      person. The spell ends for you when you attack or cast a spell.</p>
     transfer: false
     statuses:
       - invisible
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781226626068
+      modifiedTime: 1781226626068
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!1N8dDMMgZ1h1YJ3B.TeFxBRKYKIXtg6pS'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037345708
-  modifiedTime: 1731016443164
+  modifiedTime: 1781226580661
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1N8dDMMgZ1h1YJ3B'

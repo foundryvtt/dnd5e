@@ -1,0 +1,21 @@
+{{#each rolls}}
+{{{ this }}}
+{{/each}}
+
+{{#if resisted}}
+<div class="chat-card">
+    <p class="supplement">
+        <strong>{{ localize "DND5E.ROLL.Status" }}</strong>
+        {{ localize "DND5E.LegendaryResistance.Resisted" }}
+    </p>
+</div>
+{{else if canResist}}
+<div class="chat-card">
+    <div class="card-buttons">
+        <button type="button" data-action="resistSave">
+            <i class="fa-solid fa-dragon" inert></i>
+            {{ localize "DND5E.LegendaryResistance.Action.Resist" }}
+        </button>
+    </div>
+</div>
+{{/if}}

@@ -10,7 +10,8 @@ system:
       more than one poison afflicts the target, you neutralize one poison that
       you know is present, or you neutralize one at random.</p><p>For the
       duration, the target has advantage on saving throws against being
-      &amp;Reference[poisoned], and it has resistance to poison damage.</p>
+      &amp;Reference[poisoned apply=false], and it has resistance to poison
+      damage.</p>
     chat: ''
   source:
     custom: ''
@@ -30,11 +31,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -74,6 +78,9 @@ system:
         override: false
       effects:
         - _id: dNSELIYDQMBopj0Z
+          level:
+            min: null
+            max: null
       range:
         override: false
       target:
@@ -92,59 +99,70 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: protection-from-poison
 sort: 0
 flags: {}
-img: icons/magic/defensive/shield-barrier-glowing-triangle-green.webp
+img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
 effects:
   - name: Protection from Poison
     origin: Compendium.dnd5e.spells.Item.MAxM77CDUu8dgIRQ
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: false
     _id: dNSELIYDQMBopj0Z
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: poison
-        priority: null
     description: >-
-      <p>The target has advantage on saving throws against being poisoned, and
-      it has resistance to poison damage.</p>
+      <p>You have advantage on saving throws against being
+      &amp;reference[poisoned apply=false], and you have resistance to poison
+      damage.</p>
     transfer: false
     statuses: []
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781228742647
+      modifiedTime: 1781228814088
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/defensive/shield-barrier-glowing-triangle-green.webp
+    img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!MAxM77CDUu8dgIRQ.dNSELIYDQMBopj0Z'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037354331
-  modifiedTime: 1725992719226
+  modifiedTime: 1781228810017
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!MAxM77CDUu8dgIRQ'

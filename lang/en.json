@@ -94,6 +94,28 @@
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
   },
+  "FIELDS": {
+    "abilities": {
+      "element": {
+        "check": {
+          "roll": {
+            "bonus": { "label": "Check Bonus" },
+            "max": { "label": "Maximum Check Roll" },
+            "min": { "label": "Minimum Check Roll" },
+            "mode": { "label": "Check Advantage Mode" }
+          }
+        },
+        "save": {
+          "roll": {
+            "bonus": { "label": "Save Bonus" },
+            "max": { "label": "Maximum Save Roll" },
+            "min": { "label": "Minimum Save Roll" },
+            "mode": { "label": "Save Advantage Mode" }
+          }
+        }
+      }
+    }
+  },
   "Formatter": {
     "Check": {
       "AdvantageMode": "{name} Check Advantage Mode",
@@ -164,7 +186,6 @@
 "DND5E.AbilityCheckConfigure": "{ability} Ability Checks",
 "DND5E.AbilityCheckConfigurationHint": "Configure check bonuses.",
 "DND5E.AbilityConfigurationHint": "Configure ability saving throw proficiency, saving throw bonuses, and check bonuses.",
-"DND5E.AbilityCheckBonus": "Check Bonus",
 "DND5E.AbilityCheckGlobalBonusHint": "This bonus applies to all ability checks made by this actor.",
 "DND5E.Action": "Action",
 "DND5E.ActionAbbr": "A",
@@ -289,7 +310,39 @@
 },
 
 "DND5E.ACTIVEEFFECT": {
-  "AttributeKeyTooltip": "For a list of common keys, see <a href=\"{url}\">the wiki</a>.",
+  "AttributeKeyTooltip": "For a list of common keys and their accepted values, see <a href=\"{url}\">the wiki</a>.",
+  "ChangeType": {
+    "Advantage": {
+      "Label": "Advantage Mode"
+    },
+    "Bonus": {
+      "Label": "Bonus"
+    },
+    "Group": {
+      "Custom": "Custom",
+      "Rules": "Rules",
+      "Standard": "Standard"
+    },
+    "Maximum": {
+      "Label": "Roll Maximum"
+    },
+    "Minimum": {
+      "Label": "Roll Minimum"
+    }
+  },
+  "Expired": "Expired",
+  "Expiry": {
+    "GROUPS": {
+      "General": "General",
+      "Specific": "Specific"
+    },
+    "SourceStart": "Start of Source's Next Turn",
+    "SourceEnd": "End of Source's Next Turn",
+    "TargetStart": "Start of Target's Next Turn",
+    "TargetEnd": "End of Target's Next Turn",
+    "YourStart": "Start of Your Next Turn",
+    "YourEnd": "End of Your Next Turn"
+  },
   "FIELDS": {
     "statuses": {
       "label": "Status Conditions",
@@ -950,6 +1003,7 @@
 "DND5E.Amount": "Amount",
 "DND5E.Appearance": "Appearance",
 "DND5E.Apply": "Apply",
+"DND5E.AttributeScores": "Attribute Scores",
 "DND5E.Attunement": "Attunement",
 "DND5E.AttunementMax": "Maximum Attuned Items",
 "DND5E.AttunementNone": "Attunement Not Required",
@@ -1022,6 +1076,10 @@
         "calc": {
           "label": "AC Calculation Method"
         },
+        "calcs": {
+          "hint": "These formulas will be used when calculating armor class.",
+          "label": "Selected Formulas"
+        },
         "cover": {
           "label": "AC from Cover"
         },
@@ -1063,10 +1121,6 @@
         },
         "shield": {
           "label": "Equipped Shield Value"
-        },
-        "selectedFormulas": {
-          "hint": "These formulas will be used when calculating armor class.",
-          "label": "Selected Formulas"
         }
       }
     }
@@ -1095,6 +1149,9 @@
   "FIELDS": {
     "attack": {
       "label": "Attack Details",
+      "abilities": {
+        "label": "Ability Options"
+      },
       "ability": {
         "label": "Attack Ability",
         "hint": "Ability used for make the attack and determine damage. Available using @mod in formulas."
@@ -1292,54 +1349,6 @@
     "bonuses": {
       "label": "Global Bonuses",
       "hint": "Global bonuses as formulas which are added to certain rolls.",
-      "abilities": {
-        "label": "Global Ability Bonuses",
-        "check": {
-          "label": "Global Ability Check Bonus"
-        },
-        "save": {
-          "label": "Global Saving Throw Bonus"
-        },
-        "skill": {
-          "label": "Global Skill Check Bonus"
-        }
-      },
-      "msak": {
-        "label": "Melee Spell Bonuses",
-        "attack": {
-          "label": "Melee Spell Attack Bonus"
-        },
-        "damage": {
-          "label": "Melee Spell Damage Bonus"
-        }
-      },
-      "mwak": {
-        "label": "Melee Weapon Bonuses",
-        "attack": {
-          "label": "Melee Weapon Attack Bonus"
-        },
-        "damage": {
-          "label": "Melee Weapon Damage Bonus"
-        }
-      },
-      "rsak": {
-        "label": "Ranged Spell Bonuses",
-        "attack": {
-          "label": "Ranged Spell Attack Bonus"
-        },
-        "damage": {
-          "label": "Ranged Spell Damage Bonus"
-        }
-      },
-      "rwak": {
-        "label": "Ranged Weapon Bonuses",
-        "attack": {
-          "label": "Ranged Weapon Attack Bonus"
-        },
-        "damage": {
-          "label": "Ranged Weapon Damage Bonus"
-        }
-      },
       "spell": {
         "label": "Global Spell Bonuses",
         "dc": {
@@ -1592,6 +1601,7 @@
 
 "DND5E.CAST": {
   "Action": {
+    "DropSpell": "Drop a spell here",
     "RemoveSpell": "Remove Spell"
   },
   "Enchantment": {
@@ -1780,8 +1790,6 @@
   "Title": "Check"
 },
 
-"DND5E.CheckBonus": "Check Bonus",
-
 "DND5E.CLASS": {
   "Multiclass": {
     "Title": "Multiclassing"
@@ -1954,21 +1962,14 @@
   "FIELDS": {
     "attributes": {
       "concentration": {
-        "bonuses": {
-          "label": "Concentration Bonuses",
-          "save": {
-            "label": "Concentration Bonus"
-          }
-        },
         "label": "Concentration",
-        "limit": {
-          "label": "Concentration Limit"
-        },
+        "limit": { "label": "Concentration Limit" },
         "roll": {
-          "ability": "Concentration Save Ability",
-          "max": "Maximum Concentration Save Roll",
-          "min": "Minimum Concentration Save Roll",
-          "mode": "Concentration Save Advantage Mode"
+          "ability": { "label": "Concentration Ability" },
+          "bonus": { "label": "Concentration Bonus" },
+          "max": { "label": "Maximum Concentration Roll" },
+          "min": { "label": "Minimum Concentration Roll" },
+          "mode": { "label": "Concentration Advantage Mode" }
         }
       }
     }
@@ -2489,7 +2490,6 @@
 "DND5E.Dawn": "Dawn",
 "DND5E.Day": "Day",
 "DND5E.DeathSave": "Death Saves",
-"DND5E.DeathSaveBonus": "Death Save Bonus",
 "DND5E.DeathSaveConfigure": "Configure Death Saves",
 "DND5E.DeathSaveCriticalSuccess": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
 "DND5E.DeathSaveHide": "Hide Death Saves",
@@ -2509,6 +2509,22 @@
 "DND5E.DeathSaveRoll": "Roll a Death Saving Throw",
 "DND5E.DeathSavingThrow": "Death Saving Throw",
 "DND5E.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
+
+"DND5E.DEATH": {
+  "FIELDS": {
+    "attributes": {
+      "death": {
+        "roll": {
+          "bonus": { "label": "Death Save Bonus" },
+          "max": { "label": "Maximum Death Save Roll" },
+          "min": { "label": "Minimum Death Save Roll" },
+          "mode": { "label": "Death Save Advantage Mode" }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Default": "Default",
 "DND5E.DefaultSpecific": "Default ({default})",
 "DND5E.DefaultAbilityCheck": "Default Ability Check",
@@ -2583,12 +2599,20 @@
 "DND5E.Effect": "Effect",
 "DND5E.EFFECT": {
   "Action": {
+    "AddChange": "Add Change",
     "CreateEffect": "Create Effect",
     "DeleteEffect": "Delete Effect",
+    "DeleteChange": "Delete Change",
     "DissociateEffect": "Dissociate Effect",
+    "EditChange": "Edit Change",
     "EditEffect": "Edit Effect",
+    "RemoveStatus": {
+      "all": "All Sources",
+      "label": "Source"
+    },
     "Search": "Search effects"
   },
+  "AdditionalChanges": "Additional Changes",
   "Application": {
     "Action": {
       "ApplyTokens": "Apply to selected tokens"
@@ -2601,6 +2625,34 @@
   },
   "BASE": {
     "FIELDS": {
+      "changes": {
+        "element": {
+          "conditions": {
+            "hint": "Condition that must be met for this change to apply.",
+            "label": "Change Conditions"
+          },
+          "key": {
+            "label": "Attribute Key"
+          },
+          "phase": {
+            "hint": "The point in data preparation, or another event, at which a change is to be applied.",
+            "label": "Phase"
+          },
+          "priority": {
+            "label": "Priority"
+          },
+          "type": {
+            "label": "Type"
+          },
+          "value": {
+            "label": "Value"
+          }
+        }
+      },
+      "conditions": {
+        "hint": "Conditions that control when the effect will be applied.",
+        "label": "Effect Conditions"
+      },
       "magical": {
         "hint": "This effect is from a magical source and should be disabled when magic isn't available.",
         "label": "Magical"
@@ -2613,8 +2665,17 @@
     "Inactive": "Inactive Effects",
     "Unavailable": "Unavailable Effects"
   },
+  "Change": {
+    "Configuration": "Change Configuration",
+    "Label": "Change",
+    "Title": "{effect} Change #{number}"
+  },
   "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
+  "Expiry": {
+    "LongRest": "End of Long Rest",
+    "ShortRest": "End of Short Rest"
+  },
   "Label": "Available Effects",
   "New": "New Effect",
   "RIDER": {
@@ -2632,6 +2693,10 @@
   "Status": {
     "ChangeActive": "Change Active",
     "ChangeInactive": "Change Inactive",
+    "DeleteDialog": {
+      "hint": "You are under the effects of this condition from more than one source. Pick which effect to end.",
+      "title": "Remove Effect"
+    },
     "Inactive": "Inactive",
     "Passive": "Passive",
     "Temporary": "Temporary",
@@ -3137,6 +3202,14 @@
   }
 },
 
+"DND5E.FALLING": {
+  "DamageFlavor": "Fell {distance}",
+  "MovementAction": "Fall",
+  "Warning": {
+    "NoLandingSurface": "Cannot plummet {name}, there is no surface below them."
+  }
+},
+
 "DND5E.Favorite": "Favorite",
 "DND5E.FavoriteDrop": "Drop Favorite",
 "DND5E.FavoriteRemove": "Remove Favorite",
@@ -3204,6 +3277,7 @@
     "Origin": "Origin Feat"
   },
   "Monster": "Monster Feature",
+  "PietyTrait": "Piety Trait",
   "Species": "Species Feature",
   "SpeciesLegacy": "Race Feature",
   "SupernaturalGift": {
@@ -3495,6 +3569,9 @@
 "DND5E.Height": "Height",
 
 "DND5E.HITPOINTS": {
+  "Bloodied": {
+    "label": "Bloodied Threshold"
+  },
   "Counted": {
     "one": "{number} hit point",
     "other": "{number} hit points"
@@ -3558,10 +3635,25 @@
 "DND5E.Immunities": "Immunities",
 "DND5E.Initiative": "Initiative",
 "DND5E.InitiativeAbbr": "Init",
-"DND5E.InitiativeBonus": "Initiative Bonus",
 "DND5E.InitiativeRoll": "Initiative Roll",
 "DND5E.InitiativeConfig": "Configure Initiative",
 "DND5E.InitiativeConfigHint": "Configure initiative modifiers and bonuses which apply to this Actor.",
+
+"DND5E.INITIATIVE": {
+  "FIELDS": {
+    "attributes": {
+      "init": {
+        "roll": {
+          "bonus": { "label": "Initiative Bonus" },
+          "max": { "label": "Maximum Initiative Roll" },
+          "min": { "label": "Minimum Initiative Roll" },
+          "mode": { "label": "Initiative Advantage Mode" }
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Inspiration": "Inspiration",
 "DND5E.Inventory": "Inventory",
 "DND5E.InventorySearch": "Search inventory",
@@ -3610,13 +3702,6 @@
 "DND5E.ItemLootType": "Loot Type",
 "DND5E.ItemName": "Item Name",
 "DND5E.ItemNew": "New {type}",
-"DND5E.ItemRarityCommon": "common",
-"DND5E.ItemRarityMundane": "mundane",
-"DND5E.ItemRarityUncommon": "uncommon",
-"DND5E.ItemRarityRare": "rare",
-"DND5E.ItemRarityVeryRare": "very rare",
-"DND5E.ItemRarityLegendary": "legendary",
-"DND5E.ItemRarityArtifact": "artifact",
 "DND5E.ItemRechargeCheck": "{name} recharge check - {result}",
 "DND5E.ItemRechargeFailure": "failure!",
 "DND5E.ItemRechargeSuccess": "success!",
@@ -3681,6 +3766,16 @@
     "Versatile": "Versatile",
     "Verbal": "Verbal",
     "WeightlessContents": "Weightless Contents"
+  },
+  "Rarity": {
+    "Artifact": "Artifact",
+    "Common": "Common",
+    "Legendary": "Legendary",
+    "Mundane": "Mundane",
+    "Rare": "Rare",
+    "Uncommon": "Uncommon",
+    "Varies": "Varies",
+    "VeryRare": "Very Rare"
   },
   "SECTIONS": {
     "Activities": "Activities",
@@ -3901,6 +3996,18 @@
 "DND5E.PassivePerception": "Passive Perception",
 "DND5E.Period": "Period",
 "DND5E.PersonalityTraits": "Personality Traits",
+
+"DND5E.PIETY": {
+  "Configure": "Configure Piety",
+  "Label": "Piety",
+  "FIELDS": {
+    "value": {
+      "label": "Piety Score",
+      "hint": "This character's current piety score."
+    }
+  }
+},
+
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
 "DND5E.Preparation": "Preparation",
@@ -3909,19 +4016,28 @@
   "FIELDS": {
     "prerequisites": {
       "items": {
+        "display": "{items}",
         "hint": "Identifiers for items that the character must have before selecting this item.",
         "label": "Required Items"
       },
       "label": "Prerequisites",
       "level": {
+        "display": "Level {level}+",
+        "displayLegacy": "{levelOrdinal} level",
         "hint": "Character or class level required to select this feature when levelling up.",
         "label": "Required Level"
       },
       "repeatable": {
+        "display": "Not already taken",
         "hint": "This feature can be chosen more than once.",
         "label": "Repeatable"
       }
     }
+  },
+  "Status": {
+    "Invalid": "Prerequisite Validation Failed",
+    "Unknown": "Prerequisite Validation Incomplete",
+    "Valid": "Prerequisite Validation Succeeded"
   },
   "Warning": {
     "InvalidLevel": "must be at least level {level}",
@@ -4214,11 +4330,117 @@
 "DND5E.RitualAbbr": "R",
 
 "DND5E.ROLL": {
+  "Bonus": "Roll Bonus",
+  "Description": {
+    "ability": "Roll Ability",
+    "attack": {
+      "classification": "Attack Classification",
+      "mode": "Attack Mode",
+      "type": "Attack Type"
+    },
+    "proficient": "Proficient",
+    "skill": "Rolled Skill",
+    "tool": "Rolled Tool",
+    "type": "Roll Type"
+  },
+  "FIELDS": {
+    "rolls": {
+      "ability": {
+        "check": {
+          "bonus": { "label": "Global Ability Check Bonus" },
+          "max": { "label": "Maximum Global Ability Check Roll" },
+          "min": { "label": "Minimum Global Ability Check Roll" },
+          "mode": { "label": "Global Ability Check Advantage Mode" },
+          "proficiency": { "label": "Global Ability Check Proficiency" }
+        },
+        "label": "Ability Roll Modification",
+        "save": {
+          "bonus": { "label": "Global Ability Save Bonus" },
+          "max": { "label": "Maximum Global Ability Save Roll" },
+          "min": { "label": "Minimum Global Ability Save Roll" },
+          "mode": { "label": "Global Ability Save Advantage Mode" },
+          "proficiency": { "label": "Global Ability Save Proficiency" }
+        },
+        "skill": {
+          "bonus": { "label": "Global Skill Check Bonus" },
+          "max": { "label": "Maximum Global Skill Check Roll" },
+          "min": { "label": "Minimum Global Skill Check Roll" },
+          "mode": { "label": "Global Skill Check Advantage Mode" },
+          "proficiency": { "label": "Global Skill Check Proficiency" }
+        },
+        "tool": {
+          "bonus": { "label": "Global Tool Check Bonus" },
+          "max": { "label": "Maximum Global Tool Check Roll" },
+          "min": { "label": "Minimum Global Tool Check Roll" },
+          "mode": { "label": "Global Tool Check Advantage Mode" },
+          "proficiency": { "label": "Global Tool Check Proficiency" }
+        }
+      },
+      "attack": {
+        "bonus": { "label": "Global Attack Bonus" },
+        "label": "Attack Roll Modification",
+        "max": { "label": "Maximum Global Attack Roll" },
+        "min": { "label": "Minimum Global Attack Roll" },
+        "mode": { "label": "Global Attack Advantage Mode" },
+        "msak": {
+          "bonus": { "label": "Melee Spell Attack Bonus" },
+          "max": { "label": "Maximum Melee Spell Attack Roll" },
+          "min": { "label": "Minimum Melee Spell Attack Roll" },
+          "mode": { "label": "Melee Spell Attack Advantage Mode" }
+        },
+        "mwak": {
+          "bonus": { "label": "Melee Weapon Attack Bonus" },
+          "max": { "label": "Maximum Melee Weapon Attack Roll" },
+          "min": { "label": "Minimum Melee Weapon Attack Roll" },
+          "mode": { "label": "Melee Weapon Attack Advantage Mode" }
+        },
+        "rsak": {
+          "bonus": { "label": "Ranged Spell Attack Bonus" },
+          "max": { "label": "Maximum Ranged Spell Attack Roll" },
+          "min": { "label": "Minimum Ranged Spell Attack Roll" },
+          "mode": { "label": "Ranged Spell Attack Advantage Mode" }
+        },
+        "rwak": {
+          "bonus": { "label": "Ranged Weapon Attack Bonus" },
+          "max": { "label": "Maximum Ranged Weapon Attack Roll" },
+          "min": { "label": "Minimum Ranged Weapon Attack Roll" },
+          "mode": { "label": "Ranged Weapon Attack Advantage Mode" }
+        }
+      },
+      "damage": {
+        "label": "Damage Roll Modification",
+        "msak": {
+          "bonus": { "label": "Melee Spell Attack Damage Bonus" }
+        },
+        "mwak": {
+          "bonus": { "label": "Melee Weapon Attack Damage Bonus" }
+        },
+        "rsak": {
+          "bonus": { "label": "Ranged Spell Attack Damage Bonus" }
+        },
+        "rwak": {
+          "bonus": { "label": "Ranged Weapon Attack Damage Bonus" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "AdvantageMode": "{name} Advantage Mode",
+    "Bonus": "{name} Roll Bonus",
     "Maximum": "Maximum {name} Roll",
     "Minimum": "Minimum {name} Roll",
     "ModifierAbility": "{name} Modifier Ability"
+  },
+  "Generic": {
+    "D20": {
+      "bonus": { "label": "Roll Bonus" },
+      "max": { "label": "Maximum Roll" },
+      "min": { "label": "Minimum Roll" },
+      "mode": { "label": "Advantage Mode" }
+    },
+    "Damage": {
+      "bonus": { "label": "Damage Bonus" }
+    }
   },
   "Range": {
     "Label": "Roll Range",
@@ -4258,6 +4480,9 @@
     },
     "ignoredDifficultTerrain": {
       "label": "Ignored Difficult Terrain"
+    },
+    "multiplier": {
+      "label": "Movement Multiplier"
     },
     "special": {
       "label": "Special Movement"
@@ -4347,7 +4572,6 @@
   }
 },
 
-"DND5E.SaveBonus": "Saving Throw Bonus",
 "DND5E.SaveGlobalBonusHint": "This bonus applies to all saving throws made by this actor.",
 "DND5E.Scroll": {
   "CreateFrom": "Create Scroll from {spell}",
@@ -4375,6 +4599,7 @@
 "DND5E.Shape": "Shape",
 
 "DND5E.SheetClass": {
+  "ActiveEffect": "D&D 5e Active Effect Sheet",
   "AdventureImporter": "D&D 5e Adventure Importer",
   "Character": "D&D 5e Character Sheet",
   "ClassSummary": "D&D 5e Class Summary Sheet",
@@ -4430,6 +4655,18 @@
 "DND5E.SizeTinyAbbr": "Tn",
 
 "DND5E.SKILL": {
+  "FIELDS": {
+    "skills": {
+      "element": {
+        "roll": {
+          "bonus": { "label": "Skill Check Bonus" },
+          "max": { "label": "Maximum Skill Check Roll" },
+          "min": { "label": "Minimum Skill Check Roll" },
+          "mode": { "label": "Skill Check Advantage Mode" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "CheckBonus": "{name} Check Bonus",
     "PassiveBonus": "Passive {name} Bonus",
@@ -4475,7 +4712,6 @@
 "DND5E.SkillConfigure": "Configure Skill",
 "DND5E.SkillsConfig": "Configure Skills",
 "DND5E.SkillBonuses": "Skill Bonuses",
-"DND5E.SkillBonusCheck": "Check Bonus",
 "DND5E.SkillBonusPassive": "Passive Bonus",
 "DND5E.SkillConfigurationHint": "Configure skill proficiency and bonuses.",
 "DND5E.SkillGlobalBonusCheckHint": "This bonus applies to all skill checks made by this actor.",
@@ -5303,6 +5539,18 @@
 "DND5E.ToggleDescription": "Toggle Description",
 
 "DND5E.TOOL": {
+  "FIELDS": {
+    "tools": {
+      "element": {
+        "roll": {
+          "bonus": { "label": "Tool Check Bonus" },
+          "max": { "label": "Maximum Tool Check Roll" },
+          "min": { "label": "Minimum Tool Check Roll" },
+          "mode": { "label": "Tool Check Advantage Mode" }
+        }
+      }
+    }
+  },
   "Formatter": {
     "CheckBonus": "{name} Check Bonus",
     "Proficiency": "{name} Proficiency"
@@ -6254,6 +6502,30 @@
   }
 },
 
+"EDITOR.DND5E.Inserts": {
+  "Advice": "General Advice",
+  "Attack": "Attack Roll",
+  "Award": "Award",
+  "Check": "Ability Check",
+  "Damage": "Damage",
+  "EnrichersGroup": "D&D Enrichers",
+  "FloatLeft": "Float Left",
+  "FloatRight": "Float Right",
+  "Group": "D&D Blocks",
+  "HabitatTreasure": "Habitat & Treasure",
+  "Healing": "Healing",
+  "Item": "Item",
+  "Lookup": "Lookup",
+  "Narrative": "Narrative",
+  "Notable": "Notable",
+  "Quest": "Quest",
+  "Quote": "Pull Quote",
+  "Reference": "Reference",
+  "Save": "Saving Throw",
+  "Skill": "Skill Check",
+  "VTTAdvice": "VTT Advice"
+},
+
 "EFFECT.DND5E": {
   "StatusBleeding": "Bleeding",
   "StatusBloodied": "Bloodied",
@@ -6411,9 +6683,11 @@
 
 "KEYBINDINGS.DND5E.DragCopy": "Force Copy when Dragging Document",
 "KEYBINDINGS.DND5E.DragMove": "Force Move when Dragging Document",
-"KEYBINDINGS.DND5E.SkipDialogNormal": "Skip Dialog",
+"KEYBINDINGS.DND5E.OpenCompendiumBrowser": "Open Compendium Browser",
 "KEYBINDINGS.DND5E.SkipDialogAdvantage": "Skip Dialog (roll with Advantage/Critical)",
 "KEYBINDINGS.DND5E.SkipDialogDisadvantage": "Skip Dialog (roll with Disadvantage/Non-Critical)",
+"KEYBINDINGS.DND5E.SkipDialogNormal": "Skip Dialog",
+"KEYBINDINGS.DND5E.ToggleSheetMode": "Toggle Sheet Mode",
 
 "MACRO.5eMissingTargetWarn": "Your controlled actor '{actor}' does not have an {type} with name '{name}'.",
 "MACRO.5eMultipleTargetsWarn": "Your controlled actor '{actor}' has more than one {type} with name '{name}'. The first match will be chosen.",
@@ -6449,6 +6723,10 @@
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
   "AUTOMATION": {
+    "Falling": {
+      "Name": "Disable Falling Automation",
+      "Hint": "Do not track the falling status of tokens."
+    },
     "Movement": {
       "Name": "Movement Automation",
       "Hint": "Configure the amount of movement automation used by the system: Full automation including token blocking, partial automation of difficult terrain only, or off entirely.",
@@ -6486,6 +6764,14 @@
       "Name": "Dexterity Tiebreaker",
       "Hint": "Append the raw Dexterity ability score to break ties in Initiative."
     },
+    "AutoApplyDowned": {
+      "Name": "Auto-Apply Downed",
+      "Hint": "Automatically mark a creature as Dead or Unconscious when it is reduced to 0 HP in combat. Unimportant NPCs are marked Dead. Important NPCs and PCs are marked Unconscious first, and Dead if they fail three death saving throws.",
+      "None": "Never",
+      "DeadOnly": "For NPCs (dead only)",
+      "NPCs": "For NPCs (dead and unconscious)",
+      "All": "Always"
+    },
     "InitiativeScore": {
       "Name": "Initiative Score",
       "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
@@ -6501,6 +6787,9 @@
       "Name": "Roll Once per Creature",
       "Hint": "Use the same initiative roll for identical creatures."
     }
+  },
+  "CONDITIONS": {
+    "Name": "Conditions"
   },
   "CRITICAL": {
     "Name": "Critical Damage",
@@ -6562,6 +6851,10 @@
       "Silent": "Roll without creating chat card",
       "Yes": "Roll and create chat card"
     }
+  },
+  "PIETY": {
+    "Hint": "Enable optional Piety tracking for player characters.",
+    "Name": "Piety Score"
   },
   "THEME": {
     "Name": "Theme",

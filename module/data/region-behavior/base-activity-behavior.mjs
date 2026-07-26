@@ -105,4 +105,23 @@ export default class BaseActivityBehavior extends foundry.abstract.DataModel {
       }
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine what dispositions this region should apply to or ignore based on activity targeting data.
+   * @param {TargetData} target            Target data from the activity.
+   * @param {object} [options={}]
+   * @param {boolean} [options.ignored]    Should this generate an ignored list rather than a targeted list.
+   * @param {number} [options.relativeTo]  Determine dispositions relative to this disposition.
+   * @returns {Set<number>}                Set of dispositions to target or ignore.
+   */
+  getDispositions(target, { ignored, relativeTo }={}) {
+    const { HOSTILE, NEUTRAL, FRIENDLY } = CONST.TOKEN_DISPOSITIONS;
+    const type = relativeTo !== HOSTILE ? target.affects.type
+      : target.affects.type === "ally" ? "enemy" : target.affects.type === "enemy" ? "ally" : target.affects.type;
+    if ( type === "ally" ) return new Set(ignored ? [HOSTILE, NEUTRAL] : [FRIENDLY]);
+    else if ( type === "enemy" ) return new Set(ignored ? [NEUTRAL, FRIENDLY] : [HOSTILE]);
+    else return new Set();
+  }
 }

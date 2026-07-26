@@ -164,25 +164,27 @@ effects:
     img: icons/weapons/wands/wand-gem-blue.webp
     _id: 7Pcy0FgaAr30JUBV
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: Wd8ysaEjSsVhMUfW
+        - key: system.bonuses.rsak.attack
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: xomJRtSpPcEZxzfr
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -196,37 +198,42 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.2
+      systemVersion: 6.0.0
       createdTime: 1730911421903
-      modifiedTime: 1778013902839
+      modifiedTime: 1783544093104
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmg1WandOfTheWar.7Pcy0FgaAr30JUBV'
   - name: War Mage +2
     img: icons/weapons/wands/wand-gem-blue.webp
     _id: MFwYWOar805EHkdX
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: N5NvKOTP7Cw4ejJc
+        - key: system.bonuses.rsak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: 5BEYpln30DtMt1D9
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
     tint: '#ffffff'
@@ -241,37 +248,42 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar.ActiveEffect.7Pcy0FgaAr30JUBV
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.2
+      systemVersion: 6.0.0
       createdTime: 1731109827169
-      modifiedTime: 1778013906102
+      modifiedTime: 1783544093104
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmg1WandOfTheWar.MFwYWOar805EHkdX'
   - name: War Mage +3
     img: icons/weapons/wands/wand-gem-blue.webp
     _id: 5Z35lVoEDct7Ivx2
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '3'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '3'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 3
+          priority: null
+          type: add
+          phase: initial
+          _id: MCoi9cedG3aRQDbE
+        - key: system.bonuses.rsak.attack
+          value: 3
+          priority: null
+          type: add
+          phase: initial
+          _id: IPataEtLwVHFEteV
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
     tint: '#ffffff'
@@ -286,63 +298,79 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar.ActiveEffect.7Pcy0FgaAr30JUBV
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.2
+      systemVersion: 6.0.0
       createdTime: 1731109847118
-      modifiedTime: 1778013909986
+      modifiedTime: 1783544093104
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmg1WandOfTheWar.5Z35lVoEDct7Ivx2'
   - type: enchantment
     name: Wand of the War Mage, +1
     img: systems/dnd5e/icons/spell-tiers/spell2.webp
     disabled: true
     _id: UaQkN55ZMKSt9LGT
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of the War Mage, +1'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: uncommon
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
-          caption=false]</p>
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '400'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/wands/wand-gem-blue.webp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of the War Mage, +1'
+          priority: null
+          type: override
+          phase: initial
+          _id: R0osHAwqmErC0oG2
+        - key: system.rarity
+          value: uncommon
+          priority: null
+          type: override
+          phase: initial
+          _id: e5fvLPo8PxaBkTgB
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: bvfx49UqeykpEmVi
+        - key: system.price.value
+          value: 400
+          priority: null
+          type: add
+          phase: initial
+          _id: q6brYp30Nv235xOK
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: IEuAqOoI3nlQ3UXO
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: DUQLY9ZKPGyDaXbB
+        - key: system.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 9QVQgI6wJJBNQRIF
+        - key: img
+          value: icons/weapons/wands/wand-gem-blue.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: 1cf7Cbbtv1Lttsuk
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -353,62 +381,78 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1731109918289
-      modifiedTime: 1745438836027
+      modifiedTime: 1783544093104
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmg1WandOfTheWar.UaQkN55ZMKSt9LGT'
   - type: enchantment
     name: Wand of the War Mage, +2
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of the War Mage, +2'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
-          caption=false]</p>
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '2'
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/wands/wand-gem-blue.webp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of the War Mage, +2'
+          priority: null
+          type: override
+          phase: initial
+          _id: VaDl97zjK9dyEcvV
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: CBYfS81Rc8qyC2Jj
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: AzoV4YnrBcPu8XrE
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: ULCJFyDDY3ExqtDG
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: jXHaz2XhVK6vvJrC
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: sjfB7Qx52A3zkQHZ
+        - key: system.magicalBonus
+          value: 2
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: j5ZZ28mA1ApiDc9h
+        - key: img
+          value: icons/weapons/wands/wand-gem-blue.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: M2aUgqt5nRXGE89N
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -419,63 +463,79 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1731110113063
-      modifiedTime: 1745438836027
+      modifiedTime: 1783544093104
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: jqNFw2MJ4B1HG257
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmg1WandOfTheWar.jqNFw2MJ4B1HG257'
   - type: enchantment
     name: Wand of the War Mage, +3
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} of the War Mage, +3'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
-          caption=false]</p>
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '40000'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.magicalBonus
-        mode: 4
-        value: '3'
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/weapons/wands/wand-gem-blue.webp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} of the War Mage, +3'
+          priority: null
+          type: override
+          phase: initial
+          _id: nrp4fHi8Ya9UVagd
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: O1feBesfKJr0s1kU
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmg1WandOfTheWar
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: LSgISvNx3kKhGMl1
+        - key: system.price.value
+          value: 40000
+          priority: null
+          type: add
+          phase: initial
+          _id: 4xlcNmz6R4XDjujE
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: NZ6KY5CCwTe1ZIc7
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: lWApUQZidM2irKjb
+        - key: system.magicalBonus
+          value: 3
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: 3ikjWfUOa0uZPFly
+        - key: img
+          value: icons/weapons/wands/wand-gem-blue.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: tm9PYZvCj0jNaxCD
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -486,14 +546,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1731110117776
-      modifiedTime: 1745438836027
+      modifiedTime: 1783544093105
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: kejXxpJFzlSWcpm1
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmg1WandOfTheWar.kejXxpJFzlSWcpm1'
 folder: rLoBplj1TIznxeWI
 flags:
@@ -506,11 +569,11 @@ flags:
         - 5Z35lVoEDct7Ivx2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745433195913
+  modifiedTime: 1783544093104
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

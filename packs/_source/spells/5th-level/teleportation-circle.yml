@@ -22,7 +22,7 @@ system:
       additional sigil sequences during your adventures. You can commit a new
       sigil sequence to memory after studying it for 1 minute.</p><p>You can
       create a permanent teleportation circle by casting this spell in the same
-      location every day for one year. You need not use the circle to Teleport
+      location every day for one year. You need not use the circle to teleport
       when you cast the spell in this way.</p>
     chat: ''
   source:
@@ -41,14 +41,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '5'
       contiguous: false
+      count: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -107,20 +110,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: teleportation-circle
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-pentagon-magenta.webp
+img: icons/magic/symbols/star-yellow.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348916
-  modifiedTime: 1725992717477
+  modifiedTime: 1781403504135
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8aWtP5hcrmcEesBW'

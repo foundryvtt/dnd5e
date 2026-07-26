@@ -106,20 +106,18 @@ effects:
   - name: Speaking with Plants
     origin: Compendium.dnd5e.spells24.Item.phbsplSpeakwithP
     duration:
-      rounds: null
-      startTime: null
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/nature/tree-animated-squint.webp
     _id: cByepuCx1dcWTEa7
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -128,13 +126,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977127
+      modifiedTime: 1783543977127
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplSpeakwithP.cByepuCx1dcWTEa7'
 folder: HCovEE4VoPGlIbKi
 sort: 103125
@@ -147,11 +148,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1724425971879
-  modifiedTime: 1772659286543
+  modifiedTime: 1783543977127
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSpeakwithP'

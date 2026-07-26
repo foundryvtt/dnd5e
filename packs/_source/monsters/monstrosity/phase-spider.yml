@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,6 +481,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: LKJEecvimhbb9hhg
     name: Ethereal Jaunt
@@ -492,8 +490,9 @@ items:
     system:
       description:
         value: >-
-          <p>As a bonus action, the spider can magically shift from the Material
-          Plane to the Ethereal Plane, or vice versa.</p>
+          <p>As a bonus action, the [[lookup @name lowercase]]{monster} can
+          magically shift from the Material Plane to the Ethereal Plane, or vice
+          versa.</p>
         chat: ''
       source:
         custom: ''
@@ -507,14 +506,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
-        - trait
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        JeGYgXMxVT1lLLwl:
           type: utility
           activation:
             type: bonus
@@ -529,15 +527,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -548,7 +547,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -565,7 +565,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: JeGYgXMxVT1lLLwl
+          name: Shift Planes
       enchant: {}
       prerequisites:
         level: null
@@ -579,125 +591,32 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3iLXiqhhOgXOMMg7
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741122573573
+      systemVersion: 6.0.0
+      createdTime: 1781876420365
+      modifiedTime: 1781876438550
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!llSG0Hi4eGlRlQ4o.LKJEecvimhbb9hhg'
-  - _id: X78NpT0YZG0rZcaP
-    name: Spider Climb
-    type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
-    system:
-      description:
-        value: >-
-          <p>The spider can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: spider-climb
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!llSG0Hi4eGlRlQ4o.X78NpT0YZG0rZcaP'
-  - _id: HZklbue3nXLHIevM
-    name: Web Walker
-    type: feat
-    img: icons/magic/nature/tree-bare-glow-yellow.webp
-    system:
-      description:
-        value: <p>The spider ignores movement restrictions caused by webbing.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: web-walker
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!llSG0Hi4eGlRlQ4o.HZklbue3nXLHIevM'
   - _id: 2HPk5TdUTeEhD2eG
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/invertebrates/spider-mandibles-brown.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
           make a [[/save]] saving throw, taking [[/damage average
-          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          activity=8tRw363NqNSEX3gA]] damage on a failed save, or half as much
           damage on a successful one. If the poison damage reduces the target to
-          0 hit points, the target is stable but &amp;Reference[poisoned] for 1
-          hour, even after regaining hit points, and is
-          &amp;Reference[paralyzed] while poisoned in this way.</p>
+          0 hit points, the target is stable but &amp;Reference[poisoned] for
+          [[lookup @labels.duration activity=8tRw363NqNSEX3gA]], even after
+          regaining hit points, and is &amp;Reference[paralyzed] while poisoned
+          in this way.</p>
         chat: >-
-          <p>The Phase Spider attacks with its Bite. The target must make a
-          <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -769,8 +688,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        wXBvzfyjnEEeJvNB:
           type: attack
           activation:
             type: action
@@ -785,10 +703,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -805,7 +724,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -831,14 +751,21 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: wXBvzfyjnEEeJvNB
+        8tRw363NqNSEX3gA:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -848,13 +775,26 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must make a [[/save]] saving throw, taking [[/damage
+              average activity=8tRw363NqNSEX3gA]] damage on a failed save, or
+              half as much damage on a successful one. If the poison damage
+              reduces the target to 0 hit points, the target is stable but
+              &amp;Reference[poisoned] for [[lookup @labels.duration
+              activity=8tRw363NqNSEX3gA]], even after regaining hit points, and
+              is &amp;Reference[paralyzed] while poisoned in this way.</p>
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: hour
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: Op1NQWF02iahIfVF
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             value: '5'
             units: ft
@@ -868,10 +808,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -887,45 +828,205 @@ items:
                   enabled: false
                   formula: ''
                 number: 4
-                denomination: '8'
+                denomination: 8
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 8tRw363NqNSEX3gA
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
       mastery: ''
-    effects: []
+    effects:
+      - name: Stabilizing Paralysis Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.llSG0Hi4eGlRlQ4o.Item.2HPk5TdUTeEhD2eG
+        transfer: false
+        _id: Op1NQWF02iahIfVF
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are stable but &amp;reference[poisoned apply=false] for the
+          duration, even after regaining hit points. While poisoned in this way,
+          you are also &amp;reference[paralyzed apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - paralyzed
+          - poisoned
+          - stable
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781876486978
+          modifiedTime: 1781876627816
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!llSG0Hi4eGlRlQ4o.2HPk5TdUTeEhD2eG.Op1NQWF02iahIfVF
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741122560151
+      systemVersion: 6.0.0
+      createdTime: 1781876446805
+      modifiedTime: 1781876638569
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!llSG0Hi4eGlRlQ4o.2HPk5TdUTeEhD2eG'
+  - _id: QXhq8wIdZrFuW2ev
+    name: Spider Climb
+    type: feat
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including upside down on ceilings, without needing to make
+          an ability check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: spider-climb
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 150000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.0Oap13hi3sDNwVZn
+      duplicateSource: Item.lDSSf3aXXmZYJsk1
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781876394633
+      modifiedTime: 1781876394633
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!llSG0Hi4eGlRlQ4o.QXhq8wIdZrFuW2ev'
+  - _id: pnTjdoXNZUS406eW
+    name: Web Walker
+    type: feat
+    img: icons/creatures/webs/web-thin-pruple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} ignores movement
+          restrictions caused by webbing.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: web-walker
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 250000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.GQ8a63ou7VwIGrvv
+      duplicateSource: Item.qHPwkAgbpzDzN0P6
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781876396974
+      modifiedTime: 1781876398348
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!llSG0Hi4eGlRlQ4o.pnTjdoXNZUS406eW'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -934,7 +1035,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 5.1.3
   createdTime: 1726171253960

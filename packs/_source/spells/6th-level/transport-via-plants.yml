@@ -9,8 +9,8 @@ system:
       <p>This spell creates a magical link between a Large or larger inanimate
       plant within range and another plant, at any distance, on the same plane
       of existence. You must have seen or touched the destination plant at least
-      once before. For the Duration, any creature can step into the target plant
-      and exit from the destination plant by using 5 feet of Movement.</p>
+      once before. For the duration, any creature can step into the target plant
+      and exit from the destination plant by using 5 feet of movement.</p>
     chat: ''
   source:
     custom: ''
@@ -30,12 +30,15 @@ system:
       type: object
       count: '2'
       choice: false
+      special: ''
     template:
       units: spec
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -92,20 +95,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: transport-via-plants
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-maple-teal.webp
+img: icons/magic/nature/tree-spirit-black.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365888
-  modifiedTime: 1725992723061
+  modifiedTime: 1781441222683
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!s7nXgot5gGZVcMrv'

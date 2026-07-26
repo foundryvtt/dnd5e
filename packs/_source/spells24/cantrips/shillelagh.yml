@@ -211,48 +211,61 @@ effects:
     img: icons/magic/nature/root-vine-coiled-crook.webp
     disabled: false
     _id: QPsqj6jfS0iXSrTs
-    system: {}
-    changes:
-      - key: system.damage.base.denomination
-        mode: 5
-        value: '8'
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: force
-        priority: null
-      - key: system.damage.base.number
-        mode: 5
-        value: '1'
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} Shillelagh'
-        priority: null
-      - key: system.damage.base.custom.enabled
-        mode: 5
-        value: '0'
-        priority: null
-      - key: activities[attack].attack.ability
-        mode: 5
-        value: none
-        priority: null
-      - key: activities[attack].attack.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
-      - key: system.damage.base.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
+    system:
+      changes:
+        - key: system.damage.base.denomination
+          value: 8
+          priority: null
+          type: override
+          phase: initial
+          _id: pYAYnvIpQGh5kCw6
+        - key: system.damage.base.types
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: gAGXWQkjfbtvMGfs
+        - key: system.damage.base.number
+          value: 1
+          priority: null
+          type: override
+          phase: initial
+          _id: MUBHi0ncRSWCA0GG
+        - key: name
+          value: '{} Shillelagh'
+          priority: null
+          type: override
+          phase: initial
+          _id: OBtwF1jAWFIoX4El
+        - key: system.damage.base.custom.enabled
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: 03xEhyGMEJ4LHFNN
+        - key: activities[attack].attack.ability
+          value: none
+          priority: null
+          type: override
+          phase: initial
+          _id: vSDUdoixaFCk3ymh
+        - key: activities[attack].attack.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: mCmtoOSlOnkKNBm0
+        - key: system.damage.base.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: jZ50QZzHsfP5w6xR
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -263,60 +276,76 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725554262842
-      modifiedTime: 1726584452200
+      modifiedTime: 1783543976826
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplShillelagh.QPsqj6jfS0iXSrTs'
   - type: enchantment
     name: Shillelagh (1d10)
     img: icons/magic/nature/root-vine-coiled-crook.webp
     disabled: false
-    system: {}
-    changes:
-      - key: system.damage.base.denomination
-        mode: 5
-        value: '10'
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: force
-        priority: null
-      - key: system.damage.base.number
-        mode: 5
-        value: '1'
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} (Shillelagh)'
-        priority: null
-      - key: system.damage.base.custom.enabled
-        mode: 5
-        value: '0'
-        priority: null
-      - key: activities[attack].attack.ability
-        mode: 5
-        value: none
-        priority: null
-      - key: activities[attack].attack.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
-      - key: system.damage.base.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
+    system:
+      changes:
+        - key: system.damage.base.denomination
+          value: 10
+          priority: null
+          type: override
+          phase: initial
+          _id: H1GK0PcFlp6nwTeT
+        - key: system.damage.base.types
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: VdxMh8t2JA6O00mq
+        - key: system.damage.base.number
+          value: 1
+          priority: null
+          type: override
+          phase: initial
+          _id: PtBGHi5vIhp4MEY4
+        - key: name
+          value: '{} (Shillelagh)'
+          priority: null
+          type: override
+          phase: initial
+          _id: 7F4QoksDul0RLY11
+        - key: system.damage.base.custom.enabled
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: h8FtbtiAU6BsOgRV
+        - key: activities[attack].attack.ability
+          value: none
+          priority: null
+          type: override
+          phase: initial
+          _id: Zc8fAXfpZfo3Ojy9
+        - key: activities[attack].attack.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: lqa8iNTwmJXXRgsB
+        - key: system.damage.base.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: g3yMikO7UORmgqIi
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -327,61 +356,77 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725555103514
-      modifiedTime: 1726584435031
+      modifiedTime: 1783543976827
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: Oy8fnNNzPmehxXio
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplShillelagh.Oy8fnNNzPmehxXio'
   - type: enchantment
     name: Shillelagh (1d12)
     img: icons/magic/nature/root-vine-coiled-crook.webp
     disabled: false
-    system: {}
-    changes:
-      - key: system.damage.base.denomination
-        mode: 5
-        value: '12'
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: force
-        priority: null
-      - key: system.damage.base.number
-        mode: 5
-        value: '1'
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} (Shillelagh)'
-        priority: null
-      - key: system.damage.base.custom.enabled
-        mode: 5
-        value: '0'
-        priority: null
-      - key: activities[attack].attack.ability
-        mode: 5
-        value: none
-        priority: null
-      - key: activities[attack].attack.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
-      - key: system.damage.base.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
+    system:
+      changes:
+        - key: system.damage.base.denomination
+          value: 12
+          priority: null
+          type: override
+          phase: initial
+          _id: lOeCQWFja7pZbpdv
+        - key: system.damage.base.types
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: Ld4VCKewI1ucfJ5B
+        - key: system.damage.base.number
+          value: 1
+          priority: null
+          type: override
+          phase: initial
+          _id: m0XWYAIo7tgchqC7
+        - key: name
+          value: '{} (Shillelagh)'
+          priority: null
+          type: override
+          phase: initial
+          _id: g3HPicsMrqvvxUuU
+        - key: system.damage.base.custom.enabled
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: jIDqFS1e8RFzlP64
+        - key: activities[attack].attack.ability
+          value: none
+          priority: null
+          type: override
+          phase: initial
+          _id: EdRqczxUPiWdLVFx
+        - key: activities[attack].attack.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: 3NF90DmF28s8wTxo
+        - key: system.damage.base.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: 7O8Q7FhzfUOfvcUn
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -392,61 +437,77 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725555133416
-      modifiedTime: 1726584462623
+      modifiedTime: 1783543976827
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: advnpQaBnsbuv02y
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplShillelagh.advnpQaBnsbuv02y'
   - type: enchantment
     name: Shillelagh (2d6)
     img: icons/magic/nature/root-vine-coiled-crook.webp
     disabled: false
-    system: {}
-    changes:
-      - key: system.damage.base.denomination
-        mode: 5
-        value: '6'
-        priority: null
-      - key: system.damage.base.types
-        mode: 2
-        value: force
-        priority: null
-      - key: system.damage.base.number
-        mode: 5
-        value: '2'
-        priority: null
-      - key: name
-        mode: 5
-        value: '{} (Shillelagh)'
-        priority: null
-      - key: system.damage.base.custom.enabled
-        mode: 5
-        value: '0'
-        priority: null
-      - key: activities[attack].attack.ability
-        mode: 5
-        value: none
-        priority: null
-      - key: activities[attack].attack.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
-      - key: system.damage.base.bonus
-        mode: 2
-        value: max(@abilities.str.mod, @attributes.spell.mod)
-        priority: null
+    system:
+      changes:
+        - key: system.damage.base.denomination
+          value: 6
+          priority: null
+          type: override
+          phase: initial
+          _id: r8ZsrBzfEvLT8zA0
+        - key: system.damage.base.types
+          value: force
+          priority: null
+          type: add
+          phase: initial
+          _id: oHlF69f60CNzRVhw
+        - key: system.damage.base.number
+          value: 2
+          priority: null
+          type: override
+          phase: initial
+          _id: jUDooSOnfcMspio7
+        - key: name
+          value: '{} (Shillelagh)'
+          priority: null
+          type: override
+          phase: initial
+          _id: DndfTOGFmdjQ4FZO
+        - key: system.damage.base.custom.enabled
+          value: 0
+          priority: null
+          type: override
+          phase: initial
+          _id: QQnZpV3Oo0bJ3RE5
+        - key: activities[attack].attack.ability
+          value: none
+          priority: null
+          type: override
+          phase: initial
+          _id: 4CNAdEfvyniF84q6
+        - key: activities[attack].attack.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: GkhVFtR7M84yfPj5
+        - key: system.damage.base.bonus
+          value: max(@abilities.str.mod, @attributes.spell.mod)
+          priority: null
+          type: add
+          phase: initial
+          _id: cnutYg4uQeiAIEb8
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -457,14 +518,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725555207760
-      modifiedTime: 1726584473481
+      modifiedTime: 1783543976827
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: X9xoN8qHUiCc4SZR
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplShillelagh.X9xoN8qHUiCc4SZR'
 folder: 4FhsY9FJQd7h7MZb
 sort: 112500
@@ -477,11 +541,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425970676
-  modifiedTime: 1745256798147
+  modifiedTime: 1783543976826
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplShillelagh'

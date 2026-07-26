@@ -36,14 +36,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '40'
       contiguous: false
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -151,78 +154,92 @@ system:
   identifier: slow
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-dense-pink.webp
+img: icons/skills/movement/arrow-down-pink.webp
 effects:
-  - name: Slow
+  - name: Slowed
     origin: Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: YtN8kTDQyxFaxpEx
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '-2'
-        priority: null
-      - key: system.attributes.movement.burrow
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.fly
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 1
-        value: '0.5'
-        priority: null
-      - key: system.attributes.movement.walk
-        mode: 1
-        value: '0.5'
-        priority: null
     description: >-
-      <p>An affected target's speed is halved, it takes a -2 penalty to AC and
-      Dexterity saving throws, and it can't use reactions. On its turn, it can
-      use either an action or a bonus action, not both. Regardless of the
-      creature's abilities or magic items, it can't make more than one melee or
-      ranged attack during its turn.</p>
+      <p>Your speed is halved, take a -2 penalty to AC and Dexterity saving
+      throws, and you can't use reactions. On your turn, you can use either an
+      action or a bonus action, not both. Regardless of your abilities or magic
+      items, you can't make more than one melee or ranged attack during your
+      turn.</p>
     transfer: false
     statuses: []
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781293621557
+      modifiedTime: 1781293713804
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/fog-gas-smoke-dense-pink.webp
+    img: icons/skills/movement/arrow-down-pink.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          type: add
+          value: -2
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.burrow
+          type: multiply
+          value: 0.5
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.climb
+          type: multiply
+          value: 0.5
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.fly
+          type: multiply
+          value: 0.5
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.swim
+          type: multiply
+          value: 0.5
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.walk
+          type: multiply
+          value: 0.5
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!yqUDoxk4x0NWG5Bz.YtN8kTDQyxFaxpEx'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037367014
-  modifiedTime: 1725992723597
+  modifiedTime: 1781293443965
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!yqUDoxk4x0NWG5Bz'

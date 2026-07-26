@@ -1,0 +1,57 @@
+<section class="tab scrollable changes {{~#if tab.active}} active{{/if}}" data-group="{{ tab.group }}" data-tab="{{ tab.id }}">
+
+    <section class="items-list changes-list">
+        <div class="items-section card">
+            <div class="items-header header">
+                <h3 class="item-name">{{ localize "DND5E.EFFECT.Change.Label" }}</h3>
+                <div class="item-header effect-type">{{ localize "EFFECT.FIELDS.changes.element.type.label" }}</div>
+                <div class="item-header effect-value">{{ localize "DND5E.Value" }}</div>
+                <div class="item-header item-controls"></div>
+            </div>
+            <ol class="item-list changes unlist">
+                {{#each changes}}
+                <li class="item change" data-change-id="{{ _id }}" data-index="{{ @index }}">
+                    <div class="item-row change-row">
+                        <div class="item-name">
+                            <div class="name name-stacked">
+                                <span class="title"
+                                      {{~#unless (eq name key)}} data-tooltip="{{ key }}"{{/unless}}>{{ name }}</span>
+                            </div>
+                        </div>
+                        <div class="item-detail effect-type">
+                            <span class="condensed">{{ typeLabel }}</span>
+                        </div>
+                        {{> "systems/dnd5e/templates/effects/columns/value.hbs" ctx=this }}
+                        <div class="item-detail item-controls">
+                            {{#if @root.editable}}
+                            {{!-- Editing --}}
+                            <button class="unbutton control-button inline-control icon fa-solid fa-pen-to-square"
+                                    type="button" data-action="editChange" data-tooltip
+                                    aria-label="{{ localize 'DND5E.EFFECT.Action.EditChange' }}"></button>
+
+                            {{!-- Deleting --}}
+                            <button class="unbutton control-button inline-control icon fa-solid fa-trash"
+                                    type="button" data-action="deleteChange" data-tooltip
+                                    aria-label="{{ localize 'DND5E.EFFECT.Action.DeleteChange' }}"></button>
+                            {{/if}}
+
+                            {{!-- Context Menu --}}
+                            <button class="unbutton control-button inline-control always-interactive icon fa-solid
+                                    fa-ellipsis-vertical" type="button" data-context-menu
+                                    aria-label="{{ localize 'DND5E.AdditionalControls' }}"></button>
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
+        </div>
+    </section>
+
+    {{#if additionalChangesFields.length}}
+    <fieldset>
+        <legend>{{ localize "DND5E.EFFECT.AdditionalChanges" }}</legend>
+        {{> "dnd5e.fieldlist" additionalChangesFields}}
+    </fieldset>
+    {{/if}}
+
+</section>

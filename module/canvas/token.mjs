@@ -3,6 +3,15 @@
  */
 export default class Token5e extends foundry.canvas.placeables.Token {
 
+  /** @inheritDoc */
+  static RENDER_FLAGS = {
+    ...super.RENDER_FLAGS,
+    // Elevation changes must also rescale the mesh, as tokens are scaled by their distance from the viewed level.
+    refreshElevation: { propagate: ["refreshTooltip", "refreshMesh"] }
+  };
+
+  /* -------------------------------------------- */
+
   /**
    * Update the token ring when this token is targeted.
    * @param {User5e} user         The user whose targeting has changed.
@@ -146,6 +155,26 @@ export default class Token5e extends foundry.canvas.placeables.Token {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async _drawEffect(src, tint) {
+    const icon = await super._drawEffect(src, tint);
+    if ( !game.user.isGM ) return icon;
+    if ( icon && src && (src === CONFIG.statusEffects.falling?.img) ) {
+      icon.eventMode = "static";
+      icon.cursor = "pointer";
+      const baseTint = icon.tint;
+      icon.on("pointerdown", event => {
+        event.stopPropagation();
+        this.document.plummet();
+      });
+      icon.on("pointerover", () => icon.tint = 0xFF9500);
+      icon.on("pointerout", () => icon.tint = baseTint);
+    }
+    return icon;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Specialized drawing function for HP bars.
    * @param {number} number      The Bar number
@@ -226,6 +255,23 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   _configureFilterEffect(statusId, active) {
     if ( (statusId === CONFIG.specialStatusEffects.INVISIBLE) && this.hasDynamicRing ) active = false;
     return super._configureFilterEffect(statusId, active);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _refreshMeshSizeAndScale() {
+    super._refreshMeshSizeAndScale();
+    if ( !CONFIG.DND5E.elevationScaling || !canvas.level ) return;
+
+    // Calculate elevation relative to the viewed level so that tokens farther away from the 'camera' appear smaller.
+    const elevation = this.document.elevation - canvas.level.elevation.base;
+    if ( elevation >= 0 ) return; // Do not make 'closer' tokens bigger.
+
+    // Hyperbolic falloff.
+    const factor = Math.max(.5, 1 / (1 - (elevation / 90)));
+    this.mesh.scale.x *= factor;
+    this.mesh.scale.y *= factor;
   }
 
   /* -------------------------------------------- */

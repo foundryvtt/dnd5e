@@ -110,20 +110,18 @@ effects:
   - name: Pursuing Suggestion
     origin: Compendium.dnd5e.spells24.Item.phbsplSuggestion
     duration:
-      rounds: null
-      startTime: null
-      seconds: 28800
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/tools/navigation/map-marked-red.webp
     _id: aXT1HK2a1XbyabMK
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The Charmed target pursues the suggestion to the best of its ability.
       The suggested activity can continue for the entire duration, but if the
@@ -137,13 +135,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543977295
+      modifiedTime: 1783543977295
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSuggestion.aXT1HK2a1XbyabMK'
 folder: 3SjcO2acsFnWegp4
 sort: 150000
@@ -156,11 +157,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425973198
-  modifiedTime: 1745256798873
+  modifiedTime: 1783543977295
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSuggestion'

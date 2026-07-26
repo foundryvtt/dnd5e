@@ -3,7 +3,7 @@
     <fieldset class="card">
         <legend>{{ localize "DND5E.Initiative" }}</legend>
         {{ formField fields.ability value=data.ability options=abilityOptions localize=true rootId=partId }}
-        {{ formField fields.bonus value=data.bonus localize=true rootId=partId }}
+        {{ formField fields.roll.fields.bonus value=data.roll.bonus localize=true rootId=partId }}
         <hr>
         {{#each flags}}
         {{ formField field name=name value=value input=../inputs.createCheckboxInput rootId=../partId }}

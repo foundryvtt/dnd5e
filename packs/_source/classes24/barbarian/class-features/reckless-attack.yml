@@ -40,20 +40,17 @@ effects:
   - name: Reckless
     origin: Compendium.dnd5e.classes24.Item.phbbrbRecklessAt
     duration:
-      rounds: 1
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/skills/melee/blade-tips-triple-bent-white.webp
     _id: XA0GhXVB54U2IuRP
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -62,13 +59,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbRecklessAt.XA0GhXVB54U2IuRP'
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -78,7 +78,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735865940469

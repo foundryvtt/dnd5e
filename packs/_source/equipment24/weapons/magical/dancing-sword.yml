@@ -317,38 +317,45 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
     _id: WJSS4dAA3wvYZpRx
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Dancing {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDancingSword0
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Dancing {}
+          priority: null
+          type: override
+          phase: initial
+          _id: ubk8bSgyqveC7QXm
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: 5x740YfMNgLaHXqk
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: VF3FNu31GgUMztLn
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDancingSword0
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: y48vdkhQZeNZmhEx
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: zq2mZleqj5utNbX3
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -359,13 +366,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730836705437
-      modifiedTime: 1730836820979
+      modifiedTime: 1783544094678
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDancingSword0.WJSS4dAA3wvYZpRx'
 folder: kie870i5kr7yuxO8
 flags:
@@ -376,11 +386,11 @@ flags:
         - qQ7MztRj7Iuv2EyK
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764615015204
+  modifiedTime: 1783544094678
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 6900000

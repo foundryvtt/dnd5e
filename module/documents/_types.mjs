@@ -1,7 +1,17 @@
 /**
  * @import { SpellScrollValues } from "../_types.mjs";
- * @import { ActorUpdatesDescription } from "../data/chat-message/fields/_types.mjs";
+ * @import { WeaponAttackMode } from "../dice/_types.mjs";
  */
+
+/**
+ * @typedef ActorUpdatesDescription
+ * @property {object} actor       Updates applied to the actor.
+ * @property {object[]} [create]  Full data for Items to create (with IDs maintained).
+ * @property {string[]} [delete]  IDs of items to be deleted from the actor.
+ * @property {object[]} item      Updates applied to items on the actor.
+ */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef BastionTurnResult
@@ -139,9 +149,9 @@
 
 /**
  * @typedef {ItemRollData & Maybe<ActorRollData>} ActivityRollData
- * @property {object} activity    Object containing the activity's data.
- * @property {object} [consumed]  Information on what resources the activity's activation consumed.
- * @property {number} mod         The ability modifier value used by the activity.
+ * @property {object} activity         Object containing the activity's data.
+ * @property {object} [consumed]       Information on what resources the activity's activation consumed.
+ * @property {number} mod              The ability modifier value used by the activity.
  */
 
 /**
@@ -164,8 +174,8 @@
 
 /**
  * @typedef {RollData} JournalEntryPageRollData
- * @param {object} flags          Flags set on the journal entry.
- * @param {string} name           Name of the journal entry.
+ * @property {object} flags       Flags set on the journal entry.
+ * @property {string} name        Name of the journal entry.
  * @property {object} page        Object containing the page's system data.
  * @property {object} page.flags  Flags set on the page.
  * @property {string} page.name   Name of the page.
@@ -173,12 +183,36 @@
 
 /**
  * @typedef RollData
+ * @property {RollDescription} [roll]  Data describing a specific roll being performed.
+ */
+
+/**
+ * @typedef RollDescription
+ * @property {string} [ability]                Ability associated with a D20 roll.
+ * @property {object} [attack]
+ * @property {"spell"|"unarmed"|"weapon"} [attack.classification]  Source of the attack.
+ * @property {WeaponAttackMode} [attack.mode]  Selected weapon attack mode.
+ * @property {"melee"|"ranged"} [attack.type]  Whether this is a melee or ranged attack.
+ * @property {boolean} [proficient]            Whether proficiency was added to the roll.
+ * @property {string} [skill]                  ID of skill associated with the roll.
+ * @property {string} [tool]                   ID of tool associated with the roll.
+ * @property {string} type                     Type of roll being performed (e.g. "attack", "skill", "tool", etc.).
  */
 
 /**
  * @typedef RollDataOptions
- * @property {boolean} [deterministic]  Whether to force deterministic values for data properties that could
- *                                      be either a die term or a flat term.
+ * @property {boolean} [deterministic]             Whether to force deterministic values for data properties that
+ *                                                 could be either a die term or a flat term.
+ * @property {boolean|RollDataRollOptions} [roll]  Options describing the roll being performed, or true to indicate the
+ *                                                 data is for a roll without any further configuration.
+ */
+
+/**
+ * Roll-specific options that roll data preparation can respond to.
+ *
+ * @typedef RollDataRollOptions
+ * @property {string} [ability]               Ability used to calculate the roll modifier.
+ * @property {WeaponAttackMode} [attackMode]  Selected weapon attack mode.
  */
 
 /* -------------------------------------------- */

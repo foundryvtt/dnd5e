@@ -1,19 +1,22 @@
 _id: 5Rxo4K9cgpwgW9vZ
 name: Wand of Enemy Detection
 type: equipment
-img: icons/weapons/wands/wand-simple-eye.webp
+img: icons/weapons/staves/staff-hooked-banded.webp
 system:
   description:
     value: >-
-      <p><em>Wand (requires attunement)</em></p><p>This wand has 7 charges.
-      While holding it, you can use an action and expend 1 charge to speak its
-      command word. For the next minute, you know the direction of the nearest
-      creature hostile to you within 60 feet, but not its distance from you. The
-      wand can sense the presence of hostile creatures that are ethereal,
-      invisible, disguised, or hidden, as well as those in plain sight. The
-      effect ends if you stop holding the wand.</p><p>The wand regains 1d6 + 1
-      expended charges daily at dawn. If you expend the wand's last charge, roll
-      a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>
+      <p><em>Wand (requires attunement)</em></p><p>This wand has [[lookup
+      @item.uses.max]] charges. While holding it, you can use an action and
+      expend 1 charge to speak its command word. For the next [[lookup
+      @labels.duration activity=8rw7aoQH53r3yP40]], you know the direction of
+      the nearest creature hostile to you within [[lookup
+      @labels.description.range activity=8rw7aoQH53r3yP40]], but not its
+      distance from you. The wand can sense the presence of hostile creatures
+      that are ethereal, &amp;reference[invisible apply=false], disguised, or
+      hidden, as well as those in plain sight. The effect ends if you stop
+      holding the wand.</p><p>The wand regains 1d6 + 1 expended charges daily at
+      dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand
+      crumbles into ashes and is destroyed.</p>
     chat: ''
   source:
     custom: ''
@@ -55,6 +58,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   properties:
     - foc
@@ -81,9 +85,10 @@ system:
       description:
         chatFlavor: ''
       duration:
-        units: inst
+        units: minute
         concentration: false
         override: false
+        value: '1'
       effects: []
       range:
         override: false
@@ -97,7 +102,7 @@ system:
           type: ''
         affects:
           choice: false
-          count: '1'
+          count: ''
           type: enemy
           special: ''
         override: false
@@ -123,6 +128,8 @@ system:
         requireIdentification: true
   attuned: false
   identifier: wand-of-enemy-detection
+  armor:
+    magicalBonus: ''
 effects: []
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
@@ -131,11 +138,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037100973
-  modifiedTime: 1764618981987
+  modifiedTime: 1783700143753
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!5Rxo4K9cgpwgW9vZ'

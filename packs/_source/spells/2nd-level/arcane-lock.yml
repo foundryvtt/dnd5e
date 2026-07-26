@@ -34,11 +34,14 @@ system:
       type: object
       count: '1'
       choice: false
+      special: ''
     template:
       units: spec
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -58,8 +61,7 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    hDxKBYuJ3uj0Nbit:
       type: utility
       activation:
         type: action
@@ -73,6 +75,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -80,11 +83,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -96,20 +101,32 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: hDxKBYuJ3uj0Nbit
+      name: Cast
   identifier: arcane-lock
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-orange.webp
+img: icons/sundries/misc/lock-open-yellow.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348987
-  modifiedTime: 1725992717504
+  modifiedTime: 1781219206261
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!8cse7rit0oswRPUP'

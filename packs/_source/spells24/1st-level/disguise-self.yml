@@ -108,20 +108,18 @@ effects:
   - name: Disguised
     origin: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/silhouette-aura-energy.webp
     _id: SrIb7dbaZs5F4zi9
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p><span style="font-family:Signika, sans-serif">To discern that you are
       disguised, a creature must take the Study action to inspect your
@@ -134,13 +132,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974652
+      modifiedTime: 1783543974652
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplDisguiseSe.SrIb7dbaZs5F4zi9'
 folder: pBaAAtXBCq9FVEnL
 sort: 3900000
@@ -153,11 +154,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425949918
-  modifiedTime: 1745256790565
+  modifiedTime: 1783543974651
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDisguiseSe'

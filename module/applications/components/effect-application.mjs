@@ -198,16 +198,17 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const effectFlags = {
       flags: {
         dnd5e: {
-          dependentOn: origin.uuid,
+          dependentOn: concentration?.uuid,
           scaling: this.chatMessage.system.scaling,
           spellLevel: this.chatMessage.system.spellLevel
         }
       }
     };
 
-    // Inherit the activity's duration when the applied effect has no explicit duration of its own
+    // Inherit the activity's duration only when the applied effect has a duration expiry and  no explicit duration of
+    // its own.
     let durationOverride = {};
-    if ( !Number.isFinite(effect.duration.value) ) {
+    if ( !Number.isFinite(effect.duration.value) && effect.expirySupportsDuration() ) {
       const effectDuration = this.chatMessage.getAssociatedActivity({ scaled: true })?.duration.getEffectData();
       if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
     }

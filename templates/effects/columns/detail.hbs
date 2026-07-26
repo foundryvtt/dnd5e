@@ -1,0 +1,18 @@
+<div class="item-detail effect-detail {{#unless (or ctx.source ctx.value)}}empty{{/unless}}" data-column-id="detail">
+    {{#if ctx.source}}
+    <span class="effect-source">
+        {{#if ctx.hasTooltip}}
+        <a class="item-tooltip" data-uuid="{{ ctx.source.uuid }}"
+           data-tooltip-direction="RIGHT">{{ ctx.source.name }}</a>
+        {{else}}
+        {{ ctx.source.name }}
+        {{/if}}
+    </span>
+    {{else if ctx.value}}
+    {{#if (gt ctx.value.length 15)}}
+    <i class="fa-solid fa-database" data-tooltip aria-label="{{ ctx.value }}"></i>
+    {{else}}
+    <span class="condensed">{{ ctx.value }}</span>
+    {{/if}}
+    {{/if}}
+</div>

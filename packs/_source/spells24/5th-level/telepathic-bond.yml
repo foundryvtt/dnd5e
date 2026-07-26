@@ -109,21 +109,21 @@ effects:
     transfer: false
     _id: 6DciPRMecBWvJCZq
     type: base
-    system: {}
-    changes:
-      - key: system.traits.languages.custom
-        mode: 2
-        value: ;Bonded telepathy
-        priority: null
+    system:
+      changes:
+        - key: system.traits.languages.custom
+          value: ;Bonded telepathy
+          priority: null
+          type: add
+          phase: initial
+          _id: Xjb0j5L3td78LFVn
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -132,13 +132,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724428622825
-      modifiedTime: 1724429807547
+      modifiedTime: 1783543976489
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRarysTelep.6DciPRMecBWvJCZq'
 folder: beZ8MTpWY2cMEUlp
 sort: 600000
@@ -151,11 +154,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1724425967972
-  modifiedTime: 1753380906018
+  modifiedTime: 1783543976488
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRarysTelep'

@@ -118,20 +118,18 @@ effects:
   - name: Invisible
     origin: Compendium.dnd5e.spells24.Item.phbsplMislead000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/invisible.svg
     _id: 3mTWrCYjgS8jIDRU
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The &amp;Reference[invisible apply=false] immediately after you make an
       attack roll, deals damage, or casts a spell.</p>
@@ -144,13 +142,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplInvisibili.ActiveEffect.9svfDetqjhsFP3ey
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976070
+      modifiedTime: 1783543976070
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplMislead000.3mTWrCYjgS8jIDRU'
 folder: beZ8MTpWY2cMEUlp
 sort: 1100000
@@ -163,11 +164,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425964302
-  modifiedTime: 1745256796321
+  modifiedTime: 1783543976070
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMislead000'

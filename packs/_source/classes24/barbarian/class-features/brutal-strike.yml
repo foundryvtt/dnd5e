@@ -116,20 +116,12 @@ system:
   identifier: brutal-strike
 effects:
   - _id: bg9jWpPRIJ0Q2vPY
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '-15'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
     transfer: false
     flags: {}
@@ -143,17 +135,27 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.Kl6zifJ5OmdHlOi2.ActiveEffect.TIBmPKKnAAiWYuN4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101037
+      modifiedTime: 1783544101037
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/melee/strike-axe-blood-red.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: -15
+          priority: null
+          type: add
+          phase: initial
+          _id: YI3aUDBag6iHUd63
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbBrutalStri.bg9jWpPRIJ0Q2vPY'
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -163,11 +165,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735865940469
-  modifiedTime: 1745256759708
+  modifiedTime: 1783544101036
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

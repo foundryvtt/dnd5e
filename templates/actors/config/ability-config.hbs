@@ -21,10 +21,10 @@
         <div class="form-group">
             <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Bonuses.Hint" ability=label }}</p>
         </div>
-        {{ formField fields.bonuses.fields.save name=(concat prefix "bonuses.save") value=data.bonuses.save
-                     localize=true rootId=partId }}
-        {{ formField fields.bonuses.fields.check name=(concat prefix "bonuses.check") value=data.bonuses.check
-                     localize=true rootId=partId }}
+        {{ formField fields.save.fields.roll.fields.bonus name=(concat prefix "save.roll.bonus")
+                     value=data.save.roll.bonus localize=true rootId=partId }}
+        {{ formField fields.check.fields.roll.fields.bonus name=(concat prefix "check.roll.bonus")
+                     value=data.check.roll.bonus localize=true rootId=partId }}
     </fieldset>
 
     {{!-- Check Rolls --}}
@@ -70,8 +70,8 @@
         <div class="form-group">
             <p class="hint">{{ localize "DND5E.ABILITY.SECTIONS.Global.Hint" }}</p>
         </div>
-        {{ formField global.fields.save value=global.data.save localize=true rootId=partId }}
-        {{ formField global.fields.check value=global.data.check localize=true rootId=partId }}
+        {{ formField global.fields.save.fields.bonus value=global.data.save.bonus localize=true rootId=partId }}
+        {{ formField global.fields.check.fields.bonus value=global.data.check.bonus localize=true rootId=partId }}
     </fieldset>
     {{/if}}
 </section>

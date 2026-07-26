@@ -1,5 +1,6 @@
 import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import AppliedRules from "../../documents/applied-rules.mjs";
 import { safePropertyExists, staticID } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
@@ -19,7 +20,7 @@ const {
 
 /**
  * @import { DamageRollConfiguration, DamageRollProcessConfiguration } from "../../dice/_types.mjs";
- * @import { ActivityRollData } from "../../documents/_types.mjs";
+ * @import { ActivityRollData, RollDataOptions } from "../../documents/_types.mjs";
  * @import { DamageFormulaOptions } from "../shared/_types.mjs";
  * @import { ActivityData, BehaviorApplicationData, EffectApplicationData } from "./_types.mjs";
  */
@@ -95,6 +96,14 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       })
     };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Category used to fetch rules for damage calculation.
+   * @type {"damage"|"healing"}
+   */
+  static damageRuleCategory = "damage";
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -743,29 +752,6 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Get the roll parts used to create the damage rolls.
-   * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
-   * @param {object} [options]                                     Damage configuration options.
-   * @param {DamageFormulaOptions} [options.formulaOptions]        Options to configure the formula.
-   * @param {ActivityRollData} [options.rollData]                  Use pre-existing roll data.
-   * @returns {DamageRollProcessConfiguration}
-   */
-  getDamageConfig(config={}, { formulaOptions, rollData }={}) {
-    if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
-
-    const rollConfig = foundry.utils.deepClone(config);
-    rollData ??= this.getRollData();
-    rollConfig.rolls = this.damage.parts
-      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, formulaOptions))
-      .filter(d => d.parts.length)
-      .concat(config.rolls ?? []);
-
-    return rollConfig;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Effects that can be applied from this activity.
    * @returns {Promise<ActiveEffect5e[]>|null}
    */
@@ -779,36 +765,107 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Get the roll parts used to create the damage rolls.
+   * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Existing damage configuration to merge into this one.
+   * @param {object} [options]                                     Damage configuration options.
+   * @param {DamageFormulaOptions} [options.formulaOptions]        Options to configure the formula.
+   * @param {ActivityRollData} [options.rollData]                  Use pre-existing roll data.
+   * @returns {DamageRollProcessConfiguration}
+   */
+  getDamageConfig(config={}, { formulaOptions, rollData }={}) {
+    if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
+
+    const rollConfig = foundry.utils.deepClone(config);
+    rollData ??= this.getRollData({ roll: { ability: config.ability, attackMode: config.attackMode } });
+    rollData.roll ??= {};
+    Object.assign(rollData.roll, {
+      isCritical: rollConfig.isCritical,
+      properties: Array.from(this.item.system.properties ?? [])
+        .concat(config.properties ?? [])
+        .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
+    });
+    const rules = {
+      bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
+      consumed: new Set()
+    };
+    rollConfig.rolls = this._getDamageParts(config)
+      .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index, { formulaOptions, rules }))
+      .filter(d => d.parts.length)
+      .concat(config.rolls ?? []);
+
+    return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the damage parts and apply any necessary modification before they are prepared.
+   * @param {Partial<DamageRollProcessConfiguration>} [config={}]  Roll configuration being built.
+   * @returns {DamageData[]}
+   */
+  _getDamageParts(config={}) {
+    return Array.from(this.damage.parts);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
+   * @param {RollDataOptions} [options]
+   * @returns {ActivityRollData}
+   */
+  getRollData(options={}) {
+    const rollData = this.item.getRollData(options);
+    rollData.activity = { ...this };
+    rollData.consumed = this.item.flags.dnd5e?.consumed;
+    rollData.mod = this.actor?.system.abilities?.[options.roll?.ability ?? this.ability]?.mod ?? 0;
+    return rollData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Process a single damage part into a roll configuration.
    * @param {DamageData} damage                                   Damage to prepare for the roll.
    * @param {Partial<DamageRollProcessConfiguration>} rollConfig  Roll configuration being built.
    * @param {ActivityRollData} rollData                           Roll data to populate with damage data.
    * @param {number} [index=0]                                    Index of the damage part.
-   * @param {DamageFormulaOptions} [options={}]                   Options to configure the formula.
+   * @param {object} [options={}]
+   * @param {DamageFormulaOptions} [options.formulaOptions]       Options to configure the formula.
+   * @param {object} [options.rules]                              Data used to apply rules to each part.
    * @returns {DamageRollConfiguration}
    * @protected
    */
-  _processDamagePart(damage, rollConfig, rollData, index=0, options={}) {
-    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, options);
+  _processDamagePart(damage, rollConfig, rollData, index=0, { formulaOptions, rules }={}) {
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, formulaOptions);
     const parts = scaledFormula ? [scaledFormula] : [];
-    const data = { ...rollData };
+    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+    const data = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
+    data.roll.damageType = (damage.types.has(lastType) ? lastType : null) ?? damage.types.first();
 
     if ( index === 0 ) {
       const actionType = this.getActionType(rollConfig.attackMode);
-      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
+      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.rolls.damage.${actionType}.bonus`);
       if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
       if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
     }
 
-    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+    if ( rules ) {
+      const ruleBonus = AppliedRules.createIterator(rules.bonus)
+        .filterWith(data, { consumed: rules.consumed })
+        .toFormula();
+      if ( ruleBonus ) {
+        data.ruleBonus = ruleBonus;
+        parts.push("@ruleBonus");
+      }
+    }
 
     return {
       data, parts,
       options: {
-        type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
+        type: data.roll.damageType,
         types: Array.from(damage.types),
-        properties: Array.from(this.item.system.properties ?? [])
-          .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
+        properties: data.roll.properties
       }
     };
   }

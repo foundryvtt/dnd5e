@@ -453,9 +453,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -470,7 +467,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -490,59 +487,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: PGulBR18kfO768c7
-    name: Antimagic Susceptibility
-    type: feat
-    img: icons/magic/lightning/orb-ball-purple.webp
-    system:
-      description:
-        value: >-
-          <p>The rug is incapacitated while in the area of an <em>antimagic
-          field</em>.</p><p>If targeted by <em>dispel magic</em>, the rug must
-          succeed on a Constitution saving throw against the caster's spell save
-          DC or fall unconscious for 1 minute.</p>
-        chat: >-
-          <p>The rug is incapacitated while in the area of an antimagic field.
-          </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: antimagic-susceptibility
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447904734
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!f6HaKROPIcBRmSd1.PGulBR18kfO768c7'
   - _id: Jwm0r4Us1rwS6XfV
     name: Damage Transfer
     type: feat
@@ -550,9 +496,10 @@ items:
     system:
       description:
         value: >-
-          <p>While it is grappling a creature, the rug takes only half the
-          damage dealt to it, and the creature grappled by the rug takes the
-          other half.</p>
+          <p>While it is &amp;reference[grappling]{Grappling} a creature, the
+          [[lookup @name lowercase]]{monster} takes only half the damage dealt
+          to it, and the creature &amp;reference[grappled apply=false] by the
+          [[lookup @name lowercase]]{monster} takes the other half.</p>
         chat: ''
       source:
         custom: ''
@@ -566,41 +513,112 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        zCjol5maXdc3qylg:
+          type: damage
+          name: Transfer Damage
+          _id: zCjol5maXdc3qylg
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} takes damage while
+              &reference[grappling]{Grappling} a creature.
+          consumption:
+            scaling:
+              allowed: true
+              max: ''
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: touch
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '@scaling'
+                number: null
+                denomination: null
+                bonus: ''
+                types: []
+                scaling:
+                  mode: ''
+                  number: 1
       enchant: {}
       prerequisites:
         level: null
       identifier: damage-transfer
     effects: []
     folder: null
-    sort: 0
+    sort: 50000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0npeEcwmiVMdwGMV
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781486932802
+      modifiedTime: 1781487055727
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!f6HaKROPIcBRmSd1.Jwm0r4Us1rwS6XfV'
   - _id: N30l3HXqmQ6H6Xo5
     name: False Appearance
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/commodities/cloth/cloth-bolt-gold-pink.webp
     system:
       description:
         value: >-
-          <p>While the rug remains motionless, it is indistinguishable from a
-          normal rug.</p>
+          <p>While the [[lookup @name lowercase]]{monster} remains motionless,
+          it is indistinguishable from a normal rug.</p>
         chat: ''
       source:
         custom: ''
@@ -614,10 +632,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -625,39 +644,44 @@ items:
       identifier: false-appearance
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781486932096
+      modifiedTime: 1781910265921
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!f6HaKROPIcBRmSd1.N30l3HXqmQ6H6Xo5'
   - _id: 7p94WH1WPMhF1ZP9
     name: Smother
     type: weapon
-    img: icons/magic/water/wave-water-explosion.webp
+    img: icons/commodities/cloth/ribbon-bolt-red.webp
     system:
       description:
         value: >-
           <p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one Medium
           or smaller creature.</p><p><em>Hit: </em>The creature is
           &amp;Reference[grappled] (escape DC 13). Until this grapple ends, the
-          target is restrained, blinded, and at risk of suffocating, and the rug
-          can't smother another target. In addition, at the start of each of the
-          target's turns, the target takes [[/damage average]] damage.</p>
+          target is &amp;reference[restrained apply=false],
+          &amp;reference[blinded apply=false], and at risk of
+          &amp;reference[suffocation apply=false]{Suffocating}, and the [[lookup
+          @name lowercase]]{monster} can't smother another target. In addition,
+          at the start of each of the target's turns, the target takes [[/damage
+          average]] damage.</p>
         chat: >-
-          <p>The Rug of Smothering makes a smothering attack! The creature is
-          grappled. Until this grapple ends, the target is restrained, blinded,
-          and at risk of suffocating, and the rug can't smother another
-          target.</p>
+          <p>The [[lookup @name]]{monster} makes a smothering attack! The
+          creature is &amp;reference[grappled]. Until this grapple ends, the
+          target is &amp;reference[restrained], &amp;reference[blinded], and at
+          risk of &amp;reference[suffocation apply=false]{Suffocating}, and the
+          [[lookup @name]]{monster} can't [[lookup @item.name lowercase]]
+          another target.</p>
       source:
         custom: ''
         book: ''
@@ -729,8 +753,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EvjW1JDaQ0XOo3jR:
           type: attack
           activation:
             type: action
@@ -745,13 +768,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: P1jrqFcV4WHLptEG
+              level: {}
           range:
             value: '5'
             units: ft
@@ -765,7 +791,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -778,46 +805,339 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
-            includeBase: true
+            includeBase: false
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: EvjW1JDaQ0XOo3jR
+          name: ''
+        tXy9M85ms0HKs6R0:
+          type: damage
+          name: Smother Damage
+          _id: tXy9M85ms0HKs6R0
+          img: ''
+          sort: 200000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When a creature smothered by the [[lookup @name
+              lowercase]]{monster} starts their turn.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 6
+                bonus: '3'
+                types:
+                  - bludgeoning
+                scaling:
+                  number: 1
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: smother
       mastery: ''
-    effects: []
+    effects:
+      - name: Smothering Grapple
+        img: icons/commodities/cloth/ribbon-bolt-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.f6HaKROPIcBRmSd1.Item.7p94WH1WPMhF1ZP9
+        transfer: false
+        _id: P1jrqFcV4WHLptEG
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 13). Until
+          this grapple ends, you are &amp;reference[restrained apply=false],
+          &amp;reference[blinded apply=false], and at risk of
+          &amp;reference[suffocation apply=false]{Suffocating}.</p><p>In
+          addition, at the start of each of the target's turns, the target takes
+          [[/damage 2d6 + 3 bludgeoning average]] damage.</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+          - blinded
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781487279857
+          modifiedTime: 1781487458415
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!f6HaKROPIcBRmSd1.7p94WH1WPMhF1ZP9.P1jrqFcV4WHLptEG
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175498369
+      systemVersion: 6.0.0
+      createdTime: 1781487073551
+      modifiedTime: 1781487541878
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!f6HaKROPIcBRmSd1.7p94WH1WPMhF1ZP9'
+  - _id: gjJgPoevkUlW7qZ9
+    name: Antimagic Susceptibility
+    type: feat
+    img: icons/magic/lightning/orb-ball-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} is
+          &amp;reference[incapacitated apply=false] while in the area of an
+          @UUID[Compendium.dnd5e.spells.Item.Eon0jzGzQRNluTPQ]{Antimagic Field}.
+          If targeted by
+          @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic},
+          the [[lookup @name lowercase]]{monster} must succeed on a Constitution
+          saving throw against the caster's spell save DC or fall
+          &amp;reference[unconscious] for 1 minute.</p>
+        chat: >-
+          <p>The armor is incapacitated while in the area of an antimagic
+          field.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        B2aVXCenI7CfLLlj:
+          type: save
+          name: Dispel Magic Save
+          _id: B2aVXCenI7CfLLlj
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} is targeted by
+              @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel
+              Magic}.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: hZlZMpOIJOexfrmA
+              level: {}
+              onSave: false
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: ''
+            visible: true
+            bonus: ''
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: antimagic-susceptibility
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Dispelled
+        img: icons/magic/lightning/orb-ball-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.eORmAXuV5v3nWsQL.Item.jlZrv208u9gYyh7I
+        transfer: false
+        _id: hZlZMpOIJOexfrmA
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You have been rendered &amp;reference[unconscious apply=false] by
+          the @UUID[Compendium.dnd5e.spells.Item.15Fa6q1nH27XfbR8]{Dispel Magic}
+          spell for 1 minute.</p>
+        tint: '#ffffff'
+        statuses:
+          - unconscious
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781486928947
+          modifiedTime: 1781486928947
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!f6HaKROPIcBRmSd1.gjJgPoevkUlW7qZ9.hZlZMpOIJOexfrmA
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781486928947
+      modifiedTime: 1781486928947
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!f6HaKROPIcBRmSd1.gjJgPoevkUlW7qZ9'
 effects: []
 folder: pucbjwWBrVMweiOd
 sort: 0
@@ -826,7 +1146,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171245922

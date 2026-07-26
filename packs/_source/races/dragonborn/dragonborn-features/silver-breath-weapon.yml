@@ -1,19 +1,20 @@
-_id: KVgvW5yhKcmQUanz
-name: Breath Weapon - Blue
+_id: pAYTdRGftNr8AitK
+name: Silver Breath Weapon
 ownership:
   default: 0
 type: feat
 system:
   description:
     value: >-
-      <p>You can use your action to exhale destructive energy. Your draconic
-      ancestry determines the size, shape, and damage type of the
-      exhalation.</p><p>When you use your breath weapon, each creature in the
-      area of the exhalation must make a dexterity saving throw. The DC for this
+      <p>You can use your action to exhale destructive ice.</p><p>When you use
+      your breath weapon, [[lookup @labels.description.affects
+      activity=5er9HWdiUUdQFych]] in a [[lookup @labels.description.template
+      activity=5er9HWdiUUdQFych]] must make a Constitution saving throw, the
+      type of which is determined by your draconic ancestry. The DC for this
       saving throw equals 8 + your Constitution modifier + your proficiency
-      bonus. A creature takes 2d6 lightning damage on a failed save, and half as
-      much damage on a successful one. The damage increases to 3d6 at 6th level,
-      4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use your breath
+      bonus. A creature takes 2d6 cold damage on a failed save, and half as much
+      damage on a successful one. The damage increases to 3d6 at 6th level, 4d6
+      at 11th level, and 5d6 at 16th level.</p><p>After you use your breath
       weapon, you can't use it again until you complete a short or long
       rest.</p>
     chat: ''
@@ -32,11 +33,10 @@ system:
   type:
     value: race
     subtype: ''
-  requirements: Blue Dragonborn
+  requirements: Silver Dragonborn
   properties: []
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    5er9HWdiUUdQFych:
       type: save
       activation:
         type: action
@@ -48,12 +48,14 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
@@ -62,18 +64,19 @@ system:
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
         template:
           count: ''
           contiguous: false
-          type: line
-          size: '30'
-          width: '5'
+          type: cone
+          size: '15'
+          width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: creature
@@ -91,41 +94,50 @@ system:
             denomination: null
             bonus: ''
             types:
-              - lightning
+              - cold
+            scaling:
+              number: 1
       save:
         ability:
-          - dex
+          - con
         dc:
           calculation: con
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Exhale Ice
       img: ''
-      appliedEffects: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: 5er9HWdiUUdQFych
   enchant: {}
   prerequisites:
     level: null
-  identifier: breath-weapon-blue
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
-img: icons/magic/lightning/bolt-blue.webp
+  identifier: breath-weapon-silver
+flags: {}
+img: icons/magic/water/projectile-icecicle.webp
 effects: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1725037392801
-  modifiedTime: 1750440605479
+  systemVersion: 6.0.0
+  createdTime: 1725037393276
+  modifiedTime: 1781472383050
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
 folder: TAw7621pFkXOkuYI
-_key: '!items!KVgvW5yhKcmQUanz'
+_key: '!items!pAYTdRGftNr8AitK'

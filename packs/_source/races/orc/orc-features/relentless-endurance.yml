@@ -26,7 +26,8 @@ system:
     value: race
     subtype: ''
   requirements: Half-Orc
-  properties: []
+  properties:
+    - trait
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -34,16 +35,14 @@ system:
       activation:
         type: special
         value: null
-        condition: When you are reduced to 0 hit points
+        condition: When you are reduced to 0 hit points but not killed outright.
         override: false
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -93,7 +92,15 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   enchant: {}
   prerequisites:
     level: null
@@ -105,11 +112,11 @@ folder: jGOdLW5a5cAh2zZe
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037392560
-  modifiedTime: 1725992703275
+  modifiedTime: 1781473445296
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!97c8i9Z28thvZuA8'

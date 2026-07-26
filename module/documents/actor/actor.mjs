@@ -6,12 +6,14 @@ import TravelField from "../../data/actor/fields/travel-field.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
+import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
 } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
+import AppliedRules from "../applied-rules.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
@@ -31,8 +33,9 @@ import ConditionData from "../../data/active-effect/condition.mjs";
  *   SkillToolRollDialogConfiguration, SkillToolRollProcessConfiguration
  * } from "../../dice/_types.mjs";
  * @import {
- *   ActorRollData, DamageAffectCategory, DamageApplicationOptions, DamageDescription, DamageSummary,
- *   RestConfiguration, RestResult, RollDataOptions, SpellcastingDescription
+ *   ActorRollData, ActorUpdatesDescription, DamageAffectCategory, DamageApplicationOptions,
+ *   DamageDescription, DamageSummary, RestConfiguration, RestResult, RollDataOptions,
+ *   SpellcastingDescription
  * } from "../_types.mjs";
  */
 
@@ -313,20 +316,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareData() {
-    if ( this.system.modelProvider !== dnd5e ) return super.prepareData();
-    this._clearCachedValues();
     super.prepareData();
-    this.items.forEach(item => item.prepareFinalAttributes());
-    this._prepareSpellcasting();
+    if ( this.system.modelProvider === dnd5e ) {
+      this.items.forEach(item => item.prepareFinalAttributes());
+      this._prepareSpellcasting();
+    }
   }
 
   /* --------------------------------------------- */
 
-  /**
-   * Clear cached class collections.
-   * @internal
-   */
+  /** @inheritDoc */
   _clearCachedValues() {
+    super._clearCachedValues();
     this._lazy = {};
     this._preferredArtwork = null;
     this._preparationWarnings = [];
@@ -365,6 +366,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( (this.system?.prepareEmbeddedData instanceof Function) && (phase === "initial") ) {
       this.system.prepareEmbeddedData();
     }
+
+    // Pre-collect statuses so they can be reliably used for conditions
+    if ( phase === "initial" ) {
+      for ( const effect of this.allApplicableEffects() ) {
+        if ( effect.active ) for ( const statusId of effect.statuses ) this.statuses.add(statusId);
+      }
+    }
+
     return super.applyActiveEffects(phase);
   }
 
@@ -520,19 +529,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {RollDataOptions} [options]
    * @returns {ActorRollData}
    */
-  getRollData({ deterministic=false }={}) {
-    let data;
-    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
-    else data = {...super.getRollData()};
-    data.flags = {...this.flags};
-    data.name = this.name;
-    data.statuses = {};
+  getRollData(options={}) {
+    let rollData;
+    if ( this.system.getRollData ) rollData = this.system.getRollData(options);
+    else rollData = { ...super.getRollData() };
+    rollData.flags = this.flags;
+    rollData.name = this.name;
+    if ( options.roll ) rollData.roll ??= {};
+    rollData.statuses = {};
     for ( const status of this.statuses ) {
-      if ( ConditionData.hasLevels(status) ) data.statuses[status] = this.system.conditions[status];
-      else if ( status === "concentrating" ) data.statuses[status] = this.concentration.effects.size;
-      else data.statuses[status] = 1;
+      if ( ConditionData.hasLevels(status) ) rollData.statuses[status] = this.system.conditions[status];
+      else if ( status === "concentrating" ) rollData.statuses[status] = this.concentration.effects.size;
+      else rollData.statuses[status] = 1;
     }
-    return data;
+    return rollData;
   }
 
   /* -------------------------------------------- */
@@ -760,7 +770,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       isBar: true
     }, updates) === false ) return this;
 
-    await this.update(updates);
+    const context = options.origin?.getFlag?.("dnd5e", "context");
+    await this.update(updates, context ? { dnd5e: context } : {});
 
     /**
      * A hook event that fires after damage has been applied to an actor.
@@ -1318,20 +1329,31 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const alternate = type === "skill" ? this.system.tools?.[config.tool] : this.system.skills?.[config.skill];
-    const abilityId = config.ability ?? relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
-    const ability = this.system.abilities?.[abilityId];
+    const abilityId = config.ability ?? relevant?.ability
+      ?? (type === "skill" ? skillConfig.ability : toolConfig.ability) ?? "int";
     const hostActor = this.isPolymorphed && this.flags?.dnd5e?.transformOptions?.mergeSkills && (type === "skill")
       ? game.actors.get(this.flags.dnd5e?.originalActor) : null;
     const buildConfig = this._buildSkillToolConfig.bind(this, type, hostActor);
     const doubleProf = !!relevant?.prof.hasProficiency && !!alternate?.prof.hasProficiency;
     const pace = TravelField.getTravelPaceMode(config.pace, config.skill);
 
-    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
-      `abilities.${abilityId}.check.roll.mode`,
-      `${type}s.${type === "skill" ? config.skill : config.tool}.roll.mode`
+    const rollData = this.getRollData({ roll: true });
+    rollData.roll = {
+      ability: abilityId,
+      proficient: dnd5e.dataModels.actor.CommonTemplate
+        .calculateSkillToolProficiency(this, abilityId, config).multiplier >= 1,
+      [type]: config[type],
+      type
+    };
+    const { advantage, disadvantage } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`,
+      "rolls.ability.check",
+      `rolls.ability.${type}`,
+      `${type}s.${type === "skill" ? config.skill : config.tool}.roll`
     ], {
       advantages: { count: Number(doubleProf) + Number(pace.advantage) },
-      disadvantages: { count: Number(pace.disadvantage) }
+      disadvantages: { count: Number(pace.disadvantage) },
+      rules: { category: "check", actor: this, rollData }
     });
 
     const rollConfig = foundry.utils.mergeObject({
@@ -1341,12 +1363,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
-    rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
-      options: {
-        maximum: Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
-        minimum: Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
-      }
-    }, config.rolls?.shift())].concat(config.rolls ?? []);
+    rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({ options: {} }, config.rolls?.shift())]
+      .concat(config.rolls ?? []);
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -1362,19 +1380,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
-        flags: {
-          dnd5e: {
-            messageType: "roll",
-            roll: {
-              [`${type}Id`]: config[type],
-              type
-            }
-          }
-        },
         flavor: type === "skill"
           ? _loc("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
           : _loc("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
-        speaker: ChatMessage.getSpeaker({ actor: this })
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        system: { ability: abilityId, skill: config.skill, tool: config.tool },
+        type: "check"
       }
     }, message);
 
@@ -1393,7 +1404,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {string} [data.tool]    ID of the tool that was rolled as defined in `CONFIG.DND5E.tools`.
      * @param {Actor5e} data.subject  Actor for which the roll has been performed.
      */
-    const data = { ability: rollConfig.ability, [type]: rollConfig[type], subject: this };
+    const data = {
+      ability: rollConfig.ability, skill: rollConfig.skill, subject: this, tool: rollConfig.tool
+    };
     Hooks.callAll(`dnd5e.roll${name}`, rolls, data);
     Hooks.callAll(`dnd5e.roll${name}V2`, rolls, data);
 
@@ -1414,27 +1427,38 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _buildSkillToolConfig(type, hostActor, process, config, formData, index) {
     const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
-    const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
     const { calculateSkillToolProficiency } = dnd5e.dataModels.actor.CommonTemplate;
     let prof = calculateSkillToolProficiency(this, abilityId, process);
     const originalProf = calculateSkillToolProficiency(hostActor, abilityId, process);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
+    const rollData = this.getRollData({ roll: true });
+    Object.assign(rollData.roll, {
+      ability: abilityId,
+      proficient: prof.multiplier >= 1,
+      [type]: process[type],
+      type: type
+    });
+
+    const { bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`,
+      "rolls.ability.check",
+      `rolls.ability.${type}`,
+      `${type}s.${type === "skill" ? process.skill : process.tool}.roll`
+    ], { rules: { category: "check", actor: this, rollData } });
 
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: prof?.hasProficiency ? prof.term : null,
-      [`${config[type]}Bonus`]: relevant?.bonuses?.check,
       extraBonus: process.bonus,
-      [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
-      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-      abilityCheckBonus: this.system.bonuses?.abilities?.check
+      ruleBonus: bonus
     }, { ...rollData });
 
     // Add condition reductions.
     this.addConditionRollReduction(parts, data);
 
+    config.options = CONFIG.Dice.D20Roll.mergeOptions({ maximum, minimum }, config.options ?? {});
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
     config.data.abilityId = abilityId;
@@ -1532,20 +1556,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ability = this.system.abilities?.[config.ability];
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
-    const rollData = this.getRollData();
+    const rollData = this.getRollData({ roll: true });
+    Object.assign(rollData.roll, {
+      ability: config.ability,
+      proficient: ability?.[`${type}Prof`]?.multiplier >= 1,
+      type: config[`${type}Type`] ?? "ability"
+    });
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
+    ], { rules: { category: type, actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
-      [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
-      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
+      ruleBonus: bonus,
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
-    const options = {
-      advantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-      maximum: ability?.[type]?.roll.max,
-      minimum: ability?.[type]?.roll.min
-    };
 
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
@@ -1559,24 +1584,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const dialogConfig = foundry.utils.deepClone(dialog);
 
-    const messageConfig = foundry.utils.mergeObject({
-      create: true,
-      data: {
-        flags: {
-          dnd5e: {
-            messageType: "roll",
-            roll: {
-              ability: config.ability,
-              type: type === "check" ? "ability" : "save"
-            }
-          }
-        },
-        flavor: _loc(
-          `DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, { ability: abilityConfig?.label ?? "" }
-        ),
-        speaker: ChatMessage.getSpeaker({ actor: this })
-      }
-    }, message);
+    const messageData = {
+      flavor: _loc(`DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, {
+        ability: abilityConfig?.label ?? ""
+      }),
+      speaker: ChatMessage.getSpeaker({ actor: this })
+    };
+    Object.assign(messageData, { type, system: { ability: config.ability } });
+
+    const messageConfig = foundry.utils.mergeObject({ create: true, data: messageData }, message);
 
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
 
@@ -1621,25 +1637,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return null;
     }
 
-    const parts = [];
-    let data = {};
-    const options = {
-      advantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-      maximum: death.roll.max,
-      minimum: death.roll.min
-    };
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      "attributes.death.roll"
+    ]);
+    const { parts, data } = CONFIG.Dice.D20Roll.constructParts({
+      prof: this.getFlag("dnd5e", "diamondSoul") ? new Proficiency(this.system.attributes.prof, 1).term : null,
+      deathBonus: bonus
+    }, {});
 
-    // Diamond Soul adds proficiency
-    if ( this.getFlag("dnd5e", "diamondSoul") ) {
-      parts.push("@prof");
-      data.prof = new Proficiency(this.system.attributes.prof, 1).term;
-    }
-
-    // Death save bonus
-    if ( death.bonuses.save ) parts.push(death.bonuses.save);
-
-    const rollConfig = foundry.utils.mergeObject({ target: 10 }, config);
+    const rollConfig = foundry.utils.mergeObject({ saveType: "death", target: 10 }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];
     rollConfig.rolls = [
       CONFIG.Dice.D20Roll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
@@ -1762,22 +1768,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const conc = this.system.attributes?.concentration;
     if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
-    let data = {};
-    const parts = [];
-    const options = {
-      advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-      isConcentration: true,
-      maximum: conc.roll.max,
-      minimum: conc.roll.min
-    };
-
-    // Concentration bonus
-    if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
+    const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
+      "attributes.concentration.roll"
+    ]);
+    options.isConcentration = true;
+    const { parts, data } = CONFIG.Dice.D20Roll.constructParts({ concentrationBonus: bonus }, {});
 
     const rollConfig = foundry.utils.mergeObject({
       ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
       isConcentration: true,
+      saveType: "concentration",
       target: 10
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
@@ -1848,20 +1848,21 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const ability = this.system.abilities?.[abilityId];
 
-    const rollData = this.getRollData();
+    const rollData = this.getRollData({ roll: true });
+    Object.assign(rollData.roll, {
+      ability: abilityId,
+      proficient: init.prof.multiplier >= 1,
+      type: "initiative"
+    });
+    const { advantage, disadvantage, bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll`, "attributes.init.roll", "rolls.ability.check"
+    ], { rules: { category: "check", actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: init?.mod,
       prof: init.prof.hasProficiency ? init.prof.term : null,
-      initiativeBonus: init.bonus,
-      [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
-      abilityCheckBonus: this.system.bonuses?.abilities?.check,
+      ruleBonus: bonus,
       alert: flags.initiativeAlert && (dnd5e.settings.rulesVersion === "legacy") ? 5 : null
     }, rollData);
-
-    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
-      `abilities.${abilityId}.check.roll.mode`,
-      "attributes.init.roll.mode"
-    ]);
 
     // Add condition reductions
     this.addConditionRollReduction(parts, data);
@@ -1875,12 +1876,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && this.system.isNPC);
 
     options = foundry.utils.mergeObject({
-      advantage, disadvantage,
+      advantage, disadvantage, maximum, minimum,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
-      maximum: Math.min(init.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
-      minimum: Math.max(init.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
     }, options);
 
     const rollConfig = { parts, data, options, subject: this };
@@ -2040,7 +2039,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         speaker: ChatMessage.implementation.getSpeaker({actor: this}),
         flavor,
         title: `${flavor}: ${this.name}`,
-        "flags.dnd5e.roll": {type: "hitDie"}
+        type: "hitDie"
       }
     }, message);
 
@@ -2115,7 +2114,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       title: `${flavor}: ${this.name}`,
       flavor,
       speaker: ChatMessage.implementation.getSpeaker({ actor: this }),
-      "flags.dnd5e.roll": { type: "hitPoints" }
+      type: "hitPoints"
     };
 
     /**
@@ -2168,7 +2167,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       title: `${flavor}: ${this.name}`,
       flavor,
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      "flags.dnd5e.roll": { type: "hitPoints" }
+      type: "hitPoints"
     };
 
     /**
@@ -2366,10 +2365,35 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.preRestCompleted", this, result, config) === false ) return result;
 
+    // Expire active effects
+    const expiryEvents = CONFIG.DND5E.restTypes[config.type ?? "long"]?.expiryEvents ?? [];
+    let operations = [];
+    if ( expiryEvents.length ) {
+      const expired = new Map();
+      const expireEffect = effect => {
+        for ( const event of expiryEvents ) {
+          if ( !effect.isExpiryEvent(event) ) continue;
+          expired.getOrInsert(effect.parent, []).push(effect.id);
+        }
+      };
+      for ( const effect of this.effects ) {
+        if ( !effect.getFlag("dnd5e", "dependentOn") ) expireEffect(effect);
+      }
+      for ( const item of this.items ) {
+        for ( const effect of item.effects ) {
+          if ( effect.getFlag("dnd5e", "dependentOn") ) continue;
+          if ( effect.isAppliedEnchantment ) expireEffect(effect);
+        }
+      }
+      operations = expired.entries()
+        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids, parent }))
+        .toArray();
+    }
+
     // Perform updates
-    await this.update(result.updateData, { isRest: true });
-    await this.deleteEmbeddedDocuments("Item", result.deleteItems, { isRest: true });
-    await this.updateEmbeddedDocuments("Item", result.updateItems, { isRest: true });
+    await this.performBulkUpdate(
+      { actor: result.updateData, delete: result.deleteItems, item: result.updateItems, operations }, { isRest: true }
+    );
 
     // Advance the game clock
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
@@ -2668,7 +2692,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }</span>`;
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, { hidden, label }]) => {
       if ( hidden ) return html;
-      const value = movement[k];
+      const value = movement.speeds[k];
       if ( (k === "fly") && movement.hover ) label = _loc("DND5E.MOVEMENT.HoverSpeed", { speed: label });
       if ( value || (k === "walk") ) html += `
         <div class="row">
@@ -3307,7 +3331,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( app instanceof foundry.applications.sidebar.apps.Compendium ) return;
     entryOptions.push({
       label: "DND5E.TRANSFORM.Action.Restore",
-      icon: '<i class="fa-solid fa-backward"></i>',
+      icon: "fa-solid fa-backward",
       group: "system",
       visible: li => {
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -3321,7 +3345,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, {
       label: "DND5E.Group.Primary.Set",
-      icon: '<i class="fa-solid fa-star"></i>',
+      icon: "fa-solid fa-star",
       group: "system",
       visible: li => {
         const actor = game.actors.get(li.dataset.entryId);
@@ -3333,7 +3357,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       })
     }, {
       label: "DND5E.Group.Primary.Remove",
-      icon: '<i class="fa-regular fa-star"></i>',
+      icon: "fa-regular fa-star",
       group: "system",
       visible: li => {
         const actor = game.actors.get(li.dataset.entryId);
@@ -3552,10 +3576,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( hasLevels ) created = await ConditionData._applyDelta(statusId, this, { levels: options.levels ?? 1});
     created ??= await super.toggleStatusEffect(statusId, options);
-    const status = CONFIG.statusEffects.find(e => e.id === statusId);
+    const status = CONFIG.statusEffects[statusId];
     if ( !(created instanceof ActiveEffect) || !status.exclusiveGroup ) return created;
 
-    const others = CONFIG.statusEffects
+    const others = Object.values(CONFIG.statusEffects)
       .filter(e => (e.id !== statusId) && (e.exclusiveGroup === status.exclusiveGroup) && this.effects.has(e._id));
     if ( others.length ) await this.deleteEmbeddedDocuments("ActiveEffect", others.map(e => e._id));
 
@@ -3588,10 +3612,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   updateBloodied(options) {
     const hp = this.system.attributes?.hp;
-    if ( !hp?.effectiveMax || (game.settings.get("dnd5e", "bloodied") === "none") ) return;
+    if ( !this.system.isCreature || !hp?.effectiveMax || (dnd5e.settings.bloodied === "none") ) return;
 
     const effect = this.effects.get(ActiveEffect5e.ID.BLOODIED);
-    if ( hp.value > hp.effectiveMax * CONFIG.DND5E.bloodied.threshold ) return effect?.delete();
+    if ( (hp.pct === 100) || (hp.pct > hp.bloodied) ) return effect?.delete();
     if ( effect ) return;
 
     return ActiveEffect.implementation.create({
@@ -3601,6 +3625,61 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       name: _loc(CONFIG.DND5E.bloodied.name),
       statuses: ["bloodied"],
       showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON?.CONDITIONAL
+    }, { parent: this, keepId: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle applying/removing the dead/unconscious status.
+   * @param {DocumentModificationContext} options  Additional options supplied with the update.
+   * @returns {Promise<ActiveEffect|boolean|void>|void}
+   */
+  updateDowned(options) {
+    const { autoApplyDowned } = dnd5e.settings;
+    if ( autoApplyDowned === "none" ) return;
+    const hp = this.system.attributes?.hp;
+    if ( !hp ) return;
+
+    // If non-zero, remove any auto-downed effects
+    if ( hp.value ) {
+      const autoEffects = this.effects.filter(e => e.getFlag("dnd5e", "autoDowned"));
+      return this.deleteEmbeddedDocuments("ActiveEffect", autoEffects.map(e => e.id));
+    }
+    const conditionEffects = this.effects.documentsByType.condition;
+    const isDead = conditionEffects.some(e => e.system.type === "dead");
+    const isUnconscious = conditionEffects.some(e => e.system.type === "unconscious");
+
+    // Do not auto-apply statuses outside of combat or if already dead
+    if ( !this.inCombat || isDead ) return;
+    const failedDeathSaves = this.system.attributes.death.failure >= 3;
+    let toApply = null;
+    if ( this.type === "npc" ) {
+      if ( !this.system.traits.important ) toApply = "dead";
+      else if ( autoApplyDowned !== "deadOnly" ) toApply = failedDeathSaves ? "dead" : "unconscious";
+    } else if ( (this.type === "character") && (autoApplyDowned === "all") ) {
+      toApply = failedDeathSaves ? "dead" : "unconscious";
+    }
+    if ( !toApply ) return;
+    if ( toApply === "dead" ) return ActiveEffect.implementation.create({
+      _id: CONFIG.statusEffects.dead._id,
+      img: CONFIG.statusEffects.dead.img,
+      flags: { dnd5e: { autoDowned: true }, core: { overlay: true } },
+      name: CONFIG.statusEffects.dead.name,
+      statuses: ["dead"],
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
+      type: "condition",
+      system: { type: "dead" }
+    }, { parent: this, keepId: true });
+    else if ( !isUnconscious ) return ActiveEffect.implementation.create({
+      _id: CONFIG.statusEffects.unconscious._id,
+      img: CONFIG.statusEffects.unconscious.img,
+      flags: { dnd5e: { autoDowned: true } },
+      name: CONFIG.statusEffects.unconscious.name,
+      statuses: ["unconscious"],
+      showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
+      type: "condition",
+      system: { type: "unconscious" }
     }, { parent: this, keepId: true });
   }
 
@@ -3641,6 +3720,46 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   static getDefaultArtwork(actorData={}) {
     const img = CONFIG.DND5E.defaultArtwork.Actor[actorData.type];
     return img ? { img, texture: { src: img } } : super.getDefaultArtwork(actorData);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Perform bulk updates on the actor and its embedded documents.
+   * @param {ActorUpdatesDescription} updates
+   * @param {DatabaseUpdateOperation[]} [updates.operations=[]]    Additional database operations to perform.
+   * @param {object} [options]                                     Options passed to all database operations.
+   * @param {Partial<DatabaseCreateOperation>} [options.createOptions={}]  Options passed to item creation operation. By
+   *                                                                       default the `keepId` option is set to `true`.
+   * @param {Partial<DatabaseDeleteOperation>} [options.deleteOptions={}]  Options passed to item deletion operation.
+   * @param {Partial<DatabaseUpdateOperation>} [options.updateOptions={}]  Options passed to item update operation.
+   * @returns {Promise<Document[][]>}
+   */
+  performBulkUpdate(
+    { operations=[], ...updates }, { createOptions={}, deleteOptions={}, updateOptions={}, ...options }={}
+  ) {
+    if ( !foundry.utils.isEmpty(updates.actor) ) operations.push(this.parent
+      ? {
+        action: "update", documentName: "ActorDelta", parent: this.parent,
+        updates: [{ _id: this.parent.delta.id, ...updates.actor }], ...options
+      }
+      : { action: "update", documentName: "Actor", updates: [{ _id: this.id, ...updates.actor }], ...options }
+    );
+    if ( !foundry.utils.isEmpty(updates.create) ) operations.push({
+      action: "create", documentName: "Item", data: updates.create, parent: this, keepId: true,
+      ...options, ...createOptions
+    });
+    if ( !foundry.utils.isEmpty(updates.delete) ) operations.push({
+      action: "delete", documentName: "Item", ids: updates.delete, parent: this,
+      ...options, ...deleteOptions
+    });
+    if ( !foundry.utils.isEmpty(updates.item) ) operations.push({
+      action: "update", documentName: "Item", updates: updates.item, parent: this,
+      ...options, ...updateOptions
+    });
+    return foundry.documents.modifyBatch(operations);
   }
 }
 

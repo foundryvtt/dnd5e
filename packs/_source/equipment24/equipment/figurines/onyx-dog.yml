@@ -154,29 +154,33 @@ effects:
     img: icons/commodities/treasure/figurine-idol.webp
     _id: fMC3o8l8D2GamPbU
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.int.value
-        mode: 4
-        value: '8'
-        priority: null
-      - key: system.traits.languages.value
-        mode: 2
-        value: common
-        priority: null
-      - key: system.attributes.senses.blindsight
-        mode: 4
-        value: '60'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.int.value
+          value: 8
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: gDrpWiBJ6vedsdDu
+        - key: system.traits.languages.value
+          value: common
+          priority: null
+          type: add
+          phase: initial
+          _id: czi12UO9wH37tDrv
+        - key: system.attributes.senses.blindsight
+          value: 60
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: RYQoHLr4VNvt0pft
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The mastiff has an Intelligence of 8 and can speak Common. It also has
       &amp;Reference[Blindsight] with a range of 60 feet.</p>
@@ -189,13 +193,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729784122011
-      modifiedTime: 1729784777789
+      modifiedTime: 1783544095767
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgFwpOnyxDogRar.fMC3o8l8D2GamPbU'
 folder: EK3hCTgvAmjsKlfl
 sort: 300000
@@ -204,11 +211,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1729781752415
-  modifiedTime: 1764615756233
+  modifiedTime: 1783544095767
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgFwpOnyxDogRar'

@@ -8,7 +8,7 @@ system:
     value: >-
       <p>You create a 20-foot-radius sphere of yellow, nauseating gas centered
       on a point within range. The cloud spreads around corners, and its area is
-      heavily obscured. The cloud lingers in the air for the
+      &amp;reference[heavily obscured]. The cloud lingers in the air for the
       duration.</p><p>Each creature that is completely within the cloud at the
       start of its turn must make a Constitution saving throw against poison. On
       a failed save, the creature spends its action that turn retching and
@@ -69,57 +69,163 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature that is completely within the cloud at the start of
+          its turn.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
-        units: inst
+        units: turn
         concentration: false
-        override: false
-      effects: []
+        override: true
+        value: '1'
+      effects:
+        - _id: x92beMGWsdc3KGNb
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: con
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Stinking Cloud Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    r2hG3reQkMGV6jqb:
+      type: utility
+      name: Cast
+      _id: r2hG3reQkMGV6jqb
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: stinking-cloud
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-dense-green.webp
-effects: []
+img: icons/magic/acid/dissolve-pool-bubbles.webp
+effects:
+  - name: Retching and Reeling
+    img: icons/magic/acid/dissolve-pool-bubbles.webp
+    origin: Compendium.dnd5e.spells.Item.TwlD4PLcltv7Xh7j
+    transfer: false
+    _id: x92beMGWsdc3KGNb
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: turns
+      expiry: turnEnd
+      expired: false
+    description: >-
+      <p>You spend your turn retching and reeling from the effects of the
+      Stinking Cloud.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781307107114
+      modifiedTime: 1781307181587
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!TwlD4PLcltv7Xh7j.x92beMGWsdc3KGNb'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037357164
-  modifiedTime: 1731016481960
+  modifiedTime: 1781307210707
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TwlD4PLcltv7Xh7j'

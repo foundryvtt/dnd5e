@@ -6,13 +6,10 @@ system:
   description:
     value: >-
       <p><em>The potion's yellow fluid is streaked with black and swirls on its
-      own.</em></p>
-
-      <p>When you drink this potion, you gain the effect of the
-      @UUID[Compendium.dnd5e.spells.Item.Szvk5FEVQW3uhJi5]{Haste} spell for 1
-      minute (no concentration required).</p>
-
-      <p> </p>
+      own.</em></p><p>When you drink this potion, you gain the effect of the
+      @UUID[Compendium.dnd5e.spells.Item.Szvk5FEVQW3uhJi5]{haste} spell for
+      [[lookup @labels.duration activity=Hy33WqORkn5GhlSZ]] (no concentration
+      required).</p>
     chat: ''
   source:
     custom: ''
@@ -50,14 +47,16 @@ system:
     value: potion
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>The potion's yellow fluid is streaked with black and swirls on its
+      own.</p>
+    name: Unidentified Potion
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    Hy33WqORkn5GhlSZ:
       type: utility
       activation:
         type: action
@@ -69,19 +68,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: minute
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: PXMOx6wnEh05eAKY
+          uuid: null
+          level: {}
       range:
         units: touch
         special: ''
@@ -94,7 +98,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -111,8 +116,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Drink
       img: ''
       visibility:
         requireMagic: true
@@ -120,10 +125,94 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: Hy33WqORkn5GhlSZ
   attuned: false
   identifier: potion-of-speed
-effects: []
+effects:
+  - name: Hastened
+    origin: Compendium.dnd5e.items.Item.ctKfjHjk9gs9UtZI
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: false
+    _id: PXMOx6wnEh05eAKY
+    description: >-
+      <p>For the duration, your speed is doubled, you gain a +2 bonus to AC,
+      have advantage on Dexterity Saving Throws, and gain an additional action
+      on each of your turns. This action can be used only to take the
+      &amp;reference[Attack] (one weapon attack only), &amp;reference[Dash],
+      &amp;reference[Disengage], &amp;reference[Hide], or &amp;reference[Use an
+      Object] action.</p>
+    transfer: false
+    statuses: []
+    flags:
+      dnd5e:
+        riders: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783372973770
+      modifiedTime: 1783376504952
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/skills/movement/feet-winged-boots-glowing-yellow.webp
+    type: base
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          type: add
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.burrow
+          type: multiply
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.climb
+          type: multiply
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.fly
+          type: multiply
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.swim
+          type: multiply
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.attributes.movement.walk
+          type: multiply
+          value: 2
+          phase: initial
+          priority: null
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+      magical: true
+    sort: 0
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!ctKfjHjk9gs9UtZI.PXMOx6wnEh05eAKY'
 folder: gyBZp72zKb56Da84
 sort: 0
 ownership:
@@ -131,11 +220,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037232045
-  modifiedTime: 1764620345399
+  modifiedTime: 1783377115773
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ctKfjHjk9gs9UtZI'

@@ -454,9 +454,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -471,7 +468,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -491,108 +488,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: JT4JWvnmmQnEJ2qv
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The marilith has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956992088
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!egsSDYbqoLCelb0J.JT4JWvnmmQnEJ2qv'
-  - _id: e5syW3Oa9yNGZ09T
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The marilith's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!egsSDYbqoLCelb0J.e5syW3Oa9yNGZ09T'
   - _id: rBHEI0gZnnv8h44g
     name: Reactive
     type: feat
-    img: icons/magic/symbols/rune-sigil-black-pink.webp
+    img: icons/skills/melee/strikes-sword-scimitar.webp
     system:
       description:
-        value: <p>The marilith can take one reaction on every turn in combat.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can take one reaction on
+          every turn in combat.</p>
         chat: ''
       source:
         custom: ''
@@ -606,10 +512,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -617,19 +524,19 @@ items:
       identifier: reactive
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lhTQJsLKYUZT2gV5
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781640656665
+      modifiedTime: 1781640689390
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.rBHEI0gZnnv8h44g'
   - _id: nEKlIbUhhx9akBjK
@@ -639,9 +546,9 @@ items:
     system:
       description:
         value: >-
-          <p>The marilith can make seven attacks: six with its [[/item
-          .VzPNwzlwJ7knJ9MC]]{longswords} and one with its [[/item
-          .BoIambnHLbZXr85T]]{tail}.</p>
+          <p>The [[lookup @name lowercase]]{monster} can make seven attacks: six
+          with its [[/item .VzPNwzlwJ7knJ9MC]]{longswords} and one with its
+          [[/item .BoIambnHLbZXr85T]]{tail}.</p>
         chat: ''
       source:
         custom: ''
@@ -655,13 +562,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        EjFEaoe6iXJVBbDn:
           type: utility
           activation:
             type: action
@@ -676,15 +582,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -695,7 +602,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -712,7 +620,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: EjFEaoe6iXJVBbDn
       enchant: {}
       prerequisites:
         level: null
@@ -726,22 +642,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273656580
+      systemVersion: 6.0.0
+      createdTime: 1781641044474
+      modifiedTime: 1781641049283
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.nEKlIbUhhx9akBjK'
   - _id: VzPNwzlwJ7knJ9MC
     name: Longsword
     type: weapon
-    img: icons/weapons/swords/greatsword-crossguard-steel.webp
+    img: icons/weapons/swords/shortsword-broad-engraved.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Marilith attacks with its Longsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -805,7 +723,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -814,8 +732,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        jESnw2fwUUBwYqrk:
           type: attack
           activation:
             type: action
@@ -830,10 +747,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -850,7 +768,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -863,23 +782,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: jESnw2fwUUBwYqrk
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: longsword
       mastery: ''
     effects: []
@@ -891,18 +822,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378599594
+      systemVersion: 6.0.0
+      createdTime: 1781640999314
+      modifiedTime: 1781641025827
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.VzPNwzlwJ7knJ9MC'
   - _id: BoIambnHLbZXr85T
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-swipe-green.webp
     system:
       description:
         value: >-
@@ -912,11 +843,13 @@ items:
           target with its tail, and the marilith can't make tail attacks against
           other targets.</p>
         chat: >-
-          <p>The Marilith attacks with its Tail. If the target is Medium or
-          smaller, it is grappled. Until this grapple ends, the target is
-          restrained, the marilith can automatically hit the target with its
-          tail, and the marilith can't make tail attacks against other
-          targets.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is Medium or smaller, it is
+          &amp;referemce[grappled]. Until this grapple ends, the target is
+          &amp;reference[restrained], the [[lookup @name]]{monster} can
+          automatically hit the target with its tail, and the [[lookup
+          @name]]{monster} can't make [[lookup @item.name lowercase]] attacks
+          against other targets.</p>
       source:
         custom: ''
         book: ''
@@ -940,7 +873,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -980,8 +913,7 @@ items:
         conditions: ''
       properties:
         - mgc
-        - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -990,8 +922,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        gXLH8C1oOyQiIDoJ:
           type: attack
           activation:
             type: action
@@ -1006,10 +937,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1026,7 +958,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1045,17 +978,29 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: gXLH8C1oOyQiIDoJ
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: tail
       mastery: ''
     effects: []
@@ -1067,21 +1012,21 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378603401
+      systemVersion: 6.0.0
+      createdTime: 1781640799143
+      modifiedTime: 1781640989575
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.BoIambnHLbZXr85T'
   - _id: EMJe4NIzUdNIQj9S
     name: Teleport
     type: feat
-    img: icons/magic/symbols/runes-star-pentagon-magenta.webp
+    img: icons/magic/symbols/ring-circle-smoke-blue.webp
     system:
       description:
-        value: "<p>The marilith\_magically\_teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space\_it can see.</p>"
+        value: "<p>The [[lookup @name lowercase]]{monster}\_magically\_teleports, along with any equipment it is wearing or carrying, up to 120 feet to an unoccupied space\_it can see.</p>"
         chat: >-
           <section class="secret"><p></p></section><p>The marilith magically
           teleports, along with any equipment it is wearing or carrying, up to
@@ -1098,13 +1043,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        NywngA99aYzVVRFV:
           type: utility
           activation:
             type: action
@@ -1119,10 +1064,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1139,10 +1085,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: space
               choice: false
               special: ''
             prompt: true
@@ -1156,7 +1103,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: NywngA99aYzVVRFV
+          name: Teleport
       enchant: {}
       prerequisites:
         level: null
@@ -1170,27 +1129,28 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957059399
+      systemVersion: 6.0.0
+      createdTime: 1781640742790
+      modifiedTime: 1781640787749
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.EMJe4NIzUdNIQj9S'
   - _id: lS2o3QOZ2lxKyi0L
     name: Parry
     type: feat
-    img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
+    img: icons/skills/melee/swords-parry-block-yellow.webp
     system:
       description:
         value: >-
-          <p>The marlith adds 5 to its AC against one melee Attack that would
-          hit it. To do so, the marlith must see the attacker and be wielding a
-          melee weapon.</p>
+          <p>The [[lookup @name lowercase]]{monster} adds 5 to its AC against
+          one melee attack that would hit it. To do so, the [[lookup @name
+          lowercase]]{monster} must see the attacker and be wielding a melee
+          weapon.</p>
         chat: >-
-          <p>The marlith adds 5 to its <strong>AC</strong> against one melee
-          Attack that would hit it.</p>
+          <p>The [[lookup @name]]{monster} adds 5 to its AC against one melee
+          attack that would hit it.</p>
       source:
         custom: ''
         book: ''
@@ -1203,18 +1163,19 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        5RUe1bRJr64laA0l:
           type: utility
           activation:
             type: reaction
             value: 1
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} would be hit by a
+              melee attack while it is wielding a melee weapon.
             override: false
           consumption:
             targets: []
@@ -1224,15 +1185,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1243,10 +1205,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1260,7 +1223,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: Parry Attack
+          _id: 5RUe1bRJr64laA0l
       enchant: {}
       prerequisites:
         level: null
@@ -1274,14 +1249,120 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747957066760
+      systemVersion: 6.0.0
+      createdTime: 1781641058843
+      modifiedTime: 1781667086282
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.lS2o3QOZ2lxKyi0L'
+  - _id: bbSTKf4I6P8WpLkz
+    name: Magic Weapons
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    effects: []
+    folder: null
+    sort: 75000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781640682117
+      modifiedTime: 1781640696163
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.nahRRxck9R5GVVFS
+    _key: '!actors.items!egsSDYbqoLCelb0J.bbSTKf4I6P8WpLkz'
+  - _id: UnrtjJToJnn6qgVC
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 50000
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781640694580
+      modifiedTime: 1781640695382
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!egsSDYbqoLCelb0J.UnrtjJToJnn6qgVC'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -1290,7 +1371,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1726171245247

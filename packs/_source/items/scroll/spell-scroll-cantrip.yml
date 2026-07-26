@@ -1,7 +1,7 @@
 _id: rQ6sO7HDWzqMhSI3
 name: Spell Scroll Cantrip
 type: consumable
-img: icons/sundries/scrolls/scroll-bound-white-tan.webp
+img: icons/sundries/scrolls/scroll-bound-black-brown.webp
 system:
   description:
     value: >-
@@ -11,19 +11,14 @@ system:
       Otherwise, the scroll is unintelligible. Casting the spell by reading the
       scroll requires the spell's normal casting time. Once the spell is cast,
       the words on the scroll fade, and it crumbles to dust. If the casting is
-      interrupted, the scroll is not lost.</p>
-
-      <p>If the spell is on your class's spell list but of a higher level than
-      you can normally cast, you must make a DC 10 ability check using your
-      spellcasting ability to determine whether you cast it successfully. On a
-      failed check, the spell disappears from the scroll with no other
-      effect.</p>
-
-      <p>The level of the spell on the scroll determines the spell's saving
-      throw DC and attack bonus, as well as the scroll's rarity.</p>
-
-      <p><strong>Save DC</strong>: 13<br /><strong>Attack Bonus</strong>:
-      +5.</p>
+      interrupted, the scroll is not lost.</p><p>If the spell is on your class's
+      spell list but of a higher level than you can normally cast, you must make
+      a DC 10 ability check using your spellcasting ability to determine whether
+      you cast it successfully. On a failed check, the spell disappears from the
+      scroll with no other effect.</p><p>The level of the spell on the scroll
+      determines the spell's saving throw DC and attack bonus, as well as the
+      scroll's rarity.</p><p><strong>Save DC</strong>: 13<br><strong>Attack
+      Bonus</strong>: +5.</p>
     chat: ''
   source:
     custom: ''
@@ -61,7 +56,12 @@ system:
     value: scroll
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This spell scroll bears the words of a single spell, written in a
+      mystical cipher. If the spell is on your class's spell list, you can read
+      the scroll and cast its spell without providing any material components.
+      Otherwise, the scroll is unintelligible.</p>
+    name: Unidentified Scroll
   container: null
   properties:
     - mgc
@@ -77,11 +77,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037298555
-  modifiedTime: 1750697344647
+  modifiedTime: 1783650435721
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!rQ6sO7HDWzqMhSI3'

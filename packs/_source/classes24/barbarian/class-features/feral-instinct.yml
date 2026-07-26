@@ -31,20 +31,12 @@ system:
   identifier: feral-instinct
 effects:
   - _id: CaV1VYMaVjjPceJs
-    changes:
-      - key: system.attributes.init.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.classes24.Item.phbbrbFeralInsti
     transfer: true
     flags: {}
@@ -56,17 +48,27 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.classfeatures.Item.NlXslw4yAqmKZWtN.ActiveEffect.q7TkJQX7PeVOzTQH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544101133
+      modifiedTime: 1783544101133
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.init.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: fR3uBIKzN6bPvVoA
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbFeralInsti.CaV1VYMaVjjPceJs'
 folder: p6WDpW0gzmKfhGad
 flags:
@@ -76,11 +78,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735865940469
-  modifiedTime: 1745256759830
+  modifiedTime: 1783544101133
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -1,0 +1,236 @@
+folder: DQSeMEpnNmujkHlX
+name: Conjured Flame Blade
+type: weapon
+_id: 8cPlf8sC5j7O6mTv
+img: icons/weapons/daggers/dagger-glowing-white.webp
+system:
+  activities:
+    UoEybCxAkKImMdjm:
+      _id: UoEybCxAkKImMdjm
+      type: attack
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ''
+          classification: spell
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      name: ''
+  damage:
+    base:
+      types:
+        - fire
+      custom:
+        enabled: true
+        formula: '@flags.world.flame-blade-damage'
+      scaling:
+        number: 1
+      number: 3
+      denomination: 6
+      bonus: ''
+      modifiers: []
+    versatile:
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Created by the
+      @UUID[Compendium.dnd5e.spells.Item.Advtckpz1B733bu9]{Flame Blade}
+      spell.</p><p>The blade is similar in size and shape to a Scimitar, and it
+      lasts for the Duration. If you let go of the blade, it disappears, but you
+      can evoke the blade again as a Bonus Action.</p><p>You can use your action
+      to make a melee spell Attack with the fiery blade. On a hit, the target
+      takes [[lookup @flags.world.flame-blade-damage]]{3d6} fire
+      damage.</p><p>The flaming blade sheds &amp;reference[bright light] in a
+      10-foot radius and &amp;reference[dim light] for an additional 10
+      feet.</p>
+    chat: ''
+  identifier: conjured-flame-blade
+  source:
+    revision: 1
+    rules: '2014'
+    book: SRD 5.1
+    page: ''
+    custom: ''
+    license: ''
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  ammunition: {}
+  armor: {}
+  properties:
+    - mgc
+  proficient: 1
+  range:
+    units: ft
+    value: null
+    long: null
+    reach: null
+  type:
+    value: ''
+    baseItem: ''
+  mastery: ''
+  magicalBonus: ''
+effects:
+  - name: Flame Blade Illumination
+    img: icons/weapons/daggers/dagger-glowing-white.webp
+    origin: Compendium.dnd5e.spells.Item.8cPlf8sC5j7O6mTv
+    type: base
+    _id: CwXsi6Uf2CwXZsoe
+    system:
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 20
+          phase: initial
+          priority: null
+          _id: ifKaakwpzy7FAwvX
+        - key: token.light.bright
+          type: upgrade
+          value: 10
+          phase: initial
+          priority: null
+          _id: 5uyhXcheQJ99BkWT
+        - key: token.light.color
+          type: override
+          value: '#825326'
+          phase: initial
+          priority: null
+          _id: tWiVsYbUfaZ6HAsN
+        - key: token.light.animation.type
+          type: override
+          value: torch
+          phase: initial
+          priority: null
+          _id: 82Iw8oSPTcVQDRaE
+        - key: token.light.animation.intensity
+          type: override
+          value: 1
+          phase: initial
+          priority: null
+          _id: owbGFRWJiXHy8Ivd
+        - key: token.light.animation.speed
+          type: override
+          value: 1.5
+          phase: initial
+          priority: null
+          _id: tQmColG2bRHmOE4x
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>The flaming blade sheds &amp;reference[bright light] in a 10-foot
+      radius and &amp;reference[dim light] for an additional 10 feet.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781277773765
+      modifiedTime: 1783645416327
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!8cPlf8sC5j7O6mTv.CwXsi6Uf2CwXZsoe'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1781224773102
+  modifiedTime: 1783645617903
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!8cPlf8sC5j7O6mTv'

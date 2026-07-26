@@ -89,17 +89,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmMistyEscape000
     _id: SGrTBpl938UIe4e3
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Once in its resting place, it returns to its vampire form and has the
       &amp;Reference[Paralyzed apply=false] condition until it regains any Hit
@@ -113,13 +110,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736297871595
       modifiedTime: 1737800037304
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmMistyEscape000.SGrTBpl938UIe4e3'
 flags:
   dnd5e:
@@ -128,7 +128,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

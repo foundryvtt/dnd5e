@@ -193,17 +193,14 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmRottingFist000
     _id: B1S4dZd1Lz0jokIo
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>If the target is a creature, it is cursed. While cursed, the target
       can’t regain Hit Points, its Hit Point maximum doesn’t return to normal
@@ -220,13 +217,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.actors24.Actor.mmMummy000000000.Item.mmRottingFist000.ActiveEffect.t7Anyyhyg6fmTdXw
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1736980098989
       modifiedTime: 1736980098989
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmRottingFist000.B1S4dZd1Lz0jokIo'
 flags:
   dnd5e:
@@ -235,7 +235,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

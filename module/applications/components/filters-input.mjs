@@ -58,7 +58,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
 
     // Create button for opening editor
     const b = this.#button = document.createElement("button");
-    Object.assign(b, { ariaLabel: game.i18n.localize("DND5E.FILTER.Action.Edit"), type: "button" });
+    Object.assign(b, { ariaLabel: _loc("DND5E.FILTER.Action.Edit"), type: "button" });
     b.classList.add("icon", "fa-solid", "fa-filter");
     b.dataset.tooltip = "";
 
@@ -82,14 +82,14 @@ export default class FiltersInputElement extends foundry.applications.elements.A
     try {
       filters = JSON.parse(this.value);
     } catch(err) {
-      this.#breakdown.innerText = game.i18n.localize("DND5E.FILTER.Invalid");
+      this.#breakdown.innerText = _loc("DND5E.FILTER.Invalid");
       return;
     }
 
     const isEmpty = foundry.utils.isEmpty(filters);
     this.#breakdown.classList.toggle("empty", isEmpty);
     if ( isEmpty ) {
-      this.#breakdown.innerText = game.i18n.localize("DND5E.FILTER.Empty");
+      this.#breakdown.innerText = _loc("DND5E.FILTER.Empty");
       return;
     }
 
@@ -199,13 +199,13 @@ class FilterOperatorElement extends HTMLElement {
   /** @override */
   connectedCallback() {
     const operator = this.getAttribute("operator");
-    const symbol = operator?.endsWith("AND") ? game.i18n.localize("DND5E.FILTER.Operator.And")
-      : operator?.endsWith("OR") ? game.i18n.localize("DND5E.FILTER.Operator.Or") : null;
+    const symbol = operator?.endsWith("AND") ? _loc("DND5E.FILTER.Operator.And")
+      : operator?.endsWith("OR") ? _loc("DND5E.FILTER.Operator.Or") : null;
     if ( symbol ) this.querySelectorAll(":is(filter-comparison, filter-operator):not(:last-child)").forEach(e =>
       e.insertAdjacentHTML("afterend", `<span class="separator">${symbol}</span>`)
     );
     if ( operator?.startsWith("N") ) this.insertAdjacentHTML(
-      "afterbegin", `<span class="separator">${game.i18n.localize("DND5E.FILTER.Operator.Not")}</span>`
+      "afterbegin", `<span class="separator">${_loc("DND5E.FILTER.Operator.Not")}</span>`
     );
   }
 

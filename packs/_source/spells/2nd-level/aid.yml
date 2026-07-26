@@ -31,12 +31,15 @@ system:
       type: creature
       count: '3'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -56,8 +59,7 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    kLgD1zb4CQZyDkf7:
       type: heal
       activation:
         type: action
@@ -71,18 +73,53 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: YigtHr8dQ0ngnghZ
+          level:
+            min: 2
+            max: 2
+        - _id: ydbXvjPv1fY3KtbQ
+          level:
+            min: 3
+            max: 3
+        - _id: W9eUgPnCkGtKvQOk
+          level:
+            min: 4
+            max: 4
+        - _id: 7Zcvgumtxcyz4aj5
+          level:
+            min: 5
+            max: 5
+        - _id: mRobqRBcu8jtkYc3
+          level:
+            min: 6
+            max: 6
+        - _id: w1AUEmzJmQI5vaEs
+          level:
+            min: 7
+            max: 7
+        - _id: lHlCX0dxqfKc54ls
+          level:
+            min: 8
+            max: 8
+        - _id: Q7ho5m2GWwSVkEs1
+          level:
+            min: 9
+            max: 9
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -102,20 +139,376 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: kLgD1zb4CQZyDkf7
   identifier: aid
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-blue.webp
-effects: []
+img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+effects:
+  - name: 'Aid: 2nd Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    _id: YigtHr8dQ0ngnghZ
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 5
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 5 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218606353
+      modifiedTime: 1781267465443
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Opwh2PdX4runSBlm.YigtHr8dQ0ngnghZ'
+  - name: 'Aid: 3rd Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 10
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 10 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218657880
+      modifiedTime: 1781267468209
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: ydbXvjPv1fY3KtbQ
+    _key: '!items.effects!Opwh2PdX4runSBlm.ydbXvjPv1fY3KtbQ'
+  - name: 'Aid: 4th Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 15
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 15 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218659171
+      modifiedTime: 1781267470834
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: W9eUgPnCkGtKvQOk
+    _key: '!items.effects!Opwh2PdX4runSBlm.W9eUgPnCkGtKvQOk'
+  - name: 'Aid: 5th Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 20
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 20 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218659974
+      modifiedTime: 1781267475206
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 7Zcvgumtxcyz4aj5
+    _key: '!items.effects!Opwh2PdX4runSBlm.7Zcvgumtxcyz4aj5'
+  - name: 'Aid: 6th Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 25
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 25 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218660748
+      modifiedTime: 1781267479190
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: mRobqRBcu8jtkYc3
+    _key: '!items.effects!Opwh2PdX4runSBlm.mRobqRBcu8jtkYc3'
+  - name: 'Aid: 7th Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 30
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 30 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218661538
+      modifiedTime: 1781267482063
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: w1AUEmzJmQI5vaEs
+    _key: '!items.effects!Opwh2PdX4runSBlm.w1AUEmzJmQI5vaEs'
+  - name: 'Aid: 8th Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 35
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 35 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218662283
+      modifiedTime: 1781267487016
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: lHlCX0dxqfKc54ls
+    _key: '!items.effects!Opwh2PdX4runSBlm.lHlCX0dxqfKc54ls'
+  - name: 'Aid: 9th Level'
+    img: icons/magic/life/heart-cross-strong-flame-purple-orange.webp
+    origin: Compendium.dnd5e.spells.Item.Opwh2PdX4runSBlm
+    transfer: false
+    type: base
+    system:
+      changes:
+        - key: system.attributes.hp.tempmax
+          type: add
+          value: 40
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You hit point maximum is increased by 40 for the duration of this
+      spell.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781218663061
+      modifiedTime: 1781267489932
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: Q7ho5m2GWwSVkEs1
+    _key: '!items.effects!Opwh2PdX4runSBlm.Q7ho5m2GWwSVkEs1'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037355372
-  modifiedTime: 1725992719593
+  modifiedTime: 1781219145063
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Opwh2PdX4runSBlm'

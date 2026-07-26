@@ -489,12 +489,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -538,7 +535,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -558,6 +555,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
   - _id: mmIceWalk0000000
     name: Ice Walk
@@ -603,10 +601,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmIceWalk0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -714,10 +714,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -811,10 +813,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -975,10 +979,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1109,10 +1115,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmColdBreath0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1242,37 +1250,44 @@ items:
         origin: Compendium.dnd5e.actors24.Actor.mmAncientWhiteDr.Item.mmFreezingBurst0
         _id: wZRo0EAScrxHruxs
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.burrow
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.climb
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.fly
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.swim
-            mode: 5
-            value: '0'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: JlURIixxdG5suvaQ
+            - key: system.attributes.movement.burrow
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: qNe5e8S1NlXmssSA
+            - key: system.attributes.movement.climb
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: aiYjf2udG0szqlZH
+            - key: system.attributes.movement.fly
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: x2znrz8LiM3Gxehq
+            - key: system.attributes.movement.swim
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: s9bFa7pSdwFL0jvS
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target’s Speed is 0 until the end of the target’s next
           turn.</p>
@@ -1286,10 +1301,15 @@ items:
             Compendium.dnd5e.actors24.Actor.mmYoungCopperDra.Item.mmSlowingBreath0.ActiveEffect.ztGUDHGfoUxlUY53
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544172536
+          modifiedTime: 1783544172536
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientWhiteDr.mmFreezingBurst0.wZRo0EAScrxHruxs
     flags:
@@ -1301,10 +1321,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFreezingBurst0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544172536
+      modifiedTime: 1783544172536
     ownership:
       default: 0
     sort: 5
@@ -1412,10 +1434,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFrightfulPrese
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -1531,26 +1555,25 @@ items:
       identifier: fear
       method: spell
       prepared: 0
+      sourceItem: feat:frightful-presence
     type: spell
     img: icons/magic/unholy/silhouette-robe-evil-glow.webp
     effects:
       - name: Fear
         origin: Compendium.dnd5e.spells24.Item.phbsplFear000000
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/frightened.svg
         _id: ijiWLu6EJZmEJPOZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>A &amp;Reference[frightened apply=false] creature takes the
           &amp;Reference[dash] action and moves away from you by the safest
@@ -1567,55 +1590,79 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544172537
+          modifiedTime: 1783544172537
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientWhiteDr.JGAy5fooJdCpaQig.ijiWLu6EJZmEJPOZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientWhiteDr.Item.mmFrightfulPrese.Activity.lbzj4R6LBDa4r4Hk
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-          - key: system.ability
-            mode: 5
-            value: cha
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: DILS0Mgl3hKTrnq4
+            - key: system.ability
+              value: cha
+              priority: null
+              type: override
+              phase: initial
+              _id: DwrOHTroQqvn3kPd
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: SW3Rgiy564mF7esK
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientWhiteDr.Item.mmFrightfulPrese.Activity.lbzj4R6LBDa4r4Hk
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544172537
+          modifiedTime: 1783544172537
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientWhiteDr.JGAy5fooJdCpaQig.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -1629,10 +1676,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFear000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544172537
+      modifiedTime: 1783544172537
     _id: JGAy5fooJdCpaQig
     _key: '!actors.items!mmAncientWhiteDr.JGAy5fooJdCpaQig'
   - _id: mmPounce00000000
@@ -1737,10 +1786,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPounce00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 7
@@ -1751,11 +1802,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452695770
-  modifiedTime: 1771452695770
+  systemVersion: 6.0.0
+  createdTime: 1783544172536
+  modifiedTime: 1783544172536
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

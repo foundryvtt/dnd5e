@@ -154,21 +154,20 @@ effects:
     transfer: true
     _id: RZklxO114TnQQDyG
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '60'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 60
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: rzDBPAHA3IEC2nwk
     disabled: true
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>he wings last for 1 hour or until you dismiss them (no action
       required). For the duration, you have a Fly Speed of 60 feet.</p>
@@ -179,13 +178,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783544103634
+      modifiedTime: 1783544103634
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbscrDragonWing.RZklxO114TnQQDyG'
 flags:
   dnd5e:
@@ -194,11 +196,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866556244
-  modifiedTime: 1745256765427
+  modifiedTime: 1783544103633
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

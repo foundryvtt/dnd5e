@@ -109,20 +109,18 @@ effects:
   - name: Restrained
     origin: Compendium.dnd5e.spells24.Item.phbsplEntangle00
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/restrained.svg
     _id: wn7K2m4XhXhItgPT
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>A Restrained creature can take an action to make a [[/check ability=str
       skill=ath]] check against your spell save DC. On a success, it frees
@@ -135,13 +133,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974956
+      modifiedTime: 1783543974956
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplEntangle00.wn7K2m4XhXhItgPT'
 folder: pBaAAtXBCq9FVEnL
 sort: 3400000
@@ -154,11 +155,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425952240
-  modifiedTime: 1745256792362
+  modifiedTime: 1783543974956
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEntangle00'

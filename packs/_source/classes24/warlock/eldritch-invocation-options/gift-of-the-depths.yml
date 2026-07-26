@@ -97,20 +97,17 @@ effects:
   - name: Water Breathing
     origin: Compendium.dnd5e.classes24.Item.phbinvGiftoftheD
     duration:
-      rounds: null
-      startTime: null
-      seconds: 86400
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/creatures/fish/crab-blue-purple.webp
     _id: IEhxOF5rtwJ3xhOA
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -120,13 +117,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplWaterBreat.ActiveEffect.hyFupFam9XIbim0U
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvGiftoftheD.IEhxOF5rtwJ3xhOA'
 folder: BjeMHiqnKNWkWhox
 flags:
@@ -136,7 +136,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866281378

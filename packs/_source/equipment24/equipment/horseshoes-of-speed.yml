@@ -114,21 +114,21 @@ effects:
     transfer: false
     _id: 9lS2LxCve4hPYGMn
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: 30
+          priority: null
+          type: add
+          phase: initial
+          _id: CQP0fnbrRJM0zbjM
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -137,13 +137,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730694822766
-      modifiedTime: 1730694861266
+      modifiedTime: 1783544096393
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgHorseshoesOfS.9lS2LxCve4hPYGMn'
 flags:
   dnd5e:
@@ -152,11 +155,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712700864
+  modifiedTime: 1783544096393
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 18900000

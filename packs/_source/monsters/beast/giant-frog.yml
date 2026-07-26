@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,14 +478,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: ERYnD50Ibrrag5s6
+  - _id: Ycw51Yc97NIix4bm
     name: Amphibious
     type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
     system:
       description:
-        value: <p>The frog can breathe air and water.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
         chat: ''
       source:
         custom: ''
@@ -502,42 +502,47 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: amphibious
+      advancement: {}
+      crewed: false
     effects: []
-    folder: null
-    sort: 0
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 125000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781542878992
+      modifiedTime: 1781542878992
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!kSAi2KRonL4G4JpO.ERYnD50Ibrrag5s6'
-  - _id: SE3xtItC4V2Eckjk
+    _key: '!actors.items!kSAi2KRonL4G4JpO.Ycw51Yc97NIix4bm'
+  - _id: 9q7EEjZaHt58cSnA
     name: Standing Leap
     type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
+    img: icons/skills/movement/arrows-up-trio-red.webp
     system:
       description:
         value: >-
-          <p>The frog's long jump is up to <strong>20 ft.</strong> and its high
-          jump is up to <strong>10 ft.</strong>, with or without a running
-          start.</p>
+          <p>The [[lookup @name lowercase]]{monster}'s &amp;reference[long jump]
+          is up to 20 feet and its &amp;reference[high jump] is up to 10 feet,
+          with or without a running start.</p>
         chat: ''
       source:
         custom: ''
@@ -551,46 +556,55 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: standing-leap
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 225000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781542879618
+      modifiedTime: 1781542879618
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!kSAi2KRonL4G4JpO.SE3xtItC4V2Eckjk'
-  - _id: 2y826IUSIAgmYf2c
+    _key: '!actors.items!kSAi2KRonL4G4JpO.9q7EEjZaHt58cSnA'
+  - _id: VtuDa7NZ5Be8auQv
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/commodities/biological/mouth-toothed-purple.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
-          &amp;Reference[grappled] (escape DC 11). Until this grapple ends, the
-          target is restrained, and the frog can't bite another target.</p>
+          &amp;Reference[grappled] (escape DC 13). Until this grapple ends, the
+          target is &amp;Reference[restrained], and the [[lookup @name
+          lowercase]]{monster} can't [[lookup @item.name lowercase]] another
+          target.</p>
         chat: >-
-          <p>The Giant Frog attacks with its Bite. If successful, the target is
-          grappled. Until this grapple ends, the target is restrained, and the
-          frog can't bite another target.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled]. Until this
+          grapple ends, the target is &amp;reference[restrained], and the
+          [[lookup @name]]{monster} can't [[lookup @item.name
+          lowercase]]{monster} another target.</p>
       source:
         custom: ''
         book: ''
@@ -606,7 +620,6 @@ items:
         value: 0
         denomination: gp
       attunement: ''
-      equipped: true
       rarity: ''
       identified: true
       cover: null
@@ -653,17 +666,15 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
         value: natural
         baseItem: ''
       container: null
-      crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        yiKzL6VicJ1lkJTt:
           type: attack
           activation:
             type: action
@@ -678,13 +689,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: V5XiiQPdCJUmbyLn
+              level: {}
           range:
             value: '5'
             units: ft
@@ -698,7 +712,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -711,59 +726,119 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-      attuned: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: yiKzL6VicJ1lkJTt
+          name: ''
       ammunition: {}
-      magicalBonus: null
       identifier: bite
       mastery: ''
-    effects: []
+      crew:
+        value: []
+      attuned: false
+      equipped: true
+    effects:
+      - name: Grappled by Bite
+        img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.lYSWskOMRCVLyWLZ
+        transfer: false
+        _id: V5XiiQPdCJUmbyLn
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 11). While
+          grappled in this way, you are also &amp;reference[restrained
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781542904518
+          modifiedTime: 1781542996029
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!kSAi2KRonL4G4JpO.VtuDa7NZ5Be8auQv.V5XiiQPdCJUmbyLn
     folder: null
-    sort: 0
+    sort: 106250
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.kSAi2KRonL4G4JpO.Item.RV1gfO2rNZFtide4
+      duplicateSource: Item.oL53zHS3wy7FUtZM
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121035332
+      systemVersion: 6.0.0
+      createdTime: 1781542904518
+      modifiedTime: 1781542984588
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!kSAi2KRonL4G4JpO.2y826IUSIAgmYf2c'
-  - _id: 37M4eUyS3kovXqdr
+    _key: '!actors.items!kSAi2KRonL4G4JpO.VtuDa7NZ5Be8auQv'
+  - _id: 9gLJgr3WzhykKRl9
     name: Swallow
     type: feat
     img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
     system:
       description:
         value: >-
-          <p>The frog makes one bite attack against a Small or smaller target it
-          is grappling. If the attack hits, the target is swallowed, and the
-          grapple ends.</p><p>The swallowed target is &amp;Reference[blinded]
-          and &amp;Reference[restrained], it has total cover against attacks and
-          other effects outside the frog, and it takes [[/damage average]]
-          damage at the start of each of the frog's turns. The frog can have
-          only one target swallowed at a time.</p><p>If the frog dies, a
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .lYSWskOMRCVLyWLZ]]{Bite} attack against a Snall or smaller target it
+          is &amp;reference[grappling]. If the attack hits, the target is
+          swallowed, and the grapple ends.</p><p>The swallowed target is
+          &amp;reference[blinded] and &amp;reference[restrained], it has
+          &amp;reference[total cover] against attacks and other effects outside
+          the [[lookup @name lowercase]]{monster}, and it takes [[/damage
+          average activity=hjeShYMsNTvN1QF9]] damage at the start of each of the
+          [[lookup @name lowercase]]{monster}'s turns. The [[lookup @name
+          lowercase]]{monster} can have only one target swallowed at a
+          time.</p><p>If the [[lookup @name lowercase]]{monster} dies, a
           swallowed creature is no longer restrained by it and can escape from
-          the corpse using 5 ft. of movement, exiting prone.</p>
-        chat: <p>The Giant Frog attacks with its Swallow.</p>
+          the corpse using 5 feet of movement, exiting
+          &amp;reference[prone].</p>
+        chat: <p>The Giant Toad attacks with its Swallow.</p>
       source:
         custom: ''
         book: ''
@@ -781,92 +856,211 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
+        Tooheoh32mXfL0dj:
+          type: utility
+          name: Swallow Creature
+          _id: Tooheoh32mXfL0dj
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} hits a creature it
+              has &reference[grappled apply=false] with its
+              @UUID[Compendium.dnd5e.monsters.Actor.kSAi2KRonL4G4JpO.Item.VtuDa7NZ5Be8auQv]{Bite}.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
-          effects: []
+          effects:
+            - _id: 5YoZO3QgfMTcLhgh
+              level:
+                min: null
+                max: null
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: touch
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+        hjeShYMsNTvN1QF9:
+          type: damage
+          name: Start of Turn Digestion Damage
+          _id: hjeShYMsNTvN1QF9
+          img: ''
+          sort: 200000
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts its turn while
+              it has a creature swallowed.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
             critical:
               allow: false
-              bonus: ''
             parts:
-              - number: 2
-                denomination: 4
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 6
                 bonus: ''
                 types:
                   - acid
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: swallow
-    effects: []
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Swallowed
+        img: icons/creatures/abilities/mouth-teeth-tongue-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.Ixo5shumxy4I9qyD.Item.6aBDwlIsxceFMXxL
+        transfer: false
+        _id: 5YoZO3QgfMTcLhgh
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been swallowed by the giant toad. You are
+          &amp;reference[blinded apply=false], &amp;reference[restrained
+          apply=false], and have &amp;reference[total cover] against attacks and
+          other effects outsdie the giant toad.</p><p>You also take [[/damage
+          average 2d6 acid]] damage at the start of each of the giant toad's
+          turns.</p>
+        tint: '#ffffff'
+        statuses:
+          - blinded
+          - restrained
+          - coverTotal
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781542905709
+          modifiedTime: 1781542941582
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!kSAi2KRonL4G4JpO.9gLJgr3WzhykKRl9.5YoZO3QgfMTcLhgh
     folder: null
-    sort: 0
+    sort: 206250
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.kSAi2KRonL4G4JpO.Item.KjWqpIkqYhBbJqVi
+      duplicateSource: Item.cwLOLWunrYLAPO0P
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121102713
+      systemVersion: 6.0.0
+      createdTime: 1781542905709
+      modifiedTime: 1781543057680
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!kSAi2KRonL4G4JpO.37M4eUyS3kovXqdr'
+    _key: '!actors.items!kSAi2KRonL4G4JpO.9gLJgr3WzhykKRl9'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -875,7 +1069,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171252242

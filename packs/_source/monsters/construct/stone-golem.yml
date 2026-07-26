@@ -457,9 +457,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -474,7 +471,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -494,156 +491,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: FWww5Mv4eoxXAADH
-    name: Immutable Form
-    type: feat
-    img: icons/magic/unholy/orb-beam-pink.webp
-    system:
-      description:
-        value: >-
-          <p>The golem is immune to any spell or effect that would alter its
-          form.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: immutable-form
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!z3gSIXHHWYaHjfBT.FWww5Mv4eoxXAADH'
-  - _id: kf6ELkKrSnpD2fwD
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The golem has advantage on saving throws against spells and other
-          magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447760126
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!z3gSIXHHWYaHjfBT.kf6ELkKrSnpD2fwD'
-  - _id: GGgxGpYSCDYiflMA
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The golem's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!z3gSIXHHWYaHjfBT.GGgxGpYSCDYiflMA'
   - _id: Ym2CUTgDPucdmj1W
     name: Multiattack
     type: feat
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The golem makes two [[/item .DelAxHnRbNHC6OoV]]{slam} attacks.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .DelAxHnRbNHC6OoV]]{slam} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -657,13 +515,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        IouyLOlrkDz2CkVp:
           type: utility
           activation:
             type: action
@@ -678,15 +535,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -697,7 +555,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -714,7 +573,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: IouyLOlrkDz2CkVp
       enchant: {}
       prerequisites:
         level: null
@@ -728,18 +595,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447764639
+      systemVersion: 6.0.0
+      createdTime: 1781486465319
+      modifiedTime: 1781550052327
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.Ym2CUTgDPucdmj1W'
   - _id: DelAxHnRbNHC6OoV
     name: Slam
     type: weapon
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/magic/earth/strike-fist-stone-gray.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
@@ -807,7 +674,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -816,8 +683,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        LqmlhOJFC7GcWqUx:
           type: attack
           activation:
             type: action
@@ -832,15 +698,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -851,7 +718,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -864,23 +732,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: LqmlhOJFC7GcWqUx
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: slam
       mastery: ''
     effects: []
@@ -892,34 +772,38 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378687408
+      systemVersion: 6.0.0
+      createdTime: 1781486706363
+      modifiedTime: 1781486717551
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.DelAxHnRbNHC6OoV'
   - _id: 9aTwUWuZQLhMxjcD
     name: Slow
     type: feat
-    img: icons/tools/navigation/watch-simple-blue.webp
+    img: icons/skills/movement/arrow-down-pink.webp
     system:
       description:
         value: >-
-          <p>The golem targets one or more creatures it can see within 10 ft. of
-          it. Each target must make a [[/save]] saving throw against this
-          magic.</p><p>On a failed save, a target can't use reactions, its speed
-          is halved, and it can't make more than one attack on its turn. In
-          addition, the target can take either an action or a bonus action on
-          its turn, not both. These effects last for 1 minute. A target can
+          <p>The [[lookup @name lowercase]]{monster} targets one or more
+          creatures it can see within [[lookup @labels.description.range
+          activity=o1gVWezg9dluEi5a]] of it. Each target must make a [[/save]]
+          saving throw against this magic.</p><p>On a failed save, a target
+          can't use reactions, its speed is halved, and it can't make more than
+          one attack on its turn. In addition, the target can take either an
+          action or a bonus action on its turn, not both. These effects last for
+          [[lookup @labels.duration activity=o1gVWezg9dluEi5a]]. A target can
           repeat the saving throw at the end of each of its turns, ending the
           effect on itself on a success.</p>
         chat: >-
-          <p>The golem targets one or more creatures it can see within 10 ft. of
-          it. Each target must make a <strong>Wisdom</strong> saving throw
-          against this magic. A target can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself on a success.</p>
+          <p>The [[lookup @name]]{monster} targets one or more creatures it can
+          see within [[lookup @labels.description.range
+          activity=o1gVWezg9dluEi5a]] of it. Each target must make a Wisdom
+          saving throw against this magic. A target can repeat the saving throw
+          at the end of each of its turns, ending the effect on itself on a
+          success.</p>
       source:
         custom: ''
         book: ''
@@ -935,13 +819,13 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        o1gVWezg9dluEi5a:
           type: save
           activation:
             type: action
@@ -960,13 +844,17 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: E14ZO6j7HbYWlbEf
+              level: {}
+              onSave: false
           range:
             value: '10'
             units: ft
@@ -981,6 +869,7 @@ items:
               width: ''
               height: ''
               units: any
+              stationary: false
             affects:
               count: ''
               type: creature
@@ -993,20 +882,111 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '17'
-          sort: 0
-          name: ''
+            bonus: ''
+            visible: true
+          sort: 100000
+          name: Slow Creatures
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+          _id: o1gVWezg9dluEi5a
       enchant: {}
       prerequisites:
         level: null
       identifier: stone-golem-slow
-    effects: []
+    effects:
+      - name: Slowed
+        img: icons/skills/movement/arrow-down-pink.webp
+        origin: Compendium.dnd5e.monsters.Actor.z3gSIXHHWYaHjfBT.Item.9aTwUWuZQLhMxjcD
+        transfer: false
+        _id: E14ZO6j7HbYWlbEf
+        type: base
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              type: add
+              value: -2
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.burrow
+              type: multiply
+              value: 0.5
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.climb
+              type: multiply
+              value: 0.5
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.fly
+              type: multiply
+              value: 0.5
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.swim
+              type: multiply
+              value: 0.5
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.walk
+              type: multiply
+              value: 0.5
+              phase: initial
+              priority: null
+            - key: system.abilities.dex.save.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>Your speed is halved, take a -2 penalty to AC and Dexterity saving
+          throws, and you can't use reactions. On your turn, you can use either
+          an action or a bonus action, not both.</p><p>You can repeat the saving
+          throw at the end of each of your turns, ending the effect on yourself
+          on a success.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781486541273
+          modifiedTime: 1781910537162
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!z3gSIXHHWYaHjfBT.9aTwUWuZQLhMxjcD.E14ZO6j7HbYWlbEf
     folder: null
     sort: 300000
     ownership:
@@ -1015,14 +995,173 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.BDnjS1sQi2pdARh8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745447781846
+      systemVersion: 6.0.0
+      createdTime: 1781486490666
+      modifiedTime: 1781910520872
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!z3gSIXHHWYaHjfBT.9aTwUWuZQLhMxjcD'
+  - _id: eIZ74cwM3wnLHNIX
+    name: Immutable Form
+    type: feat
+    img: icons/magic/unholy/orb-beam-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} is immune to any spell or
+          effect that would alter its form.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: immutable-form
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781486451301
+      modifiedTime: 1781486451301
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!z3gSIXHHWYaHjfBT.eIZ74cwM3wnLHNIX'
+  - _id: lBKifUL9fLuDREOx
+    name: Magic Resistance
+    type: feat
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781486452545
+      modifiedTime: 1781486452545
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!z3gSIXHHWYaHjfBT.lBKifUL9fLuDREOx'
+  - _id: cv0gdC9Q1bgidGpG
+    name: Magic Weapons
+    type: feat
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781486453476
+      modifiedTime: 1781486453476
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!z3gSIXHHWYaHjfBT.cv0gdC9Q1bgidGpG'
 effects: []
 folder: pucbjwWBrVMweiOd
 sort: 0
@@ -1031,7 +1170,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171267148

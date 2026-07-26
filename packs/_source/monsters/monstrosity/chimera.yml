@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: dDrIfOa408VFGv4a
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Chimera attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -552,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -561,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        14xxw348h8nOjeyj:
           type: attack
           activation:
             type: action
@@ -577,10 +576,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -597,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,24 +611,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 14xxw348h8nOjeyj
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -637,22 +651,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825119561
+      systemVersion: 6.0.0
+      createdTime: 1781873449982
+      modifiedTime: 1781873880610
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kr6r8bhSehACPfZ8.dDrIfOa408VFGv4a'
   - _id: J98n5dL3pMkWGu69
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-canine-brown-grey.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Chimera attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -715,7 +731,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -724,8 +740,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        KbRTR4geYKi84FOB:
           type: attack
           activation:
             type: action
@@ -740,10 +755,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -760,7 +776,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -773,24 +790,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: KbRTR4geYKi84FOB
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -800,28 +830,31 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825119561
+      systemVersion: 6.0.0
+      createdTime: 1781873475176
+      modifiedTime: 1781873866447
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kr6r8bhSehACPfZ8.J98n5dL3pMkWGu69'
   - _id: c4fLDKOomwlaFcac
     name: Fire Breath
     type: feat
-    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+    img: icons/magic/fire/flame-burning-earth-orange.webp
     system:
       description:
         value: >-
-          <p>The dragon head exhales fire in a 15-foot cone. Each creature in
-          that area must make a DC 15 Dexterity saving throw, taking 31 (7d8)
-          fire damage on a failed save, or half as much damage on a successful
+          <p>The dragon head exhales fire in a [[lookup
+          @labels.description.template activity=hgZyMXNDniRUKwjz]]. Each
+          creature in that area must make a [[/save activity=hgZyMXNDniRUKwjz]]
+          saving throw, taking [[/damage average activity=hgZyMXNDniRUKwjz]]
+          damage on a failed save, or half as much damage on a successful
           one.</p>
         chat: >-
-          <p>The dragon head exhales fire in a 15-foot cone. Each creature in
-          that area must make a <strong>Dexterity</strong> saving throw.</p>
+          <p>The dragon head exhales fire in a [[lookup
+          @labels.description.template activity=hgZyMXNDniRUKwjz]]. Each
+          creature in that area must make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -837,13 +870,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        hgZyMXNDniRUKwjz:
           type: save
           activation:
             type: action
@@ -855,18 +887,18 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
-              - type: activityUses
-                value: '1'
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -883,6 +915,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: creature
@@ -892,10 +925,8 @@ items:
             override: false
           uses:
             spent: 0
-            max: '1'
-            recovery:
-              - period: recharge
-                formula: '5'
+            max: ''
+            recovery: []
           damage:
             onSave: half
             parts:
@@ -907,19 +938,29 @@ items:
                 bonus: ''
                 types:
                   - fire
+                scaling:
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '15'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Exhale Fire
           img: ''
           visibility:
             level:
               min: null
               max: null
             identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: hgZyMXNDniRUKwjz
       enchant: {}
       prerequisites:
         level: null
@@ -933,11 +974,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765825154891
+      systemVersion: 6.0.0
+      createdTime: 1781873498177
+      modifiedTime: 1781873637646
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kr6r8bhSehACPfZ8.c4fLDKOomwlaFcac'
@@ -948,11 +989,11 @@ items:
     system:
       description:
         value: >-
-          <p>The chimera makes three attacks: one with its [[/item
-          .dDrIfOa408VFGv4a]]{bite}, one with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks: one
+          with its [[/item .dDrIfOa408VFGv4a]]{bite}, one with its [[/item
           .m5xGw7RgVRGTklJT]]{horns}, and one with its [[/item
-          .J98n5dL3pMkWGu69]]{claws}. When its [[/item .c4fLDKOomwlaFcac]]{fire
-          breath} is available, it can use the breath in place of its bite or
+          .J98n5dL3pMkWGu69]]{claws}. When its [[/item .c4fLDKOomwlaFcac]]{Fire
+          Breath} is available, it can use the breath in place of its bite or
           horns.</p>
         chat: ''
       source:
@@ -967,13 +1008,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Mt3iBWaWJNeple9t:
           type: utility
           activation:
             type: action
@@ -988,15 +1028,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1007,7 +1048,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1024,7 +1066,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: Mt3iBWaWJNeple9t
       enchant: {}
       prerequisites:
         level: null
@@ -1038,22 +1088,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825120745
+      systemVersion: 6.0.0
+      createdTime: 1781873617091
+      modifiedTime: 1783366929313
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kr6r8bhSehACPfZ8.sAkv9mnK6l5nXmcz'
   - _id: m5xGw7RgVRGTklJT
     name: Horns
     type: weapon
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/commodities/bones/hurn-curved-yellow.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Chimera attacks with its Horns.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1116,7 +1168,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1125,8 +1177,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dehUm2egStzGiTmH:
           type: attack
           activation:
             type: action
@@ -1141,10 +1192,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1161,7 +1213,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1174,24 +1227,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: dehUm2egStzGiTmH
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: horns
+      mastery: ''
     effects: []
     folder: null
     sort: 200000
@@ -1201,11 +1267,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765825129808
+      systemVersion: 6.0.0
+      createdTime: 1781873431845
+      modifiedTime: 1781873872256
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!kr6r8bhSehACPfZ8.m5xGw7RgVRGTklJT'
@@ -1217,7 +1283,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171252743

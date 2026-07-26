@@ -481,12 +481,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -530,7 +527,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -550,6 +547,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmCrush000000000
     name: Crush
@@ -765,17 +763,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmCrush000000000
         _id: xoOyjbkZSz44HMbD
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Blinded apply=false] condition
           and is &amp;Reference[suffocating apply=false]{suffocating} while the
@@ -791,10 +786,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmDarkmantle0000.mmCrush000000000.xoOyjbkZSz44HMbD
       - name: 'Self: Attack Adv./0 Speed'
@@ -802,25 +802,26 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmCrush000000000
         _id: ca1RtYs4i9JuL9sV
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.fly
-            mode: 5
-            value: '0'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: OjMhSRL84ozk98Bi
+            - key: system.attributes.movement.fly
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: GLB3dtV71W3A3SoM
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>While attached to a target, the [[lookup @name lowercase]]{monster}
           can attack only the target but has Advantage on its attack rolls. Its
@@ -835,10 +836,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544175250
+          modifiedTime: 1783544175250
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDarkmantle0000.mmCrush000000000.ca1RtYs4i9JuL9sV
     flags:
@@ -850,10 +862,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCrush000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544175250
+      modifiedTime: 1783544175250
     ownership:
       default: 0
     sort: 0
@@ -969,10 +983,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDarknessAura00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -983,11 +999,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452700121
-  modifiedTime: 1771452700121
+  systemVersion: 6.0.0
+  createdTime: 1783544175249
+  modifiedTime: 1783544175249
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

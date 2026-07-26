@@ -148,21 +148,20 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmGreatBow000000
     _id: cGogXX8DEY06laQN
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '-10'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: O5zKTx682PlgTpMh
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target’s Speed decreases by 10 feet until the end of its next
       turn.</p>
@@ -174,13 +173,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1736383153304
-      modifiedTime: 1736383253581
+      modifiedTime: 1783544086270
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmGreatBow000000.cGogXX8DEY06laQN'
 flags:
   dnd5e:
@@ -189,11 +191,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1736383301703
+  modifiedTime: 1783544086270
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 10900000

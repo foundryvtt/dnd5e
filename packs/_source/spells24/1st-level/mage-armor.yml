@@ -99,20 +99,12 @@ type: spell
 img: icons/equipment/head/hat-pointed-buckle-leather-purple.webp
 effects:
   - _id: I59O22yjAwzqZOhN
-    changes:
-      - key: system.attributes.ac.calc
-        mode: 5
-        value: mage
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.spells24.Item.phbsplMageArmor0
     transfer: false
     flags: {}
@@ -124,17 +116,28 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells.Item.CKZTpZlxj7hjjo2H.ActiveEffect.cfwMU7LuOJ619Lny
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975840
+      modifiedTime: 1783543975840
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/equipment/chest/breastplate-helmet-metal.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.calc
+          value: mage
+          priority: null
+          type: override
+          phase: initial
+          _id: xRPyP7oy3jS7iNvT
+      magical: true
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMageArmor0.I59O22yjAwzqZOhN'
 folder: pBaAAtXBCq9FVEnL
 sort: 1200000
@@ -147,11 +150,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425962003
-  modifiedTime: 1745256795660
+  modifiedTime: 1783543975840
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMageArmor0'

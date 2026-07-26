@@ -45,9 +45,9 @@ export default class EnchantSheet extends ActivitySheet {
       .filter(a => a.id !== this.activity.id)
       .map(a => ({ value: a.id, label: a.name, selected: effect.data.riders.activity.has(a.id) }));
     effect.additionalSettings = "systems/dnd5e/templates/activity/parts/enchant-effect-settings.hbs";
-    effect.effectOptions = context.allEffects.map(e => ({
-      ...e, selected: effect.data.riders.effect.has(e.value)
-    }));
+    effect.effectOptions = this.item.effects
+      .filter(e => e.type === "base")
+      .map(e => ({ value: e.id, label: e.name, selected: effect.data.riders.effect.has(e.id) }));
     return effect;
   }
 

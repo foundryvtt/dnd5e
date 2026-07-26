@@ -37,14 +37,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '10'
       contiguous: false
+      count: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -101,20 +104,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: fabricate
 sort: 0
 flags: {}
-img: icons/magic/fire/explosion-fireball-medium-purple-orange.webp
+img: icons/tools/hand/hammer-and-nail.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037348005
-  modifiedTime: 1725992717195
+  modifiedTime: 1781377194545
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7Fw7Bf1k3xxDVr5L'

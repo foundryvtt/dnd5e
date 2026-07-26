@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: RbcK5H5JO9EnIiCA
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Plesiosaurus attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -562,8 +562,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        vDbwNID2KIa59jSK:
           type: attack
           activation:
             type: action
@@ -578,10 +577,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -598,7 +598,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -611,20 +612,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: vDbwNID2KIa59jSK
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -639,21 +652,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123023212
+      systemVersion: 6.0.0
+      createdTime: 1781533498216
+      modifiedTime: 1781533517590
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!4OeZZguYgJcsZoM9.RbcK5H5JO9EnIiCA'
   - _id: PtGDikGuH6rHkITy
     name: Hold Breath
     type: feat
-    img: icons/magic/water/pseudopod-swirl-blue.webp
+    img: icons/magic/water/orb-ice-opaque.webp
     system:
       description:
-        value: <p>The plesiosaurus can hold its breath for 1 hour.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can hold its breath for 1
+          hour.</p>
         chat: ''
       source:
         custom: ''
@@ -667,10 +682,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -685,12 +701,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781533526481
+      modifiedTime: 1781533537543
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!4OeZZguYgJcsZoM9.PtGDikGuH6rHkITy'
 effects: []
@@ -701,7 +717,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171201790

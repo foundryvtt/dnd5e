@@ -8,13 +8,13 @@ system:
     value: >-
       <p>Choose one creature that you can see within range. The target begins a
       comic dance in place: shuffling, tapping its feet, and capering for the
-      duration. Creatures that can't be charmed are immune to this
-      spell.</p><p>A dancing creature must use all its movement to dance without
-      leaving its space and has disadvantage on Dexterity saving throws and
-      attack rolls. While the target is affected by this spell, other creatures
-      have advantage on attack rolls against it. As an action, a dancing
-      creature makes a Wisdom saving throw to regain control of itself. On a
-      successful save, the spell ends.</p>
+      duration. Creatures that can't be &amp;reference[charmed apply=false] are
+      immune to this spell.</p><p>A dancing creature must use all its movement
+      to dance without leaving its space and has disadvantage on Dexterity
+      saving throws and attack rolls. While the target is affected by this
+      spell, other creatures have advantage on attack rolls against it. As an
+      action, a dancing creature makes a Wisdom saving throw to regain control
+      of itself. On a successful save, the spell ends.</p>
     chat: ''
   source:
     custom: ''
@@ -34,12 +34,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -58,61 +61,179 @@ system:
     - vocal
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    af27rp79fhRL6TwF:
+      type: utility
+      name: Cast
+      _id: af27rp79fhRL6TwF
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: xkNK7kGzkmyftFlx
+          level: {}
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
-        ability: wis
-        dc:
-          calculation: spellcasting
-          formula: ''
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    MZXH72uYT07j4vlL:
+      type: save
+      name: End Dance Save
+      _id: MZXH72uYT07j4vlL
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When a creature affected by this spell takes an action to try to end
+          it.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
   identifier: irresistible-dance
 sort: 0
 flags: {}
-img: icons/magic/control/energy-stream-link-large-blue.webp
-effects: []
+img: icons/magic/control/encase-creature-humanoid-hold.webp
+effects:
+  - name: Irresistible Dance
+    img: icons/magic/control/encase-creature-humanoid-hold.webp
+    origin: Compendium.dnd5e.spells.Item.TfRzwEgBHHkCc6Ql
+    transfer: false
+    _id: xkNK7kGzkmyftFlx
+    type: base
+    system:
+      changes:
+        - key: system.abilities.dex.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You begin a comic dance in place, shiffling, tapping your feet, and
+      capering for the duration.</p><p>You must use all of your movement to
+      dance without leaving your space and have disadvantage on Dexterity saving
+      throws and attack rolls. While you are affected by this spell, other
+      creatures have advantage on attack rolls against you.</p><p>As an action,
+      you can make a Wisdom saving throw to regain control of yourself. On a
+      successful save, the spell ends.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781446904668
+      modifiedTime: 1781447000239
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!TfRzwEgBHHkCc6Ql.xkNK7kGzkmyftFlx'
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356951
-  modifiedTime: 1725992720105
+  modifiedTime: 1781447045096
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TfRzwEgBHHkCc6Ql'

@@ -35,12 +35,15 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '500'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -62,66 +65,123 @@ system:
       _id: dnd5eactivity000
       type: damage
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          If you would arrive in a place already occupied by an object or a
+          creature.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: self
+        override: true
       damage:
         critical:
           allow: false
           bonus: ''
         parts:
-          - number: 4
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
             denomination: 6
             bonus: ''
             types:
               - force
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Failed Teleportation Damage
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    sIOWWHVlx6FC1kXH:
+      type: utility
+      name: Cast
+      _id: sIOWWHVlx6FC1kXH
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: dimension-door
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-pink.webp
+img: icons/environment/wilderness/mine-interior-dungeon-door.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037349790
-  modifiedTime: 1725992717754
+  modifiedTime: 1781378008962
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!A4RsPuSvB9wFtz1j'

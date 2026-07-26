@@ -20,10 +20,11 @@ system:
       Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed is
       30 feet.</p><p><em><strong>Darkvision.</strong></em> Thanks to your orc
       blood, you have superior vision in dark and dim conditions. You can see in
-      dim light within 60 feet of you as if it were bright light, and in
-      darkness as if it were dim light. You can't discern color in darkness,
-      only shades of gray.</p><p><em><strong>Menacing.</strong></em> You gain
-      proficiency in the Intimidation skill.</p><p><em><strong>Relentless
+      &amp;reference[dim light] within 60 feet of you as if it were
+      &amp;reference[bright light], and in &amp;reference[darkness] as if it
+      were dim light. You can't discern color in darkness, only shades of
+      gray.</p><p><em><strong>Menacing.</strong></em> You gain proficiency in
+      the Intimidation skill.</p><p><em><strong>Relentless
       Endurance.</strong></em> When you are reduced to 0 hit points but not
       killed outright, you can drop to 1 hit point instead. You can't use this
       feature again until you finish a long rest.</p><p><em><strong>Savage
@@ -139,11 +140,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037393238
-  modifiedTime: 1725992703691
+  modifiedTime: 1781473776994
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -129,20 +129,19 @@ effects:
     img: icons/magic/time/hourglass-tilted-glowing-gold.webp
     disabled: false
     _id: NH2gXEd7ryyntWKE
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: 'Contengency: {}'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: 'Contengency: {}'
+          priority: null
+          type: override
+          phase: initial
+          _id: X8Hgle2ok7Sg1r3q
     duration:
-      startTime: null
-      seconds: 864000
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 864000
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -153,13 +152,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724696287136
-      modifiedTime: 1724697000329
+      modifiedTime: 1783543974512
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplContingenc.NH2gXEd7ryyntWKE'
 folder: 8WmlLARx1Df3Ii9v
 sort: 1700000
@@ -172,11 +174,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425947532
-  modifiedTime: 1745256789167
+  modifiedTime: 1783543974512
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplContingenc'

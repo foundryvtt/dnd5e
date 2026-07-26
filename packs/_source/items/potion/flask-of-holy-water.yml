@@ -1,7 +1,7 @@
 _id: WPWszFTGzmdIuDRJ
 name: Flask of Holy Water
 type: consumable
-img: icons/consumables/potions/bottle-round-empty-glass.webp
+img: icons/consumables/potions/potion-bottle-corked-fancy-blue.webp
 system:
   description:
     value: >-
@@ -56,12 +56,12 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Flask of Water
   container: null
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    mEAnlbwg1J9UZDDC:
       type: attack
       activation:
         type: action
@@ -82,10 +82,11 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -102,7 +103,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -136,10 +138,20 @@ system:
               mode: whole
               number: null
               formula: ''
+            modifiers: []
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      sort: 100000
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: mEAnlbwg1J9UZDDC
   attuned: false
   identifier: flask-of-holy-water
 effects: []
@@ -150,11 +162,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037205008
-  modifiedTime: 1725992519057
+  modifiedTime: 1783375859239
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!WPWszFTGzmdIuDRJ'

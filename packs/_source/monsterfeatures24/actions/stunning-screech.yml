@@ -111,17 +111,14 @@ effects:
     origin: Item.mmStunningScreec
     _id: dQ635FV7U5Y5LUE7
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Stunned apply=false]] condition until
       the end of the vrock’s next turn.</p>
@@ -134,13 +131,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.2
       createdTime: null
       modifiedTime: 1737921213577
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmStunningScreec.dQ635FV7U5Y5LUE7'
 folder: 4T18pEvubPMQLzvD
 flags:
@@ -150,7 +150,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1737674723978

@@ -7,12 +7,13 @@ system:
   description:
     value: >-
       <p>You touch a willing creature. For the Duration, the target's Movement
-      is unaffected by difficult terrain, and Spells and other magical Effects
-      can neither reduce the target's speed nor cause the target to be Paralyzed
-      or Restrained.</p><p>The target can also spend 5 feet of Movement to
+      is unaffected by &amp;reference[difficult terrain], and Spells and other
+      magical Effects can neither reduce the target's speed nor cause the target
+      to be &amp;reference[Paralyzed apply=false] or &amp;reference[Restrained
+      apply=false].</p><p>The target can also spend 5 feet of Movement to
       automatically escape from nonmagical restraints, such as Manacles or a
-      creature that has it Grappled. Finally, being Underwater imposes no
-      penalties on the target's movement or attacks.</p>
+      creature that has it &amp;reference[Grappled apply=false]. Finally, being
+      Underwater imposes no penalties on the target's movement or attacks.</p>
     chat: ''
   source:
     custom: ''
@@ -102,37 +103,26 @@ system:
   identifier: freedom-of-movement
 sort: 0
 flags: {}
-img: icons/skills/melee/strike-blade-knife-white-red.webp
+img: icons/skills/movement/arrow-upward-yellow.webp
 effects:
   - name: Freedom of Movement
     origin: Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: OnWa3f4IQ3pneB5T
-    changes:
-      - key: system.traits.di.value
-        mode: 2
-        value: paralyzed
-        priority: null
-      - key: system.traits.di.value
-        mode: 2
-        value: restrained
-        priority: null
-      - key: system.attributes.movement.ignoredDifficultTerrain
-        mode: 2
-        value: all
-        priority: null
     description: >-
-      <p>The target's Movement is unaffected by difficult terrain, and Spells
-      and other magical Effects can neither reduce the target's speed nor cause
-      the target to be Paralyzed or Restrained.</p>
+      <p>Your movement is unaffected by &amp;reference[difficult terrain], and
+      spells and other magical effects can neither reduce your speed nor cause
+      you to be &amp;reference[Paralyzed apply=false] or
+      &amp;reference[Restrained apply=false].</p><p>You can also spend 5 feet of
+      Movement to automatically escape from nonmagical restraints, such as
+      Manacles or a creature that has you &amp;reference[Grappled apply=false].
+      Finally, being Underwater imposes no penalties on your movement or
+      attacks.</p>
     transfer: false
     statuses: []
     flags:
@@ -143,26 +133,42 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.347'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.1.3
-      createdTime: null
-      modifiedTime: 1755806855234
+      createdTime: 1781375663118
+      modifiedTime: 1781375663118
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/skills/melee/strike-blade-knife-white-red.webp
+    img: icons/skills/movement/arrow-upward-yellow.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.traits.di.value
+          value: paralyzed
+          priority: null
+          type: add
+        - key: system.traits.di.value
+          value: restrained
+          priority: null
+          type: add
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          value: all
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!da0a1t2FqaTjRZGT.OnWa3f4IQ3pneB5T'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.3
+  systemVersion: 6.0.0
   createdTime: 1725037361182
-  modifiedTime: 1755806857216
+  modifiedTime: 1781375594212
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!da0a1t2FqaTjRZGT'

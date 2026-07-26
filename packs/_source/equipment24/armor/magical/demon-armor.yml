@@ -137,56 +137,71 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
     _id: rkijTbDVcBViZ8hs
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Demon {}
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDemonArmor000
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.attunement
-        mode: 5
-        value: required
-        priority: null
-      - key: system.armor.magicalBonus
-        mode: 4
-        value: '1'
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '40000'
-        priority: null
-      - key: system.unidentified.description
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDemonArmor000
-          caption=false]</p>
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/equipment/chest/breastplate-layered-leather-green.webp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Demon {}
+          priority: null
+          type: override
+          phase: initial
+          _id: PoMIp1RiG5O6YnUx
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDemonArmor000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: uFcqcfRx2Z7b09Vf
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: sRWJ7OtLDyK11cBR
+        - key: system.attunement
+          value: required
+          priority: null
+          type: override
+          phase: initial
+          _id: W9i1qOd8DMln2aPL
+        - key: system.armor.magicalBonus
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: kWfoWTHJCosJOwf5
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: luL2Rs8emLRhdDGo
+        - key: system.price.value
+          value: 40000
+          priority: null
+          type: add
+          phase: initial
+          _id: UZd3tvScdjcrC0kv
+        - key: system.unidentified.description
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDemonArmor000
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: U9m7b0TF8HeMdjOv
+        - key: img
+          value: icons/equipment/chest/breastplate-layered-leather-green.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: VUNhdhdKsVJdRJ7R
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -197,33 +212,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730134613379
-      modifiedTime: 1745438836400
+      modifiedTime: 1783544094759
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDemonArmor000.rkijTbDVcBViZ8hs'
   - name: Abyssal Language
     img: icons/creatures/unholy/demon-fire-imp.webp
     _id: pcxBoqMaubd365yy
     type: base
-    system: {}
-    changes:
-      - key: system.traits.languages.value
-        mode: 2
-        value: abyssal
-        priority: null
+    system:
+      changes:
+        - key: system.traits.languages.value
+          value: abyssal
+          priority: null
+          type: add
+          phase: initial
+          _id: owm0R2ZGvcIYzzcQ
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -234,13 +252,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730136389597
-      modifiedTime: 1730136568037
+      modifiedTime: 1783544094759
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDemonArmor000.pcxBoqMaubd365yy'
 flags:
   dnd5e:
@@ -250,11 +271,11 @@ flags:
         - pcxBoqMaubd365yy
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712699046
+  modifiedTime: 1783544094758
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: -150000

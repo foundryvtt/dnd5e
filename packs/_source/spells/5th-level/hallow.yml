@@ -9,61 +9,47 @@ system:
       <p>You touch a point and infuse an area around it with holy (or unholy)
       power. The area can have a radius up to 60 feet, and the spell fails if
       the radius includes an area already under the effect a hallow spell. The
-      affected area is subject to the following Effects.</p><p>First,
-      Celestials, Elementals, fey, Fiends, and Undead can't enter the area, nor
+      affected area is subject to the following effects.</p><p>First,
+      celestials, flementals, fey, fiends, and undead can't enter the area, nor
       can such creatures charm, frighten, or possess creatures within it. Any
-      creature Charmed, Frightened, or possessed by such a creature is no longer
-      charmed, frightened, or possessed upon entering the area. You can exclude
-      one or more of those types of creatures from this effect.</p><p>Second,
-      you can bind an extra effect to the area. Choose the effect from the
-      following list, or choose an effect offered by the DM. Some of these
-      Effects apply to creatures in the area; you can designate whether the
-      effect applies to all creatures, creatures that follow a specific deity or
-      leader, or creatures of a specific sort, such as orcs or Trolls. When a
-      creature that would be affected enters the spell's area for the first time
-      on a turn or starts its turn there, it can make a Charisma saving throw.
-      On a success, the creature ignores the extra effect until it leaves the
-      area.</p>
-
-      <ul>
-
-      <li><strong>Courage.</strong> Affected creatures can't be Frightened while
-      in the area.</li>
-
-      <li><strong>Darkness.</strong> Darkness fills the area. Normal light, as
-      well as magical light created by Spells of a lower level than the slot you
-      used to cast this spell, can't illuminate the area.</li>
-
-      <li><strong>Daylight.</strong> Bright light fills the area. Magical
-      darkness created by Spells of a lower level than the slot you used to cast
-      this spell can't extinguish the light.</li>
-
-      <li><strong>Energy Protection.</strong> Affected creatures in the area
-      have Resistance to one damage type of your choice, except for bludgeoning,
-      piercing, or slashing.</li>
-
-      <li><strong>Energy Vulnerability.</strong> Affected creatures in the area
-      have vulnerability to one damage type of your choice, except for
-      bludgeoning, piercing, or slashing.</li>
-
-      <li><strong>Everlasting Rest.</strong> Dead bodies interred in the area
-      can't be turned into Undead.</li>
-
-      <li><strong>Extradimensional Interference.</strong> Affected creatures
-      can't move or travel using teleportation or by extradimensional or
-      interplanar means.</li>
-
-      <li><strong>Fear.</strong> Affected creatures are Frightened while in the
-      area.</li>
-
-      <li><strong>Silence.</strong> No sound can emanate from within the area,
-      and no sound can reach into it.</li>
-
-      <li><strong>Tongues.</strong> Affected creatures can communicate with any
-      other creature in the area, even if they don't share a Common
-      language.</li>
-
-      </ul>
+      creature &amp;reference[Charmed apply=false], &amp;reference[Frightened
+      apply=false], or possessed by such a creature is no longer charmed,
+      frightened, or possessed upon entering the area. You can exclude one or
+      more of those types of creatures from this effect.</p><p>Second, you can
+      bind an extra effect to the area. Choose the effect from the following
+      list, or choose an effect offered by the DM. Some of these effects apply
+      to creatures in the area; you can designate whether the effect applies to
+      all creatures, creatures that follow a specific deity or leader, or
+      creatures of a specific sort, such as orcs or trolls. When a creature that
+      would be affected enters the spell's area for the first time on a turn or
+      starts its turn there, it can make a Charisma saving throw. On a success,
+      the creature ignores the extra effect until it leaves the
+      area.</p><ul><li><p><strong>Courage.</strong> Affected creatures can't be
+      &amp;reference[Frightened apply=false] while in the
+      area.</p></li><li><p><strong>Darkness.</strong> &amp;reference[Darkness]
+      fills the area. Normal light, as well as magical light created by spells
+      of a lower level than the slot you used to cast this spell, can't
+      illuminate the area.</p></li><li><p><strong>Daylight.</strong>
+      &amp;reference[Bright light] fills the area. Magical darkness created by
+      spells of a lower level than the slot you used to cast this spell can't
+      extinguish the light.</p></li><li><p><strong>Energy Protection.</strong>
+      Affected creatures in the area have resistance to one damage type of your
+      choice, except for bludgeoning, piercing, or
+      slashing.</p></li><li><p><strong>Energy Vulnerability.</strong> Affected
+      creatures in the area have vulnerability to one damage type of your
+      choice, except for bludgeoning, piercing, or
+      slashing.</p></li><li><p><strong>Everlasting Rest.</strong> Dead bodies
+      interred in the area can't be turned into
+      undead.</p></li><li><p><strong>Extradimensional Interference.</strong>
+      Affected creatures can't move or travel using teleportation or by
+      extradimensional or interplanar
+      means.</p></li><li><p><strong>Fear.</strong> Affected creatures are
+      &amp;reference[Frightened apply=false] while in the
+      area.</p></li><li><p><strong>Silence.</strong> No sound can emanate from
+      within the area, and no sound can reach into
+      it.</p></li><li><p><strong>Tongues.</strong> Affected creatures can
+      communicate with any other creature in the area, even if they don't share
+      a common language.</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -81,13 +67,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '60'
       contiguous: false
+      count: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -145,14 +134,24 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
     dnd5eactivity100:
       _id: dnd5eactivity100
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature designated by the spell enters the area for the first
+          time on a turn or starts its turn there.
       consumption:
         targets: []
         scaling:
@@ -161,46 +160,108 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>When a creature that would be affected enters the spell's area for
+          the first time on a turn or starts its turn there, it can make a
+          Charisma saving throw. On a success, the creature ignores the extra
+          effect until it leaves the area.</p>
       duration:
         units: inst
         concentration: false
-        override: false
-      effects: []
+        override: true
+      effects:
+        - _id: XrncWjwUV3gyGj0v
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
         ability: cha
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Hallow Effect Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: hallow
 sort: 0
 flags: {}
-img: icons/magic/light/explosion-star-large-teal.webp
-effects: []
+img: icons/environment/settlement/palast.webp
+effects:
+  - name: Hallow Immunity
+    img: icons/magic/defensive/shield-barrier-blades-teal.webp
+    origin: Compendium.dnd5e.spells.Item.SLxA9QhrggTz0taU
+    transfer: false
+    _id: XrncWjwUV3gyGj0v
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are immune to the effects the Hallow spell causes in this area
+      until you leave it.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 2
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781404904695
+      modifiedTime: 1781404946609
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!SLxA9QhrggTz0taU.XrncWjwUV3gyGj0v'
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356375
-  modifiedTime: 1725992719896
+  modifiedTime: 1781404966508
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!SLxA9QhrggTz0taU'

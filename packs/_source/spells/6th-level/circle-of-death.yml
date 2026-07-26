@@ -23,14 +23,17 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: sphere
       size: '60'
       contiguous: false
+      count: ''
   range:
     value: '150'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -100,23 +103,31 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: circle-of-death
 sort: 0
 flags: {}
-img: icons/magic/air/air-burst-spiral-large-teal-green.webp
+img: icons/magic/unholy/orb-contained-pink.webp
 effects: []
 folder: 0pdesvXqKd55VOh2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037353462
-  modifiedTime: 1725992718956
+  modifiedTime: 1781435284046
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!KeunEkg1JYbOCOhV'

@@ -1,6 +1,7 @@
 export {default as BasePlacement} from "./api/base-placement.mjs";
 export * as detectionModes from "./detection-modes/_module.mjs";
 export * as layers from "./layers/_module.mjs";
+export * as vfx from "./vfx/_module.mjs";
 export {default as MapLocationControlIcon} from "./map-location-control-icon.mjs";
 export {default as Note5e} from "./note.mjs";
 export {default as TemplatePlacement} from "./template-placement.mjs";

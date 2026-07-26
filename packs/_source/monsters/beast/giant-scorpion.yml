@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: wpqra38jsZPRAuov
     name: Multiattack
@@ -489,8 +487,8 @@ items:
     system:
       description:
         value: >-
-          <p>The scorpion makes three attacks: two with its [[/item
-          .OJ2b64O3e1nni21W]]{claws} and one with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes three attacks: two
+          with its [[/item .OJ2b64O3e1nni21W]]{claws} and one with its [[/item
           .q6uVUHWyzht5OpwV]]{sting}.</p>
         chat: ''
       source:
@@ -505,13 +503,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        1VuLeUxZy5VPauv1:
           type: utility
           activation:
             type: action
@@ -526,15 +523,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -545,7 +543,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -562,7 +561,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 1VuLeUxZy5VPauv1
       enchant: {}
       prerequisites:
         level: null
@@ -576,11 +583,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655651
+      systemVersion: 6.0.0
+      createdTime: 1781538312610
+      modifiedTime: 1783369643758
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!GxgIVRX5GbVTifiF.wpqra38jsZPRAuov'
@@ -592,11 +599,12 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
-          &amp;Reference[grappled] (escape DC 12). The scorpion has two claws,
-          each of which can grapple only one target.</p>
+          &amp;Reference[grappled] (escape DC 12). The [[lookup @name
+          lowercase]]{monster} has two [[lookup @item.name lowercase]]s, each of
+          which can grapple only one target.</p>
         chat: >-
-          <p>The Giant Scorpion attacks with its Claw. The target is
-          grappled.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled].</p>
       source:
         custom: ''
         book: ''
@@ -659,7 +667,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -668,8 +676,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        paXEQuoV3d4GVMRq:
           type: attack
           activation:
             type: action
@@ -684,13 +691,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: abCwfrU3jtUWjeZ7
+              level: {}
           range:
             value: '5'
             units: ft
@@ -704,7 +714,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -717,26 +728,76 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: paXEQuoV3d4GVMRq
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
       mastery: ''
-    effects: []
+    effects:
+      - name: Grappled by Claw
+        img: icons/commodities/claws/claw-pincer-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.GxgIVRX5GbVTifiF.Item.OJ2b64O3e1nni21W
+        transfer: false
+        _id: abCwfrU3jtUWjeZ7
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You are &amp;reference[grappled apply=false] (escape DC 12).</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781538532505
+          modifiedTime: 1781538550706
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!GxgIVRX5GbVTifiF.OJ2b64O3e1nni21W.abCwfrU3jtUWjeZ7
     folder: null
     sort: 100000
     ownership:
@@ -745,11 +806,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121402908
+      systemVersion: 6.0.0
+      createdTime: 1781538348204
+      modifiedTime: 1781538567545
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!GxgIVRX5GbVTifiF.OJ2b64O3e1nni21W'
@@ -760,10 +821,10 @@ items:
     system:
       description:
         value: >-
-          <p>&amp;Reference[grappled]</p><p>The target must make a [[/save]]
-          saving throw, taking [[/damage average activity=dnd5eactivity100]]
-          damage on a failed save, or half as much damage on a successful
-          one.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          make a [[/save]] saving throw, taking [[/damage average
+          activity=GR0Tw9glqMrDk8Uh]] damage on a failed save, or half as much
+          damage on a successful one.</p>
         chat: >-
           <p>The Giant Scorpion attacks with its Sting. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -838,8 +899,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BRDFOEVTGa4nSNNF:
           type: attack
           activation:
             type: action
@@ -854,10 +914,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -874,7 +935,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -900,14 +962,21 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: BRDFOEVTGa4nSNNF
+        GR0Tw9glqMrDk8Uh:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -917,6 +986,10 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The target must make a [[/save]] saving throw, taking [[/damage
+              average activity=GR0Tw9glqMrDk8Uh]] damage on a failed save, or
+              half as much damage on a successful one.</p>
           duration:
             concentration: false
             value: ''
@@ -937,10 +1010,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -956,19 +1030,33 @@ items:
                   enabled: false
                   formula: ''
                 number: 4
-                denomination: '10'
+                denomination: 10
                 bonus: ''
                 types:
                   - poison
+                scaling:
+                  number: 1
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '12'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Poison Save
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: GR0Tw9glqMrDk8Uh
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -979,19 +1067,15 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741121453770
+      systemVersion: 6.0.0
+      createdTime: 1781538630822
+      modifiedTime: 1781538691897
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!GxgIVRX5GbVTifiF.q6uVUHWyzht5OpwV'
@@ -1003,7 +1087,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171218252

@@ -6,7 +6,7 @@ type: spell
 system:
   description:
     value: >-
-      <p>A Large Spectral Guardian appears and hovers for the Duration in an
+      <p>A Large Spectral Guardian appears and hovers for the duration in an
       unoccupied space of your choice that you can see within range. The
       guardian occupies that space and is indistinct except for a gleaming sword
       and shield emblazoned with the symbol of your deity.</p><p>Any creature
@@ -33,12 +33,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -56,73 +60,173 @@ system:
   properties:
     - vocal
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    uVCIRuG6Klnsa2wx:
+      type: summon
+      name: Summon Guardian of Faith
+      _id: uVCIRuG6Klnsa2wx
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: true
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: a37jDDLbqFatVhhK
+          uuid: Compendium.dnd5e.monsters.Actor.CoRG225xaZf4ewLF
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+    EWTxq50DDmAOzOFR:
+      type: save
+      activation:
+        type: special
+        value: null
+        override: true
+        condition: >-
+          When a creature hostile to you moves to a space within 10 feet of the
+          guardian for the first time on a turn.
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: false
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        override: true
+        concentration: false
+        special: ''
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '10'
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
         onSave: half
         parts:
-          - number: null
+          - custom:
+              enabled: true
+              formula: '20'
+            number: null
             denomination: null
             bonus: ''
             types:
               - radiant
-            custom:
-              enabled: true
-              formula: '20'
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: EWTxq50DDmAOzOFR
+      name: Guardian Strike Save
   identifier: guardian-of-faith
 sort: 0
 flags: {}
-img: icons/magic/control/buff-flight-wings-runes-blue-white.webp
+img: icons/equipment/head/helm-barbute-tan.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357010
-  modifiedTime: 1725992720123
+  modifiedTime: 1783719273363
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TgHsuhNasPbhu8MO'

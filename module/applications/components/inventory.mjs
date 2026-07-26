@@ -329,27 +329,27 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     // Standard options.
     const options = [{
       label: "DND5E.ItemView",
-      icon: '<i class="fa-solid fa-eye fa-fw"></i>',
+      icon: "fa-solid fa-eye",
       onClick: (event, target) => this._onAction(target, "view", { event })
     }, {
       label: "DND5E.ContextMenuActionEdit",
-      icon: '<i class="fa-solid fa-edit fa-fw"></i>',
+      icon: "fa-solid fa-edit",
       visible: () => item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "edit", { event })
     }, {
       label: "DND5E.ContextMenuActionDuplicate",
-      icon: '<i class="fa-solid fa-copy fa-fw"></i>',
+      icon: "fa-solid fa-copy",
       visible: () => !inFavorites && item.canDuplicate && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "duplicate", { event })
     }, {
       id: "delete",
       label: "DND5E.ContextMenuActionDelete",
-      icon: '<i class="fa-solid fa-trash fa-fw"></i>',
+      icon: "fa-solid fa-trash",
       visible: () => !inFavorites && item.canDelete && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "delete", { event })
     }, {
       label: "DND5E.DisplayCard",
-      icon: '<i class="fa-solid fa-message"></i>',
+      icon: "fa-solid fa-message",
       visible: () => item.actor,
       onClick: () => item.displayCard()
     }];
@@ -361,7 +361,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     // Owned item options.
     options.push({
       label: "DND5E.Scroll.CreateScroll",
-      icon: '<i class="fa-solid fa-scroll"></i>',
+      icon: "fa-solid fa-scroll",
       group: "action",
       visible: () => {
         const isSpell = (item.type === "spell") && !item.getFlag("dnd5e", "cachedFor");
@@ -374,7 +374,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       }
     }, {
       label: "DND5E.SplitStack.Title",
-      icon: '<i class="fa-solid fa-arrows-split-up-and-left"></i>',
+      icon: "fa-solid fa-arrows-split-up-and-left",
       visible: () => item.isOwner && !compendiumLocked && ((item.system.quantity ?? 0) > 1),
       onClick: () => {
         if ( item.system.quantity === 2 ) item.system.split();
@@ -389,25 +389,25 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       onClick: () => this.actor?.endConcentration(item)
     }, {
       label: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
-      icon: '<i class="fa-solid fa-sun fa-fw"></i>',
+      icon: "fa-solid fa-sun fa-fw",
       group: "state",
       visible: () => item.system.attunement && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "attune", { event })
     }, {
       label: `DND5E.ContextMenuAction${item.system.equipped ? "Unequip" : "Equip"}`,
-      icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
+      icon: "fa-solid fa-shield-alt fa-fw",
       group: "state",
       visible: () => ("equipped" in item.system) && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "equip", { event })
     }, {
       label: `DND5E.ContextMenuAction${item.isOnCooldown ? "Charge" : "ExpendCharge"}`,
-      icon: '<i class="fa-solid fa-bolt"></i>',
+      icon: "fa-solid fa-bolt",
       group: "state",
       visible: () => item.hasRecharge && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "toggleCharge", { event })
     }, {
       label: `DND5E.ContextMenuAction${item.system.prepared ? "Unprepare" : "Prepare"}`,
-      icon: '<i class="fa-solid fa-sun fa-fw"></i>',
+      icon: "fa-solid fa-sun fa-fw",
       group: "state",
       visible: () => {
         const isPrepared = CONFIG.DND5E.spellcasting[item.system.method]?.prepares;
@@ -418,7 +418,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       onClick: (event, target) => this._onAction(target, "prepare", { event })
     }, {
       label: "DND5E.Identify",
-      icon: '<i class="fa-solid fa-magnifying-glass"></i>',
+      icon: "fa-solid fa-magnifying-glass",
       group: "state",
       visible: () => {
         const canIdentify = ("identified" in item.system) && !item.system.identified;
@@ -428,20 +428,20 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       onClick: (event, target) => this._onAction(target, "identify", { event })
     }, {
       label: favorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-      icon: '<i class="fa-solid fa-bookmark fa-fw"></i>',
+      icon: "fa-solid fa-bookmark fa-fw",
       group: "state",
       visible: () => ("favorites" in this.actor.system) && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "toggleFavorite", { event })
     }, {
       label: item.system.properties?.has("gear") ? "DND5E.Gear.Action.Remove" : "DND5E.Gear.Action.Add",
-      icon: '<i class="fa-solid fa-axe fa-fw"></i>',
+      icon: "fa-solid fa-axe fa-fw",
       group: "state",
       visible: () => !!this.actor.system.isNPC && item.isOwner && !compendiumLocked
         && !!CONFIG.Item.dataModels[item.type]?.schema.has("quantity"),
       onClick: (event, target) => this._onAction(target, "toggleGear", { event })
     }, {
       label: expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
-      icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
+      icon: `fa-solid fa-${expanded ? "compress" : "expand"}`,
       group: "collapsible",
       visible: () => !inFavorites && ("canExpand" in this.app ? this.app.canExpand(item) : true),
       onClick: (event, target) => this._onAction(target, "toggleExpand", { event })

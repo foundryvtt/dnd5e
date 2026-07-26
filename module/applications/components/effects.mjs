@@ -1,4 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
+import ConditionData from "../../data/active-effect/condition.mjs";
 import {staticID} from "../../utils.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 
@@ -26,21 +27,12 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       priority: 1000,
       template: "systems/dnd5e/templates/effects/columns/controls.hbs"
     },
-    source: {
-      id: "source",
+    detail: {
+      id: "detail",
       width: 150,
       order: 100,
       priority: 600,
-      label: "DND5E.SOURCE.FIELDS.source.label",
-      template: "systems/dnd5e/templates/effects/columns/source.hbs"
-    },
-    value: {
-      id: "value",
-      width: 70,
-      order: 200,
-      priority: 500,
-      label: "DND5E.Value",
-      template: "systems/dnd5e/templates/effects/columns/value.hbs"
+      template: "systems/dnd5e/templates/effects/columns/detail.hbs"
     }
   };
 
@@ -100,8 +92,14 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
     for ( const control of this.querySelectorAll("[data-action]") ) {
       control.addEventListener("click", event => {
-        this._onAction(event.currentTarget, event.currentTarget.dataset.action);
+        this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
       });
+      if ( control.dataset.action === "toggleCondition" ) {
+        control.addEventListener("contextmenu", event => {
+          event.preventDefault();
+          this._onAction(event.currentTarget, event.currentTarget.dataset.action, { event });
+        });
+      }
     }
 
     for ( const source of this.querySelectorAll(".effect-source a") ) {
@@ -181,10 +179,11 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       if ( e.isConcealed ) continue;
       if ( e.type === "condition" ) continue;
       if ( e.isAppliedEnchantment ) {
-        if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
+        if ( e.disabled || e.duration.expired ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
       }
       else if ( e.type === "enchantment" ) categories.enchantment.effects.push(e);
+      else if ( e.duration.expired ) categories.inactive.effects.push(e);
       else if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
@@ -218,28 +217,28 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const options = [
       {
         label: "DND5E.ContextMenuActionEdit",
-        icon: "<i class='fas fa-edit fa-fw'></i>",
+        icon: "fa-solid fa-edit",
         visible: () => effect.isOwner,
-        onClick: (_, target) => this._onAction(target, "edit")
+        onClick: (event, target) => this._onAction(target, "edit", { event })
       },
       {
         label: "DND5E.ContextMenuActionDuplicate",
-        icon: "<i class='fas fa-copy fa-fw'></i>",
+        icon: "fa-solid fa-copy",
         visible: () => effect.isOwner,
-        onClick: (_, target) => this._onAction(target, "duplicate")
+        onClick: (event, target) => this._onAction(target, "duplicate", { event })
       },
       {
         label: "DND5E.ContextMenuActionDelete",
-        icon: "<i class='fas fa-trash fa-fw'></i>",
+        icon: "fa-solid fa-trash",
         visible: () => effect.isOwner && !isConcentrationEffect,
-        onClick: (_, target) => this._onAction(target, "delete")
+        onClick: (event, target) => this._onAction(target, "delete", { event })
       },
       {
         label: effect.disabled ? "DND5E.ContextMenuActionEnable" : "DND5E.ContextMenuActionDisable",
-        icon: effect.disabled ? "<i class='fas fa-check fa-fw'></i>" : "<i class='fas fa-times fa-fw'></i>",
+        icon: effect.disabled ? "fa-solid fa-check" : "fa-solid fa-times",
         group: "state",
         visible: () => effect.isOwner && !isConcentrationEffect,
-        onClick: (_, target) => this._onAction(target, "toggle")
+        onClick: (event, target) => this._onAction(target, "toggle", { event })
       },
       {
         label: "DND5E.CONCENTRATION.Action.Break",
@@ -250,10 +249,10 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       },
       {
         label: expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",
-        icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
+        icon: `fa-solid fa-${expanded ? "compress" : "expand"}`,
         group: "collapsible",
         visible: () => "canExpand" in this.app ? this.app.canExpand(effect) : true,
-        onClick: (_, target) => this._onAction(target, "toggleExpand")
+        onClick: (event, target) => this._onAction(target, "toggleExpand", { event })
       }
     ];
 
@@ -263,10 +262,10 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       const isFavorited = this.document.system.hasFavorite(uuid);
       options.push({
         label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: "<i class='fas fa-bookmark fa-fw'></i>",
+        icon: "fa-solid fa-bookmark",
         group: "state",
         visible: () => effect.isOwner,
-        onClick: (_, target) => this._onAction(target, isFavorited ? "unfavorite" : "favorite")
+        onClick: (event, target) => this._onAction(target, isFavorited ? "unfavorite" : "favorite", { event })
       });
     }
 
@@ -277,21 +276,23 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
   /**
    * Handle effects actions.
-   * @param {Element} target  Button or context menu entry that triggered this action.
-   * @param {string} action   Action being triggered.
+   * @param {Element} target                Button or context menu entry that triggered this action.
+   * @param {string} action                 Action being triggered.
+   * @param {object} [options]
+   * @param {PointerEvent} [options.event]  The triggering event.
    * @returns {Promise}
    * @protected
    */
-  async _onAction(target, action) {
-    const event = new CustomEvent("effect", {
+  async _onAction(target, action, { event }={}) {
+    const customEvent = new CustomEvent("effect", {
       bubbles: true,
       cancelable: true,
       detail: action
     });
-    if ( target.dispatchEvent(event) === false ) return;
+    if ( target.dispatchEvent(customEvent) === false ) return;
 
     if ( action === "toggleCondition" ) {
-      return this._onToggleCondition(target.closest("[data-condition-id]")?.dataset.conditionId);
+      return this._onToggleCondition(target.closest("[data-condition-id]")?.dataset.conditionId, { event });
     }
 
     const dataset = target.closest("[data-effect-id]")?.dataset;
@@ -325,11 +326,19 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
   /**
    * Handle toggling a condition.
-   * @param {string} conditionId  The condition identifier.
+   * @param {string} conditionId            The condition identifier.
+   * @param {object} [options]
+   * @param {PointerEvent} [options.event]  The triggering event.
    * @returns {Promise}
    * @protected
    */
-  async _onToggleCondition(conditionId) {
+  async _onToggleCondition(conditionId, { event }={}) {
+    // Leveled conditions increment/decrement.
+    if ( ConditionData.hasLevels(conditionId) ) {
+      return this.document.toggleStatusEffect(conditionId, { levels: event?.type === "contextmenu" ? -1 : 1 });
+    }
+
+    // Other conditions toggle on and off.
     const existing = this.document.effects.get(staticID(`dnd5e${conditionId}`));
     if ( existing ) return existing.delete();
     const effect = await ActiveEffect.implementation.fromStatusEffect(conditionId);

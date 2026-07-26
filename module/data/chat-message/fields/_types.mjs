@@ -11,14 +11,6 @@
  */
 
 /**
- * @typedef ActorUpdatesDescription
- * @property {object} actor       Updates applied to the actor.
- * @property {object[]} [create]  Full data for Items to create (with IDs maintained).
- * @property {string[]} [delete]  IDs of items to be deleted from the actor.
- * @property {object[]} item      Updates applied to items on the actor.
- */
-
-/**
  * @typedef IndividualDeltaData
  * @property {number} delta    The change in the specified field.
  * @property {string} keyPath  Path to the changed field on the document.

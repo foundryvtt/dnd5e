@@ -55,7 +55,7 @@ system:
       value: 33
       max: 33
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 6d8 + 6
     init:
       ability: ''
@@ -450,9 +450,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -467,7 +464,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -487,21 +484,23 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: PhdUmTsYUeWSSDNN
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/magic/nature/symbol-moon-stars-white.webp
     system:
       description:
         value: >-
-          <p>The wererat can use its action to polymorph into a rat-humanoid
-          hybrid or into a giant rat, or back into its true form, which is
-          humanoid.</p><p>Its statistics, other than its size, are the same in
-          each form. Any equipment it is wearing or carrying isn't transformed.
-          It reverts to its true form if it dies.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its action to
+          polymorph into a rat-humanoid hybrid or into a giant rat, or back into
+          its true form, which is humanoid.</p><p>Its statistics, other than its
+          size, are the same in each form. Any equipment it is wearing or
+          carrying isn't transformed. It reverts to its true form if it
+          dies.</p>
         chat: >-
-          <p>The wererat can use its action to <strong>polymorph</strong>, or
+          <p>The [[lookup @name]]{monster} can use its action to polymorph, or
           return to its true form.</p>
       source:
         custom: ''
@@ -515,70 +514,228 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties:
         - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        52cNRxb32cXr1AzR:
+          type: transform
+          name: Change Form
+          _id: 52cNRxb32cXr1AzR
+          img: ''
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
+          behaviors: []
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
-          effects: []
+          effects:
+            - _id: qmqGUOYBjP4rSWNU
+              uuid: null
+              level: {}
+            - _id: yc01pea2fc1DSSns
+              uuid: null
+              level: {}
+            - _id: EwReSrmzBnSylMHv
+              uuid: null
+              level: {}
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          profiles: []
+          settings: null
+          transform:
+            customize: false
+            formless: false
+            mode: form
+            preset: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: shapechanger
-    effects: []
+    effects:
+      - name: True Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.CrnUJhTbkdZjCZsH.Item.PhdUmTsYUeWSSDNN
+        transfer: true
+        _id: qmqGUOYBjP4rSWNU
+        type: base
+        system:
+          changes:
+            - key: items.hidden
+              type: add
+              value: bite
+              phase: initial
+              priority: null
+            - key: token.texture.src
+              type: override
+              value: systems/dnd5e/tokens/humanoid/Commoner.webp
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have transformed into your true form, which is humanoid.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783364008334
+          modifiedTime: 1783445065295
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!CrnUJhTbkdZjCZsH.PhdUmTsYUeWSSDNN.qmqGUOYBjP4rSWNU
+      - name: Hybrid Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.CrnUJhTbkdZjCZsH.Item.PhdUmTsYUeWSSDNN
+        transfer: false
+        _id: yc01pea2fc1DSSns
+        type: base
+        system:
+          changes: []
+          magical: false
+          rider:
+            statuses: []
+        disabled: true
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have transformed in your hybrid form, which is a rat-humanoid
+          hybrid.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783364008599
+          modifiedTime: 1783445069683
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!CrnUJhTbkdZjCZsH.PhdUmTsYUeWSSDNN.yc01pea2fc1DSSns
+      - name: Rat Form
+        img: icons/magic/nature/symbol-moon-stars-white.webp
+        origin: Compendium.dnd5e.monsters.Actor.CrnUJhTbkdZjCZsH.Item.PhdUmTsYUeWSSDNN
+        transfer: false
+        _id: EwReSrmzBnSylMHv
+        type: base
+        system:
+          changes:
+            - key: items.hidden
+              type: add
+              value: multiattack
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: hand-crossbow
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: shortsword
+              phase: initial
+              priority: null
+            - key: tokens.texture.src
+              type: override
+              value: systems/dnd5e/tokens/beast/GiantRat.webp
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: true
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You have transformed into your rat form.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.364'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783364008843
+          modifiedTime: 1783445080516
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!CrnUJhTbkdZjCZsH.PhdUmTsYUeWSSDNN.EwReSrmzBnSylMHv
     folder: null
     sort: 0
     ownership:
@@ -587,11 +744,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403914004
+      systemVersion: 6.0.0
+      createdTime: 1783363913476
+      modifiedTime: 1783364008869
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.PhdUmTsYUeWSSDNN'
@@ -602,8 +759,8 @@ items:
     system:
       description:
         value: >-
-          <p>The wererat has advantage on Wisdom (Perception) checks that rely
-          on smell.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on smell.</p>
         chat: ''
       source:
         custom: ''
@@ -635,11 +792,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403917577
+      systemVersion: 6.0.0
+      createdTime: 1783364233888
+      modifiedTime: 1783364233888
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.UwlU9Zhwf94gPX0n'
@@ -649,7 +806,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The wererat makes two attacks, only one of which can be a bite.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, only one
+          of which can be a [[/item .ldz0yUpzhV9Xlhss]]{bite}.</p>
         chat: ''
       source:
         custom: ''
@@ -724,7 +883,7 @@ items:
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-humanoid-or-hybrid-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 0
@@ -734,18 +893,18 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783363899080
+      modifiedTime: 1783445036025
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.ykZaywAeuqtWHAqQ'
   - _id: ldz0yUpzhV9Xlhss
     name: Bite (Rat or Hybrid Form Only)
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -753,8 +912,8 @@ items:
           a humanoid, it must succeed on a [[/save]] saving throw or be cursed
           with wererat lycanthropy.</p>
         chat: >-
-          <p>The Wererat attacks with its Bite. If the target is a humanoid, it
-          must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} attacks with its Bite. If the target
+          is a humanoid, it must make a Constitution saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -817,7 +976,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -826,8 +985,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        qfRSJgzbvfERgYJZ:
           type: attack
           activation:
             type: action
@@ -842,69 +1000,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: dex
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
           duration:
             concentration: false
             value: ''
@@ -925,7 +1021,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -937,22 +1034,158 @@ items:
             spent: 0
             max: ''
             recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
           damage:
-            onSave: half
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 100000
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: qfRSJgzbvfERgYJZ
+          name: ''
+        yGLXyFBUSgjRMps1:
+          type: save
+          activation:
+            type: special
+            value: 1
+            condition: When a humanoid is hit by this attack.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: >-
+              <p>If the target is a humanoid, it must succeed on a [[/save]]
+              saving throw or be cursed with wererat lycanthropy.</p>
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects:
+            - _id: mHBemQYUogbgs5yj
+              uuid: null
+              level: {}
+              onSave: false
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
-          name: ''
+            visible: true
+            bonus: ''
+          sort: 200000
+          name: Curse Save
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: yGLXyFBUSgjRMps1
       attuned: false
       ammunition: {}
       magicalBonus: null
       mastery: ''
-      identifier: bite-rat-or-hybrid-form-only
-    effects: []
+      identifier: bite
+    effects:
+      - name: Wererat Lycanthropy
+        img: icons/creatures/mammals/rodent-rat-diseaed-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.CrnUJhTbkdZjCZsH.Item.ldz0yUpzhV9Xlhss
+        transfer: false
+        _id: mHBemQYUogbgs5yj
+        type: base
+        system:
+          changes: []
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You are cursed with wererat lycanthropy.</p>
+        tint: '#ffffff'
+        statuses:
+          - cursed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783363841471
+          modifiedTime: 1783363863454
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!CrnUJhTbkdZjCZsH.ldz0yUpzhV9Xlhss.mHBemQYUogbgs5yj
     folder: null
     sort: 0
     ownership:
@@ -961,22 +1194,22 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403927738
+      systemVersion: 6.0.0
+      createdTime: 1783363792509
+      modifiedTime: 1783445040994
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.ldz0yUpzhV9Xlhss'
   - _id: YJi7nfridP2LjdJs
     name: Hand Crossbow (Humanoid or Hybrid Form Only)
     type: weapon
-    img: icons/weapons/crossbows/crossbow-simple-brown.webp
+    img: icons/weapons/crossbows/crossbow-ornamental-winged.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Wererat attacks with its Hand Crossbow.</p>
+        chat: <p>The [[lookup @name]]{monster} attacks with its Hand Crossbow.</p>
       source:
         custom: ''
         book: ''
@@ -1042,17 +1275,16 @@ items:
         - amm
         - lgt
         - lod
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
         value: martialR
-        baseItem: ''
+        baseItem: handcrossbow
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        d1VF5RznCqvJzMqS:
           type: attack
           activation:
             type: action
@@ -1067,10 +1299,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1087,7 +1320,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1100,24 +1334,39 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: d1VF5RznCqvJzMqS
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
-      identifier: hand-crossbow-humanoid-or-hybrid-form-only
+      identifier: hand-crossbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1127,22 +1376,22 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385197
+      systemVersion: 6.0.0
+      createdTime: 1783363647293
+      modifiedTime: 1783445046773
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.YJi7nfridP2LjdJs'
   - _id: wpyEts6pBAxoD0Gh
     name: Shortsword (Humanoid or Hybrid Form Only)
     type: weapon
-    img: icons/weapons/swords/sword-guard-brown.webp
+    img: icons/weapons/swords/sword-guard-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Wererat attacks with its Shortsword.</p>
+        chat: <p>The [[lookup @name]]{monster} attacks with its Shortsword.</p>
       source:
         custom: ''
         book: ''
@@ -1207,17 +1456,16 @@ items:
       properties:
         - fin
         - lgt
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
         value: martialM
-        baseItem: ''
+        baseItem: shortsword
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        2d02UKrb6uXOEUXM:
           type: attack
           activation:
             type: action
@@ -1232,10 +1480,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1252,7 +1501,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1265,24 +1515,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          behaviors: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 2d02UKrb6uXOEUXM
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: shortsword-humanoid-or-hybrid-form-only
+      identifier: shortsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1292,11 +1556,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107550738
+      systemVersion: 6.0.0
+      createdTime: 1783363611424
+      modifiedTime: 1783445051442
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.wpyEts6pBAxoD0Gh'
@@ -1308,11 +1572,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1726171213064
-  modifiedTime: 1726171441345
+  modifiedTime: 1783364158534
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!CrnUJhTbkdZjCZsH'

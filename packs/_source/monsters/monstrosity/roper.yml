@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,16 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: rnluQsu6p0n6s70W
     name: False Appearance
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/commodities/stone/geode-raw-beige.webp
     system:
       description:
         value: >-
-          <p>While the roper remains motionless, it is indistinguishable from a
-          normal cave formation, such as a stalagmite.</p>
+          <p>While the [[lookup @name monster]]{monster} remains motionless, it
+          is indistinguishable from a normal cave formation, such as a
+          stalagmite.</p>
         chat: ''
       source:
         custom: ''
@@ -504,10 +503,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -522,31 +522,33 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781882006634
+      modifiedTime: 1781883220245
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.rnluQsu6p0n6s70W'
   - _id: hQLj7Zzuva4M9KzH
     name: Grasping Tendrils
     type: feat
-    img: icons/magic/nature/root-vine-entangle-foot-green.webp
+    img: icons/commodities/biological/tentacle-yellow.webp
     system:
       description:
         value: >-
-          <p>The roper can have up to six tendrils at a time. Each tendril can
-          be attacked (AC 20; 10 hit points; immunity to poison and psychic
-          damage).</p><p>Destroying a tendril deals no damage to the roper,
-          which can extrude a replacement tendril on its next turn. A tendril
-          can also be broken if a creature takes an action and succeeds on a DC
-          15 Strength check against it.</p>
+          <p>The [[lookup @name lowercase]]{monster} can have up to six tendrils
+          at a time. Each tendril can be attacked (AC 20; 10 hit points;
+          immunity to poison and psychic damage).</p><p>Destroying a tendril
+          deals no damage to the [[lookup @name lowercase]]{monster}, which can
+          extrude a replacement tendril on its next turn. A tendril can also be
+          broken if a creature takes an action and succeeds on a [[/check]]
+          check against it.</p>
         chat: >-
-          <p>The roper can have up to six tendrils at a time. Each tendril can
-          be attacked. A tendril can also be broken if a creature takes an
-          action and succeeds on a Strength check against it.</p>
+          <p>The [[lookup @name]]{monster} can have up to six tendrils at a
+          time. Each tendril can be attacked. A tendril can also be broken if a
+          creature takes an action and succeeds on a Strength check against
+          it.</p>
       source:
         custom: ''
         book: ''
@@ -555,15 +557,82 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: ''
+        max: '6'
         spent: 0
-        recovery: []
+        recovery:
+          - period: turnStart
+            type: formula
+            formula: '1'
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        tmKWsSAfWOtSqU7h:
+          type: check
+          name: Break Tendril Check
+          _id: tmKWsSAfWOtSqU7h
+          img: ''
+          sort: 0
+          activation:
+            type: special
+            override: false
+            condition: >-
+              When a creature takes an action to break one of the [[lookup @name
+              lowercase]]{monster}'s tendrils.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          check:
+            associated: []
+            dc:
+              calculation: ''
+              formula: '15'
+            visible: true
+            ability: str
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -577,70 +646,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LkepRN2rP3Hp4orY
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826617674
+      systemVersion: 6.0.0
+      createdTime: 1781882120875
+      modifiedTime: 1781883212705
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.hQLj7Zzuva4M9KzH'
-  - _id: JsrlYsn9HM9HAeKH
-    name: Spider Climb
-    type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
-    system:
-      description:
-        value: >-
-          <p>The roper can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: spider-climb
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!qZyLwdx7lj5d1wfD.JsrlYsn9HM9HAeKH'
   - _id: mBRjMwEitGrPDm5I
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Roper attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -703,7 +726,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -712,8 +735,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        VHvpgO6rRZHKwY2Y:
           type: attack
           activation:
             type: action
@@ -728,10 +750,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -748,7 +771,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -761,24 +785,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: VHvpgO6rRZHKwY2Y
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 100000
@@ -788,31 +825,32 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765826632050
+      systemVersion: 6.0.0
+      createdTime: 1781882637223
+      modifiedTime: 1781882652137
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.mBRjMwEitGrPDm5I'
   - _id: bTiw89tDx64zTqDk
     name: Tendril
     type: weapon
-    img: icons/creatures/tentacles/tentacles-thing-green.webp
+    img: icons/commodities/biological/tentacle-thorned-green.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. <em>Hit:</em> The target is
           &amp;Reference[grappled] (escape DC 15). Until the grapple ends, the
           target is &amp;Reference[restrained] and has disadvantage on Strength
-          Checks and Strength Saving Throws , and the roper can't use the same
-          tendril on another target.</p>
+          checks and Strength saving throws , and the [[lookup @name
+          lowercase]]{monster} can't use the same [[lookup @item.name]] on
+          another target.</p>
         chat: >-
-          <p>The Roper attacks with its Tendril. The target is grappled. Until
-          the grapple ends, the target is restrained and has
-          <strong>disadvantage on Strength Checks and Strength Saving
-          Throws</strong>.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled]. Until the
+          grapple ends, the target is &amp;reference[restrained] and has
+          disadvantage on Strength checks and Strength saving throws.</p>
       source:
         custom: ''
         book: ''
@@ -856,7 +894,7 @@ items:
             formula: ''
         base:
           number: null
-          denomination: 0
+          denomination: null
           types: []
           custom:
             enabled: false
@@ -870,9 +908,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -881,8 +918,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        V3G7YupPtK1OuiYB:
           type: attack
           activation:
             type: action
@@ -897,13 +933,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: kywQ7FbB1Ho6Zc1w
+              level: {}
           range:
             value: '50'
             units: ft
@@ -917,7 +956,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -930,26 +970,94 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: V3G7YupPtK1OuiYB
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tendril
       mastery: ''
-    effects: []
+    effects:
+      - name: Grappled by Tendril
+        img: icons/commodities/biological/tentacle-thorned-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.qZyLwdx7lj5d1wfD.Item.bTiw89tDx64zTqDk
+        transfer: false
+        _id: kywQ7FbB1Ho6Zc1w
+        type: base
+        system:
+          changes:
+            - key: system.abilities.str.check.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+            - key: system.abilities.str.save.roll.mode
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 15). While
+          grappled in this way, you are also &amp;reference[restrained
+          apply=false] have disadvantage on Strength checks and saving
+          throws.</p><p>This tendril can be attacked (AC 20; HP 10; immunity to
+          poison and psychic damage). Destroying a tendril deals no damage to
+          the roper. A tendril can also be broken if a creature takes an action
+          and succeeds on a [[/check 15 str]] check.</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781882394061
+          modifiedTime: 1781882573556
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!qZyLwdx7lj5d1wfD.bTiw89tDx64zTqDk.kywQ7FbB1Ho6Zc1w
     folder: null
     sort: 300000
     ownership:
@@ -958,26 +1066,28 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765826632050
+      systemVersion: 6.0.0
+      createdTime: 1781882328473
+      modifiedTime: 1781882608661
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.bTiw89tDx64zTqDk'
   - _id: iGuyFLbKazqPCcXY
     name: Reel
     type: feat
-    img: icons/magic/control/sihouette-hold-beam-green.webp
+    img: icons/creatures/fish/squid-kraken-orange.webp
     system:
       description:
         value: >-
-          <p>The roper pulls each creature grappled by it up to 25 feet straight
+          <p>The [[lookup @name lowercase]]{monster} pulls each creature
+          &amp;reference[grappled apply=false] by it up to 25 feet straight
           toward it.</p>
         chat: >-
-          <section class="secret"><p></p></section><p>The roper pulls each
-          creature grappled by it up to 25 ft. straight toward it.</p>
+          <p>The [[lookup @name]]{monster} pulls each creature
+          &amp;reference[grappled apply=false] by it up to 25 feet straight
+          toward it.</p>
       source:
         custom: ''
         book: ''
@@ -990,7 +1100,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -1033,7 +1143,7 @@ items:
               units: ''
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1048,6 +1158,13 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: Reel in Prey
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -1061,11 +1178,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.IwQRhCTgCfAADyt8
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826665977
+      systemVersion: 6.0.0
+      createdTime: 1781882253135
+      modifiedTime: 1781882315160
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.iGuyFLbKazqPCcXY'
@@ -1076,9 +1193,10 @@ items:
     system:
       description:
         value: >-
-          <p>The roper makes four attacks with its [[/item
-          .bTiw89tDx64zTqDk]]{tendrils}, uses [[/item .iGuyFLbKazqPCcXY]]{Reel},
-          and makes one attack with its [[/item .mBRjMwEitGrPDm5I]]{bite}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes four attacks with its
+          [[/item .bTiw89tDx64zTqDk]]{tendrils}, uses [[/item
+          .iGuyFLbKazqPCcXY]]{reel}, and makes one attack with its [[/item
+          .mBRjMwEitGrPDm5I]]{bite}.</p>
         chat: ''
       source:
         custom: ''
@@ -1092,13 +1210,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        lkupXc7YCrWoYWM4:
           type: utility
           activation:
             type: action
@@ -1113,15 +1230,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1132,7 +1250,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1149,7 +1268,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: lkupXc7YCrWoYWM4
       enchant: {}
       prerequisites:
         level: null
@@ -1163,14 +1290,68 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765826633014
+      systemVersion: 6.0.0
+      createdTime: 1781882627597
+      modifiedTime: 1783366499388
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!qZyLwdx7lj5d1wfD.fyF8vQbuvkuLKmKf'
+  - _id: hSRGuvhA1vkf4mLW
+    name: Spider Climb
+    type: feat
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including upside down on ceilings, without needing to make
+          an ability check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: spider-climb
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 150000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.0Oap13hi3sDNwVZn
+      duplicateSource: Item.lDSSf3aXXmZYJsk1
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781882080802
+      modifiedTime: 1781882080802
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!qZyLwdx7lj5d1wfD.hSRGuvhA1vkf4mLW'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -1179,7 +1360,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171260236

@@ -47,12 +47,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -92,7 +95,13 @@ system:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: iVWIbqSzCYFAQzV6
+          level: {}
+          onSave: false
+        - _id: rFRjXg3BjmTb5GOh
+          level: {}
+          onSave: false
       range:
         override: false
       target:
@@ -111,23 +120,157 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: enlarge-reduce
 sort: 0
 flags: {}
-img: icons/magic/control/energy-stream-link-large-blue.webp
-effects: []
+img: icons/magic/control/silhouette-grow-shrink-tan.webp
+effects:
+  - name: Enlarged
+    img: icons/magic/control/silhouette-grow-shrink-tan.webp
+    origin: Compendium.dnd5e.spells.Item.WahI41a3goVUg0x1
+    transfer: false
+    _id: iVWIbqSzCYFAQzV6
+    type: base
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          type: add
+          value: 1d4
+          phase: initial
+          priority: null
+        - key: system.bonuses.rwak.damage
+          type: add
+          value: 1d4
+          phase: initial
+          priority: null
+        - key: system.abilities.str.check.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+        - key: system.abilities.str.save.roll.mode
+          type: add
+          value: 1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your size doubles in all dimensions, and your weight is multiplied by
+      eight. This growth increases your size by one category—from Medium to
+      Large, for example. If there isn't enough room for you to double its size,
+      you attain the maximum possible size in the space available. Until the
+      spell ends, you also have advantage on Strength Checks and Strength Saving
+      Throws.</p><p>Your Weapons also grow to match your new size. While these
+      Weapons are enlarged, your attacks with them deal 1d4 extra damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225668835
+      modifiedTime: 1781822601725
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!WahI41a3goVUg0x1.iVWIbqSzCYFAQzV6'
+  - name: Reduced
+    img: icons/magic/control/silhouette-grow-shrink-blue.webp
+    origin: Compendium.dnd5e.spells.Item.WahI41a3goVUg0x1
+    transfer: false
+    _id: rFRjXg3BjmTb5GOh
+    type: base
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          type: add
+          value: '-1d4'
+          phase: initial
+          priority: null
+        - key: system.bonuses.rwak.damage
+          type: add
+          value: '-1d4'
+          phase: initial
+          priority: null
+        - key: system.abilities.str.check.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+        - key: system.abilities.str.save.roll.mode
+          type: add
+          value: -1
+          phase: initial
+          priority: null
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>Your size is halved in all dimensions, and your weight is reduced to
+      one-eighth of normal. This reduction decreases your size by one
+      category—from Medium to Small, for example. Until the spell ends, you also
+      has disadvantage on Strength Checks and Strength Saving Throws.</p><p>Your
+      Weapons also shrink to match your new size. While these Weapons are
+      reduced, your attacks with them deal 1d4 less damage (this can't reduce
+      the damage below 1).</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781225669444
+      modifiedTime: 1781225854455
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!WahI41a3goVUg0x1.rFRjXg3BjmTb5GOh'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357857
-  modifiedTime: 1725992720379
+  modifiedTime: 1781225669484
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!WahI41a3goVUg0x1'

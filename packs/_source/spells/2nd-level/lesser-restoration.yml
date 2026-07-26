@@ -7,8 +7,9 @@ system:
   description:
     value: >-
       <p>You touch a creature and can end either one disease or one condition
-      afflicting it. The condition can be blinded, deafened, paralyzed, or
-      poisoned.</p>
+      afflicting it. The condition can be &amp;reference[blinded apply=false],
+      &amp;reference[deafened apply=false], &amp;reference[paralyzed
+      apply=false], or &amp;reference[poisoned apply=false].</p>
     chat: ''
   source:
     custom: ''
@@ -28,11 +29,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -89,20 +93,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: lesser-restoration
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-blue.webp
+img: icons/consumables/plants/leaf-hastate-glowing-green.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351723
-  modifiedTime: 1725992718341
+  modifiedTime: 1781226718801
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!F0GsG0SJzsIOacwV'

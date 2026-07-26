@@ -120,20 +120,18 @@ effects:
   - name: Spiked
     origin: Compendium.dnd5e.spells24.Item.phbsplMindSpike0
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/skills/targeting/target-strike-gray.webp
     _id: AbNgTsT2gRxwmBpg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>You always know the target’s location until the spell ends, but only
       while the two of you are on the same plane of existence. While you have
@@ -147,23 +145,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976021
+      modifiedTime: 1783543976021
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplMindSpike0.AbNgTsT2gRxwmBpg'
 folder: 3SjcO2acsFnWegp4
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745433110943
-  modifiedTime: 1745712695373
+  modifiedTime: 1783543976021
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 101563

@@ -105,20 +105,18 @@ effects:
   - name: Blindness
     origin: Compendium.dnd5e.spells24.Item.phbsplBlindnessD
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/blinded.svg
     _id: MIYqFloILx3luzwc
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>At the end of each of its turns, the target repeats the [[/save
       ability=con]] save, ending the spell on itself on a success.</p>
@@ -130,30 +128,31 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974212
+      modifiedTime: 1783543974212
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBlindnessD.MIYqFloILx3luzwc'
   - name: Deafness
     origin: Compendium.dnd5e.spells24.Item.phbsplBlindnessD
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: systems/dnd5e/icons/svg/statuses/deafened.svg
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>At the end of each of its turns, the target repeats the [[/save
       ability=con]] save, ending the spell on itself on a success.</p>
@@ -165,14 +164,17 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974212
+      modifiedTime: 1783543974212
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: XY351duUwtwqIGHC
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplBlindnessD.XY351duUwtwqIGHC'
 folder: 3SjcO2acsFnWegp4
 sort: 4900000
@@ -185,11 +187,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425943890
-  modifiedTime: 1745256787059
+  modifiedTime: 1783543974212
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBlindnessD'

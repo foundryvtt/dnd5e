@@ -34,21 +34,20 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmAcidAbsorption
     _id: 2G2gdLkIBFrb71Iv
     type: base
-    system: {}
-    changes:
-      - key: system.traits.di.value
-        mode: 2
-        value: acid
-        priority: null
+    system:
+      changes:
+        - key: system.traits.di.value
+          value: acid
+          priority: null
+          type: add
+          phase: initial
+          _id: hfLg0NlysLYzn3y3
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The creature is immune to Acid damage and instead regains a number of
       Hit Points equal to the Acid damage dealt.</p>
@@ -60,22 +59,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1737567996403
-      modifiedTime: 1737568040198
+      modifiedTime: 1783544084950
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmAcidAbsorption.2G2gdLkIBFrb71Iv'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1734466636845
+  modifiedTime: 1783544084950
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

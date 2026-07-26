@@ -97,28 +97,30 @@ effects:
   - name: See Invisibility
     origin: Compendium.dnd5e.spells24.Item.phbsplSeeInvisib
     duration:
-      rounds: 1
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/perception/orb-eye-scrying.webp
     _id: BRwB0T8buWhJAuDx
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.senses.special
-        mode: 2
-        value: ;Invisible creatures
-        priority: null
-      - key: system.attributes.senses.special
-        mode: 2
-        value: ;Ethereal Plane
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.senses.special
+          value: ;Invisible creatures
+          priority: null
+          type: add
+          phase: initial
+          _id: xBhJxDANaZY2d0a0
+        - key: system.attributes.senses.special
+          value: ;Ethereal Plane
+          priority: null
+          type: add
+          phase: initial
+          _id: rkt8S73dY1NOs4tv
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -127,13 +129,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976694
+      modifiedTime: 1783543976694
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplSeeInvisib.BRwB0T8buWhJAuDx'
 folder: 3SjcO2acsFnWegp4
 sort: 800000
@@ -146,11 +151,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425969918
-  modifiedTime: 1745256797905
+  modifiedTime: 1783543976694
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSeeInvisib'

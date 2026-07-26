@@ -33,11 +33,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -57,8 +60,7 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    2exFAw3zKK49UfZJ:
       type: attack
       activation:
         type: action
@@ -69,24 +71,32 @@ system:
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       attack:
         ability: ''
         bonus: ''
@@ -95,7 +105,7 @@ system:
         flat: false
         type:
           value: melee
-          classification: spell
+          classification: ''
       damage:
         critical:
           bonus: ''
@@ -116,20 +126,84 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 600000
+      name: Vampiric Touch Attack
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 2exFAw3zKK49UfZJ
+    KfKXsfMmkV5Z6EiR:
+      type: utility
+      name: Cast
+      _id: KfKXsfMmkV5Z6EiR
+      img: ''
+      sort: 500000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: vampiric-touch
 sort: 0
 flags: {}
-img: icons/magic/unholy/strike-beam-blood-red-gray.webp
+img: icons/magic/unholy/hand-claw-glow-orange.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357370
-  modifiedTime: 1725992720226
+  modifiedTime: 1783217008709
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!UfHQhA54M4323gVO'

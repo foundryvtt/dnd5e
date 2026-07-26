@@ -457,9 +457,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -474,7 +471,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -494,17 +491,19 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: sDvx0IybgYa8Q4WG
     name: Angelic Weapons
     type: feat
-    img: icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp
+    img: icons/weapons/swords/sword-gold-holy.webp
     system:
       description:
         value: >-
-          <p>The planetar's weapon attacks are magical. When the planetar hits
-          with any weapon, the weapon deals an extra 5d8 radiant damage
-          (included in the attack).</p>
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical. When the [[lookup @name lowercase]]{monster} hits with any
+          weapon, the weapon deals an extra 5d8 radiant damage (included in the
+          attack).</p>
         chat: >-
           <p>The planetar's weapon attacks are magical. When the planetar hits
           with any weapon, the weapon deals extra <em>radiant damage</em>
@@ -521,10 +520,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -539,21 +539,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cz1LUaiXG8GshgU9
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445133570
+      systemVersion: 6.0.0
+      createdTime: 1781791554713
+      modifiedTime: 1781791590172
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!XEByBLeOkDgL3mrr.sDvx0IybgYa8Q4WG'
   - _id: 2kBUlTLMlwq3KoUB
     name: Divine Awareness
     type: feat
-    img: icons/magic/perception/third-eye-blue-red.webp
+    img: icons/magic/perception/eye-slit-red-orange.webp
     system:
       description:
-        value: <p>The planetar knows if it hears a lie.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} knows if it hears a
+          lie.</p>
         chat: ''
       source:
         custom: ''
@@ -567,10 +569,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -585,12 +588,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lOJK48AtlIcfYPPB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781791638772
+      modifiedTime: 1781791651257
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!XEByBLeOkDgL3mrr.2kBUlTLMlwq3KoUB'
   - _id: 9hrSczyYfl4fSrpZ
@@ -646,7 +649,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -761,7 +764,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -769,54 +772,6 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!XEByBLeOkDgL3mrr.2C0408CEBtrZW8ji'
-  - _id: 5sDIEn5aplaeXax7
-    name: Magic Resistance
-    type: feat
-    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The planetar has advantage on saving throws against spells and
-          other magical effects.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445146570
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!XEByBLeOkDgL3mrr.5sDIEn5aplaeXax7'
   - _id: LyxrhwvzMW4YbiYE
     name: Multiattack
     type: feat
@@ -908,7 +863,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -919,11 +874,13 @@ items:
   - _id: BBLXs9hiUvtRaP16
     name: Greatsword
     type: weapon
-    img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+    img: icons/weapons/swords/greatsword-guard-gold-worn.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Planetar attacks with its Greatsword.</p>
+        chat: >-
+          <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -989,7 +946,7 @@ items:
         - hvy
         - mgc
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -998,8 +955,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        puD97d7A8r57DOxl:
           type: attack
           activation:
             type: action
@@ -1014,10 +970,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1034,7 +991,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1047,35 +1005,45 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 5
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 5
                 denomination: 8
                 bonus: ''
                 types:
                   - radiant
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: puD97d7A8r57DOxl
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: greatsword
       mastery: ''
     effects: []
@@ -1087,24 +1055,26 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378770591
+      systemVersion: 6.0.0
+      createdTime: 1781791657877
+      modifiedTime: 1781791723622
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!XEByBLeOkDgL3mrr.BBLXs9hiUvtRaP16'
   - _id: VJz6sW3vOJcEL4IS
     name: Healing Touch
     type: feat
-    img: icons/magic/light/explosion-star-glow-blue-purple.webp
+    img: icons/magic/holy/prayer-hands-glowing-yellow.webp
     system:
       description:
         value: >-
           <p>The [[lookup @name lowercase]]{monster} touches another creature.
-          The target magically regains 30 ([[/heal]]{6d8 + 3}) hit points and is
-          freed from any curse, disease, poison, blindness, or deafness.</p>
+          The target magically regains [[/healing average]] and is freed from
+          any curse, disease, poison, &amp;reference[blinded
+          apply=false]{Blindness}, or &amp;reference[deafened
+          apply=false]{Deafness}.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The planetar touches
           another creature. The target magically regains 30 (6d8 + 3) hit points
@@ -1124,13 +1094,13 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        dhJZmoRNXDJ9z02Q:
           type: heal
           activation:
             type: action
@@ -1140,26 +1110,25 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1171,6 +1140,7 @@ items:
               width: ''
               height: ''
               units: touch
+              stationary: false
             affects:
               count: ''
               type: creature
@@ -1195,7 +1165,19 @@ items:
               mode: whole
               number: null
               formula: ''
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: dhJZmoRNXDJ9z02Q
+          name: Heal Creature
       enchant: {}
       prerequisites:
         level: null
@@ -1209,11 +1191,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.r3Ugp8f5Ckw2EUHL
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745445218996
+      systemVersion: 6.0.0
+      createdTime: 1781791733358
+      modifiedTime: 1781791790402
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!XEByBLeOkDgL3mrr.VJz6sW3vOJcEL4IS'
@@ -1325,7 +1307,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1468,7 +1450,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.dLJhxDfeyOsc3zsY
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1659,7 +1641,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.TkJ8Wtg1L7TZtspm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1813,7 +1795,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.5e1xTohkzqFqbYH4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1954,7 +1936,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2083,7 +2065,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.d54VDyFulD9xxY7J
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2261,7 +2243,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2406,7 +2388,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.OVikYmSdHliAG2YD
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2414,6 +2396,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!XEByBLeOkDgL3mrr.OVikYmSdHliAG2YD'
+  - _id: XQnt0izxeEvDYmiH
+    name: Magic Resistance
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-resistance
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/magic/defensive/barrier-shield-dome-pink.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781791631519
+      modifiedTime: 1781791631519
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.Hc6MqLQhPTI1KOvm
+    _key: '!actors.items!XEByBLeOkDgL3mrr.XQnt0izxeEvDYmiH'
 effects: []
 folder: pCy5ieJezFRCg9A0
 sort: 0
@@ -2422,7 +2457,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171237273

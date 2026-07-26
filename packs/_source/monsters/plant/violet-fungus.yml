@@ -447,9 +447,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -464,7 +461,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -484,15 +481,16 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: OEx9iy4HDipiYsPt
     name: Rotting Touch
     type: weapon
-    img: icons/creatures/claws/claw-curved-poison-purple.webp
+    img: icons/magic/nature/plant-undersea-orb-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Violet Fungus attacks with its Rotting Touch.</p>
+        chat: <p>The [[lookup @name]]{monster} attacks with its Rotting Touch.</p>
       source:
         custom: ''
         book: ''
@@ -565,8 +563,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        sgANbULItYQotifM:
           type: attack
           activation:
             type: action
@@ -581,6 +578,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -601,7 +599,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -627,10 +626,16 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: sgANbULItYQotifM
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -645,11 +650,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1757447473583
+      systemVersion: 6.0.0
+      createdTime: 1781480796102
+      modifiedTime: 1781480887759
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.OEx9iy4HDipiYsPt'
@@ -660,8 +665,8 @@ items:
     system:
       description:
         value: >-
-          <p>The fungus makes 1d4 [[/item .OEx9iy4HDipiYsPt]]{Rotting Touch}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes 1d4 [[/item
+          .OEx9iy4HDipiYsPt]]{rotting touch} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -675,7 +680,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -729,10 +734,17 @@ items:
             recovery: []
           roll:
             formula: 1d4
-            name: ''
+            name: Rotting Touch Attacks
             prompt: false
             visible: false
           sort: 0
+          name: ''
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -746,18 +758,18 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1757447430330
+      systemVersion: 6.0.0
+      createdTime: 1781480762081
+      modifiedTime: 1783369331201
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.wjDktLNTUnueuX2X'
   - _id: fZgfSlczUTtrCNEb
     name: False Appearance
     type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
+    img: icons/consumables/mushrooms/umbontae-bumpy-purple.webp
     system:
       description:
         value: >-
@@ -794,12 +806,12 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      createdTime: 1781910320347
+      modifiedTime: 1781910320347
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7EmUVycEASn7SFL0.fZgfSlczUTtrCNEb'
 effects: []
@@ -810,7 +822,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171205645
