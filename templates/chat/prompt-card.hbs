@@ -1,8 +1,8 @@
 <div class="chat-card request-card">
     <div class="card-buttons">
         {{#each buttons}}
-        <button {{ dnd5e-dataset dataset }}>
-            <span class="visible-dc">{{{ buttonLabel }}}</span>
+        <button type="button" data-action="{{ action }}" data-index="{{ index }}" {{#if hidden}}hidden{{/if}}>
+            <span class="visible-dc">{{{ label }}}</span>
             <span class="hidden-dc">{{{ hiddenLabel }}}</span>
         </button>
         {{/each}}
