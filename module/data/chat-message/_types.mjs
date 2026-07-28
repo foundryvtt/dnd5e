@@ -89,11 +89,11 @@
 
 /**
  * @typedef SaveMessageSystemData
- * @property {string} ability            Ability used for the save, or "death" for a death saving throw.
+ * @property {string} ability            Ability used for the save. Required unless this is a death save.
  * @property {ActorDeltasData} deltas    Actor changes recorded by this save (death saves only).
- * @property {boolean} isConcentration   Whether this save was a concentration save.
  * @property {SaveOutcome} outcome       Terminal outcome shown on the card.
  * @property {boolean} resisted          Whether the save was turned into a success by spending a legendary resistance.
+ * @property {"ability"|"concentration"|"death"} type  Kind of saving throw this message represents.
  */
 
 /* -------------------------------------------- */

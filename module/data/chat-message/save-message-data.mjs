@@ -21,13 +21,13 @@ export default class SaveMessageData extends RollMessageData {
   /** @override */
   static defineSchema() {
     return {
-      ability: new StringField({ blank: false, required: true }),
+      ability: new StringField({ blank: false, required: false }),
       deltas: new ActorDeltasField(),
-      isConcentration: new BooleanField(),
       outcome: new StringField({
         blank: false, choices: ["broken", "death", "revive", "stable"], initial: null, nullable: true, required: false
       }),
-      resisted: new BooleanField()
+      resisted: new BooleanField(),
+      type: new StringField({ blank: false, choices: ["ability", "concentration", "death"], initial: "ability" })
     };
   }
 
@@ -43,6 +43,16 @@ export default class SaveMessageData extends RollMessageData {
   }, { inplace: false }));
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static validateJoint(data) {
+    super.validateJoint(data);
+    if ( (data.type !== "death") && !data.ability ) {
+      throw new Error("A saving throw message requires an ability unless it is a death saving throw.");
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -52,7 +62,7 @@ export default class SaveMessageData extends RollMessageData {
    */
   get canBreakConcentration() {
     const actor = this.parent.getAssociatedActor();
-    return this.isConcentration && !this.concentrationBroken && !!actor?.isOwner
+    return (this.type === "concentration") && !this.concentrationBroken && !!actor?.isOwner
       && !dnd5e.settings.disableConcentration && this.parent.rolls.some(r => r.isFailure) && !this.forceSuccess;
   }
 
@@ -72,7 +82,7 @@ export default class SaveMessageData extends RollMessageData {
 
   /** @override */
   get canCrit() {
-    return this.ability === "death";
+    return this.type === "death";
   }
 
   /* -------------------------------------------- */
@@ -99,10 +109,10 @@ export default class SaveMessageData extends RollMessageData {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const { canBreakConcentration, canResist, concentrationBroken, isConcentration, resisted } = this;
+    const { canBreakConcentration, canResist, concentrationBroken, resisted } = this;
     const actor = this.parent.getAssociatedActor();
-    Object.assign(context, { canBreakConcentration, canResist, concentrationBroken, isConcentration, resisted });
-    context.death = this.ability === "death";
+    Object.assign(context, { canBreakConcentration, canResist, concentrationBroken, resisted });
+    context.death = this.type === "death";
     if ( actor ) {
       // Filter out success & failure tallies since their real data changes might read as confusing.
       const deltas = {
