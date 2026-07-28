@@ -58,6 +58,31 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef PromptMessageSystemData
+ * @property {boolean} broadcast           Whether the prompt is broadcast to the whole table or applies only to the
+ *                                         speaker.
+ * @property {PromptButtonData[]} buttons  Buttons offering a roll or an action to the user.
+ */
+
+/**
+ * @typedef {"check"|"concentration"|"endConcentration"|"save"|"skill"|"tool"} PromptButtonType
+ */
+
+/**
+ * @typedef PromptButtonData
+ * @property {string} [ability]                 Ability used for the roll.
+ * @property {number} [dc]                      Target value for the roll.
+ * @property {"long"|"short"} [format]          Label format style.
+ * @property {string} [skill]                   Skill used for the roll.
+ * @property {string} [tool]                    Tool used for the roll.
+ * @property {PromptButtonType} type            Roll or action performed by this button.
+ * @property {string} [usingTool]               Tool used to make a skill check.
+ * @property {"all"|"creator"|"gm"} visibility  Which users can see this button.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef RequestMessageSystemData
  * @property {object} button
  * @property {string} [button.icon]         Font awesome code or path to SVG icon for the request button.
