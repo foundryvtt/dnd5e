@@ -8,7 +8,6 @@ import ActivationsField from "../../data/chat-message/fields/activations-field.m
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
-import { createRollLabel } from "../../enrichers.mjs";
 import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
 } from "../../utils.mjs";
@@ -1128,31 +1127,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const isConcentrating = this.concentration.effects.size > 0;
     if ( !isConcentrating ) return null;
 
-    const dataset = {
-      action: "concentration",
-      dc: dc
-    };
-    if ( ability in CONFIG.DND5E.abilities ) dataset.ability = ability;
-
-    const config = {
-      type: "concentration",
-      format: "short",
-      icon: true
-    };
+    const button = { dc, format: "short", type: "concentration" };
+    if ( ability in CONFIG.DND5E.abilities ) button.ability = ability;
 
     return ChatMessage.implementation.create({
-      content: await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/chat/roll-request-card.hbs",
-        {
-          buttons: [{
-            dataset: { ...dataset, type: "concentration", visibility: "all" },
-            buttonLabel: createRollLabel({ ...dataset, ...config }),
-            hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
-          }]
-        }
-      ),
-      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
-      speaker: ChatMessage.implementation.getSpeaker({ actor: this })
+      speaker: ChatMessage.implementation.getSpeaker({ actor: this }),
+      system: { broadcast: false, buttons: [button] },
+      type: "prompt",
+      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER"))
     });
   }
 
@@ -1166,23 +1148,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const isConcentrating = this.concentration.effects.size > 0;
     if ( !isConcentrating ) return null;
 
-    const label = `<i class="fa-solid fa-ban" inert></i>${
-      _loc("DND5E.CONCENTRATION.Action.Break")
-    }`;
-
     return ChatMessage.implementation.create({
-      content: await foundry.applications.handlebars.renderTemplate(
-        "systems/dnd5e/templates/chat/roll-request-card.hbs",
-        {
-          buttons: [{
-            dataset: { action: "endConcentration", actorUuid: this.uuid, visibility: "all" },
-            buttonLabel: label,
-            hiddenLabel: label
-          }]
-        }
-      ),
-      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
-      speaker: ChatMessage.implementation.getSpeaker({ actor: this })
+      speaker: ChatMessage.implementation.getSpeaker({ actor: this }),
+      system: { broadcast: false, buttons: [{ type: "endConcentration" }] },
+      type: "prompt",
+      whisper: game.users.filter(user => this.testUserPermission(user, "OWNER"))
     });
   }
 

@@ -4,6 +4,7 @@ import CheckMessageData from "./check-message-data.mjs";
 import GenericMessageData from "./generic-message-data.mjs";
 import HitDieMessageData from "./hit-die-message-data.mjs";
 import HitPointsMessageData from "./hit-points-message-data.mjs";
+import PromptMessageData from "./prompt-message-data.mjs";
 import RequestMessageData from "./request-message-data.mjs";
 import RestMessageData from "./rest-message-data.mjs";
 import RollMessageData from "./roll-message-data.mjs";
@@ -19,6 +20,7 @@ export {
   GenericMessageData,
   HitDieMessageData,
   HitPointsMessageData,
+  PromptMessageData,
   RequestMessageData,
   RestMessageData,
   RollMessageData,
@@ -36,6 +38,7 @@ export const config = {
   generic: GenericMessageData,
   hitDie: HitDieMessageData,
   hitPoints: HitPointsMessageData,
+  prompt: PromptMessageData,
   request: RequestMessageData,
   rest: RestMessageData,
   save: SaveMessageData,
