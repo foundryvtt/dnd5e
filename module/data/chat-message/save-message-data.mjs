@@ -64,7 +64,7 @@ export default class SaveMessageData extends RollMessageData {
    */
   get canResist() {
     const actor = this.parent.getAssociatedActor();
-    return !!actor?.system.isNPC && actor.isOwner && !this.resisted
+    return !!actor?.system.isNPC && actor.isOwner && !this.resisted && !this.concentrationBroken
       && this.parent.rolls.some(r => r.isFailure) && !!actor.system.resources.legres.value;
   }
 
