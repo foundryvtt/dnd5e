@@ -65,6 +65,7 @@ export default class DamageMessageData extends RollMessageData {
       parts: rolls.map(roll => {
         const part = roll.aggregateTerms();
         part.config = CONFIG.DND5E.damageTypes[part.type] ?? CONFIG.DND5E.healingTypes[part.type] ?? null;
+        part.label = part.config?.labelShort ?? part.config?.label ?? "";
         return part;
       }),
       showTray: game.user.isGM,
