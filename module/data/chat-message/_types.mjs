@@ -40,7 +40,20 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef DamageMessageSystemData
+ * @property {string|null} damageOnSave  How this damage is affected by a successful save, if it followed one.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef GenericMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {DamageMessageSystemData} HealingMessageSystemData
  */
 
 /* -------------------------------------------- */

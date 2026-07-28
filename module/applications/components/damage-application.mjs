@@ -1,3 +1,5 @@
+import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
+import DamageRoll from "../../dice/damage-roll.mjs";
 import { formatNumber } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
@@ -87,6 +89,13 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     const messageId = this.closest("[data-message-id]")?.dataset.messageId;
     this.chatMessage = game.messages.get(messageId);
     if ( !this.chatMessage ) return;
+
+    const rolls = this.chatMessage.rolls.filter(r => r instanceof DamageRoll);
+    this.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
+      properties: new Set(roll.options.properties ?? []),
+      type: roll.options.type,
+      value: Math.max(0, roll.total)
+    }));
 
     // Build the frame HTML only once
     if ( !this.targetList ) {

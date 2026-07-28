@@ -1,7 +1,9 @@
 import BastionAttackMessageData from "./bastion-attack-message-data.mjs";
 import BastionTurnMessageData from "./bastion-turn-message-data.mjs";
 import CheckMessageData from "./check-message-data.mjs";
+import DamageMessageData from "./damage-message-data.mjs";
 import GenericMessageData from "./generic-message-data.mjs";
+import HealingMessageData from "./healing-message-data.mjs";
 import HitDieMessageData from "./hit-die-message-data.mjs";
 import HitPointsMessageData from "./hit-points-message-data.mjs";
 import PromptMessageData from "./prompt-message-data.mjs";
@@ -17,7 +19,9 @@ export {
   BastionAttackMessageData,
   BastionTurnMessageData,
   CheckMessageData,
+  DamageMessageData,
   GenericMessageData,
+  HealingMessageData,
   HitDieMessageData,
   HitPointsMessageData,
   PromptMessageData,
@@ -35,7 +39,9 @@ export const config = {
   bastionAttack: BastionAttackMessageData,
   bastionTurn: BastionTurnMessageData,
   check: CheckMessageData,
+  damage: DamageMessageData,
   generic: GenericMessageData,
+  healing: HealingMessageData,
   hitDie: HitDieMessageData,
   hitPoints: HitPointsMessageData,
   prompt: PromptMessageData,
