@@ -158,8 +158,9 @@
 
 /**
  * @typedef DamageModificationData
- * @property {Record<string, string>} amount  Damage boost or reduction by damage type.
- * @property {Set<string>} bypasses           Keys for physical properties that cause modification to be bypassed.
+ * @property {Record<string, string>} amount    Damage boost or reduction by damage type.
+ * @property {Set<string>} bypasses             Keys for physical properties that cause modification to be bypassed.
+ * @property {Record<string, number>} multiply  Damage multiplier by damage type.
  */
 
 /**
