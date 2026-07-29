@@ -59,21 +59,22 @@ export default class DamageMessageData extends RollMessageData {
   async _prepareContext(options) {
     const aggregate = CONFIG.DND5E.aggregateDamageDisplay;
     const rolls = aggregate ? aggregateDamageRolls(this.parent.rolls) : this.parent.rolls;
+    const isPrivate = !this.parent.isContentVisible;
     const context = {
+      isPrivate,
       formula: rolls.map(r => aggregate ? r.formula : ` + ${r.formula}`).join("").replace(/^ \+ /, ""),
-      isPrivate: !this.parent.isContentVisible,
       parts: rolls.map(roll => {
         const part = roll.aggregateTerms();
         part.config = CONFIG.DND5E.damageTypes[part.type] ?? CONFIG.DND5E.healingTypes[part.type] ?? null;
         part.label = part.config?.labelShort ?? part.config?.label ?? "";
         return part;
       }),
-      showTray: game.user.isGM,
+      showTray: game.user.isGM && !isPrivate,
       total: rolls.reduce((total, roll) => total + Math.max(0, roll.total), 0)
     };
 
     const item = this.parent.getAssociatedItem();
-    if ( !context.isPrivate && item ) {
+    if ( !isPrivate && item ) {
       const isCritical = this.parent.rolls[0]?.isCritical === true;
       context.header = {
         isCritical, item,
@@ -83,7 +84,7 @@ export default class DamageMessageData extends RollMessageData {
       };
     }
 
-    if ( this.onSave ) {
+    if ( !isPrivate && this.onSave ) {
       context.onSave = _loc(`DND5E.SAVE.FIELDS.damage.onSave.${this.onSave.capitalize()}`);
     }
 

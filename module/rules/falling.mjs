@@ -55,7 +55,7 @@ export async function postFallDamage(targets, distance) {
           targets: getTargetDescriptors(targets)
         }
       },
-      flavor: game.i18n.format("DND5E.FALLING.DamageFlavor", {
+      flavor: _loc("DND5E.FALLING.DamageFlavor", {
         distance: formatLength(Math.round(distance), units)
       }),
       speaker: ChatMessage.implementation.getSpeaker(),

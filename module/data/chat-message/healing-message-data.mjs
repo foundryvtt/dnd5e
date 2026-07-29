@@ -16,13 +16,6 @@ export default class HealingMessageData extends DamageMessageData {
   /* -------------------------------------------- */
 
   /** @override */
-  get canApplyDamage() {
-    return false;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   get isHealing() {
     return true;
   }
