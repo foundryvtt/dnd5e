@@ -1668,7 +1668,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const returnValue = oldFormat ? roll : rolls;
     const card = roll.parent;
 
-    const { deltas, outcome, updates } = AttributesFields.applyDeathSaveResult(death, {
+    const { outcome, updates } = AttributesFields.applyDeathSaveResult(death, {
       isSuccess: roll.total >= (roll.options.target ?? 10),
       isCritical: roll.isCritical,
       isFumble: roll.isFumble
@@ -1691,6 +1691,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.rollDeathSave", rolls, details) === false ) return returnValue;
     if ( Hooks.call("dnd5e.rollDeathSaveV2", rolls, details) === false ) return returnValue;
 
+    const deltas = ActorDeltasField.getDeltas(this, { actor: details.updates, item: [] });
     if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
     if ( card ) await card.update({ "system.deltas": deltas, "system.outcome": details.outcome ?? null });
 

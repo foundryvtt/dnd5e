@@ -3,6 +3,7 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { getRulesVersion } from "../../enrichers.mjs";
 import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
+import { ActorDeltasField } from "../chat-message/fields/deltas-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import MovementField from "../shared/movement-field.mjs";
@@ -580,12 +581,12 @@ export default class NPCData extends CreatureTemplate {
       const priorFailure = message.system.deltas?.actor
         ?.find(d => d.keyPath === "system.attributes.death.failure")?.delta ?? 0;
       const failure = this.attributes.death.failure - priorFailure;
-      const { deltas, outcome, updates } = AttributesFields.applyDeathSaveResult({
+      const { outcome, updates } = AttributesFields.applyDeathSaveResult({
         failure, success: this.attributes.death.success
       }, { isSuccess: true });
       updates["system.attributes.death.failure"] ??= failure;
       Object.assign(actorUpdate, updates);
-      messageUpdate["system.deltas"] = _replace(deltas);
+      messageUpdate["system.deltas"] = _replace(ActorDeltasField.getDeltas(this.parent, { actor: updates, item: [] }));
       messageUpdate["system.outcome"] = outcome;
     }
 

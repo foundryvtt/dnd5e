@@ -80,8 +80,11 @@ export default class SaveMessageData extends RollMessageData {
     Object.assign(context, { canResist, resisted });
     context.death = this.ability === "death";
     if ( actor ) {
-      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, actor, this.parent.rolls);
-      context.deltasHeading = "DND5E.DeathSave";
+      // Filter out success & failure tallies since their real data changes might read as confusing.
+      const deltas = {
+        ...this.deltas, actor: this.deltas.actor.filter(d => !d.keyPath.startsWith("system.attributes.death."))
+      };
+      context.deltas = ActorDeltasField.processDeltas.call(deltas, actor, this.parent.rolls);
     }
     if ( this.outcome ) context.outcome = _loc(`DND5E.DEATH.Outcome.${this.outcome}`, {
       name: actor?.name ?? ""
