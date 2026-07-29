@@ -31,6 +31,9 @@ export default class TraitsField {
         }),
         bypasses: new SetField(new StringField(), {
           label: "DND5E.DAMAGE.PhysicalBypass.Label", hint: "DND5E.DAMAGE.PhysicalBypass.Hint"
+        }),
+        multiply: new MappingField(new NumberField({nullable: false, initial: 1}), {
+          label: "DND5E.DamMult", labels: { value: "DND5E.DamMult" }
         })
       }),
       ci: new SimpleTraitField({}, { label: "DND5E.ConImm" })

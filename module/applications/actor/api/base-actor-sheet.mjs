@@ -695,7 +695,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const dm = this.actor.system.traits?.dm;
     if ( dm ) {
       const rollData = this.actor.getRollData({ deterministic: true });
-      const values = Object.entries(dm.amount).map(([k, v]) => {
+      const amountValues = Object.entries(dm.amount).map(([k, v]) => {
         const total = simplifyBonus(v, rollData);
         if ( !total ) return null;
         const value = {
@@ -709,6 +709,20 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         }));
         return value;
       }).filter(f => f);
+      const multiplyValues = Object.entries(dm.multiply).map(([k, v]) => {
+        if ( !v || v === 1) return null;
+        const value = {
+          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? k} × ${formatNumber(v)}`,
+          color: v > 1 ? "maroon" : "green"
+        };
+        const icons = value.icons = [];
+        if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
+          const type = CONFIG.DND5E.itemProperties[p]?.label;
+          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+        }));
+        return value;
+      }).filter(f => f);
+      const values = [...amountValues, ...multiplyValues];
       if ( values.length ) traits.dm = values;
     }
 

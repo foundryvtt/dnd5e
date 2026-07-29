@@ -826,18 +826,27 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const dm = this.system.traits?.dm ?? {};
     const rollData = this.getRollData({ deterministic: true });
-    const modifications = Object.entries(dm.amount ?? {}).reduce((obj, [type, formula]) => {
+    const amountModifications = Object.entries(dm.amount ?? {}).reduce((obj, [type, formula]) => {
       obj[type] = simplifyBonus(formula, rollData);
       return obj;
     }, {});
-    const applyModification = (d, type=d.type) => {
-      if ( !modifications[type] || this.#changeIsIgnored("modification", type, { options }) ) return;
+    const applyAmountModification = (d, type) => {
+      if ( !amountModifications[type] || this.#changeIsIgnored("modification", type, { options }) ) return;
       const originalValue = d.value;
-      if ( Math.sign(d.value) !== Math.sign(d.value + modifications[type]) ) d.value = 0;
-      else d.value += modifications[type];
+      if ( Math.sign(d.value) !== Math.sign(d.value + amountModifications[type]) ) d.value = 0;
+      else d.value += amountModifications[type];
       (d.active[type === "ALL" ? "all" : "type"] ??= {}).modification = true;
-      modifications[type] += originalValue - d.value;
+      amountModifications[type] += originalValue - d.value;
     };
+    const applyMultiplyModification = (d, type) => {
+      if ( !dm.multiply?.[type] || this.#changeIsIgnored("modification", type, { options }) ) return;
+      d.value *= dm.multiply[type];
+      (d.active[type === "ALL" ? "all" : "type"] ??= {}).modification = true;
+    }
+    const applyModification = (d, type=d.type) => {
+      applyAmountModification(d, type);
+      applyMultiplyModification(d, type);
+    }
 
     damages.forEach(d => {
       d.active ??= {};
