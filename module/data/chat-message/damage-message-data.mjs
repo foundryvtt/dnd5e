@@ -44,7 +44,7 @@ export default class DamageMessageData extends RollMessageData {
   /* -------------------------------------------- */
 
   /**
-   * Should the results of this message be applied as healing rather than damage?
+   * Whether the results of this message should be applied as healing rather than damage.
    * @type {boolean}
    */
   get isHealing() {
@@ -96,7 +96,7 @@ export default class DamageMessageData extends RollMessageData {
   _onRender(element) {
     super._onRender(element);
 
-    // The item header carries the name and the roll flavor, so the message header's copy is redundant
+    // The item header carries the name and the roll flavor, so the message header's copy is redundant.
     if ( element.querySelector(".chat-card .card-header") ) {
       element.querySelector(".message-header .flavor-text")?.remove();
     }
