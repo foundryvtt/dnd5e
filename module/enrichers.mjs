@@ -1188,13 +1188,12 @@ async function rollDamage(config, event) {
     data: {
       flags: {
         dnd5e: {
-          messageType: "roll",
-          roll: { type: rollType },
           targets: getTargetDescriptors()
         }
       },
       flavor: _loc(`DND5E.${rollType === "healing" ? "Healing" : "Damage"}Roll`),
-      speaker: ChatMessage.implementation.getSpeaker()
+      speaker: ChatMessage.implementation.getSpeaker(),
+      type: rollType === "healing" ? "healing" : "damage"
     }
   };
 

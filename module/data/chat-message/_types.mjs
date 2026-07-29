@@ -41,7 +41,7 @@
 
 /**
  * @typedef DamageMessageSystemData
- * @property {string|null} damageOnSave  How this damage is affected by a successful save, if it followed one.
+ * @property {string|null} onSave  How this damage is affected by a successful save, if it followed one.
  */
 
 /* -------------------------------------------- */

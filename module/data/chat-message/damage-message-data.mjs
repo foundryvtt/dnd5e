@@ -21,7 +21,7 @@ export default class DamageMessageData extends RollMessageData {
   /** @override */
   static defineSchema() {
     return {
-      damageOnSave: new StringField({ blank: false, initial: null, nullable: true, required: false })
+      onSave: new StringField({ blank: false, initial: null, nullable: true, required: false })
     };
   }
 
@@ -83,8 +83,8 @@ export default class DamageMessageData extends RollMessageData {
       };
     }
 
-    if ( this.damageOnSave ) {
-      context.damageOnSave = _loc(`DND5E.SAVE.FIELDS.damage.onSave.${this.damageOnSave.capitalize()}`);
+    if ( this.onSave ) {
+      context.onSave = _loc(`DND5E.SAVE.FIELDS.damage.onSave.${this.onSave.capitalize()}`);
     }
 
     return context;
