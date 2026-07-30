@@ -1,3 +1,4 @@
+import AttackMessageData from "./attack-message-data.mjs";
 import BastionAttackMessageData from "./bastion-attack-message-data.mjs";
 import BastionTurnMessageData from "./bastion-turn-message-data.mjs";
 import CheckMessageData from "./check-message-data.mjs";
@@ -16,6 +17,7 @@ import TurnMessageData from "./turn-message-data.mjs";
 import UsageMessageData from "./usage-message-data.mjs";
 
 export {
+  AttackMessageData,
   BastionAttackMessageData,
   BastionTurnMessageData,
   CheckMessageData,
@@ -36,6 +38,7 @@ export {
 export * as fields from "./fields/_module.mjs";
 
 export const config = {
+  attack: AttackMessageData,
   bastionAttack: BastionAttackMessageData,
   bastionTurn: BastionTurnMessageData,
   check: CheckMessageData,

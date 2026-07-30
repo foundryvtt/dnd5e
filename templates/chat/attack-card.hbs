@@ -1,0 +1,35 @@
+{{#if (or header mastery)}}
+<div class="chat-card">
+    {{#if header}}
+    <section class="card-header description">
+        <header class="summary">
+            <img class="gold-icon" src="{{ header.item.img }}" alt="{{ header.item.name }}">
+            <div class="name-stacked">
+                <span class="title">{{ header.item.name }}</span>
+                <span class="subtitle">{{ header.subtitle }}</span>
+            </div>
+        </header>
+    </section>
+    {{/if}}
+
+    {{#if mastery}}
+    <p class="supplement">
+        <strong>{{ localize "DND5E.WEAPON.Mastery.Flavor" }}</strong>
+        {{#if mastery.reference}}
+        <a class="content-link" draggable="true" data-link data-uuid="{{ mastery.reference }}"
+           data-tooltip="{{ mastery.label }}">{{ mastery.label }}</a>
+        {{else}}
+        {{ mastery.label }}
+        {{/if}}
+    </p>
+    {{/if}}
+</div>
+{{/if}}
+
+{{#each rolls}}
+{{{ this }}}
+{{/each}}
+
+{{#if targets.length}}
+{{> "dnd5e.targets-tray" }}
+{{/if}}

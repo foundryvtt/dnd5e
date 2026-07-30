@@ -4,6 +4,17 @@
  */
 
 /**
+ * @typedef AttackMessageSystemData
+ * @property {string|null} ability      Ability used for the attack.
+ * @property {string|null} ammunition   ID of the ammunition used for the attack.
+ * @property {ActorDeltasData} deltas   Snapshots Items consumed & destroyed by the attack.
+ * @property {string|null} mastery      Weapon mastery property used for the attack.
+ * @property {string|null} mode         Attack mode used for the attack.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef BastionAttackMessageSystemData
  * @property {string|null} damaged  Facility that was damage by the attack.
  * @property {number} [deaths]      Number of defenders killed in the attack.
