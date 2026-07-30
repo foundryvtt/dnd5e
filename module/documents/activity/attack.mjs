@@ -161,23 +161,18 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       create: true,
       data: {
         flavor: `${this.item.name} - ${_loc("DND5E.AttackRoll")}`,
-        flags: {
-          dnd5e: {
-            ...this.messageFlags,
-            messageType: "roll",
-            roll: { type: "attack" }
-          }
-        },
-        speaker: ChatMessage.getSpeaker({ actor: this.actor })
+        flags: { dnd5e: this.messageFlags },
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        type: "attack"
       }
     }, message);
 
     const rolls = await CONFIG.Dice.D20Roll.buildConfigure(rollConfig, dialogConfig, messageConfig);
     await CONFIG.Dice.D20Roll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return null;
-    for ( const key of ["ability", "ammunition", "attackMode", "mastery"] ) {
-      if ( !rolls[0].options[key] ) continue;
-      foundry.utils.setProperty(messageConfig.data, `flags.dnd5e.roll.${key}`, rolls[0].options[key]);
+    const { ability, ammunition, mastery, attackMode: mode } = rolls[0].options;
+    for ( const [key, value] of Object.entries({ ability, ammunition, mastery, mode }) ) {
+      if ( value ) foundry.utils.setProperty(messageConfig.data, `system.${key}`, value);
     }
     await CONFIG.Dice.D20Roll.buildPost(rolls, rollConfig, messageConfig);
 
@@ -222,11 +217,11 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
     if ( canUpdate && ammoUpdate?.destroy ) {
       // If ammunition was deleted, store a copy of it in the roll message
-      const data = this.actor.items.get(ammoUpdate.id).toObject();
+      const deleted = [this.actor.items.get(ammoUpdate.id).toObject()];
       const messageId = messageConfig.data?.flags?.dnd5e?.originatingMessage
         ?? rollConfig.event?.target.closest("[data-message-id]")?.dataset.messageId;
       const attackMessage = dnd5e.registry.messages.get(messageId, "attack")?.pop();
-      await attackMessage?.setFlag("dnd5e", "roll.ammunitionData", data);
+      await attackMessage?.update({ "system.deltas": { deleted } });
       await this.actor.deleteEmbeddedDocuments("Item", [ammoUpdate.id]);
     }
     else if ( canUpdate && ammoUpdate ) await this.actor?.updateEmbeddedDocuments("Item", [
@@ -308,19 +303,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
    */
   static #rollDamage(event, target, message) {
     const lastAttack = message.getAssociatedRolls("attack").pop();
-    const ability = lastAttack?.getFlag("dnd5e", "roll.ability");
-    const attackMode = lastAttack?.getFlag("dnd5e", "roll.attackMode");
-
-    // Fetch the ammunition used with the last attack roll
-    let ammunition;
-    const actor = lastAttack?.getAssociatedActor();
-    if ( actor ) {
-      const storedData = lastAttack.getFlag("dnd5e", "roll.ammunitionData");
-      ammunition = storedData
-        ? new Item.implementation(storedData, { parent: actor })
-        : actor.items.get(lastAttack.getFlag("dnd5e", "roll.ammunition"));
-    }
-
+    const { ability, ammunitionItem: ammunition, mode: attackMode } = lastAttack?.system ?? {};
     const isCritical = lastAttack?.rolls[0]?.isCritical;
     const dialogConfig = {};
     if ( isCritical ) dialogConfig.options = { defaultButton: "critical" };
