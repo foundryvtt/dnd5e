@@ -786,11 +786,13 @@ export function migrateMacroData(macro, migrationData) {
  * @returns {object}            The update data to apply.
  */
 export function migrateMessageData(messageData) {
+  if ( messageData.type !== "base" ) return {};
+
   const updateData = {};
   const { flags } = messageData;
   const rollType = foundry.utils.getProperty(flags, "dnd5e.roll.type");
 
-  if ( (flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
+  if ( flags?.dnd5e?.messageType === "usage" ) {
     const use = flags.dnd5e.use;
     updateData.type = "usage";
     updateData.system = _replace({
@@ -810,15 +812,14 @@ export function migrateMessageData(messageData) {
     updateData["flags.dnd5e.use.spellLevel"] = _del;
   }
 
-  else if ( flags?.dnd5e?.bastion && (messageData.type === "base") ) {
+  else if ( flags?.dnd5e?.bastion ) {
     const bastion = flags.dnd5e.bastion;
     updateData.type = "orders" in bastion ? "bastionTurn" : "bastionAttack";
     updateData.system = _replace(bastion);
     updateData["flags.dnd5e.bastion"] = _del;
   }
 
-  else if ( ((rollType === "ability") || (rollType === "skill") || (rollType === "tool"))
-    && (messageData.type === "base") ) {
+  else if ( (rollType === "ability") || (rollType === "skill") || (rollType === "tool") ) {
     const roll = flags.dnd5e.roll;
     const ability = roll.ability
       ?? CONFIG.DND5E.skills[roll.skillId]?.ability
@@ -830,7 +831,7 @@ export function migrateMessageData(messageData) {
     updateData["flags.dnd5e.roll"] = _del;
   }
 
-  else if ( (rollType === "save") && (messageData.type === "base") ) {
+  else if ( rollType === "save" ) {
     const roll = flags.dnd5e.roll;
     updateData.type = "save";
     updateData.system = _replace({ ability: roll.ability, resisted: roll.forceSuccess });
@@ -838,14 +839,28 @@ export function migrateMessageData(messageData) {
     updateData["flags.dnd5e.roll"] = _del;
   }
 
-  else if ( (rollType === "death") && (messageData.type === "base") ) {
+  else if ( rollType === "death" ) {
     updateData.type = "save";
     updateData.system = _replace({ type: "death" });
     updateData["flags.dnd5e.messageType"] = _del;
     updateData["flags.dnd5e.roll"] = _del;
   }
 
-  else if ( ((rollType === "damage") || (rollType === "healing")) && (messageData.type === "base") ) {
+  else if ( rollType === "attack" ) {
+    const roll = flags.dnd5e.roll;
+    updateData.type = "attack";
+    updateData.system = _replace({
+      ability: roll.ability,
+      ammunition: roll.ammunition,
+      deltas: roll.ammunitionData ? { deleted: [roll.ammunitionData] } : null,
+      mastery: roll.mastery,
+      mode: roll.attackMode
+    });
+    updateData["flags.dnd5e.messageType"] = _del;
+    updateData["flags.dnd5e.roll"] = _del;
+  }
+
+  else if ( (rollType === "damage") || (rollType === "healing") ) {
     updateData.type = rollType;
     updateData.system = _replace({ onSave: flags.dnd5e.roll.damageOnSave ?? null });
     updateData["flags.dnd5e.messageType"] = _del;
@@ -853,19 +868,19 @@ export function migrateMessageData(messageData) {
   }
 
   /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.
-  else if ( (flags?.dnd5e?.roll?.type === "generic") && (messageData.type === "base") ) {
+  else if ( flags?.dnd5e?.roll?.type === "generic" ) {
     updateData.type = "generic";
     updateData.system = _replace({});
     updateData["flags.dnd5e.roll"] = _del;
   }
 
-  else if ( (flags?.dnd5e?.roll?.type === "hitDie") && (messageData.type === "base") ) {
+  else if ( flags?.dnd5e?.roll?.type === "hitDie" ) {
     updateData.type = "hitDie";
     updateData.system = _replace({});
     updateData["flags.dnd5e.roll"] = _del;
   }
 
-  else if ( (flags?.dnd5e?.roll?.type === "hitPoints") && (messageData.type === "base") ) {
+  else if ( flags?.dnd5e?.roll?.type === "hitPoints" ) {
     updateData.type = "hitPoints";
     updateData.system = _replace({});
     updateData["flags.dnd5e.roll"] = _del;

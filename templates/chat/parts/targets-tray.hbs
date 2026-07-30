@@ -1,0 +1,23 @@
+<div class="card-tray targets-tray collapsible collapsed">
+    <label class="roboto-upper">
+        <i class="fas fa-bullseye" inert></i>
+        <span>{{ localize "DND5E.TargetPl" }}</span>
+        <i class="fas fa-caret-down" inert></i>
+    </label>
+    <div class="collapsible-content">
+        <ul class="unlist evaluation wrapper">
+            {{#each targets}}
+            <li class="target {{#if isMiss}}miss{{else}}hit{{/if}}" data-uuid="{{ uuid }}" data-miss="{{ isMiss }}">
+                <i class="fas {{#if isMiss}}fa-times{{else}}fa-check{{/if}}"></i>
+                <div class="name">{{ name }}</div>
+                {{#if showAC}}
+                <div class="ac">
+                    <i class="fas fa-shield-halved"></i>
+                    <span>{{#if hasAC}}{{ ac }}{{else}}&infin;{{/if}}</span>
+                </div>
+                {{/if}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

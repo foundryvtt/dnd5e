@@ -38,7 +38,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {boolean}
    */
   get canSelectTargets() {
-    if ( this.flags.dnd5e?.roll?.type !== "attack" ) return false;
+    if ( this.type !== "attack" ) return false;
     return this.isRoll && this.isContentVisible;
   }
 
@@ -121,7 +121,6 @@ export default class ChatMessage5e extends ChatMessage {
       await this.system.getHTML(html, options);
     } else {
       this._displayChatActionButtons(html);
-      this._highlightCriticalSuccessFailure(html);
       if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
         html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
       }
@@ -190,69 +189,6 @@ export default class ChatMessage5e extends ChatMessage {
         if ( ((button.dataset.visibility === "gm") && !game.user.isGM) || !isCreator
           || this.getAssociatedActivity()?.shouldHideChatButton(button, this) ) button.hidden = true;
       }
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Highlight critical success or failure on d20 rolls.
-   * @param {HTMLElement} html  Rendered contents of the message.
-   * @protected
-   */
-  _highlightCriticalSuccessFailure(html) {
-    if ( !this.isContentVisible || !this.rolls.length ) return;
-    const originatingMessage = this.getOriginatingMessage();
-    const displayChallenge = originatingMessage?.shouldDisplayChallenge;
-    const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
-    const forceSuccess = this.flags.dnd5e?.roll?.forceSuccess === true;
-
-    /**
-     * Create an icon to indicate success or failure.
-     * @param {string} cls  The icon class.
-     * @returns {HTMLElement}
-     */
-    function makeIcon(cls) {
-      const icon = document.createElement("i");
-      icon.classList.add("fas", cls);
-      icon.setAttribute("inert", "");
-      return icon;
-    }
-
-    // Highlight rolls where the first part is a d20 roll
-    const totals = html.querySelectorAll(".dice-total");
-    for ( let [index, d20Roll] of this.rolls.entries() ) {
-
-      const d0 = d20Roll.dice[0];
-      if ( (d0?.faces !== 20) || (d0?.values.length !== 1) ) continue;
-
-      d20Roll = dnd5e.dice.D20Roll.fromRoll(d20Roll);
-      const d = d20Roll.dice[0];
-
-      const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
-      if ( isModifiedRoll ) continue;
-
-      // Highlight successes and failures
-      const total = totals[index];
-      if ( !total ) continue;
-      // Only attack rolls and death saves can crit or fumble.
-      const canCrit = ["attack", "death"].includes(this.getFlag("dnd5e", "roll.type"));
-      const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
-      const showResult = isAttack ? displayAttackResult : displayChallenge;
-      if ( d.options.target && showResult ) {
-        if ( d20Roll.isSuccess || forceSuccess ) total.classList.add("success");
-        else total.classList.add("failure");
-      }
-      if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
-      if ( canCrit && d20Roll.isFumble && !forceSuccess ) total.classList.add("fumble");
-
-      const icons = document.createElement("div");
-      icons.classList.add("icons");
-      if ( total.classList.contains("critical") ) icons.append(makeIcon("fa-check"), makeIcon("fa-check"));
-      else if ( total.classList.contains("fumble") ) icons.append(makeIcon("fa-xmark"), makeIcon("fa-xmark"));
-      else if ( total.classList.contains("success") ) icons.append(makeIcon("fa-check"));
-      else if ( total.classList.contains("failure") ) icons.append(makeIcon("fa-xmark"));
-      if ( icons.children.length ) total.append(icons);
     }
   }
 
@@ -335,44 +271,6 @@ export default class ChatMessage5e extends ChatMessage {
       el.replaceWith(icon);
     });
 
-    // Enriched roll flavor
-    const roll = this.getFlag("dnd5e", "roll");
-    const item = this.getAssociatedItem();
-    const activity = this.getAssociatedActivity();
-    if ( this.isContentVisible && item && roll ) {
-      const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
-      const subtitle = roll.type === "damage"
-        ? isCritical
-          ? _loc("DND5E.CriticalHit")
-          : activity?.damageFlavor ?? _loc("DND5E.DamageRoll")
-        : roll.type === "attack"
-          ? (activity?.getActionLabel(roll.attackMode) ?? "")
-          : (item.system.type?.label ?? _loc(CONFIG.Item.typeLabels[item.type]));
-      const flavor = document.createElement("div");
-      flavor.classList.add("chat-card");
-      flavor.innerHTML = `
-        <section class="card-header description ${isCritical ? "critical" : ""}">
-          <header class="summary">
-            <div class="name-stacked">
-              <span class="subtitle">${subtitle}</span>
-            </div>
-          </header>
-        </section>
-      `;
-      const icon = document.createElement("img");
-      Object.assign(icon, { className: "gold-icon", src: item.img, alt: item.name });
-      flavor.querySelector("header").insertAdjacentElement("afterbegin", icon);
-      const title = document.createElement("span");
-      title.classList.add("title");
-      title.append(item.name);
-      flavor.querySelector(".name-stacked").insertAdjacentElement("afterbegin", title);
-      html.querySelector(".message-header .flavor-text").remove();
-      html.querySelector(".message-content").insertAdjacentElement("afterbegin", flavor);
-    }
-
-    // Attack targets
-    this._enrichAttackTargets(html);
-
     // Dice rolls
     if ( this.isContentVisible ) {
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
@@ -383,82 +281,6 @@ export default class ChatMessage5e extends ChatMessage {
     avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
     avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
     avatar.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Augment attack cards with additional information.
-   * @param {HTMLLIElement} html   The chat card.
-   * @protected
-   */
-  _enrichAttackTargets(html) {
-    const attackRoll = this.rolls[0];
-    if ( !(attackRoll instanceof dnd5e.dice.D20Roll) ) return;
-
-    const masteryConfig = CONFIG.DND5E.weaponMasteries[attackRoll.options.mastery];
-    if ( masteryConfig ) {
-      const p = document.createElement("p");
-      p.classList.add("supplement");
-      let mastery = masteryConfig.label;
-      if ( masteryConfig.reference ) mastery = `
-        <a class="content-link" draggable="true" data-link data-uuid="${masteryConfig.reference}"
-           data-tooltip="${mastery}">${mastery}</a>
-      `;
-      p.innerHTML = `<strong>${_loc("DND5E.WEAPON.Mastery.Flavor")}</strong> ${mastery}`;
-      (html.querySelector(".chat-card") ?? html.querySelector(".message-content"))?.appendChild(p);
-    }
-
-    const visibility = game.settings.get("dnd5e", "attackRollVisibility");
-    const isVisible = game.user.isGM || (visibility !== "none");
-    if ( !isVisible ) return;
-
-    const targets = this.getFlag("dnd5e", "targets");
-    if ( !targets?.length ) return;
-    const tray = document.createElement("div");
-    tray.innerHTML = `
-      <div class="card-tray targets-tray collapsible collapsed">
-        <label class="roboto-upper">
-          <i class="fas fa-bullseye" inert></i>
-          <span>${_loc("DND5E.TargetPl")}</span>
-          <i class="fas fa-caret-down" inert></i>
-        </label>
-        <div class="collapsible-content">
-          <ul class="unlist evaluation wrapper"></ul>
-        </div>
-      </div>
-    `;
-    const evaluation = tray.querySelector("ul");
-    const rows = targets.map(({ name, ac, uuid }) => {
-      const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
-      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
-      const li = document.createElement("li");
-      Object.assign(li.dataset, { uuid, miss: isMiss });
-      li.className = `target ${isMiss ? "miss" : "hit"}`;
-      li.innerHTML = `
-        <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
-        <div class="name"></div>
-        ${(ac !== "") ? `
-        <div class="ac">
-          <i class="fas fa-shield-halved"></i>
-          <span>${(ac === null) ? "&infin;" : ac}</span>
-        </div>
-        ` : ""}
-      `;
-      li.querySelector(".name").append(name);
-      return li;
-    }).sort((a, b) => {
-      const missA = Boolean(a.dataset.miss);
-      const missB = Boolean(b.dataset.miss);
-      return missA === missB ? 0 : missA ? 1 : -1;
-    });
-    evaluation.append(...rows);
-    evaluation.querySelectorAll("li.target").forEach(target => {
-      target.addEventListener("click", this._onTargetMouseDown.bind(this));
-      target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
-      target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
-    });
-    html.querySelector(".message-content")?.appendChild(tray);
   }
 
   /* -------------------------------------------- */

@@ -322,8 +322,8 @@ class ItemRegistry {
 
 class MessageRegistry {
   /**
-   * Registration of roll chat messages that originated at a specific message. The map is keyed by the ID of
-   * the originating message and contains sets of IDs for each roll type.
+   * Registration of chat messages that originated at a specific message. The map is keyed by the ID of
+   * the originating message and contains sets of IDs for each message type.
    * @type {Map<string, Map<string, Set<string>>}
    */
   static #messages = new Map();
@@ -331,9 +331,9 @@ class MessageRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Fetch roll messages for an origin message, in chronological order.
+   * Fetch messages for an origin message, in chronological order.
    * @param {string} origin  ID of the origin message.
-   * @param {string} [type]  Type of roll messages to fetch.
+   * @param {string} [type]  Type of messages to fetch.
    * @returns {ChatMessage5e[]}
    */
   static get(origin, type) {
@@ -351,13 +351,13 @@ class MessageRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Add a new roll message to the registry.
+   * Add a new message to the registry.
    * @param {ChatMessage5e} message  Message to add to the registry.
    */
   static track(message) {
     const origin = message.getFlag("dnd5e", "originatingMessage");
-    const type = message.getFlag("dnd5e", "roll.type");
-    if ( !origin || !type ) return;
+    const type = message.type;
+    if ( !origin || (type === "base") ) return;
     MessageRegistry.#messages
       .getOrInsert(origin, new Map())
       .getOrInsert(type, new Set()).add(message.id);
@@ -366,13 +366,12 @@ class MessageRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Remove a roll message to the registry.
+   * Remove a message from the registry.
    * @param {ChatMessage5e} message  Message to remove from the registry.
    */
   static untrack(message) {
     const origin = message.getFlag("dnd5e", "originatingMessage");
-    const type = message.getFlag("dnd5e", "roll.type");
-    MessageRegistry.#messages.get(origin)?.get(type)?.delete(message.id);
+    MessageRegistry.#messages.get(origin)?.get(message.type)?.delete(message.id);
   }
 }
 

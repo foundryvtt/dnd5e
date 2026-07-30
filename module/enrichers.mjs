@@ -322,14 +322,10 @@ async function rollAttack(config, event) {
 
   const messageConfig = {
     data: {
-      flags: {
-        dnd5e: {
-          messageType: "roll",
-          roll: { type: "attack" }
-        }
-      },
       flavor: _loc("DND5E.AttackRoll"),
-      speaker: ChatMessage.implementation.getSpeaker()
+      speaker: ChatMessage.implementation.getSpeaker(),
+      system: { mode: attackMode ?? null },
+      type: "attack"
     }
   };
 

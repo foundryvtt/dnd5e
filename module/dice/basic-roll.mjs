@@ -122,8 +122,8 @@ export default class BasicRoll extends Roll {
     }
 
     // Store the roll type in roll.options so it can be accessed from only the roll
-    const rollType = foundry.utils.getProperty(message, "data.flags.dnd5e.roll.type");
-    if ( rollType ) rolls.forEach(roll => roll.options.rollType ??= rollType);
+    const rollType = foundry.utils.getProperty(message, "data.type");
+    if ( rollType && (rollType !== "base") ) rolls.forEach(roll => roll.options.rollType ??= rollType);
 
     /**
      * A hook event that fires after roll configuration is complete, but before the roll is evaluated.
