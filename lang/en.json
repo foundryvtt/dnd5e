@@ -2975,6 +2975,7 @@
       "Label": "Purchase Base Item",
       "Hint": "If checked, the base item will be purchased at full price instead of crafted."
     },
+    "DropHint": "Drop an Item here",
     "Hint": "The items that this facility is currently in the process of crafting or harvesting, if any."
   },
   "Description": "Description",
@@ -3125,11 +3126,11 @@
       "Supplement": "Buy"
     },
     "Creatures": {
-      "Buy": "Drop animals that you wish to purchase into the slots above, and update the cost appropriately below."
+      "Buy": "Drop animals that you wish to purchase into the slots above. The cost is calculated from their individual prices, and can be adjusted below."
     },
     "Price": {
       "Label": "Base Price",
-      "Hint": "Select which stock to sell, and input the base price above."
+      "Hint": "Select which stock to sell. The base price is calculated from their individual prices, and can be adjusted above."
     },
     "Sell": {
       "Label": "Sell Stock",

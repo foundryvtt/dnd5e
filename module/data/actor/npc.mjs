@@ -452,6 +452,13 @@ export default class NPCData extends CreatureTemplate {
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
 
+    // Price
+    const { price } = this.attributes;
+    const conversion = CONFIG.DND5E.currencies[price.denomination]?.conversion;
+    const defaultConversion = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency]?.conversion;
+    if ( (price.value === null) || !conversion || !defaultConversion ) price.valueInGP = null;
+    else price.valueInGP = Math.floor(price.value * defaultConversion / conversion);
+
     // Legendary Actions & Resistances
     const { legact, legres } = this.resources;
     legact.value = Math.clamp(legact.max - legact.spent, 0, legact.max);
