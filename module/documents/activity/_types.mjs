@@ -16,8 +16,9 @@
  * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
  * @property {object} usage
  * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.
- * @property {string} usage.chatCard                    Template used to render the chat card.
+ * @property {string|null} usage.chatCard               Template used to render the chat card.
  * @property {typeof ActivityUsageDialog} usage.dialog  Default usage prompt.
+ * @property {string} usage.messageType                 ChatMessage subtype created for this usage.
  */
 
 /* -------------------------------------------- */
@@ -130,13 +131,14 @@
  * @property {number} [costs.gold]               The cost of executing the order, in gold.
  * @property {boolean} [costs.paid]              Whether the gold cost has been paid.
  * @property {object} [craft]
+ * @property {boolean} [craft.buyBaseItem]       Whether to purchase the base item rather than crafting it.
  * @property {string} [craft.item]               The item being crafted or harvested.
  * @property {number} [craft.quantity]           The quantity of items to harvest.
  * @property {object} [trade]
  * @property {boolean} [trade.sell]              Whether the trade was a sell operation.
  * @property {object} [trade.stock]
  * @property {boolean} [trade.stock.stocked]     Whether the order was to fully stock the inventory.
- * @property {boolean} [trade.stock.value]       The base value of goods transacted.
+ * @property {number} [trade.stock.value]        The base value of goods transacted.
  * @property {object} [trade.creatures]
  * @property {string[]} [trade.creatures.buy]    Additional animals purchased.
  * @property {boolean[]} [trade.creatures.sell]  Whether a creature in a given slot was sold.

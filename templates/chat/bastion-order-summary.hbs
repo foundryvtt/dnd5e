@@ -1,0 +1,33 @@
+<div class="chat-card order-card">
+
+    {{!-- Description --}}
+    {{#with description}}
+    <p class="order-description">
+        {{{ localize "DND5E.FACILITY.Use.Description" order=(localize order) link=link facilityType=facilityType }}}
+    </p>
+    {{/with}}
+
+    {{!-- Supplements --}}
+    {{#each supplements}}
+    <p class="supplement">
+        <strong>{{ localize label }}</strong>
+        {{~#if quantity}} {{ quantity }}&times;{{/if}}
+        {{~#if value}} {{ dnd5e-numberFormat value }}{{/if}}
+        {{~#if currency}} {{ currency }}{{/if}}
+        {{~#if detail}} {{ localize detail days=days }}{{/if}}
+        {{~#if status}} ({{ localize status }}){{/if}}
+        {{~#if link}} {{{ link }}}{{/if}}
+    </p>
+    {{/each}}
+
+    {{!-- Buttons --}}
+    {{#if buttons.length}}
+    <div class="card-buttons">
+        {{#each buttons}}
+        <button type="button" {{ dnd5e-dataset dataset }}>
+            <i class="{{ icon }}" inert></i> <span>{{ localize label }}</span>
+        </button>
+        {{/each}}
+    </div>
+    {{/if}}
+</div>

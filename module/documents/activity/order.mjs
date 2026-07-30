@@ -1,8 +1,6 @@
 import ActivityMixin from "./mixin.mjs";
 import BaseOrderActivityData from "../../data/activity/order-data.mjs";
 import OrderUsageDialog from "../../applications/activity/order-usage-dialog.mjs";
-import CurrencyManager from "../../applications/currency-manager.mjs";
-import { formatNumber } from "../../utils.mjs";
 
 /**
  * @import { OrderUseConfiguration } from "./_types.mjs";
@@ -22,11 +20,9 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
     img: "systems/dnd5e/icons/svg/activity/order.svg",
     title: "DND5E.FACILITY.Order.Issue",
     usage: {
-      actions: {
-        pay: OrderActivity.#onPayOrder
-      },
-      chatCard: "systems/dnd5e/templates/chat/order-activity-card.hbs",
-      dialog: OrderUsageDialog
+      chatCard: null,
+      dialog: OrderUsageDialog,
+      messageType: "bastionOrder"
     }
   }, { inplace: false }));
 
@@ -50,11 +46,9 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
    * @type {boolean}
    */
   get inProgress() {
-    if ( this.parent.progress.order !== this.order ) return false;
-    // TODO: Ideally this would also check to see if the order has already been paid,
-    // but that information is only part of the chat message and there isn't a clean
-    // way to retrieve it at the moment
-    return this.parent.progress.value > 0;
+    const { order, paid, value } = this.parent.progress;
+    if ( order !== this.order ) return false;
+    return (value > 0) || paid;
   }
 
   /* -------------------------------------------- */
@@ -81,7 +75,7 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
    */
   _finalizeCosts(usageConfig, updates) {
     const { costs } = usageConfig;
-    if ( costs.days ) updates["system.progress"] = { value: 0, max: costs.days, order: this.order };
+    if ( costs.days ) updates["system.progress"] = { value: 0, max: costs.days, order: this.order, paid: false };
   }
 
   /* -------------------------------------------- */
@@ -116,6 +110,23 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _finalizeMessageConfig(usageConfig, messageConfig, results) {
+    super._finalizeMessageConfig(usageConfig, messageConfig, results);
+    const { costs, craft, trade } = usageConfig;
+    const system = { costs: costs ?? {}, order: this.order };
+    if ( craft?.item ) system.craft = { item: craft.item, quantity: craft.quantity };
+    if ( trade ) system.trade = {
+      creatures: this._resolveTradedLivestock(trade).map(uuid => ({ uuid })),
+      goods: trade.stock?.value ?? null,
+      sell: trade.sell === true,
+      stocked: trade.stock?.stocked === true
+    };
+    foundry.utils.mergeObject(messageConfig.data, { system });
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Update trading configuration.
    * @param {OrderUseConfiguration} usageConfig  Order configuration.
@@ -136,16 +147,8 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
       else updates["system.trade.pending.value"] = trade.stock.value;
     }
     if ( trade.creatures ) {
-      let creatures = (trade.creatures.buy ?? []).filter(_ => _);
-      if ( trade.sell ) {
-        creatures = [];
-        for ( let i = 0; i < trade.creatures.sell?.length ?? 0; i++ ) {
-          const sold = trade.creatures.sell[i];
-          if ( sold ) creatures.push(system.trade.creatures.value[i]);
-        }
-      }
       updates["system.trade.pending.value"] = trade.sell ? (trade.creatures.price ?? 0) : costs.gold;
-      updates["system.trade.pending.creatures"] = creatures;
+      updates["system.trade.pending.creatures"] = this._resolveTradedLivestock(trade);
 
       // Sold livestock are removed immediately. Bought livestock remain pending until the order is complete.
       if ( trade.sell ) {
@@ -185,122 +188,22 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
   /* -------------------------------------------- */
 
   /** @override */
-  _prepareUsageScaling(usageConfig, messageConfig, item) {
-    // FIXME: No scaling happening here, but this is the only context we have both usageConfig and messageConfig.
-    const { costs, craft, trade } = usageConfig;
-    messageConfig.data.flags.dnd5e.order = { costs, craft, trade };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   _requiresConfigurationDialog(config) {
     return true;
   }
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _usageChatButtons(message) {
-    const { costs } = message.data.flags.dnd5e.order;
-    if ( !costs.gold || costs.paid ) return [];
-    return [{
-      label: _loc("DND5E.FACILITY.Costs.Automatic"),
-      icon: '<i class="fas fa-coins"></i>',
-      dataset: { action: "pay", method: "automatic" }
-    }, {
-      label: _loc("DND5E.FACILITY.Costs.Manual"),
-      icon: '<i class="fas fa-clipboard-check"></i>',
-      dataset: { action: "pay", method: "manual" }
-    }];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  async _usageChatContext(message) {
-    const { costs, craft, trade } = message.data.flags.dnd5e.order;
-    const { type } = this.item.system;
-    const supplements = [];
-    if ( costs.days ) supplements.push(`
-      <strong>${_loc("DND5E.DurationTime")}</strong>
-      ${_loc("DND5E.FACILITY.Costs.Days", { days: costs.days })}
-    `);
-    if ( costs.gold ) supplements.push(`
-      <strong>${_loc("DND5E.CurrencyGP")}</strong>
-      ${formatNumber(costs.gold)}
-      (${_loc(`DND5E.FACILITY.Costs.${costs.paid ? "Paid" : "Unpaid"}`)})
-    `);
-    if ( craft?.item ) {
-      const item = await fromUuid(craft.item);
-      supplements.push(`
-        <strong>${_loc("DOCUMENT.Items")}</strong>
-        ${craft.quantity > 1 ? `${craft.quantity}&times;` : ""}
-        ${item.toAnchor().outerHTML}
-      `);
-    }
-    if ( trade?.stock?.value && trade.sell ) supplements.push(`
-      <strong>${_loc("DND5E.FACILITY.Trade.Sell.Supplement")}</strong>
-      ${formatNumber(trade.stock.value)}
-      ${CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency]?.abbreviation ?? ""}
-    `);
-    if ( trade?.creatures ) {
-      const creatures = [];
-      if ( trade.sell ) {
-        for ( let i = 0; i < trade.creatures.sell.length; i++ ) {
-          const sold = trade.creatures.sell[i];
-          if ( sold ) creatures.push(await fromUuid(this.item.system.trade.creatures.value[i]));
-        }
-      }
-      else creatures.push(...await Promise.all(trade.creatures.buy.filter(_ => _).map(uuid => fromUuid(uuid))));
-      supplements.push(`
-        <strong>${_loc(`DND5E.FACILITY.Trade.${trade.sell ? "Sell" : "Buy"}.Supplement`)}</strong>
-        ${game.i18n.getListFormatter({ style: "narrow" }).format(creatures.map(a => a.toAnchor().outerHTML))}
-      `);
-    }
-    const facilityType = _loc(`DND5E.FACILITY.Types.${type.value.titleCase()}.Label.one`);
-    const buttons = this._usageChatButtons(message);
-    return {
-      supplements,
-      buttons: buttons.length ? buttons : null,
-      description: _loc("DND5E.FACILITY.Use.Description", {
-        order: _loc(`DND5E.FACILITY.Orders.${this.order}.inf`),
-        link: this.item.toAnchor().outerHTML,
-        facilityType: facilityType.toLocaleLowerCase(game.i18n.lang)
-      })
-    };
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
   /**
-   * Handle deducting currency for the order.
-   * @this {OrderActivity}
-   * @param {PointerEvent} event     The triggering event.
-   * @param {HTMLElement} target     The button that was clicked.
-   * @param {ChatMessage5e} message  The message associated with the activation.
-   * @returns {Promise<void>}
+   * Determine the livestock involved in a trade order, resolved before any facility updates are applied.
+   * @param {object} trade  Trade configuration from the usage config.
+   * @returns {string[]}    UUIDs of the livestock being bought or sold.
+   * @protected
    */
-  static async #onPayOrder(event, target, message) {
-    const { method } = target.dataset;
-    const order = message.getFlag("dnd5e", "order");
-    const config = foundry.utils.expandObject({ "data.flags.dnd5e.order": order });
-    if ( method === "automatic" ) {
-      try {
-        await CurrencyManager.deductActorCurrency(this.actor, order.costs.gold, CONFIG.DND5E.defaultCurrency, {
-          recursive: true,
-          priority: "high"
-        });
-      } catch(err) {
-        ui.notifications.error(err.message);
-        return;
-      }
-    }
-    foundry.utils.setProperty(config, "data.flags.dnd5e.order.costs.paid", true);
-    const context = await this._usageChatContext(config);
-    const content = await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context);
-    await message.update({ content, flags: config.data.flags });
+  _resolveTradedLivestock(trade) {
+    if ( !trade?.creatures ) return [];
+    if ( trade.sell ) return this.item.system.trade.creatures.value.filter((_, i) => trade.creatures.sell?.[i]);
+    return (trade.creatures.buy ?? []).filter(_ => _);
   }
+
 }
