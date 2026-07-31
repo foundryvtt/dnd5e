@@ -21,12 +21,13 @@ export default class SaveMessageData extends RollMessageData {
   /** @override */
   static defineSchema() {
     return {
-      ability: new StringField({ blank: false, required: true }),
+      ability: new StringField({ blank: false, required: false }),
       deltas: new ActorDeltasField(),
       outcome: new StringField({
-        blank: false, choices: ["death", "revive", "stable"], initial: null, nullable: true, required: false
+        blank: false, choices: ["broken", "death", "revive", "stable"], initial: null, nullable: true, required: false
       }),
-      resisted: new BooleanField()
+      resisted: new BooleanField(),
+      type: new StringField({ blank: false, choices: ["ability", "concentration", "death"], initial: "ability" })
     };
   }
 
@@ -35,13 +36,36 @@ export default class SaveMessageData extends RollMessageData {
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     actions: {
+      breakConcentration: SaveMessageData.#breakConcentration,
       resistSave: SaveMessageData.#resistSave
     },
     template: "systems/dnd5e/templates/chat/save-card.hbs"
   }, { inplace: false }));
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static validateJoint(data) {
+    super.validateJoint(data);
+    if ( (data.type !== "death") && !data.ability ) {
+      throw new Error("A saving throw message requires an ability unless it is a death saving throw.");
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the concentrating actor can lose concentration as a result of this failed save.
+   * @type {boolean}
+   */
+  get canBreakConcentration() {
+    const actor = this.parent.getAssociatedActor();
+    return (this.type === "concentration") && !this.concentrationBroken && !!actor?.isOwner
+      && !dnd5e.settings.disableConcentration && this.parent.rolls.some(r => r.isFailure) && !this.forceSuccess;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -50,7 +74,7 @@ export default class SaveMessageData extends RollMessageData {
    */
   get canResist() {
     const actor = this.parent.getAssociatedActor();
-    return !!actor?.system.isNPC && actor.isOwner && !this.resisted
+    return !!actor?.system.isNPC && actor.isOwner && !this.resisted && !this.concentrationBroken
       && this.parent.rolls.some(r => r.isFailure) && !!actor.system.resources.legres.value;
   }
 
@@ -58,7 +82,17 @@ export default class SaveMessageData extends RollMessageData {
 
   /** @override */
   get canCrit() {
-    return this.ability === "death";
+    return this.type === "death";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether concentration has been broken as a result of this save.
+   * @type {boolean}
+   */
+  get concentrationBroken() {
+    return this.outcome === "broken";
   }
 
   /* -------------------------------------------- */
@@ -75,10 +109,10 @@ export default class SaveMessageData extends RollMessageData {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const { canResist, resisted } = this;
+    const { canBreakConcentration, canResist, concentrationBroken, resisted } = this;
     const actor = this.parent.getAssociatedActor();
-    Object.assign(context, { canResist, resisted });
-    context.death = this.ability === "death";
+    Object.assign(context, { canBreakConcentration, canResist, concentrationBroken, resisted });
+    context.death = this.type === "death";
     if ( actor ) {
       // Filter out success & failure tallies since their real data changes might read as confusing.
       const deltas = {
@@ -86,7 +120,7 @@ export default class SaveMessageData extends RollMessageData {
       };
       context.deltas = ActorDeltasField.processDeltas.call(deltas, actor, this.parent.rolls);
     }
-    if ( this.outcome ) context.outcome = _loc(`DND5E.DEATH.Outcome.${this.outcome}`, {
+    if ( context.death && this.outcome ) context.outcome = _loc(`DND5E.DEATH.Outcome.${this.outcome}`, {
       name: actor?.name ?? ""
     });
     return context;
@@ -94,6 +128,21 @@ export default class SaveMessageData extends RollMessageData {
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Break concentration as a result of this failed concentration save.
+   * @this {SaveMessageData}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #breakConcentration(event, target) {
+    target.disabled = true;
+    const ended = await this.parent.getAssociatedActor()?.endConcentration();
+    if ( ended?.length ) await this.parent.update({ "system.outcome": "broken" });
+    else target.disabled = false;
+  }
+
   /* -------------------------------------------- */
 
   /**

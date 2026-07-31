@@ -1655,7 +1655,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const messageConfig = foundry.utils.mergeObject({
       data: {
         flavor: _loc("DND5E.DeathSavingThrow"),
-        system: { ability: "death" }
+        system: { type: "death" }
       }
     }, message);
 
@@ -1749,7 +1749,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, dialog);
 
-    const messageConfig = foundry.utils.deepClone(message);
+    const messageConfig = foundry.utils.mergeObject({
+      data: { system: { type: "concentration" } }
+    }, message);
 
     const rolls = await this.rollSavingThrow(rollConfig, dialogConfig, messageConfig);
     if ( !rolls?.length ) return null;

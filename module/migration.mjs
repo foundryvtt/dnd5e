@@ -840,7 +840,7 @@ export function migrateMessageData(messageData) {
 
   else if ( (rollType === "death") && (messageData.type === "base") ) {
     updateData.type = "save";
-    updateData.system = _replace({ ability: "death" });
+    updateData.system = _replace({ type: "death" });
     updateData["flags.dnd5e.messageType"] = _del;
     updateData["flags.dnd5e.roll"] = _del;
   }
