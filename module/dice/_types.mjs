@@ -58,10 +58,12 @@
  * @property {boolean} [advantage]       Does this roll potentially have advantage?
  * @property {boolean} [disadvantage]    Does this roll potentially have disadvantage?
  * @property {D20Roll.ADV_MODE} [advantageMode]  Final advantage mode.
+ * @property {boolean} [autoFailure]     Force the roll to fail, including on a critical success.
  * @property {number} [criticalSuccess]  The value of the d20 die to be considered a critical success.
  * @property {number} [criticalFailure]  The value of the d20 die to be considered a critical failure.
  * @property {boolean} [elvenAccuracy]   Use three dice when rolling with advantage.
  * @property {boolean} [halflingLucky]   Add a re-roll once modifier to the d20 die.
+ * @property {boolean} [ignoreTotalCover=false]  Ignore total cover when making an attack roll.
  * @property {number} [maximum]          Maximum number the d20 die can roll.
  * @property {number} [minimum]          Minimum number the d20 die can roll.
  */
@@ -76,6 +78,7 @@
  * @property {string} [ability]               Ability to use with the attack.
  * @property {Item5e|boolean} [ammunition]    Specific ammunition to consume, or `false` to prevent any ammo usage.
  * @property {WeaponAttackMode} [attackMode]  Mode to use for making the attack and rolling damage.
+ * @property {boolean} [ignoreTotalCover=false]  Ignore total cover when making an attack roll.
  * @property {string} [mastery]               Weapon mastery option to use.
  */
 
