@@ -1,4 +1,4 @@
-export {default as aggregateDamageRolls} from "./aggregate-damage-rolls.mjs";
+export {default as aggregateDamageRolls, aggregateDamageTerms} from "./aggregate-damage-rolls.mjs";
 export {default as BasicDie} from "./basic-die.mjs";
 export {default as BasicRoll} from "./basic-roll.mjs";
 export {default as D20Die} from "./d20-die.mjs";

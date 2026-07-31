@@ -1,11 +1,12 @@
 import DamageRollConfigurationDialog from "../applications/dice/damage-configuration-dialog.mjs";
 import { areKeysPressed } from "../utils.mjs";
+import { aggregateDamageTerms } from "./aggregate-damage-rolls.mjs";
 import BasicRoll from "./basic-roll.mjs";
 
 const { DiceTerm, NumericTerm, OperatorTerm, ParentheticalTerm, RollTerm } = foundry.dice.terms;
 
 /**
- * @import { CriticalDamageConfiguration, DamageRollOptions } from "./_types.mjs";
+ * @import { CriticalDamageConfiguration, DamageBreakdown, DamageRollOptions } from "./_types.mjs";
  */
 
 /**
@@ -95,6 +96,18 @@ export default class DamageRoll extends BasicRoll {
    */
   get isCritical() {
     return this.options.isCritical === true;
+  }
+
+  /* -------------------------------------------- */
+  /*  Chat Messages                               */
+  /* -------------------------------------------- */
+
+  /**
+   * Collect this roll's dice results and its deterministic remainder into a single breakdown.
+   * @returns {DamageBreakdown}
+   */
+  aggregateTerms() {
+    return aggregateDamageTerms(this);
   }
 
   /* -------------------------------------------- */

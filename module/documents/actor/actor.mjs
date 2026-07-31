@@ -811,9 +811,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.preCalculateDamage", this, damages, options) === false ) return false;
 
     const multiplier = options.multiplier ?? 1;
-    const treatAs = options.originatingMessage?.flags?.dnd5e?.roll?.type
-      ? options.originatingMessage.flags.dnd5e.roll.type === "healing" ? "healing" : "damage"
-      : options.only ?? "damage";
+    const { isHealing } = options.originatingMessage?.system ?? {};
+    const treatAs = isHealing === undefined ? (options.only ?? "damage") : isHealing ? "healing" : "damage";
 
     const skipped = type => {
       if ( type === "maximum" ) return options.only ? options.only !== treatAs : false;

@@ -51,14 +51,15 @@ export async function postFallDamage(targets, distance) {
     data: {
       flags: {
         dnd5e: {
-          context: { fall: true }, messageType: "roll", roll: { type: "damage" },
+          context: { fall: true },
           targets: getTargetDescriptors(targets)
         }
       },
-      flavor: game.i18n.format("DND5E.FALLING.DamageFlavor", {
+      flavor: _loc("DND5E.FALLING.DamageFlavor", {
         distance: formatLength(Math.round(distance), units)
       }),
-      speaker: ChatMessage.implementation.getSpeaker()
+      speaker: ChatMessage.implementation.getSpeaker(),
+      type: "damage"
     }
   });
   if ( !rolls?.length ) return;

@@ -845,6 +845,13 @@ export function migrateMessageData(messageData) {
     updateData["flags.dnd5e.roll"] = _del;
   }
 
+  else if ( ((rollType === "damage") || (rollType === "healing")) && (messageData.type === "base") ) {
+    updateData.type = rollType;
+    updateData.system = _replace({ onSave: flags.dnd5e.roll.damageOnSave ?? null });
+    updateData["flags.dnd5e.messageType"] = _del;
+    updateData["flags.dnd5e.roll"] = _del;
+  }
+
   /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.
   else if ( (flags?.dnd5e?.roll?.type === "generic") && (messageData.type === "base") ) {
     updateData.type = "generic";

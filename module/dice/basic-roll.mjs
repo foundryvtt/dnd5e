@@ -1,5 +1,6 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
 import BasicDie from "./basic-die.mjs";
+import simplifyRollFormula from "./simplify-roll-formula.mjs";
 
 const { DiceTerm, NumericTerm, PoolTerm } = foundry.dice.terms;
 
@@ -287,6 +288,17 @@ export default class BasicRoll extends Roll {
    * @protected
    */
   static _prepareMessageData(rolls, messageData) {}
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getTooltip() {
+    const constant = Number(simplifyRollFormula(this._formula, { deterministic: true }));
+    return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, {
+      constant: constant || null,
+      parts: this.dice.map(d => d.getTooltipData())
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Evaluate Methods                            */
