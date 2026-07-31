@@ -35,13 +35,10 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
       }),
       order: new StringField({ required: true }),
       trade: new SchemaField({
-        creatures: new ArrayField(new SchemaField({
-          price: new NumberField({ min: 0 }),
-          uuid: new DocumentUUIDField({ type: "Actor" })
-        })),
-        goods: new NumberField({ integer: true, min: 0 }),
+        creatures: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
         sell: new BooleanField(),
-        stocked: new BooleanField()
+        stocked: new BooleanField(),
+        value: new NumberField({ integer: true, min: 0 })
       })
     };
   }
@@ -120,20 +117,24 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
       label: "DND5E.FACILITY.Orders.trade.inf"
     });
 
-    if ( trade.goods && trade.sell ) context.supplements.push({
-      currency: CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency]?.abbreviation ?? "",
-      label: "DND5E.FACILITY.Trade.Sell.Supplement",
-      value: trade.goods
-    });
-
+    const currency = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency]?.abbreviation ?? "";
     if ( trade.creatures.length ) {
-      const documents = await bulkFromUuid(trade.creatures.map(c => c.uuid));
-      const links = trade.creatures.map(({ uuid }) => documents.get(uuid)?.toAnchor().outerHTML).filter(_ => _);
+      const documents = await bulkFromUuid(trade.creatures);
+      const links = trade.creatures.map(uuid => documents.get(uuid)?.toAnchor().outerHTML).filter(_ => _);
       if ( links.length ) context.supplements.push({
         label: `DND5E.FACILITY.Trade.${trade.sell ? "Sell" : "Buy"}.Supplement`,
         link: game.i18n.getListFormatter({ style: "narrow" }).format(links)
       });
-    }
+      if ( trade.value ) context.supplements.push({
+        currency,
+        label: "DND5E.FACILITY.Trade.Price.Label",
+        value: trade.value
+      });
+    } else if ( trade.value && trade.sell ) context.supplements.push({
+      currency,
+      label: "DND5E.FACILITY.Trade.Sell.Supplement",
+      value: trade.value
+    });
 
     if ( costs.gold && !costs.paid && (game.user.isGM || actor?.isOwner) ) context.buttons.push({
       dataset: { action: "pay", method: "automatic" },

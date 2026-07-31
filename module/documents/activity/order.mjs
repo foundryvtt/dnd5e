@@ -117,10 +117,10 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
     const system = { costs: costs ?? {}, order: this.order };
     if ( craft?.item ) system.craft = { item: craft.item, quantity: craft.quantity };
     if ( trade ) system.trade = {
-      creatures: this._resolveTradedLivestock(trade).map(uuid => ({ uuid })),
-      goods: trade.stock?.value ?? null,
+      creatures: this._resolveTradedLivestock(trade),
       sell: trade.sell === true,
-      stocked: trade.stock?.stocked === true
+      stocked: trade.stock?.stocked === true,
+      value: trade.stock?.value ?? (trade.sell ? trade.creatures?.price : null) ?? null
     };
     foundry.utils.mergeObject(messageConfig.data, { system });
   }
