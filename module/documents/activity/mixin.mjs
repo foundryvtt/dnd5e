@@ -898,14 +898,9 @@ export default function ActivityMixin(Base) {
         create: true,
         data: {
           flavor: `${this.item.name} - ${this.damageFlavor}`,
-          flags: {
-            dnd5e: {
-              ...this.messageFlags,
-              messageType: "roll",
-              roll: { type: "damage" }
-            }
-          },
-          speaker: ChatMessage.getSpeaker({ actor: this.actor })
+          flags: { dnd5e: this.messageFlags },
+          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+          type: "damage"
         }
       }, message);
 

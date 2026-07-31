@@ -132,6 +132,17 @@
  */
 
 /**
+ * @typedef DamageBreakdown
+ * @property {{ classes: string, result: string }[]} dice  Individual die results and their display classes.
+ * @property {number|null} constant                        Deterministic remainder of the roll, or null if the formula
+ *                                                         multiplies or divides and no single constant can be given.
+ * @property {string|null} icon                            Icon representing the method used to produce the dice.
+ * @property {string|null} method                          Localization key for the method used to produce the dice.
+ * @property {number} total                                Total damage.
+ * @property {string} [type]                               Type of damage represented.
+ */
+
+/**
  * Critical effects configuration data.
  *
  * @typedef CriticalDamageConfiguration

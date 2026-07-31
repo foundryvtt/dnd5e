@@ -1,6 +1,4 @@
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
-import DamageRoll from "../dice/damage-roll.mjs";
-import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
@@ -377,10 +375,6 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Dice rolls
     if ( this.isContentVisible ) {
-      html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
-        if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
-      });
-      this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
@@ -389,30 +383,6 @@ export default class ChatMessage5e extends ChatMessage {
     avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
     avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
     avatar.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Augment roll tooltips with some additional information and styling.
-   * @param {Roll} roll            The roll instance.
-   * @param {HTMLDivElement} html  The roll tooltip markup.
-   */
-  _enrichRollTooltip(roll, html) {
-    const constant = Number(simplifyRollFormula(roll._formula, { deterministic: true }));
-    if ( !constant ) return;
-    const sign = constant < 0 ? "-" : "+";
-    const part = document.createElement("section");
-    part.classList.add("tooltip-part", "constant");
-    part.innerHTML = `
-      <div class="dice">
-        <ol class="dice-rolls"></ol>
-        <div class="total">
-          <span class="value"><span class="sign">${sign}</span>${Math.abs(constant)}</span>
-        </div>
-      </div>
-    `;
-    html.appendChild(part);
   }
 
   /* -------------------------------------------- */
@@ -489,142 +459,6 @@ export default class ChatMessage5e extends ChatMessage {
       target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
     });
     html.querySelector(".message-content")?.appendChild(tray);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Coalesce damage rolls into a single breakdown.
-   * @param {DamageRoll[]} rolls  The damage rolls.
-   * @param {HTMLElement} html    The chat card markup.
-   * @protected
-   */
-  _enrichDamageTooltip(rolls, html) {
-    if ( !rolls.length ) return;
-    const aggregatedRolls = CONFIG.DND5E.aggregateDamageDisplay ? aggregateDamageRolls(rolls) : rolls;
-    let { formula, total, breakdown } = aggregatedRolls.reduce((obj, r) => {
-      obj.formula.push(CONFIG.DND5E.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
-      obj.total += Math.max(0, r.total);
-      obj.breakdown.push(this._simplifyDamageRoll(r));
-      return obj;
-    }, { formula: [], total: 0, breakdown: [] });
-    formula = formula.join("").replace(/^ \+ /, "");
-    html.querySelectorAll(".dice-roll").forEach(el => el.remove());
-    const roll = document.createElement("div");
-    roll.classList.add("dice-roll");
-
-    const tooltipContents = breakdown.reduce((str, { type, total, constant, dice, icon, method }) => {
-      const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
-      return `${str}
-        <section class="tooltip-part">
-          <div class="dice">
-            ${icon
-              ? `<span class="part-method" data-tooltip aria-label="${_loc(method)}">${icon}</span>` : ""}
-            <ol class="dice-rolls">
-              ${dice.reduce((str, { result, classes }) => `
-                ${str}<li class="roll ${classes}">${result}</li>
-              `, "")}
-              ${constant ? `
-              <li class="constant"><span class="sign">${constant < 0 ? "-" : "+"}</span>${Math.abs(constant)}</li>
-              ` : ""}
-            </ol>
-            <div class="total">
-              ${config ? `<img src="${config.icon}" alt="${config.label}">` : ""}
-              <span class="label">${config?.labelShort ?? config?.label ?? ""}</span>
-              <span class="value">${total}</span>
-            </div>
-          </div>
-        </section>
-      `;
-    }, "");
-
-    roll.innerHTML = `
-      <div class="dice-result">
-        <div class="dice-formula">${formula}</div>
-        <div class="dice-tooltip-collapser">
-          <div class="dice-tooltip">
-            ${tooltipContents}
-          </div>
-        </div>
-        <h4 class="dice-total">${total}</h4>
-      </div>
-    `;
-    html.querySelector(".message-content").appendChild(roll);
-
-    const damageOnSave = this.getFlag("dnd5e", "roll.damageOnSave");
-    if ( damageOnSave ) {
-      const p = document.createElement("p");
-      p.classList.add("supplement");
-      p.innerHTML = `<strong>${_loc("DND5E.SAVE.OnSave")}</strong> ${
-        _loc(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
-      }`;
-      html.querySelector(".chat-card, .message-content")?.appendChild(p);
-    }
-
-    if ( game.user.isGM ) {
-      const damageApplication = document.createElement("damage-application");
-      damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
-        value: Math.max(0, roll.total),
-        type: roll.options.type,
-        properties: new Set(roll.options.properties ?? [])
-      }));
-      html.querySelector(".message-content").appendChild(damageApplication);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Simplify damage roll information for use by damage tooltip.
-   * @param {DamageRoll} roll   The damage roll to simplify.
-   * @returns {object}          The object holding simplified damage roll data.
-   * @protected
-   */
-  _simplifyDamageRoll(roll) {
-    const { OperatorTerm, NumericTerm, DiceTerm, PoolTerm } = foundry.dice.terms;
-    const termResultClasses = ["success", "failure", "rerolled", "exploded", "discarded"];
-    const aggregate = {
-      type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [], icon: null, method: null
-    };
-    let hasMultiplication = false;
-    for ( let i = roll.terms.length - 1; i >= 0; ) {
-      const term = roll.terms[i--];
-      if ( !(term instanceof NumericTerm) && !(term instanceof DiceTerm) && !(term instanceof PoolTerm) ) {
-        continue;
-      }
-      const value = term.total;
-      if ( term instanceof DiceTerm ) {
-        const tooltipData = term.getTooltipData();
-        aggregate.dice.push(...tooltipData.rolls);
-        aggregate.icon ??= tooltipData.icon;
-        aggregate.method ??= tooltipData.method;
-      }
-      if ( term instanceof PoolTerm ) {
-        term.rolls.forEach((poolTermRoll, i) => {
-          // Get simplified data for each roll
-          const simplified = this._simplifyDamageRoll(poolTermRoll);
-          const result = term.results[i];
-          // Apply main result classes to individual dice
-          simplified.dice.forEach(die => {
-            const resultClasses = termResultClasses.filter(c => result[c]).join(" ");
-            if ( resultClasses.length ) die.classes += ` ${resultClasses}`;
-          });
-          aggregate.dice.push(...simplified.dice);
-          aggregate.icon ??= simplified.icon;
-          aggregate.method ??= simplified.method;
-        });
-      }
-      let multiplier = 1;
-      let operator = roll.terms[i];
-      while ( operator instanceof OperatorTerm ) {
-        if ( !["+", "-"].includes(operator.operator) ) hasMultiplication = true;
-        if ( operator.operator === "-" ) multiplier *= -1;
-        operator = roll.terms[--i];
-      }
-      if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
-    }
-    if ( hasMultiplication ) aggregate.constant = null;
-    return aggregate;
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,31 @@
+{{#if header}}
+<div class="chat-card">
+    <section class="card-header description{{#if header.isCritical}} critical{{/if}}">
+        <header class="summary">
+            <img class="gold-icon" src="{{ header.item.img }}" alt="{{ header.item.name }}">
+            <div class="name-stacked">
+                <span class="title">{{ header.item.name }}</span>
+                <span class="subtitle">{{ header.subtitle }}</span>
+            </div>
+        </header>
+    </section>
+</div>
+{{/if}}
+
+<div class="dice-roll{{#if isPrivate}} secret-roll{{/if}}" data-action="expandRoll">
+    <div class="dice-result">
+        <div class="dice-formula">{{#if isPrivate}}???{{else}}{{ formula }}{{/if}}</div>
+        {{#unless isPrivate}}
+        {{> "dnd5e.damage-breakdown" }}
+        {{/unless}}
+        <h4 class="dice-total">{{#if isPrivate}}?{{else}}{{ total }}{{/if}}</h4>
+    </div>
+</div>
+
+{{#if onSave}}
+<p class="supplement"><strong>{{ localize "DND5E.SAVE.OnSave" }}</strong> {{ onSave }}</p>
+{{/if}}
+
+{{#if showTray}}
+<damage-application class="dnd5e2"></damage-application>
+{{/if}}
