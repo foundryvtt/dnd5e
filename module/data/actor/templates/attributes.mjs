@@ -590,6 +590,21 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Convert the actor's price into the default currency.
+   * @this {NPCData|VehicleData}
+   */
+  static preparePrice() {
+    const { price } = this.attributes;
+    const { conversion } = CONFIG.DND5E.currencies[price.denomination] ?? {};
+    const { conversion: defaultConversion } = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency] ?? {};
+    if ( (price.value !== null) && conversion && defaultConversion ) {
+      price.valueInGP = Math.floor(price.value * defaultConversion / conversion);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Apply movement and sense changes based on a race item. This method should be called during
    * the `prepareEmbeddedData` step of data preparation.
    * @param {Item5e} race                    Race item from which to get the stats.

@@ -437,6 +437,7 @@ export default class NPCData extends CreatureTemplate {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this, rollData);
+    AttributesFields.preparePrice.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
@@ -452,13 +453,6 @@ export default class NPCData extends CreatureTemplate {
       mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
-
-    // Price
-    const { price } = this.attributes;
-    const conversion = CONFIG.DND5E.currencies[price.denomination]?.conversion;
-    const defaultConversion = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency]?.conversion;
-    if ( (price.value === null) || !conversion || !defaultConversion ) price.valueInGP = null;
-    else price.valueInGP = Math.floor(price.value * defaultConversion / conversion);
 
     // Legendary Actions & Resistances
     const { legact, legres } = this.resources;
