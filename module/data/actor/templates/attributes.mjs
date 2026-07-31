@@ -13,7 +13,7 @@ import ACFormulasField from "../fields/ac-formulas-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ActorRollData } from "../../../documents/_types.mjs";
+ * @import { ActorRollData, DeathSaveOutcome } from "../../../documents/_types.mjs";
  * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
  */
 
@@ -713,7 +713,57 @@ export default class AttributesFields {
     if ( changed.system?.attributes?.death?.failure !== 3 ) return;
 
     // If hp update is included, updateDowned will be called in onUpdateHP, so exit early
-    if ( !!changed.system.attributes.hp ) return;
+    if ( changed.system.attributes.hp ) return;
     if ( userId === game.userId ) await this.parent.updateDowned(options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the actor updates and terminal outcome resulting from a death saving throw.
+   * @param {{ success: number, failure: number }} death  Current death save success/failure counts.
+   * @param {object} result
+   * @param {boolean} result.isSuccess                    Whether the save succeeded.
+   * @param {boolean} [result.isCritical]                 Whether the save was a natural 20.
+   * @param {boolean} [result.isFumble]                   Whether the save was a natural 1.
+   * @returns {{ outcome: DeathSaveOutcome, updates: object }}
+   */
+  static applyDeathSaveResult(death, { isSuccess, isCritical=false, isFumble=false }) {
+    const updates = {};
+    let outcome = null;
+    if ( isSuccess ) {
+      const successes = (death.success || 0) + 1;
+
+      // Critical success - revive with 1 hp.
+      if ( isCritical ) {
+        Object.assign(updates, {
+          "system.attributes.death.success": 0,
+          "system.attributes.death.failure": 0,
+          "system.attributes.hp.value": 1
+        });
+        outcome = "revive";
+      }
+
+      // Normal success - stabilize on the third.
+      else if ( successes >= 3 ) {
+        Object.assign(updates, {
+          "system.attributes.death.success": 0,
+          "system.attributes.death.failure": 0
+        });
+        outcome = "stable";
+      }
+
+      else updates["system.attributes.death.success"] = Math.clamp(successes, 0, 3);
+    }
+
+    else {
+      const failures = Math.clamp((death.failure || 0) + (isFumble ? 2 : 1), 0, 3);
+      updates["system.attributes.death.failure"] = failures;
+      if ( failures >= 3 ) outcome = "death";
+    }
+
+    return { outcome, updates };
   }
 }
