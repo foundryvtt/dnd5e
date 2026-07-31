@@ -5,6 +5,7 @@ const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActivityRollData, ItemRollData } from "../../documents/_types.mjs";
+ * @import { DurationData, DurationLabels } from "./_types.mjs";
  */
 
 /**
@@ -26,6 +27,28 @@ export default class DurationField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
+   * Build the display labels for duration data.
+   * @param {object} data                    Data from which to build the labels.
+   * @param {DurationData} data.duration     Resolved duration data.
+   * @param {Set<string>} [data.properties]  Item properties.
+   * @returns {Partial<DurationLabels>}
+   */
+  static getLabels({ duration, properties }) {
+    if ( !duration?.units ) return {};
+    const labels = {};
+    if ( duration.value && (duration.units in CONFIG.DND5E.timeUnits) ) {
+      labels.simple = formatTime(duration.value, duration.units);
+    } else {
+      labels.simple = CONFIG.DND5E.timePeriods[duration.units] ?? "";
+    }
+    labels.concentration = duration.concentration || properties?.has("concentration")
+      ? _loc("DND5E.CONCENTRATION.Duration", { duration: labels.simple }) : labels.simple;
+    return labels;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel|BaseActivityData}
    * @param {ItemRollData|ActivityRollData} rollData  Roll data used for formula replacements.
@@ -38,11 +61,9 @@ export default class DurationField extends SchemaField {
     } else this.duration.value = null;
 
     if ( labels && this.duration.units ) {
-      if ( this.duration.value && (this.duration.units in CONFIG.DND5E.timeUnits) ) {
-        labels.duration = formatTime(this.duration.value, this.duration.units);
-      } else labels.duration = CONFIG.DND5E.timePeriods[this.duration.units] ?? "";
-      labels.concentrationDuration = this.duration.concentration || this.properties?.has("concentration")
-        ? _loc("DND5E.CONCENTRATION.Duration", { duration: labels.duration }) : labels.duration;
+      const { concentration, simple } = DurationField.getLabels(this);
+      labels.duration = simple;
+      labels.concentrationDuration = concentration;
     }
 
     Object.defineProperty(this.duration, "getEffectData", {

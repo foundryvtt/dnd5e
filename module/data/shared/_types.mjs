@@ -10,6 +10,13 @@
  */
 
 /**
+ * @typedef ActivationLabels
+ * @property {string} simple  Activation label (e.g. "Action" or "1 Minute").
+ * @property {string} legacy  Lowercase, always counted form (e.g. "1 action").
+ * @property {string} ritual  Simple label, joined with "Ritual" if the item can be ritually cast.
+ */
+
+/**
  * @typedef CreatureTypeData
  * @property {string} value    Actor's type as defined in the system configuration.
  * @property {string} subtype  Actor's subtype usually displayed in parenthesis after main type.
@@ -66,6 +73,12 @@
  */
 
 /**
+ * @typedef DurationLabels
+ * @property {string} simple         Duration label (e.g. "Instantaneous" or "1 Minute").
+ * @property {string} concentration  Simple label, wrapped in "Concentration, up to ..." where appropriate.
+ */
+
+/**
  * @typedef MovementData
  * @property {string} bonus                         Bonus applied to all movement types that already have a speed.
  * @property {number} multiplier                    Multiplier for each movement type.
@@ -81,6 +94,13 @@
  * @property {string} value       Scalar value for the activity's range.
  * @property {string} units       Units that are used for the range.
  * @property {string} special     Description of any special range details.
+ */
+
+/**
+ * @typedef RangeLabels
+ * @property {string} simple       Range label (e.g. "Self" or "120 ft").
+ * @property {string} html         Range label as HTML, with each number and unit part wrapped in its own span.
+ * @property {string} description  Range label with the units spelled out (e.g. "120 feet").
  */
 
 /**
@@ -129,6 +149,19 @@
  * @property {string} affects.type          Type of targets that can be affected (e.g. creatures, objects, spaces).
  * @property {boolean} affects.choice       When targeting an area, can the user choose who it affects?
  * @property {string} affects.special       Description of special targeting.
+ */
+
+/**
+ * @typedef TargetLabels
+ * @property {object} affects
+ * @property {string} affects.description   Prose form used in descriptions (e.g. "each creature").
+ * @property {string} affects.sheet         Capitalized short form used on sheets and inventory lists.
+ * @property {string} affects.statblock     Counted form used in statblocks (e.g. "one creature").
+ * @property {object} template
+ * @property {string} template.description  Counted template label with its sizes (e.g. "20-foot Sphere").
+ * @property {string} template.size         Template dimensions (e.g. "20-foot" or "10-foot-long, 5-foot-wide").
+ * @property {string} template.statblock    Counted template label with its primary size (e.g. "20 ft sphere").
+ * @property {string} template.type         Localized template type (e.g. "Sphere").
  */
 
 /**
