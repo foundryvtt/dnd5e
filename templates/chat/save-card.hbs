@@ -2,7 +2,7 @@
 {{{ this }}}
 {{/each}}
 
-{{#if (or outcome resisted canResist deltas.length)}}
+{{#if (or outcome resisted canResist concentrationBroken canBreakConcentration deltas.length)}}
 <div class="chat-card{{#if death}} death-save{{/if}}">
     {{#if outcome}}
     <p class="supplement">{{ outcome }}</p>
@@ -18,6 +18,20 @@
         <button type="button" data-action="resistSave">
             <i class="fa-solid fa-dragon" inert></i>
             {{ localize "DND5E.LegendaryResistance.Action.Resist" }}
+        </button>
+    </div>
+    {{/if}}
+
+    {{#if concentrationBroken}}
+    <p class="supplement">
+        <strong>{{ localize "DND5E.ROLL.Status" }}</strong>
+        {{ localize "DND5E.CONCENTRATION.Lost" }}
+    </p>
+    {{else if canBreakConcentration}}
+    <div class="card-buttons">
+        <button type="button" data-action="breakConcentration">
+            <i class="fa-solid fa-ban" inert></i>
+            {{ localize "DND5E.CONCENTRATION.Action.Break" }}
         </button>
     </div>
     {{/if}}

@@ -93,9 +93,11 @@
  */
 
 /**
- * Terminal result of a death saving throw: "death" (three failures), "revive" (natural 20, back to 1 hp),
- * "stable" (three successes), or `null` for a non-terminal save.
  * @typedef {"death"|"revive"|"stable"|null} DeathSaveOutcome
+ */
+
+/**
+ * @typedef {DeathSaveOutcome|"broken"} SaveOutcome
  */
 
 /* -------------------------------------------- */
