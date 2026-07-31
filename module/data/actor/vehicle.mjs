@@ -288,6 +288,7 @@ export default class VehicleData extends CommonTemplate {
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this, rollData);
+    AttributesFields.preparePrice.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareResistImmune.call(this);
     TravelField.prepareData.call(this, rollData);
