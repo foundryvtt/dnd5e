@@ -50,7 +50,19 @@ export default class AttackMessageData extends RollMessageData {
     const ammunition = actor.items.get(this.ammunition);
     if ( ammunition ) return ammunition;
     const data = this.deltas?.deleted?.find(i => i._id === this.ammunition);
-    return data ? new Item.implementation(data, { parent: actor }) : null;
+    if ( !data ) return null;
+    let item;
+    try {
+      actor._embeddedPreparation = true;
+      item = new Item.implementation(data, { parent: actor });
+    } catch ( err ) {
+      Hooks.onError("AttackMessageData#ammunitionItem", err, { log: "error" });
+      return null;
+    } finally {
+      delete actor._embeddedPreparation;
+    }
+    item.prepareFinalAttributes();
+    return item;
   }
 
   /* -------------------------------------------- */
