@@ -5,6 +5,7 @@ const { SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActivityRollData, ItemRollData } from "../../documents/_types.mjs";
+ * @import { RangeData, RangeLabels } from "./_types.mjs";
  */
 
 /**
@@ -26,6 +27,31 @@ export default class RangeField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
+   * Build the display labels for range data.
+   * @param {object} data            Data from which to build the labels.
+   * @param {RangeData} data.range   Resolved range data.
+   * @returns {Partial<RangeLabels>}
+   */
+  static getLabels({ range }) {
+    const labels = {};
+    if ( !range?.units ) {
+      labels.simple = _loc("DND5E.DistSelf");
+      return labels;
+    }
+    const isScalar = range.units in CONFIG.DND5E.movementUnits;
+    if ( isScalar && range.value ) {
+      labels.simple = formatLength(range.value, range.units);
+      labels.html = formatLength(range.value, range.units, { parts: true });
+      labels.description = formatLength(range.value, range.units, { unitDisplay: "long" });
+    } else if ( !isScalar ) {
+      labels.simple = CONFIG.DND5E.distanceUnits[range.units];
+    }
+    return labels;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel|BaseActivityData}
    * @param {ItemRollData|ActivityRollData} rollData  Roll data used for formula replacements.
@@ -38,21 +64,13 @@ export default class RangeField extends SchemaField {
     } else this.range.value = null;
 
     this.range.labels ??= {};
-    if ( this.range.units ) {
-      if ( this.range.scalar && this.range.value ) {
-        this.range.labels.range = formatLength(this.range.value, this.range.units);
-        this.range.labels.rangeParts = formatLength(this.range.value, this.range.units, { parts: true });
-        this.range.labels.description = formatLength(this.range.value, this.range.units, { unitDisplay: "long" });
-      } else if ( !this.range.scalar ) {
-        this.range.labels.range = CONFIG.DND5E.distanceUnits[this.range.units];
-      }
-    } else this.range.labels.range = _loc("DND5E.DistSelf");
+    Object.assign(this.range.labels, RangeField.getLabels(this));
 
     if ( labels ) {
       labels.description ??= {};
       labels.description.range ||= this.range.labels.description;
-      labels.range ||= this.range.labels.range;
-      labels.rangeParts ||= this.range.labels.rangeParts;
+      labels.range ||= this.range.labels.simple;
+      labels.rangeParts ||= this.range.labels.html;
     }
   }
 }
