@@ -4,7 +4,7 @@ runs:
   using: composite
   steps:
     - name: Generate Access Token
-      uses: qoomon/actions--access-token@v3
+      uses: qoomon/actions--access-token@4a318f2079e61db2ee0fe6a9073508366d90927c # v3
       id: access-token
       with:
         repository: dnd-free-rules
@@ -12,7 +12,7 @@ runs:
           contents: read
 
     - name: Checkout Free Rules Repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       with:
         path: _free/
         repository: foundryvtt/dnd-free-rules
