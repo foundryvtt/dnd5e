@@ -42,7 +42,8 @@ export default function ActivityMixin(Base) {
         actions: {},
         applyEffectsInChat: true,
         chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
-        dialog: ActivityUsageDialog
+        dialog: ActivityUsageDialog,
+        messageType: "usage"
       }
     });
 
@@ -791,17 +792,21 @@ export default function ActivityMixin(Base) {
      * @protected
      */
     async _createUsageMessage(message) {
-      const context = await this._usageChatContext(message);
-      const messageConfig = foundry.utils.mergeObject({
-        data: {
-          content: await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context),
-          flags: {
-            core: { canPopout: true }
-          },
-          speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
-          title: `${this.item.name} - ${this.name}`,
-          type: "usage"
+      const { chatCard, messageType } = this.metadata.usage;
+      const data = {
+        flags: {
+          core: { canPopout: true }
         },
+        speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
+        title: `${this.item.name} - ${this.name}`,
+        type: messageType
+      };
+      if ( chatCard ) {
+        const context = await this._usageChatContext(message);
+        data.content = await foundry.applications.handlebars.renderTemplate(chatCard, context);
+      }
+      const messageConfig = foundry.utils.mergeObject({
+        data,
         rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
       }, message);
 

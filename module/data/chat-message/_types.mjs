@@ -25,6 +25,25 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef BastionOrderMessageSystemData
+ * @property {object} costs
+ * @property {number|null} costs.days       Cost of executing the order, in days.
+ * @property {number|null} costs.gold       Cost of executing the order, in gold.
+ * @property {boolean} costs.paid           Whether the gold cost has been paid.
+ * @property {object} craft
+ * @property {string|null} craft.item       UUID of the item being crafted or harvested.
+ * @property {number|null} craft.quantity   Quantity of the item to harvest.
+ * @property {string} order                 Order that was issued.
+ * @property {object} trade
+ * @property {string[]} trade.creatures     UUIDs of the livestock bought or sold by the order.
+ * @property {boolean} trade.sell           Whether this was a sell operation rather than a buy.
+ * @property {boolean} trade.stocked        Whether the order was to fully stock the facility.
+ * @property {number|null} trade.value      Base value of the goods transacted, or the proceeds of a livestock sale.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef BastionTurnMessageSystemData
  * @property {object} gold
  * @property {boolean} gold.claimed  Has this gold been claimed by the actor?

@@ -107,7 +107,7 @@ export default class Bastion {
     }
 
     // Case 3 - Order complete.
-    const updates = { "system.progress": { value: 0, max: null, order: "" } };
+    const updates = { "system.progress": { value: 0, max: null, order: "", paid: false } };
     const { gold, items } = this.#evaluateOrder(facility, progress.order, updates);
     if ( performUpdates ) await facility.update(updates);
     return { gold, items, order: progress.order, updates };
