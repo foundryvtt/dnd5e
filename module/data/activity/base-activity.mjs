@@ -860,13 +860,15 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
     }
 
+    const rollOptions = foundry.utils.mergeObject(foundry.utils.deepClone(damage.options ?? {}), {
+      type: data.roll.damageType,
+      types: Array.from(damage.types),
+      properties: data.roll.properties
+    }, { inplace: false });
+
     return {
       data, parts,
-      options: {
-        type: data.roll.damageType,
-        types: Array.from(damage.types),
-        properties: data.roll.properties
-      }
+      options: rollOptions
     };
   }
 

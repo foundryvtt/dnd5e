@@ -37,6 +37,7 @@
  * @property {string} bonus            Bonus added to the damage.
  * @property {Set<string>} types       One or more damage types. If multiple are selected, then the user will be able to
  *                                     select from those types.
+ * @property {object} options          Options to pass through to the damage roll.
  * @property {object} custom
  * @property {boolean} custom.enabled  Should the custom formula be used?
  * @property {string} custom.formula   Custom damage formula.

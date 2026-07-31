@@ -98,6 +98,36 @@ export default class DamageRoll extends BasicRoll {
   }
 
   /* -------------------------------------------- */
+  /*  Evaluate Methods                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async evaluate(options={}) {
+    options = this._prepareEvaluationOptions(options);
+    return super.evaluate(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  evaluateSync(options={}) {
+    options = this._prepareEvaluationOptions(options);
+    return super.evaluateSync(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge roll-level evaluation options into the explicit evaluation options.
+   * @param {object} [options={}]  Evaluation options.
+   * @returns {object}
+   * @protected
+   */
+  _prepareEvaluationOptions(options={}) {
+    return foundry.utils.mergeObject(this.options, options, { inplace: false });
+  }
+
+  /* -------------------------------------------- */
   /*  Roll Configuration                          */
   /* -------------------------------------------- */
 
@@ -128,8 +158,9 @@ export default class DamageRoll extends BasicRoll {
     // double-application.
     if ( this.options.configured ) return;
     critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
+    const allowCritical = critical.allow !== false;
 
-    if ( this.isCritical ) {
+    if ( this.isCritical && allowCritical ) {
       const newTerms = [];
       for ( const [i, term] of this.terms.entries() ) {
         if ( term instanceof OperatorTerm ) newTerms.push(term);
