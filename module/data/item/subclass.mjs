@@ -65,17 +65,6 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   }
 
   /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get tooltipSubtitle() {
-    const cls = dnd5e.registry.classes.get(this.classIdentifier)?.name;
-    if ( cls ) return [_loc("DND5E.SubclassOf", { class: cls })];
-    return super.tooltipSubtitle;
-  }
-
-  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -109,6 +98,16 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   /** @inheritDoc */
   prepareFinalData() {
     SpellcastingField.prepareData.call(this, this.parent.getRollData({ deterministic: true }));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getCardData(options) {
+    const context = await super.getCardData(options);
+    const cls = dnd5e.registry.classes.get(this.classIdentifier)?.name;
+    if ( cls ) context.subtitle = [_loc("DND5E.SubclassOf", { class: cls })];
+    return context;
   }
 
   /* -------------------------------------------- */

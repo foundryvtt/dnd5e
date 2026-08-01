@@ -752,6 +752,31 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Capture the activity data for a chat card.
+   * @returns {Promise<object>}
+   */
+  async getCardData() {
+    const { description, id, img, name, type, uuid } = this;
+    return {
+      description: description.value,
+      activity: { id, img, name, type, uuid, chatFlavor: description.chatFlavor }
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Capture the data describing how this activity is used.
+   * @returns {UsageData}
+   */
+  getUsageData() {
+    const { activation, duration, range, target } = this;
+    return { activation, duration, range, target };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Effects that can be applied from this activity.
    * @returns {Promise<ActiveEffect5e[]>|null}
    */

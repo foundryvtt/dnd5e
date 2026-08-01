@@ -82,6 +82,15 @@ export default class BaseAttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  getUsageData() {
+    const usage = super.getUsageData();
+    if ( (this.item.type === "weapon") && !this.range.override ) usage.range = this.item.system.range;
+    return usage;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Abilities that could potentially be used with this attack. Unless a specific ability is specified then
    * whichever ability has the highest modifier will be selected when making an attack.

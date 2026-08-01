@@ -197,11 +197,32 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
    */
   get chatProperties() {
     return [
-      this.parent.labels.level,
-      this.parent.labels.components.vsm + (this.parent.labels.materials ? ` (${this.parent.labels.materials})` : ""),
-      ...this.parent.labels.components.tags,
-      this.parent.labels.duration
+      { type: "level", level: this.level },
+      { type: "components", materials: this.properties.has("material") ? this.materials.value : "" },
+      ...this.tagProperties,
+      { type: "duration" }
     ];
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get cardProperties() {
+    return [...this.tagProperties, { type: "components" }];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Descriptors for the spell's tag properties, such as ritual or concentration.
+   * @type {object[]}
+   */
+  get tagProperties() {
+    return Array.from(this.properties).reduce((arr, property) => {
+      const config = this.validProperties.has(property) ? CONFIG.DND5E.itemProperties[property] : null;
+      if ( config?.isTag && config.label ) arr.push({ property, type: "property" });
+      return arr;
+    }, []);
   }
 
   /* -------------------------------------------- */
@@ -275,11 +296,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
-
-  /** @override */
-  get tooltipSubtitle() {
-    return [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label];
-  }
 
   /* -------------------------------------------- */
   /*  Data Migration                              */
@@ -459,10 +475,33 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @inheritDoc */
   async getCardData(options) {
     const context = await super.getCardData(options);
+    context.materials = this.properties.has("material") ? this.materials.value : "";
+    context.school = this.school;
+    context.subtitle = [
+      CONFIG.DND5E.spellLevels[context.level], CONFIG.DND5E.spellSchools[this.school]?.label
+    ].filter(_ => _);
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getUsageData(options) {
+    const usage = super.getUsageData(options);
+    usage.activation ??= this.activation;
+    usage.duration ??= this.duration;
+    usage.range ??= this.range;
+    usage.target ??= this.target;
+    return usage;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getTooltipData(options) {
+    const context = await super.getTooltipData(options);
     context.isSpell = true;
-    const { activation, components, duration, range, target } = this.parent.labels;
-    context.properties = [components?.vsm, activation, duration, range, target].filter(_ => _);
-    if ( !this.properties.has("material") ) delete context.materials;
+    context.properties = [];
     return context;
   }
 

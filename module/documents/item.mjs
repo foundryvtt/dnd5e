@@ -10,6 +10,7 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
+import PropertyField from "../data/shared/property-field.mjs";
 import { formatIdentifier, staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
@@ -763,12 +764,15 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<ChatMessage5e|object|void>}
    */
   async displayCard(message={}) {
+    const data = await this.system.getCardData();
+    data.subtitle = data.subtitle.filterJoin(" • ");
+    data.properties = PropertyField.getLabels(data.properties, { ...data, properties: data.item.properties });
     const context = {
+      data,
       actor: this.actor,
       config: CONFIG.DND5E,
       tokenId: this.actor.token?.uuid || null,
       item: this,
-      data: await this.system.getCardData(),
       isSpell: this.type === "spell"
     };
 
@@ -843,11 +847,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     });
 
     // Type specific properties
-    context.properties = [
+    const usage = this.system.getUsageData?.() ?? {};
+    context.properties = PropertyField.getLabels([
       ...this.system.chatProperties ?? [],
       ...this.system.equippableItemCardProperties ?? [],
-      ...Object.values(this.labels.activations?.[0] ?? {})
-    ].filter(p => p);
+      ...PropertyField.getUsageProperties(usage)
+    ], { ...usage, properties: this.system.properties });
 
     return context;
   }

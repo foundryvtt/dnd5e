@@ -123,7 +123,7 @@ export default class ToolData extends ItemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
+    return this.cardProperties;
   }
 
   /* -------------------------------------------- */
@@ -133,7 +133,7 @@ export default class ToolData extends ItemDataModel.mixin(
    * @type {string[]}
    */
   get cardProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
+    return this.ability ? [{ type: "ability", ability: this.ability }] : [];
   }
 
   /* -------------------------------------------- */
