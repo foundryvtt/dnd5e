@@ -42,16 +42,6 @@ export default class UsageMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /**
-   * The activity for the chat message.
-   * @type {Activity}
-   */
-  get activity() {
-    return this.parent.getAssociatedActivity();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * The actor for the chat message.
    * @type {Actor5e}
    */
@@ -60,26 +50,17 @@ export default class UsageMessageData extends ChatMessageDataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * The item for the chat message.
-   * @type {Item5e}
-   */
-  get item() {
-    return this.parent.getAssociatedItem();
-  }
-
-  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @override */
   async _prepareContext() {
+    const item = this.parent.getAssociatedItem();
     return {
       content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         this.parent.content, { rollData: this.parent.getRollData() }
       ),
-      effects: (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: this.item }))))
+      effects: (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: item }))))
         .filter(e => e && (game.user.isGM || (e.transfer & (this.parent.author?.id === game.user.id))))
     };
   }
@@ -89,12 +70,13 @@ export default class UsageMessageData extends ChatMessageDataModel {
   /** @inheritDoc */
   _onRender(element) {
     super._onRender(element);
-    this.activity?.onRenderChatCard(this.parent, element);
+    const activity = this.parent.getAssociatedActivity();
+    activity?.onRenderChatCard(this.parent, element);
     this._displayChatActionButtons(element);
     if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       element.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
     }
-    this.activity?.activateChatListeners(this.parent, element);
+    activity?.activateChatListeners(this.parent, element);
   }
 
   /* -------------------------------------------- */
@@ -107,13 +89,14 @@ export default class UsageMessageData extends ChatMessageDataModel {
   _displayChatActionButtons(element) {
     if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
 
+    const activity = this.parent.getAssociatedActivity();
     const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.isAuthor;
     for ( const button of element.querySelectorAll(".card-buttons button") ) {
       if ( button.dataset.visibility === "all" ) continue;
 
       // GM buttons should only be visible to GMs, otherwise button should only be visible to message's creator
       if ( ((button.dataset.visibility === "gm") && !game.user.isGM) || !isCreator
-        || this.activity?.shouldHideChatButton(button, this.parent) ) button.hidden = true;
+        || activity?.shouldHideChatButton(button, this.parent) ) button.hidden = true;
     }
   }
 }

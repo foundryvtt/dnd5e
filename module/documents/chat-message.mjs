@@ -606,7 +606,8 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Item5e|void}
    */
   getAssociatedItem({ scaled=false }={}) {
-    const item = fromUuidSync(this.getFlag("dnd5e", "item.uuid"), { strict: false });
+    const uuid = this.system.item?.uuid ?? this.getFlag("dnd5e", "item.uuid");
+    const item = fromUuidSync(uuid, { strict: false });
     const scaling = scaled ? this.system.scaling : null;
     if ( item ) return scaling ? item.scaledClone(scaling) : item;
     const actor = this.getAssociatedActor();
