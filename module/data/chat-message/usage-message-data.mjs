@@ -1,26 +1,32 @@
-import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
+import ItemMessageData from "./item-message-data.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
 const { ArrayField, DocumentIdField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ActivityUsageChatButton } from "../../documents/activity/_types.mjs";
  * @import { UsageMessageSystemData } from "./_types.mjs";
  */
 
 /**
  * Data stored in a usage chat message.
- * @extends {ChatMessageDataModel<UsageMessageSystemData>}
+ * @extends {ItemMessageData<UsageMessageSystemData>}
  * @mixes UsageMessageSystemData
  */
-export default class UsageMessageData extends ChatMessageDataModel {
+export default class UsageMessageData extends ItemMessageData {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static defineSchema() {
     return {
+      ...super.defineSchema(),
+      activity: new SchemaField({
+        ...this._sourceFields(),
+        chatFlavor: new StringField()
+      }),
       buttons: new ArrayField(new SchemaField({
         action: new StringField({ blank: false, required: true }),
         dataset: new ObjectField(),
@@ -61,16 +67,44 @@ export default class UsageMessageData extends ChatMessageDataModel {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @override */
-  async _prepareContext() {
-    const item = this.parent.getAssociatedItem();
-    return {
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    let context;
+    if ( this.parent.content ) context = {
       content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         this.parent.content, { rollData: this.parent.getRollData() }
-      ),
-      effects: (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: item }))))
-        .filter(e => e && (game.user.isGM || (e.transfer & (this.parent.author?.id === game.user.id))))
+      )
     };
+    else {
+      context = await super._prepareContext(options);
+      context.buttons = this._prepareButtons();
+      if ( this.activity.chatFlavor ) context.subtitle = this.activity.chatFlavor;
+    }
+
+    const item = this.parent.getAssociatedItem();
+    context.effects = (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: item }))))
+      .filter(e => e && (game.user.isGM || (e.transfer & (this.parent.author?.id === game.user.id))));
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Render context for the buttons offered by the activity, with their visibility resolved for the viewing user.
+   * @returns {object[]}
+   * @protected
+   */
+  _prepareButtons() {
+    const activity = this.parent.getAssociatedActivity();
+    const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.isAuthor;
+    return this.buttons.map((button, index) => ({
+      ...button, index,
+      hidden: button.visibility === "all"
+        ? false
+        : ((button.visibility === "gm") && !game.user.isGM)
+          || !isCreator
+          || !!activity?.shouldHideChatButton(button, this.parent)
+    }));
   }
 
   /* -------------------------------------------- */
@@ -78,33 +112,30 @@ export default class UsageMessageData extends ChatMessageDataModel {
   /** @inheritDoc */
   _onRender(element) {
     super._onRender(element);
-    const activity = this.parent.getAssociatedActivity();
-    activity?.onRenderChatCard(this.parent, element);
-    this._displayChatActionButtons(element);
-    if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
-      element.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
-    }
-    activity?.activateChatListeners(this.parent, element);
+    if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
+    this.parent.getAssociatedActivity()?.onRenderChatCard(this.parent, element);
   }
 
   /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onClickAction(event, target) {
+    if ( event.button !== 0 ) return;
+    this.parent.getAssociatedActivity()?.onChatAction(event, target, this.parent);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
 
   /**
-   * Control visibility of chat card action buttons based on viewing user.
-   * @param {HTMLElement} element  Rendered contents of the message.
-   * @protected
+   * Retrieve the descriptor for the button that was clicked.
+   * @param {HTMLElement} target  Button that was clicked.
+   * @returns {ActivityUsageChatButton|void}
    */
-  _displayChatActionButtons(element) {
-    if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
-
-    const activity = this.parent.getAssociatedActivity();
-    const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.isAuthor;
-    for ( const button of element.querySelectorAll(".card-buttons button") ) {
-      if ( button.dataset.visibility === "all" ) continue;
-
-      // GM buttons should only be visible to GMs, otherwise button should only be visible to message's creator
-      if ( ((button.dataset.visibility === "gm") && !game.user.isGM) || !isCreator
-        || activity?.shouldHideChatButton(button, this.parent) ) button.hidden = true;
-    }
+  getButton(target) {
+    return this.buttons[Number(target.dataset.index)];
   }
 }

@@ -105,14 +105,14 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken");
-    const dc = parseInt(target.dataset.dc);
+    const { ability, dc } = message.system.getButton(target)?.dataset ?? {};
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.save.bonus }, this.getRollData());
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
       const rollData = {
         event,
-        ability: target.dataset.ability ?? this.save.ability.first(),
+        ability: ability ?? this.save.ability.first(),
         target: Number.isFinite(dc) ? dc : this.save.dc.value
       };
       if ( bonusData.parts.length ) rollData.rolls = [bonusData];
