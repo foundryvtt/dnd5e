@@ -116,8 +116,8 @@ export default class AttackMessageData extends RollMessageData {
     // TODO: Move this into model when effect targets are converted.
     const targets = this.parent.getFlag("dnd5e", "targets") ?? [];
     return targets
-      .map(({ ac, name, uuid }) => ({
-        ac, name, showAC, uuid,
+      .map(({ ac, actor, name, token }) => ({
+        ac, actor, name, showAC, token,
         hasAC: ac !== null,
         isMiss: (ac === null) || (!roll.isCritical && ((roll.total < ac) || roll.isFumble))
       }))

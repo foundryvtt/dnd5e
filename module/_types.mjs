@@ -629,10 +629,11 @@
  * Important information on a targeted token.
  *
  * @typedef TargetDescriptor5e
- * @property {string} uuid  The UUID of the target.
- * @property {string} img   The target's image.
- * @property {string} name  The target's name.
- * @property {number} ac    The target's armor class, if applicable.
+ * @property {string} actor  The UUID of the target actor.
+ * @property {number} ac     The target's armor class, if applicable.
+ * @property {string} img    The target token's image.
+ * @property {string} name   The target token's name.
+ * @property {string} token  The UUID of the target token.
  */
 
 /* -------------------------------------------- */

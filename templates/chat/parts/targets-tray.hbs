@@ -7,7 +7,8 @@
     <div class="collapsible-content">
         <ul class="unlist evaluation wrapper">
             {{#each targets}}
-            <li class="target {{#if isMiss}}miss{{else}}hit{{/if}}" data-uuid="{{ uuid }}" data-miss="{{ isMiss }}">
+            <li class="target {{#if isMiss}}miss{{else}}hit{{/if}}" data-actor-uuid="{{ actor }}"
+                data-token-uuid="{{ token }}" data-miss="{{ isMiss }}">
                 <i class="fas {{#if isMiss}}fa-times{{else}}fa-check{{/if}}"></i>
                 <div class="name">{{ name }}</div>
                 {{#if showAC}}

@@ -1,4 +1,5 @@
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
+import { resolveTargetDescriptor } from "../utils.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
@@ -161,6 +162,7 @@ export default class ChatMessage5e extends ChatMessage {
     html.classList.add("dnd5e2");
 
     // Header matter
+    const token = this.getAssociatedToken();
     const actor = this.getAssociatedActor();
     const avatar = document.createElement("a");
     avatar.classList.add("avatar");
@@ -187,7 +189,8 @@ export default class ChatMessage5e extends ChatMessage {
     }
     img ??= CONST.DEFAULT_TOKEN;
 
-    if ( actor ) avatar.dataset.uuid = actor.uuid;
+    if ( actor ) avatar.dataset.actorUuid = actor.uuid;
+    if ( token ) avatar.dataset.tokenUuid = token.uuid;
     Object.assign(avatarImg, { src: img, alt: nameText });
     avatar.append(avatarImg);
 
@@ -320,10 +323,9 @@ export default class ChatMessage5e extends ChatMessage {
    */
   async _onTargetMouseDown(event) {
     event.stopPropagation();
-    const uuid = event.currentTarget.dataset.uuid;
-    const actor = fromUuidSync(uuid);
-    const token = actor?.token?.object ?? actor?.getActiveTokens()[0];
-    if ( !token || !actor.testUserPermission(game.user, "OBSERVER")) return;
+    const { actorUuid, tokenUuid } = event.currentTarget.dataset;
+    const { actor, token } = resolveTargetDescriptor({ actor: actorUuid, token: tokenUuid });
+    if ( !token || !actor?.testUserPermission(game.user, "OBSERVER")) return;
     const releaseOthers = !event.shiftKey;
     if ( token.controlled ) token.release();
     else {
@@ -340,9 +342,8 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _onTargetHoverIn(event) {
-    const uuid = event.currentTarget.dataset.uuid;
-    const actor = fromUuidSync(uuid);
-    const token = actor?.token?.object ?? actor?.getActiveTokens()[0];
+    const { actorUuid, tokenUuid } = event.currentTarget.dataset;
+    const { token } = resolveTargetDescriptor({ actor: actorUuid, token: tokenUuid });
     if ( token && token.isVisible ) {
       if ( !token.controlled ) token._onHoverIn(event, { hoverOutOthers: true });
       this._highlighted = token;
@@ -392,18 +393,13 @@ export default class ChatMessage5e extends ChatMessage {
   selectTargets(li, type) {
     if ( !canvas?.ready ) return;
     const lis = li.closest("[data-message-id]").querySelectorAll(`.evaluation li.target.${type}`);
-    const uuids = new Set(Array.from(lis).map(n => n.dataset.uuid));
     canvas.tokens.releaseAll();
-    uuids.forEach(uuid => {
-      const actor = fromUuidSync(uuid);
-      if ( !actor ) return;
-      const tokens = actor.isToken ? [actor.token?.object] : actor.getActiveTokens();
-      for ( const token of tokens ) {
-        if ( token?.isVisible && actor.testUserPermission(game.user, "OWNER") ) {
-          token.control({ releaseOthers: false });
-        }
+    for ( const { dataset } of lis ) {
+      const { actor, token } = resolveTargetDescriptor({ actor: dataset.actorUuid, token: dataset.tokenUuid });
+      if ( token?.isVisible && actor?.testUserPermission(game.user, "OWNER") ) {
+        token.control({ releaseOthers: false });
       }
-    });
+    }
   }
 
   /* -------------------------------------------- */
@@ -548,12 +544,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Actor|void}
    */
   getAssociatedActor() {
-    if ( this.speaker.scene && this.speaker.token ) {
-      const scene = game.scenes.get(this.speaker.scene);
-      const token = scene?.tokens.get(this.speaker.token);
-      if ( token ) return token.actor;
-    }
-    return game.actors.get(this.speaker.actor);
+    return this.getAssociatedToken()?.actor ?? game.actors.get(this.speaker.actor);
   }
 
   /* -------------------------------------------- */
@@ -595,6 +586,17 @@ export default class ChatMessage5e extends ChatMessage {
    */
   getAssociatedRolls(type) {
     return dnd5e.registry.messages.get(this.id, type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the token which is the speaker of a chat card.
+   * @returns {TokenDocument5e|void}
+   */
+  getAssociatedToken() {
+    const { scene, token } = this.speaker;
+    if ( scene && token ) return game.scenes.get(scene)?.tokens.get(token);
   }
 
   /* -------------------------------------------- */

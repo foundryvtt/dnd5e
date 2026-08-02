@@ -1,3 +1,5 @@
+import { resolveTargetDescriptor } from "../../utils.mjs";
+
 /**
  * Adds functionality to a custom HTML element for displaying a target selector and displaying targets.
  * @param {typeof HTMLElement} Base  The base class being mixed.
@@ -118,7 +120,10 @@ export default function TargetedApplicationMixin(Base) {
       const targetedTokens = new Map();
       switch ( this.targetingMode ) {
         case "targeted":
-          this.chatMessage?.getFlag("dnd5e", "targets")?.forEach(t => targetedTokens.set(t.uuid, t.name));
+          for ( const descriptor of this.chatMessage?.getFlag("dnd5e", "targets") ?? [] ) {
+            const { actor, token } = resolveTargetDescriptor(descriptor);
+            if ( actor ) targetedTokens.set(actor.uuid, token?.name ?? descriptor.name);
+          }
           break;
         case "selected":
           canvas.tokens?.controlled?.forEach(t => {
