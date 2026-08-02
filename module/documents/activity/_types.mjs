@@ -73,10 +73,13 @@
 
 /**
  * @typedef ActivityUsageChatButton
- * @property {string} label    Label to display on the button.
- * @property {string} icon     Icon to display on the button.
- * @property {string} classes  Classes for the button.
- * @property {object} dataset  Data attributes attached to the button.
+ * @property {string} action                      Action performed when the button is clicked.
+ * @property {object} [dataset]                   Additional data attributes attached to the button.
+ * @property {string} [hiddenLabel]               Label displayed in place of label when challenge details are
+ *                                                concealed from the viewer.
+ * @property {string} icon                        FontAwesome classes or a path to an icon image.
+ * @property {string} label                       Localization key or label text.
+ * @property {"all"|"creator"|"gm"} [visibility]  Which users can see this button.
  */
 
 /**

@@ -737,25 +737,19 @@ export default function ActivityMixin(Base) {
       const buttons = [];
 
       if ( this.target?.template?.type ) buttons.push({
-        label: _loc("DND5E.TARGET.Action.PlaceTemplate"),
-        icon: '<i class="fas fa-bullseye" inert></i>',
-        dataset: {
-          action: "placeTemplate"
-        }
+        action: "placeTemplate",
+        icon: "fa-solid fa-bullseye",
+        label: "DND5E.TARGET.Action.PlaceTemplate"
       });
 
       if ( message.hasConsumption ) buttons.push({
-        label: _loc("DND5E.CONSUMPTION.Action.ConsumeResource"),
-        icon: '<i class="fa-solid fa-cubes-stacked" inert></i>',
-        dataset: {
-          action: "consumeResource"
-        }
+        action: "consumeResource",
+        icon: "fa-solid fa-cubes-stacked",
+        label: "DND5E.CONSUMPTION.Action.ConsumeResource"
       }, {
-        label: _loc("DND5E.CONSUMPTION.Action.RefundResource"),
-        icon: '<i class="fa-solid fa-clock-rotate-left"></i>',
-        dataset: {
-          action: "refundResource"
-        }
+        action: "refundResource",
+        icon: "fa-solid fa-clock-rotate-left",
+        label: "DND5E.CONSUMPTION.Action.RefundResource"
       });
 
       return buttons;
@@ -796,6 +790,8 @@ export default function ActivityMixin(Base) {
         title: `${this.item.name} - ${this.name}`,
         type: messageType
       };
+      const buttons = this._usageChatButtons(message);
+      if ( buttons.length ) foundry.utils.setProperty(data, "system.buttons", buttons);
       if ( chatCard ) {
         const context = await this._usageChatContext(message);
         data.content = await foundry.applications.handlebars.renderTemplate(chatCard, context);
