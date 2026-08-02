@@ -26,8 +26,6 @@ export default class ChatMessage5e extends ChatMessage {
    */
   get canApplyDamage() {
     if ( this.system?.canApplyDamage === false ) return false;
-    const type = this.flags.dnd5e?.roll?.type;
-    if ( type && (type !== "damage") ) return false;
     return this.isRoll && this.isContentVisible && !!canvas.tokens?.controlled.length;
   }
 
@@ -40,14 +38,6 @@ export default class ChatMessage5e extends ChatMessage {
   get canSelectTargets() {
     if ( this.type !== "attack" ) return false;
     return this.isRoll && this.isContentVisible;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  get isRoll() {
-    if ( this.system?.isRoll !== undefined ) return this.system.isRoll;
-    return super.isRoll && !this.flags.dnd5e?.rest;
   }
 
   /* -------------------------------------------- */
@@ -116,14 +106,12 @@ export default class ChatMessage5e extends ChatMessage {
     if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
       await this.system.getHTML(html, options);
     } else {
-      this._displayChatActionButtons(html);
       if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
         html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
       }
 
       await this._enrichChatCard(html);
       this._collapseTrays(html);
-      dnd5e.enrichers.activateChatListeners(this, html);
     }
 
     /**
@@ -158,32 +146,6 @@ export default class ChatMessage5e extends ChatMessage {
     }
     for ( const element of html.querySelectorAll(this.constructor.TRAY_TYPES.join(", ")) ) {
       element.toggleAttribute("open", this._trayStates?.get(element.tagName) ?? !collapse);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Optionally hide the display of chat card action buttons which cannot be performed by the user
-   * @param {HTMLElement} html  Rendered contents of the message.
-   * @protected
-   */
-  _displayChatActionButtons(html) {
-    const chatCard = html.querySelector(".chat-card");
-    if ( chatCard ) {
-      const flavor = html.querySelector(".flavor-text");
-      if ( flavor?.innerText === html.querySelector(".item-name")?.innerText ) flavor?.remove();
-
-      if ( this.shouldDisplayChallenge ) chatCard.dataset.displayChallenge = "";
-
-      const actor = game.actors.get(this.speaker.actor);
-      const isCreator = game.user.isGM || actor?.isOwner || (this.author?.id === game.user.id);
-      for ( const button of html.querySelectorAll(".card-buttons button") ) {
-        if ( button.dataset.visibility === "all" ) continue;
-
-        // GM buttons should only be visible to GMs, otherwise button should only be visible to message's creator
-        if ( ((button.dataset.visibility === "gm") && !game.user.isGM) || !isCreator ) button.hidden = true;
-      }
     }
   }
 
