@@ -49,18 +49,14 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
   /** @override */
   _usageChatButtons(message) {
     const buttons = [{
-      label: _loc("DND5E.Attack"),
-      icon: '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg" inert></i>',
-      dataset: {
-        action: "rollAttack"
-      }
+      action: "rollAttack",
+      icon: "systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg",
+      label: "DND5E.Attack"
     }];
     if ( this.damage.parts.length || this.item.system.properties?.has("amm") ) buttons.push({
-      label: _loc("DND5E.Damage"),
-      icon: '<i class="fa-solid fa-burst" inert></i>',
-      dataset: {
-        action: "rollDamage"
-      }
+      action: "rollDamage",
+      icon: "fa-solid fa-burst",
+      label: "DND5E.Damage"
     });
     return buttons.concat(super._usageChatButtons(message));
   }
