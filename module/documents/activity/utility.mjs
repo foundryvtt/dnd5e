@@ -44,14 +44,13 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
   /** @override */
   _usageChatButtons(message) {
     if ( !this.roll.formula ) return super._usageChatButtons(message);
-    return [{
-      label: this.roll.name || _loc("DND5E.Roll"),
-      icon: '<i class="fa-solid fa-dice" inert></i>',
-      dataset: {
-        action: "rollFormula",
-        visibility: this.roll.visible ? "all" : undefined
-      }
-    }].concat(super._usageChatButtons(message));
+    const button = {
+      action: "rollFormula",
+      icon: "fa-solid fa-dice",
+      label: this.roll.name || "DND5E.Roll"
+    };
+    if ( this.roll.visible ) button.visibility = "all";
+    return [button, ...super._usageChatButtons(message)];
   }
 
   /* -------------------------------------------- */

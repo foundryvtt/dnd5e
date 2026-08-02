@@ -45,27 +45,22 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     for ( const abilityId of this.save.ability ) {
       const ability = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
       const promptTitle = _loc("DND5E.SavePromptTitle", { ability });
-      buttons.push({
-        label: dc ? `
-          <span class="visible-dc">${_loc("DND5E.SavingThrowDC", { dc, ability })}</span>
-          <span class="hidden-dc">${promptTitle}</span>
-        ` : promptTitle,
-        icon: '<i class="fa-solid fa-shield-heart" inert></i>',
-        dataset: {
-          dc,
-          ability: abilityId,
-          action: "rollSave",
-          visibility: this.save.visible ? "all" : undefined
-        }
-      });
+      const button = {
+        action: "rollSave",
+        dataset: { dc, ability: abilityId },
+        hiddenLabel: promptTitle,
+        icon: "fa-solid fa-shield-heart",
+        label: dc ? _loc("DND5E.SavingThrowDC", { ability, dc }) : promptTitle,
+        visibility: this.save.visible ? "all" : undefined
+      };
+      if ( this.save.visible ) button.visibility = "all";
+      buttons.push(button);
     }
 
     if ( this.damage.parts.length ) buttons.push({
-      label: _loc("DND5E.Damage"),
-      icon: '<i class="fas fa-burst" inert></i>',
-      dataset: {
-        action: "rollDamage"
-      }
+      action: "rollDamage",
+      icon: "fa-solid fa-burst",
+      label: "DND5E.Damage"
     });
     return buttons.concat(super._usageChatButtons(message));
   }

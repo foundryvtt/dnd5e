@@ -1,4 +1,5 @@
 /**
+ * @import { ActivityUsageChatButton } from "../../documents/activity/_types.mjs";
  * @import { BastionTurnItem, SaveOutcome } from "../../documents/_types.mjs";
  * @import { ActivationData, DurationData, RangeData, TargetData } from "../shared/_types.mjs";
  * @import { ActivationsData, ActorDeltasData } from "./fields/_types.mjs";
@@ -232,7 +233,8 @@
 
 /**
  * @typedef UsageMessageSystemData
- * @property {string} [cause]          Relative ID of the activity that caused this one on the same actor.
- * @property {ActorDeltasData} deltas  Actor/item consumption from this turn change.
- * @property {string[]} effects        Relative or absolute UUIDs of effects that can be applied.
+ * @property {ActivityUsageChatButton[]} buttons  Buttons offered by the activity that created this message.
+ * @property {string} [cause]                     Relative ID of the activity that caused this one on the same actor.
+ * @property {ActorDeltasData} deltas             Actor/item consumption from this turn change.
+ * @property {string[]} effects                   Relative or absolute UUIDs of effects that can be applied.
  */

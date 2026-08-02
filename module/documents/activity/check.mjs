@@ -46,26 +46,25 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       const ability = CONFIG.DND5E.abilities[abilityKey]?.label;
       const checkType = (associated in CONFIG.DND5E.skills) ? "skill"
         : (associated in CONFIG.DND5E.tools) ? "tool": "ability";
-      const dataset = { ability: abilityKey, action: "rollCheck", visibility: this.check.visible ? "all" : undefined };
+      const dataset = { ability: abilityKey };
       if ( dc ) dataset.dc = dc;
       if ( checkType !== "ability" ) dataset[checkType] = associated;
 
-      let label = ability;
       let type;
       if ( checkType === "skill" ) type = CONFIG.DND5E.skills[associated]?.label;
       else if ( checkType === "tool" ) type = Trait.keyLabel(associated, { trait: "tool" });
-      if ( type ) label = _loc("EDITOR.DND5E.Inline.SpecificCheck", { ability, type });
-      else label = ability;
-
-      buttons.push({
-        label: dc ? `
-          <span class="visible-dc">${_loc("EDITOR.DND5E.Inline.DC", { dc, check: wrap(label) })}</span>
-          <span class="hidden-dc">${wrap(label)}</span>
-        ` : wrap(label),
-        icon: checkType === "tool" ? '<i class="fa-solid fa-hammer" inert></i>'
-          : '<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg" inert></i>',
-        dataset
-      });
+      const check = wrap(type ? _loc("EDITOR.DND5E.Inline.SpecificCheck", { ability, type }) : ability);
+      const button = {
+        dataset,
+        action: "rollCheck",
+        hiddenLabel: check,
+        icon: checkType === "tool"
+          ? "fa-solid fa-hammer"
+          : "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        label: dc ? _loc("EDITOR.DND5E.Inline.DC", { check, dc }) : check
+      };
+      if ( this.check.visible ) button.visibility = "all";
+      buttons.push(button);
     };
     const wrap = check => _loc("EDITOR.DND5E.Inline.CheckShort", { check });
 
