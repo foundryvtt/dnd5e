@@ -16,7 +16,6 @@
  * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
  * @property {object} usage
  * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.
- * @property {string|null} usage.chatCard               Template used to render the chat card.
  * @property {typeof ActivityUsageDialog} usage.dialog  Default usage prompt.
  * @property {string} usage.messageType                 ChatMessage subtype created for this usage.
  */
