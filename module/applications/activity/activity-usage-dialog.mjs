@@ -202,10 +202,10 @@ export default class ActivityUsageDialog extends Dialog5e {
     }];
     if ( this.config.concentration?.begin ) {
       const existingConcentration = Array.from(this.actor.concentration.effects).map(effect => {
-        const data = effect.getFlag("dnd5e", "item");
+        const item = effect.getFlag("dnd5e", "item");
         return {
           value: effect.id,
-          label: data?.data?.name ?? this.actor.items.get(data?.id)?.name
+          label: item?.data?.name ?? this.actor.items.get(item?.id)?.name
             ?? _loc("DND5E.CONCENTRATION.NoSource")
         };
       });

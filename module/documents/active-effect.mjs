@@ -1061,8 +1061,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   static async endConcentrationDialog(actor, effects) {
     const choices = effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "item");
-      acc[effect.id] = data?.name ?? actor.items.get(data?.id)?.name ?? _loc("DND5E.CONCENTRATION.NoSource");
+      const item = effect.getFlag("dnd5e", "item");
+      acc[effect.id] = item?.data?.name ?? actor.items.get(item?.id)?.name ?? _loc("DND5E.CONCENTRATION.NoSource");
       return acc;
     }, {});
     const source = await ActiveEffect5e.#promptRemoveSource({
