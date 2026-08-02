@@ -1,6 +1,8 @@
 import { convertLength } from "../utils.mjs";
 import BasePlacement from "./api/base-placement.mjs";
 
+const { PreciseText } = foundry.canvas.containers;
+
 /**
  * @import {
  *   TemplatePlacementConfiguration, TemplatePlacementData, TemplatePlacementShapeConfiguration
@@ -20,26 +22,157 @@ export default class TemplatePlacement extends BasePlacement {
   /** @override */
   async _place() {
     const results = [];
+    const placedDocuments = [];
+    const onKeyDown = this.#onKeyDown.bind(this);
+    const priorTargets = this.config.targetOnPlacement ? new Set(Array.from(game.user.targets, t => t.id)) : null;
     const attachToToken = this.config.shapes.some(s => s.type === "emanation");
-    await canvas.regions.placeRegions(this.config.shapes.map(s => ({
-      name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
-      color: this.config.color,
-      displayMeasurements: true,
-      highlightMode: "coverage",
-      shapes: [this.#createShapeData(s)],
-      "flags.core.MeasuredTemplate": true
-    })), {
-      attachToToken,
-      create: false,
-      onRotate: ({ shape }) => {
-        if ( (shape.type === "rectangle") && dnd5e.settings.gridAlignedSquareTemplates ) return false;
-      },
-      preConfirm: ({ document, index }) => {
-        const obj = document.toObject();
-        results.push({ ...obj.shapes.at(-1), token: obj.attachment.token });
+    window.addEventListener("keydown", onKeyDown, { capture: true });
+    try {
+      await canvas.regions.placeRegions(this.config.shapes.map(s => ({
+        name: RegionDocument.implementation.defaultName({ parent: canvas.scene }),
+        color: this.config.color,
+        displayMeasurements: true,
+        elevation: this.#getInitialElevation(),
+        highlightMode: "coverage",
+        levels: [canvas.level.id],
+        restriction: {
+          enabled: this.config.wallMode !== "unwalled",
+          type: "move"
+        },
+        shapes: [this.#createShapeData(s)],
+        flags: {
+          core: { MeasuredTemplate: true },
+          dnd5e: {
+            dimensions: this.#getDimensionsData(),
+            wallMode: this.config.wallMode
+          }
+        }
+      })), {
+        attachToToken,
+        create: false,
+        onRotate: ({ shape }) => {
+          if ( (shape.type === "rectangle") && dnd5e.settings.gridAlignedSquareTemplates ) return false;
+        },
+        onChange: ({ preview, document }) => {
+          TemplatePlacement.#displayTemplateElevation(preview);
+          if ( this.config.targetOnPlacement ) {
+            TemplatePlacement.#targetTokens([...placedDocuments.filter(Boolean), document], this.config);
+          }
+        },
+        preConfirm: ({ document, regionIndex }) => {
+          const obj = document.toObject();
+          placedDocuments[regionIndex] = document;
+          results.push({
+            ...obj.shapes.at(-1),
+            index: results.length,
+            token: obj.attachment.token,
+            elevation: obj.elevation,
+            levels: obj.levels,
+            hidden: obj.hidden
+          });
+        }
+      });
+      if ( !results.length && priorTargets ) {
+        canvas.tokens.setTargets(priorTargets);
+        return [];
       }
-    });
-    return results;
+      return results;
+    } finally {
+      window.removeEventListener("keydown", onKeyDown, { capture: true });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle template placement keyboard controls.
+   * @param {KeyboardEvent} event  Triggering keydown event.
+   */
+  #onKeyDown(event) {
+    if ( game.keyboard.hasFocus ) return;
+    const context = game.keyboard.constructor.getKeyboardEventContext(event);
+    const action = game.keyboard.constructor._getMatchingActions(context)
+      .find(a => ["core.ascend", "core.descend"].includes(a.action));
+    if ( !action ) return;
+    const placement = canvas.regions._placementContext;
+    if ( !placement ) return;
+
+    const { preview, regionIndex, regionCount, shapes, shape, onChange } = placement;
+    const document = preview.document;
+    const shapeIndex = shape._index;
+    const shapeCount = shapes.length;
+    const delta = (action.action === "core.ascend" ? 1 : -1) * (event.shiftKey ? 1 : canvas.grid.distance);
+    const base = this.#getInitialElevation();
+    const elevation = {
+      bottom: (Number.isFinite(document.elevation.bottom) ? document.elevation.bottom : base.bottom) + delta,
+      top: (Number.isFinite(document.elevation.top) ? document.elevation.top : base.top) + delta
+    };
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const diff = document.updateSource({ elevation });
+    if ( foundry.utils.isEmpty(diff) ) return;
+    document.updateShapeConstraints();
+    preview.renderFlags.set({ refreshShapes: true, refreshMeasurements: true });
+    if ( onChange ) onChange({ preview, document, regionIndex, regionCount, shape, shapeIndex, shapeCount });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the initial elevation range for the template.
+   * @returns {{bottom: number|null, top: number|null}}
+   */
+  #getInitialElevation() {
+    const origin = this.config.origin;
+    if ( !origin ) return foundry.utils.deepClone(canvas.level.elevation);
+    const size = this.config.shapes?.[0]?.size;
+    if ( this.config.targetType === "cube" && Number.isFinite(size) ) {
+      return {
+        bottom: origin.elevation,
+        top: origin.elevation + size
+      };
+    }
+    if ( this.config.targetType === "sphere" && Number.isFinite(size) ) {
+      return {
+        bottom: origin.elevation - size,
+        top: origin.elevation + size
+      };
+    }
+    if ( this.config.targetType === "cone" && Number.isFinite(size) ) {
+      const height = size * Math.tan(Math.toRadians(CONFIG.MeasuredTemplate.defaults.angle / 2));
+      return {
+        bottom: origin.elevation - height,
+        top: origin.elevation + height
+      };
+    }
+    const width = this.config.shapes?.[0]?.width;
+    if ( this.config.targetType === "line" && Number.isFinite(width) ) {
+      return {
+        bottom: origin.elevation,
+        top: origin.elevation + width
+      };
+    }
+    return {
+      bottom: origin.elevation,
+      top: origin.elevation + ((origin.depth ?? 1) * canvas.grid.distance)
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get dimensions data for the template.
+   * @returns {object}
+   */
+  #getDimensionsData() {
+    const shape = this.config.shapes?.[0] ?? {};
+    return {
+      type: this.config.targetType,
+      size: shape.size,
+      width: shape.width,
+      height: shape.height,
+      units: canvas.scene.grid.units
+    };
   }
 
   /* -------------------------------------------- */
@@ -98,11 +231,20 @@ export default class TemplatePlacement extends BasePlacement {
       height: target.height
         ? convertLength(target.height, target.units, canvas.scene.grid.units, { strict: false }) : undefined
     };
+    const targetOnPlacement = TemplatePlacement.#getTargetOnPlacement(target);
 
     const config = foundry.utils.mergeObject({
+      activity,
+      affects: activity.target.affects?.type,
       color: game.user.color,
+      origin: activity.getUsageToken?.(),
+      targetType: target.type,
+      targetOnPlacement,
+      wallMode: target.wallMode ?? "walled",
       shapes: Array.fromRange(target.count || 1).map(() => foundry.utils.deepClone(templateData))
     }, placementConfig);
+
+    // TODO: Add region-named hooks when replacing measured template compatibility hooks.
 
     /**
      * A hook event that fires before player is prompted for template placement.
@@ -117,46 +259,72 @@ export default class TemplatePlacement extends BasePlacement {
     const placements = await TemplatePlacement.place(config);
     if ( !placements?.length ) return null;
 
-    const combinedShapes = [];
-    const splitShapes = [];
+    const shapeGroups = new Map();
     for ( const placement of placements ) {
       if ( placement.token ) {
         const { x, y, width, height, shape } = canvas.scene.tokens.get(placement.token);
         Object.assign(placement.base, { x, y, width, height, shape });
       }
-      if ( !placement.token || target.stationary ) combinedShapes.push(placement);
-      else splitShapes.push([placement]);
+      const attachmentToken = target.stationary ? undefined : placement.token;
+      const key = JSON.stringify({
+        attachmentToken,
+        split: attachmentToken ? placement.index : undefined,
+        elevation: placement.elevation,
+        levels: placement.levels,
+        hidden: placement.hidden
+      });
+      let group = shapeGroups.get(key);
+      if ( !group ) {
+        group = {
+          attachmentToken,
+          elevation: placement.elevation,
+          levels: placement.levels,
+          hidden: placement.hidden,
+          shapes: []
+        };
+        shapeGroups.set(key, group);
+      }
+      group.shapes.push(placement);
     }
 
     const rollData = activity.getRollData();
-    const regionData = [combinedShapes, ...splitShapes].map(shapes => shapes.length ? foundry.utils.mergeObject({
+    const regionData = Array.from(shapeGroups.values()).map(({ attachmentToken, elevation, levels, hidden, shapes }) =>
+      shapes.length ? foundry.utils.mergeObject({
       // TODO: Should the activity name be included?
       // TODO: Include count if more than one created?
       name: `${activity.item.name} [${game.user.name}]`,
       color: game.user.color,
-      shapes: shapes.map(({ index, token, ...data }) => data),
+      elevation,
+      hidden,
+      shapes: shapes.map(({ index, token, elevation, levels, hidden, ...data }) => data),
       // TODO: Set elevation based on shape's height
-      levels: [canvas.level.id],
+      levels,
       restriction: {
-        enabled: true,
+        enabled: config.wallMode !== "unwalled",
         // TODO: Is there a better setting to represent Total Cover?
         // TODO: What about templates like Fireball that flow around walls?
         type: "move"
       },
       attachment: {
-        token: target.stationary ? undefined : shapes[0].token
+        token: attachmentToken
       },
       visibility: CONST.REGION_VISIBILITY.ALWAYS,
       highlightMode: "coverage",
       flags: {
+        core: { MeasuredTemplate: true },
         dnd5e: {
           activity: activity.uuid,
           dimensions: {
+            type: target.type,
             size: templateData.size,
             width: templateData.width,
             height: templateData.height,
+            centerElevation: ["cone", "sphere"].includes(target.type) && elevation
+              ? ((elevation.bottom + elevation.top) / 2) : undefined,
             units: canvas.scene.grid.units
           },
+          targetOnPlacement: config.targetOnPlacement,
+          wallMode: config.wallMode,
           item: activity.item.uuid,
           origin: activity.getUsageToken()?.uuid,
           spellLevel: rollData.item.level
@@ -175,6 +343,7 @@ export default class TemplatePlacement extends BasePlacement {
     if ( Hooks.call("dnd5e.createMeasuredTemplate", activity, regionData) === false ) return null;
 
     const created = await canvas.scene.createEmbeddedDocuments("Region", regionData);
+    if ( config.targetOnPlacement ) TemplatePlacement.#targetTokens(created, config);
 
     /**
      * A hook event that fires after a template are created for an Activity.
@@ -187,4 +356,490 @@ export default class TemplatePlacement extends BasePlacement {
 
     return created;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get whether a placed template should target tokens.
+   * @param {object} target  Activity target template data.
+   * @returns {boolean}
+   */
+  static #getTargetOnPlacement(target) {
+    const defaultTargeting = game.settings.get("dnd5e", "targetTemplateOnPlacement");
+    return target.targetOnPlacement === "default" ? defaultTargeting : target.targetOnPlacement === "on";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Target tokens inside created template regions.
+   * @param {RegionDocument[]} regions  Created template regions.
+   * @param {object} config             The template regions configuration object.
+   */
+  static #targetTokens(regions, config) {
+    const priorTargetIds = new Set(Array.from(game.user.targets, t => t.id));
+    const targetIds = new Set();
+    const sourceTokenDocument = config.origin;
+    const affects = config.affects;
+    for ( const region of regions ) {
+      for ( const token of canvas.scene.tokens ) {
+        const blockEtherealTargeting = () => {
+          if ( !sourceTokenDocument?.actor || !token.actor ) return false;
+          const isSourceEthereal = sourceTokenDocument.actor.statuses.has("ethereal");
+          const isTargetEthereal = token.actor.statuses.has("ethereal");
+          return isSourceEthereal !== isTargetEthereal;
+        };
+        const isHidden = token.hidden;
+        const isMatchingDisposition = () => {
+          if ( !sourceTokenDocument ) return true;
+          const sourceTokenDisposition = sourceTokenDocument?.disposition || undefined;
+          const targetTokenDisposition = token.disposition;
+          if ( sourceTokenDisposition === undefined ) return true;
+          if ( affects === "ally" ) return sourceTokenDisposition === targetTokenDisposition;
+          if ( affects === "enemy" ) return sourceTokenDisposition !== targetTokenDisposition;
+          if ( affects === "self" ) return sourceTokenDocument.id === token.id;
+          if ( affects === "object" || affects === "space" ) return false;
+          return true;
+        };
+        const isValidTarget = !blockEtherealTargeting() && !isHidden && isMatchingDisposition();
+        if ( isValidTarget && TemplatePlacement.#testInsideTemplateRegion(token, region) ) targetIds.add(token.id);
+      }
+    }
+    canvas.tokens.setTargets(targetIds);
+    for ( const id of new Set([...priorTargetIds, ...targetIds]) ) canvas.tokens.get(id)?._refreshTarget();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display the template elevation alongside the measured distance.
+   * @param {Region} preview  Preview region object.
+   */
+  static #displayTemplateElevation(preview) {
+    if ( preview._dnd5eFormatMeasuredDistance ) return;
+    preview._dnd5eFormatMeasuredDistance = preview._formatMeasuredDistance.bind(preview);
+    preview._dnd5eRefreshMeasurements = preview._refreshMeasurements.bind(preview);
+    preview._refreshMeasurements = (...args) => {
+      if ( preview._dnd5eElevationLabel ) preview._measurementLabels.removeChild(preview._dnd5eElevationLabel).destroy();
+      preview._dnd5eElevationLabel = null;
+      const result = preview._dnd5eRefreshMeasurements(...args);
+      TemplatePlacement.#refreshTemplateElevationLabel(preview);
+      return result;
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Refresh the separate template elevation label.
+   * @param {Region} preview  Preview region object.
+   */
+  static #refreshTemplateElevationLabel(preview) {
+    const elevation = TemplatePlacement.#getDisplayedTemplateElevation(preview.document);
+    if ( !Number.isFinite(elevation) ) return;
+
+    const distanceLabel = TemplatePlacement.#getPrimaryMeasurementLabel(preview);
+    if ( !distanceLabel ) return;
+
+    const formattedElevation = elevation.toNearest(0.01).toLocaleString(game.i18n.lang);
+    const units = canvas.grid.units;
+    const text = `(\u2195 ${formattedElevation}${units ? ` ${units}` : ""})`;
+    const style = distanceLabel.style.clone();
+    style.fontSize *= 0.65;
+
+    const label = preview._measurementLabels.addChild(new PreciseText(text, style));
+    label.anchor.copyFrom(distanceLabel.anchor);
+    label.pivot.copyFrom(distanceLabel.pivot);
+    label.position.copyFrom(distanceLabel.position);
+    label.rotation = distanceLabel.rotation;
+    label.scale.copyFrom(distanceLabel.scale);
+    if ( TemplatePlacement.#canFitInlineElevation(preview, distanceLabel, label) ) {
+      const offset = (distanceLabel.width / 2) + (label.width / 2) + (6 * canvas.dimensions.uiScale);
+      label.position.x += Math.cos(label.rotation) * offset;
+      label.position.y += Math.sin(label.rotation) * offset;
+    } else label.position.y += 18 * canvas.dimensions.uiScale;
+    preview._dnd5eElevationLabel = label;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the elevation label can fit inline with the distance label.
+   * @param {Region} preview        Preview region object.
+   * @param {PreciseText} distance  Distance label.
+   * @param {PreciseText} elevation Elevation label.
+   * @returns {boolean}
+   */
+  static #canFitInlineElevation(preview, distance, elevation) {
+    const primary = TemplatePlacement.#getPrimaryMeasurementDistance(preview.document);
+    if ( !Number.isFinite(primary) ) return false;
+    const available = (primary / canvas.dimensions.distance) * canvas.dimensions.size;
+    return (distance.width + elevation.width + (6 * canvas.dimensions.uiScale)) <= available;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the measurement label matching the primary template distance.
+   * @param {Region} preview  Preview region object.
+   * @returns {PreciseText|null}
+   */
+  static #getPrimaryMeasurementLabel(preview) {
+    const primary = TemplatePlacement.#getPrimaryMeasurementDistance(preview.document);
+    if ( Number.isFinite(primary) ) {
+      const primaryText = preview._dnd5eFormatMeasuredDistance(primary);
+      const label = preview._measurementLabels.children.find(label => label.text === primaryText);
+      if ( label ) return label;
+    }
+    return preview._measurementLabels.children.find(label => !label.text.endsWith("\u00b0")) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the primary template measurement.
+   * @param {RegionDocument} region  Template region.
+   * @returns {number|undefined}
+   */
+  static #getPrimaryMeasurementDistance(region) {
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( !dimensions ) return;
+    if ( ["cone", "cube", "line", "sphere"].includes(dimensions.type) ) return dimensions.size;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the elevation displayed to users for a template region.
+   * @param {RegionDocument} region  Template region.
+   * @returns {number|undefined}
+   */
+  static #getDisplayedTemplateElevation(region) {
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( ["cone", "sphere"].includes(dimensions?.type) ) return TemplatePlacement.#getTemplateCenterElevation(region);
+    return region.elevation.bottom;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the center elevation of a 3D template region.
+   * @param {RegionDocument} region  Template region.
+   * @returns {number|undefined}
+   */
+  static #getTemplateCenterElevation(region) {
+    const { bottom, top } = region.elevation;
+    if ( Number.isFinite(bottom) && Number.isFinite(top) ) return (bottom + top) / 2;
+    return region.flags.dnd5e?.dimensions?.centerElevation;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a token is inside a template region, accounting for 3D area shapes.
+   * @param {TokenDocument} token   Token being tested.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #testInsideTemplateRegion(token, region) {
+    const wallMode = region.flags.dnd5e?.wallMode;
+    if ( wallMode === "gaps" ) {
+      if ( !TemplatePlacement.#sharesReachableTemplateGridSpace(token, region) ) return false;
+    }
+    else if ( !token.testInsideRegion(region) && !TemplatePlacement.#sharesTemplateGridSpace(token, region) ) {
+      return false;
+    }
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( !["cone", "cube", "sphere"].includes(dimensions?.type) ) return true;
+
+    const shapes = region.shapes.filter(s => ["circle", "cone", "rectangle"].includes(s.type));
+    if ( !shapes.length ) return true;
+    const tokenSize = token.getSize();
+    return shapes.some(shape => {
+      if ( dimensions.type === "cube" ) {
+        const x = Math.max(shape.x, token.x);
+        const y = Math.max(shape.y, token.y);
+        const z = Math.max(region.elevation.bottom, token.elevation);
+        const right = Math.min(shape.x + shape.width, token.x + tokenSize.width);
+        const bottom = Math.min(shape.y + shape.height, token.y + tokenSize.height);
+        const top = Math.min(region.elevation.bottom + dimensions.size, token.elevation + (token.depth * canvas.grid.distance));
+        return (x < right) && (y < bottom) && (z < top);
+      }
+      if ( dimensions.type === "cone" ) {
+        const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
+        const centerElevation = TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom;
+        const direction = Math.toRadians(shape.rotation);
+        const axis = { x: Math.cos(direction), y: Math.sin(direction) };
+        const halfAngle = Math.toRadians(shape.angle / 2);
+        const tokenTop = token.elevation + (token.depth * canvas.grid.distance);
+        const points = [
+          [token.x, token.y, token.elevation],
+          [token.x + tokenSize.width, token.y, token.elevation],
+          [token.x + tokenSize.width, token.y + tokenSize.height, token.elevation],
+          [token.x, token.y + tokenSize.height, token.elevation],
+          [token.x, token.y, tokenTop],
+          [token.x + tokenSize.width, token.y, tokenTop],
+          [token.x + tokenSize.width, token.y + tokenSize.height, tokenTop],
+          [token.x, token.y + tokenSize.height, tokenTop],
+          [token.x + (tokenSize.width / 2), token.y + (tokenSize.height / 2), (token.elevation + tokenTop) / 2]
+        ];
+        return points.some(([x, y, elevation]) => {
+          const dx = (x - shape.x) / gridMultiplier;
+          const dy = (y - shape.y) / gridMultiplier;
+          const dz = elevation - centerElevation;
+          const distance = (dx * axis.x) + (dy * axis.y);
+          if ( (distance < 0) || (distance > dimensions.size) ) return false;
+          const radius = distance * Math.tan(halfAngle);
+          const perpendicular = Math.hypot(dx - (distance * axis.x), dy - (distance * axis.y), dz);
+          return perpendicular <= radius;
+        });
+      }
+
+      const gridMultiplier = canvas.scene.grid.size / canvas.scene.grid.distance;
+      const point = {
+        x: Math.clamp(shape.x, token.x, token.x + tokenSize.width),
+        y: Math.clamp(shape.y, token.y, token.y + tokenSize.height),
+        elevation: Math.clamp(TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom, token.elevation,
+          token.elevation + (token.depth * canvas.grid.distance))
+      };
+      const dx = (point.x - shape.x) / gridMultiplier;
+      const dy = (point.y - shape.y) / gridMultiplier;
+      const dz = point.elevation - (TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom);
+      return Math.hypot(dx, dy, dz) <= dimensions.size;
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a token shares an affected grid space with a template region.
+   * @param {TokenDocument} token   Token being tested.
+   * @param {RegionDocument} region Template region being tested.
+   * @param {object} [options]      Additional options.
+   * @param {boolean} [options.useTemplateShape=false]  Test against the unrestricted template shape.
+   * @param {boolean} [options.highlightedGridSpacesOnly] Only test highlighted grid spaces.
+   * @returns {boolean}
+   */
+  static #sharesTemplateGridSpace(token, region, { useTemplateShape=false, highlightedGridSpacesOnly }={}) {
+    if ( canvas.grid.isGridless ) return false;
+    if ( !region.testPoint({ x: token.x, y: token.y, elevation: token.elevation }, 0.75) ) {
+      const top = token.elevation + (token.depth * canvas.grid.distance);
+      if ( (top <= region.elevation.bottom) || (token.elevation >= region.elevation.top) ) return false;
+    }
+
+    const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
+    const origin = TemplatePlacement.#getTemplateOrigin(region);
+    highlightedGridSpacesOnly ??= game.settings.get("dnd5e", "targetTemplateGridSpaces");
+    for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
+      const [center, ...points] = templateGridSpacePoints(offset);
+      if ( useTemplateShape && TemplatePlacement.#testTemplateShapePoint(center, region) ) return true;
+      if ( TemplatePlacement.#testTemplateGridPoint(center, polygonTree, origin) ) return true;
+      if ( highlightedGridSpacesOnly ) continue;
+
+      if ( useTemplateShape && points.some(point => TemplatePlacement.#testTemplateShapePoint(point, region)) ) return true;
+      if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
+    }
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a token shares a grid space that is inside the unrestricted template and reachable through walls.
+   * @param {TokenDocument} token   Token being tested.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #sharesReachableTemplateGridSpace(token, region) {
+    if ( canvas.grid.isGridless ) return token.testInsideRegion(region);
+    if ( !region.testPoint({ x: token.x, y: token.y, elevation: token.elevation }, 0.75) ) {
+      const top = token.elevation + (token.depth * canvas.grid.distance);
+      if ( (top <= region.elevation.bottom) || (token.elevation >= region.elevation.top) ) return false;
+    }
+
+    const polygonTree = region.object?.animationState?.polygonTree ?? region.polygonTree;
+    const origin = TemplatePlacement.#getTemplateOrigin(region);
+    const reachablePoints = TemplatePlacement.#getReachableTemplatePoints(region, polygonTree);
+    for ( const offset of token.getOccupiedGridSpaceOffsets(token._source) ) {
+      const polygon = templateGridSpacePolygon(offset);
+      if ( !TemplatePlacement.#testTemplateShapePolygon(polygon, region) ) continue;
+      const [center, ...points] = templateGridSpacePoints(offset);
+      if ( TemplatePlacement.#testTemplateGridPoint(center, polygonTree, origin) ) return true;
+      if ( points.some(point => polygonTree.testPoint(point, 0.75)) ) return true;
+      if ( polygonTree.intersectPolygon(polygon).area > 0 ) return true;
+      const targetPoints = TemplatePlacement.#getTemplateShapePolygonPoints(polygon, region);
+      if ( reachablePoints.some(source => targetPoints.some(target =>
+        TemplatePlacement.#testTemplateLineOfEffect(source, target, region))) ) return true;
+    }
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the template origin for shapes where core measurement includes the origin grid space.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {Point|null}
+   */
+  static #getTemplateOrigin(region) {
+    const dimensions = region.flags.dnd5e?.dimensions;
+    if ( !["cone", "line"].includes(dimensions?.type) ) return null;
+    const shape = region.shapes.find(s => ["cone", "line"].includes(s.type));
+    return shape ? { x: shape.x, y: shape.y } : null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test a template grid point, including the origin square for cone and line templates.
+   * @param {Point} point
+   * @param {PolygonTree} polygonTree
+   * @param {Point|null} origin
+   * @returns {boolean}
+   */
+  static #testTemplateGridPoint(point, polygonTree, origin) {
+    return (origin && (Math.max(Math.abs(point.x - origin.x), Math.abs(point.y - origin.y)) < 1))
+      || polygonTree.testPoint(point, 0.75);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a point is inside the unrestricted template shape.
+   * @param {Point} point           Point to test.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #testTemplateShapePoint(point, region) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    if ( !shape ) return false;
+    return shape.polygonTree?.testPoint(point, 0.75) ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a polygon overlaps the unrestricted template shape.
+   * @param {PIXI.Polygon} polygon    Polygon to test.
+   * @param {RegionDocument} region   Template region being tested.
+   * @returns {boolean}
+   */
+  static #testTemplateShapePolygon(polygon, region) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    return (shape?.polygonTree?.intersectPolygon(polygon).area ?? 0) > 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get points where the wall-constrained area overlaps the unrestricted template shape.
+   * @param {RegionDocument} region       Template region being tested.
+   * @param {PolygonTree} polygonTree     Wall-constrained region polygon.
+   * @returns {Point[]}
+   */
+  static #getReachableTemplatePoints(region, polygonTree) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    if ( !shape?.polygonTree ) return [];
+    return shape.polygonTree.polygons.flatMap(polygon =>
+      TemplatePlacement.#getPolygonSamplePoints(polygonTree.intersectPolygon(polygon)));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get points where a polygon overlaps the unrestricted template shape.
+   * @param {PIXI.Polygon} polygon    Polygon to intersect.
+   * @param {RegionDocument} region   Template region being tested.
+   * @returns {Point[]}
+   */
+  static #getTemplateShapePolygonPoints(polygon, region) {
+    const shape = region.shapes.find(s => ["circle", "cone", "line", "rectangle"].includes(s.type));
+    if ( !shape?.polygonTree ) return [];
+    return TemplatePlacement.#getPolygonSamplePoints(shape.polygonTree.intersectPolygon(polygon));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get sample points from a polygon tree.
+   * @param {PolygonTree} polygonTree Polygon tree to sample.
+   * @returns {Point[]}
+   */
+  static #getPolygonSamplePoints(polygonTree) {
+    return polygonTree.polygons.flatMap(polygon => {
+      const points = [];
+      for ( let i = 0; i < polygon.points.length; i += 2 ) {
+        points.push({ x: polygon.points[i], y: polygon.points[i + 1] });
+      }
+      if ( points.length ) {
+        points.push({
+          x: points.reduce((sum, point) => sum + point.x, 0) / points.length,
+          y: points.reduce((sum, point) => sum + point.y, 0) / points.length
+        });
+      }
+      return points;
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Test whether a line between two points is unobstructed by move walls.
+   * @param {Point} source          Source point.
+   * @param {Point} target          Target point.
+   * @param {RegionDocument} region Template region being tested.
+   * @returns {boolean}
+   */
+  static #testTemplateLineOfEffect(source, target, region) {
+    const level = canvas.scene.levels.get(Array.from(region.levels)[0]);
+    if ( !level ) return true;
+    const elevation = TemplatePlacement.#getTemplateCenterElevation(region) ?? region.elevation.bottom;
+    const config = {
+      type: "move",
+      level,
+      edgeTypes: { wall: true, outerBounds: true },
+      useThreshold: true,
+      mode: "any"
+    };
+    return !CONFIG.Canvas.polygonBackends.move.testCollision(
+      { ...source, elevation }, { ...target, elevation }, config
+    );
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Get the polygon for a grid space.
+ * @param {GridOffset2D} offset  Grid offset.
+ * @returns {PIXI.Polygon}
+ */
+function templateGridSpacePolygon(offset) {
+  const topLeft = canvas.grid.getTopLeftPoint(offset);
+  return new PIXI.Rectangle(topLeft.x, topLeft.y, canvas.grid.sizeX, canvas.grid.sizeY).toPolygon();
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Get center and boundary points for a grid space.
+ * @param {GridOffset2D} offset  Grid offset.
+ * @returns {Point[]}
+ */
+function templateGridSpacePoints(offset) {
+  const center = canvas.grid.getCenterPoint(offset);
+  center.x = Math.round(center.x - (canvas.grid.sizeX / 2)) + (canvas.grid.sizeX / 2);
+  center.y = Math.round(center.y - (canvas.grid.sizeY / 2)) + (canvas.grid.sizeY / 2);
+  const topLeft = canvas.grid.getTopLeftPoint(offset);
+  return [
+    center,
+    { x: topLeft.x, y: topLeft.y },
+    { x: topLeft.x + (canvas.grid.sizeX / 2), y: topLeft.y },
+    { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y },
+    { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y + (canvas.grid.sizeY / 2) },
+    { x: topLeft.x + canvas.grid.sizeX, y: topLeft.y + canvas.grid.sizeY },
+    { x: topLeft.x + (canvas.grid.sizeX / 2), y: topLeft.y + canvas.grid.sizeY },
+    { x: topLeft.x, y: topLeft.y + (canvas.grid.sizeY / 2) },
+    { x: topLeft.x, y: topLeft.y + canvas.grid.sizeY }
+  ];
 }

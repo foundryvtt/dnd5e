@@ -853,7 +853,7 @@ export default function ActivityMixin(Base) {
      * @protected
      */
     async _finalizeUsage(config, results) {
-      results.templates = config.create?.measuredTemplate ? await this.#placeTemplate() : [];
+      results.templates = config.create?.measuredTemplate ? await this.#placeTemplate(results.message) : [];
     }
 
     /* -------------------------------------------- */
@@ -1060,7 +1060,7 @@ export default function ActivityMixin(Base) {
         if ( handler ) await handler.call(activity, event, target, message);
         else if ( action === "consumeResource" ) await this.#consumeResource(event, target, message);
         else if ( action === "refundResource" ) await this.#refundResource(event, target, message);
-        else if ( action === "placeTemplate" ) await this.#placeTemplate();
+        else if ( action === "placeTemplate" ) await this.#placeTemplate(message);
         else await activity._onChatAction(event, target, message);
       } catch(err) {
         Hooks.onError("Activity#onChatAction", err, { log: "error", notify: "error" });
@@ -1145,13 +1145,22 @@ export default function ActivityMixin(Base) {
 
     /**
      * Handle placing a measured template in the scene.
-     * @returns {MeasuredTemplateDocument[]}
+     * @param {ChatMessage5e} [message]  Message associated with the placed template.
+     * @returns {RegionDocument[]}
      */
-    async #placeTemplate() {
+    async #placeTemplate(message) {
       const templates = [];
       try {
-        const result = await TemplatePlacement.fromActivity(this);
-        if ( result ) templates.push(...result);
+        const result = await TemplatePlacement.fromActivity(this, {
+          createData: { flags: { dnd5e: { originatingMessage: message?.id } } }
+        });
+        if ( result ) {
+          templates.push(...result);
+          if ( message?.update && result.some(r => r.getFlag("dnd5e", "targetOnPlacement")) ) {
+            const targets = getTargetDescriptors();
+            await message.update({ "flags.dnd5e.targets": targets });
+          }
+        }
       } catch(err) {
         Hooks.onError("Activity#placeTemplate", err, {
           msg: _loc("DND5E.TARGET.Warning.PlaceTemplate"),

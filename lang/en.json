@@ -5255,6 +5255,24 @@
           "label": "Stationary",
           "hint": "Emanation cannot be moved once placed."
         },
+        "targetOnPlacement": {
+          "label": "Template Targeting",
+          "hint": "Override the system default (currently: {default}) for this document.",
+          "choices": {
+            "default": "System Default",
+            "on": "On",
+            "off": "Off"
+          }
+        },
+        "wallMode": {
+          "label": "Walls Interaction",
+          "hint": "Determines how walls affect the area covered by the template.",
+          "choices": {
+            "walled": "Blocked by Walls",
+            "gaps": "Spread Around Corners",
+            "unwalled": "Ignore Walls"
+          }
+        },
         "type": {
           "label": "Area Type",
           "hint": "Type of area of effect targeted."
@@ -6734,6 +6752,18 @@
       "Full": "Full",
       "NoBlocking": "Partial",
       "None": "None"
+    },
+    "Targeting": {
+      "RegionTemplates": {
+        "OnPlacement": {
+          "Name": "Template Targeting Automation",
+          "Hint": "Automatically target tokens in newly placed region templates. Items and activities can override this."
+        },
+        "GridSpaces": {
+          "Name": "Target Highlighted Grid Spaces Only",
+          "Hint": "Only target tokens occupying grid spaces highlighted by the region. If disabled, targeting uses occupied-space overlap instead of Foundry's grid-space center-point rule."
+        }
+      }
     },
     "SenseVision": {
       "Name": "Sync Senses to Token Vision",
