@@ -2,8 +2,8 @@
     <div class="card-buttons">
         {{#each buttons}}
         <button type="button" data-action="{{ action }}" data-index="{{ index }}" {{#if hidden}}hidden{{/if}}>
-            <span class="visible-dc">{{{ label }}}</span>
-            <span class="hidden-dc">{{{ hiddenLabel }}}</span>
+            <span class="visible-dc">{{{ label.value }}}</span>
+            <span class="hidden-dc">{{{ label.hidden }}}</span>
         </button>
         {{/each}}
     </div>

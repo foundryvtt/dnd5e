@@ -739,17 +739,17 @@ export default function ActivityMixin(Base) {
       if ( this.target?.template?.type ) buttons.push({
         action: "placeTemplate",
         icon: "fa-solid fa-bullseye",
-        label: "DND5E.TARGET.Action.PlaceTemplate"
+        label: { value: "DND5E.TARGET.Action.PlaceTemplate" }
       });
 
       if ( message.hasConsumption ) buttons.push({
         action: "consumeResource",
         icon: "fa-solid fa-cubes-stacked",
-        label: "DND5E.CONSUMPTION.Action.ConsumeResource"
+        label: { value: "DND5E.CONSUMPTION.Action.ConsumeResource" }
       }, {
         action: "refundResource",
         icon: "fa-solid fa-clock-rotate-left",
-        label: "DND5E.CONSUMPTION.Action.RefundResource"
+        label: { value: "DND5E.CONSUMPTION.Action.RefundResource" }
       });
 
       return buttons;
