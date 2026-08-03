@@ -142,6 +142,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get hasProficiency() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Is this Item any of the armor subtypes?
    * @type {boolean}

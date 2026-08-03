@@ -268,9 +268,9 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( !availableAbilities ) return null;
     if ( availableAbilities.size === 1 ) return availableAbilities.first();
     const abilities = this.parent?.actor?.system.abilities ?? {};
-    return availableAbilities.reduce((largest, ability) =>
-      (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
-    , availableAbilities.first());
+    return availableAbilities.reduce((largest, ability) => {
+      return (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest;
+    }, availableAbilities.first());
   }
 
   /* -------------------------------------------- */
@@ -278,6 +278,13 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @override */
   get criticalThreshold() {
     return this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get hasProficiency() {
+    return true;
   }
 
   /* -------------------------------------------- */

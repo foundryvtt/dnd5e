@@ -65,6 +65,26 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Modes that can be used when making an attack with this item.
+   * @type {FormSelectOption[]}
+   */
+  get attackModes() {
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Set of abilities that can automatically be associated with this item.
+   * @type {Set<string>|null}
+   */
+  get availableAbilities() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Whether this item's activities can have scaling configured for their consumption.
    * @type {boolean}
    */
@@ -94,29 +114,19 @@ export default class ItemDataModel extends SystemDataModel {
 
   /* -------------------------------------------- */
 
-  /**
-   * Modes that can be used when making an attack with this item.
-   * @type {FormSelectOption[]}
-   */
-  get attackModes() {
-    return [];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Set of abilities that can automatically be associated with this item.
-   * @type {Set<string>|null}
-   */
-  get availableAbilities() {
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   get embeddedDescriptionKeyPath() {
     return game.user.isGM || (this.identified !== false) ? "description.value" : "unidentified.description";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether a creature can be considered proficient in this type of item.
+   * @type {boolean}
+   */
+  get hasProficiency() {
+    return false;
   }
 
   /* -------------------------------------------- */
