@@ -201,6 +201,7 @@
  * @property {"spell"|"unarmed"|"weapon"} [attack.classification]  Source of the attack.
  * @property {WeaponAttackMode} [attack.mode]  Selected weapon attack mode.
  * @property {"melee"|"ranged"} [attack.type]  Whether this is a melee or ranged attack.
+ * @property {string} [damageType]             Type of damage being applied for a single damage part.
  * @property {boolean} [proficient]            Whether proficiency was added to the roll.
  * @property {string} [skill]                  ID of skill associated with the roll.
  * @property {string} [tool]                   ID of tool associated with the roll.
