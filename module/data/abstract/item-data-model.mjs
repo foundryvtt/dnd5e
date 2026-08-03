@@ -267,7 +267,7 @@ export default class ItemDataModel extends SystemDataModel {
     Object.assign(context, {
       name, type, img, price, uses, extras,
       config: CONFIG.DND5E,
-      controlHints: dnd5e.settings.controlHints,
+      controlHints: game.settings.get("dnd5e", "controlHints"),
       description: await TextEditor.enrichHTML(description || "", enrichmentOptions),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       properties: PropertyField.getLabels(context.properties, { ...context, properties: context.item.properties }),

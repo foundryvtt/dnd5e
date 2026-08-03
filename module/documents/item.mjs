@@ -764,29 +764,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<ChatMessage5e|object|void>}
    */
   async displayCard(message={}) {
-    const data = await this.system.getCardData();
-    data.subtitle = data.subtitle.filterJoin(" • ");
-    data.properties = PropertyField.getLabels(data.properties, { ...data, properties: data.item.properties });
-    const context = {
-      data,
-      actor: this.actor,
-      config: CONFIG.DND5E,
-      tokenId: this.actor.token?.uuid || null,
-      item: this,
-      isSpell: this.type === "spell"
-    };
-
     const messageConfig = foundry.utils.mergeObject({
       create: message?.createMessage ?? true,
       data: {
-        content: await foundry.applications.handlebars.renderTemplate(
-          "systems/dnd5e/templates/chat/item-card.hbs", context
-        ),
         flags: {
-          "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
+          core: { canPopout: true }
         },
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
-        title: this.name
+        system: await this.system.getCardData(),
+        title: this.name,
+        type: "item"
       },
       rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
     }, message);

@@ -8,6 +8,7 @@ import GenericMessageData from "./generic-message-data.mjs";
 import HealingMessageData from "./healing-message-data.mjs";
 import HitDieMessageData from "./hit-die-message-data.mjs";
 import HitPointsMessageData from "./hit-points-message-data.mjs";
+import ItemMessageData from "./item-message-data.mjs";
 import PromptMessageData from "./prompt-message-data.mjs";
 import RequestMessageData from "./request-message-data.mjs";
 import RestMessageData from "./rest-message-data.mjs";
@@ -28,6 +29,7 @@ export {
   HealingMessageData,
   HitDieMessageData,
   HitPointsMessageData,
+  ItemMessageData,
   PromptMessageData,
   RequestMessageData,
   RestMessageData,
@@ -50,6 +52,7 @@ export const config = {
   healing: HealingMessageData,
   hitDie: HitDieMessageData,
   hitPoints: HitPointsMessageData,
+  item: ItemMessageData,
   prompt: PromptMessageData,
   request: RequestMessageData,
   rest: RestMessageData,
