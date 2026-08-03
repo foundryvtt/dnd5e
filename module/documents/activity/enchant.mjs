@@ -165,7 +165,15 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     const flags = { enchantmentProfile: profileId };
     if ( concentration ) flags.dependentOn = concentration.uuid;
-    const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
+    const enchantmentData = effect.clone({
+      "flags.dnd5e": flags,
+      system: {
+        origin: {
+          activity: this.uuid,
+          effect: concentration?.uuid
+        }
+      }
+    }).toObject();
     enchantmentData.system.changes = await ActiveEffect5e.forApplication(enchantmentData.system.changes, this, item);
 
     /**

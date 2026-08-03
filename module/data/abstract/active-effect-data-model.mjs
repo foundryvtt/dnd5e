@@ -1,7 +1,7 @@
 import { getHumanReadableAttributeLabel } from "../../utils.mjs";
 import FiltersField from "../fields/filters-field.mjs";
 
-const { DocumentIdField, StringField } = foundry.data.fields;
+const { DocumentIdField, DocumentUUIDField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
@@ -14,7 +14,15 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
+    const schema = {
+      ...super.defineSchema(),
+      origin: new SchemaField({
+        activity: new StringField({ required: false }),
+        actor: new DocumentUUIDField({ relative: true, required: false, type: "Actor" }),
+        effect: new DocumentUUIDField({ relative: true, required: false, type: "ActiveEffect" }),
+        item: new DocumentUUIDField({ relative: true, required: false, type: "Item" })
+      })
+    };
     schema.changes.element.extendFields({
       _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
       conditions: new FiltersField(),

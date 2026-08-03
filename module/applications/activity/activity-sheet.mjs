@@ -583,7 +583,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     return {
       name: name || this.item.name,
       img: img || this.item.img,
-      origin: this.item.uuid,
+      system: {
+        origin: {
+          item: this.item.uuid
+        }
+      },
       transfer: false
     };
   }

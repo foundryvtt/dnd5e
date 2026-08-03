@@ -297,11 +297,9 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
 
     const dataset = target.closest("[data-effect-id]")?.dataset;
     const effect = this.getEffect(dataset);
-    if ( (action !== "create") && !effect ) return;
+    if ( !effect ) return;
 
     switch ( action ) {
-      case "create":
-        return this._onCreate(target);
       case "delete":
         await effect.deleteDialog({ sheet: this.#app }, { render: false });
         return this.#app.render();
@@ -391,6 +389,10 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
    * @returns {Promise<ActiveEffect5e>}
    */
   async _onCreate(target) {
+    foundry.utils.logCompatibilityWarning(
+      "`EffectsElement#_onCreate` method is not longer supported.",
+      { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+    );
     const li = target.closest("li");
     const isActor = this.document instanceof Actor;
     const isEnchantment = li.dataset.effectType.startsWith("enchantment");

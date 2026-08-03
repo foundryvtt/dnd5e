@@ -289,7 +289,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /**
    * Handle applying an Active Effect to a Token.
    * @param {ActiveEffect5e} effect      The effect to apply.
-   * @param {Actor5e} actor              The actor.
+   * @param {Actor5e} actor              The actor to which the effect should be applied.
    * @returns {Promise<ActiveEffect5e>}  The created effect.
    * @throws {Error}                     If the effect could not be applied.
    * @protected
@@ -327,6 +327,12 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
           scaling: this.chatMessage.system.scaling,
           spellLevel: this.chatMessage.system.level
         }
+      },
+      system: {
+        origin: {
+          [activity ? "activity" : "item"]: activity ? activity.uuid : item?.uuid,
+          effect: concentration?.uuid
+        }
       }
     };
 
@@ -357,7 +363,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       ...durationOverride,
       disabled: false,
       transfer: false,
-      origin: origin.uuid,
       _stats: {
         [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
         [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null

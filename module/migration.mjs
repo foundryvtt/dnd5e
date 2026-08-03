@@ -756,6 +756,7 @@ export function migrateEffectData(effect, migrationData, { bypassVersionCheck, p
   _migrateDocumentIcon(effect, updateData, { ...migrationData, field: "img" });
   _migrateEffectChanges(effect, updateData, { setIds: migrate600 });
   if ( migrate600 ) _migrateEffectMagical(effect, parent, updateData);
+  _migrateEffectOrigin(effect, parent, updateData);
   if ( bypassVersionCheck || foundry.utils.isNewerVersion("3.1.0", version) ) {
     _migrateEffectTransfer(effect, parent, updateData);
   }
@@ -1164,6 +1165,33 @@ function _migrateEffectChanges(effect, updateData, { setIds }={}) {
  */
 function _migrateEffectMagical(effect, parent, updateData) {
   if ( isSpellOrScroll(parent) || parent.system?.properties?.includes("mgc") ) updateData["system.magical"] = true;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrates effect origin data from core field into system data.
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} parent      The parent of this effect.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectOrigin(effect, parent, updateData) {
+  const origin = effect.flags?.core?.originText ?? effect.origin;
+  const systemDataModel = CONFIG.ActiveEffect.dataModels[effect.type];
+  if ( !origin || !systemDataModel?.schema.fields.origin ) return updateData;
+
+  const field = origin.includes("Activity") ? "activity"
+    : origin.includes("ActiveEffect") ? "effect"
+    : origin.includes("Item") ? "item"
+    : origin.includes("Actor") ? "actor" : undefined;
+  if ( field ) {
+    updateData["flags.core.originText"] = _del;
+    updateData.origin = null;
+    updateData[`system.origin.${field}`] = origin;
+  }
+
   return updateData;
 }
 
