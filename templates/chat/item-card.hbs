@@ -2,7 +2,7 @@
      {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{ item.system.level }}"{{/if}}>
 
     {{!-- Collapsible Item Details --}}
-    <section class="card-header description collapsible" {{#if data.description.concealed}}data-concealed{{/if}}>
+    <section class="card-header description collapsible" {{#if data.concealed}}data-concealed{{/if}}>
 
         {{!-- Summary --}}
         <header class="summary">
@@ -21,24 +21,19 @@
         {{!-- Details --}}
         <section class="details collapsible-content card-content">
             <div class="wrapper">
-                {{{ data.description.chat }}}
+                {{{ data.description }}}
             </div>
         </section>
     </section>
 
     {{!-- Materials --}}
-    {{#if data.materials.value}}
-    <p class="supplement"><strong>{{ localize "DND5E.Materials" }}</strong>{{ data.materials.value }}</p>
+    {{#if data.materials}}
+    <p class="supplement"><strong>{{ localize "DND5E.Materials" }}</strong>{{ data.materials }}</p>
     {{/if}}
 
     {{!-- Item Properties --}}
-    {{#if data.hasProperties}}
+    {{#if data.properties.length}}
     <ul class="card-footer pills unlist">
-        {{#each data.tags}}
-        <li class="pill transparent">
-            <span class="label">{{ this }}</span>
-        </li>
-        {{/each}}
         {{#each data.properties}}
         <li class="pill transparent">
             <span class="label">{{ this }}</span>

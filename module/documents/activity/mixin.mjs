@@ -3,6 +3,7 @@ import ActivityUsageDialog from "../../applications/activity/activity-usage-dial
 import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
+import PropertyField from "../../data/shared/property-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
 import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "../mixins/dependent.mjs";
@@ -683,22 +684,15 @@ export default function ActivityMixin(Base) {
      */
     async _usageChatContext(message) {
       const data = await this.item.system.getCardData({ activity: this });
-      const properties = [...(data.tags ?? []), ...(data.properties ?? [])];
+      const properties = PropertyField.getLabels(data.properties, { ...data, properties: data.item.properties });
       const supplements = [];
       if ( this.activation.condition ) {
         supplements.push(`<strong>${_loc("DND5E.Trigger")}</strong> ${this.activation.condition}`);
       }
-      if ( data.materials?.value ) {
-        supplements.push(`<strong>${_loc("DND5E.Materials")}</strong> ${data.materials.value}`);
+      if ( data.materials ) {
+        supplements.push(`<strong>${_loc("DND5E.Materials")}</strong> ${data.materials}`);
       }
       const buttons = this._usageChatButtons(message);
-
-      // Include spell level in the subtitle.
-      if ( this.item.type === "spell" ) {
-        const spellLevel = foundry.utils.getProperty(message, "data.system.spellLevel");
-        const { spellLevels, spellSchools } = CONFIG.DND5E;
-        data.subtitle = [spellLevels[spellLevel], spellSchools[this.item.system.school]?.label].filterJoin(" &bull; ");
-      }
 
       return {
         activity: this,
@@ -706,9 +700,10 @@ export default function ActivityMixin(Base) {
         item: this.item,
         token: this.item.actor?.token,
         buttons: buttons.length ? buttons : null,
+        concealed: data.concealed,
         description: data.description,
         properties: properties.length ? properties : null,
-        subtitle: this.description.chatFlavor || data.subtitle,
+        subtitle: this.description.chatFlavor || data.subtitle.filterJoin(" • "),
         supplements
       };
     }

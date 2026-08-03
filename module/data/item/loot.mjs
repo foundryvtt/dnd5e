@@ -98,10 +98,10 @@ export default class LootData extends ItemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      this.type.label,
-      this.weight ? `${this.weight.value} ${_loc("DND5E.AbbreviationLbs")}` : null,
-      this.priceLabel
-    ];
+      { type: "text", text: this.type.label },
+      this.weight ? { ...this.weight, type: "weight" } : null,
+      { type: "price", denomination: this.price.denomination, value: this.price.value }
+    ].filter(_ => _);
   }
 
   /* -------------------------------------------- */
