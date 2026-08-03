@@ -4,11 +4,11 @@ import DurationField from "../shared/duration-field.mjs";
 import PropertyField from "../shared/property-field.mjs";
 import RangeField from "../shared/range-field.mjs";
 import TargetField from "../shared/target-field.mjs";
+import SourceReferenceField from "./fields/source-reference-field.mjs";
 import TargetsField from "./fields/targets-field.mjs";
 
 const {
-  ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, FilePathField, HTMLField, NumberField, SchemaField,
-  SetField, StringField
+  ArrayField, BooleanField, DocumentUUIDField, HTMLField, NumberField, SetField, StringField
 } = foundry.data.fields;
 
 /**
@@ -37,8 +37,7 @@ export default class ItemMessageData extends ChatMessageDataModel {
         value: new NumberField({ min: 0 })
       }, { initial: null, nullable: true }),
       identified: new BooleanField({ initial: null, nullable: true }),
-      item: new SchemaField({
-        ...this._sourceFields(),
+      item: new SourceReferenceField({
         compendiumSource: new DocumentUUIDField(),
         properties: new SetField(new StringField())
       }),
@@ -55,23 +54,6 @@ export default class ItemMessageData extends ChatMessageDataModel {
       subtitle: new ArrayField(new StringField()),
       target: new TargetField({}, { initial: null, nullable: true }),
       targets: new TargetsField()
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Fields describing a document a card was created from.
-   * @returns {Record<string, DataField>}
-   * @protected
-   */
-  static _sourceFields() {
-    return {
-      id: new DocumentIdField(),
-      img: new FilePathField({ categories: ["IMAGE"] }),
-      name: new StringField(),
-      type: new StringField(),
-      uuid: new DocumentUUIDField()
     };
   }
 

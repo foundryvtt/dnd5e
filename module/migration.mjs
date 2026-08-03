@@ -791,23 +791,36 @@ export function migrateMessageData(messageData) {
   const targets = flags?.dnd5e?.targets?.map(({ ac, img, name, uuid }) => ({ ac, img, name, actor: uuid }));
   if ( targets ) updateData["flags.dnd5e.targets"] = _del;
 
+  const sources = {};
+  for ( const key of ["activity", "item"] ) {
+    const { id, type, uuid } = flags?.dnd5e?.[key] ?? {};
+    if ( id || type || uuid ) {
+      sources[key] = { id, type, uuid };
+      updateData[`flags.dnd5e.${key}`] = _del;
+    }
+  }
+
   if ( messageData.type !== "base" ) {
-    if ( targets && CONFIG.ChatMessage.dataModels[messageData.type]?.schema.has("targets") ) {
-      updateData["system.targets"] = targets;
+    const schema = CONFIG.ChatMessage.dataModels[messageData.type]?.schema;
+    if ( targets && schema?.has("targets") ) updateData["system.targets"] = targets;
+    for ( const [key, source] of Object.entries(sources) ) {
+      if ( schema?.has(key) ) updateData[`system.${key}`] = source;
     }
     return updateData;
   }
 
   const rollType = flags?.dnd5e?.roll?.type;
 
-  if ( flags?.dnd5e?.messageType === "usage" ) {
+  if ( (flags?.dnd5e?.messageType === "usage") || flags?.dnd5e?.use ) {
     const use = flags.dnd5e.use;
     updateData.type = "usage";
     updateData.system = _replace({
+      ...messageData.system,
+      ...sources,
       targets,
       cause: use?.cause,
       concentration: use?.concentrationId,
-      deltas: use?.consumed,
+      deltas: { ...messageData.system?.deltas, ...use?.consumed },
       effects: use?.effects?.map?.(id => `.ActiveEffect.${id}`),
       scaling: use?.scaling,
       spellLevel: use?.spellLevel
@@ -852,6 +865,7 @@ export function migrateMessageData(messageData) {
     const roll = flags.dnd5e.roll;
     updateData.type = "attack";
     updateData.system = _replace({
+      ...sources,
       targets,
       ability: roll.ability,
       ammunition: roll.ammunition,
@@ -863,13 +877,13 @@ export function migrateMessageData(messageData) {
 
   else if ( (rollType === "damage") || (rollType === "healing") ) {
     updateData.type = rollType;
-    updateData.system = _replace({ targets, onSave: flags.dnd5e.roll.damageOnSave ?? null });
+    updateData.system = _replace({ ...sources, targets, onSave: flags.dnd5e.roll.damageOnSave ?? null });
   }
 
   /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.
   else if ( rollType === "generic" ) {
     updateData.type = "generic";
-    updateData.system = _replace({ targets });
+    updateData.system = _replace({ ...sources, targets });
   }
 
   else if ( rollType === "hitDie" ) {

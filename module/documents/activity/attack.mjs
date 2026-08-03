@@ -157,9 +157,8 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       create: true,
       data: {
         flavor: `${this.item.name} - ${_loc("DND5E.AttackRoll")}`,
-        flags: { dnd5e: this.messageFlags },
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        system: { targets },
+        system: { ...this.messageSources, targets },
         type: "attack"
       }
     }, message);

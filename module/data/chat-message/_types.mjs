@@ -8,7 +8,9 @@
 
 /**
  * @typedef RollMessageSystemData
- * @property {TargetDescriptor5e[]} targets  Tokens this message was rolled against.
+ * @property {SourceReferenceData|null} activity  Activity that created this message, if any.
+ * @property {ItemReferenceData|null} item        Item that created this message, if any.
+ * @property {TargetDescriptor5e[]} targets       Tokens this message was rolled against.
  */
 
 /* -------------------------------------------- */
@@ -130,7 +132,7 @@
  */
 
 /**
- * @typedef ItemMessageSourceData
+ * @typedef SourceReferenceData
  * @property {string|null} id    Document ID.
  * @property {string} img        Document image.
  * @property {string} name       Document name.
@@ -139,9 +141,13 @@
  */
 
 /**
- * @typedef {ItemMessageSourceData} ItemMessageItemData
+ * @typedef {SourceReferenceData} ItemReferenceData
  * @property {string|null} compendiumSource  UUID of the compendium item this item is based on.
- * @property {Set<string>} properties        The item's own property keys.
+ */
+
+/**
+ * @typedef {ItemReferenceData} ItemMessageItemData
+ * @property {Set<string>} properties  The item's own property keys.
  */
 
 /**
@@ -250,6 +256,6 @@
  */
 
 /**
- * @typedef {ItemMessageSourceData} UsageMessageActivityData
+ * @typedef {SourceReferenceData} UsageMessageActivityData
  * @property {string} chatFlavor  Flavor text displayed in place of the card's subtitle.
  */
