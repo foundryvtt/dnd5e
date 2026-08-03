@@ -1,5 +1,6 @@
 /**
  * @import { BastionTurnItem, SaveOutcome } from "../../documents/_types.mjs";
+ * @import { ActivationData, DurationData, RangeData, TargetData } from "../shared/_types.mjs";
  * @import { ActivationsData, ActorDeltasData } from "./fields/_types.mjs";
  */
 
@@ -96,6 +97,46 @@
 
 /**
  * @typedef HitPointsMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef ItemMessageSystemData
+ * @property {ActivationData|null} activation    How the item is activated, if at all.
+ * @property {boolean} concealed                 Whether the description is concealed from players.
+ * @property {string} description                Enriched description displayed on the card.
+ * @property {DurationData|null} duration        How long the item's effects last.
+ * @property {boolean|null} identified           Identified state when the card was created, if applicable.
+ * @property {ItemMessageItemData} item          Item the card describes.
+ * @property {number|null} level                 Level at which a spell was cast.
+ * @property {string} mastery                    Mastery property used with a weapon.
+ * @property {string} materials                  Material components required by a spell.
+ * @property {ItemMessageProperty[]} properties  Item property descriptors.
+ * @property {RangeData|null} range              Item range.
+ * @property {string} school                     Spell school.
+ * @property {string[]} subtitle                 Localized parts of the card's subtitle.
+ * @property {TargetData|null} target            What the item's use targets.
+ */
+
+/**
+ * @typedef ItemMessageSourceData
+ * @property {string|null} id    Document ID.
+ * @property {string} img        Document image.
+ * @property {string} name       Document name.
+ * @property {string} type       Document type.
+ * @property {string|null} uuid  Document UUID.
+ */
+
+/**
+ * @typedef {ItemMessageSourceData} ItemMessageItemData
+ * @property {string|null} compendiumSource  UUID of the compendium item this item is based on.
+ * @property {Set<string>} properties        The item's own property keys.
+ */
+
+/**
+ * @typedef ItemMessageProperty
+ * @property {string} type  Kind of property, which determines how it is rendered and what other data it carries.
  */
 
 /* -------------------------------------------- */
