@@ -1,6 +1,6 @@
 ![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
 
-The compendium browser is a new application for finding content from across multiple compendiums using searching and filtering. The browser can be accessed using the "Open Compendium Browser" button at the top of the Compendium Packs sidebar tab.
+The compendium browser is an application for finding content from across multiple compendiums using searching and filtering. The browser can be accessed using the "Open Compendium Browser" button at the top of the Compendium Packs sidebar tab.
 
 ![Compendium Browser - Standard Mode](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/compendium-browser/standard-mode.jpg)
 
