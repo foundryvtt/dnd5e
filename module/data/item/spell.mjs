@@ -134,6 +134,17 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get availableAbilities() {
+    if ( this.ability ) return new Set([this.ability]);
+
+    const spellcasting = this.parent?.actor?.spellcastingClasses[this.classIdentifier]?.spellcasting.ability
+      ?? this.parent?.actor?.system.attributes?.spellcasting;
+    return new Set(spellcasting ? [spellcasting] : []);
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The identifier of the spellcasting class associated with this spell, resolved through subclass parentage where
    * necessary. Returns an empty string if the spell was not granted by a class or subclass item.
@@ -145,17 +156,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     if ( sourceItem?.type === "class" ) return sourceItem.identifier;
     if ( sourceItem?.type === "subclass" ) return sourceItem.system.classIdentifier ?? "";
     return "";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  get availableAbilities() {
-    if ( this.ability ) return new Set([this.ability]);
-
-    const spellcasting = this.parent?.actor?.spellcastingClasses[this.classIdentifier]?.spellcasting.ability
-      ?? this.parent?.actor?.system.attributes?.spellcasting;
-    return new Set(spellcasting ? [spellcasting] : []);
   }
 
   /* -------------------------------------------- */
@@ -228,6 +228,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @override */
   get criticalThreshold() {
     return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get hasProficiency() {
+    return true;
   }
 
   /* -------------------------------------------- */

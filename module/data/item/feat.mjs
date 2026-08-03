@@ -182,6 +182,13 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get hasProficiency() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * The proficiency multiplier for this item.
    * @returns {number}

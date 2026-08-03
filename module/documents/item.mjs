@@ -654,13 +654,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _prepareProficiency() {
-    if ( !["spell", "weapon", "equipment", "tool", "feat", "consumable"].includes(this.type) ) return;
-    if ( !this.actor?.system.attributes?.prof ) {
-      this.system.prof = new Proficiency(0, 0);
-      return;
-    }
-
-    this.system.prof = new Proficiency(this.actor.system.attributes.prof, this.system.proficiencyMultiplier ?? 0);
+    if ( !this.system.hasProficiency ) return;
+    const prof = this.actor?.system.attributes?.prof;
+    this.system.prof = new Proficiency(Number.isFinite(prof) ? prof : 0, this.system.proficiencyMultiplier ?? 0);
   }
 
   /* -------------------------------------------- */
