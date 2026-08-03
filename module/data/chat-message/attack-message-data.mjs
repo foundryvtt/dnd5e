@@ -18,9 +18,10 @@ export default class AttackMessageData extends RollMessageData {
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static defineSchema() {
     return {
+      ...super.defineSchema(),
       ability: new StringField({ blank: false, initial: null, nullable: true }),
       ammunition: new DocumentIdField({ initial: null, nullable: true }),
       deltas: new ActorDeltasField({}, { initial: null, nullable: true }),
@@ -113,9 +114,7 @@ export default class AttackMessageData extends RollMessageData {
     if ( !game.user.isGM && (visibility === "none") ) return [];
     const showAC = game.user.isGM || (visibility === "all");
 
-    // TODO: Move this into model when effect targets are converted.
-    const targets = this.parent.getFlag("dnd5e", "targets") ?? [];
-    return targets
+    return this.targets
       .map(({ ac, actor, name, token }) => ({
         ac, actor, name, showAC, token,
         hasAC: ac !== null,

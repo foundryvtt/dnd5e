@@ -1,4 +1,4 @@
-import { resolveTargetDescriptor } from "../../utils.mjs";
+import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
 
 /**
  * Adds functionality to a custom HTML element for displaying a target selector and displaying targets.
@@ -102,7 +102,7 @@ export default function TargetedApplicationMixin(Base) {
       this.targetSourceControl.querySelectorAll("button").forEach(b =>
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
-      if ( !this.chatMessage?.getFlag("dnd5e", "targets")?.length ) this.targetSourceControl.hidden = true;
+      if ( !this.chatMessage?.system?.targets?.length ) this.targetSourceControl.hidden = true;
 
       this.targetList = document.createElement("ul");
       this.targetList.classList.add("targets", "unlist");
@@ -120,8 +120,8 @@ export default function TargetedApplicationMixin(Base) {
       const targetedTokens = new Map();
       switch ( this.targetingMode ) {
         case "targeted":
-          for ( const descriptor of this.chatMessage?.getFlag("dnd5e", "targets") ?? [] ) {
-            const { actor, token } = resolveTargetDescriptor(descriptor);
+          for ( const descriptor of this.chatMessage?.system?.targets ?? [] ) {
+            const { actor, token } = TargetsField.resolve(descriptor);
             if ( actor ) targetedTokens.set(actor.uuid, token?.name ?? descriptor.name);
           }
           break;

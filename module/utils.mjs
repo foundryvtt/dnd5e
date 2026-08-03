@@ -1,3 +1,5 @@
+import TargetsField from "./data/chat-message/fields/targets-field.mjs";
+
 /**
  * @import { TargetDescriptor5e, UnitConfiguration } from "./_types.mjs";
  * @import { RollData } from "./documents/_types.mjs";
@@ -760,48 +762,15 @@ export function loadingTooltip({ uuid, passive=false }={}) {
  * Grab the targeted tokens and return relevant information on them.
  * @param {Iterable<Token5e|TokenDocument5e>} [tokens]  Tokens to describe. Defaults to the user's current targets.
  * @returns {TargetDescriptor5e[]}
+ * @deprecated
+ * @since 6.0
  */
 export function getTargetDescriptors(tokens=game.user.targets) {
-  const targets = new Map();
-  for ( const target of tokens ) {
-    const token = target.document ?? target;
-    const { statuses, system, uuid: actor } = token.actor ?? {};
-    if ( !actor ) continue;
-    const ac = statuses.has("coverTotal") ? null : system.attributes?.ac?.value;
-    targets.set(token.uuid, {
-      actor,
-      ac: ac ?? null,
-      img: token.texture?.src,
-      name: token.name,
-      token: token.uuid
-    });
-  }
-  return Array.from(targets.values());
-}
-
-/* -------------------------------------------- */
-
-/**
- * Resolve a stored target descriptor back to the documents it describes, falling back through progressively weaker
- * matches when the exact token is not available on the scene being viewed.
- * @param {TargetDescriptor5e} descriptor  Descriptor stored when the target was captured.
- * @returns {{ [actor]: Actor5e, [token]: Token5e }}
- */
-export function resolveTargetDescriptor({ actor, token }={}) {
-  const document = token ? fromUuidSync(token, { strict: false }) : null;
-
-  // The exact token, if it is on the scene currently being viewed.
-  if ( document?.parent === canvas?.scene ) return { actor: document.actor, token: document.object };
-
-  // An unlinked token's actor exists only on that token, so no other token can stand in for it.
-  if ( foundry.utils.parseUuid(actor)?.primaryType === "Scene" ) {
-    return { actor: document?.actor ?? fromUuidSync(actor, { strict: false }) };
-  }
-
-  // Any token of the same actor on the viewed scene, otherwise the actor by itself.
-  const base = fromUuidSync(actor, { strict: false });
-  const [active] = base?.getActiveTokens() ?? [];
-  return { actor: base, token: active };
+  foundry.utils.logCompatibilityWarning(
+    "The getTargetDescriptors helper has been deprecated. Please use `TargetsField.getDescriptors` instead.",
+    { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+  );
+  return TargetsField.getDescriptors(tokens);
 }
 
 /* -------------------------------------------- */

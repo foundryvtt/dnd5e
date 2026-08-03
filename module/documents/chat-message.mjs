@@ -1,5 +1,5 @@
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
-import { resolveTargetDescriptor } from "../utils.mjs";
+import TargetsField from "../data/chat-message/fields/targets-field.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
@@ -324,7 +324,7 @@ export default class ChatMessage5e extends ChatMessage {
   async _onTargetMouseDown(event) {
     event.stopPropagation();
     const { actorUuid, tokenUuid } = event.currentTarget.dataset;
-    const { actor, token } = resolveTargetDescriptor({ actor: actorUuid, token: tokenUuid });
+    const { actor, token } = TargetsField.resolve({ actor: actorUuid, token: tokenUuid });
     if ( !token || !actor?.testUserPermission(game.user, "OBSERVER")) return;
     const releaseOthers = !event.shiftKey;
     if ( token.controlled ) token.release();
@@ -343,7 +343,7 @@ export default class ChatMessage5e extends ChatMessage {
    */
   _onTargetHoverIn(event) {
     const { actorUuid, tokenUuid } = event.currentTarget.dataset;
-    const { token } = resolveTargetDescriptor({ actor: actorUuid, token: tokenUuid });
+    const { token } = TargetsField.resolve({ actor: actorUuid, token: tokenUuid });
     if ( token && token.isVisible ) {
       if ( !token.controlled ) token._onHoverIn(event, { hoverOutOthers: true });
       this._highlighted = token;
@@ -395,7 +395,7 @@ export default class ChatMessage5e extends ChatMessage {
     const lis = li.closest("[data-message-id]").querySelectorAll(`.evaluation li.target.${type}`);
     canvas.tokens.releaseAll();
     for ( const { dataset } of lis ) {
-      const { actor, token } = resolveTargetDescriptor({ actor: dataset.actorUuid, token: dataset.tokenUuid });
+      const { actor, token } = TargetsField.resolve({ actor: dataset.actorUuid, token: dataset.tokenUuid });
       if ( token?.isVisible && actor?.testUserPermission(game.user, "OWNER") ) {
         token.control({ releaseOthers: false });
       }

@@ -1,8 +1,8 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import BaseAttackActivityData from "../../data/activity/attack-data.mjs";
+import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
-import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -80,7 +80,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
    * @returns {Promise<D20Roll[]|null>}
    */
   async rollAttack(config={}, dialog={}, message={}) {
-    const targets = getTargetDescriptors();
+    const targets = TargetsField.getDescriptors();
 
     if ( (this.item.type === "weapon") && (this.item.system.quantity === 0) ) {
       ui.notifications.warn("DND5E.ATTACK.Warning.NoQuantity");
@@ -159,6 +159,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
         flavor: `${this.item.name} - ${_loc("DND5E.AttackRoll")}`,
         flags: { dnd5e: this.messageFlags },
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        system: { targets },
         type: "attack"
       }
     }, message);

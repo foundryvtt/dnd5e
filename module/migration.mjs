@@ -786,16 +786,25 @@ export function migrateMacroData(macro, migrationData) {
  * @returns {object}            The update data to apply.
  */
 export function migrateMessageData(messageData) {
-  if ( messageData.type !== "base" ) return {};
-
   const updateData = {};
   const { flags } = messageData;
-  const rollType = foundry.utils.getProperty(flags, "dnd5e.roll.type");
+  const targets = flags?.dnd5e?.targets?.map(({ ac, img, name, uuid }) => ({ ac, img, name, actor: uuid }));
+  if ( targets ) updateData["flags.dnd5e.targets"] = _del;
+
+  if ( messageData.type !== "base" ) {
+    if ( targets && CONFIG.ChatMessage.dataModels[messageData.type]?.schema.has("targets") ) {
+      updateData["system.targets"] = targets;
+    }
+    return updateData;
+  }
+
+  const rollType = flags?.dnd5e?.roll?.type;
 
   if ( flags?.dnd5e?.messageType === "usage" ) {
     const use = flags.dnd5e.use;
     updateData.type = "usage";
     updateData.system = _replace({
+      targets,
       cause: use?.cause,
       concentration: use?.concentrationId,
       deltas: use?.consumed,
@@ -803,7 +812,6 @@ export function migrateMessageData(messageData) {
       scaling: use?.scaling,
       spellLevel: use?.spellLevel
     });
-    updateData["flags.dnd5e.messageType"] = _del;
     updateData["flags.dnd5e.scaling"] = _del;
     updateData["flags.dnd5e.use.cause"] = _del;
     updateData["flags.dnd5e.use.concentrationId"] = _del;
@@ -827,64 +835,57 @@ export function migrateMessageData(messageData) {
       ?? "int";
     updateData.type = "check";
     updateData.system = _replace({ ability, skill: roll.skillId, tool: roll.toolId });
-    updateData["flags.dnd5e.messageType"] = _del;
-    updateData["flags.dnd5e.roll"] = _del;
   }
 
   else if ( rollType === "save" ) {
     const roll = flags.dnd5e.roll;
     updateData.type = "save";
     updateData.system = _replace({ ability: roll.ability, resisted: roll.forceSuccess });
-    updateData["flags.dnd5e.messageType"] = _del;
-    updateData["flags.dnd5e.roll"] = _del;
   }
 
   else if ( rollType === "death" ) {
     updateData.type = "save";
     updateData.system = _replace({ type: "death" });
-    updateData["flags.dnd5e.messageType"] = _del;
-    updateData["flags.dnd5e.roll"] = _del;
   }
 
   else if ( rollType === "attack" ) {
     const roll = flags.dnd5e.roll;
     updateData.type = "attack";
     updateData.system = _replace({
+      targets,
       ability: roll.ability,
       ammunition: roll.ammunition,
       deltas: roll.ammunitionData ? { deleted: [roll.ammunitionData] } : null,
       mastery: roll.mastery,
       mode: roll.attackMode
     });
-    updateData["flags.dnd5e.messageType"] = _del;
-    updateData["flags.dnd5e.roll"] = _del;
   }
 
   else if ( (rollType === "damage") || (rollType === "healing") ) {
     updateData.type = rollType;
-    updateData.system = _replace({ onSave: flags.dnd5e.roll.damageOnSave ?? null });
-    updateData["flags.dnd5e.messageType"] = _del;
-    updateData["flags.dnd5e.roll"] = _del;
+    updateData.system = _replace({ targets, onSave: flags.dnd5e.roll.damageOnSave ?? null });
   }
 
   /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.
-  else if ( flags?.dnd5e?.roll?.type === "generic" ) {
+  else if ( rollType === "generic" ) {
     updateData.type = "generic";
-    updateData.system = _replace({});
-    updateData["flags.dnd5e.roll"] = _del;
+    updateData.system = _replace({ targets });
   }
 
-  else if ( flags?.dnd5e?.roll?.type === "hitDie" ) {
+  else if ( rollType === "hitDie" ) {
     updateData.type = "hitDie";
     updateData.system = _replace({});
-    updateData["flags.dnd5e.roll"] = _del;
   }
 
-  else if ( flags?.dnd5e?.roll?.type === "hitPoints" ) {
+  else if ( rollType === "hitPoints" ) {
     updateData.type = "hitPoints";
     updateData.system = _replace({});
-    updateData["flags.dnd5e.roll"] = _del;
   }*/
+
+  if ( updateData.type ) {
+    if ( rollType ) updateData["flags.dnd5e.roll"] = _del;
+    if ( flags.dnd5e.messageType ) updateData["flags.dnd5e.messageType"] = _del;
+  }
 
   return updateData;
 }
