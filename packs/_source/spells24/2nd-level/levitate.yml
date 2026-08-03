@@ -117,17 +117,15 @@ effects:
     img: icons/magic/control/silhouette-hold-change-blue.webp
     _id: axhLHcJQHprSpHRD
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target can move only by pushing or pulling against a fixed object
       or surface within reach (such as a wall or a ceiling), which allows it to
@@ -141,13 +139,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.1
+      systemVersion: 6.0.0
       createdTime: 1726687988535
-      modifiedTime: 1726688069693
+      modifiedTime: 1783543975787
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplLevitate00.axhLHcJQHprSpHRD'
 folder: 3SjcO2acsFnWegp4
 sort: 2400000
@@ -160,11 +161,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425961258
-  modifiedTime: 1745256795453
+  modifiedTime: 1783543975787
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplLevitate00'

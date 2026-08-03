@@ -41,7 +41,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * @type {string}
    */
   get otherLabel() {
-    return game.i18n.localize("DND5E.ProficiencyOther");
+    return _loc("DND5E.ProficiencyOther");
   }
 
   /* -------------------------------------------- */

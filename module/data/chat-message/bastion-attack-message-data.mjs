@@ -58,19 +58,19 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
     const context = {};
     const plurals = new Intl.PluralRules(game.i18n.lang);
     const key = this.undefended ? "Undefended" : this.deaths ? `Deaths.${plurals.select(this.deaths)}` : "NoDeaths";
-    context.description = game.i18n.format(`DND5E.Bastion.Attack.Result.${key}`, { deaths: this.deaths });
+    context.description = _loc(`DND5E.Bastion.Attack.Result.${key}`, { deaths: this.deaths });
     context.roll = await this.parent.rolls[0].render();
     context.buttons = [];
     if ( !this.resolved && (this.deaths || this.undefended) ) {
       context.buttons.push({
-        label: game.i18n.localize("DND5E.Bastion.Attack.Automatic"),
+        label: _loc("DND5E.Bastion.Attack.Automatic"),
         icon: '<i class="fa-solid fa-bolt" inert></i>',
         dataset: { action: "resolve" }
       });
     }
     if ( this.damaged ) {
       const facility = this.actor?.items.get(this.damaged);
-      if ( facility ) context.damaged = game.i18n.format("DND5E.Bastion.Attack.Result.Damaged", {
+      if ( facility ) context.damaged = _loc("DND5E.Bastion.Attack.Result.Damaged", {
         link: facility.toAnchor().outerHTML
       });
     }

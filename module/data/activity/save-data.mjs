@@ -29,10 +29,13 @@ export default class BaseSaveActivityData extends BaseActivityData {
       })),
       save: new SchemaField({
         ability: new SetField(new StringField()),
+        bonus: new FormulaField(),
         dc: new SchemaField({
+          bonus: new FormulaField({ deterministic: true, persisted: false }),
           calculation: new StringField({ initial: "initial" }),
           formula: new FormulaField({ deterministic: true })
-        })
+        }),
+        visible: new BooleanField({ initial: true })
       })
     };
   }
@@ -52,12 +55,14 @@ export default class BaseSaveActivityData extends BaseActivityData {
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static migrateData(source) {
+    super.migrateData(source);
     if ( foundry.utils.getType(source.save?.ability) === "string" ) {
       if ( source.save.ability ) source.save.ability = [source.save.ability];
       else source.save.ability = [];
     }
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -91,7 +96,6 @@ export default class BaseSaveActivityData extends BaseActivityData {
   prepareData() {
     super.prepareData();
     if ( this.save.dc.calculation === "initial" ) this.save.dc.calculation = this.isSpell ? "spellcasting" : "";
-    this.save.dc.bonus = "";
   }
 
   /* -------------------------------------------- */
@@ -111,7 +115,7 @@ export default class BaseSaveActivityData extends BaseActivityData {
       ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
     this.save.dc.value += bonus;
 
-    if ( this.save.dc.value ) this.labels.save = game.i18n.format("DND5E.SaveDC", {
+    if ( this.save.dc.value ) this.labels.save = _loc("DND5E.SaveDC", {
       dc: this.save.dc.value,
       ability: CONFIG.DND5E.abilities[ability]?.label ?? ""
     });
@@ -134,12 +138,21 @@ export default class BaseSaveActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getDamageConfig(config={}) {
-    const rollConfig = super.getDamageConfig(config);
+  getDamageConfig(config={}, options={}) {
+    const rollConfig = super.getDamageConfig(config, options);
 
     rollConfig.critical ??= {};
     rollConfig.critical.allow ??= false;
 
     return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(options={}) {
+    const rollData = super.getRollData(options);
+    if ( options.roll ) foundry.utils.setProperty(rollData, "roll.type", "save");
+    return rollData;
   }
 }

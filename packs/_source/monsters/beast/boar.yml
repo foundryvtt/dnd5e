@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: ypnf9maxKh66ucMe
     name: Tusk
@@ -489,7 +487,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Boar attacks with its Tusk.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -552,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -561,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        AjIu58g6DmE0Aj5g:
           type: attack
           activation:
             type: action
@@ -577,10 +576,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -597,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,20 +611,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: AjIu58g6DmE0Aj5g
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -638,26 +651,27 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741117003939
+      systemVersion: 6.0.0
+      createdTime: 1781524862644
+      modifiedTime: 1781525062834
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lZR4lhNmYSf89s4Q.ypnf9maxKh66ucMe'
   - _id: TSmET06nE61H6HC2
     name: Charge
     type: feat
-    img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
+    img: icons/creatures/mammals/bull-horns-eyes-glowin-orange.webp
     system:
       description:
         value: >-
-          <p>If the boar moves at least 20 ft. straight toward a target and then
-          hits it with a tusk attack on the same turn, the target takes an extra
-          [[/damage average]] damage.</p><p>If the target is a creature, it must
-          succeed on a [[/save]] saving throw or be knocked
-          &amp;Reference[prone].</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a target and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.lZR4lhNmYSf89s4Q.Item.ypnf9maxKh66ucMe]{tusk}
+          attack on the same turn, the target takes an extra [[/damage average]]
+          damage.</p><p>If the target is a creature, it must succeed on a
+          [[/save]] saving throw or be knocked &amp;Reference[prone].</p>
         chat: >-
           <p>If the boar moves at least 20 ft. straight toward a target and then
           hits it with a tusk attack on the same turn, the target takes extra
@@ -675,133 +689,90 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
+        UtbfE0oWqyvC06Yg:
+          type: save
+          name: Charge Save
+          _id: UtbfE0oWqyvC06Yg
+          img: ''
+          sort: 100000
           activation:
-            type: ''
-            value: null
-            condition: ''
+            type: special
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 20
+              feet straight toward a target and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.lZR4lhNmYSf89s4Q.Item.ypnf9maxKh66ucMe]{tusk}
+              attack on the same turn.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
-            concentration: false
-            value: ''
             units: inst
-            special: ''
+            concentration: false
             override: false
           effects: []
+          flags: {}
           range:
-            value: '20'
-            units: ft
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            critical:
-              allow: true
-              bonus: ''
+            onSave: full
             parts:
               - custom:
                   enabled: false
                   formula: ''
                 number: 1
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - slashing
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
+                scaling:
+                  number: 1
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+            visible: true
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -811,36 +782,31 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741118127951
+      systemVersion: 6.0.0
+      createdTime: 1781524696143
+      modifiedTime: 1783370003906
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lZR4lhNmYSf89s4Q.TSmET06nE61H6HC2'
   - _id: U66PTM15QvmkenvW
     name: Relentless
     type: feat
-    img: icons/magic/water/heart-ice-freeze.webp
+    img: icons/magic/life/cross-flared-green.webp
     system:
       description:
         value: >-
-          <p>If the boar takes <strong>7 damage</strong> or less that would
-          reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1
-          hit point</strong> instead. Recharges on a short or long rest.</p>
-        chat: >-
-          <p>If the boar takes damage that would reduce it to <strong>0 hit
-          points</strong>, it is reduced to <strong>1 hit point</strong>
+          <p>If the [[lookup @name lowercase]]{monster} takes 7 damage or less
+          that would reduce it to 0 hit points, it is reduced to 1 hit point
           instead.</p>
+        chat: >-
+          <p>If the [[lookup @name]]{monster} takes damage that would reduce it
+          to 0 hit points, it is reduced to 1 hit point instead.</p>
       source:
         custom: ''
         book: ''
@@ -855,10 +821,11 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -866,16 +833,16 @@ items:
           activation:
             type: special
             value: null
-            condition: ''
+            condition: >-
+              When the [[lookup @name lowercase]]{creature} takes 7 damage or
+              less that would reduce it to 0 Hit Points.
             override: false
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
@@ -904,7 +871,7 @@ items:
               units: ''
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -919,6 +886,13 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: Persevere
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -932,11 +906,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.8FX2KlWyBAKEYGzs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676738
+      systemVersion: 6.0.0
+      createdTime: 1781524756774
+      modifiedTime: 1781525085376
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!lZR4lhNmYSf89s4Q.U66PTM15QvmkenvW'
@@ -948,7 +922,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171253780

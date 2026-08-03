@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: Y4OikSWAB33cwfR2
     name: Plate Armor
@@ -552,7 +550,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -567,7 +565,7 @@ items:
     system:
       description:
         value: >-
-          <p>The knight makes two [[/item .iPLa96izrYFiVtaO]]{melee}
+          <p>The [[lookup @name lowercase]]{monster} makes two melee
           attacks.</p>
         chat: ''
       source:
@@ -582,13 +580,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        NI5mID721bADiL8i:
           type: utility
           activation:
             type: action
@@ -603,15 +600,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -622,7 +620,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -639,7 +638,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: NI5mID721bADiL8i
       enchant: {}
       prerequisites:
         level: null
@@ -653,22 +660,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403495205
+      systemVersion: 6.0.0
+      createdTime: 1781824740028
+      modifiedTime: 1781824751230
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.46b7R0DbKIsxvWcv'
   - _id: iPLa96izrYFiVtaO
     name: Greatsword
     type: weapon
-    img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+    img: icons/weapons/swords/greatsword-guard-gold-worn.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Knight attacks with its Greatsword.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -733,7 +742,7 @@ items:
       properties:
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -742,8 +751,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        atYUGg7mJ8tAcVqk:
           type: attack
           activation:
             type: action
@@ -758,10 +766,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -778,7 +787,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -791,24 +801,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: atYUGg7mJ8tAcVqk
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: greatsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -818,22 +841,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107550814
+      systemVersion: 6.0.0
+      createdTime: 1781824355779
+      modifiedTime: 1781824367070
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.iPLa96izrYFiVtaO'
   - _id: m68xw5aGQ7awxfYf
     name: Heavy Crossbow
     type: weapon
-    img: icons/weapons/crossbows/crossbow-blue.webp
+    img: icons/weapons/crossbows/crossbow-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Knight attacks with its Heavy Crossbow.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -899,7 +924,7 @@ items:
         - amm
         - hvy
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -908,8 +933,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        5aQEBNmwuRBFTijA:
           type: attack
           activation:
             type: action
@@ -924,10 +948,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -944,7 +969,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -957,24 +983,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 5aQEBNmwuRBFTijA
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: heavy-crossbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -984,27 +1024,29 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385210
+      systemVersion: 6.0.0
+      createdTime: 1781824586887
+      modifiedTime: 1781826214174
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.m68xw5aGQ7awxfYf'
   - _id: FK0ZF8egty0u713z
     name: Leadership
     type: feat
-    img: icons/sundries/documents/document-sealed-red-yellow.webp
+    img: icons/sundries/flags/banner-sword-blue.webp
     system:
       description:
         value: >-
-          <p>For 1 minute, the knight can utter a special command or warning
-          whenever a nonhostile creature that it can see within 30 ft. of it
-          makes an attack roll or a saving throw. The creature can add a d4 to
-          its roll provided it can hear and understand the knight. A creature
-          can benefit from only one Leadership die at a time. This effect ends
-          if the knight is incapacitated.</p>
+          <p>For [[lookup @labels.duration activity=u349cIbCWlRWoQ0X]], the
+          [[lookup @name lowercase]]{monster} can utter a special command or
+          warning whenever a nonhostile creature that it can see within 30 feet
+          of it makes an attack roll or a saving throw. The creature can add a
+          d4 to its roll provided it can hear and understand the [[lookup @name
+          lowercase]]{monster}. A creature can benefit from only one Leadership
+          die at a time. This effect ends if the [[lookup @name
+          lowercase]]{monster} is &amp;reference[incapacitated apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -1020,13 +1062,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        u349cIbCWlRWoQ0X:
           type: utility
           activation:
             type: action
@@ -1036,27 +1077,28 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: vd2lrybGb5P1arPD
+              level: {}
           range:
             value: '30'
-            units: ft
+            units: self
             special: ''
             override: false
           target:
@@ -1067,10 +1109,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1084,12 +1127,67 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: u349cIbCWlRWoQ0X
+          name: Command Allies
       enchant: {}
       prerequisites:
         level: null
       identifier: leadership
-    effects: []
+    effects:
+      - name: Leadership
+        img: icons/sundries/flags/banner-sword-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.D5UqYD1EnTrJaMTO.Item.FK0ZF8egty0u713z
+        transfer: false
+        _id: vd2lrybGb5P1arPD
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>For the duration, you can utter a special command or warning
+          whenever a nonhostile creature that you can see within 30 feet of you
+          makes an attack roll or a saving throw. The creature adds a d4 to its
+          roll provided that it can hear and understand you.</p><p>A creature
+          can only benefit from one Leadership die at a time. This effect ends
+          if you are &amp;reference[incapacitated apply=false]</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781824471950
+          modifiedTime: 1781824551674
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!D5UqYD1EnTrJaMTO.FK0ZF8egty0u713z.vd2lrybGb5P1arPD
     folder: null
     sort: 0
     ownership:
@@ -1098,127 +1196,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cl5sUkAIeJoAG4gh
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!D5UqYD1EnTrJaMTO.FK0ZF8egty0u713z'
-  - _id: AxY9pWHDr2M1SPCC
-    name: Parry
-    type: feat
-    img: icons/skills/melee/weapons-crossed-swords-yellow-teal.webp
-    system:
-      description:
-        value: >-
-          <p>The knight adds 2 to its AC against one melee Attack that would hit
-          it. To do so, the knight must see the attacker and be wielding a melee
-          weapon.</p>
-        chat: >-
-          <p>The knight adds 2 to its <strong>AC</strong> against one melee
-          Attack that would hit it.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: reaction
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: none
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: parry
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403505538
+      systemVersion: 6.0.0
+      createdTime: 1781824349612
+      modifiedTime: 1781824571669
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!D5UqYD1EnTrJaMTO.AxY9pWHDr2M1SPCC'
-  - _id: Sp9AkcXsLCN09C9v
+    _key: '!actors.items!D5UqYD1EnTrJaMTO.FK0ZF8egty0u713z'
+  - _id: Wrwg1LB1KnCQHuuH
     name: Brave
     type: feat
-    img: icons/skills/social/intimidation-impressing.webp
+    img: icons/equipment/head/helm-barbute-horned-tan.webp
     system:
       description:
         value: >-
-          <p>The knight has advantage on saving throws against being
-          frightened.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on saving
+          throws against being &amp;reference[Frightened apply=false].</p>
         chat: ''
       source:
         custom: ''
@@ -1232,32 +1226,161 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: brave
+      advancement: {}
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 3125
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.108q5fJnnBRoLKfe
-      duplicateSource: null
-      coreVersion: '13.345'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.fsPruAIDOg4tVrgb.Item.YbB6EsBwNaEzVlxU
+      duplicateSource: Item.ikYrVz4AFRe13k0R
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749403477970
+      systemVersion: 6.0.0
+      createdTime: 1781824305728
+      modifiedTime: 1781824305728
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!D5UqYD1EnTrJaMTO.Sp9AkcXsLCN09C9v'
+    _key: '!actors.items!D5UqYD1EnTrJaMTO.Wrwg1LB1KnCQHuuH'
+  - _id: FbpxIEzUNTLk7pYO
+    name: Parry
+    type: feat
+    img: icons/skills/melee/swords-parry-block-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} adds 2 to its AC against
+          one melee attack that would hit it. To do so, the [[lookup @name
+          lowercase]]{monster} must see the attacker and be wielding a melee
+          weapon.</p>
+        chat: >-
+          <p>The [[lookup @name lowercase]]{monster} adds 2 to its AC against
+          one melee Attack that would hit it.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        5RUe1bRJr64laA0l:
+          type: utility
+          activation:
+            type: reaction
+            value: 1
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} would be hit by a
+              melee attack while it is wielding a melee weapon.
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: Parry Attack
+          _id: 5RUe1bRJr64laA0l
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: parry
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 50000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.egsSDYbqoLCelb0J.Item.lS2o3QOZ2lxKyi0L
+      duplicateSource: Item.45SLiafyQy1HrDdF
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781824314278
+      modifiedTime: 1781824335619
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!D5UqYD1EnTrJaMTO.FbpxIEzUNTLk7pYO'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -1266,7 +1389,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171213566

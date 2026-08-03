@@ -125,17 +125,15 @@ effects:
     img: icons/consumables/potions/vial-cork-empty.webp
     _id: D6fYii3nkDC4Tsbi
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -146,22 +144,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730862196995
-      modifiedTime: 1730862213048
+      modifiedTime: 1783544097345
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgPotionOfClimb.D6fYii3nkDC4Tsbi'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614755899
+  modifiedTime: 1783544097345
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

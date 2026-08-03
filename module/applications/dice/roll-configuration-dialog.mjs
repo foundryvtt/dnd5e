@@ -212,7 +212,7 @@ export default class RollConfigurationDialog extends Dialog5e {
       roll: {
         default: true,
         icon: '<i class="fa-solid fa-dice" inert></i>',
-        label: game.i18n.localize("DND5E.Roll")
+        label: _loc("DND5E.Roll")
       }
     };
     return context;
@@ -230,13 +230,13 @@ export default class RollConfigurationDialog extends Dialog5e {
   async _prepareConfigurationContext(context, options) {
     context.fields = [{
       field: new foundry.data.fields.StringField({
-        label: game.i18n.localize("DND5E.RollMode"), blank: false, required: true
+        label: _loc("DND5E.RollMode"), blank: false, required: true
       }),
       name: "rollMode",
       value: this.message.rollMode ?? this.options.default?.rollMode ?? CONFIG.Dice.BasicRoll.getMessageMode(),
-      options: Object.entries(game.release.generation < 14 ? CONFIG.Dice.rollModes : CONFIG.ChatMessage.modes)
+      options: Object.entries(CONFIG.ChatMessage.modes)
         .filter(([k]) => k !== "ic")
-        .map(([value, l]) => ({ value, label: game.i18n.localize(l.label) }))
+        .map(([value, l]) => ({ value, label: _loc(l.label) }))
     }];
     return context;
   }
@@ -348,12 +348,27 @@ export default class RollConfigurationDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
-   * Make any final modifications to rolls based on the button clicked.
+   * Apply any action-specific changes to the roll configuration before the final rolls are built.
+   * @param {BasicRollProcessConfiguration} config  Roll configuration data to mutate in place.
+   * @param {string} action                         Action on the button clicked.
+   * @protected
+   */
+  _finalizeConfig(config, action) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Make any final modifications to rolls based on the button clicked, by re-building them from a fresh copy of the
+   * configuration. Subclasses adjust the configuration for the chosen action in _finalizeConfig, rather than mutating
+   * the already-built rolls, so that each roll is constructed exactly once.
    * @param {string} action  Action on the button clicked.
    * @returns {BasicRoll[]}
    * @protected
    */
   _finalizeRolls(action) {
+    const config = foundry.utils.deepClone(this.#config);
+    this._finalizeConfig(config, action);
+    this.#buildRolls(config, new foundry.applications.ux.FormDataExtended(this.form));
     return this.rolls;
   }
 

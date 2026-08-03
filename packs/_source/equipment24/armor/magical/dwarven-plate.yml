@@ -182,38 +182,45 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell4.webp
     disabled: true
     _id: 8E4SvTACyo0LzFBk
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Dwarven {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: veryRare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDwarvenPlate0
-          caption=false]</p>
-        priority: null
-      - key: system.armor.magicalBonus
-        mode: 4
-        value: '2'
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Dwarven {}
+          priority: null
+          type: override
+          phase: initial
+          _id: USriigECFdBQnmOT
+        - key: system.rarity
+          value: veryRare
+          priority: null
+          type: override
+          phase: initial
+          _id: vsl4MdoROm0NVCXg
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgDwarvenPlate0
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: zujncKokJlp1DhAD
+        - key: system.armor.magicalBonus
+          value: 2
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: RDIEN5W01KeAJnQL
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: Hrbez00DEnozut9B
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -224,13 +231,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730837420393
-      modifiedTime: 1730837704945
+      modifiedTime: 1783544095325
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDwarvenPlate0.8E4SvTACyo0LzFBk'
 flags:
   dnd5e:
@@ -239,11 +249,11 @@ flags:
         - n5tsFCvJgAjPSR2U
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614333976
+  modifiedTime: 1783544095325
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 500000

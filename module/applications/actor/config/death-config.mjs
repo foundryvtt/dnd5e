@@ -27,7 +27,7 @@ export default class DeathConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.DeathSaveConfigure");
+    return _loc("DND5E.DeathSaveConfigure");
   }
 
   /* -------------------------------------------- */
@@ -42,10 +42,8 @@ export default class DeathConfig extends BaseConfigSheet {
     context.data = source.attributes?.death ?? {};
     context.fields = this.document.system.schema.getField("attributes.death").fields;
 
-    if ( this.document.system.bonuses?.abilities ) context.global = {
-      data: source.bonuses?.abilities ?? {},
-      fields: this.document.system.schema.getField("bonuses.abilities").fields
-    };
+    const globalAbilityField = this.document.system.schema.getField("rolls.ability");
+    if ( globalAbilityField ) context.global = { data: source.rolls?.ability ?? {}, fields: globalAbilityField.fields };
 
     return context;
   }

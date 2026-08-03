@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
   - _id: Rr34cx78OgioMSHH
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Adult Brass Dragon attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -513,7 +513,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -551,9 +551,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -562,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        6LLAhYHofQDuBBMz:
           type: attack
           activation:
             type: action
@@ -578,10 +576,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -598,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -611,20 +611,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 6LLAhYHofQDuBBMz
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -639,22 +651,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450846430
+      systemVersion: 6.0.0
+      createdTime: 1781620685882
+      modifiedTime: 1781620704393
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7vswgicsiMfS4ZTS.Rr34cx78OgioMSHH'
   - _id: Gx6DVWF7D9lzZjse
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-yellow-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Adult Brass Dragon attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -717,7 +731,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -726,8 +740,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        SBkWRvg4VheuyzmL:
           type: attack
           activation:
             type: action
@@ -742,10 +755,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -762,7 +776,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -775,24 +790,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          name: ''
+          _id: SBkWRvg4VheuyzmL
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 300000
@@ -802,392 +830,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450846430
+      systemVersion: 6.0.0
+      createdTime: 1781620720631
+      modifiedTime: 1781620760035
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7vswgicsiMfS4ZTS.Gx6DVWF7D9lzZjse'
-  - _id: jM7XLTjt7QeJ8B7U
-    name: Detect
-    type: feat
-    img: icons/creatures/eyes/lizard-single-slit-blue.webp
-    system:
-      description:
-        value: <p>The dragon makes a Wisdom (Perception) check.</p>
-        chat: <p>The dragon watches its surrounding...</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: detect
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450956373
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.jM7XLTjt7QeJ8B7U'
-  - _id: cVkEgorVxYQJkS8M
-    name: Frightful Presence
-    type: feat
-    img: icons/creatures/unholy/demons-horned-glowing-pink.webp
-    system:
-      description:
-        value: >-
-          <p>Each creature of the dragon's choice that is within 120 feet of the
-          dragon and aware of it must succeed on a [[/save]] saving throw or
-          become &amp;Reference[frightened] for 1 minute.</p><p>A creature can
-          repeat the saving throw at the end of each of its turns, ending the
-          effect on itself on a success. If a creature's saving throw is
-          successful or the effect ends for it, the creature is immune to the
-          dragon's Frightful Presence for the next 24 hours.</p>
-        chat: >-
-          <p>Each creature of the dragon's choice that is <strong>within 120
-          feet</strong> of the dragon and aware of it must succeed on a Wisdom
-          saving throw. A creature can repeat the saving throw at the end of
-          each of its turns.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '1'
-            units: minute
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '120'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: any
-            affects:
-              count: ''
-              type: creature
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: wis
-            dc:
-              calculation: ''
-              formula: '16'
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: frightful-presence
-    effects: []
-    folder: null
-    sort: 450000
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nb6zOmwIIJBLz4iT
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450869654
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.cVkEgorVxYQJkS8M'
-  - _id: Mmn2SNmzahxtikN3
-    name: Legendary Actions
-    type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
-    system:
-      description:
-        value: <p>[[lookup @resources.legact.label]]</p>
-        chat: <p>The dragon can take 3 legendary actions. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450814744
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.Mmn2SNmzahxtikN3'
-  - _id: 86DJipzmvkhxDoKr
-    name: Legendary Resistance
-    type: feat
-    img: icons/equipment/shield/kite-wooden-oak-glow.webp
-    system:
-      description:
-        value: >-
-          <p>If the dragon fails a saving throw, it can choose to succeed
-          instead.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties:
-        - trait
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: special
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legres.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450822633
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.86DJipzmvkhxDoKr'
   - _id: MUTDiPrzhDqLYlKU
     name: Multiattack
     type: feat
@@ -1195,10 +845,10 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon can use its [[/item .cVkEgorVxYQJkS8M]]{Frightful
-          Presence}. It then makes three attacks: one with its [[/item
-          .Rr34cx78OgioMSHH]]{bite} and two with its [[/item
-          .Gx6DVWF7D9lzZjse]]{claws}.</p>
+          <p>The [[lookup @name lowercase]]{monster} can use its [[/item
+          .XyhdTtNxXj219dlP]]{Frightful Presence}. It then makes three attacks:
+          one with its [[/item .Rr34cx78OgioMSHH]]{bite} and two with its
+          [[/item .Gx6DVWF7D9lzZjse]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -1212,13 +862,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        tUSrxZU11ay5xOos:
           type: utility
           activation:
             type: action
@@ -1233,15 +882,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1252,7 +902,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1269,7 +920,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: tUSrxZU11ay5xOos
       enchant: {}
       prerequisites:
         level: null
@@ -1283,22 +942,200 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450847115
+      systemVersion: 6.0.0
+      createdTime: 1781620904151
+      modifiedTime: 1783370871372
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!7vswgicsiMfS4ZTS.MUTDiPrzhDqLYlKU'
-  - _id: rR1dMvZqWVQTgCVw
+  - _id: fZxjrr4ag5ahtBxv
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can take [[lookup
+          @resources.legact.max]] legendary actions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 137500
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781620671011
+      modifiedTime: 1781897266393
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!7vswgicsiMfS4ZTS.fZxjrr4ag5ahtBxv'
+  - _id: 8aBI5knFgJjHMTBr
+    name: Legendary Resistance
+    type: feat
+    img: icons/equipment/shield/targe-steel-blue.webp
+    system:
+      description:
+        value: >-
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: special
+            value: null
+            condition: When the [[lookup @name lowercase]]{monster} fails a saving throw.
+            override: false
+          consumption:
+            targets:
+              - type: attribute
+                value: '1'
+                target: resources.legres.value
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+          name: Persevere
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 125000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.6gjpG1ezpMNyJDGc
+      duplicateSource: Item.MwYDaI9opLjPGaPA
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781620671847
+      modifiedTime: 1781620671847
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!7vswgicsiMfS4ZTS.8aBI5knFgJjHMTBr'
+  - _id: wpjVwZ9oJcl07bYG
     name: Tail
     type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    img: icons/creatures/abilities/tail-swipe-green.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Adult Brass Dragon attacks with its Tail.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -1314,7 +1151,6 @@ items:
         value: 0
         denomination: gp
       attunement: ''
-      equipped: true
       rarity: ''
       identified: true
       cover: null
@@ -1361,17 +1197,15 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
         value: natural
         baseItem: ''
       container: null
-      crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        RceN2X8wNhuTxjLr:
           type: attack
           activation:
             type: action
@@ -1386,10 +1220,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1406,9 +1241,10 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
+              count: '1'
               type: ''
               choice: false
               special: ''
@@ -1419,49 +1255,79 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-      attuned: false
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: RceN2X8wNhuTxjLr
+          name: ''
       ammunition: {}
-      magicalBonus: null
       identifier: tail
+      mastery: ''
+      crew:
+        value: []
+      attuned: false
+      equipped: true
     effects: []
-    folder: null
-    sort: 400000
+    folder: 5cwqjeuI64dkrUa8
+    sort: 350000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.t9FrDQLVCU8x4obw
+      duplicateSource: Item.bz6wDllAaYd7bwWv
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450846430
+      systemVersion: 6.0.0
+      createdTime: 1781620764932
+      modifiedTime: 1781620765977
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.rR1dMvZqWVQTgCVw'
-  - _id: StCQbn2czecQteRM
-    name: Tail Attack
-    type: weapon
-    img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
+    _key: '!actors.items!7vswgicsiMfS4ZTS.wpjVwZ9oJcl07bYG'
+  - _id: XyhdTtNxXj219dlP
+    name: Frightful Presence
+    type: feat
+    img: icons/creatures/reptiles/dragon-horned-blue.webp
     system:
       description:
-        value: <p>The dragon makes a [[/item .rR1dMvZqWVQTgCVw]]{tail} attack.</p>
-        chat: <p>The dragon slams its long tail against its foe!</p>
+        value: >-
+          <p>Each creature of the [[lookup @name lowercase]]{monster}'s choice
+          that is within [[lookup @labels.description.range
+          activity=2VOmvThI0bGdUsMt]] of the dragon and aware of it must succeed
+          on a [[/save]] saving throw or become &amp;Reference[frightened] for
+          [[lookup @labels.duration activity=2VOmvThI0bGdUsMt]].</p><p>A
+          creature can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success. If a creature's saving throw
+          is successful or the effect ends for it, the creature is immune to the
+          [[lookup @name lowercase]]{monster}'s [[lookup @item.name]] for the
+          next 24 hours.</p>
+        chat: >-
+          <p>Each creature of the [[lookup @name]]{monster}'s choice that is
+          within [[lookup @labels.description.range activity=2VOmvThI0bGdUsMt]]
+          of the [[lookup @name]]{monster} and aware of it must succeed on a
+          Wisdom saving throw. A creature can repeat the saving throw at the end
+          of each of its turns.</p>
       source:
         custom: ''
         book: ''
@@ -1469,74 +1335,20 @@ items:
         license: CC-BY-4.0
         rules: '2014'
         revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: null
-        long: null
-        units: ''
-        reach: null
       uses:
         max: ''
         recovery: []
         spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: 2
-          denomination: 8
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
       type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
+        2VOmvThI0bGdUsMt:
+          type: save
           activation:
-            type: legendary
+            type: action
             value: 1
             condition: ''
             override: false
@@ -1548,15 +1360,22 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
-            value: ''
-            units: ''
+            value: '1'
+            units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: JG2uXIqEJlTnRHpq
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
-            units: ''
+            value: '120'
+            units: ft
             special: ''
             override: false
           target:
@@ -1567,10 +1386,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: any
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1579,246 +1399,121 @@ items:
             spent: 0
             max: ''
             recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
           damage:
-            critical:
-              bonus: ''
-            includeBase: true
+            onSave: none
             parts: []
-          sort: 0
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
-      identifier: tail-attack
-      mastery: ''
-    effects: []
-    folder: null
-    sort: 100000
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745450974418
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.StCQbn2czecQteRM'
-  - _id: Ge1y4jlE3zGCsy6K
-    name: Wing Attack
-    type: weapon
-    img: icons/creatures/abilities/wing-batlike-white-blue.webp
-    system:
-      description:
-        value: "<p>The dragon beats its wings. Each creature within\_10 feet of the dragon must succeed on a\_[[/save]] saving throw\_or take\_[[/damage average]]\_damage and be knocked &amp;Reference[prone]. The dragon can then fly up to half its flying speed.</p>"
-        chat: |-
-          <section>
-
-          </section>
-          <p>The dragon beats its wings!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: null
-        long: null
-        units: ''
-        reach: null
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: 2
-          denomination: 6
-          bonus: ''
-          types:
-            - bludgeoning
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
-      type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: legendary
-            value: 2
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                value: '2'
-                target: resources.legact.value
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: radius
-              size: '10'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 2
-                denomination: '6'
-                bonus: '@mod'
-                types:
-                  - bludgeoning
           save:
-            ability: dex
+            ability:
+              - wis
             dc:
-              calculation: str
-              formula: '19'
-          sort: 0
-          name: ''
+              calculation: cha
+              formula: '16'
+            visible: true
+            bonus: ''
+          sort: 100000
+          name: Fear Save
           img: ''
-          appliedEffects: []
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
-      identifier: wing-attack
-      mastery: ''
-    effects: []
-    folder: null
-    sort: 300000
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 2VOmvThI0bGdUsMt
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: frightful-presence
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Frightful Presence
+        img: icons/creatures/reptiles/dragon-horned-blue.webp
+        origin: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.A3azHlbNcHLRgogu
+        transfer: false
+        _id: JG2uXIqEJlTnRHpq
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[frightened apply=false] for 1
+          minute.</p><p>You can repeat the saving throw at the end of each of
+          your turns, ending the effect on yourself on a success. If your saving
+          throw is successful or the effect ends for you, you are immune to the
+          dragon's Frightful Presence for the next 24 hours.</p>
+        tint: '#ffffff'
+        statuses:
+          - frightened
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781620771093
+          modifiedTime: 1781620771093
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!7vswgicsiMfS4ZTS.XyhdTtNxXj219dlP.JG2uXIqEJlTnRHpq
+    folder: 5cwqjeuI64dkrUa8
+    sort: 400000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.A3azHlbNcHLRgogu
+      duplicateSource: Item.MsuiWclOG7d6FE0U
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745453136989
+      systemVersion: 6.0.0
+      createdTime: 1781620771093
+      modifiedTime: 1781631945275
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.Ge1y4jlE3zGCsy6K'
-  - _id: asAmhLPOTnfZhb5I
+    _key: '!actors.items!7vswgicsiMfS4ZTS.XyhdTtNxXj219dlP'
+  - _id: bylvyjev8yh0oVj6
     name: Breath Weapons
     type: feat
     img: icons/creatures/abilities/dragon-fire-breath-orange.webp
     system:
       description:
         value: >-
-          <p>The dragon uses one of the following breath
-          weapons.</p><p><strong>Fire Breath.</strong> The dragon exhales fire
-          in an 60-foot line that is 5 feet wide. Each creature in that line
-          must make a [[/save activity=1sMTs1dMXloeFhPm]] saving throw, taking
-          [[/damage average activity=1sMTs1dMXloeFhPm]] damage on a failed save,
-          or half as much damage on a successful one.</p><p><strong>Sleep
-          Breath.</strong> The dragon exhales sleep gas in a 60-foot cone. Each
+          <p>The [[lookup @name lowercase]]{monster} uses one of the following
+          breath weapons.</p><p><strong>Fire Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales fire in an [[lookup
+          @labels.description.template activity=NBdXGRF1vahbq4p8]]. Each
+          creature in that line must make a [[/save activity=NBdXGRF1vahbq4p8]]
+          saving throw, taking [[/damage average activity=NBdXGRF1vahbq4p8]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p><p><strong>Sleep Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales sleep gas in a [[lookup
+          @labels.description.template activity=O02zuaLvAqtmgutQ]]. Each
           creature in that area must succeed on a [[/save
-          activity=FogutuTRCMsfoCAT]] saving throw or fall
-          &amp;Reference[unconscious] for 10 minutes. This effect ends for a
-          creature if the creature takes damage or someone uses an action to
-          wake it.</p>
-        chat: <p>The dragon breathes in!</p>
+          activity=O02zuaLvAqtmgutQ]] saving throw or fall
+          &amp;Reference[unconscious] for [[lookup @labels.duration
+          activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if the
+          creature takes damage or someone uses an action to wake it.</p>
+        chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
         book: ''
@@ -1834,12 +1529,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        1sMTs1dMXloeFhPm:
+        NBdXGRF1vahbq4p8:
           type: save
           activation:
             type: action
@@ -1851,12 +1546,20 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales fire in an
+              [[lookup @labels.description.template activity=NBdXGRF1vahbq4p8]].
+              Each creature in that line must make a [[/save
+              activity=NBdXGRF1vahbq4p8]] saving throw, taking [[/damage average
+              activity=NBdXGRF1vahbq4p8]] damage on a failed save, or half as
+              much damage on a successful one.</p>
           duration:
             concentration: false
             value: ''
@@ -1874,12 +1577,13 @@ items:
               contiguous: false
               type: line
               size: '60'
-              width: ''
+              width: '5'
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1895,22 +1599,34 @@ items:
                   enabled: false
                   formula: ''
                 number: 13
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - fire
+                scaling:
+                  number: 1
           save:
             ability:
               - dex
             dc:
-              calculation: ''
-              formula: '18'
+              calculation: con
+              formula: '11'
+            bonus: ''
+            visible: true
           sort: 0
-          _id: 1sMTs1dMXloeFhPm
+          _id: NBdXGRF1vahbq4p8
           name: Fire Breath
           img: ''
-          appliedEffects: []
-        FogutuTRCMsfoCAT:
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+        O02zuaLvAqtmgutQ:
           type: save
           activation:
             type: action
@@ -1922,19 +1638,34 @@ items:
               - type: itemUses
                 value: '1'
                 target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales sleep gas in a
+              [[lookup @labels.description.template activity=O02zuaLvAqtmgutQ]].
+              Each creature in that area must succeed on a [[/save
+              activity=O02zuaLvAqtmgutQ]] saving throw or fall
+              &amp;Reference[unconscious] for [[lookup @labels.duration
+              activity=O02zuaLvAqtmgutQ]]. This effect ends for a creature if
+              the creature takes damage or someone uses an action to wake
+              it.</p>
           duration:
             concentration: false
             value: '10'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: P1rGrKiV7x2OMiN0
+              onSave: false
+              level:
+                min: null
+                max: null
           range:
             units: self
             special: ''
@@ -1948,9 +1679,385 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: con
+              formula: '11'
+            bonus: ''
+            visible: true
+          sort: 0
+          _id: O02zuaLvAqtmgutQ
+          name: Sleep Breath
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: breath-weapons
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Sleep Breath
+        img: icons/magic/control/sleep-bubble-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.azCbLQt5LAYwTI7U.Item.JmVLjWM4G6OOQxl4
+        transfer: false
+        _id: P1rGrKiV7x2OMiN0
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 10
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[unconcious apply=false] for 10 minutes. This
+          effect ends for you when you take damage or when someone uses and
+          action to wake you.</p>
+        tint: '#ffffff'
+        statuses:
+          - unconscious
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781620775166
+          modifiedTime: 1781621233594
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!7vswgicsiMfS4ZTS.bylvyjev8yh0oVj6.P1rGrKiV7x2OMiN0
+    folder: null
+    sort: 500000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781620775166
+      modifiedTime: 1781631812013
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!7vswgicsiMfS4ZTS.bylvyjev8yh0oVj6'
+  - _id: U9WqW9QBVAUjz5ii
+    name: Detect
+    type: feat
+    img: icons/creatures/eyes/lizard-single-slit-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes a Wisdom (Perception)
+          check.</p>
+        chat: <p>The [[lookup @name]]{monster} watches its surrounding...</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        efOEi8J50goW5M9v:
+          type: check
+          name: Look Around
+          _id: efOEi8J50goW5M9v
+          img: ''
+          sort: 100000
+          activation:
+            type: legendary
+            override: false
+            value: 1
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
               type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          check:
+            associated:
+              - prc
+            dc:
+              calculation: ''
+              formula: ''
+            visible: true
+            ability: ''
+            bonus: ''
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: detect
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.RnqMV5Ur5n9S3wIt
+      duplicateSource: Item.oTLqdQ8KvIfo9Fbc
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781620852169
+      modifiedTime: 1781620852169
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!7vswgicsiMfS4ZTS.U9WqW9QBVAUjz5ii'
+  - name: Tail Attack
+    type: feat
+    _id: 6HbC9df2Q4N6U2Ev
+    img: icons/creatures/abilities/tail-strike-bone-orange.webp
+    system:
+      activities:
+        bH5x9SlFErQaWMuP:
+          type: utility
+          activation:
+            type: legendary
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: bH5x9SlFErQaWMuP
+          name: Swing Tail
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      advancement: {}
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes a [[/item
+          .wpjVwZ9oJcl07bYG]]{tail} attack.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} slams its long tail against its
+          foe!</p>
+      identifier: tail-attack
+      source:
+        revision: 1
+        rules: '2014'
+      crewed: false
+      enchant: {}
+      prerequisites:
+        items: []
+        repeatable: false
+        level: null
+      properties: []
+      requirements: ''
+      type:
+        value: monster
+        subtype: ''
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 250000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781620853178
+      modifiedTime: 1783370840577
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.iXsGJD1VHeJYYSev
+      duplicateSource: Item.MNSBoigqkD6fGpA2
+      exportSource: null
+    _key: '!actors.items!7vswgicsiMfS4ZTS.6HbC9df2Q4N6U2Ev'
+  - name: Wing Attack
+    type: feat
+    _id: oKHKm9QeOQCdWI8x
+    img: icons/creatures/abilities/wings-birdlike-blue.webp
+    system:
+      activities:
+        4U3711rd7WmlJIhy:
+          type: save
+          activation:
+            type: legendary
+            value: 2
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: any
+              stationary: false
+            affects:
+              count: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1961,43 +2068,84 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts: []
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 6
+                bonus: '@mod'
+                types:
+                  - bludgeoning
+                scaling:
+                  number: 1
           save:
             ability:
-              - con
+              - dex
             dc:
-              calculation: ''
+              calculation: str
               formula: '18'
+            visible: true
+            bonus: ''
           sort: 0
-          _id: FogutuTRCMsfoCAT
-          name: Sleep Breath
+          name: Flap Wings
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 4U3711rd7WmlJIhy
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      advancement: {}
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} beats its wings. Each
+          creature within [[lookup @labels.description.range
+          activity=4U3711rd7WmlJIhy]] of the [[lookup @name lowercase]]{monster}
+          must succeed on a [[/save]] saving throw or take [[/damage average]]
+          damage and be knocked &amp;Reference[prone]. The [[lookup @name
+          lowercase]]{monster} can then fly up to half its flying speed.</p>
+        chat: <p>The [[lookup @name]]{monster} beats its wings!</p>
+      identifier: wing-attack
+      source:
+        revision: 1
+        rules: '2014'
+      crewed: false
       enchant: {}
       prerequisites:
+        items: []
+        repeatable: false
         level: null
-      identifier: breath-weapons
+      properties: []
+      requirements: ''
+      type:
+        value: monster
+        subtype: ''
     effects: []
-    folder: null
-    sort: 475000
+    folder: 5cwqjeuI64dkrUa8
+    sort: 275000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745451222754
+      systemVersion: 6.0.0
+      createdTime: 1781620854729
+      modifiedTime: 1781620855660
       lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.iUiQzMwuCHfvZMPB
+      duplicateSource: Item.FGCzDDxM3wgj2EUY
       exportSource: null
-    _key: '!actors.items!7vswgicsiMfS4ZTS.asAmhLPOTnfZhb5I'
+    _key: '!actors.items!7vswgicsiMfS4ZTS.oKHKm9QeOQCdWI8x'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -2006,7 +2154,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171206347

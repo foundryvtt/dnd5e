@@ -35,7 +35,7 @@ export default class SpellsUnlinkedConfig extends DocumentSheet5e {
 
   /** @inheritDoc */
   get title() {
-    return game.i18n.localize("JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Configuration");
+    return _loc("JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Configuration");
   }
 
   /* -------------------------------------------- */

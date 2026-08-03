@@ -1,7 +1,8 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
 import BasicDie from "./basic-die.mjs";
+import simplifyRollFormula from "./simplify-roll-formula.mjs";
 
-const { DiceTerm, NumericTerm } = foundry.dice.terms;
+const { DiceTerm, NumericTerm, PoolTerm } = foundry.dice.terms;
 
 /**
  * @import {
@@ -121,8 +122,8 @@ export default class BasicRoll extends Roll {
     }
 
     // Store the roll type in roll.options so it can be accessed from only the roll
-    const rollType = foundry.utils.getProperty(message, "data.flags.dnd5e.roll.type");
-    if ( rollType ) rolls.forEach(roll => roll.options.rollType ??= rollType);
+    const rollType = foundry.utils.getProperty(message, "data.type");
+    if ( rollType && (rollType !== "base") ) rolls.forEach(roll => roll.options.rollType ??= rollType);
 
     /**
      * A hook event that fires after roll configuration is complete, but before the roll is evaluated.
@@ -170,8 +171,14 @@ export default class BasicRoll extends Roll {
    */
   static async buildPost(rolls, config, message) {
     message.data = foundry.utils.expandObject(message.data ?? {});
-    const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
+    const messageId = config.event?.target?.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
+
+    // Attack & Damage store originatingMessage directly on message.data and do not have a config.event. We retrieve
+    // those here.
+    const originatingMessage = foundry.utils.getProperty(message.data, "flags.dnd5e.originatingMessage");
+    // Store in roll options so that it can be serialized.
+    if ( originatingMessage ) rolls?.forEach(r => r.options.originatingMessage ??= originatingMessage);
 
     if ( rolls?.length && (config.evaluate !== false) ) {
       message[message.create !== false ? "document" : "data"] = await this.toMessage(
@@ -197,6 +204,16 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the chat message that originated this roll (e.g. the item card that triggered it), if any.
+   * @returns {ChatMessage5e|null}
+   */
+  getOriginatingMessage() {
+    return game.messages.get(this.options.originatingMessage) ?? null;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -232,7 +249,7 @@ export default class BasicRoll extends Roll {
    * @param {BasicRoll[]} rolls              Rolls to add to the message.
    * @param {object} messageData             The data object to use when creating the message.
    * @param {options} [options]              Additional options which modify the created message.
-   * @param {string} [options.rollMode]      The template roll mode to use for the message from CONFIG.Dice.rollModes
+   * @param {string} [options.rollMode]      The roll mode to use for the message from `CONFIG.ChatMessage.modes`.
    * @param {boolean} [options.create=true]  Whether to automatically create the chat message, or only return the
    *                                         prepared chatData object.
    * @returns {Promise<ChatMessage|object>}  A promise which resolves to the created ChatMessage document if create is
@@ -255,9 +272,9 @@ export default class BasicRoll extends Roll {
     const msg = new cls(messageData);
 
     // Either create or return the data
-    if ( create ) return cls.create(msg.toObject(), { rollMode });
+    if ( create ) return cls.create(msg.toObject(), { messageMode: rollMode });
     else {
-      if ( rollMode ) msg.applyRollMode(rollMode);
+      if ( rollMode ) msg.applyMode(rollMode);
       return msg.toObject();
     }
   }
@@ -271,6 +288,17 @@ export default class BasicRoll extends Roll {
    * @protected
    */
   static _prepareMessageData(rolls, messageData) {}
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getTooltip() {
+    const constant = Number(simplifyRollFormula(this._formula, { deterministic: true }));
+    return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, {
+      constant: constant || null,
+      parts: this.dice.map(d => d.getTooltipData())
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Evaluate Methods                            */
@@ -349,16 +377,16 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Replaces all dice terms that have modifiers with their maximum/minimum value.
-   *
+   * Replaces all dice or pool terms that have modifiers with their maximum/minimum value.
    * @param {object} [options={}]            Extra optional arguments which describe or modify the BasicRoll.
    */
   preCalculateDiceTerms(options={}) {
     if ( this._evaluated || (!options.maximize && !options.minimize) ) return;
     this.terms = this.terms.map(term => {
-      if ( (term instanceof DiceTerm) && term.modifiers.length ) {
+      if ( (term instanceof DiceTerm || term instanceof PoolTerm) && term.modifiers.length ) {
         const minimize = !options.maximize;
-        const number = this.constructor.preCalculateTerm(term, { minimize });
+        const fn = term instanceof DiceTerm ? "preCalculateTerm" : "preCalculatePoolTerm";
+        const number = this.constructor[fn](term, { minimize });
         if ( Number.isFinite(number) ) return new NumericTerm({ number, options: term.options });
       }
       return term;
@@ -368,43 +396,62 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
-   * Gets information from passed die and calculates the maximum or minimum value that could be rolled.
-   *
-   * @param {DiceTerm} die                            DiceTerm to get the maximum/minimum value.
-   * @param {object} [preCalculateOptions={}]         Additional options to modify preCalculate functionality.
-   * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
-   * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
-   *                                                        null if the modifiers could not be precalculated.
+   * Synchronously apply a term's result-selection modifiers to its already-populated results by dispatching to the
+   * term's own modifier handlers. Asynchronous handlers are skipped, as they cannot be awaited on this synchronous
+   * path. Reroll and advantage/disadvantage could not change a forced extreme in any case, but explosion could (its
+   * maximum is unbounded).
+   * @param {DiceTerm|PoolTerm} term  Term whose results have been populated with their maximum or minimum faces.
+   * @internal
    */
-  static preCalculateTerm(die, { minimize=false }={}) {
-    let face = minimize ? 1 : die.faces;
-    let number = die.number;
-    const currentModifiers = foundry.utils.deepClone(die.modifiers);
-    const keep = new Set(["k", "kh", "kl"]);
-    const drop = new Set(["d", "dh", "dl"]);
-    const validModifiers = new Set([...keep, ...drop, "max", "min"]);
-    let matchedModifier = false;
-
-    for ( const modifier of currentModifiers ) {
-      const rgx = /(m[ai][xn]|[kd][hl]?)(\d+)?/i;
-      const match = modifier.match(rgx);
-      if ( !match ) continue;
-      if ( match[0].length < match.input.length ) currentModifiers.push(match.input.slice(match[0].length));
-      let [, command, value] = match;
-      command = command.toLowerCase();
-      if ( !validModifiers.has(command) ) continue;
-
-      matchedModifier = true;
-      const amount = parseInt(value) || (command === "max" || command === "min" ? -1 : 1);
-      if ( amount > 0 ) {
-        if ( (command === "max" && minimize) || (command === "min" && !minimize) ) continue;
-        else if ( (command === "max" || command === "min") ) face = Math.min(die.faces, amount);
-        else if ( keep.has(command) ) number = Math.min(number, amount);
-        else if ( drop.has(command) ) number = Math.max(1, number - amount);
+  static _applyMaxMinModifiers(term) {
+    const cls = term.constructor;
+    const union = Object.keys(cls.MODIFIERS).sort((a, b) => b.length - a.length).join("|");
+    const pattern = new RegExp(`(${union})[^A-z\\s()+\\-*/]*`, "gi");
+    for ( const sequence of term.modifiers.map(m => m.toLowerCase()) ) {
+      for ( const [matched, command] of sequence.matchAll(pattern) ) {
+        let fn = cls.MODIFIERS[command];
+        if ( typeof fn === "string" ) fn = term[fn];
+        if ( (typeof fn === "function") && !(fn instanceof foundry.utils.AsyncFunction) ) fn.call(term, matched);
       }
     }
+  }
 
-    return matchedModifier ? face * number : null;
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the maximum or minimum value that could be rolled by a dice term, honoring all of its modifiers by
+   * populating its results with the extreme face value and then delegating to the term's real modifier handlers.
+   * @param {DiceTerm} die                                  DiceTerm to get the maximum/minimum value.
+   * @param {object} [preCalculateOptions={}]               Additional options to modify preCalculate functionality.
+   * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
+   * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
+   *                                                        null if the term could not be precalculated.
+   */
+  static preCalculateTerm(die, { minimize=false }={}) {
+    if ( !die.modifiers.length || !Number.isFinite(die.number) || !Number.isFinite(die.faces) ) return null;
+    for ( let n = die.results.length; n < Math.abs(die.number); n++ ) {
+      die.results.push({ active: true, result: minimize ? Math.min(1, die.faces) : die.faces });
+    }
+    die._evaluated = true;
+    this._applyMaxMinModifiers(die);
+    return die.total;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the maximum or minimum value that could be rolled by a pool term, honoring all of its modifiers by
+   * evaluating the pool at its extreme and then delegating to the term's real modifier handlers.
+   * @param {PoolTerm} pool                                 PoolTerm to get the maximum/minimum value.
+   * @param {object} [preCalculateOptions={}]               Additional options to modify preCalculate functionality.
+   * @param {boolean} [preCalculateOptions.minimize=false]  Calculate the minimum value instead of the maximum.
+   * @returns {number|null}                                 Maximum/Minimum value that could be rolled as an integer, or
+   *                                                        null if the term could not be precalculated.
+   */
+  static preCalculatePoolTerm(pool, { minimize=false }={}) {
+    pool.evaluate({ maximize: !minimize, minimize });
+    this._applyMaxMinModifiers(pool);
+    return pool.total;
   }
 
   /* -------------------------------------------- */
@@ -438,7 +485,7 @@ export default class BasicRoll extends Roll {
    * @returns {string}}
    */
   static getMessageMode(ignoreIC=true) {
-    const mode = game.settings.get("core", game.release.generation < 14 ? "rollMode" : "messageMode");
+    const mode = game.settings.get("core", "messageMode");
     return ignoreIC && (mode === "ic") ? "public" : mode;
   }
 

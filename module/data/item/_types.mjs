@@ -77,6 +77,7 @@
  * @property {number} progress.value                 The number of days' progress made towards completing the order.
  * @property {number} progress.max                   The number of days required to complete the order.
  * @property {string} progress.order                 The order that is currently being executed.
+ * @property {boolean} progress.paid                 Whether the gold cost of the current order has been paid.
  * @property {string} size                           The size category of the facility.
  * @property {object} trade
  * @property {FacilityOccupants} trade.creatures     The trade facility's stocked creatures.
@@ -123,7 +124,7 @@
 
 /**
  * @typedef RaceItemSystemData
- * @property {Omit<MovementData, "special">} movement
+ * @property {Omit<MovementData, "bonus"|"multiplier"|"special">} movement
  * @property {SensesData} senses
  * @property {Omit<CreatureTypeData, "swarm">} type
  */

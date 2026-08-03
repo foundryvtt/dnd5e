@@ -26,7 +26,7 @@ export default class SpellSlotsConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.SpellSlotsConfig");
+    return _loc("DND5E.SpellSlotsConfig");
   }
 
   /* -------------------------------------------- */
@@ -58,7 +58,7 @@ export default class SpellSlotsConfig extends BaseConfigSheet {
         arr.push({
           value,
           label: model.isSingleLevel
-            ? game.i18n.localize(`DND5E.SPELLCASTING.METHODS.${method.capitalize()}.abbr`)
+            ? _loc(`DND5E.SPELLCASTING.METHODS.${method.capitalize()}.abbr`)
             : model.getLabel({ level: i }),
           name: `system.spells.${key}.override`,
           placeholder: spells[key]?.max ?? 0

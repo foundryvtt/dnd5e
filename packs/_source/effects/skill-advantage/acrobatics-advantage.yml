@@ -1,0 +1,36 @@
+folder: iDHeF0EnK8tpVcgP
+name: Acrobatics Advantage
+type: base
+img: icons/equipment/feet/shoes-simple-leaf-green.webp
+system:
+  changes:
+    - key: system.skills.acr.roll.mode
+      type: add
+      value: 1
+      phase: initial
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.354'
+  systemId: dnd5e
+  systemVersion: 5.3.0
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+  createdTime: 1769816839348
+  modifiedTime: 1769816839348
+_id: UaSY9DRoZqru3Sj7
+_key: '!effects!UaSY9DRoZqru3Sj7'

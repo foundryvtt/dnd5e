@@ -126,17 +126,15 @@ effects:
     transfer: false
     _id: qwsSkmGQOC4YLbCy
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p><em>Source:
       @UUID[Compendium.dnd5e.equipment24.Item.dmgDmtRogue00000]{Rogue}</em></p><p>An
@@ -148,13 +146,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729202584655
-      modifiedTime: 1729202738666
+      modifiedTime: 1783544095045
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgDmtRogue00000.qwsSkmGQOC4YLbCy'
 sort: 700000
 ownership:
@@ -162,11 +163,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1729202479113
-  modifiedTime: 1764615932344
+  modifiedTime: 1783544095045
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmgDmtRogue00000'

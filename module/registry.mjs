@@ -5,6 +5,12 @@ import { formatIdentifier } from "./utils.mjs";
  * @import { RegisteredItemData } from "./_types.mjs";
  */
 
+const STATUS_STATES = Object.freeze({
+  NONE: 0,
+  LOADING: 1,
+  READY: 2
+});
+
 /* -------------------------------------------- */
 /*  Dependents                                  */
 /* -------------------------------------------- */
@@ -66,8 +72,7 @@ class DependentsRegistry {
   static track(idOrUuid, dependent) {
     const uuid = DependentsRegistry.#resolveDependentID(idOrUuid, dependent);
     if ( !uuid ) return;
-    if ( !DependentsRegistry.#dependents.has(uuid) ) DependentsRegistry.#dependents.set(uuid, new Set());
-    DependentsRegistry.#dependents.get(uuid).add(dependent.uuid);
+    DependentsRegistry.#dependents.getOrInsert(uuid, new Set()).add(dependent.uuid);
   }
 
   /* -------------------------------------------- */
@@ -123,10 +128,7 @@ class EnchantmentRegisty {
    */
   static track(source, enchanted) {
     if ( enchanted.startsWith("Compendium.") ) return;
-    if ( !EnchantmentRegisty.#appliedEnchantments.has(source) ) {
-      EnchantmentRegisty.#appliedEnchantments.set(source, new Set());
-    }
-    EnchantmentRegisty.#appliedEnchantments.get(source).add(enchanted);
+    EnchantmentRegisty.#appliedEnchantments.getOrInsert(source, new Set()).add(enchanted);
   }
 
   /* -------------------------------------------- */
@@ -155,10 +157,26 @@ class ItemRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Items grouped by identifiers.
-   * @type {Map<string, RegisteredItemData>}
+   * Item types that track icon and a list of sources in addition to the name and identifier.
+   * @type {Set<string>}
    */
-  #items = new Map();
+  static #extendedData = new Set(["background", "class", "race", "subclass"]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Core registry of item data, shared across types.
+   * @type {Map<string, Map<string, RegisteredItemData>>}
+   */
+  static #items = new Map([["*", new Map()]]);
+
+  /* -------------------------------------------- */
+
+  /**
+   * Has initial loading been completed?
+   * @type {number}
+   */
+  static #status = STATUS_STATES.NONE;
 
   /* -------------------------------------------- */
 
@@ -167,24 +185,6 @@ class ItemRegistry {
    * @type {string}
    */
   #itemType;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Has initial loading been completed?
-   * @type {number}
-   */
-  #status = ItemRegistry.#STATUS_STATES.NONE;
-
-  /**
-   * Possible preparation states for the item registry.
-   * @enum {number}
-   */
-  static #STATUS_STATES = Object.freeze({
-    NONE: 0,
-    LOADING: 1,
-    READY: 2
-  });
 
   /* -------------------------------------------- */
 
@@ -202,12 +202,46 @@ class ItemRegistry {
   /* -------------------------------------------- */
 
   /**
+   * Label for this item type.
+   * @type {string}
+   */
+  get label() {
+    let key = CONFIG.Item.typeLabels[this.#itemType];
+    if ( game.i18n.has(`${key}Pl`) ) key = `${key}Pl`;
+    return _loc(key);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * All items formatted for a select input.
+   * @type {Iterator<FormSelectOption>}
+   */
+  get #options() {
+    return (ItemRegistry.#items.get(this.#itemType)?.entries() ?? [].values())
+      .map(([value, data]) => ({ value, label: data.name }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * All items formatted for a select input.
    * @type {FormSelectOption[]}
    */
   get options() {
-    return Array.from(this.#items.entries())
-      .map(([value, data]) => ({ value, label: data.name }))
+    return this.#options.toArray()
+      .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * All items formatted for a select input with grouping.
+   * @type {FormSelectOption[]}
+   */
+  get groupedOptions() {
+    // TODO: Group subclasses by parent class
+    return this.#options.map(o => ({ ...o, group: this.label }))
       .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
   }
 
@@ -216,22 +250,38 @@ class ItemRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Get information on a single item based on its identifier.
-   * @param {string} identifier
+   * Get an item descriptor based on identifier. Accepts optional type as either separate option or using
+   * the colon-separated format (e.g. `spell:blade-ward`).
+   * @param {string} key             Identifier to find.
+   * @param {object} [options={}]
+   * @param {string} [options.type]  Type of items to check.
    * @returns {RegisteredItemData|void}
    */
-  get(identifier) {
-    return this.#items.get(identifier);
+  static get(key, { type }={}) {
+    if ( !key ) return;
+    if ( key.includes(":") && !type ) [type, key] = key.split(":", 2);
+    return this.#items.get(type ?? "*")?.get(key);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Scan compendium packs to register matching items of this type.
+   * Get information on a single item based on its identifier.
+   * @param {string} identifier
+   * @returns {RegisteredItemData|void}
    */
-  async initialize() {
-    if ( this.#status > ItemRegistry.#STATUS_STATES.NONE ) return;
-    RegistryStatus.set(this.#itemType, false);
+  get(identifier) {
+    return ItemRegistry.get(identifier, { type: this.#itemType });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Scan compendium packs to register item identifiers.
+   */
+  static async initialize() {
+    if ( this.#status > STATUS_STATES.NONE ) return;
+    RegistryStatus.set("items", false);
     if ( game.modules.get("babele")?.active && (game.babele?.initialized === false) ) {
       Hooks.once("babele.ready", () => this.initialize());
       return;
@@ -239,25 +289,30 @@ class ItemRegistry {
       Hooks.once("ready", () => this.initialize());
       return;
     }
-    this.#status = ItemRegistry.#STATUS_STATES.LOADING;
+    this.#status = STATUS_STATES.LOADING;
 
     const indexes = await CompendiumBrowser.fetch(Item, {
-      types: new Set([this.#itemType]),
       indexFields: new Set(["system.identifier", "system.source"]),
       sort: false
     });
     for ( const item of indexes ) {
-      const identifier = item.system?.identifier ?? formatIdentifier(item.name);
-      if ( !this.#items.has(identifier) ) this.#items.set(identifier, { sources: [] });
-      const itemData = this.#items.get(identifier);
-      itemData.name = item.name;
-      itemData.img = item.img;
-      itemData.identifier = identifier;
-      itemData.sources.push(item.uuid);
+      const identifier = item.system?.identifier || formatIdentifier(item.name);
+      const generalCollection = this.#items.get("*");
+      const typeCollection = this.#items.getOrInsert(item.type, new Map());
+      for ( const collection of [generalCollection, typeCollection] ) {
+        const itemData = collection.getOrInsert(identifier, {});
+        itemData.name = item.name;
+        itemData.identifier = identifier;
+        if ( this.#extendedData.has(item.type) ) {
+          itemData.img = item.img;
+          itemData.sources ??= [];
+          itemData.sources.push(item.uuid);
+        }
+      }
     }
 
-    this.#status = ItemRegistry.#STATUS_STATES.READY;
-    RegistryStatus.set(this.#itemType, true);
+    this.#status = STATUS_STATES.READY;
+    RegistryStatus.set("items", true);
   }
 }
 
@@ -267,8 +322,8 @@ class ItemRegistry {
 
 class MessageRegistry {
   /**
-   * Registration of roll chat messages that originated at a specific message. The map is keyed by the ID of
-   * the originating message and contains sets of IDs for each roll type.
+   * Registration of chat messages that originated at a specific message. The map is keyed by the ID of
+   * the originating message and contains sets of IDs for each message type.
    * @type {Map<string, Map<string, Set<string>>}
    */
   static #messages = new Map();
@@ -276,9 +331,9 @@ class MessageRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Fetch roll messages for an origin message, in chronological order.
+   * Fetch messages for an origin message, in chronological order.
    * @param {string} origin  ID of the origin message.
-   * @param {string} [type]  Type of roll messages to fetch.
+   * @param {string} [type]  Type of messages to fetch.
    * @returns {ChatMessage5e[]}
    */
   static get(origin, type) {
@@ -296,29 +351,27 @@ class MessageRegistry {
   /* -------------------------------------------- */
 
   /**
-   * Add a new roll message to the registry.
+   * Add a new message to the registry.
    * @param {ChatMessage5e} message  Message to add to the registry.
    */
   static track(message) {
     const origin = message.getFlag("dnd5e", "originatingMessage");
-    const type = message.getFlag("dnd5e", "roll.type");
-    if ( !origin || !type ) return;
-    if ( !MessageRegistry.#messages.has(origin) ) MessageRegistry.#messages.set(origin, new Map());
-    const originMap = MessageRegistry.#messages.get(origin);
-    if ( !originMap.has(type) ) originMap.set(type, new Set());
-    originMap.get(type).add(message.id);
+    const type = message.type;
+    if ( !origin || (type === "base") ) return;
+    MessageRegistry.#messages
+      .getOrInsert(origin, new Map())
+      .getOrInsert(type, new Set()).add(message.id);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Remove a roll message to the registry.
+   * Remove a message from the registry.
    * @param {ChatMessage5e} message  Message to remove from the registry.
    */
   static untrack(message) {
     const origin = message.getFlag("dnd5e", "originatingMessage");
-    const type = message.getFlag("dnd5e", "roll.type");
-    MessageRegistry.#messages.get(origin)?.get(type)?.delete(message.id);
+    MessageRegistry.#messages.get(origin)?.get(message.type)?.delete(message.id);
   }
 }
 
@@ -428,17 +481,13 @@ class SpellListRegistry {
     if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
     if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
 
-    if ( !SpellListRegistry.#byType.has(page.system.type) ) SpellListRegistry.#byType.set(page.system.type, new Map());
-
-    const type = SpellListRegistry.#byType.get(page.system.type);
-    if ( !type.has(page.system.identifier) ) type.set(page.system.identifier, new SpellList({
-      identifier: page.system.identifier, name: page.name, type: page.system.type
-    }));
-
-    const list = type.get(page.system.identifier);
+    const list = SpellListRegistry.#byType
+      .getOrInsert(page.system.type, new Map())
+      .getOrInsertComputed(page.system.identifier, () => new SpellList({
+        identifier: page.system.identifier, name: page.name, type: page.system.type
+      }));
     await Promise.all(Array.from(list.contribute(page)).map(async uuid => {
-      if ( !SpellListRegistry.#bySpell.has(uuid) ) SpellListRegistry.#bySpell.set(uuid, new Set());
-      SpellListRegistry.#bySpell.get(uuid).add(list);
+      SpellListRegistry.#bySpell.getOrInsert(uuid, new Set()).add(list);
       const { collection } = foundry.utils.parseUuid(uuid);
       if ( (collection instanceof foundry.documents.collections.CompendiumCollection)
         && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
@@ -469,7 +518,9 @@ export class SpellList {
    * @enum {string}
    */
   static #REGISTRIES = {
+    background: "backgrounds",
     class: "classes",
+    race: "species",
     subclass: "subclasses"
   };
 
@@ -639,10 +690,7 @@ class SummonRegistry {
    */
   static track(summoner, summoned) {
     if ( summoned.startsWith("Compendium.") ) return;
-    if ( !SummonRegistry.#creatures.has(summoner) ) {
-      SummonRegistry.#creatures.set(summoner, new Set());
-    }
-    SummonRegistry.#creatures.get(summoner).add(summoned);
+    SummonRegistry.#creatures.getOrInsert(summoner, new Set()).add(summoned);
   }
 
   /* -------------------------------------------- */
@@ -712,11 +760,14 @@ const RegistryStatus = new class extends Map {
 /* -------------------------------------------- */
 
 export default {
+  backgrounds: new ItemRegistry("background"),
   classes: new ItemRegistry("class"),
   dependents: DependentsRegistry,
   enchantments: EnchantmentRegisty,
+  items: ItemRegistry,
   messages: MessageRegistry,
   ready: RegistryStatus.ready,
+  species: new ItemRegistry("race"),
   spellLists: SpellListRegistry,
   subclasses: new ItemRegistry("subclass"),
   summons: SummonRegistry

@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,6 +478,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
   - _id: PZWkwOa8C0Y2tSCR
     name: Beak
@@ -489,7 +487,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Roc attacks with its Beak.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -553,7 +553,7 @@ items:
         conditions: ''
       properties:
         - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -562,8 +562,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        m936JSwkd0zIbX5l:
           type: attack
           activation:
             type: action
@@ -578,10 +577,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -598,7 +598,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -611,24 +612,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: m936JSwkd0zIbX5l
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: beak
+      mastery: ''
     effects: []
     folder: null
     sort: 250000
@@ -638,62 +652,14 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765826597748
+      systemVersion: 6.0.0
+      createdTime: 1781865652281
+      modifiedTime: 1781876246438
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!p980augbCIdpK9ZX.PZWkwOa8C0Y2tSCR'
-  - _id: 1Ocl9VqVtWFu97Ua
-    name: Keen Sight
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The roc has advantage on Wisdom (Perception) checks that rely on
-          sight.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-sight
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765826594993
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!p980augbCIdpK9ZX.1Ocl9VqVtWFu97Ua'
   - _id: s5X12Eygxcpzd9eM
     name: Multiattack
     type: feat
@@ -701,8 +667,8 @@ items:
     system:
       description:
         value: >-
-          <p>The roc makes two attacks: one with its [[/item
-          .PZWkwOa8C0Y2tSCR]]{beak} and one with its [[/item
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks: one with
+          its [[/item .PZWkwOa8C0Y2tSCR]]{beak} and one with its [[/item
           .XMiiDwLIMYWFqxyv]]{talons}.</p>
         chat: ''
       source:
@@ -717,13 +683,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        KRC2wDcSFicoiNkQ:
           type: utility
           activation:
             type: action
@@ -738,15 +703,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -757,7 +723,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -774,7 +741,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: KRC2wDcSFicoiNkQ
       enchant: {}
       prerequisites:
         level: null
@@ -788,28 +763,32 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765826597035
+      systemVersion: 6.0.0
+      createdTime: 1781865682101
+      modifiedTime: 1783366481409
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!p980augbCIdpK9ZX.s5X12Eygxcpzd9eM'
   - _id: XMiiDwLIMYWFqxyv
     name: Talons
     type: weapon
-    img: icons/creatures/claws/claw-scaled-red.webp
+    img: icons/commodities/claws/claw-bird-pink.webp
     system:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
-          grappled (escape DC 19). Until this grapple ends, the target is
-          restrained, and the roc can't use its talons on another target.</p>
+          &amp;reference[grappled] (escape DC 19). Until this grapple ends, the
+          target is &amp;reference[restrained], and the [[lookup @name
+          lowercase]]{monster} can't use its [[lookup @item.name lowercase]] on
+          another target.</p>
         chat: >-
-          <p>The Roc attacks with its Talons. The target is grappled. Until this
-          grapple ends, the target is restrained, and the roc can't use its
-          talons on another target.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled]. Until this
+          grapple ends, the target is &amp;reference[restrained], and the
+          [[lookup @name]]{monster} can't use its [[lookup @item.name
+          lowercase]] on another target.</p>
       source:
         custom: ''
         book: ''
@@ -881,8 +860,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        NAV9V7Jt3KY9qYqQ:
           type: attack
           activation:
             type: action
@@ -897,13 +875,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: Od8t9xIH6JmByqGr
+              level: {}
           range:
             value: '5'
             units: ft
@@ -917,7 +898,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -930,25 +912,80 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: NAV9V7Jt3KY9qYqQ
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: talons
-    effects: []
+      mastery: ''
+    effects:
+      - name: Grappled by Talons
+        img: icons/commodities/claws/claw-bird-pink.webp
+        origin: Compendium.dnd5e.monsters.Actor.p980augbCIdpK9ZX.Item.XMiiDwLIMYWFqxyv
+        transfer: false
+        _id: Od8t9xIH6JmByqGr
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You are &amp;reference[grappled apply=false] (escape DC 19). While
+          grapple din this way, you are also &amp;reference[restrained
+          apply=false].</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+          - restrained
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781865597337
+          modifiedTime: 1781865645387
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!p980augbCIdpK9ZX.XMiiDwLIMYWFqxyv.Od8t9xIH6JmByqGr
     folder: null
     sort: 300000
     ownership:
@@ -957,14 +994,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1765826597035
+      systemVersion: 6.0.0
+      createdTime: 1781865522841
+      modifiedTime: 1781876242170
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!p980augbCIdpK9ZX.XMiiDwLIMYWFqxyv'
+  - _id: QUuAaelfunY7fGhp
+    name: Keen Sight
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on sight.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-sight
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.AJiJW7K957aJJCN6.Item.TePImx0XTnaVC3HB
+      duplicateSource: Item.9c2KMzJlW3pdb8hy
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781865762226
+      modifiedTime: 1781865762226
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!p980augbCIdpK9ZX.QUuAaelfunY7fGhp'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -973,7 +1063,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171258066

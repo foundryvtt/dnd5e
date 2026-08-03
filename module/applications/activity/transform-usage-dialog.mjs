@@ -34,10 +34,13 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
       let options = profiles.map(profile => ({
         value: profile._id, label: this.getProfileLabel(profile, rollData)
       }));
+      if ( (this.activity.transform.mode === "form") && this.activity.transform.formless ) options.unshift({
+        value: "", label: _loc("DND5E.TRANSFORM.NoForm"), rule: true
+      });
       context.hasCreation = true;
       context.transformFields = [{
         field: new StringField({
-          required: true, blank: false, label: game.i18n.localize("DND5E.TRANSFORM.Profile.Label")
+          required: true, blank: false, label: _loc("DND5E.TRANSFORM.Profile.Label")
         }),
         name: "transform.profile",
         value: this.config.transform?.profile,
@@ -54,8 +57,8 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
 
   /**
    * Determine the label for a profile in the ability use dialog.
-   * @param {SummonsProfile} profile     Profile for which to generate the label.
-   * @param {ActivityRollData} rollData  Roll data used to prepare the count.
+   * @param {EffectApplicationData|TransformProfile} profile  Profile for which to generate the label.
+   * @param {ActivityRollData} rollData                       Roll data used to prepare the count.
    * @returns {string}
    */
   getProfileLabel(profile, rollData) {
@@ -63,7 +66,11 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
     switch ( this.activity.transform.mode ) {
       case "cr":
         const cr = simplifyBonus(profile.cr, rollData);
-        return game.i18n.format("DND5E.TRANSFORM.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+        return _loc("DND5E.TRANSFORM.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+      case "form":
+        const effect = profile.getEffect();
+        if ( effect ) return effect.name;
+        break;
       default:
         const doc = fromUuidSync(profile.uuid);
         if ( doc ) return doc.name;

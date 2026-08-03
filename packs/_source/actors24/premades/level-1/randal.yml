@@ -509,12 +509,9 @@ prototypeToken:
     src: systems/dnd5e/icons/svg/actors/character.svg
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -558,7 +555,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -580,6 +577,7 @@ prototypeToken:
   randomImg: false
   appendNumber: false
   prependAdjective: false
+  depth: 1
 items:
   - name: Soldier
     system:
@@ -774,10 +772,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbbgSoldier0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.WtW4C15JW74zrx7Y'
@@ -828,10 +828,12 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbftSavageAttac
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.koSfOJmbYfPmiFzZ'
@@ -970,10 +972,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbspHuman000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -1020,10 +1024,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptResourcefu
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 100000
     ownership:
       default: 0
@@ -1074,10 +1080,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptSkillful00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 200000
     ownership:
       default: 0
@@ -1131,10 +1139,12 @@ items:
       compendiumSource: Compendium.dnd5e.origins24.Item.phbsptVersatile0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 150000
     ownership:
       default: 0
@@ -1207,10 +1217,12 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbftSkilled0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.YT6kgAKAefkllIKx'
@@ -2006,10 +2018,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbftrFighter000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -2066,10 +2080,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbftrFightingSt
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -2201,10 +2217,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbftrSecondWind
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -2268,10 +2286,12 @@ items:
       compendiumSource: Compendium.dnd5e.classes24.Item.phbftrWeaponMast
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     sort: 0
     ownership:
       default: 0
@@ -2320,21 +2340,20 @@ items:
         img: icons/equipment/chest/breastplate-gorget-steel.webp
         _id: W0ObItz7sS8ZJ09Y
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.ac.bonus
-            mode: 2
-            value: '1'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              value: 1
+              priority: null
+              type: add
+              phase: initial
+              _id: K3XQfx9WgmMSBOPo
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         origin: null
         tint: '#ffffff'
@@ -2346,10 +2365,21 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544149172
+          modifiedTime: 1783544149172
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!RandalLv01000000.4YvKaXa9tyX9nkJQ.W0ObItz7sS8ZJ09Y
     folder: O942K0m1gZMIIoMB
@@ -2366,10 +2396,12 @@ items:
       compendiumSource: Compendium.dnd5e.feats24.Item.phbfstDefense000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544149172
+      modifiedTime: 1783544149172
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.4YvKaXa9tyX9nkJQ'
@@ -2538,10 +2570,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepSpear00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.ABxnTg4kyQm4Diix'
@@ -2711,10 +2745,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepShortbow00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.w1dZ8aHRtrLv2Xis'
@@ -2771,10 +2807,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.cXgmBRDhH9r07MvY'
@@ -2848,10 +2886,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.yUUJvmNXliRf9ibj'
@@ -3037,10 +3077,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbgstDice000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.XVceuzIEPv1XoXE1'
@@ -3167,10 +3209,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagHealersKit0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.gC2x4yo5LFiBBppG'
@@ -3243,10 +3287,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmChainMail0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.E12bQ9fRznCAtAR5'
@@ -3415,10 +3461,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepGreatsword
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.SmNdnRugIBULpdn5'
@@ -3585,10 +3633,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepFlail00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.1gtuPL2vbA6kS4mz'
@@ -3756,10 +3806,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbwepJavelin000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.hwwPjr6vwktmzl1r'
@@ -3827,10 +3879,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagDungeoneers
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.rWs9nzYgtqvN8hRi'
@@ -3887,10 +3941,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagWaterskin00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.5dsQP0Q0Iv2BIoMI'
@@ -4012,10 +4068,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbWaterpint0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _id: lqWUZOp1h1fGECDv
     sort: 100000
     ownership:
@@ -4147,10 +4205,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagTinderbox00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.KHzgPiZSib4wqkfH'
@@ -4394,10 +4454,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagRope0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.Y9lqVRRGZEGORx6K'
@@ -4442,10 +4504,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagCrowbar0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.ees3hsi2VpHHPb2e'
@@ -4514,10 +4578,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagRations0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.mVkUeHxmzigIP6uV'
@@ -4671,10 +4737,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagTorch000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.tqBUkDPZlwJgcCYP'
@@ -4825,37 +4893,44 @@ items:
         transfer: false
         _id: HsbtDDdiWhk4d7WB
         type: base
-        system: {}
-        changes:
-          - key: system.attributes.movement.walk
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.fly
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.swim
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.climb
-            mode: 5
-            value: '0'
-            priority: null
-          - key: system.attributes.movement.burrow
-            mode: 5
-            value: '0'
-            priority: null
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: lB30omfb0zgZjdcK
+            - key: system.attributes.movement.fly
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: 4yM0lDys7hV26pQ5
+            - key: system.attributes.movement.swim
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: BLXsoBf7CXJ69Hy9
+            - key: system.attributes.movement.climb
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: CqtIS0RIKlaPzWgW
+            - key: system.attributes.movement.burrow
+              value: 0
+              priority: null
+              type: override
+              phase: initial
+              _id: EUx5vhKXOIgcQge2
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: ''
         tint: '#ffffff'
         statuses: []
@@ -4865,10 +4940,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544149173
+          modifiedTime: 1783544149173
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!RandalLv01000000.xJ8XrkRzldsIbcV9.HsbtDDdiWhk4d7WB
     sort: 71875
@@ -4881,10 +4961,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagCaltrops000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
-      lastModifiedBy: null
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544149173
+      modifiedTime: 1783544149173
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.xJ8XrkRzldsIbcV9'
@@ -5103,10 +5185,12 @@ items:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagOil00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     _key: '!actors.items!RandalLv01000000.xIRi7FOBGCPOAgMC'
@@ -5182,10 +5266,12 @@ items:
       duplicateSource: null
       exportSource: null
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbagClothesTrav
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     _key: '!actors.items!RandalLv01000000.HCEzQyzrCHlQfFDo'
 effects: []
 folder: Yg8rxL4JuMi44szP
@@ -5193,11 +5279,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452688976
-  modifiedTime: 1771452688976
+  systemVersion: 6.0.0
+  createdTime: 1783544149172
+  modifiedTime: 1783544149172
   lastModifiedBy: dnd5ebuilder0000
 ownership:
   default: 0

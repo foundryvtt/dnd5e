@@ -1,3 +1,4 @@
+import { loadingTooltip } from "../../utils.mjs";
 import DragDropApplicationMixin from "../api/drag-drop-mixin.mjs";
 import CheckboxElement from "../components/checkbox.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
@@ -131,13 +132,13 @@ export default function PrimarySheetMixin(Base) {
       elements.innerHTML = `
         <div class="source-book">
           <button type="button" class="unbutton control-button header-control" data-action="showConfiguration"
-                  data-config="source" data-tooltip aria-label="${game.i18n.localize("DND5E.SOURCE.Action.Configure")}">
+                  data-config="source" data-tooltip aria-label="${_loc("DND5E.SOURCE.Action.Configure")}">
             <i class="fas fa-cog" inert></i>
           </button>
           <span></span>
         </div>
       `;
-      html.querySelector(".window-subtitle")?.after(elements);
+      this.window.subtitle?.after(elements);
     }
 
     /* -------------------------------------------- */
@@ -153,7 +154,7 @@ export default function PrimarySheetMixin(Base) {
       const editable = this.isEditable && this.isEditMode;
       elements.querySelector("button")?.toggleAttribute("hidden", !editable);
       elements.querySelector("span").innerText = editable
-        ? (source.label || game.i18n.localize("DND5E.SOURCE.FIELDS.source.label"))
+        ? (source.label || _loc("DND5E.SOURCE.FIELDS.source.label"))
         : source.label;
     }
 
@@ -231,7 +232,7 @@ export default function PrimarySheetMixin(Base) {
       if ( this.isEditable ) {
         const button = document.createElement("button");
         button.type = "button";
-        button.ariaLabel = game.i18n.localize("CONTROLS.CommonCreate");
+        button.ariaLabel = _loc("CONTROLS.CommonCreate");
         button.classList.add("create-child", "gold-button", "always-interactive");
         button.dataset.action = "addDocument";
         button.innerHTML = '<i class="fas fa-plus" inert></i>';
@@ -292,7 +293,7 @@ export default function PrimarySheetMixin(Base) {
      * @protected
      */
     _applyItemTooltips(element) {
-      if ( "tooltip" in element.dataset ) return;
+      if ( ("tooltip" in element.dataset) || ("tooltipHtml" in element.dataset) ) return;
       const target = element.closest("[data-item-id], [data-effect-id], [data-uuid]");
       let uuid = target.dataset.uuid;
       if ( !uuid && target.dataset.itemId ) {
@@ -304,9 +305,7 @@ export default function PrimarySheetMixin(Base) {
         uuid = collection?.get(effectId)?.uuid;
       }
       if ( !uuid ) return;
-      element.dataset.tooltip = `
-        <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-      `;
+      element.dataset.tooltipHtml = loadingTooltip({ uuid });
       element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
       element.dataset.tooltipDirection ??= "LEFT";
     }
@@ -320,7 +319,7 @@ export default function PrimarySheetMixin(Base) {
      * @param {HTMLElement} target  Button that was clicked.
      */
     static #changeMode(event, target) {
-      this._onChangeSheetMode(event, target);
+      this.changeMode();
     }
 
     /* -------------------------------------------- */
@@ -332,11 +331,30 @@ export default function PrimarySheetMixin(Base) {
      * @protected
      */
     async _onChangeSheetMode(event, target=event.currentTarget) {
+      foundry.utils.logCompatibilityWarning(
+        "The `_onChangeSheetMode` method has been moved to `changeMode`.",
+        { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+      );
+      this.changeMode();
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Change the sheet mode.
+     * @param {PrimarySheet5e.MODES} [mode]  Mode to set. If not provided, mode will be toggled.
+     */
+    async changeMode(mode) {
+      if ( !this.isEditable ) return;
       const { MODES } = this.constructor;
-      const label = game.i18n.localize(`DND5E.SheetMode${target.checked ? "Play" : "Edit"}`);
-      target.dataset.tooltip = label;
-      target.setAttribute("aria-label", label);
-      this._mode = target.checked ? MODES.EDIT : MODES.PLAY;
+      this._mode = mode ?? (this.isEditMode ? MODES.PLAY : MODES.EDIT);
+      const button = this.element?.querySelector('[data-action="changeMode"]');
+      if ( button ) {
+        const label = _loc(`DND5E.SheetMode${this.isEditMode ? "Play" : "Edit"}`);
+        button.checked = this.isEditMode;
+        button.dataset.tooltip = label;
+        button.setAttribute("aria-label", label);
+      }
       await this.submit();
       this.render();
     }

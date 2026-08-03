@@ -17,7 +17,7 @@ const {
 export default class BaseSummonActivityData extends BaseActivityData {
   /** @inheritDoc */
   static defineSchema() {
-    const schema = {
+    return {
       ...super.defineSchema(),
       bonuses: new SchemaField({
         ac: new FormulaField(),
@@ -29,6 +29,10 @@ export default class BaseSummonActivityData extends BaseActivityData {
       }),
       creatureSizes: new SetField(new StringField()),
       creatureTypes: new SetField(new StringField()),
+      flat: new SchemaField({
+        attack: new NumberField({ nullable: true, initial: null }),
+        save: new NumberField({ nullable: true, initial: null })
+      }, { persisted: false }),
       match: new SchemaField({
         ability: new StringField(),
         attacks: new BooleanField(),
@@ -46,7 +50,7 @@ export default class BaseSummonActivityData extends BaseActivityData {
         }),
         name: new StringField(),
         types: new SetField(new StringField()),
-        uuid: new DocumentUUIDField()
+        uuid: new DocumentUUIDField({ type: "Actor" })
       })),
       summon: new SchemaField({
         mode: new StringField(),
@@ -54,11 +58,6 @@ export default class BaseSummonActivityData extends BaseActivityData {
       }),
       tempHP: new FormulaField()
     };
-    if ( game.release.generation > 13 ) schema.flat = new SchemaField({
-      attack: new NumberField({ nullable: true, initial: null }),
-      save: new NumberField({ nullable: true, initial: null })
-    }, { persisted: false });
-    return schema;
   }
 
   /* -------------------------------------------- */
@@ -67,7 +66,7 @@ export default class BaseSummonActivityData extends BaseActivityData {
 
   /** @inheritDoc */
   get ability() {
-    return this.match.ability || super.ability || this.item.abilityMod || this.actor?.system.attributes?.spellcasting;
+    return this.match.ability || super.ability || this.item.abilityMod || this.actor?.spellcastingAbility;
   }
 
   /* -------------------------------------------- */

@@ -57,14 +57,14 @@
                 <div class="ac-badge badge" aria-label="{{ localize 'DND5E.ArmorClass' }}">
                     {{#if editable}}
                     <button type="button" class="config-button unbutton" data-action="showConfiguration"
-                            data-config="armorClass" data-tooltip="DND5E.ArmorConfig"
-                            aria-label="{{ localize 'DND5E.ArmorConfig' }}">
+                            data-config="armorClass" data-tooltip
+                            aria-label="{{ localize 'DND5E.ARMORCLASS.Action.Configure' }}">
                         <i class="fas fa-cog" inert></i>
                     </button>
                     {{else}}
                     <div data-attribution="attributes.ac" data-attribution-caption="DND5E.ArmorClass"
                          data-tooltip-direction="DOWN">
-                        {{ system.attributes.ac.value }}
+                        {{{ ifThen system.attributes.ac.value system.attributes.ac.value "&mdash;" }}}
                     </div>
                     {{/if}}
                 </div>
@@ -137,7 +137,7 @@
                     {{/if}}
                 </div>
                 {{#with system.attributes.hp}}
-                <div class="meter sectioned hit-points">
+                <div class="meter sectioned hit-points meter-lg">
                     <div class="progress hit-points
                          {{~#if (gt tempmax 0)}} temp-positive
                          {{~else if (lt tempmax 0)}} temp-negative{{/if}}"
@@ -177,7 +177,7 @@
                     </button>
                     {{/if}}
                 </div>
-                <div class="meter hit-dice progress" role="meter" aria-valuemin="0"
+                <div class="meter hit-dice progress meter-lg" role="meter" aria-valuemin="0"
                      aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      style="--bar-percentage: {{ pct }}%">
                     <div class="label">

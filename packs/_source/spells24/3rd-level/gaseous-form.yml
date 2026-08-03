@@ -107,13 +107,10 @@ effects:
   - name: Gaseous Form
     origin: Compendium.dnd5e.spells24.Item.phbsplGaseousFor
     duration:
-      rounds: null
-      startTime: null
-      seconds: 3600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags:
       dnd5e:
@@ -122,48 +119,69 @@ effects:
     img: icons/magic/air/wind-vortex-swirl-blue-purple.webp
     _id: QeYsfnjEj2T9A3C8
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 5
-        value: '10'
-        priority: null
-      - key: system.attributes.movement.hover
-        mode: 5
-        value: 'true'
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: prone
-        priority: null
-      - key: img
-        mode: 5
-        value: icons/magic/air/wind-vortex-swirl-blue-purple.webp
-        priority: null
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.dex.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.con.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 10
+          priority: null
+          type: override
+          phase: initial
+          _id: KXg4MkprVodusA1y
+        - key: system.attributes.movement.hover
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: OMbgnxetrRGksG27
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+          phase: initial
+          _id: 5Hk4sDaviBNLoF2G
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+          phase: initial
+          _id: nElosbwWS6DYltBU
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+          phase: initial
+          _id: 3fTu6RDUSdNXIGiB
+        - key: system.traits.ci.value
+          value: prone
+          priority: null
+          type: add
+          phase: initial
+          _id: cZH3dny1C38g6nU0
+        - key: img
+          value: icons/magic/air/wind-vortex-swirl-blue-purple.webp
+          priority: null
+          type: override
+          phase: initial
+          _id: QWdXW2lYpFr500ik
+        - key: system.abilities.str.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 407SJaybnTqFBfc8
+        - key: system.abilities.dex.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: h4xtTj0G9hixYq5m
+        - key: system.abilities.con.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 3mWkUMMEmlVnWxG4
+      magical: true
     description: >-
       <p>The target’s only method of movement is a Fly Speed of 10 feet, and it
       can hover. The target can enter and occupy the space of another creature.
@@ -183,13 +201,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
-      createdTime: null
-      modifiedTime: 1760128804307
+      systemVersion: 6.0.0
+      createdTime: 1783543975271
+      modifiedTime: 1783543975271
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplGaseousFor.QeYsfnjEj2T9A3C8'
 folder: HCovEE4VoPGlIbKi
 sort: 1900000
@@ -198,11 +219,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425956002
-  modifiedTime: 1760128807672
+  modifiedTime: 1783543975271
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGaseousFor'

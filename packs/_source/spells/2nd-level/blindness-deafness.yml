@@ -33,12 +33,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -56,8 +59,7 @@ system:
   properties:
     - vocal
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    zwGBVh0vhNLbZI0K:
       type: save
       activation:
         type: action
@@ -71,6 +73,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -78,15 +81,23 @@ system:
       effects:
         - _id: 59WpbiZFULwixyvC
           onSave: false
+          level:
+            min: null
+            max: null
         - _id: H0SG0oq3VfiCxBOQ
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -94,101 +105,122 @@ system:
         onSave: half
         parts: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: zwGBVh0vhNLbZI0K
   identifier: blindness-deafness
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-red.webp
+img: icons/magic/perception/eye-slit-orange.webp
 effects:
   - name: Blindness
     origin: Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: false
     _id: 59WpbiZFULwixyvC
-    changes: []
     description: >-
-      <p>The target is Blinded for the duration. At the end of each of its
-      turns, the target can make a Constitution saving throw. On a success, the
-      spell ends.</p>
+      <p>You are &amp;reference[Blinded apply=false] for the duration. At the
+      end of each of your turns, you can make a Constitution saving throw. On a
+      success, the spell ends.</p>
     transfer: false
     statuses:
       - blinded
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781220037893
+      modifiedTime: 1781267537632
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/perception/eye-ringed-glow-angry-red.webp
+    img: icons/commodities/biological/eye-brown-red.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!zwGsAv6kmwzYGhh3.59WpbiZFULwixyvC'
   - name: Deafness
     origin: Compendium.dnd5e.spells.Item.zwGsAv6kmwzYGhh3
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    disabled: true
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: false
     _id: H0SG0oq3VfiCxBOQ
-    changes: []
     description: >-
-      <p>The target is Deafened for the duration. At the end of each of its
-      turns, the target can make a Constitution saving throw. On a success, the
-      spell ends.</p>
+      <p>You are &amp;reference[Deafened apply=false] for the duration. At the
+      end of each of your turns, you can make a Constitution saving throw. On a
+      success, the spell ends.</p>
     transfer: false
     statuses:
       - deafened
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781220076757
+      modifiedTime: 1781267542648
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/perception/eye-ringed-glow-angry-red.webp
+    img: icons/commodities/biological/ear-grey-brown.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!zwGsAv6kmwzYGhh3.H0SG0oq3VfiCxBOQ'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037367405
-  modifiedTime: 1725992723756
+  modifiedTime: 1781219906388
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!zwGsAv6kmwzYGhh3'

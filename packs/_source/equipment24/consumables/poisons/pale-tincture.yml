@@ -137,21 +137,20 @@ effects:
     transfer: false
     _id: o6ZuvxhWeXsg50MH
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.hp.max
-        mode: 2
-        value: '-0'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.hp.max
+          value: 0
+          priority: null
+          type: add
+          phase: initial
+          _id: iceRx24ODrSRHBlg
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The Poisoned creature repeats the save every 24 hours, taking 3 (1d6)
       Poison damage on a failed save. The damage the poison deals can't be
@@ -167,13 +166,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgAssassinsBloo.ActiveEffect.zpDCMRInMzrnRAAd
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730741351123
-      modifiedTime: 1730741667881
+      modifiedTime: 1783544097165
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgPaleTincture0.o6ZuvxhWeXsg50MH'
 folder: bRhjJ3GivNsz0GTF
 flags:
@@ -183,11 +185,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1728419101980
-  modifiedTime: 1745256806846
+  modifiedTime: 1783544097164
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

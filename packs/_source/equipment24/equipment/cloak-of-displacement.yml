@@ -67,17 +67,15 @@ effects:
     img: icons/magic/control/debuff-chains-orb-movement-blue.webp
     _id: LeHRRFBeh8gH0Us8
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>If you take damage, the property ceases to function until the start of
       your next turn. This property is suppressed while your Speed is 0.</p>
@@ -90,22 +88,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729009205184
-      modifiedTime: 1729010503430
+      modifiedTime: 1783544094355
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgCloakOfDispla.LeHRRFBeh8gH0Us8'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698663
+  modifiedTime: 1783544094355
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7700000

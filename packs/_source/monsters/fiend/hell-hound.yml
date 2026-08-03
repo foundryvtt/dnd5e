@@ -445,9 +445,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -462,7 +459,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -482,112 +479,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: fhBBeyLSor6NVA0l
-    name: Keen Hearing and Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The hound has advantage on Wisdom (Perception) checks that rely on
-          hearing or smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-hearing-and-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956610190
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!iSCL4Q82ivnYelzc.fhBBeyLSor6NVA0l'
-  - _id: BVEOVtTEuJhNvTfo
-    name: Pack Tactics
-    type: feat
-    img: icons/creatures/abilities/paw-print-orange.webp
-    system:
-      description:
-        value: >-
-          <p>The hound has advantage on an attack roll against a creature if at
-          least one of the hound's allies is within 5 ft. of the creature and
-          the ally isn't incapacitated.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: pack-tactics
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956613705
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!iSCL4Q82ivnYelzc.BVEOVtTEuJhNvTfo'
   - _id: AnHeKid7zbyPKJg9
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-fire-orange.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Hell Hound attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -650,7 +553,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -659,8 +562,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        WomHvOsmasbLtRJi:
           type: attack
           activation:
             type: action
@@ -675,10 +577,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -695,7 +598,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -708,36 +612,47 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: WomHvOsmasbLtRJi
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -747,28 +662,30 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552855
+      systemVersion: 6.0.0
+      createdTime: 1781667324721
+      modifiedTime: 1781667342248
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!iSCL4Q82ivnYelzc.AnHeKid7zbyPKJg9'
   - _id: gijcyepmnWeRu4HV
     name: Fire Breath
     type: feat
-    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
+    img: icons/magic/fire/flame-burning-earth-orange.webp
     system:
       description:
         value: >-
-          <p>The hound exhales fire in a 15-foot cone. Each creature in that
-          area must make a [[/save]] saving throw, taking [[/damage average]]
-          damage on a failed save, or half as much damage on a successful
-          one.</p>
+          <p>The [[lookup @name lowercase]]{monster} exhales fire in a [[lookup
+          @labels.description.template activity=B2tJnjd8wmeEa8rj]]. Each
+          creature in that area must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
-          <p>The hound exhales fire in a 15-foot cone. Each creature in that
-          area must make a <strong>Dexterity</strong> saving throw.</p>
+          <p>The [[lookup @name]]{monster} exhales fire in a [[lookup
+          @labels.description.template activity=B2tJnjd8wmeEa8rj]]. Each
+          creature in that area must make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -789,8 +706,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        B2tJnjd8wmeEa8rj:
           type: save
           activation:
             type: action
@@ -800,26 +716,25 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -831,9 +746,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -845,24 +761,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 6
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '12'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: B2tJnjd8wmeEa8rj
+          name: Exhale Fire
       enchant: {}
       prerequisites:
         level: null
@@ -876,14 +805,122 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1747956627069
+      systemVersion: 6.0.0
+      createdTime: 1781667354786
+      modifiedTime: 1781667419859
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!iSCL4Q82ivnYelzc.gijcyepmnWeRu4HV'
+  - _id: Y44FPT7C6kpnykZw
+    name: Keen Hearing and Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on hearing or smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-hearing-and-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -250000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.yawTeS8u2FCfzzZH.Item.z1WFJdHb8OXvW2yy
+      duplicateSource: Item.UgdVWHzrwE598r6T
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781667310945
+      modifiedTime: 1781667310945
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!iSCL4Q82ivnYelzc.Y44FPT7C6kpnykZw'
+  - _id: H4DaD12Chkk5agFU
+    name: Pack Tactics
+    type: feat
+    img: icons/creatures/abilities/paw-print-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on an attack
+          roll against a creature if at least one of the [[lookup @name
+          lowercase]]{monster}'s allies is within 5 feet of the creature and the
+          ally isn't &amp;reference[incapacitated apply=false].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: pack-tactics
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.JW8bXggOMBx1S6tF.Item.yb6o6KfKlg9bGhqA
+      duplicateSource: Item.bYY0d7kkeVIYaNof
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781667315792
+      modifiedTime: 1781667315792
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!iSCL4Q82ivnYelzc.H4DaD12Chkk5agFU'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
@@ -892,7 +929,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171250894

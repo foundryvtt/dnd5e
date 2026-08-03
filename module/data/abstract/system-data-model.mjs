@@ -193,8 +193,8 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
     if ( actor.itemTypes[data.type]?.length ) {
       ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
         format: {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[data.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+          itemType: _loc(CONFIG.Item.typeLabels[data.type]),
+          actorType: _loc(CONFIG.Actor.typeLabels[actor.type])
         }
       });
       return false;

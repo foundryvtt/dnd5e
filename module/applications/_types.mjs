@@ -12,12 +12,16 @@
  * @property {number|null} xp                        Amount of experience points to award.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef CurrencyUpdateOptions
- * @property {boolean} [exact=true]           Prioritize deducting the requested denomination first.
- * @property {boolean} [makeChange=true]      Convert higher denominations to fulfill the request if needed.
- * @property {"high"|"low"} [priority="low"]  Prioritize higher denominations before lower, or vice-versa.
- * @property {boolean} [recursive=false]      Deduct currency from containers as well as the base Actor. TODO
+ * @property {boolean} [exact=true]                    Prioritize deducting the requested denomination first.
+ * @property {boolean} [makeChange=true]               Convert higher denominations to fulfill the request if needed.
+ * @property {"high"|"low"|string[]} [priority="low"]  Prioritize higher denominations before lower, or vice-versa. If
+ *                                                     an array of denominations is passed, this exact order is used,
+ *                                                     skipping any denominations that are omitted.
+ * @property {boolean} [recursive=false]               Deduct currency from containers as well as the base Actor. TODO
  */
 
 /* -------------------------------------------- */
@@ -28,7 +32,11 @@
  *                                              Locked filters won't be able to be changed by the user. Initial filters
  *                                              will be set to start but can be changed.
  * @property {string|null} hint                 Hint displayed in the interface.
- * @property {CompendiumBrowserSelectionConfiguration} selection  Configuration used to define document selections.
+ * @property {CompendiumBrowserSelectionConfiguration} selection     Configuration used to define document selections.
+ * @property {object} prerequisites
+ * @property {boolean} prerequisites.enforce        Prevent selection of results that fail validation.
+ * @property {boolean} prerequisites.fullDocuments  Require the full documents to be fetched for evaluation.
+ * @property {ValidatePrerequisitesCallback} prerequisites.validate  Callback used to evaluate prerequisites.
  */
 
 /**
@@ -80,13 +88,31 @@
  */
 
 /**
+ * @typedef PrerequisiteValidationResult
+ * @property {string} label           Label describing the prerequisite.
+ * @property {boolean} [quiet=false]  Only display in mark compendium browser if invalid.
+ * @property {boolean|null} valid     Whether the prerequisite is valid or not, or `null` if it couldn't be evaluated.
+ */
+
+/**
+ * @typedef {Map<string, PrerequisiteValidationResult>} PrerequisiteValidationResults
+ */
+
+/**
+ * @callback ValidatePrerequisitesCallback
+ * @param {Document|object} doc  Document for which to evaluate the prerequisites.
+ * @returns {PrerequisiteValidationResults|void}
+ */
+
+/* -------------------------------------------- */
+
+/**
  * Description for a single part of a property attribution.
  *
  * @typedef PropertyAttributionDescription
  * @property {string} label               Descriptive label that will be displayed. If the label is in the form
  *                                        of an @ property, the system will try to turn it into a human-readable label.
- * @property {number} mode                Application mode for this step as defined in
- *                           [CONST.ACTIVE_EFFECT_MODES](https://foundryvtt.com/api/module-constants.html#.ACTIVE_EFFECT_MODES).
+ * @property {string} type                Active effect application type.
  * @property {number} value               Value of this step.
  * @property {ActiveEffect5e} [document]  Active effect applying this attribution, if any.
  */

@@ -448,9 +448,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -465,7 +462,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -485,113 +482,17 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: gbqFx1sEQUYQlDpJ
-    name: Keen Hearing and Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The wolf has advantage on Wisdom (Perception) checks that rely on
-          hearing or smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-hearing-and-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827016594
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!yGTh874etxUckmAf.gbqFx1sEQUYQlDpJ'
-  - _id: axhIBG9zM7Z9AHxL
-    name: Pack Tactics
-    type: feat
-    img: icons/creatures/abilities/paw-print-orange.webp
-    system:
-      description:
-        value: >-
-          <p>The wolf has advantage on an attack roll against a creature if at
-          least one of the wolf's allies is within 5 feet of the creature and
-          the ally isn't incapacitated.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: pack-tactics
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827025904
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!yGTh874etxUckmAf.axhIBG9zM7Z9AHxL'
   - _id: pu8fxDuua6ObNqtg
     name: Snow Camouflage
     type: feat
-    img: icons/magic/water/barrier-ice-crystal-wall-faceted.webp
+    img: icons/magic/water/ice-snowman.webp
     system:
       description:
         value: >-
-          <p>The wolf has advantage on Dexterity (Stealth) checks made to hide
-          in snowy terrain.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Dexterity
+          (Stealth) checks made to &amp;reference[hide] in snowy terrain.</p>
         chat: ''
       source:
         custom: ''
@@ -605,10 +506,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -616,25 +518,25 @@ items:
       identifier: snow-camouflage
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.jnKOUieu2UO1xHhT
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827032365
+      systemVersion: 6.0.0
+      createdTime: 1781865187700
+      modifiedTime: 1781865243356
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.pu8fxDuua6ObNqtg'
   - _id: 5PmQuifZGbPWxAYz
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: >-
@@ -642,9 +544,9 @@ items:
           a creature, it must succeed on a [[/save]] saving throw or be knocked
           &amp;Reference[prone].</p>
         chat: >-
-          <p>The Winter Wolf attacks with its Bite. If the target is a creature,
-          it must make a <strong>Strength</strong> saving throw or be knocked
-          prone.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. If the target is a creature, it must make a Strength
+          saving throw or be knocked &amp;reference[prone].</p>
       source:
         custom: ''
         book: ''
@@ -707,7 +609,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -716,8 +618,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        vkNyeMZnoIfOCgPq:
           type: attack
           activation:
             type: action
@@ -732,10 +633,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -752,7 +654,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -765,27 +668,38 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: vkNyeMZnoIfOCgPq
+          name: ''
+        oq81aFnARhfla3iq:
           type: save
           activation:
-            type: action
+            type: special
             value: 1
-            condition: ''
+            condition: When a creature is hit by this attack.
             override: false
           consumption:
             targets: []
@@ -795,10 +709,13 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>If the target is a creature, it must succeed on a [[/save]]
+              saving throw or be knocked &amp;Reference[prone].</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -815,10 +732,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -828,14 +746,29 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '14'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 200000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: oq81aFnARhfla3iq
+          name: Prone Save
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -846,37 +779,34 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741124014456
+      systemVersion: 6.0.0
+      createdTime: 1781865256748
+      modifiedTime: 1781876232621
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.5PmQuifZGbPWxAYz'
   - _id: Rj3oSInoQMIfHrPc
     name: Cold Breath
     type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+    img: icons/magic/water/projectile-ice-teardrop.webp
     system:
       description:
         value: >-
-          <p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each
-          creature in that area must make a [[/save]] saving throw, taking
-          [[/damage average]] damage on a failed save, or half as much damage on
-          a successful one.</p>
+          <p>The [[lookup @name lowercase]]{monster} exhales a blast of freezing
+          wind in a [[lookup @labels.description.template
+          activity=4YgvBZjoO2Qd5OY3]]. Each creature in that area must make a
+          [[/save]] saving throw, taking [[/damage average]] damage on a failed
+          save, or half as much damage on a successful one.</p>
         chat: >-
-          <p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each
-          creature in that area must make a <strong>Dexterity</strong> saving
-          throw.</p>
+          <p>The [[lookup @name]]{monster} exhales a blast of freezing wind in a
+          [[lookup @labels.description.template activity=4YgvBZjoO2Qd5OY3]].
+          Each creature in that area must make a Dexterity saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -892,13 +822,12 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        4YgvBZjoO2Qd5OY3:
           type: save
           activation:
             type: action
@@ -908,32 +837,28 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
+                scaling: {}
               - type: activityUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                scaling: {}
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -945,9 +870,10 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -962,24 +888,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 4
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 4
                 denomination: 8
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  number: 1
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '12'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 4YgvBZjoO2Qd5OY3
+          name: Exhale Freezing Wind
       enchant: {}
       prerequisites:
         level: null
@@ -989,22 +928,126 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741124061365
+      systemVersion: 6.0.0
+      createdTime: 1781865334820
+      modifiedTime: 1781865419890
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.Rj3oSInoQMIfHrPc'
+  - _id: v0aOv6xT8QnYWpdW
+    name: Pack Tactics
+    type: feat
+    img: icons/creatures/abilities/paw-print-orange.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on an attack
+          roll against a creature if at least one of the [[lookup @name
+          lowercase]]{monster}'s allies is within 5 feet of the creature and the
+          ally isn't &amp;reference[incapacitated apply=false].</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: pack-tactics
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 200000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.JW8bXggOMBx1S6tF.Item.yb6o6KfKlg9bGhqA
+      duplicateSource: Item.bYY0d7kkeVIYaNof
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781865242536
+      modifiedTime: 1781865243356
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!yGTh874etxUckmAf.v0aOv6xT8QnYWpdW'
+  - _id: BHyucLflanPjMHrz
+    name: Keen Hearing and Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on hearing or smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-hearing-and-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -250000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.yawTeS8u2FCfzzZH.Item.z1WFJdHb8OXvW2yy
+      duplicateSource: Item.UgdVWHzrwE598r6T
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781865251916
+      modifiedTime: 1781865251916
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!yGTh874etxUckmAf.BHyucLflanPjMHrz'
 effects: []
 folder: MMKVDW6XI98WdIVu
 sort: 0
@@ -1013,7 +1056,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171266486

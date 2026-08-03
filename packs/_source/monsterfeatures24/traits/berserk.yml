@@ -149,17 +149,14 @@ effects:
     transfer: true
     _id: 8SBNBxgUqwEyYJcK
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: true
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 99
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 99
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>On each of its turns while berserk, the creature attacks the nearest
       creature it can see. If no creature is near enough to move to and attack,
@@ -173,13 +170,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: 1734990049496
       modifiedTime: 1734990656607
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmBerserk0000000.8SBNBxgUqwEyYJcK'
 flags:
   dnd5e:
@@ -188,7 +188,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956

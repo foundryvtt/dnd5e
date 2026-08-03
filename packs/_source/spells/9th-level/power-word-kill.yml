@@ -28,12 +28,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -89,20 +92,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: power-word-kill
 sort: 0
 flags: {}
-img: icons/magic/unholy/strike-beam-blood-large-red-teal.webp
+img: icons/magic/death/skull-humanoid-crown-white-blue.webp
 effects: []
 folder: KL6ZY4VRMjojGrL4
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037361396
-  modifiedTime: 1725992721561
+  modifiedTime: 1781383000042
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dmvaMLFWFtv0qx0S'

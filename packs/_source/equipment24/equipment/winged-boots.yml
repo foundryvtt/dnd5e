@@ -130,21 +130,21 @@ effects:
     transfer: false
     _id: jKz5xLbftW2r0f3P
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 30
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: hDgVk6JQplgJfSNO
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The wings lasts for 1 hour or until you end the effect early as a Magic
       action. The wings give you a Fly Speed of 60 feet.</p>
@@ -156,22 +156,25 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgWingsOfFlying.ActiveEffect.JLR5JpSUgL3yYcvt
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730660820044
-      modifiedTime: 1730660828819
+      modifiedTime: 1783544099537
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgWingedBoots00.jKz5xLbftW2r0f3P'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764617609827
+  modifiedTime: 1783544099537
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 37900000

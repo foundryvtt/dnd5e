@@ -32,7 +32,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.StartingEquipment.Action.Configure");
+    return _loc("DND5E.StartingEquipment.Action.Configure");
   }
 
   /* -------------------------------------------- */
@@ -47,7 +47,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
       const data = {
         id: entry._id, entry, depth,
         groupType: entry.type in EquipmentEntryData.GROUPING_TYPES,
-        validTypes: depth < 3 ? EquipmentEntryData.TYPES : EquipmentEntryData.OPTION_TYPES
+        validTypes: depth < EquipmentEntryData.MAX_DEPTH ? EquipmentEntryData.TYPES : EquipmentEntryData.OPTION_TYPES
       };
       if ( entry.type in EquipmentEntryData.GROUPING_TYPES ) {
         data.children = await Promise.all(entry.children.map(c => processEntry(c, depth + 1)));
@@ -118,7 +118,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
   /** @override */
   _prepareSubmitData(event, form, formData, updateData) {
     const submitData = this._processFormData(event, form, formData);
-    if ( updateData ) foundry.utils.mergeObject(submitData, updateData, { inplace: true, performDeletions: true });
+    if ( updateData ) foundry.utils.mergeObject(submitData, updateData, { inplace: true, applyOperators: true });
     // Skip the validation step here because it causes a bunch of problems with providing array
     // updates when using the `submit` method
     return submitData;
@@ -138,7 +138,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
           _id: foundry.utils.randomID(),
           group: entryId,
           sort: highestSort + CONST.SORT_INTEGER_DENSITY,
-          type: (depth < 3) && !linkedUuid ? "OR" : "linked",
+          type: (depth < EquipmentEntryData.MAX_DEPTH) && !linkedUuid ? "OR" : "linked",
           key: linkedUuid
         });
         break;
@@ -187,9 +187,9 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
 
     // Validate that this is a physical item
     if ( !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
-      ui.notifications.error(game.i18n.format("DND5E.StartingEquipment.Warning.ItemTypeInvalid", {
-        type: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
-      }));
+      ui.notifications.error("DND5E.StartingEquipment.Warning.ItemTypeInvalid", {
+        format: { type: _loc(CONFIG.Item.typeLabels[item.type]) }
+      });
       return null;
     }
 
@@ -238,8 +238,8 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
         depth += 1;
         if ( dragEntry.children.some(c => c.type in EquipmentEntryData.GROUPING_TYPES) ) depth += 1;
       }
-      if ( depth > 3 ) {
-        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth", { localize: true });
+      if ( depth > EquipmentEntryData.MAX_DEPTH ) {
+        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth");
         return;
       }
       updateData = { [`startingEquipment.${dragEntry._id}.group`]: dropEntry._id };

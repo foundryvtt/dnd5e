@@ -50,7 +50,6 @@ export default class D20Roll extends BasicRoll {
     const formula = [new CONFIG.Dice.D20Die().formula].concat(config.parts ?? []).join(" + ");
     config.options.criticalSuccess ??= CONFIG.Dice.D20Die.CRITICAL_SUCCESS_TOTAL;
     config.options.criticalFailure ??= CONFIG.Dice.D20Die.CRITICAL_FAILURE_TOTAL;
-    config.options.elvenAccuracy ??= process.elvenAccuracy;
     config.options.halflingLucky ??= process.halflingLucky;
     config.options.reliableTalent ??= process.reliableTalent;
     config.options.target ??= process.target;
@@ -182,12 +181,47 @@ export default class D20Roll extends BasicRoll {
   /*  Chat Messages                               */
   /* -------------------------------------------- */
 
+  /**
+   * Prepare context data used to render the chat template for this roll.
+   * @param {object} [options]
+   * @param {boolean} [options.canCrit]        Can this roll score a critical success or a critical failure?
+   * @param {boolean} [options.displayResult]  Should the success or failure of this roll be revealed?
+   * @param {boolean} [options.forceSuccess]   Is this roll treated as successful regardless of the result rolled?
+   * @returns {Promise<object>}
+   * @protected
+   */
+  async _prepareChatRenderContext({ canCrit=false, displayResult=false, forceSuccess=false, ...options }={}) {
+    const context = await super._prepareChatRenderContext(options);
+    context.classes = "";
+    context.icons = [];
+    if ( options.isPrivate || !this._evaluated || !this.validD20Roll ) return context;
+
+    const d = this.d20;
+    if ( ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure ) return context;
+    if ( d.values.length !== 1 ) return context;
+
+    const classes = [];
+    if ( d.options.target && displayResult ) classes.push(this.isSuccess || forceSuccess ? "success" : "failure");
+    if ( canCrit && this.isCritical ) classes.push("critical");
+    if ( canCrit && this.isFumble && !forceSuccess ) classes.push("fumble");
+
+    if ( classes.includes("critical") ) context.icons.push("fa-check", "fa-check");
+    else if ( classes.includes("fumble") ) context.icons.push("fa-xmark", "fa-xmark");
+    else if ( classes.includes("success") ) context.icons.push("fa-check");
+    else if ( classes.includes("failure") ) context.icons.push("fa-xmark");
+
+    context.classes = classes.join(" ");
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   static _prepareMessageData(rolls, messageData) {
     let advantage = true;
     let disadvantage = true;
 
-    const rtLabel = game.i18n.localize("DND5E.FlagsReliableTalent");
+    const rtLabel = _loc("DND5E.FlagsReliableTalent");
     for ( const roll of rolls ) {
       if ( !roll.validD20Roll ) continue;
       if ( !roll.hasAdvantage ) advantage = false;
@@ -198,8 +232,8 @@ export default class D20Roll extends BasicRoll {
     }
 
     messageData.flavor ??= "";
-    if ( advantage ) messageData.flavor += ` (${game.i18n.localize("DND5E.Advantage")})`;
-    else if ( disadvantage ) messageData.flavor += ` (${game.i18n.localize("DND5E.Disadvantage")})`;
+    if ( advantage ) messageData.flavor += ` (${_loc("DND5E.Advantage")})`;
+    else if ( disadvantage ) messageData.flavor += ` (${_loc("DND5E.Disadvantage")})`;
   }
 
   /* -------------------------------------------- */

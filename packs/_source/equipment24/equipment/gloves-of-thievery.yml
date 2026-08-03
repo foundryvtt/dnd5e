@@ -62,21 +62,21 @@ effects:
     img: icons/equipment/hand/glove-tooled-leather-red-purple.webp
     _id: 6f8ARzOvPmhNZ0NV
     type: base
-    system: {}
-    changes:
-      - key: system.skills.slt.bonuses.check
-        mode: 2
-        value: '5'
-        priority: null
+    system:
+      changes:
+        - key: system.skills.slt.bonuses.check
+          value: 5
+          priority: null
+          type: add
+          phase: initial
+          _id: cX106VZdQfHKpjZp
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -90,22 +90,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 6.0.0
       createdTime: 1730728665344
-      modifiedTime: 1745611806102
+      modifiedTime: 1783544095982
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgGlovesOfThiev.6f8ARzOvPmhNZ0NV'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745611795283
+  modifiedTime: 1783544095982
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 17100000

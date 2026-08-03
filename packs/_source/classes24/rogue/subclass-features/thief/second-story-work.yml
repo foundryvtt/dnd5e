@@ -42,21 +42,20 @@ effects:
     origin: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
     _id: qPdh1z9RMd6oBcoj
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.climb
-        mode: 4
-        value: '@attributes.movement.speed'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.climb
+          value: '@attributes.movement.speed'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: vnUh9ixjuVAI47bg
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -70,12 +69,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.4
+      systemVersion: 6.0.0
       createdTime: 1768932179578
-      modifiedTime: 1768932200375
+      modifiedTime: 1783544103257
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbrgeSecondstor.qPdh1z9RMd6oBcoj'
 flags:
   dnd5e:
@@ -84,11 +86,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866560489
-  modifiedTime: 1745256764448
+  modifiedTime: 1783544103257
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

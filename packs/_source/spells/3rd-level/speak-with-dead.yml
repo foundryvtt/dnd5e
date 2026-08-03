@@ -35,12 +35,15 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '10'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -98,20 +101,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: speak-with-dead
 sort: 0
 flags: {}
-img: icons/magic/control/fear-fright-shadow-monster-green.webp
+img: icons/commodities/bones/skull-hollow-brown-red.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037352362
-  modifiedTime: 1725992718579
+  modifiedTime: 1781293409758
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!I2LUSF5ogc7Bj62e'

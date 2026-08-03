@@ -3,9 +3,9 @@
     <fieldset class="card">
         {{#if legend}}<legend>{{ legend }}</legend>{{/if}}
         {{#each types}}
-        {{#if (eq field.name "fly")}}
+        {{#if (eq name "system.attributes.movement.speeds.fly")}}
         <div class="form-group split-group">
-            <label>{{ localize field.label }}</label>
+            <label>{{ localize label }}</label>
             <div class="form-fields">
                 {{ formInput field name=name value=value placeholder=placeholder label=label }}
                 {{#with @root.hover}}

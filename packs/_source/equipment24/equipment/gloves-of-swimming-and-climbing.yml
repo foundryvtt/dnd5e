@@ -63,29 +63,33 @@ effects:
     img: icons/equipment/hand/glove-cuffed-leather-purple.webp
     _id: Nh870Ujh6Eqy0RFi
     type: base
-    system: {}
-    changes:
-      - key: system.skills.ath.bonuses.check
-        mode: 2
-        value: '5'
-        priority: null
-      - key: system.attributes.movement.climb
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.skills.ath.bonuses.check
+          value: 5
+          priority: null
+          type: add
+          phase: initial
+          _id: PTlDr6AmbDDZjWQY
+        - key: system.attributes.movement.climb
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: YQfm6WvZKOLdBipn
+        - key: system.attributes.movement.swim
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: LmERZSCb4kriGH4F
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>You have a Climb Speed and a Swim Speed equal to your Speed, and you
       gain a +5 bonus to Strength (Athletics) checks made to climb or swim.</p>
@@ -102,13 +106,16 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgGlovesOfThiev.ActiveEffect.6f8ARzOvPmhNZ0NV
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
+      systemVersion: 6.0.0
       createdTime: 1730728909619
-      modifiedTime: 1759793555006
+      modifiedTime: 1783544095947
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgGlovesOfSwimm.Nh870Ujh6Eqy0RFi'
 flags:
   dnd5e:
@@ -117,11 +124,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1759793535884
+  modifiedTime: 1783544095947
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 17000000

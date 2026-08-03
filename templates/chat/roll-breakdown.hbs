@@ -21,6 +21,16 @@
             </div>
         </section>
         {{/each}}
+        {{#if constant}}
+        <section class="tooltip-part constant">
+            <div class="dice">
+                <ol class="dice-rolls"></ol>
+                <div class="total">
+                    <span class="value">{{ dnd5e-formatModifier constant }}</span>
+                </div>
+            </div>
+        </section>
+        {{/if}}
     </div>
 </div>
 {{/if}}

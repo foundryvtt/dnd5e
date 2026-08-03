@@ -67,21 +67,21 @@ effects:
     img: systems/dnd5e/icons/svg/items/subclass.svg
     _id: hLntpSMVY7paNuaE
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.prof
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.prof
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 7iFpeP8wWziBllAn
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your Proficiency Bonus increases by 1 while this pale green prism
       orbits your head.</p>
@@ -94,22 +94,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730487043439
-      modifiedTime: 1730487143847
+      modifiedTime: 1783544096869
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgMasteryIounSt.hLntpSMVY7paNuaE'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712701381
+  modifiedTime: 1783544096869
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 37500

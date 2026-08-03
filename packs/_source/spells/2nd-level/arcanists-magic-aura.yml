@@ -14,7 +14,8 @@ system:
       spell on the same creature or object every day for 30 days, placing the
       same effect on it each time, the illusion lasts until it is
       dispelled.</p><p><strong>False Aura</strong>. You change the way the
-      target appears to Spells and magical Effects, such as Detect Magic, that
+      target appears to Spells and magical Effects, such as
+      @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{detect magic}, that
       detect magical auras. You can make a nonmagical object appear magical, a
       magical object appear nonmagical, or change the object's magical aura so
       that it appears to belong to a specific school of magic that you choose.
@@ -22,9 +23,10 @@ system:
       apparent to any creature that handles the
       item.</p><p><strong>Mask</strong>. You change the way the target appears
       to Spells and magical Effects that detect creature types, such as a
-      paladin's Divine Sense or the trigger of a symbol spell. You choose a
-      creature type and other Spells and magical Effects treat the target as if
-      it were a creature of that type or of that Alignment.</p>
+      paladin's Divine Sense or the trigger of a
+      @UUID[Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx]{symbol} spell. You
+      choose a creature type and other Spells and magical Effects treat the
+      target as if it were a creature of that type or of that Alignment.</p>
     chat: ''
   source:
     custom: ''
@@ -44,11 +46,14 @@ system:
       type: object
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -68,8 +73,7 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    2fd6KuTcr1Qio0ro:
       type: utility
       activation:
         type: action
@@ -83,18 +87,25 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: z4EYamUR9vhGZ9GB
+          level: {}
+        - _id: I6rEsnKIWc7qZG4P
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -106,20 +117,114 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 2fd6KuTcr1Qio0ro
   identifier: arcanists-magic-aura
 sort: 0
 flags: {}
-img: icons/magic/symbols/runes-star-magenta.webp
-effects: []
+img: icons/equipment/neck/amulet-carved-stone-spiral-blue.webp
+effects:
+  - name: False Aura
+    img: icons/magic/symbols/rune-sigil-white-pink.webp
+    origin: Compendium.dnd5e.spells.Item.RvEqsD89Zvd5yex4
+    transfer: false
+    _id: z4EYamUR9vhGZ9GB
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The way you appear to Spells and magical Effects, such as
+      @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic}, that
+      detect magical auras has been changed. You appear magical, nonmagical, or
+      have had your magical aura changed so that you appear to belong to a
+      specific school of magic that the caster chose.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781219364128
+      modifiedTime: 1781267496964
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!RvEqsD89Zvd5yex4.z4EYamUR9vhGZ9GB'
+  - name: Mask
+    img: icons/magic/symbols/rune-sigil-horned-blue.webp
+    origin: Compendium.dnd5e.spells.Item.RvEqsD89Zvd5yex4
+    transfer: false
+    _id: I6rEsnKIWc7qZG4P
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The way you appear to Spells and magical Effects that detect creatures,
+      such as a paladin's Divine Sense or the trigger of a
+      @UUID[Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx]{Symbol} spell has
+      been changed. Spells and magical Effects treat you as if you were a
+      creature of a specific type or Alignment of the caster's choice.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781219508063
+      modifiedTime: 1781267499447
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!RvEqsD89Zvd5yex4.I6rEsnKIWc7qZG4P'
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356167
-  modifiedTime: 1725992719830
+  modifiedTime: 1783217829301
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!RvEqsD89Zvd5yex4'

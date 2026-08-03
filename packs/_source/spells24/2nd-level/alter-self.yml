@@ -401,21 +401,21 @@ effects:
     transfer: false
     _id: 6SL9vuAkx7nAfS5D
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.swim
+          value: 1
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: RMkElG5syvNWdrap
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>You can breathe underwater and gain a Swim Speed equal to your
       Speed.</p>
@@ -426,13 +426,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725048208451
-      modifiedTime: 1725048922411
+      modifiedTime: 1783543973848
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAlterSelf0.6SL9vuAkx7nAfS5D'
   - name: Altered Appearance
     img: icons/creatures/magical/spirit-undead-ghost-blue.webp
@@ -440,17 +443,15 @@ effects:
     transfer: false
     _id: 1jrUeJtfZMGhJOZa
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -459,13 +460,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725048980878
-      modifiedTime: 1725049328488
+      modifiedTime: 1783543973849
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAlterSelf0.1jrUeJtfZMGhJOZa'
   - name: Natural Weapon
     img: icons/creatures/abilities/fang-tooth-blood-red.webp
@@ -473,17 +477,15 @@ effects:
     transfer: false
     _id: baEBDez6IgWNpkSX
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When you use your Unarmed Strike to deal damage with that new growth,
       it deals 1d6 damage of the type in parentheses instead of dealing the
@@ -497,13 +499,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1725049566534
-      modifiedTime: 1725049699059
+      modifiedTime: 1783543973849
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplAlterSelf0.baEBDez6IgWNpkSX'
 folder: 3SjcO2acsFnWegp4
 sort: 5600000
@@ -516,11 +521,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.350'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1724425940243
-  modifiedTime: 1759793902591
+  modifiedTime: 1783543973848
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAlterSelf0'

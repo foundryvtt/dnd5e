@@ -1,7 +1,7 @@
 _id: il2GNi8C0DvGLL9P
 name: Poisoner's Kit
 type: tool
-img: icons/containers/bags/pouch-gold-green.webp
+img: icons/containers/bags/sack-cloth-green-blue.webp
 system:
   description:
     value: >-
@@ -43,8 +43,7 @@ system:
     recovery: []
     spent: 0
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    J2duMPFbmDXPnYr9:
       type: check
       activation:
         type: ''
@@ -59,15 +58,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -78,7 +78,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -88,11 +89,30 @@ system:
         override: false
       check:
         ability: wis
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: J2duMPFbmDXPnYr9
+      name: Use Tools
   attuned: false
   identifier: poisoners-kit
 effects: []
@@ -103,11 +123,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037262700
-  modifiedTime: 1725992538099
+  modifiedTime: 1783649220819
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!il2GNi8C0DvGLL9P'

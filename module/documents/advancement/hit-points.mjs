@@ -16,8 +16,8 @@ export default class HitPointsAdvancement extends Advancement {
       order: 10,
       icon: "icons/magic/life/heart-pink.webp",
       typeIcon: "systems/dnd5e/icons/svg/hit-points.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.HitPoints.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.HitPoints.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.HitPoints.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.HitPoints.Hint"),
       multiLevel: true,
       apps: {
         config: HitPointsConfig,
@@ -202,7 +202,7 @@ export default class HitPointsAdvancement extends Advancement {
     let value = this.valueForLevel(level);
     if ( value === undefined ) return;
     const source = { [level]: this.value[level] };
-    this.updateSource({ [`value.-=${level}`]: null });
+    this.updateSource({ [`value.${level}`]: _del });
     this.actor.updateSource({
       "system.attributes.hp.value": this.actor.system.attributes.hp.value - this.#getApplicableValue(value)
     });

@@ -14,8 +14,10 @@ system:
       spell, you choose seeing or hearing. You can use the chosen sense through
       the sensor as if you were in its space. As your action, you can switch
       between seeing and hearing.</p><p>A creature that can see the sensor (such
-      as a creature benefiting from see invisibility or truesight) sees a
-      luminous, intangible orb about the size of your fist.</p>
+      as a creature benefiting from
+      @UUID[Compendium.dnd5e.spells.Item.DQzlB5Y3k791W5bH]{see invisibility} or
+      &amp;reference[truesight]) sees a luminous, intangible orb about the size
+      of your fist.</p>
     chat: ''
   source:
     custom: ''
@@ -34,12 +36,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '1'
     units: mi
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -100,20 +106,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: clairvoyance
 sort: 0
 flags: {}
-img: icons/magic/perception/eye-ringed-glow-angry-teal.webp
+img: icons/magic/perception/eye-winged-pink.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037360521
-  modifiedTime: 1725992721246
+  modifiedTime: 1783217238694
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!cg50KpBkBdPK6vPL'

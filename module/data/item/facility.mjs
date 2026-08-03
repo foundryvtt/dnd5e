@@ -12,7 +12,6 @@ const { ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, S
  * @import { ActivitiesTemplateData, ItemDescriptionTemplateData } from "./templates/_types.mjs";
  */
 
-
 /**
  * The data definition for Facility items.
  * @extends {ItemDataModel<ActivitiesTemplate & ItemDescriptionTemplate & FacilityItemSystemData>}
@@ -57,7 +56,8 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
       progress: new SchemaField({
         value: new NumberField({ required: true, integer: true, min: 0, nullable: false, initial: 0 }),
         max: new NumberField({ required: true, integer: true, positive: true }),
-        order: new StringField({ required: true })
+        order: new StringField({ required: true }),
+        paid: new BooleanField({ required: true })
       }),
       size: new StringField({ initial: "cramped", blank: false, nullable: false, required: true }),
       trade: new SchemaField({
@@ -123,8 +123,8 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     const activity = new OrderActivity({
       order,
       _id: staticID(id),
-      name: game.i18n.format("DND5E.FACILITY.Order.Issue", {
-        order: game.i18n.localize(`DND5E.FACILITY.Orders.${order}.inf`)
+      name: _loc("DND5E.FACILITY.Order.Issue", {
+        order: _loc(`DND5E.FACILITY.Orders.${order}.inf`)
       })
     }, { parent: this.parent });
     this.activities.set(activity.id, activity);
@@ -184,7 +184,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
     // Labels
     const labels = this.parent.labels ??= {};
-    if ( this.order ) labels.order = game.i18n.localize(`DND5E.FACILITY.Orders.${this.order}.present`);
+    if ( this.order ) labels.order = _loc(`DND5E.FACILITY.Orders.${this.order}.present`);
   }
 
   /* -------------------------------------------- */

@@ -24,6 +24,9 @@ export default class VariantRulesSettingsConfig extends BaseSettingsConfig {
     abilities: {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
+    scores: {
+      template: "systems/dnd5e/templates/settings/base-config.hbs"
+    },
     footer: {
       template: "templates/generic/form-footer.hbs"
     }
@@ -44,21 +47,28 @@ export default class VariantRulesSettingsConfig extends BaseSettingsConfig {
           this.createSettingField("proficiencyModifier"),
           this.createSettingField("levelingMode")
         ].filter(_ => _);
-        context.legend = game.i18n.localize("SETTINGS.DND5E.General");
+        context.legend = _loc("SETTINGS.DND5E.General");
         break;
       case "encumbrance":
         context.fields = [
           this.createSettingField("encumbrance"),
           this.createSettingField("currencyWeight")
         ];
-        context.legend = game.i18n.localize("DND5E.Encumbrance");
+        context.legend = _loc("DND5E.Encumbrance");
         break;
       case "abilities":
         context.fields = [
           this.createSettingField("honorScore"),
           this.createSettingField("sanityScore")
         ];
-        context.legend = game.i18n.localize("DND5E.Abilities");
+        context.legend = _loc("DND5E.Abilities");
+        break;
+      case "scores":
+        context.fields = [
+          this.createSettingField("loyaltyScore"),
+          this.createSettingField("pietyScore")
+        ];
+        context.legend = _loc("DND5E.AttributeScores");
         break;
     }
     return context;

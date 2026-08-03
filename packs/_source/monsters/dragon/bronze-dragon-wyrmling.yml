@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,61 +480,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
-  - _id: H2dPYlwoo8MOstEQ
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The dragon can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!hY9ptpO5Xl2tfkcj.H2dPYlwoo8MOstEQ'
   - _id: Vq0dUbodqBggQAVQ
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Bronze Dragon Wyrmling attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -600,7 +554,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -609,8 +563,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        gN4otqBKsGr3vuL6:
           type: attack
           activation:
             type: action
@@ -625,10 +578,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -645,7 +599,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -658,24 +613,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: gN4otqBKsGr3vuL6
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -685,11 +653,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107552828
+      systemVersion: 6.0.0
+      createdTime: 1781558277369
+      modifiedTime: 1781558290052
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hY9ptpO5Xl2tfkcj.Vq0dUbodqBggQAVQ'
@@ -700,17 +668,21 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon uses one of the following breath
-          weapons.</p><p><strong>Lightning Breath.</strong> The dragon exhales
-          lightning in a 120-foot line that is 10 feet wide. Each creature in
-          that line must make a [[/save activity=w2CftR6CLr5PZ7zY]] saving
-          throw, taking [[/damage average activity=w2CftR6CLr5PZ7zY]] damage on
-          a failed save, or half as much damage on a successful
-          one.</p><p><strong>Repulsion Breath.</strong> The dragon exhales
-          repulsion energy in a 30-foot cone. Each creature in that area must
-          succeed on a [[/save activity=YElWYv6C5UfhAu48]] saving throw. On a
-          failed save, the creature is pushed 60 feet away from the dragon.</p>
-        chat: <p>The dragon breathes in!</p>
+          <p>The [[lookup @name lowercase]]{monster} uses one of the following
+          breath weapons.</p><p><strong>Lightning Breath.</strong> The [[lookup
+          @name lowercase]]{monster} exhales lightning in a [[lookup
+          @labels.description.template activity=w2CftR6CLr5PZ7zY]]. Each
+          creature in that line must make a [[/save activity=w2CftR6CLr5PZ7zY]]
+          saving throw, taking [[/damage average activity=w2CftR6CLr5PZ7zY]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p><p><strong>Repulsion Breath.</strong> The [[lookup @name
+          lowercase]]{monster} exhales repulsion energy in a [[lookup
+          @labels.description.template activity=YElWYv6C5UfhAu48]]. Each
+          creature in that area must succeed on a [[/save
+          activity=YElWYv6C5UfhAu48]] saving throw. On a failed save, the
+          creature is pushed 60 feet away from the [[lookup @name
+          lowercase]]{monster}.</p>
+        chat: <p>The [[lookup @name]]{monster} breathes in!</p>
       source:
         custom: ''
         book: ''
@@ -726,7 +698,7 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -749,6 +721,13 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales lightning in a
+              [[lookup @labels.description.template activity=w2CftR6CLr5PZ7zY]].
+              Each creature in that line must make a [[/save
+              activity=w2CftR6CLr5PZ7zY]] saving throw, taking [[/damage average
+              activity=w2CftR6CLr5PZ7zY]] damage on a failed save, or half as
+              much damage on a successful one.</p>
           duration:
             concentration: false
             value: ''
@@ -766,12 +745,12 @@ items:
               contiguous: false
               type: line
               size: '120'
-              width: ''
+              width: '5'
               height: ''
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -795,13 +774,19 @@ items:
             ability:
               - dex
             dc:
-              calculation: ''
+              calculation: con
               formula: '12'
+            bonus: ''
           sort: 0
           _id: w2CftR6CLr5PZ7zY
           name: Lightning Breath
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
         YElWYv6C5UfhAu48:
           type: save
           activation:
@@ -820,6 +805,13 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} exhales repulsion
+              energy in a [[lookup @labels.description.template
+              activity=YElWYv6C5UfhAu48]]. Each creature in that area must
+              succeed on a [[/save activity=YElWYv6C5UfhAu48]] saving throw. On
+              a failed save, the creature is pushed 60 feet away from the
+              [[lookup @name lowercase]]{monster}.</p>
           duration:
             concentration: false
             value: ''
@@ -842,7 +834,7 @@ items:
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -852,19 +844,25 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
             ability:
               - str
             dc:
-              calculation: ''
+              calculation: con
               formula: '12'
+            bonus: ''
           sort: 0
           _id: YElWYv6C5UfhAu48
           name: Repulsion Breath
           img: ''
           appliedEffects: []
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
       enchant: {}
       prerequisites:
         level: null
@@ -878,22 +876,71 @@ items:
     sort: 600000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 6.0.0
       createdTime: 1745451478894
-      modifiedTime: 1745451510953
+      modifiedTime: 1781562678621
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hY9ptpO5Xl2tfkcj.DogAlXwHCyvsBynk'
+  - _id: HhVw9jFpoaxhcvrn
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 125000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781558272817
+      modifiedTime: 1781558272817
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!hY9ptpO5Xl2tfkcj.HhVw9jFpoaxhcvrn'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -902,7 +949,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171249513

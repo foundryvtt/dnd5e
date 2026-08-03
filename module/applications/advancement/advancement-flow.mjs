@@ -9,6 +9,10 @@
  */
 export default class AdvancementFlow extends FormApplication {
   constructor(item, advancementId, level, options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The V1 `AdvancementFlow` has been deprecated in favor of a `AdvancementFlowV2`.",
+      { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+    );
     super({}, options);
 
     /**

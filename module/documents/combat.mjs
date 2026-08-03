@@ -61,7 +61,28 @@ export default class Combat5e extends Combat {
 
   /** @inheritDoc */
   async rollInitiative(ids, options={}) {
-    await super.rollInitiative(ids, options);
+    const combatantsInfo = ids.reduce((info, id) => {
+      const rollGroupingKey = this.combatants.get(id).getInitiativeGroupingKey() ?? id;
+      let deriveFrom = null;
+      if ( dnd5e.settings.initiativeGroupRoll && !this.started ) {
+        deriveFrom = this.combatants.find(c =>
+          (c.getInitiativeGroupingKey() === rollGroupingKey) && (Number.isFinite(c.initiative))
+        )?.id ?? null;
+      }
+      deriveFrom ??= info.toBeRolled[rollGroupingKey];
+      if ( deriveFrom ) info.toBeDerived[id] = deriveFrom;
+      else info.toBeRolled[rollGroupingKey] = id;
+      return info;
+    }, { toBeRolled: {}, toBeDerived: {} });
+
+    await super.rollInitiative(Object.values(combatantsInfo.toBeRolled), options);
+
+    const updates = Object.keys(combatantsInfo.toBeDerived).map(id => ({
+      _id: id, initiative: this.combatants.get(combatantsInfo.toBeDerived[id]).initiative
+    }));
+
+    await this.updateEmbeddedDocuments("Combatant", updates, { turnEvents: false });
+
     for ( const id of ids ) await this._recoverUses({ initiative: this.combatants.get(id) });
     return this;
   }
@@ -100,8 +121,6 @@ export default class Combat5e extends Combat {
 
   /** @inheritDoc */
   _onDelete(options, userId) {
-    // TODO: Workaround for https://github.com/foundryvtt/foundryvtt/issues/13495
-    this.turn = null;
     super._onDelete(options, userId);
     this.combatants.get(this.current.combatantId)?.refreshDynamicRing();
   }
@@ -131,6 +150,51 @@ export default class Combat5e extends Combat {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onExit(combatant) {
+    await super._onExit(combatant);
+    const actor = combatant.actor;
+    if ( !actor ) return;
+    const batchDelete = [{
+      action: "delete",
+      documentName: "ActiveEffect",
+      ids: [],
+      parent: actor
+    }];
+    const shouldDelete = effect => {
+      // Don't delete dependent effects, as these will be deleted via the 5e dependency registry
+      if ( effect.getFlag("dnd5e", "dependentOn") ) return false;
+
+      // Don't delete item-bound effects which aren't applied enchantments
+      if ( !effect.isAppliedEnchantment && (effect.parent instanceof Item) ) return false;
+
+      // If effect is expired, delete
+      if ( effect.duration.expired ) return true;
+
+      // Otherwise, if a combat-specific pseudo-expiry, delete only if no start combat or start combat is this combat
+      const startCombat = effect.start?.combat;
+      return effect.specialDuration && (!startCombat || (combatant.parent === startCombat));
+    };
+    for ( const effect of actor.effects ) {
+      if ( shouldDelete(effect) ) batchDelete[0].ids.push(effect.id);
+    }
+    for ( const item of actor.items ) {
+      const toDelete = [];
+      for ( const effect of item.effects ) {
+        if ( shouldDelete(effect) ) toDelete.push(effect.id);
+      }
+      if ( toDelete.length ) batchDelete.push({
+        action: "delete",
+        documentName: "ActiveEffect",
+        ids: toDelete,
+        parent: item
+      });
+    }
+    return foundry.documents.modifyBatch(batchDelete);
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
@@ -143,8 +207,7 @@ export default class Combat5e extends Combat {
     for ( const combatant of this.combatants ) {
       const key = combatant.getGroupingKey();
       if ( key === null ) continue;
-      if ( !groups.has(key) ) groups.set(key, { combatants: [], expanded: this.expandedGroups.has(key) });
-      groups.get(key).combatants.push(combatant);
+      groups.getOrInsert(key, { combatants: [], expanded: this.expandedGroups.has(key) }).combatants.push(combatant);
     }
 
     for ( const [key, { combatants }] of groups.entries() ) {

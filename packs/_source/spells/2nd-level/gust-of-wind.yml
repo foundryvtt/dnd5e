@@ -14,7 +14,8 @@ system:
       moves when moving closer to you.</p><p>The gust disperses gas or vapor,
       and it extinguishes candles, torches, and similar unprotected flames in
       the area. It causes protected flames, such as those of lanterns, to dance
-      wildly and has a 50 percent chance to extinguish them.</p><p>As a bonus
+      wildly and has a [[/r 1d100cs&lt;51 #On a roll of 1, a flame is
+      extinguished.]]{50 percent} chance to extinguish them.</p><p>As a bonus
       action on each of your turns before the spell ends, you can change the
       direction in which the line blasts from you.</p>
     chat: ''
@@ -70,32 +71,39 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: When a creature starts its turn in the line.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
         onSave: half
         parts: []
@@ -104,23 +112,131 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Wind Blast Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    N2uCoJPi53lKVVPr:
+      type: utility
+      name: Change Gust Direction
+      _id: N2uCoJPi53lKVVPr
+      img: ''
+      sort: 100000
+      activation:
+        type: bonus
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    eYoRKXNTA7uKykZ0:
+      type: utility
+      name: Cast
+      _id: eYoRKXNTA7uKykZ0
+      img: null
+      sort: -100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: gust-of-wind
 sort: 0
 flags: {}
-img: icons/magic/air/wind-swirl-gray-blue.webp
+img: icons/magic/air/air-pressure-shield-blue.webp
 effects: []
 folder: Qi4Se3we69ukl2V9
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037351790
-  modifiedTime: 1731016507018
+  modifiedTime: 1781266818001
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!FSMy6VAjDnXY9vWz'

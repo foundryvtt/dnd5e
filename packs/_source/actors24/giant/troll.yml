@@ -482,12 +482,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -531,7 +528,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -551,6 +548,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mmLoathsomeLimbs
     name: Loathsome Limbs
@@ -697,17 +695,14 @@ items:
         origin: Compendium.dnd-monster-manual.features.Item.mmLoathsomeLimbs
         _id: PFledLQkQ75osOlZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
           each missing limb.</p>
@@ -721,27 +716,35 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmTroll000000000.mmLoathsomeLimbs.PFledLQkQ75osOlZ
       - name: Exhaustion 2
         img: systems/dnd5e/icons/svg/statuses/exhaustion-2.svg
         origin: Compendium.dnd-monster-manual.features.Item.mmLoathsomeLimbs
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
           each missing limb.</p>
@@ -755,28 +758,36 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
         _id: AVZPkC07GONXpRMe
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmTroll000000000.mmLoathsomeLimbs.AVZPkC07GONXpRMe
       - name: Exhaustion 3
         img: systems/dnd5e/icons/svg/statuses/exhaustion-3.svg
         origin: Compendium.dnd-monster-manual.features.Item.mmLoathsomeLimbs
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
           each missing limb.</p>
@@ -790,28 +801,36 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
         _id: l1PiPpfAiF9TWs88
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmTroll000000000.mmLoathsomeLimbs.l1PiPpfAiF9TWs88
       - name: Exhaustion 4
         img: systems/dnd5e/icons/svg/statuses/exhaustion-4.svg
         origin: Compendium.dnd-monster-manual.features.Item.mmLoathsomeLimbs
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
           each missing limb.</p>
@@ -825,28 +844,36 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
         _id: DCB7xWKhKSEmZHNn
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmTroll000000000.mmLoathsomeLimbs.DCB7xWKhKSEmZHNn
       - name: Exhaustion 5
         img: systems/dnd5e/icons/svg/statuses/exhaustion-5.svg
         origin: Compendium.dnd-monster-manual.features.Item.mmLoathsomeLimbs
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
           each missing limb.</p>
@@ -860,28 +887,36 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
         _id: 9Tc60NhDJH43WdEU
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmTroll000000000.mmLoathsomeLimbs.9Tc60NhDJH43WdEU
       - name: Exhaustion Dead
         img: systems/dnd5e/icons/svg/statuses/exhaustion-6.svg
         origin: Compendium.dnd-monster-manual.features.Item.mmLoathsomeLimbs
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: true
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: >-
           <p>The creature has 1 &amp;Reference[Exhaustion apply=false] level for
           each missing limb.</p>
@@ -895,11 +930,22 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
         _id: drQriWAwmwosemzp
+        showIcon: 2
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        folder: null
         _key: >-
           !actors.items.effects!mmTroll000000000.mmLoathsomeLimbs.drQriWAwmwosemzp
     flags:
@@ -911,10 +957,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLoathsomeLimbs
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -1024,10 +1072,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRegeneration00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -1129,10 +1179,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1268,10 +1320,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1376,10 +1430,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCharge00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1392,7 +1448,7 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1771452716311

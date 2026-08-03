@@ -64,10 +64,13 @@ export default class Tooltips5e {
    * @returns {Promise}
    */
   async _onTooltipActivate() {
+    const dataset = game.tooltip.element?.dataset ?? {};
+    const extras = dataset.tooltipExtras;
+
     // General content links
     if ( game.tooltip.element?.classList.contains("content-link") ) {
       const doc = await fromUuid(game.tooltip.element.dataset.uuid);
-      return this._onHoverContentLink(doc);
+      return this._onHoverContentLink(doc, { extras });
     }
 
     const loading = this.tooltip.querySelector(".loading");
@@ -76,12 +79,11 @@ export default class Tooltips5e {
     if ( loading?.dataset.uuid ) {
       const doc = await fromUuid(loading.dataset.uuid);
       if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
-      return this._onHoverContentLink(doc);
+      return this._onHoverContentLink(doc, { extras });
     }
 
     // Passive checks
     else if ( loading?.dataset.passive !== undefined ) {
-      const dataset = game.tooltip.element?.dataset ?? {};
       switch ( dataset.type ) {
         case "language":
           return this._onHoverPassiveLanguage(dataset.language);
@@ -109,11 +111,14 @@ export default class Tooltips5e {
 
   /**
    * Handle hovering over a content link and showing rich tooltips if possible.
-   * @param {Document} doc  The document linked by the content link.
+   * @param {Document} doc             The document linked by the content link.
+   * @param {object} [options={}]
+   * @param {string} [options.extras]  Extra HTML displayed with the tooltip.
    * @protected
    */
-  async _onHoverContentLink(doc) {
-    const { content, classes } = await (doc.richTooltip?.() ?? doc.system?.richTooltip?.() ?? {});
+  async _onHoverContentLink(doc, { extras }={}) {
+    if ( extras ) extras = foundry.utils.cleanHTML(extras);
+    const { content, classes } = await (doc.richTooltip?.({ extras }) ?? doc.system?.richTooltip?.({ extras }) ?? {});
     if ( !content ) return;
     this.tooltip.innerHTML = content;
     this.tooltip.classList.remove("theme-dark");
@@ -153,11 +158,11 @@ export default class Tooltips5e {
 
     let label;
     if ( skillConfig ) {
-      label = game.i18n.format("DND5E.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityConfig.label });
+      label = _loc("DND5E.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityConfig.label });
     } else {
       // If no skill was provided, we're doing a passive ability check.
       // This isn't technically a thing in the rules, but we can support it anyway if people want to use it.
-      label = game.i18n.format("DND5E.SkillPassiveHint", { skill: abilityConfig.label });
+      label = _loc("DND5E.SkillPassiveHint", { skill: abilityConfig.label });
     }
 
     this._onHoverPassive({ label }, actor => {

@@ -132,17 +132,15 @@ effects:
     transfer: true
     _id: sSsgrnNQCK4vurTm
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: true
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The effect ends early if you pull the hood down (no action required) or
       cease wearing the cloak.</p>
@@ -154,22 +152,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1729017377412
-      modifiedTime: 1730836048499
+      modifiedTime: 1783544094434
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!dmgCloakOfInvisi.sSsgrnNQCK4vurTm'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764616722094
+  modifiedTime: 1783544094434
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 7900000

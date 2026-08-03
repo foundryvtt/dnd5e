@@ -18,7 +18,9 @@ export default class EnchantSheet extends ActivitySheet {
     effect: {
       template: "systems/dnd5e/templates/activity/enchant-effect.hbs",
       templates: [
-        "systems/dnd5e/templates/activity/parts/enchant-enchantments.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs",
+        "systems/dnd5e/templates/activity/parts/enchant-effect-settings.hbs",
         "systems/dnd5e/templates/activity/parts/enchant-restrictions.hbs"
       ]
     }
@@ -42,9 +44,10 @@ export default class EnchantSheet extends ActivitySheet {
     effect.activityOptions = this.item.system.activities
       .filter(a => a.id !== this.activity.id)
       .map(a => ({ value: a.id, label: a.name, selected: effect.data.riders.activity.has(a.id) }));
-    effect.effectOptions = context.allEffects.map(e => ({
-      ...e, selected: effect.data.riders.effect.has(e.value)
-    }));
+    effect.additionalSettings = "systems/dnd5e/templates/activity/parts/enchant-effect-settings.hbs";
+    effect.effectOptions = this.item.effects
+      .filter(e => e.type === "base")
+      .map(e => ({ value: e.id, label: e.name, selected: effect.data.riders.effect.has(e.id) }));
     return effect;
   }
 
@@ -54,19 +57,20 @@ export default class EnchantSheet extends ActivitySheet {
   async _prepareEffectContext(context, options) {
     context = await super._prepareEffectContext(context, options);
 
-    const appliedEnchantments = new Set(context.activity.effects?.map(e => e._id) ?? []);
-    context.allEnchantments = this.item.effects
-      .filter(e => e.type === "enchantment")
-      .map(effect => ({
-        value: effect.id, label: effect.name, selected: appliedEnchantments.has(effect.id)
-      }));
+    context.enchantmentLabels = {
+      add: "DND5E.ENCHANT.Enchantment.Action.Create",
+      delete: "DND5E.ENCHANT.Enchantment.Action.Delete",
+      dissociate: "DND5E.ENCHANT.Enchantment.Action.Dissociate",
+      empty: "DND5E.ENCHANT.Enchantment.Empty",
+      legend: "DND5E.ENCHANT.FIELDS.enchant.label"
+    };
 
     const enchantableTypes = this.activity.enchantableTypes;
     context.typeOptions = [
-      { value: "", label: game.i18n.localize("DND5E.ENCHANT.FIELDS.restrictions.type.Any"), rule: true },
+      { value: "", label: _loc("DND5E.ENCHANT.FIELDS.restrictions.type.Any"), rule: true },
       ...Object.keys(CONFIG.Item.dataModels)
         .filter(t => enchantableTypes.has(t))
-        .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
+        .map(value => ({ value, label: _loc(CONFIG.Item.typeLabels[value]) }))
     ];
     context.isTypePhysical = !context.source.restrictions.type
       || !!CONFIG.Item.dataModels[context.source.restrictions.type]?.schema.has("quantity");
@@ -121,10 +125,11 @@ export default class EnchantSheet extends ActivitySheet {
 
   /** @override */
   _addEffectData() {
+    const { name, img } = this.activity._source;
     return {
       type: "enchantment",
-      name: this.item.name,
-      img: this.item.img,
+      name: name || this.item.name,
+      img: img || this.item.img,
       disabled: true
     };
   }

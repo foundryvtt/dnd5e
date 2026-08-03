@@ -4,6 +4,7 @@ import { defaultUnits, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
+import MovementField from "../shared/movement-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
 import SensesField from "../shared/senses-field.mjs";
 import SimpleTraitField from "./fields/simple-trait-field.mjs";
@@ -32,7 +33,7 @@ export default class CharacterData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES"];
+  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES", "DND5E.ROLL", "DND5E.CHARACTER"];
 
   /* -------------------------------------------- */
 
@@ -56,6 +57,10 @@ export default class CharacterData extends CreatureTemplate {
         ...AttributesFields.creature,
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
+          bloodied: new NumberField({
+            nullable: false, min: 0, max: 100, persisted: false, initial: () => CONFIG.DND5E.bloodied.threshold,
+            label: "DND5E.HITPOINTS.Bloodied.label"
+          }),
           max: new NumberField({
             nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsOverride",
             hint: "DND5E.HitPointsOverrideHint"
@@ -73,11 +78,14 @@ export default class CharacterData extends CreatureTemplate {
           failure: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
           }),
-          bonuses: new SchemaField({
-            save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
-          })
-        }, { label: "DND5E.DeathSave" }),
-        inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" })
+          bonuses: new SchemaField({}, { persisted: false })
+        }, { label: "DND5E.DeathSave", labelPrefix: "DND5E.DEATH.FIELDS.attributes.death.roll." }),
+        inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" }),
+        piety: new SchemaField({
+          value: new NumberField({
+            min: 1, initial: null, nullable: true, integer: true, label: "DND5E.PIETY.FIELDS.value.label", placeholder: "0"
+          }),
+        })
       }, { label: "DND5E.Attributes" }),
       bastion: new SchemaField({
         name: new StringField({ required: true }),
@@ -149,7 +157,10 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    AttributesFields._migrateArmorClass(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
+    MovementField._migrate(source.attributes?.movement);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -159,8 +170,6 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   prepareBaseData() {
     this.attributes.hd = new HitDice(this.parent);
-    this.details.level = 0;
-    this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
       if ( item.type === "class" ) this.details.level += item.system.levels;
@@ -188,7 +197,9 @@ export default class CharacterData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    MovementField._shim(this.attributes.movement);
     SensesField._shim(this.attributes.senses);
+    this.shimBonusData();
   }
 
   /* -------------------------------------------- */
@@ -204,7 +215,7 @@ export default class CharacterData extends CreatureTemplate {
     } else {
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
     }
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement.speeds[key] ??= 0;
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses.ranges[key] ??= 0;
     this.attributes.movement.units ??= defaultUnits("length");
     this.attributes.senses.units ??= defaultUnits("length");
@@ -223,14 +234,15 @@ export default class CharacterData extends CreatureTemplate {
 
     AttributesFields.prepareExhaustionLevel.call(this);
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareCurrency();
     this.prepareSkills({ rollData, originalSkills });
     this.prepareTools({ rollData });
+    AttributesFields.prepareSpellcastingAbility.call(this);
     AttributesFields.prepareArmorClass.call(this, rollData);
     AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this, rollData);
-    AttributesFields.prepareSpellcastingAbility.call(this);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
 
@@ -280,6 +292,7 @@ export default class CharacterData extends CreatureTemplate {
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     AttributesFields.onUpdateHP.call(this, changed, options, userId);
+    AttributesFields.onUpdateDeathSaves.call(this, changed, options, userId);
   }
 
   /* -------------------------------------------- */

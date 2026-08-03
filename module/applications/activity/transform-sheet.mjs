@@ -60,7 +60,7 @@ export default class TransformSheet extends ActivitySheet {
     });
     context.categories = settings.createFormCategories({ prefix: "settings." });
     context.presetOptions = [
-      { value: "", label: game.i18n.localize("DND5E.TRANSFORM.Preset.Default") },
+      { value: "", label: _loc("DND5E.TRANSFORM.Preset.Default") },
       { rule: true },
       ...Object.entries(CONFIG.DND5E.transformation.presets)
         .map(([value, { label }]) => ({ value, label }))
@@ -74,8 +74,9 @@ export default class TransformSheet extends ActivitySheet {
       .map(([value, { label }]) => ({ value, label }));
 
     context.profileModes = [
-      { value: "", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.Direct") },
-      { value: "cr", label: game.i18n.localize("DND5E.TRANSFORM.FIELDS.transform.mode.CR") }
+      { value: "", label: _loc("DND5E.TRANSFORM.FIELDS.transform.mode.Direct") },
+      { value: "cr", label: _loc("DND5E.TRANSFORM.FIELDS.transform.mode.CR"), rule: true },
+      { value: "form", label: _loc("DND5E.TRANSFORM.FIELDS.transform.mode.Form") }
     ];
     context.profiles = context.source.profiles.map((data, index) => ({
       data, index,
@@ -85,6 +86,24 @@ export default class TransformSheet extends ActivitySheet {
       prefix: `profiles.${index}.`,
       source: context.source.profiles[index] ?? data
     })).sort((lhs, rhs) => (lhs.name || "").localeCompare(rhs.name || "", game.i18n.lang));
+
+    context.effects = {
+      labels: {
+        legend: "DND5E.TRANSFORM.FIELDS.profiles.label"
+      },
+      fields: [
+        {
+          field: context.fields.transform.fields.mode,
+          options: context.profileModes,
+          value: context.source.transform.mode
+        },
+        {
+          field: context.fields.transform.fields.formless,
+          input: dnd5e.applications.fields.createCheckboxInput,
+          value: context.source.transform.formless
+        }
+      ]
+    };
 
     return context;
   }
@@ -116,7 +135,7 @@ export default class TransformSheet extends ActivitySheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    this.element.querySelector(".activity-profiles").addEventListener("drop", this.#onDrop.bind(this));
+    this.element.querySelector(".activity-profiles")?.addEventListener("drop", this.#onDrop.bind(this));
   }
 
   /* -------------------------------------------- */

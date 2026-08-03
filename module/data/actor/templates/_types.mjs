@@ -1,14 +1,14 @@
 /**
- * @import { MovementData, RollConfigData, SensesData } from "../../shared/_types.mjs";
- * @import { DamageTraitData, SimpleTraitData } from "../fields/_types.mjs";
+ * @import {
+ *   D20RollModificationData, DamageRollModificationData, MovementData, RollConfigData, SensesData
+ * } from "../../shared/_types.mjs";
+ * @import { ACFormulaData, DamageTraitData, SimpleTraitData } from "../fields/_types.mjs";
  */
 
 /**
  * @typedef AttributesCommonData
  * @property {ArmorClassData} ac       Armor class configuration.
  * @property {RollConfigData} init
- * @property {string} init.ability     The ability used for initiative rolls.
- * @property {string} init.bonus       The bonus provided to initiative rolls.
  * @property {MovementData} movement
  */
 
@@ -20,9 +20,6 @@
  * @property {string} spellcasting                Primary spellcasting ability.
  * @property {number} exhaustion                  Creature's exhaustion level.
  * @property {RollConfigData} concentration
- * @property {string} concentration.ability       The ability used for concentration saving throws.
- * @property {object} concentration.bonuses
- * @property {string} concentration.bonuses.save  The bonus provided to concentration saving throws.
  * @property {number} concentration.limit         The amount of items this actor can concentrate on.
  * @property {object} loyalty
  * @property {number} loyalty.value               The creature's loyalty score.
@@ -30,9 +27,19 @@
 
 /**
  * @typedef ArmorClassData
- * @property {string} calc     Name of one of the built-in formulas to use.
- * @property {number} flat     Flat value used for flat or natural armor calculation.
- * @property {string} formula  Custom formula to use.
+ * @property {number} armor              AC value provided by equipped armor (not persisted).
+ * @property {number} base               Base AC value originating from the formula (not persisted).
+ * @property {string} bonus              Bonus AC provided by active effects (not persisted).
+ * @property {string} calc               Name of one of the built-in formulas being used or "custom" (not persisted).
+ * @property {Set<string>} calcs         Which of the base AC calculation formulas defined by the system should be
+ *                                       usable.
+ * @property {number} cover              Bonus AC provided by the cover status effect (not persisted).
+ * @property {number} flat               Flat value usable by any armor class calculation.
+ * @property {string} formula            Extra formula added by legacy active effects (not persisted).
+ * @property {ACFormulaData[]} formulas  Available armor class formulas, the highest of which is used.
+ * @property {string} min                Minimum armor class value after all bonuses have been added (not persisted).
+ * @property {number} override           Unmodifiable armor class value that supersedes any entered formulas.
+ * @property {number} shield             AC value provided by equipped shield (not persisted).
  */
 
 /**
@@ -54,50 +61,51 @@
  * @property {number} value          Ability score.
  * @property {number} proficient     Proficiency value for saves.
  * @property {number} max            Maximum possible score for the ability.
- * @property {object} bonuses        Bonuses that modify ability checks and saves.
- * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
- * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
- * @property {RollConfigData} check    Properties related to ability checks.
- * @property {RollConfigData} save     Properties related to saving throws.
+ * @property {Omit<RollConfigData, "ability">} check  Properties related to ability checks.
+ * @property {Omit<RollConfigData, "ability">} save   Properties related to saving throws.
  */
 
 /**
  * @typedef {CommonTemplateData} CreatureTemplateData
  * @property {object} bonuses
- * @property {AttackBonusesData} bonuses.mwak        Bonuses to melee weapon attacks.
- * @property {AttackBonusesData} bonuses.rwak        Bonuses to ranged weapon attacks.
- * @property {AttackBonusesData} bonuses.msak        Bonuses to melee spell attacks.
- * @property {AttackBonusesData} bonuses.rsak        Bonuses to ranged spell attacks.
- * @property {object} bonuses.abilities              Bonuses to ability scores.
- * @property {string} bonuses.abilities.check        Numeric or dice bonus to ability checks.
- * @property {string} bonuses.abilities.save         Numeric or dice bonus to ability saves.
- * @property {string} bonuses.abilities.skill        Numeric or dice bonus to skill checks.
  * @property {object} bonuses.spell                  Bonuses to spells.
  * @property {string} bonuses.spell.dc               Numeric bonus to spellcasting DC.
+ * @property {object} rolls
+ * @property {object} rolls.ability
+ * @property {ProficientRollModificationData} rolls.ability.check  Modifications to ability checks.
+ * @property {ProficientRollModificationData} rolls.ability.save   Modifications to ability saves.
+ * @property {ProficientRollModificationData} rolls.ability.skill  Modifications to skill checks.
+ * @property {ProficientRollModificationData} rolls.ability.tool   Modifications to tool checks.
+ * @property {D20RollModificationData} rolls.attack       Modifications to attack rolls.
+ * @property {D20RollModificationData} rolls.attack.msak  Modifications to melee spell attack rolls.
+ * @property {D20RollModificationData} rolls.attack.mwak  Modifications to melee weapon attack rolls.
+ * @property {D20RollModificationData} rolls.attack.rsak  Modifications to ranged spell attack rolls.
+ * @property {D20RollModificationData} rolls.attack.rwak  Modifications to ranged weapon attack rolls.
+ * @property {object} rolls.damage
+ * @property {DamageRollModificationData} rolls.damage.msak  Damage bonuses to melee spell attacks.
+ * @property {DamageRollModificationData} rolls.damage.mwak  Damage bonuses to melee weapon attacks.
+ * @property {DamageRollModificationData} rolls.damage.rsak  Damage bonuses to ranged spell attacks.
+ * @property {DamageRollModificationData} rolls.damage.rwak  Damage bonuses to ranged weapon attacks.
  * @property {Record<string, ToolData>} tools        Actor's tools.
  * @property {Record<string, SkillData>} skills      Actor's skills.
  * @property {Record<string, SpellSlotData>} spells  Actor's spell slots.
  */
 
 /**
- * @typedef AttackBonusesData
- * @property {string} attack  Numeric or dice bonus to attack rolls.
- * @property {string} damage  Numeric or dice bonus to damage rolls.
+ * @typedef {D20RollModificationData} ProficientRollModificationData
+ * @property {number} proficiency  Minimum proficiency level for this roll.
  */
 
 /**
  * @typedef {RollConfigData} SkillData
  * @property {number} value            Proficiency level creature has in this skill.
  * @property {object} bonuses          Bonuses for this skill.
- * @property {string} bonuses.check    Numeric or dice bonus to skill's check.
  * @property {string} bonuses.passive  Numeric bonus to skill's passive check.
  */
 
 /**
  * @typedef {RollConfigData} ToolData
  * @property {number} value            Proficiency level creature has in this tool.
- * @property {object} bonuses          Bonuses for this tool.
- * @property {string} bonuses.check    Numeric or dice bonus to tool's check.
  */
 
 /**

@@ -7,17 +7,17 @@ system:
   description:
     value: >-
       <p>You conjure a phantom watchdog in an unoccupied space that you can see
-      within range, where it remains for the Duration, until you dismiss it as
+      within range, where it remains for the duration, until you dismiss it as
       an action, or until you move more than 100 feet away from it.</p><p>The
-      hound is Invisible to all creatures except you and can't be harmed. When a
-      Small or larger creature comes within 30 feet of it without first speaking
-      the password that you specify when you cast this spell, the hound starts
-      barking loudly. The hound sees invisible creatures and can see into the
-      Ethereal Plane. It ignores illusions.</p><p>At the start of each of your
-      turns, the hound attempts to bite one creature within 5 feet of it that is
-      hostile to you. The hound's Attack bonus is equal to your Spellcasting
-      ability modifier + your Proficiency Bonus. On a hit, it deals 4d8 piercing
-      damage.</p>
+      hound is &amp;reference[Invisible apply=false] to all creatures except you
+      and can't be harmed. When a Small or larger creature comes within 30 feet
+      of it without first speaking the password that you specify when you cast
+      this spell, the hound starts barking loudly. The hound sees invisible
+      creatures and can see into the Ethereal Plane. It ignores
+      illusions.</p><p>At the start of each of your turns, the hound attempts to
+      bite one creature within 5 feet of it that is hostile to you. The hound's
+      Attack bonus is equal to your Spellcasting ability modifier + your
+      Proficiency Bonus. On a hit, it deals 4d8 piercing damage.</p>
     chat: ''
   source:
     custom: ''
@@ -36,12 +36,16 @@ system:
     affects:
       type: space
       choice: false
+      count: ''
+      special: ''
     template:
       units: any
       contiguous: false
+      type: ''
   range:
     value: '30'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -65,9 +69,10 @@ system:
       _id: dnd5eactivity000
       type: attack
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: At the start of each of your turns while the Faithful Hound is active.
       consumption:
         targets: []
         scaling:
@@ -79,18 +84,25 @@ system:
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        special: ''
+        units: ft
+        value: '5'
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       attack:
         ability: ''
         bonus: ''
@@ -98,42 +110,122 @@ system:
           threshold: null
         flat: false
         type:
-          value: ranged
-          classification: spell
+          value: melee
+          classification: ''
       damage:
         critical:
           bonus: ''
         includeBase: true
         parts:
-          - number: 4
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
             denomination: 8
             bonus: ''
             types:
               - piercing
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
+              number: 1
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    txlrVwlbaR355KwZ:
+      type: summon
+      name: Summon Hound
+      _id: txlrVwlbaR355KwZ
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: true
+        disposition: true
+        proficiency: true
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: xomklCZSPxj0cIRP
+          uuid: Compendium.dnd5e.monsters.Actor.GoBpZC30OYlQso2d
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   identifier: faithful-hound
 sort: 0
 flags: {}
-img: icons/magic/nature/wolf-paw-glow-large-purple-teal.webp
+img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037356311
-  modifiedTime: 1725992719862
+  modifiedTime: 1781377125045
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!SAj03P2WBDiWu7zu'

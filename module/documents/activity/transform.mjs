@@ -34,6 +34,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
         actions: {
           transformActor: TransformActivity.#transformActor
         },
+        applyEffectsInChat: false,
         dialog: TransformUsageDialog
       }
     }, { inplace: false })
@@ -48,6 +49,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
    * @type {boolean}
    */
   get canTransform() {
+    if ( this.transform.mode === "form" ) return this.actor.isOwner;
     return game.user.can("ACTOR_CREATE") && (game.user.isGM || game.settings.get("dnd5e", "allowPolymorphing"));
   }
 
@@ -59,7 +61,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);
     config.transform ??= {};
-    config.transform.profile ??= this.availableProfiles[0]?._id ?? null;
+    config.transform.profile ??= this.currentProfile ?? this.availableProfiles[0]?._id ?? null;
     return config;
   }
 
@@ -85,8 +87,11 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   /** @override */
   _usageChatButtons(message) {
     if ( !this.availableProfiles.length ) return super._usageChatButtons(message);
+    const form = this.transform.mode === "form"
+      ? this.effects.find(e => e._id === message.data?.flags?.dnd5e?.transform?.profile)?.getEffect()?.name
+        ?? _loc("DND5E.TRANSFORM.NoForm") : null;
     return [{
-      label: game.i18n.localize("DND5E.TRANSFORM.Action.Transform"),
+      label: form ?? _loc("DND5E.TRANSFORM.Action.Transform"),
       icon: '<i class="fa-solid fa-frog" inert></i>',
       dataset: {
         action: "transformActor"
@@ -106,12 +111,14 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
 
   /** @inheritDoc */
   async _finalizeUsage(config, results) {
-    const profile = this.profiles.find(p => p._id === config.transform?.profile);
-    if ( profile ) {
-      const uuid = !this.transform.mode ? profile.uuid : await this.queryActor(profile);
-      if ( uuid ) {
-        if ( results.message instanceof ChatMessage ) results.message.setFlag("dnd5e", "transform.uuid", uuid);
-        else foundry.utils.setProperty(results.message, "flags.dnd5e.transform.uuid", uuid);
+    if ( this.transform.mode !== "form" ) {
+      const profile = this.profiles.find(p => p._id === config.transform?.profile);
+      if ( profile ) {
+        const uuid = this.transform.mode ? await this.queryActor(profile) : profile.uuid;
+        if ( uuid ) {
+          if ( results.message instanceof ChatMessage ) results.message.setFlag("dnd5e", "transform.uuid", uuid);
+          else foundry.utils.setProperty(results.message, "flags.dnd5e.transform.uuid", uuid);
+        }
       }
     }
     await super._finalizeUsage(config, results);
@@ -140,6 +147,16 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  async _triggerSubsequentActions(config, results) {
+    if ( this.transform.mode !== "form" ) return;
+    const profile = results.message?.flags?.dnd5e?.transform?.profile
+      ?? results.message?.data?.flags?.dnd5e?.transform?.profile;
+    this.#transformToForm(profile);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -151,10 +168,15 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static async #transformActor(event, target, message) {
+    if ( this.transform.mode === "form" ) {
+      await this.#transformToForm(message.getFlag("dnd5e", "transform.profile"));
+      return;
+    }
+
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) {
-      ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
+      ui.notifications.warn("DND5E.ActionWarningNoToken");
       return;
     }
 
@@ -163,7 +185,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     const uuid = message.getFlag("dnd5e", "transform.uuid") ?? await this.queryActor(profile);
     const source = await fromUuid(uuid);
     if ( !source ) {
-      ui.notifications.warn("DND5E.TRANSFORM.Warning.SourceActor", { localize: true });
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.SourceActor");
       return;
     }
 
@@ -171,6 +193,39 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
       const actor = token instanceof Actor ? token : token.actor;
       await actor.transformInto(source, this.settings);
       // TODO: Create message for transformed actors
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle transforming the actor to a specific form.
+   * @param {string} [profileId]  ID of the profile into which to transform.
+   */
+  async #transformToForm(profileId) {
+    if ( this.transform.mode !== "form" ) return;
+    const profile = this.applicableEffects.find(e => e._id === profileId);
+    if ( !profile && !this.transform.formless ) return;
+
+    let targets = getSceneTargets(this.actor, { checkBaseActor: true }).map(t => t.actor);
+    if ( !targets.length ) targets.push(this.actor);
+    for ( const target of targets ) {
+      const item = target.items.get(this.item.id);
+      if ( !item ) continue;
+      const updates = [];
+      for ( const profile of this.effects ) {
+        const effect = item.effects.get(profile._id);
+        if ( !effect ) continue;
+        const enabledEffect = effect.id === profileId;
+        if ( enabledEffect && effect.transfer && !effect.disabled ) {
+          ui.notifications.info("DND5E.TRANSFORM.Warning.FormActive", {
+            format: { form: effect.name, actor: target.token?.name ?? target.name }
+          });
+        } else {
+          updates.push({ _id: effect.id, disabled: !enabledEffect, transfer: enabledEffect });
+        }
+      }
+      if ( updates.length ) await item.updateEmbeddedDocuments("ActiveEffect", updates);
     }
   }
 }

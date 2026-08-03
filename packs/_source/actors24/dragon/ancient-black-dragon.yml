@@ -487,12 +487,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -536,7 +533,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -556,6 +553,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 4
 items:
   - _id: mmAmphibious0000
     name: Amphibious
@@ -599,10 +597,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -710,10 +710,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -810,10 +812,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -976,10 +980,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1112,10 +1118,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAcidBreath0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1515,10 +1523,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1635,26 +1645,25 @@ items:
       identifier: detect-magic
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/symbols/runes-carved-stone-green.webp
     effects:
       - name: Detect Magic
         origin: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
         duration:
-          rounds: null
-          startTime: null
-          seconds: 600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/symbols/runes-carved-stone-green.webp
         _id: BHw91lQmVgdx39WZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: ''
         tint: '#ffffff'
         transfer: false
@@ -1665,47 +1674,64 @@ items:
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168394
+          modifiedTime: 1783544168394
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.1twiaSI2Uric4bTI.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.7S1YVXc130tYgec9
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: COJn7u96dvDcIXGw
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.7S1YVXc130tYgec9
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168394
+          modifiedTime: 1783544168394
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.1twiaSI2Uric4bTI.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1722,10 +1748,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544168394
+      modifiedTime: 1783544168394
     _id: 1twiaSI2Uric4bTI
     _key: '!actors.items!mmAncientBlackDr.1twiaSI2Uric4bTI'
   - name: Fear
@@ -1839,26 +1867,25 @@ items:
       identifier: fear
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/silhouette-robe-evil-glow.webp
     effects:
       - name: Fear
         origin: Compendium.dnd5e.spells24.Item.phbsplFear000000
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/frightened.svg
         _id: ijiWLu6EJZmEJPOZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>A &amp;Reference[frightened apply=false] creature takes the
           &amp;Reference[dash] action and moves away from you by the safest
@@ -1875,47 +1902,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168395
+          modifiedTime: 1783544168395
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.5JLSjcBWRU5O5oKu.ijiWLu6EJZmEJPOZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.QSykagiGmCaFA3q8
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: RPFYCe8WVW2FUn1N
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.QSykagiGmCaFA3q8
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168395
+          modifiedTime: 1783544168395
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.5JLSjcBWRU5O5oKu.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -1929,10 +1973,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFear000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544168395
+      modifiedTime: 1783544168395
     _id: 5JLSjcBWRU5O5oKu
     _key: '!actors.items!mmAncientBlackDr.5JLSjcBWRU5O5oKu'
   - name: Melf's Acid Arrow
@@ -2121,6 +2167,7 @@ items:
       identifier: melfs-acid-arrow
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/skills/ranged/arrow-flying-poisoned-green.webp
     effects:
@@ -2130,17 +2177,15 @@ items:
         transfer: false
         _id: NgglkyjzTbDh5Loa
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>On a hit, the target takes 4d4 Acid damage and [[/damage 2d4
           type=acid]] (plus 1d4 per spell slot level above 2) Acid damage at the
@@ -2153,47 +2198,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168396
+          modifiedTime: 1783544168396
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.cuqkOUrmNhkntoHX.NgglkyjzTbDh5Loa
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.gtXvXbQg0TZaId1o
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: gHQmmlWmnlCKCfSG
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.gtXvXbQg0TZaId1o
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168396
+          modifiedTime: 1783544168396
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.cuqkOUrmNhkntoHX.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2210,10 +2272,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544168396
+      modifiedTime: 1783544168396
     _id: cuqkOUrmNhkntoHX
     _key: '!actors.items!mmAncientBlackDr.cuqkOUrmNhkntoHX'
   - name: Create Undead
@@ -2503,6 +2567,7 @@ items:
       identifier: create-undead
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/death/skull-flames-white-blue.webp
     effects:
@@ -2510,45 +2575,61 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.9Ji8KEKo3eGDbS5E
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: 6JjTFr7gXvk2jtgK
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: sKR24trNsW4rnCEC
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: IuQyQEqLqArQY1KX
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.9Ji8KEKo3eGDbS5E
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168397
+          modifiedTime: 1783544168397
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.UcplL49FOmK57nA4.dnd5espellchange
     folder: 8WmlLARx1Df3Ii9v
@@ -2562,10 +2643,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCreateUnde
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544168397
+      modifiedTime: 1783544168397
     _id: UcplL49FOmK57nA4
     _key: '!actors.items!mmAncientBlackDr.UcplL49FOmK57nA4'
   - name: Speak with Dead
@@ -2679,6 +2762,7 @@ items:
       identifier: speak-with-dead
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/death/undead-ghost-scream-teal.webp
     effects:
@@ -2686,37 +2770,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.5NyTuxFfIxIupCwZ
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: azMRwN0NSTltnFtn
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.5NyTuxFfIxIupCwZ
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168398
+          modifiedTime: 1783544168398
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.thdt9qqr4Hh0H8ox.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2730,10 +2826,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpeakwithD
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544168398
+      modifiedTime: 1783544168398
     _id: thdt9qqr4Hh0H8ox
     _key: '!actors.items!mmAncientBlackDr.thdt9qqr4Hh0H8ox'
   - name: Vitriolic Sphere
@@ -2930,26 +3028,25 @@ items:
       identifier: vitriolic-sphere
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/acid/orb-bubble-smoke-drip.webp
     effects:
       - name: Lingering Acid
         origin: Compendium.dnd5e.spells24.Item.phbsplVitriolicS
         duration:
-          rounds: null
-          startTime: null
-          seconds: null
-          combat: null
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
         _id: WHhf4PFHQBDkCAyb
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>The creature takes [[/damage <span style="font-family:Signika,
           sans-serif">5d4 type=acid]] damage at the end of its next
@@ -2962,47 +3059,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168399
+          modifiedTime: 1783544168399
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.3wJDvk72mq7GaNo2.WHhf4PFHQBDkCAyb
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.RPTvY4v08mOXHq67
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: zmJPhoNl8CzlNg40
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmSpellcasting00.Activity.RPTvY4v08mOXHq67
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168399
+          modifiedTime: 1783544168399
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.3wJDvk72mq7GaNo2.dnd5espellchange
     folder: qi3IbnEwap7mRw4b
@@ -3019,10 +3133,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplVitriolicS
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544168399
+      modifiedTime: 1783544168399
     _id: 3wJDvk72mq7GaNo2
     _key: '!actors.items!mmAncientBlackDr.3wJDvk72mq7GaNo2'
   - _id: mmCloudOfInsects
@@ -3146,17 +3262,14 @@ items:
         transfer: false
         _id: owuEyJBslYKvxqeX
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 1
+          units: rounds
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has Disadvantage on saving throws to maintain
           Concentration until the end of its next turn</p>
@@ -3168,10 +3281,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.mmCloudOfInsects.owuEyJBslYKvxqeX
     flags:
@@ -3183,10 +3301,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCloudOfInsects
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 6
@@ -3294,10 +3414,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFrightfulPrese
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 7
@@ -3413,26 +3535,25 @@ items:
       identifier: fear
       method: spell
       prepared: 0
+      sourceItem: feat:frightful-presence
     type: spell
     img: icons/magic/unholy/silhouette-robe-evil-glow.webp
     effects:
       - name: Fear
         origin: Compendium.dnd5e.spells24.Item.phbsplFear000000
         duration:
-          rounds: 1
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/frightened.svg
         _id: ijiWLu6EJZmEJPOZ
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>A &amp;Reference[frightened apply=false] creature takes the
           &amp;Reference[dash] action and moves away from you by the safest
@@ -3449,63 +3570,91 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168400
+          modifiedTime: 1783544168400
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.VVUgABLlS8lQwH7N.ijiWLu6EJZmEJPOZ
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmFrightfulPrese.Activity.lbzj4R6LBDa4r4Hk
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"legendary","value":1,"condition":""}'
-            priority: null
-          - key: system.ability
-            mode: 5
-            value: cha
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: legendary
+                value: 1
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: SnjstV3YK641Gno8
+            - key: system.ability
+              value: cha
+              priority: null
+              type: override
+              phase: initial
+              _id: Qr9Kjqs6YenzH343
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: Q7eLwfmr7KV3PFNH
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: RtIXAxoBqYm2ujE0
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: Wa22dzsCGBE2tXjg
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmAncientBlackDr.Item.mmFrightfulPrese.Activity.lbzj4R6LBDa4r4Hk
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544168400
+          modifiedTime: 1783544168400
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmAncientBlackDr.VVUgABLlS8lQwH7N.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -3519,10 +3668,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFear000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544168400
+      modifiedTime: 1783544168400
     _id: VVUgABLlS8lQwH7N
     _key: '!actors.items!mmAncientBlackDr.VVUgABLlS8lQwH7N'
   - _id: mmPounce00000000
@@ -3627,10 +3778,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPounce00000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 8
@@ -3641,11 +3794,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452694684
-  modifiedTime: 1771452694684
+  systemVersion: 6.0.0
+  createdTime: 1783544168392
+  modifiedTime: 1783544168392
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

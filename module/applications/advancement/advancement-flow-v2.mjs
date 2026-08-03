@@ -5,19 +5,6 @@ import Application5e from "../api/application.mjs";
  * individual advancement types.
  */
 export default class AdvancementFlow extends Application5e {
-  constructor(options, advancementId, level, _options={}) {
-    if ( options instanceof Item ) {
-      foundry.utils.logCompatibilityWarning(
-        "`AdvancementFlowV2` instances should be created with the advancement and level passed to the options object.",
-        { since: "DnD5e 5.2", until: "DnD5e 5.4" }
-      );
-      options = { document: options.advancement?.byId[advancementId], level, ..._options };
-    }
-    super(options);
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["advancement", "flow"],

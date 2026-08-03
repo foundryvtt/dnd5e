@@ -90,18 +90,18 @@ export default class CreateScrollDialog extends Dialog5e {
     context.fields = [{
       field: new StringField({
         required: true, blank: false,
-        label: game.i18n.localize("DND5E.Scroll.Explanation.Label"),
-        hint: game.i18n.localize("DND5E.Scroll.Explanation.Hint")
+        label: _loc("DND5E.Scroll.Explanation.Label"),
+        hint: _loc("DND5E.Scroll.Explanation.Hint")
       }),
       name: "explanation",
       options: [
-        { value: "full", label: game.i18n.localize("DND5E.Scroll.Explanation.Complete") },
-        { value: "reference", label: game.i18n.localize("DND5E.Scroll.Explanation.Reference") },
-        { value: "none", label: game.i18n.localize("DND5E.None") }
+        { value: "full", label: _loc("DND5E.Scroll.Explanation.Complete") },
+        { value: "reference", label: _loc("DND5E.Scroll.Explanation.Reference") },
+        { value: "none", label: _loc("DND5E.None") }
       ],
       value: this.config.explanation ?? "reference"
     }, {
-      field: new NumberField({ label: game.i18n.localize("DND5E.SpellLevel") }),
+      field: new NumberField({ label: _loc("DND5E.SpellLevel") }),
       name: "level",
       options: Object.entries(CONFIG.DND5E.spellLevels)
         .map(([value, label]) => ({ value, label }))
@@ -109,8 +109,8 @@ export default class CreateScrollDialog extends Dialog5e {
       value: this.config.level ?? this.spell.system.level
     }];
     context.values = {
-      bonus: new NumberField({ label: game.i18n.localize("DND5E.BonusAttack") }),
-      dc: new NumberField({ label: game.i18n.localize("DND5E.Scroll.SaveDC") })
+      bonus: new NumberField({ label: _loc("DND5E.BonusAttack") }),
+      dc: new NumberField({ label: _loc("DND5E.Scroll.SaveDC") })
     };
     context.valuePlaceholders = {};
     for ( const level of Array.fromRange(this.config.level + 1).reverse() ) {

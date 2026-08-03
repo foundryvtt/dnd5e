@@ -25,7 +25,7 @@ export default class TreasureConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.localize("DND5E.Treasure.Configuration.Title");
+    return _loc("DND5E.Treasure.Configuration.Title");
   }
 
   /* -------------------------------------------- */

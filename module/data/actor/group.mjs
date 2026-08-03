@@ -1,3 +1,4 @@
+import PartyRequestDialog from "../../applications/actor/party-request-dialog.mjs";
 import { defaultUnits } from "../../utils.mjs";
 import TravelField from "./fields/travel-field.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
@@ -32,7 +33,7 @@ export default class GroupData extends GroupTemplate {
       }, { label: "DND5E.Details" }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor)
-      }), { label: "DND5E.GroupMembers" }),
+      }), { label: "DND5E.Group.Member.other" }),
       primaryVehicle: new ForeignDocumentField(foundry.documents.BaseActor)
     });
   }
@@ -100,6 +101,7 @@ export default class GroupData extends GroupTemplate {
     super._migrateData(source);
     GroupData.#migrateMembers(source);
     GroupData.#migrateTravel(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -176,6 +178,7 @@ export default class GroupData extends GroupTemplate {
   /** @inheritDoc */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
+    this.prepareCurrency();
     TravelField.prepareData.call(this, rollData);
   }
 
@@ -283,12 +286,12 @@ export default class GroupData extends GroupTemplate {
     const skillLabel = skillConfig?.label ?? "";
     const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
     await foundry.documents.ChatMessage.implementation.create({
-      flavor: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+      flavor: _loc("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
       speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
       system: {
         button: {
           icon: "fa-solid fa-dice-d20",
-          label: game.i18n.localize("DND5E.SkillRoll", { skill: skillLabel, ability: abilityLabel })
+          label: _loc("DND5E.SkillRoll", { skill: skillLabel, ability: abilityLabel })
         },
         data: { ...config },
         handler: "skill",
@@ -300,6 +303,21 @@ export default class GroupData extends GroupTemplate {
       type: "request"
     });
     return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Send a request to the members of this group.
+   * @param {string} handler            Specific rest handler as defined in `CONFIG.DND5E.requests`.
+   * @param {object} [messageData={}]   Additional data used to create the chat message.
+   * @param {object} [options={}]       Additional options passed to the dialog.
+   * @returns {Promise<ChatMessage5e>}  Promise that resolves to the created request chat message.
+   * @throws if dialog is closed
+   */
+  sendRequest(handler, messageData={}, options={}) {
+    foundry.utils.setProperty(options, "request.group", this.parent);
+    return PartyRequestDialog.sendRequest(handler, messageData, options);
   }
 
   /* -------------------------------------------- */
@@ -316,6 +334,8 @@ export default class GroupData extends GroupTemplate {
     const targets = this.members
       .map(({ actor }) => !config.targets || config.targets.includes(actor.id) ? actor : null)
       .filter(_ => _);
+
+    config.advanceTime = game.settings.get("dnd5e", "calendarConfig").enabled;
 
     // Create a rest chat message
     if ( !config.autoRest ) {

@@ -1,16 +1,19 @@
-import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
+import AppliedRules from "../../../documents/applied-rules.mjs";
+import { applyFallProne } from "../../../rules/falling.mjs";
 import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
+import ConditionData from "../../active-effect/condition.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
+import ACFormulasField from "../fields/ac-formulas-field.mjs";
 
-const { NumberField, SchemaField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { ActorRollData } from "../../../documents/_types.mjs";
+ * @import { ActorRollData, DeathSaveOutcome } from "../../../documents/_types.mjs";
  * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
  */
 
@@ -24,9 +27,39 @@ export default class AttributesFields {
    */
   static get armorClass() {
     return {
-      calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
-      flat: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
-      formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" })
+      armor: new NumberField({
+        integer: true, min: 0, initial: 10, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.armor.label"
+      }),
+      base: new NumberField({
+        integer: true, initial: -Infinity, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.base.label"
+      }),
+      bonus: new FormulaField({
+        deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.bonus.label"
+      }),
+      calc: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calc.label" }),
+      calcs: new SetField(new StringField(), {
+        initial: ["unarmored", "armored"], label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.calcs.hint"
+      }),
+      cover: new NumberField({
+        integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.cover.label"
+      }),
+      flat: new NumberField({
+        required: true, integer: true, min: 0, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.label",
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.flat.hint"
+      }),
+      formula: new StringField({ persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formula.label" }),
+      formulas: new ACFormulasField(),
+      min: new FormulaField({
+        deterministic: true, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.min.label"
+      }),
+      override: new NumberField({
+        min: 0, integer: true, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.label", initial: null,
+        hint: "DND5E.ARMORCLASS.FIELDS.attributes.ac.override.hint"
+      }),
+      shield: new NumberField({
+        integer: true, min: 0, initial: 0, persisted: false, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.shield.label"
+      })
     };
   }
 
@@ -56,10 +89,47 @@ export default class AttributesFields {
   static get common() {
     return {
       ac: new SchemaField(this.armorClass, { label: "DND5E.ArmorClass" }),
+      encumbrance: new SchemaField({
+        bonuses: new SchemaField({
+          encumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true,
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.bonuses.overall.label"
+          })
+        }),
+        multipliers: new SchemaField({
+          encumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.encumbered.label"
+          }),
+          heavilyEncumbered: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.heavilyEncumbered.label"
+          }),
+          maximum: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.maximum.label"
+          }),
+          overall: new FormulaField({
+            deterministic: true, initial: "1",
+            label: "DND5E.ENCUMBRANCE.FIELDS.attributes.encumbrance.multipliers.overall.label"
+          })
+        })
+      }, { persisted: false }),
       init: new RollConfigField({
-        ability: "",
-        bonus: new FormulaField({ required: true, label: "DND5E.InitiativeBonus" })
-      }, { label: "DND5E.Initiative" }),
+        bonuses: new SchemaField({}, { persisted: false })
+      }, { label: "DND5E.Initiative", labelPrefix: "DND5E.INITIATIVE.FIELDS.attributes.init.roll." }),
       movement: new MovementField()
     };
   }
@@ -75,20 +145,25 @@ export default class AttributesFields {
       attunement: new SchemaField({
         max: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5E.AttunementMax"
-        })
+        }),
+        value: new NumberField({ integer: true, min: 0, initial: 0, persisted: false })
       }, { label: "DND5E.Attunement" }),
       senses: new SensesField(),
+      spell: new SchemaField({
+        attack: new NumberField({ integer: true }),
+        dc: new NumberField({ integer: true }),
+        mod: new NumberField({ integer: true })
+      }, { persisted: false }),
       spellcasting: new StringField({ required: true, blank: true, label: "DND5E.SpellAbility" }),
       exhaustion: new NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
       }),
       concentration: new RollConfigField({
-        ability: "",
-        bonuses: new SchemaField({
-          save: new FormulaField({ required: true, label: "DND5E.ConcentrationBonus" })
-        }),
-        limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.ConcentrationLimit" })
-      }, { label: "DND5E.Concentration" }),
+        bonuses: new SchemaField({}, { persisted: false }),
+        limit: new NumberField({
+          integer: true, min: 0, initial: 1, label: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.limit.label"
+        })
+      }, { label: "DND5E.Concentration", labelPrefix: "DND5E.CONCENTRATION.FIELDS.attributes.concentration.roll." }),
       loyalty: new SchemaField({
         value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
       })
@@ -100,15 +175,52 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Migrate the old single armor formula into formulas.
+   * @param {object} [source]  The source attributes object.
+   * @internal
+   */
+  static _migrateArmorClass(source) {
+    const ac = source?.ac ?? {};
+    if ( Number.isNumeric(ac.value) && !CONFIG.DND5E.armorClasses[ac.calc] ) {
+      ac.override = Number(ac.value);
+      delete ac.value;
+    }
+
+    if ( !ac.calc ) return;
+    switch ( ac.calc ) {
+      case "custom":
+        ac.formulas ??= [];
+        ac.formulas.push({ formula: ac.formula });
+        break;
+      case "flat":
+        ac.override = ac.flat;
+        break;
+      case "default": break;
+      case "natural":
+        ac.calcs = ["natural"];
+        break;
+      default:
+        ac.calcs ??= ["unarmored", "armored"];
+        ac.calcs.push(ac.calc);
+        break;
+    }
+    delete ac.calc;
+    delete ac.formula;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Migrate the old init.value and incorporate it into init.bonus.
-   * @param {object} source  The source attributes object.
+   * @param {object} [source]  The source attributes object.
    * @internal
    */
   static _migrateInitiative(source) {
     const init = source?.init;
     if ( !init?.value || (typeof init?.bonus === "string") ) return;
-    if ( init.bonus ) init.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
-    else init.bonus = `${init.value}`;
+    init.roll ??= {};
+    if ( init.roll.bonus ) init.roll.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
+    else init.roll.bonus = `${init.value}`;
   }
 
   /* -------------------------------------------- */
@@ -119,12 +231,7 @@ export default class AttributesFields {
    * Initialize derived AC fields for Active Effects to target.
    * @this {CharacterData|NPCData|VehicleData}
    */
-  static prepareBaseArmorClass() {
-    const ac = this.attributes.ac;
-    ac.armor = 10;
-    ac.shield = ac.cover = 0;
-    ac.min = ac.bonus = "";
-  }
+  static prepareBaseArmorClass() {}
 
   /* -------------------------------------------- */
 
@@ -132,11 +239,7 @@ export default class AttributesFields {
    * Initialize base encumbrance fields to be targeted by active effects.
    * @this {CharacterData|NPCData|VehicleData}
    */
-  static prepareBaseEncumbrance() {
-    const encumbrance = this.attributes.encumbrance ??= {};
-    encumbrance.multipliers = { encumbered: "1", heavilyEncumbered: "1", maximum: "1", overall: "1" };
-    encumbrance.bonuses = { encumbered: "", heavilyEncumbered: "", maximum: "", overall: "" };
-  }
+  static prepareBaseEncumbrance() {}
 
   /* -------------------------------------------- */
 
@@ -147,14 +250,21 @@ export default class AttributesFields {
    */
   static prepareArmorClass(rollData) {
     const ac = this.attributes.ac;
+    ac.label = "";
+    ac.flat ||= 0;
 
-    // Apply automatic migrations for older data structures
-    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    if ( !cfg ) {
-      ac.calc = "flat";
-      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.DND5E.armorClasses.flat;
-    }
+    // Add formulas set by old-style AEs
+    if ( ac.calc === "flat" ) ac.override = ac.flat;
+    else if ( (ac.calc === "custom") && ac.formula ) ac.formulas.push({
+      formula: ac.formula, label: _loc("DND5E.ARMORCLASS.Calculation.Custom")
+    });
+    else if ( ac.calc in CONFIG.DND5E.armorClasses ) ac.calcs.add(ac.calc);
+
+    // Add selected formulas
+    const baseFormulas = foundry.utils.iterateEntries(CONFIG.DND5E.armorClasses)
+      .filter(([id]) => ac.calcs.has(id))
+      .map(([id, data]) => ({ ...data, id, type: "base" }));
+    ac.formulas.unshift(...baseFormulas);
 
     // Identify Equipped Items
     const { armors, shields } = this.parent.itemTypes.equipment.reduce((obj, equip) => {
@@ -164,74 +274,74 @@ export default class AttributesFields {
       return obj;
     }, { armors: [], shields: [] });
 
-    // Set stealth disadvantage
-    if ( armors[0]?.system.properties.has("stealthDisadvantage") ) {
-      AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
-    }
-
-    ac.label = !["custom", "flat"].includes(ac.calc) ? CONFIG.DND5E.armorClasses[ac.calc]?.label : null;
-
-    // Determine base AC
-    switch ( ac.calc ) {
-
-      // Flat AC (no additional bonuses)
-      case "flat":
-        ac.value = Number(ac.flat);
-        return;
-
-      // Natural AC (includes bonuses)
-      case "natural":
-        ac.base = Number(ac.flat);
-        break;
-
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        if ( armors.length ) {
-          if ( armors.length > 1 ) this.parent._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
-          });
-          const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
-        }
-        else ac.dex = this.abilities.dex?.mod ?? 0;
-
-        if ( !ac.equippedArmor ) ac.label = null;
-
-        rollData.attributes.ac = ac;
-        try {
-          const replaced = replaceFormulaData(formula, rollData, {
-            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
-          });
-          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
-        } catch(err) {
-          this.parent._preparationWarnings.push({
-            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
-          });
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = new Roll(replaced).evaluateSync().total;
-        }
-        break;
+    // Equipped Armor
+    if ( armors.length ) {
+      if ( armors.length > 1 ) this.parent._preparationWarnings.push({
+        message: _loc("DND5E.WarnMultipleArmor"), type: "warning"
+      });
+      ac.equippedArmor = armors[0];
+      ac.armor = ac.equippedArmor.system.armor.value ?? ac.armor;
+      if ( ac.equippedArmor.system.properties.has("stealthDisadvantage") && this.skills ) {
+        AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
+      }
     }
 
     // Equipped Shield
     if ( shields.length ) {
       if ( shields.length > 1 ) this.parent._preparationWarnings.push({
-        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
+        message: _loc("DND5E.WarnMultipleShields"), type: "warning"
       });
-      ac.shield = shields[0].system.armor.value ?? 0;
       ac.equippedShield = shields[0];
+      ac.shield = ac.equippedShield.system.armor.value ?? 0;
     }
 
-    // Compute cover.
-    ac.cover = Math.max(ac.cover, this.parent.coverBonus);
+    // If armor is equipped, prepare clamped abilities
+    const isHeavy = ac.equippedArmor?.system.type.value === "heavy";
+    ac.clamped = Object.entries(this.abilities).reduce((obj, [k, v]) => {
+      obj[k] = isHeavy ? 0 : Math.min(v.mod, ac.equippedArmor?.system.armor.dex ?? Infinity);
+      return obj;
+    }, {});
+    ac.dex = ac.clamped.dex;
 
-    // Compute total AC and return
+    const validFormulas = ac.formulas.filter(formula => {
+      if ( !formula.formula ) return false;
+      if ( (typeof formula.armored === "boolean") && (formula.armored !== !!ac.equippedArmor) ) return false;
+      if ( (typeof formula.shielded === "boolean") && (formula.shielded !== !!ac.equippedShield) ) return false;
+      return true;
+    });
+
+    for ( const config of validFormulas ) {
+      try {
+        const replaced = replaceFormulaData(config.formula, rollData, {
+          actor: this, missing: null, property: _loc("DND5E.ArmorClass")
+        });
+        const result = replaced ? new Roll(replaced).evaluateSync().total : 0;
+        if ( result > ac.base ) {
+          ac.activeFormula = config;
+          ac.base = result;
+          ac.calc = config.id ?? "custom";
+          ac.formula = config.formula;
+          if ( config.id === "armored" ) ac.label = ac.equippedArmor.name;
+          else ac.label = config.label ?? "";
+        }
+      } catch(error) {
+        this.parent._preparationWarnings.push({
+          message: _loc("DND5E.WarnBadACFormula", { formula: config.formula }), link: "armor", type: "error"
+        });
+      }
+    }
+
+    if ( !Number.isFinite(ac.base) ) {
+      ac.base = ac.flat ?? 0;
+      ac.calc = "natural";
+      ac.formula = "@attributes.ac.flat";
+    }
+
+    ac.cover = Math.max(ac.cover, this.parent.coverBonus);
     ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
+    if ( Number.isFinite(ac.override) ) ac.value = ac.override;
+    else ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
   }
 
   /* -------------------------------------------- */
@@ -245,7 +355,7 @@ export default class AttributesFields {
     const { concentration } = this.attributes;
     const abilityId = concentration.ability || CONFIG.DND5E.defaultAbilities.concentration;
     const ability = this.abilities?.[abilityId] || {};
-    const bonus = simplifyBonus(concentration.bonuses.save, rollData);
+    const bonus = simplifyBonus(concentration.roll.bonus, rollData);
     concentration.save = (ability.save?.value ?? 0) + bonus;
   }
 
@@ -284,7 +394,7 @@ export default class AttributesFields {
     }
 
     // Determine the Encumbrance size class
-    const keys = Object.keys(CONFIG.DND5E.actorSizes);
+    const keys = CONFIG.DND5E.actorSizes.orderedKeys;
     const index = keys.findIndex(k => k === this.traits.size);
     const sizeConfig = CONFIG.DND5E.actorSizes[
       keys[this.parent.flags.dnd5e?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
@@ -335,9 +445,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
-    this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+    this.attributes.exhaustion = this.conditions.exhaustion ?? 0;
   }
 
   /* -------------------------------------------- */
@@ -373,7 +481,7 @@ export default class AttributesFields {
   static prepareInitiative(rollData) {
     const init = this.attributes.init ??= {};
     const flags = this.parent.flags.dnd5e ?? {};
-    const globalCheckBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
+    const globalCheckBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
 
     // Compute initiative modifier
     const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
@@ -396,11 +504,18 @@ export default class AttributesFields {
       AdvantageModeField.setMode(this, "attributes.init.roll.mode", -1);
     }
 
+    // Complete roll data
+    rollData = { ...rollData };
+    rollData.roll = { ability: abilityId, proficient: init.prof.multiplier >= 1, type: "initiative" };
+
     // Total initiative includes all numeric terms
-    const initBonus = simplifyBonus(init.bonus, rollData);
-    const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
+    const initBonus = simplifyBonus(init.roll.bonus, rollData);
+    const abilityBonus = simplifyBonus(ability.check?.roll?.bonus, rollData);
+    const ruleBonus = simplifyBonus(
+      AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+    );
     const quality = this.attributes.quality?.value ?? 0;
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + quality
+    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + ruleBonus + quality
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
     init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);
@@ -410,17 +525,18 @@ export default class AttributesFields {
 
   /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
-   * @this {CharacterData|NPCData}
+   * @this {CharacterData|NPCData|VehicleData}
    * @param {ActorRollData} rollData  The Actor's roll data.
    */
   static prepareMovement(rollData=this.parent.getRollData()) {
     const statuses = this.parent.statuses;
     const noMovement = this.parent.hasConditionEffect("noMovement");
     const crawl = this.parent.hasConditionEffect("crawl");
+    const speeds = this.attributes.movement.speeds;
     for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( noMovement || (crawl && (type !== "walk")) ) this.attributes.movement[type] = 0;
-      else this.attributes.movement[type] = Math.max(0, simplifyBonus(this.attributes.movement[type], rollData));
-      if ( type === "walk" ) this.attributes.movement.speed = this.attributes.movement.walk;
+      if ( noMovement || (crawl && (type !== "walk")) ) speeds[type] = 0;
+      else speeds[type] = Math.max(0, simplifyBonus(speeds[type], rollData));
+      if ( type === "walk" ) this.attributes.movement.speed = speeds.walk;
     }
 
     const halfMovement = this.parent.hasConditionEffect("halfMovement");
@@ -428,16 +544,29 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const units = this.attributes.movement.units ??= defaultUnits("length");
-    let reduction = dnd5e.settings.rulesVersion === "modern" && !this.traits?.ci?.value?.has("exhaustion")
-      ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+
+    let reduction = statuses.reduce((acc, status) => {
+      const immune = this.traits?.ci?.value?.has(status);
+      if ( immune ) return acc;
+
+      const speed = CONFIG.DND5E.conditionTypes[status]?.reduction?.speed ?? 0;
+      const level = ConditionData.hasLevels(status)
+        ? this.parent.system.conditions[status] ?? 0
+        : Boolean(statuses.has(status));
+      return acc + (level * speed);
+    }, 0);
+    if ( ((this.attributes.ac?.equippedArmor?.system.strength ?? 0) > (this.abilities?.str?.value ?? Infinity))
+      && !this.parent.flags.dnd5e?.ignoreArmorSpeedReduction && this.isCreature ) {
+      reduction += CONFIG.DND5E.armorSpeedReduction;
+    }
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
+    const multiplier = this.attributes.movement.multiplier * (halfMovement ? 0.5 : 1);
     this.attributes.movement.max = 0;
     for ( const type of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      let speed = Math.max(0, this.attributes.movement[type] - reduction);
-      if ( speed ) {
-        speed = Math.max(0, speed + bonus);
-        if ( halfMovement ) speed *= 0.5;
+      let speed = Math.max(0, speeds[type] - reduction);
+      if ( (speed * multiplier) > 0 ) {
+        speed = Math.max(0, speed + bonus) * multiplier;
         if ( heavilyEncumbered ) {
           speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
         } else if ( encumbered ) {
@@ -446,14 +575,31 @@ export default class AttributesFields {
         if ( exceedingCarryingCapacity ) {
           speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
+        speeds[type] = speed;
+      } else {
+        speeds[type] = 0;
       }
-      this.attributes.movement[type] = speed;
-      this.attributes.movement.max = Math.max(speed, this.attributes.movement.max);
-      if ( type === "walk" ) this.attributes.movement.speed = speed;
+      this.attributes.movement.max = Math.max(speeds[type], this.attributes.movement.max);
+      if ( type === "walk" ) this.attributes.movement.speed = speeds[type];
     }
-    const baseSpeed = this._source.attributes.movement.walk || this.attributes.movement.fromSpecies?.walk;
-    this.attributes.movement.slowed = this.attributes.movement.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
-    this.attributes.movement.jump = (this.abilities?.str.value ?? 0) / 2;
+    const baseSpeed = this._source.attributes.movement.speeds.walk || this.attributes.movement.fromSpecies?.walk;
+    this.attributes.movement.slowed = speeds.walk <= (simplifyBonus(baseSpeed, rollData) / 2);
+    this.attributes.movement.speeds.jump = (this.abilities?.str.value ?? 0) / 2;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert the actor's price into the default currency.
+   * @this {NPCData|VehicleData}
+   */
+  static preparePrice() {
+    const { price } = this.attributes;
+    const { conversion } = CONFIG.DND5E.currencies[price.denomination] ?? {};
+    const { conversion: defaultConversion } = CONFIG.DND5E.currencies[CONFIG.DND5E.defaultCurrency] ?? {};
+    if ( (price.value !== null) && conversion && defaultConversion ) {
+      price.valueInGP = Math.floor(price.value * defaultConversion / conversion);
+    }
   }
 
   /* -------------------------------------------- */
@@ -467,22 +613,23 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareRace(race, { force=false }={}) {
+    const { movement, senses } = race.system;
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && this.attributes.movement[key]) ) continue;
+      if ( !movement.speeds[key] || (!force && this.attributes.movement.speeds[key]) ) continue;
       this.attributes.movement.fromSpecies ??= {};
-      this.attributes.movement[key] = this.attributes.movement.fromSpecies[key] = race.system.movement[key];
+      this.attributes.movement.speeds[key] = this.attributes.movement.fromSpecies[key] = movement.speeds[key];
     }
-    if ( race.system.movement.hover ) this.attributes.movement.hover = true;
-    if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
-    else this.attributes.movement.units ??= race.system.movement.units;
+    if ( movement.hover ) this.attributes.movement.hover = true;
+    if ( force && movement.units ) this.attributes.movement.units = movement.units;
+    else this.attributes.movement.units ??= movement.units;
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( !race.system.senses.ranges[key] || (!force && (this.attributes.senses.ranges[key] !== null)) ) continue;
-      this.attributes.senses.ranges[key] = race.system.senses.ranges[key];
+      if ( !senses.ranges[key] || (!force && (this.attributes.senses.ranges[key] !== null)) ) continue;
+      this.attributes.senses.ranges[key] = senses.ranges[key];
     }
-    this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
-    if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
-    else this.attributes.senses.units ??= race.system.senses.units;
+    this.attributes.senses.special = [this.attributes.senses.special, senses.special].filterJoin(";");
+    if ( force && senses.units ) this.attributes.senses.units = senses.units;
+    else this.attributes.senses.units ??= senses.units;
   }
 
   /* -------------------------------------------- */
@@ -531,7 +678,11 @@ export default class AttributesFields {
    */
   static async onUpdateHP(changed, options, userId) {
     if ( !changed.system?.attributes?.hp ) return;
-    if ( userId === game.userId ) await this.parent.updateBloodied(options);
+    if ( userId === game.userId ) {
+      await this.parent.updateBloodied(options);
+      await this.parent.updateDowned(options);
+      await applyFallProne(this.parent, options);
+    }
 
     const hp = options.dnd5e?.hp;
     if ( !hp || options.isRest || options.isAdvancement ) return;
@@ -562,5 +713,72 @@ export default class AttributesFields {
      * @param {string} userId                                       Id of the user that performed the update.
      */
     Hooks.callAll(`dnd5e.${changes.total > 0 ? "heal" : "damage"}Actor`, this.parent, changes, changed, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger auto-downed logic if failed three death saves.
+   * @this {CharacterData|NPCData}
+   * @param {object} changed  The differential data that was changed relative to the document's prior values.
+   * @param {object} options  Additional options which modify the update request.
+   * @param {string} userId   The id of the User requesting the document update.
+   */
+  static async onUpdateDeathSaves(changed, options, userId) {
+    if ( changed.system?.attributes?.death?.failure !== 3 ) return;
+
+    // If hp update is included, updateDowned will be called in onUpdateHP, so exit early
+    if ( changed.system.attributes.hp ) return;
+    if ( userId === game.userId ) await this.parent.updateDowned(options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the actor updates and terminal outcome resulting from a death saving throw.
+   * @param {{ success: number, failure: number }} death  Current death save success/failure counts.
+   * @param {object} result
+   * @param {boolean} result.isSuccess                    Whether the save succeeded.
+   * @param {boolean} [result.isCritical]                 Whether the save was a natural 20.
+   * @param {boolean} [result.isFumble]                   Whether the save was a natural 1.
+   * @returns {{ outcome: DeathSaveOutcome, updates: object }}
+   */
+  static applyDeathSaveResult(death, { isSuccess, isCritical=false, isFumble=false }) {
+    const updates = {};
+    let outcome = null;
+    if ( isSuccess ) {
+      const successes = (death.success || 0) + 1;
+
+      // Critical success - revive with 1 hp.
+      if ( isCritical ) {
+        Object.assign(updates, {
+          "system.attributes.death.success": 0,
+          "system.attributes.death.failure": 0,
+          "system.attributes.hp.value": 1
+        });
+        outcome = "revive";
+      }
+
+      // Normal success - stabilize on the third.
+      else if ( successes >= 3 ) {
+        Object.assign(updates, {
+          "system.attributes.death.success": 0,
+          "system.attributes.death.failure": 0
+        });
+        outcome = "stable";
+      }
+
+      else updates["system.attributes.death.success"] = Math.clamp(successes, 0, 3);
+    }
+
+    else {
+      const failures = Math.clamp((death.failure || 0) + (isFumble ? 2 : 1), 0, 3);
+      updates["system.attributes.death.failure"] = failures;
+      if ( failures >= 3 ) outcome = "death";
+    }
+
+    return { outcome, updates };
   }
 }

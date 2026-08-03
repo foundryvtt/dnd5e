@@ -5,8 +5,8 @@ img: icons/weapons/wands/wand-gem-purple.webp
 system:
   description:
     value: >-
-      <p><em>Wand</em></p><p>This wand has 3 charges. While holding it, you can
-      expend 1 charge as an action to cast the
+      <p><em>Wand</em></p><p>This wand has [[lookup @item.uses.max]] charges.
+      While holding it, you can expend 1 charge as an action to cast the
       @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic} spell
       from it. The wand regains 1d3 expended charges daily at dawn.</p>
     chat: ''
@@ -50,6 +50,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   properties:
     - foc
@@ -114,6 +115,8 @@ system:
         identifier: ''
   attuned: false
   identifier: wand-of-magic-detection
+  armor:
+    magicalBonus: ''
 effects: []
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
@@ -122,11 +125,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037084495
-  modifiedTime: 1764618696321
+  modifiedTime: 1783700377807
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!18fbyArtidKzON01'

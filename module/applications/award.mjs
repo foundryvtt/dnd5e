@@ -1,4 +1,4 @@
-import { filteredKeys, formatNumber } from "../utils.mjs";
+import { filteredKeys, formatNumber, roundCurrency } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
@@ -231,7 +231,7 @@ export default class Award extends Application5e {
         if ( !amount ) continue;
         amount = Math.clamp(
           // Divide amount between remaining destinations
-          Math.floor(amount / remainingDestinations),
+          roundCurrency(amount / remainingDestinations, key),
           // Ensure negative amounts aren't more than is contained in destination
           -destination.system.currency[key],
           // Ensure positive amounts aren't more than is contained in origin
@@ -301,12 +301,12 @@ export default class Award extends Application5e {
       }
       if ( result.xp ) entries.push(`
         <span class="award-entry">
-          ${formatNumber(result.xp)} ${game.i18n.localize("DND5E.ExperiencePoints.Abbreviation")}
+          ${formatNumber(result.xp)} ${_loc("DND5E.ExperiencePoints.Abbreviation")}
         </span>
       `);
       if ( !entries.length ) continue;
 
-      const content = game.i18n.format("DND5E.Award.Message", {
+      const content = _loc("DND5E.Award.Message", {
         name: destination.name, award: `<span class="dnd5e2">${game.i18n.getListFormatter().format(entries)}</span>`
       });
 
@@ -343,8 +343,8 @@ export default class Award extends Application5e {
 
   /**
    * Use the `chatMessage` hook to determine if an award command was typed.
-   * @param {string} message   Text of the message being posted.
-   * @returns {boolean|void}   Returns `false` to prevent the message from continuing to parse.
+   * @param {string} message  Text of the message being posted.
+   * @returns {false|void}    Returns `false` to prevent the message from continuing to parse.
    */
   static chatMessage(message) {
     if ( !this.COMMAND_PATTERN.test(message) ) return;
@@ -360,7 +360,7 @@ export default class Award extends Application5e {
    */
   static async handleAward(message) {
     if ( !game.user.isGM ) {
-      ui.notifications.error("DND5E.Award.NotGMError", { localize: true });
+      ui.notifications.error("DND5E.Award.NotGMError");
       return;
     }
 
@@ -426,7 +426,7 @@ export default class Award extends Application5e {
     }
 
     // Display warning about an unrecognized commands
-    if ( unrecognized.length ) throw new Error(game.i18n.format("DND5E.Award.UnrecognizedWarning", {
+    if ( unrecognized.length ) throw new Error(_loc("DND5E.Award.UnrecognizedWarning", {
       commands: game.i18n.getListFormatter().format(unrecognized.map(u => `"${u}"`))
     }));
 

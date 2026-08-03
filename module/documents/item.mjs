@@ -80,7 +80,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }, {});
     const choices = makeChoices(generalTypes);
     choices.physical = {
-      label: game.i18n.localize("DND5E.ITEM.Category.Physical"),
+      label: _loc("DND5E.ITEM.Category.Physical"),
       children: makeChoices(physicalTypes, chosen.has("physical"))
     };
     return new SelectChoices(choices);
@@ -161,6 +161,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   get canDuplicate() {
     return !this.system.metadata?.singleton && !["class", "subclass"].includes(this.type)
       && !this.flags.dnd5e?.cachedFor;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Should this item be able to be used?
+   * @type {boolean}
+   */
+  get canUse() {
+    return !this.inCompendium && !this.isHidden;
   }
 
   /* --------------------------------------------- */
@@ -283,6 +293,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get isHealing() {
     return this.system.isHealing ?? false;
+  }
+
+  /* --------------------------------------------- */
+
+  /**
+   * Is this item hidden, preventing it from being used or recovering uses?
+   * @type {boolean}
+   */
+  get isHidden() {
+    if ( this.actor?.hiddenItems.has(this.id) ) return true;
+    if ( this.dependentOrigin?.active === false ) return true;
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -437,7 +459,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   *allApplicableEffects() {
     for ( const effect of this.effects ) {
-      if ( effect.isAppliedEnchantment ) yield effect;
+      if ( effect.applicableType === "Item" ) yield effect;
     }
   }
 
@@ -451,25 +473,22 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const changes = [];
     for ( const effect of this.allApplicableEffects() ) {
       if ( !effect.active ) continue;
-      changes.push(...effect.changes.map(change => {
-        const c = foundry.utils.deepClone(change);
-        c.effect = effect;
-        c.priority ??= c.mode * 10;
-        return c;
-      }));
+      for ( const change of effect.system.changes ) {
+        if ( change.key === "" ) continue;
+        const copy = foundry.utils.deepClone(change);
+        copy.effect = effect;
+        changes.push(copy);
+      }
     }
     changes.sort((a, b) => a.priority - b.priority);
-    if ( game.release.generation > 13 ) foundry.documents.ActiveEffect._shimChanges?.(changes);
+    foundry.documents.ActiveEffect._shimChanges?.(changes);
 
     // Apply all changes
     const overrides = {};
     const replacementData = this.getRollData();
     for ( const change of changes ) {
-      if ( !change.key ) continue;
-      const changes = (game.release.generation > 13)
-        ? change.effect.constructor.applyChange(this, change, { replacementData })
-        : change.effect.apply(this, change);
-      Object.assign(overrides, changes);
+      const result = change.effect.constructor.applyChange(this, change, { replacementData });
+      if ( foundry.utils.isPlainObject(result) ) Object.assign(overrides, result);
     }
 
     // Expand the set of final overrides
@@ -483,6 +502,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @type {boolean}
    */
   get areEffectsSuppressed() {
+    if ( this.isHidden ) return true;
     const requireEquipped = (this.type !== "consumable")
       || ["rod", "trinket", "wand"].includes(this.system.type.value);
     if ( requireEquipped && (this.system.equipped === false) ) return true;
@@ -503,6 +523,18 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       item.prepareFinalAttributes();
     }
     return item;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a clone of this item with a certain scaling.
+   * @param {number} scaling       Scaling increase above base level.
+   * @param {object} [options={}]  Additional options for the clone.
+   * @returns {Item5e}
+   */
+  scaledClone(scaling, options={}) {
+    return this.clone({ "flags.dnd5e": { scaling } }, { keepId: true, ...options });
   }
 
   /* -------------------------------------------- */
@@ -622,13 +654,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   _prepareProficiency() {
-    if ( !["spell", "weapon", "equipment", "tool", "feat", "consumable"].includes(this.type) ) return;
-    if ( !this.actor?.system.attributes?.prof ) {
-      this.system.prof = new Proficiency(0, 0);
-      return;
-    }
-
-    this.system.prof = new Proficiency(this.actor.system.attributes.prof, this.system.proficiencyMultiplier ?? 0);
+    if ( !this.system.hasProficiency ) return;
+    const prof = this.actor?.system.attributes?.prof;
+    this.system.prof = new Proficiency(Number.isFinite(prof) ? prof : 0, this.system.proficiencyMultiplier ?? 0);
   }
 
   /* -------------------------------------------- */
@@ -658,7 +686,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const existingDamageLabels = new Set();
     let firstDamage = true;
     for ( const activity of this.system.activities ) {
-      if ( !("activation" in activity) || !activity.canUse ) continue;
+      if ( !("activation" in activity) || activity.isHidden ) continue;
       const activationLabels = activity.activationLabels;
       if ( activationLabels ) activations.push({
         ...activationLabels,
@@ -689,10 +717,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /**
    * Render a rich tooltip for this item.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {Promise<{content: string, classes: string[]}>|null}
    */
   richTooltip(enrichmentOptions={}) {
-    return this.system.richTooltip?.() ?? null;
+    return this.system.richTooltip?.(enrichmentOptions) ?? null;
   }
 
   /* -------------------------------------------- */
@@ -709,8 +738,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *                                                                   activities and was posted directly to chat.
    */
   async use(config={}, dialog={}, message={}) {
-    if ( this.pack ) return;
-
     let event = config.event;
     const activities = this.system.activities?.filter(a => a.canUse);
     if ( activities?.length ) {
@@ -777,7 +804,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( Hooks.call("dnd5e.preDisplayCard", this, messageConfig) === false ) return;
     if ( Hooks.call("dnd5e.preDisplayCardV2", this, messageConfig) === false ) return;
 
-    ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+    ChatMessage.applyMode(messageConfig.data, messageConfig.rollMode);
     const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
 
     /**
@@ -853,12 +880,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {RollDataOptions} [options]
    * @returns {ItemRollData}
    */
-  getRollData({ deterministic=false }={}) {
+  getRollData(options={}) {
     let data;
-    if ( this.system.getRollData ) data = this.system.getRollData({ deterministic });
-    else data = { ...(this.actor?.getRollData({ deterministic }) ?? {}), item: { ...this.system } };
+    if ( this.system.getRollData ) data = this.system.getRollData(options);
+    else data = { ...(this.actor?.getRollData(options) ?? {}), item: { ...this.system } };
     if ( data?.item ) {
-      data.item.flags = { ...this.flags };
+      data.item.flags = this.flags;
       data.item.name = this.name;
     }
     data.labels = this.labels;
@@ -956,7 +983,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const activity = this.system.activities?.get(id);
     if ( !activity ) return this;
     await Promise.allSettled(activity.constructor._apps.get(activity.uuid)?.map(a => a.close()) ?? []);
-    if ( game.release.generation < 14 ) return this.update({ [`system.activities.-=${id}`]: null });
     return this.update({ [`system.activities.${id}`]: _del });
   }
 
@@ -968,20 +994,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [data]                        Data to use when creating the advancement.
    * @param {object} [options]
    * @param {boolean} [options.renderSheet]        Should the sheet be rendered after creation?
-   * @param {boolean} [options.showConfig]         Deprecated, use `renderSheet` instead.
    * @param {boolean} [options.source=false]       Should a source-only update be performed?
    * @returns {Promise<AdvancementConfig>|Item5e}  Promise for advancement config for new advancement if source
    *                                               is `false`, or item with newly added advancement.
    */
-  createAdvancement(type, data={}, { renderSheet=true, showConfig, source=false }={}) {
-    if ( showConfig !== undefined ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `showConfig` options in `createAdvancement` has been deprecated and replaced with `renderSheet`.",
-        { since: "DnD5e 5.2", until: "DnD5e 6.0" }
-      );
-      renderSheet = showConfig;
-    }
-
+  createAdvancement(type, data={}, { renderSheet=true, source=false }={}) {
     if ( !this.system.advancement ) return this;
 
     const config = CONFIG.DND5E.advancementTypes[type];
@@ -1026,9 +1043,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement.get(id);
     let update = { [`system.advancement.${id}`]: updates };
     if ( !source && this._needsAdvancementMigration ) update = {
-      "system.==advancement": foundry.utils.mergeObject(
-        this.system.toObject().advancement, { [id]: updates }, { performDeletions: true }
-      )
+      "system.advancement": _replace(foundry.utils.mergeObject(
+        this.system.toObject().advancement, { [id]: updates }, { applyOperators: true }
+      ))
     };
     if ( source ) {
       advancement.updateSource(updates);
@@ -1055,13 +1072,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancement = this.system.advancement?.get(id);
     if ( !advancement ) return this;
 
-    let update = game.release.generation < 14
-      ? { [`system.advancement.-=${id}`]: null }
-      : { [`system.advancement.${id}`]: _del };
+    let update = { [`system.advancement.${id}`]: _del };
     if ( !source && this._needsAdvancementMigration ) {
       const data = this.system.toObject().advancement;
       delete data[id];
-      update = { "system.==advancement": data };
+      update = { "system.advancement": _replace(data) };
     }
     if ( source ) return this.updateSource(update);
 
@@ -1075,7 +1090,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Duplicate an advancement, resetting its value to default and giving it a new ID.
    * @param {string} id                             ID of the advancement to duplicate.
    * @param {object} [options]
-   * @param {boolean} [options.showConfig=true]     Should the new advancement's configuration application be shown?
+   * @param {boolean} [options.renderSheet=true]    Should the sheet be rendered after creation?
    * @param {boolean} [options.source=false]        Should a source-only update be performed?
    * @returns {Promise<AdvancementConfig>|Item5e}   Promise for advancement config for duplicate advancement if source
    *                                                is `false`, or item with newly duplicated advancement.
@@ -1188,20 +1203,20 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Display custom delete dialog when deleting a container with contents
     const count = await this.system.contentsCount;
     if ( count ) {
-      const type = game.i18n.localize("DND5E.Container");
+      const type = _loc("DND5E.Container");
       const config = foundry.utils.mergeObject({
         window: {
           icon: "fa-solid fa-trash",
-          title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}`
+          title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}`
         },
         position: { width: 400 },
         content: `
           <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong>
-            ${game.i18n.format("DND5E.ContainerDeleteMessage", { count })}
+            <strong>${_loc("COMMON.AreYouSure")}</strong>
+            ${_loc("DND5E.ContainerDeleteMessage", { count })}
           </p>
           <label class="checkbox">
-            <span>${game.i18n.localize("DND5E.ContainerDeleteContents")}</span>
+            <span>${_loc("DND5E.ContainerDeleteContents")}</span>
             <input type="checkbox" name="deleteContents">
           </label>
         `,
@@ -1215,13 +1230,13 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }
 
     if ( sheet ) {
-      const type = game.i18n.localize(this.constructor.metadata.label);
+      const type = _loc(this.constructor.metadata.label);
       return sheet._confirmDialog(foundry.utils.mergeObject({
-        window: { title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name}` },
+        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}` },
         position: { width: 400 },
         content: `
           <p>
-            <strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.format("SIDEBAR.DeleteWarning", { type })}
+            <strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
           </p>
         `,
         yes: { callback: () => this.delete(operation) }
@@ -1241,24 +1256,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static addDirectoryContextOptions(app, entryOptions) {
     entryOptions.push({
-      name: "DND5E.Scroll.CreateScroll",
-      icon: '<i class="fa-solid fa-scroll"></i>',
-      callback: async li => {
-        let spell = game.items.get(li.dataset.entryId);
-        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
-          spell = await app.collection.getDocument(li.dataset.entryId);
-        }
-        const scroll = await Item5e.createScrollFromSpell(spell);
-        if ( scroll ) Item5e.create(scroll);
-      },
-      condition: li => {
-        let item = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+      label: "DND5E.Scroll.CreateScroll",
+      icon: "fa-solid fa-scroll",
+      group: "system",
+      visible: li => {
+        let item = game.items.get(li.dataset.entryId);
         if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
           item = app.collection.index.get(li.dataset.entryId);
         }
         return (item.type === "spell") && game.user.hasPermission("ITEM_CREATE");
       },
-      group: "system"
+      onClick: async (_, target) => {
+        let spell = game.items.get(target.dataset.entryId);
+        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
+          spell = await app.collection.getDocument(target.dataset.entryId);
+        }
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
+      }
     });
   }
 
@@ -1280,7 +1295,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( container ) {
       initialDepth = 1 + (await container.system.allContainers()).length;
       if ( initialDepth > PhysicalItemTemplate.MAX_DEPTH ) {
-        ui.notifications.warn(game.i18n.format("DND5E.ContainerMaxDepth", { depth: PhysicalItemTemplate.MAX_DEPTH }));
+        ui.notifications.warn("DND5E.ContainerMaxDepth", { format: { depth: PhysicalItemTemplate.MAX_DEPTH } });
         return;
       }
     }
@@ -1414,7 +1429,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Create the spell scroll data
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
-      name: `${game.i18n.localize("DND5E.SpellScroll")}: ${itemData.name}`,
+      name: `${_loc("DND5E.SpellScroll")}: ${itemData.name}`,
       effects: itemData.effects ?? [],
       flags,
       system: {
@@ -1518,7 +1533,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     // Create the spell scroll data
     const spellScrollData = foundry.utils.mergeObject(scrollData, {
-      name: `${game.i18n.localize("DND5E.SpellScroll")}: ${spell.name}`,
+      name: `${_loc("DND5E.SpellScroll")}: ${spell.name}`,
       system: {
         activities: { ...(scrollData.system.activities ?? {}), [activity._id]: activity },
         description: {
@@ -1565,10 +1580,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
         return [
           scrollDetails ? scrollIntro : null,
-          `<h3>${spell.name} (${game.i18n.format("DND5E.LevelNumber", { level })})</h3>`,
-          isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
+          `<h3>${spell.name} (${_loc("DND5E.LevelNumber", { level })})</h3>`,
+          isConc ? `<p><em>${_loc("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
           spellDescription,
-          `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
+          `<h3>${_loc("DND5E.Scroll.Details")}</h3>`,
           scrollDetails || scrollIntro
         ].filterJoin("");
       case "reference":
@@ -1576,7 +1591,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
           "<p><em>",
           CONFIG.DND5E.spellLevels[level] ?? level,
           " &Reference[Spell Scroll]",
-          isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
+          isConc ? `, ${_loc("DND5E.Scroll.RequiresConcentration")}` : null,
           "</em></p>",
           spellDescription
         ].filterJoin("");

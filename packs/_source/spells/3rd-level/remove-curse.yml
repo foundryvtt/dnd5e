@@ -28,11 +28,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -89,20 +92,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: remove-curse
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-purple-orange.webp
+img: icons/sundries/scrolls/scroll-bound-sealed-red-green.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358503
-  modifiedTime: 1725992720587
+  modifiedTime: 1781293194071
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!XZhdgVK3cLoxNCQl'

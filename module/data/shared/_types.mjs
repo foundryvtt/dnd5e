@@ -10,6 +10,13 @@
  */
 
 /**
+ * @typedef ActivationLabels
+ * @property {string} simple  Activation label (e.g. "Action" or "1 Minute").
+ * @property {string} legacy  Lowercase, always counted form (e.g. "1 action").
+ * @property {string} ritual  Simple label, joined with "Ritual" if the item can be ritually cast.
+ */
+
+/**
  * @typedef CreatureTypeData
  * @property {string} value    Actor's type as defined in the system configuration.
  * @property {string} subtype  Actor's subtype usually displayed in parenthesis after main type.
@@ -23,6 +30,14 @@
  */
 
 /**
+ * @typedef D20RollModificationData
+ * @property {string} bonus  Bonus added to the roll.
+ * @property {number} min    Minimum number on the die rolled.
+ * @property {number} max    Maximum number on the die rolled.
+ * @property {number} mode   Should the roll be with disadvantage or advantage by default?
+ */
+
+/**
  * @typedef DamageData
  * @property {number} number           Number of dice to roll.
  * @property {number} denomination     Die denomination to roll.
@@ -32,10 +47,22 @@
  * @property {object} custom
  * @property {boolean} custom.enabled  Should the custom formula be used?
  * @property {string} custom.formula   Custom damage formula.
+ * @property {Set<string>} modifiers   Modifiers to apply to damage roll.
  * @property {object} scaling
  * @property {string} scaling.mode     How the damage scales in relation with levels.
  * @property {number} scaling.number   Number of dice to add per scaling level.
  * @property {string} scaling.formula  Arbitrary scaling formula which will be multiplied by scaling increase.
+ */
+
+/**
+ * @typedef DamageFormulaOptions
+ * @property {Set<string>|false} modifiers  Additional modifiers to apply to the formula, if possible.
+ *                                          A `false` value will remove modifiers provided by damage data.
+ */
+
+/**
+ * @typedef DamageRollModificationData
+ * @property {string} bonus  Bonus added to the roll.
  */
 
 /**
@@ -46,14 +73,17 @@
  */
 
 /**
+ * @typedef DurationLabels
+ * @property {string} simple         Duration label (e.g. "Instantaneous" or "1 Minute").
+ * @property {string} concentration  Simple label, wrapped in "Concentration, up to ..." where appropriate.
+ */
+
+/**
  * @typedef MovementData
- * @property {number} walk                          Actor walking speed.
- * @property {number} burrow                        Actor burrowing speed.
- * @property {number} climb                         Actor climbing speed.
- * @property {number} fly                           Actor flying speed.
- * @property {number} swim                          Actor swimming speed.
  * @property {string} bonus                         Bonus applied to all movement types that already have a speed.
+ * @property {number} multiplier                    Multiplier for each movement type.
  * @property {string} special                       Semi-colon separated list of special movement information.
+ * @property {Record<string, string>} speeds        Speeds for various movement types.
  * @property {string} units                         Movement used to measure the various speeds.
  * @property {boolean} hover                        This flying creature able to hover in place.
  * @property {Set<string>} ignoredDifficultTerrain  Types of difficult terrain ignored.
@@ -67,12 +97,24 @@
  */
 
 /**
+ * @typedef RangeLabels
+ * @property {string} simple       Range label (e.g. "Self" or "120 ft").
+ * @property {string} html         Range label as HTML, with each number and unit part wrapped in its own span.
+ * @property {string} description  Range label with the units spelled out (e.g. "120 feet").
+ */
+
+/**
  * @typedef RollConfigData
- * @property {string} [ability]  Default ability associated with this roll.
- * @property {object} roll
- * @property {number} roll.min   Minimum number on the die rolled.
- * @property {number} roll.max   Maximum number on the die rolled.
- * @property {number} roll.mode  Should the roll be with disadvantage or advantage by default?
+ * @property {string} ability    Default ability associated with this roll.
+ * @property {D20RollModificationData} roll
+ */
+
+/**
+ * @typedef RulesDetails
+ * @property {string} category    Category of rules to retrieve (e.g. "attack" or "check").
+ * @property {Actor5e} actor      Actor from which to fetch rules.
+ * @property {Item5e} [item]      Item from which to fetch rules.
+ * @property {RollData} rollData  Roll data with which to filter the rules.
  */
 
 /**
@@ -107,6 +149,19 @@
  * @property {string} affects.type          Type of targets that can be affected (e.g. creatures, objects, spaces).
  * @property {boolean} affects.choice       When targeting an area, can the user choose who it affects?
  * @property {string} affects.special       Description of special targeting.
+ */
+
+/**
+ * @typedef TargetLabels
+ * @property {object} affects
+ * @property {string} affects.description   Prose form used in descriptions (e.g. "each creature").
+ * @property {string} affects.sheet         Capitalized short form used on sheets and inventory lists.
+ * @property {string} affects.statblock     Counted form used in statblocks (e.g. "one creature").
+ * @property {object} template
+ * @property {string} template.description  Counted template label with its sizes (e.g. "20-foot Sphere").
+ * @property {string} template.size         Template dimensions (e.g. "20-foot" or "10-foot-long, 5-foot-wide").
+ * @property {string} template.statblock    Counted template label with its primary size (e.g. "20 ft sphere").
+ * @property {string} template.type         Localized template type (e.g. "Sphere").
  */
 
 /**

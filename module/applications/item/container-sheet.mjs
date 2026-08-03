@@ -108,9 +108,10 @@ export default class ContainerSheet extends ItemSheet5e {
     for ( const item of await this.item.system.contents ) {
       const ctx = context.itemContext[item.id] ??= {};
       ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
-      ctx.isExpanded = this.expandedSections.get(item.id);
+      ctx.isExpanded = this.expandedSections.get(`items.${item.id}`);
       ctx.isStack = item.system.quantity > 1;
-      ctx.expanded = this.expandedSections.get(item.id) ? await item.getChatData({ secrets: this.item.isOwner }) : null;
+      ctx.expanded = this.expandedSections.get(`items.${item.id}`)
+        ? await item.getChatData({ secrets: this.item.isOwner }) : null;
       ctx.groups = { contents: "contents", type: item.type };
       ctx.dataset = { groupContents: "contents", groupType: item.type };
       context.items.push(item);
@@ -135,7 +136,7 @@ export default class ContainerSheet extends ItemSheet5e {
     inventory.forEach(s => s.minWidth = 190);
     context.inventory = Inventory.prepareSections(inventory);
     context.listControls = foundry.utils.deepClone(ItemListControlsElement.CONFIG.inventory);
-    context.currency = context.source.currency;
+    context.currency = context.system.currency;
     context.showCurrency = true;
     this._items = context.items;
 
@@ -205,7 +206,7 @@ export default class ContainerSheet extends ItemSheet5e {
     items = items.filter(i => i && !containers.has(i.system.container));
 
     // Display recursive warning, but continue with any remaining items
-    if ( recursiveWarning ) ui.notifications.warn("DND5E.ContainerRecursiveError", { localize: true });
+    if ( recursiveWarning ) ui.notifications.warn("DND5E.ContainerRecursiveError");
     if ( !items.length ) return [];
 
     // Create any remaining items
@@ -239,7 +240,7 @@ export default class ContainerSheet extends ItemSheet5e {
     // Prevent dropping containers within themselves
     const parentContainers = await this.item.system.allContainers();
     if ( (this.item.uuid === item.uuid) || parentContainers.includes(item) ) {
-      ui.notifications.error("DND5E.ContainerRecursiveError", { localize: true });
+      ui.notifications.error("DND5E.ContainerRecursiveError");
       return;
     }
 
@@ -358,20 +359,25 @@ export default class ContainerSheet extends ItemSheet5e {
    * @protected
    */
   _filterItems(items, filters) {
-    const actions = ["action", "bonus", "reaction"];
+    if ( !filters.size ) return items.filter(item => this._filterItem(item, filters) !== false);
+    const { included, excluded } = ItemListControlsElement.partitionFilters(filters);
+    const actions = new Set(["action", "bonus", "reaction"]);
+    const actionFilter = actions.intersection(included);
+    const actionExclude = actions.intersection(excluded);
+    const passes = ItemListControlsElement.passesFilter;
+
     return items.filter(item => {
       // Subclass-specific logic.
       const filtered = this._filterItem(item, filters);
       if ( filtered !== undefined ) return filtered;
 
       // Action usage.
-      for ( const action of actions ) {
-        if ( filters.has(action) && (item.system.activation?.type !== action) ) return false;
-      }
+      if ( actionFilter.size && !actionFilter.has(item.system.activation?.type) ) return false;
+      if ( actionExclude.size && actionExclude.has(item.system.activation?.type) ) return false;
 
       // Equipment-specific filters.
-      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
-      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+      if ( !passes(included, excluded, "equipped", item.system.equipped === true) ) return false;
+      if ( !passes(included, excluded, "mgc", item.system.properties?.has("mgc")) ) return false;
 
       return true;
     });
@@ -398,7 +404,8 @@ export default class ContainerSheet extends ItemSheet5e {
      * @param {Set<string>} filters                     Filters applied to the Item.
      * @returns {false|void} Return false to hide the item, otherwise other filters will continue to apply.
      */
-    if ( Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
+    if ( ("dnd5e.filterItem" in Hooks.events)
+      && Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
   }
 
   /* -------------------------------------------- */

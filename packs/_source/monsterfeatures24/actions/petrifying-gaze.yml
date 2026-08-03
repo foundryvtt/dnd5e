@@ -165,17 +165,14 @@ effects:
     origin: Item.mmPetrifyingGaze
     _id: a5kKgU7vfT0v17yF
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Restrained apply=false] condition and
       repeats the save at the end of its next turn if it is still Restrained,
@@ -191,30 +188,36 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736074114628
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!items.effects!mmPetrifyingGaze.a5kKgU7vfT0v17yF'
   - name: Petrified
     img: systems/dnd5e/icons/svg/statuses/petrified.svg
     origin: Item.mmPetrifyingGaze
     _id: YLFv2Ujss9c0vtMQ
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Petrified apply=false] condition
       instead of the Restrained condition.</p>
@@ -229,13 +232,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736074128922
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!mmPetrifyingGaze.YLFv2Ujss9c0vtMQ'
 flags:
   dnd5e:
@@ -244,7 +250,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

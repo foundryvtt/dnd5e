@@ -1,9 +1,10 @@
 import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
-import AbilityTemplate from "../../canvas/ability-template.mjs";
+import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
@@ -11,9 +12,9 @@ import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
  * @import { FavoriteData5e } from "../../data/abstract/_types.mjs";
  * @import { ActorDeltasData } from "../../data/chat-message/fields/_types.mjs";
  * @import {
- *   BasicRollDialogConfiguration, BasicRollMessageConfiguration, DamageRollProcessConfiguration
+ *   BasicRollDialogConfiguration, BasicRollMessageConfiguration,
+ *   DamageRollConfiguration, DamageRollProcessConfiguration
  * } from "../../dice/_types.mjs";
- * @import { ActivityRollData, RollDataOptions } from "../_types.mjs";
  * @import {
  *   ActivityConsumptionDescriptor, ActivityDialogConfiguration, ActivityMessageConfiguration, ActivityMetadata,
  *   ActivityUsageChatButton, ActivityUsageResults, ActivityUsageUpdates, ActivityUseConfiguration
@@ -39,8 +40,10 @@ export default function ActivityMixin(Base) {
       sheetClass: ActivitySheet,
       usage: {
         actions: {},
+        applyEffectsInChat: true,
         chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
-        dialog: ActivityUsageDialog
+        dialog: ActivityUsageDialog,
+        messageType: "usage"
       }
     });
 
@@ -96,15 +99,7 @@ export default function ActivityMixin(Base) {
      * @type {boolean}
      */
     get canUse() {
-      if ( this.isRider ) return false;
-      if ( this.dependentOrigin?.active === false ) return false;
-      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return false;
-      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return false;
-      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return false;
-      const level = this.relevantLevel;
-      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
-        || ((this.visibility?.level?.max ?? Infinity) < level) ) return false;
-      return true;
+      return this.item.canUse && !this.isHidden;
     }
 
     /* -------------------------------------------- */
@@ -114,7 +109,7 @@ export default function ActivityMixin(Base) {
      * @type {string}
      */
     get damageFlavor() {
-      return game.i18n.localize("DND5E.DamageRoll");
+      return _loc("DND5E.DamageRoll");
     }
 
     /* -------------------------------------------- */
@@ -125,6 +120,25 @@ export default function ActivityMixin(Base) {
      */
     get dependentOrigin() {
       return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity hidden from display?
+     * @type {boolean}
+     */
+    get isHidden() {
+      if ( this.isRider ) return true;
+      if ( this.item.isHidden ) return true;
+      if ( this.dependentOrigin?.active === false ) return true;
+      if ( this.visibility?.requireAttunement && !this.item.system.attuned ) return true;
+      if ( this.visibility?.requireMagic && (this.item.system.magicAvailable === false) ) return true;
+      if ( this.visibility?.requireIdentification && !this.item.system.identified ) return true;
+      const level = this.relevantLevel;
+      if ( ((this.visibility?.level?.min ?? -Infinity) > level)
+        || ((this.visibility?.level?.max ?? Infinity) < level) ) return true;
+      return false;
     }
 
     /* -------------------------------------------- */
@@ -175,13 +189,13 @@ export default function ActivityMixin(Base) {
      * @returns {Promise<ActivityUsageResults|void>}  Details on the usage process if not canceled.
      */
     async use(usage={}, dialog={}, message={}) {
-      if ( !this.item.isEmbedded || this.item.pack ) return;
+      if ( !this.item.isEmbedded ) return;
       if ( !this.item.isOwner ) {
-        ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
+        ui.notifications.error("DND5E.DocumentUseWarn");
         return;
       }
       if ( !this.canUse ) {
-        ui.notifications.error("DND5E.ACTIVITY.Warning.UsageNotAllowed", { localize: true });
+        ui.notifications.error("DND5E.ACTIVITY.Warning.UsageNotAllowed");
         return;
       }
 
@@ -201,9 +215,6 @@ export default function ActivityMixin(Base) {
         data: {
           flags: {
             dnd5e: this.messageFlags
-          },
-          system: {
-            effects: this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`)
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -394,12 +405,7 @@ export default function ActivityMixin(Base) {
       const consumed = ActorDeltasField.getDeltas(this.actor, updates);
 
       // Update documents with consumption
-      if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
-      if ( !foundry.utils.isEmpty(updates.create) ) {
-        await this.actor.createEmbeddedDocuments("Item", updates.create, { keepId: true });
-      }
-      if ( !foundry.utils.isEmpty(updates.delete) ) await this.actor.deleteEmbeddedDocuments("Item", updates.delete);
-      if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+      await this.actor.performBulkUpdate(updates);
 
       return consumed;
     }
@@ -427,7 +433,7 @@ export default function ActivityMixin(Base) {
         const activationConfig = CONFIG.DND5E.activityActivationTypes[this.activation.type] ?? {};
         const hasActionConsumption = activationConfig.consume
           && (activationConfig.consume.canConsume?.(this) !== false);
-        const hasResourceConsumption = this.consumption.targets.length > 0;
+        const hasResourceConsumption = !!this.consumption.targets.find(c => !c.hasZeroCost(config));
         const hasLinkedConsumption = (linked?.consumption.targets.length > 0) && !ignoreLinkedConsumption;
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
         config.consume ??= {};
@@ -550,7 +556,7 @@ export default function ActivityMixin(Base) {
           if ( current.value < 1 ) message = "DND5E.ACTIVATION.Warning.NoActions";
           else if ( count > current.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
           if ( message ) {
-            const err = new ConsumptionError(game.i18n.format(message, {
+            const err = new ConsumptionError(_loc(message, {
               type: activationConfig.label,
               required: formatNumber(count),
               available: formatNumber(current.value)
@@ -568,6 +574,7 @@ export default function ActivityMixin(Base) {
           ? this.consumption.targets.keys() : config.consume.resources;
         for ( const index of indexes ) {
           const target = this.consumption.targets[index];
+          if ( target.hasZeroCost(config) ) continue;
           try {
             await target.consume(config, updates);
           } catch(err) {
@@ -619,7 +626,7 @@ export default function ActivityMixin(Base) {
             const newValue = Math.max(slotData.value - 1, 0);
             foundry.utils.mergeObject(updates.actor, { [`system.spells.${slot}.value`]: newValue });
           } else {
-            const err = new ConsumptionError(game.i18n.format("DND5E.SpellCastNoSlots", {
+            const err = new ConsumptionError(_loc("DND5E.SpellCastNoSlots", {
               name: this.item.name, level: slotData.label
             }));
             errors.push(err);
@@ -634,13 +641,13 @@ export default function ActivityMixin(Base) {
         if ( config.concentration.end ) {
           const replacedEffect = effects.find(i => i.id === config.concentration.end);
           if ( !replacedEffect ) errors.push(
-            new ConsumptionError(game.i18n.localize("DND5E.ConcentratingMissingItem"))
+            new ConsumptionError(_loc("DND5E.CONCENTRATION.Warning.MissingItem"))
           );
         }
 
         // Cannot begin more concentrations than the limit
         else if ( effects.size >= this.actor.system.attributes?.concentration?.limit ) errors.push(
-          new ConsumptionError(game.i18n.localize("DND5E.ConcentratingLimited"))
+          new ConsumptionError(_loc("DND5E.CONCENTRATION.Limit.Reached"))
         );
       }
 
@@ -679,10 +686,10 @@ export default function ActivityMixin(Base) {
       const properties = [...(data.tags ?? []), ...(data.properties ?? [])];
       const supplements = [];
       if ( this.activation.condition ) {
-        supplements.push(`<strong>${game.i18n.localize("DND5E.Trigger")}</strong> ${this.activation.condition}`);
+        supplements.push(`<strong>${_loc("DND5E.Trigger")}</strong> ${this.activation.condition}`);
       }
       if ( data.materials?.value ) {
-        supplements.push(`<strong>${game.i18n.localize("DND5E.Materials")}</strong> ${data.materials.value}`);
+        supplements.push(`<strong>${_loc("DND5E.Materials")}</strong> ${data.materials.value}`);
       }
       const buttons = this._usageChatButtons(message);
 
@@ -717,8 +724,10 @@ export default function ActivityMixin(Base) {
      */
     _finalizeMessageConfig(usageConfig, messageConfig, results) {
       messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
-      const effects = this.applicableEffects?.map(e => `.ActiveEffect.${e.id}`);
-      if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      if ( this.metadata.usage.applyEffectsInChat ) {
+        const effects = this.applicableEffects?.map(e => e.relativeUUID);
+        if ( effects ) foundry.utils.setProperty(messageConfig.data, "system.effects", effects);
+      }
     }
 
     /* -------------------------------------------- */
@@ -733,7 +742,7 @@ export default function ActivityMixin(Base) {
       const buttons = [];
 
       if ( this.target?.template?.type ) buttons.push({
-        label: game.i18n.localize("DND5E.TARGET.Action.PlaceTemplate"),
+        label: _loc("DND5E.TARGET.Action.PlaceTemplate"),
         icon: '<i class="fas fa-bullseye" inert></i>',
         dataset: {
           action: "placeTemplate"
@@ -741,13 +750,13 @@ export default function ActivityMixin(Base) {
       });
 
       if ( message.hasConsumption ) buttons.push({
-        label: game.i18n.localize("DND5E.CONSUMPTION.Action.ConsumeResource"),
+        label: _loc("DND5E.CONSUMPTION.Action.ConsumeResource"),
         icon: '<i class="fa-solid fa-cubes-stacked" inert></i>',
         dataset: {
           action: "consumeResource"
         }
       }, {
-        label: game.i18n.localize("DND5E.CONSUMPTION.Action.RefundResource"),
+        label: _loc("DND5E.CONSUMPTION.Action.RefundResource"),
         icon: '<i class="fa-solid fa-clock-rotate-left"></i>',
         dataset: {
           action: "refundResource"
@@ -769,9 +778,7 @@ export default function ActivityMixin(Base) {
       switch ( button.dataset.action ) {
         case "consumeResource": return !!message.system.deltas;
         case "refundResource": return !message.system.deltas;
-        case "placeTemplate":
-          return !game.user.can(game.release.generation < 14 ? "TEMPLATE_CREATE" : "REGION_CREATE")
-            || !game.canvas.scene;
+        case "placeTemplate": return !game.user.can("REGION_CREATE") || !game.canvas.scene;
       }
       return false;
     }
@@ -785,17 +792,21 @@ export default function ActivityMixin(Base) {
      * @protected
      */
     async _createUsageMessage(message) {
-      const context = await this._usageChatContext(message);
-      const messageConfig = foundry.utils.mergeObject({
-        data: {
-          content: await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context),
-          flags: {
-            core: { canPopout: true }
-          },
-          speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
-          title: `${this.item.name} - ${this.name}`,
-          type: "usage"
+      const { chatCard, messageType } = this.metadata.usage;
+      const data = {
+        flags: {
+          core: { canPopout: true }
         },
+        speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
+        title: `${this.item.name} - ${this.name}`,
+        type: messageType
+      };
+      if ( chatCard ) {
+        const context = await this._usageChatContext(message);
+        data.content = await foundry.applications.handlebars.renderTemplate(chatCard, context);
+      }
+      const messageConfig = foundry.utils.mergeObject({
+        data,
         rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
       }, message);
 
@@ -808,7 +819,7 @@ export default function ActivityMixin(Base) {
        */
       Hooks.callAll("dnd5e.preCreateUsageMessage", this, messageConfig);
 
-      ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
+      ChatMessage.applyMode(messageConfig.data, messageConfig.rollMode);
       const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
 
       /**
@@ -871,8 +882,10 @@ export default function ActivityMixin(Base) {
       rollConfig.hookNames = [...(config.hookNames ?? []), "damage"];
       rollConfig.subject = this;
 
+      const buildConfig = this._buildDamageConfig.bind(this);
       const dialogConfig = foundry.utils.mergeObject({
         options: {
+          buildConfig,
           position: {
             width: 400,
             top: config.event ? config.event.clientY - 80 : null,
@@ -890,14 +903,9 @@ export default function ActivityMixin(Base) {
         create: true,
         data: {
           flavor: `${this.item.name} - ${this.damageFlavor}`,
-          flags: {
-            dnd5e: {
-              ...this.messageFlags,
-              messageType: "roll",
-              roll: { type: "damage" }
-            }
-          },
-          speaker: ChatMessage.getSpeaker({ actor: this.actor })
+          flags: { dnd5e: this.messageFlags },
+          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+          type: "damage"
         }
       }, message);
 
@@ -929,6 +937,37 @@ export default function ActivityMixin(Base) {
     }
 
     /* -------------------------------------------- */
+
+    /**
+     * Adjust rules applied to damage parts when damage type is changed.
+     * @param {DamageRollProcessConfiguration} process  Configuration for the entire rolling process.
+     * @param {DamageRollConfiguration} config          Configuration for a specific roll.
+     * @param {FormDataExtended|void} formData          Any data entered into the rolling prompt.
+     * @param {number} index                            Index of the roll within all rolls being prepared.
+     */
+    _buildDamageConfig(process, config, formData, index) {
+      if ( index === 0 ) process.rules = {
+        bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
+        consumed: new Set()
+      };
+
+      config.data.roll ??= {};
+      config.data.roll.damageType = config.options.type;
+      const ruleBonus = AppliedRules.createIterator(process.rules.bonus)
+        .filterWith(config.data, { consumed: process.rules.consumed })
+        .toFormula();
+      const rulePartIndex = config.parts.findIndex(p => p === "@ruleBonus");
+      if ( ruleBonus ) {
+        config.data.ruleBonus = ruleBonus;
+        if ( rulePartIndex < 0 ) config.parts.push("@ruleBonus");
+      } else if ( rulePartIndex >= 0 ) {
+        config.parts.splice(rulePartIndex, 1);
+      }
+
+      return config;
+    }
+
+    /* -------------------------------------------- */
     /*  Event Listeners and Handlers                */
     /* -------------------------------------------- */
 
@@ -956,42 +995,42 @@ export default function ActivityMixin(Base) {
 
       if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
-          name: "DND5E.ContextMenuActionEdit",
-          icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
-          callback: () => this.item.sheet._renderChild(this.sheet)
+          label: "DND5E.ContextMenuActionEdit",
+          icon: "fa-solid fa-pen-to-square",
+          onClick: () => this.item.sheet._renderChild(this.sheet)
         }, {
-          name: "DND5E.ContextMenuActionDuplicate",
-          icon: '<i class="fas fa-copy fa-fw"></i>',
-          callback: () => {
+          label: "DND5E.ContextMenuActionDuplicate",
+          icon: "fa-solid fa-copy",
+          onClick: () => {
             const createData = this.toObject();
             delete createData._id;
             this.item.createActivity(createData.type, createData, { renderSheet: false });
           }
         }, {
-          name: "DND5E.ContextMenuActionDelete",
-          icon: '<i class="fas fa-trash fa-fw"></i>',
-          callback: () => this.deleteDialog({ sheet: this.item.sheet })
+          label: "DND5E.ContextMenuActionDelete",
+          icon: "fa-solid fa-trash",
+          onClick: () => this.deleteDialog({ sheet: this.item.sheet })
         });
       } else {
         entries.push({
-          name: "DND5E.ContextMenuActionView",
-          icon: '<i class="fas fa-eye fa-fw"></i>',
-          callback: () => this.item.sheet._renderChild(this.sheet)
+          label: "DND5E.ContextMenuActionView",
+          icon: "fa-solid fa-eye",
+          onClick: () => this.item.sheet._renderChild(this.sheet)
         });
       }
 
       if ( "favorites" in (this.actor?.system ?? {}) ) {
-        const uuid = `${this.item.getRelativeUUID(this.actor)}.Activity.${this.id}`;
+        const uuid = `${foundry.utils.buildRelativeUuid(this.item, this.actor)}.Activity.${this.id}`;
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
-          name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-          icon: '<i class="fas fa-bookmark fa-fw"></i>',
-          condition: () => this.item.isOwner && !compendiumLocked,
-          callback: () => {
+          label: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
+          icon: "fa-solid fa-bookmark",
+          group: "state",
+          visible: () => this.item.isOwner && !compendiumLocked,
+          onClick: () => {
             if ( isFavorited ) this.actor.system.removeFavorite(uuid);
             else this.actor.system.addFavorite({ type: "activity", id: uuid });
-          },
-          group: "state"
+          }
         });
       }
 
@@ -1111,18 +1150,45 @@ export default function ActivityMixin(Base) {
     async #placeTemplate() {
       const templates = [];
       try {
-        for ( const template of AbilityTemplate.fromActivity(this) ) {
-          const result = await template.drawPreview();
-          if ( result ) templates.push(result);
-        }
+        const result = await TemplatePlacement.fromActivity(this);
+        if ( result ) templates.push(...result);
       } catch(err) {
         Hooks.onError("Activity#placeTemplate", err, {
-          msg: game.i18n.localize("DND5E.TARGET.Warning.PlaceTemplate"),
+          msg: _loc("DND5E.TARGET.Warning.PlaceTemplate"),
           log: "error",
           notify: "error"
         });
       }
       return templates;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle attaching region behaviors to a newly created template.
+     * @param {Region} region
+     * @param {object} options
+     * @param {string} userId
+     */
+    static async placeTemplateBehaviors(region, options, userId) {
+      if ( !game.user.isActiveGM || (options.dnd5e?.createActivityBehaviors === false) ) return;
+
+      const activity = await fromUuid(region.getFlag("dnd5e", "activity"));
+      const behaviors = activity?.applicableBehaviors;
+      if ( !behaviors?.length ) return;
+
+      const token = fromUuidSync(region.getFlag("dnd5e", "origin"));
+      const toCreate = [];
+      for ( const behavior of behaviors ) {
+        const data = behavior.config.createBehaviorData(activity, { token });
+        if ( !data ) continue;
+        data.name ??= behavior.name;
+        toCreate.push(data);
+      }
+
+      // TODO: Add pre- and post- hooks
+
+      region.createEmbeddedDocuments("RegionBehavior", toCreate);
     }
 
     /* -------------------------------------------- */
@@ -1175,21 +1241,6 @@ export default function ActivityMixin(Base) {
       if ( !this.actor ) return null;
       relativeUUID ??= this.item.getFlag("dnd5e", "cachedFor");
       return fromUuidSync(relativeUUID, { relative: this.actor, strict: false });
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Prepare a data object which defines the data schema used by dice roll commands against this Activity.
-     * @param {RollDataOptions} [options]
-     * @returns {ActivityRollData}
-     */
-    getRollData(options) {
-      const rollData = this.item.getRollData(options);
-      rollData.activity = { ...this };
-      rollData.consumed = this.item.flags.dnd5e?.consumed;
-      rollData.mod = this.actor?.system.abilities?.[this.ability]?.mod ?? 0;
-      return rollData;
     }
 
     /* -------------------------------------------- */

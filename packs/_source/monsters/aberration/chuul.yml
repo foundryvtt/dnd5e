@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,6 +480,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: 7lnXqe8AnWhtnQh7
     name: Pincer
@@ -493,10 +491,12 @@ items:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
           &amp;Reference[grappled] (escape DC 14) if it is a Large or smaller
-          creature and the chuul doesn't have two other creatures grappled.</p>
+          creature and the [[lookup @name lowercase]]{monster} doesn't have two
+          other creatures grappled.</p>
         chat: >-
-          <p>The Chuul attacks with its Pincer. The target is grappled if it is
-          a Large or smaller creature.</p>
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. The target is &amp;reference[grappled] if it is a Large
+          or smaller creature.</p>
       source:
         custom: ''
         book: ''
@@ -520,7 +520,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 10
       uses:
         max: ''
         recovery: []
@@ -558,9 +558,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - rch
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -569,8 +568,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        jCeyehMdpYV9FDa2:
           type: attack
           activation:
             type: action
@@ -585,13 +583,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: T41SFU26kz9FJtPA
+              level: {}
           range:
             value: '10'
             units: ft
@@ -605,7 +606,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -618,26 +620,76 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: jCeyehMdpYV9FDa2
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: pincer
       mastery: ''
-    effects: []
+    effects:
+      - name: Grappled by Pincer
+        img: icons/commodities/claws/claw-pincer-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.P6qC8jB3pnEH0tIE.Item.7lnXqe8AnWhtnQh7
+        transfer: false
+        _id: T41SFU26kz9FJtPA
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You are &amp;reference[grappled apply=false] (escape DC 14).</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781745608329
+          modifiedTime: 1781745631602
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!P6qC8jB3pnEH0tIE.7lnXqe8AnWhtnQh7.T41SFU26kz9FJtPA
     folder: null
     sort: 100000
     ownership:
@@ -646,26 +698,28 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275762395
+      systemVersion: 6.0.0
+      createdTime: 1781745591065
+      modifiedTime: 1781745645258
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.7lnXqe8AnWhtnQh7'
   - _id: XUzROtGqVZS61Ofm
     name: Tentacles
     type: feat
-    img: icons/creatures/tentacles/tentacles-thing-green.webp
+    img: icons/commodities/biological/tentacle-purple-white.webp
     system:
       description:
         value: >-
-          <p>One creature grappled by the chuul must succeed on a [[/save]]
-          saving throw or be &amp;Reference[poisoned] for 1 minute. Until this
-          poison ends, the target is &amp;Reference[paralyzed]. The target can
-          repeat the saving throw at the end of each of its turns, ending the
-          effect on itself on a success.</p>
+          <p>One creature &amp;reference[grappled apply=false] by the [[lookup
+          @name lowercase]]{monster} must succeed on a [[/save]] saving throw or
+          be &amp;Reference[poisoned] for [[lookup @labels.duration
+          activity=BrAr9lF8TvsDoyxu]]. Until this poison ends, the target is
+          &amp;Reference[paralyzed]. The target can repeat the saving throw at
+          the end of each of its turns, ending the effect on itself on a
+          success.</p>
         chat: >-
           <p>One creature grappled by the chuul must make a
           <strong>Constitution</strong> saving throw. The target can repeat the
@@ -688,8 +742,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        BrAr9lF8TvsDoyxu:
           type: save
           activation:
             type: action
@@ -704,15 +757,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '1'
             units: minute
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: qingRxadtuIDPDLb
+              level: {}
+              onSave: false
           range:
-            units: ''
+            units: touch
             special: ''
             override: false
           target:
@@ -723,10 +780,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -736,19 +794,77 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: BrAr9lF8TvsDoyxu
+          name: Poison Save
       enchant: {}
       prerequisites:
         level: null
       identifier: tentacles
-    effects: []
+    effects:
+      - name: Chuul Poison
+        img: icons/skills/toxins/symbol-poison-drop-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.P6qC8jB3pnEH0tIE.Item.XUzROtGqVZS61Ofm
+        transfer: false
+        _id: qingRxadtuIDPDLb
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 1
+          units: minutes
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[poisoned apply=false]. While poisoned in
+          this way, you are also &amp;reference[paralyzed apply=false]. You can
+          repeat the saving throw at the end of each of your turns, ending the
+          effece on yourself on a success.</p>
+        tint: '#ffffff'
+        statuses:
+          - poisoned
+          - paralyzed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781745691315
+          modifiedTime: 1781745761491
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!P6qC8jB3pnEH0tIE.XUzROtGqVZS61Ofm.qingRxadtuIDPDLb
     folder: null
     sort: 300000
     ownership:
@@ -757,60 +873,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nKpLMXS9E10TSGhU
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275751000
+      systemVersion: 6.0.0
+      createdTime: 1781745657364
+      modifiedTime: 1781745778177
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.XUzROtGqVZS61Ofm'
-  - _id: uMZgFW5l9JQmFBp8
-    name: Amphibious
-    type: feat
-    img: icons/environment/creatures/frog-spotted-green.webp
-    system:
-      description:
-        value: <p>The chuul can breathe air and water.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: amphibious
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!P6qC8jB3pnEH0tIE.uMZgFW5l9JQmFBp8'
   - _id: OtOJ4eSobUE30d2S
     name: Multiattack
     type: feat
@@ -905,7 +975,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -916,13 +986,14 @@ items:
   - _id: 03oy1y5rwobZdg46
     name: Sense Magic
     type: feat
-    img: icons/magic/water/projectile-ice-snowball.webp
+    img: icons/magic/perception/eye-winged-pink.webp
     system:
       description:
         value: >-
-          <p>The chuul senses magic within 120 feet of it at will. This trait
-          otherwise works like the detect magic spell but isn't itself
-          magical.</p>
+          <p>The [[lookup @name lowercase]]{monster} senses magic within 120
+          feet of it at will. This trait otherwise works like the
+          @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic}
+          spell but isn't itself magical.</p>
         chat: ''
       source:
         custom: ''
@@ -936,7 +1007,7 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -947,21 +1018,74 @@ items:
       identifier: sense-magic
     effects: []
     folder: null
-    sort: 0
+    sort: 275000
     ownership:
       default: 0
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JAnMheqgFhkLF2ET
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745275666710
+      systemVersion: 6.0.0
+      createdTime: 1781745536810
+      modifiedTime: 1781745571759
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.03oy1y5rwobZdg46'
+  - _id: muIprvwkxlLF6dM3
+    name: Amphibious
+    type: feat
+    img: icons/creatures/amphibians/treefrog-underneath-teal.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can breathe air and
+          water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: amphibious
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 175000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.8RgUhb31VvjUNZU1.Item.ciz8wAZjqxPnu5Pe
+      duplicateSource: Item.pV30uzlB7Apma9GE
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781745533647
+      modifiedTime: 1781826569396
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!P6qC8jB3pnEH0tIE.muIprvwkxlLF6dM3'
 effects: []
 folder: cHmylff3tHTzhvyb
 sort: 0
@@ -970,7 +1094,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171228710

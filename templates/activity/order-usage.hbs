@@ -22,9 +22,9 @@
     {{#with craft}}
     <fieldset {{#if isHarvesting}}class="harvesting"{{/if}}>
         <legend>{{ legend }}</legend>
+        {{#if value}}
         <ul class="separated-list single-item">
             <li>
-                {{#if value}}
                 <div class="details flexrow">
                     <img class="gold-icon" src="{{ value.img }}" alt="{{ value.name }}">
                     {{{ value.contentLink }}}
@@ -36,11 +36,12 @@
                     </div>
                 </div>
                 <input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
-                {{else}}
-                {{ formInput item.field name=item.name }}
-                {{/if}}
             </li>
         </ul>
+        {{else}}
+        {{ formInput item.field name=item.name classes="drop-area"
+                     dataset=(dnd5e-object dropHint=(localize "DND5E.FACILITY.Craft.DropHint")) }}
+        {{/if}}
         {{#if quantity}}
         <div class="quantity">
             <span class="separator">&times;</span>

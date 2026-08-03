@@ -1,8 +1,11 @@
 /**
  * @import { TransformationSettingData } from "../settings/_types.mjs";
  * @import { ActivationData, DamageData, DurationData, RangeData, TargetData, UsesData } from "../shared/_types.mjs";
- * @import { ConsumptionTargetData, EffectApplicationData } from "./fields/_types.mjs";
  */
+
+/* -------------------------------------------- */
+/*  Activities                                  */
+/* -------------------------------------------- */
 
 /**
  * @typedef ActivityData
@@ -21,6 +24,7 @@
  * @property {ConsumptionTargetData[]} consumption.targets  Collection of consumption targets.
  * @property {object} description
  * @property {string} description.chatFlavor     Extra text displayed in the activation chat message.
+ * @property {string} description.value          Full activity description displayed in chat.
  * @property {DurationData} duration             Duration of the effect.
  * @property {boolean} duration.concentration    Does this effect require concentration?
  * @property {boolean} duration.override         Override duration values inferred from item.
@@ -42,6 +46,8 @@
  * @property {boolean} visibility.requireMagic           Not usable if magic isn't available.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {ActivityData} AttackActivityData
  * @property {object} attack
@@ -61,6 +67,8 @@
  * @property {DamageData[]} damage.parts          Parts of damage to inflict.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {Omit<ActivityData, "effects">} CastActivityData
  * @property {object} spell
@@ -75,15 +83,21 @@
  * @property {string} spell.uuid                 UUID of the spell to cast.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {ActivityData} CheckActivityData
  * @property {object} check
  * @property {string} check.ability          Ability used with the check.
  * @property {Set<string>} check.associated  Skills or tools that can contribute to the check.
+ * @property {string} check.bonus            Bonus added to all checks made through this activity.
  * @property {object} check.dc
  * @property {string} check.dc.calculation   Method or ability used to calculate the difficulty class of the check.
  * @property {string} check.dc.formula       Custom DC formula or flat value.
+ * @property {boolean} check.visible         Should this check be displayed to all players?
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef {ActivityData} DamageActivityData
@@ -92,6 +106,8 @@
  * @property {string} damage.critical.bonus   Extra damage applied to the first damage part when a critical is rolled.
  * @property {DamageData[]} damage.parts      Parts of damage to inflict.
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef {ActivityData} EnchantActivityData
@@ -112,16 +128,22 @@
  * @property {Set<string>} riders.item      UUIDs of items that will be added with this enchantment.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {Omit<ActivityData, "duration"|"effects"|"range"|"target">} ForwardActivityData
  * @property {object} activity
  * @property {string} activity.id  ID of the activity to forward to.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {ActivityData} HealActivityData
  * @property {DamageData} healing
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef OrderActivityData
@@ -132,6 +154,8 @@
  * @property {string} order  The issued order.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {ActivityData} SaveActivityData
  * @property {object} damage
@@ -140,15 +164,19 @@
  * @property {SaveEffectApplicationData[]} effects  Linked effects that can be applied.
  * @property {object} save
  * @property {Set<string>} save.ability             Make the saving throw with one of these abilities.
+ * @property {string} save.bonus                    Bonus added to all saves made through this activity.
  * @property {object} save.dc
  * @property {string} save.dc.calculation           Method or ability used to calculate the difficulty class.
  * @property {string} save.dc.formula               Custom DC formula or flat value.
+ * @property {boolean} save.visible                 Should this save be displayed to all players?
  */
 
 /**
  * @typedef {EffectApplicationData} SaveEffectApplicationData
  * @property {boolean} onSave  Should this effect still be applied on a successful save?
  */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef {ActivityData} SummonActivityData
@@ -187,6 +215,18 @@
  * @property {string} uuid        UUID of the actor to summon if in default mode.
  */
 
+/* -------------------------------------------- */
+
+/**
+ * @typedef {ActivityData} TeleportActivityData
+ * @property {object} teleport
+ * @property {boolean} teleport.override    Use custom maximum distance rather than the activity's range.
+ * @property {string} teleport.units        Units used to measure teleport distance.
+ * @property {string} teleport.value        Maximum distance the token can teleport.
+ */
+
+/* -------------------------------------------- */
+
 /**
  * @typedef {ActivityData} TransformActivityData
  * @property {TransformProfile[]} profiles         Information on transformation methods and sources.
@@ -212,6 +252,8 @@
  * @property {string} uuid           UUID of the actor to transform into if in direct mode.
  */
 
+/* -------------------------------------------- */
+
 /**
  * @typedef {ActivityData} UtilityActivityData
  * @property {object} roll
@@ -219,4 +261,43 @@
  * @property {string} roll.name      Label for the rolling button.
  * @property {boolean} roll.prompt   Should the roll configuration dialog be displayed?
  * @property {boolean} roll.visible  Should the rolling button be visible to all players?
+ */
+
+/* -------------------------------------------- */
+/*  Fields                                      */
+/* -------------------------------------------- */
+
+/**
+ * @typedef BehaviorApplicationData
+ * @property {string} _id        ID of this behavior entry.
+ * @property {object} config     Configuration data defined by the behavior type.
+ * @property {object} level
+ * @property {number} level.min  Minimum level at which this behavior can be applied.
+ * @property {number} level.max  Maximum level at which this behavior can be applied.
+ * @property {string} name       Custom name for the created behavior.
+ * @property {string} type       Type of behavior being applied.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef EffectApplicationData
+ * @property {string} _id        ID of configuration, matches local effect ID if UUID isn't specified.
+ * @property {string} uuid       UUID of remote effect to apply.
+ * @property {object} level
+ * @property {number} level.min  Minimum level at which this effect can be applied.
+ * @property {number} level.max  Maximum level at which this effect can be applied.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef ConsumptionTargetData
+ * @property {string} type             Type of consumption (e.g. activity uses, item uses, hit die, spell slot).
+ * @property {string} target           Target of the consumption depending on the selected type (e.g. item's ID, hit
+ *                                     die denomination, spell slot level).
+ * @property {string} value            Formula that determines amount consumed or recovered.
+ * @property {object} scaling
+ * @property {string} scaling.mode     Scaling mode (e.g. no scaling, scale target amount, scale spell level).
+ * @property {string} scaling.formula  Specific scaling formula if not automatically calculated from target's value.
  */

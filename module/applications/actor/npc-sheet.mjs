@@ -90,7 +90,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
     { tab: "inventory", label: "DND5E.Inventory", svg: "systems/dnd5e/icons/svg/backpack.svg" },
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
-    { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
+    { tab: "effects", label: "DND5E.EFFECT.Tab", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
     { tab: "specialTraits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
@@ -281,7 +281,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         return {
           n: max - n, filled,
           tooltip: `DND5E.${i18n}.Label`,
-          label: game.i18n.format(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
+          label: _loc(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")
         };
       });
@@ -346,7 +346,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         ...habitat.value.map(({ type, subtype }) => {
           let { label } = CONFIG.DND5E.habitats[type] ?? {};
           if ( label && (!any || (type === "any")) ) {
-            if ( subtype ) label = game.i18n.format("DND5E.Habitat.Subtype", { type: label, subtype });
+            if ( subtype ) label = _loc("DND5E.Habitat.Subtype", { type: label, subtype });
             return { label };
           }
           return null;
@@ -359,24 +359,24 @@ export default class NPCActorSheet extends BaseActorSheet {
     context.senses = this._prepareSenses(context);
     if ( this.actor.system.skills.prc ) context.senses.push({
       key: "passivePerception",
-      label: game.i18n.localize("DND5E.PassivePerception"),
+      label: _loc("DND5E.PassivePerception"),
       value: this.actor.system.skills.prc.passive
     });
 
     // Skills & Tools
     const skillSetting = game.settings.get("dnd5e", "defaultSkills");
     context.skills = this._prepareSkillsTools(context, "skills")
-      .filter(v => v.prof.multiplier || skillSetting.has(v.key) || v.bonuses.check || v.bonuses.passive);
+      .filter(v => v.prof.multiplier || skillSetting.has(v.key) || v.roll.bonus || v.bonuses.passive);
     context.tools = this._prepareSkillsTools(context, "tools");
 
     // Speed
     context.speed = [
       ...Object.entries(CONFIG.DND5E.movementTypes).filter(([, m]) => !m.hidden).map(([k, { label }]) => {
-        const value = attributes.movement[k];
+        const value = attributes.movement.speeds[k];
         if ( !value ) return null;
         const data = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) data.icons = [{
-          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MOVEMENT.Hover")
+          icon: "fas fa-cloud", label: _loc("DND5E.MOVEMENT.Hover")
         }];
         return data;
       }),
@@ -410,21 +410,25 @@ export default class NPCActorSheet extends BaseActorSheet {
 
     const { fields } = this.document.system.schema;
     context.flags.sections.unshift({
-      label: game.i18n.localize("DND5E.NPC.Label"),
+      label: _loc("DND5E.NPC.Label"),
       fields: [{
         field: fields.traits.fields.important,
         input: createCheckboxInput,
         name: "system.traits.important",
         value: context.source.traits.important
       }, {
-        label: "DND5E.NPC.FIELDS.attributes.price.label",
-        hint: "DND5E.NPC.FIELDS.attributes.price.hint",
+        group: {
+          label: "DND5E.NPC.FIELDS.attributes.price.label",
+          hint: "DND5E.NPC.FIELDS.attributes.price.hint"
+        },
         fields: [{
+          classes: "label-top",
           field: fields.attributes.fields.price.fields.value,
           name: "system.attributes.price.value",
           value: context.source.attributes.price.value
         }, {
           choices: CONFIG.DND5E.currencies,
+          classes: "label-top",
           field: fields.attributes.fields.price.fields.denomination,
           name: "system.attributes.price.denomination",
           value: context.source.attributes.price.denomination
@@ -442,18 +446,18 @@ export default class NPCActorSheet extends BaseActorSheet {
     context = await super._prepareSpellsContext(context, options);
     context.classSpellcasting = Object.values(this.actor.classes).some(c => c.spellcasting?.levels);
 
-    const { abilities, attributes, bonuses } = this.actor.system;
+    const { abilities, attributes, rolls } = this.actor.system;
     context.spellcasting = [];
-    const msak = simplifyBonus(bonuses.msak.attack, context.rollData);
-    const rsak = simplifyBonus(bonuses.rsak.attack, context.rollData);
+    const msak = simplifyBonus(rolls.attack?.msak?.bonus, context.rollData);
+    const rsak = simplifyBonus(rolls.attack?.rsak?.bonus, context.rollData);
     const spellcaster = Object.values(this.actor.spellcastingClasses)[0];
     const ability = spellcaster?.spellcasting.ability ?? attributes.spellcasting;
     const spellAbility = abilities[ability];
     const mod = spellAbility?.mod ?? 0;
     const attackBonus = msak === rsak ? msak : 0;
     context.spellcasting.push({
-      label: game.i18n.format("DND5E.SpellcastingClass", {
-        class: spellcaster?.name ?? game.i18n.format("DND5E.NPC.Label")
+      label: _loc("DND5E.SpellcastingClass", {
+        class: spellcaster?.name ?? _loc("DND5E.NPC.Label")
       }),
       level: spellcaster?.system.levels ?? attributes.spell.level,
       ability: {
@@ -465,7 +469,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       noSpellcaster: !spellcaster,
       concentration: {
         mod: attributes.concentration.save,
-        tooltip: game.i18n.format("DND5E.AbilityConfigure", { ability: game.i18n.localize("DND5E.Concentration") })
+        tooltip: _loc("DND5E.AbilityConfigure", { ability: _loc("DND5E.Concentration") })
       }
     });
 
@@ -521,7 +525,7 @@ export default class NPCActorSheet extends BaseActorSheet {
     const elements = this.element.querySelector(".header-elements .cr-xp");
     if ( !elements || this.actor.limited ) return;
     const xp = this.actor.system.details.xp.value;
-    elements.innerText = xp === null ? "" : game.i18n.format("DND5E.ExperiencePoints.Format", {
+    elements.innerText = xp === null ? "" : _loc("DND5E.ExperiencePoints.Format", {
       value: formatNumber(xp)
     });
 

@@ -99,28 +99,30 @@ effects:
   - name: Flight
     origin: Compendium.dnd5e.spells24.Item.phbsplFly0000000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/creatures/abilities/wings-birdlike-blue.webp
     _id: EHFLuTHqI6cXn1zb
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.fly
-        mode: 4
-        value: '60'
-        priority: null
-      - key: system.attributes.movement.hover
-        mode: 5
-        value: 'true'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          value: 60
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: ydavaRaigr6REqow
+        - key: system.attributes.movement.hover
+          value: true
+          priority: null
+          type: override
+          phase: initial
+          _id: 4zO22al9BpGeylIv
+      magical: true
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -129,13 +131,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975198
+      modifiedTime: 1783543975198
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplFly0000000.EHFLuTHqI6cXn1zb'
 folder: HCovEE4VoPGlIbKi
 sort: 2000000
@@ -148,11 +153,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425954637
-  modifiedTime: 1745256793318
+  modifiedTime: 1783543975198
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFly0000000'

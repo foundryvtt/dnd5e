@@ -11,7 +11,7 @@ system:
       the cylinder must make a Dexterity saving throw. A creature takes 2d8
       bludgeoning damage and 4d6 cold damage on a failed save, or half as much
       damage on a successful one.</p><p>Hailstones turn the storm's area of
-      effect into difficult terrain until the end of your next
+      effect into &amp;reference[difficult terrain] until the end of your next
       turn.</p><p><strong>At Higher Levels.</strong> When you cast this spell
       using a spell slot of 5th level or higher, the bludgeoning damage
       increases by 1d8 for each slot level above 4th.</p>
@@ -32,14 +32,18 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cylinder
       size: '20'
       contiguous: false
+      height: '40'
+      count: ''
   range:
     value: '300'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -59,8 +63,7 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    CdKCQ6unSd91abIb:
       type: save
       activation:
         type: action
@@ -74,6 +77,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -81,63 +85,80 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
       damage:
         onSave: half
         parts:
-          - number: 2
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
             denomination: 8
             bonus: ''
             types:
               - bludgeoning
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: whole
               number: 1
               formula: ''
-          - number: 4
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
             denomination: 6
             bonus: ''
             types:
               - cold
-            custom:
-              enabled: false
-              formula: ''
             scaling:
-              mode: whole
+              mode: ''
               number: null
-              formula: 1d8
+              formula: ''
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: CdKCQ6unSd91abIb
   identifier: ice-storm
 sort: 0
 flags: {}
-img: icons/magic/water/projectiles-ice-faceted-shard-salvo-blue.webp
+img: icons/magic/water/projectiles-ice-faceted-shard-salvo-gray.webp
 effects: []
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037357721
-  modifiedTime: 1725992720333
+  modifiedTime: 1781375353315
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!WN2LWEljYU6QqnRH'

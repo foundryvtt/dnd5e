@@ -1,6 +1,6 @@
 name: Glyph of Warding
 type: spell
-img: icons/magic/symbols/runes-star-orange-purple.webp
+img: icons/magic/defensive/shield-barrier-blades-teal.webp
 system:
   description:
     value: >-
@@ -30,9 +30,9 @@ system:
       glyph.</p><p><em><strong>Explosive Runes.</strong></em> When triggered,
       the glyph erupts with magical energy in a 20-foot-radius sphere centered
       on the glyph. The sphere spreads around corners. Each creature in the area
-      must make a Dexterity saving throw. A creature takes [[/r 5d8]] acid,
-      cold, fire, lightning, or thunder damage on a failed saving throw (your
-      choice when you create the glyph), or half as much damage on a successful
+      must make a Dexterity saving throw. A creature takes 5d8 acid, cold, fire,
+      lightning, or thunder damage on a failed saving throw (your choice when
+      you create the glyph), or half as much damage on a successful
       one.</p><p><em><strong>Spell Glyph.</strong></em> You can store a prepared
       spell of 3rd level or lower in the glyph by casting it as part of creating
       the glyph. The spell must target a single creature or an area. The spell
@@ -65,11 +65,14 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -91,59 +94,204 @@ system:
     - somatic
     - material
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: save
+    ZLkktrcLmi0naPRC:
+      type: utility
+      name: Cast
+      _id: ZLkktrcLmi0naPRC
+      img: null
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    Kn7He91921d5pTio:
+      type: save
+      name: Explosive Rune Save
+      _id: Kn7He91921d5pTio
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: true
+        condition: When the Glyph of Warding is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>When triggered, the glyph erupts with magical energy in a
+          20-foot-radius sphere centered on the glyph. The sphere spreads around
+          corners. Each creature in the area must make a Dexterity saving throw.
+          A creature takes 5d8 acid, cold, fire, lightning, or thunder damage on
+          a failed saving throw (your choice when you create the glyph), or half
+          as much damage on a successful one.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: sphere
+          size: '20'
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          special: ''
+          count: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
         onSave: half
         parts:
-          - number: 5
-            denomination: 8
-            bonus: ''
-            types: []
-            custom:
+          - custom:
               enabled: false
               formula: ''
+            number: 5
+            denomination: 8
+            bonus: ''
+            types:
+              - acid
+              - cold
+              - fire
+              - lightning
+              - thunder
             scaling:
               mode: whole
               number: 1
               formula: ''
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
+    x7zjmSoY9DWaiMhP:
+      type: utility
+      name: Activated Spell Glyph
+      _id: x7zjmSoY9DWaiMhP
+      img: ''
+      sort: 300000
+      activation:
+        type: special
+        override: true
+        condition: When the Glyph of Warding is triggered.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>When the glyph is triggered, the stored spell is cast. If the spell
+          has a target, it targets the creature that triggered the glyph. If the
+          spell affects an area, the area is centered on that creature. If the
+          spell summons hostile creatures or creates harmful objects or traps,
+          they appear as close as possible to the intruder and attack it. If the
+          spell requires concentration, it lasts until the end of its full
+          duration.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+          size: ''
+          count: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   identifier: glyph-of-warding
 effects: []
 sort: 0
@@ -154,11 +302,11 @@ ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365222
-  modifiedTime: 1725992722805
+  modifiedTime: 1781361408352
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!pB7XVYwdGNcUG935'

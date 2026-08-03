@@ -66,25 +66,27 @@ effects:
     img: systems/dnd5e/icons/svg/abilities/dexterity.svg
     _id: 89e4TT2q0PLRozOi
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.dex.value
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.abilities.dex.value
-        mode: 3
-        value: '20'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.dex.value
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: AhOKZyUK0E5qCs3h
+        - key: system.abilities.dex.value
+          value: 20
+          priority: null
+          type: downgrade
+          phase: initial
+          _id: uDMiI3Rc6VfxJfy0
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your Dexterity increases by 2, to a maximum of 20, while this deep-red
       sphere orbits your head.</p>
@@ -97,22 +99,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730480532280
-      modifiedTime: 1730480772753
+      modifiedTime: 1783544093204
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgAgilityIounSt.89e4TT2q0PLRozOi'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712697640
+  modifiedTime: 1783544093204
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 3125

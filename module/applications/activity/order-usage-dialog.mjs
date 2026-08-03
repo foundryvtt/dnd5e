@@ -1,4 +1,5 @@
 import ActivityUsageDialog from "./activity-usage-dialog.mjs";
+import { bulkFromUuid } from "../../utils.mjs";
 
 const { BooleanField, DocumentUUIDField, NumberField, StringField } = foundry.data.fields;
 
@@ -80,9 +81,9 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
   async _prepareCraftContext(context, options) {
     const { craft } = this.item.system;
     context.craft = {
-      legend: game.i18n.localize(`DND5E.FACILITY.Orders.${this.activity.order}.present`),
+      legend: _loc(`DND5E.FACILITY.Orders.${this.activity.order}.present`),
       item: {
-        field: new DocumentUUIDField(),
+        field: new DocumentUUIDField({ type: "Item" }),
         name: "craft.item",
         value: this.config.craft?.item ?? ""
       }
@@ -287,11 +288,28 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
   /* -------------------------------------------- */
 
   /**
-   * Handle drops onto the dialog.
-   * @param {DragEvent} event  The drag-drop event.
+   * Calculate the combined price of the given livestock in the default currency.
+   * @param {string[]} uuids     UUIDs of the livestock being bought or sold.
+   * @returns {Promise<number>}  The total price.
    * @protected
    */
-  _onDrop(event) {
+  async _calculateLivestockPrice(uuids) {
+    const livestock = await bulkFromUuid(uuids);
+    return uuids.reduce((total, uuid) => {
+      const { valueInGP=0 } = foundry.utils.getProperty(livestock.get(uuid) ?? {}, "system.attributes.price") ?? {};
+      return total + valueInGP;
+    }, 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle drops onto the dialog.
+   * @param {DragEvent} event  The drag-drop event.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _onDrop(event) {
     const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     if ( (data.type !== "Actor") || !data.uuid ) return;
     const { trade } = this.item.system;
@@ -303,6 +321,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
     const index = Math.max(trade.creatures.value.length, this.config.trade.creatures.buy.length);
     if ( index + 1 > trade.creatures.max ) return;
     this.config.trade.creatures.buy[index] = data.uuid;
+    await this._updateLivestockCost();
     this.render();
   }
 
@@ -361,7 +380,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
    */
   async _prepareTradeData(submitData) {
     // Clear data when toggling trade mode.
-    if ( ("trade" in this.config) && (submitData.trade.sell !== this.config.trade?.sell) ) {
+    if ( ("sell" in (this.config.trade ?? {})) && (submitData.trade.sell !== this.config.trade.sell) ) {
       delete this.config.trade.stock;
       delete this.config.trade.creatures;
       submitData.costs.gold = 0;
@@ -371,12 +390,37 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
       submitData.costs.gold = submitData.trade.stock.value;
     }
 
-    if ( "creatures" in submitData.trade && !submitData.trade.sell ) {
+    if ( ("creatures" in submitData.trade) && !submitData.trade.sell ) {
       const buy = [];
       const { creatures } = submitData.trade;
       Object.keys(creatures.buy ?? {}).forEach(k => buy[k] = creatures.buy[k]);
       submitData.trade.creatures.buy = buy;
     }
+
+    if ( ("creatures" in submitData.trade) && submitData.trade.sell ) {
+      const { creatures } = submitData.trade;
+      if ( !Array.isArray(creatures.sell) ) creatures.sell = [creatures.sell];
+
+      // Only re-price when the selection changes, so any manual adjustment is preserved.
+      const previous = this.config.trade?.creatures?.sell ?? [];
+      if ( creatures.sell.some((sold, i) => sold !== (previous[i] ?? false)) ) {
+        const uuids = this.item.system.trade.creatures.value.filter((uuid, i) => creatures.sell[i]);
+        creatures.price = await this._calculateLivestockPrice(uuids);
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recalculate the cost of purchasing the configured livestock.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _updateLivestockCost() {
+    const uuids = (this.config.trade?.creatures?.buy ?? []).filter(_ => _);
+    this.config.costs ??= {};
+    this.config.costs.gold = await this._calculateLivestockPrice(uuids);
   }
 
   /* -------------------------------------------- */
@@ -386,10 +430,12 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
    * @this {OrderUsageDialog}
    * @param {PointerEvent} event  The triggering event.
    * @param {HTMLElement} target  The event target.
+   * @returns {Promise<void>}
    */
-  static #onDeleteOccupant(event, target) {
+  static async #onDeleteOccupant(event, target) {
     const { index } = target.closest("[data-index]")?.dataset ?? {};
     this.config.trade.creatures.buy.splice(index, 1);
+    await this._updateLivestockCost();
     this.render();
   }
 

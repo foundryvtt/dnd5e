@@ -1,7 +1,15 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
+import ConditionData from "../../../data/active-effect/condition.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
-  formatLength, formatNumber, getPluralRules, parseInputDelta, simplifyBonus, splitSemicolons, staticID
+  formatLength,
+  formatNumber,
+  getPluralRules,
+  loadingTooltip,
+  parseInputDelta,
+  simplifyBonus,
+  splitSemicolons,
+  staticID
 } from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
@@ -9,7 +17,7 @@ import AdvancementManager from "../../advancement/advancement-manager.mjs";
 import ApplicationV2Mixin from "../../api/application-v2-mixin.mjs";
 import PrimarySheetMixin from "../../api/primary-sheet-mixin.mjs";
 import EffectsElement from "../../components/effects.mjs";
-import { createCheckboxInput } from "../../fields.mjs";
+import {createCheckboxInput} from "../../fields.mjs";
 import CreatureTypeConfig from "../../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../../shared/movement-senses-config.mjs";
 import SourceConfig from "../../shared/source-config.mjs";
@@ -23,6 +31,7 @@ import HitDiceConfig from "../config/hit-dice-config.mjs";
 import HitPointsConfig from "../config/hit-points-config.mjs";
 import InitiativeConfig from "../config/initiative-config.mjs";
 import LanguagesConfig from "../config/languages-config.mjs";
+import PietyConfig from "../config/piety-config.mjs";
 import SkillsConfig from "../config/skills-config.mjs";
 import SkillToolConfig from "../config/skill-tool-config.mjs";
 import SpellSlotsConfig from "../config/spell-slots-config.mjs";
@@ -37,6 +46,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 /**
  * @import { DropEffectValue } from "../../../_types.mjs"
  * @import { InventorySectionDescriptor } from "../../components/_types.mjs";
+ * @import ContainerSheet from "../../item/container-sheet.mjs";
  */
 
 /**
@@ -71,7 +81,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       togglePip: BaseActorSheet.#togglePip,
       toggleSidebar: BaseActorSheet.#toggleSidebar
     },
-    classes: ["actor", "standard-form"],
+    classes: ["actor", "standard-form", "hidden-title"],
     elements: {
       effects: "dnd5e-effects",
       inventory: "dnd5e-inventory"
@@ -184,6 +194,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       parts.features.templates ??= [];
       parts.features.templates.push(...customElements.get(this.options.elements.inventory).templates);
     }
+    if ( "effects" in parts ) {
+      parts.effects.templates ??= [];
+      parts.effects.templates.push(...customElements.get(this.options.elements.effects).templates);
+    }
     return parts;
   }
 
@@ -240,35 +254,38 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       conditionIds.add(id);
       const existing = this.actor.effects.get(id);
       const { disabled } = existing ?? {};
-      arr.push({
+      const condition = {
         name, reference,
         id: k,
         img: existing?.img ?? img,
         disabled: existing ? disabled : true
-      });
+      };
+      if ( ConditionData.hasLevels(k) ) condition.level = this.actor.system.conditions?.[k] ?? 0;
+      arr.push(condition);
       return arr;
     }, []);
 
+    const columns = [EffectsElement.COLUMNS.detail, EffectsElement.COLUMNS.controls];
     for ( const category of Object.values(context.effects) ) {
+      category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {
-        effect.updateDuration();
         if ( conditionIds.has(effect.id) && !effect.duration.remaining ) return arr;
-        const { id, name, img, disabled, duration } = effect;
         const toggleable = !this._concentration?.effects.has(effect);
-        let source = await effect.getSource();
+        const isExpanded = this.expandedSections.get(`effects.${effect.id}`) === true;
+        const ctx = {
+          ...(await effect.getSheetContext()), toggleable, isExpanded,
+          parentId: effect.target === effect.parent ? null : effect.parent.id,
+          expanded: isExpanded ? await effect.getPreviewContext({ secrets: effect.isOwner }) : null
+        };
         // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
-        if ( source instanceof ActiveEffect ) {
-          source = source.target;
-          if ( (source instanceof Item) && source.parent && (source.parent !== this.object) ) source = source.parent;
+        ctx.hasTooltip = ctx.source instanceof dnd5e.documents.Item5e;
+        if ( ctx.source instanceof ActiveEffect ) {
+          const src = ctx.source;
+          ctx.source = src.target;
+          if ( (src instanceof Item) && src.parent && (src.parent !== this.object) ) ctx.source = src.parent;
         }
         arr = await arr;
-        arr.push({
-          id, name, img, disabled, duration, source, toggleable,
-          parentId: effect.target === effect.parent ? null : effect.parent.id,
-          durationParts: duration.remaining ? duration.label.split(", ") : [],
-          showDuration: game.release.generation < 14 ? !!duration.remaining : Number.isFinite(duration.value),
-          hasTooltip: source instanceof dnd5e.documents.Item5e
-        });
+        arr.push(ctx);
         return arr;
       }, []);
     }
@@ -292,7 +309,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Currency
     context.currency = Object.fromEntries(
-      Object.keys(CONFIG.DND5E.currencies).map(k => [k, this.inventorySource.system._source.currency[k] ?? 0])
+      Object.keys(CONFIG.DND5E.currencies).map(k => [k, this.inventorySource.system.currency[k] ?? 0])
     );
 
     // Containers
@@ -362,12 +379,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Global Bonuses
     const globals = [];
-    const addBonus = field => {
-      if ( field instanceof SchemaField ) Object.values(field.fields).forEach(f => addBonus(f));
-      else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
+    const addBonus = (field, checkName=false) => {
+      if ( field instanceof SchemaField ) Object.values(field.fields).forEach(f => addBonus(f, checkName));
+      else if ( !checkName || (field.name === "bonus") ) globals.push({
+        field, disabled: context.flags.disabled, localize: true, name: field.fieldPath,
+        value: foundry.utils.getProperty(source, field.fieldPath)
+      });
     };
     addBonus(this.document.system.schema.fields.bonuses);
-    if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
+    addBonus(this.document.system.schema.fields.rolls, true);
+    if ( globals.length ) sections[_loc("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
     flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));
 
@@ -440,6 +461,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     context.itemContext = {};
     context.items = Array.from(this.inventorySource.items).filter(i => !this.actor.items.has(i.system.container));
     await Promise.all(context.items.map(async item => {
+      if ( !this._isItemVisible(item) ) return;
+
       // Prepare item context
       const ctx = context.itemContext[item.id] ??= {};
       ctx.clickAction = "use";
@@ -449,7 +472,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       else await this._prepareItemFeature(item, ctx);
 
       // Handle expanded data
-      ctx.isExpanded = this.expandedSections.get(item.id) === true;
+      ctx.isExpanded = this.expandedSections.get(`items.${item.id}`) === true;
       if ( ctx.isExpanded ) ctx.expanded = await item.getChatData({ secrets: item.isOwner });
 
       // Place the item into specific categories.
@@ -493,7 +516,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _prepareSenses(context) {
     return [
-      ...Object.entries(CONFIG.DND5E.senses).map(([k, label]) => {
+      ...Object.entries(CONFIG.DND5E.senses).map(([k, { label }]) => {
         const value = context.system.attributes.senses.ranges[k];
         return value ? { label, value } : null;
       }, {}).filter(_ => _),
@@ -519,7 +542,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       return src ?? "int";
     };
     return Object.entries(context.system[property] ?? {})
-      .filter(([key]) => key in CONFIG.DND5E[property])
+      .filter(([key]) => key in CONFIG.DND5E[property] || ((property === "tools") && (key in CONFIG.DND5E.vehicleTypes)))
       .map(([key, entry]) => ({
         ...entry, key,
         abbreviation: CONFIG.DND5E.abilities[entry.ability]?.abbreviation,
@@ -558,7 +581,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const registerSection = (key, level, config) => {
       level = config?.slots ? level : 1;
       if ( key in spellbook ) return;
-      const label = config?.getLabel({ level }) ?? game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook");
+      const label = config?.getLabel({ level }) ?? _loc("DND5E.CAST.SECTIONS.Spellbook");
       const method = config?.key ?? key;
       const order = level === 0 ? 0 : (config?.order ?? 1000);
       const usesSlots = config?.slots && (level !== 0);
@@ -578,10 +601,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const filled = spells.value >= n;
         const temp = n > maxSlots;
         const label = temp
-          ? game.i18n.localize("DND5E.SpellSlotTemporary")
+          ? _loc("DND5E.SpellSlotTemporary")
           : filled
-            ? game.i18n.format(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
-            : game.i18n.localize("DND5E.SpellSlotExpended");
+            ? _loc(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
+            : _loc("DND5E.SpellSlotExpended");
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
         if ( temp ) classes.push("tmp");
@@ -598,7 +621,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
-    (context.itemCategories.spells ?? []).forEach(spell => {
+    (context.itemCategories.spells ?? []).sort((lhs, rhs) => lhs.system.level - rhs.system.level).forEach(spell => {
       let method = spell.system.method;
       if ( !(method in CONFIG.DND5E.spellcasting) ) method = "innate";
       const spellcasting = CONFIG.DND5E.spellcasting[method];
@@ -648,7 +671,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       });
@@ -658,7 +681,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // If petrified, display "All Damage" instead of all damage types separately
     if ( this.document.hasConditionEffect("petrification") ) {
-      traits.dr = [{ label: game.i18n.localize("DND5E.DAMAGE.All") }];
+      traits.dr = [{ label: _loc("DND5E.DAMAGE.All") }];
     }
 
     // Combine damage & condition immunities in play mode.
@@ -682,7 +705,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const icons = value.icons = [];
         if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: game.i18n.format("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
         }));
         return value;
       }).filter(f => f);
@@ -707,7 +730,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         traits.weapon ??= [];
         traits.weapon.push(value);
       }
-      value.icons.push({ icon: "mastery", label: game.i18n.format("DND5E.WEAPON.Mastery.Label") });
+      value.icons.push({ icon: "mastery", label: _loc("DND5E.WEAPON.Mastery.Label") });
     }
 
     return traits;
@@ -726,8 +749,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       "header-control", "preparation-warnings", "icon", "fa-solid", "fa-triangle-exclamation"
     );
     Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
-    warnings.setAttribute("aria-label", game.i18n.localize("Warnings"));
-    html.querySelector(".window-header .window-subtitle").after(warnings);
+    warnings.setAttribute("aria-label", _loc("Warnings"));
+    this.window.subtitle.after(warnings);
 
     return html;
   }
@@ -743,12 +766,25 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _assignItemCategories(item) {
-    const origin = item.dependentOrigin;
-    if ( (origin?.active === false) && (origin.parent !== item) ) return [];
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an item should be displayed on the sheet.
+   * @param {Item5e} item    Item being prepared for display.
+   * @returns {boolean}
+   * @protected
+   */
+  _isItemVisible(item) {
+    const origin = item.dependentOrigin;
+    if ( this.actor.hiddenItems.has(item.id) ) return false;
+    if ( (origin?.active === false) && (origin.parent !== item) ) return false;
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -785,7 +821,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     return {
       _id, img, labels, name, range, uses,
       activation: activationAbbr
-        ? `${activation.value ?? ""}${game.i18n.localize(activationAbbr)}`
+        ? `${activation.value ?? ""}${_loc(activationAbbr)}`
         : labels.activation,
       isSpell: activity.item.type === "spell",
       save: save ? {
@@ -793,7 +829,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         ability: save.ability?.size
           ? save.ability.size === 1
             ? CONFIG.DND5E.abilities[save.ability.first()]?.abbreviation
-            : game.i18n.localize("DND5E.AbbreviationDC")
+            : _loc("DND5E.AbbreviationDC")
           : null
       } : null,
       toHit: Number.isNaN(toHit) ? null : toHit
@@ -813,7 +849,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Activities
     ctx.activities = item.system.activities
-      ?.filter(a => a.canUse)
+      ?.filter(a => !a.isHidden)
       ?.map(this._prepareActivity.bind(this));
 
     // Concentration
@@ -827,7 +863,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.save = { ...item.system.activities?.getByType("save")[0]?.save };
     ctx.save.ability = ctx.save.ability?.size ? ctx.save.ability.size === 1
       ? CONFIG.DND5E.abilities[ctx.save.ability.first()]?.abbreviation
-      : game.i18n.localize("DND5E.AbbreviationDC") : null;
+      : _loc("DND5E.AbbreviationDC") : null;
 
     // Linked Uses
     const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: item.parent, strict: false });
@@ -924,7 +960,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       hour: "DND5E.TimeHourAbbr",
       day: "DND5E.TimeDayAbbr"
     }[item.system.activation.type];
-    ctx.activation = abbr ? `${cost}${game.i18n.localize(abbr)}` : item.labels.activation;
+    ctx.activation = abbr ? `${cost}${_loc(abbr)}` : item.labels.activation;
 
     // Range
     const units = item.system.range?.units;
@@ -985,7 +1021,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     element.classList.add("attunement");
     element.innerHTML = `
       <i class="fa-solid fa-sun" data-tooltip="DND5E.Attunement"
-         aria-label="${game.i18n.localize("DND5E.Attunement")}"></i>
+         aria-label="${_loc("DND5E.Attunement")}"></i>
       <span class="value"></span>
       <span class="separator">&sol;</span>
     `;
@@ -1014,7 +1050,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const button = document.createElement("button");
     Object.assign(button, {
       type: "button", className: "create-child gold-button",
-      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
+      ariaLabel: _loc("SIDEBAR.Create", { type: _loc("DOCUMENT.Item") })
     });
     button.dataset.action = "addDocument";
     button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
@@ -1041,7 +1077,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( context.editable ) {
         const config = document.createElement("button");
         Object.assign(config, {
-          type: "button", className: "unbutton config-button", ariaLabel: game.i18n.localize("DND5E.SpellSlotsConfig")
+          type: "button", className: "unbutton config-button", ariaLabel: _loc("DND5E.SpellSlotsConfig")
         });
         Object.assign(config.dataset, {
           action: "showConfiguration", config: "spellSlots", tooltip: "DND5E.SpellSlotsConfig"
@@ -1075,11 +1111,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _applyTooltips(element) {
-    if ( "tooltip" in element.dataset ) return;
+    if ( ("tooltip" in element.dataset) || ("tooltipHtml" in element.dataset) ) return;
     const uuid = element.dataset.referenceTooltip ?? this.actor.uuid;
-    element.dataset.tooltip = `
-      <section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>
-    `;
+    element.dataset.tooltipHtml = loadingTooltip({ uuid });
     if ( element.dataset.attribution ) element.dataset.tooltipClass = "property-attribution";
   }
 
@@ -1174,7 +1208,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   _addDocument(event, target) {
     if ( this.tabGroups.primary === "effects" ) return ActiveEffect.implementation.create({
-      name: game.i18n.localize("DND5E.EffectNew"),
+      name: _loc("DND5E.EFFECT.New"),
       icon: "icons/svg/aura.svg"
     }, { parent: this.actor, renderSheet: true });
 
@@ -1185,7 +1219,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     const type = types[0];
     return Item.implementation.create({
-      type, name: game.i18n.format("DOCUMENT.New", { type: game.i18n.format(CONFIG.Item.typeLabels[type]) })
+      type, name: _loc("DOCUMENT.New", { type: _loc(CONFIG.Item.typeLabels[type]) })
     }, { parent: actor, renderSheet: true });
   }
 
@@ -1247,8 +1281,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Adjust create child tooltip
     const createChild = this.element.querySelector(".create-child");
-    createChild?.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
-      type: game.i18n.localize(`DOCUMENT.${tab === "effects" ? "ActiveEffect" : "Item"}`)
+    createChild?.setAttribute("aria-label", _loc("SIDEBAR.Create", {
+      type: _loc(`DOCUMENT.${tab === "effects" ? "ActiveEffect" : "Item"}`)
     }));
 
     // Toggle sidebar
@@ -1493,6 +1527,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this._renderChild(new HitPointsConfig(config));
       case "initiative":
         return this._renderChild(new InitiativeConfig(config));
+      case "piety":
+        return this._renderChild(new PietyConfig(config));
       case "movement":
       case "senses":
         return this._renderChild(new MovementSensesConfig({ ...config, type: target.dataset.config }));
@@ -1586,7 +1622,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !collapser ) return collapsed;
     const icon = collapser.querySelector("i");
     collapser.dataset.tooltip = `JOURNAL.View${collapsed ? "Expand" : "Collapse"}`;
-    collapser.setAttribute("aria-label", game.i18n.localize(collapser.dataset.tooltip));
+    collapser.setAttribute("aria-label", _loc(collapser.dataset.tooltip));
     icon.classList.remove("fa-caret-left", "fa-caret-right");
     icon.classList.add(`fa-caret-${collapsed ? "right" : "left"}`);
     return collapsed;
@@ -1609,7 +1645,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
       delete submitData.flags.dnd5e[key];
       if ( foundry.utils.hasProperty(this.document._source, `flags.dnd5e.${key}`) ) {
-        submitData.flags.dnd5e[`-=${key}`] = null;
+        submitData.flags.dnd5e[key] = _del;
       }
     }
 
@@ -1764,7 +1800,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( item.type === "container" ) {
       const parentContainers = await container.system.allContainers();
       if ( (container.id === item.id) || parentContainers.includes(item) ) {
-        ui.notifications.error("DND5E.ContainerRecursiveError", { localize: true });
+        ui.notifications.error("DND5E.ContainerRecursiveError");
         return;
       }
     }
@@ -1821,7 +1857,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.size);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
-      ui.notifications.warn(game.i18n.format("DND5E.WarnCantAddMultipleAdvancements"));
+      ui.notifications.warn("DND5E.WarnCantAddMultipleAdvancements");
       items = itemsWithoutAdvancement;
     }
 
@@ -1865,8 +1901,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn("DND5E.ACTOR.Warning.InvalidItem", {
         format: {
-          itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-          actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+          itemType: _loc(CONFIG.Item.typeLabels[itemData.type]),
+          actorType: _loc(CONFIG.Actor.typeLabels[actor.type])
         }
       });
       return false;
@@ -1895,8 +1931,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( singleton && actor.itemTypes[itemData.type].length ) {
         ui.notifications.error("DND5E.ACTOR.Warning.Singleton", {
           format: {
-            itemType: game.i18n.localize(CONFIG.Item.typeLabels[itemData.type]),
-            actorType: game.i18n.localize(CONFIG.Actor.typeLabels[actor.type])
+            itemType: _loc(CONFIG.Item.typeLabels[itemData.type]),
+            actorType: _loc(CONFIG.Actor.typeLabels[actor.type])
           }
         });
         return false;
@@ -2022,12 +2058,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItems(items, filters) {
-    const actions = ["action", "bonus", "reaction", "lair", "legendary"];
     const recoveries = ["lr", "sr"];
-    const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
-    const schoolFilter = spellSchools.intersection(filters);
-    const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
-    const classFilter = spellcastingClasses.intersection(filters);
+    if ( !filters.size ) return items.filter(item => this._filterItem(item, filters) !== false);
+    const { included, excluded } = ItemListControlsElement.partitionFilters(filters);
+    const schoolFilter = new Set(Object.keys(CONFIG.DND5E.spellSchools)).intersection(included);
+    const classFilter = new Set(Object.keys(this.actor.spellcastingClasses)).intersection(included);
+    const actions = new Set(["action", "bonus", "reaction", "lair", "legendary"]);
+    const actionFilter = actions.intersection(included);
+    const actionExclude = actions.intersection(excluded);
+    const passes = ItemListControlsElement.passesFilter;
 
     return items.filter(item => {
 
@@ -2036,32 +2075,43 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( filtered !== undefined ) return filtered;
 
       // Action usage
-      for ( const f of actions ) {
-        if ( !filters.has(f) ) continue;
+      if ( actionFilter.size ) {
         if ( item.type === "spell" ) {
-          if ( item.system.activation.type !== f ) return false;
-          continue;
+          if ( !actionFilter.has(item.system.activation.type) ) return false;
+        } else if ( !item.system.activities?.size
+          || !item.system.activities.some(a => actionFilter.has(a.activation?.type)) ) {
+          return false;
         }
-        if ( !item.system.activities?.size ) return false;
-        if ( item.system.activities.every(a => a.activation?.type !== f) ) return false;
+      }
+      if ( actionExclude.size ) {
+        if ( item.type === "spell" ) {
+          if ( actionExclude.has(item.system.activation.type) ) return false;
+        } else if ( item.system.activities?.some(a => actionExclude.has(a.activation?.type)) ) {
+          return false;
+        }
       }
 
       // Spell-specific filters
-      if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
-      if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
+      if ( !passes(included, excluded, "ritual", item.system.properties?.has("ritual")) ) return false;
+      if ( !passes(included, excluded, "concentration", item.system.properties?.has("concentration")) ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
+      if ( excluded.has(item.system.school) ) return false;
       if ( classFilter.size && !classFilter.has(item.system.classIdentifier) ) return false;
-      if ( filters.has("prepared") ) return item.system.canPrepare && item.system.prepared;
+      if ( excluded.has(item.system.classIdentifier) ) return false;
+      if ( !passes(included, excluded, "prepared", item.system.canPrepare && item.system.prepared) ) return false;
 
       // Equipment-specific filters
-      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
-      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+      if ( !passes(included, excluded, "equipped", item.system.equipped === true) ) return false;
+      if ( !passes(included, excluded, "mgc", item.system.properties?.has("mgc")) ) return false;
 
       // Recovery
       for ( const f of recoveries ) {
-        if ( !filters.has(f) ) continue;
+        const inc = included.has(f);
+        const exc = excluded.has(f);
+        if ( !inc && !exc ) continue;
         if ( !item.system.uses?.recovery.length ) return false;
-        if ( item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( inc && item.system.uses.recovery.every(r => r.period !== f) ) return false;
+        if ( exc && item.system.uses.recovery.every(r => r.period === f) ) return false;
       }
 
       return true;
@@ -2078,8 +2128,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItem(item, filters) {
-    /** @import ContainerSheet from "../../item/container-sheet.mjs" */
-
     /**
      * A hook event that fires when a sheet filters an item.
      * @function dnd5e.filterItem
@@ -2089,7 +2137,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
      * @param {Set<string>} filters                     Filters applied to the Item.
      * @returns {false|void} Return false to hide the item, otherwise other filters will continue to apply.
      */
-    if ( Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
+    if ( ("dnd5e.filterItem" in Hooks.events)
+      && (Hooks.call("dnd5e.filterItem", this, item, filters) === false) ) return false;
   }
 
   /* -------------------------------------------- */

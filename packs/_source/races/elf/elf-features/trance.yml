@@ -26,7 +26,8 @@ system:
     value: race
     subtype: ''
   requirements: Elf
-  properties: []
+  properties:
+    - trait
   activities: {}
   enchant: {}
   prerequisites:
@@ -38,11 +39,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037392535
-  modifiedTime: 1725992703260
+  modifiedTime: 1781472806745
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

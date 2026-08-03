@@ -110,17 +110,15 @@ effects:
     transfer: false
     _id: O73gdwM6cCbr9LXn
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>For the duration, the target regains [[/healing 1 type=healing]]{1 Hit
       Point} at the start of each of its turns, and any severed body parts
@@ -132,13 +130,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724966450239
-      modifiedTime: 1724966609573
+      modifiedTime: 1783543976574
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplRegenerate.O73gdwM6cCbr9LXn'
 folder: EdAGMG8IF26PLkD3
 sort: 800000
@@ -151,11 +152,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425968792
-  modifiedTime: 1745256797505
+  modifiedTime: 1783543976574
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRegenerate'

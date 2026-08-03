@@ -130,11 +130,11 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     const modernRules = dnd5e.settings.rulesVersion === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
-    context.pointCap = game.i18n.format(
+    context.pointCap = _loc(
       `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(context.points.cap)}`,
       { points: context.points.cap }
     );
-    context.pointsRemaining = game.i18n.format(
+    context.pointsRemaining = _loc(
       `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(context.points.available)}`,
       { points: context.points.available }
     );
@@ -185,7 +185,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     // TODO: Remove this unnecessary check when https://github.com/foundryvtt/dnd5e/issues/5139 is implemented
     const item = await fromUuid(result);
-    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    const isValid = item.system.assertPrerequisites?.(this.advancement.actor, { showMessage: true });
     if ( isValid === true ) {
       await this.advancement.apply(this.level, {
         retainedItems: this.retainedData?.retainedItems, type: "feat", uuid: result
@@ -286,11 +286,11 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const item = await Item.implementation.fromDropData(data);
 
     if ( (item.type !== "feat") || (item.system.type.value !== "feat") ) {
-      ui.notifications.error("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Type", {localize: true});
+      ui.notifications.error("DND5E.ADVANCEMENT.AbilityScoreImprovement.Warning.Type");
       return null;
     }
 
-    const isValid = item.system.validatePrerequisites?.(this.advancement.actor, { showMessage: true });
+    const isValid = item.system.assertPrerequisites?.(this.advancement.actor, { showMessage: true });
     if ( isValid !== true ) return null;
 
     await this.advancement.apply(this.level, {

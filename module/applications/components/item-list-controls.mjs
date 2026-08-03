@@ -230,7 +230,7 @@ export default class ItemListControlsElement extends MaybeAdoptable {
       <ul class="unlist controls">
         <li>
           <button type="button" class="unbutton filter-control always-interactive" data-action="clear"
-                  data-tooltip aria-label="${game.i18n.localize("DND5E.FilterClear")}">
+                  data-tooltip aria-label="${_loc("DND5E.FilterClear")}">
             <i class="fas fa-xmark"></i>
           </button>
         </li>
@@ -248,7 +248,7 @@ export default class ItemListControlsElement extends MaybeAdoptable {
       const item = document.createElement("li");
       item.innerHTML = `
         <button type="button" class="unbutton filter-control filter always-interactive" data-action="filter"
-                aria-label="${game.i18n.localize("DND5E.Filter")}">
+                aria-label="${_loc("DND5E.Filter")}">
           <i class="fa-solid fa-filter" inert></i>
         </button>
       `;
@@ -342,6 +342,39 @@ export default class ItemListControlsElement extends MaybeAdoptable {
 
   /* -------------------------------------------- */
   /*  Filtering, Grouping, & Sorting              */
+  /* -------------------------------------------- */
+
+  /**
+   * Partition a flat filter set, as produced by the filter menu.
+   * @param {Set<string>} filters  The filter state's property set.
+   * @returns {{ included: Set<string>, excluded: Set<string> }}
+   */
+  static partitionFilters(filters) {
+    const included = new Set();
+    const excluded = new Set();
+    for ( const f of filters ) {
+      if ( f[0] === "!" ) excluded.add(f.slice(1));
+      else included.add(f);
+    }
+    return { included, excluded };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Evaluate a tri-state filter against an item property.
+   * @param {Set<string>} included  Filter keys toggled to include.
+   * @param {Set<string>} excluded  Filter keys toggled to exclude.
+   * @param {string} key            The filter key to evaluate.
+   * @param {boolean} matches       Whether the item satisfies the filtered property.
+   * @returns {boolean}             False if the filter rejects the item, otherwise true.
+   */
+  static passesFilter(included, excluded, key, matches) {
+    if ( included.has(key) ) return matches;
+    if ( excluded.has(key) ) return !matches;
+    return true;
+  }
+
   /* -------------------------------------------- */
 
   /**

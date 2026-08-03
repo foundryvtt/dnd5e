@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,71 +478,28 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
-  - _id: G2GfXsv9MMfL3lc5
-    name: Keen Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The tiger has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!FayqbnjBMszO6Pat.G2GfXsv9MMfL3lc5'
   - _id: wklAUVakX97y0z2S
     name: Pounce
     type: feat
-    img: icons/creatures/claws/claw-talons-glowing-orange.webp
+    img: icons/creatures/abilities/cougar-pounce-stalk-black.webp
     system:
       description:
         value: >-
-          <p>If the tiger moves at least 20 ft. straight toward a creature and
-          then hits it with a claw attack on the same turn, that target must
-          succeed on a [[/save]] saving throw or be knocked
-          &amp;Reference[prone].</p><p>If the target is prone, the panther can
-          make one bite attack against it as a bonus action.</p>
+          <p>If the [[lookup @name lowercase]]{monster} moves at least 20 feet
+          straight toward a creature and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.FayqbnjBMszO6Pat.Item.7GCnVtakQo6iZyn7]{claw}
+          attack on the same turn, that target must succeed on a [[/save]]
+          saving throw or be knocked &amp;Reference[prone].</p><p>If the target
+          is prone, the [[lookup @name lowercase]]{monster} can make one [[/item
+          .YypXtXEL61FqWYOP]]{bite} attack against it as a bonus action.</p>
         chat: >-
-          <p>If the tiger moves at least <strong>20 ft.</strong> straight toward
-          a creature and then hits it with a claw attack on the same turn, that
-          target must make a <strong>Strength</strong> saving throw.</p>
+          <p>If the [[lookup @name]]{monster} moves at least 20 feet straight
+          toward a creature and then hits it with a
+          @UUID[Compendium.dnd5e.monsters.Actor.FayqbnjBMszO6Pat.Item.7GCnVtakQo6iZyn7]{Claw}
+          attack on the same turn, that target must make a Strength saving
+          throw.</p>
       source:
         custom: ''
         book: ''
@@ -558,122 +512,80 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
+        8dIa5DwJPOAhNkpx:
           type: save
+          name: Pounce Save
+          _id: 8dIa5DwJPOAhNkpx
+          img: ''
+          sort: 100000
           activation:
-            type: ''
-            value: null
-            condition: ''
+            type: special
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} moves at least 20
+              feet straight toward a creature and then hits it with a
+              @UUID[Compendium.dnd5e.monsters.Actor.FayqbnjBMszO6Pat.Item.7GCnVtakQo6iZyn7]{claw}
+              attack on the same turn.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            value: '20'
-            units: ft
-            special: ''
+            units: spec
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: creature
+              count: '1'
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+            visible: true
+            bonus: ''
       enchant: {}
       prerequisites:
         level: null
@@ -687,22 +599,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MqAVplIArAKzpnXB
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123736236
+      systemVersion: 6.0.0
+      createdTime: 1781526270211
+      modifiedTime: 1783369927252
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!FayqbnjBMszO6Pat.wklAUVakX97y0z2S'
   - _id: YypXtXEL61FqWYOP
     name: Bite
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/creatures/abilities/mouth-teeth-rows-red.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Tiger attacks with its Bite.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -765,7 +679,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -774,8 +688,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        WC9MAi3vgvIhekNc:
           type: attack
           activation:
             type: action
@@ -790,10 +703,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -810,7 +724,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -823,20 +738,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: WC9MAi3vgvIhekNc
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -851,22 +778,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123751274
+      systemVersion: 6.0.0
+      createdTime: 1781526147713
+      modifiedTime: 1781526164595
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!FayqbnjBMszO6Pat.YypXtXEL61FqWYOP'
   - _id: 7GCnVtakQo6iZyn7
     name: Claw
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-canine-brown-grey.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Tiger attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -928,9 +857,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties:
-        - fin
-      proficient: 1
+      properties: []
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -939,8 +867,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        WmA9NgYzeCgMZI7Y:
           type: attack
           activation:
             type: action
@@ -955,10 +882,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -975,7 +903,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -988,20 +917,32 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: WmA9NgYzeCgMZI7Y
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1016,14 +957,67 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1741123760572
+      systemVersion: 6.0.0
+      createdTime: 1781526191285
+      modifiedTime: 1781526229568
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!FayqbnjBMszO6Pat.7GCnVtakQo6iZyn7'
+  - _id: HmYMnw2nXcqUSSwS
+    name: Keen Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.oQvORD924obyPdCc.Item.hwviWX3lRj9wqENj
+      duplicateSource: Item.gcfYCrt0yFVt4QF4
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781526260832
+      modifiedTime: 1781530629308
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!FayqbnjBMszO6Pat.HmYMnw2nXcqUSSwS'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -1032,7 +1026,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171216735

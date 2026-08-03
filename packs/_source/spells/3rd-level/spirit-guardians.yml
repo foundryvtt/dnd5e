@@ -36,13 +36,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '15'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -67,43 +70,53 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: >-
+          When a creature enters the area for the first time on a turn or starts
+          its turn there.
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        units: spec
+        special: ''
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
       damage:
         onSave: half
         parts:
-          - number: 3
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
             denomination: 8
             bonus: ''
             types:
               - radiant
-            custom:
-              enabled: false
-              formula: ''
+              - necrotic
             scaling:
               mode: whole
               number: 1
@@ -113,23 +126,76 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Start of Turn / Enter Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    0vosgb6402pwvwVt:
+      type: utility
+      name: Cast
+      _id: 0vosgb6402pwvwVt
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: spirit-guardians
 sort: 0
 flags: {}
-img: icons/magic/light/projectile-bolts-salvo-white.webp
+img: icons/magic/light/projectiles-salvo-blue.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037366148
-  modifiedTime: 1725992723195
+  modifiedTime: 1781361944259
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!uCud2s4TjMfjiXUb'

@@ -86,7 +86,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const config = this.advancement.configuration;
     const counts = this.counts;
     const value = this.advancement.value;
-    this.pool ??= (await Promise.all(config.pool.map(i => fromUuid(i.uuid)))).filter(_ => _);
+    this.pool ??= (await Promise.all(config.pool
+      .sort((lhs, rhs) => this.advancement.configuration.sorting === "m" ? lhs.sort - rhs.sort : 0)
+      .map(i => fromUuid(i.uuid))
+    )).filter(_ => _)
+      .sort((lhs, rhs) => this.advancement.configuration.sorting === "a" ? lhs.name.localeCompare(rhs.name) : 0);
     this.retained ??= Object.entries(value.added).reduce((obj, [level, added]) => {
       obj[level] = Object.fromEntries(Object.entries(added).map(([id]) => [id, actor.items.get(id)]));
       return obj;
@@ -104,7 +108,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     for ( const level of Array.fromRange(this.level) ) {
       const added = value.added[level];
       if ( added ) context.sections.set(level, {
-        header: game.i18n.format(`DND5E.AdvancementLevel${level === "0" ? "AnyHeader" : "Header"}`, { level }),
+        header: _loc(`DND5E.AdvancementLevel${level === "0" ? "AnyHeader" : "Header"}`, { level }),
         items: Object.entries(added).map(([id, uuid]) => {
           const { name, img } = actor.items.get(id) ?? fromUuidSync(uuid);
           previouslySelected.add(uuid);
@@ -129,7 +133,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     const spellLevel = config.restriction.level;
     const maxSlot = this._maxSpellSlotLevel();
-    const validateSpellLevel = (config.type === "spell") && (spellLevel === "available");
+    const minSlot = spellLevel === "availableNoCantrips" ? 1 : 0;
+    const validateSpellLevel = (config.type === "spell") && ["available", "availableNoCantrips"].includes(spellLevel);
 
     const added = [];
     const dropped = [];
@@ -144,15 +149,16 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const removed = counts.replaced ? actor.items.get(value.replaced[this.level]?.original) : [];
 
     if ( counts.max ) context.sections.set(this.level, {
-      header: game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Chosen", counts),
+      header: _loc("DND5E.ADVANCEMENT.ItemChoice.Chosen", counts),
       isCurrentLevel: true,
       items: [...this.pool, ...dropped].reduce((arr, item) => {
         const { id, name, img } = item;
         const uuid = item.flags.dnd5e?.sourceId ?? item.uuid;
-        const validFeature = !item.system.validatePrerequisites || (item.system.validatePrerequisites(
+        const validFeature = !item.system.assertPrerequisites || (item.system.assertPrerequisites(
           this.advancement.actor, { added, removed, level: this.featureLevel }
         ) === true);
-        const validSpell = !validateSpellLevel || (item.system.level <= maxSlot);
+        const validSpell = !validateSpellLevel
+          || ((item.system.level >= minSlot) && (item.system.level <= maxSlot));
         if ( validFeature && validSpell ) {
           const data = {
             id, img, name, uuid,
@@ -175,16 +181,16 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( context.abilities ) context.abilities.disabled = this.level > firstLevel;
 
     if ( config.type ) {
-      let type = game.i18n.localize(CONFIG.Item.typeLabels[config.type]);
+      let type = _loc(CONFIG.Item.typeLabels[config.type]);
       if ( (config.type === "feat") && config.restriction.type ) {
         const typeConfig = CONFIG.DND5E.featureTypes[config.restriction.type];
         const subtype = typeConfig.subtypes?.[config.restriction.subtype];
         if ( subtype ) type = subtype;
         else type = typeConfig.label;
       }
-      context.selectLabel = game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Action.SelectSpecific", { type });
+      context.selectLabel = _loc("DND5E.ADVANCEMENT.ItemChoice.Action.SelectSpecific", { type });
     } else {
-      context.selectLabel = game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Action.SelectGeneric");
+      context.selectLabel = _loc("DND5E.ADVANCEMENT.ItemChoice.Action.SelectGeneric");
     }
 
     context.showBrowseButton = config.allowDrops && !counts.full;
@@ -223,11 +229,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const config = this.advancement.configuration;
     const { current, max } = this.counts;
     if ( current >= max ) {
-      ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected", { localize: true });
+      ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected");
       return;
     }
 
-    const filters = { locked: { additional: {}, documentClass: "Item" } };
+    const filters = { locked: { additional: {}, documentClass: "Item", exclusive: true } };
 
     // Apply restrictions based on type
     if ( config.type ) {
@@ -248,6 +254,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     } else if ( (config.type === "spell") && (config.restriction.level !== "") ) {
       if ( config.restriction.level === "available" ) {
         filters.locked.additional.level = { max: this._maxSpellSlotLevel() };
+      } else if ( config.restriction.level === "availableNoCantrips" ) {
+        filters.locked.additional.level = { min: 1, max: this._maxSpellSlotLevel() };
       } else {
         filters.locked.additional.level = {
           min: Number(config.restriction.level),
@@ -265,7 +273,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     }
 
     const result = await CompendiumBrowser.select({
-      filters, selection: { min: 1, max: max - current }
+      filters,
+      prerequisites: {
+        validate: item => {
+          if ( !item.system.validatePrerequisites ) return;
+          return item.system.validatePrerequisites({ actor: this.advancement.actor, level: this.featureLevel });
+        }
+      },
+      selection: { min: 1, max: max - current }
     }, this.manager?._detachOptions());
     if ( !result?.size ) return;
 
@@ -334,6 +349,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     try {
       this.advancement._validateItemType(item);
+      item.system.assertPrerequisites?.(this.advancement.actor, { level: this.featureLevel, throwError: true });
     } catch(err) {
       ui.notifications.error(err.message);
       return null;
@@ -341,12 +357,13 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     // If spell level is restricted to available level, ensure the spell is of the appropriate level
     const spellLevel = this.advancement.configuration.restriction.level;
-    if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
+    if ( (this.advancement.configuration.type === "spell") && ["available", "availableNoCantrips"].includes(spellLevel) ) {
       const maxSlot = this._maxSpellSlotLevel();
-      if ( item.system.level > maxSlot ) {
-        ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
-          level: CONFIG.DND5E.spellLevels[maxSlot]
-        }));
+      const minSlot = spellLevel === "availableNoCantrips" ? 1 : 0;
+      if ( (item.system.level < minSlot) || (item.system.level > maxSlot) ) {
+        ui.notifications.error("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
+          format: { level: CONFIG.DND5E.spellLevels[maxSlot] }
+        });
         return null;
       }
     }

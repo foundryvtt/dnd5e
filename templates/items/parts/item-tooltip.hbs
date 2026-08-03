@@ -38,9 +38,8 @@
             </div>
         </div>
     </section>
-    {{#if isSpell}}
-        {{> "dnd5e.spell-block" }}
-    {{/if}}
+    {{#if extras}}<p class="extras">{{{ extras }}}</p>{{/if}}
+    {{#if isSpell}}{{> "dnd5e.spell-block" }}{{/if}}
     <section class="description">{{{ description.value }}}</section>
     <ul class="pills">
         {{#each properties}}

@@ -1,3 +1,5 @@
+import { loadingTooltip } from "../../utils.mjs";
+
 /**
  * @import { ChatMessageDataModelMetadata } from "./types.mjs";
  */
@@ -21,6 +23,16 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
 
   get metadata() {
     return this.constructor.metadata;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the results of this message can be applied as damage or healing.
+   * @type {boolean}
+   */
+  get canApplyDamage() {
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -90,7 +102,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
       const uuid = e.closest("[data-item-uuid]")?.dataset.itemUuid;
       if ( !uuid ) continue;
       Object.assign(e.dataset, {
-        tooltip: `<section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>`,
+        tooltipHtml: loadingTooltip({ uuid }),
         tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip",
         tooltipDirection: "LEFT"
       });

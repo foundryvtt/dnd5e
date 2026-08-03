@@ -10,18 +10,21 @@ system:
       animation, giving them the ability to communicate with you and follow your
       simple commands. You can question plants about events in the spell's area
       within the past day, gaining information about creatures that have passed,
-      weather, and other circumstances.</p><p>You can also turn difficult
-      terrain caused by Plant Growth (such as thickets and undergrowth) into
-      ordinary terrain that lasts for the Duration. Or you can turn ordinary
-      terrain where Plants are present into difficult terrain that lasts for the
-      duration, causing vines and branches to hinder pursuers, for
-      example.</p><p>Plants might be able to perform other tasks on your behalf,
-      at the DM's discretion. The spell doesn't enable Plants to uproot
-      themselves and move about, but they can freely move branches, tendrils,
-      and stalks.</p><p>If a plant creature is in the area, you can communicate
-      with it as if you shared a Common language, but you gain no magical
-      ability to influence it.</p><p>This spell can cause the plants created by
-      the Entangle spell to release a Restrained creature.</p>
+      weather, and other circumstances.</p><p>You can also turn
+      &amp;reference[difficult terrain] caused by
+      @UUID[Compendium.dnd5e.spells.Item.YWtwzp6ZnQJMEmVW]{plant growth} (such
+      as thickets and undergrowth) into ordinary terrain that lasts for the
+      Duration. Or you can turn ordinary terrain where Plants are present into
+      difficult terrain that lasts for the duration, causing vines and branches
+      to hinder pursuers, for example.</p><p>Plants might be able to perform
+      other tasks on your behalf, at the DM's discretion. The spell doesn't
+      enable Plants to uproot themselves and move about, but they can freely
+      move branches, tendrils, and stalks.</p><p>If a plant creature is in the
+      area, you can communicate with it as if you shared a Common language, but
+      you gain no magical ability to influence it.</p><p>This spell can cause
+      the plants created by the
+      @UUID[Compendium.dnd5e.spells.Item.gMrWeG8fMDPRFiVe]{entangle} spell to
+      release a &amp;reference[Restrained apply=false] creature.</p>
     chat: ''
   source:
     custom: ''
@@ -39,13 +42,16 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: radius
       size: '30'
       contiguous: false
+      count: ''
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -64,8 +70,7 @@ system:
     - vocal
     - somatic
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    vBrfLankjDF6gaZP:
       type: utility
       activation:
         type: action
@@ -79,6 +84,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -86,11 +92,13 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -102,20 +110,32 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Cast
+      img: ''
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: vBrfLankjDF6gaZP
   identifier: speak-with-plants
 sort: 0
 flags: {}
-img: icons/magic/nature/leaf-glow-teal.webp
+img: icons/magic/nature/tree-animated-smile.webp
 effects: []
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037346119
-  modifiedTime: 1725992716623
+  modifiedTime: 1783217073718
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2VXGS206tuChoeXy'

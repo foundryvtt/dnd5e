@@ -112,24 +112,24 @@ effects:
   - name: Shining
     origin: Compendium.dnd5e.spells24.Item.phbsplShiningSmi
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/light/explosion-star-glow-silhouette.webp
     _id: pBjrcT286iCAQrjm
     type: base
-    system: {}
-    changes:
-      - key: system.traits.ci.value
-        mode: 2
-        value: invisible
-        priority: null
+    system:
+      changes:
+        - key: system.traits.ci.value
+          value: invisible
+          priority: null
+          type: add
+          phase: initial
+          _id: CilUI43HPcGZktvx
+      magical: true
     description: >-
       <p>Until the spell ends, the target sheds &amp;Reference[BrightLight] in a
       5-foot radius, attack rolls against it have Advantage, and it can’t
@@ -142,13 +142,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: 1725650522091
+      systemVersion: 6.0.0
+      createdTime: 1783543976907
+      modifiedTime: 1783543976907
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplShiningSmi.pBjrcT286iCAQrjm'
 folder: 3SjcO2acsFnWegp4
 sort: 600000
@@ -161,11 +164,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425970772
-  modifiedTime: 1745256798190
+  modifiedTime: 1783543976907
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplShiningSmi'

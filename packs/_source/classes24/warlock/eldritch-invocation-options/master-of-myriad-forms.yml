@@ -384,21 +384,20 @@ effects:
     transfer: false
     _id: 6SL9vuAkx7nAfS5D
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '@attributes.movement.walk'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.swim
+          value: '@attributes.movement.walk'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: DNYdROZoNsCgsIyB
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>You can breathe underwater and gain a Swim Speed equal to your
       Speed.</p>
@@ -412,13 +411,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1759793207379
+      systemVersion: 6.0.0
+      createdTime: 1783544102363
+      modifiedTime: 1783544102363
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvMasterofMy.6SL9vuAkx7nAfS5D'
   - name: Altered Appearance
     img: icons/creatures/magical/spirit-undead-ghost-blue.webp
@@ -426,17 +428,14 @@ effects:
     transfer: false
     _id: 1jrUeJtfZMGhJOZa
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -445,13 +444,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvMasterofMy.1jrUeJtfZMGhJOZa'
   - name: Natural Weapon
     img: icons/creatures/abilities/fang-tooth-blood-red.webp
@@ -459,17 +461,14 @@ effects:
     transfer: false
     _id: baEBDez6IgWNpkSX
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>When you use your Unarmed Strike to deal damage with that new growth,
       it deals 1d6 damage of the type in parentheses instead of dealing the
@@ -483,13 +482,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbinvMasterofMy.baEBDez6IgWNpkSX'
 folder: BjeMHiqnKNWkWhox
 flags:
@@ -499,11 +501,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1735866281378
-  modifiedTime: 1745256762407
+  modifiedTime: 1783544102363
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

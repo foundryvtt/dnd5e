@@ -444,9 +444,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -461,7 +458,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -481,15 +478,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 0.5
 items:
   - _id: QEiTKu95xZ1ovW5K
     name: Claws
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/commodities/claws/claw-brown-black.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Cat attacks with its Claws.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -552,7 +552,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -561,8 +561,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        KckGqXdYjRxWLQnO:
           type: attack
           activation:
             type: action
@@ -577,6 +576,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -597,7 +597,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -610,57 +611,63 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: none
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: true
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: KckGqXdYjRxWLQnO
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1744916839039
+      systemVersion: 6.0.0
+      createdTime: 1781525274859
+      modifiedTime: 1781525295111
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!hIf83RD3ZVW4Egfi.QEiTKu95xZ1ovW5K'
-  - _id: rZhUwhHEUo6VBxPt
+  - _id: kG93koT76mfyh9Ys
     name: Keen Smell
     type: feat
     img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
     system:
       description:
         value: >-
-          <p>The cat has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on smell.</p>
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on smell.</p>
         chat: ''
       source:
         custom: ''
@@ -674,137 +681,37 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: Cat
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: check
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: The cat raises its head, sniffing the air.
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          check:
-            ability: wis
-            dc: {}
-            associated: []
-          sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: The cat raises its head, sniffing the air.
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 2d20kh + @mod
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: keen-smell
+      advancement: {}
+      crewed: false
     effects: []
-    folder: null
-    sort: 0
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -100000
     ownership:
       default: 0
     flags: {}
     _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
+      compendiumSource: Compendium.dnd5e.monsters.Actor.oQvORD924obyPdCc.Item.hwviWX3lRj9wqENj
+      duplicateSource: Item.gcfYCrt0yFVt4QF4
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781525299688
+      modifiedTime: 1781530669624
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!hIf83RD3ZVW4Egfi.rZhUwhHEUo6VBxPt'
+    _key: '!actors.items!hIf83RD3ZVW4Egfi.kG93koT76mfyh9Ys'
 effects: []
 folder: g8DmtGW2tiBpzCMk
 sort: 0
@@ -813,7 +720,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171249141

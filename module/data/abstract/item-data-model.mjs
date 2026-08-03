@@ -65,6 +65,26 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Modes that can be used when making an attack with this item.
+   * @type {FormSelectOption[]}
+   */
+  get attackModes() {
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Set of abilities that can automatically be associated with this item.
+   * @type {Set<string>|null}
+   */
+  get availableAbilities() {
+    return null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Whether this item's activities can have scaling configured for their consumption.
    * @type {boolean}
    */
@@ -94,29 +114,19 @@ export default class ItemDataModel extends SystemDataModel {
 
   /* -------------------------------------------- */
 
-  /**
-   * Modes that can be used when making an attack with this item.
-   * @type {FormSelectOption[]}
-   */
-  get attackModes() {
-    return [];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Set of abilities that can automatically be associated with this item.
-   * @type {Set<string>|null}
-   */
-  get availableAbilities() {
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
   /** @override */
   get embeddedDescriptionKeyPath() {
     return game.user.isGM || (this.identified !== false) ? "description.value" : "unidentified.description";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether a creature can be considered proficient in this type of item.
+   * @type {boolean}
+   */
+  get hasProficiency() {
+    return false;
   }
 
   /* -------------------------------------------- */
@@ -136,7 +146,7 @@ export default class ItemDataModel extends SystemDataModel {
    * @type {string[]}
    */
   get tooltipSubtitle() {
-    return [this.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])];
+    return [this.type?.label ?? _loc(CONFIG.Item.typeLabels[this.parent.type])];
   }
 
   /* -------------------------------------------- */
@@ -171,6 +181,8 @@ export default class ItemDataModel extends SystemDataModel {
   /**
    * Render a rich tooltip for this item.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+   * @param {Activity} [enrichmentOptions.activity]     Specific activity on item to use for customizing the data.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {{content: string, classes: string[]}}
    */
   async richTooltip(enrichmentOptions={}) {
@@ -188,34 +200,38 @@ export default class ItemDataModel extends SystemDataModel {
    * Prepare item card template data.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
    * @param {Activity} [enrichmentOptions.activity]     Specific activity on item to use for customizing the data.
+   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
    * @returns {Promise<object>}
    */
-  async getCardData({ activity, ...enrichmentOptions }={}) {
+  async getCardData({ activity, extras, ...enrichmentOptions }={}) {
     const { name, type, img } = this.parent;
     let {
       price, weight, uses, identified, unidentified, description, school, materials
     } = this;
     const rollData = (activity ?? this.parent).getRollData();
     const isIdentified = identified !== false;
-    const chat = isIdentified ? description.chat || description.value : unidentified?.description;
-    const desc = game.user.isGM || isIdentified ? description.value : unidentified?.description;
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
+    enrichmentOptions = { rollData, relativeTo: this.parent, ...enrichmentOptions };
     const context = {
-      name, type, img, price, weight, uses, school, materials,
+      name, type, img, price, weight, uses, school, materials, extras,
       config: CONFIG.DND5E,
       controlHints: game.settings.get("dnd5e", "controlHints"),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
       tags: this.parent.labels?.components?.tags,
       subtitle: this.tooltipSubtitle.filterJoin(" • "),
       description: {
-        value: await TextEditor.enrichHTML(desc ?? "", {
-          rollData, relativeTo: this.parent, ...enrichmentOptions
-        }),
-        chat: await TextEditor.enrichHTML(chat ?? "", {
-          rollData, relativeTo: this.parent, ...enrichmentOptions
-        }),
+        value: await TextEditor.enrichHTML(
+          (game.user.isGM || isIdentified ? description.value : unidentified?.description) ?? "",
+          enrichmentOptions
+        ),
+        chat: await TextEditor.enrichHTML(
+          activity?.description?.value
+            || (isIdentified ? description.chat || description.value : unidentified?.description)
+            || "",
+          enrichmentOptions
+        ),
         concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !description.chat
       }
     };
@@ -283,7 +299,7 @@ export default class ItemDataModel extends SystemDataModel {
     return {
       img: this.parent.img,
       title: this.parent.name,
-      subtitle: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type])
+      subtitle: _loc(CONFIG.Item.typeLabels[this.parent.type])
     };
   }
 
@@ -303,8 +319,8 @@ export default class ItemDataModel extends SystemDataModel {
    * @param {RollDataOptions} [options]
    * @returns {ItemRollData}
    */
-  getRollData({ deterministic=false }={}) {
-    const actorRollData = this.parent.actor?.getRollData({ deterministic }) ?? {};
+  getRollData(options={}) {
+    const actorRollData = this.parent.actor?.getRollData(options) ?? {};
     const data = { ...actorRollData, item: { ...this } };
     return data;
   }

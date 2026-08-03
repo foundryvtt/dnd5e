@@ -1,0 +1,43 @@
+{{#each rolls}}
+{{{ this }}}
+{{/each}}
+
+{{#if (or outcome resisted canResist concentrationBroken canBreakConcentration deltas.length)}}
+<div class="chat-card{{#if death}} death-save{{/if}}">
+    {{#if outcome}}
+    <p class="supplement">{{ outcome }}</p>
+    {{/if}}
+
+    {{#if resisted}}
+    <p class="supplement">
+        <strong>{{ localize "DND5E.ROLL.Status" }}</strong>
+        {{ localize "DND5E.LegendaryResistance.Resisted" }}
+    </p>
+    {{else if canResist}}
+    <div class="card-buttons">
+        <button type="button" data-action="resistSave">
+            <i class="fa-solid fa-dragon" inert></i>
+            {{ localize "DND5E.LegendaryResistance.Action.Resist" }}
+        </button>
+    </div>
+    {{/if}}
+
+    {{#if concentrationBroken}}
+    <p class="supplement">
+        <strong>{{ localize "DND5E.ROLL.Status" }}</strong>
+        {{ localize "DND5E.CONCENTRATION.Lost" }}
+    </p>
+    {{else if canBreakConcentration}}
+    <div class="card-buttons">
+        <button type="button" data-action="breakConcentration">
+            <i class="fa-solid fa-ban" inert></i>
+            {{ localize "DND5E.CONCENTRATION.Action.Break" }}
+        </button>
+    </div>
+    {{/if}}
+
+    {{#if deltas.length}}
+    {{> "dnd5e.card-deltas" }}
+    {{/if}}
+</div>
+{{/if}}

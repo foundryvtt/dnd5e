@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,6 +480,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: m65uENAa93Pz8lLl
     name: Chain Mail
@@ -553,7 +551,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.rLMflzmxpe8JGTOA
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -569,8 +567,10 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
-          activity=aKQQjgpq0XwCcMGK]] damage in Small or Medium form.</p>
-        chat: <p>The Oni attacks with its Glaive.</p>
+          activity=Rev09LWfUvsYkKwA]] damage in Small or Medium form.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -637,7 +637,7 @@ items:
         - mgc
         - rch
         - two
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -646,8 +646,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        gjPjqYhlKAk1tfGh:
           type: attack
           activation:
             type: action
@@ -662,71 +661,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
-          duration:
-            concentration: false
             value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '10'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-          name: Attack (large)
-          img: ''
-          appliedEffects: []
-        aKQQjgpq0XwCcMGK:
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
           duration:
             concentration: false
             value: ''
@@ -747,7 +682,84 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: ''
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 100000
+          name: Attack (Large)
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: gjPjqYhlKAk1tfGh
+        Rev09LWfUvsYkKwA:
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -781,14 +793,24 @@ items:
                 bonus: '@mod'
                 types:
                   - slashing
-          sort: 0
-          name: Attack (small)
-          _id: aKQQjgpq0XwCcMGK
+                scaling:
+                  number: 1
+          sort: 200000
+          name: Attack (Small / Medium)
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Rev09LWfUvsYkKwA
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: glaive
       mastery: ''
     effects: []
@@ -796,30 +818,28 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.rOG1OM2ihgPjOvFW
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378799817
+      systemVersion: 6.0.0
+      createdTime: 1781806471852
+      modifiedTime: 1781806523459
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.FC0FNE8O4rnbth8s'
   - _id: q7J7PERrJb2vxtlt
     name: Claw (Oni Form Only)
     type: weapon
-    img: icons/skills/melee/strike-slashes-red.webp
+    img: icons/creatures/claws/claw-talons-glowing-purple.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Oni attacks with its Claw.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -883,7 +903,7 @@ items:
         conditions: ''
       properties:
         - mgc
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -892,8 +912,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        g2x5QBL3gFRLCI98:
           type: attack
           activation:
             type: action
@@ -908,10 +927,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -928,7 +948,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -941,23 +962,35 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: g2x5QBL3gFRLCI98
+          name: ''
       attuned: false
       ammunition: {}
-      magicalBonus: null
+      magicalBonus: ''
       identifier: claw-oni-form-only
       mastery: ''
     effects: []
@@ -969,11 +1002,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.0
-      createdTime: null
-      modifiedTime: 1760378803707
+      systemVersion: 6.0.0
+      createdTime: 1781806542438
+      modifiedTime: 1781806559873
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.q7J7PERrJb2vxtlt'
@@ -1025,7 +1058,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -1127,7 +1160,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 5.1.0
       createdTime: null
@@ -1142,8 +1175,8 @@ items:
     system:
       description:
         value: >-
-          <p>The oni regains 10 hit points at the start of its turn if it has at
-          least 1 hit point.</p>
+          <p>The [[lookup @name lowercase]]{monster} regains [[/healing]] at the
+          start of its turn if it has at least 1 hit point.</p>
         chat: >-
           <p>The oni regains <strong>10 hit points</strong> at the start of its
           turn.</p>
@@ -1159,13 +1192,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        2fundJLXw6s1SAnf:
           type: heal
           activation:
             type: turnStart
@@ -1180,15 +1213,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1199,10 +1233,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1224,10 +1259,19 @@ items:
               mode: whole
               number: null
               formula: ''
-          sort: 0
-          name: ''
+          sort: 100000
+          name: Regenerate
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: 2fundJLXw6s1SAnf
       enchant: {}
       prerequisites:
         level: null
@@ -1237,81 +1281,32 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402468251
+      systemVersion: 6.0.0
+      createdTime: 1781806438284
+      modifiedTime: 1781806450186
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.8liUuXPhjNLKYMMx'
-  - _id: HJDOmnRX2zQuXraB
-    name: Magic Weapons
-    type: feat
-    img: icons/weapons/swords/sword-runed-glowing.webp
-    system:
-      description:
-        value: <p>The oni's weapon attacks are magical.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: magic-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402491378
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!L1w8yBkInMscfJ3F.HJDOmnRX2zQuXraB'
   - _id: QGNzJqfTHnbhjzFN
     name: Change Shape
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     system:
       description:
         value: >-
-          <p>The oni magically polymorphs into a Small or Medium humanoid, into
-          a Large giant, or back into its true form. Other than its size, its
-          statistics are the same in each form. The only equipment that is
-          transformed is its glaive, which shrinks so that it can be wielded in
-          humanoid form. If the oni dies, it reverts to its true form, and its
-          glaive reverts to its normal size.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically polymorphs into a
+          Small or Medium humanoid, into a Large giant, or back into its true
+          form. Other than its size, its statistics are the same in each form.
+          The only equipment that is transformed is its glaive, which shrinks so
+          that it can be wielded in humanoid form. If the [[lookup @name
+          lowercase]]{monster} dies, it reverts to its true form, and its glaive
+          reverts to its normal size.</p>
         chat: ''
       source:
         custom: ''
@@ -1325,64 +1320,82 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        GHwuUudZqOR9Jep5:
+          type: transform
+          name: Transform
+          _id: GHwuUudZqOR9Jep5
+          img: ''
+          sort: 200000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          profiles:
+            - cr: ''
+              name: ''
+              _id: kS9Bcbd3HzOQ0NBC
+              uuid: null
+              sizes:
+                - sm
+                - med
+              types:
+                - humanoid
+              movement: []
+              level:
+                min: null
+                max: null
+          settings: null
+          transform:
+            customize: false
+            mode: cr
+            preset: polymorphSelf
       enchant: {}
       prerequisites:
         level: null
@@ -1396,11 +1409,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
       duplicateSource: null
-      coreVersion: '13.345'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402634275
+      systemVersion: 6.0.0
+      createdTime: 1781806592702
+      modifiedTime: 1781806664896
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.QGNzJqfTHnbhjzFN'
@@ -1516,7 +1529,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1632,7 +1645,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1760,7 +1773,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1892,7 +1905,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.RpKjTlYASrfqUPVA
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2025,7 +2038,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2169,7 +2182,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2177,6 +2190,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!L1w8yBkInMscfJ3F.KhwiSi9fwVfUPtku'
+  - _id: TCJLfMzkArxZePFY
+    name: Magic Weapons
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster}'s weapon attacks are
+          magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      properties:
+        - trait
+      identifier: magic-weapons
+      advancement: {}
+      crewed: false
+    flags: {}
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    effects: []
+    folder: null
+    sort: 0
+    _stats:
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781806461106
+      modifiedTime: 1781806461106
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Item.nahRRxck9R5GVVFS
+    _key: '!actors.items!L1w8yBkInMscfJ3F.TCJLfMzkArxZePFY'
 effects: []
 folder: v8gFGdEluEFQdRQg
 sort: 0
@@ -2185,7 +2251,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171223750

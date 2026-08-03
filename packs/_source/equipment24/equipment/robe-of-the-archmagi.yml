@@ -70,25 +70,27 @@ effects:
     img: icons/equipment/back/cloak-plain-white.webp
     _id: pYCleIMCUWOJPtF9
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.ac.calc
-        mode: 5
-        value: custom
-        priority: null
-      - key: system.attributes.ac.formula
-        mode: 5
-        value: 15 + @abilities.dex.mod
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.ac.calc
+          value: custom
+          priority: null
+          type: override
+          phase: initial
+          _id: x2smEVAsBylBnymO
+        - key: system.attributes.ac.formula
+          value: 15 + @abilities.dex.mod
+          priority: null
+          type: override
+          phase: initial
+          _id: n1CA3L50cuz4odjI
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -102,41 +104,48 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.2
+      systemVersion: 6.0.0
       createdTime: 1730677761115
-      modifiedTime: 1778013875031
+      modifiedTime: 1783544098022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRobeOfTheArch.pYCleIMCUWOJPtF9'
   - name: War Mage
     img: icons/magic/symbols/star-rising-purple.webp
     _id: pBVfmqYFHKSl662C
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.spell.dc
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.spell.dc
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: 71XsoQSWztQoaL6Z
+        - key: system.bonuses.msak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: Y5zGSnRaCq4vlr8S
+        - key: system.bonuses.rsak.attack
+          value: 2
+          priority: null
+          type: add
+          phase: initial
+          _id: mQHd1tcfST6wqQCt
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -147,13 +156,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730678232321
-      modifiedTime: 1730678321514
+      modifiedTime: 1783544098022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgRobeOfTheArch.pBVfmqYFHKSl662C'
 flags:
   dnd5e:
@@ -162,11 +174,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745431704598
+  modifiedTime: 1783544098022
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 32600000

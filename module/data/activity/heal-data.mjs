@@ -1,3 +1,4 @@
+import AppliedRules from "../../documents/applied-rules.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
@@ -18,6 +19,11 @@ export default class BaseHealActivityData extends BaseActivityData {
       healing: new DamageField()
     };
   }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static damageRuleCategory = "healing";
 
   /* -------------------------------------------- */
   /*  Data Migration                              */
@@ -46,12 +52,18 @@ export default class BaseHealActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @override */
-  getDamageConfig(config={}) {
+  getDamageConfig(config={}, { formulaOptions, rollData }={}) {
     if ( !this.healing.formula ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
     const rollConfig = foundry.utils.mergeObject({ critical: { allow: false } }, config);
-    const rollData = this.getRollData();
-    rollConfig.rolls = [this._processDamagePart(this.healing, rollConfig, rollData)].concat(config.rolls ?? []);
+    rollData ??= this.getRollData({ roll: true });
+    const rules = {
+      bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
+      consumed: new Set()
+    };
+    rollConfig.rolls = [
+      this._processDamagePart(this.healing, rollConfig, rollData, 0, { formulaOptions, rules })
+    ].concat(config.rolls ?? []);
 
     return rollConfig;
   }

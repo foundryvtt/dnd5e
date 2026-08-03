@@ -44,9 +44,7 @@ export default class BaseAdvancementData extends SparseDataModel {
       icon: new FilePathField({
         initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon", base64: true
       }),
-      classRestriction: new StringField({
-        initial: undefined, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"
-      })
+      classRestriction: new StringField({ initial: undefined, label: "DND5E.AdvancementClassRestriction" })
     };
   }
 
@@ -57,7 +55,10 @@ export default class BaseAdvancementData extends SparseDataModel {
   /** @inheritDoc */
   static migrateData(source) {
     super.migrateData(source);
+    if ( !source ) return source;
+
     if ( source.configuration?.hint ) source.hint = source.configuration.hint;
+
     return source;
   }
 }

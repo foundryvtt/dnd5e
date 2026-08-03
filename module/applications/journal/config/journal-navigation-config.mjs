@@ -35,7 +35,7 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
 
   /** @override */
   get title() {
-    return game.i18n.localize(this.options.window.title);
+    return _loc(this.options.window.title);
   }
 
   /* --------------------------------------------- */
@@ -58,7 +58,7 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
     });
     context.fields = ["previous", "up", "next"].map(name => ({
       field: new StringField(),
-      label: game.i18n.localize(`DND5E.JOURNALENTRY.Navigation.${name.capitalize()}`),
+      label: _loc(`DND5E.JOURNALENTRY.Navigation.${name.capitalize()}`),
       name: `flags.dnd5e.navigation.${name}`,
       options: entryOptions,
       value: data[name]
@@ -79,13 +79,13 @@ export default class JournalNavigationConfig extends DocumentSheet5e {
     if ( Object.values(navigation).some(v => v) ) {
       submitData.flags.dnd5e.navigation = Object.entries(navigation).reduce((obj, [k, v]) => {
         if ( v ) obj[k] = v;
-        else obj[`-=${k}`] = null;
+        else obj[k] = _del;
         return obj;
       }, {});
     } else if ( (keys.length > 1) || ((keys.length === 1) && (keys[0] !== "navigation")) ) {
-      submitData.flags = { dnd5e: { "-=navigation": null } };
+      submitData.flags = { dnd5e: { navigation: _del } };
     } else {
-      submitData.flags = { "-=dnd5e": null };
+      submitData.flags = { dnd5e: _del };
     }
 
     return submitData;

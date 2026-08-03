@@ -109,6 +109,16 @@ export default class ToolData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    return this.ability || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Properties displayed in chat.
    * @type {string[]}
    */
@@ -128,12 +138,9 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /**
-   * Which ability score modifier is used by this item?
-   * @type {string|null}
-   */
-  get abilityMod() {
-    return this.ability || "int";
+  /** @override */
+  get hasProficiency() {
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -168,6 +175,7 @@ export default class ToolData extends ItemDataModel.mixin(
     super._migrateData(source);
     ActivitiesTemplate.migrateActivities(source);
     ToolData.#migrateAbility(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -190,7 +198,7 @@ export default class ToolData extends ItemDataModel.mixin(
     this.prepareDescriptionData();
     this.prepareIdentifiable();
     this.preparePhysicalData();
-    this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
+    this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? _loc(CONFIG.Item.typeLabels.tool);
     this.type.identifier = CONFIG.DND5E.tools[this.type.baseItem]?.id;
   }
 

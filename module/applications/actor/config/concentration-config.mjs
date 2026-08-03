@@ -27,7 +27,7 @@ export default class ConcentrationConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.format("DND5E.ABILITY.Configure.Title", { ability: game.i18n.localize("DND5E.Concentration") });
+    return _loc("DND5E.ABILITY.Configure.Title", { ability: _loc("DND5E.Concentration") });
   }
 
   /* -------------------------------------------- */
@@ -43,15 +43,13 @@ export default class ConcentrationConfig extends BaseConfigSheet {
     context.fields = this.document.system.schema.fields.attributes.fields.concentration.fields;
     const ability = CONFIG.DND5E.abilities[CONFIG.DND5E.defaultAbilities.concentration]?.label?.toLowerCase();
     context.abilityOptions = [
-      { value: "", label: ability ? game.i18n.format("DND5E.DefaultSpecific", { default: ability }) : "" },
+      { value: "", label: ability ? _loc("DND5E.DefaultSpecific", { default: ability }) : "" },
       { rule: true },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
     ];
 
-    if ( this.document.system.bonuses?.abilities ) context.global = {
-      data: source.bonuses?.abilities ?? {},
-      fields: this.document.system.schema.fields.bonuses.fields.abilities.fields
-    };
+    const globalAbilityField = this.document.system.schema.getField("rolls.ability");
+    if ( globalAbilityField ) context.global = { data: source.rolls?.ability ?? {}, fields: globalAbilityField.fields };
 
     return context;
   }

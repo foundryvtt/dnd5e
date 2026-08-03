@@ -20,37 +20,43 @@ system:
       guard a particular chamber or corridor. If you issue no commands, the
       creature only defends itself against hostile creatures. Once given an
       order, the creature continues to follow it until its task is
-      complete.</p><table><caption>Animated Object
-      Statistics</caption><thead><tr><th scope="col">Size</th><th
-      scope="col">HP</th><th scope="col">AC</th><th scope="col">Attack</th><th
-      scope="col">Str</th><th scope="col">Dex</th></tr></thead><tbody><tr><th
-      scope="row">Tiny</th><td>20</td><td>18</td><td>+8 to hit, 1d4 + 4
-      damage</td><td>4</td><td>18</td></tr><tr><th
-      scope="row">Small</th><td>25</td><td>16</td><td>+6 to hit, 1d8 + 2
-      damage</td><td>6</td><td>14</td></tr><tr><th
-      scope="row">Medium</th><td>40</td><td>13</td><td>+5 to hit, 2d6 + 1
-      damage</td><td>10</td><td>12</td></tr><tr><th
-      scope="row">Large</th><td>50</td><td>10</td><td>+6 to hit, 2d10 + 2
-      damage</td><td>14</td><td>10</td></tr><tr><th
-      scope="row">Huge</th><td>80</td><td>10</td><td>+8 to hit, 2d12 + 4
-      damage</td><td>18</td><td>6</td></tr></tbody></table><p>An animated object
-      is a construct with AC, hit points, attacks, Strength, and Dexterity
-      determined by its size. Its Constitution is 10 and its Intelligence and
-      Wisdom are 3, and its Charisma is 1. Its speed is 30 feet; if the object
-      lacks legs or other appendages it can use for locomotion, it instead has a
-      flying speed of 30 feet and can hover. If the object is securely attached
-      to a surface or a larger object, such as a chain bolted to a wall, its
-      speed is 0. It has blindsight with a radius of 30 feet and is blind beyond
-      that distance. When the animated object drops to 0 hit points, it reverts
-      to its original object form, and any remaining damage carries over to its
-      original object form.</p><p>If you command an object to attack, it can
-      make a single melee attack against a creature within 5 feet of it. It
-      makes a slam attack with an attack bonus and bludgeoning damage determined
-      by its size. The DM might rule that a specific object inflicts slashing or
-      piercing damage based on its form.</p><p><strong>At Higher
-      Levels.</strong> If you cast this spell using a spell slot of 6th level or
-      higher, you can animate two additional objects for each slot level above
-      5th.</p>
+      complete.</p><table><caption><p>Animated Object
+      Statistics</p></caption><thead><tr><th scope="col"><p>Size</p></th><th
+      scope="col"><p>HP</p></th><th scope="col"><p>AC</p></th><th
+      scope="col"><p>Attack</p></th><th scope="col"><p>Str</p></th><th
+      scope="col"><p>Dex</p></th></tr></thead><tbody><tr><th
+      scope="row"><p>Tiny</p></th><td><p>20</p></td><td><p>18</p></td><td><p>+8
+      to hit, 1d4 + 4
+      damage</p></td><td><p>4</p></td><td><p>18</p></td></tr><tr><th
+      scope="row"><p>Small</p></th><td><p>25</p></td><td><p>16</p></td><td><p>+6
+      to hit, 1d8 + 2
+      damage</p></td><td><p>6</p></td><td><p>14</p></td></tr><tr><th
+      scope="row"><p>Medium</p></th><td><p>40</p></td><td><p>13</p></td><td><p>+5
+      to hit, 2d6 + 1
+      damage</p></td><td><p>10</p></td><td><p>12</p></td></tr><tr><th
+      scope="row"><p>Large</p></th><td><p>50</p></td><td><p>10</p></td><td><p>+6
+      to hit, 2d10 + 2
+      damage</p></td><td><p>14</p></td><td><p>10</p></td></tr><tr><th
+      scope="row"><p>Huge</p></th><td><p>80</p></td><td><p>10</p></td><td><p>+8
+      to hit, 2d12 + 4
+      damage</p></td><td><p>18</p></td><td><p>6</p></td></tr></tbody></table><p>An
+      animated object is a construct with AC, hit points, attacks, Strength, and
+      Dexterity determined by its size. Its Constitution is 10 and its
+      Intelligence and Wisdom are 3, and its Charisma is 1. Its speed is 30
+      feet; if the object lacks legs or other appendages it can use for
+      locomotion, it instead has a flying speed of 30 feet and can hover. If the
+      object is securely attached to a surface or a larger object, such as a
+      chain bolted to a wall, its speed is 0. It has &amp;reference[blindsight]
+      with a radius of 30 feet and is blind beyond that distance. When the
+      animated object drops to 0 hit points, it reverts to its original object
+      form, and any remaining damage carries over to its original object
+      form.</p><p>If you command an object to attack, it can make a single melee
+      attack against a creature within 5 feet of it. It makes a slam attack with
+      an attack bonus and bludgeoning damage determined by its size. The DM
+      might rule that a specific object inflicts slashing or piercing damage
+      based on its form.</p><p><strong>At Higher Levels.</strong> If you cast
+      this spell using a spell slot of 6th level or higher, you can animate two
+      additional objects for each slot level above 5th.</p>
     chat: ''
   source:
     custom: ''
@@ -70,12 +76,15 @@ system:
       type: object
       count: '10'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,58 +104,125 @@ system:
     - somatic
     - concentration
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    v6TXogtTedQR3pQ0:
+      type: summon
+      name: Summon
+      _id: v6TXogtTedQR3pQ0
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects: []
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '10'
+          name: ''
+          _id: DThHTbpdKdjYvOeP
+          uuid: Compendium.dnd5e.monsters.Actor.oT08GcXHkvnKJTdA
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '1'
+          name: ''
+          _id: MGeANHhOOnVXzZrf
+          uuid: Compendium.dnd5e.monsters.Actor.abG4qRbHQzehlVYz
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '2'
+          name: ''
+          _id: OLea8ydEOcw78zgv
+          uuid: Compendium.dnd5e.monsters.Actor.cI49DUvHgcPFmnk3
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '10'
+          name: ''
+          _id: lbRNMTpVLPV8q06Y
+          uuid: Compendium.dnd5e.monsters.Actor.nvTVjot7vdzWxMt7
+          level:
+            min: null
+            max: null
+          types: []
+        - count: '5'
+          name: ''
+          _id: hVTZLTjmt0nhRIBC
+          uuid: Compendium.dnd5e.monsters.Actor.BImoeCT97rI3nKmG
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   identifier: animate-objects
 sort: 0
 flags: {}
-img: icons/magic/earth/projectile-stone-boulder-purple.webp
+img: icons/sundries/gaming/chess-pawn-white-pink.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350009
-  modifiedTime: 1725992717832
+  modifiedTime: 1783720602196
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ATo0Eb63TDtnu6iA'

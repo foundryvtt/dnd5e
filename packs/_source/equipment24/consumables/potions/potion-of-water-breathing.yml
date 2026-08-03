@@ -125,17 +125,15 @@ effects:
     transfer: false
     _id: FuzyfcWOcC3IXsDB
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 86400
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
@@ -148,22 +146,25 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.equipment24.Item.dmgPotionOfVital.ActiveEffect.GxutU47JS0FNfeoM
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.2
+      systemVersion: 6.0.0
       createdTime: 1730864676000
-      modifiedTime: 1778013741565
+      modifiedTime: 1783544097650
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgPotionOfWater.FuzyfcWOcC3IXsDB'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1727883376108
-  modifiedTime: 1764614684593
+  modifiedTime: 1783544097650
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

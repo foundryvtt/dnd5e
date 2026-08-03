@@ -54,8 +54,8 @@ system:
     hp:
       value: 85
       max: 85
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 10d10 + 30
     init:
       ability: ''
@@ -454,9 +454,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -471,7 +468,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -491,16 +488,18 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: Na7qo8robmcacNZI
     name: Amorphous
     type: feat
-    img: icons/creatures/slimes/slime-movement-dripping-purple.webp
+    img: icons/creatures/slimes/slime-movement-swirling-blue.webp
     system:
       description:
         value: >-
-          <p>The pudding can move through a space as narrow as 1 inch wide
-          without squeezing.</p>
+          <p>The [[lookup @name lowercase]]{monster} can move through a space as
+          narrow as 1 inch wide without
+          &amp;reference[squeezing]{Squeezing}.</p>
         chat: ''
       source:
         custom: ''
@@ -514,10 +513,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -532,33 +532,40 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781897510510
+      modifiedTime: 1781897536970
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.Na7qo8robmcacNZI'
   - _id: wvlDMuDDdk7peoPa
     name: Corrosive Form
     type: feat
-    img: icons/magic/earth/orb-stone-smoke-teal.webp
+    img: icons/commodities/stone/ore-chunk-black.webp
     system:
       description:
         value: >-
-          <p>A creature that touches the pudding or hits it with a melee attack
-          while within 5 feet of it takes 4 (1d8) acid damage. Any nonmagical
-          weapon made of metal or wood that hits the pudding
-          corrodes.</p><p>After dealing damage, the weapon takes a permanent and
-          cumulative -1 penalty to damage rolls. If its penalty drops to -5, the
-          weapon is destroyed. Nonmagical ammunition made of metal or wood that
-          hits the pudding is destroyed after dealing damage. The pudding can
-          eat through 2-inch-thick, nonmagical wood or metal in 1 round.</p>
+          <p>A creature that touches the [[lookup @name lowercase]]{monster} or
+          hits it with a melee attack while within 5 feet of it takes [[/damage
+          average]] damage. Any nonmagical weapon made of metal or wood that
+          hits the [[lookup @name lowercase]]{monster} corrodes.</p><p>After
+          dealing damage, the weapon takes a permanent and cumulative -1 penalty
+          to damage rolls. If its penalty drops to -5, the weapon is destroyed.
+          Nonmagical ammunition made of metal or wood that hits the pudding is
+          destroyed after dealing damage. The pudding can eat through
+          2-inch-thick, nonmagical wood or metal in 1 round.</p><section
+          id="secret-JkTKDNe8rclkb2HO" class="secret"><p><strong>Foundry
+          Note</strong></p><p>You can apply the
+          @UUID[Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.wvlDMuDDdk7peoPa.ActiveEffect.dodLAz6LZ0KlsabM]{Corroded
+          Weapon} enchantment to a weapon, granting it a cumulative -1 penalty
+          to damage rolls each time the enchantment is applied.</p></section>
         chat: >-
-          <p>A creature that touches the pudding or hits it with a melee attack
-          while within 5 feet of it takes <em>acid damage</em>. Any nonmagical
-          weapon made of metal or wood that hits the pudding corrodes.</p>
+          <p>A creature that touches the [[lookup @name]]{monster} or hits it
+          with a melee attack while within 5 feet of it takes acid damage. Any
+          nonmagical weapon made of metal or wood that hits the [[lookup
+          @name]]{monster} corrodes.</p>
       source:
         custom: ''
         book: ''
@@ -571,18 +578,20 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        HmpHoKqKU8OyiT1J:
           type: damage
           activation:
             type: special
             value: null
-            condition: ''
+            condition: >-
+              When a creature touches the [[lookup @name lowercase]]{monster} or
+              hits it with a melee attack while within 5 feet of it.
             override: false
           consumption:
             targets: []
@@ -592,17 +601,31 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: >-
+              <p>A creature that touches the [[lookup @name lowercase]]{monster}
+              or hits it with a melee attack while within 5 feet of it takes
+              [[/damage average]] damage. Any nonmagical weapon made of metal or
+              wood that hits the [[lookup @name lowercase]]{monster}
+              corrodes.</p><p>After dealing damage, the weapon takes a permanent
+              and cumulative -1 penalty to damage rolls. If its penalty drops to
+              -5, the weapon is destroyed. Nonmagical ammunition made of metal
+              or wood that hits the pudding is destroyed after dealing damage.
+              The pudding can eat through 2-inch-thick, nonmagical wood or metal
+              in 1
+              round.</p><p>@UUID[Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.wvlDMuDDdk7peoPa.ActiveEffect.dodLAz6LZ0KlsabM]{Corroded
+              Weapon}</p>
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: ft
             special: ''
             override: false
+            value: '5'
           target:
             template:
               count: ''
@@ -611,10 +634,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -628,24 +652,84 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 8
                 bonus: ''
                 types:
                   - acid
-                custom:
-                  enabled: false
-                  formula: ''
                 scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+                  number: 1
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: HmpHoKqKU8OyiT1J
+          name: Contact Damage
       enchant: {}
       prerequisites:
         level: null
       identifier: corrosive-form
-    effects: []
+    effects:
+      - name: Corroded Weapon
+        img: icons/commodities/stone/ore-chunk-black.webp
+        origin: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.wvlDMuDDdk7peoPa
+        type: enchantment
+        _id: dodLAz6LZ0KlsabM
+        system:
+          changes:
+            - key: flags.world.corrode-weapon-penalty
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+            - key: system.damage.bonus
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>This weapon has been corroded, taking a permanent and cumulative -1
+          penalty to damage rolls. If its penalty drops to -5, the weapon is
+          destroyed.</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781908350102
+          modifiedTime: 1783367752168
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!NwQpeeaMxAC3fRft.wvlDMuDDdk7peoPa.dodLAz6LZ0KlsabM
     folder: null
     sort: 0
     ownership:
@@ -654,62 +738,14 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cZm13DxOe9lZyGFT
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765827327146
+      systemVersion: 6.0.0
+      createdTime: 1781908149137
+      modifiedTime: 1781909504467
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.wvlDMuDDdk7peoPa'
-  - _id: 06FRVwBFMJYhZ94o
-    name: Spider Climb
-    type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
-    system:
-      description:
-        value: >-
-          <p>The pudding can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: spider-climb
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!NwQpeeaMxAC3fRft.06FRVwBFMJYhZ94o'
   - _id: v6ZspnPr8G5hApkL
     name: Pseudopod
     type: weapon
@@ -720,11 +756,17 @@ items:
           <p>[[/attack extended]]. [[/damage extended]].</p><p>In addition,
           nonmagical armor worn by the target is partly dissolved and takes a
           permanent and cumulative -1 penalty to the AC it offers. The armor is
-          destroyed if the penalty reduces its AC to 10.</p>
+          destroyed if the penalty reduces its AC to 10.</p><section
+          id="secret-EuthiTlnSJwRrtDQ" class="secret"><p><strong>Foundry
+          Note</strong></p><p>You can apply the
+          @UUID[Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.v6ZspnPr8G5hApkL.ActiveEffect.4U4SIb01ypbc6lzv]{Corroded
+          Armor} enchantment to a suit of armor, granting it a cumulative -1 to
+          the AC it offers each time the enchantment is applied.</p></section>
         chat: >-
-          <p>The Black Pudding attacks with its Pseudopod. In addition,
-          nonmagical armor worn by the target is partly dissolved and takes a
-          permanent and cumulative -1 penalty to the AC it offers.</p>
+          <p>The [[lookup @name lowercase]]{monster} attacks with its [[lookup
+          @item.name]]. In addition, nonmagical armor worn by the target is
+          partly dissolved and takes a permanent and cumulative -1 penalty to
+          the AC it offers.</p>
       source:
         custom: ''
         book: ''
@@ -875,7 +917,58 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: pseudopod
-    effects: []
+      mastery: ''
+    effects:
+      - name: Corroded Armor
+        img: icons/equipment/chest/breastplate-collared-leather-brown.webp
+        origin: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.v6ZspnPr8G5hApkL
+        type: enchantment
+        _id: 4U4SIb01ypbc6lzv
+        system:
+          changes:
+            - key: flags.world.corroded-armor-penalty
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+            - key: system.armor.value
+              type: add
+              value: -1
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>This armor has been corroded, taking a permanent and cumulative -1
+          penalty to the AC it offers. The armor is destroyed if the penalty
+          reduces its AC to 10.</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1783367872455
+          modifiedTime: 1783367890262
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!NwQpeeaMxAC3fRft.v6ZspnPr8G5hApkL.4U4SIb01ypbc6lzv
     folder: null
     sort: 0
     ownership:
@@ -884,29 +977,85 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107551533
+      systemVersion: 6.0.0
+      createdTime: 1781909385190
+      modifiedTime: 1783367948769
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!NwQpeeaMxAC3fRft.v6ZspnPr8G5hApkL'
-  - _id: VcVWWSlfTBeXWh3T
-    name: Split
+  - _id: i3tPruqWyXIVfdiK
+    name: Spider Climb
     type: feat
-    img: icons/creatures/slimes/slime-movement-pseudopod-green.webp
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
     system:
       description:
         value: >-
-          <p>When a pudding that is Medium or larger is subjected to lightning
-          or <em>slashing damage</em>, it splits into two new puddings if it has
-          at least 10 Hit Points. Each new pudding has Hit Points equal to half
-          the original pudding's, rounded down. New puddings are one size
-          smaller than the original pudding.</p>
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including upside down on ceilings, without needing to make
+          an ability check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: spider-climb
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 150000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.0Oap13hi3sDNwVZn
+      duplicateSource: Item.lDSSf3aXXmZYJsk1
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781897547443
+      modifiedTime: 1781897547443
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!NwQpeeaMxAC3fRft.i3tPruqWyXIVfdiK'
+  - name: Split
+    type: feat
+    img: icons/creatures/slimes/slime-face-skull-green.webp
+    system:
+      description:
+        value: >-
+          <p>When a [[lookup @name lowercase]]{monster} that is Medium or larger
+          is subjected to lightning or <em>slashing damage</em>, it splits into
+          two new [[lookup @name lowercase]]{monster}s if it has at least 10 Hit
+          Points. Each new pudding has Hit Points equal to half the original
+          [[lookup @name lowercase]]{monster}'s, rounded down. New [[lookup
+          @name lowercase]]{monster}s are one size smaller than the original
+          [[lookup @name lowercase]]{monster}.</p>
         chat: >-
-          <p>The pudding splits into two new puddings. New puddings are one size
-          smaller than the original pudding.</p>
+          <p>The [[lookup @name]]{monster} splits into two new [[lookup
+          @name]]{monster}s. New [[lookup @name]]{monster}s are one size smaller
+          than the original [[lookup @name]]{monster}.</p>
       source:
         custom: ''
         book: ''
@@ -919,69 +1068,288 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        lnQUX5t8FkfwBXF0:
+          type: summon
+          name: Split in Medium Puddings
+          _id: lnQUX5t8FkfwBXF0
+          img: ''
+          sort: 200000
           activation:
             type: reaction
-            value: 1
-            condition: ''
             override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} is subjected to
+              lightning or slashing damage while it is Medium or larger.
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
+            value: ''
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
-          effects: []
+          effects:
+            - _id: WZn6kAQJRm0Cm6i9
+              level:
+                min: null
+                max: null
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
+              type: self
               special: ''
-            prompt: true
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes:
+            - med
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '2'
+              name: ''
+              _id: MRP4kRQNMysSkdQG
+              uuid: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
+        Lqw20oXln5ANuHDx:
+          type: summon
+          name: Split into Small Puddings
+          _id: Lqw20oXln5ANuHDx
+          img: ''
+          sort: 300000
+          activation:
+            type: reaction
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} is subjected to
+              lightning or slashing damage while it is Medium or larger.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: QTexJH8jSdxaIXP2
+              level:
+                min: null
+                max: null
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes:
+            - sm
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '2'
+              name: ''
+              _id: UVi85Ihz8eGGJkIz
+              uuid: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
       enchant: {}
       prerequisites:
         level: null
+        items: []
+        repeatable: false
       identifier: split
-    effects: []
+      advancement: {}
+      crewed: false
+    effects:
+      - name: Split Medium Puddings
+        img: icons/creatures/slimes/slime-face-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.VcVWWSlfTBeXWh3T
+        transfer: false
+        _id: WZn6kAQJRm0Cm6i9
+        type: base
+        system:
+          changes:
+            - key: system.attributes.hp.max
+              type: multiply
+              value: 0.5
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been created by a Large
+          @UUID[Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft]{Black Pudding}
+          splitting into two.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781899778453
+          modifiedTime: 1781899778453
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!NwQpeeaMxAC3fRft.jF9rqlnLBWRoCnpK.WZn6kAQJRm0Cm6i9
+      - name: Split Small Puddings
+        img: icons/creatures/slimes/slime-face-skull-green.webp
+        origin: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.VcVWWSlfTBeXWh3T
+        transfer: false
+        type: base
+        system:
+          changes:
+            - key: system.attributes.hp.max
+              type: multiply
+              value: 0.25
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: split
+              phase: initial
+              priority: null
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: >-
+          <p>You have been created by a Medium
+          @UUID[Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft]{Black Pudding}
+          splitting into two.</p>
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 0
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781899778453
+          modifiedTime: 1781899778453
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _id: QTexJH8jSdxaIXP2
+        _key: >-
+          !actors.items.effects!NwQpeeaMxAC3fRft.jF9rqlnLBWRoCnpK.QTexJH8jSdxaIXP2
     folder: null
     sort: 0
     ownership:
@@ -989,15 +1357,16 @@ items:
     flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NzHwrEuKnKxZ4NTP
-      duplicateSource: null
-      coreVersion: '13.344'
+      duplicateSource: Compendium.dnd5e.monsters.Actor.NwQpeeaMxAC3fRft.Item.VcVWWSlfTBeXWh3T
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676723
+      systemVersion: 6.0.0
+      createdTime: 1781899778453
+      modifiedTime: 1781900107914
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    _key: '!actors.items!NwQpeeaMxAC3fRft.VcVWWSlfTBeXWh3T'
+    _id: jF9rqlnLBWRoCnpK
+    _key: '!actors.items!NwQpeeaMxAC3fRft.jF9rqlnLBWRoCnpK'
 effects: []
 folder: spz6Dws3tO6Qs5Mh
 sort: 0
@@ -1006,11 +1375,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1726171227615
-  modifiedTime: 1726171444054
+  modifiedTime: 1781899273560
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!actors!NwQpeeaMxAC3fRft'

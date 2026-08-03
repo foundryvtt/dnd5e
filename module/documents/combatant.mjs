@@ -59,13 +59,25 @@ export default class Combatant5e extends Combatant {
   /* -------------------------------------------- */
 
   /**
-   * Key for the group to which this combatant should belong, or `null` if it can't be grouped.
+   * Key for the group to which this combatant should belong in the encounter tracker, or `null` if it can't be grouped.
    * @returns {string|null}
    */
   getGroupingKey() {
     if ( this.group ) return this.group.id;
-    if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null) ) return null;
-    return `${Math.floor(this.initiative).paddedString(4)}:${this.token.disposition}:${this.token.baseActor.id}`;
+    if ( (this.initiative === null) || !dnd5e.settings.initiativeGroupCombatants ) return null;
+    return this.getUniqueKey(Math.floor(this.initiative).paddedString(4));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key for the group to which this combatant should belong when rolling initiative, or `null` if it can't be grouped.
+   * @returns {string|null}
+   */
+  getInitiativeGroupingKey() {
+    if ( this.group ) return this.group.id;
+    if ( !dnd5e.settings.initiativeGroupRoll ) return null;
+    return this.getUniqueKey(this.getInitiativeRoll().formula);
   }
 
   /* -------------------------------------------- */
@@ -74,6 +86,18 @@ export default class Combatant5e extends Combatant {
   getInitiativeRoll(formula) {
     if ( !this.actor ) return new CONFIG.Dice.D20Roll(formula ?? "1d20", {});
     return this.actor.getInitiativeRoll();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key identifying a unique set of actors in the combat, optionally prefixed by a grouping discriminator.
+   * @param {string} [prefix]  Discriminator placed at the head of the key.
+   * @returns {string|null}
+   */
+  getUniqueKey(prefix) {
+    if ( this.token?.actorLink || !this.token?.baseActor ) return null;
+    return `${prefix === undefined ? "" : `${prefix}:`}${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
   /* -------------------------------------------- */
@@ -96,11 +120,10 @@ export default class Combatant5e extends Combatant {
     const results = { actor: {}, delete: [], item: [], rolls: [] };
     await this.actor?.system.recoverCombatUses?.(periods, results);
 
+    const recoveryPeriods = new Map(periods.map(p => [p, 1]));
     for ( const item of this.actor?.items ?? [] ) {
-      if ( (item.dependentOrigin?.active === false)
-        || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
-      const rollData = item.getRollData();
-      const { updates, rolls, destroy } = await item.system.recoverUses(Array.from(periods), rollData);
+      if ( item.isHidden || (foundry.utils.getType(item.system.recoverUses) !== "function") ) continue;
+      const { updates, rolls, destroy } = await item.system.recoverUses(recoveryPeriods);
       if ( destroy ) {
         results.delete.push(item.id);
       } else if ( !foundry.utils.isEmpty(updates) ) {
@@ -125,9 +148,7 @@ export default class Combatant5e extends Combatant {
 
     const deltas = ActorDeltasField.getDeltas(this.actor, results);
 
-    if ( !foundry.utils.isEmpty(results.actor) ) await this.actor.update(results.actor);
-    if ( results.delete.length ) await this.actor.deleteEmbeddedDocuments("Item", results.delete);
-    if ( results.item.length ) await this.actor.updateEmbeddedDocuments("Item", results.item);
+    await this.actor.performBulkUpdate(results);
 
     const message = await this.createTurnMessage({ deltas, periods, rolls: results.rolls });
 

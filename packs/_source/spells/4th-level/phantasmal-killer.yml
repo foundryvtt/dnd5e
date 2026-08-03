@@ -34,12 +34,15 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -81,6 +84,34 @@ system:
       effects:
         - _id: J6OIwL9rmPzNN307
           onSave: false
+          level:
+            min: 4
+            max: 4
+        - _id: R5MdvUZbqqCgBL6t
+          onSave: false
+          level:
+            min: 5
+            max: 5
+        - _id: fm26pCWmSEBcWEBe
+          onSave: false
+          level:
+            min: 6
+            max: 6
+        - _id: 3oeCmX26bWOj5E8C
+          onSave: false
+          level:
+            min: 7
+            max: 7
+        - _id: LNGvFzuugMXHIx7o
+          onSave: false
+          level:
+            min: 8
+            max: 8
+        - _id: kMYQQYGLWCoTKpPJ
+          onSave: false
+          level:
+            min: 9
+            max: 9
       range:
         override: false
       target:
@@ -111,61 +142,352 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    1UPMEailYa6ppMg6:
+      type: save
+      name: End of Turn Save
+      _id: 1UPMEailYa6ppMg6
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: true
+        condition: When a creature affected by this spell ends their turn.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: spec
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: none
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - psychic
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability:
+          - wis
+        dc:
+          calculation: spellcasting
+          formula: ''
+        visible: true
+        bonus: ''
   identifier: phantasmal-killer
 sort: 0
 flags: {}
-img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+img: icons/magic/control/fear-fright-mask-yellow.webp
 effects:
-  - name: Phantasmal Killer
+  - name: 'Phantasmal Killer: 4th Level'
     origin: Compendium.dnd5e.spells.Item.BYNvBJzHcF5VJhXw
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: J6OIwL9rmPzNN307
-    changes: []
     description: >-
-      <p>The target becomes Frightened for the Duration. At the end of each of
-      the target's turns before the spell ends, the target must succeed on a
-      Wisdom saving throw or take psychic damage. On a successful save, the
+      <p>You are &amp;reference[frightened apply=false] for the duration. A the
+      end of each of your turns before the spell ends, you must succeed on a
+      Wisdom saving throw or take 4d10 psychic damage. On a successful save, the
       spell ends.</p>
     transfer: false
     statuses:
       - frightened
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781375128372
+      modifiedTime: 1781375135692
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+    img: icons/magic/control/fear-fright-mask-yellow.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!BYNvBJzHcF5VJhXw.J6OIwL9rmPzNN307'
+  - name: 'Phantasmal Killer: 5th Level'
+    origin: Compendium.dnd5e.spells.Item.BYNvBJzHcF5VJhXw
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] for the duration. A the
+      end of each of your turns before the spell ends, you must succeed on a
+      Wisdom saving throw or take 5d10 psychic damage. On a successful save, the
+      spell ends.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781375139114
+      modifiedTime: 1781375149956
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/fear-fright-mask-yellow.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: R5MdvUZbqqCgBL6t
+    _key: '!items.effects!BYNvBJzHcF5VJhXw.R5MdvUZbqqCgBL6t'
+  - name: 'Phantasmal Killer: 6th Level'
+    origin: Compendium.dnd5e.spells.Item.BYNvBJzHcF5VJhXw
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] for the duration. A the
+      end of each of your turns before the spell ends, you must succeed on a
+      Wisdom saving throw or take 6d10 psychic damage. On a successful save, the
+      spell ends.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781375140175
+      modifiedTime: 1781375158314
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/fear-fright-mask-yellow.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: fm26pCWmSEBcWEBe
+    _key: '!items.effects!BYNvBJzHcF5VJhXw.fm26pCWmSEBcWEBe'
+  - name: 'Phantasmal Killer: 7th Level'
+    origin: Compendium.dnd5e.spells.Item.BYNvBJzHcF5VJhXw
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] for the duration. A the
+      end of each of your turns before the spell ends, you must succeed on a
+      Wisdom saving throw or take 7d10 psychic damage. On a successful save, the
+      spell ends.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781375140921
+      modifiedTime: 1781375171767
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/fear-fright-mask-yellow.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: 3oeCmX26bWOj5E8C
+    _key: '!items.effects!BYNvBJzHcF5VJhXw.3oeCmX26bWOj5E8C'
+  - name: 'Phantasmal Killer: 8th Level'
+    origin: Compendium.dnd5e.spells.Item.BYNvBJzHcF5VJhXw
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] for the duration. A the
+      end of each of your turns before the spell ends, you must succeed on a
+      Wisdom saving throw or take 8d10 psychic damage. On a successful save, the
+      spell ends.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781375141731
+      modifiedTime: 1781375180921
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/fear-fright-mask-yellow.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: LNGvFzuugMXHIx7o
+    _key: '!items.effects!BYNvBJzHcF5VJhXw.LNGvFzuugMXHIx7o'
+  - name: 'Phantasmal Killer: 9th Level'
+    origin: Compendium.dnd5e.spells.Item.BYNvBJzHcF5VJhXw
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    disabled: true
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] for the duration. A the
+      end of each of your turns before the spell ends, you must succeed on a
+      Wisdom saving throw or take 9d10 psychic damage. On a successful save, the
+      spell ends.</p>
+    transfer: false
+    statuses:
+      - frightened
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781375142486
+      modifiedTime: 1781375187407
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/magic/control/fear-fright-mask-yellow.webp
+    type: base
+    system:
+      changes: []
+    sort: 0
+    showIcon: 2
+    start: null
+    folder: null
+    _id: kMYQQYGLWCoTKpPJ
+    _key: '!items.effects!BYNvBJzHcF5VJhXw.kMYQQYGLWCoTKpPJ'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037350639
-  modifiedTime: 1725992718018
+  modifiedTime: 1781375219651
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!BYNvBJzHcF5VJhXw'

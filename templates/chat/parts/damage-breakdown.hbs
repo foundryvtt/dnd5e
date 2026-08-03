@@ -1,0 +1,30 @@
+<div class="dice-tooltip-collapser">
+    <div class="dice-tooltip">
+        {{#each parts}}
+        <section class="tooltip-part">
+            <div class="dice">
+                {{#if icon}}
+                <span class="part-method" data-tooltip aria-label="{{ localize method }}">
+                    {{{ icon }}}
+                </span>
+                {{/if}}
+                <ol class="dice-rolls">
+                    {{#each dice}}
+                    <li class="roll {{ classes }}">{{{ result }}}</li>
+                    {{/each}}
+                    {{#if constant}}
+                    <li class="constant">{{ dnd5e-formatModifier constant }}</li>
+                    {{/if}}
+                </ol>
+                <div class="total">
+                    {{#if config}}
+                    <img src="{{ config.icon }}" alt="{{ config.label }}">
+                    {{/if}}
+                    <span class="label">{{ label }}</span>
+                    <span class="value">{{ total }}</span>
+                </div>
+            </div>
+        </section>
+        {{/each}}
+    </div>
+</div>

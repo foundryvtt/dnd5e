@@ -43,12 +43,12 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
       critical: {
         default: defaultCritical,
         icon: '<i class="fa-solid fa-bomb" inert></i>',
-        label: game.i18n.localize("DND5E.CriticalHit")
+        label: _loc("DND5E.CriticalHit")
       },
       normal: {
         default: !defaultCritical,
         icon: '<i class="fa-solid fa-dice" inert></i>',
-        label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll")
+        label: _loc(allowCritical ? "DND5E.Normal" : "DND5E.Roll")
       }
     };
     if ( !allowCritical ) delete context.buttons.critical;
@@ -78,21 +78,20 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
 
   /** @inheritDoc */
   _buildConfig(config, formData, index) {
-    config = super._buildConfig(config, formData, index);
     const damageType = formData?.get(`roll.${index}.damageType`);
     if ( damageType ) config.options.type = damageType;
+    config = super._buildConfig(config, formData, index);
     return config;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  _finalizeRolls(action) {
-    this.config.isCritical = action === "critical";
-    return this.rolls.map(roll => {
-      roll.options.isCritical = this.config.isCritical;
-      roll.configureDamage({ critical: this.config.critical });
-      return roll;
-    });
+  _finalizeConfig(config, action) {
+    config.isCritical = action === "critical";
+    for ( const roll of config.rolls ?? [] ) {
+      roll.options ??= {};
+      roll.options.isCritical = config.isCritical;
+    }
   }
 }

@@ -449,9 +449,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -466,7 +463,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -486,30 +483,33 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: BqG5guVa93LaOAn1
     name: Shapechanger
     type: feat
-    img: icons/magic/control/silhouette-hold-change-blue.webp
+    img: icons/magic/nature/symbol-moon-stars-white.webp
     system:
       description:
         value: >-
-          <p>If the vampire isn't in sun light or running water, it can use its
-          action to polymorph into a Tiny bat or a Medium cloud of mist, or back
-          into its true form.</p><p>While in bat form, the vampire can't speak,
-          its walking speed is 5 feet, and it has a flying speed of 30 feet. Its
-          statistics, other than its size and speed, are unchanged. Anything it
-          is wearing transforms with it, but nothing it is carrying does. It
-          reverts to its true form if it dies.</p><p>While in mist form, the
-          vampire can't take any actions, speak, or manipulate objects. It is
-          weightless, has a flying speed of 20 feet, can hover, and can enter a
-          hostile creature's space and stop there. In addition, if air can pass
-          through a space, the mist can do so without squeezing, and it can't
-          pass through water. It has advantage on Strength, Dexterity, and
-          Constitution saving throws, and it is immune to all nonmagical damage,
-          except the damage it takes from sunlight.</p>
+          <p>If the [[lookup @name lowercase]]{monster} isn't in sun light or
+          running water, it can use its action to polymorph into a Tiny bat or a
+          Medium cloud of mist, or back into its true form.</p><p>While in bat
+          form, the [[lookup @name lowercase]]{monster} can't speak, its walking
+          speed is 5 feet, and it has a flying speed of 30 feet. Its statistics,
+          other than its size and speed, are unchanged. Anything it is wearing
+          transforms with it, but nothing it is carrying does. It reverts to its
+          true form if it dies.</p><p>While in mist form, the [[lookup @name
+          lowercase]]{monster} can't take any actions, speak, or manipulate
+          objects. It is weightless, has a flying speed of 20 feet, can hover,
+          and can enter a hostile creature's space and stop there. In addition,
+          if air can pass through a space, the mist can do so without
+          &amp;reference[squeezing]{Squeezing}, and it can't pass through water.
+          It has advantage on Strength, Dexterity, and Constitution saving
+          throws, and it is immune to all nonmagical damage, except the damage
+          it takes from sunlight.</p>
         chat: >-
-          <p>The vampire can use its action to <strong>polymorph</strong> or
+          <p>The [[lookup @name]]{monster} can use its action to polymorph or
           return to its true form.</p>
       source:
         custom: ''
@@ -523,16 +523,252 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
-      activities: {}
+      properties:
+        - trait
+      activities:
+        xaduSF3C6EyFtlvZ:
+          type: transform
+          name: ''
+          _id: xaduSF3C6EyFtlvZ
+          img: ''
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: ''
+          behaviors: []
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: eAhdbv25VWIb2xHQ
+              uuid: null
+              level: {}
+            - _id: figVl65iYV63Yojl
+              uuid: null
+              level: {}
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          profiles: []
+          settings: null
+          transform:
+            customize: false
+            formless: true
+            mode: form
+            preset: ''
       enchant: {}
       prerequisites:
         level: null
       identifier: shapechanger
-    effects: []
+    effects:
+      - name: Cloud of Mist
+        img: icons/magic/air/fog-gas-smoke-swirling-gray.webp
+        origin: Compendium.dnd5e.monsters.Actor.DDO9lDCDtNHkfShP.Item.BqG5guVa93LaOAn1
+        transfer: false
+        _id: eAhdbv25VWIb2xHQ
+        type: base
+        system:
+          changes:
+            - key: items.hidden
+              type: add
+              value: multiattack
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: unarmed-strike
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: bite
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.walk
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.fly
+              type: upgrade
+              value: 20
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.hover
+              type: override
+              value: true
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.burrow
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.swim
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.climb
+              type: override
+              value: 0
+              phase: initial
+              priority: null
+            - key: system.abilities.str.save.roll.mode
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+            - key: system.abilities.con.save.roll.mode
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+            - key: system.abilities.dex.save.roll.mode
+              type: add
+              value: 1
+              phase: initial
+              priority: null
+            - key: token.texture.src
+              type: override
+              value: systems/dnd5e/tokens/elemental/InvisibleStalker.webp
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - ethereal
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1782950433514
+          modifiedTime: 1782951795459
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!DDO9lDCDtNHkfShP.BqG5guVa93LaOAn1.eAhdbv25VWIb2xHQ
+      - name: Bat
+        img: icons/creatures/mammals/bat-movement-flying-purple.webp
+        origin: Compendium.dnd5e.monsters.Actor.DDO9lDCDtNHkfShP.Item.BqG5guVa93LaOAn1
+        transfer: false
+        _id: figVl65iYV63Yojl
+        type: base
+        system:
+          changes:
+            - key: system.attributes.movement.walk
+              type: downgrade
+              value: 5
+              phase: initial
+              priority: null
+            - key: system.attributes.movement.fly
+              type: upgrade
+              value: 30
+              phase: initial
+              priority: null
+            - key: system.traits.size
+              type: override
+              value: tiny
+              phase: initial
+              priority: null
+            - key: token.texture.src
+              type: override
+              value: systems/dnd5e/tokens/beast/Bat.webp
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: multiattack
+              phase: initial
+              priority: null
+            - key: items.hidden
+              type: add
+              value: unarmed-strike
+              phase: initial
+              priority: null
+          magical: false
+          rider:
+            statuses: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: ''
+        tint: '#ffffff'
+        statuses: []
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags: {}
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1782950454816
+          modifiedTime: 1782951731397
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!DDO9lDCDtNHkfShP.BqG5guVa93LaOAn1.figVl65iYV63Yojl
     folder: null
     sort: 0
     ownership:
@@ -541,137 +777,34 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828539560
+      systemVersion: 6.0.0
+      createdTime: 1782950420440
+      modifiedTime: 1783368852306
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.BqG5guVa93LaOAn1'
-  - _id: JaohF91Eok1kSEIG
-    name: Legendary Resistance
-    type: feat
-    img: icons/equipment/shield/kite-wooden-oak-glow.webp
-    system:
-      description:
-        value: >-
-          <p>If the vampire fails a saving throw, it can choose to succeed
-          instead.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: special
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legres.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-resistance
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!DDO9lDCDtNHkfShP.JaohF91Eok1kSEIG'
   - _id: pVlKFunmE2qxO0pe
     name: Misty Escape
     type: feat
-    img: icons/magic/air/fog-gas-smoke-swirling-gray.webp
+    img: icons/magic/air/air-wave-gust-blue.webp
     system:
       description:
         value: >-
           <p>When it drops to 0 hit points outside its resting place, the
-          vampire transforms into a cloud of mist (as in the Shapechanger trait)
-          instead of falling unconscious, provided that it isn't in sunlight or
-          running water. If it can't transform, it is destroyed.</p><p>While it
-          has 0 hit points in mist form, it can't revert to its vampire form,
+          [[lookup @name lowercase]]{monster} transforms into a cloud of mist
+          (as in the
+          @UUID[Compendium.dnd5e.monsters.Actor.DDO9lDCDtNHkfShP.Item.BqG5guVa93LaOAn1]{Shapechanger}
+          trait) instead of falling &amp;reference[unconscious apply=false],
+          provided that it isn't in sunlight or running water. If it can't
+          transform, it is destroyed.</p><p>While it has 0 hit points in mist
+          form, it can't revert to its [[lookup @name lowercase]]{monster} form,
           and it must reach its resting place within 2 hours or be destroyed.
-          Once in its resting place, it reverts to its vampire form. It is then
-          paralyzed until it regains at least 1 hit point. After spending 1 hour
-          in its resting place with 0 hit points, it regains 1 hit point.</p>
+          Once in its resting place, it reverts to its [[lookup @name
+          lowercase]]{monster} form. It is then &amp;reference[paralyzed] until
+          it regains at least 1 hit point. After spending 1 hour in its resting
+          place with 0 hit points, it regains 1 hit point.</p>
         chat: >-
           <p>A slain vampire transforms into a cloud of mist (as in the
           Shapechanger trait) instead of falling unconscious.</p>
@@ -687,10 +820,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -705,28 +839,26 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hMC7XCkDbzVMZ0QG
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828551461
+      systemVersion: 6.0.0
+      createdTime: 1781831137810
+      modifiedTime: 1781831182069
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.pVlKFunmE2qxO0pe'
-  - _id: BDnluJG7T7FfBjsQ
-    name: Regeneration
+  - _id: siO3h9XOkgPVi78F
+    name: Multiattack (Vampire Form Only)
     type: feat
-    img: icons/skills/wounds/anatomy-organ-heart-red.webp
+    img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
         value: >-
-          <p>The vampire regains 20 hit points at the start of its turn if it
-          has at least 1 hit point and isn't in sunlight or running water. If
-          the vampire takes radiant damage or damage from holy water, this trait
-          doesn't function at the start of the vampire's next turn.</p>
-        chat: >-
-          <p>The vampire regains <strong>20 hit points</strong> at the start of
-          its turn.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two attacks, only one
+          of which can be a
+          @UUID[Compendium.dnd5e.monsters.Actor.DDO9lDCDtNHkfShP.Item.uqHuj7Pjf2sjny21]{bite}
+          attack.</p>
+        chat: ''
       source:
         custom: ''
         book: ''
@@ -739,18 +871,16 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties:
-        - trait
+      properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: heal
+        pb0CfcpBM0SpwQ1O:
+          type: utility
           activation:
-            type: turnStart
-            value: null
+            type: action
+            value: 1
             condition: ''
             override: false
           consumption:
@@ -761,10 +891,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -780,228 +911,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
-            affects:
-              count: ''
-              type: self
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          healing:
-            number: null
-            denomination: null
-            bonus: ''
-            types:
-              - healing
-            custom:
-              enabled: true
-              formula: '20'
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
-          sort: 0
-          name: ''
-          img: ''
-          visibility:
-            level:
-              min: null
-              max: null
-            identifier: ''
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regeneration
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828569480
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!DDO9lDCDtNHkfShP.BDnluJG7T7FfBjsQ'
-  - _id: jc3NboVcwuEiXOYn
-    name: Spider Climb
-    type: feat
-    img: icons/creatures/invertebrates/spider-beetle-runed-green.webp
-    system:
-      description:
-        value: >-
-          <p>The vampire can climb difficult surfaces, including upside down on
-          ceilings, without needing to make an ability check.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: spider-climb
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    _key: '!actors.items!DDO9lDCDtNHkfShP.jc3NboVcwuEiXOYn'
-  - _id: RLsKLdfdmHajHSwD
-    name: Vampire Weaknesses
-    type: feat
-    img: icons/magic/control/encase-creature-monster-hold.webp
-    system:
-      description:
-        value: >-
-          <p>The vampire has the following flaws:</p><p><em>Forbiddance</em>.
-          The vampire can't enter a residence without an invitation from one of
-          the occupants.</p><p><em>Harmed by Running Water</em>. The vampire
-          takes 20 acid damage if it ends its turn in running
-          water.</p><p><em>Stake to the Heart</em>. If a piercing weapon made of
-          wood is driven into the vampire's heart while the vampire is
-          incapacitated in its resting place, the vampire is paralyzed until the
-          stake is removed.</p><p><em>Sunlight Hypersensitivity</em>. The
-          vampire takes 20 <em>radiant damage</em> when it starts its turn in
-          sunlight. While in sunlight, it has disadvantage on attack rolls and
-          ability checks.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: vampire-weaknesses
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.Ervkb8H99e2Beiae
-      duplicateSource: null
-      coreVersion: '13.351'
-      systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828586712
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!DDO9lDCDtNHkfShP.RLsKLdfdmHajHSwD'
-  - _id: siO3h9XOkgPVi78F
-    name: Multiattack (Vampire Form Only)
-    type: feat
-    img: icons/skills/melee/blade-tips-triple-steel.webp
-    system:
-      description:
-        value: >-
-          <p>The vampire makes two attacks, only one of which can be a bite
-          attack.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1018,11 +929,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: pb0CfcpBM0SpwQ1O
       enchant: {}
       prerequisites:
         level: null
-      identifier: multiattack-vampire-form-only
+      identifier: multiattack
     effects: []
     folder: null
     sort: 0
@@ -1032,12 +951,12 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781832366565
+      modifiedTime: 1783368987575
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.siO3h9XOkgPVi78F'
   - _id: jYBYvv9EF1UnOvqZ
@@ -1047,9 +966,13 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>Instead of
-          dealing damage, the vampire can grapple the target (escape DC 18).</p>
-        chat: <p>The Vampire attacks with its Unarmed Strike.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>Instead of
+          dealing damage, the [[lookup @name lowercase]}{monster} can
+          &amp;reference[grapple] the target (escape DC 18).</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]]. Instead of dealing damage, the [[lookup @name]]{monster}
+          can &amp;reference[grapple] the target.</p>
       source:
         custom: ''
         book: ''
@@ -1112,7 +1035,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1121,8 +1044,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        zmaEvRqEq64zd9Bx:
           type: attack
           activation:
             type: action
@@ -1137,13 +1059,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: v9TyI7sPX0W8vaOA
+              level: {}
           range:
             value: '5'
             units: ft
@@ -1157,7 +1082,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1170,25 +1096,76 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: zmaEvRqEq64zd9Bx
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: unarmed-strike-vampire-form-only
-    effects: []
+      identifier: unarmed-strike
+      mastery: ''
+    effects:
+      - name: Grappled by Unarmed Strike
+        img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.DDO9lDCDtNHkfShP.Item.jYBYvv9EF1UnOvqZ
+        transfer: false
+        _id: v9TyI7sPX0W8vaOA
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
+        description: <p>You are &amp;reference[grappled apply=false] (escape DC 18).</p>
+        tint: '#ffffff'
+        statuses:
+          - grappled
+        showIcon: 2
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781832302817
+          modifiedTime: 1781832329026
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!DDO9lDCDtNHkfShP.jYBYvv9EF1UnOvqZ.v9TyI7sPX0W8vaOA
     folder: null
     sort: 0
     ownership:
@@ -1197,30 +1174,34 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107550823
+      systemVersion: 6.0.0
+      createdTime: 1781832281890
+      modifiedTime: 1781832392039
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.jYBYvv9EF1UnOvqZ'
   - _id: uqHuj7Pjf2sjny21
     name: Bite (Bat or Vampire Form Only)
     type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/magic/death/mouth-bite-fangs-vampire.webp
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack: </em>[[/attack]], reach 5 ft., one willing
-          creature, or a creature that is grappled by the vampire,
-          incapacitated, or restrained. [[/damage extended]].</p><p>The target's
-          hit point maximum is reduced by an amount equal to the <em>necrotic
-          damage</em> taken, and the vampire regains hit points equal to that
-          amount. The reduction lasts until the target finishes a long rest. The
-          target dies if this effect reduces its hit point maximum to 0. A
-          humanoid slain in this way and then buried in the ground rises the
-          following night as a vampire spawn under the vampire's control.</p>
+          <p><em>Melee Weapon Attack:</em> [[/attack]], 5 ft., one willing
+          creature, or a creature that is &amp;reference[grappled apply=false]
+          by the [[lookup @name lowercase]]{monster},
+          &amp;reference[incapacitated apply=false], or
+          &amp;reference[restrained apply=false]. [[/damage
+          extended]].</p><p>The target's hit point maximum is reduced by an
+          amount equal to the necrotic damage taken, and the [[lookup @name
+          lowercase]]{monster} regains hit points equal to that amount. The
+          reduction lasts until the target finishes a long rest. The target dies
+          if this effect reduces its hit point maximum to 0. A humanoid slain in
+          this way and then buried in the ground rises the following night as a
+          @UUID[Compendium.dnd5e.monsters.Actor.zpaZb7I8alY32vWV]{vampire spawn}
+          under the [[lookup @name lowercase]]{monster}'s control.</p>
         chat: <p>The Vampire attacks with its Bite.</p>
       source:
         custom: ''
@@ -1284,7 +1265,7 @@ items:
         dt: null
         conditions: ''
       properties: []
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -1293,8 +1274,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        FGQogOc79BXur5xb:
           type: attack
           activation:
             type: action
@@ -1309,6 +1289,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
@@ -1329,12 +1310,15 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
               choice: false
-              special: ' one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained'
+              special: >-
+                one willing creature, or a creature that is grappled by the
+                vampire, incapacitated, or restrained
             prompt: true
             override: false
           uses:
@@ -1342,14 +1326,14 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
@@ -1359,59 +1343,289 @@ items:
                   enabled: false
                   formula: ''
                 number: 3
-                denomination: '6'
+                denomination: 6
                 bonus: ''
                 types:
                   - necrotic
-          sort: 0
+                scaling:
+                  number: 1
+          sort: 100000
           name: ''
           img: ''
-          appliedEffects: []
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: FGQogOc79BXur5xb
+        gBAOkLKokkHXEVXH:
+          type: damage
+          name: Drain Maximum Hit Points (Target)
+          img: ''
+          sort: 200000
+          activation:
+            type: special
+            override: false
+            condition: When a creature takes necrotic damage from this attack.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>The target's hit point maximum is reduced by an amount equal to
+              the necrotic damage taken. The reduction lasts until the target
+              finishes a long rest. The target dies if this effect reduces its
+              hit point maximum to 0.</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: null
+                denomination: null
+                bonus: '@scaling'
+                types:
+                  - maximum
+                scaling:
+                  number: 1
+          _id: gBAOkLKokkHXEVXH
+        ik3iBqS5tIhTkMN3:
+          type: heal
+          name: Regain Hit Points (Vampire)
+          img: ''
+          sort: 300000
+          activation:
+            type: special
+            override: false
+            condition: When a creature takes necrotic damage from this attack.
+          consumption:
+            scaling:
+              allowed: true
+              max: ''
+            spellSlot: true
+            targets: []
+          description:
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} regains hit points
+              equal to the amount of necrotic damage taken.</p>
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: spec
+            override: true
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          healing:
+            types:
+              - healing
+            custom:
+              enabled: false
+            scaling:
+              number: 1
+              mode: ''
+            number: null
+            denomination: null
+            bonus: '@scaling'
+          _id: ik3iBqS5tIhTkMN3
+        AnVex0SffJQiWgSX:
+          type: summon
+          name: Raise Vampire Spawn
+          img: ''
+          sort: 400000
+          activation:
+            type: special
+            override: false
+            condition: The following night after a humanoid is slain by this attack.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: creature
+              count: '1'
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: true
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: '1'
+              name: ''
+              _id: lEoQRNG58qcnVLK3
+              uuid: Compendium.dnd5e.monsters.Actor.zpaZb7I8alY32vWV
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
+          _id: AnVex0SffJQiWgSX
       attuned: false
       ammunition: {}
       magicalBonus: null
-      identifier: bite-bat-or-vampire-form-only
+      identifier: bite
       mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
+    flags: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745174258292
+      systemVersion: 6.0.0
+      createdTime: 1781832063766
+      modifiedTime: 1783368967204
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.uqHuj7Pjf2sjny21'
   - _id: RHezeN7HzNf2oKYP
     name: Charm
     type: feat
-    img: icons/creatures/eyes/human-single-blue.webp
+    img: icons/magic/life/heart-shadow-red.webp
     system:
       description:
         value: >-
-          <p>The vampire targets one humanoid it can see within 30 ft. of it. If
-          the target can see the vampire, the target must succeed on a DC 17
-          Wisdom saving throw against this magic or be charmed by the vampire.
-          The charmed target regards the vampire as a trusted friend to be
-          heeded and protected. Although the target isn't under the vampire's
-          control, it takes the vampire's requests or actions in the most
-          favorable way it can, and it is a willing target for the vampire's
-          bite attack.</p><p>Each time the vampire or the vampire's companions
-          do anything harmful to the target, it can repeat the saving throw,
-          ending the effect on itself on a success. Otherwise, the effect lasts
-          24 hours or until the vampire is destroyed, is on a different plane of
-          existence than the target, or takes a bonus action to end the
+          <p>The [[lookup @name lowercase]]{monster} targets one humanoid it can
+          see within [[lookup @labels.description.range
+          activity=kzseXOAXwSg10knT]] of it. If the target can see the [[lookup
+          @name lowercase]]{monster}, the target must succeed on a [[/save]]
+          saving throw against this magic or be &amp;reference[charmed] by the
+          [[lookup @name lowercase]]{monster}. The charmed target regards the
+          [[lookup @name lowercase]]{monster} as a trusted friend to be heeded
+          and protected. Although the target isn't under the [[lookup @name
+          lowercase]]{monster}'s control, it takes the [[lookup @name
+          lowercase]]{monster}'s requests or actions in the most favorable way
+          it can, and it is a willing target for the [[lookup @name
+          lowercase]]{monster}'s
+          @UUID[Compendium.dnd5e.monsters.Actor.DDO9lDCDtNHkfShP.Item.uqHuj7Pjf2sjny21]{bite}
+          attack.</p><p>Each time the [[lookup @name lowercase]]{monster} or the
+          [[lookup @name lowercase]]{monster}'s companions do anything harmful
+          to the target, it can repeat the saving throw, ending the effect on
+          itself on a success. Otherwise, the effect lasts 24 hours or until the
+          [[lookup @name lowercase]]{monster} is destroyed, is on a different
+          plane of existence than the target, or takes a bonus action to end the
           effect.</p>
         chat: >-
           <p>The vampire targets one humanoid it can see within 30 ft. of it. If
@@ -1429,13 +1643,13 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        kzseXOAXwSg10knT:
           type: save
           activation:
             type: action
@@ -1450,13 +1664,17 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: '24'
             units: hour
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: ybKYbruo2zldUDBj
+              level: {}
+              onSave: false
           range:
             value: '30'
             units: ft
@@ -1470,7 +1688,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: '1'
               type: creature
@@ -1483,19 +1702,82 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '17'
-          sort: 0
+            visible: true
+            bonus: ''
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: true
+            identifier: ''
+          _id: kzseXOAXwSg10knT
+          name: Charm Creature
       enchant: {}
       prerequisites:
         level: null
       identifier: charm
-    effects: []
+    effects:
+      - name: Vampiric Charm
+        img: icons/magic/life/heart-shadow-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.DDO9lDCDtNHkfShP.Item.RHezeN7HzNf2oKYP
+        transfer: false
+        _id: ybKYbruo2zldUDBj
+        type: base
+        system:
+          changes: []
+        disabled: false
+        start: null
+        duration:
+          value: 24
+          units: hours
+          expiry: turnStart
+          expired: false
+        description: >-
+          <p>You are &amp;reference[charmed apply=false] by the vampire. You
+          regard the vampire as a trusted friend to be heeded and protected.
+          Although you are not under the vampire's control, you take the
+          vampire's requests or actions in the most favorable way you can, and
+          you are a willing target for the vampire's Bite attack.</p><p>Each
+          time the vampire or the vampire's companions do anything harmful to
+          you, you can repeat the saving throw, ending the effect on yourself on
+          a success. Otherwise, the effect lasts for the duration or until the
+          vampire is destroyed, is on a different plane of existence than you,
+          or takes a bonus action to end the effect.</p>
+        tint: '#ffffff'
+        statuses:
+          - charmed
+        showIcon: 1
+        folder: null
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          coreVersion: '14.361'
+          systemId: dnd5e
+          systemVersion: 6.0.0
+          createdTime: 1781832455567
+          modifiedTime: 1781832588491
+          lastModifiedBy: dnd5ebuilder0000
+          compendiumSource: null
+          duplicateSource: null
+          exportSource: null
+        _key: >-
+          !actors.items.effects!DDO9lDCDtNHkfShP.RHezeN7HzNf2oKYP.ybKYbruo2zldUDBj
     folder: null
     sort: 0
     ownership:
@@ -1504,27 +1786,34 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ykoo88OJOdfYH7mH
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828614521
+      systemVersion: 6.0.0
+      createdTime: 1781831991918
+      modifiedTime: 1783369013155
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.RHezeN7HzNf2oKYP'
   - _id: c9z4o0fkxq37v8KY
     name: Children of the Night
     type: feat
-    img: icons/magic/death/skull-trio-badge-purple.webp
+    img: icons/creatures/mammals/bat-movement-flying-purple.webp
     system:
       description:
         value: >-
-          <p>The vampire magically calls 2d4 swarms of bats or rats, provided
-          that the sun isn't up. While outdoors, the vampire can call 3d6 wolves
-          instead. </p><p>The called creatures arrive in 1d4 rounds, acting as
-          allies of the vampire and obeying its spoken commands. The beasts
-          remain for 1 hour, until the vampire dies, or until the vampire
-          dismisses them as a bonus action.</p>
+          <p>The [[lookup @name lowercase]]{monster} magically calls 2d4
+          @UUID[Compendium.dnd5e.monsters.Actor.PcZ0QjIG6bHpffp9]{Swarms of
+          Bats} or
+          @UUID[Compendium.dnd5e.monsters.Actor.8ihbbjkaOFTPbI73]{Rats},
+          provided that the sun isn't up. While outdoors, the [[lookup @name
+          lowercase]]{monster} can call 3d6
+          @UUID[Compendium.dnd5e.monsters.Actor.yawTeS8u2FCfzzZH]{Wolves}
+          instead.</p><p>The called creatures arrive in 1d4 rounds, acting as
+          allies of the [[lookup @name lowercase]]{monster} and obeying its
+          spoken commands. The beasts remain for [[lookup @labels.duration
+          activity=MEMqdbvq8fIu4T89]], until the [[lookup @name
+          lowercase]]{monster} dies, or until the [[lookup @name
+          lowercase]]{monster} dismisses them as a bonus action.</p>
         chat: >-
           <p>The vampire magically calls swarms of bats or rats. While outdoors,
           the vampire can call wolves instead. </p>
@@ -1542,70 +1831,126 @@ items:
             type: recoverAll
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - mgc
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        MEMqdbvq8fIu4T89:
+          type: summon
+          name: Summon Beasts
+          _id: MEMqdbvq8fIu4T89
+          img: ''
+          sort: 100000
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+                scaling: {}
           description:
+            value: >-
+              <p>The [[lookup @name lowercase]]{monster} magically calls 2d4
+              @UUID[Compendium.dnd5e.monsters.Actor.PcZ0QjIG6bHpffp9]{Swarms of
+              Bats} or
+              @UUID[Compendium.dnd5e.monsters.Actor.8ihbbjkaOFTPbI73]{Rats},
+              provided that the sun isn't up. While outdoors, the [[lookup @name
+              lowercase]]{monster} can call 3d6
+              @UUID[Compendium.dnd5e.monsters.Actor.yawTeS8u2FCfzzZH]{Wolves}
+              instead.</p><p>The called creatures arrive in 1d4 rounds, acting
+              as allies of the [[lookup @name lowercase]]{monster} and obeying
+              its spoken commands. The beasts remain for [[lookup
+              @labels.duration activity=MEMqdbvq8fIu4T89]], until the [[lookup
+              @name lowercase]]{monster} dies, or until the [[lookup @name
+              lowercase]]{monster} dismisses them as a bonus
+              action.</p><h4>Rounds until Beasts Arrive: [[1d4]]</h4>
             chatFlavor: ''
           duration:
-            concentration: false
-            value: '1'
             units: hour
-            special: ''
+            concentration: false
             override: false
+            value: '1'
           effects: []
+          flags: {}
           range:
-            units: ''
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              stationary: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          bonuses:
+            ac: ''
+            hd: ''
+            hp: ''
+            attackDamage: ''
+            saveDamage: ''
+            healing: ''
+          creatureSizes: []
+          creatureTypes: []
+          match:
+            attacks: false
+            disposition: false
+            proficiency: false
+            saves: false
+            ability: ''
+          profiles:
+            - count: 2d4
+              name: Swarms of Bats
+              _id: 7buSdyzaIOj5eyRm
+              uuid: Compendium.dnd5e.monsters.Actor.PcZ0QjIG6bHpffp9
+              level:
+                min: null
+                max: null
+              types: []
+            - count: 2d4
+              name: Swarms of Rats
+              _id: kuHqC6m1KOdp9jQj
+              uuid: Compendium.dnd5e.monsters.Actor.8ihbbjkaOFTPbI73
+              level:
+                min: null
+                max: null
+              types: []
+            - count: 3d6
+              name: Wolves
+              _id: 9wtSg4F1y1U9LiJm
+              uuid: Compendium.dnd5e.monsters.Actor.yawTeS8u2FCfzzZH
+              level:
+                min: null
+                max: null
+              types: []
+          summon:
+            prompt: true
+            mode: ''
+          tempHP: ''
       enchant: {}
       prerequisites:
         level: null
@@ -1619,73 +1964,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dm2G9HupHZbZRvNm
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676990
+      systemVersion: 6.0.0
+      createdTime: 1781831211013
+      modifiedTime: 1781831980670
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.c9z4o0fkxq37v8KY'
-  - _id: rQOFEdWpVwJWS2U4
-    name: Legendary Actions
-    type: feat
-    img: icons/magic/light/hand-sparks-glow-yellow.webp
-    system:
-      description:
-        value: >-
-          <p>The vampire can take 3 legendary actions. Only one legendary action
-          option can be used at a time and only at the end of another creature's
-          turn. The vampire regains spent legendary actions at the start of its
-          turn.</p>
-        chat: <p>The vampire can take 3 legendary actions.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: legendary-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676990
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!DDO9lDCDtNHkfShP.rQOFEdWpVwJWS2U4'
   - _id: o4v4mHxP82HTbIOX
     name: Move
     type: feat
-    img: icons/skills/movement/feet-winged-boots-brown.webp
+    img: icons/skills/movement/feet-winged-boots-glowing-yellow.webp
     system:
       description:
         value: >-
-          <p>The vampire moves up to its speed without provoking opportunity
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} moves up to its speed
+          without provoking &amp;reference[opportunity attacks].</p>
         chat: ''
       source:
         custom: ''
@@ -1704,8 +1999,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Ysznhkr9oI1Omv7o:
           type: utility
           activation:
             type: legendary
@@ -1713,23 +2007,18 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1746,10 +2035,11 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
-              type: ''
+              type: self
               choice: false
               special: ''
             prompt: true
@@ -1763,7 +2053,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: Ysznhkr9oI1Omv7o
+          name: Reposition
       enchant: {}
       prerequisites:
         level: null
@@ -1777,23 +2079,23 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781832603126
+      modifiedTime: 1781911033751
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.o4v4mHxP82HTbIOX'
   - _id: rEmbKJQ6mpvnUPOO
     name: Unarmed Strike
     type: feat
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    img: icons/skills/melee/hand-grip-staff-yellow-brown.webp
     system:
       description:
         value: >-
-          <p>The vampire makes one [[/item .jYBYvv9EF1UnOvqZ]]{unarmed
-          strike}.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes one [[/item
+          .jYBYvv9EF1UnOvqZ]]{unarmed strike}.</p>
         chat: ''
       source:
         custom: ''
@@ -1812,8 +2114,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        sk0ZwLBldThMcfPN:
           type: utility
           activation:
             type: legendary
@@ -1821,28 +2122,23 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1853,7 +2149,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1870,7 +2167,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          name: Strike
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: sk0ZwLBldThMcfPN
       enchant: {}
       prerequisites:
         level: null
@@ -1884,21 +2193,23 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.GsuvwoekKZatfKwF
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828636959
+      systemVersion: 6.0.0
+      createdTime: 1781832638607
+      modifiedTime: 1783369002959
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.rEmbKJQ6mpvnUPOO'
   - _id: pW4iNTQphTJ3litv
     name: Bite
     type: feat
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
+    img: icons/magic/death/mouth-teeth-fangs-vampire.webp
     system:
       description:
-        value: <p>The vampire makes a [[/item .uqHuj7Pjf2sjny21]]{bite} attack.</p>
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} makes a [[/item
+          .uqHuj7Pjf2sjny21]]{bite} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -1917,8 +2228,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        7e7JMHdQoduWIiuN:
           type: utility
           activation:
             type: legendary
@@ -1926,28 +2236,23 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1958,7 +2263,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -1975,7 +2281,19 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          name: Strike
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 7e7JMHdQoduWIiuN
       enchant: {}
       prerequisites:
         level: null
@@ -1989,14 +2307,579 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 5.2.3
-      createdTime: null
-      modifiedTime: 1765828649318
+      systemVersion: 6.0.0
+      createdTime: 1781832669059
+      modifiedTime: 1783368995395
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.pW4iNTQphTJ3litv'
+  - _id: p676MFyJkjg4hmMW
+    name: Legendary Resistance
+    type: feat
+    img: icons/equipment/shield/targe-steel-blue.webp
+    system:
+      description:
+        value: >-
+          <p>If the [[lookup @name lowercase]]{monster} fails a saving throw, it
+          can choose to succeed instead.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: special
+            value: null
+            condition: When the [[lookup @name lowercase]]{monster} fails a saving throw.
+            override: false
+          consumption:
+            targets:
+              - type: attribute
+                value: '1'
+                target: resources.legres.value
+                scaling: {}
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+          name: Persevere
+          img: ''
+          flags: {}
+          visibility:
+            identifier: ''
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-resistance
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 125000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.6gjpG1ezpMNyJDGc
+      duplicateSource: Item.MwYDaI9opLjPGaPA
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781831054437
+      modifiedTime: 1781831054437
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!DDO9lDCDtNHkfShP.p676MFyJkjg4hmMW'
+  - _id: pUHIuImn1FbYiry6
+    name: Legendary Actions
+    type: feat
+    img: icons/skills/melee/weapons-crossed-swords-teal.webp
+    system:
+      description:
+        value: <p>[[lookup @resources.legact.label]]</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} can take [[lookup
+          @resources.legact.max]] legendary actions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: legendary-actions
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: 5cwqjeuI64dkrUa8
+    sort: 137500
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.M4eX4Mu5IHCr3TMf.Item.tWGObm0RZMwSrQLU
+      duplicateSource: Item.iG1TPGZxSyxA5B9l
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781831057041
+      modifiedTime: 1781897128835
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!DDO9lDCDtNHkfShP.pUHIuImn1FbYiry6'
+  - _id: IlrCCTK8b6DmtjB2
+    name: Regeneration
+    type: feat
+    img: icons/skills/wounds/anatomy-organ-heart-red.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} regains [[/healing]] at the
+          start of its turn if it has at least 1 hit point and isn't in sunlight
+          or running water. If the [[lookup @name lowercase]]{monster} takes
+          radiant damage or damage from
+          @UUID[Compendium.dnd5e.equipment24.Item.nshr9PBVyB03T7wB]{Holy Water},
+          this trait doesn't function at the start of the [[lookup @name
+          lowercase]]{monster}'s next turn.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} regains [[/healing]] at the start of
+          its turn.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        pGwOWm6umxeSdbMO:
+          type: heal
+          activation:
+            type: turnStart
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+            value: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ft
+              stationary: false
+            affects:
+              count: ''
+              type: self
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          healing:
+            number: null
+            denomination: null
+            bonus: ''
+            types:
+              - healing
+            custom:
+              enabled: true
+              formula: '20'
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+          sort: 100000
+          name: Regenerate
+          img: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            identifier: ''
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          flags: {}
+          _id: pGwOWm6umxeSdbMO
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: regeneration
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 123829
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.zpaZb7I8alY32vWV.Item.wzRyhY2I1U0ytB7D
+      duplicateSource: Item.NsuKY1OWjU1YX2Mu
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781831085621
+      modifiedTime: 1781831100324
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!DDO9lDCDtNHkfShP.IlrCCTK8b6DmtjB2'
+  - _id: 8Lluz633dVXNjygE
+    name: Vampire Weaknesses
+    type: feat
+    img: icons/magic/time/day-night-sunset-sunrise.webp
+    system:
+      description:
+        value: >-
+          <p>The vampire has the following
+          flaws:</p><p><em><strong>Forbiddance.</strong></em> The [[lookup @name
+          lowercase]]{monster} can't enter a residence without an invitation
+          from one of the occupants.</p><p><em><strong>Harmed by Running
+          Water.</strong></em> The [[lookup @name lowercase]]{monster} takes
+          [[/damage activity=zTY3HiiTYj5yJ7Io]] damage when it ends its turn in
+          running water.</p><p><em><strong>Stake to the Heart.</strong></em> The
+          [[lookup @name lowercase]]{monster} is destroyed if a piercing weapon
+          made of wood is driven into its heart while it is
+          &amp;reference[incapacitated apply=false] in its resting
+          place.</p><p><em><strong>Sunlight Hypersensitivity.</strong></em> The
+          [[lookup @name lowercase]]{monster} takes [[/damage
+          activity=3lO6XvaimPKCB5te]] damage when it starts its turn in
+          sunlight. While in sunlight, it has disadvantage on attack rolls and
+          ability checks.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities:
+        zTY3HiiTYj5yJ7Io:
+          type: damage
+          name: Running Water Damage
+          _id: zTY3HiiTYj5yJ7Io
+          img: ''
+          sort: 0
+          activation:
+            type: turnEnd
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} ends their turn in
+              running water.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: null
+                denomination: null
+                bonus: '20'
+                types:
+                  - acid
+                scaling:
+                  number: 1
+        3lO6XvaimPKCB5te:
+          type: damage
+          name: Sunlight Hypersensitivity
+          _id: 3lO6XvaimPKCB5te
+          img: ''
+          sort: 100000
+          activation:
+            type: turnStart
+            override: false
+            condition: >-
+              When the [[lookup @name lowercase]]{monster} starts their turn in
+              sunlight.
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            value: ''
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          flags: {}
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              stationary: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: self
+              special: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: null
+                denomination: null
+                bonus: '20'
+                types:
+                  - radiant
+                scaling:
+                  number: 1
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: vampire-weaknesses
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: null
+    sort: 121485
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.zpaZb7I8alY32vWV.Item.lLAigtCvoIuj0TM9
+      duplicateSource: Item.iAFnFQcTpFMM6ETn
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781831118524
+      modifiedTime: 1781831118524
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!DDO9lDCDtNHkfShP.8Lluz633dVXNjygE'
+  - _id: aINTvQHERB5bGZEK
+    name: Spider Climb
+    type: feat
+    img: icons/creatures/invertebrates/spider-pink-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} can climb difficult
+          surfaces, including upside down on ceilings, without needing to make
+          an ability check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: spider-climb
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: 60743
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.28gU50HtG8Kp7uIz.Item.0Oap13hi3sDNwVZn
+      duplicateSource: Item.lDSSf3aXXmZYJsk1
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781831128280
+      modifiedTime: 1781831129882
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!DDO9lDCDtNHkfShP.aINTvQHERB5bGZEK'
 effects: []
 folder: FsvtTiIRh93utaoh
 sort: 0
@@ -2005,7 +2888,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171214189

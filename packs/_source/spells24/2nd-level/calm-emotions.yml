@@ -107,28 +107,30 @@ effects:
   - name: Calmed
     origin: Compendium.dnd5e.spells24.Item.phbsplCalmEmotio
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/holy/yin-yang-balance-symbol.webp
     _id: xwyUvd93d4A5LHHH
     type: base
-    system: {}
-    changes:
-      - key: system.traits.ci.value
-        mode: 2
-        value: charmed
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: frightened
-        priority: null
+    system:
+      changes:
+        - key: system.traits.ci.value
+          value: charmed
+          priority: null
+          type: add
+          phase: initial
+          _id: rCH88iFMJyYgbqbh
+        - key: system.traits.ci.value
+          value: frightened
+          priority: null
+          type: add
+          phase: initial
+          _id: dyUq9QMzy18VmVmL
+      magical: true
     description: >-
       <p>The creature has Immunity to the Charmed and Frightened conditions
       until the spell ends. If the creature was already Charmed or Frightened,
@@ -140,30 +142,31 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974285
+      modifiedTime: 1783543974285
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplCalmEmotio.xwyUvd93d4A5LHHH'
   - name: Indifference
     origin: Compendium.dnd5e.spells24.Item.phbsplCalmEmotio
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/symbols/question-stone-yellow.webp
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     description: >-
       <p>The creature becomes Indifferent about creatures of your choice that
       it’s Hostile toward. This indifference ends if the target takes damage or
@@ -177,14 +180,17 @@ effects:
       compendiumSource: >-
         Compendium.dnd5e.spells24.Item.phbsplCalmEmotio.ActiveEffect.xwyUvd93d4A5LHHH
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543974285
+      modifiedTime: 1783543974285
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: cb3KFq1j9UkOUV2l
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplCalmEmotio.cb3KFq1j9UkOUV2l'
 folder: 3SjcO2acsFnWegp4
 sort: 4700000
@@ -197,11 +203,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425944343
-  modifiedTime: 1745256787417
+  modifiedTime: 1783543974284
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplCalmEmotio'

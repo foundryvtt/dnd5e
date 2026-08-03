@@ -20,8 +20,9 @@ system:
       or a change in its shape (to the extent that you no longer fit within it)
       expels you and deals 6d6 bludgeoning damage to you. The stone's complete
       destruction (or Transmutation into a different substance) expels you and
-      deals 50 bludgeoning damage to you. If expelled, you fall prone in an
-      unoccupied space closest to where you first entered.</p>
+      deals 50 bludgeoning damage to you. If expelled, you fall
+      &amp;reference[prone] in an unoccupied space closest to where you first
+      entered.</p>
     chat: ''
   source:
     custom: ''
@@ -40,11 +41,14 @@ system:
     affects:
       type: self
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -64,120 +68,254 @@ system:
     - somatic
     - ritual
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: damage
+    aUsAItFCOoEIQd7I:
+      type: utility
+      name: Cast
+      _id: aUsAItFCOoEIQd7I
+      img: null
+      sort: -100000
       activation:
         type: action
-        value: null
         override: false
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
-        chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: Zhqc0y1xVkLsYkgs
+          level: {}
+      flags: {}
       range:
+        units: self
         override: false
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
         affects:
           choice: false
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
+    at17qOrWdjr80zy0:
+      type: damage
+      name: Partial Stone Destruction Damage
+      _id: at17qOrWdjr80zy0
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: true
+        condition: >-
+          When the stone are melded in is partially destroyed while you are
+          melded into it.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: true
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
       damage:
         critical:
           allow: false
-          bonus: ''
         parts:
-          - number: 6
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
             denomination: 6
             bonus: ''
             types:
               - bludgeoning
-            custom:
-              enabled: false
-              formula: ''
             scaling:
               mode: ''
-              number: null
-              formula: ''
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
-    dnd5eactivity200:
-      _id: dnd5eactivity200
+              number: 1
+    2NOxC43FZiwhej6W:
       type: damage
+      name: Complete Stone Destruction Damage
+      img: ''
+      sort: 200000
       activation:
-        type: action
-        value: null
-        override: false
+        type: special
+        override: true
+        condition: >-
+          When the stone are melded in is completely destroyed while you are
+          melded into it.
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
-        spellSlot: true
+        spellSlot: false
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
+      flags: {}
       range:
-        override: false
+        units: self
+        override: true
+        special: ''
       target:
-        prompt: true
         template:
           contiguous: false
+          stationary: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
-      damage:
-        critical:
-          allow: false
-          bonus: ''
-        parts:
-          - number: null
-            denomination: null
-            bonus: ''
-            types: []
-            custom:
-              enabled: true
-              formula: '50'
-            scaling:
-              mode: ''
-              number: null
-              formula: ''
+          type: self
+          special: ''
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: null
+            denomination: null
+            bonus: '50'
+            types:
+              - bludgeoning
+            scaling:
+              mode: ''
+              number: 1
+      _id: 2NOxC43FZiwhej6W
   identifier: meld-into-stone
 sort: 0
 flags: {}
-img: icons/magic/earth/projectile-spiked-stone-boulder-blue.webp
-effects: []
+img: icons/magic/earth/projectile-stone-landslide.webp
+effects:
+  - name: Melded into Stone
+    img: icons/magic/earth/projectile-stone-landslide.webp
+    origin: Compendium.dnd5e.spells.Item.64uo4fHriHLjRUrX
+    transfer: false
+    _id: Zhqc0y1xVkLsYkgs
+    type: base
+    system:
+      changes: []
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You have stepped into a stone object or surface large enough to fully
+      contain your body, melding yourself and all the Equipment you carry with
+      the stone for the Duration. Nothing of your presence remains visible or
+      otherwise detectable by nonmagical Senses.</p><p>While merged with the
+      stone, you can't see what occurs outside it, and any Wisdom (Perception)
+      checks you make to hear sounds outside it are made with disadvantage. You
+      remain aware of the passage of time and can cast Spells on yourself while
+      merged in the stone. You can use your Movement to leave the stone where
+      you entered it, which ends the spell. You otherwise can't
+      move.</p><p>Minor physical damage to the stone doesn't harm you, but its
+      partial destruction or a change in its shape (to the extent that you no
+      longer fit within it) expels you and deals 6d6 bludgeoning damage to you.
+      The stone's complete destruction (or Transmutation into a different
+      substance) expels you and deals [[/damage 50 bludgeoning]] damage to you.
+      If expelled, you fall &amp;reference[prone] in an unoccupied space closest
+      to where you first entered.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781356530799
+      modifiedTime: 1783720931928
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!64uo4fHriHLjRUrX.Zhqc0y1xVkLsYkgs'
 folder: 5Si35RRLLaaoWvC3
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037347728
-  modifiedTime: 1725992717094
+  modifiedTime: 1781356865280
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!64uo4fHriHLjRUrX'

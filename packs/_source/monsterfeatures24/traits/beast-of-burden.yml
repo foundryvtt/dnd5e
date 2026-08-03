@@ -33,21 +33,20 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmBeastOfBurden0
     _id: VW9jjwa34EHjrXBB
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd5e.powerfulBuild
-        mode: 5
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd5e.powerfulBuild
+          value: 1
+          priority: null
+          type: override
+          phase: initial
+          _id: CzcqD3pIM9qp9lQj
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -57,22 +56,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1734986043841
-      modifiedTime: 1734986488744
+      modifiedTime: 1783544085156
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmBeastOfBurden0.VW9jjwa34EHjrXBB'
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1734986469363
+  modifiedTime: 1783544085156
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1800000

@@ -1,6 +1,10 @@
+import CreateDocumentDialog from "../create-document-dialog.mjs";
 import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
+import BaseActivityBehavior from "../../data/region-behavior/base-activity-behavior.mjs";
 import UsesField from "../../data/shared/uses-field.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
+
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Default sheet for activities.
@@ -13,10 +17,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       icon: "fa-solid fa-gauge"
     },
     actions: {
+      addBehavior: ActivitySheet.#addBehavior,
       addConsumption: ActivitySheet.#addConsumption,
       addDamagePart: ActivitySheet.#addDamagePart,
       addEffect: ActivitySheet.#addEffect,
       addRecovery: ActivitySheet.#addRecovery,
+      deleteBehavior: ActivitySheet.#deleteBehavior,
       deleteConsumption: ActivitySheet.#deleteConsumption,
       deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
@@ -54,6 +60,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     effect: {
       template: "systems/dnd5e/templates/activity/effect.hbs",
       templates: [
+        "systems/dnd5e/templates/activity/parts/activity-behaviors.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-behavior-level-limit.hbs",
+        "systems/dnd5e/templates/activity/parts/activity-behavior-settings.hbs",
         "systems/dnd5e/templates/activity/parts/activity-effects.hbs",
         "systems/dnd5e/templates/activity/parts/activity-effect-level-limit.hbs",
         "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
@@ -149,28 +158,28 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     context.activationTypes = [
       ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, config]) => ({
         value,
-        label: game.i18n.localize(config.label),
-        group: game.i18n.localize(config.group)
+        label: _loc(config.label),
+        group: _loc(config.group)
       })),
-      { value: "", label: game.i18n.localize("DND5E.NoneActionLabel") }
+      { value: "", label: _loc("DND5E.NoneActionLabel") }
     ];
-    context.affectsPlaceholder = game.i18n.localize(
+    context.affectsPlaceholder = _loc(
       `DND5E.TARGET.Count.${context.data.target?.template?.type ? "Every" : "Any"}`
     );
     context.durationUnits = [
-      { value: "inst", label: game.i18n.localize("DND5E.TimeInst") },
+      { value: "inst", label: _loc("DND5E.TimeInst") },
       ...Object.entries(CONFIG.DND5E.scalarTimePeriods).map(([value, label]) => ({
-        value, label, group: game.i18n.localize("DND5E.DurationTime")
+        value, label, group: _loc("DND5E.DurationTime")
       })),
       ...Object.entries(CONFIG.DND5E.permanentTimePeriods).map(([value, label]) => ({
-        value, label, group: game.i18n.localize("DND5E.DurationPermanent")
+        value, label, group: _loc("DND5E.DurationPermanent")
       })),
-      { value: "spec", label: game.i18n.localize("DND5E.Special") }
+      { value: "spec", label: _loc("DND5E.Special") }
     ];
     context.rangeUnits = [
       ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
       ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({
-        value, label, group: game.i18n.localize("DND5E.RangeDistance")
+        value, label, group: _loc("DND5E.RangeDistance")
       }))
     ];
 
@@ -192,15 +201,15 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         targetHint: this.item.isEmbedded ? undefined : typeConfig.nonEmbeddedHint,
         typeOptions: consumptionTypeOptions,
         scalingModes: canScale ? [
-          { value: "", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.None") },
-          { value: "amount", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.Amount") },
-          ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: game.i18n.localize(label) }))
+          { value: "", label: _loc("DND5E.CONSUMPTION.Scaling.None") },
+          { value: "amount", label: _loc("DND5E.CONSUMPTION.Scaling.Amount") },
+          ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: _loc(label) }))
         ] : null,
         showTargets: "validTargets" in typeConfig,
         selectedTarget: ("validTargets" in typeConfig) && ["itemUses", "material"].includes(data.type)
           ? this.activity._remapConsumptionTarget(data.target)
           : data.target,
-        targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : "",
+        targetPlaceholder: data.type === "itemUses" ? _loc("DND5E.CONSUMPTION.Target.ThisItem") : "",
         validTargets: showTextTarget ? null : target.validTargets
       };
     });
@@ -208,24 +217,37 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     context.showScaling = !this.activity.isSpell || this.activity.isRider;
 
     // Uses recovery
-    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
-      { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
-      { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
-      { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
+      { value: "recoverAll", label: _loc("DND5E.USES.Recovery.Type.RecoverAll") },
+      { value: "loseAll", label: _loc("DND5E.USES.Recovery.Type.LoseAll") },
+      { value: "formula", label: _loc("DND5E.USES.Recovery.Type.Formula") }
     ];
     context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
       data,
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null,
+      periodOptions: UsesField.recoveryOptions(this.item, data.period)
     }));
 
     // Template dimensions
     context.dimensions = context.activity.target?.template?.dimensions;
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a specific applied behavior if present in the activity data.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {object} behavior                   Applied behavior context being prepared.
+   * @returns {object}
+   * @protected
+   */
+  _prepareAppliedBehaviorContext(context, behavior) {
+    return behavior;
   }
 
   /* -------------------------------------------- */
@@ -266,28 +288,48 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   async _prepareEffectContext(context, options) {
     context.tab = context.tabs.effect;
 
+    if ( context.activity.behaviors && (context.activity.target?.template?.type || this.activity.isRider) ) {
+      context.appliedBehaviors = context.activity.behaviors.values()
+        .filter(d => d.type in CONFIG.DND5E.activityBehaviorTypes)
+        .map(data => {
+          const source = context.source.behaviors[data._index];
+          if ( !source ) return null;
+          const ctx = {
+            data, source,
+            additionalFields: data.config.generateFields(source.config, { prefix: `behaviors.${data._index}.config.` }),
+            additionalSettings: "systems/dnd5e/templates/activity/parts/activity-behavior-settings.hbs",
+            collapsed: this.expandedSections.get(`behaviors.${data._id}`) ? "" : "collapsed",
+            config: CONFIG.DND5E.activityBehaviorTypes[data.type],
+            fields: this.activity.schema.fields.behaviors.element.fields,
+            prefix: `behaviors.${data._index}.`
+          };
+          return this._prepareAppliedBehaviorContext(context, ctx);
+        })
+        .filter(_ => _)
+        .toArray();
+    }
+
     if ( context.activity.effects ) {
       const appliedEffects = new Set(context.activity.effects?.map(e => e._id) ?? []);
+      const supportedTypes = this.activity.schema.getField("effects.element").supportedTypes;
       context.allEffects = this.item.effects
-        .filter(e => e.type !== "enchantment")
+        .filter(e => supportedTypes.has(e.type))
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.reduce((arr, data) => {
-        if ( !data.effect ) return arr;
-        const effect = {
+      context.appliedEffects = (await Promise.all(context.activity.effects.map(async data => {
+        const effectDocument = await data.getEffect();
+        return effectDocument ? this._prepareAppliedEffectContext(context, {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
-          effect: data.effect,
+          effect: effectDocument,
           fields: this.activity.schema.fields.effects.element.fields,
           prefix: `effects.${data._index}.`,
           source: context.source.effects[data._index] ?? data,
-          contentLink: data.effect.toAnchor().outerHTML,
+          contentLink: effectDocument.toAnchor().outerHTML,
           additionalSettings: "systems/dnd5e/templates/activity/parts/activity-effect-settings.hbs"
-        };
-        arr.push(this._prepareAppliedEffectContext(context, effect));
-        return arr;
-      }, []);
+        }) : null;
+      }))).filter(_ => _);
     }
 
     context.denominationOptions = [
@@ -297,7 +339,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
     if ( context.activity.damage?.parts ) {
       const scaleKey = (this.item.type === "spell") && (this.item.system.level === 0) ? "labelCantrip" : "label";
       const scalingOptions = [
-        { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
+        { value: "", label: _loc("DND5E.DAMAGE.Scaling.None") },
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
       let typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({ ...config, value }));
@@ -342,8 +384,11 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       value: context.source.target.prompt,
       input: context.inputs.createCheckboxInput
     });
+    context.enriched = await TextEditor.enrichHTML(this.activity.description.value, {
+      relativeTo: this.activity.item, rollData: this.activity.getRollData(), secrets: this.activity.item.isOwner
+    });
     context.placeholder = {
-      name: game.i18n.localize(this.activity.metadata.title),
+      name: _loc(this.activity.metadata.title),
       img: this.activity.metadata.img
     };
 
@@ -463,6 +508,21 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /* -------------------------------------------- */
 
   /**
+   * Handle adding a new entry to the behaviors list.
+   * @this {ActivitySheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #addBehavior(event, target) {
+    if ( !this.activity.behaviors ) return;
+    const createData = await CreateDocumentDialog.prompt(BaseActivityBehavior, {}, { parent: this.activity });
+    if ( !createData?.type ) return;
+    this.activity.update({ behaviors: [...this.activity.toObject().behaviors, createData] });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle adding a new entry to the consumption list.
    * @this {ActivitySheet}
    * @param {Event} event         Triggering click event.
@@ -519,9 +579,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    * @protected
    */
   _addEffectData() {
+    const { name, img } = this.activity._source;
     return {
-      name: this.item.name,
-      img: this.item.img,
+      name: name || this.item.name,
+      img: img || this.item.img,
       origin: this.item.uuid,
       transfer: false
     };
@@ -547,6 +608,20 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         { period: filteredPeriods.first() ?? periods.first() }
       ]
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing an entry from the behaviors list.
+   * @this {ActivitySheet}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #deleteBehavior(event, target) {
+    if ( !this.activity.behaviors ) return;
+    const behaviors = this.activity.toObject().behaviors;
+    this.activity.update({ behaviors: behaviors.toSpliced(target.closest("[data-index]").dataset.index, 1) });
   }
 
   /* -------------------------------------------- */
@@ -588,7 +663,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   static async #deleteEffect(event, target) {
     if ( !this.activity.effects ) return;
-    const effectId = target.closest("[data-effect-id]")?.dataset.effectId;
+    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
     const result = await this.item.effects.get(effectId)?.deleteDialog({}, { render: false });
     if ( result instanceof ActiveEffect ) {
       const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
@@ -619,9 +694,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    * @param {HTMLElement} target  The button that was clicked.
    */
   static #dissociateEffect(event, target) {
-    const { effectId } = target.closest("[data-effect-id]")?.dataset ?? {};
-    if ( !this.activity.effects || !effectId ) return;
-    const effects = this.activity.toObject().effects.filter(e => e._id !== effectId);
+    const { profileId } = target.closest("[data-profile-id]")?.dataset ?? {};
+    if ( !this.activity.effects || !profileId ) return;
+    const effects = this.activity.toObject().effects.filter(e => e._id !== profileId);
     this.activity.update({ effects });
   }
 
@@ -636,14 +711,21 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       const data = foundry.utils.getProperty(submitData, keyPath);
       if ( data ) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
     }
-    if ( foundry.utils.hasProperty(submitData, "appliedEffects") ) {
-      const effects = submitData.effects ?? this.activity.toObject().effects;
-      submitData.effects = effects.filter(e => submitData.appliedEffects.includes(e._id));
-      for ( const _id of submitData.appliedEffects ) {
+    if ( foundry.utils.hasProperty(submitData, "appliedLocalEffects")
+      || foundry.utils.hasProperty(submitData, "appliedRemoteEffects") ) {
+      submitData.effects ??= this.activity.toObject().effects;
+      const supportedTypes = this.activity.schema.getField("effects.element").supportedTypes;
+      for ( const _id of submitData.appliedLocalEffects ?? [] ) {
         if ( submitData.effects.find(e => e._id === _id) ) continue;
         submitData.effects.push({ _id });
       }
-      delete submitData.appliedEffects;
+      for ( const uuid of submitData.appliedRemoteEffects ?? [] ) {
+        const effect = fromUuidSync(uuid, { strict: false });
+        if ( !supportedTypes.has(effect?.type) || submitData.effects.find(e => e.uuid === uuid) ) continue;
+        submitData.effects.push({ _id: `${foundry.utils.randomID(10)}REMOTE`, uuid });
+      }
+      delete submitData.appliedLocalEffects;
+      delete submitData.appliedRemoteEffects;
     }
     return submitData;
   }

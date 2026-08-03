@@ -1,9 +1,11 @@
-import GroupTemplate from "./templates/group.mjs";
+import { bulkFromUuid } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
+import GroupTemplate from "./templates/group.mjs";
 
 const { ArrayField, DocumentUUIDField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
+ * @import { EncounterPlacementSettingData } from "../settings/_types.mjs";
  * @import { EncounterActorSystemData } from "./_types.mjs";
  */
 
@@ -22,7 +24,7 @@ export default class EncounterData extends GroupTemplate {
           value: new NumberField({ initial: 1, integer: true, min: 0, label: "DND5E.Quantity" }),
           formula: new FormulaField({ label: "DND5E.QuantityFormula" })
         })
-      }), { label: "DND5E.GroupMembers" })
+      }), { label: "DND5E.Group.Member.other" })
     });
   }
 
@@ -34,6 +36,7 @@ export default class EncounterData extends GroupTemplate {
   static _migrateData(source) {
     super._migrateData(source);
     EncounterData.#migrateMembers(source);
+    return source;
   }
 
   /* -------------------------------------------- */
@@ -67,6 +70,14 @@ export default class EncounterData extends GroupTemplate {
       writable: false,
       configurable: true
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.prepareCurrency();
   }
 
   /* -------------------------------------------- */
@@ -117,31 +128,10 @@ export default class EncounterData extends GroupTemplate {
 
   /** @override */
   async getMembers() {
-    // Batch compendium lookups when retrieving members.
-    const collections = new Map();
-    const members = new Map();
-
-    for ( const { uuid, ...rest } of this.members ) {
-      const { collection, id } = foundry.utils.parseUuid(uuid);
-      let ids = collections.get(collection);
-      if ( !ids ) {
-        ids = [];
-        collections.set(collection, ids);
-      }
-      ids.push(id);
-      rest.collection = collection;
-      members.set(id, rest);
-    }
-
-    for ( const [collection, ids] of collections.entries() ) {
-      if ( collection instanceof foundry.documents.collections.CompendiumCollection ) {
-        await collection.getDocuments({ _id__in: ids });
-      }
-    }
-
-    return Array.from(members.entries().map(([id, { collection, ...data }]) => {
-      return { actor: collection.get(id), ...foundry.utils.deepClone(data) };
-    }).filter(d => d.actor));
+    const members = await bulkFromUuid(this.members.map(m => m.uuid));
+    return this.members.map(data => ({
+      actor: members.get(data.uuid), ...foundry.utils.deepClone(data)
+    })).filter(d => d.actor);
   }
 
   /* -------------------------------------------- */
@@ -149,7 +139,8 @@ export default class EncounterData extends GroupTemplate {
   /** @override */
   async getPlaceableMembers() {
     return (await Promise.all((await this.getMembers()).map(async member => {
-      member.actor = await dnd5e.documents.Actor5e.fetchExisting(member.actor.uuid);
+      const fetchOptions = { folderId: this.parent.folder?.id ?? null };
+      member.actor = await dnd5e.documents.Actor5e.fetchExisting(member.actor.uuid, fetchOptions);
       if ( (member.quantity.value === null) && member.quantity.formula ) {
         const roll = new Roll(member.quantity.formula);
         await roll.evaluate();
@@ -157,6 +148,26 @@ export default class EncounterData extends GroupTemplate {
       }
       return member;
     }))).filter(m => m.quantity.value);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Place all members in the encounter on the current scene and return the associated token documents.
+   * @param {object} [config]                                        Configuration options for the encounter placement.
+   * @param {EncounterPlacementSettingData} [config.combatBehavior]  Combat tracker options for the placed tokens.
+   * @returns {Promise<TokenDocument[]>}
+   */
+  async placeMembers(config={}) {
+    const tokenDocuments = await super.placeMembers();
+    config.combatBehavior ??= game.settings.get("dnd5e", "encounterPlacementBehavior");
+    if ( tokenDocuments.length && (config.combatBehavior !== "none") ) {
+      const combatants = await TokenDocument.implementation.createCombatants(tokenDocuments);
+      if ( config.combatBehavior === "rollInitiative" ) {
+        await game.combats.viewed.rollInitiative(combatants.map(c => c.id));
+      }
+    }
+    return tokenDocuments;
   }
 
   /* -------------------------------------------- */

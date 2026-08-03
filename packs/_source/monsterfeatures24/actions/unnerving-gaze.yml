@@ -103,17 +103,14 @@ effects:
     origin: Item.1psii5msWut9Uxse
     _id: BheOE4RU2wcG94yl
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Frightened apply=false] condition
       until the end of its turn.</p>
@@ -128,13 +125,22 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736126302564
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!items.effects!mmUnnervingGaze0.BheOE4RU2wcG94yl'
 flags:
   dnd5e:
@@ -143,7 +149,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.2
   createdTime: 1733432292956

@@ -1,7 +1,18 @@
 /**
- * @import { BastionTurnItem } from "../../documents/_types.mjs";
+ * @import { BastionTurnItem, SaveOutcome } from "../../documents/_types.mjs";
  * @import { ActivationsData, ActorDeltasData } from "./fields/_types.mjs";
  */
+
+/**
+ * @typedef AttackMessageSystemData
+ * @property {string|null} ability      Ability used for the attack.
+ * @property {string|null} ammunition   ID of the ammunition used for the attack.
+ * @property {ActorDeltasData} deltas   Snapshots Items consumed & destroyed by the attack.
+ * @property {string|null} mastery      Weapon mastery property used for the attack.
+ * @property {string|null} mode         Attack mode used for the attack.
+ */
+
+/* -------------------------------------------- */
 
 /**
  * @typedef BastionAttackMessageSystemData
@@ -9,6 +20,25 @@
  * @property {number} [deaths]      Number of defenders killed in the attack.
  * @property {boolean} resolved     Have the effects of the attack been fully resolved?
  * @property {boolean} undefended   Was the bastion undefended when it was attacked?
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef BastionOrderMessageSystemData
+ * @property {object} costs
+ * @property {number|null} costs.days       Cost of executing the order, in days.
+ * @property {number|null} costs.gold       Cost of executing the order, in gold.
+ * @property {boolean} costs.paid           Whether the gold cost has been paid.
+ * @property {object} craft
+ * @property {string|null} craft.item       UUID of the item being crafted or harvested.
+ * @property {number|null} craft.quantity   Quantity of the item to harvest.
+ * @property {string} order                 Order that was issued.
+ * @property {object} trade
+ * @property {string[]} trade.creatures     UUIDs of the livestock bought or sold by the order.
+ * @property {boolean} trade.sell           Whether this was a sell operation rather than a buy.
+ * @property {boolean} trade.stocked        Whether the order was to fully stock the facility.
+ * @property {number|null} trade.value      Base value of the goods transacted, or the proceeds of a livestock sale.
  */
 
 /* -------------------------------------------- */
@@ -26,6 +56,71 @@
  * @typedef BastionTurnOrder
  * @property {string} id     ID of the facility that was issued the order.
  * @property {string} order  Order that was issued.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef CheckMessageSystemData
+ * @property {string} ability      Ability used for the check.
+ * @property {string|null} skill   Skill used for the check, if any.
+ * @property {string|null} tool    Tool used for the check, if any.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef DamageMessageSystemData
+ * @property {string|null} onSave  How this damage is affected by a successful save, if it followed one.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef GenericMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {DamageMessageSystemData} HealingMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef HitDieMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef HitPointsMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef PromptMessageSystemData
+ * @property {boolean} broadcast           Whether the prompt is broadcast to the whole table or applies only to the
+ *                                         speaker.
+ * @property {PromptButtonData[]} buttons  Buttons offering a roll or an action to the user.
+ */
+
+/**
+ * @typedef {"check"|"concentration"|"endConcentration"|"save"|"skill"|"tool"} PromptButtonType
+ */
+
+/**
+ * @typedef PromptButtonData
+ * @property {string} [ability]                 Ability used for the roll.
+ * @property {number} [dc]                      Target value for the roll.
+ * @property {"long"|"short"} [format]          Label format style.
+ * @property {string} [skill]                   Skill used for the roll.
+ * @property {string} [tool]                    Tool used for the roll.
+ * @property {PromptButtonType} type            Roll or action performed by this button.
+ * @property {string} [usingTool]               Tool used to make a skill check.
+ * @property {"all"|"creator"|"gm"} visibility  Which users can see this button.
  */
 
 /* -------------------------------------------- */
@@ -61,6 +156,30 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef SaveMessageSystemData
+ * @property {string} ability            Ability used for the save. Required unless this is a death save.
+ * @property {ActorDeltasData} deltas    Actor changes recorded by this save (death saves only).
+ * @property {SaveOutcome} outcome       Terminal outcome shown on the card.
+ * @property {boolean} resisted          Whether the save was turned into a success by spending a legendary resistance.
+ * @property {"ability"|"concentration"|"death"} type  Kind of saving throw this message represents.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef TimePassedMessageSystemData
+ * @property {DocumentDeltasData[]} changes  Item recovery from this time change.
+ */
+
+/**
+ * @typedef DocumentDeltasData
+ * @property {ActorDeltasData} deltas  Data deltas for a actor update.
+ * @property {string} uuid             UUID of the actor to which the deltas apply.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef TurnMessageSystemData
  * @property {ActivationsData} activations  Activities that can be used with these periods, stored as relative UUIDs.
  * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
@@ -74,5 +193,5 @@
  * @typedef UsageMessageSystemData
  * @property {string} [cause]          Relative ID of the activity that caused this one on the same actor.
  * @property {ActorDeltasData} deltas  Actor/item consumption from this turn change.
- * @property {string[]} effects        Relative UUIDs of effects that can be applied.
+ * @property {string[]} effects        Relative or absolute UUIDs of effects that can be applied.
  */

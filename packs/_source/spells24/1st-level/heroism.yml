@@ -104,24 +104,24 @@ effects:
   - name: Bravery
     origin: Compendium.dnd5e.spells24.Item.phbsplHeroism000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 60
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/control-influence-crown-yellow.webp
     _id: zCpsdUyNz8bL3LF5
     type: base
-    system: {}
-    changes:
-      - key: system.traits.ci.value
-        mode: 2
-        value: frightened
-        priority: null
+    system:
+      changes:
+        - key: system.traits.ci.value
+          value: frightened
+          priority: null
+          type: add
+          phase: initial
+          _id: NVeoiMur14XKasJl
+      magical: true
     description: >-
       <p>The creature is immune to the Frightened condition and gains Temporary
       Hit Points equal to your spellcasting ability modifier at the start of
@@ -133,13 +133,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543975520
+      modifiedTime: 1783543975520
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbsplHeroism000.zCpsdUyNz8bL3LF5'
 folder: pBaAAtXBCq9FVEnL
 sort: 2100000
@@ -152,11 +155,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425958612
-  modifiedTime: 1745256794652
+  modifiedTime: 1783543975520
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHeroism000'

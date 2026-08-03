@@ -5,6 +5,7 @@ const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActivityRollData, ItemRollData } from "../../documents/_types.mjs";
+ * @import { TargetData, TargetLabels } from "./_types.mjs";
  */
 
 /**
@@ -39,6 +40,76 @@ export default class TargetField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
+   * Build the display labels for target data.
+   * @param {object} data                               Data from which to build the labels.
+   * @param {Record<string, string>} [data.dimensions]  Template dimensions, derived from the type when omitted.
+   * @param {TargetData} data.target                    Resolved target data.
+   * @returns {TargetLabels}
+   */
+  static getLabels({ dimensions, target }) {
+    const pr = getPluralRules();
+
+    // Generate the template labels
+    const template = {};
+    const templateConfig = CONFIG.DND5E.areaTargetTypes[target.template.type];
+    if ( templateConfig ) {
+      dimensions ??= TargetField.templateDimensions(target.template.type);
+      const parts = [];
+      if ( target.template.count > 1 ) parts.push(`${target.template.count} ×`);
+      if ( target.template.units in CONFIG.DND5E.movementUnits ) {
+        parts.push(formatLength(target.template.size, target.template.units));
+      }
+      template.statblock = _loc(`${templateConfig.counted}.${pr.select(target.template.count || 1)}`, {
+        number: parts.filterJoin(" ")
+      }).trim().capitalize();
+
+      const sizeUnit = CONFIG.DND5E.movementUnits[target.template.units]?.template ?? "";
+      if ( Object.keys(dimensions).length === 1 ) template.size = _loc("DND5E.AreaOfEffect.Description.SizeSimple",{
+        number: formatNumber(target.template.size), unit: sizeUnit
+      });
+      else template.size = game.i18n.getListFormatter({ type: "unit" })
+        .format(Object.entries(dimensions).map(([k, l]) =>
+          _loc("DND5E.AreaOfEffect.Description.SizeType", {
+            number: formatNumber(target.template[k]), unit: sizeUnit,
+            type: _loc(l.replace("DND5E.AreaOfEffect.Size.", "DND5E.AreaOfEffect.Description."))
+          })
+        ));
+
+      template.description = _loc(`${templateConfig.counted}.${pr.select(target.template.count || 1)}Sized`, {
+        number: formatNumber(target.template.count, { words: true }),
+        sizes: template.size
+      });
+
+      template.type = templateConfig.label;
+    }
+
+    // Generate the affects labels
+    const affectsConfig = CONFIG.DND5E.individualTargetTypes[target.affects.type];
+    const affects = {
+      description: _loc(
+        `${target.affects.special ? "DND5E.TARGET.Type.Special.Counted"
+          : affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${target.affects.count
+          ? pr.select(target.affects.count) : target.template.type ? "each" : "any"}`, {
+          number: formatNumber(target.affects.count, { words: true }),
+          special: target.affects.special
+        }),
+      sheet: affectsConfig?.counted ? _loc(
+        `${affectsConfig.counted}.${target.affects.count ? pr.select(target.affects.count) : "other"}`, {
+          number: target.affects.count ? formatNumber(target.affects.count)
+            : _loc(`DND5E.TARGET.Count.${target.template.type ? "Every" : "Any"}`)
+        }).trim().capitalize() : (affectsConfig?.label ?? ""),
+      statblock: _loc(
+        `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr.select(target.affects.count || 1)}`,
+        { number: formatNumber(target.affects.count || 1, { words: true }) }
+      )
+    };
+
+    return { affects, template };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data for this field. Should be called during the `prepareFinalData` stage.
    * @this {ItemDataModel|BaseActivityData}
    * @param {ItemRollData|ActivityRollData} rollData  Roll data used for formula replacements.
@@ -68,68 +139,10 @@ export default class TargetField extends SchemaField {
       this.target.template.height = null;
     }
 
-    const pr = getPluralRules();
-
-    // Generate the template labels
-    const templateConfig = CONFIG.DND5E.areaTargetTypes[this.target.template.type];
-    this.target.template.labels = {};
-    if ( templateConfig ) {
-      const parts = [];
-      if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);
-      if ( this.target.template.units in CONFIG.DND5E.movementUnits ) {
-        parts.push(formatLength(this.target.template.size, this.target.template.units));
-      }
-      this.target.template.labels.statblock = this.target.template.label = game.i18n.format(
-        `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}`, { number: parts.filterJoin(" ") }
-      ).trim().capitalize();
-
-      const sizeUnit = CONFIG.DND5E.movementUnits[this.target.template.units]?.template ?? "";
-      if ( Object.keys(dimensions).length === 1 ) this.target.template.labels.size = game.i18n.format(
-        "DND5E.AreaOfEffect.Description.SizeSimple",
-        { number: formatNumber(this.target.template.size), unit: sizeUnit }
-      );
-      else this.target.template.labels.size = game.i18n.getListFormatter({ type: "unit" })
-        .format(Object.entries(dimensions).map(([k, l]) =>
-          game.i18n.format("DND5E.AreaOfEffect.Description.SizeType", {
-            number: formatNumber(this.target.template[k]), unit: sizeUnit,
-            type: game.i18n.localize(l.replace("DND5E.AreaOfEffect.Size.", "DND5E.AreaOfEffect.Description."))
-          })
-        ));
-
-      this.target.template.labels.description = game.i18n.format(
-        `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}Sized`,
-        {
-          number: formatNumber(this.target.template.count, { words: true }),
-          sizes: this.target.template.labels.size
-        }
-      );
-
-      this.target.template.labels.type = templateConfig.label;
-    } else this.target.template.label = "";
-
-    // Generate the affects labels
-    const affectsConfig = CONFIG.DND5E.individualTargetTypes[this.target.affects.type];
-    this.target.affects.labels = {
-      description: game.i18n.format(
-        `${this.target.affects.special ? "DND5E.TARGET.Type.Special.Counted"
-          : affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${this.target.affects.count
-          ? pr.select(this.target.affects.count) : this.target.template.type ? "each" : "any"}`,
-        {
-          number: formatNumber(this.target.affects.count, { words: true }),
-          special: this.target.affects.special
-        }
-      ),
-      sheet: affectsConfig?.counted ? game.i18n.format(
-        `${affectsConfig.counted}.${this.target.affects.count ? pr.select(this.target.affects.count) : "other"}`, {
-          number: this.target.affects.count ? formatNumber(this.target.affects.count)
-            : game.i18n.localize(`DND5E.TARGET.Count.${this.target.template.type ? "Every" : "Any"}`)
-        }
-      ).trim().capitalize() : (affectsConfig?.label ?? ""),
-      statblock: game.i18n.format(
-        `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr.select(this.target.affects.count || 1)}`,
-        { number: formatNumber(this.target.affects.count || 1, { words: true }) }
-      )
-    };
+    const { affects, template } = TargetField.getLabels({ dimensions, target: this.target });
+    this.target.template.labels = template;
+    this.target.template.label = template.statblock ?? "";
+    this.target.affects.labels = affects;
 
     if ( labels ) {
       labels.description ??= {};

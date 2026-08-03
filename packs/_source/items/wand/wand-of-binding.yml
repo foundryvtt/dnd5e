@@ -11,14 +11,16 @@ system:
       On a 1, the wand crumbles into ashes and is
       destroyed.</p><p><strong>Spells</strong>. While holding the wand, you can
       use an action to expend some of its charges to cast one of the following
-      spells (save DC 17):
+      spells (save DC [[lookup @spell.challenge.save
+      activity=yAh2VKsLWwGagH4w]]):
       @UUID[Compendium.dnd5e.spells.Item.l9Ju5KE7bbn3WpTm]{Hold Monster} (5
       charges) or @UUID[Compendium.dnd5e.spells.Item.3Lo9boi7P2ro6QV4]{Hold
       Person} (2 charges).</p><p><strong>Assisted Escape</strong>. While holding
       the wand, you can use your reaction to expend 1 charge and gain advantage
-      on a saving throw you make to avoid being paralyzed or restrained, or you
-      can expend 1 charge and gain advantage on any check you make to escape a
-      grapple.</p>
+      on a saving throw you make to avoid being &amp;reference[paralyzed
+      apply=false] or &amp;reference[restrained apply=false], or you can expend
+      1 charge and gain advantage on any check you make to escape a
+      &amp;reference[grappled apply=false]{Grapple}.</p>
     chat: ''
   source:
     custom: ''
@@ -60,6 +62,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Wand
   container: null
   properties:
     - foc
@@ -187,7 +190,10 @@ system:
         type: reaction
         value: null
         override: false
-        condition: ''
+        condition: >-
+          When you make a saving throw to avoid being &reference[paralyzed
+          apply=false], &reference[restrained apply=false], or when you attempt
+          to escape a &reference[grappled apply=false]{Grapple}.
       consumption:
         scaling:
           allowed: false
@@ -198,6 +204,13 @@ system:
             target: ''
       description:
         chatFlavor: ''
+        value: >-
+          <p>While holding the wand, you can use your reaction to expend 1
+          charge and gain advantage on a saving throw you make to avoid being
+          &amp;reference[paralyzed apply=false] or &amp;reference[restrained
+          apply=false], or you can expend 1 charge and gain advantage on any
+          check you make to escape a &amp;reference[grappled
+          apply=false]{Grapple}.</p>
       duration:
         units: inst
         concentration: false
@@ -238,6 +251,8 @@ system:
         requireIdentification: true
   attuned: false
   identifier: wand-of-binding
+  armor:
+    magicalBonus: ''
 effects: []
 folder: 1aDgsGVwDbPdxG2V
 sort: 0
@@ -246,11 +261,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037109504
-  modifiedTime: 1764619063037
+  modifiedTime: 1783700138706
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!7jEKkA9qbwJ3IuCb'

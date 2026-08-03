@@ -3,7 +3,6 @@ import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs"
 import CalendarSettingsConfig from "./applications/settings/calendar-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
-import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
 import BastionSetting from "./data/settings/bastion-setting.mjs";
@@ -41,6 +40,29 @@ export function registerSystemKeybindings() {
   game.keybindings.register("dnd5e", "dragMove", {
     name: "KEYBINDINGS.DND5E.DragMove",
     editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }, { key: "OsLeft" }, { key: "OsRight" }]
+  });
+
+  game.keybindings.register("dnd5e", "toggleSheetMode", {
+    name: "KEYBINDINGS.DND5E.ToggleSheetMode",
+    editable: [{ key: "KeyE", modifiers: ["Shift"] }],
+    onDown: () => {
+      const app = ui.activeWindow;
+      if ( !app?.rendered || !app.changeMode || !app.isEditable ) return false;
+      app.changeMode();
+      return true;
+    }
+  });
+
+  game.keybindings.register("dnd5e", "openCompendiumBrowser", {
+    name: "KEYBINDINGS.DND5E.OpenCompendiumBrowser",
+    editable: [{ key: "KeyB", modifiers: ["Shift"] }],
+    onDown: () => {
+      const existing = Array.from(foundry.applications.instances.values())
+        .find(app => app instanceof CompendiumBrowser && app.rendered);
+      if ( existing ) existing.bringToFront();
+      else new CompendiumBrowser().render({ force: true });
+      return true;
+    }
   });
 }
 
@@ -96,6 +118,29 @@ export function registerSystemSettings() {
     }
   });
 
+  // Falling automation
+  game.settings.register("dnd5e", "disableFalling", {
+    config: true,
+    default: false,
+    hint: "SETTINGS.DND5E.AUTOMATION.Falling.Hint",
+    name: "SETTINGS.DND5E.AUTOMATION.Falling.Name",
+    scope: "world",
+    type: Boolean
+  });
+
+  // Sense-to-token vision sync
+  game.settings.register("dnd5e", "senseVisionSync", {
+    name: "SETTINGS.DND5E.AUTOMATION.SenseVision.Name",
+    hint: "SETTINGS.DND5E.AUTOMATION.SenseVision.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: () => {
+      if ( canvas?.ready ) canvas.draw();
+    }
+  });
+
   // Allow rotating square templates
   game.settings.register("dnd5e", "gridAlignedSquareTemplates", {
     name: "SETTINGS.5eGridAlignedSquareTemplatesN",
@@ -111,7 +156,17 @@ export function registerSystemSettings() {
     name: "SETTINGS.DND5E.LOYALTY.Name",
     hint: "SETTINGS.DND5E.LOYALTY.Hint",
     scope: "world",
-    config: true,
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
+  // Piety
+  game.settings.register("dnd5e", "pietyScore", {
+    name: "SETTINGS.DND5E.PIETY.Name",
+    hint: "SETTINGS.DND5E.PIETY.Hint",
+    scope: "world",
+    config: false,
     default: false,
     type: Boolean
   });
@@ -134,6 +189,17 @@ export function registerSystemSettings() {
     config: true,
     default: false,
     type: Boolean
+  });
+
+  // Disable Exhaustion Automation
+  game.settings.register("dnd5e", "disableExhaustion", {
+    name: "SETTINGS.5eNoExhaustionN",
+    hint: "SETTINGS.5eNoExhaustionL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+    requiresReload: true
   });
 
   // Collapse Item Cards (by default)
@@ -233,29 +299,6 @@ export function registerSystemSettings() {
     default: true
   });
 
-  // Dynamic art.
-  game.settings.registerMenu("dnd5e", "moduleArtConfiguration", {
-    name: "DND5E.ModuleArtConfigN",
-    label: "DND5E.ModuleArtConfigL",
-    hint: "DND5E.ModuleArtConfigH",
-    icon: "fa-solid fa-palette",
-    type: ModuleArtSettingsConfig,
-    restricted: true
-  });
-
-  game.settings.register("dnd5e", "moduleArtConfiguration", {
-    name: "Module Art Configuration",
-    scope: "world",
-    config: false,
-    type: Object,
-    default: {
-      dnd5e: {
-        portraits: true,
-        tokens: true
-      }
-    }
-  });
-
   // Compendium Browser source exclusion
   game.settings.registerMenu("dnd5e", "packSourceConfiguration", {
     name: "DND5E.CompendiumBrowser.Sources.Name",
@@ -332,7 +375,10 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     type: CalendarConfigSetting,
-    onChange: () => dnd5e.ui.calendar?.onUpdateSettings?.()
+    onChange: () => {
+      dnd5e.bastion.initializeUI();
+      dnd5e.ui.calendar?.onUpdateSettings?.();
+    }
   });
 
   game.settings.register("dnd5e", "calendarPreferences", {
@@ -399,12 +445,44 @@ export function registerSystemSettings() {
     default: false
   });
 
+  game.settings.register("dnd5e", "encounterPlacementBehavior", {
+    name: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.Name",
+    hint: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.None",
+      createCombatants: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.CreateCombatants",
+      rollInitiative: "SETTINGS.DND5E.ENCOUNTERS.EncounterPlacementBehavior.RollInitiative"
+    }
+  });
+
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Name",
     hint: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Hint",
     scope: "world",
     config: false,
     default: false,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeGroupCombatants", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupCombatants.Hint",
+    scope: "world",
+    config: false,
+    default: true,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeGroupRoll", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeGroupRoll.Hint",
+    scope: "world",
+    config: false,
+    default: true,
     type: Boolean
   });
 
@@ -419,6 +497,21 @@ export function registerSystemSettings() {
       none: "SETTINGS.DND5E.COMBAT.InitiativeScore.None",
       npcs: "SETTINGS.DND5E.COMBAT.InitiativeScore.NPCs",
       all: "SETTINGS.DND5E.COMBAT.InitiativeScore.All"
+    }
+  });
+
+  game.settings.register("dnd5e", "autoApplyDowned", {
+    name: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Name",
+    hint: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.None",
+      deadOnly: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.DeadOnly",
+      npcs: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.NPCs",
+      all: "SETTINGS.DND5E.COMBAT.AutoApplyDowned.All"
     }
   });
 
@@ -646,6 +739,14 @@ function cacheSettings() {
  * Register additional settings after modules have had a chance to initialize to give them a chance to modify choices.
  */
 export function registerDeferredSettings() {
+  game.settings.register("dnd5e", "defaultDocumentSubtypes", {
+    name: "Default Document Subtypes",
+    scope: "client",
+    config: false,
+    type: Object,
+    default: { Actor: game.user.isGM ? "npc" : "character", Item: "feat" }
+  });
+
   game.settings.register("dnd5e", "theme", {
     name: "SETTINGS.DND5E.THEME.Name",
     hint: "SETTINGS.DND5E.THEME.Hint",
@@ -712,6 +813,15 @@ export function applyLegacyRules() {
   DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
   DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
 
+  // Add exhaustion effects.
+  DND5E.conditionEffects.noMovement.add("exhaustion-5");
+  DND5E.conditionEffects.halfMovement.add("exhaustion-2");
+  DND5E.conditionEffects.halfHealth.add("exhaustion-4");
+  DND5E.conditionEffects.abilityCheckDisadvantage.add("exhaustion-1");
+  DND5E.conditionEffects.abilitySaveDisadvantage.add("exhaustion-3");
+  DND5E.conditionEffects.attackDisadvantage.add("exhaustion-3");
+  delete DND5E.conditionTypes.exhaustion.reduction;
+
   // Incapacitated creatures within 2 size categories still cannot be moved through in legacy
   delete DND5E.conditionTypes.incapacitated.neverBlockMovement;
 
@@ -730,6 +840,29 @@ export function applyLegacyRules() {
 
   // Swap spell lists.
   DND5E.SPELL_LISTS = LEGACY.SPELL_LISTS;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Disable exhaustion automation if applicable.
+ */
+export function disableExhaustionAutomation() {
+  const DND5E = CONFIG.DND5E;
+
+  // Roll and speed reductions (modern) and death at maximum level.
+  delete DND5E.conditionTypes.exhaustion.reduction;
+  delete DND5E.conditionTypes.exhaustion.conditions;
+
+  // Graded condition effects (legacy).
+  for ( const effects of Object.values(DND5E.conditionEffects) ) {
+    for ( const key of effects ) {
+      if ( key.startsWith("exhaustion-") ) effects.delete(key);
+    }
+  }
+
+  // Exhaustion recovered on a long rest.
+  delete DND5E.restTypes.long.exhaustionDelta;
 }
 
 /* -------------------------------------------- */

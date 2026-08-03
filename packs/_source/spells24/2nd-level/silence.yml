@@ -98,24 +98,24 @@ effects:
   - name: Silenced
     origin: Compendium.dnd5e.spells24.Item.phbsplSilence000
     duration:
-      rounds: null
-      startTime: null
-      seconds: 600
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     flags: {}
     img: icons/magic/control/encase-creature-humanoid-hold.webp
     _id: kjbKMAk1y5VUyEoT
     type: base
-    system: {}
-    changes:
-      - key: system.traits.di.value
-        mode: 2
-        value: thunder
-        priority: null
+    system:
+      changes:
+        - key: system.traits.di.value
+          value: thunder
+          priority: null
+          type: add
+          phase: initial
+          _id: RJjPYvOAzW7maELZ
+      magical: true
     description: >-
       <p>Any creature or object entirely inside the Sphere has Immunity to
       Thunder damage, and creatures have the Deafened condition while entirely
@@ -130,13 +130,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1783543976980
+      modifiedTime: 1783543976980
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplSilence000.kjbKMAk1y5VUyEoT'
 folder: 3SjcO2acsFnWegp4
 sort: 500000
@@ -149,11 +152,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425970956
-  modifiedTime: 1745256798254
+  modifiedTime: 1783543976980
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSilence000'

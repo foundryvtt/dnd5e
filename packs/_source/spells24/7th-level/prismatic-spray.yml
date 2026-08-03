@@ -230,17 +230,15 @@ effects:
     transfer: false
     _id: cCQh7iXKnT8PKmc1
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Restrained apply=false] condition and
       makes a [[/save ability=con format=long]] at the end of each of its turns.
@@ -259,13 +257,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724958684378
-      modifiedTime: 1724959126557
+      modifiedTime: 1783543976378
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplPrismaticS.cCQh7iXKnT8PKmc1'
   - name: Teleporting (Violet)
     img: icons/magic/control/silhouette-grow-shrink-blue.webp
@@ -273,17 +274,15 @@ effects:
     transfer: false
     _id: jFAGct9YCYvLJodW
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: 1
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: rounds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>The target has the &amp;Reference[Blinded apply=false] condition and
       makes a [[/save ability=wis format=long]] at the start of your next turn.
@@ -298,13 +297,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 6.0.0
       createdTime: 1724959216304
-      modifiedTime: 1724959310974
+      modifiedTime: 1783543976378
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!phbsplPrismaticS.jFAGct9YCYvLJodW'
 folder: EdAGMG8IF26PLkD3
 sort: 1000000
@@ -317,11 +319,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425967138
-  modifiedTime: 1745256797132
+  modifiedTime: 1783543976378
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPrismaticS'

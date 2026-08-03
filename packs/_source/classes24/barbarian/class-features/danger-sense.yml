@@ -40,21 +40,20 @@ effects:
     origin: Compendium.dnd5e.classes24.Item.phbbrbDangerSens
     _id: lTOwmIJoE8GLm1oy
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.dex.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.dex.save.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: lVFSbJLjCvkkdvoP
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>You have Advantage on Dexterity saving throws unless you have the
       &amp;Reference[Incapacitated] condition.</p>
@@ -70,22 +69,25 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.1.9
+      systemVersion: 6.0.0
       createdTime: 1760130562890
-      modifiedTime: 1760130598140
+      modifiedTime: 1783544101069
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!phbbrbDangerSens.lTOwmIJoE8GLm1oy'
 folder: p6WDpW0gzmKfhGad
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 5.1.9
   createdTime: 1724425956869
-  modifiedTime: 1760130686289
+  modifiedTime: 1783544101069
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

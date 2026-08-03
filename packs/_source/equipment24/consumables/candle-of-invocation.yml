@@ -178,17 +178,15 @@ effects:
     transfer: false
     _id: gN0PgSLPlbsD8T2g
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>While lit, the candle sheds Dim Light in a 30-foot radius. While you
       are within that light, you have Advantage on D20 Tests. In addition, a
@@ -201,13 +199,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1728928218637
-      modifiedTime: 1728928572384
+      modifiedTime: 1783544094281
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgCandleOfInvoc.gN0PgSLPlbsD8T2g'
 flags:
   dnd5e:
@@ -216,11 +217,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712698463
+  modifiedTime: 1783544094281
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

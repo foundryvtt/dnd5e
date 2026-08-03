@@ -6,9 +6,9 @@ type: spell
 system:
   description:
     value: >-
-      <p>You or a creature you touch becomes Invisible until the spell ends.
-      Anything the target is wearing or carrying is Invisible as long as it is
-      on the target's person.</p>
+      <p>You or a creature you touch becomes &amp;reference[Invisible
+      apply=false] until the spell ends. Anything the target is wearing or
+      carrying is Invisible as long as it is on the target's person.</p>
     chat: ''
   source:
     custom: ''
@@ -28,11 +28,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -95,53 +98,56 @@ system:
   identifier: greater-invisibility
 sort: 0
 flags: {}
-img: icons/magic/air/fog-gas-smoke-swirling-gray.webp
+img: icons/creatures/magical/spirit-undead-ghost-purple.webp
 effects:
   - name: Greater Invisibility
     origin: Compendium.dnd5e.spells.Item.tEpDmYZNGc9f5OhJ
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: lhYVl4DD9jyS5gcn
-    changes: []
     description: >-
-      <p>The target becomes Invisible until the spell ends. Anything the target
-      is wearing or carrying is Invisible as long as it is on the target's
+      <p>You become &amp;reference[Invisible apply=false] until the spell ends.
+      Anything you are wearing or carrying is invisible as long as it is on your
       person.</p>
     transfer: false
     statuses:
       - invisible
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     tint: '#ffffff'
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1781379000294
+      modifiedTime: 1781379000294
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
-    img: icons/magic/air/fog-gas-smoke-swirling-gray.webp
+    img: icons/creatures/magical/spirit-undead-ghost-purple.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!tEpDmYZNGc9f5OhJ.lhYVl4DD9jyS5gcn'
 folder: 5auWSClKMDUIV5Ni
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037365994
-  modifiedTime: 1725992723118
+  modifiedTime: 1781379008417
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!tEpDmYZNGc9f5OhJ'

@@ -89,7 +89,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
   async _prepareHeaderContext(context, options) {
     const difficulty = await this.actor.system.getDifficulty();
     context.subtitles = [];
-    if ( difficulty ) context.subtitles.push(game.i18n.localize(`DND5E.ENCOUNTER.Difficulty.${difficulty}`));
+    if ( difficulty ) context.subtitles.push(_loc(`DND5E.ENCOUNTER.Difficulty.${difficulty}`));
     return context;
   }
 
@@ -133,7 +133,7 @@ export default class EncounterActorSheet extends MultiActorSheet {
       member.subtitle = [
         CONFIG.DND5E.actorSizes[system.traits.size]?.label,
         system.details.type.label,
-        game.i18n.format("DND5E.ExperiencePoints.Format", { value: formatter.format(system.details.xp.value) })
+        _loc("DND5E.ExperiencePoints.Format", { value: formatter.format(system.details.xp.value) })
       ].filterJoin(" • ");
       member.underlay = `var(--underlay-npc-${system.details.type.value})`;
       member.showFormula = context.editable || (quantity.formula && (quantity.value === null));

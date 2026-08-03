@@ -1,6 +1,4 @@
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
-import DamageRoll from "../dice/damage-roll.mjs";
-import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
@@ -27,6 +25,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {boolean}
    */
   get canApplyDamage() {
+    if ( this.system?.canApplyDamage === false ) return false;
     const type = this.flags.dnd5e?.roll?.type;
     if ( type && (type !== "damage") ) return false;
     return this.isRoll && this.isContentVisible && !!canvas.tokens?.controlled.length;
@@ -39,7 +38,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {boolean}
    */
   get canSelectTargets() {
-    if ( this.flags.dnd5e?.roll?.type !== "attack" ) return false;
+    if ( this.type !== "attack" ) return false;
     return this.isRoll && this.isContentVisible;
   }
 
@@ -122,7 +121,6 @@ export default class ChatMessage5e extends ChatMessage {
       await this.system.getHTML(html, options);
     } else {
       this._displayChatActionButtons(html);
-      this._highlightCriticalSuccessFailure(html);
       if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
         html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
       }
@@ -197,69 +195,6 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
-   * Highlight critical success or failure on d20 rolls.
-   * @param {HTMLElement} html  Rendered contents of the message.
-   * @protected
-   */
-  _highlightCriticalSuccessFailure(html) {
-    if ( !this.isContentVisible || !this.rolls.length ) return;
-    const originatingMessage = this.getOriginatingMessage();
-    const displayChallenge = originatingMessage?.shouldDisplayChallenge;
-    const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
-    const forceSuccess = this.flags.dnd5e?.roll?.forceSuccess === true;
-
-    /**
-     * Create an icon to indicate success or failure.
-     * @param {string} cls  The icon class.
-     * @returns {HTMLElement}
-     */
-    function makeIcon(cls) {
-      const icon = document.createElement("i");
-      icon.classList.add("fas", cls);
-      icon.setAttribute("inert", "");
-      return icon;
-    }
-
-    // Highlight rolls where the first part is a d20 roll
-    const totals = html.querySelectorAll(".dice-total");
-    for ( let [index, d20Roll] of this.rolls.entries() ) {
-
-      const d0 = d20Roll.dice[0];
-      if ( (d0?.faces !== 20) || (d0?.values.length !== 1) ) continue;
-
-      d20Roll = dnd5e.dice.D20Roll.fromRoll(d20Roll);
-      const d = d20Roll.dice[0];
-
-      const isModifiedRoll = ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure;
-      if ( isModifiedRoll ) continue;
-
-      // Highlight successes and failures
-      const total = totals[index];
-      if ( !total ) continue;
-      // Only attack rolls and death saves can crit or fumble.
-      const canCrit = ["attack", "death"].includes(this.getFlag("dnd5e", "roll.type"));
-      const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
-      const showResult = isAttack ? displayAttackResult : displayChallenge;
-      if ( d.options.target && showResult ) {
-        if ( d20Roll.isSuccess || forceSuccess ) total.classList.add("success");
-        else total.classList.add("failure");
-      }
-      if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
-      if ( canCrit && d20Roll.isFumble && !forceSuccess ) total.classList.add("fumble");
-
-      const icons = document.createElement("div");
-      icons.classList.add("icons");
-      if ( total.classList.contains("critical") ) icons.append(makeIcon("fa-check"), makeIcon("fa-check"));
-      else if ( total.classList.contains("fumble") ) icons.append(makeIcon("fa-xmark"), makeIcon("fa-xmark"));
-      else if ( total.classList.contains("success") ) icons.append(makeIcon("fa-check"));
-      else if ( total.classList.contains("failure") ) icons.append(makeIcon("fa-xmark"));
-      if ( icons.children.length ) total.append(icons);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Augment the chat card markup for additional styling.
    * @param {HTMLElement} html  The chat card markup.
    * @protected
@@ -323,7 +258,7 @@ export default class ChatMessage5e extends ChatMessage {
     if ( !game.user.isGM ) deleteButton?.remove();
     else deleteButton?.querySelector("i").classList.add("fa-fw");
     const anchor = document.createElement("a");
-    anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
+    anchor.setAttribute("aria-label", _loc("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
     anchor.dataset.contextMenu = "";
     anchor.innerHTML = '<i class="fas fa-ellipsis-vertical fa-fw"></i>';
@@ -336,51 +271,8 @@ export default class ChatMessage5e extends ChatMessage {
       el.replaceWith(icon);
     });
 
-    // Enriched roll flavor
-    const roll = this.getFlag("dnd5e", "roll");
-    const item = this.getAssociatedItem();
-    const activity = this.getAssociatedActivity();
-    if ( this.isContentVisible && item && roll ) {
-      const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
-      const subtitle = roll.type === "damage"
-        ? isCritical
-          ? game.i18n.localize("DND5E.CriticalHit")
-          : activity?.damageFlavor ?? game.i18n.localize("DND5E.DamageRoll")
-        : roll.type === "attack"
-          ? (activity?.getActionLabel(roll.attackMode) ?? "")
-          : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
-      const flavor = document.createElement("div");
-      flavor.classList.add("chat-card");
-      flavor.innerHTML = `
-        <section class="card-header description ${isCritical ? "critical" : ""}">
-          <header class="summary">
-            <div class="name-stacked">
-              <span class="subtitle">${subtitle}</span>
-            </div>
-          </header>
-        </section>
-      `;
-      const icon = document.createElement("img");
-      Object.assign(icon, { className: "gold-icon", src: item.img, alt: item.name });
-      flavor.querySelector("header").insertAdjacentElement("afterbegin", icon);
-      const title = document.createElement("span");
-      title.classList.add("title");
-      title.append(item.name);
-      flavor.querySelector(".name-stacked").insertAdjacentElement("afterbegin", title);
-      html.querySelector(".message-header .flavor-text").remove();
-      html.querySelector(".message-content").insertAdjacentElement("afterbegin", flavor);
-    }
-
-    // Attack targets
-    this._enrichAttackTargets(html);
-
     // Dice rolls
     if ( this.isContentVisible ) {
-      html.querySelectorAll(".dice-tooltip").forEach((el, i) => {
-        if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
-      });
-      this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
-      this._enrichSaveTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
@@ -389,284 +281,6 @@ export default class ChatMessage5e extends ChatMessage {
     avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
     avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
     avatar.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Augment roll tooltips with some additional information and styling.
-   * @param {Roll} roll            The roll instance.
-   * @param {HTMLDivElement} html  The roll tooltip markup.
-   */
-  _enrichRollTooltip(roll, html) {
-    const constant = Number(simplifyRollFormula(roll._formula, { deterministic: true }));
-    if ( !constant ) return;
-    const sign = constant < 0 ? "-" : "+";
-    const part = document.createElement("section");
-    part.classList.add("tooltip-part", "constant");
-    part.innerHTML = `
-      <div class="dice">
-        <ol class="dice-rolls"></ol>
-        <div class="total">
-          <span class="value"><span class="sign">${sign}</span>${Math.abs(constant)}</span>
-        </div>
-      </div>
-    `;
-    html.appendChild(part);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Augment attack cards with additional information.
-   * @param {HTMLLIElement} html   The chat card.
-   * @protected
-   */
-  _enrichAttackTargets(html) {
-    const attackRoll = this.rolls[0];
-    if ( !(attackRoll instanceof dnd5e.dice.D20Roll) ) return;
-
-    const masteryConfig = CONFIG.DND5E.weaponMasteries[attackRoll.options.mastery];
-    if ( masteryConfig ) {
-      const p = document.createElement("p");
-      p.classList.add("supplement");
-      let mastery = masteryConfig.label;
-      if ( masteryConfig.reference ) mastery = `
-        <a class="content-link" draggable="true" data-link data-uuid="${masteryConfig.reference}"
-           data-tooltip="${mastery}">${mastery}</a>
-      `;
-      p.innerHTML = `<strong>${game.i18n.format("DND5E.WEAPON.Mastery.Flavor")}</strong> ${mastery}`;
-      (html.querySelector(".chat-card") ?? html.querySelector(".message-content"))?.appendChild(p);
-    }
-
-    const visibility = game.settings.get("dnd5e", "attackRollVisibility");
-    const isVisible = game.user.isGM || (visibility !== "none");
-    if ( !isVisible ) return;
-
-    const targets = this.getFlag("dnd5e", "targets");
-    if ( !targets?.length ) return;
-    const tray = document.createElement("div");
-    tray.innerHTML = `
-      <div class="card-tray targets-tray collapsible collapsed">
-        <label class="roboto-upper">
-          <i class="fas fa-bullseye" inert></i>
-          <span>${game.i18n.localize("DND5E.TargetPl")}</span>
-          <i class="fas fa-caret-down" inert></i>
-        </label>
-        <div class="collapsible-content">
-          <ul class="unlist evaluation wrapper"></ul>
-        </div>
-      </div>
-    `;
-    const evaluation = tray.querySelector("ul");
-    const rows = targets.map(({ name, ac, uuid }) => {
-      const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
-      if ( !game.user.isGM && (visibility !== "all") ) ac = "";
-      const li = document.createElement("li");
-      Object.assign(li.dataset, { uuid, miss: isMiss });
-      li.className = `target ${isMiss ? "miss" : "hit"}`;
-      li.innerHTML = `
-        <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
-        <div class="name"></div>
-        ${(ac !== "") ? `
-        <div class="ac">
-          <i class="fas fa-shield-halved"></i>
-          <span>${(ac === null) ? "&infin;" : ac}</span>
-        </div>
-        ` : ""}
-      `;
-      li.querySelector(".name").append(name);
-      return li;
-    }).sort((a, b) => {
-      const missA = Boolean(a.dataset.miss);
-      const missB = Boolean(b.dataset.miss);
-      return missA === missB ? 0 : missA ? 1 : -1;
-    });
-    evaluation.append(...rows);
-    evaluation.querySelectorAll("li.target").forEach(target => {
-      target.addEventListener("click", this._onTargetMouseDown.bind(this));
-      target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
-      target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
-    });
-    html.querySelector(".message-content")?.appendChild(tray);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Coalesce damage rolls into a single breakdown.
-   * @param {DamageRoll[]} rolls  The damage rolls.
-   * @param {HTMLElement} html    The chat card markup.
-   * @protected
-   */
-  _enrichDamageTooltip(rolls, html) {
-    if ( !rolls.length ) return;
-    const aggregatedRolls = CONFIG.DND5E.aggregateDamageDisplay ? aggregateDamageRolls(rolls) : rolls;
-    let { formula, total, breakdown } = aggregatedRolls.reduce((obj, r) => {
-      obj.formula.push(CONFIG.DND5E.aggregateDamageDisplay ? r.formula : ` + ${r.formula}`);
-      obj.total += Math.max(0, r.total);
-      obj.breakdown.push(this._simplifyDamageRoll(r));
-      return obj;
-    }, { formula: [], total: 0, breakdown: [] });
-    formula = formula.join("").replace(/^ \+ /, "");
-    html.querySelectorAll(".dice-roll").forEach(el => el.remove());
-    const roll = document.createElement("div");
-    roll.classList.add("dice-roll");
-
-    const tooltipContents = breakdown.reduce((str, { type, total, constant, dice, icon, method }) => {
-      const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
-      return `${str}
-        <section class="tooltip-part">
-          <div class="dice">
-            ${icon
-              ? `<span class="part-method" data-tooltip aria-label="${game.i18n.localize(method)}">${icon}</span>` : ""}
-            <ol class="dice-rolls">
-              ${dice.reduce((str, { result, classes }) => `
-                ${str}<li class="roll ${classes}">${result}</li>
-              `, "")}
-              ${constant ? `
-              <li class="constant"><span class="sign">${constant < 0 ? "-" : "+"}</span>${Math.abs(constant)}</li>
-              ` : ""}
-            </ol>
-            <div class="total">
-              ${config ? `<img src="${config.icon}" alt="${config.label}">` : ""}
-              <span class="label">${config?.labelShort ?? config?.label ?? ""}</span>
-              <span class="value">${total}</span>
-            </div>
-          </div>
-        </section>
-      `;
-    }, "");
-
-    roll.innerHTML = `
-      <div class="dice-result">
-        <div class="dice-formula">${formula}</div>
-        <div class="dice-tooltip-collapser">
-          <div class="dice-tooltip">
-            ${tooltipContents}
-          </div>
-        </div>
-        <h4 class="dice-total">${total}</h4>
-      </div>
-    `;
-    html.querySelector(".message-content").appendChild(roll);
-
-    const damageOnSave = this.getFlag("dnd5e", "roll.damageOnSave");
-    if ( damageOnSave ) {
-      const p = document.createElement("p");
-      p.classList.add("supplement");
-      p.innerHTML = `<strong>${game.i18n.format("DND5E.SAVE.OnSave")}</strong> ${
-        game.i18n.localize(`DND5E.SAVE.FIELDS.damage.onSave.${damageOnSave.capitalize()}`)
-      }`;
-      html.querySelector(".chat-card, .message-content")?.appendChild(p);
-    }
-
-    if ( game.user.isGM ) {
-      const damageApplication = document.createElement("damage-application");
-      damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
-        value: Math.max(0, roll.total),
-        type: roll.options.type,
-        properties: new Set(roll.options.properties ?? [])
-      }));
-      html.querySelector(".message-content").appendChild(damageApplication);
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Simplify damage roll information for use by damage tooltip.
-   * @param {DamageRoll} roll   The damage roll to simplify.
-   * @returns {object}          The object holding simplified damage roll data.
-   * @protected
-   */
-  _simplifyDamageRoll(roll) {
-    const { OperatorTerm, NumericTerm, DiceTerm, PoolTerm } = foundry.dice.terms;
-    const termResultClasses = ["success", "failure", "rerolled", "exploded", "discarded"];
-    const aggregate = {
-      type: roll.options.type, total: Math.max(0, roll.total), constant: 0, dice: [], icon: null, method: null
-    };
-    let hasMultiplication = false;
-    for ( let i = roll.terms.length - 1; i >= 0; ) {
-      const term = roll.terms[i--];
-      if ( !(term instanceof NumericTerm) && !(term instanceof DiceTerm) && !(term instanceof PoolTerm) ) {
-        continue;
-      }
-      const value = term.total;
-      if ( term instanceof DiceTerm ) {
-        const tooltipData = term.getTooltipData();
-        aggregate.dice.push(...tooltipData.rolls);
-        aggregate.icon ??= tooltipData.icon;
-        aggregate.method ??= tooltipData.method;
-      }
-      if ( term instanceof PoolTerm ) {
-        term.rolls.forEach((poolTermRoll, i) => {
-          // Get simplified data for each roll
-          const simplified = this._simplifyDamageRoll(poolTermRoll);
-          const result = term.results[i];
-          // Apply main result classes to individual dice
-          simplified.dice.forEach(die => {
-            const resultClasses = termResultClasses.filter(c => result[c]).join(" ");
-            if ( resultClasses.length ) die.classes += ` ${resultClasses}`;
-          });
-          aggregate.dice.push(...simplified.dice);
-          aggregate.icon ??= simplified.icon;
-          aggregate.method ??= simplified.method;
-        });
-      }
-      let multiplier = 1;
-      let operator = roll.terms[i];
-      while ( operator instanceof OperatorTerm ) {
-        if ( !["+", "-"].includes(operator.operator) ) hasMultiplication = true;
-        if ( operator.operator === "-" ) multiplier *= -1;
-        operator = roll.terms[--i];
-      }
-      if ( term instanceof NumericTerm ) aggregate.constant += value * multiplier;
-    }
-    if ( hasMultiplication ) aggregate.constant = null;
-    return aggregate;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Display option to resist a failed save using a legendary resistance.
-   * @param {HTMLLIElement} html  The chat card.
-   * @protected
-   */
-  _enrichSaveTooltip(html) {
-    const actor = this.getAssociatedActor();
-    const roll = this.getFlag("dnd5e", "roll");
-    if ( !actor?.system.isNPC || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
-
-    const content = document.createElement("div");
-    content.classList.add("chat-card");
-
-    // If message has the `forceSuccess` flag, mark it as resisted
-    if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
-      <p class="supplement">
-        <strong>${game.i18n.localize("DND5E.ROLL.Status")}</strong>
-        ${game.i18n.localize("DND5E.LegendaryResistance.Resisted")}
-      </p>
-    `);
-
-    // Otherwise if actor has legendary resistances remaining, display resist button
-    else if ( actor.system.resources.legres.value && actor.isOwner ) {
-      content.insertAdjacentHTML("beforeend", `
-        <div class="card-buttons">
-          <button type="button">
-            <i class="fa-solid fa-dragon" inert></i>
-            ${game.i18n.localize("DND5E.LegendaryResistance.Action.Resist")}
-          </button>
-        </div>
-      `);
-      const button = content.querySelector("button");
-      button.addEventListener("click", () => actor.system.resistSave(this));
-    }
-
-    else return;
-
-    html.querySelector(".message-content").append(content);
   }
 
   /* -------------------------------------------- */
@@ -687,53 +301,53 @@ export default class ChatMessage5e extends ChatMessage {
     const canTarget = li => game.messages.get(li.dataset.messageId)?.canSelectTargets;
     options.push(
       {
-        name: game.i18n.localize("DND5E.ChatContextDamage"),
-        icon: '<i class="fas fa-user-minus"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 1),
-        group: "damage"
+        label: _loc("DND5E.ChatContextDamage"),
+        icon: "fa-solid fa-user-minus",
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 1)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHealing"),
-        icon: '<i class="fas fa-user-plus"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, -1),
-        group: "damage"
+        label: _loc("DND5E.ChatContextHealing"),
+        icon: "fa-solid fa-user-plus",
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, -1)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextTempHP"),
-        icon: '<i class="fas fa-user-clock"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardTemp(li),
-        group: "damage"
+        label: _loc("DND5E.ChatContextTempHP"),
+        icon: "fa-solid fa-user-clock",
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardTemp(target)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
-        icon: '<i class="fas fa-user-injured"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 2),
-        group: "damage"
+        label: _loc("DND5E.ChatContextDoubleDamage"),
+        icon: "fa-solid fa-user-injured",
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 2)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
-        icon: '<i class="fas fa-user-shield"></i>',
-        condition: canApply,
-        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 0.5),
-        group: "damage"
+        label: _loc("DND5E.ChatContextHalfDamage"),
+        icon: "fa-solid fa-user-shield",
+        group: "damage",
+        visible: canApply,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 0.5)
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextSelectHit"),
-        icon: '<i class="fas fa-bullseye"></i>',
-        condition: canTarget,
-        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "hit"),
-        group: "attack"
+        label: _loc("DND5E.ChatContextSelectHit"),
+        icon: "fa-solid fa-bullseye",
+        group: "attack",
+        visible: canTarget,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "hit")
       },
       {
-        name: game.i18n.localize("DND5E.ChatContextSelectMiss"),
-        icon: '<i class="fas fa-bullseye"></i>',
-        condition: canTarget,
-        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "miss"),
-        group: "attack"
+        label: _loc("DND5E.ChatContextSelectMiss"),
+        icon: "fa-solid fa-bullseye",
+        group: "attack",
+        visible: canTarget,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "miss")
       }
     );
     return options;
@@ -874,7 +488,7 @@ export default class ChatMessage5e extends ChatMessage {
     const close = html.querySelector(".header-button.close");
     if ( close ) {
       close.innerHTML = '<i class="fas fa-times"></i>';
-      close.dataset.tooltip = game.i18n.localize("Close");
+      close.dataset.tooltip = _loc("Close");
       close.setAttribute("aria-label", close.dataset.tooltip);
     }
     html.querySelector(".message-metadata [data-context-menu]")?.remove();
@@ -955,12 +569,17 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Get the Activity that created this chat card.
+   * @param {object} [options={}]
+   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Activity|void}
    */
-  getAssociatedActivity() {
+  getAssociatedActivity({ scaled=false }={}) {
     const activity = fromUuidSync(this.getFlag("dnd5e", "activity.uuid"), { strict: false });
-    if ( activity ) return activity;
-    return this.getAssociatedItem()?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
+    if ( activity ) {
+      const scaling = scaled ? this.system.scaling : null;
+      return scaling ? activity.item.scaledClone(scaling).system.activities.get(activity.id) : activity;
+    }
+    return this.getAssociatedItem({ scaled })?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
   }
 
   /* -------------------------------------------- */
@@ -982,15 +601,18 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Get the item associated with this chat card.
+   * @param {object} [options={}]
+   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Item5e|void}
    */
-  getAssociatedItem() {
+  getAssociatedItem({ scaled=false }={}) {
     const item = fromUuidSync(this.getFlag("dnd5e", "item.uuid"), { strict: false });
-    if ( item ) return item;
+    const scaling = scaled ? this.system.scaling : null;
+    if ( item ) return scaling ? item.scaledClone(scaling) : item;
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
     const storedData = this.getFlag("dnd5e", "item.data") ?? this.getOriginatingMessage().getFlag("dnd5e", "item.data");
-    if ( storedData ) return new Item.implementation(storedData, { parent: actor });
+    if ( storedData ) return new Item.implementation(storedData, { parent: actor }).scaledClone(scaling);
   }
 
   /* -------------------------------------------- */

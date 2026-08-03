@@ -1,7 +1,7 @@
 import Advancement from "./advancement.mjs";
 import SizeConfig from "../../applications/advancement/size-config.mjs";
 import SizeFlow from "../../applications/advancement/size-flow.mjs";
-import { SizeConfigurationData, SizeValueData } from "../../data/advancement/size.mjs";
+import { SizeConfigurationData, SizeValueData } from "../../data/advancement/size-data.mjs";
 
 /**
  * Advancement that handles player size.
@@ -18,8 +18,8 @@ export default class SizeAdvancement extends Advancement {
       order: 25,
       icon: "icons/environment/wilderness/tree-ash.webp",
       typeIcon: "systems/dnd5e/icons/svg/size.svg",
-      title: game.i18n.localize("DND5E.ADVANCEMENT.Size.Title"),
-      hint: game.i18n.localize("DND5E.ADVANCEMENT.Size.Hint"),
+      title: _loc("DND5E.ADVANCEMENT.Size.Title"),
+      hint: _loc("DND5E.ADVANCEMENT.Size.Hint"),
       apps: {
         config: SizeConfig,
         flow: SizeFlow
@@ -38,13 +38,13 @@ export default class SizeAdvancement extends Advancement {
   get automaticHint() {
     if ( !this.configuration.sizes.size ) return "";
     if ( this.configuration.sizes.size === 1 ) {
-      return `<p>${game.i18n.format("DND5E.ADVANCEMENT.Size.DefaultHint.Single", {
+      return `<p>${_loc("DND5E.ADVANCEMENT.Size.DefaultHint.Single", {
         size: CONFIG.DND5E.actorSizes[this.configuration.sizes.first()].label
       })}</p>`;
     }
 
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { type: "disjunction" });
-    return `<p>${game.i18n.format("DND5E.ADVANCEMENT.Size.DefaultHint.Multiple", {
+    return `<p>${_loc("DND5E.ADVANCEMENT.Size.DefaultHint.Multiple", {
       sizes: listFormatter.format(this.configuration.sizes.map(s => CONFIG.DND5E.actorSizes[s].label))
     })}</p>`;
   }

@@ -130,46 +130,57 @@ effects:
     img: systems/dnd5e/icons/spell-tiers/spell3.webp
     disabled: true
     _id: CzJMRNHYWlVNvnJN
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: Vicious {}
-        priority: null
-      - key: system.rarity
-        mode: 5
-        value: rare
-        priority: null
-      - key: system.description.value
-        mode: 5
-        value: >-
-          {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
-          caption=false]</p>
-        priority: null
-      - key: system.properties
-        mode: 2
-        value: mgc
-        priority: null
-      - key: system.damage.base.bonus
-        mode: 2
-        value: 2d6
-        priority: null
-      - key: system.price.value
-        mode: 2
-        value: '4000'
-        priority: null
-      - key: system.price.denomination
-        mode: 5
-        value: gp
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: Vicious {}
+          priority: null
+          type: override
+          phase: initial
+          _id: W4CK40Vg3nIx7yG1
+        - key: system.rarity
+          value: rare
+          priority: null
+          type: override
+          phase: initial
+          _id: 8Otau7F3GDgrCWHX
+        - key: system.description.value
+          value: >-
+            {}<p>@Embed[Compendium.dnd5e.equipment24.Item.dmgViciousWeapon
+            caption=false]</p>
+          priority: null
+          type: override
+          phase: initial
+          _id: 4oLYiCjrPpbr1FLs
+        - key: system.properties
+          value: mgc
+          priority: null
+          type: add
+          phase: initial
+          _id: Phe1Jy0QSECJkhsC
+        - key: system.damage.base.bonus
+          value: 2d6
+          priority: null
+          type: add
+          phase: initial
+          _id: f8UEF8l1nfW74aAe
+        - key: system.price.value
+          value: 4000
+          priority: null
+          type: add
+          phase: initial
+          _id: KB15jLRVGJtwVoLQ
+        - key: system.price.denomination
+          value: gp
+          priority: null
+          type: override
+          phase: initial
+          _id: Pi9tN6PM33yAWgwS
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -180,13 +191,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1730222742876
-      modifiedTime: 1731087950403
+      modifiedTime: 1783544099270
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!dmgViciousWeapon.CzJMRNHYWlVNvnJN'
 folder: kie870i5kr7yuxO8
 flags:
@@ -196,11 +210,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1727883376108
-  modifiedTime: 1745712704476
+  modifiedTime: 1783544099270
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 16000000

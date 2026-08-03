@@ -7,16 +7,16 @@ system:
   description:
     value: >-
       <p>This spell reverses gravity in a 50-foot-radius, 100-foot high Cylinder
-      centered on a point within range. All creatures and Objects that aren't
+      centered on a point within range. All creatures and objects that aren't
       somehow anchored to the ground in the area fall upward and reach the top
       of the area when you cast this spell. A creature can make a Dexterity
       saving throw to grab onto a fixed object it can reach, thus avoiding the
       fall.</p><p>If some solid object (such as a ceiling) is encountered in
-      this fall, Falling Objects and creatures strike it just as they would
+      this fall, falling objects and creatures strike it just as they would
       during a normal downward fall. If an object or creature reaches the top of
       the area without striking anything, it remains there, oscillating
-      slightly, for the Duration.</p><p>At the end of the Duration, affected
-      Objects and creatures fall back down.</p>
+      slightly, for the duration.</p><p>At the end of the duration, affected
+      objects and creatures fall back down.</p>
     chat: ''
   source:
     custom: ''
@@ -34,14 +34,18 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cylinder
       size: '50'
       contiguous: false
+      height: '100'
+      count: '1'
   range:
     value: '100'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -66,32 +70,42 @@ system:
       _id: dnd5eactivity000
       type: save
       activation:
-        type: action
+        type: special
         value: null
-        override: false
+        override: true
+        condition: ''
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: true
+        spellSlot: false
       description:
         chatFlavor: ''
+        value: >-
+          <p>A creature can make a Dexterity saving throw to grab onto a fixed
+          object it can reach, thus avoiding the fall.</p>
       duration:
         units: inst
         concentration: false
-        override: false
+        override: true
       effects: []
       range:
-        override: false
+        override: true
+        special: ''
+        units: touch
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          type: ''
         affects:
           choice: false
-        override: false
+          type: ''
+          count: ''
+          special: ''
+        override: true
       damage:
         onSave: half
         parts: []
@@ -100,23 +114,76 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 200000
+      name: Grab Fixed Object Save
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+    kQCUtqvQ2Rt07RYM:
+      type: utility
+      name: Cast
+      _id: kQCUtqvQ2Rt07RYM
+      img: null
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      roll:
+        prompt: false
+        visible: false
   identifier: reverse-gravity
 sort: 0
 flags: {}
-img: icons/magic/control/debuff-energy-hold-yellow.webp
+img: icons/magic/earth/orb-ringed-lava-black-orange.webp
 effects: []
 folder: irCSpQWIMtp978TA
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037351513
-  modifiedTime: 1725992718269
+  modifiedTime: 1781466685575
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ERCv7yuRkQ0YjGx6'

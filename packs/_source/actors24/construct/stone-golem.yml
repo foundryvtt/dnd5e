@@ -488,12 +488,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 2
     scaleY: 2
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -537,7 +534,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -557,6 +554,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 2
 items:
   - _id: mmImmutableForm0
     name: Immutable Form
@@ -600,10 +598,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmImmutableForm0
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -650,10 +650,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -747,10 +749,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -911,10 +915,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSlam0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -1077,10 +1083,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmForceBolt00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -1196,10 +1204,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSlow0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -1374,50 +1384,19 @@ items:
       identifier: slow
       method: spell
       prepared: 0
+      sourceItem: feat:slow
     type: spell
     img: icons/magic/time/clock-stopwatch-white-blue.webp
     effects:
       - name: Slowed
         origin: Compendium.dnd5e.spells24.Item.phbsplSlow000000
         duration:
-          startTime: null
-          seconds: 60
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         _id: z1lkguBohjqXRSHm
-        changes:
-          - key: system.attributes.ac.bonus
-            mode: 2
-            value: '-2'
-            priority: null
-          - key: system.attributes.movement.burrow
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.climb
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.fly
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.swim
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.attributes.movement.walk
-            mode: 1
-            value: '0.5'
-            priority: null
-          - key: system.abilities.dex.bonuses.save
-            mode: 2
-            value: '-2'
-            priority: null
         description: >-
           <p>An affected target’s Speed is halved, it takes a −2 penalty to AC
           and Dexterity saving throws, and it can’t take Reactions. On its
@@ -1437,67 +1416,139 @@ items:
             Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544183312
+          modifiedTime: 1783544183312
         img: icons/magic/time/clock-stopwatch-white-blue.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.bonus
+              value: -2
+              priority: null
+              type: add
+              phase: initial
+              _id: R2USByg6xXbERJaw
+            - key: system.attributes.movement.burrow
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: yW5EYw8NZCNlA6Al
+            - key: system.attributes.movement.climb
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: XsZccetBN99bw1Q4
+            - key: system.attributes.movement.fly
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: 20uCZ0ytUfJzTmfa
+            - key: system.attributes.movement.swim
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: hcFYiBbG4xBjtBSA
+            - key: system.attributes.movement.walk
+              value: 0.5
+              priority: null
+              type: multiply
+              phase: initial
+              _id: SCBcIVHW30rPZiTo
+            - key: system.abilities.dex.bonuses.save
+              value: -2
+              priority: null
+              type: add
+              phase: initial
+              _id: uldR3KPAam1WbjhE
+          magical: true
         sort: 0
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmStoneGolem0000.rHwlDG85kUcrUFdg.z1lkguBohjqXRSHm
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmStoneGolem0000.Item.mmSlow0000000000.Activity.NJu26YkznURRXRCV
-        changes:
-          - key: system.activation
-            mode: 5
-            value: '{"type":"bonus","value":null,"condition":""}'
-            priority: null
-          - key: system.ability
-            mode: 5
-            value: con
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.activation
+              value:
+                type: bonus
+                value: null
+                condition: ''
+              priority: null
+              type: override
+              phase: initial
+              _id: En29hVnEXPKwryzY
+            - key: system.ability
+              value: con
+              priority: null
+              type: override
+              phase: initial
+              _id: 6tcWA6Vj7yDKGDtw
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: bhKM7hr1301A7oyE
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: 1R5EbuXL179069CU
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: mzs4dZmR2DmXOsbe
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmStoneGolem0000.Item.mmSlow0000000000.Activity.NJu26YkznURRXRCV
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544183312
+          modifiedTime: 1783544183312
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmStoneGolem0000.rHwlDG85kUcrUFdg.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -1511,10 +1562,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSlow000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544183312
+      modifiedTime: 1783544183312
     _id: rHwlDG85kUcrUFdg
     _key: '!actors.items!mmStoneGolem0000.rHwlDG85kUcrUFdg'
 effects: []
@@ -1525,11 +1578,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452715113
-  modifiedTime: 1771452715113
+  systemVersion: 6.0.0
+  createdTime: 1783544183311
+  modifiedTime: 1783544183311
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

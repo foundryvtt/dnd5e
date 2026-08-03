@@ -446,9 +446,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -463,7 +460,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -483,55 +480,8 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 3
 items:
-  - _id: 4xg2sYoD5Z4lRmkT
-    name: Keen Smell
-    type: feat
-    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The giant has advantage on Wisdom (Perception) checks that rely on
-          smell.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: keen-smell
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.345'
-      systemId: dnd5e
-      systemVersion: 5.1.0
-      createdTime: null
-      modifiedTime: 1749402404311
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!Aw2wmqGIatxe2ImI.4xg2sYoD5Z4lRmkT'
   - _id: WFfPQjdkfYdIIiZT
     name: Innate Spellcasting
     type: feat
@@ -583,7 +533,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
@@ -598,8 +548,8 @@ items:
     system:
       description:
         value: >-
-          <p>The giant makes two [[/item .Jr0CfxY8xuFT6hoa]]{morningstar}
-          attacks.</p>
+          <p>The [[lookup @name lowercase]]{monster} makes two [[/item
+          .Jr0CfxY8xuFT6hoa]]{morningstar} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -613,13 +563,12 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        95UsNhVD3twhqoZ5:
           type: utility
           activation:
             type: action
@@ -634,15 +583,16 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -653,7 +603,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -670,7 +621,15 @@ items:
             name: ''
             prompt: false
             visible: false
-          sort: 0
+          sort: 100000
+          img: null
+          flags: {}
+          visibility:
+            level: {}
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+          _id: 95UsNhVD3twhqoZ5
       enchant: {}
       prerequisites:
         level: null
@@ -684,11 +643,11 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745273655466
+      systemVersion: 6.0.0
+      createdTime: 1781805381920
+      modifiedTime: 1781805385753
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Aw2wmqGIatxe2ImI.pH1i4SwsZRV3rq3v'
@@ -699,7 +658,9 @@ items:
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Cloud Giant attacks with its Morningstar.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -763,7 +724,7 @@ items:
         conditions: ''
       properties:
         - rch
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -772,8 +733,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        HQWZhf9d6XWrPvqH:
           type: attack
           activation:
             type: action
@@ -788,10 +748,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -808,7 +769,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -821,24 +783,37 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: HQWZhf9d6XWrPvqH
+          name: ''
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: morningstar
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -848,22 +823,24 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.dX8AxCh9o0A9CkT3
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745107550546
+      systemVersion: 6.0.0
+      createdTime: 1781805027846
+      modifiedTime: 1781805038926
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Aw2wmqGIatxe2ImI.Jr0CfxY8xuFT6hoa'
   - _id: NXgSHbDNtVbxsItU
     name: Rock
     type: weapon
-    img: icons/magic/earth/projectile-stone-ball-brown.webp
+    img: icons/magic/earth/projectile-boulder-yellow.webp
     system:
       description:
         value: <p>[[/attack extended]]. [[/damage extended]].</p>
-        chat: <p>The Cloud Giant attacks with its Rock.</p>
+        chat: >-
+          <p>The [[lookup @name]]{monster} attacks with its [[lookup
+          @item.name]].</p>
       source:
         custom: ''
         book: ''
@@ -926,9 +903,8 @@ items:
         dt: null
         conditions: ''
       properties:
-        - amm
         - thr
-      proficient: 1
+      proficient: null
       unidentified:
         description: ''
       type:
@@ -937,8 +913,7 @@ items:
       container: null
       crewed: false
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        zmkWHVvAQsGR0LOl:
           type: attack
           activation:
             type: action
@@ -953,10 +928,11 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -973,7 +949,8 @@ items:
               size: ''
               width: ''
               height: ''
-              units: ''
+              units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -993,17 +970,31 @@ items:
             flat: false
             type:
               value: ranged
-              classification: weapon
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: 100000
+          img: ''
+          flags: {}
+          visibility:
+            level:
+              min: null
+              max: null
+            requireAttunement: false
+            requireIdentification: false
+            requireMagic: false
+            identifier: ''
+          _id: zmkWHVvAQsGR0LOl
+          name: ''
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: rock
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1013,11 +1004,11 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745173385099
+      systemVersion: 6.0.0
+      createdTime: 1781805044389
+      modifiedTime: 1781805216605
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!Aw2wmqGIatxe2ImI.NXgSHbDNtVbxsItU'
@@ -1130,7 +1121,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1247,7 +1238,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1366,7 +1357,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1488,7 +1479,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pub0OWVEB71XQx1n
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1612,7 +1603,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1729,7 +1720,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.wqfAVANuQonNBgnL
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -1874,7 +1865,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.HQfd7jJyULIoGxrZ
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2052,7 +2043,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2185,7 +2176,7 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -2193,6 +2184,59 @@ items:
       lastModifiedBy: null
       exportSource: null
     _key: '!actors.items!Aw2wmqGIatxe2ImI.2IWiZAJtOGDoKjiz'
+  - _id: rbM3ahm1bp8koa8s
+    name: Keen Smell
+    type: feat
+    img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The [[lookup @name lowercase]]{monster} has advantage on Wisdom
+          (Perception) checks that rely on smell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: monster
+        subtype: ''
+      requirements: ''
+      properties:
+        - trait
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+        items: []
+        repeatable: false
+      identifier: keen-smell
+      advancement: {}
+      crewed: false
+    effects: []
+    folder: UIqfXYMLB6oOsW3Z
+    sort: -100000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsters.Actor.oQvORD924obyPdCc.Item.hwviWX3lRj9wqENj
+      duplicateSource: Item.gcfYCrt0yFVt4QF4
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1781804999642
+      modifiedTime: 1781804999642
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    _key: '!actors.items!Aw2wmqGIatxe2ImI.rbM3ahm1bp8koa8s'
 effects: []
 folder: v8gFGdEluEFQdRQg
 sort: 0
@@ -2201,7 +2245,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171210419

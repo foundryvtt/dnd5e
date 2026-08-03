@@ -7,21 +7,14 @@ system:
   description:
     value: >-
       <p>You imbue a creature you touch with positive energy to undo a
-      debilitating effect. You can reduce the target's Exhaustion level by one,
-      or end one of the following Effects on the target:</p>
-
-      <ul>
-
-      <li>One effect that Charmed or Petrified the target</li>
-
-      <li>One curse, including the target's Attunement to a cursed magic
-      item</li>
-
-      <li>Any reduction to one of the target's Ability Scores</li>
-
-      <li>One effect reducing the target's hit point maximum</li>
-
-      </ul>
+      debilitating effect. You can reduce the target's &amp;reference[Exhaustion
+      apply=false] level by one, or end one of the following effects on the
+      target:</p><ul><li><p>One effect that &amp;reference[Charmed apply=false]
+      or &amp;reference[Petrified apply=false] the target</p></li><li><p>One
+      curse, including the target's attunement to a cursed magic
+      item</p></li><li><p>Any reduction to one of the target's Ability
+      Scores</p></li><li><p>One effect reducing the target's hit point
+      maximum</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -41,11 +34,14 @@ system:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
       units: ''
       contiguous: false
+      type: ''
   range:
     units: touch
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -103,20 +99,27 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Cast
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
   identifier: greater-restoration
 sort: 0
 flags: {}
-img: icons/magic/life/heart-cross-strong-flame-blue.webp
+img: icons/magic/nature/leaf-glow-maple-teal.webp
 effects: []
 folder: bG9QTayc46rfNkv2
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037358060
-  modifiedTime: 1725992720448
+  modifiedTime: 1781391411326
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!WzvJ7G3cqvIubsLk'

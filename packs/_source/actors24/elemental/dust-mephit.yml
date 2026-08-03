@@ -486,12 +486,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -535,7 +532,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -555,6 +552,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmDeathBurst0000
     name: Death Burst
@@ -678,10 +676,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDeathBurst0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -818,10 +818,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmClaw0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -941,17 +943,14 @@ items:
         transfer: false
         _id: uNffaKFUEBaATXHm
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
         disabled: false
         duration:
-          startTime: null
-          seconds: null
-          combat: null
-          rounds: 1
-          turns: 1
-          startRound: null
-          startTurn: null
+          value: 1
+          units: turns
+          expiry: turnStart
+          expired: false
         description: >-
           <p>The target has the &amp;Reference[Blinded apply=false] condition
           until the end of the user's next turn.</p>
@@ -964,10 +963,15 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
           systemVersion: 5.3.0
           lastModifiedBy: null
+          createdTime: null
+          modifiedTime: null
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmDustMephit0000.mmBlindingBreath.uNffaKFUEBaATXHm
     flags:
@@ -979,10 +983,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBlindingBreath
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -1094,10 +1100,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSleep000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -1215,26 +1223,25 @@ items:
       identifier: sleep
       method: spell
       prepared: 0
+      sourceItem: feat:sleep
     type: spell
     img: icons/magic/control/hypnosis-mesmerism-pendulum.webp
     effects:
       - name: Sleeping
         origin: Compendium.dnd5e.spells24.Item.phbsplSleep00000
         duration:
-          rounds: null
-          startTime: null
-          seconds: 60
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 60
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/control/sleep-bubble-purple.webp
         _id: 04Wa4xUzjA31kPno
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>The target has the &amp;Reference[incapacitated apply=false]
           condition until the end of its next turn, at which point it must
@@ -1251,55 +1258,76 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544177551
+          modifiedTime: 1783544177551
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmDustMephit0000.CF13ievxQ48W9L9w.04Wa4xUzjA31kPno
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmDustMephit0000.Item.mmSleep000000000.Activity.cSodzDxxCJH0nwai
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-vocal'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-somatic'
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-vocal'
+              priority: null
+              type: add
+              phase: initial
+              _id: 561V8wZccKDE1NLE
+            - key: system.properties
+              value: '-somatic'
+              priority: null
+              type: add
+              phase: initial
+              _id: 2vaAYLP1rujmouR0
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: ILmNuhxp8mCVAolQ
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmDustMephit0000.Item.mmSleep000000000.Activity.cSodzDxxCJH0nwai
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544177551
+          modifiedTime: 1783544177551
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmDustMephit0000.CF13ievxQ48W9L9w.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1313,10 +1341,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSleep00000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544177551
+      modifiedTime: 1783544177551
     _id: CF13ievxQ48W9L9w
     _key: '!actors.items!mmDustMephit0000.CF13ievxQ48W9L9w'
 effects: []
@@ -1325,11 +1355,11 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452701218
-  modifiedTime: 1771452701218
+  systemVersion: 6.0.0
+  createdTime: 1783544177550
+  modifiedTime: 1783544177550
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

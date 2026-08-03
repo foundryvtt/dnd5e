@@ -149,21 +149,20 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures24.Item.mmOceanSpear0000
     _id: JXXj1j2cUhRFmmaN
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.walk
-        mode: 2
-        value: '-10'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.walk
+          value: -10
+          priority: null
+          type: add
+          phase: initial
+          _id: 4Q12gmrpT2B157mX
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: 1
-      startRound: null
-      startTurn: null
+      value: 1
+      units: turns
+      expiry: turnStart
+      expired: false
     description: >-
       <p>If the target is a creature, its Speed decreases by 10 feet until the
       end of its next turn.</p>
@@ -175,13 +174,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.346'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 6.0.0
       createdTime: 1736291778115
-      modifiedTime: 1736291941279
+      modifiedTime: 1783544086886
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mmOceanSpear0000.JXXj1j2cUhRFmmaN'
 flags:
   dnd5e:
@@ -190,11 +192,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.364'
   systemId: dnd5e
   systemVersion: 4.2.0
   createdTime: 1733432292956
-  modifiedTime: 1737151112635
+  modifiedTime: 1783544086886
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 13900000

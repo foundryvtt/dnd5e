@@ -483,12 +483,9 @@ prototypeToken:
     src: null
     anchorX: 0.5
     anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
     fit: contain
     scaleX: 1
     scaleY: 1
-    rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
   lockRotation: false
@@ -532,7 +529,7 @@ prototypeToken:
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   occludable:
     radius: 0
   ring:
@@ -552,6 +549,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - _id: mmAmphibious0000
     name: Amphibious
@@ -595,10 +593,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 0
@@ -1010,10 +1010,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCovenMagic0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 1
@@ -1129,6 +1131,7 @@ items:
       identifier: augury
       method: spell
       prepared: 0
+      sourceItem: feat:coven-magic
     type: spell
     img: icons/sundries/gaming/playing-cards-black.webp
     effects:
@@ -1136,41 +1139,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.8ju3sHk7cBC4KmcD
-        changes:
-          - key: system.ability
-            mode: 5
-            value: int
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: int
+              priority: null
+              type: override
+              phase: initial
+              _id: F1BZE1Pc8bUuzTw1
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: lGnQcm3zyLvB90ud
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.8ju3sHk7cBC4KmcD
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179483
+          modifiedTime: 1783544179483
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.3rCVpd7aieYnPHwB.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1184,10 +1201,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplAugury0000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179482
+      modifiedTime: 1783544179482
     _id: 3rCVpd7aieYnPHwB
     _key: '!actors.items!mmGreenHag000000.3rCVpd7aieYnPHwB'
   - name: Find Familiar
@@ -1348,6 +1367,7 @@ items:
       identifier: find-familiar
       method: spell
       prepared: 0
+      sourceItem: feat:coven-magic
     type: spell
     img: icons/creatures/mammals/spirit-deer-herd-blue.webp
     effects:
@@ -1355,41 +1375,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.tFMa0R3ASrW58hwK
-        changes:
-          - key: system.ability
-            mode: 5
-            value: int
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: int
+              priority: null
+              type: override
+              phase: initial
+              _id: l5BWyDswPGBFfTPw
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: Joh8tzwuIV4BWkDL
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.tFMa0R3ASrW58hwK
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179483
+          modifiedTime: 1783544179483
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.ijY9hc5b4AQkz5ZS.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1403,10 +1437,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFindFamili
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179483
+      modifiedTime: 1783544179483
     _id: ijY9hc5b4AQkz5ZS
     _key: '!actors.items!mmGreenHag000000.ijY9hc5b4AQkz5ZS'
   - name: Identify
@@ -1512,6 +1548,7 @@ items:
       identifier: identify
       method: spell
       prepared: 0
+      sourceItem: feat:coven-magic
     type: spell
     img: icons/tools/scribal/magnifying-glass.webp
     effects:
@@ -1519,41 +1556,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.vT617J2KBufcrx7f
-        changes:
-          - key: system.ability
-            mode: 5
-            value: int
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: int
+              priority: null
+              type: override
+              phase: initial
+              _id: rjBpZkN1eq87Yzlb
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: fJJ3ifUR7ki9kUYf
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.vT617J2KBufcrx7f
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179484
+          modifiedTime: 1783544179484
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.kUzXgVwiKDTtw9Mo.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1567,10 +1618,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplIdentify00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179484
+      modifiedTime: 1783544179484
     _id: kUzXgVwiKDTtw9Mo
     _key: '!actors.items!mmGreenHag000000.kUzXgVwiKDTtw9Mo'
   - name: Locate Object
@@ -1681,6 +1734,7 @@ items:
       identifier: locate-object
       method: spell
       prepared: 0
+      sourceItem: feat:coven-magic
     type: spell
     img: icons/tools/navigation/map-marked-gold.webp
     effects:
@@ -1688,41 +1742,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.N6ny9K2f4ckcSvXq
-        changes:
-          - key: system.ability
-            mode: 5
-            value: int
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: int
+              priority: null
+              type: override
+              phase: initial
+              _id: ovU61qyyZkEZVuP8
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: WN73Md4mniS5RYeu
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.N6ny9K2f4ckcSvXq
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179485
+          modifiedTime: 1783544179485
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.amFlR7cm6e8cdMEg.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1739,10 +1807,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLocateObje
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179484
+      modifiedTime: 1783544179484
     _id: amFlR7cm6e8cdMEg
     _key: '!actors.items!mmGreenHag000000.amFlR7cm6e8cdMEg'
   - name: Scrying
@@ -2364,6 +2434,7 @@ items:
       identifier: scrying
       method: spell
       prepared: 0
+      sourceItem: feat:coven-magic
     type: spell
     img: icons/magic/perception/orb-crystal-ball-scrying-blue.webp
     effects:
@@ -2371,41 +2442,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.1LYa3YdeNryXGv4z
-        changes:
-          - key: system.ability
-            mode: 5
-            value: int
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: int
+              priority: null
+              type: override
+              phase: initial
+              _id: BfMoGeDlTRKZdH8E
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: M8mHONu5j5cRnDMp
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.1LYa3YdeNryXGv4z
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179485
+          modifiedTime: 1783544179485
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.LsZ3LIUekPUB0IAu.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2419,10 +2504,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScrying000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179485
+      modifiedTime: 1783544179485
     _id: LsZ3LIUekPUB0IAu
     _key: '!actors.items!mmGreenHag000000.LsZ3LIUekPUB0IAu'
   - name: Unseen Servant
@@ -2559,6 +2646,7 @@ items:
       identifier: unseen-servant
       method: spell
       prepared: 0
+      sourceItem: feat:coven-magic
     type: spell
     img: icons/creatures/magical/humanoid-silhouette-aliens-green.webp
     effects:
@@ -2566,41 +2654,55 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.IsLR26jWhhHrcdgh
-        changes:
-          - key: system.ability
-            mode: 5
-            value: int
-            priority: null
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.ability
+              value: int
+              priority: null
+              type: override
+              phase: initial
+              _id: wYxawdYkox4RKuPu
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: jjuRZC1lWE27JEH0
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmCovenMagic0000.Activity.IsLR26jWhhHrcdgh
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179486
+          modifiedTime: 1783544179486
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.NpwyLKMMy9agOfxL.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2614,10 +2716,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplUnseenServ
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179485
+      modifiedTime: 1783544179485
     _id: NpwyLKMMy9agOfxL
     _key: '!actors.items!mmGreenHag000000.NpwyLKMMy9agOfxL'
   - _id: mmMimicry0000000
@@ -2722,10 +2826,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMimicry0000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 2
@@ -2827,10 +2933,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 3
@@ -2991,10 +3099,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmClaw0000000000
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 4
@@ -3322,10 +3432,12 @@ items:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
       systemVersion: 5.3.0
       lastModifiedBy: null
+      createdTime: null
+      modifiedTime: null
     ownership:
       default: 0
     sort: 5
@@ -3520,6 +3632,7 @@ items:
       identifier: dancing-lights
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/light/light-candles-lit-white.webp
     effects:
@@ -3527,37 +3640,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.SmjbRqSgfdMvDEXe
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: 9V30067BiMuTOVlW
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.SmjbRqSgfdMvDEXe
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179486
+          modifiedTime: 1783544179486
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.WHzIxRkgJHT6dAcb.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -3571,10 +3696,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDancingLig
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179486
+      modifiedTime: 1783544179486
     _id: WHzIxRkgJHT6dAcb
     _key: '!actors.items!mmGreenHag000000.WHzIxRkgJHT6dAcb'
   - name: Disguise Self
@@ -3688,26 +3815,25 @@ items:
       identifier: disguise-self
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/equipment/head/mask-carved-bird-grey-pink.webp
     effects:
       - name: Disguised
         origin: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
         duration:
-          rounds: null
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: icons/magic/control/silhouette-aura-energy.webp
         _id: SrIb7dbaZs5F4zi9
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p><span style="font-family:Signika, sans-serif">To discern that you
           are disguised, a creature must take the Study action to inspect your
@@ -3721,47 +3847,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179486
+          modifiedTime: 1783544179486
+        start: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.3SIvYE13BfHn7qvz.SrIb7dbaZs5F4zi9
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.lOqIlUmpbGB62aiJ
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: s4PP29MV172XRi6Q
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.lOqIlUmpbGB62aiJ
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179486
+          modifiedTime: 1783544179486
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.3SIvYE13BfHn7qvz.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -3775,10 +3918,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179486
+      modifiedTime: 1783544179486
     _id: 3SIvYE13BfHn7qvz
     _key: '!actors.items!mmGreenHag000000.3SIvYE13BfHn7qvz'
   - name: Invisibility
@@ -3886,26 +4031,25 @@ items:
       identifier: invisibility
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/creatures/magical/spirit-undead-ghost-purple.webp
     effects:
       - name: Invisible
         origin: Compendium.dnd5e.spells24.Item.phbsplInvisibili
         duration:
-          rounds: null
-          startTime: null
-          seconds: 3600
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 3600
+          units: seconds
+          expiry: turnStart
+          expired: false
         disabled: false
         flags: {}
         img: systems/dnd5e/icons/svg/statuses/invisible.svg
         _id: 9svfDetqjhsFP3ey
         type: base
-        system: {}
-        changes: []
+        system:
+          changes: []
+          magical: true
         description: >-
           <p>The spell ends early immediately after the target makes an attack
           roll, deals damage, or casts a spell.</p>
@@ -3918,47 +4062,64 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179487
+          modifiedTime: 1783544179487
+        showIcon: 2
+        start: null
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.P1WohR9zwkV78Jwb.9svfDetqjhsFP3ey
       - _id: dnd5espellchange
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.IwyEZMg6lpOAkscT
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: 8JAqQxHYTN4N9HYB
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.IwyEZMg6lpOAkscT
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179487
+          modifiedTime: 1783544179487
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.P1WohR9zwkV78Jwb.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -3972,10 +4133,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplInvisibili
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179487
+      modifiedTime: 1783544179487
     _id: P1WohR9zwkV78Jwb
     _key: '!actors.items!mmGreenHag000000.P1WohR9zwkV78Jwb'
   - name: Minor Illusion
@@ -4126,6 +4289,7 @@ items:
       identifier: minor-illusion
       method: spell
       prepared: 2
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/sundries/gaming/playing-cards.webp
     effects:
@@ -4133,37 +4297,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.HS7IMtG7X42Hrw91
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: vq5gZN3qne8WFdX7
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.HS7IMtG7X42Hrw91
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179487
+          modifiedTime: 1783544179487
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.lQDlH8pdy1WcUTMT.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -4177,10 +4353,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMinorIllus
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179487
+      modifiedTime: 1783544179487
     _id: lQDlH8pdy1WcUTMT
     _key: '!actors.items!mmGreenHag000000.lQDlH8pdy1WcUTMT'
   - name: Ray of Sickness
@@ -4304,6 +4482,7 @@ items:
       identifier: ray-of-sickness
       method: spell
       prepared: 0
+      sourceItem: feat:spellcasting
     type: spell
     img: icons/magic/unholy/beam-impact-green.webp
     effects:
@@ -4311,37 +4490,49 @@ items:
         type: enchantment
         name: Spell Changes
         img: systems/dnd5e/icons/svg/activity/cast.svg
-        origin: >-
-          Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.NDhxy35O9XezhDFg
-        changes:
-          - key: system.properties
-            mode: 2
-            value: '-material'
-            priority: null
-        system: {}
+        origin: null
+        system:
+          changes:
+            - key: system.properties
+              value: '-material'
+              priority: null
+              type: add
+              phase: initial
+              _id: AIA8pHMC7sY9xtay
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         description: ''
         tint: '#ffffff'
         transfer: true
         statuses: []
         sort: 0
-        flags: {}
+        flags:
+          core:
+            originText: >-
+              Compendium.dnd5e.actors24.Actor.mmGreenHag000000.Item.mmSpellcasting00.Activity.NDhxy35O9XezhDFg
         _stats:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '13.351'
+          coreVersion: '14.364'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1783544179488
+          modifiedTime: 1783544179488
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.b6RHBNfOpyYoM3zy.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -4355,10 +4546,12 @@ items:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRayofSickn
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.364'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1783544179488
+      modifiedTime: 1783544179488
     _id: b6RHBNfOpyYoM3zy
     _key: '!actors.items!mmGreenHag000000.b6RHBNfOpyYoM3zy'
 effects: []
@@ -4369,11 +4562,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.364'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452705699
-  modifiedTime: 1771452705699
+  systemVersion: 6.0.0
+  createdTime: 1783544179481
+  modifiedTime: 1783544179481
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

@@ -45,7 +45,7 @@ export class CalendarHarptos extends CalendarData5e {
   /** @inheritDoc */
   static formatMonthDay(calendar, components, options) {
     const festivalDay = calendar.findFestivalDay(components);
-    return festivalDay ? game.i18n.localize(festivalDay.name) : CalendarHarptos.formatLocalized(
+    return festivalDay ? _loc(festivalDay.name) : CalendarHarptos.formatLocalized(
       "DND5E.CALENDAR.Harptos.Formatters.DayMonth", calendar, components, options
     );
   }
@@ -57,8 +57,8 @@ export class CalendarHarptos extends CalendarData5e {
     const festivalDay = calendar.findFestivalDay(components);
     if ( festivalDay ) {
       const context = CalendarData5e.dateFormattingParts(calendar, components);
-      context.day = game.i18n.localize(festivalDay.name);
-      return game.i18n.format("DND5E.CALENDAR.Harptos.Formatters.FestivalDayYear", context);
+      context.day = _loc(festivalDay.name);
+      return _loc("DND5E.CALENDAR.Harptos.Formatters.FestivalDayYear", context);
     }
     return CalendarHarptos.formatLocalized(
       "DND5E.CALENDAR.Harptos.Formatters.DayMonthYear", calendar, components, options
