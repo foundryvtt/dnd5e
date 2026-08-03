@@ -109,6 +109,16 @@ export default class ToolData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Which ability score modifier is used by this item?
+   * @type {string|null}
+   */
+  get abilityMod() {
+    return this.ability || "int";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Properties displayed in chat.
    * @type {string[]}
    */
@@ -128,12 +138,9 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
-  /**
-   * Which ability score modifier is used by this item?
-   * @type {string|null}
-   */
-  get abilityMod() {
-    return this.ability || "int";
+  /** @override */
+  get hasProficiency() {
+    return true;
   }
 
   /* -------------------------------------------- */

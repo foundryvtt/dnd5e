@@ -138,6 +138,13 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
+  get hasProficiency() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   static get itemCategories() {
     return CONFIG.DND5E.consumableTypes;
   }
