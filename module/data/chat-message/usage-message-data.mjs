@@ -25,7 +25,8 @@ export default class UsageMessageData extends ItemMessageData {
       ...super.defineSchema(),
       activity: new SchemaField({
         ...this._sourceFields(),
-        chatFlavor: new StringField()
+        chatFlavor: new StringField(),
+        uuid: new StringField({ blank: false, nullable: false, required: true })
       }),
       buttons: new ArrayField(new SchemaField({
         action: new StringField({ blank: false, required: true }),

@@ -68,7 +68,13 @@
       "save": {},
       "timePassed": {},
       "turn": {},
-      "usage": {}
+      "usage": {
+        "filePathFields": {
+          "activity.img": ["IMAGE"],
+          "item.img": ["IMAGE"]
+        },
+        "htmlFields": ["description"]
+      }
     },
     "Item": {
       "weapon": {
