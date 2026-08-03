@@ -1,4 +1,4 @@
-import { formatLength, formatNumber } from "../../utils.mjs";
+import { defaultUnits, formatLength, formatNumber, formatWeight } from "../../utils.mjs";
 import ActivationField from "./activation-field.mjs";
 import DurationField from "./duration-field.mjs";
 import RangeField from "./range-field.mjs";
@@ -33,7 +33,10 @@ export default class PropertyField extends TypedSchemaField {
       reach: {},
       target: {},
       text: { text: new StringField() },
-      weight: { value: new NumberField() }
+      weight: {
+        units: new StringField({ blank: false, initial: () => defaultUnits("weight"), required: true }),
+        value: new NumberField()
+      }
     }, options, context);
   }
 
@@ -85,7 +88,7 @@ export default class PropertyField extends TypedSchemaField {
           return labels.template.statblock || labels.affects.sheet;
         }
         case "text": return p.text;
-        case "weight": return `${p.value} ${_loc("DND5E.AbbreviationLbs")}`;
+        case "weight": return formatWeight(p.value, p.units);
         default: return null;
       }
     }).filter(_ => _);

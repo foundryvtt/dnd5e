@@ -99,7 +99,7 @@ export default class LootData extends ItemDataModel.mixin(
   get chatProperties() {
     return [
       { type: "text", text: this.type.label },
-      this.weight ? { type: "weight", value: this.weight.value } : null,
+      this.weight ? { ...this.weight, type: "weight" } : null,
       { type: "price", denomination: this.price.denomination, value: this.price.value }
     ].filter(_ => _);
   }
