@@ -14,7 +14,7 @@ export default class TargetsField extends ArrayField {
     super(new SchemaField({
       ac: new NumberField({ integer: true }),
       actor: new DocumentUUIDField({ type: "Actor" }),
-      img: new FilePathField({ categories: ["IMAGE"] }),
+      img: new FilePathField({ categories: ["IMAGE", "VIDEO"] }),
       name: new StringField(),
       token: new DocumentUUIDField({ type: "Token" })
     }), options);

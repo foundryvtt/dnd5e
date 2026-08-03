@@ -46,32 +46,66 @@
       }
     },
     "ChatMessage": {
-      "attack": {},
+      "attack": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
       "bastionAttack": {},
       "bastionOrder": {},
       "bastionTurn": {},
-      "check": {},
-      "damage": {},
-      "generic": {},
-      "healing": {},
-      "hitDie": {},
-      "hitPoints": {},
+      "check": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
+      "damage": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
+      "generic": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
+      "healing": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
+      "hitDie": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
+      "hitPoints": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
       "item": {
         "filePathFields": {
-          "item.img": ["IMAGE"]
+          "item.img": ["IMAGE"],
+          "targets.*.img": ["IMAGE", "VIDEO"]
         },
         "htmlFields": ["description"]
       },
       "prompt": {},
       "request": {},
       "rest": {},
-      "save": {},
+      "save": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
       "timePassed": {},
       "turn": {},
       "usage": {
         "filePathFields": {
           "activity.img": ["IMAGE"],
-          "item.img": ["IMAGE"]
+          "item.img": ["IMAGE"],
+          "targets.*.img": ["IMAGE", "VIDEO"]
         },
         "htmlFields": ["description"]
       }
