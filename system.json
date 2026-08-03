@@ -56,7 +56,12 @@
       "healing": {},
       "hitDie": {},
       "hitPoints": {},
-      "item": {},
+      "item": {
+        "filePathFields": {
+          "item.img": ["IMAGE"]
+        },
+        "htmlFields": ["description"]
+      },
       "prompt": {},
       "request": {},
       "rest": {},
