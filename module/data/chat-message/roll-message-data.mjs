@@ -2,7 +2,7 @@ import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 import SourceReferenceField from "./fields/source-reference-field.mjs";
 import TargetsField from "./fields/targets-field.mjs";
 
-const { DocumentUUIDField } = foundry.data.fields;
+const { DocumentUUIDField, ForeignDocumentField } = foundry.data.fields;
 
 /**
  * @import { RollMessageSystemData } from "./_types.mjs";
@@ -33,6 +33,7 @@ export default class RollMessageData extends ChatMessageDataModel {
       item: new SourceReferenceField({
         compendiumSource: new DocumentUUIDField()
       }, { initial: null, nullable: true }),
+      origin: new ForeignDocumentField(foundry.documents.BaseChatMessage),
       targets: new TargetsField()
     };
   }

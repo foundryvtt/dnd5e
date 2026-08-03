@@ -10,6 +10,7 @@
  * @typedef RollMessageSystemData
  * @property {SourceReferenceData|null} activity  Activity that created this message, if any.
  * @property {ItemReferenceData|null} item        Item that created this message, if any.
+ * @property {ChatMessage5e|null} origin          The message that spawned this one.
  * @property {TargetDescriptor5e[]} targets       Tokens this message was rolled against.
  */
 

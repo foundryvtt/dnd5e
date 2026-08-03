@@ -791,6 +791,9 @@ export function migrateMessageData(messageData) {
   const targets = flags?.dnd5e?.targets?.map(({ ac, img, name, uuid }) => ({ ac, img, name, actor: uuid }));
   if ( targets ) updateData["flags.dnd5e.targets"] = _del;
 
+  const origin = flags?.dnd5e?.originatingMessage;
+  if ( origin ) updateData["flags.dnd5e.originatingMessage"] = _del;
+
   const sources = {};
   for ( const key of ["activity", "item"] ) {
     const { id, type, uuid } = flags?.dnd5e?.[key] ?? {};
@@ -801,11 +804,9 @@ export function migrateMessageData(messageData) {
   }
 
   if ( messageData.type !== "base" ) {
-    const schema = CONFIG.ChatMessage.dataModels[messageData.type]?.schema;
-    if ( targets && schema?.has("targets") ) updateData["system.targets"] = targets;
-    for ( const [key, source] of Object.entries(sources) ) {
-      if ( schema?.has(key) ) updateData[`system.${key}`] = source;
-    }
+    if ( origin ) updateData["system.origin"] = origin;
+    if ( targets ) updateData["system.targets"] = targets;
+    for ( const [key, source] of Object.entries(sources) ) updateData[`system.${key}`] = source;
     return updateData;
   }
 
@@ -847,18 +848,18 @@ export function migrateMessageData(messageData) {
       ?? CONFIG.DND5E.tools[roll.toolId]?.ability
       ?? "int";
     updateData.type = "check";
-    updateData.system = _replace({ ability, skill: roll.skillId, tool: roll.toolId });
+    updateData.system = _replace({ ability, origin, skill: roll.skillId, tool: roll.toolId });
   }
 
   else if ( rollType === "save" ) {
     const roll = flags.dnd5e.roll;
     updateData.type = "save";
-    updateData.system = _replace({ ability: roll.ability, resisted: roll.forceSuccess });
+    updateData.system = _replace({ origin, ability: roll.ability, resisted: roll.forceSuccess });
   }
 
   else if ( rollType === "death" ) {
     updateData.type = "save";
-    updateData.system = _replace({ type: "death" });
+    updateData.system = _replace({ origin, type: "death" });
   }
 
   else if ( rollType === "attack" ) {
@@ -866,7 +867,7 @@ export function migrateMessageData(messageData) {
     updateData.type = "attack";
     updateData.system = _replace({
       ...sources,
-      targets,
+      origin, targets,
       ability: roll.ability,
       ammunition: roll.ammunition,
       deltas: roll.ammunitionData ? { deleted: [roll.ammunitionData] } : null,
@@ -877,23 +878,23 @@ export function migrateMessageData(messageData) {
 
   else if ( (rollType === "damage") || (rollType === "healing") ) {
     updateData.type = rollType;
-    updateData.system = _replace({ ...sources, targets, onSave: flags.dnd5e.roll.damageOnSave ?? null });
+    updateData.system = _replace({ ...sources, origin, targets, onSave: flags.dnd5e.roll.damageOnSave ?? null });
   }
 
   /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.
   else if ( rollType === "generic" ) {
     updateData.type = "generic";
-    updateData.system = _replace({ ...sources, targets });
+    updateData.system = _replace({ ...sources, origin, targets });
   }
 
   else if ( rollType === "hitDie" ) {
     updateData.type = "hitDie";
-    updateData.system = _replace({});
+    updateData.system = _replace({ origin });
   }
 
   else if ( rollType === "hitPoints" ) {
     updateData.type = "hitPoints";
-    updateData.system = _replace({});
+    updateData.system = _replace({ origin });
   }*/
 
   if ( updateData.type ) {
