@@ -155,7 +155,7 @@ export default class FeatData extends ItemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
-    return [this.requirements];
+    return this.cardProperties;
   }
 
   /* -------------------------------------------- */
@@ -165,7 +165,7 @@ export default class FeatData extends ItemDataModel.mixin(
    * @type {string[]}
    */
   get cardProperties() {
-    return [this.requirements];
+    return this.requirements ? [{ type: "text", text: this.requirements }] : [];
   }
 
   /* -------------------------------------------- */

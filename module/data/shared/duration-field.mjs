@@ -41,7 +41,7 @@ export default class DurationField extends SchemaField {
     } else {
       labels.simple = CONFIG.DND5E.timePeriods[duration.units] ?? "";
     }
-    labels.concentration = duration.concentration || properties?.has("concentration")
+    labels.concentration = duration.concentration || properties?.has?.("concentration")
       ? _loc("DND5E.CONCENTRATION.Duration", { duration: labels.simple }) : labels.simple;
     return labels;
   }

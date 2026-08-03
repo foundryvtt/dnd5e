@@ -121,10 +121,10 @@ export default class ConsumableData extends ItemDataModel.mixin(
    */
   get chatProperties() {
     return [
-      this.type.label,
-      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${_loc("DND5E.Charges")}` : null,
-      this.priceLabel
-    ];
+      { type: "text", text: this.type.label },
+      this.hasLimitedUses ? { type: "charges", max: this.uses.max, value: this.uses.value } : null,
+      { type: "price", denomination: this.price.denomination, value: this.price.value }
+    ].filter(_ => _);
   }
 
   /* -------------------------------------------- */

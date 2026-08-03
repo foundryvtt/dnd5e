@@ -1,4 +1,5 @@
 import * as Trait from "../../documents/actor/trait.mjs";
+import PropertyField from "../shared/property-field.mjs";
 import SystemDataModel from "./system-data-model.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -140,16 +141,6 @@ export default class ItemDataModel extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Parts making up the subtitle on the item's tooltip.
-   * @type {string[]}
-   */
-  get tooltipSubtitle() {
-    return [this.type?.label ?? _loc(CONFIG.Item.typeLabels[this.parent.type])];
-  }
-
-  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -188,7 +179,7 @@ export default class ItemDataModel extends SystemDataModel {
   async richTooltip(enrichmentOptions={}) {
     return {
       content: await foundry.applications.handlebars.renderTemplate(
-        this.constructor.ITEM_TOOLTIP_TEMPLATE, await this.getCardData(enrichmentOptions)
+        this.constructor.ITEM_TOOLTIP_TEMPLATE, await this.getTooltipData(enrichmentOptions)
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "item-tooltip", "themed", "theme-light"]
     };
@@ -197,57 +188,92 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Prepare item card template data.
-   * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
-   * @param {Activity} [enrichmentOptions.activity]     Specific activity on item to use for customizing the data.
-   * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
+   * Capture the item data displayed on a chat card.
+   * @param {EnrichmentOptions} [options={}]        Options for text enrichment.
+   * @param {Activity} [options.activity]           Specific activity on item to use for customizing the data.
+   * @param {boolean|null} [options.identified]     Treat the item as having this identified state, rather than its
+   *                                                own, when deciding what to include.
    * @returns {Promise<object>}
    */
-  async getCardData({ activity, extras, ...enrichmentOptions }={}) {
+  async getCardData({ activity, identified, ...enrichmentOptions }={}) {
+    const { description: desc, unidentified } = this;
+    const { _stats, id, img, name, type, uuid } = this.parent;
+    identified ??= this.identified ?? null;
+
+    enrichmentOptions.rollData ??= (activity ?? this.parent).getRollData();
+    enrichmentOptions.relativeTo ??= this.parent;
+
+    const source = (await activity?.getCardData()) ?? {};
+    const usage = this.getUsageData({ activity });
+
+    let description = source.description ?? "";
+    description ||= (identified === false) ? unidentified?.description : (desc.chat || desc.value);
+
+    return {
+      identified, ...usage,
+      activity: source.activity ?? {},
+      concealed: game.user.isGM && dnd5e.settings.concealItemDescriptions && !desc.chat,
+      description: await TextEditor.enrichHTML(description || "", enrichmentOptions),
+      item: {
+        id, img, name, type, uuid, compendiumSource: _stats.compendiumSource, properties: this.properties ?? new Set()
+      },
+      level: enrichmentOptions.rollData.item?.level ?? null,
+      properties: (identified === false) ? [] : [
+        ...this.cardProperties ?? [],
+        ...PropertyField.getUsageProperties(usage),
+        ...this.equippableItemCardProperties ?? []
+      ],
+      subtitle: [this.type?.label ?? _loc(CONFIG.Item.typeLabels[type])]
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Resolve the data describing how this item is used, taken from the activity being used, otherwise the first
+   * activity that has an activation. Item types with intrinsic usage data supply their own.
+   * @param {object} [options]
+   * @param {Activity} [options.activity]  Specific activity being used.
+   * @returns {UsageData}
+   */
+  getUsageData({ activity }={}) {
+    const source = activity ?? this.activities?.find(a => ("activation" in a) && !a.isHidden);
+    return { activation: null, duration: null, range: null, target: null, ...source?.getUsageData() };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare item tooltip template data.
+   * @param {EnrichmentOptions} [options={}]  Options for text enrichment.
+   * @param {Activity} [options.activity]     Specific activity on item to use for customizing the data.
+   * @param {string} [options.extras]         Extra HTML displayed with the tooltip.
+   * @returns {Promise<object>}
+   */
+  async getTooltipData({ activity, extras, ...enrichmentOptions }={}) {
+    enrichmentOptions.rollData ??= (activity ?? this.parent).getRollData();
+    enrichmentOptions.relativeTo ??= this.parent;
+    const options = { activity, ...enrichmentOptions };
+    if ( game.user.isGM ) options.identified = true;
+    const context = await this.getCardData(options);
+
     const { name, type, img } = this.parent;
-    let {
-      price, weight, uses, identified, unidentified, description, school, materials
-    } = this;
-    const rollData = (activity ?? this.parent).getRollData();
-    const isIdentified = identified !== false;
+    const { description: desc, unidentified } = this;
+    const description = (context.identified === false) ? unidentified?.description : desc.value;
+    let { identified, price, uses } = this;
     uses = this.hasLimitedUses && (game.user.isGM || identified) ? uses : null;
     price = game.user.isGM || identified ? price : null;
 
-    enrichmentOptions = { rollData, relativeTo: this.parent, ...enrichmentOptions };
-    const context = {
-      name, type, img, price, weight, uses, school, materials, extras,
+    Object.assign(context, {
+      name, type, img, price, uses, extras,
       config: CONFIG.DND5E,
-      controlHints: game.settings.get("dnd5e", "controlHints"),
+      controlHints: dnd5e.settings.controlHints,
+      description: await TextEditor.enrichHTML(description || "", enrichmentOptions),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
-      tags: this.parent.labels?.components?.tags,
-      subtitle: this.tooltipSubtitle.filterJoin(" • "),
-      description: {
-        value: await TextEditor.enrichHTML(
-          (game.user.isGM || isIdentified ? description.value : unidentified?.description) ?? "",
-          enrichmentOptions
-        ),
-        chat: await TextEditor.enrichHTML(
-          activity?.description?.value
-            || (isIdentified ? description.chat || description.value : unidentified?.description)
-            || "",
-          enrichmentOptions
-        ),
-        concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !description.chat
-      }
-    };
-
-    context.properties = [];
-
-    if ( game.user.isGM || isIdentified ) {
-      context.properties.push(
-        ...this.cardProperties ?? [],
-        ...Object.values((activity ? activity?.activationLabels : this.parent.labels.activations?.[0]) ?? {}),
-        ...this.equippableItemCardProperties ?? []
-      );
-    }
-
-    context.properties = context.properties.filter(_ => _);
-    context.hasProperties = context.tags?.length || context.properties.length;
+      properties: PropertyField.getLabels(context.properties, { ...context, properties: context.item.properties }),
+      subtitle: context.subtitle.filterJoin(" • "),
+      weight: this.weight
+    });
     return context;
   }
 

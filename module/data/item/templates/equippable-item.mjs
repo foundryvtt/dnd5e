@@ -61,11 +61,11 @@ export default class EquippableItemTemplate extends SystemDataModel {
    */
   get equippableItemCardProperties() {
     return [
-      this.attuned ? _loc("DND5E.AttunementAttuned")
-        : CONFIG.DND5E.attunementTypes[this.attunement] ?? null,
-      _loc(this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped"),
-      ("proficient" in this) ? CONFIG.DND5E.proficiencyLevels[this.prof?.multiplier || 0] : null
-    ];
+      (this.attuned || CONFIG.DND5E.attunementTypes[this.attunement])
+        ? { type: "attunement", attuned: this.attuned, attunement: this.attunement } : null,
+      { type: "label", label: this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped" },
+      ("proficient" in this) ? { type: "proficiency", proficiency: this.prof?.multiplier || 0 } : null
+    ].filter(_ => _);
   }
 
   /* -------------------------------------------- */

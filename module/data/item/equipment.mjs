@@ -120,11 +120,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
-    return [
-      this.type.label,
-      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? _loc("DND5E.ITEM.Property.StealthDisadvantage") : null
-    ];
+    return [{ type: "text", text: this.type.label }, ...this.cardProperties];
   }
 
   /* -------------------------------------------- */
@@ -135,9 +131,9 @@ export default class EquipmentData extends ItemDataModel.mixin(
    */
   get cardProperties() {
     return [
-      (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? _loc("DND5E.ITEM.Property.StealthDisadvantage") : null
-    ];
+      ((this.isArmor || this.isMountable) && this.armor.value) ? { type: "ac", value: this.armor.value } : null,
+      this.properties.has("stealthDisadvantage") ? { type: "property", property: "stealthDisadvantage" } : null
+    ].filter(_ => _);
   }
 
   /* -------------------------------------------- */

@@ -1,3 +1,4 @@
+import PropertyField from "../../data/shared/property-field.mjs";
 import UsesField from "../../data/shared/uses-field.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys } from "../../utils.mjs";
@@ -220,11 +221,14 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( this.item.type !== "spell" ) {
       context.properties.options.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
     }
-    if ( game.user.isGM || context.isIdentified ) context.properties.active.push(
-      ...this.item.system.cardProperties ?? [],
-      ...Object.values(this.item.labels.activations?.[0] ?? {}),
-      ...this.item.system.equippableItemCardProperties ?? []
-    );
+    if ( game.user.isGM || context.isIdentified ) {
+      const usage = this.item.system.getUsageData?.() ?? {};
+      context.properties.active.push(...PropertyField.getLabels([
+        ...this.item.system.cardProperties ?? [],
+        ...PropertyField.getUsageProperties(usage),
+        ...this.item.system.equippableItemCardProperties ?? []
+      ], { ...usage, properties: this.item.system.properties }));
+    }
 
     await this.item.system.getSheetData?.(context);
 
