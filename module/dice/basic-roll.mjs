@@ -172,13 +172,13 @@ export default class BasicRoll extends Roll {
   static async buildPost(rolls, config, message) {
     message.data = foundry.utils.expandObject(message.data ?? {});
     const messageId = config.event?.target?.closest("[data-message-id]")?.dataset.messageId;
-    if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
+    if ( messageId ) foundry.utils.setProperty(message.data, "system.origin", messageId);
 
-    // Attack & Damage store originatingMessage directly on message.data and do not have a config.event. We retrieve
+    // Attack & Damage store their origin directly on message.data and do not have a config.event. We retrieve
     // those here.
-    const originatingMessage = foundry.utils.getProperty(message.data, "flags.dnd5e.originatingMessage");
+    const origin = foundry.utils.getProperty(message.data, "system.origin");
     // Store in roll options so that it can be serialized.
-    if ( originatingMessage ) rolls?.forEach(r => r.options.originatingMessage ??= originatingMessage);
+    if ( origin ) rolls?.forEach(r => r.options.originatingMessage ??= origin);
 
     if ( rolls?.length && (config.evaluate !== false) ) {
       message[message.create !== false ? "document" : "data"] = await this.toMessage(

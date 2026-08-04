@@ -92,10 +92,7 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
       data: {
         flavor: `${this.item.name} - ${this.roll.label || _loc("DND5E.OtherFormula")}`,
         type: "generic",
-        flags: {
-          dnd5e: this.messageFlags
-        },
-        system: { targets: TargetsField.getDescriptors() }
+        system: { ...this.messageSources, targets: TargetsField.getDescriptors() }
       }
     }, message);
 

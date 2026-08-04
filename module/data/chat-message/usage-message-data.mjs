@@ -1,5 +1,6 @@
 import ItemMessageData from "./item-message-data.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
+import SourceReferenceField from "./fields/source-reference-field.mjs";
 
 const { ArrayField, DocumentIdField, NumberField, ObjectField, SchemaField, StringField } = foundry.data.fields;
 
@@ -23,8 +24,7 @@ export default class UsageMessageData extends ItemMessageData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      activity: new SchemaField({
-        ...this._sourceFields(),
+      activity: new SourceReferenceField({
         chatFlavor: new StringField(),
         uuid: new StringField({ blank: false, nullable: true, required: true })
       }),

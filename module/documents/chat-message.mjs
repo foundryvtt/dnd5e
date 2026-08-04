@@ -72,17 +72,26 @@ export default class ChatMessage5e extends ChatMessage {
   /** @inheritDoc */
   static migrateData(source) {
     source = super.migrateData(source);
-    if ( foundry.utils.hasProperty(source, "flags.dnd5e.itemData") ) {
-      foundry.utils.setProperty(source, "flags.dnd5e.item.data", source.flags.dnd5e.itemData);
-      delete source.flags.dnd5e.itemData;
+    const legacy = source.flags?.dnd5e;
+    if ( !legacy ) return source;
+
+    // The snapshot of a deleted item is kept alongside every other deleted item.
+    const snapshot = legacy.itemData ?? legacy.item?.data;
+    if ( snapshot ) {
+      const deleted = foundry.utils.getProperty(source, "system.deltas.deleted") ?? [];
+      if ( !deleted.some(i => i._id === snapshot._id) ) deleted.push(snapshot);
+      foundry.utils.setProperty(source, "system.deltas.deleted", deleted);
+      delete legacy.itemData;
+      delete legacy.item?.data;
     }
-    if ( foundry.utils.hasProperty(source, "flags.dnd5e.use") ) {
-      const use = source.flags.dnd5e.use;
-      if ( source.type !== "usage" ) foundry.utils.setProperty(source, "flags.dnd5e.messageType", "usage");
-      if ( use.type ) foundry.utils.setProperty(source, "flags.dnd5e.item.type", use.type);
-      if ( use.itemId ) foundry.utils.setProperty(source, "flags.dnd5e.item.id", use.itemId);
-      if ( use.itemUuid ) foundry.utils.setProperty(source, "flags.dnd5e.item.uuid", use.itemUuid);
+
+    if ( legacy.use ) {
+      const { itemId, itemUuid, type } = legacy.use;
+      if ( type ) foundry.utils.setProperty(source, "system.item.type", type);
+      if ( itemId ) foundry.utils.setProperty(source, "system.item.id", itemId);
+      if ( itemUuid ) foundry.utils.setProperty(source, "system.item.uuid", itemUuid);
     }
+
     return source;
   }
 
@@ -527,14 +536,12 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Activity|void}
    */
   getAssociatedActivity({ scaled=false }={}) {
-    const uuid = this.system.activity?.uuid ?? this.getFlag("dnd5e", "activity.uuid");
-    const activity = fromUuidSync(uuid, { strict: false });
+    const activity = fromUuidSync(this.system.activity?.uuid, { strict: false });
     if ( activity ) {
       const scaling = scaled ? this.system.scaling : null;
       return scaling ? activity.item.scaledClone(scaling).system.activities.get(activity.id) : activity;
     }
-    const id = this.system.activity?.id ?? this.getFlag("dnd5e", "activity.id");
-    return this.getAssociatedItem({ scaled })?.system.activities?.get(id);
+    return this.getAssociatedItem({ scaled })?.system.activities?.get(this.system.activity?.id);
   }
 
   /* -------------------------------------------- */
@@ -556,8 +563,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Item5e|void}
    */
   getAssociatedItem({ scaled=false }={}) {
-    const uuid = this.system.item?.uuid ?? this.getFlag("dnd5e", "item.uuid");
-    const item = fromUuidSync(uuid, { strict: false });
+    const item = fromUuidSync(this.system.item?.uuid, { strict: false });
     const scaling = scaled ? this.system.scaling : null;
     if ( item ) return scaling ? item.scaledClone(scaling) : item;
     const actor = this.getAssociatedActor();
@@ -573,8 +579,8 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {object|void}
    */
   #getStoredItemData() {
-    const id = this.system.item?.id ?? this.getFlag("dnd5e", "item.id");
-    return this.system.deltas?.deleted?.find(i => i._id === id) ?? this.getFlag("dnd5e", "item.data");
+    const id = this.system.item?.id;
+    return this.system.deltas?.deleted?.find(i => i._id === id);
   }
 
   /* -------------------------------------------- */
@@ -607,6 +613,6 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {ChatMessage5e}
    */
   getOriginatingMessage() {
-    return game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
+    return this.system.origin ?? this;
   }
 }
