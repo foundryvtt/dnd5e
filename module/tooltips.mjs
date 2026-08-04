@@ -64,26 +64,36 @@ export default class Tooltips5e {
    * @returns {Promise}
    */
   async _onTooltipActivate() {
-    const dataset = game.tooltip.element?.dataset ?? {};
+    const { element } = game.tooltip;
+    const { dataset } = element;
     const extras = dataset.tooltipExtras;
+    const nearestThemed = element.closest(".themed") ?? element.ownerDocument.body;
+    const [, theme] = nearestThemed.className.match(/(?:^|\s)(theme-\w+)/) ?? [];
+    const isContentLink = element.classList.contains("content-link");
+    const loading = this.tooltip.querySelector(".loading");
+    const isSheetTooltip = loading?.dataset.uuid !== undefined;
+    const isPassiveCheck = loading?.dataset.passive !== undefined;
+
+    if ( isContentLink || isSheetTooltip || isPassiveCheck ) {
+      this.tooltip.classList.remove("theme-dark");
+      this.tooltip.classList.add(theme ? theme : "theme-light");
+    }
 
     // General content links
-    if ( game.tooltip.element?.classList.contains("content-link") ) {
+    if ( isContentLink ) {
       const doc = await fromUuid(game.tooltip.element.dataset.uuid);
       return this._onHoverContentLink(doc, { extras });
     }
 
-    const loading = this.tooltip.querySelector(".loading");
-
     // Sheet-specific tooltips
-    if ( loading?.dataset.uuid ) {
+    if ( isSheetTooltip ) {
       const doc = await fromUuid(loading.dataset.uuid);
       if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
       return this._onHoverContentLink(doc, { extras });
     }
 
     // Passive checks
-    else if ( loading?.dataset.passive !== undefined ) {
+    else if ( isPassiveCheck ) {
       switch ( dataset.type ) {
         case "language":
           return this._onHoverPassiveLanguage(dataset.language);
@@ -121,7 +131,6 @@ export default class Tooltips5e {
     const { content, classes } = await (doc.richTooltip?.({ extras }) ?? doc.system?.richTooltip?.({ extras }) ?? {});
     if ( !content ) return;
     this.tooltip.innerHTML = content;
-    this.tooltip.classList.remove("theme-dark");
     if ( classes?.length ) this.tooltip.classList.add(...classes);
     const { tooltipDirection } = game.tooltip.element.dataset;
     requestAnimationFrame(() => this._positionItemTooltip(tooltipDirection));
@@ -216,8 +225,7 @@ export default class Tooltips5e {
       if ( ctx ) context.party.push({ name: member.actor.name, img: member.actor.img, ...ctx });
     }
 
-    this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip", "dnd5e2", "themed", "theme-light");
-    this.tooltip.classList.remove("theme-dark");
+    this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip", "dnd5e2");
     this.tooltip.innerHTML = await foundry.applications.handlebars.renderTemplate(
       "systems/dnd5e/templates/journal/passive-tooltip.hbs", context
     );

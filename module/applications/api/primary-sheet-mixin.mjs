@@ -306,7 +306,7 @@ export default function PrimarySheetMixin(Base) {
       }
       if ( !uuid ) return;
       element.dataset.tooltipHtml = loadingTooltip({ uuid });
-      element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
+      element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
       element.dataset.tooltipDirection ??= "LEFT";
     }
 

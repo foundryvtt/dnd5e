@@ -1423,7 +1423,7 @@ export async function enrichItem(config, label, options) {
     _addDataset(span, dataset);
     if ( uuid ) {
       span.dataset.tooltipHtml = loadingTooltip({ uuid });
-      span.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light";
+      span.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
       span.dataset.tooltipDirection = "LEFT";
     }
     span.append(createRollLink(label));
