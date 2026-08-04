@@ -1,2 +1,3 @@
-export {default as ActivationsField} from "./activations-field.mjs";
+export { default as ActivationsField } from "./activations-field.mjs";
 export * from "./deltas-field.mjs";
+export { default as TargetsField } from "./targets-field.mjs";

@@ -3,7 +3,8 @@ import AttackRollConfigurationDialog from "./applications/dice/attack-configurat
 import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
-import { formatNumber, getSceneTargets, getTargetDescriptors, loadingTooltip, log, simplifyBonus } from "./utils.mjs";
+import TargetsField from "./data/chat-message/fields/targets-field.mjs";
+import { formatNumber, getSceneTargets, loadingTooltip, log, simplifyBonus } from "./utils.mjs";
 
 const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 const logWarning = (msg, options) =>
@@ -306,7 +307,7 @@ async function rollAttack(config, event) {
     if ( activity ) return activity.rollAttack({ attackMode, event });
   }
 
-  const targets = getTargetDescriptors();
+  const targets = TargetsField.getDescriptors();
   const rollConfig = {
     attackMode, event,
     hookNames: ["attack", "d20Test"],
@@ -1182,13 +1183,9 @@ async function rollDamage(config, event) {
   const messageConfig = {
     create: true,
     data: {
-      flags: {
-        dnd5e: {
-          targets: getTargetDescriptors()
-        }
-      },
       flavor: _loc(`DND5E.${rollType === "healing" ? "Healing" : "Damage"}Roll`),
       speaker: ChatMessage.implementation.getSpeaker(),
+      system: { targets: TargetsField.getDescriptors() },
       type: rollType === "healing" ? "healing" : "damage"
     }
   };

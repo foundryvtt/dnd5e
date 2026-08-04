@@ -1,5 +1,6 @@
 import UtilitySheet from "../../applications/activity/utility-sheet.mjs";
 import BaseUtilityActivityData from "../../data/activity/utility-data.mjs";
+import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -93,7 +94,8 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
         type: "generic",
         flags: {
           dnd5e: this.messageFlags
-        }
+        },
+        system: { targets: TargetsField.getDescriptors() }
       }
     }, message);
 

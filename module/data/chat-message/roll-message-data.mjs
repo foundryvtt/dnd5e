@@ -1,7 +1,14 @@
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
+import TargetsField from "./fields/targets-field.mjs";
+
+/**
+ * @import { RollMessageSystemData } from "./_types.mjs";
+ */
 
 /**
  * Base data model for chat messages that display the results of rolls.
+ * @extends {ChatMessageDataModel<RollMessageSystemData>}
+ * @mixes RollMessageSystemData
  * @abstract
  */
 export default class RollMessageData extends ChatMessageDataModel {
@@ -11,6 +18,17 @@ export default class RollMessageData extends ChatMessageDataModel {
    * @type {string}
    */
   static ROLL_TEMPLATE = "systems/dnd5e/templates/chat/parts/roll.hbs";
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static defineSchema() {
+    return {
+      targets: new TargetsField()
+    };
+  }
 
   /* -------------------------------------------- */
   /*  Properties                                  */

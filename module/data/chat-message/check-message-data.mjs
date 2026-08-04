@@ -17,9 +17,10 @@ export default class CheckMessageData extends RollMessageData {
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static defineSchema() {
     return {
+      ...super.defineSchema(),
       ability: new StringField({ blank: false, required: true }),
       skill: new StringField({ blank: false, initial: null, nullable: true }),
       tool: new StringField({ blank: false, initial: null, nullable: true })
