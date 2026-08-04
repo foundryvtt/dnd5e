@@ -4,7 +4,8 @@ import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
-import { formatNumber, getSceneTargets, localizeSchema } from "../../utils.mjs";
+import PropertyField from "../../data/shared/property-field.mjs";
+import { formatNumber, generateIcon, getSceneTargets, localizeSchema } from "../../utils.mjs";
 import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
@@ -762,6 +763,8 @@ export default function ActivityMixin(Base) {
       const buttons = this._usageChatButtons(message);
       this.#migrateLegacyChatButtons(buttons);
       if ( buttons.length ) foundry.utils.setProperty(data, "system.buttons", buttons);
+      const legacyContent = await this.#legacyUsageContent(message);
+      if ( legacyContent ) data.content = legacyContent;
       const messageConfig = foundry.utils.mergeObject({
         data,
         rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
@@ -1240,23 +1243,18 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Legacy activateChatListeners stub so that super calls do not throw.
-     * @param {ChatMessage5e} message  Associated chat message.
-     * @param {HTMLElement} html       Element in the chat log.
      * @deprecated
      * @since 6.0.0
+     * @ignore
      */
     activateChatListeners(message, html) {}
 
     /* -------------------------------------------- */
 
     /**
-     * Invoke a legacy activateChatListeners override if this activity still defines one.
-     * @param {ChatMessage5e} message  Associated chat message.
-     * @param {HTMLElement} html       Element in the chat log.
-     * @internal
      * @deprecated
      * @since 6.0.0
+     * @ignore
      */
     _activateLegacyChatListeners(message, html) {
       if ( foundry.utils.getDefiningClass(this, "activateChatListeners") === Activity ) return;
@@ -1271,10 +1269,54 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Convert legacy chat buttons from the pre-6.0 shape.
-     * @param {ActivityUsageChatButton[]} buttons  Descriptors from `_usageChatButtons`.
      * @deprecated
      * @since 6.0.0
+     * @ignore
+     */
+    async _usageChatContext(message) {
+      const data = await this.item.system.getCardData({ activity: this });
+      const properties = PropertyField.getLabels(data.properties, { ...data, properties: data.item.properties });
+      const supplements = [];
+      if ( this.activation.condition ) {
+        supplements.push(`<strong>${_loc("DND5E.Trigger")}</strong> ${this.activation.condition}`);
+      }
+      if ( data.materials ) {
+        supplements.push(`<strong>${_loc("DND5E.Materials")}</strong> ${data.materials}`);
+      }
+      const buttons = this._usageChatButtons(message);
+      this.#migrateLegacyChatButtons(buttons);
+      const legacy = buttons.map(button => {
+        const label = _loc(button.label?.value ?? "");
+        return {
+          ...button,
+          dataset: { ...button.dataset, action: button.action },
+          icon: generateIcon(button.icon)?.outerHTML ?? "",
+          label: button.label?.hidden
+            ? `<span class="visible-dc">${label}</span><span class="hidden-dc">${_loc(button.label.hidden)}</span>`
+            : label
+        };
+      });
+
+      return {
+        activity: this,
+        actor: this.item.actor,
+        item: this.item,
+        token: this.item.actor?.token,
+        buttons: legacy.length ? legacy : null,
+        concealed: data.concealed,
+        description: data.description,
+        properties: properties.length ? properties : null,
+        subtitle: this.description.chatFlavor || data.subtitle.filterJoin(" • "),
+        supplements
+      };
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * @deprecated
+     * @since 6.0.0
+     * @ignore
      */
     #migrateLegacyChatButtons(buttons) {
       const legacy = buttons.filter(b => !b.action || (typeof b.label === "string") || b.icon?.startsWith("<"));
@@ -1298,6 +1340,27 @@ export default function ActivityMixin(Base) {
           button.icon = icon?.dataset?.src ?? icon?.getAttribute?.("src") ?? icon?.className ?? "";
         }
       }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * @deprecated
+     * @since 6.0.0
+     * @ignore
+     */
+    async #legacyUsageContent(message) {
+      const { chatCard } = this.metadata.usage;
+      if ( !chatCard
+        && (foundry.utils.getDefiningClass(this, "_usageChatContext") === Activity) ) return;
+      foundry.utils.logCompatibilityWarning(
+        `The "${this.type}" activity supplies a legacy usage card. "usage.chatCard" and "_usageChatContext" are `
+        + 'deprecated. Set "message.data.content" in "_createUsageMessage" to keep custom card content.',
+        { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+      );
+      return foundry.applications.handlebars.renderTemplate(
+        chatCard ?? "systems/dnd5e/templates/chat/activity-card.hbs", await this._usageChatContext(message)
+      );
     }
   }
   return Activity;
