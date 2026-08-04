@@ -100,14 +100,17 @@ export default class UsageMessageData extends ItemMessageData {
   _prepareButtons() {
     const activity = this.parent.getAssociatedActivity();
     const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.isAuthor;
-    return this.buttons.map((button, index) => ({
-      ...button, index,
-      hidden: button.visibility === "all"
-        ? false
-        : ((button.visibility === "gm") && !game.user.isGM)
-          || !isCreator
-          || !!activity?.shouldHideChatButton(button, this.parent)
-    }));
+    return this.buttons.map((button, index) => {
+      const descriptor = { ...button, dataset: { ...button.dataset, /** @deprecated */ action: button.action } };
+      return {
+        ...descriptor, index,
+        hidden: button.visibility === "all"
+          ? false
+          : ((button.visibility === "gm") && !game.user.isGM)
+            || !isCreator
+            || !!activity?.shouldHideChatButton(descriptor, this.parent)
+      };
+    });
   }
 
   /* -------------------------------------------- */
