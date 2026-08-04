@@ -48,9 +48,11 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       const button = {
         action: "rollSave",
         dataset: { dc, ability: abilityId },
-        hiddenLabel: promptTitle,
         icon: "fa-solid fa-shield-heart",
-        label: dc ? _loc("DND5E.SavingThrowDC", { ability, dc }) : promptTitle,
+        label: {
+          hidden: promptTitle,
+          value: dc ? _loc("DND5E.SavingThrowDC", { ability, dc }) : promptTitle
+        },
         visibility: this.save.visible ? "all" : undefined
       };
       if ( this.save.visible ) button.visibility = "all";
@@ -60,7 +62,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     if ( this.damage.parts.length ) buttons.push({
       action: "rollDamage",
       icon: "fa-solid fa-burst",
-      label: "DND5E.Damage"
+      label: { value: "DND5E.Damage" }
     });
     return buttons.concat(super._usageChatButtons(message));
   }

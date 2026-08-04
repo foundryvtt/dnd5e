@@ -47,7 +47,7 @@ export default class UtilityActivity extends ActivityMixin(BaseUtilityActivityDa
     const button = {
       action: "rollFormula",
       icon: "fa-solid fa-dice",
-      label: this.roll.name || "DND5E.Roll"
+      label: { value: this.roll.name || "DND5E.Roll" }
     };
     if ( this.roll.visible ) button.visibility = "all";
     return [button, ...super._usageChatButtons(message)];

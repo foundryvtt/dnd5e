@@ -26,11 +26,11 @@
         {{#each buttons}}
         <button type="button" data-action="{{ action }}" data-index="{{ index }}"{{#if hidden}} hidden{{/if}}>
             {{ dnd5e-icon icon }}
-            {{#if hiddenLabel}}
-            <span class="visible-dc">{{ localize label }}</span>
-            <span class="hidden-dc">{{ localize hiddenLabel }}</span>
+            {{#if label.hidden}}
+            <span class="visible-dc">{{ localize label.value }}</span>
+            <span class="hidden-dc">{{ localize label.hidden }}</span>
             {{else}}
-            <span>{{ localize label }}</span>
+            <span>{{ localize label.value }}</span>
             {{/if}}
         </button>
         {{/each}}

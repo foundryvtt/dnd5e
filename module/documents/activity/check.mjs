@@ -57,11 +57,12 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       const button = {
         dataset,
         action: "rollCheck",
-        hiddenLabel: check,
-        icon: checkType === "tool"
-          ? "fa-solid fa-hammer"
+        icon: checkType === "tool" ? "fa-solid fa-hammer"
           : "systems/dnd5e/icons/svg/ability-score-improvement.svg",
-        label: dc ? _loc("EDITOR.DND5E.Inline.DC", { check, dc }) : check
+        label: {
+          hidden: check,
+          value: dc ? _loc("EDITOR.DND5E.Inline.DC", { check, dc }) : check
+        }
       };
       if ( this.check.visible ) button.visibility = "all";
       buttons.push(button);

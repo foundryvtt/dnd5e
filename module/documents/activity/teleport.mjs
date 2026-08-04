@@ -59,7 +59,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
     return [{
       action: "planTeleport",
       icon: "fa-solid fa-person-walking-dashed-line-arrow-right",
-      label: "DND5E.TELEPORT.Action.Teleport"
+      label: { value: "DND5E.TELEPORT.Action.Teleport" }
     }].concat(super._usageChatButtons(message));
   }
 
