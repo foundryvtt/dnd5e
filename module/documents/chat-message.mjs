@@ -536,12 +536,14 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Activity|void}
    */
   getAssociatedActivity({ scaled=false }={}) {
-    const activity = fromUuidSync(this.system.activity?.uuid, { strict: false });
+    const uuid = this.system.activity?.uuid ?? this.getFlag("dnd5e", "activity.uuid");
+    const activity = fromUuidSync(uuid, { strict: false });
     if ( activity ) {
       const scaling = scaled ? this.system.scaling : null;
       return scaling ? activity.item.scaledClone(scaling).system.activities.get(activity.id) : activity;
     }
-    return this.getAssociatedItem({ scaled })?.system.activities?.get(this.system.activity?.id);
+    const id = this.system.activity?.id ?? this.getFlag("dnd5e", "activity.id");
+    return this.getAssociatedItem({ scaled })?.system.activities?.get(id);
   }
 
   /* -------------------------------------------- */
@@ -563,7 +565,8 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Item5e|void}
    */
   getAssociatedItem({ scaled=false }={}) {
-    const item = fromUuidSync(this.system.item?.uuid, { strict: false });
+    const uuid = this.system.item?.uuid ?? this.getFlag("dnd5e", "item.uuid");
+    const item = fromUuidSync(uuid, { strict: false });
     const scaling = scaled ? this.system.scaling : null;
     if ( item ) return scaling ? item.scaledClone(scaling) : item;
     const actor = this.getAssociatedActor();
@@ -579,8 +582,8 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {object|void}
    */
   #getStoredItemData() {
-    const id = this.system.item?.id;
-    return this.system.deltas?.deleted?.find(i => i._id === id);
+    const id = this.system.item?.id ?? this.getFlag("dnd5e", "item.id");
+    return this.system.deltas?.deleted?.find(i => i._id === id) ?? this.getFlag("dnd5e", "item.data");
   }
 
   /* -------------------------------------------- */
@@ -613,6 +616,6 @@ export default class ChatMessage5e extends ChatMessage {
    * @type {ChatMessage5e}
    */
   getOriginatingMessage() {
-    return this.system.origin ?? this;
+    return this.system.origin ?? game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
   }
 }
