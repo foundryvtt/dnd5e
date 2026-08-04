@@ -100,14 +100,17 @@ export default class UsageMessageData extends ItemMessageData {
   _prepareButtons() {
     const activity = this.parent.getAssociatedActivity();
     const isCreator = game.user.isGM || this.actor?.isOwner || this.parent.isAuthor;
-    return this.buttons.map((button, index) => ({
-      ...button, index,
-      hidden: button.visibility === "all"
-        ? false
-        : ((button.visibility === "gm") && !game.user.isGM)
-          || !isCreator
-          || !!activity?.shouldHideChatButton(button, this.parent)
-    }));
+    return this.buttons.map((button, index) => {
+      const descriptor = { ...button, dataset: { ...button.dataset, /** @deprecated */ action: button.action } };
+      return {
+        ...descriptor, index,
+        hidden: button.visibility === "all"
+          ? false
+          : ((button.visibility === "gm") && !game.user.isGM)
+            || !isCreator
+            || !!activity?.shouldHideChatButton(descriptor, this.parent)
+      };
+    });
   }
 
   /* -------------------------------------------- */
@@ -116,7 +119,9 @@ export default class UsageMessageData extends ItemMessageData {
   _onRender(element) {
     super._onRender(element);
     if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
-    this.parent.getAssociatedActivity()?.onRenderChatCard(this.parent, element);
+    const activity = this.parent.getAssociatedActivity();
+    activity?.onRenderChatCard(this.parent, element);
+    activity?._activateLegacyChatListeners(this.parent, element);
   }
 
   /* -------------------------------------------- */

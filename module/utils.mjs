@@ -761,16 +761,16 @@ export function loadingTooltip({ uuid, passive=false }={}) {
 /**
  * Grab the targeted tokens and return relevant information on them.
  * @param {Iterable<Token5e|TokenDocument5e>} [tokens]  Tokens to describe. Defaults to the user's current targets.
- * @returns {TargetDescriptor5e[]}
+ * @returns {(TargetDescriptor5e & { uuid: string })[]}
  * @deprecated
- * @since 6.0
+ * @since 6.0.0
  */
 export function getTargetDescriptors(tokens=game.user.targets) {
   foundry.utils.logCompatibilityWarning(
     "The getTargetDescriptors helper has been deprecated. Please use `TargetsField.getDescriptors` instead.",
     { since: "DnD5e 6.0", until: "DnD5e 6.2" }
   );
-  return TargetsField.getDescriptors(tokens);
+  return TargetsField.getDescriptors(tokens).map(t => ({ ...t, uuid: t.actor }));
 }
 
 /* -------------------------------------------- */
