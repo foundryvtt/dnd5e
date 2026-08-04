@@ -125,7 +125,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       Object.assign(li.dataset, {
         id: effect.id,
         tooltipHtml: loadingTooltip({ uuid: effect.uuid }),
-        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip themed theme-light",
+        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip",
         tooltipDirection: "LEFT",
         uuid: effect.uuid
       });
