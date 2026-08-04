@@ -824,7 +824,7 @@ export function migrateMessageData(messageData) {
       deltas: { ...messageData.system?.deltas, ...use?.consumed },
       effects: use?.effects?.map?.(id => `.ActiveEffect.${id}`),
       scaling: use?.scaling,
-      spellLevel: use?.spellLevel
+      level: use?.spellLevel
     });
     updateData["flags.dnd5e.scaling"] = _del;
     updateData["flags.dnd5e.use.cause"] = _del;
