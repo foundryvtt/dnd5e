@@ -1,4 +1,4 @@
-.mixin-variables-light {
+.mixin-variables-light() {
   /* Applications */
   --dnd5e-application-background: var(--dnd5e-background-texture-paper-gray);
   --dnd5e-item-header-content: none;
@@ -131,6 +131,10 @@
     --color-revealed-bg: rgb(0 53 0 / 5%);
   }
 
+  /* System Badge */
+  --sidebar-info-link-color: var(--dnd5e-color-maroon);
+  --sidebar-info-heading-color: var(--color-dark-1);
+
   /* Forms */
   --slide-toggle-track-color-unchecked: var(--dnd5e-background-25);
   --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
@@ -228,14 +232,8 @@
   --dnd5e-statblock-title-border: currentcolor;
 }
 
-@layer general {
-  body.theme-light .dnd5e2 {
-    .mixin-variables-light();
-  }
-}
-
-@layer specific {
-  .themed.theme-light.dnd5e2, .themed.theme-light.dnd5e2-journal, .themed.theme-light .dnd5e2.chat-message {
+@scope (.theme-light) to (.themed) {
+  .dnd5e2, :where(:scope).dnd5e2 {
     .mixin-variables-light();
   }
 }

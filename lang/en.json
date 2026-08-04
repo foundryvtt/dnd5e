@@ -6858,10 +6858,6 @@
     "Hint": "Enable optional Piety tracking for player characters.",
     "Name": "Piety Score"
   },
-  "THEME": {
-    "Name": "Theme",
-    "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
-  },
   "PERMISSIONS": {
     "AllowRests": {
       "Hint": "Allow players to rest directly from their characters' sheets. When disabled, players will only be able to rest when the GM makes a request from the party.",
@@ -6952,15 +6948,6 @@
       "Hint": "Hide the descriptions of NPC items from players when posted to chat by the DM. Will only hide the descriptions for items without a Chat Description set.",
       "Name": "Conceal NPC Descriptions"
     }
-  }
-},
-
-"SHEETS.DND5E": {
-  "THEME": {
-    "Label": "Theme",
-    "Automatic": "Automatic",
-    "Dark": "Dark Mode",
-    "Light": "Light Mode"
   }
 },
 
