@@ -200,7 +200,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         dnd5e: {
           dependentOn: concentration?.uuid,
           scaling: this.chatMessage.system.scaling,
-          spellLevel: this.chatMessage.system.spellLevel
+          spellLevel: this.chatMessage.system.level
         }
       }
     };

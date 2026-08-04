@@ -512,10 +512,7 @@ export default function ActivityMixin(Base) {
         usageConfig.scaling = Math.max(0, levelingFlag.value - levelingFlag.base);
       } else if ( this.isSpell ) {
         const level = this.actor.system.spells?.[usageConfig.spell?.slot]?.level;
-        if ( level ) {
-          usageConfig.scaling = level - item.system.level;
-          foundry.utils.setProperty(messageConfig, "data.system.spellLevel", level);
-        }
+        if ( level ) usageConfig.scaling = level - item.system.level;
       }
 
       if ( usageConfig.scaling ) {
