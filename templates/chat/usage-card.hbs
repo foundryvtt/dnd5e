@@ -1,11 +1,13 @@
-<div>
-    {{{ content }}}
+{{#if content}}
+{{{ content }}}
+{{else}}
+{{> "dnd5e.card-face" }}
+{{/if}}
 
-    {{#if effects.length}}
-    <effect-application class="dnd5e2">
-        {{#each effects}}
-        <option value="{{ uuid }}"></option>
-        {{/each}}
-    </effect-application>
-    {{/if}}
-</div>
+{{#if effects.length}}
+<effect-application class="dnd5e2">
+    {{#each effects}}
+    <option value="{{ uuid }}"></option>
+    {{/each}}
+</effect-application>
+{{/if}}

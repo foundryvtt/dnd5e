@@ -20,6 +20,23 @@
         {{/if}}
     </section>
 
+    {{!-- Buttons --}}
+    {{#if buttons.length}}
+    <div class="card-buttons">
+        {{#each buttons}}
+        <button type="button" data-action="{{ action }}" data-index="{{ index }}"{{#if hidden}} hidden{{/if}}>
+            {{ dnd5e-icon icon }}
+            {{#if hiddenLabel}}
+            <span class="visible-dc">{{ localize label }}</span>
+            <span class="hidden-dc">{{ localize hiddenLabel }}</span>
+            {{else}}
+            <span>{{ localize label }}</span>
+            {{/if}}
+        </button>
+        {{/each}}
+    </div>
+    {{/if}}
+
     {{!-- Supplements --}}
     {{#each supplements}}
     <p class="supplement"><strong>{{ localize label }}</strong> {{ detail }}</p>

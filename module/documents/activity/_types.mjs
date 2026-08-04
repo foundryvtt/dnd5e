@@ -74,7 +74,7 @@
 /**
  * @typedef ActivityUsageChatButton
  * @property {string} action                      Action performed when the button is clicked.
- * @property {object} [dataset]                   Additional data attributes attached to the button.
+ * @property {object} [dataset]                   Parameters passed to the action that handles the button.
  * @property {string} [hiddenLabel]               Label displayed in place of label when challenge details are
  *                                                concealed from the viewer.
  * @property {string} icon                        FontAwesome classes or a path to an icon image.

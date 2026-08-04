@@ -102,10 +102,6 @@ export default class ChatMessage5e extends ChatMessage {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if ( !this.flags.dnd5e?.item?.data && this.flags.dnd5e?.item?.id ) {
-      const itemData = this.system.deltas?.deleted?.find(i => i._id === this.flags.dnd5e.item.id);
-      if ( itemData ) Object.defineProperty(this.flags.dnd5e.item, "data", { value: itemData });
-    }
     dnd5e.registry.messages.track(this);
   }
 
@@ -186,8 +182,7 @@ export default class ChatMessage5e extends ChatMessage {
         if ( button.dataset.visibility === "all" ) continue;
 
         // GM buttons should only be visible to GMs, otherwise button should only be visible to message's creator
-        if ( ((button.dataset.visibility === "gm") && !game.user.isGM) || !isCreator
-          || this.getAssociatedActivity()?.shouldHideChatButton(button, this) ) button.hidden = true;
+        if ( ((button.dataset.visibility === "gm") && !game.user.isGM) || !isCreator ) button.hidden = true;
       }
     }
   }
@@ -574,12 +569,14 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Activity|void}
    */
   getAssociatedActivity({ scaled=false }={}) {
-    const activity = fromUuidSync(this.getFlag("dnd5e", "activity.uuid"), { strict: false });
+    const uuid = this.system.activity?.uuid ?? this.getFlag("dnd5e", "activity.uuid");
+    const activity = fromUuidSync(uuid, { strict: false });
     if ( activity ) {
       const scaling = scaled ? this.system.scaling : null;
       return scaling ? activity.item.scaledClone(scaling).system.activities.get(activity.id) : activity;
     }
-    return this.getAssociatedItem({ scaled })?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
+    const id = this.system.activity?.id ?? this.getFlag("dnd5e", "activity.id");
+    return this.getAssociatedItem({ scaled })?.system.activities?.get(id);
   }
 
   /* -------------------------------------------- */
@@ -612,8 +609,19 @@ export default class ChatMessage5e extends ChatMessage {
     if ( item ) return scaling ? item.scaledClone(scaling) : item;
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
-    const storedData = this.getFlag("dnd5e", "item.data") ?? this.getOriginatingMessage().getFlag("dnd5e", "item.data");
+    const storedData = this.#getStoredItemData() ?? this.getOriginatingMessage().#getStoredItemData();
     if ( storedData ) return new Item.implementation(storedData, { parent: actor }).scaledClone(scaling);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the snapshot taken of this card's item if it has since been deleted.
+   * @returns {object|void}
+   */
+  #getStoredItemData() {
+    const id = this.system.item?.id ?? this.getFlag("dnd5e", "item.id");
+    return this.system.deltas?.deleted?.find(i => i._id === id) ?? this.getFlag("dnd5e", "item.data");
   }
 
   /* -------------------------------------------- */

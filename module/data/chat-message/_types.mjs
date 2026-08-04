@@ -232,9 +232,15 @@
  */
 
 /**
- * @typedef UsageMessageSystemData
+ * @typedef {ItemMessageSystemData} UsageMessageSystemData
+ * @property {UsageMessageActivityData} activity  Activity that was used.
  * @property {ActivityUsageChatButton[]} buttons  Buttons offered by the activity that created this message.
  * @property {string} [cause]                     Relative ID of the activity that caused this one on the same actor.
  * @property {ActorDeltasData} deltas             Actor/item consumption from this turn change.
  * @property {string[]} effects                   Relative or absolute UUIDs of effects that can be applied.
+ */
+
+/**
+ * @typedef {ItemMessageSourceData} UsageMessageActivityData
+ * @property {string} chatFlavor  Flavor text displayed in place of the card's subtitle.
  */

@@ -20,7 +20,6 @@ export default class OrderActivity extends ActivityMixin(BaseOrderActivityData) 
     img: "systems/dnd5e/icons/svg/activity/order.svg",
     title: "DND5E.FACILITY.Order.Issue",
     usage: {
-      chatCard: null,
       dialog: OrderUsageDialog,
       messageType: "bastionOrder"
     }

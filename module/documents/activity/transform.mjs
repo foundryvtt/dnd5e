@@ -101,7 +101,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
 
   /** @inheritDoc */
   shouldHideChatButton(button, message) {
-    if ( button.dataset.action === "transformActor" ) return !this.canTransform;
+    if ( button.action === "transformActor" ) return !this.canTransform;
     return super.shouldHideChatButton(button, message);
   }
 
