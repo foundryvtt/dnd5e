@@ -4,6 +4,7 @@ import DurationField from "../shared/duration-field.mjs";
 import PropertyField from "../shared/property-field.mjs";
 import RangeField from "../shared/range-field.mjs";
 import TargetField from "../shared/target-field.mjs";
+import TargetsField from "./fields/targets-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, DocumentUUIDField, FilePathField, HTMLField, NumberField, SchemaField,
@@ -52,7 +53,8 @@ export default class ItemMessageData extends ChatMessageDataModel {
       }, { initial: null, nullable: true }),
       school: new StringField(),
       subtitle: new ArrayField(new StringField()),
-      target: new TargetField({}, { initial: null, nullable: true })
+      target: new TargetField({}, { initial: null, nullable: true }),
+      targets: new TargetsField()
     };
   }
 

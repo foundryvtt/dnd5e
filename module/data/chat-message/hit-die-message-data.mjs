@@ -15,13 +15,6 @@ export default class HitDieMessageData extends RollMessageData {
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
-  /** @override */
-  static defineSchema() {
-    return {};
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     template: "systems/dnd5e/templates/chat/hit-die-card.hbs"

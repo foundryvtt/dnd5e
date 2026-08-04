@@ -18,9 +18,10 @@ export default class DamageMessageData extends RollMessageData {
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static defineSchema() {
     return {
+      ...super.defineSchema(),
       onSave: new StringField({ blank: false, initial: null, nullable: true, required: false })
     };
   }

@@ -3,7 +3,8 @@ import ActivityUsageDialog from "../../applications/activity/activity-usage-dial
 import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
-import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
+import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
+import { formatNumber, getSceneTargets, localizeSchema } from "../../utils.mjs";
 import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "../mixins/dependent.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
@@ -149,8 +150,7 @@ export default function ActivityMixin(Base) {
     get messageFlags() {
       return {
         activity: { type: this.type, id: this.id, uuid: this.uuid },
-        item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid },
-        targets: getTargetDescriptors()
+        item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
       };
     }
 
@@ -212,9 +212,7 @@ export default function ActivityMixin(Base) {
       const messageConfig = foundry.utils.mergeObject({
         create: true,
         data: {
-          flags: {
-            dnd5e: { targets: getTargetDescriptors() }
-          }
+          system: { targets: TargetsField.getDescriptors() }
         },
         hasConsumption: usageConfig.hasConsumption
       }, message);
@@ -857,6 +855,7 @@ export default function ActivityMixin(Base) {
           flavor: `${this.item.name} - ${this.damageFlavor}`,
           flags: { dnd5e: this.messageFlags },
           speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+          system: { targets: TargetsField.getDescriptors() },
           type: "damage"
         }
       }, message);

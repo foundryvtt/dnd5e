@@ -1,4 +1,5 @@
 /**
+ * @import { TargetDescriptor5e } from "../../_types.mjs";
  * @import { ActivityUsageChatButton } from "../../documents/activity/_types.mjs";
  * @import { BastionTurnItem, SaveOutcome } from "../../documents/_types.mjs";
  * @import { ActivationData, DurationData, RangeData, TargetData } from "../shared/_types.mjs";
@@ -6,7 +7,14 @@
  */
 
 /**
- * @typedef AttackMessageSystemData
+ * @typedef RollMessageSystemData
+ * @property {TargetDescriptor5e[]} targets  Tokens this message was rolled against.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {RollMessageSystemData} AttackMessageSystemData
  * @property {string|null} ability      Ability used for the attack.
  * @property {string|null} ammunition   ID of the ammunition used for the attack.
  * @property {ActorDeltasData} deltas   Snapshots Items consumed & destroyed by the attack.
@@ -63,7 +71,7 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef CheckMessageSystemData
+ * @typedef {RollMessageSystemData} CheckMessageSystemData
  * @property {string} ability      Ability used for the check.
  * @property {string|null} skill   Skill used for the check, if any.
  * @property {string|null} tool    Tool used for the check, if any.
@@ -72,14 +80,14 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef DamageMessageSystemData
+ * @typedef {RollMessageSystemData} DamageMessageSystemData
  * @property {string|null} onSave  How this damage is affected by a successful save, if it followed one.
  */
 
 /* -------------------------------------------- */
 
 /**
- * @typedef GenericMessageSystemData
+ * @typedef {RollMessageSystemData} GenericMessageSystemData
  */
 
 /* -------------------------------------------- */
@@ -91,13 +99,13 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef HitDieMessageSystemData
+ * @typedef {RollMessageSystemData} HitDieMessageSystemData
  */
 
 /* -------------------------------------------- */
 
 /**
- * @typedef HitPointsMessageSystemData
+ * @typedef {RollMessageSystemData} HitPointsMessageSystemData
  */
 
 /* -------------------------------------------- */
@@ -118,6 +126,7 @@
  * @property {string} school                     Spell school.
  * @property {string[]} subtitle                 Localized parts of the card's subtitle.
  * @property {TargetData|null} target            What the item's use targets.
+ * @property {TargetDescriptor5e[]} targets      Tokens this message was rolled against.
  */
 
 /**
@@ -198,7 +207,7 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef SaveMessageSystemData
+ * @typedef {RollMessageSystemData} SaveMessageSystemData
  * @property {string} ability            Ability used for the save. Required unless this is a death save.
  * @property {ActorDeltasData} deltas    Actor changes recorded by this save (death saves only).
  * @property {SaveOutcome} outcome       Terminal outcome shown on the card.

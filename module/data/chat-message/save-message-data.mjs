@@ -18,9 +18,10 @@ export default class SaveMessageData extends RollMessageData {
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
-  /** @override */
+  /** @inheritDoc */
   static defineSchema() {
     return {
+      ...super.defineSchema(),
       ability: new StringField({ blank: false, required: false }),
       deltas: new ActorDeltasField(),
       outcome: new StringField({

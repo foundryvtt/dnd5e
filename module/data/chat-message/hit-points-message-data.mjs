@@ -15,13 +15,6 @@ export default class HitPointsMessageData extends RollMessageData {
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
-  /** @override */
-  static defineSchema() {
-    return {};
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     template: "systems/dnd5e/templates/chat/hit-points-card.hbs"
