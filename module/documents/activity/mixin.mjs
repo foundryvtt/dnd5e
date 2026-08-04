@@ -760,6 +760,7 @@ export default function ActivityMixin(Base) {
         type: messageType
       };
       const buttons = this._usageChatButtons(message);
+      this.#migrateLegacyChatButtons(buttons);
       if ( buttons.length ) foundry.utils.setProperty(data, "system.buttons", buttons);
       const messageConfig = foundry.utils.mergeObject({
         data,
@@ -1232,6 +1233,40 @@ export default function ActivityMixin(Base) {
       return Object.entries(CONFIG.DND5E.activityTypes)
         .filter(([, c]) => (c.configurable !== false) && c.documentClass.availableForItem(parent))
         .map(([k]) => k);
+    }
+
+    /* -------------------------------------------- */
+    /*  Deprecations                                */
+    /* -------------------------------------------- */
+
+    /**
+     * Convert legacy chat buttons from the pre-6.0 shape.
+     * @param {ActivityUsageChatButton[]} buttons  Descriptors from `_usageChatButtons`.
+     * @deprecated
+     * @since 6.0.0
+     */
+    #migrateLegacyChatButtons(buttons) {
+      const legacy = buttons.filter(b => !b.action || (typeof b.label === "string") || b.icon?.startsWith("<"));
+      if ( !legacy.length ) return;
+      foundry.utils.logCompatibilityWarning(
+        `The "${this.type}" activity supplies chat buttons in a legacy format. Buttons must now define an "action", `
+        + 'a "label" object, and an "icon" given as FontAwesome classes or an image path.',
+        { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+      );
+      for ( const button of legacy ) {
+        button.action ??= button.dataset?.action;
+        if ( typeof button.label === "string" ) {
+          const label = foundry.utils.parseHTML(`<div>${button.label}</div>`);
+          const dc = label.querySelector(".visible-dc");
+          button.label = dc
+            ? { hidden: label.querySelector(".hidden-dc")?.textContent.trim(), value: dc.textContent.trim() }
+            : { value: button.label };
+        }
+        if ( button.icon?.startsWith("<") ) {
+          const icon = foundry.utils.parseHTML(button.icon);
+          button.icon = icon?.dataset?.src ?? icon?.getAttribute?.("src") ?? icon?.className ?? "";
+        }
+      }
     }
   }
   return Activity;
