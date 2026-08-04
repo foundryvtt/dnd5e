@@ -65,7 +65,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
 
   /** @override */
   async _triggerSubsequentActions(config, results) {
-    this.rollAttack({ event: config.event }, {}, { data: { "flags.dnd5e.originatingMessage": results.message?.id } });
+    this.rollAttack({ event: config.event }, {}, { data: { system: { origin: results.message?.id } } });
   }
 
   /* -------------------------------------------- */
@@ -157,9 +157,8 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       create: true,
       data: {
         flavor: `${this.item.name} - ${_loc("DND5E.AttackRoll")}`,
-        flags: { dnd5e: this.messageFlags },
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        system: { targets },
+        system: { ...this.messageSources, targets },
         type: "attack"
       }
     }, message);
@@ -215,7 +214,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     if ( canUpdate && ammoUpdate?.destroy ) {
       // If ammunition was deleted, store a copy of it in the roll message
       const deleted = [this.actor.items.get(ammoUpdate.id).toObject()];
-      const messageId = messageConfig.data?.flags?.dnd5e?.originatingMessage
+      const messageId = messageConfig.data?.system?.origin
         ?? rollConfig.event?.target.closest("[data-message-id]")?.dataset.messageId;
       const attackMessage = dnd5e.registry.messages.get(messageId, "attack")?.pop();
       await attackMessage?.update({ "system.deltas": { deleted } });

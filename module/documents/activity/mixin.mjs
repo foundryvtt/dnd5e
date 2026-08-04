@@ -144,13 +144,19 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Create the data added to messages flags.
-     * @type {object}
+     * References to this activity and its item, stored on the messages it creates.
+     * @type {{ activity: SourceReferenceData, item: ItemReferenceData }}
      */
-    get messageFlags() {
+    get messageSources() {
+      const { item } = this;
       return {
-        activity: { type: this.type, id: this.id, uuid: this.uuid },
-        item: { type: this.item.type, id: this.item.id, uuid: this.item.uuid }
+        activity: {
+          id: this.id, img: this.img, name: this.name, type: this.type, uuid: this.uuid
+        },
+        item: {
+          compendiumSource: item?._stats?.compendiumSource, id: item?.id, img: item?.img,
+          name: item?.name, type: item?.type, uuid: item?.uuid
+        }
       };
     }
 
@@ -853,9 +859,8 @@ export default function ActivityMixin(Base) {
         create: true,
         data: {
           flavor: `${this.item.name} - ${this.damageFlavor}`,
-          flags: { dnd5e: this.messageFlags },
           speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-          system: { targets: TargetsField.getDescriptors() },
+          system: { ...this.messageSources, targets: TargetsField.getDescriptors() },
           type: "damage"
         }
       }, message);

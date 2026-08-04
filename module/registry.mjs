@@ -355,7 +355,7 @@ class MessageRegistry {
    * @param {ChatMessage5e} message  Message to add to the registry.
    */
   static track(message) {
-    const origin = message.getFlag("dnd5e", "originatingMessage");
+    const origin = message._source.system?.origin;
     const type = message.type;
     if ( !origin || (type === "base") ) return;
     MessageRegistry.#messages
@@ -370,7 +370,7 @@ class MessageRegistry {
    * @param {ChatMessage5e} message  Message to remove from the registry.
    */
   static untrack(message) {
-    const origin = message.getFlag("dnd5e", "originatingMessage");
+    const origin = message._source.system?.origin;
     MessageRegistry.#messages.get(origin)?.get(message.type)?.delete(message.id);
   }
 }

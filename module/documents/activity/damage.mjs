@@ -49,7 +49,7 @@ export default class DamageActivity extends ActivityMixin(BaseDamageActivityData
 
   /** @override */
   async _triggerSubsequentActions(config, results) {
-    this.rollDamage({ event: config.event }, {}, { data: { "flags.dnd5e.originatingMessage": results.message?.id } });
+    this.rollDamage({ event: config.event }, {}, { data: { system: { origin: results.message?.id } } });
   }
 
   /* -------------------------------------------- */
