@@ -90,7 +90,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
   /** @inheritDoc */
   shouldHideChatButton(button, message) {
-    if ( button.dataset.action === "placeSummons" ) return !this.canSummon;
+    if ( button.action === "placeSummons" ) return !this.canSummon;
     return super.shouldHideChatButton(button, message);
   }
 

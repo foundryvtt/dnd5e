@@ -94,8 +94,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken");
-    let { ability, dc, skill, tool } = target.dataset;
-    dc = parseInt(dc);
+    const { ability, dc, skill, tool } = message.system.getButton(target)?.dataset ?? {};
     const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.check.bonus }, this.getRollData());
     if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;

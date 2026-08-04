@@ -42,7 +42,7 @@ export default function ActivityMixin(Base) {
       usage: {
         actions: {},
         applyEffectsInChat: true,
-        chatCard: "systems/dnd5e/templates/chat/activity-card.hbs",
+        chatCard: null,
         dialog: ActivityUsageDialog,
         messageType: "usage"
       }
@@ -215,7 +215,7 @@ export default function ActivityMixin(Base) {
         create: true,
         data: {
           flags: {
-            dnd5e: this.messageFlags
+            dnd5e: { targets: getTargetDescriptors() }
           }
         },
         hasConsumption: usageConfig.hasConsumption
@@ -759,12 +759,12 @@ export default function ActivityMixin(Base) {
 
     /**
      * Determine whether the provided button in a chat message should be visible.
-     * @param {HTMLButtonElement} button  The button to check.
-     * @param {ChatMessage5e} message     Chat message containing the button.
+     * @param {ActivityUsageChatButton} button  Descriptor for the button to check.
+     * @param {ChatMessage5e} message           Chat message containing the button.
      * @returns {boolean}
      */
     shouldHideChatButton(button, message) {
-      switch ( button.dataset.action ) {
+      switch ( button.action ) {
         case "consumeResource": return !!message.system.deltas;
         case "refundResource": return !message.system.deltas;
         case "placeTemplate": return !game.user.can("REGION_CREATE") || !game.canvas.scene;
@@ -787,6 +787,7 @@ export default function ActivityMixin(Base) {
           core: { canPopout: true }
         },
         speaker: ChatMessage.implementation.getSpeaker({ actor: this.item.actor }),
+        system: await this.item.system.getCardData({ activity: this }),
         title: `${this.item.name} - ${this.name}`,
         type: messageType
       };
@@ -963,20 +964,6 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Activate listeners on a chat message.
-     * @param {ChatMessage} message  Associated chat message.
-     * @param {HTMLElement} html     Element in the chat log.
-     */
-    activateChatListeners(message, html) {
-      html.addEventListener("click", event => {
-        const target = event.target.closest("[data-action]");
-        if ( target ) this.#onChatAction(event, target, message);
-      });
-    }
-
-    /* -------------------------------------------- */
-
-    /**
      * Construct context menu options for this Activity.
      * @returns {ContextMenuEntry[]}
      */
@@ -1036,7 +1023,7 @@ export default function ActivityMixin(Base) {
      * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
-    async #onChatAction(event, target, message) {
+    async onChatAction(event, target, message) {
       const consumed = this.createConsumedFlag(message.getAssociatedActor(), message.system.deltas);
       const scaling = message.system.scaling ?? 0;
       const item = (consumed || scaling) ? this.item.clone({
