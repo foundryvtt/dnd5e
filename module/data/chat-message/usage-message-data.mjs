@@ -119,7 +119,9 @@ export default class UsageMessageData extends ItemMessageData {
   _onRender(element) {
     super._onRender(element);
     if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
-    this.parent.getAssociatedActivity()?.onRenderChatCard(this.parent, element);
+    const activity = this.parent.getAssociatedActivity();
+    activity?.onRenderChatCard(this.parent, element);
+    activity?._activateLegacyChatListeners(this.parent, element);
   }
 
   /* -------------------------------------------- */

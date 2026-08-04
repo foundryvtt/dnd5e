@@ -1240,6 +1240,37 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Legacy activateChatListeners stub so that super calls do not throw.
+     * @param {ChatMessage5e} message  Associated chat message.
+     * @param {HTMLElement} html       Element in the chat log.
+     * @deprecated
+     * @since 6.0.0
+     */
+    activateChatListeners(message, html) {}
+
+    /* -------------------------------------------- */
+
+    /**
+     * Invoke a legacy activateChatListeners override if this activity still defines one.
+     * @param {ChatMessage5e} message  Associated chat message.
+     * @param {HTMLElement} html       Element in the chat log.
+     * @internal
+     * @deprecated
+     * @since 6.0.0
+     */
+    _activateLegacyChatListeners(message, html) {
+      if ( foundry.utils.getDefiningClass(this, "activateChatListeners") === Activity ) return;
+      foundry.utils.logCompatibilityWarning(
+        `The "${this.type}" activity defines "activateChatListeners". Register chat card actions through the `
+        + '"usage.actions" metadata or "_onChatAction" instead.',
+        { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+      );
+      this.activateChatListeners(message, html);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Convert legacy chat buttons from the pre-6.0 shape.
      * @param {ActivityUsageChatButton[]} buttons  Descriptors from `_usageChatButtons`.
      * @deprecated
