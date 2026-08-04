@@ -455,8 +455,8 @@
     flex-direction: column;
     position: relative;
     overflow: hidden auto;
-    scrollbar-gutter: stable;
-    scrollbar-color: var(--dnd5e-color-gold) transparent;
+    .scrollbar(var(--dnd5e-color-gold));
+    .scroll-gutter(8px);
 
     .main-content {
       --sidebar-padding: 8px;
@@ -501,7 +501,7 @@
         .tab {
           flex: 1;
           display: flex;
-          padding: 8px 4px 8px 16px;
+          padding: 8px var(--dnd5e-scroll-pad) 8px 16px;
           gap: 8px;
 
           &[data-tab="spells"], &[data-tab="biography"] { flex-direction: column; }

@@ -76,9 +76,9 @@
     height: 100%;
     overflow-y: auto;
     gap: 12px;
-    padding: 6px 4px 3px 12px;
+    padding: 6px 0 3px 12px;
     font-family: var(--dnd5e-font-roboto-condensed);
-    scrollbar-gutter: stable;
+    .scroll-gutter(12px);
 
     [data-application-part="types"] {
       display: flex;
@@ -217,10 +217,9 @@
 
   .results {
     --results-padding: 6px;
-    padding: var(--results-padding) 4px 12px 4px;
-    margin-right: 4px;
+    padding: var(--results-padding) 0 12px 0;
     overflow-y: auto;
-    scrollbar-gutter: stable;
+    .scroll-gutter(12px);
 
     > .note { margin-inline: 4px; }
 
@@ -295,9 +294,9 @@
 
   /* Sidebar */
   .sidebar {
-    scrollbar-gutter: stable;
-    padding: 6px 4px 0 12px;
+    padding: 6px 0 0 12px;
     overflow: hidden auto;
+    .scroll-gutter(12px);
 
     search { margin-bottom: 16px; }
   }
@@ -354,9 +353,9 @@
   /* Packs */
   .packs {
     display: flex;
-    scrollbar-gutter: stable;
-    padding: 6px 8px 0 4px;
+    padding: 6px 0 0 4px;
     overflow: hidden auto;
+    .scroll-gutter(12px);
     gap: 12px;
     align-items: start;
 

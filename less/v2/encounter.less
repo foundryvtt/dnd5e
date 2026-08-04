@@ -107,9 +107,8 @@
   .tab {
     max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
     overflow: hidden auto;
-    scrollbar-gutter: stable;
-    padding: 16px 4px 8px 16px;
-    margin-right: 4px;
+    padding: 16px 0 8px 16px;
+    .scroll-gutter(16px);
   }
 
   /* -------------------------------------------- */
@@ -248,9 +247,7 @@
   /* -------------------------------------------- */
 
   .tab[data-tab=inventory] {
-    padding: 8px 4px calc(1.5rem + 30px) 16px;
-    margin-right: 4px;
-    scrollbar-gutter: stable;
+    padding: 8px var(--dnd5e-scroll-pad) calc(1.5rem + 30px) 16px;
     overflow-y: auto;
   }
 
