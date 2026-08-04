@@ -325,7 +325,7 @@ export default class ChatMessage5e extends ChatMessage {
     event.stopPropagation();
     const { actorUuid, tokenUuid } = event.currentTarget.dataset;
     const { actor, token } = TargetsField.resolve({ actor: actorUuid, token: tokenUuid });
-    if ( !token || !actor?.testUserPermission(game.user, "OBSERVER")) return;
+    if ( !token || !actor?.testUserPermission(game.user, "OBSERVER") ) return;
     const releaseOthers = !event.shiftKey;
     if ( token.controlled ) token.release();
     else {
