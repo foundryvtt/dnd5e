@@ -222,7 +222,9 @@ export default class ItemDataModel extends SystemDataModel {
         ...this.cardProperties ?? [],
         ...PropertyField.getUsageProperties(usage),
         ...this.equippableItemCardProperties ?? []
-      ],
+      ]
+        // Entries without a type are pre-6.0 label strings, which would cause a validation failure.
+        .filter(p => p?.type),
       subtitle: [this.type?.label ?? _loc(CONFIG.Item.typeLabels[type])]
     };
   }
