@@ -1379,6 +1379,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const { clientWidth } = document.documentElement;
     const dialog = this.form.querySelector("dialog.warnings");
     Object.assign(dialog.style, { top: `${top + height}px`, left: `${Math.min(left - 16, clientWidth - 300)}px` });
+    dialog.classList.remove("themed", "theme-light", "theme-dark");
+    const nearestThemed = dialog.closest(".themed") ?? dialog.ownerDocument.body;
+    const [, theme] = nearestThemed.className.match(/(?:^|\s)(theme-\w+)/) ?? [];
+    if ( theme ) dialog.classList.add("themed", theme);
     dialog.showModal();
     dialog.addEventListener("click", () => dialog.close(), { once: true });
   }
