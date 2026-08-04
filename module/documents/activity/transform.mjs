@@ -93,7 +93,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     return [{
       action: "transformActor",
       icon: "fa-solid fa-frog",
-      label: form ?? "DND5E.TRANSFORM.Action.Transform"
+      label: { value: form ?? "DND5E.TRANSFORM.Action.Transform" }
     }].concat(super._usageChatButtons(message));
   }
 

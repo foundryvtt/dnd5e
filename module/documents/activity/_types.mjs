@@ -16,7 +16,6 @@
  * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
  * @property {object} usage
  * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.
- * @property {string|null} usage.chatCard               Template used to render the chat card.
  * @property {typeof ActivityUsageDialog} usage.dialog  Default usage prompt.
  * @property {string} usage.messageType                 ChatMessage subtype created for this usage.
  */
@@ -75,10 +74,10 @@
  * @typedef ActivityUsageChatButton
  * @property {string} action                      Action performed when the button is clicked.
  * @property {object} [dataset]                   Parameters passed to the action that handles the button.
- * @property {string} [hiddenLabel]               Label displayed in place of label when challenge details are
- *                                                concealed from the viewer.
  * @property {string} icon                        FontAwesome classes or a path to an icon image.
- * @property {string} label                       Localization key or label text.
+ * @property {object} label                       Labels displayed on the button.
+ * @property {string} [label.hidden]              Label displayed when challenge details are concealed from the viewer.
+ * @property {string} label.value                 Localization key or label text.
  * @property {"all"|"creator"|"gm"} [visibility]  Which users can see this button.
  */
 

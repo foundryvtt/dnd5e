@@ -91,8 +91,10 @@ export default class PromptMessageData extends ChatMessageDataModel {
         action: button.type === "endConcentration" ? "endConcentration" : "roll",
         hidden: ((button.visibility === "gm") && !game.user.isGM)
           || ((button.visibility === "creator") && !isCreator),
-        hiddenLabel: createRollLabel({ ...button, hideDC: true, icon: true }),
-        label: createRollLabel({ ...button, icon: true })
+        label: {
+          hidden: createRollLabel({ ...button, hideDC: true, icon: true }),
+          value: createRollLabel({ ...button, icon: true })
+        }
       }))
     };
   }

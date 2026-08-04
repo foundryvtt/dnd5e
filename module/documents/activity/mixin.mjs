@@ -3,7 +3,6 @@ import ActivityUsageDialog from "../../applications/activity/activity-usage-dial
 import TemplatePlacement from "../../canvas/template-placement.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
-import PropertyField from "../../data/shared/property-field.mjs";
 import { formatNumber, getSceneTargets, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
 import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "../mixins/dependent.mjs";
@@ -42,7 +41,6 @@ export default function ActivityMixin(Base) {
       usage: {
         actions: {},
         applyEffectsInChat: true,
-        chatCard: null,
         dialog: ActivityUsageDialog,
         messageType: "usage"
       }
@@ -677,40 +675,6 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Prepare the context used to render the usage chat card.
-     * @param {ActivityMessageConfiguration} message  Configuration info for the created message.
-     * @returns {object}
-     * @protected
-     */
-    async _usageChatContext(message) {
-      const data = await this.item.system.getCardData({ activity: this });
-      const properties = PropertyField.getLabels(data.properties, { ...data, properties: data.item.properties });
-      const supplements = [];
-      if ( this.activation.condition ) {
-        supplements.push(`<strong>${_loc("DND5E.Trigger")}</strong> ${this.activation.condition}`);
-      }
-      if ( data.materials ) {
-        supplements.push(`<strong>${_loc("DND5E.Materials")}</strong> ${data.materials}`);
-      }
-      const buttons = this._usageChatButtons(message);
-
-      return {
-        activity: this,
-        actor: this.item.actor,
-        item: this.item,
-        token: this.item.actor?.token,
-        buttons: buttons.length ? buttons : null,
-        concealed: data.concealed,
-        description: data.description,
-        properties: properties.length ? properties : null,
-        subtitle: this.description.chatFlavor || data.subtitle.filterJoin(" • "),
-        supplements
-      };
-    }
-
-    /* -------------------------------------------- */
-
-    /**
      * Apply any final modifications to message config immediately before message is created.
      * @param {ActivityUseConfiguration} usageConfig        Configuration data for the activation.
      * @param {ActivityMessageConfiguration} messageConfig  Configuration data for the chat message.
@@ -739,17 +703,17 @@ export default function ActivityMixin(Base) {
       if ( this.target?.template?.type ) buttons.push({
         action: "placeTemplate",
         icon: "fa-solid fa-bullseye",
-        label: "DND5E.TARGET.Action.PlaceTemplate"
+        label: { value: "DND5E.TARGET.Action.PlaceTemplate" }
       });
 
       if ( message.hasConsumption ) buttons.push({
         action: "consumeResource",
         icon: "fa-solid fa-cubes-stacked",
-        label: "DND5E.CONSUMPTION.Action.ConsumeResource"
+        label: { value: "DND5E.CONSUMPTION.Action.ConsumeResource" }
       }, {
         action: "refundResource",
         icon: "fa-solid fa-clock-rotate-left",
-        label: "DND5E.CONSUMPTION.Action.RefundResource"
+        label: { value: "DND5E.CONSUMPTION.Action.RefundResource" }
       });
 
       return buttons;
@@ -781,7 +745,7 @@ export default function ActivityMixin(Base) {
      * @protected
      */
     async _createUsageMessage(message) {
-      const { chatCard, messageType } = this.metadata.usage;
+      const { messageType } = this.metadata.usage;
       const data = {
         flags: {
           core: { canPopout: true }
@@ -793,10 +757,6 @@ export default function ActivityMixin(Base) {
       };
       const buttons = this._usageChatButtons(message);
       if ( buttons.length ) foundry.utils.setProperty(data, "system.buttons", buttons);
-      if ( chatCard ) {
-        const context = await this._usageChatContext(message);
-        data.content = await foundry.applications.handlebars.renderTemplate(chatCard, context);
-      }
       const messageConfig = foundry.utils.mergeObject({
         data,
         rollMode: CONFIG.Dice.BasicRoll.getMessageMode()

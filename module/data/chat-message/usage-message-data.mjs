@@ -31,9 +31,11 @@ export default class UsageMessageData extends ItemMessageData {
       buttons: new ArrayField(new SchemaField({
         action: new StringField({ blank: false, required: true }),
         dataset: new ObjectField(),
-        hiddenLabel: new StringField(),
         icon: new StringField(),
-        label: new StringField(),
+        label: new SchemaField({
+          hidden: new StringField(),
+          value: new StringField()
+        }),
         visibility: new StringField({ choices: ["all", "creator", "gm"], initial: "creator", required: true })
       })),
       cause: new StringField(), // TODO: Replace with DocumentUUIDField with `relative: true` in DnD5e 6.0
