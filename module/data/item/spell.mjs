@@ -152,7 +152,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
    */
   get classIdentifier() {
     if ( !this.sourceItem ) return "";
-    const sourceItem = this.parent?.actor?.identifiedItems.get(this.sourceItem)?.first();
+    let sourceItem = this.parent?.actor?.identifiedItems.get(this.sourceItem)?.first();
+    if ( sourceItem && (sourceItem.type !== "class") && (sourceItem.type !== "subclass") ) {
+      sourceItem = this.parent?.actor?.items.get(sourceItem.getFlag("dnd5e", "advancementRoot")?.slice(0, 16));
+    }
     if ( sourceItem?.type === "class" ) return sourceItem.identifier;
     if ( sourceItem?.type === "subclass" ) return sourceItem.system.classIdentifier ?? "";
     return "";
