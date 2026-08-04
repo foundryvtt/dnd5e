@@ -299,8 +299,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
-
-  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 

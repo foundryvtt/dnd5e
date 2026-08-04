@@ -42,8 +42,7 @@ export default class UsageMessageData extends ItemMessageData {
       concentration: new DocumentIdField({ required: false }),
       deltas: new ActorDeltasField({}, { initial: null, nullable: true }),
       effects: new ArrayField(new StringField({ blank: false })),
-      scaling: new NumberField({ integer: true, min: 0, initial: 0 }),
-      spellLevel: new NumberField({ integer: true, min: 0 })
+      scaling: new NumberField({ integer: true, min: 0, initial: 0 })
     };
   }
 
@@ -145,5 +144,34 @@ export default class UsageMessageData extends ItemMessageData {
    */
   getButton(target) {
     return this.buttons[Number(target.dataset.index)];
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
+    if ( "spellLevel" in source ) {
+      source.level = source.spellLevel;
+      delete source.spellLevel;
+    }
+    return source;
+  }
+
+  /* -------------------------------------------- */
+  /*  Deprecations                                */
+  /* -------------------------------------------- */
+
+  /**
+   * @ignore
+   * @deprecated
+   * @since 6.0.0
+   */
+  get spellLevel() {
+    foundry.utils.logCompatibilityWarning("UsageMessageData#spellLevel is deprecated. "
+      + "Please use the 'level' property instead.", { since: "DnD5e 6.0", until: "DnD5e 6.2" });
+    return this.level;
   }
 }
