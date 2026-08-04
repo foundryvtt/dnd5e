@@ -1117,7 +1117,7 @@ export default class CompendiumBrowser extends Application5e {
    * @param {boolean|string|Function} [options.sort=true]  Should the contents be sorted? By default sorting will be
    *                                         performed using document names, but a key path can be provided to sort on
    *                                         a specific property or a function to provide more advanced sorting.
-   * @returns {object[]|Document[]}
+   * @returns {Promise<object[]|Document[]>}
    */
   static async fetch(documentClass, { types=new Set(), filters=[], index=true, indexFields=new Set(), sort=true }={}) {
     // Nothing within containers should be shown
