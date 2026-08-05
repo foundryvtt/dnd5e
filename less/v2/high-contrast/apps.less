@@ -1,12 +1,11 @@
 .dnd5e-flag-high-contrast .dnd5e2,
 .dnd5e2.dnd5e-flag-high-contrast {
   &.sheet {
-    --color-text-dark-primary: #000000;
     --dnd5e-color-gold: #e3ce9e;
     --dnd5e-color-scrollbar: var(--dnd5e-color-maroon);
   }
 
-  .card { border-color: var(--dnd5e-color-dark); }
+  .card { border: var(--dnd5e-border-dark); }
 
   .pill-lg {
     border-color: var(--dnd5e-color-dark);
@@ -42,6 +41,7 @@
 @scope (.dnd5e-flag-high-contrast.theme-light, .dnd5e-flag-high-contrast .theme-light) to (.themed) {
   .dnd5e2, :where(:scope).dnd5e2 {
     &.sheet {
+      --color-text-dark-primary: #000000;
       --filigree-background-color: #ffffff;
       --filigree-border-color: var(--dnd5e-color-dark);
       --dnd5e-background-card: #ffffff;
@@ -72,8 +72,6 @@
       --proficiency-cycle-enabled-color: unset;
       --proficiency-cycle-disabled-color: unset;
     }
-
-    .card { border: var(--dnd5e-border-dark); }
   }
 
   item-list-controls search {
