@@ -498,12 +498,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return { [change.key]: this.applyChangeField(actor, change, { field }) };
     }
 
-    // Coerce boolean-like or number-like strings into booleans or numeric values
-    if ( change.key.startsWith("flags.") ) {
-      if ( ["true", "false"].includes(change.value) ) change.value = change.value === "true";
-      else if ( Number.isFinite(Number(change.value)) ) change.value = Number(change.value);
-    }
-
     super._applyChangeUnguided(actor, change, changes, { replacementData });
   }
 
