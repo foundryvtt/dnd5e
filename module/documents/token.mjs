@@ -115,7 +115,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
 
     if ( sight.enabled ) {
-      Object.assign(target.sight, { enabled: true, range: sight.range, visionMode: sight.visionMode });
+      Object.assign(target.sight, { range: sight.range, visionMode: sight.visionMode });
     }
   }
 
