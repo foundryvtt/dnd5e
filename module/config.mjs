@@ -5009,20 +5009,6 @@ DND5E.sourceBooks = {};
 preLocalize("sourceBooks", { sort: true });
 
 /* -------------------------------------------- */
-/*  Themes                                      */
-/* -------------------------------------------- */
-
-/**
- * Themes that can be set for the system or on sheets.
- * @enum {string}
- */
-DND5E.themes = {
-  light: "SHEETS.DND5E.THEME.Light",
-  dark: "SHEETS.DND5E.THEME.Dark"
-};
-preLocalize("themes");
-
-/* -------------------------------------------- */
 /*  Enrichment                                  */
 /* -------------------------------------------- */
 

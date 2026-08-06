@@ -50,7 +50,7 @@
       position: absolute;
       inset: 0;
       overflow: hidden auto;
-      scrollbar-gutter: stable;
+      .scroll-gutter(16px);
     }
   }
 
@@ -210,7 +210,7 @@
   .sheet-body .tab-body [data-application-part=members] {
     overflow: hidden auto;
     scrollbar-gutter: stable;
-    inset: 0 4px 0 0;
+    inset: 0;
     gap: 0;
 
     h3 { padding-left: 12px; }
@@ -221,7 +221,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding: 16px 4px 16px 16px;
+    padding: 16px 0 16px 16px;
 
     &.stats {
       .member {
@@ -364,16 +364,19 @@
   /*  Inventory                         */
   /* ---------------------------------- */
 
-  [data-application-part=inventory] {
+  .tab[data-application-part=inventory] {
     gap: 0;
     grid-template-columns: 196px auto;
+    scrollbar-gutter: auto;
+    margin-inline-end: 0;
+    padding-inline-end: 0;
 
     &.active { display: grid; }
 
     .sidebar {
-      padding: 6px 4px 0 12px;
-      scrollbar-gutter: stable;
+      padding: 6px 0 0 12px;
       overflow-y: auto;
+      .scroll-gutter(12px);
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -436,10 +439,9 @@
     }
 
     .body {
-      padding: 6px 4px calc(1.5rem + 30px) 4px;
-      margin-right: 4px;
-      scrollbar-gutter: stable;
+      padding: 6px 0 calc(1.5rem + 30px) 4px;
       overflow-y: auto;
+      .scroll-gutter(12px);
       display: flex;
       flex-direction: column;
 
