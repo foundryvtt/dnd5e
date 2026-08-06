@@ -226,14 +226,14 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin: -6px -11px -6px -6px;
-    padding: 6px 2px 6px 6px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-    scrollbar-gutter: stable;
+    margin: -6px 0 -6px -6px;
+    padding: 6px 0 6px 6px;
+    .scrollbar();
+    .scroll-gutter(12px);
+    margin-inline-end: calc(-1 * (var(--dnd5e-scroll-pad) + var(--dnd5e-scrollbar-width)));
 
     &:not(.active) { display: none; }
-    &.effects, &.activities { padding: 12px 2px 58px 6px; }
+    &.effects, &.activities { padding: 12px var(--dnd5e-scroll-pad) 58px 6px; }
 
     > .pills .pill {
       font-size: var(--font-size-10);

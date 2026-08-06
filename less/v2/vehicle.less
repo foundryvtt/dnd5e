@@ -197,8 +197,8 @@
 
         .tab {
           overflow: hidden auto;
-          scrollbar-gutter: stable;
-          inset: 0 2px 0 0;
+          inset: 0;
+          .scroll-gutter(8px);
           position: absolute;
           flex-direction: column;
 
@@ -212,14 +212,14 @@
 
     /* Inventory */
     .inventory-element {
-      padding: 8px 4px 0;
+      padding: 8px 0 0;
       flex: 1;
 
       .encumbrance .breakpoint { display: none; }
     }
 
     /* Effects */
-    .effects-element { padding: 8px 4px 0; }
+    .effects-element { padding: 8px 0 0; }
 
   }
 
@@ -235,12 +235,12 @@
   /* -------------------------------------------- */
 
   .sheet-stations {
-    padding: 8px 4px 0 8px;
+    padding: 8px 0 0 8px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     overflow: hidden auto;
-    scrollbar-gutter: stable;
+    .scroll-gutter(12px);
 
     /* Abilities */
     .abilities {
@@ -395,7 +395,6 @@
   /* -------------------------------------------- */
 
   .sheet-body .main-content .tab-body .tab.sheet-crew {
-    left: 4px;
     &.active { display: grid; }
   }
 
@@ -488,8 +487,6 @@
   /*  Description                                 */
   /* -------------------------------------------- */
 
-  .sheet-body .main-content .tab-body .tab.sheet-description { left: 4px; }
-
   .sheet-description {
     padding-top: 8px;
 
@@ -498,6 +495,7 @@
         overflow: hidden;
         scrollbar-gutter: auto;
         margin: 0 0 0 8px;
+        padding-inline-end: 0;
       }
 
       .editor-content {

@@ -20,18 +20,7 @@
   }
 
   &.journal-entry .scrollable, &.journal-entry-page.editor-content, .toc {
-    scrollbar-width: thin;
-    scrollbar-color: var(--dnd5e-color-gold) transparent;
-
-    &::-webkit-scrollbar-track {
-      box-shadow: none;
-      border-radius: 0;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border: none;
-      background: var(--dnd5e-color-gold);
-    }
+    .scrollbar(var(--dnd5e-color-gold));
   }
 
   &.journal-entry .scrollable { overflow-anchor: none; } /* https://github.com/foundryvtt/dnd5e/issues/6599 */
@@ -80,9 +69,8 @@
     margin: 0;
 
     .editor-content {
-      scrollbar-gutter: stable;
-      margin: 0 4px 0 16px;
-      padding-right: 4px;
+      margin: 0 0 0 16px;
+      .scroll-gutter(16px);
     }
   }
 
@@ -249,8 +237,8 @@
     }
 
     .editor-content {
-      scrollbar-gutter: stable;
-      padding: 0 4px 0 0;
+      padding: 0;
+      .scroll-gutter(12px);
     }
   }
   h1, h2, h3, h4, h5, h6 {
@@ -399,8 +387,8 @@
 
     > .right {
       overflow-y: auto;
-      padding: 16px 4px 16px 8px;
-      scrollbar-gutter: stable;
+      padding: 16px 0 16px 8px;
+      .scroll-gutter(12px);
     }
 
     h3 { margin-block-start: 1rem; }
