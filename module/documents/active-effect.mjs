@@ -856,14 +856,30 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     await super._onDeleteOperation(documents, operation, user);
     if ( game.user === game.users.activeGM ) {
       const dependents = new Map();
+      const pseudo = new Map();
       for ( const effect of documents ) {
         for ( const dependent of effect.getDependents() ) {
-          dependents.getOrInsert(dependent.parent, new Set()).add(dependent.id);
+          let { collectionName, documentName, parent } = dependent;
+          const descriptor = { collectionName, documentName, ids: new Set() };
+          if ( !(dependent instanceof foundry.abstract.Document) ) {
+            parent = dependent.item;
+            pseudo.getOrInsert(parent, descriptor).ids.add(dependent.id);
+            continue;
+          }
+          dependents.getOrInsert(parent, descriptor).ids.add(dependent.id);
         }
       }
-      const batch = dependents.entries()
-        .map(([parent, ids]) => ({ action: "delete", documentName: "ActiveEffect", ids: [...ids], parent }))
-        .toArray();
+      const batch = [
+        ...dependents.entries().map(([parent, { documentName, ids }]) => {
+          return { documentName, parent, action: "delete", ids: Array.from(ids) };
+        }).toArray(),
+        ...pseudo.entries().map(([parent, { collectionName, ids }]) => {
+          return {
+            action: "update", documentName: "Item", parent: parent.parent,
+            updates: [{ _id: parent.id, ...Object.fromEntries(ids.map(id => [`system.${collectionName}.${id}`, _del])) }]
+          };
+        })
+      ];
       if ( batch.length ) await foundry.documents.modifyBatch(batch);
     }
 

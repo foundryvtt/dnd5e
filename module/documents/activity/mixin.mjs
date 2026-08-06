@@ -37,8 +37,9 @@ export default function ActivityMixin(Base) {
      * @type {Readonly<ActivityMetadata>}
      */
     static metadata = Object.freeze({
-      name: "Activity",
+      collection: "activities",
       label: "DOCUMENT.DND5E.Activity",
+      name: "Activity",
       sheetClass: ActivitySheet,
       usage: {
         actions: {},

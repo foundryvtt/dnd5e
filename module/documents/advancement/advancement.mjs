@@ -65,14 +65,15 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
    */
   static get metadata() {
     return {
-      name: "Advancement",
-      label: "DOCUMENT.DND5E.Advancement",
-      order: 100,
+      collection: "advancement",
+      hint: "",
       icon: "icons/svg/upgrade.svg",
+      label: "DOCUMENT.DND5E.Advancement",
+      multiLevel: false,
+      name: "Advancement",
+      order: 100,
       typeIcon: "icons/svg/upgrade.svg",
       title: _loc("DND5E.AdvancementTitle"),
-      hint: "",
-      multiLevel: false,
       validItemTypes: new Set(["background", "class", "race", "subclass"]),
       apps: {
         config: AdvancementConfig,
