@@ -46,6 +46,20 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * The name of the collection this PseudoDocument is stored in on its parent.
+     * @type {string}
+     */
+    static get collectionName() {
+      return this.metadata.collection;
+    }
+
+    get collectionName() {
+      return this.constructor.collectionName;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Configuration object that defines types.
      * @type {object}
      */
