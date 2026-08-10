@@ -63,7 +63,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
     return [
       (this.attuned || CONFIG.DND5E.attunementTypes[this.attunement])
         ? { type: "attunement", attuned: this.attuned, attunement: this.attunement } : null,
-      { type: "label", label: this.equipped ? "DND5E.Equipped" : "DND5E.Unequipped" },
+      this.equipped ? null : { type: "label", label: "DND5E.Unequipped" },
       ("proficient" in this) ? { type: "proficiency", proficiency: this.prof?.multiplier || 0 } : null
     ].filter(_ => _);
   }

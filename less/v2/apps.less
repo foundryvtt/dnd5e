@@ -417,14 +417,15 @@
     gap: .25rem;
 
     .pill {
-      font-family: var(--dnd5e-font-roboto);
-      font-weight: bold;
+      font-family: var(--dnd5e-font-roboto-condensed);
+      font-weight: 400;
       font-size: var(--font-size-11);
-      text-transform: uppercase;
+      line-height: 1;
+      text-transform: none;
       border: var(--pill-border);
       border-radius: 3px;
       background: var(--dnd5e-background-card);
-      padding: .1875rem .375rem;
+      padding: 2px 5px;
       display: flex;
       gap: .25rem;
       margin: 0;
@@ -437,16 +438,10 @@
       &.green { background-color: var(--pill-background-green); }
       &.maroon { background-color: var(--pill-background-maroon); }
 
-      &.transparent, &.pill-sm {
+      &.transparent {
         color: var(--pill-transparent-color);
         border: var(--pill-border-dotted);
         background-color: transparent;
-      }
-
-      &.pill-xs {
-        font-size: var(--font-size-9);
-        padding: 2px 4px;
-        gap: 3px;
       }
 
       > .separator { color: var(--color-text-tertiary); }

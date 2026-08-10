@@ -42,12 +42,29 @@ export default class TargetField extends SchemaField {
   /**
    * Build the display labels for target data.
    * @param {object} data                               Data from which to build the labels.
+   * @param {boolean} [data.capitalize=false]           Capitalize the target type in labels intended to stand alone,
+   *                                                    rather than read as part of a sentence.
    * @param {Record<string, string>} [data.dimensions]  Template dimensions, derived from the type when omitted.
    * @param {TargetData} data.target                    Resolved target data.
    * @returns {TargetLabels}
    */
-  static getLabels({ dimensions, target }) {
+  static getLabels({ capitalize=false, dimensions, target }) {
     const pr = getPluralRules();
+
+    /**
+     * Combine a count with its localized target type.
+     * @param {string} count                        Formatted count.
+     * @param {string} key                          Localization key for the target type.
+     * @param {object} [options={}]
+     * @param {boolean} [options.capitalize=false]  Capitalize the target type.
+     * @param {string} [options.special]            Description of a special target type.
+     * @returns {string}
+     */
+    const fmt = (count, key, { capitalize=false, special }={}) => {
+      let type = _loc(key, { special });
+      if ( capitalize ) type = type.capitalize();
+      return _loc("DND5E.TARGET.Formatted", { count, type }).trim();
+    };
 
     // Generate the template labels
     const template = {};
@@ -59,12 +76,13 @@ export default class TargetField extends SchemaField {
       if ( target.template.units in CONFIG.DND5E.movementUnits ) {
         parts.push(formatLength(target.template.size, target.template.units));
       }
-      template.statblock = _loc(`${templateConfig.counted}.${pr.select(target.template.count || 1)}`, {
-        number: parts.filterJoin(" ")
-      }).trim().capitalize();
+      template.statblock = fmt(
+        parts.filterJoin(" "), `${templateConfig.counted}.${pr.select(target.template.count || 1)}`,
+        { capitalize }
+      ).capitalize();
 
       const sizeUnit = CONFIG.DND5E.movementUnits[target.template.units]?.template ?? "";
-      if ( Object.keys(dimensions).length === 1 ) template.size = _loc("DND5E.AreaOfEffect.Description.SizeSimple",{
+      if ( Object.keys(dimensions).length === 1 ) template.size = _loc("DND5E.AreaOfEffect.Description.SizeSimple", {
         number: formatNumber(target.template.size), unit: sizeUnit
       });
       else template.size = game.i18n.getListFormatter({ type: "unit" })
@@ -85,23 +103,18 @@ export default class TargetField extends SchemaField {
 
     // Generate the affects labels
     const affectsConfig = CONFIG.DND5E.individualTargetTypes[target.affects.type];
+    const { count, special } = target.affects;
+    const counted = affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted";
+    const described = special ? "DND5E.TARGET.Type.Special.Counted" : counted;
     const affects = {
-      description: _loc(
-        `${target.affects.special ? "DND5E.TARGET.Type.Special.Counted"
-          : affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${target.affects.count
-          ? pr.select(target.affects.count) : target.template.type ? "each" : "any"}`, {
-          number: formatNumber(target.affects.count, { words: true }),
-          special: target.affects.special
-        }),
-      sheet: affectsConfig?.counted ? _loc(
-        `${affectsConfig.counted}.${target.affects.count ? pr.select(target.affects.count) : "other"}`, {
-          number: target.affects.count ? formatNumber(target.affects.count)
-            : _loc(`DND5E.TARGET.Count.${target.template.type ? "Every" : "Any"}`)
-        }).trim().capitalize() : (affectsConfig?.label ?? ""),
-      statblock: _loc(
-        `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr.select(target.affects.count || 1)}`,
-        { number: formatNumber(target.affects.count || 1, { words: true }) }
-      )
+      description: count
+        ? fmt(formatNumber(count, { words: true }), `${described}.${pr.select(count)}`, { special })
+        : _loc(`${described}.${target.template.type ? "each" : "any"}`, { special }),
+      sheet: affectsConfig?.counted ? fmt(
+        count ? formatNumber(count) : _loc(`DND5E.TARGET.Count.${target.template.type ? "Every" : "Any"}`),
+        `${affectsConfig.counted}.${count ? pr.select(count) : "other"}`, { capitalize }
+      ).capitalize() : (affectsConfig?.label ?? ""),
+      statblock: fmt(formatNumber(count || 1, { words: true }), `${counted}.${pr.select(count || 1)}`)
     };
 
     return { affects, template };

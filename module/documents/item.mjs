@@ -839,7 +839,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       ...this.system.chatProperties ?? [],
       ...this.system.equippableItemCardProperties ?? [],
       ...PropertyField.getUsageProperties(usage)
-    ], { ...usage, properties: this.system.properties });
+    ].filter(p => {
+      return (p.type !== "duration") || (usage.duration.units !== "inst") || this.system.alwaysShowDuration;
+    }), { ...usage, properties: this.system.properties });
 
     return context;
   }

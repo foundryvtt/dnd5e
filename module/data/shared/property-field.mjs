@@ -15,7 +15,7 @@ const { BooleanField, NumberField, StringField, TypedSchemaField } = foundry.dat
  */
 export default class PropertyField extends TypedSchemaField {
   constructor(options={}, context={}) {
-    super({
+    const types = {
       ability: { ability: new StringField() },
       ac: { value: new NumberField({ integer: true }) },
       activation: {},
@@ -31,13 +31,18 @@ export default class PropertyField extends TypedSchemaField {
       property: { property: new StringField() },
       range: {},
       reach: {},
+      school: { school: new StringField() },
       target: {},
       text: { text: new StringField() },
+      "weapon:category": { category: new StringField() },
+      "weapon:class": { class: new StringField() },
       weight: {
         units: new StringField({ blank: false, initial: () => defaultUnits("weight"), required: true }),
         value: new NumberField()
       }
-    }, options, context);
+    };
+    for ( const type of Object.values(types) ) type.identity = new BooleanField();
+    super(types, options, context);
   }
 
   /* -------------------------------------------- */
@@ -55,7 +60,7 @@ export default class PropertyField extends TypedSchemaField {
       switch ( p.type ) {
         case "ability": return CONFIG.DND5E.abilities[p.ability]?.label;
         case "ac": return `${p.value} ${_loc("DND5E.AC")}`;
-        case "activation": return ActivationField.getLabels({ activation, properties }).simple;
+        case "activation": return ActivationField.getLabels({ activation, properties }).simple?.titleCase();
         case "attunement": return p.attuned
           ? _loc("DND5E.AttunementAttuned")
           : CONFIG.DND5E.attunementTypes[p.attunement];
@@ -70,7 +75,7 @@ export default class PropertyField extends TypedSchemaField {
           );
           return p.materials ? `${components} (${p.materials})` : components;
         }
-        case "duration": return DurationField.getLabels({ duration, properties }).simple;
+        case "duration": return DurationField.getLabels({ duration, properties }).simple?.titleCase();
         case "label": return _loc(p.label);
         case "level": return CONFIG.DND5E.spellLevels[p.level];
         case "mastery": return CONFIG.DND5E.weaponMasteries[p.mastery]?.label;
@@ -82,12 +87,17 @@ export default class PropertyField extends TypedSchemaField {
         case "range": return (range.long && (range.long !== range.value))
           ? `${formatNumber(range.value)}/${formatLength(range.long, range.units)}`
           : RangeField.getLabels({ range }).simple;
-        case "reach": return _loc("DND5E.RANGE.Formatted.Reach", { reach: formatLength(range.reach, range.units) });
+        case "reach": return _loc("DND5E.RANGE.Formatted.Reach", {
+          reach: formatLength(range.reach, range.units)
+        }).capitalize();
+        case "school": return CONFIG.DND5E.spellSchools[p.school]?.label;
         case "target": {
-          const labels = TargetField.getLabels({ target });
+          const labels = TargetField.getLabels({ target, capitalize: true });
           return labels.template.statblock || labels.affects.sheet;
         }
         case "text": return p.text;
+        case "weapon:category": return CONFIG.DND5E.weaponProficiencies[p.category];
+        case "weapon:class": return CONFIG.DND5E.attackTypes[p.class]?.label;
         case "weight": return formatWeight(p.value, p.units);
         default: return null;
       }
