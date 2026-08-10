@@ -866,7 +866,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const parts = scaledFormula ? [scaledFormula] : [];
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
     const data = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
-    data.roll.damageType = (damage.types.has(lastType) ? lastType : null) ?? damage.types.first();
+    data.roll.damage ??= {};
+    data.roll.damage.type = (damage.types.has(lastType) ? lastType : null) ?? damage.types.first();
 
     if ( index === 0 ) {
       const actionType = this.getActionType(rollConfig.attackMode);
@@ -888,7 +889,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     return {
       data, parts,
       options: {
-        type: data.roll.damageType,
+        type: data.roll.damage.type,
         types: Array.from(damage.types),
         properties: data.roll.properties
       }
