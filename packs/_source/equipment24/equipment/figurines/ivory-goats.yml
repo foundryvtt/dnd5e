@@ -146,7 +146,7 @@ system:
           - type: activityUses
             value: '7'
           - type: itemUses
-            value: '-@item.uses.spent'
+            value: -@item.uses.spent
             target: ''
       description:
         chatFlavor: ''

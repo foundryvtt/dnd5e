@@ -52,7 +52,7 @@ system:
         spellSlot: true
         targets:
           - type: itemUses
-            value: '-@classes.monk.levels'
+            value: -@classes.monk.levels
             target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
             scaling: {}
           - type: itemUses

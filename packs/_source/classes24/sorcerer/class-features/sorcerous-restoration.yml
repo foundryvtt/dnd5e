@@ -54,7 +54,7 @@ system:
             target: ''
             scaling: {}
           - type: itemUses
-            value: '-(floor(@classes.sorcerer.levels / 2))'
+            value: -(floor(@classes.sorcerer.levels / 2))
             target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
             scaling: {}
       description:

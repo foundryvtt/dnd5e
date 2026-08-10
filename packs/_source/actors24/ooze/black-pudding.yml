@@ -899,7 +899,7 @@ items:
           bonuses:
             ac: ''
             hd: ''
-            hp: '-@summon.attributes.hp.value + floor(@attributes.hp.value / 2)'
+            hp: -@summon.attributes.hp.value + floor(@attributes.hp.value / 2)
             attackDamage: ''
             saveDamage: ''
             healing: ''

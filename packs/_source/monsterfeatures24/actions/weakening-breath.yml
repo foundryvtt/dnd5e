@@ -101,7 +101,7 @@ effects:
     system:
       changes:
         - key: system.abilities.str.bonuses.check
-          value: '-1d4'
+          value: -1d4
           priority: null
           type: add
           phase: initial
