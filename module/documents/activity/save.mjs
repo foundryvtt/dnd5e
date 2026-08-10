@@ -47,6 +47,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       const promptTitle = _loc("DND5E.SavePromptTitle", { ability });
       const button = {
         action: "rollSave",
+        canGroup: true,
         dataset: { dc, ability: abilityId },
         icon: "fa-solid fa-shield-heart",
         label: {

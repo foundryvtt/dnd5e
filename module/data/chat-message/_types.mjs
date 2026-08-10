@@ -153,7 +153,9 @@
 
 /**
  * @typedef ItemMessageProperty
- * @property {string} type  Kind of property, which determines how it is rendered and what other data it carries.
+ * @property {boolean} identity  Whether this property identifies what the item is, and so is displayed only on cards
+ *                               that do not render it in their subtitle.
+ * @property {string} type       Kind of property, which determines how it is rendered and what other data it carries.
  */
 
 /* -------------------------------------------- */

@@ -3,11 +3,3 @@
 {{else}}
 {{> "dnd5e.card-face" }}
 {{/if}}
-
-{{#if effects.length}}
-<effect-application class="dnd5e2">
-    {{#each effects}}
-    <option value="{{ uuid }}"></option>
-    {{/each}}
-</effect-application>
-{{/if}}

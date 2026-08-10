@@ -65,18 +65,44 @@ export default class ItemMessageData extends ChatMessageDataModel {
   }, { inplace: false }));
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether the properties that identify the item are displayed as pills, rather than in the card's subtitle.
+   * @type {boolean}
+   */
+  get showIdentity() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @override */
   async _prepareContext(options) {
-    const { concealed, description, item, subtitle } = this;
+    const { concealed, description, item, showIdentity, subtitle } = this;
     return {
       concealed, description, item,
-      properties: PropertyField.getLabels(this.properties, { ...this, properties: item.properties }),
+      rows: {
+        properties: {
+          entries: PropertyField.getLabels(showIdentity ? this.properties : this.properties.filter(p => !p.identity), {
+            ...this, properties: item.properties
+          }),
+          icon: "fa-solid fa-tag"
+        }
+      },
       subtitle: subtitle.filterJoin(" • "),
       supplements: this._prepareSupplements()
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
   }
 
   /* -------------------------------------------- */
@@ -100,8 +126,9 @@ export default class ItemMessageData extends ChatMessageDataModel {
   /** @inheritDoc */
   _onRender(element) {
     super._onRender(element);
+    element.classList.add("compact");
     if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
-      element.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
+      element.querySelectorAll(".card-header, .card-description").forEach(el => el.classList.add("collapsed"));
     }
   }
 }

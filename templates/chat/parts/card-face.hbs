@@ -1,40 +1,39 @@
 <div class="chat-card">
 
-    {{!-- Collapsible Description --}}
-    <section class="card-header description {{~#if description}} collapsible{{/if}}"
+    {{!-- Header --}}
+    <section class="card-header"{{#if description}} data-action="toggleDescription"{{/if}}
              {{~#if concealed}} data-concealed{{/if}}>
-        <header class="summary">
+        <div class="item-icon" data-action="showDocument" data-uuid="{{ item.uuid }}">
             <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
-            <div class="name-stacked border">
-                <span class="title">{{ item.name }}</span>
-                {{#if subtitle}}
-                <span class="subtitle">{{{ subtitle }}}</span>
-                {{/if}}
-            </div>
-            {{#if description}}<i class="fa-solid fa-chevron-down fa-fw" inert></i>{{/if}}
-        </header>
+        </div>
+        {{#if activity.uuid}}
+        <div class="activity-icon">{{ dnd5e-icon activity.img alt=activity.name classes="gold-icon" }}</div>
+        {{/if}}
+        <div class="name-stacked">
+            <span class="title">{{ item.name }}</span>
+            {{#if subtitle}}
+            <span class="subtitle">{{{ subtitle }}}</span>
+            {{/if}}
+        </div>
         {{#if description}}
-        <section class="details collapsible-content card-content">
-            <div class="wrapper">{{{ description }}}</div>
-        </section>
+        <div class="chevron">
+            <i class="fa-solid fa-chevron-down" inert></i>
+        </div>
         {{/if}}
     </section>
 
-    {{!-- Buttons --}}
-    {{#if buttons.length}}
-    <div class="card-buttons">
-        {{#each buttons}}
-        <button type="button" data-action="{{ action }}" data-index="{{ index }}"{{#if hidden}} hidden{{/if}}>
-            {{ dnd5e-icon icon }}
-            {{#if label.hidden}}
-            <span class="visible-dc">{{ localize label.value }}</span>
-            <span class="hidden-dc">{{ localize label.hidden }}</span>
-            {{else}}
-            <span>{{ localize label.value }}</span>
-            {{/if}}
-        </button>
-        {{/each}}
-    </div>
+    {{!-- Flavor --}}
+    {{#if activity.chatFlavor}}
+    <section class="card-flavor">{{{ activity.chatFlavor }}}</section>
+    {{/if}}
+
+    {{!-- Collapsible Description --}}
+    {{#if description}}
+    <section class="card-description collapsible">
+        <div class="collapsible-content">
+            <div class="wrapper">{{{ description }}}</div>
+        </div>
+    </section>
     {{/if}}
 
     {{!-- Supplements --}}
@@ -42,14 +41,39 @@
     <p class="supplement"><strong>{{ localize label }}</strong> {{ detail }}</p>
     {{/each}}
 
-    {{!-- Properties --}}
-    {{#if properties.length}}
-    <ul class="card-footer pills unlist">
-        {{#each properties}}
-        <li class="pill transparent">
-            <span class="label">{{ this }}</span>
-        </li>
-        {{/each}}
-    </ul>
+    {{!-- Rows --}}
+    {{#each rows}}
+    {{#if entries.length}}
+    <section class="icon-row">
+        <i class="fa-fw {{ icon }}" inert></i>
+        <ul class="pills unlist">
+            {{#each entries}}
+            <li class="pill transparent">
+                <span class="label">{{ this }}</span>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+    {{/if}}
+    {{/each}}
+
+    {{!-- Buttons --}}
+    {{#if buttonGroups}}
+    <section class="icon-row">
+        <i class="fa-solid fa-fw fa-bolt" inert></i>
+        <ul class="unlist">
+            {{#each buttonGroups}}
+            {{#each entries}}
+            <li>
+                <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}"
+                        {{#if (and canGroup (not singleton))}}data-group data-forward-action="{{ action }}"
+                        {{else}}data-action="{{ action }}" data-index="{{ index}}"{{/if}}>
+                    {{ dnd5e-icon icon }}
+                </button>
+            </li>
+            {{/each}}
+            {{/each}}
+        </ul>
+    </section>
     {{/if}}
 </div>

@@ -107,7 +107,7 @@
           "item.img": ["IMAGE"],
           "targets.*.img": ["IMAGE", "VIDEO"]
         },
-        "htmlFields": ["description"]
+        "htmlFields": ["activity.chatFlavor", "description"]
       }
     },
     "Item": {

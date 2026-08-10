@@ -30,6 +30,13 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef ChatMessageEnrichmentOptions
+ * @property {boolean} [avatar=true]  Whether to inject an avatar image.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {ActorUpdatesDescription} CombatRecoveryResults
  * @property {BasicRoll[]} rolls  Any recovery rolls performed.
  */

@@ -216,6 +216,10 @@ export default class ItemDataModel extends SystemDataModel {
     const source = (await activity?.getCardData()) ?? {};
     const usage = this.getUsageData({ activity });
 
+    if ( source.activity?.chatFlavor ) {
+      source.activity.chatFlavor = await TextEditor.enrichHTML(source.activity.chatFlavor, enrichmentOptions);
+    }
+
     let description = source.description ?? "";
     description ||= (identified === false) ? unidentified?.description : (desc.chat || desc.value);
 

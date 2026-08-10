@@ -16,6 +16,7 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
   async _onFirstRender(context, options) {
     const scroll = this.element.querySelector(".chat-scroll");
     const log = this.element.querySelector(".chat-log");
+    log.classList.remove("themed", "theme-light");
     new MutationObserver(this.#onLogMutated.bind(this)).observe(log, { childList: true });
     this.#intersections = new IntersectionObserver(this.#onCardIntersects.bind(this), { root: scroll });
     return super._onFirstRender(context, options);
