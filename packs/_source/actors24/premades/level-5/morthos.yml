@@ -8339,7 +8339,7 @@ items:
                 target: ''
                 scaling: {}
               - type: itemUses
-                value: '-(floor(@classes.sorcerer.levels / 2))'
+                value: -(floor(@classes.sorcerer.levels / 2))
                 target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
                 scaling: {}
           description:
@@ -11119,17 +11119,17 @@ items:
               phase: initial
               _id: NoXh8wqPX1A49L4F
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: hkFcpY59C3gusMFx
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: OE5pH56NnhgppZCp
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: bxnMC0DF3F3k1YD7
@@ -11516,17 +11516,17 @@ items:
               phase: initial
               _id: mCroYC95O5d6eWuF
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: iQ5jrZgdRdt3OjLn
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: maMsazVHXBzP6s41
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: IHvfkV32TQkI31Ni
@@ -11912,17 +11912,17 @@ items:
               phase: initial
               _id: vzy6oSugO93U09AQ
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: 2m3pRGGsqCncWhXY
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: M0Wmtko5vaSBlX5g
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: YkyDndVRksEkYgXx

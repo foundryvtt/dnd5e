@@ -50,7 +50,7 @@ system:
             target: Compendium.dnd5e.classes24.Item.phbwlkMagicalCun
             scaling: {}
           - type: attribute
-            value: '-(@spells.pact.max)'
+            value: -(@spells.pact.max)
             target: spells.pact.value
             scaling: {}
       description:

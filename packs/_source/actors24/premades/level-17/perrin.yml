@@ -6375,7 +6375,7 @@ items:
             spellSlot: true
             targets:
               - type: itemUses
-                value: '-@classes.monk.levels'
+                value: -@classes.monk.levels
                 target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
                 scaling: {}
               - type: itemUses
@@ -9269,7 +9269,7 @@ items:
             spellSlot: true
             targets:
               - type: itemUses
-                value: '-1d6 - 3'
+                value: -1d6 - 3
                 target: ''
                 scaling: {}
               - type: activityUses
@@ -9606,17 +9606,17 @@ items:
               phase: initial
               _id: t7BIDa9p8oN8N12u
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: QbW0EnzjgvDRUbUz
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: BAQsDfQwehPKoNRV
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: L4IrqiXv97mRZkPg

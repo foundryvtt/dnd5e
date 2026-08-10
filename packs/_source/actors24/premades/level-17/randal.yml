@@ -7958,7 +7958,7 @@ items:
             spellSlot: true
             targets:
               - type: itemUses
-                value: '-1d6 - 3'
+                value: -1d6 - 3
                 target: ''
                 scaling: {}
               - type: activityUses
@@ -8295,17 +8295,17 @@ items:
               phase: initial
               _id: NFvgKBk0tHcI92ty
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: Sm8eZCECgoeebTG2
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: ddP2RsH4uvcK5ug7
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: LpP2OgD3OPaSjSSq

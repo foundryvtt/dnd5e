@@ -5207,7 +5207,7 @@ items:
                 target: ''
                 scaling: {}
               - type: attribute
-                value: '-(ceil(@spells.pact.max / 2))'
+                value: -(ceil(@spells.pact.max / 2))
                 target: spells.pact.value
                 scaling: {}
           description:
@@ -8482,31 +8482,31 @@ items:
         system:
           changes:
             - key: system.bonuses.abilities.save
-              value: '-1d4'
+              value: -1d4
               priority: null
               type: add
               phase: initial
               _id: lHmzu7U8I57uD90J
             - key: system.bonuses.mwak.attack
-              value: '-1d4'
+              value: -1d4
               priority: null
               type: add
               phase: initial
               _id: Q12X32k5O4SrtRvo
             - key: system.bonuses.msak.attack
-              value: '-1d4'
+              value: -1d4
               priority: null
               type: add
               phase: initial
               _id: f37mL3gF1rEUu2Ft
             - key: system.bonuses.rsak.attack
-              value: '-1d4'
+              value: -1d4
               priority: null
               type: add
               phase: initial
               _id: 9aGqVnj2GdNdqQRH
             - key: system.bonuses.rwak.attack
-              value: '-1d4'
+              value: -1d4
               priority: null
               type: add
               phase: initial
@@ -10487,17 +10487,17 @@ items:
               phase: initial
               _id: 8v1Q89B2qwc93GUP
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: Qk3SGWNC7CU3NeuY
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: cDCx9edaBpDkcPya
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: fxOUtOIVOxul4uNK
@@ -10896,17 +10896,17 @@ items:
               phase: initial
               _id: y3jEEZ4YHHWU8BG5
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: KI7vqPVpfp2VgpAg
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: SOjMbm7f2KY82vT6
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: 3V1sHXBXW3uBggjx

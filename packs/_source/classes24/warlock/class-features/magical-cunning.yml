@@ -54,7 +54,7 @@ system:
             target: ''
             scaling: {}
           - type: attribute
-            value: '-(ceil(@spells.pact.max / 2))'
+            value: -(ceil(@spells.pact.max / 2))
             target: spells.pact.value
             scaling: {}
       description:

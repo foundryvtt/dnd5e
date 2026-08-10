@@ -9522,17 +9522,17 @@ items:
               phase: initial
               _id: AzQlACuaAiFPMWPk
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: sM2ANdSjU9b9SHVk
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: vMdva94JSINYU0VV
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: RS4STrGf7z1awcA2
@@ -9866,17 +9866,17 @@ items:
               phase: initial
               _id: xAXUlMrRvG6OdrjY
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: XcnTskmx4G4ybCYq
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: JeftCJ9lwbhOI4aR
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: 0dWvw7YHXMeHBR2U
@@ -10253,17 +10253,17 @@ items:
               phase: initial
               _id: ja7e3QePoqZoxofd
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: 0OqLDkDeYc7Br4zZ
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: IoiKnFQLSqGix7Iz
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: XvlPyKqHXn5jFEfO
@@ -10639,17 +10639,17 @@ items:
               phase: initial
               _id: 6Ax2HL0I42QUOzTN
             - key: system.properties
-              value: '-vocal'
+              value: -vocal
               type: add
               phase: initial
               _id: dfknmRoLYFs0bNNY
             - key: system.properties
-              value: '-somatic'
+              value: -somatic
               type: add
               phase: initial
               _id: 9vFjjhSnN1DwQ0NN
             - key: system.properties
-              value: '-material'
+              value: -material
               type: add
               phase: initial
               _id: jGOTLQztVqKMCoZe
@@ -15761,17 +15761,18 @@ items:
           @UUID[Compendium.dnd5e.actors24.Actor.mmWolf0000000000]{Wolf} are
           recommended. Whenever you finish a Long Rest, you can replace one of
           your known forms with another eligible form.</p><section class="fvtt
-          advice"><figure class="icon"><img class="vtt-outline" src="icons/vtt-512.png"
-          /></figure><article><h3>Wild Shape Automation</h3><p>When you've
-          selected the creature you would like to wild shape into you can drag
-          it onto your character sheet, select the Wild Shape option, and
-          Foundry will automatically update your sheet. You can revert the
-          transformation at the top of your sheet or by right clicking on your
-          Actor in the sidebar.</p></article></section><p>When you reach certain
-          Druid levels, your number of known forms and the maximum Challenge
-          Rating for those forms increases, as shown in the Beast Shapes table.
-          In addition, starting at level 8, you can adopt a form that has a Fly
-          Speed.</p><p><strong>Current Known Forms Limit:</strong> [[lookup
+          advice"><figure class="icon"><img class="vtt-outline"
+          src="icons/vtt-512.png" /></figure><article><h3>Wild Shape
+          Automation</h3><p>When you've selected the creature you would like to
+          wild shape into you can drag it onto your character sheet, select the
+          Wild Shape option, and Foundry will automatically update your sheet.
+          You can revert the transformation at the top of your sheet or by right
+          clicking on your Actor in the sidebar.</p></article></section><p>When
+          you reach certain Druid levels, your number of known forms and the
+          maximum Challenge Rating for those forms increases, as shown in the
+          Beast Shapes table. In addition, starting at level 8, you can adopt a
+          form that has a Fly Speed.</p><p><strong>Current Known Forms
+          Limit:</strong> [[lookup
           @scale.druid.known-forms]]</p><p><strong>Current CR Limit:</strong>
           [[lookup @scale.druid.wild-shape]]</p><p>When choosing known forms,
           you may look in the <em>Monster Manual</em> or elsewhere for eligible

@@ -145,12 +145,12 @@ effects:
       changes:
         - key: system.bonuses.mwak.damage
           type: add
-          value: '-1d4'
+          value: -1d4
           phase: initial
           priority: null
         - key: system.bonuses.rwak.damage
           type: add
-          value: '-1d4'
+          value: -1d4
           phase: initial
           priority: null
         - key: system.abilities.str.check.roll.mode
