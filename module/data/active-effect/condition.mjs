@@ -117,7 +117,6 @@ export default class ConditionData extends foundry.data.ActiveEffectTypeDataMode
   async increase(levels=1) {
     if ( !this.hasLevels ) return this;
     const level = Math.clamp(this.level + levels, 0, this.maxLevel);
-
     await this.parent.update({ "system.level": level }, { dnd5e: { originalLevel: this.level }});
     return this.parent;
   }
