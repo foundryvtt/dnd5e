@@ -11,7 +11,7 @@ system:
       destination determines whether you arrive there successfully. The DM rolls
       [[/gmr 1d100]] and consults the Teleportation Outcome table and the
       explanations after
-      it.</p><details><summary><strong>@UUID[Compendium.dnd5e.tables24.RollTable.phbsplTeleportMi]{Teleportation
+      it.</p><details><summary><strong>@UUID[Compendium.dnd-players-handbook.tables.RollTable.phbsplTeleportMi]{Teleportation
       Outcome}</strong></summary><table><thead><tr><td>Familiarity</td><td>Mishap</td><td>Similar
       Area</td><td>Off Target</td><td>On
       Target</td></tr></thead><tbody><tr><td>Permanent
@@ -55,8 +55,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -71,9 +72,10 @@ system:
       type: willing
       special: you and up to eight creatures or one object
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -91,12 +93,9 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     CBfszVA8MvW52CdU:
-      type: utility
+      type: teleport
       _id: CBfszVA8MvW52CdU
       activation:
         type: action
@@ -109,6 +108,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -116,10 +116,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -129,15 +131,23 @@ system:
         recovery: []
         max: ''
       sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
       name: ''
-      img: systems/dnd5e/icons/svg/trait-saves.svg
-      appliedEffects: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: true
+        units: ft
   identifier: teleport
+  method: spell
+  prepared: 0
 _id: phbsplTeleport00
 type: spell
 img: icons/skills/movement/arrows-up-trio-red.webp
@@ -146,18 +156,14 @@ folder: EdAGMG8IF26PLkD3
 sort: 200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425974953
-  modifiedTime: 1745256799110
+  systemVersion: 6.0.0
+  createdTime: 1786473202467
+  modifiedTime: 1786473202467
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTeleport00'

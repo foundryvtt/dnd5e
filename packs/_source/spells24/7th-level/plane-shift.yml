@@ -16,8 +16,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -32,9 +33,10 @@ system:
       type: willing
       special: you and up to eight willing creatures
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: touch
     special: ''
@@ -53,12 +55,9 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     xE0rm4EPLcH17Ypa:
-      type: utility
+      type: teleport
       _id: xE0rm4EPLcH17Ypa
       activation:
         type: action
@@ -71,6 +70,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -78,10 +78,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -91,15 +93,23 @@ system:
         recovery: []
         max: ''
       sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
       name: Transport
-      img: systems/dnd5e/icons/svg/trait-saves.svg
-      appliedEffects: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: true
+        units: ft
   identifier: plane-shift
+  method: spell
+  prepared: 0
 _id: phbsplPlaneShift
 type: spell
 img: icons/skills/targeting/target-glowing-yellow.webp
@@ -108,18 +118,14 @@ folder: EdAGMG8IF26PLkD3
 sort: 1200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425966118
-  modifiedTime: 1745256796851
+  systemVersion: 6.0.0
+  createdTime: 1786473193972
+  modifiedTime: 1786473193972
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPlaneShift'

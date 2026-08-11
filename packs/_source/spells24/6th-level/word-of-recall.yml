@@ -13,8 +13,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -29,9 +30,10 @@ system:
       type: willing
       special: you and five other creatures
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -49,12 +51,9 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     fErYiqUpSCDHfV61:
-      type: utility
+      type: teleport
       _id: fErYiqUpSCDHfV61
       activation:
         type: action
@@ -67,6 +66,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -74,10 +74,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -87,14 +89,20 @@ system:
         recovery: []
         max: ''
       sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
       name: Teleport to Sanctuary
       img: systems/dnd5e/icons/svg/trait-saves.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: true
+        units: ft
     CJ6NOsqtoO3HCGjQ:
       type: utility
       name: Designate Sanctuary
@@ -110,6 +118,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -124,6 +133,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -142,8 +152,16 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/items/background.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: word-of-recall
+  method: spell
+  prepared: 0
 _id: phbsplWordofReca
 type: spell
 img: icons/magic/movement/portal-vortex-orange.webp
@@ -152,18 +170,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 100007
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425978529
-  modifiedTime: 1745256800278
+  systemVersion: 6.0.0
+  createdTime: 1786473216939
+  modifiedTime: 1786473216939
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplWordofReca'

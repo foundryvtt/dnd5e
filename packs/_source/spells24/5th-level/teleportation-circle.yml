@@ -22,8 +22,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: minute
     condition: ''
@@ -44,6 +45,7 @@ system:
       size: '5'
       count: ''
       height: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -62,12 +64,9 @@ system:
     consumed: true
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     naWXNn0rMcVvKOi2:
-      type: utility
+      type: teleport
       name: ''
       _id: naWXNn0rMcVvKOi2
       sort: 0
@@ -80,7 +79,9 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        value: ''
+        chatFlavor: ''
       duration:
         units: inst
         concentration: false
@@ -88,10 +89,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -99,10 +102,23 @@ system:
       uses:
         spent: 0
         recovery: []
-      roll:
-        prompt: false
-        visible: false
+        max: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: true
+        units: ft
   identifier: teleportation-circle
+  method: spell
+  prepared: 0
 _id: phbsplTeleportat
 type: spell
 img: icons/magic/symbols/runes-carved-stone-yellow.webp
@@ -111,18 +127,14 @@ folder: beZ8MTpWY2cMEUlp
 sort: 101563
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425975042
-  modifiedTime: 1745256799140
+  systemVersion: 6.0.0
+  createdTime: 1786473200176
+  modifiedTime: 1786473200176
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTeleportat'

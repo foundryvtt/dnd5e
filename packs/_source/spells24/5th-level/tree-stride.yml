@@ -17,8 +17,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -30,12 +31,13 @@ system:
     affects:
       choice: false
       count: ''
-      type: ''
+      type: self
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -54,12 +56,9 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     vcosPna67heYEKpl:
-      type: utility
+      type: teleport
       name: ''
       _id: vcosPna67heYEKpl
       sort: 0
@@ -74,6 +73,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -81,10 +81,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -93,12 +95,23 @@ system:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: true
+        value: '500'
+        units: ft
   identifier: tree-stride
+  method: spell
+  prepared: 0
 _id: phbsplTreeStride
 type: spell
 img: icons/magic/nature/tree-spirit-blue.webp
@@ -107,18 +120,14 @@ folder: beZ8MTpWY2cMEUlp
 sort: 100782
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425976015
-  modifiedTime: 1745256799353
+  systemVersion: 6.0.0
+  createdTime: 1786473212471
+  modifiedTime: 1786473212471
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTreeStride'
