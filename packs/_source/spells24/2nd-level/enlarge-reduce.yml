@@ -23,9 +23,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
-    book: ''
     revision: 2
+    book: ''
+    page: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -40,9 +41,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '30'
     units: ft
@@ -63,9 +65,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -79,23 +78,32 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: Wi2E10l7n6Ka8k6u
           onSave: false
+          uuid: null
+          level: {}
         - _id: NXdtOxX4HvPeodml
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -103,15 +111,27 @@ system:
         onSave: half
         parts: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: enlarge-reduce
+  method: spell
+  prepared: 0
 _id: phbsplEnlargeRed
 type: spell
 img: icons/consumables/mushrooms/mushroom-spotted-red.webp
@@ -133,31 +153,45 @@ effects:
     type: base
     system:
       changes:
-        - key: system.bonuses.mwak.damage
+        - key: system.rolls.damage.mwak.bonus
           value: 1d4
           priority: null
           type: add
           phase: initial
-          _id: BILOOAY4dj2TaYo6
-        - key: system.bonuses.rwak.damage
+          _id: liAne1IbyyUNiCd4
+          conditions: '{}'
+        - key: system.rolls.damage.rwak.bonus
           value: 1d4
           priority: null
           type: add
           phase: initial
-          _id: Ads6r9B1HxdiUZCy
+          _id: 1tyB0m0RWR13wAn5
+          conditions: '{}'
         - key: system.abilities.str.check.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: 4FOwOOP9LfyeEvZM
+          _id: PclGL5LwNTZqjO7v
+          conditions: '{}'
         - key: system.abilities.str.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: svpIMfPDpRdBNBk4
+          _id: rwlTBEmpSIHiE04n
+          conditions: '{}'
+        - key: system.traits.size
+          type: add
+          value: 1
+          phase: initial
+          _id: qavAEe7zJsBCoVvd
+          conditions: '{}'
+          priority: null
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>The target’s size increases by one category—from Medium to Large, for
       example. The target also has Advantage on Strength checks and Strength
@@ -170,11 +204,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543974912
-      modifiedTime: 1783543974912
+      createdTime: 1786480120519
+      modifiedTime: 1786480120519
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -198,31 +232,45 @@ effects:
     type: base
     system:
       changes:
-        - key: system.bonuses.mwak.damage
-          value: '- 1d4'
+        - key: system.rolls.damage.mwak.bonus
+          value: 1d4
           priority: null
-          type: add
+          type: subtract
           phase: initial
-          _id: 6lp3F7BQYinW6zgt
-        - key: system.bonuses.rwak.damage
-          value: '- 1d4'
+          _id: Y6EVhD7qmhHWwX7S
+          conditions: '{}'
+        - key: system.rolls.damage.rwak.bonus
+          value: 1d4
           priority: null
-          type: add
+          type: subtract
           phase: initial
-          _id: 7TaorlUsDOitZvcY
+          _id: 1tSKjRN5ozmQODHH
+          conditions: '{}'
         - key: system.abilities.str.check.roll.mode
           value: -1
           priority: null
           type: add
           phase: initial
-          _id: qxCndCBm9LBJD8ln
+          _id: 8hcR8EZuZfBZjX1r
+          conditions: '{}'
         - key: system.abilities.str.save.roll.mode
           value: -1
           priority: null
           type: add
           phase: initial
-          _id: kA20tabH3yLdR1Jh
+          _id: RfEQNZwYek96Scpu
+          conditions: '{}'
+        - key: system.traits.size
+          type: subtract
+          value: 1
+          phase: initial
+          _id: alrq1Wu0gwWCg3EA
+          conditions: '{}'
+          priority: null
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>The target’s size decreases by one category—from Medium to Small, for
       example. The target also has Disadvantage on Strength checks and Strength
@@ -236,11 +284,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543974912
-      modifiedTime: 1783543974912
+      createdTime: 1786480120519
+      modifiedTime: 1786480120519
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -254,11 +302,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1724425952041
-  modifiedTime: 1783543974912
+  systemVersion: 6.0.0
+  createdTime: 1786480120518
+  modifiedTime: 1786480120518
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEnlargeRed'
