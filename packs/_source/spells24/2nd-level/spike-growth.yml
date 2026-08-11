@@ -3,9 +3,9 @@ system:
   description:
     value: >-
       <p>The ground in a 20-foot-radius Sphere centered on a point within range
-      sprouts hard spikes and thorns. The area becomes Difficult Terrain for the
-      duration. When a creature moves into or within the area, it takes
-      [[/damage 2d4 type=piercing]] damage for every 5 feet it
+      sprouts hard spikes and thorns. The area becomes &amp;Reference[Difficult
+      Terrain] for the duration. When a creature moves into or within the area,
+      it takes [[/damage 2d4 type=piercing]] damage for every 5 feet it
       travels.</p><p>The transformation of the ground is camouflaged to look
       natural. Any creature that can't see the area when the spell is cast must
       take a Search action and succeed on a [[/check ability=wis skill=prc
@@ -16,9 +16,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -38,6 +39,7 @@ system:
       size: '20'
       contiguous: false
       count: ''
+      stationary: false
   range:
     value: '150'
     units: ft
@@ -58,9 +60,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -74,19 +73,24 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -106,6 +110,7 @@ system:
             scaling:
               mode: ''
               number: 1
+            modifiers: []
       uses:
         spent: 0
         recovery: []
@@ -113,8 +118,27 @@ system:
       sort: 0
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors:
+        - name: ''
+          _id: sOfWSPGymqiAqbGw
+          type: difficultTerrain
+          config:
+            types:
+              - plants
+          level:
+            min: null
+            max: null
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: spike-growth
+  method: spell
+  prepared: 0
 _id: phbsplSpikeGrowt
 type: spell
 img: icons/creatures/abilities/stinger-spine-horn-blood.webp
@@ -123,18 +147,14 @@ folder: 3SjcO2acsFnWegp4
 sort: 300000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425972056
-  modifiedTime: 1745256798632
+  systemVersion: 6.0.0
+  createdTime: 1786472113394
+  modifiedTime: 1786472113394
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSpikeGrowt'

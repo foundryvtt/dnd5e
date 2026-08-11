@@ -22,9 +22,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -43,6 +44,7 @@ system:
       size: '20'
       contiguous: false
       count: ''
+      stationary: false
   range:
     value: '60'
     units: ft
@@ -63,9 +65,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -79,19 +78,24 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -109,18 +113,43 @@ system:
             scaling:
               mode: ''
               number: 1
+            modifiers: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
       sort: 0
       name: ''
+      img: ''
+      behaviors:
+        - name: ''
+          _id: eSbdtQ7KsNn0onHD
+          type: difficultTerrain
+          config:
+            types:
+              - web
+          level:
+            min: null
+            max: null
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: web
+  method: spell
+  prepared: 0
 _id: phbsplWeb0000000
 type: spell
 img: icons/creatures/webs/web-spider-casting-caught-purple.webp
@@ -129,18 +158,14 @@ folder: 3SjcO2acsFnWegp4
 sort: 106250
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425977860
-  modifiedTime: 1745256800037
+  systemVersion: 6.0.0
+  createdTime: 1786472123825
+  modifiedTime: 1786472123825
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplWeb0000000'

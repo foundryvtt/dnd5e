@@ -16,9 +16,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -36,6 +37,7 @@ system:
       size: '20'
       contiguous: false
       count: ''
+      stationary: false
   range:
     value: '90'
     units: ft
@@ -55,9 +57,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -71,21 +70,30 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: wn7K2m4XhXhItgPT
+          uuid: null
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -93,15 +101,41 @@ system:
         onSave: half
         parts: []
       save:
-        ability: str
+        ability:
+          - str
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      img: ''
+      behaviors:
+        - name: ''
+          _id: B2ZFUM5G3wW3feMi
+          type: difficultTerrain
+          config:
+            types:
+              - plants
+          level:
+            min: null
+            max: null
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      name: ''
   identifier: entangle
+  method: spell
+  prepared: 0
 _id: phbsplEntangle00
 type: spell
 img: icons/magic/nature/root-vine-entangle-foot-green.webp
@@ -121,6 +155,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>A Restrained creature can take an action to make a [[/check ability=str
       skill=ath]] check against your spell save DC. On a success, it frees
@@ -133,11 +170,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543974956
-      modifiedTime: 1783543974956
+      createdTime: 1786472051192
+      modifiedTime: 1786472051192
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -148,18 +185,14 @@ folder: pBaAAtXBCq9FVEnL
 sort: 3400000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425952240
-  modifiedTime: 1783543974956
+  systemVersion: 6.0.0
+  createdTime: 1786472051192
+  modifiedTime: 1786472051192
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEntangle00'
