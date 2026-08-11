@@ -14,9 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -31,9 +32,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '30'
     units: ft
@@ -54,9 +56,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -70,20 +69,27 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: NEFWcyysYgsE6de3
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -99,8 +105,13 @@ system:
       sort: 0
       name: Cast
       img: ''
-      appliedEffects:
-        - NEFWcyysYgsE6de3
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     rBQrZnq7cHkSUAK9:
       type: utility
       name: Apply Lethargy
@@ -118,6 +129,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: round
         concentration: false
@@ -125,6 +137,8 @@ system:
         value: '1'
       effects:
         - _id: S5XcFawnnNHO8bUr
+          uuid: null
+          level: {}
       range:
         override: true
         units: any
@@ -133,6 +147,7 @@ system:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -147,9 +162,16 @@ system:
         name: ''
         formula: ''
       img: ''
-      appliedEffects:
-        - S5XcFawnnNHO8bUr
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: haste
+  method: spell
+  prepared: 0
 _id: phbsplHaste00000
 type: spell
 img: icons/magic/time/clock-spinning-gold-pink.webp
@@ -171,49 +193,31 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 2
           priority: null
           type: multiply
           phase: initial
-          _id: VNjQTf5nemDRVEy1
-        - key: system.attributes.movement.burrow
-          value: 2
-          priority: null
-          type: multiply
-          phase: initial
-          _id: L8tIkGOj0wyI6l0i
-        - key: system.attributes.movement.climb
-          value: 2
-          priority: null
-          type: multiply
-          phase: initial
-          _id: oo3xA2QDgpV3m9C6
-        - key: system.attributes.movement.fly
-          value: 2
-          priority: null
-          type: multiply
-          phase: initial
-          _id: QAv9M3oLNJJSP5v7
-        - key: system.attributes.movement.swim
-          value: 2
-          priority: null
-          type: multiply
-          phase: initial
-          _id: 25aJVhryJj5S8CB7
+          _id: FyaPasxi38V8bl43
+          conditions: '{}'
         - key: system.attributes.ac.bonus
           value: 2
           priority: null
           type: add
           phase: initial
-          _id: UPblsKx9Njx3JBHN
+          _id: z9R8AkKJmXwnaQ6C
+          conditions: '{}'
         - key: system.abilities.dex.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: gIfPzfbWMMkvwgZy
+          _id: HJrKfWpGn9QtcXGr
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>Until the spell ends, the target’s Speed is doubled, it gains a +2
       bonus to Armor Class, it has Advantage on Dexterity saving throws, and it
@@ -221,7 +225,7 @@ effects:
       to take only the Attack (one attack only), Dash, Disengage, Hide, or
       Utilize action.</p><p>When the spell ends, the target is Incapacitated and
       has a Speed of 0 until the end of its next turn, as a
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplHaste00000.ActiveEffect.S5XcFawnnNHO8bUr]{wave
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplHaste00000.ActiveEffect.S5XcFawnnNHO8bUr]{wave
       of lethargy} washes over it.</p>
     tint: '#ffffff'
     transfer: false
@@ -230,11 +234,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543975435
-      modifiedTime: 1783543975435
+      createdTime: 1786481118454
+      modifiedTime: 1786481118454
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -249,43 +253,25 @@ effects:
       expiry: turnStart
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/tools/nautical/anchor-blue.webp
     _id: S5XcFawnnNHO8bUr
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 0
           priority: null
-          type: downgrade
+          type: override
           phase: initial
-          _id: Y7UNigwv1E20shQR
-        - key: system.attributes.movement.burrow
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: APHi1pYEDqjM2UmU
-        - key: system.attributes.movement.climb
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: aNsWpK9fcd5jgJFq
-        - key: system.attributes.movement.fly
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: U9GtZdC1yxypSL1b
-        - key: system.attributes.movement.swim
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: peTnJBoKqVVUgEgq
+          _id: KIbE4sxIpCZAZp57
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>When the spell ends, the target is &amp;Reference[incapacitated
       apply=false] and has a Speed of 0 until the end of its next turn, as a
@@ -298,11 +284,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543975435
-      modifiedTime: 1783543975435
+      createdTime: 1786481118454
+      modifiedTime: 1786481118454
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -313,18 +299,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 1700000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1724425958065
-  modifiedTime: 1783543975435
+  systemVersion: 6.0.0
+  createdTime: 1786481118454
+  modifiedTime: 1786481118454
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHaste00000'

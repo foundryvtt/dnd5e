@@ -15,14 +15,16 @@ system:
       collects three of a kind.</p><p>If you maintain your Concentration on this
       spell for the entire possible duration, the target is Petrified until the
       condition is ended by
-      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGreaterRes]{Greater
       Restoration}</em> or similar magic.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -37,9 +39,10 @@ system:
       type: creature
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -60,9 +63,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     g34TzvzMcBYBxqp4:
       type: save
@@ -78,6 +78,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -85,14 +86,20 @@ system:
       effects:
         - _id: Xt8AUh0PfYhGYBvY
           onSave: false
+          uuid: null
+          level: {}
         - _id: sFyjp6wt9bjyIl9W
           onSave: true
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -106,16 +113,24 @@ system:
         parts: []
         onSave: half
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: ''
       img: ''
-      appliedEffects:
-        - Xt8AUh0PfYhGYBvY
-        - sFyjp6wt9bjyIl9W
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: flesh-to-stone
+  method: spell
+  prepared: 0
 _id: phbsplFleshtoSto
 type: spell
 img: icons/magic/earth/strike-body-stone-crumble.webp
@@ -129,6 +144,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 60
@@ -140,7 +158,7 @@ effects:
       ability=con format=long]] at the end of each of its turns. If it
       successfully saves against this spell three times, the spell ends. If it
       fails its saves three times, it is turned to stone and has the
-      &amp;Reference[Petrified] condition for the duration. </p>
+      &amp;Reference[Petrified] condition for the duration.</p>
     tint: '#ffffff'
     statuses:
       - restrained
@@ -149,11 +167,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1724708938829
-      modifiedTime: 1783543975172
+      createdTime: 1786481111223
+      modifiedTime: 1786481111223
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -168,37 +186,17 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 0
           priority: null
-          type: downgrade
+          type: override
           phase: initial
-          _id: A5oWquY12JbLRdiM
-        - key: system.attributes.movement.fly
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: VMRl9KHPvsPP4GVQ
-        - key: system.attributes.movement.swim
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: OKzYOtESVrTV5Qh2
-        - key: system.attributes.movement.climb
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: tu4MKf4KvzLwEmBp
-        - key: system.attributes.movement.burrow
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: rUOgc8M8CHcBDHv9
+          _id: IaIbX4xdVh4zIrsl
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 1
@@ -211,15 +209,17 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1724709070719
-      modifiedTime: 1783543975172
+      createdTime: 1786481111223
+      modifiedTime: 1786481111223
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -230,18 +230,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 1100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425954533
-  modifiedTime: 1783543975172
+  systemVersion: 6.0.0
+  createdTime: 1786481111223
+  modifiedTime: 1786481111223
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFleshtoSto'
