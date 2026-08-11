@@ -90,7 +90,8 @@ export default class ItemMessageData extends ChatMessageDataModel {
           entries: PropertyField.getLabels(showIdentity ? this.properties : this.properties.filter(p => !p.identity), {
             ...this, properties: item.properties
           }),
-          icon: "fa-solid fa-tag"
+          icon: "fa-solid fa-tag",
+          label: "DND5E.CHATMESSAGE.Row.Properties"
         }
       },
       subtitle: subtitle.filterJoin(" • "),

@@ -101,9 +101,9 @@ export default class UsageMessageData extends ItemMessageData {
   async _prepareContext(options) {
     let context;
     if ( this.parent.content ) context = {
-      content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-        this.parent.content, { rollData: this.parent.getRollData() }
-      )
+      content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.parent.content, {
+        rollData: this.parent.getRollData()
+      })
     };
     else {
       context = await super._prepareContext(options);
@@ -156,7 +156,7 @@ export default class UsageMessageData extends ItemMessageData {
       if ( hidden ) return obj;
       obj[action] ??= { icon, entries: [] };
       if ( canGroup ) {
-        context.rows[action] ??= { icon, entries: [] };
+        context.rows[action] ??= { icon, entries: [], label: `DND5E.CHATMESSAGE.Row.${action}` };
         context.rows[action].entries.push(label);
         if ( obj[action].entries.length ) {
           obj[action].entries[0].singleton = false;

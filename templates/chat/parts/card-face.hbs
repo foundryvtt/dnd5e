@@ -45,7 +45,7 @@
     {{#each rows}}
     {{#if entries.length}}
     <section class="icon-row">
-        <i class="fa-fw {{ icon }}" inert></i>
+        <i class="fa-fw {{ icon }}" aria-label="{{ localize label }}"></i>
         <ul class="pills unlist">
             {{#each entries}}
             <li class="pill transparent">
@@ -60,7 +60,7 @@
     {{!-- Buttons --}}
     {{#if buttonGroups}}
     <section class="icon-row">
-        <i class="fa-solid fa-fw fa-bolt" inert></i>
+        <i class="fa-solid fa-fw fa-bolt" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Actions" }}"></i>
         <ul class="unlist">
             {{#each buttonGroups}}
             {{#each entries}}

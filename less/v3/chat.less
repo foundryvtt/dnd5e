@@ -15,7 +15,7 @@
 
     &.blind, &.emote, &.whisper { border-block-end-width: 3px; }
     &.emote { border-block-end-color: #e5af29; }
-    &.whisper { border-block-end-color: #7d7df1; }
+    &.whisper { border-block-end-color: #6b5cff; }
     &.blind { border-block-end-color: #c12fc1; }
 
     .message-content {
@@ -28,8 +28,13 @@
     .message-header {
       align-items: center;
       color: var(--color-text-primary);
-      gap: 8px;
       margin-block-end: 4px;
+
+      .whisper-to {
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-10);
+        font-style: italic;
+      }
     }
 
     .message-metadata {
@@ -39,16 +44,14 @@
     }
 
     .message-sender {
+      cursor: var(--cursor-pointer);
       flex: 1;
       font-family: var(--dnd5e-font-roboto-slab);
       font-size: var(--font-size-14);
       font-weight: bold;
       font-variant: small-caps;
 
-      &:hover {
-        cursor: var(--cursor-pointer);
-        text-shadow: 0 0 8px var(--color-shadow-primary);
-      }
+      &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
     }
 
     .chat-card {
@@ -79,7 +82,7 @@
         inline-size: var(--size);
 
         &:has(> dnd5e-icon) {
-          border: 1px solid var(--dnd5e-color-gold);
+          border: 1px solid transparent;
           border-radius: 4px;
           padding: 2px;
         }
