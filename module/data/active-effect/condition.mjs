@@ -21,7 +21,7 @@ export default class ConditionData extends foundry.data.ActiveEffectTypeDataMode
    */
   static hasLevels(type) {
     const config = CONFIG.DND5E.conditionTypes[type];
-    return !!config && ("levels" in config);
+    return Number.isFinite(config?.levels);
   }
 
   /* -------------------------------------------------- */
@@ -116,7 +116,9 @@ export default class ConditionData extends foundry.data.ActiveEffectTypeDataMode
    */
   async increase(levels=1) {
     if ( !this.hasLevels ) return this;
-    await this.parent.update({ "system.level": this.level + levels }, { dnd5e: { originalLevel: this.level }});
+    const level = Math.clamp(this.level + levels, 0, this.maxLevel);
+
+    await this.parent.update({ "system.level": level }, { dnd5e: { originalLevel: this.level }});
     return this.parent;
   }
 
