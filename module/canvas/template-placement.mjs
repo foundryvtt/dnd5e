@@ -34,7 +34,7 @@ export default class TemplatePlacement extends BasePlacement {
       onRotate: ({ shape }) => {
         if ( (shape.type === "rectangle") && dnd5e.settings.gridAlignedSquareTemplates ) return false;
       },
-      preConfirm: ({ document, index }) => {
+      preConfirm: ({ document }) => {
         const obj = document.toObject();
         results.push({ ...obj.shapes.at(-1), token: obj.attachment.token });
       }
@@ -134,7 +134,7 @@ export default class TemplatePlacement extends BasePlacement {
       // TODO: Include count if more than one created?
       name: `${activity.item.name} [${game.user.name}]`,
       color: game.user.color,
-      shapes: shapes.map(({ index, token, ...data }) => data),
+      shapes: shapes.map(({ token, ...data }) => data),
       // TODO: Set elevation based on shape's height
       levels: [canvas.level.id],
       restriction: {
