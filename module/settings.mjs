@@ -1,3 +1,4 @@
+import ChatLog5e from "./applications/chat-log.mjs";
 import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
 import CalendarSettingsConfig from "./applications/settings/calendar-settings.mjs";
@@ -229,6 +230,25 @@ export function registerSystemSettings() {
       older: "SETTINGS.DND5E.COLLAPSETRAYS.Older",
       always: "SETTINGS.DND5E.COLLAPSETRAYS.Always"
     }
+  });
+
+  // Chat log theme
+  game.settings.register("dnd5e", "chatLogTheme", {
+    config: true,
+    hint: "SETTINGS.DND5E.CHATLOG.Hint",
+    name: "SETTINGS.DND5E.CHATLOG.Name",
+    onChange: () => ChatLog5e.applyTheme(),
+    scope: "client",
+    type: new foundry.data.fields.StringField({
+      blank: true,
+      choices: {
+        "": "SETTINGS.DND5E.CHATLOG.Options.blank",
+        dark: "SETTINGS.DND5E.CHATLOG.Options.dark",
+        light: "SETTINGS.DND5E.CHATLOG.Options.light"
+      },
+      initial: "",
+      required: true
+    })
   });
 
   // Allow Rests from Sheet

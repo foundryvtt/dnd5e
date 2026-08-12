@@ -12,11 +12,24 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
 
   /* -------------------------------------------- */
 
+  /**
+   * Apply the configured chat log theme.
+   */
+  static applyTheme() {
+    const theme = game.settings.get("dnd5e", "chatLogTheme");
+    for ( const element of foundry.applications.detached.querySelectorAll(".chat-log, .chat-popout") ) {
+      element.classList.remove("themed", "theme-light", "theme-dark");
+      if ( theme ) element.classList.add("themed", `theme-${theme}`);
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _onFirstRender(context, options) {
     const scroll = this.element.querySelector(".chat-scroll");
     const log = this.element.querySelector(".chat-log");
-    log.classList.remove("themed", "theme-light");
+    this.constructor.applyTheme();
     new MutationObserver(this.#onLogMutated.bind(this)).observe(log, { childList: true });
     this.#intersections = new IntersectionObserver(this.#onCardIntersects.bind(this), { root: scroll });
     return super._onFirstRender(context, options);
