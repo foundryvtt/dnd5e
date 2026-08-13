@@ -156,6 +156,9 @@ export default class EffectChangeConfig extends DocumentSheet5e {
     const change = changes.find(c => c._id === this.options.changeId);
     if ( !change ) return;
     foundry.utils.mergeObject(change, foundry.utils.expandObject(formData.object));
+    try {
+      if ( typeof change.value === "string" ) change.value &&= JSON.parse(change.value);
+    } catch {}
     this.effect.update({ "system.changes": changes });
   }
 }
