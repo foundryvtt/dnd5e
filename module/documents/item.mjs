@@ -911,7 +911,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   static _onChatCardToggleContent(event) {
     const header = event.target.closest(".collapsible");
-    if ( !event.target.closest(".collapsible-content.card-content") ) {
+    if ( !event.target.closest(".collapsible-content") ) {
       event.preventDefault();
       header.classList.toggle("collapsed");
 

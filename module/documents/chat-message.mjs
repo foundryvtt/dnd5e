@@ -1,5 +1,10 @@
 import aggregateDamageRolls from "../dice/aggregate-damage-rolls.mjs";
 import TargetsField from "../data/chat-message/fields/targets-field.mjs";
+import ContextMenu5e from "../applications/context-menu.mjs";
+
+/**
+ * @import { ChatMessageEnrichmentOptions } from "./_types.mjs";
+ */
 
 export default class ChatMessage5e extends ChatMessage {
 
@@ -119,7 +124,6 @@ export default class ChatMessage5e extends ChatMessage {
       if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
         html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
       }
-
       await this._enrichChatCard(html);
       this._collapseTrays(html);
     }
@@ -164,62 +168,15 @@ export default class ChatMessage5e extends ChatMessage {
   /**
    * Augment the chat card markup for additional styling.
    * @param {HTMLElement} html  The chat card markup.
+   * @param {ChatMessageEnrichmentOptions} [options]
    * @protected
    */
-  async _enrichChatCard(html) {
+  async _enrichChatCard(html, options={}) {
     html.querySelectorAll(".dnd5e2").forEach(el => el.classList.remove("dnd5e2")); // Legacy
     html.classList.add("dnd5e2");
 
     // Header matter
-    const token = this.getAssociatedToken();
-    const actor = this.getAssociatedActor();
-    const avatar = document.createElement("a");
-    avatar.classList.add("avatar");
-    let avatarImg = document.createElement("img");
-
-    let img;
-    let nameText;
-    if ( this.isContentVisible ) {
-      const artworkData = await actor?.getPreferredArtwork();
-      img = artworkData?.src ?? this.author?.avatar;
-      nameText = this.alias;
-      if ( artworkData?.isToken ) avatar.classList.add("token");
-      if ( artworkData?.isVideo ) {
-        avatarImg = document.createElement("video");
-        avatarImg.toggleAttribute("autoplay", true);
-        avatarImg.toggleAttribute("muted", true);
-        avatarImg.toggleAttribute("disablepictureinpicture", true);
-        avatarImg.toggleAttribute("loop", true);
-        avatarImg.toggleAttribute("playsinline", true);
-      }
-    } else {
-      img = this.author?.avatar;
-      nameText = this.author?.name ?? "";
-    }
-    img ??= CONST.DEFAULT_TOKEN;
-
-    if ( actor ) avatar.dataset.actorUuid = actor.uuid;
-    if ( token ) avatar.dataset.tokenUuid = token.uuid;
-    Object.assign(avatarImg, { src: img, alt: nameText });
-    avatar.append(avatarImg);
-
-    const name = document.createElement("span");
-    name.classList.add("name-stacked");
-    const title = document.createElement("span");
-    title.classList.add("title");
-    title.append(nameText);
-    name.append(title);
-
-    const subtitle = document.createElement("span");
-    subtitle.classList.add("subtitle");
-    if ( this.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
-    if ( (nameText !== this.author?.name) && !subtitle.innerText.length ) subtitle.innerText = this.author?.name ?? "";
-
-    name.appendChild(subtitle);
-
-    const sender = html.querySelector(".message-sender");
-    sender?.replaceChildren(avatar, name);
-    html.querySelector(".whisper-to")?.remove();
+    await this._enrichHeader(html, options);
 
     // Context menu
     const metadata = html.querySelector(".message-metadata");
@@ -232,6 +189,13 @@ export default class ChatMessage5e extends ChatMessage {
     anchor.dataset.contextMenu = "";
     anchor.innerHTML = '<i class="fas fa-ellipsis-vertical fa-fw"></i>';
     metadata.appendChild(anchor);
+
+    if ( typeof this.system?._getButtonGroupContextOptions === "function" ) {
+      new ContextMenu5e(html, "button[data-group]", [], {
+        eventName: "click", jQuery: false,
+        onOpen: () => ui.context.menuItems = this.system._getButtonGroupContextOptions()
+      });
+    }
 
     // SVG icons
     html.querySelectorAll("i.dnd5e-icon").forEach(el => {
@@ -246,10 +210,77 @@ export default class ChatMessage5e extends ChatMessage {
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
+  }
 
-    avatar.addEventListener("click", this._onTargetMouseDown.bind(this));
-    avatar.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
-    avatar.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
+  /* -------------------------------------------- */
+
+  /**
+   * Enrich chat card header matter.
+   * @param {HTMLElement} html  The chat card markup.
+   * @param {ChatMessageEnrichmentOptions} options
+   * @protected
+   */
+  async _enrichHeader(html, options={}) {
+    const token = this.getAssociatedToken();
+    const actor = this.getAssociatedActor();
+    const sender = html.querySelector(".message-sender");
+    let avatar;
+
+    if ( options.avatar !== false ) {
+      avatar = document.createElement("a");
+      avatar.classList.add("avatar");
+      let avatarImg = document.createElement("img");
+
+      let img;
+      let nameText;
+      if ( this.isContentVisible ) {
+        const artworkData = await actor?.getPreferredArtwork();
+        img = artworkData?.src ?? this.author?.avatar;
+        nameText = this.alias;
+        if ( artworkData?.isToken ) avatar.classList.add("token");
+        if ( artworkData?.isVideo ) {
+          avatarImg = document.createElement("video");
+          avatarImg.toggleAttribute("autoplay", true);
+          avatarImg.toggleAttribute("muted", true);
+          avatarImg.toggleAttribute("disablepictureinpicture", true);
+          avatarImg.toggleAttribute("loop", true);
+          avatarImg.toggleAttribute("playsinline", true);
+        }
+      } else {
+        img = this.author?.avatar;
+        nameText = this.author?.name ?? "";
+      }
+
+      img ??= CONST.DEFAULT_TOKEN;
+      Object.assign(avatarImg, { src: img, alt: nameText });
+      avatar.append(avatarImg);
+
+      const name = document.createElement("span");
+      name.classList.add("name-stacked");
+      const title = document.createElement("span");
+      title.classList.add("title");
+      title.append(nameText);
+      name.append(title);
+
+      const subtitle = document.createElement("span");
+      subtitle.classList.add("subtitle");
+      if ( this.whisper.length ) subtitle.innerText = html.querySelector(".whisper-to")?.innerText ?? "";
+      if ( (nameText !== this.author?.name) && !subtitle.innerText.length ) {
+        subtitle.innerText = this.author?.name ?? "";
+      }
+
+      name.appendChild(subtitle);
+      sender?.replaceChildren(avatar, name);
+      html.querySelector(".whisper-to")?.remove();
+    }
+
+    const target = avatar ?? sender;
+    if ( !target ) return;
+    if ( actor ) target.dataset.actorUuid = actor.uuid;
+    if ( token ) target.dataset.tokenUuid = token.uuid;
+    target.addEventListener("click", this._onTargetMouseDown.bind(this));
+    target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
+    target.addEventListener("pointerout", this._onTargetHoverOut.bind(this));
   }
 
   /* -------------------------------------------- */

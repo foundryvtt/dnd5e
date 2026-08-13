@@ -1,7 +1,7 @@
 import { loadingTooltip } from "../../utils.mjs";
 
 /**
- * @import { ChatMessageDataModelMetadata } from "./types.mjs";
+ * @import { ChatMessageDataModelMetadata } from "./_types.mjs";
  */
 
 /**
@@ -16,6 +16,8 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    */
   static metadata = Object.freeze({
     actions: {
+      showDocument: ChatMessageDataModel.#showDocument,
+      toggleDescription: ChatMessageDataModel.#toggleDescription,
       use: ChatMessageDataModel.#useActivity
     },
     template: ""
@@ -57,7 +59,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
   async getHTML(element, options) {
     const rendered = await this.render(options);
     if ( rendered ) element.querySelector(".message-content").innerHTML = rendered;
-    this.parent._enrichChatCard(element);
+    this.parent._enrichChatCard(element, this._getEnrichmentOptions());
     this.parent._collapseTrays(element);
 
     const click = this.#onClick.bind(this);
@@ -76,6 +78,17 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
   async render(options) {
     if ( !this.template ) return "";
     return foundry.applications.handlebars.renderTemplate(this.template, await this._prepareContext(options));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Options to forward to ChatMessage5e#_enrichChatCard.
+   * @returns {ChatMessageEnrichmentOptions}
+   * @protected
+   */
+  _getEnrichmentOptions() {
+    return {};
   }
 
   /* -------------------------------------------- */
@@ -145,6 +158,51 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    * @protected
    */
   _onClickAction(event, target) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Context menu options for button groups.
+   * @returns {ContextMenuEntry[]}
+   * @protected
+   */
+  _getButtonGroupContextOptions() {
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle showing a Document's sheet.
+   * @this {ChatMessageDataModel}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Action target.
+   * @returns {Promise}
+   */
+  static async #showDocument(event, target) {
+    event.stopPropagation();
+    const { uuid } = target.closest("[data-uuid]")?.dataset ?? {};
+    const doc = await fromUuid(uuid);
+    return doc?.sheet.render({ force: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the card's description.
+   * @this {ChatMessageDataModel}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Action target.
+   */
+  static #toggleDescription(event, target) {
+    const card = target.closest(".chat-card");
+    target.classList.toggle("collapsed");
+    card.querySelector(".card-description")?.classList.toggle("collapsed");
+
+    // Clear the height from the chat popout container so that it appropriately resizes.
+    const popout = card.closest(".chat-popout");
+    if ( popout ) popout.style.height = "";
+  }
 
   /* -------------------------------------------- */
 

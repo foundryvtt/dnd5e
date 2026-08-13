@@ -996,8 +996,7 @@ export default function ActivityMixin(Base) {
         "flags.dnd5e": { consumed, scaling }
       }, { keepId: true }) : this.item;
       const activity = item.system.activities.get(this.id);
-
-      const action = target.dataset.action;
+      const action = target.dataset.action ?? message.system.getButton(target)?.action;
       const handler = this.metadata.usage?.actions?.[action];
       target.disabled = true;
       try {
@@ -1006,7 +1005,7 @@ export default function ActivityMixin(Base) {
         else if ( action === "refundResource" ) await this.#refundResource(event, target, message);
         else if ( action === "placeTemplate" ) await this.#placeTemplate();
         else await activity._onChatAction(event, target, message);
-      } catch(err) {
+      } catch (err) {
         Hooks.onError("Activity#onChatAction", err, { log: "error", notify: "error" });
       } finally {
         target.disabled = false;
@@ -1273,7 +1272,9 @@ export default function ActivityMixin(Base) {
      */
     async _usageChatContext(message) {
       const data = await this.item.system.getCardData({ activity: this });
-      const properties = PropertyField.getLabels(data.properties, { ...data, properties: data.item.properties });
+      const properties = PropertyField.getLabels(data.properties.filter(p => !p.identity), {
+        ...data, properties: data.item.properties
+      });
       const supplements = [];
       if ( this.activation.condition ) {
         supplements.push(`<strong>${_loc("DND5E.Trigger")}</strong> ${this.activation.condition}`);

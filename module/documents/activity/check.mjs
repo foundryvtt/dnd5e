@@ -57,8 +57,8 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       const button = {
         dataset,
         action: "rollCheck",
-        icon: checkType === "tool" ? "fa-solid fa-hammer"
-          : "systems/dnd5e/icons/svg/ability-score-improvement.svg",
+        canGroup: true,
+        icon: checkType === "tool" ? "fa-solid fa-hammer" : "fa-solid fa-dumbbell",
         label: {
           hidden: check,
           value: dc ? _loc("EDITOR.DND5E.Inline.DC", { check, dc }) : check
@@ -67,7 +67,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       if ( this.check.visible ) button.visibility = "all";
       buttons.push(button);
     };
-    const wrap = check => _loc("EDITOR.DND5E.Inline.CheckShort", { check });
+    const wrap = check => _loc("EDITOR.DND5E.Inline.CheckLong", { check });
 
     const associated = Array.from(this.check.associated);
     if ( !associated.length && (this.item.type === "tool") ) associated.push(this.item.system.type.baseItem);
@@ -86,7 +86,6 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
 
   /**
    * Handle performing an ability check.
-   * @this {CheckActivity}
    * @param {PointerEvent} event     Triggering click event.
    * @param {HTMLElement} target     The capturing HTML element which defined a [data-action].
    * @param {ChatMessage5e} message  Message associated with the activation.

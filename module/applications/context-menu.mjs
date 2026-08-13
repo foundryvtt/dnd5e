@@ -12,7 +12,7 @@ export default class ContextMenu5e extends foundry.applications.ux.ContextMenu {
   /* -------------------------------------------- */
 
   /**
-   * Trigger a context menu event in response to a normal click on a additional options button.
+   * Trigger a context menu event in response to a normal click on an additional options button.
    * @param {PointerEvent} event
    */
   static triggerEvent(event) {

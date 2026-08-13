@@ -1734,6 +1734,13 @@
 
 "DND5E.CHATMESSAGE": {
   "Activities": "Activities",
+  "Button": {
+    "rollAttack": "Attack",
+    "rollCheck": "Ability Check",
+    "rollDamage": "Damage",
+    "rollFormula": "Roll",
+    "rollSave": "Saving Throw"
+  },
   "Deltas": {
     "Created": "Item Created",
     "Deleted": "Item Deleted",
@@ -1748,6 +1755,12 @@
     "Complete": "Request Fulfilled",
     "PartyMembers": "Party Members",
     "Title": "Request"
+  },
+  "Row": {
+    "Actions": "Item actions",
+    "Properties": "Item properties",
+    "rollCheck": "Ability checks",
+    "rollSave": "Saving throws"
   },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"
@@ -6757,6 +6770,15 @@
     "All": "Display for Friendly, Neutral, & Hostile Tokens",
     "Player": "Only Display for Friendly Tokens",
     "None": "Never Display"
+  },
+  "CHATLOG": {
+    "Hint": "Specify a theme for the chat log. By default this will inherit from the Application theme.",
+    "Name": "Chat Log",
+    "Options": {
+      "blank": "Default",
+      "dark": "Dark",
+      "light": "Light"
+    }
   },
   "COLLAPSETRAYS": {
     "Name": "Collapse Trays in Chat",
