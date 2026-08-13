@@ -1959,7 +1959,10 @@
     "End": "End Concentration"
   },
   "Description": "You are maintaining concentration on the effects of the '{name}' {type}.",
-  "Duration": "Concentration, up to {duration}",
+  "Duration": {
+    "Scalar": "Concentration, up to {duration}",
+    "Special": "Concentration, {durationLc}"
+  },
   "EndChoice": "You are concentrating on effects from more than one source. Pick which effect to end.",
   "FIELDS": {
     "attributes": {
