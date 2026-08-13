@@ -90,3 +90,5 @@ Spell list journal entry pages can be registered in the manifest flags allowing 
   }
 }
 ```
+
+A full guide for implementing this can be found on the [Linking Class Spells](Linking-Class-Spells.md) page
