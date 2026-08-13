@@ -66,6 +66,16 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Whether this item should always record a duration property, even if just the default 'instantaneous'.
+   * @type {boolean}
+   */
+  get alwaysShowDuration() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modes that can be used when making an attack with this item.
    * @type {FormSelectOption[]}
    */
@@ -219,12 +229,16 @@ export default class ItemDataModel extends SystemDataModel {
       },
       level: enrichmentOptions.rollData.item?.level ?? null,
       properties: (identified === false) ? [] : [
+        { type: "text", text: this.type?.label ?? _loc(CONFIG.Item.typeLabels[type]), identity: true },
         ...this.cardProperties ?? [],
         ...PropertyField.getUsageProperties(usage),
         ...this.equippableItemCardProperties ?? []
       ]
         // Entries without a type are pre-6.0 label strings, which would cause a validation failure.
-        .filter(p => p?.type),
+        .filter(p => p?.type)
+        .filter(p => {
+          return (p.type !== "duration") || (usage.duration.units !== "inst") || this.alwaysShowDuration;
+        }),
       subtitle: [this.type?.label ?? _loc(CONFIG.Item.typeLabels[type])]
     };
   }
@@ -272,7 +286,9 @@ export default class ItemDataModel extends SystemDataModel {
       controlHints: game.settings.get("dnd5e", "controlHints"),
       description: await TextEditor.enrichHTML(description || "", enrichmentOptions),
       labels: foundry.utils.deepClone((activity ?? this.parent).labels),
-      properties: PropertyField.getLabels(context.properties, { ...context, properties: context.item.properties }),
+      properties: PropertyField.getLabels(context.properties.filter(p => !p.identity), {
+        ...context, properties: context.item.properties
+      }),
       subtitle: context.subtitle.filterJoin(" • "),
       weight: this.weight
     });

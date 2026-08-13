@@ -227,7 +227,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         ...this.item.system.cardProperties ?? [],
         ...PropertyField.getUsageProperties(usage),
         ...this.item.system.equippableItemCardProperties ?? []
-      ], { ...usage, properties: this.item.system.properties }));
+      ].filter(p => {
+        return (p.type !== "duration") || (usage.duration.units !== "inst") || this.item.system.alwaysShowDuration;
+      }), { ...usage, properties: this.item.system.properties }));
     }
 
     await this.item.system.getSheetData?.(context);
