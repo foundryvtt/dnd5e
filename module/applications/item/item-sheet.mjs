@@ -515,7 +515,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         summary: await advancement.summaryForLevel(level, { configMode, legacyDisplay }),
         configured: advancement.configuredForLevel(level),
         tags: this._getAdvancementTags(advancement),
-        value: advancement.valueForLevel?.(level),
+        value: advancement.displayValueForLevel?.(level),
         classes: [advancement.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
       })));
       if ( !items.length ) continue;

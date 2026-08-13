@@ -525,7 +525,7 @@ export class ScaleValueTypeUsage extends ScaleValueTypeNumber {
 
   /** @inheritdoc */
   get display() {
-    return `${this.value}/${CONFIG.DND5E.limitedUsePeriods[this.period]?.abbreviation ?? ""}`;
+    return [this.value, CONFIG.DND5E.limitedUsePeriods[this.period]?.abbreviation ?? ""].filter(_ => _).join("/");
   }
 
   /* -------------------------------------------- */
