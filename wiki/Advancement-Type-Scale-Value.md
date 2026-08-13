@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The Scale Value advancement allows for setting a value that increases with character or class level and is available anywhere roll formula data is used.
 
@@ -6,7 +6,7 @@ The Scale Value advancement allows for setting a value that increases with chara
 
 ![Scale Value Configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/scale-value-configuration.jpg)
 
-The first step in configuring a Scale Value is determining what type of data is being represented. The advancement comes with several supported types including "Numeric" (e.g. Barbarian's Rage bonus), "Challenge Rating" (e.g. Druid's maximum Wild Shape CR), "Dice" (e.g. Rogue's Sneak Attack dice), and "Distance" (e.g. Monk's Unarmored Movement bonus). If none of these types match what is needed, then the "Anything" type can be used.
+The first step in configuring a Scale Value is determining what type of data is being represented. The advancement comes with several supported types including "Numeric" (e.g. Barbarian's Rage bonus), "Challenge Rating" (e.g. Druid's maximum Wild Shape CR), "Dice" (e.g. Rogue's Sneak Attack dice), "Distance" (e.g. Monk's Unarmored Movement bonus), and "Usage" (e.g. Bards's Bardic Inspiration uses). If none of these types match what is needed, then the "Anything" type can be used.
 
 If the "Distance" type is selected then an additional field will be available allowing for setting the units used to measure the distance value. The same units are used across all levels.
 
@@ -24,6 +24,10 @@ Accessing the scale value in formulas involves typing `@scale.<class identifier>
 
 For the "Dice" scale value type there are several additional options for access. For a Rogue's Sneak Attack, the whole die formula can be accessed like any other type: `@scale.rogue.sneak-attack` produces `4d6`. If only the die part is desired, appending `.die` to the value will fetch it: `@scale.rogue.sneak-attack.die` produces `d6`. Similarly adding `.number` will grab the die count: `@scale.rogue.sneak-attack.number` produces `4`. Finally `.faces` can be used to access the number of faces on the die without the leading `d`: `@scale.rogue.sneak-attack.faces` produces `6`.
 
+![Configuration Scale Value Recovery](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/scale-value-usage-recovery.jpg)
+
+For the "Usage" scale value type, there is also the option use the scale value to define the recovery period on an item or activity. For non-embedded items, selecting the "Scale Value" option in the recovery period dropdown will create a text area where the scale value's formula path can be entered (e.g. `@scale.bard.inspiration-uses`). Items that are already embedded will instead show a list of available usage scale values. When a scale value is entered into recovery, those uses will then recover based on the period entered in the scale value at the current level, allowing features to recover on a Long Rest at one level and change to Short Rest at a higher level.
+
 ## API
 
 The [original proposal](https://github.com/foundryvtt/dnd5e/issues/1406) for the Scale Value advancement is available on GitHub, but may not reflect the current state of the advancement.
@@ -37,6 +41,8 @@ The `identifier` property controls how the advancement is available in formulas.
 The `scale` property is a mapping of character or class levels and an object. The contained object structure varies depending on the advancement type, but for most it contains `value` as a string or number.
 
 For die scale value it instead contains `number` and `faces`, two number specifying the number of dice and the denomination, as well as `modifiers`, a set of roll modifiers. The `modifiers` value currently can only be set using an active effect (e.g. `system.scale.rogue.sneak-attack.modifiers | ADD | rr=1`).
+
+For usage scale value in addition to value it contains `period`, which accepts a value from `CONFIG.DND5E.limitedUsePeriods`.
 
 The `type` property indicates what type of scale value is used.
 
