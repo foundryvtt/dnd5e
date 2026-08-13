@@ -1527,7 +1527,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollData = this.getRollData({ roll: true });
     Object.assign(rollData.roll, {
       ability: config.ability,
-      proficient: ability?.[`${type}Prof`]?.multiplier >= 1,
+      proficient: ability?.[type]?.prof?.multiplier >= 1,
       type: config[`${type}Type`] ?? "ability"
     });
     const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
@@ -1535,7 +1535,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     ], { rules: { category: type, actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
-      prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
+      prof: ability?.[type].prof.hasProficiency ? ability[type].prof.term : null,
       ruleBonus: bonus,
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);

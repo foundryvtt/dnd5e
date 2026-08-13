@@ -265,6 +265,22 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const checkBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
     const saveBonus = simplifyBonus(this.rolls?.ability?.save?.bonus, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
+
+    const shimField = (obj, id, type, field) => {
+      const oldName = `${type}${field.capitalize()}`;
+      Object.defineProperty(obj, oldName, {
+        get: () => {
+          foundry.utils.logCompatibilityWarning(
+            `\`abilities.${id}.${oldName}\` has moved to \`abilities.${id}.${type}.${field}\`.`,
+            { since: "DnD5e 6.0", until: "DnD5e 6.2" }
+          );
+          return obj[type][field];
+        },
+        configurable: true,
+        enumerable: false
+      });
+    };
+
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.proficient = Math.max(abl.proficient, this.rolls?.ability?.save?.proficiency ?? -Infinity);
@@ -275,38 +291,39 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       }
 
       const calculatedProf = this.calculateAbilityCheckProficiency(0, id);
-      abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.multiplier
-        ? originalAbility.checkProf.clone() : calculatedProf;
-      abl.saveProf = abl.merged ? originalAbility.saveProf.clone() : new Proficiency(prof, abl.proficient);
+      abl.check.prof = originalAbility?.check?.prof?.multiplier > calculatedProf.multiplier
+        ? originalAbility.check.prof.clone() : calculatedProf;
+      abl.save.prof = abl.merged ? originalAbility.save.prof.clone() : new Proficiency(prof, abl.proficient);
 
       rollData = { ...rollData };
-      rollData.roll = { ability: id, proficient: abl.checkProf.multiplier >= 1, type: "ability" };
+      rollData.roll = { ability: id, proficient: abl.check.prof.multiplier >= 1, type: "ability" };
 
       const attackBonusAbl = simplifyBonus(abl.attack?.roll?.bonus, rollData);
       const attackBonusRules = simplifyBonus(
         AppliedRules.collect("attack:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
-      abl.attackBonus = attackBonusAbl + attackBonusRules;
+      abl.attack.bonus = attackBonusAbl + attackBonusRules;
+      abl.attack.value = abl.mod + prof + abl.attack.bonus;
 
       const checkBonusAbl = simplifyBonus(abl.check?.roll?.bonus, rollData);
       const checkBonusRules = simplifyBonus(
         AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
-      abl.checkBonus = checkBonusAbl + checkBonusRules + checkBonus;
+      abl.check.bonus = checkBonusAbl + checkBonusRules + checkBonus;
+      abl.check.value = abl.mod + abl.check.bonus;
+      if ( Number.isNumeric(abl.check.prof.term) ) abl.check.value += abl.check.prof.flat;
 
       const saveBonusAbl = simplifyBonus(abl.save?.roll?.bonus, rollData);
       const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
-      rollData.roll.proficient = abl.saveProf.multiplier >= 1;
+      rollData.roll.proficient = abl.save.prof.multiplier >= 1;
       const saveBonusRules = simplifyBonus(
         AppliedRules.collect("save:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
-      abl.saveBonus = saveBonusAbl + saveBonusRules + saveBonus + cover;
+      abl.save.bonus = saveBonusAbl + saveBonusRules + saveBonus + cover;
+      abl.save.value = abl.mod + abl.save.bonus;
+      if ( Number.isNumeric(abl.save.prof.term) ) abl.save.value += abl.save.prof.flat;
 
-      abl.attack.value = abl.mod + prof + abl.attackBonus;
-      abl.save.value = abl.mod + abl.saveBonus;
-      if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
       abl.dc = 8 + abl.mod + prof + dcBonus;
-
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
 
       // Adjust rolling mode
@@ -323,6 +340,11 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
         || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage")) ) {
         AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1);
       }
+
+      shimField(abl, id, "check", "bonus");
+      shimField(abl, id, "check", "prof");
+      shimField(abl, id, "save", "bonus");
+      shimField(abl, id, "save", "prof");
     }
   }
 

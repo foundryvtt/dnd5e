@@ -284,9 +284,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     const { bonus } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
       `abilities.${rollData.roll.ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
-    ], {
-      rules: { category: "attack", actor: this.actor, item: this.item, rollData }
-    }) : {};
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: rollData.roll.ability ? rollData.mod : null,
       prof: weapon.prof?.term,

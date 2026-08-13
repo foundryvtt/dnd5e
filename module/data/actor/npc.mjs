@@ -746,7 +746,7 @@ export default class NPCData extends CreatureTemplate {
         // Saves (e.g. `Dex +7, Con +15, Wis +10, Cha +12`)
         saves: formatter.format(
           Object.entries(CONFIG.DND5E.abilities)
-            .filter(([k]) => this.abilities[k].saveProf.multiplier !== 0)
+            .filter(([k]) => this.abilities[k].save.prof.multiplier !== 0)
             .map(([k, { abbreviation }]) =>
               `${abbreviation.capitalize()} ${formatNumber(this.abilities[k].save.value, { signDisplay: "always" })}`
             )

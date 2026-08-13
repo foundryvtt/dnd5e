@@ -120,9 +120,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
       `abilities.${rollConfig.ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
-    ], {
-      rules: { category: "attack", actor: this.actor, item: this.item, rollData }
-    }) : {};
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
@@ -260,9 +258,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
       `abilities.${ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
-    ], {
-      rules: { category: "attack", actor: this.actor, item: this.item, rollData: data }
-    }) : {};
+    ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData: data } }) : {};
     const options = CONFIG.Dice.D20Roll.mergeOptions({
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
