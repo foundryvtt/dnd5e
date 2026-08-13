@@ -513,6 +513,16 @@ export default class WeaponData extends ItemDataModel.mixin(
     context.mastery = this.mastery;
     const masteryLabel = CONFIG.DND5E.weaponMasteries[this.mastery]?.label;
     if ( masteryLabel ) context.subtitle.push(masteryLabel);
+
+    const identity = [{ type: "label", label: CONFIG.Item.typeLabels.weapon, identity: true }];
+    const category = CONFIG.DND5E.weaponProficienciesMap[this.type.value];
+    if ( category ) identity.push({ type: "weapon:category", category, identity: true });
+    else if ( this.type.label ) identity.push({ type: "text", text: this.type.label, identity: true });
+    const cls = CONFIG.DND5E.weaponTypeMap[this.type.value];
+    if ( cls ) identity.push({ type: "weapon:class", class: cls, identity: true });
+    if ( this.mastery ) identity.push({ type: "mastery", mastery: this.mastery, identity: true });
+    context.properties = [...identity, ...context.properties.filter(p => !p.identity)];
+
     return context;
   }
 

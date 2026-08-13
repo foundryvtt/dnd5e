@@ -106,7 +106,14 @@ export default class SubclassData extends ItemDataModel.mixin(AdvancementTemplat
   async getCardData(options) {
     const context = await super.getCardData(options);
     const cls = dnd5e.registry.classes.get(this.classIdentifier)?.name;
-    if ( cls ) context.subtitle = [_loc("DND5E.SubclassOf", { class: cls })];
+    if ( cls ) {
+      const label = _loc("DND5E.SubclassOf", { class: cls });
+      context.subtitle = [label];
+      context.properties = [
+        { type: "text", text: label, identity: true },
+        ...context.properties.filter(p => !p.identity)
+      ];
+    }
     return context;
   }
 

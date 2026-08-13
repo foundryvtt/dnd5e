@@ -124,6 +124,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /*  Properties                                  */
   /* -------------------------------------------- */
 
+  /** @override */
+  get alwaysShowDuration() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Attack classification of this spell.
    * @type {"spell"}
@@ -202,8 +209,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     return [
       { type: "level", level: this.level },
       { type: "components", materials: this.properties.has("material") ? this.materials.value : "" },
-      ...this.tagProperties,
-      { type: "duration" }
+      ...this.tagProperties
     ];
   }
 
@@ -481,6 +487,11 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     context.subtitle = [
       CONFIG.DND5E.spellLevels[context.level], CONFIG.DND5E.spellSchools[this.school]?.label
     ].filter(_ => _);
+    context.properties = [
+      { type: "level", level: context.level, identity: true },
+      { type: "school", school: this.school, identity: true },
+      ...context.properties.filter(p => !p.identity)
+    ];
     return context;
   }
 
