@@ -135,7 +135,7 @@ export default class TeleportActivity extends ActivityMixin(TeleportActivityData
      * @function dnd5e.postTeleport
      * @memberof hookEvents
      * @param {TeleportActivity} activity         The activity that is performing the teleportation.
-     * @param {TeleportMovementResult[]} results  Plans for tokens that are to be moved.
+     * @param {TeleportMovementResult[]} results  Information on tokens that have moved.
      */
     Hooks.callAll("dnd5e.postTeleport", this, results);
 
