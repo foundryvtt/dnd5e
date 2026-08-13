@@ -21,6 +21,7 @@
     - [Advancement Type: Choose Items](Advancement-Type-Item-Choice.md)
     - [Advancement Type: Grant Items](Advancement-Type-Item-Grant.md)
     - [Advancement Type: Hit Points](Advancement-Type-Hit-Points.md)
+    - [Advancement Type: Modify Items](Advancement-Type-Modify-Items.md)
     - [Advancement Type: Scale Value](Advancement-Type-Scale-Value.md)
     - [Advancement Type: Size](Advancement-Type-Size.md)
     - [Advancement Type: Subclass](Advancement-Type-Subclass.md)

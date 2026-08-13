@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The Choose Items advancement is designed for any feature that gives the player a choice of options to add to their character at a certain level. This covers features with a limited set of options such as Fighting Style and more open ended features such as Magical Secrets.
 
@@ -13,6 +13,8 @@ The "Allow Drops" option controls whether players can choose their own items thr
 If the "Item Type" is set to "Spell" then an additional set of controls appear. The "Spell Level" allows for restricting what levels of spells can be chosen when added manually by the player. It can be restricted to a specific spell level or allow for selecting any spell that the character can cast. The "Spell Lists" allows restricting the spell selection to only spells included on certain spell lists. The remaining controls affect the spells that are added to the sheet. More information on using these controls is available on the [Grant Items advancement guide](Advancement-Type-Grant-Items).
 
 The second column is the pool of items available for selection. Dropping items here will add them to the list, and they can be removed by clicking the delete entry trashcan next to each item. Some advancements, like Eldritch Invocations, might have a large list of items filled here, while others, such as Magical Secrets won't include any items at all.
+
+There are two sorting modes to the items list. By default it is set to manual sorting, allowing individual item entries to be rearranged using the drag handles on the right side of each item row. The button the top right can be used to toggle to alphabetical sorting.
 
 The third column is a list of the number of items that can be chosen at any given level. These numbers should indicate only the number of new items allowed for each level, not the total the character should have. So for a Warlock's Eldritch Invocations it should include a `1` at 1st level, a `2` at 2nd level, and a `2` at 5th level, but nothing at 3rd or 4th level.
 
@@ -40,9 +42,11 @@ The Choose Items advancement contains the `allowDrops` boolean which controls wh
 
 The `choices` object contains objects grouped by level that include the `count` property indicating how many items the player can choose at that level, and the `replacement` boolean indicating whether a replacement item can be chosen.
 
-The `pool` property is an array of objects that include a `uuid` property indicating the item that can be chosen.
+The `pool` property is an array of objects that include a `uuid` property indicating the item that can be chosen and a `sort` property that controls the entry's position when manual sorting is used.
 
 The `restriction` object contains `type`, indicating the item category (in this case "Class Features"), `subtype` indicating the subtype within that (in this case only "Hunter's Prey" features), `level` indicating the allowed spell level if spells are selected, and `list` includes the IDs of spell lists to restrict the choices to.
+
+The `sorting` property controls whether manual sorting (`m`) or alphabetic sorting (`a`) is used.
 
 The `spell` property is an object with spell configuration which is detailed in the [Grant Items advancement guide](Advancement-Type-Grant-Items).
 
@@ -55,9 +59,9 @@ The `type` property contains the general item type allowed, such as classes, wea
     3: { count: 1, replacement: false }
   },
   pool: [
-    { uuid: "Compendium.dnd5e.classfeatures.5gx1O0sxK08awEO9" },
-    { uuid: "Compendium.dnd5e.classfeatures.StfmqK1twVfukpa0" },
-    { uuid: "Compendium.dnd5e.classfeatures.C6sHdDGmCMo0cYHd" }
+    { sort: 0, uuid: "Compendium.dnd5e.classfeatures.5gx1O0sxK08awEO9" },
+    { sort: 10000, uuid: "Compendium.dnd5e.classfeatures.StfmqK1twVfukpa0" },
+    { sort: 20000, uuid: "Compendium.dnd5e.classfeatures.C6sHdDGmCMo0cYHd" }
   ],
   restriction: {
     type: "class",
@@ -65,6 +69,7 @@ The `type` property contains the general item type allowed, such as classes, wea
     level: "",
     list: []
   },
+  sorting: "m",
   spell: null,
   type: "feat"
 }
