@@ -36,13 +36,16 @@ export default class DurationField extends SchemaField {
   static getLabels({ duration, properties }) {
     if ( !duration?.units ) return {};
     const labels = {};
-    if ( duration.value && (duration.units in CONFIG.DND5E.timeUnits) ) {
+    const isScalar = duration.units in CONFIG.DND5E.timeUnits;
+    if ( duration.value && isScalar ) {
       labels.simple = formatTime(duration.value, duration.units);
     } else {
       labels.simple = CONFIG.DND5E.timePeriods[duration.units] ?? "";
     }
-    labels.concentration = duration.concentration || properties?.has?.("concentration")
-      ? _loc("DND5E.CONCENTRATION.Duration", { duration: labels.simple }) : labels.simple;
+    labels.concentration = duration.concentration || properties?.has?.("concentration") ? _loc(
+      `DND5E.CONCENTRATION.Duration.${isScalar ? "Scalar" : "Special"}`,
+      { duration: labels.simple, durationLc: labels.simple.toLowerCase() }
+    ) : labels.simple;
     return labels;
   }
 
