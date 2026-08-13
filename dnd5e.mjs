@@ -635,7 +635,9 @@ Hooks.on("renderSettings", (app, html) => applications.settings.sidebar.renderSe
 
 Hooks.on("applyCompendiumArt", (documentClass, ...args) => documentClass.applyCompendiumArt?.(...args));
 
+Hooks.on("renderChatInput", () => applications.ChatLog5e.applyTheme());
 Hooks.on("renderChatPopout", documents.ChatMessage5e.onRenderChatPopout);
+Hooks.on("renderChatPopout", () => applications.ChatLog5e.applyTheme());
 Hooks.on("getChatMessageContextOptions", documents.ChatMessage5e.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => {

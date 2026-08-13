@@ -130,6 +130,7 @@ export default class EnchantmentApplicationElement extends MaybeAdoptable {
     });
     if ( enchantedItems.length ) this.dropArea.replaceChildren(...enchantedItems);
     else this.dropArea.innerHTML = `<p>${_loc("DND5E.ENCHANT.DropArea")}</p>`;
+    this.dropArea.classList.toggle("empty", !enchantedItems.length);
     if ( this.countArea ) this.countArea.querySelector(".current").innerText = enchantedItems.length;
   }
 

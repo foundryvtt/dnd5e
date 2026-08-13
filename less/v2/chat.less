@@ -2,34 +2,27 @@
 /*  Chat Cards                        */
 /* ---------------------------------- */
 
-:is(.chat-popout, #chat-log, .chat-log) .message {
+:is(.chat-popout, #chat-log, .chat-log) .message:not(.compact) {
   padding: .5rem;
-  border-width: 1px;
+  border: var(--dnd5e-border-gold);
   border-block-end-width: 2px;
   border-radius: 6px;
   font-family: var(--dnd5e-font-roboto);
   font-size: var(--font-size-13);
   position: relative;
-  background: var(--dnd5e-color-parchment);
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: transparent url("ui/texture-gray1.webp") no-repeat top left;
-    border-radius: 6px;
-  }
+  background: var(--dnd5e-chat-background);
+  color: var(--color-text-primary);
 
   > .message-header, > .message-content { position: relative; }
 
-  &.emote { background-color: #f3edde; }
-  &.whisper { background-color: #e8e8ef; }
-  &.whisper::before { filter: grayscale(1); }
-  &.blind { background-color: #f5eaf5; }
-  &.blind::before { mix-blend-mode: luminosity; }
+  &.blind, &.emote, &.whisper { border-block-end-width: 3px; }
+  &.emote { border-block-end-color: #e5af29; }
+  &.whisper { border-block-end-color: #7d7df1; }
+  &.blind { border-block-end-color: #c12fc1; }
 
   /* Header */
   .message-header {
+    color: var(--color-text-secondary);
     margin-bottom: .375rem;
 
     .message-delete { display: none; }
@@ -60,7 +53,7 @@
         object-position: top;
       }
       .avatar.token :is(img, video) {
-        object-fix: contain;
+        object-fit: contain;
         object-position: center;
       }
     }
@@ -81,18 +74,13 @@
       color: var(--color-text-primary);
     }
 
-    .subtitle {
-      font-size: var(--font-size-11);
-      color: var(--color-text-secondary);
-    }
+    .subtitle { font-size: var(--font-size-11); }
 
     .message-metadata {
       font-size: var(--font-size-10);
       transform: translate(2px, -4px);
       flex: none;
     }
-
-    time { color: var(--color-text-secondary); }
 
     .flavor-text {
       margin-block-start: 4px;
@@ -141,7 +129,7 @@
     &::before {
       content: "";
       width: 36px;
-      border-left: 1px solid #bbb;
+      border-inline-start: var(--dnd5e-border-separator-heavy);
     }
 
     &::after {
@@ -411,7 +399,7 @@
 /*  Item Cards                        */
 /* ---------------------------------- */
 
-.dnd5e2 .chat-card {
+.dnd5e2:not(.compact) .chat-card {
   display: flex;
   flex-direction: column;
   gap: .375rem;
@@ -420,9 +408,9 @@
 
   .description {
     padding: .5rem;
-    border: 1px solid var(--dnd5e-color-gold);
+    border: var(--dnd5e-border-gold);
     border-radius: 3px;
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5e-background-card);
     overflow: hidden;
 
     .summary {
@@ -506,18 +494,18 @@
   }
 }
 
-.dice-roll + .chat-card {
+.message:not(.compact) .dice-roll + .chat-card {
   margin-block-start: .375rem;
 }
 
 .chat-sidebar, .chat-popout, #chat-notifications {
-  &:not([data-gm-user]) .card-header[data-concealed] {
+  &:not([data-gm-user]) .message:not(.compact) .card-header[data-concealed] {
     .summary { cursor: inherit; }
     .fa-chevron-down, .details { display: none; }
   }
 }
 
-.message {
+.message:not(.compact) {
   p.supplement {
     margin: 0;
     font-size: var(--font-size-11);
@@ -729,18 +717,20 @@
 /* ---------------------------------- */
 
 enchantment-application.dnd5e2 {
-  margin: 4px;
+  margin: 4px 0 -6px;
 
   .drop-area {
-    background: var(--dnd5e-color-card);
-    border: 1px dashed var(--dnd5e-color-crimson);
-    color: inherit;
-    font-size: inherit;
-    font-style: normal;
     gap: 4px;
-    min-block-size: 40px;
     place-content: normal;
     text-align: start;
+
+    &.empty { min-block-size: 38px; }
+
+    &:not(.empty) {
+      color: inherit;
+      font-size: var(--font-size-12);
+      font-style: normal;
+    }
 
     p {
       place-content: center;
@@ -753,14 +743,14 @@ enchantment-application.dnd5e2 {
       gap: 6px;
 
       &:not(:last-child) {
-        border-block-end: 1px dotted var(--color-border-light-2);
+        border-block-end: var(--dnd5e-border-dotted);
         padding-block-end: 4px;
       }
 
       > img {
-        block-size: 32px;
-        inline-size: 32px;
-        flex: 0 0 32px;
+        block-size: 24px;
+        inline-size: 24px;
+        flex: 0 0 24px;
       }
       > .name {
         flex: 1;
@@ -774,8 +764,7 @@ enchantment-application.dnd5e2 {
   }
 
   .count-area {
-    margin-block-start: 2px;
-    margin-inline-end: 4px;
+    margin: 4px 4px 0;
     font-size: var(--font-size-10);
     text-align: end;
     text-transform: uppercase;
@@ -849,7 +838,7 @@ enchantment-application.dnd5e2 {
 /*  Rest & Turn Cards                 */
 /* ---------------------------------- */
 
-.dnd5e2 .chat-card {
+.dnd5e2:not(.compact) .chat-card {
   section > strong:first-child {
     display: block;
     margin-block-start: 1em;

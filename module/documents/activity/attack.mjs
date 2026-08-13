@@ -50,7 +50,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
   _usageChatButtons(message) {
     const buttons = [{
       action: "rollAttack",
-      icon: "systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg",
+      icon: "fa-solid fa-sword",
       label: { value: "DND5E.Attack" }
     }];
     if ( this.damage.parts.length || this.item.system.properties?.has("amm") ) buttons.push({

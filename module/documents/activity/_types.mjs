@@ -73,6 +73,7 @@
 /**
  * @typedef ActivityUsageChatButton
  * @property {string} action                      Action performed when the button is clicked.
+ * @property {boolean} [canGroup]                 Whether this button can be grouped with others that share an action.
  * @property {object} [dataset]                   Parameters passed to the action that handles the button.
  * @property {string} icon                        FontAwesome classes or a path to an icon image.
  * @property {object} label                       Labels displayed on the button.
