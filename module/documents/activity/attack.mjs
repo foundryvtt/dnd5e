@@ -117,14 +117,12 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     }
 
     const rollData = this.getRollData({ roll: { ability: rollConfig.ability, attackMode: rollConfig.attackMode } });
-    const rollFields = [
-      ...(rollConfig.ability ? [`abilities.${rollConfig.ability}.attack.roll`] : []),
+    const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      `abilities.${rollConfig.ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
-    ];
-    const { advantage, disadvantage } = this.actor
-      ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
-        rules: { category: "attack", actor: this.actor, item: this.item, rollData }
-      }) : {};
+    ], {
+      rules: { category: "attack", actor: this.actor, item: this.item, rollData }
+    }) : {};
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
     rollConfig.rolls = [CONFIG.Dice.D20Roll.mergeConfigs({
@@ -259,14 +257,12 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
     const mastery = formData?.get("mastery") ?? process.mastery;
 
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
-    const rollFields = [
-      ...(ability ? [`abilities.${ability}.attack.roll`] : []),
+    const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      `abilities.${ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
-    ];
-    const { maximum, minimum } = this.actor
-      ? D20RollModificationField.combineFields(this.actor.system, rollFields, {
-        rules: { category: "attack", actor: this.actor, item: this.item, rollData: data }
-      }) : {};
+    ], {
+      rules: { category: "attack", actor: this.actor, item: this.item, rollData: data }
+    }) : {};
     const options = CONFIG.Dice.D20Roll.mergeOptions({
       elvenAccuracy: this.actor?.getFlag("dnd5e", "elvenAccuracy")
         && CONFIG.DND5E.characterFlags.elvenAccuracy.abilities.includes(ability),
