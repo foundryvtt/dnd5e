@@ -68,6 +68,13 @@ export default class ScaleValueAdvancement extends Advancement {
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
+  /** @override */
+  displayValueForLevel(level) {
+    return this.valueForLevel(level)?.display ?? null;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const value = this.valueForLevel(level)?.display;

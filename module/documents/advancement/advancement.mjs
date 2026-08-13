@@ -201,6 +201,17 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   /* -------------------------------------------- */
 
   /**
+   * Short value displayed at each level. Should generally never be more than 4 characters long.
+   * @param {number} level  Level for which to retrieve the value.
+   * @returns {number|string|null}
+   */
+  displayValueForLevel(level) {
+    return this.valueForLevel?.(level) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Value used for sorting this advancement at a certain level.
    * @param {number} level  Level for which this entry is being sorted.
    * @returns {string}      String that can be used for sorting.
