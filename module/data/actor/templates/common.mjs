@@ -296,7 +296,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       abl.save.prof = abl.merged ? originalAbility.save.prof.clone() : new Proficiency(prof, abl.proficient);
 
       rollData = { ...rollData };
-      rollData.roll = { ability: id, proficient: abl.check.prof.multiplier >= 1, type: "ability" };
+      rollData.roll = { ability: id, proficient: true, type: "ability" };
 
       const attackBonusAbl = simplifyBonus(abl.attack?.roll?.bonus, rollData);
       const attackBonusRules = simplifyBonus(
@@ -306,6 +306,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       abl.attack.value = abl.mod + prof + abl.attack.bonus;
 
       const checkBonusAbl = simplifyBonus(abl.check?.roll?.bonus, rollData);
+      rollData.roll.proficient = abl.check.prof.multiplier >= 1;
       const checkBonusRules = simplifyBonus(
         AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
