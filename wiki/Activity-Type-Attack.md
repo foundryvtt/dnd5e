@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The Attack activity allows for making attacks and rolling damage.
 
@@ -10,6 +10,7 @@ Using the attack activity will place an attack card into the chat log, with "Att
 ![Attack Card & Dialogs](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/attack-chat-dialog.jpg)
 
 When making an attack with a weapon, a few additional options may appear in the attack roll dialog:
+- *Ability*: Presents the ability options when attack allows for multiple abilities (such as a Finesse weapon or a Warlock's pact blade). Attacks default to the ability with the highest modifier.
 - *Ammunition*: For weapons with the Ammunition property, the ammunition used with the attack will be selectable. This ammo will add a bonus to the attack roll if it has a magical bonus and bonuses to the subsequent damage rolled using the same attack card
 - *Attack Mode*: Allows for choosing between one-handed and two-handed attacks on weapons with the "Versatile" property, between melee and thrown attacks on weapons with the "Thrown" property, or making an offhand attack for weapons with the "Light" property. Subsequent damage rolls from the same attack card will be adjusted based on the attack mode chosen
 - *Weapon Mastery*: If the weapon has a defined "Mastery" and the character has alternate mastery options, when the player will able to choose which of the available masteries to use

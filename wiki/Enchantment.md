@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 Enchantments are a special type of Active Effect that makes changes on the item to which they are added, rather than the actor like normal Active Effects. They are configured in much the same way as normal Active Effects, but rely on different attribute keys that are documented below.
 
@@ -377,9 +377,12 @@ Enchantments can also target changes to item activities based on their type. Thi
 
 #### Changing the Attack Ability
 
-| Attribute Key                       | Change Mode | Effect Value | Roll Data? |
-| ----------------------------------- | ----------- | ------------ | ---------- |
-| `activities[attack].attack.ability` | Override    | `[string]`   | No         |
+Setting `attack.ability` will replace the base ability used by the attack activity. Targeting `attack.abilities` instead allows for adding new abilities to the pool of available activities for an attack.
+
+| Attribute Key                         | Change Mode | Effect Value | Roll Data? |
+| ------------------------------------- | ----------- | ------------ | ---------- |
+| `activities[attack].attack.ability`   | Override    | `[string]`   | No         |
+| `activities[attack].attack.abilities` | Add         | `[string]`   | No         |
 
 #### Setting Flat To Hit
 

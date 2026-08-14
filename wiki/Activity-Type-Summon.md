@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The Summon activity is designed to automatically bring summoned creatures into your world. This allows for summoning based on a pre-determined list of creatures or allowing the player to select a creature to summon based on CR and creature type. This activity can modify the summoned creatures before they are brought into the world and includes an interface for players to place them as desired in the scene.
 
@@ -67,7 +67,7 @@ In **Challenge Rating & Type** mode the profile contains a *CR* field for settin
 
 In the first example above, the spell "Conjure Animals" from the Player’s Handbook, there are four profiles with descending CRs and increasing quantities (the complex formula in the count field allows for the count to double at certain spell levels). The *Display Name* field is left blank allowing the summoning to automatically generate the appropriate label.
 
-The second example shows the spell "Conjure Element", also from the Player’s Handbook. This only has a single summoning profile with a CR that scales based on the spell level (starting at CR 5 because it is a 5th level spell, and increasing CR by 1 for each level cast above 5th). The dropdown shows that that spell can only summon creatures with the "Elemental" type.
+The second example shows the spell "Conjure Elemental", also from the Player’s Handbook. This only has a single summoning profile with a CR that scales based on the spell level (starting at CR 5 because it is a 5th level spell, and increasing CR by 1 for each level cast above 5th). The dropdown shows that that spell can only summon creatures with the "Elemental" type.
 
 #### Summoning Level
 
