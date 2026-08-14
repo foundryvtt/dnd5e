@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The activities system is a new method for adding things that can be done by an item. It replaces the older method of defining a single action for an item with a much more flexible system.
 
@@ -25,6 +25,7 @@ There are a variety of activity types offered by the DnD5e system, and modules c
 - [Heal](Activity-Type-Heal.md): Heal a creature
 - [Save](Activity-Type-Save.md): Impose a saving throw roll and roll damage
 - [Summon](Activity-Type-Summon.md): Summon a new creature to the scene
+- [Teleport](Activity-Type-Teleport.md): Teleport tokens across a scene
 - [Transform](Activity-Type-Transform.md): Change an actor using the stats of another
 - [Utility](Activity-Type-Utility.md): Make an arbitrary roll or just indicate something happened
 
@@ -41,6 +42,9 @@ The first tab that appears is the "Identity" tab which contains details on how t
 - *Name*: Name for the activity, will default to the name of the activity type if none is provided
 - *Icon*: Icon used when the activity appears in the actor and item sheets
 - *Chat Flavor*: Brief additional text used in the usage chat message
+- *Description*: The large rich text box is for the activity's description, which appears in chat cards
+
+The behavior contains options for the activity activation process. Different activity types will customize this section, but there is one option that is shared among most activities:
 - *Measured Template Prompt*: If the activity defines an area of effect, should the player be prompted to place the template by default? If unchecked, then the player can still place the template using a button on the chat card
 
 There are also several options that control when the activity is visible and usable:
@@ -60,7 +64,7 @@ The "Activation" tab contains three sub-tabs: "Time", "Consumption", and "Target
 
 The "Activation" section contains details on how long it takes to use the activity and under what conditions it can be used. If activation data is provided by the item (such as on spells), this will default to the details from the item but can be overridden using a checkbox next to the name.
 
-The "Duration" section contains details on how long the usage of the activity lasts. This can also be derived from the item’s data if present.
+The "Duration" section contains details on how long the usage of the activity lasts. This can also be derived from the item’s data if present. When applying an active effect from the activity, the duration here will be used for the effect unless the effect already has a duration specified.
 
 #### Consumption
 
@@ -82,6 +86,8 @@ The "Range", "Targets", and "Area" sections contain details on where and who the
 
 ![Activity Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-effect.jpg)
 
-The final tab will vary the most between different activity types. Most activity types contain an "Applied Effects" list which specifies what Active Effects present on the item will be available to apply to targets through the chat card. The dropdown allows for selecting existing effects on the item, or the plus button can be used to create a new Active Effect.
+The final tab will vary the most between different activity types. Most activity types contain an "Applied Effects" list which specifies what Active Effects present on the item will be available to apply to targets through the chat card. The dropdown allows for selecting existing effects on the item, the plus button can be used to create a new Active Effect, and the drop area allows adding effects from a compendium.
 
 Inside the "Additional Settings" dropdown for each effect is a set of level limits. These allow restricting what level the effect will be offered for application and follow the same rules as the level limits on the identity tab.
+
+The "Area of Effect Behaviors" section appears whenever an area type is selected on the targeting tab. This section allows defining [behaviors](Activity-Behaviors.md) that are added to measured template regions when they are placed in a scene. These behaviors can do things like make the region difficult terrain or attach active effects to any tokens entering the region.

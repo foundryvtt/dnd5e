@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The Enchant activity allows for applying [enchantments](Enchantment.md) to items. These enchantments can modify the stats of an item (such as *Magic Weapon* giving a mundane weapon a +1 magical bonus), carry effects that apply to an actor (such as the *Fire Rune* granting a player double proficiency on tool checks), and carry items that are added to the actor (such as the *Arcane Propulsive Armor* give the player a set of gauntlets that can be used to attack).
 
@@ -26,7 +26,7 @@ After creating the Enchant activity the configuration sheet will open. In additi
 
 ### Enchantments
 
-The "Enchantments" tab contains a list of potential enchantments that can be applied by the activity. The plus button can be used to create new enchantments, or the dropdown can be used to select enchantments that are already on the item, but not yet on the Enchant activity. Clicking on the name of an enchantment will open up the configuration sheet for it. More details on configuring the enchantments themselves can be found in the [enchantment guide](Enchantment.md).
+The "Enchantments" tab contains a list of potential enchantments that can be applied by the activity. The plus button can be used to create new enchantments, the dropdown can be used to select enchantments that are already on the item but not yet on the Enchant activity, and enchantments from a compendium can be dropped into the drop area below. Clicking on the name of an enchantment will open up the configuration sheet for it. More details on configuring the enchantments themselves can be found in the [enchantment guide](Enchantment.md).
 
 #### Enchantment Level
 
