@@ -111,8 +111,8 @@
         <span class="title">{{ name }}</span>
     </div>
     {{#if showDuration}}
-    <div class="duration">
-        <i class="fa-solid fa-clock" inert></i>
+    <div class="duration pill transparent">
+        <i class="fa-solid {{ durationIcon }}" inert></i>
         <span class="most-significant">{{ durationParts.[0] }}</span>
         {{#if durationParts.[1]}}
         <span class="separator">&vert;</span>

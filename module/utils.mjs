@@ -814,23 +814,24 @@ export function convertLength(value, from, to, { strict=true }={}) {
 /**
  * Convert the provided time value to another unit. If no final unit is provided, then will convert it to the largest
  * unit that can still represent the value as a whole number.
- * @param {number} value                    The time being converted.
- * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {number} value                      The time being converted.
+ * @param {string} from                       The initial unit as defined in `CONFIG.DND5E.timeUnits`.
  * @param {object} [options={}]
- * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
- * @param {boolean} [options.strict=true]   Throw an error if from unit isn't found.
- * @param {string} [options.to]             The final units, if explicitly provided.
+ * @param {boolean} [options.combat=false]    Use combat units when auto-selecting units, rather than normal units.
+ * @param {boolean} [options.strict=true]     Throw an error if from unit isn't found.
+ * @param {string} [options.to]               The final units, if explicitly provided.
+ * @param {boolean} [options.truncate=false]  Select the largest unit that can represent the value, discarding any
+ *                                            remainder, rather than the largest that represents it exactly.
  * @returns {{ value: number, unit: string }}
  */
-export function convertTime(value, from, { combat=false, strict=true, to }={}) {
+export function convertTime(value, from, { combat=false, strict=true, to, truncate=false }={}) {
   const base = value * (CONFIG.DND5E.timeUnits[from]?.conversion ?? 1);
   if ( !to ) {
     // Find unit with largest conversion value that can still display the value
     const unitOptions = Object.entries(CONFIG.DND5E.timeUnits)
       .reduce((arr, [key, v]) => {
-        if ( ((v.combat ?? false) === combat) && ((base % v.conversion === 0) || (base >= v.conversion * 2)) ) {
-          arr.push({ key, conversion: v.conversion });
-        }
+        const fits = truncate ? base >= v.conversion : (base % v.conversion === 0) || (base >= v.conversion * 2);
+        if ( ((v.combat ?? false) === combat) && fits ) arr.push({ key, conversion: v.conversion });
         return arr;
       }, [])
       .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
@@ -838,7 +839,8 @@ export function convertTime(value, from, { combat=false, strict=true, to }={}) {
   }
 
   const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
-  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict }), unit: to };
+  const converted = _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict });
+  return { unit: to, value: truncate ? Math.floor(converted) : converted };
 }
 
 /* -------------------------------------------- */

@@ -1,4 +1,4 @@
-import { loadingTooltip } from "../../utils.mjs";
+import { convertTime, formatTime, loadingTooltip } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
@@ -51,10 +51,39 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   /**
+   * Checked status for effects.
+   * @type {Map<string, boolean>}
+   */
+  #effectOptions = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Target pills grouped by their grouping keys.
+   * @type {Record<string, TargetPillElement>}
+   */
+  #targetGroups;
+
+  /* -------------------------------------------- */
+
+  /**
    * Checked status for application targets.
    * @type {Map<string, boolean>}
    */
   #targetOptions = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Checked status for the given effect.
+   * @param {string} uuid  UUID of the effect.
+   * @returns {boolean}
+   */
+  effectChecked(uuid) {
+    return this.#effectOptions.get(uuid) ?? false;
+  }
+
+  /* -------------------------------------------- */
 
   /**
    * Options for a specific target.
@@ -95,8 +124,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         </label>
         <div class="collapsible-content">
           <div class="wrapper">
-            <hr>
             <menu class="effects unlist"></menu>
+            <button type="button" class="apply-button" data-action="apply">
+              <i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
+              <span>${_loc("DND5E.EFFECT.Action.Apply")}</span>
+            </button>
           </div>
         </div>
       `;
@@ -106,10 +138,12 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       else this.buildEffectsList();
       div.querySelector(".wrapper").prepend(...this.buildTargetContainer());
       this.targetList.addEventListener("change", this._onCheckTarget.bind(this));
+      this.effectsList.addEventListener("click", this._onCheckEffect.bind(this));
       div.addEventListener("click", this._handleClickHeader.bind(this));
+      div.querySelector(".apply-button").addEventListener("click", this._onApplyEffects.bind(this));
     }
 
-    this.targetingMode = this.targetSourceControl.hidden ? "selected" : "targeted";
+    this.targetingMode = "targeted";
   }
 
   /* -------------------------------------------- */
@@ -118,8 +152,12 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    * Build a list of active effects.
    */
   buildEffectsList() {
+    if ( this.effects.length && foundry.utils.isEmpty(this.#effectOptions) ) {
+      this.#effectOptions.set(this.effects[0].uuid, true);
+    }
     for ( const effect of this.effects ) {
       effect.updateDuration();
+      const { icon, label } = this.#formatDuration(effect);
       const li = document.createElement("li");
       li.classList.add("effect");
       Object.assign(li.dataset, {
@@ -131,52 +169,115 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       });
       li.innerHTML = `
         <img class="gold-icon">
-        <div class="name-stacked">
-          <span class="title"></span>
-          <span class="subtitle">${effect.duration.label}</span>
+        <span class="title"></span>
+        <div class="duration pill transparent">
+          <i class="fa-solid ${icon}" inert></i>
+          <span>${label}</span>
         </div>
-        <button class="apply-effect" type="button" data-action="applyEffect"
-                data-tooltip aria-label="${_loc("DND5E.EFFECT.Application.Action.ApplyTokens")}">
-          <i class="fas fa-reply-all fa-flip-horizontal" inert></i>
-        </button>
+        <span class="pip" aria-pressed="${this.effectChecked(effect.uuid)}"></span>
       `;
       Object.assign(li.querySelector(".gold-icon"), { alt: effect.name, src: effect.img });
-      li.querySelector(".name-stacked .title").append(effect.name);
+      li.querySelector(".title").append(effect.name);
       this.effectsList.append(li);
-      li.addEventListener("click", this._onApplyEffect.bind(this));
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  buildTargetContainer() {
+    const [control, list] = super.buildTargetContainer();
+    const row = document.createElement("section");
+    row.classList.add("icon-row");
+    row.append(control, list);
+    list.classList.add("pills");
+    return [row];
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   buildTargetListEntry({ uuid, name }) {
-    const actor = fromUuidSync(uuid);
-    if ( !actor?.isOwner ) return;
+    const token = fromUuidSync(uuid);
+    if ( !token?.isOwner ) return;
 
-    const disabled = this.targetingMode === "selected" ? " disabled" : "";
-    const checked = this.targetChecked(uuid) ? " checked" : "";
+    const key = token.getGroupingKey() ?? token.uuid;
+    let group = this.#targetGroups[key];
+    const isGrouped = group;
 
-    const li = document.createElement("li");
-    li.classList.add("target");
-    li.dataset.targetUuid = uuid;
-    li.innerHTML = `
-      <img class="gold-icon">
-      <div class="name-stacked">
-        <span class="title"></span>
-      </div>
-      <div class="checkbox">
-        <dnd5e-checkbox name="${uuid}"${checked}${disabled}></dnd5e-checkbox>
-      </div>
-    `;
-    Object.assign(li.querySelector(".gold-icon"), { alt: name, src: actor.img });
-    li.querySelector(".name-stacked .title").append(name);
+    if ( !group ) {
+      group = document.createElement("target-pill");
+      group.insertAdjacentHTML("afterbegin", "<label></label><datalist></datalist>");
+      group.querySelector("label").append(name);
+      group.disabled = this.targetingMode === "selected";
+    }
 
-    return li;
+    const option = document.createElement("option");
+    option.value = token.uuid;
+    option.toggleAttribute("data-checked", this.targetChecked(token.uuid));
+    option.append(name);
+    const data = group.querySelector("datalist");
+    data.append(option);
+    const count = data.children.length;
+    group.querySelector("label").textContent = count > 1
+      ? _loc("DND5E.CHATMESSAGE.Targets.Count", { name, number: count })
+      : name;
+    this.#targetGroups[key] = group;
+
+    return isGrouped ? null : group;
   }
 
   /* -------------------------------------------- */
-  /*  Event Handlers                              */
+
+  /** @inheritDoc */
+  buildTargetsList() {
+    this.#targetGroups = {};
+    return super.buildTargetsList();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _buildTargetSourceControl() {
+    const control = document.createElement("button");
+    control.type = "button";
+    control.classList.add("unbutton", "control-button", "target-source-toggle");
+    control.toggleAttribute("data-tooltip", true);
+    control.addEventListener("click", this._onChangeTargetMode.bind(this));
+    return control;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _refreshTargetMode() {
+    const targeted = this.targetingMode === "targeted";
+    this.targetSourceControl.dataset.mode = this.targetingMode;
+    this.targetSourceControl.ariaLabel = _loc(`DND5E.Tokens.${targeted ? "Targeted" : "Selected"}`);
+    this.targetSourceControl.disabled = !this.hasRecordedTargets;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Abbreviate an effect's duration, using the most significant unit that can represent it.
+   * @param {ActiveEffect5e} effect              The effect being displayed.
+   * @returns {{ icon: string, label: string }}  Icon and label to display.
+   */
+  #formatDuration(effect) {
+    const special = effect.getSpecialDurationParts();
+    if ( special ) return special;
+    const { label, units, value } = effect.duration;
+    if ( !Number.isFinite(value) || !units ) return { icon: "fa-clock", label };
+    const from = units.replace(/s$/, "");
+    const { unit, value: converted } = CONFIG.DND5E.timeUnits[from]?.combat
+      ? { value, unit: from }
+      : convertTime(value, from, { truncate: true });
+    return { icon: "fa-clock", label: formatTime(converted, unit, { unitDisplay: "narrow" }) };
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
   /* -------------------------------------------- */
 
   /**
@@ -188,6 +289,22 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    * @protected
    */
   async _applyEffectToActor(effect, actor) {
+    const { action, data } = this._prepareEffectData(effect, actor);
+    if ( action === "update" ) return actor.effects.get(data._id).update(data);
+    return ActiveEffect.implementation.create(data, { parent: actor });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the data for applying an Active Effect to an Actor.
+   * @param {ActiveEffect5e} effect                         The effect to apply.
+   * @param {Actor5e} actor                                 The actor.
+   * @returns {{ action: "create"|"update", data: object }} The effect data and the operation required to apply it.
+   * @throws {Error}                                        If the effect could not be applied.
+   * @protected
+   */
+  _prepareEffectData(effect, actor) {
     const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
     const item = this.chatMessage.getAssociatedItem();
     const origin = concentration ?? (effect.inCompendium && item ? item : effect);
@@ -214,14 +331,16 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = effect.inCompendium ? actor.effects.find(e => e._stats.compendiumSource === effect.uuid)
+    const existingEffect = effect.inCompendium
+      ? actor.effects.find(e => e._stats.compendiumSource === effect.uuid)
       : actor.effects.find(e => e.origin === origin.uuid);
     if ( existingEffect ) {
-      return existingEffect.update(foundry.utils.mergeObject({
+      return { action: "update", data: foundry.utils.mergeObject({
         ...durationOverride,
+        _id: existingEffect.id,
         disabled: false,
         start: effect.constructor.getEffectStart()
-      }, effectFlags));
+      }, effectFlags) };
     }
 
     if ( !game.user.isGM && concentration && !concentration.isOwner ) {
@@ -229,7 +348,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     // Otherwise, create a new effect on the target
-    const effectData = foundry.utils.mergeObject({
+    return { action: "create", data: foundry.utils.mergeObject({
       ...effect.toObject(),
       ...durationOverride,
       disabled: false,
@@ -239,32 +358,71 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
         [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
       }
-    }, effectFlags);
-    return await ActiveEffect.implementation.create(effectData, { parent: actor });
+    }, effectFlags) };
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle applying selected effects to the appropriate targets.
+   * @protected
+   */
+  async _onApplyEffects() {
+    const effects = this.effects.filter(e => this.effectChecked(e.uuid));
+    const operations = [];
+    for ( const option of this.targetList.querySelectorAll("option[data-checked]") ) {
+      const doc = await fromUuid(option.value);
+      const actor = doc?.actor ?? doc;
+      if ( !actor ) continue;
+      const data = [];
+      const updates = [];
+      for ( const effect of effects ) {
+        try {
+          const operation = this._prepareEffectData(effect, actor);
+          (operation.action === "create" ? data : updates).push(operation.data);
+        } catch ( err ) {
+          Hooks.onError("EffectApplicationElement._prepareEffectData", err, { notify: "warn", log: "warn" });
+        }
+      }
+      if ( data.length ) operations.push({ data, action: "create", documentName: "ActiveEffect", parent: actor });
+      if ( updates.length ) {
+        operations.push({ updates, action: "update", documentName: "ActiveEffect", parent: actor });
+      }
+    }
+    if ( operations.length ) await foundry.documents.modifyBatch(operations);
+    if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
+      this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onChangeTargetMode(event) {
+    event.preventDefault();
+    this.targetingMode = this.targetingMode === "targeted" ? "selected" : "targeted";
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Handle clicking the apply effect button.
-   * @param {PointerEvent} event  Triggering click event.
+   * Handle checking or unchecking an effect.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
    */
-  async _onApplyEffect(event) {
-    event.preventDefault();
-    const effect = await fromUuid(event.target.closest("[data-uuid]")?.dataset.uuid);
+  _onCheckEffect(event) {
+    const effect = event.target.closest(".effect[data-uuid]");
     if ( !effect ) return;
-    for ( const target of this.targetList.querySelectorAll("[data-target-uuid]") ) {
-      const actor = fromUuidSync(target.dataset.targetUuid);
-      if ( !actor || !target.querySelector("dnd5e-checkbox")?.checked ) continue;
-      try {
-        await this._applyEffectToActor(effect, actor);
-      } catch(err) {
-        Hooks.onError("EffectApplicationElement._applyEffectToToken", err, { notify: "warn", log: "warn" });
-      }
-    }
-    if ( game.settings.get("dnd5e", "autoCollapseChatTrays") !== "manual" ) {
-      this.querySelector(".collapsible").dispatchEvent(new PointerEvent("click", { bubbles: true, cancelable: true }));
-    }
+    event.stopPropagation();
+    const { uuid } = effect.dataset;
+    const checked = this.#effectOptions.get(uuid);
+    if ( !event.shiftKey ) this.#effectOptions.clear();
+    this.#effectOptions.set(uuid, event.shiftKey ? !checked : true);
+    this.querySelectorAll(".effect[data-uuid]").forEach(el => {
+      el.querySelector(".pip").ariaPressed = `${this.#effectOptions.get(el.dataset.uuid) ?? false}`;
+    });
   }
 
   /* -------------------------------------------- */
@@ -274,9 +432,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    * @param {Event} event  Triggering change event.
    */
   _onCheckTarget(event) {
-    const uuid = event.target.closest("[data-target-uuid]")?.dataset.targetUuid;
-    if ( !uuid ) return;
-    this.#targetOptions.set(uuid, event.target.checked);
+    this.#targetOptions = new Map(Iterator.from(event.currentTarget.querySelectorAll(".target option"))
+      .map(el => [el.value, "checked" in el.dataset]));
   }
 
   /* -------------------------------------------- */

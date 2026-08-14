@@ -177,6 +177,18 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
 
+  /**
+   * A key that allows for similar tokens to be grouped together.
+   * @param {string} [prefix]  Discriminator placed at the head of the key.
+   * @returns {string|null}
+   */
+  getGroupingKey(prefix) {
+    if ( this.actorLink || !this.baseActor ) return null;
+    return `${prefix === undefined ? "" : `${prefix}:`}${this.disposition}:${this.baseActor.id}`;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   prepareData() {
     super.prepareData();
