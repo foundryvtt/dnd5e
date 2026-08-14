@@ -521,7 +521,10 @@
         }
       }
     }
-    &:disabled > .input-group { background: var(--input-disabled-background-color); }
+    &:disabled > .input-group {
+      background: var(--input-disabled-background-color);
+      input { background: none; }
+    }
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
