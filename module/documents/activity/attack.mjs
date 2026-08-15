@@ -118,6 +118,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
 
     const rollData = this.getRollData({ roll: { ability: rollConfig.ability, attackMode: rollConfig.attackMode } });
     const { advantage, disadvantage } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      `abilities.${rollConfig.ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(rollConfig.attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData } }) : {};
 
@@ -255,6 +256,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
 
     let { parts, data } = this.getAttackData({ ability, ammunition, attackMode });
     const { maximum, minimum } = this.actor ? D20RollModificationField.combineFields(this.actor.system, [
+      `abilities.${ability}.attack.roll`,
       "rolls.attack", `rolls.attack.${this.getActionType(attackMode)}`
     ], { rules: { category: "attack", actor: this.actor, item: this.item, rollData: data } }) : {};
     const options = CONFIG.Dice.D20Roll.mergeOptions({

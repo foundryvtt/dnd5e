@@ -45,11 +45,24 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
           labelFormatter: "DND5E.ABILITY.Formatter.Maximum"
         }),
         bonuses: new SchemaField({}, { label: "DND5E.AbilityBonuses", persisted: false }),
-        check: new RollConfigField({ ability: false }, {
+        attack: new RollConfigField({
+          ability: false,
+          value: new NumberField({ integer: true, persisted: false })
+        }, {
+          labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.attack.roll.",
+          labelFormatterPrefix: "DND5E.ABILITY.Formatter.Attack."
+        }),
+        check: new RollConfigField({
+          ability: false,
+          value: new NumberField({ integer: true, persisted: false })
+        }, {
           labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.check.roll.",
           labelFormatterPrefix: "DND5E.ABILITY.Formatter.Check."
         }),
-        save: new RollConfigField({ ability: false }, {
+        save: new RollConfigField({
+          ability: false,
+          value: new NumberField({ integer: true, persisted: false })
+        }, {
           labelPrefix: "DND5E.ABILITY.FIELDS.abilities.element.save.roll.",
           labelFormatterPrefix: "DND5E.ABILITY.Formatter.Save."
         })
@@ -103,6 +116,19 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   static #SKILL_TOOL_BONUS_FIELD_PATHS = [
     ["bonuses.check", "check.roll.bonus"]
+  ];
+
+  /* -------------------------------------------- */
+
+  /**
+   * Moved paths for prepared ability data.
+   * @type {Array}
+   */
+  static #ABILITY_ROLL_FIELD_PATHS = [
+    ["checkBonus", "check.bonus"],
+    ["checkProf", "check.prof"],
+    ["saveBonus", "save.bonus"],
+    ["saveProf", "save.prof"]
   ];
 
   /* -------------------------------------------- */
@@ -242,6 +268,40 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Apply shims for prepared ability data that has moved.
+   * @param {AbilityData} ability  Prepared ability data to shim.
+   * @param {string} id            Key of the ability being shimmed.
+   */
+  static shimAbilityData(ability, id) {
+    for ( const [original, updated] of CommonTemplate.#ABILITY_ROLL_FIELD_PATHS ) {
+      Object.defineProperty(ability, original, {
+        get() {
+          foundry.utils.logCompatibilityWarning(
+            `abilities.${id}.${original} has moved to "abilities.${id}.${updated}".`,
+            { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+          );
+          return foundry.utils.getProperty(this, updated);
+        },
+        configurable: true,
+        enumerable: false
+      });
+    }
+
+    Object.defineProperty(ability.attack, "toString", {
+      value() {
+        foundry.utils.logCompatibilityWarning(
+          `abilities.${id}.attack has moved to "abilities.${id}.attack.value".`,
+          { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
+        );
+        return String(this.value);
+      },
+      configurable: true
+    });
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -258,6 +318,8 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const checkBonus = simplifyBonus(this.rolls?.ability?.check?.bonus, rollData);
     const saveBonus = simplifyBonus(this.rolls?.ability?.save?.bonus, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
+    const attackBonus = simplifyBonus(this.rolls?.attack?.bonus, rollData);
+
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.proficient = Math.max(abl.proficient, this.rolls?.ability?.save?.proficiency ?? -Infinity);
@@ -268,32 +330,41 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       }
 
       const calculatedProf = this.calculateAbilityCheckProficiency(0, id);
-      abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.multiplier
-        ? originalAbility.checkProf.clone() : calculatedProf;
-      abl.saveProf = abl.merged ? originalAbility.saveProf.clone() : new Proficiency(prof, abl.proficient);
+      abl.check.prof = originalAbility?.check?.prof?.multiplier > calculatedProf.multiplier
+        ? originalAbility.check.prof.clone() : calculatedProf;
+      abl.save.prof = abl.merged ? originalAbility.save.prof.clone() : new Proficiency(prof, abl.proficient);
 
       rollData = { ...rollData };
-      rollData.roll = { ability: id, proficient: abl.checkProf.multiplier >= 1, type: "ability" };
+      rollData.roll = { ability: id, proficient: true, type: "attack" };
+
+      const attackBonusAbl = simplifyBonus(abl.attack?.roll?.bonus, rollData);
+      const attackBonusRules = simplifyBonus(
+        AppliedRules.collect("attack:bonus", this.parent).filterWith(rollData).toFormula(), rollData
+      );
+      abl.attack.bonus = attackBonusAbl + attackBonusRules + attackBonus;
+      abl.attack.value = abl.mod + prof + abl.attack.bonus;
 
       const checkBonusAbl = simplifyBonus(abl.check?.roll?.bonus, rollData);
+      rollData.roll.proficient = abl.check.prof.multiplier >= 1;
+      rollData.roll.type = "ability";
       const checkBonusRules = simplifyBonus(
         AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
-      abl.checkBonus = checkBonusAbl + checkBonusRules + checkBonus;
+      abl.check.bonus = checkBonusAbl + checkBonusRules + checkBonus;
+      abl.check.value = abl.mod + abl.check.bonus;
+      if ( Number.isNumeric(abl.check.prof.term) ) abl.check.value += abl.check.prof.flat;
 
       const saveBonusAbl = simplifyBonus(abl.save?.roll?.bonus, rollData);
       const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
-      rollData.roll.proficient = abl.saveProf.multiplier >= 1;
+      rollData.roll.proficient = abl.save.prof.multiplier >= 1;
       const saveBonusRules = simplifyBonus(
         AppliedRules.collect("save:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
-      abl.saveBonus = saveBonusAbl + saveBonusRules + saveBonus + cover;
+      abl.save.bonus = saveBonusAbl + saveBonusRules + saveBonus + cover;
+      abl.save.value = abl.mod + abl.save.bonus;
+      if ( Number.isNumeric(abl.save.prof.term) ) abl.save.value += abl.save.prof.flat;
 
-      abl.save.value = abl.mod + abl.saveBonus;
-      if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
-      abl.attack = abl.mod + prof;
       abl.dc = 8 + abl.mod + prof + dcBonus;
-
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
 
       // Adjust rolling mode
@@ -310,6 +381,8 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
         || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage")) ) {
         AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1);
       }
+
+      CommonTemplate.shimAbilityData(abl, id);
     }
   }
 
