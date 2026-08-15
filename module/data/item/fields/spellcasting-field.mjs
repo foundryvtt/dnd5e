@@ -56,7 +56,8 @@ export default class SpellcastingField extends SchemaField {
     const msakBonus = simplifyBonus(actor.system.rolls?.attack?.msak?.bonus, rollData);
     const rsakBonus = simplifyBonus(actor.system.rolls?.attack?.rsak?.bonus, rollData);
     const attackBonus = ability?.attack.bonus ?? 0;
-    this.spellcasting.attack = modProf + attackBonus + (msakBonus === rsakBonus ? msakBonus : 0);
+    this.spellcasting.attack = modProf + attackBonus + (msakBonus === rsakBonus ? msakBonus : 0)
+      + actor.conditionRollReduction;
     this.spellcasting.save = ability?.dc ?? (8 + modProf);
   }
 }
