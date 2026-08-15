@@ -236,14 +236,23 @@
   .effects {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    margin-block: -4px;
     user-select: none;
 
-    .effect {
+    .effect > button {
       align-items: center;
+      block-size: auto;
+      color: inherit;
       cursor: var(--cursor-pointer);
       display: flex;
       gap: 8px;
+      inline-size: 100%;
+      padding: 4px 0;
+      text-align: start;
+      text-transform: none;
+
+      &:hover:not(:disabled), &:focus { box-shadow: none; }
+      &:focus-visible { text-shadow: 0 0 5px var(--color-shadow-highlight); }
 
       > .gold-icon {
         block-size: 16px;
@@ -270,9 +279,9 @@
         border: 1px solid var(--dnd5e-color-gold);
         border-radius: 50%;
         inline-size: 7px;
-
-        &[aria-pressed=true] { background: var(--dnd5e-color-gold); }
       }
+
+      &[aria-pressed=true] > .pip { background: var(--dnd5e-color-gold); }
     }
   }
 
@@ -281,7 +290,8 @@
     color: var(--color-level-error);
   }
 
-  .icon-row > .target-source-toggle {
+  .icon-row > button.target-source-toggle {
+    align-self: stretch;
     block-size: unset;
     color: var(--dnd5e-color-gold);
     font-size: var(--font-size-12);

@@ -168,13 +168,15 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         uuid: effect.uuid
       });
       li.innerHTML = `
-        <img class="gold-icon">
-        <span class="title"></span>
-        <div class="duration pill transparent">
-          <i class="fa-solid ${icon}" inert></i>
-          <span>${label}</span>
-        </div>
-        <span class="pip" aria-pressed="${this.effectChecked(effect.uuid)}"></span>
+        <button type="button" class="unbutton" aria-pressed="${this.effectChecked(effect.uuid)}">
+          <img class="gold-icon">
+          <span class="title"></span>
+          <span class="duration pill transparent">
+            <i class="fa-solid ${icon}" inert></i>
+            <span>${label}</span>
+          </span>
+          <span class="pip" inert></span>
+        </button>
       `;
       Object.assign(li.querySelector(".gold-icon"), { alt: effect.name, src: effect.img });
       li.querySelector(".title").append(effect.name);
@@ -421,7 +423,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     if ( !event.shiftKey ) this.#effectOptions.clear();
     this.#effectOptions.set(uuid, event.shiftKey ? !checked : true);
     this.querySelectorAll(".effect[data-uuid]").forEach(el => {
-      el.querySelector(".pip").ariaPressed = `${this.#effectOptions.get(el.dataset.uuid) ?? false}`;
+      el.querySelector("button").ariaPressed = `${this.#effectOptions.get(el.dataset.uuid) ?? false}`;
     });
   }
 
