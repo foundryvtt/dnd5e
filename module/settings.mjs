@@ -251,6 +251,16 @@ export function registerSystemSettings() {
     })
   });
 
+  // Allow Player use of Effect Application Tray
+  game.settings.register("dnd5e", "allowPlayerEffectsTray", {
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowEffects.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowEffects.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Allow Rests from Sheet
   game.settings.register("dnd5e", "allowRests", {
     name: "SETTINGS.DND5E.PERMISSIONS.AllowRests.Name",

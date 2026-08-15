@@ -798,6 +798,13 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
 
+    // Cannot apply a concentration-dependent effect without an active GM
+    const dependentUuid = this.getFlag("dnd5e", "dependentOn");
+    if ( dependentUuid && !game.users.activeGM ) {
+      ui.notifications.warn("DND5E.EFFECT.Application.Warning.Concentration", { localize: true });
+      return false;
+    }
+
     // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
     const { units, expiry } = this.duration;
     if ( expiry && !this.expirySupportsDuration(expiry) ) this.updateSource({ "duration.value": null });
