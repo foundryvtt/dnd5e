@@ -38,9 +38,12 @@ export default class AbilityConfig extends BaseProficiencyConfig {
       { value: 0, label: CONFIG.DND5E.proficiencyLevels[0] },
       { value: 1, label: CONFIG.DND5E.proficiencyLevels[1] }
     ];
-    context.attackLabel = _loc("DND5E.ABILITY.Configure.AttackLabel", { ability: context.label });
-    context.checkLabel = _loc("DND5E.ABILITY.Configure.CheckLabel", { ability: context.label });
-    context.saveLabel = _loc("DND5E.ABILITY.Configure.SaveLabel", { ability: context.label });
+    context.rollSections = ["attack", "check", "save"].map(type => ({
+      data: context.data[type]?.roll ?? {},
+      fields: context.fields[type].fields.roll.fields,
+      label: _loc(`DND5E.ABILITY.Configure.${type.capitalize()}Label`, { ability: context.label }),
+      prefix: `${context.prefix}${type}.roll.`
+    }));
     return context;
   }
 }
