@@ -257,7 +257,7 @@ export function registerSystemSettings() {
     hint: "SETTINGS.DND5E.PERMISSIONS.AllowEffects.Hint",
     scope: "world",
     config: true,
-    default: true,
+    default: false,
     type: Boolean
   });
 
