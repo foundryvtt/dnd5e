@@ -2717,6 +2717,10 @@
     "Label": "Change",
     "Title": "{effect} Change #{number}"
   },
+  "DisabledTooltip": {
+    "Disabled": "This effect is currently selected in one or more of its Item's Activities, and therefore cannot be suspended.",
+    "Transfer": "This effect is currently selected in one or more of its Item's Activities, and therefore cannot passively apply to the Item's Actor."
+  },
   "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
   "Expiry": {

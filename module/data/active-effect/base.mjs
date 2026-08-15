@@ -35,6 +35,16 @@ export default class BaseEffectData extends ActiveEffectDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if ( this.isOnActivity ) this.parent.transfer = this.parent.disabled = false;
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -46,11 +56,37 @@ export default class BaseEffectData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Is this effect selected by any activity on its parent item?
+   * @type {boolean}
+   */
+  get isOnActivity() {
+    return this.item
+      && (this.item.system.activities?.contents ?? []).some(a => a.effects.some(e => e._id === this.parent._id));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Is this effect a rider for a non-applied enchantment?
    * @type {boolean}
    */
   get isRider() {
     return this.item?.getFlag("dnd5e", "riders.effect")?.includes?.(this.parent.id) ?? false;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners & Handlers                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  onRenderActiveEffectConfig(app, html, context) {
+    if ( !this.isOnActivity ) return;
+    const checkboxes = html.querySelectorAll('dnd5e-checkbox[name="transfer"], dnd5e-checkbox[name="disabled"]');
+    for ( const checkbox of checkboxes ) {
+      if ( app.isEditable ) checkbox.dataset.tooltip = `DND5E.EFFECT.DisabledTooltip.${checkbox.name.capitalize()}`;
+      checkbox.disabled = true;
+      checkbox.checked = false;
+    }
   }
 
   /* -------------------------------------------- */
