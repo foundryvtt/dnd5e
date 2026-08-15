@@ -58,11 +58,15 @@
 
 /**
  * @typedef AbilityData
- * @property {number} value          Ability score.
- * @property {number} proficient     Proficiency value for saves.
- * @property {number} max            Maximum possible score for the ability.
- * @property {Omit<RollConfigData, "ability">} check  Properties related to ability checks.
- * @property {Omit<RollConfigData, "ability">} save   Properties related to saving throws.
+ * @property {number} value           Ability score.
+ * @property {number} proficient      Proficiency value for saves.
+ * @property {number} max             Maximum possible score for the ability.
+ * @property {Omit<RollConfigData, "ability">} attack  Properties related to attack rolls.
+ * @property {number} attack.value    Attack modifier for this ability.
+ * @property {Omit<RollConfigData, "ability">} check   Properties related to ability checks.
+ * @property {number} check.value     Check modifier for this ability.
+ * @property {Omit<RollConfigData, "ability">} save    Properties related to saving throws.
+ * @property {number} save.value      Saving throw modifier for this ability.
  */
 
 /**

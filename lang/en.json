@@ -92,6 +92,7 @@
 
 "DND5E.ABILITY": {
   "Configure": {
+    "AttackLabel": "{ability} Attack",
     "CheckLabel": "{ability} Check",
     "SaveLabel": "{ability} Save",
     "Title": "Configure {ability}"
@@ -99,6 +100,14 @@
   "FIELDS": {
     "abilities": {
       "element": {
+        "attack": {
+          "roll": {
+            "bonus": { "label": "Attack Bonus" },
+            "max": { "label": "Maximum Attack Roll" },
+            "min": { "label": "Minimum Attack Roll" },
+            "mode": { "label": "Attack Advantage Mode" }
+          }
+        },
         "check": {
           "roll": {
             "bonus": { "label": "Check Bonus" },
@@ -119,6 +128,12 @@
     }
   },
   "Formatter": {
+    "Attack": {
+      "AdvantageMode": "{name} Attack Advantage Mode",
+      "Bonus": "{name} Attack Bonus",
+      "Maximum": "Maximum {name} Attack Roll",
+      "Minimum": "Minimum {name} Attack Roll"
+    },
     "Check": {
       "AdvantageMode": "{name} Check Advantage Mode",
       "Bonus": "{name} Check Bonus",
@@ -138,11 +153,11 @@
   "SECTIONS": {
     "Bonuses": {
       "Label": "{ability} Bonuses",
-      "Hint": "These bonuses apply to checks & saves made with {ability}."
+      "Hint": "These bonuses apply to attacks, checks, and saves made with {ability}."
     },
     "Global": {
       "Label": "Global Bonuses",
-      "Hint": "These bonuses apply to checks & saves made with any ability."
+      "Hint": "These bonuses apply to checks and saves made with any ability."
     },
     "Score": "{ability} Score"
   }

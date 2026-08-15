@@ -642,7 +642,7 @@ export default class AttributesFields {
     const ability = this.abilities?.[this.attributes.spellcasting];
     this.attributes.spell ??= {};
     this.attributes.spell.abilityLabel = CONFIG.DND5E.abilities[this.attributes.spellcasting]?.label ?? "";
-    this.attributes.spell.attack = ability ? ability.attack : this.attributes.prof;
+    this.attributes.spell.attack = ability ? ability.attack.value : this.attributes.prof;
     this.attributes.spell.dc = ability ? ability.dc : 8 + this.attributes.prof;
     this.attributes.spell.mod = ability ? ability.mod : 0;
   }
