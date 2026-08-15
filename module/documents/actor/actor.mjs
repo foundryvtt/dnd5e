@@ -119,6 +119,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Total reduction to this actor's D20 Tests from conditions.
+   * @type {number}
+   */
+  get conditionRollReduction() {
+    return Object.values(this.conditionRollReductions).reduce((total, reduction) => total + reduction, 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reductions to this actor's D20 Tests from conditions, keyed by the status applying them.
+   * @type {Record<string, number>}
+   */
+  get conditionRollReductions() {
+    if ( this._lazy.conditionRollReductions !== undefined ) return this._lazy.conditionRollReductions;
+    const immunities = this.system.traits?.ci?.value ?? new Set();
+    return this._lazy.conditionRollReductions = this.statuses.difference(immunities).reduce((obj, status) => {
+      const reduction = CONFIG.DND5E.conditionTypes[status]?.reduction?.rolls ?? 0;
+      const levels = ConditionData.hasLevels(status) ? this.system.conditions[status] ?? 0 : 1;
+      if ( reduction && levels ) obj[status] = -levels * reduction;
+      return obj;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Calculate the bonus from any cover the actor is affected by.
    * @type {number}     The cover bonus to AC and dexterity saving throws.
    */
@@ -1193,20 +1220,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} data     Roll data.
    */
   addConditionRollReduction(parts, data) {
-    const immunities = this.system.traits?.ci?.value ?? new Set();
-    this.statuses.difference(immunities).forEach(status => {
-      const reduction = CONFIG.DND5E.conditionTypes[status]?.reduction?.rolls ?? 0;
-      if ( !reduction ) return;
-
-      const levels = ConditionData.hasLevels(status) ? (this.system.conditions[status] ?? 0) : 1;
-      const penalty = levels * reduction;
-
-      if ( penalty ) {
-        parts.push(`@reductions.${status}`);
-        data.reductions ??= {};
-        data.reductions[status] = -penalty;
-      }
-    });
+    for ( const [status, reduction] of Object.entries(this.conditionRollReductions) ) {
+      parts.push(`@reductions.${status}`);
+      data.reductions ??= {};
+      data.reductions[status] = reduction;
+    }
   }
 
   /* -------------------------------------------- */

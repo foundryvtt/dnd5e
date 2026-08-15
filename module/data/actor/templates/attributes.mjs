@@ -517,7 +517,7 @@ export default class AttributesFields {
     const quality = this.attributes.quality?.value ?? 0;
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus + ruleBonus + quality
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
-      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0) + this.parent.conditionRollReduction;
     init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);
   }
 

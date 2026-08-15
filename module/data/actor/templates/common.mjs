@@ -319,6 +319,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const saveBonus = simplifyBonus(this.rolls?.ability?.save?.bonus, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
     const attackBonus = simplifyBonus(this.rolls?.attack?.bonus, rollData);
+    const rollReduction = this.parent.conditionRollReduction;
 
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
@@ -342,7 +343,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
         AppliedRules.collect("attack:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
       abl.attack.bonus = attackBonusAbl + attackBonusRules + attackBonus;
-      abl.attack.value = abl.mod + prof + abl.attack.bonus;
+      abl.attack.value = abl.mod + prof + abl.attack.bonus + rollReduction;
 
       const checkBonusAbl = simplifyBonus(abl.check?.roll?.bonus, rollData);
       rollData.roll.proficient = abl.check.prof.multiplier >= 1;
@@ -351,7 +352,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
         AppliedRules.collect("check:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
       abl.check.bonus = checkBonusAbl + checkBonusRules + checkBonus;
-      abl.check.value = abl.mod + abl.check.bonus;
+      abl.check.value = abl.mod + abl.check.bonus + rollReduction;
       if ( Number.isNumeric(abl.check.prof.term) ) abl.check.value += abl.check.prof.flat;
 
       const saveBonusAbl = simplifyBonus(abl.save?.roll?.bonus, rollData);
@@ -361,7 +362,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
         AppliedRules.collect("save:bonus", this.parent).filterWith(rollData).toFormula(), rollData
       );
       abl.save.bonus = saveBonusAbl + saveBonusRules + saveBonus + cover;
-      abl.save.value = abl.mod + abl.save.bonus;
+      abl.save.value = abl.mod + abl.save.bonus + rollReduction;
       if ( Number.isNumeric(abl.save.prof.term) ) abl.save.value += abl.save.prof.flat;
 
       abl.dc = 8 + abl.mod + prof + dcBonus;

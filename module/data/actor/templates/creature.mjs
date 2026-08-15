@@ -304,7 +304,7 @@ export default class CreatureTemplate extends CommonTemplate {
     skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus + ruleBonus;
     skillData.mod = abilityData?.mod ?? 0;
     skillData.value = skillData.proficient = skillData.prof.multiplier;
-    skillData.total = skillData.mod + skillData.bonus;
+    skillData.total = skillData.mod + skillData.bonus + this.parent.conditionRollReduction;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
 
     // If we merged skills when transforming, take the highest bonus
@@ -329,7 +329,8 @@ export default class CreatureTemplate extends CommonTemplate {
       "rolls.ability.check.mode", "rolls.ability.skill.mode"
     ], AppliedRules.collect("check:advantage", this.parent).filterWith(rollData).toAdvantageCounts())?.mode ?? 0;
     skillData.passive = CONFIG.DND5E.skillPassive.base + skillData.mod + skillData.bonus + skillData.prof.flat
-      + passive + passiveBonus + (advantageMode * CONFIG.DND5E.skillPassive.modifier);
+      + passive + passiveBonus + (advantageMode * CONFIG.DND5E.skillPassive.modifier)
+      + this.parent.conditionRollReduction;
 
     return skillData;
   }
@@ -360,7 +361,7 @@ export default class CreatureTemplate extends CommonTemplate {
       tool.effectValue = tool.value;
       tool.bonus = baseBonus + globalCheckBonus + globalToolBonus + checkBonusAbl + ruleBonus;
       tool.mod = ability?.mod ?? 0;
-      tool.total = tool.mod + tool.bonus;
+      tool.total = tool.mod + tool.bonus + this.parent.conditionRollReduction;
       if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
       tool.value = tool.prof.multiplier;
     }
