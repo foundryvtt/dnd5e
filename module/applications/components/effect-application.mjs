@@ -311,6 +311,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const originActor = this.chatMessage.getAssociatedActor();
     const concentration = originActor?.effects.get(this.chatMessage.system.concentration);
     const item = this.chatMessage.getAssociatedItem();
+    const activity = this.chatMessage.getAssociatedActivity({ scaled: true });
     const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
@@ -330,7 +331,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     // its own.
     let durationOverride = {};
     if ( !Number.isFinite(effect.duration.value) && effect.expirySupportsDuration() ) {
-      const effectDuration = this.chatMessage.getAssociatedActivity({ scaled: true })?.duration.getEffectData();
+      const effectDuration = activity?.duration.getEffectData();
       if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
     }
 
@@ -366,7 +367,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
     effectData.system.changes = await ActiveEffect5e.forApplication(
       effectData.system.changes,
-      item ?? originActor,
+      activity ?? item ?? originActor,
       actor
     );
 

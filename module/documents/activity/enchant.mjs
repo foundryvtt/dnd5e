@@ -205,7 +205,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       [item] = await Item5e.createDocuments(toCreate, { keepId: true, parent: actor });
     }
 
-    const enchantment = await ActiveEffect5e.create(enchantmentData, {
+    const enchantment = await ActiveEffect.implementation.create(enchantmentData, {
       parent: item, keepId: true, keepOrigin: true, chatMessageOrigin: chatMessage?.id
     });
 

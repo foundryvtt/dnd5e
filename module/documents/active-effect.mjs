@@ -529,16 +529,16 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * Convert roll data properties in change data.
-   * @param {object[]} changes        Effect change data in json-serializable format.
-   * @param {*} origin                The origin of the effect to be applied.
-   * @param {Actor5e|Item5e} target   The target of the effect to be applied.
-   * @returns {Promise<object[]>}     A promise that resolves to the modified change data.
+   * @param {object[]} changes         Effect change data in json-serializable format.
+   * @param {*} [origin]               The origin of the effect to be applied.
+   * @param {Actor5e|Item5e} [target]  The target of the effect to be applied.
+   * @returns {Promise<object[]>}      A promise that resolves to the modified change data.
    */
   static async forApplication(changes, origin, target) {
     const oData = origin?.getRollData() ?? {};
     const tData = target?.getRollData() ?? {};
 
-    changes = foundry.utils.deepClone(changes);
+    changes = foundry.utils.deepClone(changes ?? []);
     for ( const change of changes ) {
       // TODO: Evaluate properties in objects, as this may be valid json.
       if ( typeof change.value !== "string" ) continue;
