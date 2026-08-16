@@ -13,13 +13,15 @@ export default function EmbeddableDocumentMixin(Base) {
       if ( !config.nameStyle ) return element;
 
       // Use citation if present, use caption if it equals the document's name, otherwise create a new element
-      const figcaption = element.querySelector("figcaption:has(cite, .embed-caption)");
-      const citation = figcaption.querySelector(":scope > cite");
-      const caption = figcaption.querySelector(":scope > .embed-caption");
+      const figcaption = element.querySelector(":scope > figure.content-embed > figcaption:has(cite, .embed-caption)");
+      const citation = figcaption?.querySelector(":scope > cite")
+        ?? element.querySelector(":scope > figure.content-embed > cite");
+      const caption = figcaption?.querySelector(":scope > .embed-caption");
       const originalElement = caption && (caption.innerText === this.name) ? caption : citation;
 
       // Headers use tag provided, inline uses <span>, any others are invalid
-      const tagName = config.nameStyle.match(/h\d/i) ? config.nameStyle : config.nameStyle === "inline" ? "span" : null;
+      const nameStyle = String(config.nameStyle);
+      const tagName = /^h[1-6]$/i.test(nameStyle) ? nameStyle : nameStyle === "inline" ? "span" : null;
       if ( !tagName ) return element;
 
       // Create the new name element
@@ -33,11 +35,13 @@ export default function EmbeddableDocumentMixin(Base) {
 
       // Place headers as the first child, place inline names inside first paragraph
       let prepend = element.querySelector("figure.content-embed") ?? element;
-      if ( config.nameStyle === "inline" ) prepend = element.querySelector(".content-embed p") ?? prepend;
+      if ( config.nameStyle === "inline" ) {
+        prepend = element.querySelector(":scope > figure.content-embed p") ?? prepend;
+      }
       prepend.prepend(nameElement);
 
       // Remove original <figcaption> if empty
-      if ( !figcaption.hasChildNodes() ) figcaption.remove();
+      if ( figcaption && !figcaption.hasChildNodes() ) figcaption.remove();
 
       return element;
     }
