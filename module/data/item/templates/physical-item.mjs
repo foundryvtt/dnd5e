@@ -323,15 +323,14 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     if ( enchantment ) {
       if ( !flags.preserveEffect ) enchantment = await fromUuid(enchantment._stats.compendiumSource) ?? enchantment;
       clone.updateSource({
-        effects: [{
-          ...enchantment.toObject(),
+        effects: [foundry.utils.mergeObject(enchantment.toObject(), {
           disabled: false,
           system: {
             origin: {
               item: enchantment.parent.uuid
             }
           }
-        }]
+        })]
       });
       // TODO: Add rider activities & effects once https://github.com/foundryvtt/dnd5e/issues/6357 is merged
     }

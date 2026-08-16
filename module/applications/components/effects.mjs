@@ -390,7 +390,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
    */
   async _onCreate(target) {
     foundry.utils.logCompatibilityWarning(
-      "`EffectsElement#_onCreate` method is not longer supported.",
+      "`EffectsElement#_onCreate` method is no longer supported.",
       { since: "DnD5e 6.0", until: "DnD5e 6.2" }
     );
     const li = target.closest("li");

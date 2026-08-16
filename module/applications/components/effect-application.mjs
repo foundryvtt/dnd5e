@@ -315,7 +315,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const concentration = originActor?.effects.get(this.chatMessage.system.concentration);
     const item = this.chatMessage.getAssociatedItem();
     const activity = this.chatMessage.getAssociatedActivity({ scaled: true });
-    const origin = concentration ?? (effect.inCompendium && item ? item : effect);
+    const sourceKey = effect.inCompendium ? "compendiumSource" : "duplicateSource";
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
     }
@@ -345,9 +345,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = effect.inCompendium
-      ? actor.effects.find(e => e._stats.compendiumSource === effect.uuid)
-      : actor.effects.find(e => e.origin === origin.uuid);
+    const existingEffect = actor.effects.find(e => e._stats[sourceKey] === effect.uuid);
     if ( existingEffect ) {
       return { action: "update", data: foundry.utils.mergeObject({
         ...durationOverride,
@@ -364,7 +362,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       disabled: false,
       transfer: false,
       _stats: {
-        [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
+        [sourceKey]: effect.uuid,
         [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
       }
     }, effectFlags);

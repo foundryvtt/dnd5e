@@ -1180,12 +1180,13 @@ function _migrateEffectMagical(effect, parent, updateData) {
 function _migrateEffectOrigin(effect, parent, updateData) {
   const origin = effect.flags?.core?.originText ?? effect.origin;
   const systemDataModel = CONFIG.ActiveEffect.dataModels[effect.type];
-  if ( !origin || !systemDataModel?.schema.fields.origin ) return updateData;
+  if ( !origin || foundry.utils.objectValues(effect.system?.origin ?? {}).some(k => k)
+    || !systemDataModel?.schema.fields.origin ) return updateData;
 
   const field = origin.includes("Activity") ? "activity"
     : origin.includes("ActiveEffect") ? "effect"
-    : origin.includes("Item") ? "item"
-    : origin.includes("Actor") ? "actor" : undefined;
+      : origin.includes("Item") ? "item"
+        : origin.includes("Actor") ? "actor" : undefined;
   if ( field ) {
     updateData["flags.core.originText"] = _del;
     updateData.origin = null;
