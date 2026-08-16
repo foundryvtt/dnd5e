@@ -1182,7 +1182,7 @@ export default function ActivityMixin(Base) {
     async _buildEmbedHTML(config, options={}) {
       if ( !this.description?.value ) return null;
       const enriched = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.description.value, {
-        rollData: this.item.getRollData(), ...options, relativeTo: this.item
+        ...options, rollData: this.getRollData(), relativeTo: this.item
       });
       const container = document.createElement("div");
       container.innerHTML = enriched;

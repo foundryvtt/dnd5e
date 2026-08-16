@@ -106,7 +106,7 @@ Hooks.once("init", function() {
     sidebarIcon: "fa-solid fa-person-hiking",
     typeLabels: new Proxy(CONFIG.DND5E.activityTypes, {
       get(target, prop) {
-        return target[prop]?.documentClass?.metadata?.title
+        return target[prop]?.documentClass?.metadata?.title;
       }
     })
   };
@@ -116,7 +116,7 @@ Hooks.once("init", function() {
     sidebarIcon: "fa-solid fa-person-dress-burst",
     typeLabels: new Proxy(CONFIG.DND5E.advancementTypes, {
       get(target, prop) {
-        return target[prop]?.documentClass?.metadata?.title
+        return target[prop]?.documentClass?.metadata?.title;
       }
     })
   };

@@ -985,22 +985,22 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
   /**
    * Handle dropping an Activity onto the sheet.
-   * @param {DragEvent} event       The drag event.
-   * @param {object} transfer       The dropped data.
-   * @param {object} transfer.data  The Activity data.
+   * @param {DragEvent} event   The concluding DragEvent which contains drop data.
+   * @param {object} data       The data transfer extracted from the event.
    * @protected
    */
-  _onDropActivity(event, { data }) {
-    const { _id: id, type } = data;
-    const source = this.item.system.activities.get(id);
-    const config = CONFIG.DND5E.activityTypes[type] ?? {};
+  async _onDropActivity(event, data) {
+    const activity = await dnd5e.documents.activity.UtilityActivity.fromDropData(data);
+    if ( !activity ) return;
+    const source = this.item.system.activities.get(activity.id);
+    const config = CONFIG.DND5E.activityTypes[activity.type] ?? {};
 
     // Reordering
     if ( source ) {
       const targetId = event.target.closest(".activity[data-activity-id]")?.dataset.activityId;
       const target = this.item.system.activities.get(targetId);
       if ( !target || (target === source) ) return;
-      const siblings = this.item.system.activities.filter(a => a._id !== id);
+      const siblings = this.item.system.activities.filter(a => a._id !== activity.id);
       const sortUpdates = foundry.utils.performIntegerSort(source, { target, siblings });
       const updateData = Object.fromEntries(sortUpdates.map(({ target, update }) => {
         return [target._id, { sort: update.sort }];
@@ -1010,8 +1010,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
     // Copying
     else if ( (config?.configurable !== false) && config.documentClass.availableForItem(this.item) ) {
-      delete data._id;
-      this.item.createActivity(type, data, { renderSheet: false });
+      const sourceData = activity.toObject();
+      delete sourceData._id;
+      this.item.createActivity(activity.type, sourceData, { renderSheet: false });
     }
   }
 

@@ -160,6 +160,16 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Compendium pack containing this activity.
+     * @type {CompendiumCollection|null}
+     */
+    get pack() {
+      return this.item?.pack ?? null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Lazily obtain a Application instance used to configure this PseudoDocument, or null if no sheet is available.
      * @type {Application|ApplicationV2|null}
      */
