@@ -52,6 +52,14 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * The handlebars template for rendering activity tooltips.
+     * @type {string}
+     */
+    static ACTIVITY_TOOLTIP_TEMPLATE = "systems/dnd5e/templates/activity/parts/activity-tooltip.hbs";
+
+    /* -------------------------------------------- */
+
+    /**
      * Perform the pre-localization of this data model.
      */
     static localize() {
@@ -1139,6 +1147,19 @@ export default function ActivityMixin(Base) {
     /*  Helpers                                     */
     /* -------------------------------------------- */
 
+    /** @override */
+    async _buildEmbedHTML(config, options={}) {
+      if ( !this.description?.value ) return null;
+      const enriched = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.description.value, {
+        ...options, rollData: this.getRollData(), relativeTo: this.item
+      });
+      const container = document.createElement("div");
+      container.innerHTML = enriched;
+      return container.children;
+    }
+
+    /* -------------------------------------------- */
+
     /**
      * Retrieve consumed flag for given update data.
      * @param {Actor5e} actor
@@ -1172,21 +1193,6 @@ export default function ActivityMixin(Base) {
         range: this.range,
         uses: { ...this.uses, name: "uses.value" }
       };
-    }
-
-    /* -------------------------------------------- */
-    /*  Helpers                                     */
-    /* -------------------------------------------- */
-
-    /** @override */
-    async _buildEmbedHTML(config, options={}) {
-      if ( !this.description?.value ) return null;
-      const enriched = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.description.value, {
-        ...options, rollData: this.getRollData(), relativeTo: this.item
-      });
-      const container = document.createElement("div");
-      container.innerHTML = enriched;
-      return container.children;
     }
 
     /* -------------------------------------------- */
@@ -1227,6 +1233,23 @@ export default function ActivityMixin(Base) {
       const activityUpdates = foundry.utils.expandObject(updates.activity);
       if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
       else updates.item[itemIndex][keyPath] = activityUpdates;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Render a rich tooltip for this activity.
+     * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
+     * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
+     * @returns {Promise<{content: string, classes: string[]}>|null}
+     */
+    async richTooltip(enrichmentOptions={}) {
+      return {
+        content: await foundry.applications.handlebars.renderTemplate(
+          this.constructor.ACTIVITY_TOOLTIP_TEMPLATE, await this.getTooltipData(enrichmentOptions)
+        ),
+        classes: ["dnd5e2", "dnd5e-tooltip", "activity-tooltip"]
+      };
     }
 
     /* -------------------------------------------- */

@@ -56,7 +56,7 @@
   /*  Item Tooltips                     */
   /* ---------------------------------- */
 
-  &:is(.item-tooltip, .effect-tooltip) {
+  &:is(.activity-tooltip, .effect-tooltip, .item-tooltip) {
     width: 300px;
 
     .loading {
@@ -71,6 +71,7 @@
       display: flex;
       flex-direction: column;
       gap: .5rem;
+      --header-image-size: 64px;
       padding-top: .75rem;
 
       .top {
@@ -83,14 +84,25 @@
         .subtitle { font-size: var(--font-size-11); }
       }
 
+      dnd5e-icon {
+        --icon-fill: var(--activity-icon-color);
+        --icon-size: var(--header-image-size);
+      }
+
       img {
-        width: 64px;
-        height: 64px;
+        width: var(--header-image-size);
+        height: var(--header-image-size);
         border: 2px solid var(--dnd5e-color-gold);
         box-shadow: 0 0 4px var(--dnd5e-shadow-45);
         border-radius: 8px;
         object-fit: cover;
         background: var(--dnd5e-background-alt-1);
+      }
+
+      .images {
+        display: flex;
+        gap: 8px;
+        --header-image-size: 48px;
       }
 
       .bottom {

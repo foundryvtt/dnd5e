@@ -1,6 +1,7 @@
 import BaseActivityData from "./base-activity.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -83,6 +84,25 @@ export default class BaseCastActivityData extends BaseActivityData {
       context.labels = foundry.utils.mergeObject(context.labels, spellLabels, { inplace: false });
       context.save = { ...cachedSpell.system.activities?.getByType("save")[0]?.save };
     }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getTooltipData({ extras, ...enrichmentOptions }={}) {
+    const context = await super.getTooltipData({ extras, ...enrichmentOptions });
+
+    if ( !context.description ) {
+      const cachedSpell = this.cachedSpell;
+      context.description = await TextEditor.enrichHTML(
+        cachedSpell?.system.description.value || "",
+        { ...enrichmentOptions, relativeTo: cachedSpell }
+      );
+    }
+
     return context;
   }
 }
