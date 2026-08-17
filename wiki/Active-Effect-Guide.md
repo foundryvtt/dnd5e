@@ -40,6 +40,10 @@ Useful examples:
 
 ```
 system.abilities.[abbreviation].value
+                                attack.roll.bonus
+                                            min
+                                            max
+                                            mode
                                 check.roll.bonus
                                            min
                                            max
@@ -100,6 +104,12 @@ E.g. an Item that increases an ability score up to 20
 | Attribute Key                                      | Change Mode | Effect Value | Roll Data? |
 | -------------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.abilities.[abbreviation].check.roll.bonus` | Add         | `[formula]`  | Yes        |
+
+### Disadvantage on Attacks with Certain Ability
+
+| Attribute Key                                      | Change Mode | Effect Value | Roll Data? |
+| -------------------------------------------------- | ----------- | ------------ | ---------- |
+| `system.abilities.[abbreviation].attack.roll.mode` | Add         | `-1`         | No         |
 
 ### Advantage on a Specific Saving Throw
 
