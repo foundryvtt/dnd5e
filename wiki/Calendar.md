@@ -1,8 +1,10 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The DnD5e system extends Foundry's calendar system with a new HUD to display the date & time, various configuration options to customize how the calendar is presented, an application for jumping to a specific date, several built-in calendars for prominent 5e game settings, and an API to allow module authors to contribute their own calendars.
 
 ![Calendar HUD, Settings, and Set Date Dialog](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/calendar/calendar-summary.jpg)
+
+In addition to the calendar HUD, the system uses the passage of time for several gameplay mechanics. Items and activities with "Dawn", "Dusk", or "Day" usage recovery will automatically regain their uses as sunrise, sunset, or midnight respectively. Also, if the bastion system is enabled, bastion actions will automatically progress towards completion as new days occur.
 
 
 ## Calendar Setup
@@ -21,6 +23,7 @@ The GM's calendar settings has an additional "Configuration" section that isn't 
 
 - *Enabled*: Controls whether the calendar interface as a whole is enabled. If this is unchecked, no user will be able to view the calendar interface or change any of the options under "Calendar Preferences".
 - *Calendar*: Select a specific Calendar that will be used to measure time. The system provides support for the default simplified Gregorian calendar, the Calendar of Greyhawk, the Calendar of Harptos (from the Forgotten Realms), and the Calendar of Khorvaire (from Eberron). **Note:** Changing the calendar requires a restart.
+- *Daily Recovery Mode*: Controls how items with Dawn, Dusk, and Day recovery modes are handled. The default setting goes off of whether the calendar system is enabled or not. The Calendar Recovery mode means that items will recover uses when time is advances in the calendar. The Manual Recovery mode requires the selection of "New Day" in rest dialogs to trigger time-based usage recovery.
 
 
 ## Calendar HUD
@@ -144,3 +147,42 @@ Hooks.on("dnd5e.setupCalendar", () => {
 When the calendar system is disabled by a module a message will be displayed in the settings dialog to indicate that and any settings that aren't usable will be disabled.
 
 ![Calendar Settings Disabled](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/calendar/calendar-settings-disabled.jpg)
+
+#### Calendar Recovery with Custom Calendars
+
+If a module is providing its own calendar system but still wishes to make use of the system's time-based recovery for item and activity uses, then it should do two things.
+
+First, the Daily Recovery setting should be set to `calendar` so the system doesn't use the manual recovery option.
+
+```javascript
+game.settings.set("dnd5e", "calendarConfig", {
+  ...game.settings.get("dnd5e", "calendarConfig").toObject(),
+  dailyRecovery: "calendar"
+});
+```
+
+Second, the module's subclass of `CalendarData` should provide two new methods for determining sunrise and sunset on any given day. These are necessary for the system to handle the "Dawn" and "Dusk" recovery types:
+
+```javascript
+class MyCalendarData extends foundry.data.CalendarData {
+  /**
+   * Get the sunrise time for a given day.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @returns {number}                      Sunrise time in hours.
+   */
+  sunrise(time=game.time.components) {
+    return this.days.hoursPerDay * .25;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the sunset time for a given day.
+   * @param {number|TimeComponents} [time]  The time to use, by default the current world time.
+   * @returns {number}                      Sunset time in hours.
+   */
+  sunset(time=game.time.components) {
+    return this.days.hoursPerDay * .75;
+  }
+}
+```
