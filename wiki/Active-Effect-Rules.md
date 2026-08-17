@@ -52,9 +52,7 @@ Rules are extremely broad by default. Adding a damage bonus rule means that that
 
 The [active effect conditions page](Active-Effects.md#Conditions) goes over the details on how conditions are defined and what data can be generally filtered on. Of special importance to rules is the rolling description fields which provide additional information that can be used to narrow down when a rule should be applied (e.g. using the `roll.damageType` to only apply a bonus when the character does fire damage, or `roll.attack.mode` to apply a bonus only to thrown weapon attacks).
 
-### Only Ranged Attacks
-
-Minimum roll value for ranged attack rolls:
+### Minimum Roll on Ranged Attacks
 
 - **Key**: attack
 - **Type**: Minimum
@@ -68,9 +66,7 @@ Minimum roll value for ranged attack rolls:
 }
 ```
 
-### Only Thrown Weapon Attacks
-
-Apply a damage bonus to thrown weapon attacks:
+### Damage Bonus on Thrown Weapon Attacks
 
 - **Key**: damage
 - **Type**: Bonus
@@ -85,9 +81,7 @@ Apply a damage bonus to thrown weapon attacks:
 }
 ```
 
-### Only Fire Damage
-
-Add proficiency when dealing fire damage:
+### Damage Bonus to All Fire Damage
 
 - **Key**: damage
 - **Type**: Bonus
@@ -101,9 +95,7 @@ Add proficiency when dealing fire damage:
 }
 ```
 
-### Only Strength-Based D20 Tests
-
-Disadvantage on all strength-based D20 rolls (attacks, saves, and checks):
+### Disadvantage on Strength-Based D20 Tests
 
 - **Key**: d20
 - **Type**: Advantage Mode
@@ -115,4 +107,54 @@ Disadvantage on all strength-based D20 rolls (attacks, saves, and checks):
   "k": "roll.ability",
   "v": "str"
 }
+```
+
+### Bonus on Intelligence (History) & Wisdom (Medicine) Checks
+
+- **Key**: check
+- **Type**: Bonus
+- **Value**: 1d4
+- **Condition**:
+
+```json
+{
+  "o": "OR",
+  "v": [{
+    "o": "AND",
+    "v": [{
+      "k": "roll.ability",
+      "v": "int"
+    },{
+      "k": "roll.skill",
+      "v": "his"
+    }]
+  },{
+    "o": "AND",
+    "v": [{
+      "k": "roll.ability",
+      "v": "wis"
+    },{
+      "k": "roll.skill",
+      "v": "med"
+    }]
+  }]
+}
+```
+
+### Bonus on Charisma (Deception, Intimidation, or Persuasion) Checks
+
+- **Key**: check
+- **Type**: Bonus
+- **Value**: 1d4
+- **Condition**:
+
+```json
+[{
+  "k": "roll.skill",
+  "o": "in",
+  "v": ["dec", "itm", "per"]
+},{
+  "k": "roll.ability",
+  "v": "cha"
+}]
 ```
