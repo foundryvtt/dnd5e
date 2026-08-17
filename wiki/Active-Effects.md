@@ -28,3 +28,7 @@ The DnD5e system provides several special expiry events that behave a bit differ
 The system provides a set of special change types called rules. Rather than being applied directly to data on an actor or item, these rules are evaluated at roll time an modify only a specific roll.
 
 More information on these change types can be found on the [active effect rules page](Active-Effect-Rules.md).
+
+## Active Effect Compendium
+
+The system comes with a compendium of stock active effects that can be used covering things like damage resistances, various conditions, speed enhancements, and advantages/disadvantages. These effects can be referenced directly using an activity if no changes are required (other than duration, which will be applied automatically from the activity), or copied onto an item to use as the basis for a modified version.
