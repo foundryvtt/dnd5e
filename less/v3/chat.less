@@ -20,6 +20,9 @@
 
     .message-content {
       color: var(--color-text-primary);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
       overflow: visible;
     }
 
@@ -66,6 +69,7 @@
       gap: 4px;
 
       &[data-action] { cursor: var(--cursor-pointer); }
+      &.no-description { margin-block-end: 4px; }
 
       .activity-icon, .item-icon {
         --size: 24px;
@@ -163,9 +167,12 @@
         --button-hover-background-color: var(--dnd5e-chat-button-hover-background);
         --button-hover-border-color: var(--dnd5e-chat-button-hover-border);
         --button-size: 24px;
-        block-size: var(--button-size);
         box-shadow: none;
-        padding: 0;
+
+        &.target-source-toggle, &.icon {
+          block-size: var(--button-size);
+          padding: 0;
+        }
 
         &:hover:not(:disabled), &:focus { box-shadow: var(--dnd5e-chat-button-hover-shadow); }
         &[hidden] { display: none; }
@@ -184,17 +191,127 @@
         text-transform: uppercase;
       }
     }
+
+    .target.none {
+      border: 1px solid var(--color-level-error-border);
+      color: var(--color-level-error);
+    }
+
+    /* Rolls */
+    button.dice-roll {
+      align-items: center;
+      block-size: unset;
+      flex: 1;
+      flex-direction: row;
+      padding: 0 8px;
+      position: relative;
+
+      &:hover:not(:disabled) { box-shadow: none; }
+
+      .icons, .result {
+        align-items: center;
+        display: flex;
+        gap: 4px;
+      }
+
+      .icons {
+        font-size: var(--font-size-10);
+        inset-inline-start: 8px;
+        padding-block-start: 3px;
+        position: absolute;
+      }
+
+      .d20die {
+        inset-inline-end: 8px;
+        padding-block-start: 3px;
+        position: absolute;
+
+        > i {
+          color: var(--dnd5e-chat-color-die);
+          font-size: var(--font-size-16);
+        }
+
+        .roll {
+          color: var(--dnd5e-color-black);
+          font-size: var(--font-size-12);
+          font-weight: bold;
+          inset: 0 0 0 -2px;
+          letter-spacing: -1px;
+          line-height: 22px;
+          position: absolute;
+          text-align: center;
+        }
+      }
+
+      .result {
+        display: inline-block;
+        flex: 1;
+        text-align: center;
+
+        .total {
+          align-items: center;
+          border: 1px solid var(--dnd5e-color-gold);
+          border-radius: 3px;
+          color: var(--color-text-emphatic);
+          display: inline-flex;
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-size: var(--font-size-16);
+          font-weight: bold;
+          justify-content: center;
+          min-inline-size: 26px;
+          position: relative;
+
+          &::before, &::after {
+            block-size: 1px;
+            content: "";
+            inline-size: 28px;
+            position: absolute;
+          }
+
+          &::before {
+            background: linear-gradient(to left, var(--dnd5e-color-gold), transparent);
+            inset-inline-end: 100%;
+          }
+
+          &::after {
+            background: linear-gradient(to right, var(--dnd5e-color-gold), transparent);
+            inset-inline-start: 100%;
+          }
+        }
+      }
+
+      &.critical {
+        .icons, .roll { color: var(--dnd5e-color-success); }
+      }
+
+      &.success:not(.fumble) .icons { color: var(--dnd5e-color-success); }
+
+      &.fumble {
+        .icons, .roll { color: var(--dnd5e-color-failure); }
+      }
+
+      &.failure:not(.critical) .icons { color: var(--dnd5e-color-failure); }
+    }
+
+    .roll-breakdown {
+      background: var(--dnd5e-background-parchment);
+      border: var(--dnd5e-chat-breakdown-border);
+      border-radius: 5px;
+      box-shadow: 0 0 8px var(--dnd5e-shadow-45);
+      inset: auto;
+      margin: 0;
+      width: unset;
+    }
   }
 }
+
 
 /* -------------------------------------------- */
 /*  Trays                                       */
 /* -------------------------------------------- */
 
 .dnd5e2 .card-tray {
-  margin-block-start: 8px;
-  margin-inline: -8px;
-  margin: 8px -8px -8px;
+  margin: 4px -8px -8px;
 
   > label {
     align-items: center;
@@ -279,11 +396,6 @@
 
       &[aria-pressed=true] > .pip { background: var(--dnd5e-color-gold); }
     }
-  }
-
-  .target.none {
-    border: 1px solid var(--color-level-error-border);
-    color: var(--color-level-error);
   }
 
   .icon-row > button.target-source-toggle {

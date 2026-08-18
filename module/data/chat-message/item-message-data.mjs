@@ -81,8 +81,26 @@ export default class ItemMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element) {
+    super._onRender(element);
+    element.classList.add("compact");
+    if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
+      element.querySelectorAll(".card-header, .card-description").forEach(el => el.classList.add("collapsed"));
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _prepareContext(options) {
-    const { concealed, description, item, showIdentity, subtitle } = this;
+    const {concealed, description, item, showIdentity, subtitle} = this;
     return {
       concealed, description, item,
       rows: {
@@ -101,13 +119,6 @@ export default class ItemMessageData extends ChatMessageDataModel {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _getEnrichmentOptions() {
-    return { avatar: false };
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Render context for supplements.
    * @returns {{ detail: string, label: string }[]}
@@ -120,16 +131,5 @@ export default class ItemMessageData extends ChatMessageDataModel {
     }
     if ( this.materials ) supplements.push({ detail: this.materials, label: "DND5E.Materials" });
     return supplements;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
-    element.classList.add("compact");
-    if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
-      element.querySelectorAll(".card-header, .card-description").forEach(el => el.classList.add("collapsed"));
-    }
   }
 }

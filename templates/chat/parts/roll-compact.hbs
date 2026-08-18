@@ -1,0 +1,15 @@
+<button type="button" class="unbutton dice-roll {{ classes }}">
+    <span class="icons">
+        {{#each icons}}
+        <i class="fa-solid {{ this }}" inert></i>
+        {{/each}}
+    </span>
+    <span class="result">
+        <strong class="total">{{ total }}</strong>
+    </span>
+    <span class="d20die">
+        <i class="fa-fw fa-solid fa-hexagon fa-rotate-90" inert></i>
+        <span class="roll">{{ d20.total }}</span>
+    </span>
+</button>
+<div class="roll-breakdown" popover>{{{ tooltip }}}</div>

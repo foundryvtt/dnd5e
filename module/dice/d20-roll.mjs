@@ -196,7 +196,7 @@ export default class D20Roll extends BasicRoll {
     context.icons = [];
     if ( options.isPrivate || !this._evaluated || !this.validD20Roll ) return context;
 
-    const d = this.d20;
+    const d = context.d20 = this.d20;
     if ( ("success" in d.results[0]) || d.options.marginSuccess || d.options.marginFailure ) return context;
     if ( d.values.length !== 1 ) return context;
 

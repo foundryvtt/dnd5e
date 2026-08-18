@@ -206,7 +206,9 @@ export default class ChatMessage5e extends ChatMessage {
 
     // Dice rolls
     if ( this.isContentVisible ) {
-      html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
+      html.querySelectorAll(".dice-roll").forEach(el => {
+        el.addEventListener("click", this._onClickDiceRoll.bind(this));
+      });
     } else {
       html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
     }
@@ -340,14 +342,14 @@ export default class ChatMessage5e extends ChatMessage {
         icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
-        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "hit")
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets("hit")
       },
       {
         label: _loc("DND5E.ChatContextSelectMiss"),
         icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
-        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets(target, "miss")
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets("miss")
       }
     );
     return options;
@@ -427,19 +429,21 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Select the hit or missed targets.
-   * @param {HTMLElement} li    The chat entry which contains the roll data.
-   * @param {string} type       The type of selection ('hit' or 'miss').
+   * @param {"hit"|"miss"} type  The type of selection.
    */
-  selectTargets(li, type) {
+  selectTargets(type) {
     if ( !canvas?.ready ) return;
-    const lis = li.closest("[data-message-id]").querySelectorAll(`.evaluation li.target.${type}`);
+    const isMiss = type === "miss";
+    const targets = this.system.evaluatedTargets ?? [];
     canvas.tokens.releaseAll();
-    for ( const { dataset } of lis ) {
-      const { actor, token } = TargetsField.resolve({ actor: dataset.actorUuid, token: dataset.tokenUuid });
+    for ( const descriptor of targets ) {
+      if ( descriptor.isMiss !== isMiss ) continue;
+      const { actor, token } = TargetsField.resolve(descriptor);
       if ( token?.isVisible && actor?.testUserPermission(game.user, "OWNER") ) {
         token.control({ releaseOthers: false });
       }
     }
+    this.#showOriginSelection();
   }
 
   /* -------------------------------------------- */
@@ -648,5 +652,22 @@ export default class ChatMessage5e extends ChatMessage {
    */
   getOriginatingMessage() {
     return this.system.origin ?? game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * If this message originated from an activity Use that has effects, auto-select the appropriate targets in the
+   * origin message's effects tray also.
+   */
+  #showOriginSelection() {
+    if ( game.settings.get("dnd5e", "autoCollapseChatTrays") === "always" ) return;
+    const origin = this.getOriginatingMessage();
+    if ( origin === this ) return;
+    const query = `[data-message-id="${origin.id}"] effect-application`;
+    for ( const tray of foundry.applications.detached.querySelectorAll(query) ) {
+      tray.targetingMode = "selected";
+      tray.open = true;
+    }
   }
 }

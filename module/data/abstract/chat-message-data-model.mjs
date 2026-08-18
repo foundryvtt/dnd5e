@@ -120,6 +120,10 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
         tooltipDirection: "LEFT"
       });
     }
+    for ( const popover of element.querySelectorAll(".roll-breakdown[popover]") ) {
+      popover.previousElementSibling.popoverTargetElement = popover;
+      popover.addEventListener("toggle", ChatMessageDataModel.#onToggleBreakdown);
+    }
   }
 
   /* -------------------------------------------- */
@@ -168,6 +172,26 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    */
   _getButtonGroupContextOptions() {
     return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling a roll breakdown.
+   * @param {ToggleEvent} event  The triggering event.
+   */
+  static #onToggleBreakdown(event) {
+    if ( event.newState !== "open" ) return;
+    const popover = event.target;
+    const anchor = popover.previousElementSibling.getBoundingClientRect();
+    const { innerHeight, innerWidth } = popover.ownerDocument.defaultView;
+    Object.assign(popover.style, {
+      left: `${anchor.left}px`,
+      right: `${innerWidth - anchor.right}px`
+    });
+    const { height } = popover.getBoundingClientRect();
+    const below = anchor.bottom + height + 4 < innerHeight;
+    popover.style.top = `${below ? anchor.bottom + 4 : anchor.top - height - 4}px`;
   }
 
   /* -------------------------------------------- */

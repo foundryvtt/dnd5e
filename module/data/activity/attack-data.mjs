@@ -240,7 +240,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
   /**
    * The game term label for this attack.
    * @param {string} [attackMode]  The mode the attack was made with.
-   * @returns {string}
+   * @returns {string[]}
    */
   getActionLabel(attackMode) {
     let attackModeLabel;
@@ -254,14 +254,14 @@ export default class BaseAttackActivityData extends BaseActivityData {
     const isUnarmed = this.attack.type.classification === "unarmed";
     if ( isUnarmed ) attackModeLabel = _loc("DND5E.ATTACK.Classification.Unarmed");
     const isSpell = (actionType === "rsak") || (actionType === "msak");
-    if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
+    if ( isLegacy || isSpell ) return [actionTypeLabel, attackModeLabel].filter(_ => _);
     actionTypeLabel = _loc(`DND5E.ATTACK.Attack.${actionType}`);
-    if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filterJoin(" • ");
+    if ( isUnarmed ) return [actionTypeLabel, attackModeLabel].filter(_ => _);
     const weaponType = CONFIG.DND5E.weaponTypeMap[this.item.system.type?.value];
     const weaponTypeLabel = weaponType
       ? _loc(`DND5E.ATTACK.Weapon.${weaponType.capitalize()}`)
       : CONFIG.DND5E.weaponTypes[this.item.system.type?.value];
-    return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filterJoin(" • ");
+    return [actionTypeLabel, weaponTypeLabel, attackModeLabel].filter(_ => _);
   }
 
   /* -------------------------------------------- */
