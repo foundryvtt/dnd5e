@@ -66,16 +66,6 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * The facility that was issued this order.
-   * @type {Item5e}
-   */
-  get item() {
-    return this.parent.getAssociatedItem();
-  }
-
-  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
