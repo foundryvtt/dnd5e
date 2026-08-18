@@ -329,11 +329,12 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static replaceFormulaData(formula, data, options) {
+  static replaceFormulaData(formula, data, options={}, _r=0) {
+    options.recursive ??= true;
     // This looks for the pattern `$!!$` and replaces it with just the value between the marks (the bang has
     // been added to ensure this is a deliberate shim from the system, not a unintentional usage that should
     // show an error).
-    return super.replaceFormulaData(formula, data, options).replaceAll(/\$"?!(.+?)!"?\$/g, "$1");
+    return super.replaceFormulaData(formula, data, options, _r).replaceAll(/\$"?!(.+?)!"?\$/g, "$1");
   }
 
   /* -------------------------------------------- */
