@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
@@ -14,7 +14,7 @@ The option table describes the options that can be provided to the enricher. Opt
 
 If spaces are required within the value, then you must surround it with double quotation marks: `<name>="Two Words"`. The **Assembled** column indicates that an option can be used with spaces without the quotation marks.
 
-The **Formula** column indicates what type of data is accepted for the value. A list and description of the various formats are available in the dropdown below.
+The **Format** column indicates what type of data is accepted for the value. A list and description of the various formats are available in the dropdown below.
 
 > <details>
 >   <summary>Option Formats</summary>
@@ -26,6 +26,12 @@ The **Formula** column indicates what type of data is accepted for the value. A 
 >     <li><strong>ID</strong>: A 16-digit ID for a document, found by right clicking on the button in the document header.</li>
 >   </ul>
 > </details>
+
+Finally the **Chat** column indicates whether the that option can be used when invoking an enricher command directly in chat. If this column isn't present, then that enricher cannot be used from chat.
+
+### Using Enrichers in Chat
+
+Many of the enrichers described on this page also offer the option to be invoked directly from a chat message. Each section provides examples of usage, but generally simply removing the surrounding square brackets (e.g. `[[/check dex]]` to `/check dex`) is enough to invoke an enricher's behavior directly.
 
 
 ## Attack Enricher
@@ -55,22 +61,38 @@ The enricher is also helpful when building items for NPC stat blocks, because it
 [[/attack extended]]
 ```
 
+#### Chat Usage
+
+The attack enricher can be used from chat, bringing up the attack dialog. If used when a token is selected, it will roll using the stats from actor. Otherwise it will fall back to the player's assigned character, or roll generically if no character is assigned.
+
+```
+// Example: Flat attack roll
+/attack
+
+// Example: Fixed +5 to hit
+/attack formula=5
+/attack 5
+
+// Example: Use a specific attack mode
+/attack formula=5 attackMode=thrown
+/attack 5 thrown
+```
+
 #### Options
 
-| Name         | Format  | Inferred  | Assembled |
-| ------------ | ------- | --------- | --------- |
-| `activity`   | ID      |           |           |
-| `attackMode` | Choice  |     ✔︎     |           |
-| `format`     | Choice  |     ✔︎     |           |
-| `formula`    | Formula |     ✔︎     |     ✔︎     |
-| `rules`      | Choice  |           |           |
+| Name         | Format  | Inferred  | Assembled | Chat      |
+| ------------ | ------- | --------- | --------- | --------- |
+| `activity`   | ID      |           |           |           |
+| `attackMode` | Choice  |     ✔︎     |           |     ✔︎     |
+| `format`     | Choice  |     ✔︎     |           |           |
+| `formula`    | Formula |     ✔︎     |     ✔︎     |     ✔︎     |
+| `rules`      | Choice  |           |           |           |
 
 - `activity`: Specify a specific activity by ID on the same item as this enricher
 - `attackMode`: Specify an attack mode to use
 - `format`: Display mode of either `short`, `long`, or `extended`
 - `formula`: The formula used when rolling to hit
 - `rules`: Rules version to use (either `2014` or `2024`), which only affects the presentation when using the `extended` format option
-
 
 #### Potential Issues
 - If no formula is specified and no attack activity is found
@@ -166,17 +188,33 @@ The check enricher offers two different formats that can be used depending on th
 [[/check]]
 ```
 
+#### Chat Usage
+
+The check enricher can be used from chat. If used when a token is selected, it will roll using that actor. Otherwise it will fall back to the player's assigned character. The `request` option can also be used to create a check request card for other players to click.
+
+```
+// Example: Make a dexterity check
+/check ability=dexterity
+/check ability=dexterity dc=20
+/check dexterity
+/check dexterity 20
+/check DC 20 Dexterity
+
+// Example: Make a request to players
+/check skill=acr/ath 20 request
+```
+
 #### Options
 
-| Name       | Format  | Inferred  | Assembled |
-| ---------- | ------- | --------- | --------- |
-| `ability`  | Choice  |     ✔︎     |           |
-| `activity` | ID      |           |           |
-| `dc`       | Formula |		 ✔︎     |           |
-| `format`   | Choice  |     ✔︎     |           |
-| `rules`    | Choice  |           |           |
-| `skill`    | Choice  |		 ✔︎     |           |
-| `tool`     | Choice  |		 ✔︎     |           |
+| Name       | Format  | Inferred  | Assembled | Chat      |
+| ---------- | ------- | --------- | --------- | --------- |
+| `ability`  | Choice  |     ✔︎     |           |     ✔︎     |
+| `activity` | ID      |           |           |           |
+| `dc`       | Formula |		 ✔︎     |           |     ✔︎     |
+| `format`   | Choice  |     ✔︎     |           |           |
+| `rules`    | Choice  |           |           |           |
+| `skill`    | Choice  |		 ✔︎     |           |     ✔︎     |
+| `tool`     | Choice  |		 ✔︎     |           |     ✔︎     |
 
 - `ability`: Ability to use with the check
 - `activity`: ID of an activity on the same item from which the details should be derived
@@ -316,17 +354,27 @@ When inferring an activity, the `heal` form will fetch the first [heal activity]
 [[/heal]]
 ```
 
+#### Chat Usage
+
+The damage enricher can be used from chat, bringing up the damage dialog. If used when a token is selected, it will roll using the stats from actor. Otherwise it will fall back to the player's assigned character, or roll generically if no character is assigned.
+
+```
+// Example: Damage rolls
+/damage 1d4 fire
+/damage 3d6 type=bludgeoning/piercing
+```
+
 #### Options
 
-| Name         | Format  | Inferred  | Assembled | Global    |
-| ------------ | ------- | --------- | --------- | --------- |
-| `activity`   | ID      |           |           |     ✔︎     |
-| `attackMode` | Choice  |     ✔︎     |           |     ✔︎     |
-| `average`    | Boolean |           |           |     ✔︎     |
-| `format`     | Choice  |     ✔︎     |           |     ✔︎     |
-| `formula`    | Formula |     ✔︎     |     ✔︎     |           |
-| `rules`      | Choice  |           |           |           |
-| `type`       | Choice  |     ✔︎     |           |           |
+| Name         | Format  | Inferred  | Assembled | Global    | Chat      |
+| ------------ | ------- | --------- | --------- | --------- | --------- |
+| `activity`   | ID      |           |           |     ✔︎     |           |
+| `attackMode` | Choice  |     ✔︎     |           |     ✔︎     |     ✔︎     |
+| `average`    | Boolean |           |           |     ✔︎     |           |
+| `format`     | Choice  |     ✔︎     |           |     ✔︎     |           |
+| `formula`    | Formula |     ✔︎     |     ✔︎     |           |     ✔︎     |
+| `rules`      | Choice  |           |           |           |           |
+| `type`       | Choice  |     ✔︎     |           |           |     ✔︎     |
 
 **Note**: The global column indicates options that can be specified within any damage part, but will apply to the whole enriched content (so `[[/damage 1d4 fire & 1d6 bludgeoning average]]` and `[[/damage 1d4 fire average & 1d6 bludgeoning]]` are the same).
 
@@ -665,14 +713,30 @@ The save enricher offers two different formats that can be used depending on the
 [[/concentration charisma]]
 ```
 
+#### Chat Usage
+
+The save enricher can be used from chat, bringing up the saving throw dialog. If used when a token is selected, it will roll using that actor. Otherwise it will fall back to the player's assigned character. The `request` option can also be used to create a check request card for other players to click.
+
+```
+// Example: Make a dexterity save
+/save ability=dexterity
+/save ability=dexterity dc=20
+/save dexterity
+/save dexterity 20
+/save DC 20 Dexterity
+
+// Example: Make a request to players
+/save ability=str/dex 20 request
+```
+
 #### Options
 
-| Name       | Format  | Inferred  | Assembled |
-| ---------- | ------- | --------- | --------- |
-| `ability`  | Choice  |     ✔︎     |           |
-| `activity` | ID      |           |           |
-| `dc`       | Formula |     ✔︎     |           |
-| `format`   | Choice  |     ✔︎     |           |
+| Name       | Format  | Inferred  | Assembled | Chat      |
+| ---------- | ------- | --------- | --------- | --------- |
+| `ability`  | Choice  |     ✔︎     |           |     ✔︎     |
+| `activity` | ID      |           |           |           |
+| `dc`       | Formula |     ✔︎     |           |     ✔︎     |
+| `format`   | Choice  |     ✔︎     |           |           |
 
 - `ability`: Ability to use when making the save
 - `activity`: ID of an activity on the same item from which the details should be derived
