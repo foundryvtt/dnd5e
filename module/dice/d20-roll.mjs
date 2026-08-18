@@ -194,6 +194,7 @@ export default class D20Roll extends BasicRoll {
     const context = await super._prepareChatRenderContext(options);
     context.classes = "";
     context.icons = [];
+    context.isPrivate = options.isPrivate;
     if ( options.isPrivate || !this._evaluated || !this.validD20Roll ) return context;
 
     const d = context.d20 = this.d20;

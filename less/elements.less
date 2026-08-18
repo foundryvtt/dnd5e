@@ -380,9 +380,14 @@ prose-mirror {
   }
 
   &[data-miss] {
+    background-color: #591010;
     border: 1px solid var(--color-level-error-border);
-    color: var(--color-level-error);
-    &::before { content: "\f00d"; }
+    color: var(--pill-colored-text-color);
+
+    &::before {
+      content: "\f00d";
+      color: var(--color-level-error);
+    }
   }
 
   &[data-value]::after {

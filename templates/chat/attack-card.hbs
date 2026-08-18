@@ -51,12 +51,13 @@
 {{/if}}
 
 {{!-- Targets --}}
+{{#if targets.length}}
 <section class="icon-row">
     <i class="fa-fw fa-solid fa-bullseye" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Targets" }}"></i>
     <ul class="unlist targets pills">
         {{#each targets}}
         <li>
-            <target-pill {{ ifThen isMiss "data-miss" "data-hit" }}
+            <target-pill {{#if showResult}}{{ ifThen isMiss "data-miss" "data-hit" }}{{/if}}
                 {{#if showAC}}data-value="{{ ifThen hasAC ac "∞" }}"{{/if}}>
                 <label>{{ name }}</label>
                 <datalist>
@@ -69,6 +70,7 @@
         {{/each}}
     </ul>
 </section>
+{{/if}}
 
 {{!-- Rolls --}}
 {{#each rolls}}

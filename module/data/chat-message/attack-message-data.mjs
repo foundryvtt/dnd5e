@@ -140,10 +140,10 @@ export default class AttackMessageData extends RollMessageData {
   _prepareTargetsContext() {
     if ( !this.parent.isContentVisible ) return [];
     const visibility = dnd5e.settings.attackRollVisibility;
-    if ( !game.user.isGM && (visibility === "none") ) return [];
     const showAC = game.user.isGM || (visibility === "all");
+    const showResult = game.user.isGM || (visibility !== "none");
     return this.evaluatedTargets
-      .map(target => ({ ...target, showAC, hasAC: target.ac !== null }))
+      .map(target => ({ ...target, showAC, showResult, hasAC: target.ac !== null }))
       .sort((lhs, rhs) => (lhs.isMiss === rhs.isMiss) ? 0 : (lhs.isMiss ? 1 : -1));
   }
 

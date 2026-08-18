@@ -1,5 +1,5 @@
-import TargetMenu from "./target-menu.mjs";
 import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
+import TargetMenu from "./target-menu.mjs";
 
 /**
  * A custom element that represents a grouping of one or more potential targets.

@@ -206,7 +206,7 @@
       padding: 0 8px;
       position: relative;
 
-      &:hover:not(:disabled) { box-shadow: none; }
+      &:hover:not(:disabled), &:focus { box-shadow: none; }
 
       .icons, .result {
         align-items: center;
@@ -281,16 +281,16 @@
       }
 
       &.critical {
-        .icons, .roll { color: var(--dnd5e-color-success); }
+        .icons, .d20die > i { color: var(--color-level-success); }
       }
 
-      &.success:not(.fumble) .icons { color: var(--dnd5e-color-success); }
+      &.success:not(.fumble) .icons { color: var(--color-level-success); }
 
       &.fumble {
-        .icons, .roll { color: var(--dnd5e-color-failure); }
+        .icons, .d20die > i { color: var(--color-level-error); }
       }
 
-      &.failure:not(.critical) .icons { color: var(--dnd5e-color-failure); }
+      &.failure:not(.critical) .icons { color: var(--color-level-error); }
     }
 
     .roll-breakdown {
