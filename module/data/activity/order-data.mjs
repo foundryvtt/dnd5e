@@ -34,4 +34,13 @@ export default class BaseOrderActivityData extends BaseActivityData {
     super.prepareData();
     this.img = CONFIG.DND5E.facilities.orders[this.order]?.icon || this.metadata?.img;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async getCardData() {
+    return {};
+  }
 }
