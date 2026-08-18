@@ -229,9 +229,12 @@ export default class UsesField extends SchemaField {
           ? { item: this.parent.id, itemUuid: this.parent.uuid, keyPath: "system.uses.spent" }
           : { item: this.item.id, itemUuid: this.item.uuid, keyPath: `system.activities.${this.id}.uses.spent` };
         roll = new CONFIG.Dice.BasicRoll(profile.formula, rollData, { delta });
-        if ( count > 1 ) roll.alter(count, 0, { multiplyNumeric: true });
+        if ( count > 1 ) {
+          const minRoll = await roll.clone().evaluate({ minimize: true });
+          roll.alter(Math.min(count, Math.ceil(this.uses.max / (minRoll.total || 1))), 0, { multiplyNumeric: true });
+        }
         total = (await roll.evaluate()).total;
-      } catch(err) {
+      } catch (err) {
         Hooks.onError("UsesField#recoverUses", err, {
           msg: _loc("DND5E.ItemRecoveryFormulaWarning", {
             name: item.name, formula: profile.formula, uuid: this.uuid ?? item.uuid
