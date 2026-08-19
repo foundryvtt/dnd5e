@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 [Activities](#activities) | [Actor](#actor) | [Calendar](#calendar) | [Chat Messages](#chat-messages) | [Compendium Browser](#compendium-browser) | [Combat](#combat) | [Items](#items) | [Journal Pages](#journal-pages) | [Movement Automation](#movement-automation) | [Rolls](#rolls) | [Sheets](#sheets) | [Other](#other)
 
@@ -643,6 +643,16 @@ Fires to convert the provided spellcasting progression into spell slots. A diffe
 | actor       | Actor5e | Actor for whom the data is being prepared.    |
 | progression | object  | Spellcasting progression data.                |
 
+### `dnd5e.initializeActorSource`
+
+Fires before source data is initialized for an Actor in a compendium.
+
+| Name     | Type    | Description                                    |
+| -------- | ------- | ---------------------------------------------- |
+| actor    | Actor5e | Actor for which the data is being initialized. |
+| source   | object  | Source data being initialized.                 |
+| options  | object  | Additional data initialization options.        |
+
 
 ## Advancement
 
@@ -670,7 +680,7 @@ Fires when an `AdvancementManager` is done modifying an actor.
 
 | Name               | Type               | Description                                   |
 | ------------------ | ------------------ | --------------------------------------------- |
-| advancementManager | AdvancementManager | The advancement manager that just completed. |
+| advancementManager | AdvancementManager | The advancement manager that just completed.  |
 
 ### Document Modification Context
 
@@ -851,6 +861,16 @@ Fires after an embedded spell with details is rendered.
 | template | HTMLTemplateElement     | Template whose children will be embedded. |
 | config   | DocumentHTMLEmbedConfig | Configuration for embedding behavior.     |
 | options  | EnrichmentOptions       | Original enrichment options.              |
+
+### `dnd5e.initializeItemSource`
+
+Fires before source data is initialized for an Item in a compendium.
+
+| Name     | Type   | Description                                   |
+| -------- | ------ | --------------------------------------------- |
+| item     | Item5e | Item for which the data is being initialized. |
+| source   | object | Source data being initialized.                |
+| options  | object | Additional data initialization options.       |
 
 
 ## Journal Pages
