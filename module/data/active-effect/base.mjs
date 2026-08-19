@@ -35,16 +35,6 @@ export default class BaseEffectData extends ActiveEffectDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Preparation                            */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareBaseData() {
-    super.prepareBaseData();
-    if ( this.isOnActivity ) this.parent.transfer = this.parent.disabled = false;
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
