@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 Foundry provides an [enricher](Enrichers) that allows embedding a document within a journal page or description on an item or actor. The DnD5e system extends this functionality in several useful ways.
 
@@ -24,6 +24,32 @@ Embeds can also use the `inline` option, which disables both the citation and ca
 @Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ inline]
 ```
 
+### Name Style Option
+
+The system adds an additional option when embedding actors, items, or activities that gives greater control over where the document's name appears. Using the `nameStyle` option it is possible to place the document's name either as a header preceding the embedded text (`nameStyle=h4`) or inline with the first paragraph of the text (`nameStyle=inline`). The name will be a link to the document unless `cite=false` is set, in which case it will be plain text.
+
+```
+// Display as header with link
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 caption=false]
+
+// Display as plain text header
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 cite=false]
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 caption=false cite=false]
+
+// Display as plain text header with citation link below embed
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2]
+
+// Display inline link
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline caption=false]
+
+// Display plain text inline name
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline cite=false]
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline caption=false cite=false]
+
+// Display plain text inline name with citation link below embed
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline]
+```
+
 ## Actors & Items
 
 Using the standard embed format for actors will embed their public biography and embedding items will display their standard description, unless the item is unidentified and the player is not a GM user, in which case the unidentified description will be embedded instead.
@@ -34,6 +60,18 @@ Using the standard embed format for actors will embed their public biography and
 
 // Item embed
 @Embed[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]
+```
+
+## Activities
+
+Activities on items can also be embedded using the activity's UUID. These embeds will display the activity's description. When embedding an activity in the description of its containing item, it is a good idea to use a relative UUID rather than the absolute UUID so the connection remains consistent when the item is moved around. After copying the UUID from the activity sheet or dragging the activity into the editor, remove everything before `.Activity.` to turn it into a relative UUID.
+
+```
+// Using absolute UUID
+@Embed[Compendium.dnd5e.equipment24.Item.dmgStaffOfPower0.Activity.udI31yfOHiwPCiSF]
+
+// Using relative UUID
+@Embed[.Activity.udI31yfOHiwPCiSF]
 ```
 
 ### NPC Stat Blocks
