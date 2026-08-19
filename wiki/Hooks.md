@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 [Activities](#activities) | [Actor](#actor) | [Calendar](#calendar) | [Chat Messages](#chat-messages) | [Compendium Browser](#compendium-browser) | [Combat](#combat) | [Items](#items) | [Journal Pages](#journal-pages) | [Movement Automation](#movement-automation) | [Rolls](#rolls) | [Sheets](#sheets) | [Other](#other)
 
@@ -97,23 +97,32 @@ Fires after an activity usage card is created.
 | activity      | Activity            | Activity being used.                               |
 | card          | ChatMessage\|object | The created ChatMessage instance or ChatMessageData depending on whether options.createMessage was set to `true`. |
 
-### `dnd5e.preCreateActivityTemplate`
+### `dnd5e.preCreateMeasuredTemplate`
 
-Fires before a template is created for an Activity. Returning `false` will prevent template from being created.
+Fires before player is prompted for template placement. Returning `false` will prevent template placement.
 
-| Name         | Type     | Description                                      |
-| ------------ | -------- | ------------------------------------------------ |
-| activity     | Activity | Activity for which the template is being placed. |
-| templateData | object   | Data used to create the new template.            |
+| Name            | Type                             | Description                                      |
+| --------------- | -------------------------------- | ------------------------------------------------ |
+| activity        | Activity                         | Activity for which the template is being placed. |
+| placementConfig | TemplatePlacementConfiguration   | Data used to create the new template.            |
 
-### `dnd5e.createActivityTemplate`
+### `dnd5e.createMeasuredTemplate`
+
+Fires after templates have been placed by the player but before they have been created. Returning `false` will prevent template creation.
+
+| Name         | Type              | Description                                      |
+| ------------ | ----------------- | ------------------------------------------------ |
+| activity     | Activity          | Activity for which the template is being placed. |
+| templateData | object[]          | Data for the regions to be created.              |
+
+### `dnd5e.postCreateMeasuredTemplate`
 
 Fires after a template are created for an Activity.
 
-| Name      | Type              | Description                                      |
-| --------- | ----------------- | ------------------------------------------------ |
-| activity  | Activity          | Activity for which the template is being placed. |
-| templates | AbilityTemplate[] | The templates being placed.                      |
+| Name         | Type              | Description                                      |
+| ------------ | ----------------- | ------------------------------------------------ |
+| activity     | Activity          | Activity for which the template is being placed. |
+| template     | RegionDocument[]  | The regions that were created.                   |
 
 ### `dnd5e.preRollAttack`
 
@@ -238,6 +247,35 @@ Fires when summoning is complete.
 | profile  | SummonsProfile         | Profile used for summoning.                    |
 | tokens   | Token5e[]              | Tokens that have been created.                 |
 | options  | SummoningConfiguration | Configuration data for summoning behavior.     |
+
+### `dnd5e.preTeleport`
+
+Fires before teleport movement has been planned. Returning `false` will prevent teleporting.
+
+| Name               | Type      | Description                                              |
+| ------------------ | --------- | -------------------------------------------------------- |
+| activity           | Activity  | The activity that is performing the teleportation.       |
+| config             | object    |                                                          |
+| config.maxDistance | number    | Maximum allowed distance to teleport. Can be `Infinite`. |
+| config.tokens      | Token5e[] | Tokens that should be teleported.                        |
+
+### `dnd5e.teleport`
+
+Fires after teleport movement has been planned, but before tokens have been moved. Returning `false` will prevent teleporting.
+
+| Name     | Type                     | Description                                              |
+| -------- | ------------------------ | -------------------------------------------------------- |
+| activity | Activity                 | The activity that is performing the teleportation.       |
+| plans    | TeleportMovementResult[] | Plans for tokens that are to be moved.                   |
+
+### `dnd5e.postTeleport`
+
+Fires after teleport movement has occurred.
+
+| Name     | Type                     | Description                                              |
+| -------- | ------------------------ | -------------------------------------------------------- |
+| activity | Activity                 | The activity that is performing the teleportation.       |
+| plans    | TeleportMovementResult[] | Information on tokens that have moved.                   |
 
 
 ## Actor
@@ -605,6 +643,16 @@ Fires to convert the provided spellcasting progression into spell slots. A diffe
 | actor       | Actor5e | Actor for whom the data is being prepared.    |
 | progression | object  | Spellcasting progression data.                |
 
+### `dnd5e.initializeActorSource`
+
+Fires before source data is initialized for an Actor in a compendium.
+
+| Name     | Type    | Description                                    |
+| -------- | ------- | ---------------------------------------------- |
+| actor    | Actor5e | Actor for which the data is being initialized. |
+| source   | object  | Source data being initialized.                 |
+| options  | object  | Additional data initialization options.        |
+
 
 ## Advancement
 
@@ -632,7 +680,7 @@ Fires when an `AdvancementManager` is done modifying an actor.
 
 | Name               | Type               | Description                                   |
 | ------------------ | ------------------ | --------------------------------------------- |
-| advancementManager | AdvancementManager | The advancement manager that just completed. |
+| advancementManager | AdvancementManager | The advancement manager that just completed.  |
 
 ### Document Modification Context
 
@@ -656,6 +704,16 @@ Fires during the `init` step to give modules a chance to customize the calendar 
 ### `updateWorldTime`
 
 The system introduces a few extra options to the normal `updateWorldTime` hook to track when certain points in time have passed. The `options` object for that hook has a `dnd5e.deltas` object that contains `midnights`, `middays`, `sunrises`, and `sunsets`, each of which is a number indicating how many of those times have been passed during the current time change. Positive numbers indicate a forward time advancement while negative ones indicate a reverse.
+
+### `dnd5e.preCreateTimePassedMessage`
+
+Fires before a time passed chat message is created.
+
+| Name                 | Type          | Description                        |
+| -------------------- | ------------- | ---------------------------------- |
+| messageConfig        | object        |                                    |
+| messageConfig.create | boolean       | Should the chat message be posted? |
+| messageConfig.data   | object        | Data for the created chat message. |
 
 
 ## Chat Messages
@@ -792,6 +850,27 @@ Fires after the item data for a scroll is created but before the item is returne
 | --------------- | -------------- | ------------------------------------------------ |
 | item            | Item5e\|object | The spell or item data to be made into a scroll. |
 | spellScrollData | object         | The final item data used to make the scroll.     |
+
+### `dnd5e.renderEmbeddedSpell`
+
+Fires after an embedded spell with details is rendered.
+
+| Name     | Type                    | Description                               |
+| -------- | ----------------------- | ----------------------------------------- |
+| item     | Item5e                  | Spell being embedded.                     |
+| template | HTMLTemplateElement     | Template whose children will be embedded. |
+| config   | DocumentHTMLEmbedConfig | Configuration for embedding behavior.     |
+| options  | EnrichmentOptions       | Original enrichment options.              |
+
+### `dnd5e.initializeItemSource`
+
+Fires before source data is initialized for an Item in a compendium.
+
+| Name     | Type   | Description                                   |
+| -------- | ------ | --------------------------------------------- |
+| item     | Item5e | Item for which the data is being initialized. |
+| source   | object | Source data being initialized.                |
+| options  | object | Additional data initialization options.       |
 
 
 ## Journal Pages

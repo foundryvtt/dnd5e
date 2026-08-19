@@ -36,6 +36,7 @@
 - [Hooks](Hooks.md)
 - [Journal Pages](Journal-Pages.md)
 - Module Development
+  - [Adventurer Importer](Adventure-Importer.md)
   - [Module Registration](Module-Registration.md)
   - [System HTML](System-HTML.md)
   - [Table of Contents](Table-of-Contents.md)
