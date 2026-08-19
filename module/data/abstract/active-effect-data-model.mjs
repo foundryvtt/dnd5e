@@ -1,7 +1,7 @@
 import { getHumanReadableAttributeLabel } from "../../utils.mjs";
 import FiltersField from "../fields/filters-field.mjs";
 
-const { DocumentIdField } = foundry.data.fields;
+const { DocumentIdField, StringField } = foundry.data.fields;
 
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
@@ -17,7 +17,15 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
     const schema = super.defineSchema();
     schema.changes.element.extendFields({
       _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
-      conditions: new FiltersField()
+      conditions: new FiltersField(),
+      replacement: new StringField({
+        required: true,
+        blank: true,
+        choices: {
+          origin: "DND5E.EFFECT.Replacement.Origin",
+          target: "DND5E.EFFECT.Replacement.Target"
+        }
+      })
     });
     return schema;
   }

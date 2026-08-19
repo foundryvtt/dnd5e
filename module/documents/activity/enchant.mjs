@@ -3,6 +3,7 @@ import EnchantUsageDialog from "../../applications/activity/enchant-usage-dialog
 import BaseEnchantActivityData from "../../data/activity/enchant-data.mjs";
 import Item5e from "../../documents/item.mjs";
 import { getSceneTargets } from "../../utils.mjs";
+import ActiveEffect5e from "../active-effect.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -175,6 +176,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     const flags = { enchantmentProfile: profileId };
     if ( concentration ) flags.dependentOn = concentration.uuid;
     const enchantmentData = effect.clone({ origin: this.uuid, "flags.dnd5e": flags }).toObject();
+    enchantmentData.system.changes = await ActiveEffect5e.forApplication(enchantmentData.system.changes, this, item);
 
     /**
      * Hook that fires before an enchantment is applied to an item.
@@ -203,7 +205,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       [item] = await Item5e.createDocuments(toCreate, { keepId: true, parent: actor });
     }
 
-    const enchantment = await ActiveEffect.create(enchantmentData, {
+    const enchantment = await ActiveEffect.implementation.create(enchantmentData, {
       parent: item, keepId: true, keepOrigin: true, chatMessageOrigin: chatMessage?.id
     });
 

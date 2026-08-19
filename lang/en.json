@@ -2682,6 +2682,10 @@
           "priority": {
             "label": "Priority"
           },
+          "replacement": {
+            "label": "Replacement",
+            "hint": "Configure whether roll data properties in the Value are replaced prior to application, and using whose data."
+          },
           "type": {
             "label": "Type"
           },
@@ -2719,6 +2723,11 @@
   },
   "Label": "Available Effects",
   "New": "New Effect",
+  "Replacement": {
+    "NoChange": "No Change",
+    "Origin": "Origin",
+    "Target": "Target"
+  },
   "RIDER": {
     "Activity": "Enchantment Rider Activity",
     "Effect": "Enchantment Rider Effect",
