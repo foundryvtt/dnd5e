@@ -1,6 +1,6 @@
-/* ---------------------------------- */
-/*  Chat Cards                        */
-/* ---------------------------------- */
+/* -------------------------------------------- */
+/*  Chat Cards                                  */
+/* -------------------------------------------- */
 
 .chat-log, .chat-popout {
   .message.compact {
@@ -153,7 +153,7 @@
         flex-wrap: wrap;
         gap: 4px;
         justify-content: end;
-        margin-left: auto;
+        margin-inline-start: auto;
       }
 
       button {
@@ -187,9 +187,131 @@
   }
 }
 
-/* ---------------------------------- */
-/*  Hidden Content                    */
-/* ---------------------------------- */
+/* -------------------------------------------- */
+/*  Trays                                       */
+/* -------------------------------------------- */
+
+.dnd5e2 .card-tray {
+  margin-block-start: 8px;
+  margin-inline: -8px;
+  margin: 8px -8px -8px;
+
+  > label {
+    align-items: center;
+    color: var(--color-text-secondary);
+    cursor: var(--cursor-pointer);
+    display: flex;
+    font-size: var(--font-size-11);
+    gap: 4px;
+    justify-content: center;
+
+    > span { flex: none; }
+    > i:first-of-type { color: var(--dnd5e-color-gold); }
+    .fa-caret-down { transition: all 250ms ease; }
+
+    &::before, &::after {
+      border-block-start: 1px dashed var(--dnd5e-color-blue-gray-3);
+      content: "";
+      flex-basis: 50%;
+    }
+  }
+
+  .collapsible-content > .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px 8px 8px;
+  }
+
+  .apply-button {
+    --input-height: 20px;
+    font-variant: all-small-caps;
+    i { font-size: var(--font-size-10); }
+  }
+
+  .effects {
+    display: flex;
+    flex-direction: column;
+    margin-block: -4px;
+    user-select: none;
+
+    .effect > button {
+      align-items: center;
+      block-size: auto;
+      color: inherit;
+      cursor: var(--cursor-pointer);
+      display: flex;
+      gap: 8px;
+      inline-size: 100%;
+      padding: 4px 0;
+      text-align: start;
+      text-transform: none;
+
+      &:hover:not(:disabled), &:focus { box-shadow: none; }
+      &:focus-visible { text-shadow: 0 0 5px var(--color-shadow-highlight); }
+
+      > .gold-icon {
+        block-size: 16px;
+        inline-size: 16px;
+        flex-basis: 16px;
+      }
+
+      > .title {
+        flex: 1;
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-size: var(--font-size-12);
+        font-weight: bold;
+      }
+
+      > .duration {
+        align-items: center;
+        color: var(--color-text-secondary);
+
+        > i { font-size: var(--font-size-8); }
+      }
+
+      > .pip {
+        block-size: 7px;
+        border: 1px solid var(--dnd5e-color-gold);
+        border-radius: 50%;
+        inline-size: 7px;
+      }
+
+      &[aria-pressed=true] > .pip { background: var(--dnd5e-color-gold); }
+    }
+  }
+
+  .target.none {
+    border: 1px solid var(--color-level-error-border);
+    color: var(--color-level-error);
+  }
+
+  .icon-row > button.target-source-toggle {
+    align-self: stretch;
+    block-size: unset;
+    color: var(--dnd5e-color-gold);
+    font-size: var(--font-size-12);
+
+    &::before {
+      content: "\f140";
+      font-family: var(--font-awesome);
+      font-weight: bold;
+    }
+
+    &[data-mode=selected]::before { content: "\f065"; }
+
+    &:hover:not(:disabled), &:focus {
+      box-shadow: none;
+      text-shadow: 0 0 5px var(--color-shadow-highlight);
+    }
+
+    &:disabled:hover { text-shadow: none; }
+  }
+}
+
+/* -------------------------------------------- */
+/*  Hidden Content                              */
+/* -------------------------------------------- */
 
 .chat-sidebar, .chat-popout, #chat-notifications {
   &:not([data-gm-user]) .message.compact .card-header[data-concealed] {

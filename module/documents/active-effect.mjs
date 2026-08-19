@@ -243,6 +243,22 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
+  /**
+   * Icon & abbreviated label for effects that expire at the start or end of a turn. The icon indicates whose turn the
+   * effect expires on, and the label which end of that turn.
+   * @returns {{ icon: string, label: string }|null}  Null if this effect has no special duration.
+   */
+  getSpecialDurationParts() {
+    const expiry = this.specialDuration;
+    if ( !expiry ) return null;
+    return {
+      icon: expiry.startsWith("target") ? "fa-bullseye" : "fa-user",
+      label: _loc(`DND5E.ACTIVEEFFECT.Expiry.Abbreviation.${expiry.endsWith("Start") ? "Start" : "End"}`)
+    };
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
     if ( !("description" in effectData) && reference ) effectData.description = `@Embed[${reference} inline]`;
@@ -1253,10 +1269,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     this.updateDuration();
     const { id, name, img, disabled, duration } = this;
     const source = await this.getSource();
+    const special = this.getSpecialDurationParts();
     return {
       id, name, img, disabled, duration, source,
       changes: await Promise.all(this.changes.map(change => this.getSheetChangeContext(change))),
-      durationParts: this.getDurationParts(),
+      durationIcon: special?.icon ?? "fa-clock",
+      durationParts: special ? [special.label] : this.getDurationParts(),
       showDuration: !this.expirySupportsDuration() || Number.isFinite(this.duration.value),
       effect: this
     };

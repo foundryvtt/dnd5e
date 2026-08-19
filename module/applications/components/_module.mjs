@@ -16,6 +16,7 @@ import InventoryElement from "./inventory.mjs";
 import ItemListControlsElement from "./item-list-controls.mjs";
 import ProficiencyCycleElement from "./proficiency-cycle.mjs";
 import SlideToggleElement from "./slide-toggle.mjs";
+import TargetPillElement from "./target-pill.mjs";
 
 window.customElements.define(CopyableTextElement.tagName, CopyableTextElement);
 window.customElements.define(DamageApplicationElement.tagName, DamageApplicationElement);
@@ -34,10 +35,11 @@ window.customElements.define(FilterStateElement.tagName, FilterStateElement);
 window.customElements.define(ItemListControlsElement.tagName, ItemListControlsElement);
 window.customElements.define(ProficiencyCycleElement.tagName, ProficiencyCycleElement);
 window.customElements.define(SlideToggleElement.tagName, SlideToggleElement);
+window.customElements.define(TargetPillElement.tagName, TargetPillElement);
 
 export {
   ActivitiesElement, AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement,
   DoubleRangePickerElement, EffectApplicationElement, EffectsElement, EnchantmentApplicationElement,
   FiligreeBoxElement, FiltersInputElement, FilterStateElement, IconElement, IdentifierInputElement,
-  InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
+  InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement, TargetPillElement
 };

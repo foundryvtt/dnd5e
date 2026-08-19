@@ -20,6 +20,16 @@ export default function TargetedApplicationMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Whether the associated chat message recorded any targets.
+     * @type {boolean}
+     */
+    get hasRecordedTargets() {
+      return !!this.chatMessage?.system?.targets?.length;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Whether to rebuild the target list.
      * @type {boolean|void}
      */
@@ -34,16 +44,13 @@ export default function TargetedApplicationMixin(Base) {
      * @type {"targeted"|"selected"}
      */
     get targetingMode() {
-      if ( this.targetSourceControl.hidden ) return "selected";
-      return this.targetSourceControl.querySelector('[aria-pressed="true"]')?.dataset.mode ?? "targeted";
+      return this.#targetingMode;
     }
 
     set targetingMode(mode) {
-      if ( this.targetSourceControl.hidden ) mode = "selected";
-      const toPress = this.targetSourceControl.querySelector(`[data-mode="${mode}"]`);
-      const currentlyPressed = this.targetSourceControl.querySelector('[aria-pressed="true"]');
-      if ( currentlyPressed ) currentlyPressed.ariaPressed = false;
-      toPress.ariaPressed = true;
+      if ( !this.hasRecordedTargets ) mode = "selected";
+      this.#targetingMode = mode;
+      this._refreshTargetMode();
 
       this.buildTargetsList();
       if ( (mode === "targeted") && (this.selectedTokensHook !== null) ) {
@@ -71,6 +78,14 @@ export default function TargetedApplicationMixin(Base) {
     targetSourceControl;
 
     /* -------------------------------------------- */
+
+    /**
+     * The current targeting mode.
+     * @type {"targeted"|"selected"}
+     */
+    #targetingMode = "targeted";
+
+    /* -------------------------------------------- */
     /*  Life-Cycle                                  */
     /* -------------------------------------------- */
 
@@ -89,20 +104,7 @@ export default function TargetedApplicationMixin(Base) {
      * @returns {HTMLElement[]}
      */
     buildTargetContainer() {
-      this.targetSourceControl = document.createElement("div");
-      this.targetSourceControl.classList.add("target-source-control");
-      this.targetSourceControl.innerHTML = `
-        <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
-          <i class="fa-solid fa-bullseye" inert></i> ${_loc("DND5E.Tokens.Targeted")}
-        </button>
-        <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
-          <i class="fa-solid fa-expand" inert></i> ${_loc("DND5E.Tokens.Selected")}
-        </button>
-      `;
-      this.targetSourceControl.querySelectorAll("button").forEach(b =>
-        b.addEventListener("click", this._onChangeTargetMode.bind(this))
-      );
-      if ( !this.chatMessage?.system?.targets?.length ) this.targetSourceControl.hidden = true;
+      this.targetSourceControl = this._buildTargetSourceControl();
 
       this.targetList = document.createElement("ul");
       this.targetList.classList.add("targets", "unlist");
@@ -122,12 +124,14 @@ export default function TargetedApplicationMixin(Base) {
         case "targeted":
           for ( const descriptor of this.chatMessage?.system?.targets ?? [] ) {
             const { actor, token } = TargetsField.resolve(descriptor);
-            if ( actor ) targetedTokens.set(actor.uuid, token?.name ?? descriptor.name);
+            if ( actor || token ) {
+              targetedTokens.set(token?.document.uuid ?? actor?.uuid, token?.name ?? descriptor.name);
+            }
           }
           break;
         case "selected":
           canvas.tokens?.controlled?.forEach(t => {
-            if ( t.actor ) targetedTokens.set(t.actor.uuid, t.name);
+            if ( t.actor ) targetedTokens.set(t.document.uuid, t.name);
           });
           break;
       }
@@ -137,8 +141,8 @@ export default function TargetedApplicationMixin(Base) {
       if ( targets.length ) this.targetList.replaceChildren(...targets);
       else {
         const li = document.createElement("li");
-        li.classList.add("none");
-        li.innerText = _loc(`DND5E.Tokens.None${this.targetingMode.capitalize()}`);
+        li.classList.add("none", "pill", "target", "transparent");
+        li.innerText = _loc("DND5E.Tokens.NoTargets");
         this.targetList.replaceChildren(li);
       }
     }
@@ -154,6 +158,43 @@ export default function TargetedApplicationMixin(Base) {
      * @abstract
      */
     buildTargetListEntry({ uuid, name }) {}
+
+    /* -------------------------------------------- */
+
+    /**
+     * Build the control used to switch between target sources.
+     * @returns {HTMLElement}
+     * @protected
+     */
+    _buildTargetSourceControl() {
+      const control = document.createElement("div");
+      control.classList.add("target-source-control");
+      control.innerHTML = `
+        <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
+          <i class="fa-solid fa-bullseye" inert></i> ${_loc("DND5E.Tokens.Targeted")}
+        </button>
+        <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
+          <i class="fa-solid fa-expand" inert></i> ${_loc("DND5E.Tokens.Selected")}
+        </button>
+      `;
+      control.querySelectorAll("button").forEach(b =>
+        b.addEventListener("click", this._onChangeTargetMode.bind(this))
+      );
+      if ( !this.hasRecordedTargets ) control.hidden = true;
+      return control;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Update the target source control to reflect the current targeting mode.
+     * @protected
+     */
+    _refreshTargetMode() {
+      for ( const button of this.targetSourceControl.querySelectorAll("[data-mode]") ) {
+        button.ariaPressed = `${button.dataset.mode === this.targetingMode}`;
+      }
+    }
 
     /* -------------------------------------------- */
     /*  Event Handlers                              */

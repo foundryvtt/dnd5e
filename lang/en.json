@@ -349,6 +349,10 @@
   },
   "Expired": "Expired",
   "Expiry": {
+    "Abbreviation": {
+      "End": "End",
+      "Start": "Start"
+    },
     "GROUPS": {
       "General": "General",
       "Specific": "Specific"
@@ -1777,6 +1781,9 @@
     "rollCheck": "Ability checks",
     "rollSave": "Saving throws"
   },
+  "Targets": {
+    "Count": "{number}× {name}"
+  },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"
   }
@@ -2631,6 +2638,7 @@
 "DND5E.EFFECT": {
   "Action": {
     "AddChange": "Add Change",
+    "Apply": "Apply",
     "CreateEffect": "Create Effect",
     "DeleteEffect": "Delete Effect",
     "DeleteChange": "Delete Change",
@@ -5571,6 +5579,7 @@
 "DND5E.Tokens": {
   "NoneSelected": "No Tokens Selected",
   "NoneTargeted": "No Tokens Targeted",
+  "NoTargets": "No Targets",
   "Selected": "Selected",
   "Targeted": "Targeted"
 },
