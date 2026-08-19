@@ -24,7 +24,7 @@ Useful examples:
 > When using formulas in an Active Effect Value, the actor sheet display that corresponds to the changed value will not always display the evaluated formula, but it will be applied when rolled.
 > E.g. When adding `@abilities.cha.mod` to `system.bonuses.abilities.save` to simulate a Paladin's Aura of Protection, the actor sheet will not display that bonus applied to saving throws. The bonus will be present when the saving throw is rolled.
 
-| Change Mode | Description |
+| Change Type | Description |
 |------------ | ------------|
 | Add         | Adds the provided value to the specified attribute. For numerical attributes, this can be used to both add and subtract from a particular value by specifying `1` or `-1` as the value to add. For sets such as an item's properties or character's damage resistances this can be used to add or remove an entry (e.g. `mgc` to add the magical property, or `-mgc` to remove it).  |
 | Subtract    | **V14 or higher.** Subtracts the provided value from the specified attribute. For sets such as an item's properties or character's damage reisistances this can be used to remove an entry. |
@@ -33,6 +33,22 @@ Useful examples:
 | Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
 | Upgrade     | Increases the defined attribute only in cases where the current value of that attribute would be less than value specified in the Effect Value field. |
 | Custom      | The Custom change mode applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Mode|
+
+## Modify Roll Mode
+
+Various places in the system allow for setting the advantage mode for rolls, such as `system.dex.check.roll.mode` or `system.rolls.attack.mwak.mode`. In these cases there is some special handling for the change type and value.
+
+### Change Value
+- `0`: Normal
+- `1`: Advantage
+- `-1`: Disadvantage
+
+### Change Type
+- `Add`: Adds one instance of advantage (`1`) or disadvantage (`-1`)
+- `Subtract`: Removes one instance of advantage or disadvantage (`-1`)
+- `Override`: Forces the roll to be advantage (`1`), disadvantage (`-1`), or normal (`0`)
+- `Upgrade` and value of `0`: Prevents roll from having disadvantage (but can still have advantage)
+- `Downgrade` and value of `0`: Prevents roll from having advantage (but can still have disadvantage)
 
 # Commonly Desired Effect Examples
 
