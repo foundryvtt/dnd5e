@@ -52,9 +52,10 @@ export default class ChatTrayElement extends (foundry.applications.elements.Adop
    * @param {PointerEvent} event  Triggering click event.
    */
   _handleClickHeader(event) {
+    if ( event.target.closest(".collapsible-content") ) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    if ( !event.target.closest(".collapsible-content") ) this.toggleAttribute("open");
+    this.toggleAttribute("open");
   }
 
   /* -------------------------------------------- */

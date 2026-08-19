@@ -19,6 +19,11 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
   /* -------------------------------------------- */
 
   /** @override */
+  static observedAttributes = ["checked"];
+
+  /* -------------------------------------------- */
+
+  /** @override */
   static tagName = "dnd5e-checkbox";
 
   /* -------------------------------------------- */
@@ -130,7 +135,6 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   set checked(checked) {
     this.toggleAttribute("checked", checked);
-    this._refresh();
   }
 
   /* -------------------------------------------- */
@@ -158,6 +162,13 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   /* -------------------------------------------- */
   /*  Element Lifecycle                           */
+  /* -------------------------------------------- */
+
+  /** @override */
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    if ( this.isConnected ) this._refresh();
+  }
+
   /* -------------------------------------------- */
 
   /** @override */

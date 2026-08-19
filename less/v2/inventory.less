@@ -540,10 +540,16 @@
     }
   }
 
-  .effect-name .duration, &.effect-tooltip .duration {
-    padding: .25rem;
-    border: var(--dnd5e-border-dashed-faint);
-    border-radius: 4px;
+  .effect-name .duration {
+    align-items: center;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+
+    > i { font-size: var(--font-size-9); }
+    .least-significant { color: var(--color-text-tertiary); }
+  }
+
+  &.effect-tooltip .duration {
     font-family: var(--dnd5e-font-roboto-condensed);
     text-transform: uppercase;
     font-size: var(--font-size-11);

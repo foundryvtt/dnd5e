@@ -65,7 +65,7 @@ export default class Combatant5e extends Combatant {
   getGroupingKey() {
     if ( this.group ) return this.group.id;
     if ( (this.initiative === null) || !dnd5e.settings.initiativeGroupCombatants ) return null;
-    return this.getUniqueKey(Math.floor(this.initiative).paddedString(4));
+    return this.token.getGroupingKey(Math.floor(this.initiative).paddedString(4));
   }
 
   /* -------------------------------------------- */
@@ -77,7 +77,7 @@ export default class Combatant5e extends Combatant {
   getInitiativeGroupingKey() {
     if ( this.group ) return this.group.id;
     if ( !dnd5e.settings.initiativeGroupRoll ) return null;
-    return this.getUniqueKey(this.getInitiativeRoll().formula);
+    return this.token.getGroupingKey(this.getInitiativeRoll().formula);
   }
 
   /* -------------------------------------------- */
@@ -86,18 +86,6 @@ export default class Combatant5e extends Combatant {
   getInitiativeRoll(formula) {
     if ( !this.actor ) return new CONFIG.Dice.D20Roll(formula ?? "1d20", {});
     return this.actor.getInitiativeRoll();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Key identifying a unique set of actors in the combat, optionally prefixed by a grouping discriminator.
-   * @param {string} [prefix]  Discriminator placed at the head of the key.
-   * @returns {string|null}
-   */
-  getUniqueKey(prefix) {
-    if ( this.token?.actorLink || !this.token?.baseActor ) return null;
-    return `${prefix === undefined ? "" : `${prefix}:`}${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
   /* -------------------------------------------- */

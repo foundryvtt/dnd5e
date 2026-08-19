@@ -415,37 +415,37 @@
     display: flex;
     flex-wrap: wrap;
     gap: .25rem;
+  }
 
-    .pill {
-      font-family: var(--dnd5e-font-roboto-condensed);
-      font-weight: 400;
-      font-size: var(--font-size-11);
-      line-height: 1;
-      text-transform: none;
-      border: var(--pill-border);
-      border-radius: 3px;
-      background: var(--dnd5e-background-card);
-      padding: 2px 5px;
-      display: flex;
-      gap: .25rem;
-      margin: 0;
+  .pill {
+    font-family: var(--dnd5e-font-roboto-condensed);
+    font-weight: 400;
+    font-size: var(--font-size-11);
+    line-height: 1;
+    text-transform: none;
+    border: var(--pill-border);
+    border-radius: 3px;
+    background: var(--dnd5e-background-card);
+    padding: 2px 5px;
+    display: flex;
+    gap: .25rem;
+    margin: 0;
 
-      &.green, &.maroon {
-        color: var(--pill-colored-text-color);
-        border: var(--pill-colored-border);
-      }
-
-      &.green { background-color: var(--pill-background-green); }
-      &.maroon { background-color: var(--pill-background-maroon); }
-
-      &.transparent {
-        color: var(--pill-transparent-color);
-        border: var(--pill-border-dotted);
-        background-color: transparent;
-      }
-
-      > .separator { color: var(--color-text-tertiary); }
+    &.green, &.maroon {
+      color: var(--pill-colored-text-color);
+      border: var(--pill-colored-border);
     }
+
+    &.green { background-color: var(--pill-background-green); }
+    &.maroon { background-color: var(--pill-background-maroon); }
+
+    &.transparent {
+      color: var(--pill-transparent-color);
+      border: var(--pill-border-dotted);
+      background-color: transparent;
+    }
+
+    > .separator { color: var(--color-text-tertiary); }
   }
 
   .gold-button, &.standard-form button.gold-button {
@@ -2020,7 +2020,10 @@ dialog.dnd5e2.application {
   .collapsible-content {
     display: grid;
     transition: grid-template-rows 250ms ease;
-    > .wrapper { overflow: hidden; }
+    > .wrapper {
+      overflow: hidden;
+      transition: padding-block 250ms ease;
+    }
   }
 }
 
@@ -2030,7 +2033,10 @@ dialog.dnd5e2.application {
   }
   :scope.collapsed {
     .fa-caret-down { transform: rotate(-90deg); }
-    .collapsible-content { grid-template-rows: 0fr; }
+    .collapsible-content {
+      grid-template-rows: 0fr;
+      > .wrapper { padding-block: 0; }
+    }
   }
 }
 

@@ -124,19 +124,19 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       div.addEventListener("click", this._handleClickHeader.bind(this));
     }
 
-    this.targetingMode = this.targetSourceControl.hidden ? "selected" : "targeted";
+    this.targetingMode = "targeted";
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   buildTargetListEntry({ uuid, name }) {
-    const actor = fromUuidSync(uuid);
-    if ( !actor?.isOwner ) return;
+    const token = fromUuidSync(uuid);
+    if ( !token?.isOwner ) return;
 
     // Calculate damage to apply
     const targetOptions = this.getTargetOptions(uuid);
-    const { temp, tempMax, total, active } = this.calculateDamage(actor, targetOptions);
+    const { temp, tempMax, total, active } = this.calculateDamage(token.actor, targetOptions);
 
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
@@ -174,7 +174,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       </div>
       <menu class="damage-multipliers unlist"></menu>
     `;
-    Object.assign(li.querySelector(".gold-icon"), { alt: name, src: actor.img });
+    Object.assign(li.querySelector(".gold-icon"), { alt: name, src: token.texture.src });
     li.querySelector(".name-stacked .title").append(name);
     const menu = li.querySelector("menu");
     for ( const [value, display] of MULTIPLIERS ) {
@@ -187,7 +187,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       menu.append(entry);
     }
 
-    this.refreshListEntry(actor, li, targetOptions);
+    this.refreshListEntry(token, li, targetOptions);
     li.addEventListener("click", this._onChangeOptions.bind(this));
 
     return li;
@@ -284,12 +284,12 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
   /**
    * Refresh the damage total on a list entry based on modified options.
-   * @param {Actor5e} token
+   * @param {TokenDocument5e} token
    * @param {HTMLLiElement} entry
    * @param {DamageApplicationOptions} options
    */
   refreshListEntry(token, entry, options) {
-    const { active, temp, tempMax, total } = this.calculateDamage(token, options);
+    const { active, temp, tempMax, total } = this.calculateDamage(token.actor, options);
     const calculatedDamage = entry.querySelector(".calculated.damage");
     calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
     calculatedDamage.classList.toggle("healing", total < 0);

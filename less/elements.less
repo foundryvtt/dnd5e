@@ -317,3 +317,52 @@ section.secret > button.reveal {
 prose-mirror {
   button.toggle:disabled { display: none; }
 }
+
+/* -------------------------------------------- */
+/*  Target Pills                                */
+/* -------------------------------------------- */
+
+.dnd5e2 .pills target-pill.pill {
+  --pip-fill: var(--color-text-secondary);
+  --pip-size: 7px;
+  align-items: center;
+  background-color: transparent;
+  border: var(--pill-border-dotted);
+  color: var(--pill-transparent-color);
+  user-select: none;
+
+  &.context { pointer-events: auto; }
+
+  &:not(:disabled) {
+    cursor: var(--cursor-pointer);
+    label { cursor: var(--cursor-pointer); }
+  }
+
+  .pip {
+    block-size: var(--pip-size);
+    border: 1px solid var(--pip-fill);
+    border-radius: 50%;
+    inline-size: var(--pip-size);
+  }
+
+  &[checked] {
+    --pip-fill: var(--color-level-success);
+    background-color: #1a6b22;
+    border-color: var(--color-level-success-border);
+    color: var(--pill-colored-text-color);
+    .pip { background: var(--pip-fill); }
+  }
+
+  &[indeterminate] {
+    --pip-fill: transparent;
+    background-color: var(--dnd5e-background-card);
+
+    .pip {
+      background: var(--color-text-secondary);
+      block-size: 2px;
+      border-radius: 0;
+      inline-size: 6px;
+      padding-block-start: 1px;
+    }
+  }
+}

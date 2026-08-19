@@ -19,7 +19,7 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(
   /* -------------------------------------------- */
 
   /**
-   * The HTML tag named used by this element.
+   * The HTML tag name used by this element.
    * @type {string}
    */
   static tagName = "proficiency-cycle";
@@ -84,14 +84,6 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(
       opacity: 0;
     }
   `;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Controller for removing listeners automatically.
-   * @type {AbortController}
-   */
-  #controller;
 
   /* -------------------------------------------- */
 
@@ -182,18 +174,11 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(
 
   /** @override */
   _activateListeners() {
-    const { signal } = this.#controller = new AbortController();
+    const signal = this.abortSignal;
     this.addEventListener("click", this.#onClick.bind(this), { signal });
     this.addEventListener("contextmenu", this.#onClick.bind(this), { signal });
     this.#shadowRoot.querySelector("div").addEventListener("contextmenu", e => e.preventDefault(), { signal });
     this.#shadowRoot.querySelector("input").addEventListener("change", this.#onChangeInput.bind(this), { signal });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  disconnectedCallback() {
-    this.#controller.abort();
   }
 
   /* -------------------------------------------- */
