@@ -1,3 +1,4 @@
+import ActiveEffect5e from "../../documents/active-effect.mjs";
 import { convertTime, formatTime, loadingTooltip } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
@@ -291,7 +292,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    * @protected
    */
   async _applyEffectToActor(effect, actor) {
-    const { action, data } = this._prepareEffectData(effect, actor);
+    const { action, data } = await this._prepareEffectData(effect, actor);
     if ( action === "update" ) return actor.effects.get(data._id).update(data);
     return ActiveEffect.implementation.create(data, { parent: actor });
   }
@@ -300,15 +301,17 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /**
    * Prepare the data for applying an Active Effect to an Actor.
-   * @param {ActiveEffect5e} effect                         The effect to apply.
-   * @param {Actor5e} actor                                 The actor.
-   * @returns {{ action: "create"|"update", data: object }} The effect data and the operation required to apply it.
-   * @throws {Error}                                        If the effect could not be applied.
+   * @param {ActiveEffect5e} effect  The effect to apply.
+   * @param {Actor5e} actor          The actor.
+   * @returns {Promise<{ action: "create"|"update", data: object }>}
+   * @throws {Error}
    * @protected
    */
-  _prepareEffectData(effect, actor) {
-    const concentration = this.chatMessage.getAssociatedActor()?.effects.get(this.chatMessage.system.concentration);
+  async _prepareEffectData(effect, actor) {
+    const originActor = this.chatMessage.getAssociatedActor();
+    const concentration = originActor?.effects.get(this.chatMessage.system.concentration);
     const item = this.chatMessage.getAssociatedItem();
+    const activity = this.chatMessage.getAssociatedActivity({ scaled: true });
     const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
@@ -328,7 +331,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     // its own.
     let durationOverride = {};
     if ( !Number.isFinite(effect.duration.value) && effect.expirySupportsDuration() ) {
-      const effectDuration = this.chatMessage.getAssociatedActivity({ scaled: true })?.duration.getEffectData();
+      const effectDuration = activity?.duration.getEffectData();
       if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
     }
 
@@ -350,7 +353,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     }
 
     // Otherwise, create a new effect on the target
-    return { action: "create", data: foundry.utils.mergeObject({
+    const effectData = foundry.utils.mergeObject({
       ...effect.toObject(),
       ...durationOverride,
       disabled: false,
@@ -360,7 +363,15 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
         [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
       }
-    }, effectFlags) };
+    }, effectFlags);
+
+    effectData.system.changes = await ActiveEffect5e.forApplication(
+      effectData.system.changes,
+      activity ?? item ?? originActor,
+      actor
+    );
+
+    return { action: "create", data: effectData };
   }
 
   /* -------------------------------------------- */
@@ -382,7 +393,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       const updates = [];
       for ( const effect of effects ) {
         try {
-          const operation = this._prepareEffectData(effect, actor);
+          const operation = await this._prepareEffectData(effect, actor);
           (operation.action === "create" ? data : updates).push(operation.data);
         } catch ( err ) {
           Hooks.onError("EffectApplicationElement._prepareEffectData", err, { notify: "warn", log: "warn" });

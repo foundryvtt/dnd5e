@@ -62,7 +62,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     if ( !actor || !this.#evaluateConditions(token) ) return;
     const resumeMovement = movement ? token.pauseMovement() : undefined;
     const effects = await Promise.all(this.effects.map(fromUuid));
-    const toCreate = this.#getEffectsToCreate(actor, effects);
+    const toCreate = await this.#getEffectsToCreate(actor, effects);
     if ( toCreate.length ) await actor.createEmbeddedDocuments("ActiveEffect", toCreate);
     await resumeMovement?.();
   }
@@ -125,7 +125,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
         });
       }
       if ( !this.#evaluateConditions(token) ) continue;
-      const toCreate = this.#getEffectsToCreate(actor, effects);
+      const toCreate = await this.#getEffectsToCreate(actor, effects);
       if ( toCreate.length ) {
         operations.push({
           action: "create",
@@ -142,11 +142,12 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
 
   /**
    * Get Active Effects that should be created for the Actor.
-   * @param {Actor54} actor            The actor the Active Effects should be created for.
-   * @param {ActiveEffect5e]} effects  The effects the Active Effects are created from.
-   * @returns {ActiveEffectData[]}     The data of Active Effects that should be created.
+   * @param {Actor5e} actor                  The actor the Active Effects should be created for.
+   * @param {ActiveEffect5e[]} effects       The effects the Active Effects are created from.
+   * @returns {Promise<ActiveEffectData[]>}  The data of Active Effects that should be created.
    */
-  #getEffectsToCreate(actor, effects) {
+  async #getEffectsToCreate(actor, effects) {
+    const origin = await fromUuid(this.region.getFlag("dnd5e", "activity"));
     const toCreate = [];
     for ( const effect of effects ) {
       if ( !effect ) continue;
@@ -161,6 +162,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
       }
       data._stats.exportSource = null;
       data.origin = this.behavior.uuid;
+      data.system.changes = await ActiveEffect.implementation.forApplication(data.system.changes, origin, actor);
       toCreate.push(data);
     }
     return toCreate;
