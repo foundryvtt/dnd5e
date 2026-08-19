@@ -2883,6 +2883,11 @@
     "Never": "Never",
     "ShortRest": "Short Rest"
   },
+  "Transfer": {
+    "DisabledTooltip": "This Enchantment is currently selected in one or more of its Item's Enchant Activities, and therefore cannot apply directly to the Item.",
+    "Hint": "If checked, this Enchantment will be applied directly to its parent Item.",
+    "Label": "Apply Enchantment to Item"
+  },
   "Warning": {
     "NotOnActor": "Enchantments can only be added to items, not directly to actors.",
     "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it."

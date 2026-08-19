@@ -172,7 +172,9 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
           activity: this.uuid,
           effect: concentration?.uuid
         }
-      }
+      },
+      disabled: false,
+      transfer: true
     }).toObject();
     enchantmentData.system.changes = await ActiveEffect5e.forApplication(enchantmentData.system.changes, this, item);
 
