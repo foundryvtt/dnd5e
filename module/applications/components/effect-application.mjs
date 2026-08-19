@@ -209,10 +209,13 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     const isGrouped = group;
 
     if ( !group ) {
-      group = document.createElement("target-pill");
-      group.insertAdjacentHTML("afterbegin", "<label></label><datalist></datalist>");
-      group.querySelector("label").append(name);
-      group.disabled = this.targetingMode === "selected";
+      group = document.createElement("li");
+      const pill = document.createElement("target-pill");
+      pill.insertAdjacentHTML("afterbegin", "<label></label><datalist></datalist>");
+      pill.querySelector("label").append(name);
+      pill.disabled = this.targetingMode === "selected";
+      pill.toggle = true;
+      group.append(pill);
     }
 
     const option = document.createElement("option");

@@ -5,6 +5,7 @@ const { DocumentIdField, StringField } = foundry.data.fields;
 
 /**
  * @import { AttackMessageSystemData } from "./_types.mjs";
+ * @import { TargetDescriptor5e } from "../../_types.mjs";
  */
 
 /**
@@ -36,6 +37,10 @@ export default class AttackMessageData extends RollMessageData {
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     template: "systems/dnd5e/templates/chat/attack-card.hbs"
   }, { inplace: false }));
+
+  /* -------------------------------------------- */
+
+  static ROLL_TEMPLATE = "systems/dnd5e/templates/chat/parts/roll-compact.hbs";
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -81,7 +86,29 @@ export default class AttackMessageData extends RollMessageData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Evaluated hits & misses against the targeted tokens.
+   * @type {(TargetDescriptor5e & { isMiss: boolean })[]}
+   */
+  get evaluatedTargets() {
+    const roll = this.parent.rolls[0];
+    if ( !(roll instanceof CONFIG.Dice.D20Roll) ) return [];
+    return this.targets.map(target => ({
+      ...target,
+      isMiss: (target.ac === null) || (!roll.isCritical && ((roll.total < target.ac) || roll.isFumble))
+    }));
+  }
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -89,12 +116,16 @@ export default class AttackMessageData extends RollMessageData {
     const context = await super._prepareContext(options);
     const isPrivate = !this.parent.isContentVisible;
     const item = this.parent.getAssociatedItem();
-    if ( !isPrivate && item ) context.header = {
-      item,
-      subtitle: this.parent.getAssociatedActivity()?.getActionLabel(this.mode) ?? ""
-    };
+    if ( !isPrivate && item ) context.header = { item, activity: this.activity };
     const mastery = CONFIG.DND5E.weaponMasteries[this.mastery];
     if ( mastery ) context.mastery = { label: mastery.label, reference: mastery.reference };
+    context.rows = {
+      properties: {
+        entries: this.parent.getAssociatedActivity()?.getActionLabel(this.mode) ?? [],
+        icon: "fa-solid fa-tag",
+        label: "DND5E.CHATMESSAGE.Row.Properties"
+      }
+    };
     context.targets = this._prepareTargetsContext();
     return context;
   }
@@ -107,19 +138,12 @@ export default class AttackMessageData extends RollMessageData {
    * @protected
    */
   _prepareTargetsContext() {
-    const roll = this.parent.rolls[0];
-    if ( !this.parent.isContentVisible || !(roll instanceof CONFIG.Dice.D20Roll) ) return [];
-
+    if ( !this.parent.isContentVisible ) return [];
     const visibility = dnd5e.settings.attackRollVisibility;
-    if ( !game.user.isGM && (visibility === "none") ) return [];
     const showAC = game.user.isGM || (visibility === "all");
-
-    return this.targets
-      .map(({ ac, actor, name, token }) => ({
-        ac, actor, name, showAC, token,
-        hasAC: ac !== null,
-        isMiss: (ac === null) || (!roll.isCritical && ((roll.total < ac) || roll.isFumble))
-      }))
+    const showResult = game.user.isGM || (visibility !== "none");
+    return this.evaluatedTargets
+      .map(target => ({ ...target, showAC, showResult, hasAC: target.ac !== null }))
       .sort((lhs, rhs) => (lhs.isMiss === rhs.isMiss) ? 0 : (lhs.isMiss ? 1 : -1));
   }
 
@@ -128,16 +152,9 @@ export default class AttackMessageData extends RollMessageData {
   /** @inheritDoc */
   _onRender(element) {
     super._onRender(element);
-
-    // The item header carries the name and the roll flavor, so the message header's copy is redundant.
+    element.classList.add("compact");
     if ( element.querySelector(".chat-card .card-header") ) {
       element.querySelector(".message-header .flavor-text")?.remove();
-    }
-
-    for ( const target of element.querySelectorAll("li.target") ) {
-      target.addEventListener("click", this.parent._onTargetMouseDown.bind(this.parent));
-      target.addEventListener("pointerover", this.parent._onTargetHoverIn.bind(this.parent));
-      target.addEventListener("pointerout", this.parent._onTargetHoverOut.bind(this.parent));
     }
   }
 }

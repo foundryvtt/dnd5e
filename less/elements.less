@@ -345,7 +345,9 @@ prose-mirror {
     inline-size: var(--pip-size);
   }
 
-  &[checked] {
+  &:not([toggle]) .pip { display: none; }
+
+  &[checked], &[data-hit] {
     --pip-fill: var(--color-level-success);
     background-color: #1a6b22;
     border-color: var(--color-level-success-border);
@@ -364,5 +366,31 @@ prose-mirror {
       inline-size: 6px;
       padding-block-start: 1px;
     }
+  }
+
+  &::before {
+    font-family: var(--font-awesome);
+    font-size: var(--font-size-9);
+    font-weight: bold;
+  }
+
+  &[data-hit]::before {
+    color: var(--color-level-success);
+    content: "\f00c";
+  }
+
+  &[data-miss] {
+    background-color: #591010;
+    border: 1px solid var(--color-level-error-border);
+    color: var(--pill-colored-text-color);
+
+    &::before {
+      content: "\f00d";
+      color: var(--color-level-error);
+    }
+  }
+
+  &[data-value]::after {
+    content: attr(data-value);
   }
 }

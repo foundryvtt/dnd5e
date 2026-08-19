@@ -1,7 +1,8 @@
 <div class="chat-card">
 
     {{!-- Header --}}
-    <section class="card-header"{{#if description}} data-action="toggleDescription"{{/if}}
+    <section class="card-header {{#unless (or description activity.chatFlavor)}}no-description{{/unless}}"
+             {{#if description}} data-action="toggleDescription"{{/if}}
              {{~#if concealed}} data-concealed{{/if}}>
         <div class="item-icon" data-action="showDocument" data-uuid="{{ item.uuid }}">
             <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">

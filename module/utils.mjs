@@ -1000,7 +1000,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/chat/parts/card-face.hbs",
     "systems/dnd5e/templates/chat/parts/damage-breakdown.hbs",
     "systems/dnd5e/templates/chat/parts/roll.hbs",
-    "systems/dnd5e/templates/chat/parts/targets-tray.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/details/details-background.hbs",
