@@ -711,6 +711,110 @@ These are properties that cause the actor to take increased or decreased damage 
 ------------------------
 
 
+## Weapon Proficiencies
+
+```
+system.traits.weaponProf.value
+                         mastery.value
+                                 bonus
+```
+
+### Weapon Types
+
+> <details>
+> <summary>Weapon Types</summary>
+>
+> | Weapon Type             | Value           |
+> | ----------------------- | --------------- |
+> | Simple Weapons          | `sim`           |
+> | Club                    | `club`          |
+> | Dagger                  | `dagger`        |
+> | Dart                    | `dart`          |
+> | Greatclub               | `greatclub`     |
+> | Handaxe                 | `handaxe`       |
+> | Javelin                 | `javelin`       |
+> | Light Crossbow          | `lightcrossbow` |
+> | Light Hammer            | `lighthammer`   |
+> | Mace                    | `mace`          |
+> | Quarterstaff            | `quarterstaff`  |
+> | Shortbow                | `shortbow`      |
+> | Sickle                  | `sickle`        |
+> | Sling                   | `sling`         |
+> | Martial Weapons         | `mar`           |
+> | Battleaxe               | `battleaxe`     |
+> | Blowgun                 | `blowgun`       |
+> | Flail                   | `flail`         |
+> | Glaive                  | `glaive`        |
+> | Greataxe                | `greataxe`      |
+> | Greatsword              | `greatsword`    |
+> | Halberd                 | `halberd`       |
+> | Hand Crossbow           | `handcrossbow`  |
+> | Heavy Crossbow          | `heavycrossbow` |
+> | Lance                   | `lance`         |
+> | Longbow                 | `longbow`       |
+> | Longsword               | `longsword`     |
+> | Maul                    | `maul`          |
+> | Morningstar             | `morningstar`   |
+> | Musket                  | `musket`        |
+> | Pike                    | `pike`          |
+> | Pistol                  | `pistol`        |
+> | Rapier                  | `rapier`        |
+> | Scimitar                | `scimitar`      |
+> | Shortsword              | `shortsword`    |
+> | Trident                 | `trident`       |
+> | War Pick                | `warpick`       |
+> | Warhammer               | `warhammer`     |
+> | Whip                    | `whip`          |
+>
+> Source: `CONFIG.DND5E.weaponProficiencies`
+> Source: `CONFIG.DND5E.weaponIds`
+> </details>
+
+### Weapon Masteries
+
+> <details>
+> <summary>Weapon Masteries</summary>
+>
+> | Mastery      | Value           |
+> | ------------ | --------------- |
+> | Cleave       | `cleave`        |
+> | Graze        | `graze`         |
+> | Nick         | `nick`          |
+> | Push         | `push`          |
+> | Sap          | `sap`           |
+> | Slow         | `slow`          |
+> | Topple       | `topple`        |
+> | Vex          | `vex`           |
+>
+> Source: `CONFIG.DND5E.weaponMasteries`
+> </details>
+
+### Add a Weapon Proficiency
+
+| Attribute Key                    | Change Mode | Effect Value    |
+| -------------------------------- | ----------- | --------------- |
+| `system.traits.weaponProf.value` | Add         | `[weaponType]`  |
+
+### Add a Weapon Mastery
+
+Adding to the `mastery.value` will add a new normal weapon mastery such as one gained when taking the normal "Weapon Mastery" feature.
+
+| Attribute Key                            | Change Mode | Effect Value    |
+| ---------------------------------------- | ----------- | --------------- |
+| `system.traits.weaponProf.mastery.value` | Add         | `[weaponType]`  |
+
+### Add a Bonus Weapon Mastery
+
+Adding to `mastery.bonus` gives a bonus weapon mastery that can be chosen when attacking with any weapon with which you have an existing mastery.
+
+| Attribute Key                            | Change Mode | Effect Value      |
+| ---------------------------------------- | ----------- | ----------------- |
+| `system.traits.weaponProf.mastery.bonus` | Add         | `[weaponMastery]` |
+
+
+------------------------
+
+
 ## Tools
 
 ```
