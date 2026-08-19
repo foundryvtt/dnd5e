@@ -332,6 +332,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
         origin: {
           [activity ? "activity" : "item"]: activity ? activity.uuid : item?.uuid,
           effect: concentration?.uuid
+          // TODO: Should set the profile here, but currently that data isn't fully available in the message data
         }
       }
     };
