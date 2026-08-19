@@ -1,6 +1,7 @@
 import ItemMessageData from "./item-message-data.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 import SourceReferenceField from "./fields/source-reference-field.mjs";
+import TargetsField from "./fields/targets-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentIdField, HTMLField, NumberField, ObjectField, SchemaField, StringField
@@ -114,8 +115,11 @@ export default class UsageMessageData extends ItemMessageData {
     }
 
     const item = this.parent.getAssociatedItem();
+    const activity = this.parent.getAssociatedActivity();
+    const allowPlayerApplication = this.targets?.some(t => TargetsField.resolve(t).token?.isOwner)
+      || ((this.parent.author?.id === game.user.id) && (activity?.target.affects.type === "self"));
     context.effects = (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: item }))))
-      .filter(e => e && (game.user.isGM || (e.transfer & (this.parent.author?.id === game.user.id))));
+      .filter(e => e && (game.user.isGM || (dnd5e.settings.allowPlayerEffectsTray && allowPlayerApplication)));
     return context;
   }
 

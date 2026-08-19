@@ -2662,7 +2662,6 @@
     },
     "Header": "Effects",
     "Warning": {
-      "Concentration": "Applying an effect that is being concentrated on by another character requires GM permissions.",
       "Ownership": "Effects cannot be applied to tokens you are not the owner of."
     }
   },
@@ -2716,6 +2715,10 @@
     "Configuration": "Change Configuration",
     "Label": "Change",
     "Title": "{effect} Change #{number}"
+  },
+  "DisabledTooltip": {
+    "Disabled": "This effect is currently selected in one or more of its Item's Activities, and therefore cannot be suspended.",
+    "Transfer": "This effect is currently selected in one or more of its Item's Activities, and therefore cannot passively apply to the Item's Actor."
   },
   "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
@@ -6924,6 +6927,10 @@
     "Name": "Piety Score"
   },
   "PERMISSIONS": {
+    "AllowEffects": {
+      "Hint": "Allow players to use the effect application tray when an actor they own is the target of an effect.",
+      "Name": "Allow Player Effect Application"
+    },
     "AllowRests": {
       "Hint": "Allow players to rest directly from their characters' sheets. When disabled, players will only be able to rest when the GM makes a request from the party.",
       "Name": "Allow Individual Rests"
