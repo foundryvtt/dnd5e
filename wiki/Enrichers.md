@@ -2,7 +2,7 @@
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
-[Attack](#attack-enricher) | [Award](#award-enricher) | [Check](#check-enrichers) | [Damage/Heal](#damage-enrichers) | [Item](#item-use-enrichers) | [Lookup](#lookup-enrichers) | [Reference](#reference-enrichers) | [Save](#save-enrichers)
+[Attack](#attack-enricher) | [Award](#award-enricher) | [Check](#check-enrichers) | [Damage/Heal](#damage-enrichers) | [Item](#item-use-enrichers) | [Language](#language-enrichers) | [Lookup](#lookup-enrichers) | [Reference](#reference-enrichers) | [Save](#save-enrichers)
 
 ![Enricher Preview](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enrichers-preview.jpg)
 
@@ -414,6 +414,63 @@ A Relative ID can contain a reference to an owned Item either by an ID, or a rel
 The activity name can also be used when referring to an item using its ID in the same manner as above with item name.
 
 ![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.jpg)
+
+
+## Language Enrichers
+
+The language enricher allows for referencing a single language and provides a tooltip that indicates which members of the primary party understand that language.
+
+![Language Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-language.jpg)
+
+#### Examples
+
+```
+// Example: Show a lanuage
+[[language gnomish]]
+[[language deep]]{strange language}
+```
+
+#### Options
+
+| Name       | Format  | Inferred  | Assembled |
+| ---------- | ------- | --------- | --------- |
+| `language` | Choice  |     ✔︎     |           |
+
+- `language`: ID of the language to display
+
+> <details>
+> <summary>Language IDs</summary>
+>
+> | Language               | ID             |
+> |------------------------|----------------|
+> | Common                 | `common`       |
+> | Common Sign Language   | `sign`         |
+> | Draconic               | `draconic`     |
+> | Dwarvish               | `dwarvish`     |
+> | Elvish                 | `elvish`       |
+> | Giant                  | `giant`        |
+> | Gnomish                | `gnomish`      |
+> | Goblin                 | `goblin`       |
+> | Halfling               | `halfling`     |
+> | Orc                    | `orc`          |
+> | Aarakocra              | `aarakocra`    |
+> | Abyssal                | `abyssal`      |
+> | Celestial              | `celestial`    |
+> | Deep Speech            | `deep`         |
+> | Druidic                | `druidic`      |
+> | Gith                   | `gith`         |
+> | Gnoll                  | `gnoll`        |
+> | Infernal               | `infernal`     |
+> | Primordial             | `primordial`   |
+> | Aquan                  | `aquan`        |
+> | Auran                  | `auran`        |
+> | Ignan                  | `ignan`        |
+> | Terran                 | `terran`       |
+> | Sylvan                 | `sylvan`       |
+> | Thieves' Cant          | `cant`         |
+> | Undercommon            | `undercommon`  |
+>
+> Source: `CONFIG.DND5E.languages` </details>
 
 
 ## Lookup Enrichers
