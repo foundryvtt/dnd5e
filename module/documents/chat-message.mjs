@@ -4,6 +4,7 @@ import ContextMenu5e from "../applications/context-menu.mjs";
 
 /**
  * @import { ChatMessageEnrichmentOptions } from "./_types.mjs";
+ * @import Item5e from "./item.mjs";
  */
 
 export default class ChatMessage5e extends ChatMessage {
@@ -567,7 +568,7 @@ export default class ChatMessage5e extends ChatMessage {
   /**
    * Get the Activity that created this chat card.
    * @param {object} [options={}]
-   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
+   * @param {boolean} [options.scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Activity|void}
    */
   getAssociatedActivity({ scaled=false }={}) {
@@ -596,7 +597,7 @@ export default class ChatMessage5e extends ChatMessage {
   /**
    * Get the item associated with this chat card.
    * @param {object} [options={}]
-   * @param {boolean} [scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
+   * @param {boolean} [options.scaled=false]  Pre-scaled the item based on the scaling value on the chat card.
    * @returns {Item5e|void}
    */
   getAssociatedItem({ scaled=false }={}) {
