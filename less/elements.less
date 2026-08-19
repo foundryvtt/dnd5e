@@ -326,6 +326,8 @@ prose-mirror {
   --pip-fill: var(--color-text-secondary);
   --pip-size: 7px;
   align-items: center;
+  anchor-name: --target-pill;
+  anchor-scope: --target-pill;
   background-color: transparent;
   border: var(--pill-border-dotted);
   color: var(--pill-transparent-color);
@@ -348,11 +350,12 @@ prose-mirror {
   &:not([toggle]) .pip { display: none; }
 
   &[checked], &[data-hit] {
-    --pip-fill: var(--color-level-success);
-    background-color: #1a6b22;
-    border-color: var(--color-level-success-border);
-    color: var(--pill-colored-text-color);
     .pip { background: var(--pip-fill); }
+  }
+
+  &[checked] {
+    --pip-fill: var(--dnd5e-color-gold);
+    border-color: var(--dnd5e-color-gold);
   }
 
   &[indeterminate] {
@@ -374,6 +377,13 @@ prose-mirror {
     font-weight: bold;
   }
 
+  &[data-hit] {
+    --pip-fill: var(--color-level-success);
+    background-color: #1a6b22;
+    border-color: var(--color-level-success-border);
+    color: var(--pill-colored-text-color);
+  }
+
   &[data-hit]::before {
     color: var(--color-level-success);
     content: "\f00c";
@@ -390,7 +400,58 @@ prose-mirror {
     }
   }
 
-  &[data-value]::after {
-    content: attr(data-value);
+  &[data-value]::after { content: attr(data-value); }
+
+  .target-menu {
+    background: var(--dnd5e-background-parchment);
+    border: var(--dnd5e-chat-breakdown-border);
+    border-radius: 5px;
+    box-shadow: 0 0 8px var(--dnd5e-shadow-45);
+    flex-direction: column;
+    inline-size: max-content;
+    inset: calc(anchor(end) + 4px) auto auto anchor(start);
+    position-anchor: --target-pill;
+    position-try-fallbacks: flip-block, flip-inline;
+
+    &:popover-open { display: flex; }
+
+    li {
+      align-items: center;
+      cursor: var(--cursor-pointer);
+      display: flex;
+      gap: 8px;
+      padding: 5px 24px 6px 5px;
+      position: relative;
+
+      &:hover {
+        background: var(--context-entry-hover-background);
+        color: var(--color-text-primary);
+      }
+
+      &::after {
+        color: var(--dnd5e-color-gold);
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        inset-inline-end: 8px;
+        position: absolute;
+      }
+
+      &.active::after { content: "\f00c"; }
+
+      .title {
+        flex: 1;
+        margin-inline-end: 4px;
+      }
+
+      .pan-target {
+        block-size: unset;
+        font-size: var(--font-size-9);
+
+        &:hover, &:focus {
+          box-shadow: none;
+          text-shadow: 0 0 8px var(--color-shadow-primary);
+        }
+      }
+    }
   }
 }
