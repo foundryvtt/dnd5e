@@ -1,5 +1,4 @@
 import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
-import TargetMenu from "./target-menu.mjs";
 
 /**
  * A custom element that represents a grouping of one or more potential targets.
@@ -50,6 +49,14 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
   /* -------------------------------------------- */
 
   /**
+   * The full target list popover.
+   * @type {HTMLUListElement}
+   */
+  list;
+
+  /* -------------------------------------------- */
+
+  /**
    * The pill's indicator pip.
    * @type {HTMLDivElement}
    */
@@ -65,6 +72,16 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
     const options = this.querySelectorAll("option");
     if ( options.length !== 1 ) return null;
     return options[0].value;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convenience getter to retrieve all contained target UUIDs. Use value to retrieve only the selected ones.
+   * @type {string[]}
+   */
+  get targets() {
+    return Iterator.from(this.querySelectorAll("option")).map(el => el.value).toArray();
   }
 
   /* -------------------------------------------- */
@@ -92,10 +109,10 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
   /* -------------------------------------------- */
 
   /**
-   * The bound TargetMenu instance.
-   * @type {TargetMenu}
+   * State management for the popover.
+   * @type {boolean}
    */
-  #menu;
+  #wasOpen = false;
 
   /* -------------------------------------------- */
   /*  Methods                                     */
@@ -116,6 +133,22 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
     this.pip = document.createElement("div");
     this.pip.classList.add("pip");
     this.append(this.pip);
+    this.list = document.createElement("ul");
+    this.list.classList.add("target-menu", "unlist");
+    this.list.popover = "auto";
+    this.list.append(...Iterator.from(this.querySelectorAll("option")).map(o => {
+      const li = document.createElement("li");
+      li.classList.toggle("active", "checked" in o.dataset);
+      li.dataset.uuid = o.value;
+      li.innerHTML = `
+        <button type="button" class="pan-target unbutton"><i class="fa-solid fa-arrows-to-circle" inert></i></button>
+        <span class="title"></span>
+      `;
+      li.querySelector("button").ariaLabel = _loc("DND5E.EFFECT.Action.PanToToken");
+      li.querySelector(".title").append(o.textContent);
+      return li;
+    }));
+    this.append(this.list);
     return this.children;
   }
 
@@ -166,24 +199,6 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
   /* -------------------------------------------- */
 
   /**
-   * Prepare individual target entries.
-   * @returns {ContextMenuEntry[]}
-   */
-  #getTargetContextOptions() {
-    const options = this.querySelectorAll("option");
-    if ( this.disabled || (options.length < 2) ) return [];
-    return Iterator.from(options).map(o => ({
-      classes: ["filter-item", "checked" in o.dataset ? "active" : ""].filterJoin(" "),
-      label: o.textContent,
-      onClick: event => this.#onEntryClick(event, o.value),
-      onHoverIn: event => this.#onEntryHoverIn(event, o.value),
-      onHoverOut: this.#onEntryHoverOut.bind(this)
-    })).toArray();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Update the element's internal value state.
    */
   #update() {
@@ -197,18 +212,39 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
   /** @override */
   _activateListeners() {
     const signal = this.abortSignal;
-    this.#menu ??= new TargetMenu(this, this.constructor.tagName, {
-      eventName: "contextmenu",
-      menuItems: this.#getTargetContextOptions.bind(this),
-      onClose: this.#onEntryHoverOut.bind(this)
-    });
     this.addEventListener("keydown", event => {
       if ( event.key === " " ) this._onClick(event);
     }, { signal });
-    const uuid = this.target;
-    if ( uuid ) {
-      this.addEventListener("pointerenter", event => this.#onEntryHoverIn(event, uuid), { signal });
-      this.addEventListener("pointerleave", event => this.#onEntryHoverOut(event, uuid), { signal });
+    const options = this.querySelectorAll("option");
+    if ( options.length > 1 ) {
+      const uuid = event => event.target.closest("[data-uuid]")?.dataset.uuid;
+      // Spawning the popover on right-click is a bit tortured. If we switch to popover="manual" then we need to handle
+      // global click listener & Escape handler.
+      this.addEventListener("contextmenu", event => {
+        event.preventDefault();
+        event.stopPropagation();
+      }, { signal });
+      this.addEventListener("pointerdown", event => {
+        if ( (event.button === 2) && !this.disabled ) this.#wasOpen = this.list.matches(":popover-open");
+      }, { signal });
+      this.addEventListener("pointerup", event => {
+        if ( (event.button === 2) && !this.disabled ) setTimeout(() => this.#onToggleMenu());
+      }, { signal });
+      this.list.addEventListener("click", event => {
+        event.stopPropagation();
+        if ( event.target.closest(".pan-target") ) return this.#onTargetMouseDown(event, uuid(event));
+        this.#onEntryClick(event, uuid(event));
+      });
+      this.list.addEventListener("pointerover", event => this.#onEntryHoverIn(event, uuid(event)));
+      this.list.addEventListener("pointerout", this.#onEntryHoverOut.bind(this));
+      this.list.addEventListener("toggle", event => {
+        if ( event.newState === "closed" ) this.#onEntryHoverOut();
+      });
+    }
+    const { target } = this;
+    if ( target ) {
+      this.addEventListener("pointerenter", event => this.#onEntryHoverIn(event, target), { signal });
+      this.addEventListener("pointerleave", this.#onEntryHoverOut.bind(this), { signal });
     }
   }
 
@@ -231,6 +267,7 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
    */
   #onEntryClick(event, uuid) {
     this.querySelector(`[value="${uuid}"]`)?.toggleAttribute("data-checked");
+    this.querySelector(`li[data-uuid="${uuid}"]`).classList.toggle("active");
     this.#update();
   }
 
@@ -277,5 +314,15 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
       token.control({ releaseOthers });
       return canvas.animatePan(token.center);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the target menu.
+   */
+  #onToggleMenu() {
+    if ( this.#wasOpen ) this.list.hidePopover();
+    else this.list.showPopover();
   }
 }

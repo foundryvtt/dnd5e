@@ -116,7 +116,7 @@
       &.collapsed .chevron .fa-chevron-down { transform: rotate(-90deg); }
     }
 
-    .card-flavor {
+    .card-flavor, .flavor-text {
       color: var(--color-text-secondary);
       font-family: var(--dnd5e-font-roboto-condensed);
       font-size: var(--font-size-11);
@@ -152,30 +152,12 @@
         padding-block-start: 2px;
       }
 
-      ul {
+      > ul {
         display: flex;
         flex-wrap: wrap;
         gap: 4px;
         justify-content: end;
         margin-inline-start: auto;
-      }
-
-      button {
-        --icon-fill: currentcolor;
-        --button-background-color: var(--dnd5e-chat-button-background);
-        --button-border-color: var(--dnd5e-chat-button-border);
-        --button-hover-background-color: var(--dnd5e-chat-button-hover-background);
-        --button-hover-border-color: var(--dnd5e-chat-button-hover-border);
-        --button-size: 24px;
-        box-shadow: none;
-
-        &.target-source-toggle, &.icon {
-          block-size: var(--button-size);
-          padding: 0;
-        }
-
-        &:hover:not(:disabled), &:focus { box-shadow: var(--dnd5e-chat-button-hover-shadow); }
-        &[hidden] { display: none; }
       }
     }
 
@@ -197,13 +179,31 @@
       color: var(--color-level-error);
     }
 
+    button {
+      --icon-fill: currentcolor;
+      --button-background-color: var(--dnd5e-chat-button-background);
+      --button-border-color: var(--dnd5e-chat-button-border);
+      --button-hover-background-color: var(--button-background-color);
+      --button-hover-border-color: var(--dnd5e-color-gold);
+      --button-size: 24px;
+      box-shadow: none;
+
+      &.target-source-toggle, &.icon {
+        block-size: var(--button-size);
+        padding: 0;
+      }
+
+      &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--dnd5e-color-gold); }
+      &[hidden] { display: none; }
+    }
+
     /* Rolls */
     button.dice-roll {
+      --button-hover-background-color: var(--button-background-color);
       align-items: center;
       block-size: unset;
       flex: 1;
       flex-direction: row;
-      padding: 0 8px;
       position: relative;
 
       &:hover:not(:disabled), &:focus { box-shadow: none; }
@@ -217,7 +217,6 @@
       .icons {
         font-size: var(--font-size-10);
         inset-inline-start: 8px;
-        padding-block-start: 3px;
         position: absolute;
       }
 
@@ -298,8 +297,10 @@
       border: var(--dnd5e-chat-breakdown-border);
       border-radius: 5px;
       box-shadow: 0 0 8px var(--dnd5e-shadow-45);
-      inset: auto;
+      inset: calc(anchor(end) + 4px) anchor(end) auto anchor(start);
       margin: 0;
+      position-anchor: auto;
+      position-try-fallbacks: flip-block;
       width: unset;
     }
   }
@@ -319,6 +320,7 @@
     cursor: var(--cursor-pointer);
     display: flex;
     font-size: var(--font-size-11);
+    font-weight: normal;
     gap: 4px;
     justify-content: center;
 
@@ -342,8 +344,11 @@
 
   .apply-button {
     --input-height: 20px;
+    font-size: var(--font-size-11);
     font-variant: all-small-caps;
-    i { font-size: var(--font-size-10); }
+    font-weight: normal;
+
+    i { font-size: var(--font-size-9); }
   }
 
   .effects {

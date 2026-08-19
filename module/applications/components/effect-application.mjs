@@ -127,7 +127,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
           <div class="wrapper">
             <menu class="effects unlist"></menu>
             <button type="button" class="apply-button" data-action="apply">
-              <i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
+              <i class="fa-light fa-reply-all fa-flip-horizontal" inert></i>
               <span>${_loc("DND5E.EFFECT.Action.Apply")}</span>
             </button>
           </div>
