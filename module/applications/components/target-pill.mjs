@@ -1,3 +1,4 @@
+import TargetsField from "../../data/chat-message/fields/targets-field.mjs";
 import TargetMenu from "./target-menu.mjs";
 
 /**
@@ -27,6 +28,7 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
    * @type {boolean}
    */
   get checked() {
+    if ( !this.toggle ) return false;
     return this.#determineState().checked;
   }
 
@@ -52,6 +54,32 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
    * @type {HTMLDivElement}
    */
   pip;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convenience getter to retrieve the single target UUID if this pill represents only one.
+   * @type {string|null}
+   */
+  get target() {
+    const options = this.querySelectorAll("option");
+    if ( options.length !== 1 ) return null;
+    return options[0].value;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this pill is toggleable.
+   * @type {boolean}
+   */
+  get toggle() {
+    return this.hasAttribute("toggle");
+  }
+
+  set toggle(toggle) {
+    this.toggleAttribute("toggle", toggle);
+  }
 
   /* -------------------------------------------- */
 
@@ -168,6 +196,7 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
 
   /** @override */
   _activateListeners() {
+    const signal = this.abortSignal;
     this.#menu ??= new TargetMenu(this, this.constructor.tagName, {
       eventName: "contextmenu",
       menuItems: this.#getTargetContextOptions.bind(this),
@@ -175,7 +204,12 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
     });
     this.addEventListener("keydown", event => {
       if ( event.key === " " ) this._onClick(event);
-    }, { signal: this.abortSignal });
+    }, { signal });
+    const uuid = this.target;
+    if ( uuid ) {
+      this.addEventListener("pointerenter", event => this.#onEntryHoverIn(event, uuid), { signal });
+      this.addEventListener("pointerleave", event => this.#onEntryHoverOut(event, uuid), { signal });
+    }
   }
 
   /* -------------------------------------------- */
@@ -184,7 +218,8 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
   _onClick(event) {
     if ( this.disabled ) return;
     event.preventDefault();
-    this.checked = !this.checked;
+    if ( this.toggle ) this.checked = !this.checked;
+    else return this.#onTargetMouseDown(event, this.target);
   }
 
   /* -------------------------------------------- */
@@ -222,5 +257,25 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
   #onEntryHoverOut() {
     this.#highlighted?._onHoverOut();
     this.#highlighted = null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle target selection and panning.
+   * @param {PointerEvent} event  The triggering event.
+   * @param {string|null} uuid    The target UUID.
+   * @returns {Promise}
+   */
+  async #onTargetMouseDown(event, uuid) {
+    event.stopPropagation();
+    const { actor, token } = TargetsField.resolve({ token: uuid });
+    if ( !token || !actor?.testUserPermission(game.user, "OBSERVER") ) return;
+    const releaseOthers = !event.shiftKey;
+    if ( token.controlled ) token.release();
+    else {
+      token.control({ releaseOthers });
+      return canvas.animatePan(token.center);
+    }
   }
 }
