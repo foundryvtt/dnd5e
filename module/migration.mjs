@@ -881,7 +881,6 @@ export function migrateMessageData(messageData) {
     updateData.system = _replace({ ...sources, origin, targets, onSave: flags.dnd5e.roll.damageOnSave ?? null });
   }
 
-  /* TODO: Re-instate these migrations when foundryvtt/foundryvtt#14229 is resolved.
   else if ( rollType === "generic" ) {
     updateData.type = "generic";
     updateData.system = _replace({ ...sources, origin, targets });
@@ -895,7 +894,7 @@ export function migrateMessageData(messageData) {
   else if ( rollType === "hitPoints" ) {
     updateData.type = "hitPoints";
     updateData.system = _replace({ origin });
-  }*/
+  }
 
   if ( updateData.type ) {
     if ( rollType ) updateData["flags.dnd5e.roll"] = _del;
