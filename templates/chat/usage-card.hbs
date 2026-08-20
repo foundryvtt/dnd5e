@@ -4,7 +4,7 @@
 {{> "dnd5e.card-face" }}
 {{/if}}
 
-{{#if effects.length}}
+{{#if (and effects.length showTargets)}}
 <effect-application class="dnd5e2">
     {{#each effects}}
     <option value="{{ uuid }}"></option>

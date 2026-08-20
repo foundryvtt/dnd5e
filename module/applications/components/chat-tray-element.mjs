@@ -1,7 +1,7 @@
 /**
  * Custom element designed to display as a collapsible tray in chat.
  */
-export default class ChatTrayElement extends (foundry.applications.elements.AdoptableHTMLElement ?? HTMLElement) {
+export default class ChatTrayElement extends foundry.applications.elements.AdoptableHTMLElement {
 
   static observedAttributes = ["open"];
 

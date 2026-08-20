@@ -1,5 +1,9 @@
 import ChatMessage5e from "../documents/chat-message.mjs";
 
+Hooks.once("canvasReady", () => {
+  foundry.applications.detached.querySelectorAll("recorded-targets").forEach(el => el.buildTargetsList());
+});
+
 /**
  * Custom implementation of the chat log to support saving tray states.
  */
@@ -39,11 +43,12 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
 
   /** @inheritDoc */
   async updateMessage(message, notify=false) {
+    const trayTypes = CONFIG.ChatMessage.documentClass.TRAY_TYPES ?? ChatMessage5e.TRAY_TYPES;
     const card = this.element.querySelector(`.message[data-message-id="${message.id}"]`);
     if ( card ) message._trayStates = new Map([
       ...Array.from(card.querySelectorAll(".card-tray"))
         .map(t => [t.className.replace(" collapsed", ""), t.classList.contains("collapsed")]),
-      ...Array.from(card.querySelectorAll(ChatMessage5e.TRAY_TYPES.join(", "))).map(t => [t.tagName, t.open])
+      ...Array.from(card.querySelectorAll(trayTypes.join(", "))).map(t => [t.tagName, t.open])
     ]);
     await super.updateMessage(message, notify);
   }
@@ -55,7 +60,8 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
    * @param {IntersectionObserverEntry[]} entries  The observed elements that have entered or left the viewport.
    */
   #onCardIntersects(entries) {
-    const selector = ChatMessage5e.TRAY_TYPES.join(", ");
+    const trayTypes = CONFIG.ChatMessage.documentClass.TRAY_TYPES ?? ChatMessage5e.TRAY_TYPES;
+    const selector = `${trayTypes.join(", ")}, recorded-targets`;
     for ( const { isIntersecting, target } of entries ) {
       target.querySelectorAll(selector).forEach(t => t.visible = isIntersecting);
     }

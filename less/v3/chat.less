@@ -309,6 +309,30 @@
       position-try-fallbacks: flip-block;
       width: unset;
     }
+
+    /* Targets */
+    .icon-row > button.target-source-toggle {
+      align-self: stretch;
+      block-size: unset;
+      color: var(--dnd5e-color-gold);
+      font-size: var(--font-size-12);
+      inline-size: 1.25em;
+
+      &::before {
+        content: "\f140";
+        font-family: var(--font-awesome);
+        font-weight: bold;
+      }
+
+      &[data-mode=selected]::before { content: "\f065"; }
+
+      &:hover:not(:disabled), &:focus {
+        box-shadow: none;
+        text-shadow: 0 0 5px var(--color-shadow-highlight);
+      }
+
+      &:disabled:hover { text-shadow: none; }
+    }
   }
 }
 
@@ -407,28 +431,6 @@
 
       &[aria-pressed=true] > .pip { background: var(--dnd5e-color-gold); }
     }
-  }
-
-  .icon-row > button.target-source-toggle {
-    align-self: stretch;
-    block-size: unset;
-    color: var(--dnd5e-color-gold);
-    font-size: var(--font-size-12);
-
-    &::before {
-      content: "\f140";
-      font-family: var(--font-awesome);
-      font-weight: bold;
-    }
-
-    &[data-mode=selected]::before { content: "\f065"; }
-
-    &:hover:not(:disabled), &:focus {
-      box-shadow: none;
-      text-shadow: 0 0 5px var(--color-shadow-highlight);
-    }
-
-    &:disabled:hover { text-shadow: none; }
   }
 
   &.damage-tray target-pill {
