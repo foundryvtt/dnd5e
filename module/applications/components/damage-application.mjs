@@ -2,11 +2,11 @@ import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
 import DamageRoll from "../../dice/damage-roll.mjs";
 import { formatNumber } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
-import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
 /**
  * @import { DamageApplicationOptions, DamageCalc, DamageDescription } from "../../documents/_types.mjs";
- * @import { TargetPillMenuEntryCallback } from "./_types.mjs";
+ * @import { RecordedTargetEntryCallback, TargetPillMenuEntryCallback } from "./_types.mjs";
+ * @import RecordedTargetsElement from "./recorded-targets.mjs";
  */
 
 /**
@@ -18,7 +18,7 @@ const MULTIPLIERS = [[-1, "-1"], [0, "0"], [.25, "¼"], [.5, "½"], [1, "1"], [2
 /**
  * Application to handle applying damage from a chat card.
  */
-export default class DamageApplicationElement extends TargetedApplicationMixin(ChatTrayElement) {
+export default class DamageApplicationElement extends ChatTrayElement {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -64,10 +64,11 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
-  /** @override */
-  get shouldBuildTargetList() {
-    return super.shouldBuildTargetList && this.open && this.visible;
-  }
+  /**
+   * The container for the targets.
+   * @type {RecordedTargetsElement}
+   */
+  targetList;
 
   /* -------------------------------------------- */
 
@@ -97,14 +98,6 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
    * @type {number}
    */
   #rebuild;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Target pills grouped by their grouping keys.
-   * @type {Record<string, HTMLLIElement>}
-   */
-  #targetGroups;
 
   /* -------------------------------------------- */
 
@@ -285,11 +278,9 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       const multipliers = div.querySelector(".multiplier-row .damage-multipliers");
       multipliers.append(...this.buildMultiplierButtons(this.multiplier));
       multipliers.addEventListener("click", this._onChangeMultiplier.bind(this));
-      div.querySelector("template").replaceWith(...this.buildTargetContainer());
+      div.querySelector("template").replaceWith(this.buildTargetContainer());
       div.addEventListener("click", this._handleClickHeader.bind(this));
     }
-
-    this.targetingMode = "targeted";
   }
 
   /* -------------------------------------------- */
@@ -314,38 +305,34 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /**
+   * Build the container for the target pills.
+   * @returns {RecordedTargetsElement}
+   */
   buildTargetContainer() {
-    const [control, list] = super.buildTargetContainer();
-    const row = document.createElement("section");
-    row.classList.add("icon-row");
-    row.append(control, list);
-    list.classList.add("pills");
-    list.addEventListener("click", this.#onPaneInteract.bind(this));
-    list.addEventListener("toggle", this.#onToggleMenu.bind(this), { capture: true });
-    list.addEventListener("change", this.#onToggleGroup.bind(this));
-    return [row];
+    this.targetList = document.createElement("recorded-targets");
+    this.targetList.onBuildTargetListEntry = this.buildTargetListEntry.bind(this);
+    this.targetList.suspended = !this.open;
+    this.targetList.addEventListener("click", this.#onPaneInteract.bind(this));
+    this.targetList.addEventListener("toggle", this.#onToggleMenu.bind(this), { capture: true });
+    this.targetList.addEventListener("change", this.#onToggleGroup.bind(this));
+    return this.targetList;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  buildTargetsList() {
-    this.#targetGroups = {};
-    return super.buildTargetsList();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  buildTargetListEntry({ uuid, name }) {
+  /**
+   * Handle building & grouping target entries.
+   * @type {RecordedTargetEntryCallback}
+   */
+  buildTargetListEntry(targetList, { uuid, name }) {
     const token = fromUuidSync(uuid);
     if ( !token?.isOwner ) return;
 
     const options = this.getMergedOptions(uuid);
     const damage = this.calculateDamage(token.actor, options);
     const key = this.#getGroupingKey(token, options, damage);
-    let group = this.#targetGroups[key];
+    let group = targetList.targetGroups[key];
     const isGrouped = group;
 
     if ( !group ) {
@@ -372,7 +359,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       pill.onBuildMenuEntry = this.#buildTargetMenuEntry.bind(this);
       pill.onEntryClick = this.#onClickTargetMenuEntry.bind(this);
       group.append(pill);
-      this.#targetGroups[key] = group;
+      targetList.targetGroups[key] = group;
       this.refreshListEntry(group, damage);
     }
 
@@ -555,6 +542,14 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _handleToggleOpen(open) {
+    super._handleToggleOpen(open);
+    if ( this.targetList ) this.targetList.suspended = !open;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle clicking the apply damage button.
    * @param {PointerEvent} event  Triggering click event.
@@ -585,21 +580,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     for ( const other of this.querySelectorAll(".multiplier-row .multiplier-button") ) {
       other.ariaPressed = `${Number(other.value) === this.multiplier}`;
     }
-    this.buildTargetsList();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onOpen() {
-    this.buildTargetsList();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onVisible() {
-    this.buildTargetsList();
+    this.targetList.buildTargetsList();
   }
 
   /* -------------------------------------------- */
@@ -659,7 +640,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       else if ( this.multiplier === 0 ) options.multiplier = 1;
       else delete options.multiplier;
     }
-    this.buildTargetsList();
+    this.targetList.buildTargetsList();
   }
 
   /* -------------------------------------------- */
@@ -683,7 +664,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     // then disappears out from underneath the cursor. We have to defer the rebuild also to fix the ordering of events.
     this.#rebuild = setTimeout(() => {
       if ( this.querySelector(".target-pane:popover-open") ) return;
-      this.buildTargetsList();
+      this.targetList.buildTargetsList();
     });
   }
 }

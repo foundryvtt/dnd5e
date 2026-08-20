@@ -110,12 +110,14 @@ export default class UsageMessageData extends ItemMessageData {
       context = await super._prepareContext(options);
       context.activity = this.activity;
       context.buttons = this._prepareButtons();
+      context.showTargets = true;
       this._prepareButtonGroups(context);
       if ( this.activity.name ) context.subtitle = this.activity.name;
     }
 
     const item = this.parent.getAssociatedItem();
     const activity = this.parent.getAssociatedActivity();
+    context.showTargets = this.effects.length || (activity.type === "check") || (activity.type === "save");
     const allowPlayerApplication = this.targets?.some(t => TargetsField.resolve(t).token?.isOwner)
       || ((this.parent.author?.id === game.user.id) && (activity?.target.affects.type === "self"));
     context.effects = (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: item }))))
