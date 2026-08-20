@@ -2509,6 +2509,7 @@
 
 "DND5E.Damage": "Damage",
 "DND5E.DamageApplication": {
+  "Back": "Back to previous pane",
   "Change": {
     "Modification": "{type} Modification",
     "Immunity": "{type} Immunity",
@@ -2517,7 +2518,18 @@
     "Vulnerability": "{type} Vulnerability"
   },
   "Downgrading": "Downgrading {source} to Resistance",
-  "Ignoring": "Ignoring {source}"
+  "Ignoring": "Ignoring {source}",
+  "Multiplier": "Damage multiplier",
+  "Section": {
+    "Changes": "Applied to this target",
+    "Multiplier": "Multiplier",
+    "Targets": "Targets in this group"
+  },
+  "State": {
+    "active": "Applied",
+    "downgrade": "Downgraded",
+    "ignore": "Ignored"
+  }
 },
 "DND5E.DamageModification": {
   "Label": "Damage Modification",

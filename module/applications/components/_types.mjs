@@ -1,4 +1,8 @@
 /**
+ * @import { DamageApplicationOptions, DamageCalc } from "../../documents/_types.mjs";
+ */
+
+/**
  * @typedef InventorySectionDescriptor
  * @property {string} id                                     The section identifier.
  * @property {number} order                                  Sections are displayed in ascending order of this value.
@@ -51,4 +55,31 @@
  * @property {ListControlDescriptor[]} filters  Filter configuration.
  * @property {ListControlDescriptor[]} sorting  Sorting configuration.
  * @property {ListControlDescriptor[]} grouping Grouping configuration.
+ */
+
+/**
+ * @callback TargetPillMenuCallback
+ * @param {HTMLElement} pill  The target pill element.
+ * @param {HTMLElement} menu  The menu being built.
+ */
+
+/**
+ * @callback TargetPillMenuEntryCallback
+ * @param {HTMLElement} pill                                         The target pill element.
+ * @param {{ checked: boolean, name: string, uuid: string }} target  Target data.
+ * @returns {HTMLElement|void}
+ */
+
+/**
+ * @callback TargetPillMenuEntryClickCallback
+ * @param {HTMLElement} pill    The target pill element.
+ * @param {PointerEvent} event  The triggering event.
+ */
+
+/**
+ * @typedef TargetPillMenuState
+ * @property {DamageCalc|null} [calc]                   The current damage calculation.
+ * @property {TargetPillElement|null} [group]           The target pill representing the group of targets.
+ * @property {DamageApplicationOptions|null} [options]  Options which adjust damage calculation.
+ * @property {string[]} targets                         The targets in the group.
  */
