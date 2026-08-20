@@ -559,12 +559,14 @@
       &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
     }
 
-    &:has(select:disabled) .tags.input-element-tags .tag {
-      cursor: var(--cursor-default);
-      a { cursor: var(--cursor-default); }
-      &:hover a { text-shadow: none; }
-      .remove { display: unset; }
-      .fa-xmark { display: none; }
+    &:has(select:disabled), &:is(:disabled, [readonly]) {
+      .tags.input-element-tags .tag {
+        cursor: var(--cursor-default);
+        a { cursor: var(--cursor-default); }
+        &:hover a { text-shadow: none; }
+        .remove { display: unset; }
+        .fa-xmark { display: none; }
+      }
     }
 
     &.hidden-tags .tags.input-element-tags { display: none; }
