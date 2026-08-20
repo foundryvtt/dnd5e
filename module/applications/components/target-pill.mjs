@@ -376,6 +376,9 @@ export default class TargetPillElement extends foundry.applications.elements.Abs
   #onToggleMenu() {
     if ( !this.isConnected ) return;
     if ( this.#wasOpen ) this.pane.hidePopover();
-    else this.pane.showPopover();
+    else {
+      ui.context?.close({ animate: false });
+      this.pane.showPopover();
+    }
   }
 }

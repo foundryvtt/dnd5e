@@ -153,6 +153,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     union("immunity");
     if ( foundry.utils.getType(options.downgrade) === "Set" ) {
       active.immunity = active.immunity.union(options.downgrade);
+      active.resistance = active.resistance.difference(options.downgrade);
     }
     active.threshold ||= options.ignore?.threshold;
 
@@ -297,14 +298,15 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
 
   /**
    * Build a row of multiplier buttons.
-   * @param {number} active  The currently active button.
+   * @param {Set<number>|number} active  The currently active button.
    * @returns {HTMLButtonElement[]}
    */
   buildMultiplierButtons(active) {
+    const pressed = active instanceof Set ? active : new Set([active]);
     return MULTIPLIERS.map(([value, display]) => {
       const button = document.createElement("button");
       button.classList.add("multiplier-button", "split-control");
-      Object.assign(button, { value, ariaPressed: value === active, type: "button" });
+      Object.assign(button, { value, ariaPressed: pressed.has(value), type: "button" });
       button.insertAdjacentHTML("afterbegin", `<span>${display}</span>`);
       return button;
     });
@@ -515,7 +517,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       : token.name);
     const multipliers = document.createElement("div");
     multipliers.classList.add("menu-multipliers", "damage-multipliers", "split-button");
-    multipliers.append(...this.buildMultiplierButtons(options.multiplier));
+    multipliers.append(...this.buildMultiplierButtons(new Set(uuids.map(u => this.getMergedOptions(u).multiplier))));
     const sources = document.createElement("menu");
     sources.classList.add("menu-change-sources", "unlist");
     sources.append(...this.#buildChangeSources(active, options));
@@ -628,13 +630,13 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
     if ( !button ) return;
     if ( button.classList.contains("back") ) this.#paneState = this.#paneStack.pop() ?? { targets: [] };
     else {
-      Object.assign(this.#paneState, { calc: null, options: null });
       for ( const uuid of this.#paneState.targets ) {
         const options = this.getTargetOptions(uuid);
         if ( button.classList.contains("multiplier-button") ) options.multiplier = Number(button.value);
         else this.#cycleChangeSource(options, button.dataset);
       }
     }
+    Object.assign(this.#paneState, { calc: null, options: null });
     const { group, targets } = this.#paneState;
     const [uuid] = targets;
     const token = fromUuidSync(uuid);
