@@ -1,16 +1,16 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import { convertTime, formatTime, loadingTooltip } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
-import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
 /**
- * @import { TargetPillMenuEntryCallback } from "./_types.mjs";
+ * @import { RecordedTargetEntryCallback, TargetPillMenuEntryCallback } from "./_types.mjs";
+ * @import RecordedTargetsElement from "./recorded-targets.mjs";
  */
 
 /**
  * Application to handle applying active effects from a chat card.
  */
-export default class EffectApplicationElement extends TargetedApplicationMixin(ChatTrayElement) {
+export default class EffectApplicationElement extends ChatTrayElement {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -48,10 +48,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
-  /** @override */
-  get shouldBuildTargetList() {
-    return super.shouldBuildTargetList && this.open && this.visible;
-  }
+  /**
+   * The container for the targets.
+   * @type {RecordedTargetsElement}
+   */
+  targetList;
 
   /* -------------------------------------------- */
 
@@ -64,40 +65,12 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   /* -------------------------------------------- */
 
   /**
-   * Target pills grouped by their grouping keys.
-   * @type {Record<string, HTMLLIElement>}
-   */
-  #targetGroups;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Checked status for application targets.
-   * @type {Map<string, boolean>}
-   */
-  #targetOptions = new Map();
-
-  /* -------------------------------------------- */
-
-  /**
    * Checked status for the given effect.
    * @param {string} uuid  UUID of the effect.
    * @returns {boolean}
    */
   effectChecked(uuid) {
     return this.#effectOptions.get(uuid) ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Options for a specific target.
-   * @param {string} uuid  UUID of the target.
-   * @returns {boolean}    Should this target be checked?
-   */
-  targetChecked(uuid) {
-    if ( this.targetingMode === "selected" ) return true;
-    return this.#targetOptions.get(uuid) ?? true;
   }
 
   /* -------------------------------------------- */
@@ -112,12 +85,11 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     if ( !this.chatMessage ) return;
 
     // Build the frame HTML only once
-    if ( !this.effectsList || !this.targetList ) {
+    if ( !this.effectsList ) {
       let effectPromise;
       if ( !this.effects.length ) effectPromise = Promise.all(
         Array.from(this.querySelectorAll("option")).map(o => fromUuid(o.value))
       ).then(p => this.effects = p.filter(_ => _));
-
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
       if ( !this.open ) div.classList.add("collapsed");
@@ -141,14 +113,10 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       this.effectsList = div.querySelector(".effects");
       if ( effectPromise ) effectPromise.then(() => this.buildEffectsList());
       else this.buildEffectsList();
-      div.querySelector(".wrapper").prepend(...this.buildTargetContainer());
-      this.targetList.addEventListener("change", this._onCheckTarget.bind(this));
       this.effectsList.addEventListener("click", this._onCheckEffect.bind(this));
       div.addEventListener("click", this._handleClickHeader.bind(this));
       div.querySelector(".apply-button").addEventListener("click", this._onApplyEffects.bind(this));
     }
-
-    this.targetingMode = "targeted";
   }
 
   /* -------------------------------------------- */
@@ -191,64 +159,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  buildTargetContainer() {
-    const [control, list] = super.buildTargetContainer();
-    const row = document.createElement("section");
-    row.classList.add("icon-row");
-    row.append(control, list);
-    list.classList.add("pills");
-    return [row];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  buildTargetListEntry({ uuid, name }) {
-    const token = fromUuidSync(uuid);
-    if ( !token?.isOwner ) return;
-
-    const key = token.getGroupingKey() ?? token.uuid;
-    let group = this.#targetGroups[key];
-    const isGrouped = group;
-
-    if ( !group ) {
-      group = document.createElement("li");
-      const pill = document.createElement("target-pill");
-      pill.insertAdjacentHTML("afterbegin", "<label></label><datalist></datalist>");
-      pill.querySelector("label").append(name);
-      pill.disabled = this.targetingMode === "selected";
-      pill.toggle = true;
-      pill.onBuildMenuEntry = this.#buildTargetMenuEntry.bind(this);
-      pill.onEntryClick = this.#onClickTargetMenuEntry.bind(this);
-      group.append(pill);
-      this.#targetGroups[key] = group;
-    }
-
-    const option = document.createElement("option");
-    option.value = token.uuid;
-    option.toggleAttribute("data-checked", this.targetChecked(token.uuid));
-    option.append(name);
-    const data = group.querySelector("datalist");
-    data.append(option);
-    const count = data.children.length;
-    group.querySelector("label").textContent = count > 1
-      ? _loc("DND5E.CHATMESSAGE.Targets.Count", { name, number: count })
-      : name;
-
-    return isGrouped ? null : group;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  buildTargetsList() {
-    this.#targetGroups = {};
-    return super.buildTargetsList();
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Abbreviate an effect's duration, using the most significant unit that can represent it.
    * @param {ActiveEffect5e} effect              The effect being displayed.
@@ -264,25 +174,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       ? { value, unit: from }
       : convertTime(value, from, { truncate: true });
     return { icon: "fa-clock", label: formatTime(converted, unit, { unitDisplay: "narrow" }) };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Create the markup for an entry in the expanded target drop-down.
-   * @type {TargetPillMenuEntryCallback}
-   */
-  #buildTargetMenuEntry(pill, { checked, name, uuid }={}) {
-    const li = document.createElement("li");
-    li.classList.toggle("active", checked);
-    li.dataset.uuid = uuid;
-    li.innerHTML = `
-      <button type="button" class="pan-target unbutton"><i class="fa-solid fa-arrows-to-circle" inert></i></button>
-      <span class="title"></span>
-    `;
-    li.querySelector(".pan-target").ariaLabel = _loc("DND5E.EFFECT.Action.PanToToken");
-    li.querySelector(".title").append(name);
-    return li;
   }
 
   /* -------------------------------------------- */
@@ -377,6 +268,20 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Get the UUIDs of targets to apply selected effects to.
+   * @returns {string[]}
+   */
+  #getTargets() {
+    const recordedTargets = this.closest("[data-message-id]").querySelector("recorded-targets");
+    if ( recordedTargets ) return recordedTargets.targets;
+    return canvas.tokens?.controlled?.map(t => {
+      if ( t.actor ) return t.document.uuid;
+    }).filter(_ => _) ?? [];
+  }
+
+  /* -------------------------------------------- */
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
@@ -387,8 +292,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   async _onApplyEffects() {
     const effects = this.effects.filter(e => this.effectChecked(e.uuid));
     const operations = [];
-    for ( const option of this.targetList.querySelectorAll("option[data-checked]") ) {
-      const doc = await fromUuid(option.value);
+    for ( const uuid of this.#getTargets() ) {
+      const doc = await fromUuid(uuid);
       const actor = doc?.actor ?? doc;
       if ( !actor ) continue;
       const data = [];
@@ -430,41 +335,5 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     this.querySelectorAll(".effect[data-uuid]").forEach(el => {
       el.querySelector("button").ariaPressed = `${this.#effectOptions.get(el.dataset.uuid) ?? false}`;
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle checking or unchecking a target.
-   * @param {Event} event  Triggering change event.
-   */
-  _onCheckTarget(event) {
-    this.#targetOptions = new Map(Iterator.from(event.currentTarget.querySelectorAll(".target option"))
-      .map(el => [el.value, "checked" in el.dataset]));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicking a target menu entry.
-   * @param {HTMLElement} pill    The target-pill element.
-   * @param {PointerEvent} event  The triggering event.
-   */
-  #onClickTargetMenuEntry(pill, event) {
-    event.target.closest("li[data-uuid]")?.classList.toggle("active");
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onOpen() {
-    this.buildTargetsList();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onVisible() {
-    this.buildTargetsList();
   }
 }

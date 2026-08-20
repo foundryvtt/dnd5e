@@ -1,5 +1,6 @@
 /**
  * @import { DamageApplicationOptions, DamageCalc } from "../../documents/_types.mjs";
+ * @import RecordedTargetsElement from "./recorded-targets.mjs";
  */
 
 /**
@@ -55,6 +56,15 @@
  * @property {ListControlDescriptor[]} filters  Filter configuration.
  * @property {ListControlDescriptor[]} sorting  Sorting configuration.
  * @property {ListControlDescriptor[]} grouping Grouping configuration.
+ */
+
+/**
+ * @callback RecordedTargetEntryCallback
+ * @param {RecordedTargetsElement} element  The parent recorded targets element.
+ * @param {object} data                     Data about the entry.
+ * @param {string} data.name                The entry's name.
+ * @param {string} data.uuid                The entry's UUID.
+ * @returns {HTMLLIElement|null|void}
  */
 
 /**

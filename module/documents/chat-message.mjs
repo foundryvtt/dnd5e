@@ -665,10 +665,12 @@ export default class ChatMessage5e extends ChatMessage {
     if ( game.settings.get("dnd5e", "autoCollapseChatTrays") === "always" ) return;
     const origin = this.getOriginatingMessage();
     if ( origin === this ) return;
-    const query = `[data-message-id="${origin.id}"] effect-application`;
-    for ( const tray of foundry.applications.detached.querySelectorAll(query) ) {
-      tray.targetingMode = "selected";
-      tray.open = true;
+    const query = `[data-message-id="${origin.id}"]`;
+    for ( const message of foundry.applications.detached.querySelectorAll(query) ) {
+      const tray = message.querySelector("effect-application");
+      const targets = message.querySelector("recorded-targets");
+      if ( tray ) tray.open = true;
+      if ( targets ) targets.targetingMode = "selected";
     }
   }
 }
