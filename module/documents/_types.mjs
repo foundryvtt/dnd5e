@@ -93,6 +93,14 @@
  */
 
 /**
+ * @typedef DamageCalc
+ * @property {Record<string, Set<string>>} active  Active damage adjustment toggles.
+ * @property {number} temp                         Temporary HP total.
+ * @property {number} tempMax                      Temporary maximum HP total.
+ * @property {number} total                        Total HP delta.
+ */
+
+/**
  * @typedef {Array<DamageDescription>} DamageSummary
  * @property {number} amount   Total amount of damage/healing across all damage types.
  * @property {number} temp     Total amount of temp HP across all damage types.

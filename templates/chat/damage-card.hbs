@@ -1,30 +1,57 @@
-{{#if header}}
 <div class="chat-card">
-    <section class="card-header description{{#if header.isCritical}} critical{{/if}}">
-        <header class="summary">
-            <img class="gold-icon" src="{{ header.item.img }}" alt="{{ header.item.name }}">
-            <div class="name-stacked">
-                <span class="title">{{ header.item.name }}</span>
-                <span class="subtitle">{{ header.subtitle }}</span>
-            </div>
-        </header>
+
+    {{!-- Header --}}
+    {{#with header}}
+    <section class="card-header no-description">
+        <div class="item-icon" data-action="showDocument" data-uuid="{{ item.uuid }}">
+            <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+        </div>
+        {{#if activity.uuid}}
+        <div class="activity-icon">{{ dnd5e-icon activity.img alt=activity.name classes="gold-icon" }}</div>
+        {{/if}}
+        <div class="name-stacked">
+            <span class="title">{{ item.name }}</span>
+            {{#if activity.name}}
+            <span class="subtitle">{{ subtitle }}</span>
+            {{/if}}
+        </div>
     </section>
-</div>
-{{/if}}
+    {{/with}}
 
-<div class="dice-roll{{#if isPrivate}} secret-roll{{/if}}" data-action="expandRoll">
-    <div class="dice-result">
-        <div class="dice-formula">{{#if isPrivate}}???{{else}}{{ formula }}{{/if}}</div>
-        {{#unless isPrivate}}
-        {{> "dnd5e.damage-breakdown" }}
-        {{/unless}}
-        <h4 class="dice-total">{{#if isPrivate}}?{{else}}{{ total }}{{/if}}</h4>
-    </div>
+    {{!-- Supplements --}}
+    {{#if onSave}}
+    <p class="supplement"><strong>{{ localize "DND5E.SAVE.OnSave" }}</strong> {{ onSave }}</p>
+    {{/if}}
+
+    {{!-- Rows --}}
+    {{#each rows}}
+    {{#if entries.length}}
+    <section class="icon-row">
+        <i class="fa-fw {{ icon }}" aria-label="{{ localize label }}"></i>
+        <ul class="pills unlist">
+            {{#each entries}}
+            <li class="pill transparent {{ css }}">
+                <span class="label">{{ label }}</span>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
+    {{/if}}
+    {{/each}}
 </div>
 
-{{#if onSave}}
-<p class="supplement"><strong>{{ localize "DND5E.SAVE.OnSave" }}</strong> {{ onSave }}</p>
-{{/if}}
+{{!-- Rolls --}}
+<section class="icon-row">
+    <i class="fa-fw fa-solid fa-dice" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Roll" }}"></i>
+    <button type="button" class="dice-roll" {{ disabled isPrivate }}>
+        <span class="result">
+            <strong class="total">{{ ifThen isPrivate "?" total }}</strong>
+        </span>
+    </button>
+    {{#unless isPrivate}}
+    <div class="roll-breakdown" popover>{{> "dnd5e.damage-breakdown" }}</div>
+    {{/unless}}
+</section>
 
 {{#if showTray}}
 <damage-application class="dnd5e2"></damage-application>

@@ -56,11 +56,41 @@ export default class DamageMessageData extends RollMessageData {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /**
+   * Marshal salient properties for this damage roll.
+   * @param {Activity} [activity]  The associated activity.
+   * @returns {{ [css]: string, label: string }[]}
+   * @protected
+   */
+  _getDamageProperties(activity) {
+    activity ??= this.parent.getAssociatedActivity();
+    const { isSpell=false } = activity ?? {};
+    const isCritical = this.parent.rolls[0]?.isCritical === true;
+    const isWeapon = this.item.type === "weapon";
+    const props = new Set(this.parent.rolls.flatMap(r => r.options.properties ?? []));
+    const tags = [];
+    if ( isCritical ) tags.push({ css: "critical", label: _loc("DND5E.Critical") });
+    if ( isSpell ) tags.push({ label: _loc(CONFIG.Item.typeLabels.spell) });
+    else if ( isWeapon ) tags.push({ label: _loc(CONFIG.Item.typeLabels.weapon) });
+    tags.push(...Array.from(props, p => ({ label: CONFIG.DND5E.itemProperties[p]?.label })).filter(p => p.label));
+    return tags;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async _prepareContext(options) {
     const aggregate = CONFIG.DND5E.aggregateDamageDisplay;
     const rolls = aggregate ? aggregateDamageRolls(this.parent.rolls) : this.parent.rolls;
     const isPrivate = !this.parent.isContentVisible;
+    const activity = this.parent.getAssociatedActivity();
     const context = {
       isPrivate,
       formula: rolls.map(r => aggregate ? r.formula : ` + ${r.formula}`).join("").replace(/^ \+ /, ""),
@@ -70,21 +100,23 @@ export default class DamageMessageData extends RollMessageData {
         part.label = part.config?.labelShort ?? part.config?.label ?? "";
         return part;
       }),
+      rows: {
+        properties: {
+          entries: this._getDamageProperties(activity),
+          icon: "fa-solid fa-tag",
+          label: "DND5E.CHATMESSAGE.Row.Properties"
+        }
+      },
       showTray: game.user.isGM && !isPrivate,
       total: rolls.reduce((total, roll) => total + Math.max(0, roll.total), 0)
     };
 
     const item = this.parent.getAssociatedItem();
-    if ( !isPrivate && item ) {
-      const isCritical = this.parent.rolls[0]?.isCritical === true;
-      context.header = {
-        isCritical, item,
-        subtitle: isCritical
-          ? _loc("DND5E.CriticalHit")
-          : this.parent.getAssociatedActivity()?.damageFlavor ?? _loc("DND5E.DamageRoll")
-      };
-    }
-
+    if ( !isPrivate && item ) context.header = {
+      item,
+      activity: this.activity,
+      subtitle: [this.activity.name, activity?.damageFlavor].filterJoin(" • ")
+    };
     if ( !isPrivate && this.onSave ) {
       context.onSave = _loc(`DND5E.SAVE.FIELDS.damage.onSave.${this.onSave.capitalize()}`);
     }
@@ -97,8 +129,7 @@ export default class DamageMessageData extends RollMessageData {
   /** @inheritDoc */
   _onRender(element) {
     super._onRender(element);
-
-    // The item header carries the name and the roll flavor, so the message header's copy is redundant.
+    element.classList.add("compact");
     if ( element.querySelector(".chat-card .card-header") ) {
       element.querySelector(".message-header .flavor-text")?.remove();
     }

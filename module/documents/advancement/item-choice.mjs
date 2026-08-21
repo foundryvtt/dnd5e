@@ -303,8 +303,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     }
 
     // If spell list is specified, ensure the spell is on that list
-    if ( (type === "spell") && restriction.list.size ) {
-      const lists = Array.from(restriction.list)
+    if ( (type === "spell") && restriction.pane.size ) {
+      const lists = Array.from(restriction.pane)
         .map(l => dnd5e.registry.spellLists.forType(l))
         .filter(_ => _);
       if ( !lists.some(l => l.has(item)) ) return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellList", {

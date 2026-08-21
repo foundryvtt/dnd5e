@@ -148,6 +148,7 @@
 
       > i {
         color: var(--dnd5e-color-gold);
+        flex: 0 0 var(--fa-width);
         font-size: var(--font-size-12);
         padding-block-start: 2px;
       }
@@ -177,6 +178,11 @@
     .target.none {
       border: 1px solid var(--color-level-error-border);
       color: var(--color-level-error);
+    }
+
+    .pill.critical {
+      border: 1px solid var(--color-level-success-border);
+      color: var(--color-level-success);
     }
 
     button {
@@ -423,6 +429,55 @@
     }
 
     &:disabled:hover { text-shadow: none; }
+  }
+
+  &.damage-tray target-pill {
+    .pip { display: none; }
+
+    .calculated {
+      font-weight: bold;
+
+      &.damage { color: var(--dnd5e-color-application-damage); }
+      &.temp { color: var(--dnd5e-color-application-temp); }
+      &.temp-max { color: var(--dnd5e-color-application-damage); }
+      &.healing { color: var(--dnd5e-color-application-healing); }
+      &[hidden] { display: none; }
+    }
+
+    .calculated:not([hidden]) ~ .calculated:not([hidden])::before {
+      color: var(--color-text-secondary);
+      content: "/";
+    }
+
+    > .calculated { --icon-size: 8px; }
+
+    .target-pane.damage-pane {
+      inline-size: 230px;
+
+      .target-entries li {
+        padding-inline-end: 5px;
+        .fa-chevron-right { font-size: var(--font-size-8); }
+      }
+    }
+  }
+
+  .damage-multipliers { margin-inline-start: auto; }
+
+  .multiplier-button {
+    block-size: unset;
+    font-size: var(--font-size-11);
+    font-weight: normal;
+    padding-block: 2px;
+
+    &:first-child {
+      border-end-start-radius: 3px;
+      border-start-start-radius: 3px;
+    }
+
+    &:last-child {
+      border-end-end-radius: 3px;
+      border-start-end-radius: 3px;
+    }
   }
 }
 
