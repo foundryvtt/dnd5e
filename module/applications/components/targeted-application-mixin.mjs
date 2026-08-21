@@ -167,20 +167,11 @@ export default function TargetedApplicationMixin(Base) {
      * @protected
      */
     _buildTargetSourceControl() {
-      const control = document.createElement("div");
-      control.classList.add("target-source-control");
-      control.innerHTML = `
-        <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
-          <i class="fa-solid fa-bullseye" inert></i> ${_loc("DND5E.Tokens.Targeted")}
-        </button>
-        <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
-          <i class="fa-solid fa-expand" inert></i> ${_loc("DND5E.Tokens.Selected")}
-        </button>
-      `;
-      control.querySelectorAll("button").forEach(b =>
-        b.addEventListener("click", this._onChangeTargetMode.bind(this))
-      );
-      if ( !this.hasRecordedTargets ) control.hidden = true;
+      const control = document.createElement("button");
+      control.type = "button";
+      control.classList.add("unbutton", "control-button", "target-source-toggle");
+      control.toggleAttribute("data-tooltip", true);
+      control.addEventListener("click", this._onChangeTargetMode.bind(this));
       return control;
     }
 
@@ -191,9 +182,10 @@ export default function TargetedApplicationMixin(Base) {
      * @protected
      */
     _refreshTargetMode() {
-      for ( const button of this.targetSourceControl.querySelectorAll("[data-mode]") ) {
-        button.ariaPressed = `${button.dataset.mode === this.targetingMode}`;
-      }
+      const targeted = this.targetingMode === "targeted";
+      this.targetSourceControl.dataset.mode = this.targetingMode;
+      this.targetSourceControl.ariaLabel = _loc(`DND5E.Tokens.${targeted ? "Targeted" : "Selected"}`);
+      this.targetSourceControl.disabled = !this.hasRecordedTargets;
     }
 
     /* -------------------------------------------- */
@@ -204,9 +196,9 @@ export default function TargetedApplicationMixin(Base) {
      * Handle clicking on the target mode buttons.
      * @param {PointerEvent} event  Triggering click event.
      */
-    async _onChangeTargetMode(event) {
+    _onChangeTargetMode(event) {
       event.preventDefault();
-      this.targetingMode = event.currentTarget.dataset.mode;
+      this.targetingMode = this.targetingMode === "targeted" ? "selected" : "targeted";
     }
   };
 }

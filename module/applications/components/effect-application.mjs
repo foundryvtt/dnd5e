@@ -4,6 +4,10 @@ import ChatTrayElement from "./chat-tray-element.mjs";
 import TargetedApplicationMixin from "./targeted-application-mixin.mjs";
 
 /**
+ * @import { TargetPillMenuEntryCallback } from "./_types.mjs";
+ */
+
+/**
  * Application to handle applying active effects from a chat card.
  */
 export default class EffectApplicationElement extends TargetedApplicationMixin(ChatTrayElement) {
@@ -61,7 +65,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /**
    * Target pills grouped by their grouping keys.
-   * @type {Record<string, TargetPillElement>}
+   * @type {Record<string, HTMLLIElement>}
    */
   #targetGroups;
 
@@ -215,7 +219,10 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       pill.querySelector("label").append(name);
       pill.disabled = this.targetingMode === "selected";
       pill.toggle = true;
+      pill.onBuildMenuEntry = this.#buildTargetMenuEntry.bind(this);
+      pill.onEntryClick = this.#onClickTargetMenuEntry.bind(this);
       group.append(pill);
+      this.#targetGroups[key] = group;
     }
 
     const option = document.createElement("option");
@@ -228,7 +235,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
     group.querySelector("label").textContent = count > 1
       ? _loc("DND5E.CHATMESSAGE.Targets.Count", { name, number: count })
       : name;
-    this.#targetGroups[key] = group;
 
     return isGrouped ? null : group;
   }
@@ -239,28 +245,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   buildTargetsList() {
     this.#targetGroups = {};
     return super.buildTargetsList();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _buildTargetSourceControl() {
-    const control = document.createElement("button");
-    control.type = "button";
-    control.classList.add("unbutton", "control-button", "target-source-toggle");
-    control.toggleAttribute("data-tooltip", true);
-    control.addEventListener("click", this._onChangeTargetMode.bind(this));
-    return control;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _refreshTargetMode() {
-    const targeted = this.targetingMode === "targeted";
-    this.targetSourceControl.dataset.mode = this.targetingMode;
-    this.targetSourceControl.ariaLabel = _loc(`DND5E.Tokens.${targeted ? "Targeted" : "Selected"}`);
-    this.targetSourceControl.disabled = !this.hasRecordedTargets;
   }
 
   /* -------------------------------------------- */
@@ -280,6 +264,25 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       ? { value, unit: from }
       : convertTime(value, from, { truncate: true });
     return { icon: "fa-clock", label: formatTime(converted, unit, { unitDisplay: "narrow" }) };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the markup for an entry in the expanded target drop-down.
+   * @type {TargetPillMenuEntryCallback}
+   */
+  #buildTargetMenuEntry(pill, { checked, name, uuid }={}) {
+    const li = document.createElement("li");
+    li.classList.toggle("active", checked);
+    li.dataset.uuid = uuid;
+    li.innerHTML = `
+      <button type="button" class="pan-target unbutton"><i class="fa-solid fa-arrows-to-circle" inert></i></button>
+      <span class="title"></span>
+    `;
+    li.querySelector(".pan-target").ariaLabel = _loc("DND5E.EFFECT.Action.PanToToken");
+    li.querySelector(".title").append(name);
+    return li;
   }
 
   /* -------------------------------------------- */
@@ -411,14 +414,6 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _onChangeTargetMode(event) {
-    event.preventDefault();
-    this.targetingMode = this.targetingMode === "targeted" ? "selected" : "targeted";
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Handle checking or unchecking an effect.
    * @param {PointerEvent} event  The triggering event.
@@ -446,6 +441,17 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
   _onCheckTarget(event) {
     this.#targetOptions = new Map(Iterator.from(event.currentTarget.querySelectorAll(".target option"))
       .map(el => [el.value, "checked" in el.dataset]));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle clicking a target menu entry.
+   * @param {HTMLElement} pill    The target-pill element.
+   * @param {PointerEvent} event  The triggering event.
+   */
+  #onClickTargetMenuEntry(pill, event) {
+    event.target.closest("li[data-uuid]")?.classList.toggle("active");
   }
 
   /* -------------------------------------------- */
