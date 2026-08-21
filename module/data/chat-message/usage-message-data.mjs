@@ -71,9 +71,92 @@ export default class UsageMessageData extends ItemMessageData {
 
   /* -------------------------------------------- */
 
+  /**
+   * The message's currently configured targets.
+   * @type {(TokenDocument5e|Actor5e)[]|void}
+   */
+  get evaluatedTargets() {
+    const { checked, mode } = this.parent._targetState;
+    if ( !mode ) return;
+    if ( mode === "selected" ) return canvas.tokens?.controlled;
+    return this.targets.map(descriptor => {
+      if ( checked.get(descriptor.token) === false ) return null;
+      const { actor, token } = TargetsField.resolve(descriptor);
+      return token?.document ?? actor;
+    }).filter(_ => _);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Marshal all the rolled outcomes of this usage.
+   * @type {Map<string, "failure"|"success">}
+   */
+  get outcomes() {
+    if ( this.#outcomes ) return this.#outcomes;
+    const outcomes = new Map();
+    for ( const message of this.parent.getAssociatedRolls(this.activity.type) ) {
+      const [roll] = message.rolls;
+      if ( !(roll instanceof CONFIG.Dice.D20Roll) ) continue;
+      const uuid = message.getAssociatedToken()?.uuid;
+      if ( !uuid ) continue;
+      if ( roll.isSuccess || message.system.forceSuccess ) outcomes.set(uuid, "success");
+      else if ( roll.isFailure ) outcomes.set(uuid, "failure");
+    }
+    return this.#outcomes = outcomes;
+  }
+
+  #outcomes;
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   get showIdentity() {
     return !!this.activity.name;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * The currently highlighted token.
+   * @type {Token5e|null}
+   */
+  #highlighted = null;
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Perform operations when one of the descendent cards is created, updated, or deleted.
+   * @param {ChatMessage5e} message  The descendent.
+   * @returns {Promise}
+   */
+  async onDescendentRefresh(message) {
+    if ( message.type !== this.activity.type ) return; // The descendent wasn't an outcome, it was some other action.
+    this.#outcomes = undefined;
+    return Promise.all(this.parent.getAssociatedRolls("damage").map(m => ui.chat?.updateMessage(m)));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Update targets based on roll outcomes.
+   * @param {"all"|"failure"|"success"} outcome  The outcomes to gather.
+   * @param {HTMLLIElement} element              The chat message element.
+   */
+  selectOutcomes(outcome, element) {
+    if ( !canvas?.ready ) return;
+    canvas.tokens.releaseAll();
+    const outcomes = this.outcomes.entries().filter(([, o]) => outcome === "all" ? true : o === outcome);
+    for ( const [uuid] of outcomes ) {
+      const token = fromUuidSync(uuid)?.object;
+      if ( token?.isVisible && token?.actor?.testUserPermission(game.user, "OWNER") ) {
+        token.control({ releaseOthers: false });
+      }
+    }
+    const targets = element.querySelector("recorded-targets");
+    if ( targets ) targets.targetingMode = "selected";
   }
 
   /* -------------------------------------------- */
@@ -113,11 +196,18 @@ export default class UsageMessageData extends ItemMessageData {
       context.showTargets = true;
       this._prepareButtonGroups(context);
       if ( this.activity.name ) context.subtitle = this.activity.name;
+      context.summaries = (await Promise.all(this.parent.getAssociatedRolls()
+        .filter(m => m.visible)
+        .map(async m => {
+          const token = m.getAssociatedToken();
+          return { html: await m.system.render({ summary: true }), id: m.id, token: token };
+        })))
+        .filter(s => s.html);
     }
 
     const item = this.parent.getAssociatedItem();
     const activity = this.parent.getAssociatedActivity();
-    context.showTargets = this.effects.length || (activity.type === "check") || (activity.type === "save");
+    context.showTargets = this.effects.length || (activity.metadata.targetPhase === "pre");
     const allowPlayerApplication = this.targets?.some(t => TargetsField.resolve(t).token?.isOwner)
       || ((this.parent.author?.id === game.user.id) && (activity?.target.affects.type === "self"));
     context.effects = (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: item }))))
@@ -180,12 +270,14 @@ export default class UsageMessageData extends ItemMessageData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
+  _onRender(element, options={}) {
+    super._onRender(element, options);
     if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
     const activity = this.parent.getAssociatedActivity();
     activity?.onRenderChatCard(this.parent, element);
     activity?._activateLegacyChatListeners(this.parent, element);
+    element.addEventListener("pointerover", this.#onHoverInSummary.bind(this));
+    element.addEventListener("pointerout", this.#onHoverOutSummary.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -196,6 +288,32 @@ export default class UsageMessageData extends ItemMessageData {
   _onClickAction(event, target) {
     if ( event.button !== 0 ) return;
     this.parent.getAssociatedActivity()?.onChatAction(event, target, this.parent);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle hovering over a summary element.
+   * @param {PointerEvent} event  The triggering event.
+   */
+  #onHoverInSummary(event) {
+    const { targetUuid } = event.target.closest(".card-summary[data-target-uuid]")?.dataset ?? {};
+    if ( !canvas.ready || !targetUuid ) return;
+    const token = fromUuidSync(targetUuid)?.object;
+    if ( token && token._canHover(game.user, event) && token.visible ) {
+      token._onHoverIn(event, { hoverOutOthers: true });
+      this.#highlighted = token;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle hovering out a summary element.
+   */
+  #onHoverOutSummary() {
+    this.#highlighted?._onHoverOut();
+    this.#highlighted = null;
   }
 
   /* -------------------------------------------- */

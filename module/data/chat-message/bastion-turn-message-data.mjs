@@ -109,8 +109,8 @@ export default class BastionTurnMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
+  _onRender(element, options={}) {
+    super._onRender(element, options);
     if ( !this.actor?.isOwner ) return;
 
     element.querySelectorAll(".item-summary > li").forEach(async el => {

@@ -1,0 +1,30 @@
+<section class="icon-row">
+    <i class="fa-solid fa-bullseye" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Targets" }}"></i>
+    <ul class="pills unlist">
+        <li class="pill target transparent">{{ token.name }}</li>
+    </ul>
+</section>
+
+{{!-- Rolls --}}
+{{#each rolls}}
+<section class="icon-row with-buttons">
+    <i class="fa-fw fa-solid fa-dice" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Roll" }}"></i>
+    {{{ this }}}
+    {{#with @root.buttonGroups.resist}}
+    {{#each entries}}
+    <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}"
+        {{#if (and canGroup (not singleton))}}data-group data-forward-action="{{ action}}"
+        {{else}}data-action="{{ action }}" data-index="{{ index }}"{{/if}}>
+        {{ dnd5e-icon icon }}
+    </button>
+    {{/each}}
+    {{/with}}
+</section>
+{{/each}}
+
+{{#if resisted}}
+<p class="supplement">
+    <strong>{{ localize "DND5E.ROLL.Status" }}</strong>
+    {{ localize "DND5E.LegendaryResistance.Resisted" }}
+</p>
+{{/if}}

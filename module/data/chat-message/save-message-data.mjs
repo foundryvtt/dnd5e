@@ -40,6 +40,7 @@ export default class SaveMessageData extends RollMessageData {
       breakConcentration: SaveMessageData.#breakConcentration,
       resistSave: SaveMessageData.#resistSave
     },
+    summaryTemplate: "systems/dnd5e/templates/chat/save-summary.hbs",
     template: "systems/dnd5e/templates/chat/save-card.hbs"
   }, { inplace: false }));
 
@@ -112,8 +113,10 @@ export default class SaveMessageData extends RollMessageData {
     const context = await super._prepareContext(options);
     const { canBreakConcentration, canResist, concentrationBroken, resisted } = this;
     const actor = this.parent.getAssociatedActor();
+    const token = this.parent.getAssociatedToken();
     Object.assign(context, { canBreakConcentration, canResist, concentrationBroken, resisted });
     context.death = this.type === "death";
+    context.token = token ?? actor;
     if ( actor ) {
       // Filter out success & failure tallies since their real data changes might read as confusing.
       const deltas = {
@@ -124,7 +127,36 @@ export default class SaveMessageData extends RollMessageData {
     if ( context.death && this.outcome ) context.outcome = _loc(`DND5E.DEATH.Outcome.${this.outcome}`, {
       name: actor?.name ?? ""
     });
+    const item = this.parent.getAssociatedItem();
+    const isPrivate = !this.parent.isContentVisible;
+    if ( !isPrivate && item ) context.header = {
+      item,
+      activity: this.activity,
+      subtitle: [this.activity.name, this.parent.flavor].filterJoin(" • ")
+    };
+    const buttons = {};
+    if ( !resisted && canResist ) buttons.resist = { entries: [{
+      action: "resistSave",
+      icon: "fa-solid fa-dragon",
+      label: "DND5E.LegendaryResistance.Action.Resist"
+    }] };
+    if ( !concentrationBroken && canBreakConcentration ) buttons.concentration = { entries: [{
+      action: "breakConcentration",
+      icon: "fa-solid fa-ban",
+      label: "DND5E.CONCENTRATION.Action.Break"
+    }] };
+    if ( !foundry.utils.isEmpty(buttons) ) context.buttonGroups = buttons;
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element, options={}) {
+    super._onRender(element, options);
+    if ( element.querySelector(".chat-card .card-header") ) {
+      element.querySelector(".message-header .flavor-text")?.remove();
+    }
   }
 
   /* -------------------------------------------- */

@@ -20,6 +20,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
       toggleDescription: ChatMessageDataModel.#toggleDescription,
       use: ChatMessageDataModel.#useActivity
     },
+    summaryTemplate: "",
     template: ""
   });
 
@@ -35,6 +36,16 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    */
   get canApplyDamage() {
     return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Template to use when rendering this message as a summary item.
+   * @type {string}
+   */
+  get summaryTemplate() {
+    return this.metadata.summaryTemplate;
   }
 
   /* -------------------------------------------- */
@@ -65,7 +76,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
     const click = this.#onClick.bind(this);
     element.addEventListener("click", click);
     element.addEventListener("contextmenu", click);
-    this._onRender(element);
+    this._onRender(element, options);
   }
 
   /* -------------------------------------------- */
@@ -76,8 +87,9 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    * @returns {Promise<string>}
    */
   async render(options) {
-    if ( !this.template ) return "";
-    return foundry.applications.handlebars.renderTemplate(this.template, await this._prepareContext(options));
+    const template = options.summary ? this.summaryTemplate : this.template;
+    if ( !template ) return "";
+    return foundry.applications.handlebars.renderTemplate(template, await this._prepareContext(options));
   }
 
   /* -------------------------------------------- */
@@ -107,10 +119,11 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
 
   /**
    * Actions taken after the message has been rendered.
-   * @param {HTMLElement} element
+   * @param {HTMLElement} element  The message element.
+   * @param {object} [options]     Render options.
    * @protected
    */
-  _onRender(element) {
+  _onRender(element, options={}) {
     for ( const e of element.querySelectorAll(".item-tooltip") ) {
       const uuid = e.closest("[data-item-uuid]")?.dataset.itemUuid;
       if ( !uuid ) continue;
@@ -122,6 +135,9 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
     }
     for ( const popover of element.querySelectorAll(".roll-breakdown[popover]") ) {
       popover.previousElementSibling.popoverTargetElement = popover;
+    }
+    for ( const summary of element.querySelectorAll(".card-summary[data-message-id]") ) {
+      game.messages.get(summary.dataset.messageId)?.system?._onRender(summary, { summary: true });
     }
   }
 
@@ -135,18 +151,19 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    */
   #onClick(event) {
     const target = event.target.closest("[data-action]");
+    const message = game.messages.get(event.target.closest("[data-message-id]")?.dataset.messageId) ?? this;
     if ( target ) {
       const action = target.dataset.action;
-      let handler = this.metadata.actions[action];
+      let handler = message.system.metadata.actions[action];
       if ( handler ) {
         let buttons = [0];
         if ( typeof handler === "object" ) {
           buttons = handler.buttons;
           handler = handler.handler;
         }
-        if ( buttons.includes(event.button) ) handler?.call(this, event, target);
+        if ( buttons.includes(event.button) ) handler?.call(message.system, event, target);
       } else {
-        this._onClickAction(event, target);
+        message.system._onClickAction(event, target);
       }
     }
   }

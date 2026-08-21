@@ -71,8 +71,8 @@ export default class RequestMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
+  _onRender(element, options={}) {
+    super._onRender(element, options);
     this._highlightSuccessFailure(element);
   }
 

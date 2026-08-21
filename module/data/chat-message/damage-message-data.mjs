@@ -79,13 +79,6 @@ export default class DamageMessageData extends RollMessageData {
   /* -------------------------------------------- */
 
   /** @override */
-  _getEnrichmentOptions() {
-    return { avatar: false };
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   async _prepareContext(options) {
     const aggregate = CONFIG.DND5E.aggregateDamageDisplay;
     const rolls = aggregate ? aggregateDamageRolls(this.parent.rolls) : this.parent.rolls;
@@ -127,9 +120,8 @@ export default class DamageMessageData extends RollMessageData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
-    element.classList.add("compact");
+  _onRender(element, options={}) {
+    super._onRender(element, options);
     if ( element.querySelector(".chat-card .card-header") ) {
       element.querySelector(".message-header .flavor-text")?.remove();
     }

@@ -1,0 +1,16 @@
+{{#with header}}
+<section class="card-header no-description">
+    <div class="item-icon" data-action="showDocument" data-uuid="{{ item.uuid }}">
+        <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
+    </div>
+    {{#if activity.uuid}}
+    <div class="activity-icon">{{ dnd5e-icon activity.img alt=activity.name classes="gold-icon" }}</div>
+    {{/if}}
+    <div class="name-stacked">
+        <span class="title">{{ item.name }}</span>
+        {{#if activity.name}}
+        <span class="subtitle">{{ subtitle }}</span>
+        {{/if}}
+    </div>
+</section>
+{{/with}}

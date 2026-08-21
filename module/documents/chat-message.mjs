@@ -39,6 +39,19 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
+   * Whether the given message offers the option to select targets based on outcome of subsequent rolls.
+   * @type {boolean}
+   */
+  get canSelectOutcomes() {
+    if ( (this.type !== "usage") || !this.isContentVisible ) return false;
+    const activity = this.getAssociatedActivity();
+    if ( !activity ) return false;
+    return activity.hasOutcomes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Should the select targets options appear?
    * @type {boolean}
    */
@@ -61,6 +74,15 @@ export default class ChatMessage5e extends ChatMessage {
       default: return false;
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Store the targeting state of the message, if applicable.
+   * @type {{ checked: Map<string, boolean>, mode: ""|"selected"|"targeted" }}
+   * @internal
+   */
+  _targetState = { checked: new Map(), mode: "" };
 
   /* -------------------------------------------- */
 
@@ -128,6 +150,8 @@ export default class ChatMessage5e extends ChatMessage {
       await this._enrichChatCard(html);
       this._collapseTrays(html);
     }
+
+    if ( this.system?.summaryTemplate && this.system.origin && !options.canClose ) html.hidden = true;
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -287,6 +311,18 @@ export default class ChatMessage5e extends ChatMessage {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Re-render the chat message that spawned this one so this one can be rendered as a summary.
+   */
+  async #refreshOrigin() {
+    const origin = this.system?.origin;
+    if ( !origin ) return;
+    await origin.system?.onDescendentRefresh?.(this);
+    ui.chat?.updateMessage(origin);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
@@ -302,6 +338,7 @@ export default class ChatMessage5e extends ChatMessage {
   static addChatMessageContextOptions(html, options) {
     const canApply = li => game.messages.get(li.dataset.messageId)?.canApplyDamage;
     const canTarget = li => game.messages.get(li.dataset.messageId)?.canSelectTargets;
+    const canSelectOutcomes = li => game.messages.get(li.dataset.messageId)?.canSelectOutcomes;
     options.push(
       {
         label: _loc("DND5E.ChatContextDamage"),
@@ -351,6 +388,27 @@ export default class ChatMessage5e extends ChatMessage {
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets("miss")
+      },
+      {
+        label: _loc("DND5E.CHATMESSAGE.Action.SelectAll"),
+        icon: "fa-solid fa-bullseye",
+        group: "outcomes",
+        visible: canSelectOutcomes,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("all", target)
+      },
+      {
+        label: _loc("DND5E.CHATMESSAGE.Action.SelectSuccess"),
+        icon: "fa-solid fa-bullseye",
+        group: "outcomes",
+        visible: canSelectOutcomes,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("success", target)
+      },
+      {
+        label: _loc("DND5E.CHATMESSAGE.Action.SelectFailure"),
+        icon: "fa-solid fa-bullseye",
+        group: "outcomes",
+        visible: canSelectOutcomes,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("failure", target)
       }
     );
     return options;
@@ -546,6 +604,20 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static async _preDeleteOperation(documents, operation, user) {
+    const ids = new Set(operation.ids);
+    for ( const message of documents ) {
+      for ( const result of dnd5e.registry.messages.get(message.id) ) {
+        if ( result.system.summaryTemplate ) ids.add(result.id);
+      }
+    }
+    operation.ids = Array.from(ids);
+    return super._preDeleteOperation(documents, operation, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     if ( !foundry.utils.hasProperty(data, "flags.core.canPopout") ) {
@@ -556,9 +628,26 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    this.#refreshOrigin();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     dnd5e.registry.messages.untrack(this);
+    this.#refreshOrigin();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if ( "system" in changed ) this.#refreshOrigin();
   }
 
   /* -------------------------------------------- */

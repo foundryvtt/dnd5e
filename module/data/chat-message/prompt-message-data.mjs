@@ -102,8 +102,8 @@ export default class PromptMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
+  _onRender(element, options={}) {
+    super._onRender(element, options);
     if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
   }
 

@@ -24,6 +24,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       title: "DND5E.SAVE.Title.one",
       hint: "DND5E.SAVE.Hint",
       sheetClass: SaveSheet,
+      targetPhase: "pre",
       usage: {
         actions: {
           rollDamage: SaveActivity.#rollDamage,
@@ -32,6 +33,15 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
       }
     }, { inplace: false })
   );
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get hasOutcomes() {
+    return Number.isFinite(this.save.dc.value);
+  }
 
   /* -------------------------------------------- */
   /*  Activation                                  */
@@ -105,9 +115,9 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static async #rollSave(event, target, message) {
-    const targets = getSceneTargets();
+    const targets = message.system?.evaluatedTargets ?? getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
-    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken");
+    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     const { ability, dc } = message.system.getButton(target)?.dataset ?? {};
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.save.bonus }, this.getRollData());
     for ( const token of targets ) {
@@ -119,7 +129,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
         target: Number.isFinite(dc) ? dc : this.save.dc.value
       };
       if ( bonusData.parts.length ) rollData.rolls = [bonusData];
-      await actor.rollSavingThrow(rollData, {}, { data: { speaker } });
+      await actor.rollSavingThrow(rollData, {}, { data: { speaker, system: this.messageSources } });
     }
   }
 
