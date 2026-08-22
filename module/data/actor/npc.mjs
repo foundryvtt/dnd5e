@@ -578,7 +578,7 @@ export default class NPCData extends CreatureTemplate {
 
     // Legendary resistance turns the failed save into a success: revert this save's failure and credit a success
     // (which may stabilize the creature at three).
-    if ( message.system.ability === "death" ) {
+    if ( message.system.type === "death" ) {
       const priorFailure = message.system.deltas?.actor
         ?.find(d => d.keyPath === "system.attributes.death.failure")?.delta ?? 0;
       const failure = this.attributes.death.failure - priorFailure;

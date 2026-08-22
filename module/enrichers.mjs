@@ -884,7 +884,7 @@ async function rollCheckSave(config, event) {
   const actors = config.actor ? [config.actor] : getSceneTargets().map(t => t.actor);
   if ( !actors.length && game.user.character ) actors.push(game.user.character);
   if ( !actors.length ) {
-    ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor");
+    ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
     return;
   }
 

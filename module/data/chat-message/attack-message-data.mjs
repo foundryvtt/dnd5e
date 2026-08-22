@@ -110,7 +110,7 @@ export default class AttackMessageData extends RollMessageData {
     if ( mastery ) context.mastery = { label: mastery.label, reference: mastery.reference };
     context.rows = {
       properties: {
-        entries: this.parent.getAssociatedActivity()?.getActionLabel(this.mode) ?? [],
+        entries: (this.parent.getAssociatedActivity()?.getActionLabel(this.mode) ?? []).map(label => ({ label })),
         icon: "fa-solid fa-tag",
         label: "DND5E.CHATMESSAGE.Row.Properties"
       }

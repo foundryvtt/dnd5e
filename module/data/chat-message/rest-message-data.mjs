@@ -54,6 +54,13 @@ export default class RestMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _prepareContext() {
     const context = {
       actor: this.actor,
@@ -66,5 +73,13 @@ export default class RestMessageData extends ChatMessageDataModel {
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element, options={}) {
+    super._onRender(element, options);
+    element.classList.add("compact");
   }
 }

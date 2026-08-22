@@ -41,6 +41,13 @@ export default class TimePassedMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _prepareContext() {
     const context = {
       content: await TextEditor.enrichHTML(this.parent.content, { rollData: this.parent.getRollData() }),
@@ -54,5 +61,13 @@ export default class TimePassedMessageData extends ChatMessageDataModel {
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element, options={}) {
+    super._onRender(element, options);
+    element.classList.add("compact");
   }
 }

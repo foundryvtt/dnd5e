@@ -72,7 +72,7 @@ function getMacroTarget(name, documentType) {
   if ( speaker.token ) actor = game.actors.tokens[speaker.token];
   actor ??= game.actors.get(speaker.actor);
   if ( !actor ) {
-    ui.notifications.warn("MACRO.5eNoActorSelected");
+    ui.notifications.warn("MACRO.5eNoActorSelected", { localize: true });
     return null;
   }
 

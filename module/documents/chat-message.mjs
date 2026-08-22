@@ -153,7 +153,7 @@ export default class ChatMessage5e extends ChatMessage {
 
     if ( game.settings.get("dnd5e", "chatCardSummary")
       && this.system?.summaryTemplate
-      && this.system.origin
+      && this.system.origin?.system?.rendersSummaries
       && !options.canClose ) {
       html.hidden = true;
     }
@@ -622,6 +622,7 @@ export default class ChatMessage5e extends ChatMessage {
   static async _preDeleteOperation(documents, operation, user) {
     const ids = new Set(operation.ids);
     for ( const message of documents ) {
+      if ( !message.system?.rendersSummaries ) continue;
       for ( const result of dnd5e.registry.messages.get(message.id) ) {
         if ( result.system.summaryTemplate ) ids.add(result.id);
       }
@@ -637,6 +638,13 @@ export default class ChatMessage5e extends ChatMessage {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     if ( !foundry.utils.hasProperty(data, "flags.core.canPopout") ) {
       this.updateSource({ "flags.core.canPopout": true });
+    }
+    if ( (this.type === "base") && foundry.utils.getProperty(data, "flags.core.initiativeRoll") ) {
+      const ability = this.rolls[0]?.options?.ability;
+      if ( ability ) this.updateSource({
+        system: _replace({ ability, type: "initiative" }),
+        type: "check"
+      });
     }
   }
 
