@@ -384,9 +384,16 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     }, {
       label: "DND5E.CONCENTRATION.Action.Break",
       icon: '<dnd5e-icon src="systems/dnd5e/icons/svg/break-concentration.svg"></dnd5e-icon>',
-      group: "state",
+      group: "destructive",
       visible: () => this.actor?.concentration?.items.has(item),
       onClick: () => this.actor?.endConcentration(item)
+    }, {
+      label: "DND5E.ENCHANTMENT.Action.Remove",
+      icon: '<i class="fa-solid fa-rotate-left fa-fw"></i>',
+      group: "destructive",
+      visible: () => item.isOwner && !compendiumLocked
+        && item.effects.some(e => e.isAppliedEnchantment && !e.getFlag("dnd5e", "static")),
+      onClick: (event, target) => this._onAction(target, "removeEnchantment", { event })
     }, {
       label: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
       icon: "fa-solid fa-sun fa-fw",
@@ -488,6 +495,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       case "identify": return this._onToggleIdentify(item);
       case "prepare": return this._onTogglePrepared(item);
       case "recharge": return this._onRollRecharge(activity ?? item, { event });
+      case "removeEnchantment": return this._onRemoveEnchantment(item);
       case "toggleCharge": return this._onToggleCharge(item);
       case "toggleExpand": return this._onToggleExpand(target, { item });
       case "toggleFavorite": return this._onToggleFavorite(item);
@@ -635,6 +643,21 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       ui.context.menuItems = this._getContextOptions(item, element);
       Hooks.callAll("dnd5e.getItemContextOptions", item, ui.context.menuItems);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing all applied enchantments from an item.
+   * @param {Item5e} item  The item.
+   * @returns {Promise}
+   * @protected
+   */
+  _onRemoveEnchantment(item) {
+    const ids = item.effects
+      .filter(e => e.isAppliedEnchantment && !e.getFlag("dnd5e", "static"))
+      .map(e => e.id);
+    return item.deleteEmbeddedDocuments("ActiveEffect", ids);
   }
 
   /* -------------------------------------------- */
