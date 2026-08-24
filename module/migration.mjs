@@ -755,7 +755,10 @@ export function migrateEffectData(effect, migrationData, { bypassVersionCheck, p
 
   _migrateDocumentIcon(effect, updateData, { ...migrationData, field: "img" });
   _migrateEffectChanges(effect, updateData, { setIds: migrate600 });
-  if ( migrate600 ) _migrateEffectMagical(effect, parent, updateData);
+  if ( migrate600 ) {
+    _migrateEffectMagical(effect, parent, updateData);
+    _migrateEnchantmentTransfer(effect, parent, updateData);
+  }
   _migrateEffectOrigin(effect, parent, updateData);
   if ( bypassVersionCheck || foundry.utils.isNewerVersion("3.1.0", version) ) {
     _migrateEffectTransfer(effect, parent, updateData);
@@ -1164,6 +1167,23 @@ function _migrateEffectChanges(effect, updateData, { setIds }={}) {
  */
 function _migrateEffectMagical(effect, parent, updateData) {
   if ( isSpellOrScroll(parent) || parent.system?.properties?.includes("mgc") ) updateData["system.magical"] = true;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrates Enchantment effect's transfer field according to whether they should be applied.
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} parent      The parent of this effect.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEnchantmentTransfer(effect, parent, updateData) {
+  if ( (effect.type !== "enchantment")
+    || foundry.utils.objectValues(effect.system?.origin ?? {}).some(k => k) ) return updateData;
+  const origin = effect.flags?.core?.originText ?? effect.origin;
+  updateData.transfer = !!origin && !origin.endsWith(parent._id);
   return updateData;
 }
 

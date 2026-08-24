@@ -41,6 +41,16 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if ( this.isOnActivity ) this.parent.transfer = this.parent.disabled = false;
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -71,6 +81,17 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
    */
   get isConcealed() {
     return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this effect selected by any activity on its parent item?
+   * @type {boolean}
+   */
+  get isOnActivity() {
+    return !!this.item
+      && (this.item.system.activities?.contents ?? []).some(a => a.effects?.some(e => e._id === this.parent._id));
   }
 
   /* -------------------------------------------- */

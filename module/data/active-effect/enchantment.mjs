@@ -43,11 +43,11 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Has this enchantment been applied by another item, or was it directly created.
+   * Should this enchantment apply to its parent item?
    * @type {boolean}
    */
   get isApplied() {
-    return !!this.parent.origin && (this.parent.origin !== this.item?.uuid);
+    return this.parent.transfer && !!this.item;
   }
 
   /* -------------------------------------------- */
@@ -67,7 +67,9 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.isApplied && this.parent.uuid ) dnd5e.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+    if ( this.isApplied && this.parent.uuid && this.parent.origin ) {
+      dnd5e.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+    }
   }
 
   /* -------------------------------------------- */
@@ -161,8 +163,23 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /** @override */
   onRenderActiveEffectConfig(app, html, context) {
-    const toRemove = html.querySelectorAll('.form-group:has([name="transfer"], [name="statuses"], [name="showIcon"])');
+    const toRemove = html.querySelectorAll('.form-group:has([name="statuses"], [name="showIcon"])');
     toRemove.forEach(f => f.remove());
+    const transferFormGroup = html.querySelector('.form-group:has([name="transfer"])');
+    if ( transferFormGroup ) {
+      const transferLabel = transferFormGroup.querySelector("label");
+      const transferHint = transferFormGroup.querySelector(".hint");
+      if ( transferLabel ) transferLabel.innerText = _loc("DND5E.ENCHANTMENT.Transfer.Label");
+      if ( transferHint ) transferHint.innerText = _loc("DND5E.ENCHANTMENT.Transfer.Hint");
+      if ( this.isOnActivity ) {
+        const transferCheckbox = transferFormGroup.querySelector('dnd5e-checkbox[name="transfer"]');
+        if ( transferCheckbox ) {
+          if ( app.isEditable ) transferCheckbox.dataset.tooltip = "DND5E.ENCHANTMENT.Transfer.DisabledTooltip";
+          transferCheckbox.disabled = true;
+          transferCheckbox.checked = false;
+        }
+      }
+    }
   }
 
   /* -------------------------------------------- */
