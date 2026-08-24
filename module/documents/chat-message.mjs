@@ -356,70 +356,70 @@ export default class ChatMessage5e extends ChatMessage {
     const canSelectOutcomes = li => game.messages.get(li.dataset.messageId)?.canSelectOutcomes;
     options.push(
       {
-        label: _loc("DND5E.ChatContextDamage"),
+        label: "DND5E.ChatContextDamage",
         icon: "fa-solid fa-user-minus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 1)
       },
       {
-        label: _loc("DND5E.ChatContextHealing"),
+        label: "DND5E.ChatContextHealing",
         icon: "fa-solid fa-user-plus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, -1)
       },
       {
-        label: _loc("DND5E.ChatContextTempHP"),
+        label: "DND5E.ChatContextTempHP",
         icon: "fa-solid fa-user-clock",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardTemp(target)
       },
       {
-        label: _loc("DND5E.ChatContextDoubleDamage"),
+        label: "DND5E.ChatContextDoubleDamage",
         icon: "fa-solid fa-user-injured",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 2)
       },
       {
-        label: _loc("DND5E.ChatContextHalfDamage"),
+        label: "DND5E.ChatContextHalfDamage",
         icon: "fa-solid fa-user-shield",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 0.5)
       },
       {
-        label: _loc("DND5E.ChatContextSelectHit"),
+        label: "DND5E.ChatContextSelectHit",
         icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets("hit")
       },
       {
-        label: _loc("DND5E.ChatContextSelectMiss"),
+        label: "DND5E.ChatContextSelectMiss",
         icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets("miss")
       },
       {
-        label: _loc("DND5E.CHATMESSAGE.Action.SelectAll"),
+        label: "DND5E.CHATMESSAGE.Action.SelectAll",
         icon: "fa-solid fa-bullseye",
         group: "outcomes",
         visible: canSelectOutcomes,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("all", target)
       },
       {
-        label: _loc("DND5E.CHATMESSAGE.Action.SelectSuccess"),
+        label: "DND5E.CHATMESSAGE.Action.SelectSuccess",
         icon: "fa-solid fa-bullseye",
         group: "outcomes",
         visible: canSelectOutcomes,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("success", target)
       },
       {
-        label: _loc("DND5E.CHATMESSAGE.Action.SelectFailure"),
+        label: "DND5E.CHATMESSAGE.Action.SelectFailure",
         icon: "fa-solid fa-bullseye",
         group: "outcomes",
         visible: canSelectOutcomes,
