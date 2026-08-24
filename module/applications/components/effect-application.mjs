@@ -331,8 +331,9 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       system: {
         origin: {
           [activity ? "activity" : "item"]: activity ? activity.uuid : item?.uuid,
-          effect: concentration?.uuid
-          // TODO: Should set the profile here, but currently that data isn't fully available in the message data
+          effect: concentration?.uuid,
+          profile: activity
+            ? activity.effects?.find(e => (e.uuid === effect.uuid) || (e._id === effect.id))?._id : undefined
         }
       }
     };
