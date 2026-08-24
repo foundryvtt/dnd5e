@@ -596,10 +596,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( this.system.conditions?.check(conditionData) === false ) return false;
       if ( change.conditions?.check(conditionData) === false ) return false;
     }
-
-    const originalChange = this.system.changes.find(c => c._id === change._id);
-    if ( originalChange ) originalChange.applied = true;
-
+    change.applied = true;
     return true;
   }
 
@@ -607,15 +604,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   getReplacementData(baseData) {
+    if ( !this.item ) return super.getReplacementData(baseData);
     baseData = { ...super.getReplacementData(baseData) };
-    if ( this.item ) {
-      baseData.item = {
-        ...this.item.system,
-        flags: this.item.flags,
-        name: this.item.name
-      };
-      baseData.scaling = new Scaling(this.item.scalingIncrease);
-    }
+    baseData.item = {
+      ...this.item.system,
+      flags: this.item.flags,
+      name: this.item.name
+    };
+    baseData.scaling = new Scaling(this.item.scalingIncrease);
     return baseData;
   }
 
