@@ -2,22 +2,7 @@
 <div class="chat-card">
 
     {{!-- Header --}}
-    {{#with header}}
-    <section class="card-header no-description">
-        <div class="item-icon" data-action="showDocument" data-uuid="{{ item.uuid }}">
-            <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
-        </div>
-        {{#if activity.uuid}}
-        <div class="activity-icon">{{ dnd5e-icon activity.img alt=activity.name classes="gold-icon" }}</div>
-        {{/if}}
-        <div class="name-stacked">
-            <span class="title">{{ item.name }}</span>
-            {{#if activity.name}}
-            <span class="subtitle">{{ activity.name }}</span>
-            {{/if}}
-        </div>
-    </section>
-    {{/with}}
+    {{> "dnd5e.card-header" }}
 
     {{!-- Supplements --}}
     {{#if mastery}}
@@ -33,20 +18,7 @@
     {{/if}}
 
     {{!-- Rows --}}
-    {{#each rows}}
-    {{#if entries.length}}
-    <section class="icon-row">
-        <i class="fa-fw {{ icon }}" aria-label="{{ localize label }}"></i>
-        <ul class="pills unlist">
-            {{#each entries}}
-            <li class="pill transparent">
-                <span class="label">{{ this }}</span>
-            </li>
-            {{/each}}
-        </ul>
-    </section>
-    {{/if}}
-    {{/each}}
+    {{> "dnd5e.card-rows" }}
 </div>
 {{/if}}
 
@@ -73,9 +45,4 @@
 {{/if}}
 
 {{!-- Rolls --}}
-{{#each rolls}}
-<section class="icon-row">
-    <i class="fa-fw fa-solid fa-dice" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Roll" }}"></i>
-    {{{ this }}}
-</section>
-{{/each}}
+{{> "dnd5e.card-rolls" }}

@@ -996,8 +996,12 @@ export async function preloadHandlebarsTemplates() {
 
     // Chat Message Partials
     "systems/dnd5e/templates/chat/parts/card-activities.hbs",
+    "systems/dnd5e/templates/chat/parts/card-buttons.hbs",
     "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
     "systems/dnd5e/templates/chat/parts/card-face.hbs",
+    "systems/dnd5e/templates/chat/parts/card-header.hbs",
+    "systems/dnd5e/templates/chat/parts/card-rolls.hbs",
+    "systems/dnd5e/templates/chat/parts/card-rows.hbs",
     "systems/dnd5e/templates/chat/parts/damage-breakdown.hbs",
     "systems/dnd5e/templates/chat/parts/roll.hbs",
 

@@ -73,6 +73,14 @@ export default class DamageApplicationElement extends ChatTrayElement {
   /* -------------------------------------------- */
 
   /**
+   * Whether the tray has received user modifications.
+   * @type {boolean}
+   */
+  #dirty = false;
+
+  /* -------------------------------------------- */
+
+  /**
    * Stacked target menu states.
    * @type {TargetPillMenuState[]}
    */
@@ -161,8 +169,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
    * @returns {DamageApplicationOptions}
    */
   getMergedOptions(uuid) {
+    const fallback = this.#dirty ? this.multiplier : (this.#saveMultiplier(uuid) ?? this.multiplier);
     const options = this.getTargetOptions(uuid);
-    return { ...options, multiplier: options.multiplier ?? this.multiplier };
+    return { ...options, multiplier: options.multiplier ?? fallback };
   }
 
   /* -------------------------------------------- */
@@ -231,6 +240,24 @@ export default class DamageApplicationElement extends ChatTrayElement {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Determine a multiplier based on the save outcome.
+   * @param {string} uuid  The target's UUID.
+   * @returns {number|null}
+   */
+  #saveMultiplier(uuid) {
+    const { onSave, origin } = this.chatMessage.system;
+    if ( !onSave || (origin?.system?.outcomes?.get(uuid) !== "success") ) return null;
+    switch ( onSave ) {
+      case "full": return 1;
+      case "half": return .5;
+      case "none": return 0;
+    }
+    return null;
+  }
+
+  /* -------------------------------------------- */
   /*  Life-Cycle                                  */
   /* -------------------------------------------- */
 
@@ -280,6 +307,8 @@ export default class DamageApplicationElement extends ChatTrayElement {
       multipliers.addEventListener("click", this._onChangeMultiplier.bind(this));
       div.querySelector("template").replaceWith(this.buildTargetContainer());
       div.addEventListener("click", this._handleClickHeader.bind(this));
+      this.targetList.addEventListener("recorded-targets:build", this.refreshMultiplier.bind(this));
+      this.targetList.addEventListener("recorded-targets:change", () => this.#dirty = false);
     }
   }
 
@@ -421,6 +450,20 @@ export default class DamageApplicationElement extends ChatTrayElement {
     m.textContent = formatNumber(-tempMax, { signDisplay: "always" });
     m.parentElement.classList.toggle("healing", tempMax < 0);
     m.parentElement.hidden = !tempMax;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Refresh the global multiplier display.
+   */
+  refreshMultiplier() {
+    const multipliers = new Set(Array.from(this.targetList.querySelectorAll("option"), o => {
+      return this.getMergedOptions(o.value).multiplier;
+    }));
+    for ( const button of this.querySelectorAll(".multiplier-row .multiplier-button") ) {
+      button.ariaPressed = `${multipliers.has(Number(button.value))}`;
+    }
   }
 
   /* -------------------------------------------- */
@@ -577,9 +620,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const button = event.target.closest(".multiplier-button");
     if ( !button ) return;
     this.multiplier = Number(button.value);
-    for ( const other of this.querySelectorAll(".multiplier-row .multiplier-button") ) {
-      other.ariaPressed = `${Number(other.value) === this.multiplier}`;
-    }
+    this.#dirty = true;
     this.targetList.buildTargetsList();
   }
 

@@ -1752,6 +1752,11 @@
 "DND5E.ChatFlavor": "Chat Message Flavor",
 
 "DND5E.CHATMESSAGE": {
+  "Action": {
+    "SelectAll": "Select All Outcomes",
+    "SelectFailure": "Select Failures",
+    "SelectSuccess": "Select Successes"
+  },
   "Activities": "Activities",
   "Button": {
     "rollAttack": "Attack",
@@ -6824,7 +6829,7 @@
   },
   "CHATLOG": {
     "Hint": "Specify a theme for the chat log. By default this will inherit from the Application theme.",
-    "Name": "Chat Log",
+    "Name": "Chat Log Theme",
     "Options": {
       "blank": "Default",
       "dark": "Dark",
@@ -6962,6 +6967,10 @@
     "Hint": "Change handling of various rules between the 2024 and 2014 rule sets.",
     "Legacy": "Legacy Rules (2014)",
     "Modern": "Modern Rules (2024)"
+  },
+  "SUMMARIZECHAT": {
+    "Hint": "Append certain results as summaries rather than full chat cards.",
+    "Name": "Summary Chat Cards"
   },
   "VARIANT": {
     "Hint": "Enable and configure rules variations offered by the system.",

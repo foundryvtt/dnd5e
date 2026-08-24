@@ -20,7 +20,7 @@ export default class RollMessageData extends ChatMessageDataModel {
    * Template used to render each individual roll within the message.
    * @type {string}
    */
-  static ROLL_TEMPLATE = "systems/dnd5e/templates/chat/parts/roll.hbs";
+  static ROLL_TEMPLATE = "systems/dnd5e/templates/chat/parts/roll-compact.hbs";
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -77,6 +77,13 @@ export default class RollMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _prepareContext(options) {
     const { canCrit, displayResult, forceSuccess } = this;
     const isPrivate = !this.parent.isContentVisible;
@@ -87,5 +94,13 @@ export default class RollMessageData extends ChatMessageDataModel {
         template: this.constructor.ROLL_TEMPLATE
       })))
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element, options={}) {
+    super._onRender(element, options);
+    if ( !options.summary ) element.classList.add("compact");
   }
 }

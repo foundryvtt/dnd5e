@@ -101,6 +101,7 @@ export default class RecordedTargetsElement extends foundry.applications.element
   set targetingMode(mode) {
     if ( !this.hasRecordedTargets ) mode = "selected";
     this.#targetingMode = mode;
+    if ( this.chatMessage ) this.chatMessage._targetState.mode = mode;
     this._refreshTargetMode();
     this.buildTargetsList();
     if ( (mode === "targeted") && (this.selectedTokensHook !== null) ) {
@@ -163,8 +164,16 @@ export default class RecordedTargetsElement extends foundry.applications.element
   /* -------------------------------------------- */
 
   /**
+   * The set of targets last recorded.
+   * @type {Set<string>}
+   */
+  #lastTargets = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
    * Checked status for application targets.
-   * @type {Map<any, any>}
+   * @type {Map<string, boolean>}
    */
   #targetOptions = new Map();
 
@@ -179,7 +188,8 @@ export default class RecordedTargetsElement extends foundry.applications.element
     this.chatMessage = game.messages.get(this.closest("[data-message-id]")?.dataset.messageId);
     if ( !this.targetList ) this.replaceChildren(this.buildTargetContainer());
     this.addEventListener("change", this._onCheckTarget.bind(this), { signal: this.#abortController.signal });
-    this.targetingMode = "targeted";
+    this.#targetOptions = this.chatMessage?._targetState.checked ?? new Map();
+    this.targetingMode = this.chatMessage?._targetState.mode || "targeted";
   }
 
   /* -------------------------------------------- */
@@ -247,6 +257,11 @@ export default class RecordedTargetsElement extends foundry.applications.element
         });
         break;
     }
+    const uuids = new Set(targetedTokens.keys());
+    if ( uuids.symmetricDifference(this.#lastTargets).size ) {
+      this.#lastTargets = uuids;
+      this.dispatchEvent(new Event("recorded-targets:change"));
+    }
     const targets = Array.from(targetedTokens.entries())
       .map(([uuid, name]) => {
         return this.onBuildTargetListEntry
@@ -261,6 +276,7 @@ export default class RecordedTargetsElement extends foundry.applications.element
       li.textContent = _loc("DND5E.Tokens.NoTargets");
       this.targetList.replaceChildren(li);
     }
+    this.dispatchEvent(new Event("recorded-targets:build"));
   }
 
   /* -------------------------------------------- */
@@ -378,6 +394,7 @@ export default class RecordedTargetsElement extends foundry.applications.element
   _onCheckTarget(event) {
     this.#targetOptions = new Map(Iterator.from(event.currentTarget.querySelectorAll(".target option"))
       .map(el => [el.value, "checked" in el.dataset]));
+    if ( this.chatMessage ) this.chatMessage._targetState.checked = this.#targetOptions;
   }
 
   /* -------------------------------------------- */

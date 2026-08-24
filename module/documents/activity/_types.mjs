@@ -14,6 +14,8 @@
  * @property {string} title                             Default title.
  * @property {string} [hint]                            Hint about how this activity type functions.
  * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
+ * @property {""|"pre"|"post"} targetPhase              Whether this activity selects targets before its initial use or
+ *                                                      afterward.
  * @property {object} usage
  * @property {Record<string, Function>} usage.actions   Actions that can be triggered from the chat card.
  * @property {typeof ActivityUsageDialog} usage.dialog  Default usage prompt.

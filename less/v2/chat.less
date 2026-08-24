@@ -92,7 +92,7 @@
 
 /* Modifier Keys */
 :is(.chat-popout, #chat-log, .chat-log)[data-modifier-shift] {
-  .message .message-header .message-delete { display: unset; }
+  .message :is(.message-header, .card-summary) .message-delete { display: unset; }
   .message .message-header:has(.message-delete) .chat-control { display: none; }
 }
 

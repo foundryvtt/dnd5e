@@ -25,6 +25,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       title: "DND5E.CHECK.Title",
       hint: "DND5E.CHECK.Hint",
       sheetClass: CheckSheet,
+      targetPhase: "pre",
       usage: {
         actions: {
           rollCheck: CheckActivity.#rollCheck
@@ -32,6 +33,15 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
       }
     }, { inplace: false })
   );
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  get hasOutcomes() {
+    return Number.isFinite(this.check.dc.value);
+  }
 
   /* -------------------------------------------- */
   /*  Activation                                  */
@@ -91,9 +101,9 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static async #rollCheck(event, target, message) {
-    const targets = getSceneTargets();
+    const targets = message.system?.evaluatedTargets ?? getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
-    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken");
+    if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     const { ability, dc, skill, tool } = message.system.getButton(target)?.dataset ?? {};
     const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.check.bonus }, this.getRollData());
@@ -102,7 +112,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
-      const messageData = { data: { speaker } };
+      const messageData = { data: { speaker, system: { ...this.messageSources, origin: message.id } } };
       if ( bonusData.parts.length ) rollData.rolls = [bonusData];
       if ( skill ) await actor.rollSkill({ ...rollData, skill }, {}, messageData);
       else if ( tool ) {
