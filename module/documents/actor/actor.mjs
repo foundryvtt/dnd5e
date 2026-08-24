@@ -1879,7 +1879,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     await this.rollInitiative({
       createCombatants: true,
-      initiativeOptions: { messageMode: CONFIG.Dice.BasicRoll.getMessageMode() }
+      initiativeOptions: { messageMode: messageOptions.rollMode }
     });
   }
 

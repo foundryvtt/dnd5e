@@ -213,10 +213,17 @@
       &[hidden] { display: none; }
     }
 
-    .card-buttons button {
-      inline-size: 100%;
-      font-family: var(--dnd5e-font-roboto-condensed);
-      font-weight: normal;
+    .card-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      button {
+        --input-height: 28px;
+        inline-size: 100%;
+        font-family: var(--dnd5e-font-roboto-condensed);
+        font-weight: normal;
+      }
     }
 
     /* Rolls */
