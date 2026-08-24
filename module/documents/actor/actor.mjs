@@ -1822,6 +1822,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     options = foundry.utils.mergeObject({
       advantage, disadvantage, maximum, minimum,
+      ability: abilityId,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
@@ -1876,7 +1877,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this._cachedInitiativeRoll = new CONFIG.Dice.BasicRoll(String(options.fixed), data, options);
     }
 
-    await this.rollInitiative({ createCombatants: true, initiativeOptions: { messageOptions } });
+    await this.rollInitiative({
+      createCombatants: true,
+      initiativeOptions: { messageMode: messageOptions.rollMode }
+    });
   }
 
   /* -------------------------------------------- */
@@ -2395,11 +2399,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Create a chat message
     const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
-      content: _loc(message, {
+      content: `<p>${_loc(message, {
         name: this.name,
         dice: _loc(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
         health: _loc(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
-      }),
+      })}</p>`,
       flavor: this.createRestFlavor(config, result),
       type: "rest",
       rolls: result.rolls,

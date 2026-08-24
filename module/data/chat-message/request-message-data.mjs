@@ -50,6 +50,13 @@ export default class RequestMessageData extends ChatMessageDataModel {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Highlight successes and failures in the results, if applicable.
    * @param {HTMLElement} element  The rendered chat card.
@@ -73,6 +80,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
   /** @inheritDoc */
   _onRender(element, options={}) {
     super._onRender(element, options);
+    element.classList.add("compact");
     this._highlightSuccessFailure(element);
   }
 

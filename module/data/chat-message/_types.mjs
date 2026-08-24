@@ -75,9 +75,10 @@
 
 /**
  * @typedef {RollMessageSystemData} CheckMessageSystemData
- * @property {string} ability      Ability used for the check.
- * @property {string|null} skill   Skill used for the check, if any.
- * @property {string|null} tool    Tool used for the check, if any.
+ * @property {string} ability               Ability used for the check.
+ * @property {string|null} skill            Skill used for the check, if any.
+ * @property {string|null} tool             Tool used for the check, if any.
+ * @property {"ability"|"initiative"} type  The check sub-type.
  */
 
 /* -------------------------------------------- */
