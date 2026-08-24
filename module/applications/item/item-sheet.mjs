@@ -967,8 +967,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( !this.item.isOwner || !effect
       || (this.item.uuid === effect.parent?.uuid)
-      || (this.item.uuid === effect.origin)
-      || (this.item.uuid === effect.system.origin?.uuid) ) return false;
+      || effect.matchesOrigin(this.item.uuid) ) return false;
     const effectData = effect.toObject();
     const options = { parent: this.item, keepOrigin: false };
 

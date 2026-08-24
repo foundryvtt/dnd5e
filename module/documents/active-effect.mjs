@@ -211,7 +211,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * Retrieve the source Actor or Item, or null if it could not be determined.
-   * @returns {Promise<Activity|ActiveEffect|Actor5e|Item5e|null>}
+   * @returns {Promise<Activity|ActiveEffect|Actor5e|Item5e|RegionBehavior|null>}
    */
   async getSource() {
     if ( (this.target instanceof dnd5e.documents.Actor5e) && (this.parent instanceof dnd5e.documents.Item5e) ) {
@@ -227,7 +227,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {Actor5e|null}
    */
   getSourceActor() {
-    const origin = fromUuidSync(this.system.origin?.actor ?? this.origin, { strict: false });
+    const o = this.system.origin ?? {};
+    const origin = fromUuidSync(o.actor ?? o.item ?? o.activity ?? this.origin, { strict: false });
     return (origin instanceof dnd5e.documents.Actor5e) ? origin : (origin?.actor || null);
   }
 
@@ -313,8 +314,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   prepareBaseData() {
-    this.origin = this.system.origin?.effect ?? this.system.origin?.activity
-      ?? this.system.origin?.item ?? this.system.origin?.actor
+    this.origin = this.system.origin?.effect ?? this.system.origin?.behavior
+      ?? this.system.origin?.activity ?? this.system.origin?.item ?? this.system.origin?.actor
       ?? this.getFlag("core", "originText") ?? this.origin;
     super.prepareBaseData();
   }
@@ -744,7 +745,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( effectData ) {
         delete effectData._id;
         delete effectData.flags?.dnd5e?.rider;
-        foundry.utils.setPoperty(effectData, "system.origin", this.system.origin);
+        foundry.utils.setProperty(effectData, "system.origin", this.system.origin);
       }
       return effectData;
     }));
@@ -794,6 +795,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async _preCreate(data, options, user) {
     if ( await super._preCreate(data, options, user) === false ) return false;
     if ( options.keepOrigin === false ) this.updateSource({
+      origin: null,
       system: {
         origin: {
           activity: _del,
@@ -1306,7 +1308,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   async getSheetContext() {
     this.updateDuration();
     const { id, name, img, disabled, duration } = this;
-    const source = await this.getSource();
+    let source = await this.getSource();
+    if ( source instanceof RegionBehavior ) source = this.getSourceActor() ?? source;
     const special = this.getSpecialDurationParts();
     return {
       id, name, img, disabled, duration, source,
@@ -1334,6 +1337,18 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     };
     context.name ||= change.key;
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine if any of the origin values match a certain UUID.
+   * @param {string} uuid
+   * @returns {boolean}
+   */
+  matchesOrigin(uuid) {
+    return (this._source.origin === uuid)
+      || foundry.utils.iterateValues(this.system.origin ?? {}).some(o => o === uuid);
   }
 
   /* -------------------------------------------- */

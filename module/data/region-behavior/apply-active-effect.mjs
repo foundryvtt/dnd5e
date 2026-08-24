@@ -161,7 +161,15 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
         data._stats.compendiumSource = null;
       }
       data._stats.exportSource = null;
-      data.origin = this.behavior.uuid;
+      if ( data.system.origin ) {
+        delete data.origin;
+        data.system.origin = {
+          activity: this.region.flags.dnd5e?.activity,
+          behavior: this.behavior.uuid,
+          item: this.region.flags.dnd5e?.item
+        };
+      }
+      else data.origin = this.behavior.uuid;
       data.system.changes = await ActiveEffect.implementation.forApplication(data.system.changes, origin, actor);
       toCreate.push(data);
     }

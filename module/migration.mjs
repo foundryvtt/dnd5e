@@ -1186,7 +1186,9 @@ function _migrateEffectOrigin(effect, parent, updateData) {
   const field = origin.includes("Activity") ? "activity"
     : origin.includes("ActiveEffect") ? "effect"
       : origin.includes("Item") ? "item"
-        : origin.includes("Actor") ? "actor" : undefined;
+        : origin.includes("Actor") ? "actor"
+          : origin.includes("RegionBehavior") ? "behavior"
+            : undefined;
   if ( field ) {
     updateData["flags.core.originText"] = _del;
     updateData.origin = null;

@@ -61,7 +61,7 @@ export default class BaseEffectData extends ActiveEffectDataModel {
    */
   get isOnActivity() {
     return this.item
-      && (this.item.system.activities?.contents ?? []).some(a => a.effects.some(e => e._id === this.parent._id));
+      && (this.item.system.activities?.contents ?? []).some(a => a.effects?.some(e => e._id === this.parent._id));
   }
 
   /* -------------------------------------------- */

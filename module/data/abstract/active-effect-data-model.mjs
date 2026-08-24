@@ -19,6 +19,7 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
       origin: new SchemaField({
         activity: new StringField({ required: false }),
         actor: new DocumentUUIDField({ relative: true, required: false, type: "Actor" }),
+        behavior: new DocumentUUIDField({ required: false, type: "RegionBehavior" }),
         effect: new DocumentUUIDField({ relative: true, required: false, type: "ActiveEffect" }),
         item: new DocumentUUIDField({ relative: true, required: false, type: "Item" })
       })

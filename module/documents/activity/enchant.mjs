@@ -57,7 +57,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
    */
   get existingEnchantment() {
     return this.enchant.self
-      ? this.item.effects.find(e => e.isAppliedEnchantment && (e.origin === this.uuid)) : undefined;
+      ? this.item.effects.find(e => e.isAppliedEnchantment && e.matchesOrigin(this.uuid)) : undefined;
   }
 
   /* -------------------------------------------- */
