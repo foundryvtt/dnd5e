@@ -18,6 +18,7 @@ export default class TeleportSheet extends ActivitySheet {
     effect: {
       template: "systems/dnd5e/templates/activity/teleport-effect.hbs",
       templates: [
+        ...super.PARTS.effect.templates,
         "systems/dnd5e/templates/activity/parts/teleport-settings.hbs"
       ]
     }
