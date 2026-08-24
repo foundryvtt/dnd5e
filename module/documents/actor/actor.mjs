@@ -389,7 +389,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Prepare final attributes & spellcasting so that they can be used/modified in "final" phase
-    if ( phase === "final" && (this.system?.modelProvider === dnd5e) ) {
+    if ( phase === "final" ) {
       this.items.forEach(item => item.prepareFinalAttributes());
       this._prepareSpellcasting();
     }

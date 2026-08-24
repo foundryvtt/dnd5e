@@ -5,6 +5,7 @@ import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, simplifyBonus, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
+import Scaling from "./scaling.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -607,11 +608,14 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   getReplacementData(baseData) {
     baseData = { ...super.getReplacementData(baseData) };
-    if ( this.item ) baseData.item = {
-      ...this.item.system,
-      flags: this.item.flags,
-      name: this.item.name
-    };
+    if ( this.item ) {
+      baseData.item = {
+        ...this.item.system,
+        flags: this.item.flags,
+        name: this.item.name
+      };
+      baseData.scaling = new Scaling(this.item.scalingIncrease);
+    }
     return baseData;
   }
 
