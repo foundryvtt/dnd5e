@@ -66,10 +66,8 @@ export default class BaseTransformActivityData extends BaseActivityData {
    */
   get currentProfile() {
     if ( this.transform.mode !== "form" ) return null;
-    const active = this.effects.find(e => {
-      const effect = e.getEffect();
-      return !effect?.disabled && effect?.transfer;
-    })?._id;
+    const relativeUuid = foundry.utils.buildRelativeUuid(this.uuid, this.actor.uuid);
+    const active = this.actor.effects.find(e => e.system.origin?.activity === relativeUuid)?.system.origin.profile;
     return active ?? (this.transform.formless ? "" : null);
   }
 

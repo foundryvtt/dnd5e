@@ -157,7 +157,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
         (e.system.type === "concentrating") && (e.flags.dnd5e?.activity?.id === this.id)
       )?.uuid,
       scaling: config.scaling ? config.scaling : undefined,
-      spellLevel: this.item.level
+      spellLevel: this.item.system.level
     });
   }
 
@@ -217,15 +217,18 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     const profile = this.applicableEffects.find(e => e._id === profileId);
     if ( !profile && !this.transform.formless ) return;
 
-    let targets = getSceneTargets(this.actor, { checkBaseActor: true }).map(t => t.actor);
-    if ( !targets.length ) targets.push(this.actor);
+    const targets = new Set(getSceneTargets(this.actor, { checkBaseActor: true }).map(t => t.actor));
+    if ( !targets.size ) targets.add(this.actor);
     const operations = [];
     for ( const target of targets ) {
       const item = target.items.get(this.item.id);
       if ( !item ) continue;
       const ids = [];
+      const activityUuid = foundry.utils.buildRelativeUuid(this.uuid, target.uuid);
       for ( const profile of this.effects ) {
-        const appliedEffect = target.effects.find(e => e.system.origin?.profile === profile._id);
+        const appliedEffect = target.effects.find(e =>
+          (e.system.origin?.profile === profile._id) && (e.system.origin?.activity === activityUuid)
+        );
         const sourceEffect = item.effects.get(profile._id);
         if ( (profile._id === profileId) && sourceEffect ) {
           const effectFlags = {
@@ -234,7 +237,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
             },
             system: {
               origin: {
-                activity: foundry.utils.buildRelativeUuid(this.uuid, target.uuid),
+                activity: activityUuid,
                 profile: profileId
               }
             }
@@ -243,7 +246,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
           // Effect already exists, reset its duration
           if ( appliedEffect ) operations.push({
             action: "update", documentName: "ActiveEffect", updates: [foundry.utils.mergeObject({
-              _id: appliedEffect._id, start: ActiveEffect5e.getEffectStart()
+              _id: appliedEffect._id, start: ActiveEffect5e.getEffectStart(), disabled: false
             }, effectFlags)], parent: target
           });
 
