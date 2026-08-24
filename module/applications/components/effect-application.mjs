@@ -225,7 +225,9 @@ export default class EffectApplicationElement extends ChatTrayElement {
       system: {
         origin: {
           [activity ? "activity" : "item"]: activity ? activity.uuid : item?.uuid,
-          effect: concentration?.uuid
+          effect: concentration?.uuid,
+          profile: activity
+            ? activity.effects?.find(e => (e.uuid === effect.uuid) || (e._id === effect.id))?._id : undefined
         }
       }
     };

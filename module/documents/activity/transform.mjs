@@ -3,6 +3,7 @@ import TransformUsageDialog from "../../applications/activity/transform-usage-di
 import CompendiumBrowser from "../../applications/compendium-browser.mjs";
 import BaseTransformActivityData from "../../data/activity/transform-data.mjs";
 import { getSceneTargets, simplifyBonus } from "../../utils.mjs";
+import ActiveEffect5e from "../active-effect.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -151,7 +152,13 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     if ( this.transform.mode !== "form" ) return;
     const profile = results.message?.flags?.dnd5e?.transform?.profile
       ?? results.message?.data?.flags?.dnd5e?.transform?.profile;
-    this.#transformToForm(profile);
+    this.#transformToForm(profile, {
+      dependentOn: results.effects?.find(e =>
+        (e.system.type === "concentrating") && (e.flags.dnd5e?.activity?.id === this.id)
+      )?.uuid,
+      scaling: config.scaling ? config.scaling : undefined,
+      spellLevel: this.item.system.level
+    });
   }
 
   /* -------------------------------------------- */
@@ -167,7 +174,11 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
    */
   static async #transformActor(event, target, message) {
     if ( this.transform.mode === "form" ) {
-      await this.#transformToForm(message.getFlag("dnd5e", "transform.profile"));
+      await this.#transformToForm(message.getFlag("dnd5e", "transform.profile"), {
+        dependentOn: message.getAssociatedActor()?.effects.get(message.system.concentration)?.uuid,
+        scaling: message.system.scaling,
+        spellLevel: message.system.level
+      });
       return;
     }
 
@@ -199,31 +210,61 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
   /**
    * Handle transforming the actor to a specific form.
    * @param {string} [profileId]  ID of the profile into which to transform.
+   * @param {object} [flags={}]   Flags to apply to the created effect.
    */
-  async #transformToForm(profileId) {
+  async #transformToForm(profileId, flags={}) {
     if ( this.transform.mode !== "form" ) return;
     const profile = this.applicableEffects.find(e => e._id === profileId);
     if ( !profile && !this.transform.formless ) return;
 
-    let targets = getSceneTargets(this.actor, { checkBaseActor: true }).map(t => t.actor);
-    if ( !targets.length ) targets.push(this.actor);
+    const targets = new Set(getSceneTargets(this.actor, { checkBaseActor: true }).map(t => t.actor));
+    if ( !targets.size ) targets.add(this.actor);
+    const operations = [];
     for ( const target of targets ) {
       const item = target.items.get(this.item.id);
       if ( !item ) continue;
-      const updates = [];
+      const ids = [];
+      const activityUuid = foundry.utils.buildRelativeUuid(this.uuid, target.uuid);
       for ( const profile of this.effects ) {
-        const effect = item.effects.get(profile._id);
-        if ( !effect ) continue;
-        const enabledEffect = effect.id === profileId;
-        if ( enabledEffect && effect.transfer && !effect.disabled ) {
-          ui.notifications.info("DND5E.TRANSFORM.Warning.FormActive", {
-            format: { form: effect.name, actor: target.token?.name ?? target.name }
+        const appliedEffect = target.effects.find(e =>
+          (e.system.origin?.profile === profile._id) && (e.system.origin?.activity === activityUuid)
+        );
+        const sourceEffect = item.effects.get(profile._id);
+        if ( (profile._id === profileId) && sourceEffect ) {
+          const effectFlags = {
+            flags: {
+              dnd5e: flags
+            },
+            system: {
+              origin: {
+                activity: activityUuid,
+                profile: profileId
+              }
+            }
+          };
+
+          // Effect already exists, reset its duration
+          if ( appliedEffect ) operations.push({
+            action: "update", documentName: "ActiveEffect", updates: [foundry.utils.mergeObject({
+              _id: appliedEffect._id, start: ActiveEffect5e.getEffectStart(), disabled: false
+            }, effectFlags)], parent: target
           });
-        } else {
-          updates.push({ _id: effect.id, disabled: !enabledEffect, transfer: enabledEffect });
+
+          // Create new effect
+          else {
+            const effectData = sourceEffect.clone(foundry.utils.mergeObject({
+              disabled: false, _stats: { compendiumSource: null, duplicateSource: sourceEffect.uuid }
+            }, effectFlags)).toObject();
+            effectData.system.changes = await ActiveEffect5e.forApplication(effectData.system.changes, this, target);
+            operations.push({ action: "create", documentName: "ActiveEffect", data: [effectData], parent: target });
+          }
         }
+
+        // Remove the existing effect
+        else if ( appliedEffect ) ids.push(appliedEffect.id);
       }
-      if ( updates.length ) await item.updateEmbeddedDocuments("ActiveEffect", updates);
+      if ( ids.length ) operations.push({ action: "delete", documentName: "ActiveEffect", ids, parent: target });
     }
+    await foundry.documents.modifyBatch(operations);
   }
 }
