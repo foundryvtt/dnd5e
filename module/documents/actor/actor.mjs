@@ -337,17 +337,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return type;
   }
 
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  prepareData() {
-    super.prepareData();
-    if ( this.system.modelProvider === dnd5e ) {
-      this.items.forEach(item => item.prepareFinalAttributes());
-      this._prepareSpellcasting();
-    }
-  }
-
   /* --------------------------------------------- */
 
   /** @inheritDoc */
@@ -397,6 +386,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       for ( const effect of this.allApplicableEffects() ) {
         if ( effect.active ) for ( const statusId of effect.statuses ) this.statuses.add(statusId);
       }
+    }
+
+    // Prepare final attributes & spellcasting so that they can be used/modified in "final" phase
+    if ( phase === "final" ) {
+      this.items.forEach(item => item.prepareFinalAttributes());
+      this._prepareSpellcasting();
     }
 
     return super.applyActiveEffects(phase);
