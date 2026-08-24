@@ -205,6 +205,7 @@ export function registerSystemSettings() {
 
   // Chat card summaries
   game.settings.register("dnd5e", "chatCardSummary", {
+    config: true,
     default: true,
     hint: "SETTINGS.DND5E.SUMMARIZECHAT.Hint",
     name: "SETTINGS.DND5E.SUMMARIZECHAT.Name",
