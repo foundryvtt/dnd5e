@@ -5,6 +5,7 @@ import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, simplifyBonus, staticID } from "../utils.mjs";
 import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
+import Scaling from "./scaling.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -323,9 +324,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     // Apply shims to moved fields
     change = change.effect._applyChangeShim(change);
 
-    if ( (model instanceof foundry.abstract.Document)
-      && !change.effect._checkCondition(change, options.replacementData) ) return {};
-
     // Handle special actor flags
     if ( change.key.startsWith("flags.dnd5e.") ) change = change.effect._prepareFlagChange(model, change);
 
@@ -590,23 +588,31 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /**
-   * Determine whether a specific change should be applied during this phase, setting `applied` if approved.
-   * @param {object} change           Change that might be applied.
-   * @param {object} [conditionData]  Data used to evaluate conditions.
-   * @returns {boolean}
-   * @internal
-   */
-  _checkCondition(change, conditionData) {
+  /** @inheritDoc */
+  shouldApplyChange(change, options) {
+    if ( !super.shouldApplyChange(change, options) ) return false;
+    const conditionData = options?.replacementData;
     if ( conditionData && !CONFIG.ActiveEffect.changeTypes[change.type]?.skipConditions ) {
       if ( this.system.conditions?.check(conditionData) === false ) return false;
       if ( change.conditions?.check(conditionData) === false ) return false;
     }
-
-    const originalChange = this.system.changes.find(c => c._id === change._id);
-    if ( originalChange ) originalChange.applied = true;
-
+    change.applied = true;
     return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getReplacementData(baseData) {
+    if ( !this.item ) return super.getReplacementData(baseData);
+    baseData = { ...super.getReplacementData(baseData) };
+    baseData.item = {
+      ...this.item.system,
+      flags: this.item.flags,
+      name: this.item.name
+    };
+    baseData.scaling = new Scaling(this.item.scalingIncrease);
+    return baseData;
   }
 
   /* -------------------------------------------- */
