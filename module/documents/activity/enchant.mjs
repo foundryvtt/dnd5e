@@ -170,7 +170,8 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       system: {
         origin: {
           activity: this.uuid,
-          effect: concentration?.uuid
+          effect: concentration?.uuid,
+          profile: profileId
         }
       }
     }).toObject();
