@@ -207,7 +207,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
   async _prepareEffectData(effect, actor) {
     const originActor = this.chatMessage.getAssociatedActor();
     const concentration = originActor?.effects.get(this.chatMessage.system.concentration);
-    const item = this.chatMessage.getAssociatedItem();
+    const item = this.chatMessage.getAssociatedItem({ scaled: true });
     const activity = this.chatMessage.getAssociatedActivity({ scaled: true });
     const origin = concentration ?? (effect.inCompendium && item ? item : effect);
     if ( !game.user.isGM && !actor.isOwner ) {
