@@ -1181,7 +1181,8 @@ function _migrateEffectMagical(effect, parent, updateData) {
  * @returns {object}           The updateData to apply.
  */
 function _migrateEnchantmentTransfer(effect, parent, updateData) {
-  if ( effect.type !== "enchantment" ) return updateData;
+  if ( (effect.type !== "enchantment")
+    || foundry.utils.objectValues(effect.system?.origin ?? {}).some(k => k) ) return updateData;
   const origin = effect.flags?.core?.originText ?? effect.origin;
   updateData.transfer = !!origin && !origin.endsWith(parent._id);
   return updateData;

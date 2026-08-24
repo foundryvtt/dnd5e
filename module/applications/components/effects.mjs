@@ -189,7 +189,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
       else categories.passive.effects.push(e);
     }
-    categories.enchantment.hidden = !parent?.system.isEnchantment;
+    categories.enchantment.hidden = !parent?.system.isEnchantment && !categories.enchantment.effects.length;
     categories.enchantmentActive.hidden = !categories.enchantmentActive.effects.length;
     categories.enchantmentInactive.hidden = !categories.enchantmentInactive.effects.length;
     categories.suppressed.hidden = !categories.suppressed.effects.length;

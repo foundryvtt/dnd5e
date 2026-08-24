@@ -974,6 +974,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
 
     if ( effect.type === "enchantment" ) {
       effectData.system.origin.item ??= effect.parent?.uuid;
+      if ( effect.system.isOnActivity ) effectData.transfer = true;
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,
