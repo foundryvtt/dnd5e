@@ -131,7 +131,8 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
             origin: {
               activity: this.uuid
             }
-          }
+          },
+          transfer: true
         }
       ],
       flags: {

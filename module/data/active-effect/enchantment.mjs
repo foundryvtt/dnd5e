@@ -67,7 +67,9 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if ( this.isApplied && this.parent.uuid ) dnd5e.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+    if ( this.isApplied && this.parent.uuid && this.parent.origin ) {
+      dnd5e.registry.enchantments.track(this.parent.origin, this.parent.uuid);
+    }
   }
 
   /* -------------------------------------------- */
@@ -172,8 +174,9 @@ export default class EnchantmentData extends ActiveEffectDataModel {
       if ( this.isOnActivity ) {
         const transferCheckbox = transferFormGroup.querySelector('dnd5e-checkbox[name="transfer"]');
         if ( transferCheckbox ) {
-          transferCheckbox.dataset.tooltip = "DND5E.ENCHANTMENT.Transfer.DisabledTooltip";
+          if ( app.isEditable ) transferCheckbox.dataset.tooltip = "DND5E.ENCHANTMENT.Transfer.DisabledTooltip";
           transferCheckbox.disabled = true;
+          transferCheckbox.checked = false;
         }
       }
     }
