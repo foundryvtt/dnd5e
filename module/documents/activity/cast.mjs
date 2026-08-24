@@ -126,8 +126,12 @@ export default class CastActivity extends ActivityMixin(BaseCastActivityData) {
           type: "enchantment",
           name: _loc("DND5E.CAST.Enchantment.Name"),
           img: "systems/dnd5e/icons/svg/activity/cast.svg",
-          origin: this.uuid,
-          changes: this.getSpellChanges()
+          system: {
+            changes: this.getSpellChanges(),
+            origin: {
+              activity: this.uuid
+            }
+          }
         }
       ],
       flags: {

@@ -2733,7 +2733,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const attributions = [];
     for ( const e of this.allApplicableEffects() ) {
       let source = e.sourceName;
-      if ( !e.origin || (e.origin === this.uuid) ) source = e.name;
+      if ( !e.origin || e.matchesOrigin(this.uuid) ) source = e.name;
       if ( !source || e.disabled || e.isSuppressed ) continue;
       const value = e.changes.reduce((n, change) => {
         if ( (ActiveEffect5e.SHIM_FIELDS[change.key]?.key ?? change.key) !== target ) return n;
@@ -2986,7 +2986,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Remove active effects
       const oEffects = foundry.utils.deepClone(d.effects);
       const originEffectIds = new Set(oEffects.filter(effect => {
-        return !effect.origin || effect.origin === this.uuid;
+        return !effect.origin || effect.matchesOrigin(this.uuid);
       }).map(e => e._id));
       d.effects = d.effects.filter(e => {
         if ( settings.effects.has("all") ) return true;

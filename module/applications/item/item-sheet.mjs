@@ -703,9 +703,11 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       return ActiveEffect.implementation.createDialog({
         name: this.document.name,
         img: this.document.img,
-        origin: this.document.uuid,
         system: {
-          magical: this.document.system.properties?.has("mgc")
+          magical: this.document.system.properties?.has("mgc"),
+          origin: {
+            item: this.document.uuid
+          }
         }
       }, { parent: this.document, renderSheet: true }, { sheet: this });
     }
@@ -965,12 +967,12 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
     if ( !this.item.isOwner || !effect
       || (this.item.uuid === effect.parent?.uuid)
-      || (this.item.uuid === effect.origin) ) return false;
+      || effect.matchesOrigin(this.item.uuid) ) return false;
     const effectData = effect.toObject();
     const options = { parent: this.item, keepOrigin: false };
 
     if ( effect.type === "enchantment" ) {
-      effectData.origin ??= effect.parent?.uuid;
+      effectData.system.origin.item ??= effect.parent?.uuid;
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,

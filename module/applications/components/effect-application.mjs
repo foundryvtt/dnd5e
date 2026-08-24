@@ -183,7 +183,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
   /**
    * Handle applying an Active Effect to a Token.
    * @param {ActiveEffect5e} effect      The effect to apply.
-   * @param {Actor5e} actor              The actor.
+   * @param {Actor5e} actor              The actor to which the effect should be applied.
    * @returns {Promise<ActiveEffect5e>}  The created effect.
    * @throws {Error}                     If the effect could not be applied.
    * @protected
@@ -209,7 +209,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
     const concentration = originActor?.effects.get(this.chatMessage.system.concentration);
     const item = this.chatMessage.getAssociatedItem({ scaled: true });
     const activity = this.chatMessage.getAssociatedActivity({ scaled: true });
-    const origin = concentration ?? (effect.inCompendium && item ? item : effect);
+    const sourceKey = effect.inCompendium ? "compendiumSource" : "duplicateSource";
     if ( !game.user.isGM && !actor.isOwner ) {
       throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
     }
@@ -220,6 +220,12 @@ export default class EffectApplicationElement extends ChatTrayElement {
           dependentOn: concentration?.uuid,
           scaling: this.chatMessage.system.scaling,
           spellLevel: this.chatMessage.system.level
+        }
+      },
+      system: {
+        origin: {
+          [activity ? "activity" : "item"]: activity ? activity.uuid : item?.uuid,
+          effect: concentration?.uuid
         }
       }
     };
@@ -233,9 +239,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
     }
 
     // Enable an existing effect on the target if it originated from this effect
-    const existingEffect = effect.inCompendium
-      ? actor.effects.find(e => e._stats.compendiumSource === effect.uuid)
-      : actor.effects.find(e => e.origin === origin.uuid);
+    const existingEffect = actor.effects.find(e => e._stats[sourceKey] === effect.uuid);
     if ( existingEffect ) {
       return { action: "update", data: foundry.utils.mergeObject({
         ...durationOverride,
@@ -251,9 +255,8 @@ export default class EffectApplicationElement extends ChatTrayElement {
       ...durationOverride,
       disabled: false,
       transfer: false,
-      origin: origin.uuid,
       _stats: {
-        [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
+        [sourceKey]: effect.uuid,
         [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
       }
     }, effectFlags);

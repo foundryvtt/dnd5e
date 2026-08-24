@@ -459,11 +459,13 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       if ( changes.length ) {
         const effect = (new ActiveEffect({
           _id: staticID("dnd5eItemChanges"),
-          changes,
           disabled: false,
           icon: "icons/skills/melee/strike-slashes-orange.webp",
           name: _loc("DND5E.SUMMON.ItemChanges.Label"),
-          origin: this.uuid,
+          system: {
+            changes,
+            origin: { activity: this.uuid }
+          },
           type: "enchantment"
         })).toObject();
         actorUpdates.items.push({ _id: item.id, effects: [effect, ...item.effects.map(e => e.toObject())] });

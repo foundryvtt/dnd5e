@@ -57,7 +57,11 @@ export default class ModifyItemAdvancement extends Advancement {
               sourceId: effect.uuid
             }
           },
-          origin: this.item.uuid
+          system: {
+            origin: {
+              item: this.item.uuid
+            }
+          }
         }, { keepId: true }).toObject();
         item.updateSource({ effects: [clone] });
         modified.push({ change: change._id, effect: clone._id, item: item._id });
