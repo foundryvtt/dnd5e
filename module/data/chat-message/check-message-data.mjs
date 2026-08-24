@@ -23,7 +23,8 @@ export default class CheckMessageData extends RollMessageData {
       ...super.defineSchema(),
       ability: new StringField({ blank: false, required: true }),
       skill: new StringField({ blank: false, initial: null, nullable: true }),
-      tool: new StringField({ blank: false, initial: null, nullable: true })
+      tool: new StringField({ blank: false, initial: null, nullable: true }),
+      type: new StringField({ blank: false, choices: ["ability", "initiative"], initial: "ability" })
     };
   }
 

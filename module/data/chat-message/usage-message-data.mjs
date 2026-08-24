@@ -110,6 +110,13 @@ export default class UsageMessageData extends ItemMessageData {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  get rendersSummaries() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   get showIdentity() {
     return !!this.activity.name;

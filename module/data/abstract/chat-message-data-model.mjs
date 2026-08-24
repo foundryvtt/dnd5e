@@ -41,6 +41,16 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
   /* -------------------------------------------- */
 
   /**
+   * Whether this card renders eligible descendents as summaries.
+   * @type {boolean}
+   */
+  get rendersSummaries() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Template to use when rendering this message as a summary item.
    * @type {string}
    */

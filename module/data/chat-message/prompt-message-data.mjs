@@ -83,6 +83,13 @@ export default class PromptMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _prepareContext(options) {
     const isCreator = game.user.isGM || this.parent.getAssociatedActor()?.isOwner || this.parent.isAuthor;
     return {
@@ -104,6 +111,7 @@ export default class PromptMessageData extends ChatMessageDataModel {
   /** @inheritDoc */
   _onRender(element, options={}) {
     super._onRender(element, options);
+    element.classList.add("compact");
     if ( this.parent.shouldDisplayChallenge ) element.dataset.displayChallenge = "";
   }
 
