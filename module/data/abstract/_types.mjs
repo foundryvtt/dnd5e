@@ -10,6 +10,8 @@
 /**
  * @typedef ChatMessageDataModelMetadata
  * @property {Record<string, ApplicationClickAction>} actions  Default click actions for buttons on the message.
+ * @property {string} summaryTemplate                          Template to use when rendering the message as a summary
+ *                                                             in a different message.
  * @property {string} template                                 Template to use when rendering this message.
  */
 

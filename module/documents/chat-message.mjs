@@ -39,6 +39,19 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
+   * Whether the given message offers the option to select targets based on outcome of subsequent rolls.
+   * @type {boolean}
+   */
+  get canSelectOutcomes() {
+    if ( (this.type !== "usage") || !this.isContentVisible ) return false;
+    const activity = this.getAssociatedActivity();
+    if ( !activity ) return false;
+    return activity.hasOutcomes;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Should the select targets options appear?
    * @type {boolean}
    */
@@ -61,6 +74,15 @@ export default class ChatMessage5e extends ChatMessage {
       default: return false;
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Store the targeting state of the message, if applicable.
+   * @type {{ checked: Map<string, boolean>, mode: ""|"selected"|"targeted" }}
+   * @internal
+   */
+  _targetState = { checked: new Map(), mode: "" };
 
   /* -------------------------------------------- */
 
@@ -127,6 +149,13 @@ export default class ChatMessage5e extends ChatMessage {
       }
       await this._enrichChatCard(html);
       this._collapseTrays(html);
+    }
+
+    if ( game.settings.get("dnd5e", "chatCardSummary")
+      && this.system?.summaryTemplate
+      && this.system.origin
+      && !options.canClose ) {
+      html.hidden = true;
     }
 
     /**
@@ -197,6 +226,16 @@ export default class ChatMessage5e extends ChatMessage {
         onOpen: () => ui.context.menuItems = this.system._getButtonGroupContextOptions()
       });
     }
+
+    // Summary controls
+    html.querySelectorAll(".card-summary[data-message-id] > :first-child").forEach(el => {
+      el.insertAdjacentHTML("beforeend", `
+        <button type="button" class="unbutton control-button message-delete" data-action="deleteMessage"
+                aria-label="${_loc("COMMON.Delete")}">
+          <i class="fa-solid fa-trash" inert></i>
+        </button>
+      `);
+    });
 
     // SVG icons
     html.querySelectorAll("i.dnd5e-icon").forEach(el => {
@@ -287,6 +326,18 @@ export default class ChatMessage5e extends ChatMessage {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Re-render the chat message that spawned this one so this one can be rendered as a summary.
+   */
+  async #refreshOrigin() {
+    const origin = this.system?.origin;
+    if ( !origin ) return;
+    await origin.system?.onDescendentRefresh?.(this);
+    ui.chat?.updateMessage(origin);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Handlers                              */
   /* -------------------------------------------- */
 
@@ -302,55 +353,77 @@ export default class ChatMessage5e extends ChatMessage {
   static addChatMessageContextOptions(html, options) {
     const canApply = li => game.messages.get(li.dataset.messageId)?.canApplyDamage;
     const canTarget = li => game.messages.get(li.dataset.messageId)?.canSelectTargets;
+    const canSelectOutcomes = li => game.messages.get(li.dataset.messageId)?.canSelectOutcomes;
     options.push(
       {
-        label: _loc("DND5E.ChatContextDamage"),
+        label: "DND5E.ChatContextDamage",
         icon: "fa-solid fa-user-minus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 1)
       },
       {
-        label: _loc("DND5E.ChatContextHealing"),
+        label: "DND5E.ChatContextHealing",
         icon: "fa-solid fa-user-plus",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, -1)
       },
       {
-        label: _loc("DND5E.ChatContextTempHP"),
+        label: "DND5E.ChatContextTempHP",
         icon: "fa-solid fa-user-clock",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardTemp(target)
       },
       {
-        label: _loc("DND5E.ChatContextDoubleDamage"),
+        label: "DND5E.ChatContextDoubleDamage",
         icon: "fa-solid fa-user-injured",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 2)
       },
       {
-        label: _loc("DND5E.ChatContextHalfDamage"),
+        label: "DND5E.ChatContextHalfDamage",
         icon: "fa-solid fa-user-shield",
         group: "damage",
         visible: canApply,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.applyChatCardDamage(target, 0.5)
       },
       {
-        label: _loc("DND5E.ChatContextSelectHit"),
+        label: "DND5E.ChatContextSelectHit",
         icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets("hit")
       },
       {
-        label: _loc("DND5E.ChatContextSelectMiss"),
+        label: "DND5E.ChatContextSelectMiss",
         icon: "fa-solid fa-bullseye",
         group: "attack",
         visible: canTarget,
         onClick: (_, target) => game.messages.get(target.dataset.messageId)?.selectTargets("miss")
+      },
+      {
+        label: "DND5E.CHATMESSAGE.Action.SelectAll",
+        icon: "fa-solid fa-bullseye",
+        group: "outcomes",
+        visible: canSelectOutcomes,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("all", target)
+      },
+      {
+        label: "DND5E.CHATMESSAGE.Action.SelectSuccess",
+        icon: "fa-solid fa-bullseye",
+        group: "outcomes",
+        visible: canSelectOutcomes,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("success", target)
+      },
+      {
+        label: "DND5E.CHATMESSAGE.Action.SelectFailure",
+        icon: "fa-solid fa-bullseye",
+        group: "outcomes",
+        visible: canSelectOutcomes,
+        onClick: (_, target) => game.messages.get(target.dataset.messageId)?.system?.selectOutcomes("failure", target)
       }
     );
     return options;
@@ -546,6 +619,20 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static async _preDeleteOperation(documents, operation, user) {
+    const ids = new Set(operation.ids);
+    for ( const message of documents ) {
+      for ( const result of dnd5e.registry.messages.get(message.id) ) {
+        if ( result.system.summaryTemplate ) ids.add(result.id);
+      }
+    }
+    operation.ids = Array.from(ids);
+    return super._preDeleteOperation(documents, operation, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     if ( !foundry.utils.hasProperty(data, "flags.core.canPopout") ) {
@@ -556,9 +643,26 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    this.#refreshOrigin();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     dnd5e.registry.messages.untrack(this);
+    this.#refreshOrigin();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if ( "system" in changed ) this.#refreshOrigin();
   }
 
   /* -------------------------------------------- */

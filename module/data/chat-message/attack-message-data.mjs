@@ -39,10 +39,6 @@ export default class AttackMessageData extends RollMessageData {
   }, { inplace: false }));
 
   /* -------------------------------------------- */
-
-  static ROLL_TEMPLATE = "systems/dnd5e/templates/chat/parts/roll-compact.hbs";
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -104,19 +100,12 @@ export default class AttackMessageData extends RollMessageData {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
-  /** @override */
-  _getEnrichmentOptions() {
-    return { avatar: false };
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const isPrivate = !this.parent.isContentVisible;
     const item = this.parent.getAssociatedItem();
-    if ( !isPrivate && item ) context.header = { item, activity: this.activity };
+    if ( !isPrivate && item ) context.header = { item, activity: this.activity, subtitle: this.activity.name };
     const mastery = CONFIG.DND5E.weaponMasteries[this.mastery];
     if ( mastery ) context.mastery = { label: mastery.label, reference: mastery.reference };
     context.rows = {
@@ -150,9 +139,8 @@ export default class AttackMessageData extends RollMessageData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
-    element.classList.add("compact");
+  _onRender(element, options={}) {
+    super._onRender(element, options);
     if ( element.querySelector(".chat-card .card-header") ) {
       element.querySelector(".message-header .flavor-text")?.remove();
     }

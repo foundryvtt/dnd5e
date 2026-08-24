@@ -41,6 +41,7 @@ export default function ActivityMixin(Base) {
       label: "DOCUMENT.DND5E.Activity",
       name: "Activity",
       sheetClass: ActivitySheet,
+      targetPhase: "",
       usage: {
         actions: {},
         applyEffectsInChat: true,
@@ -122,6 +123,16 @@ export default function ActivityMixin(Base) {
      */
     get dependentOrigin() {
       return this.item.effects.get(this.flags?.dnd5e?.dependentOn) ?? null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Whether this activity supports pass/fail outcomes.
+     * @type {boolean}
+     */
+    get hasOutcomes() {
+      return false;
     }
 
     /* -------------------------------------------- */

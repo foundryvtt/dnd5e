@@ -1,0 +1,14 @@
+{{#each rows}}
+{{#if entries.length}}
+<section class="icon-row">
+    <i class="fa-fw {{ icon }}" aria-label="{{ localize label }}"></i>
+    <ul class="pills unlist">
+        {{#each entries}}
+        <li class="pill transparent {{ css }}">
+            <span class="label">{{ label }}</span>
+        </li>
+        {{/each}}
+    </ul>
+</section>
+{{/if}}
+{{/each}}

@@ -31,6 +31,27 @@ export default class CheckMessageData extends RollMessageData {
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    summaryTemplate: "systems/dnd5e/templates/chat/check-summary.hbs",
     template: "systems/dnd5e/templates/chat/check-card.hbs"
   }, { inplace: false }));
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    const actor = this.parent.getAssociatedActor();
+    const token = this.parent.getAssociatedToken();
+    const item = this.parent.getAssociatedItem();
+    const isPrivate = !this.parent.isContentVisible;
+    context.token = token ?? actor;
+    if ( !isPrivate && item ) context.header = {
+      item,
+      activity: this.activity,
+      subtitle: [this.activity.name, this.parent.flavor].filterJoin(" • ")
+    };
+    return context;
+  }
 }

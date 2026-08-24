@@ -66,7 +66,7 @@ export default class DamageMessageData extends RollMessageData {
     activity ??= this.parent.getAssociatedActivity();
     const { isSpell=false } = activity ?? {};
     const isCritical = this.parent.rolls[0]?.isCritical === true;
-    const isWeapon = this.item.type === "weapon";
+    const isWeapon = this.item?.type === "weapon";
     const props = new Set(this.parent.rolls.flatMap(r => r.options.properties ?? []));
     const tags = [];
     if ( isCritical ) tags.push({ css: "critical", label: _loc("DND5E.Critical") });
@@ -74,13 +74,6 @@ export default class DamageMessageData extends RollMessageData {
     else if ( isWeapon ) tags.push({ label: _loc(CONFIG.Item.typeLabels.weapon) });
     tags.push(...Array.from(props, p => ({ label: CONFIG.DND5E.itemProperties[p]?.label })).filter(p => p.label));
     return tags;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _getEnrichmentOptions() {
-    return { avatar: false };
   }
 
   /* -------------------------------------------- */
@@ -127,9 +120,8 @@ export default class DamageMessageData extends RollMessageData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onRender(element) {
-    super._onRender(element);
-    element.classList.add("compact");
+  _onRender(element, options={}) {
+    super._onRender(element, options);
     if ( element.querySelector(".chat-card .card-header") ) {
       element.querySelector(".message-header .flavor-text")?.remove();
     }
