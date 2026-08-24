@@ -69,7 +69,8 @@ export default class ModifyItemConfig extends AdvancementConfig {
     const effectData = {
       name: this.advancement._source.title || this.item.name,
       img: this.advancement._source.icon || this.item.img,
-      type: "enchantment"
+      type: "enchantment",
+      transfer: false
     };
     const [created] = await this.item.createEmbeddedDocuments("ActiveEffect", [effectData], { render: false });
     this.advancement.update({
