@@ -73,6 +73,14 @@ export default class DamageApplicationElement extends ChatTrayElement {
   /* -------------------------------------------- */
 
   /**
+   * Whether the tray has received user modifications.
+   * @type {boolean}
+   */
+  #dirty = false;
+
+  /* -------------------------------------------- */
+
+  /**
    * Stacked target menu states.
    * @type {TargetPillMenuState[]}
    */
@@ -161,8 +169,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
    * @returns {DamageApplicationOptions}
    */
   getMergedOptions(uuid) {
+    const fallback = this.#dirty ? this.multiplier : (this.#saveMultiplier(uuid) ?? this.multiplier);
     const options = this.getTargetOptions(uuid);
-    return { ...options, multiplier: options.multiplier ?? this.#saveMultiplier(uuid) ?? this.multiplier };
+    return { ...options, multiplier: options.multiplier ?? fallback };
   }
 
   /* -------------------------------------------- */
@@ -299,6 +308,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
       div.querySelector("template").replaceWith(this.buildTargetContainer());
       div.addEventListener("click", this._handleClickHeader.bind(this));
       this.targetList.addEventListener("recorded-targets:build", this.refreshMultiplier.bind(this));
+      this.targetList.addEventListener("recorded-targets:change", () => this.#dirty = false);
     }
   }
 
@@ -451,8 +461,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const multipliers = new Set(Array.from(this.targetList.querySelectorAll("option"), o => {
       return this.getMergedOptions(o.value).multiplier;
     }));
-    this.querySelector(".multiplier-row .damage-multipliers")
-      .replaceChildren(...this.buildMultiplierButtons(multipliers));
+    for ( const button of this.querySelectorAll(".multiplier-row .multiplier-button") ) {
+      button.ariaPressed = `${multipliers.has(Number(button.value))}`;
+    }
   }
 
   /* -------------------------------------------- */
@@ -609,6 +620,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const button = event.target.closest(".multiplier-button");
     if ( !button ) return;
     this.multiplier = Number(button.value);
+    this.#dirty = true;
     this.targetList.buildTargetsList();
   }
 

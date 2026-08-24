@@ -151,7 +151,12 @@ export default class ChatMessage5e extends ChatMessage {
       this._collapseTrays(html);
     }
 
-    if ( this.system?.summaryTemplate && this.system.origin && !options.canClose ) html.hidden = true;
+    if ( game.settings.get("dnd5e", "chatCardSummary")
+      && this.system?.summaryTemplate
+      && this.system.origin
+      && !options.canClose ) {
+      html.hidden = true;
+    }
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -221,6 +226,16 @@ export default class ChatMessage5e extends ChatMessage {
         onOpen: () => ui.context.menuItems = this.system._getButtonGroupContextOptions()
       });
     }
+
+    // Summary controls
+    html.querySelectorAll(".card-summary[data-message-id] > :first-child").forEach(el => {
+      el.insertAdjacentHTML("beforeend", `
+        <button type="button" class="unbutton control-button message-delete" data-action="deleteMessage"
+                aria-label="${_loc("COMMON.Delete")}">
+          <i class="fa-solid fa-trash" inert></i>
+        </button>
+      `);
+    });
 
     // SVG icons
     html.querySelectorAll("i.dnd5e-icon").forEach(el => {

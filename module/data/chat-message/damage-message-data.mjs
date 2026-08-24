@@ -66,7 +66,7 @@ export default class DamageMessageData extends RollMessageData {
     activity ??= this.parent.getAssociatedActivity();
     const { isSpell=false } = activity ?? {};
     const isCritical = this.parent.rolls[0]?.isCritical === true;
-    const isWeapon = this.item.type === "weapon";
+    const isWeapon = this.item?.type === "weapon";
     const props = new Set(this.parent.rolls.flatMap(r => r.options.properties ?? []));
     const tags = [];
     if ( isCritical ) tags.push({ css: "critical", label: _loc("DND5E.Critical") });

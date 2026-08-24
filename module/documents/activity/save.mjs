@@ -129,7 +129,9 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
         target: Number.isFinite(dc) ? dc : this.save.dc.value
       };
       if ( bonusData.parts.length ) rollData.rolls = [bonusData];
-      await actor.rollSavingThrow(rollData, {}, { data: { speaker, system: this.messageSources } });
+      await actor.rollSavingThrow(rollData, {}, {
+        data: { speaker, system: { ...this.messageSources, origin: message.id } }
+      });
     }
   }
 

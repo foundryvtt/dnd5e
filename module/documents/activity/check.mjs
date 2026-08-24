@@ -112,7 +112,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
       const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
-      const messageData = { data: { speaker, system: this.messageSources } };
+      const messageData = { data: { speaker, system: { ...this.messageSources, origin: message.id } } };
       if ( bonusData.parts.length ) rollData.rolls = [bonusData];
       if ( skill ) await actor.rollSkill({ ...rollData, skill }, {}, messageData);
       else if ( tool ) {

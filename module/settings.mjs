@@ -203,6 +203,15 @@ export function registerSystemSettings() {
     requiresReload: true
   });
 
+  // Chat card summaries
+  game.settings.register("dnd5e", "chatCardSummary", {
+    default: true,
+    hint: "SETTINGS.DND5E.SUMMARIZECHAT.Hint",
+    name: "SETTINGS.DND5E.SUMMARIZECHAT.Name",
+    scope: "client",
+    type: Boolean
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",

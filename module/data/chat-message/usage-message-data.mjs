@@ -196,13 +196,15 @@ export default class UsageMessageData extends ItemMessageData {
       context.showTargets = true;
       this._prepareButtonGroups(context);
       if ( this.activity.name ) context.subtitle = this.activity.name;
-      context.summaries = (await Promise.all(this.parent.getAssociatedRolls()
-        .filter(m => m.visible)
-        .map(async m => {
-          const token = m.getAssociatedToken();
-          return { html: await m.system.render({ summary: true }), id: m.id, token: token };
-        })))
-        .filter(s => s.html);
+      if ( game.settings.get("dnd5e", "chatCardSummary") ) {
+        context.summaries = (await Promise.all(this.parent.getAssociatedRolls()
+          .filter(m => m.visible)
+          .map(async m => {
+            const token = m.getAssociatedToken();
+            return { html: await m.system.render({ summary: true }), id: m.id, token: token };
+          })))
+          .filter(s => s.html);
+      }
     }
 
     const item = this.parent.getAssociatedItem();

@@ -39,6 +39,7 @@ export default class CheckMessageData extends RollMessageData {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const actor = this.parent.getAssociatedActor();

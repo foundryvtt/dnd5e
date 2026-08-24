@@ -164,6 +164,14 @@ export default class RecordedTargetsElement extends foundry.applications.element
   /* -------------------------------------------- */
 
   /**
+   * The set of targets last recorded.
+   * @type {Set<string>}
+   */
+  #lastTargets = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
    * Checked status for application targets.
    * @type {Map<string, boolean>}
    */
@@ -248,6 +256,11 @@ export default class RecordedTargetsElement extends foundry.applications.element
           if ( t.actor ) targetedTokens.set(t.document.uuid, t.name);
         });
         break;
+    }
+    const uuids = new Set(targetedTokens.keys());
+    if ( uuids.symmetricDifference(this.#lastTargets).size ) {
+      this.#lastTargets = uuids;
+      this.dispatchEvent(new Event("recorded-targets:change"));
     }
     const targets = Array.from(targetedTokens.entries())
       .map(([uuid, name]) => {
