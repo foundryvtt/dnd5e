@@ -1,5 +1,6 @@
 import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "./dependent.mjs";
+import EmbeddableDocumentMixin from "./embeddable.mjs";
 import SystemFlagsMixin from "./flags.mjs";
 
 /**
@@ -10,7 +11,7 @@ import SystemFlagsMixin from "./flags.mjs";
  * @mixin
  */
 export default function SystemDocumentMixin(Base) {
-  class SystemDocument extends DependentDocumentMixin(SystemFlagsMixin(Base)) {
+  class SystemDocument extends DependentDocumentMixin(EmbeddableDocumentMixin(SystemFlagsMixin(Base))) {
 
     /* -------------------------------------------- */
     /*  Properties                                  */
