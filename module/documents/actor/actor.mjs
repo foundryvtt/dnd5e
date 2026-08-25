@@ -2986,14 +2986,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       // Remove active effects
       const oEffects = foundry.utils.deepClone(d.effects);
       const originEffectIds = new Set(oEffects.filter(effect => {
-        return !effect.origin || effect.matchesOrigin(this.uuid);
+        const o = effect.system?.origin ?? {};
+        const hasOrigin = effect.origin || foundry.utils.iterateValues(o).some(_ => _);
+        return !hasOrigin || (effect.origin === this.uuid) || (o.actor === this.uuid);
       }).map(e => e._id));
       d.effects = d.effects.filter(e => {
         if ( settings.effects.has("all") ) return true;
         if ( settings.keep.has("hp") && !settings.keep.has("class") && (e._id === staticID("dnd5eTransformProf")) ) {
           return true;
         }
-        const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? fromUuidSync(e.origin) : {};
+        const o = e.system?.origin ?? {};
+        const originUuid = o.effect ?? o.behavior ?? o.activity ?? o.item ?? o.actor ?? e.origin;
+        const origin = originUuid?.startsWith("Actor") || originUuid?.startsWith("Item")
+          ? fromUuidSync(originUuid) : {};
         const originIsSelf = origin?.parent?.uuid === this.uuid;
         const isOriginEffect = originEffectIds.has(e._id);
         if ( isOriginEffect ) return settings.effects.has("origin");

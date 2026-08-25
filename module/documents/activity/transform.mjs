@@ -3,7 +3,6 @@ import TransformUsageDialog from "../../applications/activity/transform-usage-di
 import CompendiumBrowser from "../../applications/compendium-browser.mjs";
 import BaseTransformActivityData from "../../data/activity/transform-data.mjs";
 import { getSceneTargets, simplifyBonus } from "../../utils.mjs";
-import ActiveEffect5e from "../active-effect.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -152,7 +151,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     if ( this.transform.mode !== "form" ) return;
     const profile = results.message?.flags?.dnd5e?.transform?.profile
       ?? results.message?.data?.flags?.dnd5e?.transform?.profile;
-    this.#transformToForm(profile, {
+    await this.#transformToForm(profile, {
       dependentOn: results.effects?.find(e =>
         (e.system.type === "concentrating") && (e.flags.dnd5e?.activity?.id === this.id)
       )?.uuid,
@@ -246,7 +245,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
           // Effect already exists, reset its duration
           if ( appliedEffect ) operations.push({
             action: "update", documentName: "ActiveEffect", updates: [foundry.utils.mergeObject({
-              _id: appliedEffect._id, start: ActiveEffect5e.getEffectStart(), disabled: false
+              _id: appliedEffect._id, start: ActiveEffect.implementation.getEffectStart(), disabled: false
             }, effectFlags)], parent: target
           });
 
@@ -255,7 +254,8 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
             const effectData = sourceEffect.clone(foundry.utils.mergeObject({
               disabled: false, _stats: { compendiumSource: null, duplicateSource: sourceEffect.uuid }
             }, effectFlags)).toObject();
-            effectData.system.changes = await ActiveEffect5e.forApplication(effectData.system.changes, this, target);
+            effectData.system.changes =
+              await ActiveEffect.implementation.forApplication(effectData.system.changes, this, target);
             operations.push({ action: "create", documentName: "ActiveEffect", data: [effectData], parent: target });
           }
         }
