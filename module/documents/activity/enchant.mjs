@@ -3,7 +3,6 @@ import EnchantUsageDialog from "../../applications/activity/enchant-usage-dialog
 import BaseEnchantActivityData from "../../data/activity/enchant-data.mjs";
 import Item5e from "../../documents/item.mjs";
 import { getSceneTargets } from "../../utils.mjs";
-import ActiveEffect5e from "../active-effect.mjs";
 import ActivityMixin from "./mixin.mjs";
 
 /**
@@ -170,14 +169,14 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       system: {
         origin: {
           activity: this.uuid,
-          effect: concentration?.uuid,
           profile: profileId
         }
       },
       disabled: false,
       transfer: true
     }).toObject();
-    enchantmentData.system.changes = await ActiveEffect5e.forApplication(enchantmentData.system.changes, this, item);
+    enchantmentData.system.changes =
+      await ActiveEffect.implementation.forApplication(enchantmentData.system.changes, this, item);
 
     /**
      * Hook that fires before an enchantment is applied to an item.

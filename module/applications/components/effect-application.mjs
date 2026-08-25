@@ -1,4 +1,3 @@
-import ActiveEffect5e from "../../documents/active-effect.mjs";
 import { convertTime, formatTime, loadingTooltip } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
 
@@ -263,7 +262,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
       }
     }, effectFlags);
 
-    effectData.system.changes = await ActiveEffect5e.forApplication(
+    effectData.system.changes = await ActiveEffect.implementation.forApplication(
       effectData.system.changes,
       activity ?? item ?? originActor,
       actor
