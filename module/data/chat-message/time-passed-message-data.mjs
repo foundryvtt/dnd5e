@@ -75,7 +75,7 @@ export default class TimePassedMessageData extends ChatMessageDataModel {
           game.time.calendar.timeToComponents(this.time)
         ) : Infinity;
         if ( days > 0 ) context.bastion.message = _loc(
-          `DND5E.Bastion.Reminder.${Number.isFinite(days) ? "Ellapsed" : "Unknown"}`,
+          `DND5E.Bastion.Reminder.${Number.isFinite(days) ? "Elapsed" : "Unknown"}`,
           { time: formatTime(days, "day") }
         );
       }

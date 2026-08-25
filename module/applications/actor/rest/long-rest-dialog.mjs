@@ -29,17 +29,16 @@ export default class LongRestDialog extends BaseRestDialog {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
+  async _prepareFields(context, options) {
+    await super._prepareFields(context, options);
 
-    const { enabled } = game.settings.get("dnd5e", "bastionConfiguration");
-    if ( game.user.isGM && context.isGroup && enabled ) context.fields.unshift({
-      field: new BooleanField({ label: _loc("DND5E.Bastion.Action.BastionTurn") }),
+    const { enabled, reminder } = dnd5e.settings.bastionConfiguration;
+    const { enabled: calendarEnabled } = dnd5e.settings.calendarConfig;
+    if ( game.user.isGM && context.isGroup && enabled && (!calendarEnabled || !reminder) ) context.fields.unshift({
+      field: new BooleanField({ label: _loc(`DND5E.Bastion.Action.${calendarEnabled ? "Maintain" : "Advance"}`) }),
       input: context.inputs.createCheckboxInput,
       name: "advanceBastionTurn",
       value: context.config.advanceBastionTurn
     });
-
-    return context;
   }
 }

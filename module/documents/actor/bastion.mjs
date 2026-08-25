@@ -20,9 +20,8 @@ export default class Bastion {
    * @returns {Promise<void>}
    */
   async advanceAllBastions() {
-    const duration = dnd5e.settings.calendarConfig.enabled ? 0 : dnd5e.settings.bastionConfiguration.duration;
     const haveBastions = game.actors.filter(a => a.system.isCharacter && a.itemTypes.facility.length);
-    for ( const actor of haveBastions ) await this.advanceAllFacilities(actor, { duration });
+    for ( const actor of haveBastions ) await this.advanceAllFacilities(actor);
     game.settings.set("dnd5e", "bastionTurns", [...game.settings.get("dnd5e", "bastionTurns"), game.time.worldTime]);
   }
 
@@ -32,14 +31,15 @@ export default class Bastion {
    * Advance all the facilities of a given Actor by one bastion turn.
    * @param {Actor5e} actor                          The actor.
    * @param {object} [options]
-   * @param {number} [options.duration=7]            The number of days the bastion turn spanned.
+   * @param {number} [options.duration]              The number of days the bastion turn spanned.
    * @param {boolean} [options.performUpdates=true]  Update the actor's facilities.
    * @param {boolean|"auto"} [options.summary=true]  Print a chat message summary of the turn. If set to "auto" then
    *                                                 the message will only be created if an order is completed.
    * @param {boolean} [options.turn=true]            Trigger events like recovery that are tied to turns, not days.
    * @returns {Promise<{ [message]: ChatMessage5e, updates: object[] }>}
    */
-  async advanceAllFacilities(actor, { duration=7, performUpdates=true, summary=true, turn=true }={}) {
+  async advanceAllFacilities(actor, { duration, performUpdates=true, summary=true, turn=true }={}) {
+    duration ??= dnd5e.settings.calendarConfig.enabled ? 0 : dnd5e.settings.bastionConfiguration.duration;
     const results = { orders: [], items: [], gold: 0 };
     const itemUpdates = [];
     for ( const facility of actor.itemTypes.facility ) {

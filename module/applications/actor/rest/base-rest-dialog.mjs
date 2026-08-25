@@ -136,6 +136,52 @@ export default class BaseRestDialog extends Dialog5e {
       isGroup: this.isPartyGroup,
       variant: game.settings.get("dnd5e", "restVariant")
     };
+
+    await this._prepareFields(context, options);
+
+    if ( context.fields.length ) {
+      context.formSections.push({ legend: "DND5E.REST.Configuration", fields: context.fields });
+    }
+    if ( context.hitPoints.length ) {
+      context.formSections.push({ legend: "DND5E.HitPoints", fields: context.hitPoints });
+    }
+
+    if ( this.isPartyGroup ) {
+      const restSettings = this.actor.getFlag("dnd5e", "restSettings") ?? {};
+      context.request = [
+        {
+          field: new BooleanField({
+            label: _loc("DND5E.REST.Request.AutoRest.Label"),
+            hint: _loc("DND5E.REST.Request.AutoRest.Hint")
+          }),
+          name: "autoRest",
+          input: context.inputs.createCheckboxInput,
+          value: restSettings.autoRest
+        },
+        ...this.actor.system.members
+          .filter(m => m.actor?.system.isCreature)
+          .map(m => ({
+            field: new BooleanField({
+              label: m.actor.name
+            }),
+            name: `targets.${m.actor.id}`,
+            input: context.inputs.createCheckboxInput,
+            value: restSettings.targets ? restSettings.targets?.has(m.actor.id) : true
+          }))
+      ];
+    }
+
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle preparing the main list of fields for the dialog.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   */
+  async _prepareFields(context, options) {
     if ( this.promptNewDay ) context.fields.push({
       disabled: !!this.config.request,
       field: new BooleanField({
@@ -147,7 +193,7 @@ export default class BaseRestDialog extends Dialog5e {
       value: context.config.newDay
     });
 
-    if ( context.isGroup && game.settings.get("dnd5e", "calendarConfig").enabled ) {
+    if ( context.isGroup && dnd5e.settings.calendarConfig.enabled ) {
       const duration = convertTime(this.duration, "minute", { strict: false });
       context.duration = {
         fields: [
@@ -190,40 +236,6 @@ export default class BaseRestDialog extends Dialog5e {
       name: "recoverTempMax",
       value: context.config.recoverTempMax
     });
-
-    if ( context.fields.length ) {
-      context.formSections.push({ legend: "DND5E.REST.Configuration", fields: context.fields });
-    }
-    if ( context.hitPoints.length ) {
-      context.formSections.push({ legend: "DND5E.HitPoints", fields: context.hitPoints });
-    }
-
-    if ( this.isPartyGroup ) {
-      const restSettings = this.actor.getFlag("dnd5e", "restSettings") ?? {};
-      context.request = [
-        {
-          field: new BooleanField({
-            label: _loc("DND5E.REST.Request.AutoRest.Label"),
-            hint: _loc("DND5E.REST.Request.AutoRest.Hint")
-          }),
-          name: "autoRest",
-          input: context.inputs.createCheckboxInput,
-          value: restSettings.autoRest
-        },
-        ...this.actor.system.members
-          .filter(m => m.actor?.system.isCreature)
-          .map(m => ({
-            field: new BooleanField({
-              label: m.actor.name
-            }),
-            name: `targets.${m.actor.id}`,
-            input: context.inputs.createCheckboxInput,
-            value: restSettings.targets ? restSettings.targets?.has(m.actor.id) : true
-          }))
-      ];
-    }
-
-    return context;
   }
 
   /* -------------------------------------------- */

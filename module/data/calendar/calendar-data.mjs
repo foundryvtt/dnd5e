@@ -357,9 +357,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
     const changes = [];
     const rolls = [];
+    let hasBastion = false;
 
     const bastion = dnd5e.settings.bastionConfiguration;
-    const advanceFacilities = timePassageData.midnights > 0;
+    const advanceFacilities = dnd5e.settings.calendarConfig.enabled && (timePassageData.midnights > 0);
     const recoverUses = !dnd5e.settings.calendarConfig.manualRecovery && periods.size;
     if ( advanceFacilities || recoverUses ) {
       const operations = [];
@@ -374,6 +375,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
             duration: timePassageData.midnights, performUpdates: false, summary: "auto", turn: false
           });
           updates.push(...results.updates);
+          hasBastion = true;
         }
 
         // Recover item & activity uses
@@ -410,15 +412,20 @@ export default class CalendarData5e extends foundry.data.CalendarData {
     };
 
     // Display bastion turn reminder
-    if ( advanceFacilities && bastion.enabled && bastion.reminder ) {
+    if ( advanceFacilities && bastion.enabled && bastion.reminder && hasBastion ) {
       const lastBastionTurn = dnd5e.settings.bastionTurns.at(-1);
-      const days = lastBastionTurn !== undefined ? CalendarData5e.dayDifference(
-        game.time.calendar.timeToComponents(lastBastionTurn),
-        game.time.calendar.timeToComponents(game.time.worldTime)
-      ) : Infinity;
-      if ( days >= dnd5e.settings.bastionConfiguration.duration ) {
-        messageConfig.create = true;
-        messageConfig.data.system.bastion = { reminder: true };
+      if ( lastBastionTurn === undefined ) {
+        await game.settings.set("dnd5e", "bastionTurns", [game.time.worldTime]);
+      } else {
+        const days = lastBastionTurn !== undefined ? CalendarData5e.dayDifference(
+          game.time.calendar.timeToComponents(lastBastionTurn),
+          game.time.calendar.timeToComponents(game.time.worldTime)
+        ) : Infinity;
+        const previousDays = days - timePassageData.midnights;
+        if ( Math.floor(days / bastion.duration) > Math.floor(previousDays / bastion.duration) ) {
+          messageConfig.create = true;
+          messageConfig.data.system.bastion = { reminder: true };
+        }
       }
     }
 
