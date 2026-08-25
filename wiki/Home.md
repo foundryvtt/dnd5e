@@ -1,6 +1,10 @@
 # Welcome to the DnD5e FoundryVTT Wiki
 
-- [Active Effects Guide](Active-Effect-Guide.md)
+- [Active Effects Overview](Active-Effects.md)
+  - [Attribute Keys & Values (base effects)](Active-Effect-Guide.md)
+  - [Attribute Keys & Values (enchantment effects)](Enchantment.md)
+  - [Conditions Format](Filters.md)
+  - [Rule Change Types](Active-Effect-Rules.md)
 - [Activities Overview](Activities.md)
   - Activity Types
     - [Activity Type: Attack](Activity-Type-Attack.md)
@@ -32,6 +36,7 @@
 - [Enchantment](Enchantment.md)
 - [Enrichers](Enrichers.md)
   - [Embeds](Embeds.md)
+- [Filters](Filters.md)
 - [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
 - [Journal Pages](Journal-Pages.md)
