@@ -92,6 +92,7 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
     for ( const roll of config.rolls ?? [] ) {
       roll.options ??= {};
       roll.options.isCritical = config.isCritical;
+      foundry.utils.setProperty(roll, "data.roll.isCritical", config.isCritical);
     }
   }
 }
