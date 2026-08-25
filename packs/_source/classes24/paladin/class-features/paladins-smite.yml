@@ -7,10 +7,10 @@ system:
   description:
     value: >-
       <p>You always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplDivineSmit]{Divine Smite} spell
-      prepared. In addition, you can cast it without expending a spell slot, but
-      you must finish a Long Rest before you can cast it in this way
-      again.</p><section id="secret-47mDL7wHB8aQP7SD"
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDivineSmit]{Divine
+      Smite} spell prepared. In addition, you can cast it without expending a
+      spell slot, but you must finish a Long Rest before you can cast it in this
+      way again.</p><section id="secret-47mDL7wHB8aQP7SD"
       class="secret"><p><strong>Foundry Note</strong></p><p>When you reach this
       level the Divine Smite spell is added to your spells as Always Prepared
       and with a free use.</p></section>
@@ -18,9 +18,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -30,25 +30,24 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: paladins-smite
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1745256763929
+  systemVersion: 6.0.0
+  createdTime: 1787616014986
+  modifiedTime: 1787616014986
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

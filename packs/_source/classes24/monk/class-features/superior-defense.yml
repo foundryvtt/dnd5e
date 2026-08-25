@@ -17,9 +17,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,6 +29,7 @@ system:
     subtype: ki
   prerequisites:
     level: 18
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -52,12 +53,15 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: zAtnsWRpAcTIkjpz
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -67,6 +71,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -84,8 +89,18 @@ system:
         name: ''
         formula: ''
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: superior-defense
+  advancement: {}
+  crewed: false
 effects:
   - name: Superior Defense
     img: systems/dnd5e/icons/svg/items/feature.svg
@@ -100,73 +115,106 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 0SpF8C2Il1jfl1S7
+          _id: romzpwreQJPKgvgr
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: bludgeoning
           priority: null
           type: add
           phase: initial
-          _id: DCS8TDE3lsibJ6X0
+          _id: sZi2cgYPZSz05t6b
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: cold
           priority: null
           type: add
           phase: initial
-          _id: rSNaVHlqptKVYBaS
+          _id: oTNZb7GT6murOBJF
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: fire
           priority: null
           type: add
           phase: initial
-          _id: HY6mBo5wwMfsprR0
+          _id: SrhSD0sjb3LAU0rg
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: lightning
           priority: null
           type: add
           phase: initial
-          _id: GgD9yPK7YzbNmUxi
+          _id: ueGM2WLRLQCfHa1i
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: necrotic
           priority: null
           type: add
           phase: initial
-          _id: I6wPPNbLkaRz8xKI
+          _id: LGCs60S37XtlJWTq
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: piercing
           priority: null
           type: add
           phase: initial
-          _id: 94FQYiMaWbxCo7Ma
+          _id: b4WAXO1qSpIyj9uU
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: poison
           priority: null
           type: add
           phase: initial
-          _id: ssCnvYbSq9sy0lOs
+          _id: 13nMnlx0A45JOzEU
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: psychic
           priority: null
           type: add
           phase: initial
-          _id: XmTGxpyNC0qbEvi2
+          _id: Cea337MLgBOOlYdI
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: radiant
           priority: null
           type: add
           phase: initial
-          _id: Dt5sLKB23tBmwtpi
+          _id: wsFqmAAwX8HU2q2E
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: slashing
           priority: null
           type: add
           phase: initial
-          _id: WNAAi1m4jXAw8RPT
+          _id: kDqsMrHkeTFeR7PH
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: thunder
           priority: null
           type: add
           phase: initial
-          _id: N2HoYpmILIFTXleh
+          _id: BAIxhQIX6lpOsigF
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 60
@@ -181,29 +229,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102846
-      modifiedTime: 1783544102846
+      createdTime: 1787616015001
+      modifiedTime: 1787616015001
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbmnkSuperiorDe.zAtnsWRpAcTIkjpz'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1783544102846
+  systemVersion: 6.0.0
+  createdTime: 1787616015001
+  modifiedTime: 1787616015001
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1700000

@@ -25,9 +25,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     recovery: []
@@ -37,6 +37,7 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
   requirements: Circle of Land
@@ -61,6 +62,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: '1'
         units: minute
@@ -69,9 +71,17 @@ system:
         concentration: false
       effects:
         - _id: h0xW0mOYF8frKgHf
+          uuid: null
+          level: {}
         - _id: 7YVMASgXswIFXNs2
+          uuid: null
+          level: {}
         - _id: Gqgjm2NswU6f7qVL
+          uuid: null
+          level: {}
         - _id: LKxwXqkEIXJR2XAa
+          uuid: null
+          level: {}
       range:
         value: '120'
         units: ft
@@ -86,6 +96,7 @@ system:
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: ally
@@ -104,6 +115,14 @@ system:
         max: ''
       sort: 0
       name: Spectral Trees and Vines
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     oV51RLBkYFH4MPrS:
       type: utility
       _id: oV51RLBkYFH4MPrS
@@ -119,6 +138,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -134,6 +154,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -151,8 +172,18 @@ system:
         name: ''
         formula: ''
       name: Move
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: natures-sanctuary
+  advancement: {}
+  crewed: false
 effects:
   - name: 'Nature''s Ward: Arid'
     origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
@@ -173,7 +204,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: BDhBCz3WXru4rDgZ
+          _id: hFwdsPh38ZzKlx2w
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -181,14 +223,13 @@ effects:
       - coverHalf
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.J6hYOcVvZlLKuWab
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101769
-      modifiedTime: 1783544101769
+      createdTime: 1787616015014
+      modifiedTime: 1787616015014
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -214,7 +255,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: rpZWkckVjtNua4TG
+          _id: Qxf2ray6uV0TgxT4
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -222,14 +274,13 @@ effects:
       - coverHalf
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.XLIRgAYPO1ARo5pb
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101769
-      modifiedTime: 1783544101769
+      createdTime: 1787616015014
+      modifiedTime: 1787616015014
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -255,7 +306,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: VkJLuhOWEnmrmfaQ
+          _id: MbqlVdbuvq816KnY
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -263,14 +325,13 @@ effects:
       - coverHalf
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.yruAlaBCduO8AcnU
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101769
-      modifiedTime: 1783544101769
+      createdTime: 1787616015014
+      modifiedTime: 1787616015014
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -296,7 +357,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: RbcvscAaJGhxB31q
+          _id: wTVrYCh25iGE34gp
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -304,32 +376,27 @@ effects:
       - coverHalf
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbdrdNaturesWar.ActiveEffect.lDVYGRNqqw3HwcKM
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101769
-      modifiedTime: 1783544101769
+      createdTime: 1787616015015
+      modifiedTime: 1787616015015
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
     folder: null
     _key: '!items.effects!phbdrdNaturesSan.LKxwXqkEIXJR2XAa'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866583501
-  modifiedTime: 1783544101769
+  systemVersion: 6.0.0
+  createdTime: 1787616015014
+  modifiedTime: 1787616015014
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

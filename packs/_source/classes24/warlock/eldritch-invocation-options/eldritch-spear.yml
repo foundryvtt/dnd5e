@@ -20,9 +20,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -33,6 +33,7 @@ system:
   prerequisites:
     level: 2
     repeatable: true
+    items: []
   properties: []
   requirements: Warlock Cantrip That Deals Damage
   activities:
@@ -53,6 +54,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -66,6 +68,7 @@ system:
             activity: []
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -75,6 +78,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -86,14 +90,24 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories: []
         properties: []
         type: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: eldritch-spear
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Eldritch Spear
@@ -107,13 +121,23 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: PMBB1qMoHKjwHiqA
+          _id: n2ONeDtKRkdiMQZn
+          conditions: '{}'
+          replacement: ''
         - key: name
           value: ', Eldritch Spear'
           priority: null
           type: add
           phase: initial
-          _id: 8o3sE4vmp1Zuv3wI
+          _id: NIVo0XN2wKff7pj5
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      magical: true
     duration:
       value: null
       units: seconds
@@ -129,11 +153,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102237
-      modifiedTime: 1783544102237
+      createdTime: 1787616014999
+      modifiedTime: 1787616014999
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -141,18 +165,14 @@ effects:
     folder: null
     _key: '!items.effects!phbinvEldritchSp.IY7BiUpe3kGLWk9L'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102236
+  systemVersion: 6.0.0
+  createdTime: 1787616014999
+  modifiedTime: 1787616014999
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

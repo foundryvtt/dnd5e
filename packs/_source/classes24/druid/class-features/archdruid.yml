@@ -28,8 +28,8 @@ system:
     custom: ''
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: '1'
     recovery:
@@ -41,6 +41,7 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
@@ -77,6 +78,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
@@ -96,7 +98,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -115,12 +118,20 @@ system:
         max: ''
       sort: 0
       name: Nature Magician
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     xqLZdQ13RBZkeACB:
       type: utility
       name: Recharge on Initiative
       _id: xqLZdQ13RBZkeACB
       activation:
-        type: ''
+        type: encounter
         value: null
         override: false
         condition: ''
@@ -135,6 +146,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -149,6 +161,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -167,21 +180,26 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: archdruid
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1740680082199
+  systemVersion: 6.0.0
+  createdTime: 1787616014978
+  modifiedTime: 1787616014978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

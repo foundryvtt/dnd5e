@@ -22,21 +22,25 @@ system:
       @scale.druid.wild-shape-uses]]</p><p><strong>Known Forms. </strong>You
       know four Beast forms for this feature, chosen from among Beast stat
       blocks that have a maximum Challenge Rating of 1/4 and that lack a Fly
-      Speed. The @UUID[Compendium.dnd5e.actors24.Actor.mmRat00000000000]{Rat},
-      @UUID[Compendium.dnd5e.actors24.Actor.mmRidingHorse000]{Riding Horse},
-      @UUID[Compendium.dnd5e.actors24.Actor.mmSpider00000000]{Spider}, and
-      @UUID[Compendium.dnd5e.actors24.Actor.mmWolf0000000000]{Wolf} are
-      recommended. Whenever you finish a Long Rest, you can replace one of your
-      known forms with another eligible form.</p><section class="fvtt
-      advice"><figure class="icon"><img class="vtt-outline"
-      src="icons/vtt-512.png" /></figure><article><h3>Wild Shape
-      Automation</h3><p>When you've selected the creature you would like to wild
-      shape into you can drag it onto your character sheet, select the Wild
-      Shape option, and Foundry will automatically update your sheet. You can
-      revert the transformation at the top of your sheet or by right clicking on
-      your Actor in the sidebar.</p></article></section><p>When you reach
-      certain Druid levels, your number of known forms and the maximum Challenge
-      Rating for those forms increases, as shown in the Beast Shapes table. In
+      Speed. The
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobRat0000000]{Rat},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobRidingHors]{Riding
+      Horse},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobSpider0000]{Spider},
+      and
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobWolf000000]{Wolf}
+      are recommended. Whenever you finish a Long Rest, you can replace one of
+      your known forms with another eligible form.</p><section class="fvtt
+      advice"><figure class="icon"><img
+      src="icons/vtt-512.png"></figure><article><h3>Wild Shape
+      Automation</h3><p>This feature includes a <strong>Transform</strong>
+      activity. When you use it you can select the creature you'd like to Wild
+      Shape into using the Compendium Browser. You can revert the transformation
+      at the top of your sheet by clicking on the kebab menu (three vertical
+      dots) and selecting <strong>Restore
+      Transformation</strong>.</p></article></section><p>When you reach certain
+      Druid levels, your number of known forms and the maximum Challenge Rating
+      for those forms increases, as shown in the Beast Shapes table. In
       addition, starting at level 8, you can adopt a form that has a Fly
       Speed.</p><p><strong>Current Known Forms Limit:</strong> [[lookup
       @scale.druid.known-forms]]</p><p><strong>Current CR Limit:</strong>
@@ -68,18 +72,15 @@ system:
       Your equipment doesn't change size or shape to match the new form, and any
       equipment that the new form can't wear must either fall to the ground or
       merge with the form. Equipment that merges with the form has no effect
-      while you're in that form.</p><section class="secret"
-      id="secret-FZNGONDktXDnwY0x"><p><strong>Foundry Note</strong></p><p>You
-      can activate this feature to track uses of your Wild Shape.</p><p>It will
-      automatically restore a use on a Short Rest and all uses on a Long
-      Rest.</p></section>
+      while you're in that form.</p>
     chat: ''
   source:
     custom: ''
-    revision: 1
+    revision: 2
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
   uses:
     max: '@scale.druid.wild-shape-uses'
     recovery:
@@ -94,13 +95,14 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities:
-    FsDnynyqno8XNHgf:
+    46YUClJmy4DjUyW7:
       type: transform
-      _id: FsDnynyqno8XNHgf
+      _id: 46YUClJmy4DjUyW7
       sort: 0
       activation:
         type: bonus
@@ -114,12 +116,15 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: inst
+        units: hour
         concentration: false
         override: false
+        value: (floor(@classes.druid.levels / 2))
       effects: []
       range:
         units: self
@@ -130,6 +135,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           type: self
@@ -143,8 +149,8 @@ system:
       profiles:
         - cr: '0.25'
           name: CR ¼
-          _id: xUPf0uISOwKy3mhO
-          uuid: ''
+          _id: 1bmphNX1PGLZiPM5
+          uuid: null
           sizes: []
           types:
             - beast
@@ -152,23 +158,23 @@ system:
             - fly
           level:
             min: null
-            max: 3
+            max: 5
         - cr: '0.5'
           name: CR ½
-          _id: yu86xk21fVzHg9r5
-          uuid: ''
+          _id: 6SSHRda5Pf6fCKCf
+          uuid: null
           sizes: []
           types:
             - beast
           movement:
             - fly
           level:
-            min: 4
+            min: 6
             max: 7
         - cr: '1'
           name: CR 1
-          _id: ZFqKHYlY9JhLYnx0
-          uuid: ''
+          _id: BBW6hlzISRpioLLK
+          uuid: null
           sizes: []
           types:
             - beast
@@ -179,25 +185,32 @@ system:
       settings: null
       transform:
         customize: false
-        identifier: druid
+        mode: cr
         preset: wildshape
+        formless: false
       name: ''
-      img: systems/dnd5e/icons/svg/abilities/intelligence.svg
+      img: ''
       visibility:
-        level:
-          min: null
-          max: null
+        identifier: druid
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: wild-shape
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1735866366918
-  modifiedTime: 1768923594518
+  systemVersion: 6.0.0
+  createdTime: 1787616014979
+  modifiedTime: 1787616014979
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

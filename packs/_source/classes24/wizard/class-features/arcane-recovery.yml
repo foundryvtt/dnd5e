@@ -23,9 +23,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '1'
     spent: 0
@@ -37,6 +37,7 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -44,7 +45,6 @@ system:
     eSo3M84A3t6rwozM:
       type: utility
       name: Recover
-      _id: eSo3M84A3t6rwozM
       img: ''
       sort: 0
       activation:
@@ -59,8 +59,10 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -99,17 +101,21 @@ system:
         visible: false
         name: Combined Spell Levels
         formula: ceil(@classes.wizard.levels / 2)
+      _id: eSo3M84A3t6rwozM
+      behaviors: []
   enchant: {}
   identifier: arcane-recovery
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.3.2
-  createdTime: 1735866273692
-  modifiedTime: 1778017154684
+  systemVersion: 6.0.0
+  createdTime: 1787616014990
+  modifiedTime: 1787616014990
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

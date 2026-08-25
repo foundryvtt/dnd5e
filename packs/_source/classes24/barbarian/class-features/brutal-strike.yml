@@ -27,9 +27,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   uses:
     max: ''
     spent: 0
@@ -39,6 +40,7 @@ system:
     subtype: ''
   prerequisites:
     level: 9
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
@@ -60,12 +62,17 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: bg9jWpPRIJ0Q2vPY
+          level:
+            min: null
+            max: null
+          uuid: null
       range:
         override: false
         units: self
@@ -75,6 +82,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -88,7 +96,8 @@ system:
         max: ''
       damage:
         critical:
-          allow: false
+          allow: true
+          bonus: ''
         parts:
           - custom:
               enabled: true
@@ -97,23 +106,37 @@ system:
             denomination: 0
             bonus: ''
             types:
-              - acid
               - bludgeoning
+              - piercing
+              - slashing
+              - acid
               - cold
               - fire
               - force
               - lightning
               - necrotic
-              - piercing
               - poison
               - psychic
               - radiant
-              - slashing
               - thunder
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: brutal-strike
+  advancement: {}
+  crewed: false
 effects:
   - _id: bg9jWpPRIJ0Q2vPY
     disabled: false
@@ -124,7 +147,9 @@ effects:
       expired: false
     origin: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
     transfer: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     tint: '#ffffff'
     name: Hamstrung
     description: >-
@@ -132,44 +157,50 @@ effects:
       feet until the start of the attacker's next turn.</p>
     statuses: []
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classfeatures.Item.Kl6zifJ5OmdHlOi2.ActiveEffect.TIBmPKKnAAiWYuN4
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101037
-      modifiedTime: 1783544101037
+      createdTime: 1787616014992
+      modifiedTime: 1787616014992
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/melee/strike-axe-blood-red.webp
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.speed
           value: -15
           priority: null
           type: add
           phase: initial
-          _id: YI3aUDBag6iHUd63
+          _id: pPeQYbXPgivAZYEg
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     sort: 0
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrbBrutalStri.bg9jWpPRIJ0Q2vPY'
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1783544101036
+  systemVersion: 6.0.0
+  createdTime: 1787616014992
+  modifiedTime: 1787616014992
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

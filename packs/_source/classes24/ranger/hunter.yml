@@ -6,66 +6,89 @@ img: systems/dnd5e/icons/classes/hunter.webp
 system:
   description:
     value: >-
-      <blockquote><p>Protect Nature and People from
-      Destruction</p></blockquote><p>You stalk prey in the wilds and elsewhere,
-      using your abilities as a Hunter to protect nature and people everywhere
-      from forces that would destroy them.</p>
+      <p><em>Protect Nature and People from Destruction</em></p><p>You stalk
+      prey in the wilds and elsewhere, using your abilities as a Hunter to
+      protect nature and people everywhere from forces that would destroy
+      them.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbRanger0000000.JournalEntryPage.80h94evzbL3MwLk1]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: hunter
   classIdentifier: ranger
   advancement:
-    - _id: wacj6x75L5ZaZUky
+    wacj6x75L5ZaZUky:
+      _id: wacj6x75L5ZaZUky
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrHuntersLor
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrHuntersPre
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: 4nA7C6uQhBJBtWdS
+      flags: {}
+      hint: ''
+    4nA7C6uQhBJBtWdS:
+      _id: 4nA7C6uQhBJBtWdS
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrDefensiveT
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 7
       title: Subclass Features
-    - _id: gBE1JZA0jf6dglQu
+      flags: {}
+      hint: ''
+    gBE1JZA0jf6dglQu:
+      _id: gBE1JZA0jf6dglQu
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrSuperiorHu
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 11
       title: Subclass Features
-    - _id: 1P4RbYyrzFoutFrj
+      flags: {}
+      hint: ''
+    1P4RbYyrzFoutFrj:
+      _id: 1P4RbYyrzFoutFrj
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 15
       title: Subclass Features
+      flags: {}
+      hint: ''
   spellcasting:
     progression: none
     ability: ''
@@ -75,14 +98,14 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866564824
-  modifiedTime: 1745256764932
+  systemVersion: 6.0.0
+  createdTime: 1787616014988
+  modifiedTime: 1787616014988
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 500000
+sort: 700000
 ownership:
   default: 0
 _key: '!items!phbrgrHunter0000'

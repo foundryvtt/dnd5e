@@ -17,9 +17,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,12 +29,15 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: aura-of-devotion
+  advancement: {}
+  crewed: false
 effects:
   - name: Devoted
     img: icons/magic/life/heart-glowing-red.webp
@@ -44,6 +47,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -56,32 +68,27 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbpdnCourageAur.ActiveEffect.cJtDumOL6RUzrBHA
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616015002
+      modifiedTime: 1787616015002
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnDevotionAu.iKPJ2nBT687zLvTc'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866569467
-  modifiedTime: 1745256763655
+  systemVersion: 6.0.0
+  createdTime: 1787616015002
+  modifiedTime: 1787616015002
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

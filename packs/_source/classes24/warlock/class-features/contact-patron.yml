@@ -8,12 +8,12 @@ system:
     value: >-
       <p>In the past, you usually contacted your patron through intermediaries.
       Now you can communicate directly; you always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplContactOth]{Contact Other
-      Plane} spell prepared. With this feature, you can cast the spell without
-      expending a spell slot to contact your patron, and you automatically
-      succeed on the spell's saving throw.</p><p>Once you cast the spell with
-      this feature, you can't do so in this way again until you finish a Long
-      Rest.</p><section class="secret"
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplContactOth]{Contact
+      Other Plane} spell prepared. With this feature, you can cast the spell
+      without expending a spell slot to contact your patron, and you
+      automatically succeed on the spell's saving throw.</p><p>Once you cast the
+      spell with this feature, you can't do so in this way again until you
+      finish a Long Rest.</p><section class="secret"
       id="secret-ZobRIiK6iB3SlCis"><p><strong>Foundry Note</strong></p><p>The
       spell is granted to you automatically at this level with a free
       use.</p></section>
@@ -21,9 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -33,25 +33,24 @@ system:
     subtype: ''
   prerequisites:
     level: 9
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: contact-patron
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256765718
+  systemVersion: 6.0.0
+  createdTime: 1787616014989
+  modifiedTime: 1787616014989
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

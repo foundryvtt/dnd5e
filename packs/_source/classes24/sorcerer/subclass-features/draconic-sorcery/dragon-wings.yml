@@ -21,9 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '1'
     spent: 0
@@ -35,6 +35,7 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -59,6 +60,7 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: hour
         concentration: false
@@ -66,6 +68,8 @@ system:
         value: '1'
       effects:
         - _id: RZklxO114TnQQDyG
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -75,6 +79,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -91,6 +96,14 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     j52NY9ULfqEFdnDm:
       type: utility
       name: Restore Use
@@ -115,6 +128,7 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -129,6 +143,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -145,8 +160,18 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: dragon-wings
+  advancement: {}
+  crewed: false
 effects:
   - name: Winged
     img: icons/creatures/abilities/wing-batlike-white-blue.webp
@@ -161,7 +186,18 @@ effects:
           priority: null
           type: upgrade
           phase: initial
-          _id: rzDBPAHA3IEC2nwk
+          _id: HiyWbDPPaFzdQxUf
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: 3600
@@ -178,29 +214,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103634
-      modifiedTime: 1783544103634
+      createdTime: 1787616015006
+      modifiedTime: 1787616015006
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbscrDragonWing.RZklxO114TnQQDyG'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866556244
-  modifiedTime: 1783544103633
+  systemVersion: 6.0.0
+  createdTime: 1787616015006
+  modifiedTime: 1787616015006
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

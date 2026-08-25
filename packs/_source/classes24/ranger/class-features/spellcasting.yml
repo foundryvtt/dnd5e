@@ -8,7 +8,7 @@ system:
     value: >-
       <p>You have learned to channel the magical essence of nature to cast
       spells. See the
-      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.b2QVn25z2N1ykWpf]{rules
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{rules
       on spellcasting}. The information below details how you use those rules
       with Ranger spells, which appear in the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5]{Ranger
@@ -19,16 +19,17 @@ system:
       Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare the
       list of level 1+ spells that are available for you to cast with this
       feature. To start, choose two level 1 Ranger spells.
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure Wounds} and
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplEnsnaringS]{Ensnaring Strike}
-      are recommended.</p><p>The number of spells on your list increases as you
-      gain Ranger levels, as shown in the Prepared Spells column of the Ranger
-      Features table. Whenever that number increases, choose additional Ranger
-      spells until the number of spells on your list matches the number in the
-      Ranger Features table. The chosen spells must be of a level for which you
-      have spell slots. For example, if you're a level 5 Ranger, your list of
-      prepared spells can include six Ranger spells of level 1 or 2 in any
-      combination.</p><p>If another Ranger feature gives you spells that you
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplCureWounds]{Cure
+      Wounds} and
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplEnsnaringS]{Ensnaring
+      Strike} are recommended.</p><p>The number of spells on your list increases
+      as you gain Ranger levels, as shown in the Prepared Spells column of the
+      Ranger Features table. Whenever that number increases, choose additional
+      Ranger spells until the number of spells on your list matches the number
+      in the Ranger Features table. The chosen spells must be of a level for
+      which you have spell slots. For example, if you're a level 5 Ranger, your
+      list of prepared spells can include six Ranger spells of level 1 or 2 in
+      any combination.</p><p>If another Ranger feature gives you spells that you
       always have prepared, those spells don't count against the number of
       spells you can prepare with this feature, but those spells otherwise count
       as Ranger spells for you.</p><p><strong>Changing Your Prepared
@@ -42,9 +43,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -54,24 +55,24 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
+    repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: spellcasting
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735932734523
-  modifiedTime: 1750441227045
+  systemVersion: 6.0.0
+  createdTime: 1787616014988
+  modifiedTime: 1787616014988
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

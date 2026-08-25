@@ -17,9 +17,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,6 +29,7 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -57,6 +58,7 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -71,6 +73,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -88,21 +91,26 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: sorcery-incarnate
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866286897
-  modifiedTime: 1740680088718
+  systemVersion: 6.0.0
+  createdTime: 1787616014989
+  modifiedTime: 1787616014989
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -34,8 +34,8 @@ system:
     custom: ''
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: max(1, @abilities.cha.mod)
     recovery:
@@ -47,6 +47,7 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Bard
@@ -71,6 +72,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: '1'
         units: hour
@@ -79,6 +81,8 @@ system:
         concentration: false
       effects:
         - _id: WIHaOwkGqnX71mK1
+          uuid: null
+          level: {}
       range:
         value: '60'
         units: ft
@@ -92,7 +96,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -112,8 +117,17 @@ system:
       sort: 0
       name: Inspire
       img: systems/dnd5e/icons/svg/damage/psychic.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: bardic-inspiration
+  advancement: {}
+  crewed: false
 effects:
   - name: Inspired
     origin: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
@@ -129,6 +143,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: >-
       <p>You have received Bardic Inspiration. Once within the next hour when
       you fail a D20 Test, you can roll the Bardic Inspiration die and add the
@@ -141,29 +164,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616014994
+      modifiedTime: 1787616014994
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrdBardicInsp.WIHaOwkGqnX71mK1'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866377962
-  modifiedTime: 1745256760271
+  systemVersion: 6.0.0
+  createdTime: 1787616014994
+  modifiedTime: 1787616014994
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

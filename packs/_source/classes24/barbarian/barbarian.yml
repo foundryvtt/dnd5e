@@ -4,14 +4,15 @@ type: class
 img: systems/dnd5e/icons/classes/barbarian.webp
 system:
   description:
-    value: "<h3>Core Barbarian Traits</h3><table class=\"core-class-traits\"><tbody><tr><th scope=\"row\"><p>Primary Ability</p></th><td><p>Strength</p></td></tr><tr><th><p><strong>Hit Point Die</strong></p></th><td><p>D12 per Barbarian level</p></td></tr><tr><th><p><strong>Saving Throw Proficiencies</strong></p></th><td><p>Strength and Constitution</p></td></tr><tr><th><p><strong>Skill Proficiencies</strong></p></th><td><p><em>Choose 2:</em> Animal Handling, Athletics, Intimidation, Nature, Perception, or Survival</p></td></tr><tr><th><p><strong>Weapon Proficiencies</strong></p></th><td><p>Simple and Martial\_weapons</p></td></tr><tr><th><p><strong>Armor Training</strong></p></th><td><p>Light and Medium armor and Shields</p></td></tr><tr><th><p><strong>Starting Equipment</strong></p></th><td><p><em>Choose A or B:</em> (A) @UUID[Compendium.dnd5e.equipment24.Item.phbwepGreataxe00]{Greataxe}, 4 @UUID[Compendium.dnd5e.equipment24.Item.phbwepHandaxe000]{Handaxes}, @UUID[Compendium.dnd5e.equipment24.Item.phbagExplorersPa]{Explorer's Pack}, and [[/award 15GP]]; or (B) [[/award 75GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbbrbBarbarian0 inline classes=\"free-rules-embed\"]</p><h2>Becoming a Barbarian …</h2><h3>As a Level 1 Character</h3><ul><li>Gain all the traits in the Core Barbarian Traits table.</li><li>Gain the Barbarian's level 1 features, which are listed in the Barbarian Features table.</li></ul><h3>As a Multiclass Character</h3><ul><li>Gain the following traits from the Core Barbarian Traits table: Hit Point Die, proficiency with Martial weapons, and training with Shields.</li><li>Gain the Barbarian's level 1 features, which are listed in the Barbarian Features table.</li></ul>"
+    value: "<p><em>A Fierce Warrior of Primal Rage</em></p><h3>Core Barbarian Traits</h3><table class=\"core-class-traits\"><tbody><tr><th scope=\"row\"><p>Primary Ability</p></th><td><p>Strength</p></td></tr><tr><th><p><strong>Hit Point Die</strong></p></th><td><p>D12 per Barbarian level</p></td></tr><tr><th><p><strong>Saving Throw Proficiencies</strong></p></th><td><p>Strength and Constitution</p></td></tr><tr><th><p><strong>Skill Proficiencies</strong></p></th><td><p><em>Choose 2:</em> Animal Handling, Athletics, Intimidation, Nature, Perception, or Survival</p></td></tr><tr><th><p><strong>Weapon Proficiencies</strong></p></th><td><p>Simple and Martial\_weapons</p></td></tr><tr><th><p><strong>Armor Training</strong></p></th><td><p>Light and Medium armor and Shields</p></td></tr><tr><th><p><strong>Starting Equipment</strong></p></th><td><p><em>Choose A or B:</em> (A) @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepGreataxe00]{Greataxe}, 4 @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepHandaxe000]{Handaxes}, @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagExplorersPa]{Explorer's Pack}, and [[/award 15GP]]; or (B) [[/award 75GP]]</p></td></tr></tbody></table><p>Barbarians are mighty warriors who are powered by primal forces of the multiverse that manifest as a Rage. More than a mere emotion—and not limited to anger—this Rage is an incarnation of a predator's ferocity, a storm's fury, and a sea's turmoil.</p><p>Some Barbarians personify their Rage as a fierce spirit or revered forebear. Others see it as a connection to the pain and anguish of the world, as an impersonal tangle of wild magic, or as an expression of their own deepest self. For every Barbarian, their Rage is a power that fuels not just battle prowess, but also uncanny reflexes and heightened senses.</p><p>Barbarians often serve as protectors and leaders in their communities. They charge headlong into danger so those under their protection don't have to. Their courage in the face of danger makes Barbarians perfectly suited for adventure.</p><h2>Becoming a Barbarian …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in the Core Barbarian Traits table.</p></li><li><p>Gain the Barbarian's level 1 features, which are listed in the Barbarian Features table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain the following traits from the Core Barbarian Traits table: Hit Point Die, proficiency with Martial weapons, and training with Shields.</p></li><li><p>Gain the Barbarian's level 1 features, which are listed in the Barbarian Features table.</p></li></ul>"
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -20,21 +21,21 @@ system:
       sort: 200000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagExplorersPa
       requiresProficiency: false
       _id: EFPVIxAZ7F488Wt8
       group: 0Yx0DOCxeeNYZw7n
       sort: 300000
     - type: linked
       count: 4
-      key: Compendium.dnd5e.equipment24.Item.phbwepHandaxe000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepHandaxe000
       requiresProficiency: false
       _id: CF9oDnOKVLy0OehZ
       group: 0Yx0DOCxeeNYZw7n
       sort: 400000
     - type: linked
       count: 1
-      key: Compendium.dnd5e.equipment24.Item.phbwepGreataxe00
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepGreataxe00
       requiresProficiency: false
       _id: ubIakV0ZwY5Av8bB
       group: 0Yx0DOCxeeNYZw7n
@@ -43,13 +44,14 @@ system:
       count: 15
       key: gp
       requiresProficiency: false
-      _id: Xc0Dsr2G1lJ6yLsY
+      _id: NtcwgbyNGlDERPQV
       group: 0Yx0DOCxeeNYZw7n
       sort: 700000
   identifier: barbarian
   levels: 1
   advancement:
-    - _id: JsGU20wwFmwSQ5He
+    JsGU20wwFmwSQ5He:
+      _id: JsGU20wwFmwSQ5He
       type: ScaleValue
       configuration:
         identifier: rage-damage
@@ -66,7 +68,9 @@ system:
       value: {}
       title: Rage Damage
       hint: ''
-    - _id: Hc3cNal60BVZjgi5
+      flags: {}
+    Hc3cNal60BVZjgi5:
+      _id: Hc3cNal60BVZjgi5
       type: ScaleValue
       configuration:
         identifier: mastery
@@ -83,48 +87,69 @@ system:
       value: {}
       title: Weapon Masteries Known
       hint: ''
-    - _id: c07WAYE7J6zHt0yk
+      flags: {}
+    c07WAYE7J6zHt0yk:
+      _id: c07WAYE7J6zHt0yk
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbRage000000
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbUnarmoredD
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbWeaponMast
             optional: false
-          - uuid: Compendium.dnd5e.equipment24.Item.phbUnarmedStrike
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.equipment.Item.phbUnarmedStrike
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 1
       title: Class Features
-    - _id: vbNdqiHqN2qTbnUw
+      flags: {}
+      hint: ''
+    vbNdqiHqN2qTbnUw:
+      _id: vbNdqiHqN2qTbnUw
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbDangerSens
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbRecklessAt
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 2
       title: Class Features
-    - _id: MUU3y634K3edUdyL
+      flags: {}
+      hint: ''
+    MUU3y634K3edUdyL:
+      _id: MUU3y634K3edUdyL
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbPrimalKnow
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Class Features
-    - _id: YzgEeP9pAA0c3bbn
+      flags: {}
+      hint: ''
+    YzgEeP9pAA0c3bbn:
+      _id: YzgEeP9pAA0c3bbn
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -138,37 +163,52 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 4
       title: ''
       hint: ''
-    - _id: 49KNhnvoZJduJaOI
+      flags: {}
+    49KNhnvoZJduJaOI:
+      _id: 49KNhnvoZJduJaOI
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbExtraAttac
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbFastMoveme
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 5
       title: Class Features
-    - _id: ALO7yStJ7IHDxOss
+      flags: {}
+      hint: ''
+    ALO7yStJ7IHDxOss:
+      _id: ALO7yStJ7IHDxOss
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbFeralInsti
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbInstinctiv
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 7
       title: Class Features
-    - _id: Xl4k2CTxTMhAZbGt
+      flags: {}
+      hint: ''
+    Xl4k2CTxTMhAZbGt:
+      _id: Xl4k2CTxTMhAZbGt
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -182,32 +222,46 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 8
       title: ''
-    - _id: JNtXQqEZhCUM1NLJ
+      flags: {}
+      hint: ''
+    JNtXQqEZhCUM1NLJ:
+      _id: JNtXQqEZhCUM1NLJ
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbBrutalStri
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 9
       title: Class Features
-    - _id: 5S7821U8Dtg9egZu
+      flags: {}
+      hint: ''
+    5S7821U8Dtg9egZu:
+      _id: 5S7821U8Dtg9egZu
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbRelentless
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 11
       title: Class Features
-    - _id: 5hgfh1Zcyct9PXLy
+      flags: {}
+      hint: ''
+    5hgfh1Zcyct9PXLy:
+      _id: 5hgfh1Zcyct9PXLy
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -221,32 +275,46 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 12
       title: ''
-    - _id: zqXib0MKbaqrTTVR
+      flags: {}
+      hint: ''
+    zqXib0MKbaqrTTVR:
+      _id: zqXib0MKbaqrTTVR
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbImpBrutalS
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 13
       title: Class Features
-    - _id: YYXyPXHTKRgnPswF
+      flags: {}
+      hint: ''
+    YYXyPXHTKRgnPswF:
+      _id: YYXyPXHTKRgnPswF
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbPersistent
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 15
       title: Class Features
-    - _id: SI7lbuRXd2YfXXEi
+      flags: {}
+      hint: ''
+    SI7lbuRXd2YfXXEi:
+      _id: SI7lbuRXd2YfXXEi
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -260,48 +328,70 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 16
       title: ''
-    - _id: e5XIkDQYhqNDImgs
+      flags: {}
+      hint: ''
+    e5XIkDQYhqNDImgs:
+      _id: e5XIkDQYhqNDImgs
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbImp2Brutal
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 17
       title: Class Features
-    - _id: WlOoBbYeEoCTcD0t
+      flags: {}
+      hint: ''
+    WlOoBbYeEoCTcD0t:
+      _id: WlOoBbYeEoCTcD0t
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbIndomitabl
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 18
       title: Class Features
-    - _id: vsCiTVHhgLseNJjr
+      flags: {}
+      hint: ''
+    vsCiTVHhgLseNJjr:
+      _id: vsCiTVHhgLseNJjr
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbPrimalCham
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
       title: Class Features
-    - _id: WB74p7CaIJKZVoNK
+      flags: {}
+      hint: ''
+    WB74p7CaIJKZVoNK:
+      _id: WB74p7CaIJKZVoNK
       type: HitPoints
       configuration: {}
       value: {}
       title: ''
-    - _id: n7u8pfM928PJ8Mkd
+      flags: {}
+      hint: ''
+    n7u8pfM928PJ8Mkd:
+      _id: n7u8pfM928PJ8Mkd
       type: Trait
       configuration:
         mode: default
@@ -323,7 +413,9 @@ system:
       hint: >-
         You gain proficiency in another skill of your choice from the skill list
         available to Barbarians at level 1.
-    - _id: joUosIRgww6atx7N
+      flags: {}
+    joUosIRgww6atx7N:
+      _id: joUosIRgww6atx7N
       type: ScaleValue
       configuration:
         identifier: ''
@@ -342,7 +434,9 @@ system:
       value: {}
       title: Brutal Strike
       hint: ''
-    - _id: llft9LHzCcVGZr1R
+      flags: {}
+    llft9LHzCcVGZr1R:
+      _id: llft9LHzCcVGZr1R
       type: Subclass
       configuration: {}
       value:
@@ -351,7 +445,9 @@ system:
       level: 3
       title: ''
       hint: ''
-    - _id: yRMpy6l9CCzZfkmT
+      flags: {}
+    yRMpy6l9CCzZfkmT:
+      _id: yRMpy6l9CCzZfkmT
       type: Trait
       configuration:
         mode: default
@@ -366,7 +462,9 @@ system:
       title: Saving Throws Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: x68sQAjEcrIug4VO
+      flags: {}
+    x68sQAjEcrIug4VO:
+      _id: x68sQAjEcrIug4VO
       type: Trait
       configuration:
         mode: default
@@ -387,7 +485,9 @@ system:
       title: Skill Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: Q4crzEug7m7VK51P
+      flags: {}
+    Q4crzEug7m7VK51P:
+      _id: Q4crzEug7m7VK51P
       type: Trait
       configuration:
         mode: default
@@ -402,7 +502,9 @@ system:
       title: Weapon Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: HKfpwmpBxd4539HK
+      flags: {}
+    HKfpwmpBxd4539HK:
+      _id: HKfpwmpBxd4539HK
       type: Trait
       configuration:
         mode: default
@@ -418,7 +520,9 @@ system:
       title: Armor Training
       hint: ''
       classRestriction: primary
-    - _id: yj2VgvjKystoRCK6
+      flags: {}
+    yj2VgvjKystoRCK6:
+      _id: yj2VgvjKystoRCK6
       type: Trait
       configuration:
         mode: default
@@ -432,7 +536,9 @@ system:
       title: Weapon Proficiencies
       hint: ''
       classRestriction: secondary
-    - _id: oxhsE5PIGxe6mO4s
+      flags: {}
+    oxhsE5PIGxe6mO4s:
+      _id: oxhsE5PIGxe6mO4s
       type: Trait
       configuration:
         mode: default
@@ -446,7 +552,9 @@ system:
       title: Armor Training
       hint: ''
       classRestriction: secondary
-    - _id: UJdrH9cjLqpQrLCz
+      flags: {}
+    UJdrH9cjLqpQrLCz:
+      _id: UJdrH9cjLqpQrLCz
       type: Trait
       configuration:
         mode: mastery
@@ -463,7 +571,9 @@ system:
       hint: >-
         Your training with weapons allows you to use the mastery properties of
         additional weapons.
-    - _id: WYkWGiSyjLN4WC4x
+      flags: {}
+    WYkWGiSyjLN4WC4x:
+      _id: WYkWGiSyjLN4WC4x
       type: Trait
       configuration:
         mode: mastery
@@ -480,7 +590,9 @@ system:
       hint: >-
         Your training with weapons allows you to use the mastery properties of
         additional weapons.
-    - _id: EUfvF7zVF9ooQGUg
+      flags: {}
+    EUfvF7zVF9ooQGUg:
+      _id: EUfvF7zVF9ooQGUg
       type: Trait
       configuration:
         mode: mastery
@@ -497,7 +609,9 @@ system:
       hint: >-
         Your training with weapons allows you to use the mastery properties of
         additional weapons.
-    - _id: 6FTnn7DjW37STeW6
+      flags: {}
+    6FTnn7DjW37STeW6:
+      _id: 6FTnn7DjW37STeW6
       type: ScaleValue
       configuration:
         identifier: ''
@@ -518,7 +632,9 @@ system:
       value: {}
       title: Rages
       hint: ''
-    - type: AbilityScoreImprovement
+      flags: {}
+    Ab9IuXTuVV9GY2s0:
+      type: AbilityScoreImprovement
       _id: Ab9IuXTuVV9GY2s0
       configuration:
         cap: 2
@@ -531,12 +647,14 @@ system:
           cha: 0
         locked: []
         points: 2
-        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
+        recommendation: Compendium.dnd-players-handbook.feats.Item.phbBoonofIrresis
         max: null
-      value: {}
+      value:
+        type: asi
       level: 19
       title: ''
       hint: ''
+      flags: {}
   spellcasting:
     progression: none
     ability: ''
@@ -551,16 +669,17 @@ system:
     denomination: d12
     spent: 0
     additional: ''
+  properties: []
 effects: []
 folder: ZzMJGIp9Rxhr2hDV
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735865940469
-  modifiedTime: 1757541406172
+  systemVersion: 6.0.0
+  createdTime: 1787616014975
+  modifiedTime: 1787616014975
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

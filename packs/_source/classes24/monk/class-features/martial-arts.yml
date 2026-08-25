@@ -31,9 +31,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -43,6 +43,7 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -64,6 +65,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -78,6 +80,7 @@ system:
               - w1iULzeSjTNs16nf
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -87,6 +90,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -99,7 +103,7 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -107,8 +111,13 @@ system:
         properties: []
         type: weapon
       img: ''
-      appliedEffects:
-        - VnV6opO1b3apq6wt
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     uCIVkZurvxHYJ0h0:
       type: enchant
       name: Master Light Martial Weapon
@@ -125,6 +134,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -139,6 +149,7 @@ system:
               - w1iULzeSjTNs16nf
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -148,6 +159,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -160,7 +172,7 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -170,10 +182,17 @@ system:
         type: weapon
       _id: uCIVkZurvxHYJ0h0
       img: ''
-      appliedEffects:
-        - VnV6opO1b3apq6wt
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: martial-arts
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Dexterous Attacks & Martial Arts Damage
@@ -187,25 +206,39 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: bvOMMWdBF5rVRf5k
+          _id: dhV0ibsdCovRccRP
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.custom.enabled
           value: true
           priority: null
           type: override
           phase: initial
-          _id: VxbQQBKUdtQfwD1P
+          _id: P6HqUw0Abd2w05ws
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.custom.formula
           value: '@scale.monk.die + @mod'
           priority: null
           type: override
           phase: initial
-          _id: u58nJx6t8vjGmWYR
+          _id: bQIhgxyAL5s0ioKx
+          conditions: '{}'
+          replacement: ''
         - key: name
           value: '{} (Martial Arts)'
           priority: null
           type: override
           phase: initial
-          _id: SuB6scR5qWZZ6swj
+          _id: BvPKEPHCBbAt129I
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      magical: true
     duration:
       value: null
       units: seconds
@@ -228,16 +261,15 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1726772286789
-      modifiedTime: 1783544102739
+      createdTime: 1787616015001
+      modifiedTime: 1787616015001
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -249,14 +281,13 @@ flags:
     riders:
       activity:
         - w1iULzeSjTNs16nf
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1724425979197
-  modifiedTime: 1783544102739
+  systemVersion: 6.0.0
+  createdTime: 1787616015001
+  modifiedTime: 1787616015001
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

@@ -6,17 +6,15 @@ system:
   description:
     value: >-
       <p>Trained for battle, you gain proficiency with Martial weapons and
-      training with Medium armor.</p><section id="secret-hVQSjHcU93Zpf54G"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
-      includes an Active Effect which automates the addition of your Martial
-      weapons proficiency and Medium armor training.</p></section>
+      training with Medium armor.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -26,72 +24,40 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities: {}
   enchant: {}
   identifier: primal-order-warden
-effects:
-  - name: 'Primal Order: Warden'
-    origin: Item.phbPrimalOrderWa
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    disabled: false
-    flags: {}
-    img: systems/dnd5e/icons/svg/items/feature.svg
-    _id: j6MsESItx2TEvDju
-    type: base
-    system:
-      changes:
-        - key: system.traits.armorProf.value
-          value: med
-          priority: null
-          type: add
-          phase: initial
-          _id: KTtmGiuIfQLEOGwZ
-        - key: system.traits.weaponProf.value
-          value: mar
-          priority: null
-          type: add
-          phase: initial
-          _id: paguP5acvLVhEK3i
-    description: ''
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    sort: 0
-    _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde.ActiveEffect.FZ2cZXwJx1f7bUxQ
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544100991
-      modifiedTime: 1783544100991
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbPrimalOrderWa.j6MsESItx2TEvDju'
+  advancement:
+    YdRJn38UHZKg0BO4:
+      type: Trait
+      title: Trained for Battle
+      _id: YdRJn38UHZKg0BO4
+      configuration:
+        allowReplacements: false
+        choices: []
+        grants:
+          - armor:med
+          - weapon:mar
+        mode: default
+      flags: {}
+      level: 1
+      hint: ''
+      value: {}
+  crewed: false
+effects: []
 folder: EXYmwRGoNyMbByN1
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1783544100991
+  systemVersion: 6.0.0
+  createdTime: 1787616014992
+  modifiedTime: 1787616014992
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1050000

@@ -7,12 +7,12 @@ system:
   description:
     value: >-
       <p>You can cast
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplSummonDrag]{Summon Dragon}
-      without a Material component. You can also cast it once without a spell
-      slot, and you regain the ability to cast it in this way when you finish a
-      Long Rest.</p><p>Whenever you start casting the spell, you can modify it
-      so that it doesn't require Concentration. If you do so, the spell's
-      duration becomes 1 minute for that casting.</p><section
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSummonDrag]{Summon
+      Dragon} without a Material component. You can also cast it once without a
+      spell slot, and you regain the ability to cast it in this way when you
+      finish a Long Rest.</p><p>Whenever you start casting the spell, you can
+      modify it so that it doesn't require Concentration. If you do so, the
+      spell's duration becomes 1 minute for that casting.</p><section
       id="secret-dxl0rjuVblJvTXgy" class="secret"><p><strong>Foundry
       Note</strong></p><p>This feature can be used for tracking your free usage.
       When you cast the spell you can uncheck the "Consumption" box and,
@@ -21,9 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '1'
     spent: 0
@@ -35,6 +35,7 @@ system:
     subtype: ''
   prerequisites:
     level: 18
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -59,6 +60,7 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -73,6 +75,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -88,21 +91,27 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: dragon-companion
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866556244
-  modifiedTime: 1745256765404
+  systemVersion: 6.0.0
+  createdTime: 1787616014989
+  modifiedTime: 1787616014989
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -6,19 +6,17 @@ system:
   description:
     value: >-
       <p>You can cast
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplMageArmor0]{Mage Armor} on
-      yourself without expending a spell slot.</p><section
-      id="secret-G6Bmiw5YEqEfBh2e" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Mage Armor</strong> activity is configured
-      with the spell's effect and duration, including an Active Effect to set
-      the spell's provided AC formula.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMageArmor0]{Mage
+      Armor} on yourself without expending a spell
+      slot.</p><hr><p>@Embed[Compendium.dnd-players-handbook.spells.Item.phbsplMageArmor0
+      inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -28,20 +26,26 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities:
-    XKx7cpBQ8AvRs6Kl:
-      type: utility
-      name: Mage Armor
-      _id: XKx7cpBQ8AvRs6Kl
+    v3GceOoHJUQgfSWj:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplMageArmor0
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 1
+      _id: v3GceOoHJUQgfSWj
       sort: 0
       activation:
         type: action
-        value: null
         override: false
-        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -49,94 +53,52 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: hour
+        units: inst
         concentration: false
         override: false
-        value: '8'
-      effects:
-        - _id: 3UaxEJx1X9kDrR65
       range:
+        units: self
         override: false
-        units: touch
-        special: ''
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
-          count: ''
           type: self
-          special: ''
-        override: false
+        override: true
         prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+      name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: armor-of-shadows
-effects:
-  - _id: 3UaxEJx1X9kDrR65
-    disabled: true
-    duration:
-      value: 28800
-      units: seconds
-      expiry: turnStart
-      expired: false
-    origin: Compendium.dnd5e.classes24.Item.phbinvArmorofSha
-    transfer: true
-    flags: {}
-    tint: '#ffffff'
-    name: Mage Armor
-    description: <p>The target's base AC becomes 13 + its Dexterity modifier.</p>
-    statuses: []
-    _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.spells.Item.CKZTpZlxj7hjjo2H.ActiveEffect.cfwMU7LuOJ619Lny
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544102142
-      modifiedTime: 1783544102142
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    img: icons/equipment/chest/breastplate-helmet-metal.webp
-    type: base
-    system:
-      changes:
-        - key: system.attributes.ac.calc
-          value: mage
-          priority: null
-          type: override
-          phase: initial
-          _id: L7XMWUseajt7eVuK
-    sort: 0
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbinvArmorofSha.3UaxEJx1X9kDrR65'
+  advancement: {}
+  crewed: false
+effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102142
+  systemVersion: 6.0.0
+  createdTime: 1787616014998
+  modifiedTime: 1787616014998
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

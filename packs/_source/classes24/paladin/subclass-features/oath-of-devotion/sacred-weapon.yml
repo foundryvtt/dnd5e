@@ -19,18 +19,20 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
     recovery: []
   type:
     value: class
-    subtype: ''
+    subtype: channelDivinity
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -39,10 +41,10 @@ system:
       type: enchant
       _id: Ew70lNTD8dR3vREt
       activation:
-        type: special
+        type: action
         value: null
         override: false
-        condition: when taking the Attack action
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -50,9 +52,11 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: feat:channel-divinity-paladin
+            target: Compendium.dnd5e.classes24.Item.phbpdnChannelDiv
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: minute
         concentration: false
@@ -60,9 +64,8 @@ system:
         value: '10'
       effects:
         - _id: sEWDFOuWn47L5860
-          level:
-            min: null
-            max: null
+          uuid: null
+          level: {}
           riders:
             activity: []
             effect: []
@@ -76,6 +79,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -88,7 +92,7 @@ system:
         max: ''
       sort: 0
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -98,15 +102,17 @@ system:
         type: weapon
       name: ''
       img: ''
-      appliedEffects:
-        - sEWDFOuWn47L5860
+      behaviors: []
+      flags: {}
       visibility:
-        level:
-          min: null
-          max: null
-        identifier: ''
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: sacred-weapon
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Sacred Weapon
@@ -120,19 +126,31 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Yr5wphM5gvIy3y6n
+          _id: cRNVmoheR3KkMpYJ
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.types
           value: radiant
           priority: null
           type: add
           phase: initial
-          _id: 5QqndFGftPaI3u8U
+          _id: kCYfyi4rfkwQ2vVN
+          conditions: '{}'
+          replacement: ''
         - key: activities[attack].attack.bonus
           value: (max(1,@abilities.cha.mod))
           priority: null
           type: add
           phase: initial
-          _id: F6hOnhARG2HlC74o
+          _id: 1c9ZEXuSqf0aTpyo
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      magical: true
     duration:
       value: 600
       units: seconds
@@ -148,11 +166,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103117
-      modifiedTime: 1783544103117
+      createdTime: 1787616015004
+      modifiedTime: 1787616015004
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -162,11 +180,11 @@ effects:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1735866569467
-  modifiedTime: 1783544103117
+  systemVersion: 6.0.0
+  createdTime: 1787616015003
+  modifiedTime: 1787616015003
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -26,9 +26,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '20'
     spent: 0
@@ -40,6 +40,7 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -66,6 +67,7 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -80,6 +82,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -104,9 +107,18 @@ system:
             bonus: ''
             types:
               - necrotic
+            modifiers: []
             scaling:
               number: 1
       name: Second+ Use
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     w09009Qtx2IuGeS9:
       type: damage
       activation:
@@ -128,6 +140,7 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -142,6 +155,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -162,28 +176,35 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: ''
             types: []
+            modifiers: []
             scaling:
               number: 1
       name: First Use
       _id: w09009Qtx2IuGeS9
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: overchannel
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866546265
-  modifiedTime: 1745256769214
+  systemVersion: 6.0.0
+  createdTime: 1787616014990
+  modifiedTime: 1787616014990
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -8,19 +8,20 @@ system:
     value: >-
       <p>You have learned to cast spells through studying the mystical forces of
       nature. See
-      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.b2QVn25z2N1ykWpf]{chapter
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{chapter
       7} for the rules on spellcasting. The information below details how you
       use those rules with Druid spells, which appear on the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU]{Druid
       spell list}.</p><p><strong>Cantrips.</strong> You know two cantrips of
       your choice from the Druid spell list.
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplDruidcraft]{Druidcraft} and
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplProduceFla]{Produce Flame} are
-      recommended.</p><p>Whenever you gain a Druid level, you can replace one of
-      your cantrips with another cantrip of your choice from the Druid spell
-      list.</p><p>When you reach Druid levels 4 and 10, you learn another
-      cantrip of your choice from the Druid spell list, as shown in the Cantrips
-      column of the
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDruidcraft]{Druidcraft}
+      and
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplProduceFla]{Produce
+      Flame} are recommended.</p><p>Whenever you gain a Druid level, you can
+      replace one of your cantrips with another cantrip of your choice from the
+      Druid spell list.</p><p>When you reach Druid levels 4 and 10, you learn
+      another cantrip of your choice from the Druid spell list, as shown in the
+      Cantrips column of the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbDruid00000000.JournalEntryPage.UCOh3zlvGxyk5jLr#class-features]{Druid
       Features} table.</p><p><strong>Spell Slots.</strong> The Druid Features
       table shows how many spell slots you have to cast your level 1+ spells.
@@ -28,16 +29,19 @@ system:
       Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare the
       list of level 1+ spells that are available for you to cast with this
       feature. To start, choose four level 1 spells from the Druid spell list.
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplAnimalFrie]{Animal Friendship},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure Wounds},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplFaerieFire]{Faerie Fire}, and
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplThunderwav]{Thunderwave} are
-      recommended.</p><p>The number of spells on your list increases as you gain
-      Druid levels, as shown in the Prepared Spells column of the Druid Features
-      table. Whenever that number increases, choose additional spells from the
-      Druid spell list until the number of spells on your list matches the
-      number on the table. The chosen spells must be of a level for which you
-      have spell slots. For example, if you're a level 3 Druid, your list of
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplAnimalFrie]{Animal
+      Friendship},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplCureWounds]{Cure
+      Wounds},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFaerieFire]{Faerie
+      Fire}, and
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplThunderwav]{Thunderwave}
+      are recommended.</p><p>The number of spells on your list increases as you
+      gain Druid levels, as shown in the Prepared Spells column of the Druid
+      Features table. Whenever that number increases, choose additional spells
+      from the Druid spell list until the number of spells on your list matches
+      the number on the table. The chosen spells must be of a level for which
+      you have spell slots. For example, if you're a level 3 Druid, your list of
       prepared spells can include six spells of levels 1 and 2 in any
       combination.</p><p>If another Druid feature gives you spells that you
       always have prepared, those spells don't count against the number of
@@ -53,9 +57,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -65,25 +69,24 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities: {}
   enchant: {}
   identifier: spellcasting
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866366918
-  modifiedTime: 1750441233646
+  systemVersion: 6.0.0
+  createdTime: 1787616014979
+  modifiedTime: 1787616014979
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 800000

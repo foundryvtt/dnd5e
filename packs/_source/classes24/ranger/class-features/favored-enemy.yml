@@ -7,19 +7,20 @@ system:
   description:
     value: >-
       <p>You always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplHuntersMar]{Hunter's Mark}
-      spell prepared. You can cast it twice without expending a spell slot, and
-      you regain all expended uses of this ability when you finish a Long
-      Rest.</p><p>The number of times you can cast the spell without a spell
-      slot increases when you reach certain Ranger levels, as shown in the
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplHuntersMar]{Hunter's
+      Mark} spell prepared. You can cast it twice without expending a spell
+      slot, and you regain all expended uses of this ability when you finish a
+      Long Rest.</p><p>The number of times you can cast the spell without a
+      spell slot increases when you reach certain Ranger levels, as shown in the
       Favored Enemy column of the Ranger Features table.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: '@scale.ranger.favored-enemy'
     spent: 0
@@ -31,6 +32,8 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
+    repeatable: false
   properties:
     - mgc
   requirements: ''
@@ -38,7 +41,7 @@ system:
     18OW4UKZ5cSPPLhC:
       type: cast
       spell:
-        uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplHuntersMar
         challenge:
           override: false
         properties: []
@@ -60,8 +63,10 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -92,6 +97,7 @@ system:
         requireMagic: false
         identifier: ''
       name: ''
+      behaviors: []
   enchant: {}
   identifier: favored-enemy
   advancement:
@@ -101,7 +107,8 @@ system:
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplHuntersMar
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplHuntersMar
+            sort: 0
         optional: false
         spell:
           ability: []
@@ -111,20 +118,22 @@ system:
             requireSlot: false
           method: spell
           prepared: 2
+        sorting: m
       value: {}
       level: 1
       title: Favored Enemy
       hint: ''
       flags: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.3.2
-  createdTime: 1724425982601
-  modifiedTime: 1778088166342
+  systemVersion: 6.0.0
+  createdTime: 1787616014988
+  modifiedTime: 1787616014988
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

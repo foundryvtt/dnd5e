@@ -17,9 +17,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,6 +30,7 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -48,6 +50,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -62,6 +65,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -82,7 +86,7 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '@abilities.int.mod'
             types:
               - acid
@@ -98,24 +102,31 @@ system:
               - radiant
               - slashing
               - thunder
+            modifiers: []
             scaling:
               number: 1
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: empowered-evocation
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866546265
-  modifiedTime: 1745256768696
+  systemVersion: 6.0.0
+  createdTime: 1787616014990
+  modifiedTime: 1787616014990
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

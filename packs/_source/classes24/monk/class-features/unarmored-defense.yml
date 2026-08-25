@@ -15,9 +15,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -27,12 +27,15 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: unarmored-defense
+  advancement: {}
+  crewed: false
 effects:
   - _id: m2RCcVkc0YkCXNEb
     disabled: false
@@ -49,14 +52,13 @@ effects:
     description: ''
     statuses: []
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classfeatures.Item.UAvV7N7T4zJhxdfI.ActiveEffect.R5ro4AuNjcdWD56O
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102875
-      modifiedTime: 1783544102875
+      createdTime: 1787616015001
+      modifiedTime: 1787616015001
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/magic/control/silhouette-hold-change-blue.webp
@@ -68,24 +70,31 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: ernBxWFCCnjcMuRU
+          _id: KmnQqXzfaydODrTS
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     sort: 0
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbmnkUnarmoredD.m2RCcVkc0YkCXNEb'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1783544102875
+  systemVersion: 6.0.0
+  createdTime: 1787616015001
+  modifiedTime: 1787616015001
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1900000

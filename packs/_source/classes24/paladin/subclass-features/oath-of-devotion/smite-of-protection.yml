@@ -7,20 +7,21 @@ system:
   description:
     value: >-
       <p>Your magical smite now radiates protective energy. Whenever you cast
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplDivineSmit]{Divine Smite}, you
-      and your allies have Half Cover while in your Aura of Protection. The aura
-      has this benefit until the start of your next turn.</p><section
-      class="secret" id="secret-zaNpOup6oPMC6RtV"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect which provides
-      the Half Cover status but it is not automatically granted as creatures
-      enter/exit your aura.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDivineSmit]{Divine
+      Smite}, you and your allies have Half Cover while in your Aura of
+      Protection. The aura has this benefit until the start of your next
+      turn.</p><section class="secret"
+      id="secret-zaNpOup6oPMC6RtV"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which provides the Half Cover status but
+      it is not automatically granted as creatures enter/exit your
+      aura.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -30,12 +31,15 @@ system:
     subtype: ''
   prerequisites:
     level: 15
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: smite-of-protection
+  advancement: {}
+  crewed: false
 effects:
   - name: Smite of Protection
     img: icons/magic/symbols/cog-shield-white-blue.webp
@@ -43,6 +47,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -60,29 +73,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616015004
+      modifiedTime: 1787616015004
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
     folder: null
     _key: '!items.effects!phbpdnSmiteOfPro.EyWEQv8qPwbXyDmA'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866569467
-  modifiedTime: 1745256764060
+  systemVersion: 6.0.0
+  createdTime: 1787616015004
+  modifiedTime: 1787616015004
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

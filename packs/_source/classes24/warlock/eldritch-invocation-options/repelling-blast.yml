@@ -21,6 +21,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -34,6 +35,7 @@ system:
             activity: []
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -43,6 +45,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -54,12 +57,20 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories: []
         properties: []
         type: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
@@ -79,9 +90,9 @@ system:
     chat: ''
   source:
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   enchant: {}
   type:
     value: class
@@ -89,9 +100,12 @@ system:
   prerequisites:
     level: 2
     repeatable: true
+    items: []
   properties: []
   requirements: Warlock Cantrip That Deals Damage via an Attack
   identifier: repelling-blast
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Repelling Blast
@@ -105,7 +119,15 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: lxwjgiat4DhI6vSE
+          _id: XZWF6xxzTiNin0Ve
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      magical: true
     duration:
       value: null
       units: seconds
@@ -124,11 +146,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102464
-      modifiedTime: 1783544102464
+      createdTime: 1787616015000
+      modifiedTime: 1787616015000
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -136,18 +158,14 @@ effects:
     folder: null
     _key: '!items.effects!phbinvRepellingB.DShZGDAUy0w9RUzS'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102464
+  systemVersion: 6.0.0
+  createdTime: 1787616015000
+  modifiedTime: 1787616015000
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -12,9 +12,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -24,25 +24,52 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: body-and-mind
+  advancement:
+    Yj4v0ul6dJiogWZy:
+      type: AbilityScoreImprovement
+      _id: Yj4v0ul6dJiogWZy
+      configuration:
+        cap: 4
+        fixed:
+          str: 0
+          dex: 4
+          con: 0
+          int: 0
+          wis: 4
+          cha: 0
+        locked:
+          - str
+          - dex
+          - con
+          - int
+          - wis
+          - cha
+        points: 0
+        recommendation: null
+        max: 25
+      value:
+        type: asi
+      level: 0
+      title: ''
+      hint: ''
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1745256762930
+  systemVersion: 6.0.0
+  createdTime: 1787616014985
+  modifiedTime: 1787616014985
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

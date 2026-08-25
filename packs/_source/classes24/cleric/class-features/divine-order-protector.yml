@@ -12,86 +12,53 @@ system:
     value: >-
       <p>You have dedicated yourself to the following sacred
       role:</p><p><strong>Protector.</strong> Trained for battle, you gain
-      proficiency with Martial weapons and training with Heavy
-      armor.</p><section id="secret-Tsm148wTyiFWlMFv"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
-      includes an Active Effect which grants the proficiency and
-      training.</p></section>
+      proficiency with Martial weapons and training with Heavy armor.</p>
     chat: ''
   source:
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   enchant: {}
   type:
     value: class
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - trait
   requirements: Cleric
   identifier: divine-order-protector
-effects:
-  - name: 'Divine Order: Protector'
-    img: icons/magic/holy/barrier-shield-winged-blue.webp
-    _id: Mvzn4plDBs9fDfph
-    type: base
-    system:
-      changes:
-        - key: system.traits.weaponProf.value
-          value: mar
-          priority: null
-          type: add
-          phase: initial
-          _id: Uoe1yE94HGUcWYVU
-        - key: system.traits.armorProf.value
-          value: hvy
-          priority: null
-          type: add
-          phase: initial
-          _id: 0cfyQFSBA5r0cbqr
-    disabled: false
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    description: ''
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544100879
-      modifiedTime: 1783544100879
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbDivineOrderPr.Mvzn4plDBs9fDfph'
+  advancement:
+    Pw2NhGslXxcl0btG:
+      type: Trait
+      title: Protector
+      _id: Pw2NhGslXxcl0btG
+      configuration:
+        allowReplacements: false
+        choices: []
+        grants:
+          - armor:hvy
+          - weapon:mar
+        mode: default
+      flags: {}
+      level: 1
+      hint: ''
+      value: {}
+  crewed: false
+effects: []
 folder: 3wY92TRgyyyDkpmF
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1783544100879
+  systemVersion: 6.0.0
+  createdTime: 1787616014991
+  modifiedTime: 1787616014991
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1300000

@@ -19,9 +19,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -31,6 +32,7 @@ system:
     subtype: ''
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
   requirements: Bard
@@ -48,15 +50,22 @@ system:
         targets:
           - type: itemUses
             value: '-1'
-            target: feat:bardic-inspiration
+            target: bardic-inspiration
+            scaling:
+              mode: ''
           - type: spellSlots
             value: '1'
             target: '1'
+            scaling:
+              mode: level
+              formula: ''
         scaling:
-          allowed: false
+          allowed: true
+          max: '9'
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -71,6 +80,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -89,18 +99,29 @@ system:
         name: ''
         formula: ''
       img: ''
-      appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: font-of-inspiration
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.10
-  createdTime: 1735866377962
-  modifiedTime: 1759426669892
+  systemVersion: 6.0.0
+  createdTime: 1787616014977
+  modifiedTime: 1787616014977
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

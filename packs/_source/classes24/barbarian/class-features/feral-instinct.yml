@@ -11,9 +11,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -23,12 +23,15 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
   activities: {}
   enchant: {}
   identifier: feral-instinct
+  advancement: {}
+  crewed: false
 effects:
   - _id: CaV1VYMaVjjPceJs
     disabled: false
@@ -45,44 +48,50 @@ effects:
     description: ''
     statuses: []
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classfeatures.Item.NlXslw4yAqmKZWtN.ActiveEffect.q7TkJQX7PeVOzTQH
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101133
-      modifiedTime: 1783544101133
+      createdTime: 1787616014993
+      modifiedTime: 1787616014993
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
     type: base
     system:
       changes:
-        - key: system.attributes.init.roll.mode
-          value: 1
+        - key: flags.dnd5e.initiativeAdv
+          value: true
           priority: null
-          type: add
+          type: override
           phase: initial
-          _id: fR3uBIKzN6bPvVoA
+          _id: nor9C3dXNB3MV5cr
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     sort: 0
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrbFeralInsti.CaV1VYMaVjjPceJs'
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1783544101133
+  systemVersion: 6.0.0
+  createdTime: 1787616014993
+  modifiedTime: 1787616014993
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

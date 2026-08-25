@@ -6,7 +6,8 @@ img: systems/dnd5e/icons/classes/cleric.webp
 system:
   description:
     value: >-
-      <h3>Core Cleric Traits</h3><table class="core-class-traits"><tbody><tr><th
+      <p><em>A Miraculous Priest of Divine Power</em></p><h3>Core Cleric
+      Traits</h3><table class="core-class-traits"><tbody><tr><th
       scope="row"><p>Primary Ability</p></th><td><p>Wisdom</p></td></tr><tr><th
       scope="row"><p>Hit Point Die</p></th><td><p>D8 per Cleric
       level</p></td></tr><tr><th scope="row"><p>Saving Throw
@@ -18,29 +19,43 @@ system:
       scope="row"><p>Armor Training</p></th><td><p>Light and Medium armor and
       Shields</p></td></tr><tr><th scope="row"><p>Starting
       Equipment</p></th><td><p><em>Choose A or B:</em> (A)
-      @UUID[Compendium.dnd5e.equipment24.Item.phbarmChainShirt]{Chain Shirt},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbarmShield0000]{Shield},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepMace000000]{Mace},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagHolySymbolV]{Holy Symbol},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagPriestsPack]{Priest's Pack},
-      and [[/award 7GP]]; or (B) [[/award
-      110GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbclcCleric0000
-      inline classes="free-rules-embed"]</p><h2>Becoming a Cleric …</h2><h3>As a
-      Level 1 Character</h3><ul><li>Gain all the traits in the Core Cleric
-      Traits table.</li><li>Gain the Cleric's level 1 features, which are listed
-      in the Cleric Features table.</li></ul><h3>As a Multiclass
-      Character</h3><ul><li>Gain the following traits from the Core Cleric
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbarmChainShirt]{Chain
+      Shirt},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbarmShield0000]{Shield},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepMace000000]{Mace},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagHolySymbolV]{Holy
+      Symbol},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagPriestsPack]{Priest's
+      Pack}, and [[/award 7GP]]; or (B) [[/award
+      110GP]]</p></td></tr></tbody></table><p>Clerics draw power from the realms
+      of the gods and harness it to work miracles. Blessed by a deity, a
+      pantheon, or another immortal entity, a Cleric can reach out to the divine
+      magic of the Outer Planes—where gods dwell—and channel it to bolster
+      people and battle foes.</p><p>Because their power is a divine gift,
+      Clerics typically associate themselves with temples dedicated to the deity
+      or other immortal force that unlocked their magic. Harnessing divine magic
+      doesn't rely on specific training, yet Clerics might learn prayers and
+      rites that help them draw on power from the Outer Planes.</p><p>Not every
+      member of a temple or shrine is a Cleric. Some priests are called to a
+      simple life of temple service, carrying out their devotion through prayer
+      and rituals, not through magic. Many mortals claim to speak for the gods,
+      but few can marshal the power of those gods the way a Cleric
+      can.</p><h2>Becoming a Cleric …</h2><h3>As a Level 1
+      Character</h3><ul><li><p>Gain all the traits in the Core Cleric Traits
+      table.</p></li><li><p>Gain the Cleric's level 1 features, which are listed
+      in the Cleric Features table.</p></li></ul><h3>As a Multiclass
+      Character</h3><ul><li><p>Gain the following traits from the Core Cleric
       Traits table: Hit Point Die and training with Light and Medium armor and
-      Shields.</li><li>Gain the Cleric's level 1 features, which are listed in
-      the Cleric Features table. See the multiclassing rules in chapter 2 to
-      determine your available spell slots.</li></ul>
+      Shields.</p></li><li><p>Gain the Cleric's level 1 features, which are
+      listed in the Cleric Features table. See the multiclassing rules in
+      chapter 2 to determine your available spell slots.</p></li></ul>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -49,21 +64,21 @@ system:
       sort: 100000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbarmChainShirt
+      key: Compendium.dnd-players-handbook.equipment.Item.phbarmChainShirt
       requiresProficiency: false
       _id: bGGpwQNPkEm90Aak
       group: hRVywVtYMIyj47LI
       sort: 200000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbarmShield0000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbarmShield0000
       requiresProficiency: false
       _id: XN2TO8Ned2z0tGU1
       group: hRVywVtYMIyj47LI
       sort: 300000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepMace000000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepMace000000
       requiresProficiency: false
       _id: 2TqR6FTmfE5pF3uU
       group: hRVywVtYMIyj47LI
@@ -77,7 +92,7 @@ system:
       sort: 500000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagPriestsPack
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagPriestsPack
       requiresProficiency: false
       _id: svexQM2NoMbtszQz
       group: hRVywVtYMIyj47LI
@@ -86,85 +101,120 @@ system:
       count: 7
       key: gp
       requiresProficiency: false
-      _id: SM5Tru74IHIrgmjJ
+      _id: OFKWmgXVMYpoL44K
       group: hRVywVtYMIyj47LI
       sort: 700000
   identifier: cleric
   levels: 1
   advancement:
-    - _id: NCN5ZAV8TtveRR4d
+    NCN5ZAV8TtveRR4d:
+      _id: NCN5ZAV8TtveRR4d
       type: HitPoints
       configuration: {}
       value: {}
-    - _id: rQCM2OtE22hoSikN
+      flags: {}
+      hint: ''
+    rQCM2OtE22hoSikN:
+      _id: rQCM2OtE22hoSikN
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcSpellcasti
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbclcDivineOrde
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 1
       title: Class Features
-    - _id: sbC9gYqIKyBudLEX
+      flags: {}
+      hint: ''
+    sbC9gYqIKyBudLEX:
+      _id: sbC9gYqIKyBudLEX
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcChannelDiv
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 2
       title: Class Features
-    - _id: iyByIlgOSTkVdiIb
+      flags: {}
+      hint: ''
+    iyByIlgOSTkVdiIb:
+      _id: iyByIlgOSTkVdiIb
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcSearUndead
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 5
       title: Class Features
-    - _id: fMMlnS7XNj4jHolA
+      flags: {}
+      hint: ''
+    fMMlnS7XNj4jHolA:
+      _id: fMMlnS7XNj4jHolA
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcDivineInte
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 10
       title: Class Features
-    - _id: db2RJZ0xSSbbOPIk
+      flags: {}
+      hint: ''
+    db2RJZ0xSSbbOPIk:
+      _id: db2RJZ0xSSbbOPIk
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcImprovedBl
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 14
       title: Class Features
-    - _id: ilTop8eaoKLL9KVJ
+      flags: {}
+      hint: ''
+    ilTop8eaoKLL9KVJ:
+      _id: ilTop8eaoKLL9KVJ
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcGreaterDiv
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
       title: Class Features
-    - _id: bwCLOdauuzoHofil
+      flags: {}
+      hint: ''
+    bwCLOdauuzoHofil:
+      _id: bwCLOdauuzoHofil
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -178,10 +228,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 4
       title: ''
-    - _id: mRSh9oUVjLU33e7p
+      flags: {}
+      hint: ''
+    mRSh9oUVjLU33e7p:
+      _id: mRSh9oUVjLU33e7p
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -195,10 +249,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 8
       title: ''
-    - _id: mhZh3LfLMa15tXee
+      flags: {}
+      hint: ''
+    mhZh3LfLMa15tXee:
+      _id: mhZh3LfLMa15tXee
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -212,10 +270,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 12
       title: ''
-    - _id: FOf5CkGnSs0OlppY
+      flags: {}
+      hint: ''
+    FOf5CkGnSs0OlppY:
+      _id: FOf5CkGnSs0OlppY
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -229,10 +291,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 16
       title: ''
-    - _id: ivrX9MYiE52lFZLI
+      flags: {}
+      hint: ''
+    ivrX9MYiE52lFZLI:
+      _id: ivrX9MYiE52lFZLI
       type: ScaleValue
       configuration:
         identifier: channel-divinity
@@ -249,7 +315,9 @@ system:
       value: {}
       title: Channel Divinity Uses
       hint: ''
-    - _id: jMZmkkMc9XLsde4W
+      flags: {}
+    jMZmkkMc9XLsde4W:
+      _id: jMZmkkMc9XLsde4W
       type: ScaleValue
       configuration:
         identifier: max-prepared
@@ -294,7 +362,9 @@ system:
       value: {}
       title: Max Prepared Spells
       hint: ''
-    - _id: FjHGiO7BkbHTcQ2J
+      flags: {}
+    FjHGiO7BkbHTcQ2J:
+      _id: FjHGiO7BkbHTcQ2J
       type: ScaleValue
       configuration:
         identifier: ''
@@ -311,19 +381,25 @@ system:
       value: {}
       title: Cantrips Known
       hint: ''
-    - _id: X3bKJF53QCfKsonV
+      flags: {}
+    X3bKJF53QCfKsonV:
+      _id: X3bKJF53QCfKsonV
       type: ItemGrant
       configuration:
         items:
           - optional: false
             uuid: Compendium.dnd5e.classes24.Item.phbclcBlessedStr
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 7
       title: Blessed Strikes
       hint: ''
-    - _id: V8GfnoZYTe1PLXPI
+      flags: {}
+    V8GfnoZYTe1PLXPI:
+      _id: V8GfnoZYTe1PLXPI
       type: ItemChoice
       configuration:
         choices:
@@ -334,12 +410,15 @@ system:
         type: feat
         pool:
           - uuid: Compendium.dnd5e.classes24.Item.phbDivineOrderPr
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbDivineOrderTh
+            sort: 0
         spell: null
         restriction:
           type: class
           subtype: ''
           list: []
+        sorting: a
       value:
         added: {}
         replaced: {}
@@ -347,7 +426,9 @@ system:
       hint: >-
         You have dedicated yourself to one of the following sacred roles of your
         choice.
-    - _id: C9ABIfTHZkeFpUva
+      flags: {}
+    C9ABIfTHZkeFpUva:
+      _id: C9ABIfTHZkeFpUva
       type: ItemChoice
       configuration:
         choices:
@@ -358,12 +439,15 @@ system:
         type: feat
         pool:
           - uuid: Compendium.dnd5e.classes24.Item.phbDivineStrike0
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbClcPotentSpel
+            sort: 0
         spell: null
         restriction:
           type: class
           subtype: ''
           list: []
+        sorting: a
       value:
         added: {}
         replaced: {}
@@ -372,7 +456,9 @@ system:
         Divine power infuses you in battle. You gain one of the following
         options of your choice (if you get either option from a Cleric subclass
         in an older book, use only the option you choose for this feature).
-    - _id: 14RcvdtbvXnTdR9P
+      flags: {}
+    14RcvdtbvXnTdR9P:
+      _id: 14RcvdtbvXnTdR9P
       type: ScaleValue
       configuration:
         identifier: ''
@@ -391,7 +477,9 @@ system:
       value: {}
       title: Divine Strike
       hint: ''
-    - _id: xtHP27K3z3naIFTi
+      flags: {}
+    xtHP27K3z3naIFTi:
+      _id: xtHP27K3z3naIFTi
       type: Subclass
       configuration: {}
       value:
@@ -400,7 +488,9 @@ system:
       level: 3
       title: ''
       hint: ''
-    - _id: Z9K5kHYMLvroIMpT
+      flags: {}
+    Z9K5kHYMLvroIMpT:
+      _id: Z9K5kHYMLvroIMpT
       type: Trait
       configuration:
         mode: default
@@ -415,7 +505,9 @@ system:
       title: Saving Throw Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: 2wUNkQzS4vL9nR6D
+      flags: {}
+    2wUNkQzS4vL9nR6D:
+      _id: 2wUNkQzS4vL9nR6D
       type: Trait
       configuration:
         mode: default
@@ -435,7 +527,9 @@ system:
       title: Skill Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: U6GGwY4ZKiXqXBQN
+      flags: {}
+    U6GGwY4ZKiXqXBQN:
+      _id: U6GGwY4ZKiXqXBQN
       type: Trait
       configuration:
         mode: default
@@ -449,7 +543,9 @@ system:
       title: Weapon Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: KfX42cnLxFc9gUxU
+      flags: {}
+    KfX42cnLxFc9gUxU:
+      _id: KfX42cnLxFc9gUxU
       type: Trait
       configuration:
         mode: default
@@ -464,8 +560,11 @@ system:
       level: 1
       title: Armor Training
       hint: ''
-    - type: AbilityScoreImprovement
-      _id: 8mdNRciTyktb4g40
+      flags: {}
+    GsYtOM3ismwNGVBK:
+      type: AbilityScoreImprovement
+      title: Epic Boon
+      _id: GsYtOM3ismwNGVBK
       configuration:
         cap: 2
         fixed:
@@ -477,12 +576,13 @@ system:
           cha: 0
         locked: []
         points: 2
-        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofFate000
+        recommendation: Compendium.dnd-players-handbook.feats.Item.phbBoonofFate000
         max: null
-      value: {}
+      value:
+        type: asi
       level: 19
-      title: ''
       hint: ''
+      flags: {}
   spellcasting:
     progression: full
     ability: wis
@@ -497,15 +597,16 @@ system:
     denomination: d8
     spent: 0
     additional: ''
+  properties: []
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866373481
-  modifiedTime: 1757541484584
+  systemVersion: 6.0.0
+  createdTime: 1787616014977
+  modifiedTime: 1787616014977
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -4,56 +4,58 @@ type: feat
 img: icons/magic/death/undead-ghost-scream-teal.webp
 system:
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    IFWVSWZIMHxQuass:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithD
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 3
+      _id: IFWVSWZIMHxQuass
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
-        condition: ''
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: minute
-        override: false
+        units: inst
         concentration: false
-        value: '10'
-      effects: []
-      range:
         override: false
+      range:
         units: self
-        special: ''
+        override: false
       target:
-        prompt: false
         template:
           contiguous: false
           units: ft
-          type: ''
+          stationary: false
         affects:
           choice: false
-          count: '1'
-          type: object
-          special: Corpse
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: Whisper
-      img: systems/dnd5e/icons/svg/damage/psychic.svg
+      name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
@@ -61,39 +63,41 @@ system:
   description:
     value: >-
       <blockquote><p>Prerequisite: Level 7+ Warlock</p></blockquote><p>You can
-      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithD]{Speak with
-      Dead} without expending a spell slot.</p>
+      cast
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithD]{Speak
+      with Dead} without expending a spell
+      slot.</p><hr><p>@Embed[Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithD
+      inline]</p>
     chat: ''
   source:
     rules: '2024'
     custom: ''
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: whispers-of-the-grave
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1740680084508
+  systemVersion: 6.0.0
+  createdTime: 1787616014984
+  modifiedTime: 1787616014984
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

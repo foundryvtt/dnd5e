@@ -21,9 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -33,6 +33,7 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -53,6 +54,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -67,6 +69,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -87,12 +90,21 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '@abilities.cha.mod'
             types:
               - acid
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     8c416jhRGbwBaFtn:
       type: damage
       name: Cold
@@ -108,6 +120,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -122,6 +135,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -142,13 +156,22 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '@abilities.cha.mod'
             types:
               - cold
+            modifiers: []
             scaling:
               number: 1
       _id: 8c416jhRGbwBaFtn
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     QtWZ4Z7tGn9FhBMI:
       type: damage
       name: Fire
@@ -164,6 +187,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -178,6 +202,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -198,13 +223,22 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '@abilities.cha.mod'
             types:
               - fire
+            modifiers: []
             scaling:
               number: 1
       _id: QtWZ4Z7tGn9FhBMI
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     HIZjwCtrr9r9EDet:
       type: damage
       name: Lightning
@@ -220,6 +254,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -234,6 +269,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -254,13 +290,22 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '@abilities.cha.mod'
             types:
               - lightning
+            modifiers: []
             scaling:
               number: 1
       _id: HIZjwCtrr9r9EDet
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     SV6ewryKJ1bBxeyD:
       type: damage
       name: Poison
@@ -276,6 +321,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -290,6 +336,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -310,28 +357,35 @@ system:
               enabled: false
               formula: ''
             number: null
-            denomination: 0
+            denomination: null
             bonus: '@abilities.cha.mod'
             types:
               - poison
+            modifiers: []
             scaling:
               number: 1
       _id: SV6ewryKJ1bBxeyD
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: elemental-affinity
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866556244
-  modifiedTime: 1745256765451
+  systemVersion: 6.0.0
+  createdTime: 1787616014989
+  modifiedTime: 1787616014989
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -6,18 +6,18 @@ system:
   description:
     value: >-
       <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
-      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplJump000000]{Jump} on
-      yourself without expending a spell slot.</p><section
-      id="secret-JpQyXOJAkEKVXxff" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature can be used in place of the Jump spell
-      and includes an Active Effect for tracking.</p></section>
+      cast
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplJump000000]{Jump}
+      on yourself without expending a spell
+      slot.</p><hr><p>@Embed[Compendium.dnd-players-handbook.spells.Item.phbsplJump000000
+      inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -27,110 +27,82 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    wH4IQveLxB62JsAi:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplJump000000
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 1
+      _id: wH4IQveLxB62JsAi
+      sort: 0
       activation:
-        type: bonus
-        value: null
+        type: action
         override: false
-        condition: ''
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: minute
-        override: false
+        units: inst
         concentration: false
-        value: '1'
-      effects:
-        - _id: Esyd01OZ3NCv8gtp
-      range:
         override: false
-        units: touch
-        special: ''
+      range:
+        units: self
+        override: false
       target:
-        prompt: true
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
-          count: ''
           type: self
-        override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        override: true
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: otherworldly-leap
-effects:
-  - name: Jump
-    origin: Compendium.dnd5e.spells24.Item.phbsplJump000000
-    duration:
-      value: 60
-      units: seconds
-      expiry: turnStart
-      expired: false
-    disabled: false
-    flags: {}
-    img: icons/skills/movement/feet-winged-boots-blue.webp
-    _id: Esyd01OZ3NCv8gtp
-    type: base
-    system:
-      changes: []
-    description: >-
-      <p>Once on each of its turns until the spell ends, that creature can jump
-      up to 30 feet by spending 10 feet of movement.</p>
-    tint: '#ffffff'
-    transfer: false
-    statuses: []
-    sort: 0
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbinvOtherworld.Esyd01OZ3NCv8gtp'
+  advancement: {}
+  crewed: false
+effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256762472
+  systemVersion: 6.0.0
+  createdTime: 1787616014999
+  modifiedTime: 1787616014999
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

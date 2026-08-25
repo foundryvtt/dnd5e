@@ -17,9 +17,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,12 +29,15 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: fiendish-resilience
+  advancement: {}
+  crewed: false
 effects:
   - name: 'Fiendish Resilience: Acid'
     img: icons/magic/defensive/armor-stone-skin.webp
@@ -49,7 +52,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: z415mxiWjxWG4tXN
+          _id: XETpMkx3CwIemFrs
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -62,14 +76,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.jZGIulxQFLY7uRDe
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      createdTime: 1787616015017
+      modifiedTime: 1787616015017
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -88,7 +101,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: iejyHQc5YYkE2Rgr
+          _id: Z6fqLbyhf3uLlF5u
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -101,14 +125,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.HybTLXiZgGa3t61e
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      createdTime: 1787616015017
+      modifiedTime: 1787616015017
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: JjA9Jda2qeK6Tpxk
@@ -128,7 +151,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: QHHWssstkd3WkB99
+          _id: XNLsXnNl4H7ksPsz
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -141,14 +175,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.6z5fLOHiOiHHcuac
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      createdTime: 1787616015017
+      modifiedTime: 1787616015017
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: rhUc7IVz5XTphPRp
@@ -168,7 +201,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: YLsts1KjYvMLWiaN
+          _id: XeiwwJmGJAGx3ULI
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -181,14 +225,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.DW6JJBsbBtR1Z75R
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103803
-      modifiedTime: 1783544103803
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: GvzW5wzRBfjFqye7
@@ -208,7 +251,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 30KEmQfya7mwPvGR
+          _id: pqKjuuJf03PuFREz
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -221,14 +275,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.5ZizSWuVy8cy77K1
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: UZ00jXoUKfevQhxQ
@@ -248,7 +301,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: pgMs36HB9d6S0MWh
+          _id: Z9ougpkHpptxB7Vc
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -261,14 +325,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.fcFLysPw4llFTQsg
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: iMBfFAs7UwqdgSI5
@@ -288,7 +351,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: ozDfAmpMjgqm0rQS
+          _id: orUAvgw0TpFYW6ZB
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -301,14 +375,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.8Uf0Dw8A3l7CI8Fd
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: G0Ed5szAi1vUFCf7
@@ -328,7 +401,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Hdn0bOTRRdUnJZ5i
+          _id: 9D0990pr14LuFAzd
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -341,14 +425,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.PpWYucbhugNEIBJ7
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 3Uw7a9ldJtxHam1x
@@ -368,7 +451,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: j0n4A6nz7jj3J7HL
+          _id: u0TNcaQwyuft4HTY
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -381,14 +475,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.BbvC3rh4RDmi06XI
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: loTaIaBwUsMSzpdW
@@ -408,7 +501,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: V39lgvx01qbPhTqh
+          _id: cDDLo1LOBIZDk4KU
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -421,14 +525,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.IFg9ae4ZyhMDPa3m
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: F8szMcfuxVxXJ7sf
@@ -448,7 +551,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 4LLUDWhx6LN3hVeR
+          _id: MXJwurKN7OUi3SNj
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -461,14 +575,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.30KWef6vBjF8RChr
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 7oATkYAfEZzx6F5P
@@ -488,7 +601,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Cs8vZTbrBXicD6Ib
+          _id: oMHwSQxQi6vHyBmw
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: null
@@ -501,14 +625,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.P7YUT6Y1NXGpo5Er
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103804
-      modifiedTime: 1783544103804
+      createdTime: 1787616015018
+      modifiedTime: 1787616015018
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 6BHlD7hrfHUEfum5
@@ -516,18 +639,14 @@ effects:
     showIcon: 1
     folder: null
     _key: '!items.effects!phbwlkFiendishRe.6BHlD7hrfHUEfum5'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866551616
-  modifiedTime: 1783544103803
+  systemVersion: 6.0.0
+  createdTime: 1787616015017
+  modifiedTime: 1787616015017
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

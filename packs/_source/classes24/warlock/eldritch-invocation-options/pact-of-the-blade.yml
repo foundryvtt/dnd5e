@@ -21,6 +21,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -35,6 +36,7 @@ system:
               - UTEfakL3rBtTIu1K
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -44,6 +46,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -55,7 +58,7 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -63,6 +66,14 @@ system:
           - martialM
         properties: []
         type: weapon
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     UTEfakL3rBtTIu1K:
       type: attack
       name: Spellcasting Attack
@@ -79,6 +90,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -93,6 +105,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -119,6 +132,13 @@ system:
         parts: []
       img: systems/dnd5e/icons/svg/properties/magical.svg
       _id: UTEfakL3rBtTIu1K
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
@@ -141,19 +161,22 @@ system:
   source:
     rules: '2024'
     custom: ''
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: pact-of-the-blade
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Pact Weapon
@@ -167,55 +190,79 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: y94nZgqUe7Yy9geT
+          _id: 9hTq3HD4LSmCO4F4
+          conditions: '{}'
+          replacement: ''
         - key: system.proficient
           value: 1
           priority: null
           type: override
           phase: initial
-          _id: X5sk4LXtZX779wDd
+          _id: MUOlhI0RCmtPetL9
+          conditions: '{}'
+          replacement: ''
         - key: system.properties
           value: foc
           priority: null
           type: add
           phase: initial
-          _id: iU6EUPSr8U4EA1fP
+          _id: bUBUHXoNkRsDogHz
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.types
           value: necrotic
           priority: null
           type: add
           phase: initial
-          _id: eWzOUfbK9gxtOOgq
+          _id: mJG21fvaF6Z1Qyuu
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.types
           value: psychic
           priority: null
           type: add
           phase: initial
-          _id: 0qgzJL2k4P8exBWM
+          _id: cFiuSw9tn8woqmWr
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.types
           value: radiant
           priority: null
           type: add
           phase: initial
-          _id: aaqOjsd1b6V8asuQ
+          _id: 94Vw03axrKC0rdgo
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.versatile.types
           value: necrotic
           priority: null
           type: add
           phase: initial
-          _id: Psluz2LyOW7mzZe6
+          _id: xDoWIXPanCCF8LLY
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.versatile.types
           value: psychic
           priority: null
           type: add
           phase: initial
-          _id: WFN1Sfc4ID6yXFZj
+          _id: WAM2gWQ57McpRrOG
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.versatile.types
           value: radiant
           priority: null
           type: add
           phase: initial
-          _id: HJI3JBaaU5eLBE7S
+          _id: WXC3HvWZvPEeZCbM
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      magical: true
     duration:
       value: null
       units: seconds
@@ -231,11 +278,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102422
-      modifiedTime: 1783544102422
+      createdTime: 1787616014999
+      modifiedTime: 1787616014999
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -248,14 +295,13 @@ flags:
     riders:
       activity:
         - UTEfakL3rBtTIu1K
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102422
+  systemVersion: 6.0.0
+  createdTime: 1787616014999
+  modifiedTime: 1787616014999
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

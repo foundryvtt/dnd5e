@@ -25,19 +25,22 @@ system:
     chat: ''
   source:
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   enchant: {}
   type:
     value: class
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: divine-order-thaumaturge
+  advancement: {}
+  crewed: false
 effects:
   - name: Thaumaturge
     img: icons/magic/life/ankh-shadow-green.webp
@@ -50,19 +53,34 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: k3ohnfGoXYIYc5hv
+          _id: mH0OMNvdKj0akyD9
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.arc.bonuses.check
           value: (max(1,@abilities.wis.mod))
           priority: null
           type: add
           phase: initial
-          _id: D0rfzFnL94kxvIWe
+          _id: vTjBid9qoKzSpjjj
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.rel.bonuses.check
           value: (max(1,@abilities.wis.mod))
           priority: null
           type: add
           phase: initial
-          _id: 993UBoBWNJuPzfPl
+          _id: 0gzsjmJlIucDuGU6
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -79,11 +97,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544100904
-      modifiedTime: 1783544100904
+      createdTime: 1787616014991
+      modifiedTime: 1787616014991
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -91,18 +109,14 @@ effects:
     folder: null
     _key: '!items.effects!phbDivineOrderTh.7fucT9vgkryEEoxI'
 folder: 3wY92TRgyyyDkpmF
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1783544100904
+  systemVersion: 6.0.0
+  createdTime: 1787616014991
+  modifiedTime: 1787616014991
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1400000

@@ -9,11 +9,11 @@ system:
       <p>You know Druidic, the secret language of Druids. While learning this
       ancient tongue, you also unlocked the magic of communicating with animals;
       you always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplSpeakwithA]{Speak with Animals}
-      spell prepared.</p><p>You can use Druidic to leave hidden messages. You
-      and others who know Druidic automatically spot such a message. Others spot
-      the message's presence with a successful [[/check inv 15]] check but can't
-      decipher it without magic.</p><section class="secret"
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithA]{Speak
+      with Animals} spell prepared.</p><p>You can use Druidic to leave hidden
+      messages. You and others who know Druidic automatically spot such a
+      message. Others spot the message's presence with a successful [[/check inv
+      15]] check but can't decipher it without magic.</p><section class="secret"
       id="secret-5uD3Qi61JX7q2Fk8"><p><strong>Foundry
       Note</strong></p><p>Druidic and Speak with Animals are automatically added
       during advancement.</p></section>
@@ -21,9 +21,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -33,25 +33,24 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities: {}
   enchant: {}
   identifier: druidic
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1745256761069
+  systemVersion: 6.0.0
+  createdTime: 1787616014979
+  modifiedTime: 1787616014979
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

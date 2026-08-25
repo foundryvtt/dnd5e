@@ -8,9 +8,9 @@ system:
     value: >-
       <p>You can call on even more powerful divine intervention. When you use
       your Divine Intervention feature, you can choose
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish} when you
-      select a spell. If you do so, you can't use Divine Intervention again
-      until you finish [[/r 2d4]] Long Rests.</p><section class="secret"
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplWish000000]{Wish}
+      when you select a spell. If you do so, you can't use Divine Intervention
+      again until you finish [[/r 2d4]] Long Rests.</p><section class="secret"
       id="secret-LP9WqNdaJevppYeM"><p><strong>Foundry Note</strong></p><p>This
       feature will consume a use of your Divine Intervention but it can not
       automatically recharge the usage after the rolled number of Long
@@ -19,9 +19,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -31,6 +31,7 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
   properties: []
   requirements: Cleric
@@ -54,6 +55,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -68,6 +70,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -85,21 +88,27 @@ system:
         name: ''
         formula: ''
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: greater-divine-intervention
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1745256760820
+  systemVersion: 6.0.0
+  createdTime: 1787616014978
+  modifiedTime: 1787616014978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 600000

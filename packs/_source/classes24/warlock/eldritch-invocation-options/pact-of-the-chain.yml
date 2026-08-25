@@ -9,7 +9,7 @@ system:
       name: Find Familiar
       sort: 0
       activation:
-        type: action
+        type: hour
         value: 1
         override: false
         condition: ''
@@ -17,13 +17,10 @@ system:
         scaling:
           allowed: false
         spellSlot: true
-        targets:
-          - type: attribute
-            value: '1'
-            target: spells.pact.value
-            scaling: {}
+        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -39,6 +36,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -66,12 +64,14 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        disposition: true
+        ability: ''
       profiles:
         - count: '1'
           cr: '0'
           name: CR 0 Beast
           _id: e5dWV5L2uBJ2KPAM
-          uuid: ''
+          uuid: null
           types:
             - beast
           level:
@@ -79,15 +79,26 @@ system:
             max: null
       summon:
         prompt: true
-        identifier: ''
         mode: cr
       _id: uehA2kfgOCKRIqAs
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      tempHP: ''
+      behaviors: []
+      flags: {}
     5W78W2Opzhax0Jcf:
       type: summon
       name: Find Familiar (Expanded Options)
       sort: 0
       activation:
-        type: action
+        type: hour
         value: 1
         override: false
         condition: ''
@@ -95,17 +106,15 @@ system:
         scaling:
           allowed: false
         spellSlot: true
-        targets:
-          - type: attribute
-            value: '1'
-            target: spells.pact.value
-            scaling: {}
+        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        value: ''
       effects: []
       range:
         override: false
@@ -117,6 +126,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -144,60 +154,89 @@ system:
         attacks: false
         proficiency: false
         saves: false
+        disposition: true
+        ability: ''
       profiles:
-        - _id: Rr8F49wXgEzvI3Je
+        - count: ''
+          name: ''
+          _id: Rr8F49wXgEzvI3Je
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobImp0000000
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmImp00000000000
-        - _id: Cg8B2qkwRo7qh7oZ
+        - count: ''
+          name: ''
+          _id: Cg8B2qkwRo7qh7oZ
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobPseudodrag
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmPseudodragon00
-        - _id: 8NAn0ZR5HRnRJvqs
+        - count: ''
+          name: ''
+          _id: 8NAn0ZR5HRnRJvqs
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobQuasit0000
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmQuasit00000000
-        - _id: Gik7lMg53Gno0nSf
+        - count: ''
+          name: ''
+          _id: Gik7lMg53Gno0nSf
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSphinxofWo
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmSphinxOfWonder
-        - _id: m5hfZoWAcEjKrkxo
+        - count: ''
+          name: ''
+          _id: m5hfZoWAcEjKrkxo
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSkeleton00
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmSkeleton000000
-        - _id: mDue5EQkMxi5G6Pf
+        - count: ''
+          name: ''
+          _id: mDue5EQkMxi5G6Pf
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSlaadTadpo
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmSlaadTadpole00
-        - _id: U60QGv6hzjT15bFK
+        - count: ''
+          name: ''
+          _id: U60QGv6hzjT15bFK
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSprite0000
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmSprite00000000
-        - _id: ZtrQLBrDRmN97IvI
+        - count: ''
+          name: ''
+          _id: ZtrQLBrDRmN97IvI
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobVenomousSn
           level:
             min: null
             max: null
           types: []
-          uuid: Compendium.dnd5e.actors24.Actor.mmVenomousSnake0
       summon:
         prompt: true
-        identifier: ''
         mode: ''
       _id: 5W78W2Opzhax0Jcf
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      tempHP: ''
+      behaviors: []
+      flags: {}
   uses:
     spent: 0
     recovery: []
@@ -205,55 +244,60 @@ system:
   description:
     value: >-
       <p>You learn the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find Familiar}
-      spell and can cast it as a Magic action without expending a spell
-      slot.</p><p>When you cast the spell, you choose one of the normal forms
-      for your familiar or one of the following special forms:
-      @UUID[Compendium.dnd5e.actors24.Actor.mmImp00000000000]{Imp},
-      @UUID[Compendium.dnd5e.actors24.Actor.mmPseudodragon00]{Pseudodragon},
-      @UUID[Compendium.dnd5e.actors24.Actor.mmQuasit00000000]{Quasit},
-      @UUID[Compendium.dnd5e.actors24.Actor.mmSkeleton000000]{Skeleton}, Slaad
-      Tadpole, @UUID[Compendium.dnd5e.actors24.Actor.mmSphinxOfWonder]{Sphinx of
-      Wonder}, @UUID[Compendium.dnd5e.actors24.Actor.mmSprite00000000]{Sprite},
-      or @UUID[Compendium.dnd5e.actors24.Actor.mmVenomousSnake0]{Venomous
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFindFamili]{Find
+      Familiar} spell and can cast it as a Magic action without expending a
+      spell slot.</p><p>When you cast the spell, you choose one of the normal
+      forms for your familiar or one of the following special forms:
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobImp0000000]{Imp},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobPseudodrag]{Pseudodragon},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobQuasit0000]{Quasit},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobSkeleton00]{Skeleton},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobSlaadTadpo]{Slaad
+      Tadpole},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobSphinxofWo]{Sphinx
+      of Wonder},
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobSprite0000]{Sprite},
+      or
+      @UUID[Compendium.dnd-players-handbook.actors.Actor.phbmobVenomousSn]{Venomous
       Snake}.</p><p>Additionally, when you take the Attack action, you can forgo
       one of your own attacks to allow your familiar to make one attack of its
-      own with its Reaction.</p><section class="secret"
-      id="secret-aKbhLPfPD3R9Y1KL"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Summon Familiar</strong> activity includes the normal summoning
-      options and the <strong>Summon Familiar (Expanded Options)</strong>
-      activity includes the additional options.</p></section>
+      own with its Reaction.</p><section id="secret-aKbhLPfPD3R9Y1KL"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The <strong>Summon
+      Familiar</strong> activity includes the normal summoning options and the
+      <strong>Summon Familiar (Expanded Options)</strong> activity includes the
+      additional options.</p></section>
     chat: ''
   source:
     rules: '2024'
     custom: ''
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: null
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: ''
   identifier: pact-of-the-chain
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745515553373
+  systemVersion: 6.0.0
+  createdTime: 1787616014984
+  modifiedTime: 1787616014984
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

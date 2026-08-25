@@ -12,18 +12,19 @@ system:
       gain the benefit of rolling a 20 on it.</p><p><strong>Heroic
       Rally.</strong> At the start of each of your turns, you regain Hit Points
       equal to 5 plus your Constitution modifier if you are Bloodied and have at
-      least 1 Hit Point.</p><section id="secret-z1Nr871ifr67hchm"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature does
-      not automate the Death Saving Throw changes. It includes an activity for
+      least 1 Hit Point.</p><section class="secret"
+      id="secret-z1Nr871ifr67hchm"><p><strong>Foundry Note</strong></p><p>This
+      feature does not automate the Death Saving Throw changes to rolling an 18
+      or 19, but does include Advantage automation. It includes an activity for
       healing but does not automatically add it when you are
       Bloodied.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -33,6 +34,7 @@ system:
     subtype: ''
   prerequisites:
     level: 18
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -41,10 +43,10 @@ system:
       type: heal
       _id: 5Fo0QwzexIPyLP3W
       activation:
-        type: ''
+        type: turnStart
         value: null
         override: false
-        condition: At the start of each of your turns
+        condition: if Bloodied
       consumption:
         targets: []
         scaling:
@@ -52,6 +54,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -66,6 +69,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -80,31 +84,92 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
           enabled: true
-          formula: '5'
+          formula: 5 + @abilities.con.mod
         scaling:
           number: 1
         bonus: ''
-      name: ''
+        modifiers: []
+      name: Heroic Rally
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: survivor
-effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+  advancement: {}
+  crewed: false
+effects:
+  - name: Defy Death
+    img: icons/skills/wounds/injury-eyes-blood-red-pink.webp
+    origin: Compendium.dnd5e.classes24.Item.phbftrSurvivor00
+    _id: Pp5xPE2M5bTEdZWW
+    type: base
+    system:
+      changes:
+        - key: system.attributes.death.roll.mode
+          value: 1
+          priority: null
+          type: add
+          phase: initial
+          _id: 0AfXZujKmkyUpuua
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+    disabled: false
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p><strong>Note:</strong> This effect does not modify the behavior of
+      rolling an 18 or 19 on a Death Saving Throw.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '14.367'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1787616014982
+      modifiedTime: 1787616014982
+      lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!phbftrSurvivor00.Pp5xPE2M5bTEdZWW'
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1745256761796
+  systemVersion: 6.0.0
+  createdTime: 1787616014982
+  modifiedTime: 1787616014982
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

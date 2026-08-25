@@ -18,21 +18,24 @@ system:
     chat: ''
   source:
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: 15
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: witch-sight
+  advancement: {}
+  crewed: false
 effects:
-  - name: Witch Sight
+  - name: Truesight (30 ft)
     img: icons/magic/perception/eye-tendrils-web-purple.webp
     _id: CkC8PmrUFz70FTwS
     type: base
@@ -43,7 +46,18 @@ effects:
           priority: null
           type: upgrade
           phase: initial
-          _id: dZHxAl71SrC0zWEY
+          _id: u9HjqajyGQ3oZYlE
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -56,15 +70,17 @@ effects:
     transfer: true
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102512
-      modifiedTime: 1783544102512
+      createdTime: 1787616015000
+      modifiedTime: 1787616015000
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -72,18 +88,14 @@ effects:
     folder: null
     _key: '!items.effects!phbinvWitchSight.CkC8PmrUFz70FTwS'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102512
+  systemVersion: 6.0.0
+  createdTime: 1787616015000
+  modifiedTime: 1787616015000
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

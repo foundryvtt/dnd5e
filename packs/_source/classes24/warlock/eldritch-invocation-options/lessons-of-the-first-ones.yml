@@ -16,9 +16,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,25 +29,67 @@ system:
   prerequisites:
     level: 2
     repeatable: true
+    items: []
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: lessons-of-the-first-ones
+  advancement:
+    ysQ48LtppKVlaYwB:
+      type: ItemChoice
+      _id: ysQ48LtppKVlaYwB
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        pool:
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftAlert000000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftCrafter0000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftHealer00000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftLucky000000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftMagicInitia
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftMusician000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftSavageAttac
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftSkilled0000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftTavernBrawl
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbftTough000000
+            sort: 0
+        restriction:
+          list: []
+          type: feat
+          subtype: origin
+        spell: null
+        type: feat
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      title: Choose Origin Feat
+      hint: ''
+      flags: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1752706862177
+  systemVersion: 6.0.0
+  createdTime: 1787616014983
+  modifiedTime: 1787616014983
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

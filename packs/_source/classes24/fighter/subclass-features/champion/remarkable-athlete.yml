@@ -16,9 +16,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -28,12 +28,15 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: remarkable-athlete
+  advancement: {}
+  crewed: false
 effects:
   - name: Remarkable Athlete
     img: icons/magic/control/buff-strength-muscle-damage.webp
@@ -46,7 +49,18 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: yfckT0R56OuM0M24
+          _id: AXGw3edmPRoB7usN
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -63,29 +77,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101999
-      modifiedTime: 1783544101999
+      createdTime: 1787616014997
+      modifiedTime: 1787616014997
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbftrRemarkable.1f8R9CFfhsetkhF5'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1783544101999
+  systemVersion: 6.0.0
+  createdTime: 1787616014997
+  modifiedTime: 1787616014997
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

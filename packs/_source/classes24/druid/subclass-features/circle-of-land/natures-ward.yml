@@ -12,16 +12,17 @@ system:
       Ward</caption><thead><tr><td>Land
       Type</td><td>Resistance</td></tr></thead><tbody><tr><td>Arid</td><td>Fire</td></tr><tr><td>Polar</td><td>Cold</td></tr><tr><td>Temperate</td><td>Lightning</td></tr><tr><td>Tropical</td><td>Poison</td></tr></tbody></table><section
       class="secret" id="secret-0muLLDjt1zqXptme"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect for the Poison
-      condition immunity and an Active Effect for each land type. You can
-      activate the Active Effect for your chosen land type.</p></section>
+      Note</strong></p><p>This feature includes an Active Effect for each land
+      type. You can activate the Active Effect for your chosen land
+      type.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -31,55 +32,31 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - trait
   requirements: Circle of Land
   activities: {}
   enchant: {}
   identifier: natures-ward
+  advancement:
+    amFc8dQnolkg1wve:
+      type: Trait
+      title: Poisoned Immunity
+      _id: amFc8dQnolkg1wve
+      configuration:
+        allowReplacements: false
+        choices: []
+        grants:
+          - ci:poisoned
+        mode: default
+      flags: {}
+      level: 10
+      hint: ''
+      value: {}
+  crewed: false
 effects:
-  - name: Nature's Ward
-    origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    disabled: false
-    flags:
-      dnd5e:
-        riders:
-          statuses: []
-    img: icons/magic/nature/root-vine-caduceus-healing.webp
-    _id: WWAuOh7qyAZgchmL
-    type: base
-    system:
-      changes:
-        - key: system.traits.ci.value
-          value: poison
-          priority: null
-          type: add
-          phase: initial
-          _id: rQRlge4IAP60TTET
-    description: ''
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    sort: 0
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544101808
-      modifiedTime: 1783544101808
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbdrdNaturesWar.WWAuOh7qyAZgchmL'
   - name: 'Nature''s Ward: Arid'
     origin: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
     duration:
@@ -90,8 +67,7 @@ effects:
     disabled: true
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     img: icons/magic/nature/root-vine-caduceus-healing.webp
     _id: J6hYOcVvZlLKuWab
     type: base
@@ -102,7 +78,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: fqNtkh43NeycP1Io
+          _id: hjw6n9pI43yFtltc
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -111,11 +98,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101808
-      modifiedTime: 1783544101808
+      createdTime: 1787616015016
+      modifiedTime: 1787616015016
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -132,8 +119,7 @@ effects:
     disabled: true
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     img: icons/magic/nature/root-vine-caduceus-healing.webp
     _id: XLIRgAYPO1ARo5pb
     type: base
@@ -144,7 +130,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: E9obsoaxe0Ynyr8T
+          _id: eZNaGIOhqbqIvscN
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -153,11 +150,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101808
-      modifiedTime: 1783544101808
+      createdTime: 1787616015017
+      modifiedTime: 1787616015017
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -174,8 +171,7 @@ effects:
     disabled: true
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     img: icons/magic/nature/root-vine-caduceus-healing.webp
     _id: yruAlaBCduO8AcnU
     type: base
@@ -186,7 +182,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Y8awGkyxx8bk5tlN
+          _id: 8dsXeOtyLzFHNyt7
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -195,11 +202,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101808
-      modifiedTime: 1783544101808
+      createdTime: 1787616015017
+      modifiedTime: 1787616015017
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -216,8 +223,7 @@ effects:
     disabled: true
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     img: icons/magic/nature/root-vine-caduceus-healing.webp
     _id: lDVYGRNqqw3HwcKM
     type: base
@@ -228,7 +234,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: dZroUd1FRR74UQM3
+          _id: AqzTgViEQPPInE8v
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -237,29 +254,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101808
-      modifiedTime: 1783544101808
+      createdTime: 1787616015017
+      modifiedTime: 1787616015017
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbdrdNaturesWar.lDVYGRNqqw3HwcKM'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866583501
-  modifiedTime: 1783544101808
+  systemVersion: 6.0.0
+  createdTime: 1787616015015
+  modifiedTime: 1787616015015
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 500000

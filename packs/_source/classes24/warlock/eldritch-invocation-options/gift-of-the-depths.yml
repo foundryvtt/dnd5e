@@ -8,20 +8,19 @@ system:
       <blockquote><p>Prerequisite: Level 5+ Warlock</p></blockquote><p>You can
       breathe underwater, and you gain a Swim Speed equal to your
       Speed.</p><p>You can also cast
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplWaterBreat]{Water Breathing}
-      once without expending a spell slot. You regain the ability to cast it in
-      this way again when you finish a Long Rest.</p><section
-      id="secret-aH09PLbY0nXMKypM" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Gift Water Breathing</strong> activity
-      consumes a limited use and includes an Active Effect for tracking the
-      chosen creatures.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplWaterBreat]{Water
+      Breathing} once without expending a spell slot. You regain the ability to
+      cast it in this way again when you finish a Long
+      Rest.</p><hr><p>@Embed[Compendium.dnd-players-handbook.spells.Item.phbsplWaterBreat
+      inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: '1'
     spent: 0
@@ -33,20 +32,27 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 5
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - trait
   requirements: ''
   activities:
-    cfps5v1q7nFqc2EO:
-      type: utility
-      name: Gift Water Breathing
-      _id: cfps5v1q7nFqc2EO
+    vWwmQUAWJw04yAbF:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplWaterBreat
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 3
+      _id: vWwmQUAWJw04yAbF
       sort: 0
       activation:
         type: action
-        value: null
         override: false
-        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -54,93 +60,107 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: ''
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: hour
+        units: inst
         concentration: false
         override: false
-        value: '24'
-      effects:
-        - _id: IEhxOF5rtwJ3xhOA
       range:
+        units: self
         override: false
-        units: ft
-        special: ''
-        value: '30'
       target:
         template:
           contiguous: false
           units: ft
-          type: ''
+          stationary: false
         affects:
           choice: false
-          count: '10'
-          type: creature
-          special: ''
         override: false
-        prompt: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+      name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: gift-of-the-depths
+  advancement: {}
+  crewed: false
 effects:
-  - name: Water Breathing
+  - name: Water Breathing & Swim Speed
     origin: Compendium.dnd5e.classes24.Item.phbinvGiftoftheD
     duration:
-      value: 86400
+      value: null
       units: seconds
-      expiry: turnStart
+      expiry: null
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/creatures/fish/crab-blue-purple.webp
     _id: IEhxOF5rtwJ3xhOA
     type: base
     system:
-      changes: []
-    description: ''
+      changes:
+        - key: system.attributes.movement.swim
+          value: '@attributes.movement.speed'
+          priority: null
+          type: override
+          phase: initial
+          _id: bi1Jgw8Il8Vl3uTr
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+    description: >-
+      <p>You can breathe underwater, and you gain a Swim Speed equal to your
+      Speed.</p>
     tint: '#ffffff'
-    transfer: false
+    transfer: true
     statuses: []
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.spells24.Item.phbsplWaterBreat.ActiveEffect.hyFupFam9XIbim0U
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616014999
+      modifiedTime: 1787616014999
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbinvGiftoftheD.IEhxOF5rtwJ3xhOA'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1745256762238
+  systemVersion: 6.0.0
+  createdTime: 1787616014999
+  modifiedTime: 1787616014999
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

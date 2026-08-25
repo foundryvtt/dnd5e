@@ -22,7 +22,8 @@ system:
       location of any creature of those types within 60 feet of yourself, and
       you know its creature type. Within the same radius, you also detect the
       presence of any place or object that has been consecrated or desecrated,
-      as with the @UUID[Compendium.dnd5e.spells24.Item.phbsplHallow0000]{Hallow}
+      as with the
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplHallow0000]{Hallow}
       spell.</p><section class="secret"
       id="secret-lIHCt32JLE7PAUbn"><p><strong>Foundry Note</strong></p><p>The
       uses of your Channel Divinity increase automatically as you level up. It
@@ -34,10 +35,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
-    page: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '@scale.paladin.channel-divinity'
     spent: 0
@@ -52,6 +52,7 @@ system:
     subtype: channelDivinity
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -76,12 +77,15 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: hr8wnlgs3uXphCnI
+          uuid: null
+          level: {}
       range:
         override: false
         units: ft
@@ -92,6 +96,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -109,8 +114,18 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
-  identifier: channel-divinity-paladin
+  identifier: channel-divinity
+  advancement: {}
+  crewed: false
 effects:
   - name: Divine Sense
     img: icons/magic/holy/saint-glass-portrait-halo.webp
@@ -118,6 +133,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 600
@@ -134,29 +158,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616015002
+      modifiedTime: 1787616015002
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnChannelDiv.hr8wnlgs3uXphCnI'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.10
-  createdTime: 1735866297701
-  modifiedTime: 1759426547851
+  systemVersion: 6.0.0
+  createdTime: 1787616015002
+  modifiedTime: 1787616015002
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

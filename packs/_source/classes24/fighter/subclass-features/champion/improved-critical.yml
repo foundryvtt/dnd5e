@@ -15,9 +15,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -27,12 +28,15 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: improved-critical
+  advancement: {}
+  crewed: false
 effects:
   - name: Improved Critical
     img: icons/skills/melee/strikes-sword-scimitar.webp
@@ -45,7 +49,18 @@ effects:
           priority: null
           type: downgrade
           phase: initial
-          _id: 1LpHxQmFZeSHfEw0
+          _id: Qr4hoVEZGORPYfk8
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -60,34 +75,29 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101970
-      modifiedTime: 1783544101970
+      createdTime: 1787616014997
+      modifiedTime: 1787616014997
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbftrImprovedCr.fbCF0jqdt3NMZdkc'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1783544101970
+  systemVersion: 6.0.0
+  createdTime: 1787616014997
+  modifiedTime: 1787616014997
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

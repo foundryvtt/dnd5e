@@ -6,69 +6,92 @@ img: systems/dnd5e/icons/classes/land.webp
 system:
   description:
     value: >-
-      <blockquote><p>Celebrate Connection to the Natural
-      World</p></blockquote><p>The Circle of the Land comprises mystics and
-      sages who safeguard ancient knowledge and rites. These Druids meet within
-      sacred circles of trees or standing stones to whisper primal secrets in
-      Druidic. The circle's wisest members preside as the chief priests of their
-      communities.</p>
+      <p><em>Celebrate Connection to the Natural World</em></p><p>The Circle of
+      the Land comprises mystics and sages who safeguard ancient knowledge and
+      rites. These Druids meet within sacred circles of trees or standing stones
+      to whisper primal secrets in Druidic. The circle's wisest members preside
+      as the chief priests of their communities.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbDruid00000000.JournalEntryPage.Ysgeru1iCA7CCe3x]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: land
   classIdentifier: druid
   advancement:
-    - _id: amRVULpFLpOQ2gPC
+    amRVULpFLpOQ2gPC:
+      _id: amRVULpFLpOQ2gPC
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbdrdLandSpells
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbdrdLandsAid00
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: 9l1ICcnaGx27bdOp
+      flags: {}
+      hint: ''
+    9l1ICcnaGx27bdOp:
+      _id: 9l1ICcnaGx27bdOp
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbdrdNaturalRec
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 6
       title: Subclass Features
-    - _id: tQpnSPCulIWNV3ZV
+      flags: {}
+      hint: ''
+    tQpnSPCulIWNV3ZV:
+      _id: tQpnSPCulIWNV3ZV
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbdrdNaturesWar
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 10
       title: Subclass Features
-    - _id: tdzTZSOWJgyhnk5X
+      flags: {}
+      hint: ''
+    tdzTZSOWJgyhnk5X:
+      _id: tdzTZSOWJgyhnk5X
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbdrdNaturesSan
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 14
       title: Subclass Features
-    - _id: 3QzkY4MkeL5QLWfM
+      flags: {}
+      hint: ''
+    3QzkY4MkeL5QLWfM:
+      _id: 3QzkY4MkeL5QLWfM
       type: ScaleValue
       configuration:
         identifier: lands-aid
@@ -91,6 +114,7 @@ system:
       value: {}
       title: Lands Aid Damage
       hint: ''
+      flags: {}
   spellcasting:
     progression: none
     ability: ''
@@ -100,11 +124,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866583501
-  modifiedTime: 1745256761026
+  systemVersion: 6.0.0
+  createdTime: 1787616014978
+  modifiedTime: 1787616014978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

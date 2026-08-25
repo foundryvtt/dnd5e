@@ -19,9 +19,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -31,12 +31,15 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Bard
   activities: {}
   enchant: {}
   identifier: jack-of-all-trades
+  advancement: {}
+  crewed: false
 effects:
   - _id: c7gWn9MMrBQb8ygm
     disabled: false
@@ -53,14 +56,13 @@ effects:
     description: ''
     statuses: []
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classfeatures.Item.ezWijmCnlnQ9ZRX2.ActiveEffect.K4xQzXl1Z4zMnyOa
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101431
-      modifiedTime: 1783544101431
+      createdTime: 1787616014995
+      modifiedTime: 1787616014995
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/trades/academics-investigation-puzzles.webp
@@ -72,24 +74,31 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: BX0y5POtg9mHaN3R
+          _id: HmbASL9ed4cYKy99
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     sort: 0
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrdJackOfAllT.c7gWn9MMrBQb8ygm'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866377962
-  modifiedTime: 1783544101431
+  systemVersion: 6.0.0
+  createdTime: 1787616014995
+  modifiedTime: 1787616014995
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

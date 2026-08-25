@@ -10,15 +10,19 @@ system:
       when you reach a Warlock level specified in the Fiend Spells table, you
       thereafter always have the listed spells
       prepared.</p><table><caption>Fiend Spells</caption><thead><tr><td>Warlock
-      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplBurningHan]{Burning
-      Hands}, @UUID[Compendium.dnd5e.spells24.Item.phbsplCommand000]{Command},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplScorchingR]{Scorching Ray},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplSuggestion]{Suggestion}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFireball00]{Fireball},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplStinkingCl]{Stinking
-      Cloud}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFireShield]{Fire
-      Shield}, @UUID[Compendium.dnd5e.spells24.Item.phbsplWallofFire]{Wall of
-      Fire}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplGeas000000]{Geas},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplInsectPlag]{Insect
+      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplBurningHan]{Burning
+      Hands},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplCommand000]{Command},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplScorchingR]{Scorching
+      Ray},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSuggestion]{Suggestion}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFireball00]{Fireball},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplStinkingCl]{Stinking
+      Cloud}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFireShield]{Fire
+      Shield},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplWallofFire]{Wall
+      of
+      Fire}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGeas000000]{Geas},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplInsectPlag]{Insect
       Plague}</td></tr></tbody></table><section class="secret"
       id="secret-Az5JbDGwh8PLTt7g"><p><strong>Foundry Note</strong></p><p>As you
       level up these spells will be granted to you automatically.</p></section>
@@ -26,9 +30,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -38,25 +42,24 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: fiend-spells
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866551616
-  modifiedTime: 1745256767588
+  systemVersion: 6.0.0
+  createdTime: 1787616014990
+  modifiedTime: 1787616014990
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

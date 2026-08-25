@@ -44,11 +44,10 @@ system:
     chat: ''
   source:
     custom: ''
-    revision: 2
+    revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    page: ''
+    license: CC-BY-4.0
   uses:
     max: '@scale.cleric.channel-divinity'
     recovery:
@@ -63,6 +62,7 @@ system:
     subtype: channelDivinity
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Cleric
@@ -83,8 +83,10 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -100,6 +102,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -114,23 +117,25 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: null
+        denomination: 8
         types:
           - healing
         custom:
           enabled: true
-          formula: (@scale.channel-divinity-cleric.spark)d8 + @abilities.wis.mod
+          formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
         scaling:
           number: 1
-        bonus: ''
+        bonus: '@abilities.wis.mod'
+        modifiers: []
       name: 'Divine Spark: Heal'
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
       visibility:
-        level:
-          min: null
-          max: null
-        identifier: ''
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     OY9UrTXvlRL0JUoI:
       type: save
       name: 'Divine Spark: Save'
@@ -148,8 +153,10 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -165,6 +172,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -181,26 +189,32 @@ system:
         parts:
           - custom:
               enabled: true
-              formula: (@scale.channel-divinity-cleric.spark)d8 + @abilities.wis.mod
-            number: null
-            denomination: null
-            bonus: ''
+              formula: (@scale.channel-divinity.spark)d8 + @abilities.wis.mod
+            number: 1
+            denomination: 8
+            bonus: '@abilities.wis.mod'
             types:
               - necrotic
               - radiant
+            modifiers: []
+            scaling:
+              number: 1
         onSave: half
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
       visibility:
-        level:
-          min: null
-          max: null
-        identifier: ''
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     aOptL5pMaj3WtR8S:
       type: save
       name: Turn Undead
@@ -218,14 +232,19 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: iUeSbfduM7K8XrCF
+          uuid: null
+          level: {}
+          onSave: false
       range:
         override: false
         units: ft
@@ -236,6 +255,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -248,24 +268,29 @@ system:
         recovery: []
         max: ''
       sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
-      appliedEffects:
-        - iUeSbfduM7K8XrCF
       save:
         ability:
           - wis
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      damage:
+        onSave: half
+        parts: []
   enchant: {}
-  identifier: channel-divinity-cleric
+  identifier: channel-divinity
   advancement:
-    - type: ScaleValue
+    uFauTQi3ls40bO1J:
+      type: ScaleValue
       title: Divine Spark Die Count
       _id: uFauTQi3ls40bO1J
       configuration:
@@ -284,6 +309,8 @@ system:
             value: 4
       value: {}
       hint: ''
+      flags: {}
+  crewed: false
 effects:
   - name: Turned
     img: icons/magic/symbols/star-rising-purple.webp
@@ -293,6 +320,15 @@ effects:
     type: base
     system:
       changes: []
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: 60
@@ -310,16 +346,15 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.1.1
-      createdTime: 1725377184193
-      modifiedTime: 1755538106434
+      systemVersion: 6.0.0
+      createdTime: 1787616014995
+      modifiedTime: 1787616014995
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -329,11 +364,11 @@ effects:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1735866373481
-  modifiedTime: 1768929683855
+  systemVersion: 6.0.0
+  createdTime: 1787616014995
+  modifiedTime: 1787616014995
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

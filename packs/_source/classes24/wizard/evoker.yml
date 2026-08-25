@@ -6,68 +6,91 @@ img: systems/dnd5e/icons/classes/evoker.webp
 system:
   description:
     value: >-
-      <blockquote><p>Create Explosive Elemental Effects</p></blockquote><p>Your
-      studies focus on magic that creates powerful elemental effects such as
-      bitter cold, searing flame, rolling thunder, crackling lightning, and
-      burning acid. Some Evokers find employment in military forces, serving as
-      artillery to blast armies from afar. Others use their power to protect
-      others, while some seek their own gain.</p>
+      <p><em>Create Explosive Elemental Effects</em></p><p>Your studies focus on
+      magic that creates powerful elemental effects such as bitter cold, searing
+      flame, rolling thunder, crackling lightning, and burning acid. Some
+      Evokers find employment in military forces, serving as artillery to blast
+      armies from afar. Others use their power to protect others, while some
+      seek their own gain.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbWizard0000000.JournalEntryPage.F5Nlk4mkB1nUUaob]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: evoker
   classIdentifier: wizard
   advancement:
-    - _id: NElqwo5qeP2KjewN
+    NElqwo5qeP2KjewN:
+      _id: NElqwo5qeP2KjewN
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdEvocationS
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdPotentCant
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: MnGUHDUfl1pqbwJK
+      flags: {}
+      hint: ''
+    MnGUHDUfl1pqbwJK:
+      _id: MnGUHDUfl1pqbwJK
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdSculptSpel
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 6
       title: Subclass Features
-    - _id: vyrvNKiCAYyJcR9l
+      flags: {}
+      hint: ''
+    vyrvNKiCAYyJcR9l:
+      _id: vyrvNKiCAYyJcR9l
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdEmpoweredE
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 10
       title: Subclass Features
-    - _id: GeBj8GgEaEGUkxxL
+      flags: {}
+      hint: ''
+    GeBj8GgEaEGUkxxL:
+      _id: GeBj8GgEaEGUkxxL
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdOverchanne
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 14
       title: Subclass Features
+      flags: {}
+      hint: ''
   spellcasting:
     progression: none
     ability: ''
@@ -77,11 +100,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866546265
-  modifiedTime: 1745256768923
+  systemVersion: 6.0.0
+  createdTime: 1787616014990
+  modifiedTime: 1787616014990
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

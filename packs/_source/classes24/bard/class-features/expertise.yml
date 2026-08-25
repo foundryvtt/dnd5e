@@ -14,9 +14,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -26,25 +26,24 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Bard
   activities: {}
   enchant: {}
   identifier: expertise
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866377962
-  modifiedTime: 1745256760380
+  systemVersion: 6.0.0
+  createdTime: 1787616014977
+  modifiedTime: 1787616014977
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

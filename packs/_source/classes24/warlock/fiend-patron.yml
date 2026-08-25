@@ -6,81 +6,109 @@ img: systems/dnd5e/icons/classes/fiend.webp
 system:
   description:
     value: >-
-      <blockquote><p>Make a Deal with the Lower Planes</p></blockquote><p>Your
-      pact draws on the Lower Planes, the realms of perdition. You might forge a
-      bargain with a demon lord such as Demogorgon or Orcus; an archdevil such
-      as Asmodeus; or a pit fiend, balor, yugoloth, or night hag that is
-      especially mighty. That patron's aims are evil—the corruption or
-      destruction of all things, ultimately including you—and your path is
-      defined by the extent to which you strive against those aims.</p>
+      <p><em>Make a Deal with the Lower Planes</em></p><p>Your pact draws on the
+      Lower Planes, the realms of perdition. You might forge a bargain with a
+      demon lord such as Demogorgon or Orcus; an archdevil such as Asmodeus; or
+      a pit fiend, balor, yugoloth, or night hag that is especially mighty. That
+      patron's aims are evil—the corruption or destruction of all things,
+      ultimately including you—and your path is defined by the extent to which
+      you strive against those aims.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbWarlock000000.JournalEntryPage.4km6CWhHArWi0klF]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: fiend
   classIdentifier: warlock
   advancement:
-    - _id: EyDjHPlaiU9pcKWc
+    EyDjHPlaiU9pcKWc:
+      _id: EyDjHPlaiU9pcKWc
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkDarkOnesBl
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkFiendSpell
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: pkjDsDeyI1xHOSDb
+      flags: {}
+      hint: ''
+    pkjDsDeyI1xHOSDb:
+      _id: pkjDsDeyI1xHOSDb
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkDarkOnesOw
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 6
       title: Subclass Features
-    - _id: hEHLXeuzpfLUyPbb
+      flags: {}
+      hint: ''
+    hEHLXeuzpfLUyPbb:
+      _id: hEHLXeuzpfLUyPbb
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkFiendishRe
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 10
       title: Subclass Features
-    - _id: BXdX73NWYsGIrZyc
+      flags: {}
+      hint: ''
+    BXdX73NWYsGIrZyc:
+      _id: BXdX73NWYsGIrZyc
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkHurlThroug
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 14
       title: Subclass Features
-    - _id: BL0KO6NHMdWDzORz
+      flags: {}
+      hint: ''
+    BL0KO6NHMdWDzORz:
+      _id: BL0KO6NHMdWDzORz
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplBurningHan
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplBurningHan
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplCommand000
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplCommand000
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplScorchingR
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplScorchingR
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplSuggestion
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSuggestion
+            sort: 0
         optional: false
         spell:
           ability: []
@@ -90,6 +118,7 @@ system:
             requireSlot: false
           method: pact
           prepared: 2
+        sorting: m
       value: {}
       level: 3
       title: Fiend Spells
@@ -97,14 +126,18 @@ system:
         The magic of your patron ensures you always have certain spells ready;
         when you reach a Warlock level specified in the Fiend Spells table, you
         thereafter always have the listed spells prepared.
-    - _id: RQGbS50hbBG90d1e
+      flags: {}
+    RQGbS50hbBG90d1e:
+      _id: RQGbS50hbBG90d1e
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplFireball00
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFireball00
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplStinkingCl
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplStinkingCl
+            sort: 0
         optional: false
         spell:
           ability: []
@@ -114,6 +147,7 @@ system:
             requireSlot: false
           method: pact
           prepared: 2
+        sorting: m
       value: {}
       level: 5
       title: Fiend Spells
@@ -121,14 +155,18 @@ system:
         The magic of your patron ensures you always have certain spells ready;
         when you reach a Warlock level specified in the Fiend Spells table, you
         thereafter always have the listed spells prepared.
-    - _id: HI0odgqJuVranhPH
+      flags: {}
+    HI0odgqJuVranhPH:
+      _id: HI0odgqJuVranhPH
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplFireShield
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFireShield
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplWallofFire
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplWallofFire
+            sort: 0
         optional: false
         spell:
           ability: []
@@ -138,6 +176,7 @@ system:
             requireSlot: false
           method: pact
           prepared: 2
+        sorting: m
       value: {}
       level: 7
       title: Fiend Spells
@@ -145,14 +184,18 @@ system:
         The magic of your patron ensures you always have certain spells ready;
         when you reach a Warlock level specified in the Fiend Spells table, you
         thereafter always have the listed spells prepared.
-    - _id: Aqu6VkaM9Z70GTtM
+      flags: {}
+    Aqu6VkaM9Z70GTtM:
+      _id: Aqu6VkaM9Z70GTtM
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplGeas000000
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplGeas000000
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplInsectPlag
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplInsectPlag
+            sort: 0
         optional: false
         spell:
           ability: []
@@ -162,6 +205,7 @@ system:
             requireSlot: false
           method: pact
           prepared: 2
+        sorting: m
       value: {}
       level: 9
       title: Fiend Spells
@@ -169,6 +213,7 @@ system:
         The magic of your patron ensures you always have certain spells ready;
         when you reach a Warlock level specified in the Fiend Spells table, you
         thereafter always have the listed spells prepared.
+      flags: {}
   spellcasting:
     progression: none
     ability: ''
@@ -178,11 +223,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866551616
-  modifiedTime: 1757447162214
+  systemVersion: 6.0.0
+  createdTime: 1787616014990
+  modifiedTime: 1787616014990
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

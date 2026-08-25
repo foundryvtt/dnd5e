@@ -6,80 +6,109 @@ img: systems/dnd5e/icons/classes/champion.webp
 system:
   description:
     value: >-
-      <blockquote><p>Pursue Physical Excellence in Combat</p></blockquote><p>A
-      Champion focuses on the development of martial prowess in a relentless
-      pursuit of victory. Champions combine rigorous training with physical
-      excellence to deal devastating blows, withstand peril, and garner glory.
-      Whether in athletic contests or bloody battle, Champions strive for the
-      crown of the victor.</p>
+      <p><em>Pursue Physical Excellence in Combat</em></p><p>A Champion focuses
+      on the development of martial prowess in a relentless pursuit of victory.
+      Champions combine rigorous training with physical excellence to deal
+      devastating blows, withstand peril, and garner glory. Whether in athletic
+      contests or bloody battle, Champions strive for the crown of the
+      victor.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbFighter000000.JournalEntryPage.oIre3TldjyfnGzQr]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: champion
   classIdentifier: fighter
   advancement:
-    - _id: 1uBHnM7yyltYiGYr
+    1uBHnM7yyltYiGYr:
+      _id: 1uBHnM7yyltYiGYr
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrImprovedCr
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbftrRemarkable
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: WS2baKDHOKdTHvn4
+      flags: {}
+      hint: ''
+    WS2baKDHOKdTHvn4:
+      _id: WS2baKDHOKdTHvn4
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrAdditional
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 7
       title: Subclass Features
-    - _id: ifmHcVXF9ZqyVhXa
+      flags: {}
+      hint: ''
+    ifmHcVXF9ZqyVhXa:
+      _id: ifmHcVXF9ZqyVhXa
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrHeroicWarr
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 10
       title: Subclass Features
-    - _id: DNwHuSG5CFe5o94z
+      flags: {}
+      hint: ''
+    DNwHuSG5CFe5o94z:
+      _id: DNwHuSG5CFe5o94z
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrSuperiorCr
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 15
       title: Subclass Features
-    - _id: nAg9H5fvgytySqaf
+      flags: {}
+      hint: ''
+    nAg9H5fvgytySqaf:
+      _id: nAg9H5fvgytySqaf
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbftrSurvivor00
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 18
       title: Subclass Features
-    - _id: F4BJnjlTZ7nAuzjg
+      flags: {}
+      hint: ''
+    F4BJnjlTZ7nAuzjg:
+      _id: F4BJnjlTZ7nAuzjg
       type: ItemChoice
       configuration:
         choices:
@@ -89,25 +118,38 @@ system:
         allowDrops: true
         type: feat
         pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstArchery000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstBlindFight
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstDefense000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstDueling000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstGreatWeapo
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstIntercepti
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstProtection
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstThrownWeap
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstTwoWeaponF
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstUnarmedFig
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstArchery000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstBlindFight
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstDefense000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstDueling000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstGreatWeapo
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstIntercepti
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstProtection
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstThrownWeap
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstTwoWeaponF
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstUnarmedFig
+            sort: 0
         spell: null
         restriction:
-          type: feat
+          type: class
           subtype: fightingStyle
+          list: []
+        sorting: a
       value:
         added: {}
         replaced: {}
       title: Fighting Style
       hint: ''
+      flags: {}
   spellcasting:
     progression: none
     ability: ''
@@ -117,11 +159,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1745256761455
+  systemVersion: 6.0.0
+  createdTime: 1787616014979
+  modifiedTime: 1787616014979
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

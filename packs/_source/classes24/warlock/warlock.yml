@@ -6,8 +6,9 @@ img: systems/dnd5e/icons/classes/warlock.webp
 system:
   description:
     value: >-
-      <h3>Core Warlock Traits</h3><table
-      class="core-class-traits"><tbody><tr><th scope="row"><p>Primary
+      <p><em>An Occultist Empowered by Otherworldly Pacts</em></p><h3>Core
+      Warlock Traits</h3><table class="core-class-traits"><tbody><tr><th
+      scope="row"><p>Primary
       Ability</p></th><td><p>Charisma</p></td></tr><tr><th scope="row"><p>Hit
       Point Die</p></th><td><p>D8 per Warlock level</p></td></tr><tr><th
       scope="row"><p>Saving Throw Proficiencies</p></th><td><p>Wisdom and
@@ -19,33 +20,54 @@ system:
       scope="row"><p>Armor Training</p></th><td><p>Light
       armor</p></td></tr><tr><th scope="row"><p>Starting
       Equipment</p></th><td><p><em>Choose A or B: </em>(A)
-      @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather Armor},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepSickle0000]{Sickle}, 2
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Daggers},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane Focus}
-      (@UUID[Compendium.dnd5e.equipment24.Item.phbafcOrb0000000]{orb}),
-      @UUID[Compendium.dnd5e.equipment24.Item.phiPN9UzkXk3i5xh]{Book} (occult
-      lore), @UUID[Compendium.dnd5e.equipment24.Item.phbagScholarsPac]{Scholar's
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbarmLeatherArm]{Leather
+      Armor},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepSickle0000]{Sickle},
+      2
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepDagger0000]{Daggers},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagArcaneFocus]{Arcane
+      Focus}
+      (@UUID[Compendium.dnd-players-handbook.equipment.Item.phbafcOrb0000000]{orb}),
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phiPN9UzkXk3i5xh]{Book}
+      (occult lore),
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagScholarsPac]{Scholar's
       Pack}, and [[/award 15GP]]; or (B) [[/award
-      100GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbwlkWarlock000
-      inline classes="free-rules-embed"]</p><h2>Becoming a Warlock …</h2><h3>As
-      a Level 1 Character</h3><ul><li>Gain all the traits in the Core Warlock
-      Traits table.</li><li>Gain the Warlock's level 1 features, which are
+      100GP]]</p></td></tr></tbody></table><p>Warlocks quest for knowledge that
+      lies hidden in the fabric of the multiverse. They often begin their search
+      for magical power by delving into tomes of forbidden lore, dabbling in
+      invocations meant to attract the power of extraplanar beings, or seeking
+      places of power where the influence of these beings can be felt. In no
+      time, each Warlock is drawn into a binding pact with a powerful patron.
+      Drawing on the ancient knowledge of beings such as angels, archfey,
+      demons, devils, hags, and alien entities of the Far Realm, Warlocks piece
+      together arcane secrets to bolster their own power.</p><p>Warlocks view
+      their patrons as resources, as means to the end of achieving magical
+      power. Some Warlocks respect, revere, or even love their patrons; some
+      serve their patrons grudgingly; and some seek to undermine their patrons
+      even as they wield the power their patrons have given them.</p><p>Once a
+      pact is made, a Warlock's thirst for knowledge and power can't be slaked
+      with mere study. Most Warlocks spend their days pursuing greater power and
+      deeper knowledge, which typically means some kind of
+      adventure.</p><h2>Becoming a Warlock …</h2><h3>As a Level 1
+      Character</h3><ul><li><p>Gain all the traits in the Core Warlock Traits
+      table.</p></li><li><p>Gain the Warlock's level 1 features, which are
       listed in the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbWarlock000000.JournalEntryPage.znue6EaGDDXgeQb0#class-features]{Warlock
-      Features table}.</li></ul><h3>As a Multiclass Character</h3><ul><li>Gain
-      the following traits from the Core Warlock Traits table: Hit Point Die and
-      training with Light armor.</li><li>Gain the Warlock's level 1 features,
-      which are listed in the Warlock Features table. See the
+      Features table}.</p></li></ul><h3>As a Multiclass
+      Character</h3><ul><li><p>Gain the following traits from the Core Warlock
+      Traits table: Hit Point Die and training with Light
+      armor.</p></li><li><p>Gain the Warlock's level 1 features, which are
+      listed in the Warlock Features table. See the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.vcs4jfEKRxPCsgXm]{multiclassing
-      rules} to determine your available spell slots.</li></ul>
+      rules} to determine your available spell slots.</p></li></ul>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -54,42 +76,42 @@ system:
       sort: 100000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
+      key: Compendium.dnd-players-handbook.equipment.Item.phbarmLeatherArm
       requiresProficiency: false
       _id: E16bWj9PWbA3ZDHF
       group: HNL3GVldnPCsg4BR
       sort: 200000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepSickle0000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepSickle0000
       requiresProficiency: false
       _id: c2w1NtOevecavhT1
       group: HNL3GVldnPCsg4BR
       sort: 300000
     - type: linked
       count: 2
-      key: Compendium.dnd5e.equipment24.Item.phbwepDagger0000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepDagger0000
       requiresProficiency: false
       _id: cbnBTbycZMQuhcSY
       group: HNL3GVldnPCsg4BR
       sort: 400000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbafcOrb0000000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbafcOrb0000000
       requiresProficiency: false
       _id: O8EoDIxQhPCa9Y1L
       group: HNL3GVldnPCsg4BR
       sort: 600000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagBook0000000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagBook0000000
       requiresProficiency: false
       _id: azIjGwebr4IUGOUW
       group: HNL3GVldnPCsg4BR
       sort: 700000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagScholarsPac
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagScholarsPac
       requiresProficiency: false
       _id: QtlLMEGt8LF296xx
       group: HNL3GVldnPCsg4BR
@@ -98,74 +120,104 @@ system:
       count: 15
       key: gp
       requiresProficiency: false
-      _id: KqxMWGbayv1QRIDV
+      _id: LUCXUFwvzytNkcH7
       group: HNL3GVldnPCsg4BR
       sort: 900000
   identifier: warlock
   levels: 1
   advancement:
-    - _id: viu0ntZhrve35HNy
+    viu0ntZhrve35HNy:
+      _id: viu0ntZhrve35HNy
       type: HitPoints
       configuration: {}
       value: {}
-    - _id: yjm7B73po6OV5DPi
+      flags: {}
+      hint: ''
+    yjm7B73po6OV5DPi:
+      _id: yjm7B73po6OV5DPi
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkEldritchIn
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkPactMagic0
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 1
       title: Class Features
-    - _id: IUkGspfJYbVXFLjw
+      flags: {}
+      hint: ''
+    IUkGspfJYbVXFLjw:
+      _id: IUkGspfJYbVXFLjw
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkMagicalCun
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 2
       title: Class Features
-    - _id: sDYsem2WwWHtRGj9
+      flags: {}
+      hint: ''
+    sDYsem2WwWHtRGj9:
+      _id: sDYsem2WwWHtRGj9
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkContactPat
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 9
       title: Class Features
-    - _id: T6SDpQI1L8qivGUw
+      flags: {}
+      hint: ''
+    T6SDpQI1L8qivGUw:
+      _id: T6SDpQI1L8qivGUw
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkMysticArca
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 11
       title: Class Features
-    - _id: E698BngQ7tgxYG9T
+      flags: {}
+      hint: ''
+    E698BngQ7tgxYG9T:
+      _id: E698BngQ7tgxYG9T
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwlkEldritchMa
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
       title: Class Features
-    - _id: bwCLOdauuzoHofil
+      flags: {}
+      hint: ''
+    bwCLOdauuzoHofil:
+      _id: bwCLOdauuzoHofil
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -179,14 +231,17 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 4
       title: ''
       hint: >-
         You gain the Ability Score Improvement feat or another feat of your
         choice for which you qualify. You gain this feature again at Warlock
         levels 8, 12, and 16.
-    - _id: mRSh9oUVjLU33e7p
+      flags: {}
+    mRSh9oUVjLU33e7p:
+      _id: mRSh9oUVjLU33e7p
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -200,14 +255,17 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 8
       title: ''
       hint: >-
         You gain the Ability Score Improvement feat or another feat of your
         choice for which you qualify. You gain this feature again at Warlock
         levels 8, 12, and 16.
-    - _id: mhZh3LfLMa15tXee
+      flags: {}
+    mhZh3LfLMa15tXee:
+      _id: mhZh3LfLMa15tXee
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -221,14 +279,17 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 12
       title: ''
       hint: >-
         You gain the Ability Score Improvement feat or another feat of your
         choice for which you qualify. You gain this feature again at Warlock
         levels 8, 12, and 16.
-    - _id: FOf5CkGnSs0OlppY
+      flags: {}
+    FOf5CkGnSs0OlppY:
+      _id: FOf5CkGnSs0OlppY
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -242,14 +303,17 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 16
       title: ''
       hint: >-
         You gain the Ability Score Improvement feat or another feat of your
         choice for which you qualify. You gain this feature again at Warlock
         levels 8, 12, and 16.
-    - _id: HucmTSEzIq7OeJr7
+      flags: {}
+    HucmTSEzIq7OeJr7:
+      _id: HucmTSEzIq7OeJr7
       type: ScaleValue
       configuration:
         identifier: invocations-known
@@ -276,7 +340,9 @@ system:
       value: {}
       title: Eldritch Invocations Known
       hint: ''
-    - _id: dZ29O2QGbIsj25Vg
+      flags: {}
+    dZ29O2QGbIsj25Vg:
+      _id: dZ29O2QGbIsj25Vg
       type: ScaleValue
       configuration:
         identifier: ''
@@ -293,7 +359,9 @@ system:
       value: {}
       title: Cantrips Known
       hint: ''
-    - _id: KTLPtUpPuGbXWiap
+      flags: {}
+    KTLPtUpPuGbXWiap:
+      _id: KTLPtUpPuGbXWiap
       type: Subclass
       configuration: {}
       value:
@@ -306,7 +374,9 @@ system:
         specialization that grants you features at certain Warlock levels. For
         the rest of your career, you gain each of your subclass’s features that
         are of your Warlock level or lower.
-    - _id: v3lym1uxhRr5SHcH
+      flags: {}
+    v3lym1uxhRr5SHcH:
+      _id: v3lym1uxhRr5SHcH
       type: ScaleValue
       configuration:
         identifier: max-prepared
@@ -345,7 +415,9 @@ system:
       value: {}
       title: Max Pact Magic Spells
       hint: ''
-    - _id: xMtpuEuf5g6C8cqA
+      flags: {}
+    xMtpuEuf5g6C8cqA:
+      _id: xMtpuEuf5g6C8cqA
       type: ItemChoice
       configuration:
         choices:
@@ -413,38 +485,67 @@ system:
         type: feat
         pool:
           - uuid: Compendium.dnd5e.classes24.Item.phbinvAgonizingB
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvArmorofSha
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvAscendantS
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvDevilsSigh
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvDevouringB
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvEldritchMi
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvEldritchSm
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvEldritchSp
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvFiendishVi
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvGazeofTwoM
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvGiftoftheD
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvGiftoftheP
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvInvestment
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvLessonsoft
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvLifedrinke
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvMaskofMany
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvMasterofMy
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvMistyVisio
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvOnewithSha
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvOtherworld
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvPactBlade0
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvPactChain0
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvPactTome00
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvRepellingB
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvThirstingB
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvVisionsOfD
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvWhispersOf
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbinvWitchSight
+            sort: 0
         spell: null
         restriction:
           type: class
           subtype: eldritchInvocation
           list: []
+        sorting: a
       value:
         added: {}
         replaced: {}
@@ -452,12 +553,15 @@ system:
       hint: >-
         You have unearthed Eldritch Invocations, pieces of forbidden knowledge
         that imbue you with an abiding magical ability or other lessons.
-    - _id: pNAJJ0MCkjHO2ZK1
+      flags: {}
+    pNAJJ0MCkjHO2ZK1:
+      _id: pNAJJ0MCkjHO2ZK1
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplContactOth
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplContactOth
+            sort: 0
         optional: false
         spell:
           ability: []
@@ -467,6 +571,7 @@ system:
             requireSlot: false
           method: spell
           prepared: 2
+        sorting: m
       value: {}
       level: 9
       title: Contact Patron
@@ -474,7 +579,9 @@ system:
         In the past, you usually contacted your patron through intermediaries.
         Now you can communicate directly; you always have the Contact Other
         Plane spell prepared.
-    - _id: W9auMtMHTf0KV1Xw
+      flags: {}
+    W9auMtMHTf0KV1Xw:
+      _id: W9auMtMHTf0KV1Xw
       type: Trait
       configuration:
         mode: default
@@ -489,7 +596,9 @@ system:
       title: Saving Throw Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: 9LblGv17rkWDNni2
+      flags: {}
+    9LblGv17rkWDNni2:
+      _id: 9LblGv17rkWDNni2
       type: Trait
       configuration:
         mode: default
@@ -511,7 +620,9 @@ system:
       title: Skill Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: 4XUbrDNUSRAH6TqT
+      flags: {}
+    4XUbrDNUSRAH6TqT:
+      _id: 4XUbrDNUSRAH6TqT
       type: Trait
       configuration:
         mode: default
@@ -525,7 +636,9 @@ system:
       title: Weapon Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: yB5RTWToMnl2sB6c
+      flags: {}
+    yB5RTWToMnl2sB6c:
+      _id: yB5RTWToMnl2sB6c
       type: Trait
       configuration:
         mode: default
@@ -538,8 +651,11 @@ system:
       level: 1
       title: Armor Training
       hint: ''
-    - type: AbilityScoreImprovement
-      _id: 8I38hJ6buQAYd1QL
+      flags: {}
+    29Ufd0MpG7PBckVs:
+      type: AbilityScoreImprovement
+      title: Epic Boon
+      _id: 29Ufd0MpG7PBckVs
       configuration:
         cap: 2
         fixed:
@@ -551,12 +667,13 @@ system:
           cha: 0
         locked: []
         points: 2
-        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofFate000
+        recommendation: Compendium.dnd-players-handbook.feats.Item.phbBoonofFate000
         max: null
-      value: {}
+      value:
+        type: asi
       level: 19
-      title: ''
       hint: ''
+      flags: {}
   spellcasting:
     progression: pact
     ability: cha
@@ -571,15 +688,16 @@ system:
     denomination: d8
     spent: 0
     additional: ''
+  properties: []
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866281378
-  modifiedTime: 1757541745637
+  systemVersion: 6.0.0
+  createdTime: 1787616014990
+  modifiedTime: 1787616014990
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

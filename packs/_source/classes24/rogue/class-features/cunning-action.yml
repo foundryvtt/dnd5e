@@ -14,9 +14,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -26,6 +26,7 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -45,6 +46,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -59,6 +61,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -76,6 +79,14 @@ system:
         name: ''
         formula: ''
       name: Dash
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     AeCciDTvw3kS583a:
       type: utility
       name: Disengage
@@ -92,6 +103,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -106,6 +118,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -122,6 +135,14 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     NiI5qEhg9TepZxMh:
       type: utility
       _id: NiI5qEhg9TepZxMh
@@ -137,12 +158,15 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: YLfpwyCVUObRTopP
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -152,6 +176,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -169,8 +194,18 @@ system:
         name: ''
         formula: ''
       name: Hide
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: cunning-action
+  advancement: {}
+  crewed: false
 effects:
   - name: Hiding
     img: icons/skills/movement/figure-running-gray.webp
@@ -180,6 +215,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -195,29 +239,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616015004
+      modifiedTime: 1787616015004
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
     folder: null
     _key: '!items.effects!phbrgeCunningAct.YLfpwyCVUObRTopP'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866292069
-  modifiedTime: 1745256764143
+  systemVersion: 6.0.0
+  createdTime: 1787616015004
+  modifiedTime: 1787616015004
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

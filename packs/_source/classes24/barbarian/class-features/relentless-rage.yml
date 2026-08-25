@@ -19,9 +19,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '20'
     recovery:
@@ -33,6 +33,7 @@ system:
     subtype: ''
   prerequisites:
     level: 11
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
@@ -57,6 +58,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
@@ -76,7 +78,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -93,12 +96,21 @@ system:
         dc:
           calculation: ''
           formula: 10 + (@item.uses.spent * 5)
+        visible: true
       uses:
         spent: 0
         recovery: []
         max: ''
       sort: 0
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Y2xWUsWmpklWLtVT:
       type: heal
       name: ''
@@ -116,6 +128,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -130,6 +143,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -143,7 +157,7 @@ system:
         max: ''
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
@@ -152,22 +166,29 @@ system:
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: relentless-rage
+  advancement: {}
+  crewed: false
 effects: []
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1740680080815
+  systemVersion: 6.0.0
+  createdTime: 1787616014976
+  modifiedTime: 1787616014976
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -17,7 +17,8 @@ system:
           allowed: false
         spellSlot: true
         targets: []
-      description: {}
+      description:
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -25,10 +26,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -45,6 +48,14 @@ system:
         critical: {}
         includeBase: true
         parts: []
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
@@ -56,8 +67,8 @@ system:
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   identified: true
   unidentified:
     description: ''
@@ -76,7 +87,6 @@ system:
   armor:
     value: null
   cover: null
-  crewed: false
   hp:
     value: null
     max: null
@@ -96,6 +106,7 @@ system:
       scaling:
         number: 1
       bonus: ''
+      modifiers: []
     versatile:
       number: null
       denomination: null
@@ -104,7 +115,7 @@ system:
         enabled: false
       scaling:
         number: 1
-  magicalBonus: null
+      modifiers: []
   properties:
     - foc
   proficient: null
@@ -112,22 +123,20 @@ system:
     value: null
     long: null
     reach: null
-    units: ''
+    units: ft
   mastery: ''
+  crew:
+    value: []
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1726339999415
-  modifiedTime: 1740680088742
+  systemVersion: 6.0.0
+  createdTime: 1787616014989
+  modifiedTime: 1787616014989
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

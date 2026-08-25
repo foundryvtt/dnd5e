@@ -30,10 +30,12 @@ system:
       <strong>Flurry of Blows</strong> activity is a Bonus Action which expends
       a Focus Point and includes the Attack Roll and Damage for an Unarmored
       Strike using your Martial Arts Die which automatically scales as you level
-      up.</p><p>The <strong>Patient Defense</strong> Bonus Action activity
-      includes an Active Effect for tracking that you're Disengaged. The
-      <strong>Patient Defense (Focus Point)</strong> activity expends a Focus
-      Point and includes an Active Effect that adds the Dodging
+      up. If your [[/item Unarmed Strike]] is impacted by other magic items, you
+      can use the <strong>Expend Focus Point</strong> activity and then use your
+      Unarmed Strike as usual.</p><p>The <strong>Patient Defense</strong> Bonus
+      Action activity includes an Active Effect for tracking that you're
+      Disengaged. The <strong>Patient Defense (Focus Point)</strong> activity
+      expends a Focus Point and includes an Active Effect that adds the Dodging
       status.</p><p>The <strong>Step of the Wind</strong> Bonus Action activity
       expends 1 Focus Point and includes an Active Effect for tracking that
       you're Disengaged.</p></section>
@@ -41,9 +43,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '@scale.monk.focus'
     spent: 0
@@ -55,6 +57,7 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Monk
@@ -76,8 +79,10 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
       description:
         chatFlavor: Make two [[/item Unarmed Strike]]{Unarmed Strikes}
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -92,6 +97,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -108,7 +114,15 @@ system:
       roll:
         name: ''
         formula: ''
-      appliedEffects: []
+        prompt: false
+        visible: false
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     7xj7b6e8tDznDSrE:
       type: utility
       name: Patient Defense (Focus Point)
@@ -129,12 +143,15 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: UYHRNxrU74xiUJAy
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -144,6 +161,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -162,6 +180,13 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-resistances.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     EFzidO6yAapw8d60:
       type: utility
       name: Patient Defense
@@ -177,12 +202,15 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: 92bFICMzRpJmnO56
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -192,6 +220,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -211,6 +240,13 @@ system:
         name: ''
       _id: EFzidO6yAapw8d60
       img: systems/dnd5e/icons/svg/trait-damage-resistances.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     0MuRZ0Ur95xQTKFq:
       type: utility
       name: Step of the Wind
@@ -231,12 +267,15 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: 92bFICMzRpJmnO56
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -246,6 +285,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -264,8 +304,17 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait-saves.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: monks-focus
+  advancement: {}
+  crewed: false
 effects:
   - name: Patient Defense (Focus Point)
     img: systems/dnd5e/icons/svg/items/feature.svg
@@ -275,6 +324,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -290,12 +348,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616015010
+      modifiedTime: 1787616015010
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
@@ -309,6 +367,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -323,12 +390,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616015010
+      modifiedTime: 1787616015010
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
@@ -337,11 +404,11 @@ effects:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866307724
-  modifiedTime: 1759782137284
+  systemVersion: 6.0.0
+  createdTime: 1787616015010
+  modifiedTime: 1787616015010
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

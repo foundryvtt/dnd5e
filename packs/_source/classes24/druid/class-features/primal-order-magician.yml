@@ -19,9 +19,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -31,14 +31,17 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Druid
   activities: {}
   enchant: {}
   identifier: primal-order-magician
+  advancement: {}
+  crewed: false
 effects:
-  - name: Magician
+  - name: Magician Checks & Cantrip
     origin: Item.phbPrimalOrderMa
     duration:
       value: null
@@ -46,7 +49,9 @@ effects:
       expiry: null
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/magic/nature/leaf-hand-green.webp
     _id: IqjrvuQ2ORv65hxB
     type: base
@@ -57,33 +62,47 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: ROAaa6PRPzYP0amw
+          _id: 5dgovAuL0SFakcVF
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.arc.bonuses.check
           value: (max(1,@abilities.wis.mod))
           priority: null
           type: add
           phase: initial
-          _id: aHCG0XFzOWjTQ2PI
+          _id: O93k4Jh3tRPa4zIA
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.nat.bonuses.check
           value: (max(1,@abilities.wis.mod))
           priority: null
           type: add
           phase: initial
-          _id: PxjoSQM4D78bD1En
+          _id: YqnLaq6IhnShBytT
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     description: ''
     tint: '#ffffff'
     transfer: true
     statuses: []
     sort: 0
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbdrdPrimalOrde.ActiveEffect.zxFq5nqzLiznWTeu
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544100960
-      modifiedTime: 1783544100960
+      createdTime: 1787616014992
+      modifiedTime: 1787616014992
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -91,18 +110,14 @@ effects:
     folder: null
     _key: '!items.effects!phbPrimalOrderMa.IqjrvuQ2ORv65hxB'
 folder: EXYmwRGoNyMbByN1
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866366918
-  modifiedTime: 1783544100960
+  systemVersion: 6.0.0
+  createdTime: 1787616014991
+  modifiedTime: 1787616014991
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

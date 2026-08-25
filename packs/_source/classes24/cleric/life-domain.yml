@@ -6,146 +6,191 @@ img: systems/dnd5e/icons/classes/life.webp
 system:
   description:
     value: >-
-      <blockquote><p>Soothe the Hurts of the World</p></blockquote><p>The Life
-      Domain focuses on the positive energy that helps sustain all life in the
-      multiverse. Clerics who tap into this domain are masters of healing, using
-      that life force to cure many hurts.</p><p>Existence itself relies on the
-      positive energy associated with this domain, so a Cleric of almost any
-      religious tradition might choose it. This domain is particularly
-      associated with agricultural deities, gods of healing or endurance, and
-      gods of home and community. Religious orders of healing also seek the
-      magic of this domain.</p>
+      <p><em>Soothe the Hurts of the World</em></p><p>The Life Domain focuses on
+      the positive energy that helps sustain all life in the multiverse. Clerics
+      who tap into this domain are masters of healing, using that life force to
+      cure many hurts.</p><p>Existence itself relies on the positive energy
+      associated with this domain, so a Cleric of almost any religious tradition
+      might choose it. This domain is particularly associated with agricultural
+      deities, gods of healing or endurance, and gods of home and community.
+      Religious orders of healing also seek the magic of this domain.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbCleric0000000.JournalEntryPage.aGYpgynZ3nkBCPaT]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   identifier: life
   classIdentifier: cleric
   advancement:
-    - _id: xGJEF0anyVTaO02x
+    xGJEF0anyVTaO02x:
+      _id: xGJEF0anyVTaO02x
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcDiscipleOf
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbclcLifeSpells
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbclcPreserveLi
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: Qkx3Cd07TGIwBX91
+      flags: {}
+      hint: ''
+    Qkx3Cd07TGIwBX91:
+      _id: Qkx3Cd07TGIwBX91
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcBlessedHea
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 6
       title: Subclass Features
-    - _id: fke7bQihEBwKmOXP
+      flags: {}
+      hint: ''
+    fke7bQihEBwKmOXP:
+      _id: fke7bQihEBwKmOXP
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbclcSupremeHea
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 17
       title: Subclass Features
-    - _id: MOUCVB3JGazDiUI3
+      flags: {}
+      hint: ''
+    MOUCVB3JGazDiUI3:
+      _id: MOUCVB3JGazDiUI3
       type: ItemGrant
       configuration:
         items:
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplAid0000000
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplCureWounds
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplCureWounds
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplLesserRest
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplLesserRest
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplBless00000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplBless00000
             optional: false
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 3
       title: Life Domain Spells
       hint: ''
-    - _id: zfcT1xCvqRLRZXiH
+      flags: {}
+    zfcT1xCvqRLRZXiH:
+      _id: zfcT1xCvqRLRZXiH
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplMassHealin
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplMassHealin
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplRevivify00
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplRevivify00
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 5
       title: Life Domain Spells
       hint: ''
-    - _id: 1FttAn0lw9lBpofn
+      flags: {}
+    1FttAn0lw9lBpofn:
+      _id: 1FttAn0lw9lBpofn
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplAuraofLife
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplAuraofLife
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplDeathWard0
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDeathWard0
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 7
       title: Life Domain Spells
       hint: ''
-    - _id: iYrz7E0p8N6pp5Uy
+      flags: {}
+    iYrz7E0p8N6pp5Uy:
+      _id: iYrz7E0p8N6pp5Uy
       type: ItemGrant
       configuration:
         items:
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplGreaterRes
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplGreaterRes
+            sort: 0
           - optional: false
-            uuid: Compendium.dnd5e.spells24.Item.phbsplMassCureWo
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplMassCureWo
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 9
       title: Life Domain Spells
       hint: ''
+      flags: {}
   spellcasting:
     progression: none
     ability: ''
@@ -155,11 +200,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866589552
-  modifiedTime: 1745256760855
+  systemVersion: 6.0.0
+  createdTime: 1787616014978
+  modifiedTime: 1787616014978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

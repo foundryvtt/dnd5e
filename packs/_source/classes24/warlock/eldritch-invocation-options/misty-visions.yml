@@ -6,18 +6,18 @@ system:
   description:
     value: >-
       <blockquote><p>Prerequisite: Level 2+ Warlock</p></blockquote><p>You can
-      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplSilentImag]{Silent Image}
-      without expending a spell slot.</p><section class="secret"
-      id="secret-zbni49FP84e1UILg"><p><strong>Foundry Note</strong></p><p>This
-      feature includes Silent Image's activities and can be used in its
-      place.</p></section>
+      cast
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSilentImag]{Silent
+      Image} without expending a spell
+      slot.</p><hr><p>@Embed[Compendium.dnd-players-handbook.spells.Item.phbsplSilentImag
+      inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -27,118 +27,77 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: summon
+    74fYEr3FNUwniqfY:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSilentImag
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 1
+      _id: 74fYEr3FNUwniqfY
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
-        condition: ''
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: hour
+        units: inst
+        concentration: false
         override: false
-        concentration: true
-        value: '1'
       range:
+        units: self
         override: false
-        units: ft
-        special: ''
-        value: '60'
       target:
-        prompt: false
         template:
           contiguous: false
           units: ft
-          type: ''
+          stationary: false
         affects:
           choice: false
-          count: '1'
-          type: space
-          special: ''
         override: false
-      bonuses:
-        ac: ''
-        hd: ''
-        hp: ''
-        attackDamage: ''
-        saveDamage: ''
-        healing: ''
-      creatureSizes:
-        - tiny
-        - sm
-        - med
-        - lg
-        - huge
-      creatureTypes: []
-      match:
-        proficiency: false
-        attacks: false
-        saves: false
-      profiles:
-        - count: ''
-          name: ''
-          _id: IxAsPOEknS47M7Ya
-          uuid: Compendium.dnd5e.actors24.Actor.dmgIllusoryCreat
-          level:
-            min: null
-            max: null
-          types: []
-        - count: ''
-          name: ''
-          _id: FmMkdA2mgbTGgfRe
-          uuid: Compendium.dnd5e.actors24.Actor.phbiluObject0000
-          level:
-            min: null
-            max: null
-          types: []
-        - count: ''
-          name: ''
-          _id: F2J7UUoTTzvbMzYP
-          uuid: Compendium.dnd5e.actors24.Actor.phbiluSensory000
-          level:
-            min: null
-            max: null
-          types: []
-      summon:
-        identifier: ''
-        mode: ''
         prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      effects: []
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: misty-visions
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1740685846463
+  systemVersion: 6.0.0
+  createdTime: 1787616014984
+  modifiedTime: 1787616014984
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

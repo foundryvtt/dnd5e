@@ -4,77 +4,58 @@ type: feat
 img: icons/magic/control/hypnosis-mesmerism-eye.webp
 system:
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: summon
+    bTLS2ccOyKbiT1sN:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplArcaneEye0
+        challenge:
+          override: false
+        properties: []
+        spellbook: true
+        ability: ''
+        level: 4
+      _id: bTLS2ccOyKbiT1sN
+      sort: 0
       activation:
         type: action
-        value: null
         override: false
-        condition: ''
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: hour
+        units: inst
+        concentration: false
         override: false
-        concentration: true
-        value: '1'
       range:
+        units: self
         override: false
-        units: ft
-        special: ''
-        value: '30'
       target:
-        prompt: false
         template:
           contiguous: false
           units: ft
-          type: ''
+          stationary: false
         affects:
           choice: false
-          count: '1'
-          type: space
-          special: ''
         override: false
-      bonuses:
-        ac: ''
-        hd: ''
-        hp: ''
-        attackDamage: ''
-        saveDamage: ''
-        healing: ''
-      creatureSizes: []
-      creatureTypes: []
-      match:
-        attacks: false
-        proficiency: false
-        saves: false
-      profiles:
-        - count: ''
-          name: ''
-          _id: OPGmJyPFZox9o5it
-          uuid: Compendium.dnd5e.actors24.Actor.phbsplArcaneEye0
-          level:
-            min: null
-            max: null
-          types: []
-      summon:
-        identifier: ''
-        mode: ''
         prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      effects: []
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery: []
@@ -82,42 +63,41 @@ system:
   description:
     value: >-
       <blockquote><p>Prerequisite: Level 9+ Warlock</p></blockquote><p>You can
-      cast @UUID[Compendium.dnd5e.spells24.Item.phbsplArcaneEye0]{Arcane Eye}
-      without expending a spell slot.</p><section class="secret"
-      id="secret-yVljO3Op1LVKKBRZ"><p><strong>Foundry Note</strong></p><p>This
-      feature can be used in place of Arcane Eye and includes a
-      <strong>Summon</strong> activity.</p></section>
+      cast
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplArcaneEye0]{Arcane
+      Eye} without expending a spell
+      slot.</p><hr><p>@Embed[Compendium.dnd-players-handbook.spells.Item.phbsplArcaneEye0
+      inline]</p>
     chat: ''
   source:
     rules: '2024'
     custom: ''
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   enchant: {}
   type:
     value: class
     subtype: eldritchInvocation
   prerequisites:
     level: 9
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: visions-of-distant-realms
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1740680084434
+  systemVersion: 6.0.0
+  createdTime: 1787616014984
+  modifiedTime: 1787616014984
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

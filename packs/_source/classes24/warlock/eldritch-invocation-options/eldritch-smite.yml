@@ -19,9 +19,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -31,9 +32,9 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 5
-    repeatable: false
     items:
       - pact-of-the-blade
+    repeatable: false
   properties: []
   requirements: ''
   activities:
@@ -59,6 +60,7 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -73,6 +75,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -86,7 +89,7 @@ system:
         max: ''
       damage:
         critical:
-          allow: false
+          allow: true
         parts:
           - custom:
               enabled: true
@@ -96,24 +99,34 @@ system:
             bonus: ''
             types:
               - force
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: eldritch-smite
+  advancement: {}
+  crewed: false
 effects: []
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.346'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1752706793505
+  systemVersion: 6.0.0
+  createdTime: 1787616014983
+  modifiedTime: 1787616014983
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -11,9 +11,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -23,17 +23,20 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: eldritch-mind
+  advancement: {}
+  crewed: false
 effects:
-  - name: Eldritch Mind
+  - name: Concentration Advantage
     img: icons/magic/unholy/silhouette-robe-evil-power.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvEldritchMi
-    _id: yiLpNgz92fezlhAG
+    _id: 24hE74nCrrmswvlm
     type: base
     system:
       changes:
@@ -42,7 +45,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: et5CQsIQNwcc0PiZ
+          _id: hYLoWDWXJNLxsDAN
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -56,35 +70,30 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1768927362062
-      modifiedTime: 1783544102208
+      createdTime: 1787616014998
+      modifiedTime: 1787616014998
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
     folder: null
-    _key: '!items.effects!phbinvEldritchMi.yiLpNgz92fezlhAG'
+    _key: '!items.effects!phbinvEldritchMi.24hE74nCrrmswvlm'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102208
+  systemVersion: 6.0.0
+  createdTime: 1787616014998
+  modifiedTime: 1787616014998
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

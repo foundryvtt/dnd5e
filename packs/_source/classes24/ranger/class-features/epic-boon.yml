@@ -9,17 +9,18 @@ system:
       <p>You gain an
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.GxfrwkJbrIvn7reC]{Epic
       Boon feat} or another feat of your choice for which you qualify.
-      @UUID[Compendium.dnd5e.feats24.Item.phbBoonofDimensi]{Boon of Dimensional
-      Travel} is recommended.</p><section id="secret-YoYODjOrhZ9UwOVg"
-      class="secret"><p><strong>Foundry Note</strong></p><p>You will be prompted
-      for a choice while leveling up.</p></section>
+      @UUID[Compendium.dnd-players-handbook.feats.Item.phbBoonofDimensi]{Boon of
+      Dimensional Travel} is recommended.</p><section
+      id="secret-YoYODjOrhZ9UwOVg" class="secret"><p><strong>Foundry
+      Note</strong></p><p>You will be prompted for a choice while leveling
+      up.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,24 +30,24 @@ system:
     subtype: ''
   prerequisites:
     level: 19
+    items: []
+    repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: epic-boon
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735932734523
-  modifiedTime: 1745256764771
+  systemVersion: 6.0.0
+  createdTime: 1787616014987
+  modifiedTime: 1787616014987
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

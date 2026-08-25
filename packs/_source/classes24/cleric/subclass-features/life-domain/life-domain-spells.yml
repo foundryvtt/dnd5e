@@ -10,16 +10,18 @@ system:
       Spells table, you thereafter always have the listed spells
       prepared.</p><table><caption>Life Domain
       Spells</caption><thead><tr><td>Cleric Level</td><td>Prepared
-      Spells</td></tr></thead><tbody><tr><td>3</td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplAid0000000]{Aid},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure Wounds},<br
-      />@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
-      Restoration}</p></td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplMassHealin]{Mass
+      Spells</td></tr></thead><tbody><tr><td>3</td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000]{Aid},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplBless00000]{Bless},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplCureWounds]{Cure
+      Wounds},<br>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplLesserRest]{Lesser
+      Restoration}</p></td></tr><tr><td>5</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMassHealin]{Mass
       Healing Word},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplRevivify00]{Revivify}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplAuraofLife]{Aura
-      of Life}, @UUID[Compendium.dnd5e.spells24.Item.phbsplDeathWard0]{Death
-      Ward}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
-      Restoration}, @UUID[Compendium.dnd5e.spells24.Item.phbsplMassCureWo]{Mass
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplRevivify00]{Revivify}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplAuraofLife]{Aura
+      of Life},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDeathWard0]{Death
+      Ward}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGreaterRes]{Greater
+      Restoration},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMassCureWo]{Mass
       Cure Wounds}</td></tr></tbody></table><section class="secret"
       id="secret-Z9pAhvumQlf7onuP"><p><strong>Foundry Note</strong></p><p>These
       spells are granted automatically as you advance.</p></section>
@@ -27,9 +29,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -39,26 +41,25 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: Life Domain
   activities: {}
   enchant: {}
   identifier: life-domain-spells
+  advancement: {}
+  crewed: false
 effects: []
 folder: jWzqOsH9e7IW7WO7
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866589552
-  modifiedTime: 1745256760876
+  systemVersion: 6.0.0
+  createdTime: 1787616014978
+  modifiedTime: 1787616014978
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

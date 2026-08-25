@@ -6,7 +6,8 @@ img: systems/dnd5e/icons/classes/ranger.webp
 system:
   description:
     value: >-
-      <h3>Core Ranger Traits</h3><table class="core-class-traits"><tbody><tr><th
+      <p><em>A Wandering Warrior Imbued with Primal Magic</em></p><h3>Core
+      Ranger Traits</h3><table class="core-class-traits"><tbody><tr><th
       scope="row"><p><strong>Primary Ability</strong></p></th><td><p>Dexterity
       and Wisdom</p></td></tr><tr><th scope="row"><p><strong>Hit Point
       Die</strong></p></th><td><p>D10 per Ranger level</p></td></tr><tr><th
@@ -21,38 +22,45 @@ system:
       Training</strong></p></th><td><p>Light and Medium armor and
       Shields</p></td></tr><tr><th scope="row"><p><strong>Starting
       Equipment</strong></p></th><td><p><em>Choose A or B: </em>(A)
-      @UUID[Compendium.dnd5e.equipment24.Item.phbarmStuddedLea]{Studded Leather
-      Armor},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepScimitar00]{Scimitar},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepShortsword]{Shortsword},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepLongbow000]{Longbow}, 20
-      @UUID[Compendium.dnd5e.equipment24.Item.phbamoArrows0000]{Arrows},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagQuiver00000]{Quiver},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagDruidicFocu]{Druidic Focus}
-      (@UUID[Compendium.dnd5e.equipment24.Item.phbdfcSprigofmis]{sprig of
-      mistletoe}),
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagExplorersPa]{Explorer's
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbarmStuddedLea]{Studded
+      Leather Armor},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepScimitar00]{Scimitar},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepShortsword]{Shortsword},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepLongbow000]{Longbow},
+      20
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbamoArrows0000]{Arrows},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagQuiver00000]{Quiver},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagDruidicFocu]{Druidic
+      Focus}
+      (@UUID[Compendium.dnd-players-handbook.equipment.Item.phbdfcSprigofmis]{sprig
+      of mistletoe}),
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagExplorersPa]{Explorer's
       Pack}, and [[/award 7GP]]; or (B) [[/award
-      150GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbrgrRanger0000
-      inline classes="free-rules-embed"]</p><h2>Becoming a Ranger …</h2><h3>As a
-      Level 1 Character</h3><ul><li>Gain all the traits in the Core Ranger
-      Traits table.</li><li>Gain the Ranger's level 1 features, which are listed
-      in the Ranger Features table.</li></ul><h3>As a Multiclass
-      Character</h3><ul><li>Gain the following traits from the Core Ranger
-      Traits table: Hit Point Die, proficiency with Martial weapons, proficiency
-      in one skill of your choice from the Ranger's skill list, and training
-      with Light and Medium armor and Shields.</li><li>Gain the Ranger's level 1
-      features, which are listed in the Ranger Features table. See the
-      multiclassing rules in chapter 2 to determine your available spell
-      slots.</li></ul>
+      150GP]]</p></td></tr></tbody></table><p>Far from bustling cities, amid the
+      trees of trackless forests and across wide plains, Rangers keep their
+      unending watch in the wilderness. Rangers learn to track their quarry as a
+      predator does, moving stealthily through the wilds and hiding themselves
+      in brush and rubble.</p><p>Thanks to their connection with nature, Rangers
+      can also cast spells that harness primal powers of the wilderness. A
+      Ranger's talents and magic are honed with deadly focus to protect the
+      world from the ravages of monsters and tyrants.</p><h2>Becoming a Ranger
+      …</h2><h3>As a Level 1 Character</h3><ul><li><p>Gain all the traits in the
+      Core Ranger Traits table.</p></li><li><p>Gain the Ranger's level 1
+      features, which are listed in the Ranger Features
+      table.</p></li></ul><h3>As a Multiclass Character</h3><ul><li><p>Gain the
+      following traits from the Core Ranger Traits table: Hit Point Die,
+      proficiency with Martial weapons, proficiency in one skill of your choice
+      from the Ranger's skill list, and training with Light and Medium armor and
+      Shields.</p></li><li><p>Gain the Ranger's level 1 features, which are
+      listed in the Ranger Features table. See the multiclassing rules in
+      chapter 2 to determine your available spell slots.</p></li></ul>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
-    page: ''
+    license: CC-BY-4.0
+    revision: 1
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -61,56 +69,56 @@ system:
       sort: 100000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
+      key: Compendium.dnd-players-handbook.equipment.Item.phbarmStuddedLea
       requiresProficiency: false
       _id: Xd5dGKrCFOma0tff
       group: WFIcVPxUX9AVm6Bi
       sort: 200000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepScimitar00
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepScimitar00
       requiresProficiency: false
       _id: QSWlS6rRuZ0EEv82
       group: WFIcVPxUX9AVm6Bi
       sort: 300000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepShortsword
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepShortsword
       requiresProficiency: false
       _id: tsVTDYKzuaFj9Ml9
       group: WFIcVPxUX9AVm6Bi
       sort: 400000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepLongbow000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepLongbow000
       requiresProficiency: false
       _id: 5T06wPne6AU3Rrsa
       group: WFIcVPxUX9AVm6Bi
       sort: 500000
     - type: linked
       count: 20
-      key: Compendium.dnd5e.equipment24.Item.phbamoArrows0000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbamoArrows0000
       requiresProficiency: false
       _id: 5xYjLDFChJSP5ygy
       group: WFIcVPxUX9AVm6Bi
       sort: 600000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagQuiver00000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagQuiver00000
       requiresProficiency: false
       _id: rXPrZLCycIgTF1bs
       group: WFIcVPxUX9AVm6Bi
       sort: 700000
-    - type: focus
+    - type: linked
       count: null
-      key: druidic
+      key: Compendium.dnd-players-handbook.equipment.Item.phbdfcSprigofmis
       requiresProficiency: false
       _id: 9UhnUjgaVE5NlAEw
       group: WFIcVPxUX9AVm6Bi
       sort: 800000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagExplorersPa
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagExplorersPa
       requiresProficiency: false
       _id: 3BV41WTrCIy6HLHS
       group: WFIcVPxUX9AVm6Bi
@@ -119,7 +127,7 @@ system:
       count: 7
       key: gp
       requiresProficiency: false
-      _id: Rpvzjvy76WfbCkxs
+      _id: arpyk6wvufzGcUuG
       group: WFIcVPxUX9AVm6Bi
       sort: 1000000
   identifier: ranger
@@ -139,12 +147,16 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrSpellcasti
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrFavoredEne
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrWeaponMast
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 1
       title: Class Features
@@ -157,10 +169,13 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrDeftExplor
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrFightingSt
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 2
       title: Class Features
@@ -173,8 +188,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrExtraAttac
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 5
       title: Class Features
@@ -187,8 +204,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrRoving0000
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 6
       title: Class Features
@@ -201,8 +220,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrExpertise0
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 9
       title: Class Features
@@ -232,8 +253,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrTireless00
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 10
       title: Class Features
@@ -246,8 +269,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrRelentless
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 13
       title: Class Features
@@ -260,8 +285,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrNaturesVei
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 14
       title: Class Features
@@ -274,8 +301,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrPreciseHun
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 17
       title: Class Features
@@ -288,8 +317,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrFeralSense
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 18
       title: Class Features
@@ -302,8 +333,10 @@ system:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgrFoeSlayer0
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
       title: Class Features
@@ -324,7 +357,8 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 4
       title: ''
       flags: {}
@@ -344,7 +378,8 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 8
       title: ''
       flags: {}
@@ -364,7 +399,8 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 12
       title: ''
       flags: {}
@@ -384,7 +420,8 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 16
       title: ''
       flags: {}
@@ -628,16 +665,34 @@ system:
         allowDrops: true
         type: feat
         pool:
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstArchery000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstDefense000
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstGreatWeapo
-          - uuid: Compendium.dnd5e.feats24.Item.phbfstTwoWeaponF
-          - uuid: Compendium.dnd5e.classes24.Item.phbfstDruidicWar
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstArchery000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstBlindFight
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstDefense000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstDruidicWar
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstDueling000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstGreatWeapo
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstIntercepti
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstProtection
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstThrownWeap
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstTwoWeaponF
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.feats.Item.phbfstUnarmedFig
+            sort: 0
         spell: null
         restriction:
-          type: feat
+          type: class
           subtype: fightingStyle
           list: []
+        sorting: a
       value:
         added: {}
         replaced: {}
@@ -677,9 +732,10 @@ system:
       hint: ''
       classRestriction: secondary
       flags: {}
-    Fu3uIg8onmQ45JBX:
+    29Ufd0MpG7PBckVs:
       type: AbilityScoreImprovement
-      _id: Fu3uIg8onmQ45JBX
+      title: Epic Boon
+      _id: 29Ufd0MpG7PBckVs
       configuration:
         cap: 2
         fixed:
@@ -691,11 +747,11 @@ system:
           cha: 0
         locked: []
         points: 2
-        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+        recommendation: Compendium.dnd-players-handbook.feats.Item.phbBoonofDimensi
         max: null
-      value: {}
+      value:
+        type: asi
       level: 19
-      title: ''
       hint: ''
       flags: {}
   spellcasting:
@@ -713,18 +769,19 @@ system:
     denomination: d10
     spent: 0
     additional: ''
+  properties: []
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.3.2
-  createdTime: 1735932734523
-  modifiedTime: 1777921202246
+  systemVersion: 6.0.0
+  createdTime: 1787616014988
+  modifiedTime: 1787616014988
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 0
+sort: 200000
 ownership:
   default: 0
 _key: '!items!phbrgrRanger0000'

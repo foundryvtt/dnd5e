@@ -6,7 +6,8 @@ img: systems/dnd5e/icons/classes/wizard.webp
 system:
   description:
     value: >-
-      <h3>Core Wizard Traits</h3><table class="core-class-traits"><tbody><tr><th
+      <p><em>A Scholarly Magic-User of Arcane Power</em></p><h3>Core Wizard
+      Traits</h3><table class="core-class-traits"><tbody><tr><th
       scope="row"><p><strong>Primary
       Ability</strong></p></th><td><p>Intelligence</p></td></tr><tr><th
       scope="row"><p><strong>Hit Point Die</strong></p></th><td><p>D6 per Wizard
@@ -20,24 +21,44 @@ system:
       Training</strong></p></th><td><p>None</p></td></tr><tr><th
       scope="row"><p><strong>Starting
       Equipment</strong></p></th><td><p><em>Choose A or B:</em> (A) 2
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Daggers},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane Focus}
-      (@UUID[Compendium.dnd5e.equipment24.Item.phbwepQuartersta]{Quarterstaff}),
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagRobe0000000]{Robe},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepDagger0000]{Daggers},
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagArcaneFocus]{Arcane
+      Focus}
+      (@UUID[Compendium.dnd-players-handbook.equipment.Item.phbwepQuartersta]{Quarterstaff}),
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagRobe0000000]{Robe},
       @UUID[Compendium.dnd5e.items.Item.LBajgahniRJbAgDr]{Spellbook},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagScholarsPac]{Scholar's Pack},
-      and [[/award 5GP]]; or (B) [[/award
-      55GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbwzdWizard0000
-      inline classes="free-rules-embed"]</p><h2>Becoming a Wizard …</h2><h3>As a
-      Level 1 Character</h3><ul><li>Gain all the traits in the Core Wizard
-      Traits table.</li><li>Gain the Wizard's level 1 features, which are listed
-      in the Wizard Features table.</li></ul><h3>As a Multiclass
-      Character</h3><ul><li>Gain the Hit Point Die from the Core Wizard Traits
-      table.</li><li>Gain the Wizard's level 1 features, which are listed in the
+      @UUID[Compendium.dnd-players-handbook.equipment.Item.phbagScholarsPac]{Scholar's
+      Pack}, and [[/award 5GP]]; or (B) [[/award
+      55GP]]</p></td></tr></tbody></table><p>Wizards are defined by their
+      exhaustive study of magic's inner workings. They cast spells of explosive
+      fire, arcing lightning, subtle deception, and spectacular transformations.
+      Their magic conjures monsters from other planes of existence, glimpses the
+      future, or forms protective barriers. Their mightiest spells change one
+      substance into another, call meteors from the sky, or open portals to
+      other worlds.</p><p>Most Wizards share a scholarly approach to magic. They
+      examine the theoretical underpinnings of magic, particularly the
+      categorization of spells into schools of magic. Renowned Wizards such as
+      Bigby, Tasha, Mordenkainen, and Yolande have built on their studies to
+      invent iconic spells now used across the multiverse.</p><p>The closest a
+      Wizard is likely to come to an ordinary life is working as a sage or
+      lecturer. Other Wizards sell their services as advisers, serve in military
+      forces, or pursue lives of crime or domination.</p><p>But the lure of
+      knowledge calls even the most unadventurous Wizards from the safety of
+      their libraries and laboratories and into crumbling ruins and lost cities.
+      Most Wizards believe that their counterparts in ancient civilizations knew
+      secrets of magic that have been lost to the ages, and discovering those
+      secrets could unlock the path to a power greater than any magic available
+      in the present age.</p><h2>Becoming a Wizard …</h2><h3>As a Level 1
+      Character</h3><ul><li><p>Gain all the traits in the Core Wizard Traits
+      table.</p></li><li><p>Gain the Wizard's level 1 features, which are listed
+      in the Wizard Features table.</p></li></ul><h3>As a Multiclass
+      Character</h3><ul><li><p>Gain the Hit Point Die from the Core Wizard
+      Traits table.</p></li><li><p>Gain the Wizard's level 1 features, which are
+      listed in the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbWizard0000000.JournalEntryPage.g7cMRWzsgAsEF7zC#class-features]{Wizard
       Features table}. See the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.vcs4jfEKRxPCsgXm]{multiclassing
-      rules} to determine your available spell slots.</li></ul><aside
+      rules} to determine your available spell slots.</p></li></ul><aside
       class="notable"><p><strong>Expanding and Replacing a
       Spellbook</strong></p><p>The spells you add to your spellbook as you gain
       levels reflect your ongoing magical research, but you might find other
@@ -61,9 +82,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -72,7 +94,7 @@ system:
       sort: 100000
     - type: linked
       count: 2
-      key: Compendium.dnd5e.equipment24.Item.phbwepDagger0000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepDagger0000
       requiresProficiency: false
       _id: Ac2gEqPAS8Y0xgxs
       group: zcKhKDfR6l9mjjo0
@@ -84,21 +106,21 @@ system:
       sort: 300000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbafcStaffalsoa
+      key: Compendium.dnd-players-handbook.equipment.Item.phbafcStaffalsoa
       requiresProficiency: false
       _id: WuhfdgDOMfGFoprm
       group: lVKJqhzrzUJbCutg
       sort: 600000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagRobe0000000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagRobe0000000
       requiresProficiency: false
       _id: 01FYjSGd8b9I8peX
       group: zcKhKDfR6l9mjjo0
       sort: 400000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagScholarsPac
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagScholarsPac
       requiresProficiency: false
       _id: ipKkaDAn6KnKgpVH
       group: zcKhKDfR6l9mjjo0
@@ -107,76 +129,107 @@ system:
       count: 5
       key: gp
       requiresProficiency: false
-      _id: xxd2IhkKWk9bmLjp
+      _id: uRme8DfH5eDcVOy0
       group: zcKhKDfR6l9mjjo0
       sort: 700000
   identifier: wizard
   levels: 1
   advancement:
-    - _id: a16u6wgnJQq8HMoq
+    a16u6wgnJQq8HMoq:
+      _id: a16u6wgnJQq8HMoq
       type: HitPoints
       configuration: {}
       value: {}
-    - _id: 2whBHO3s8fBYBEWi
+      flags: {}
+      hint: ''
+    2whBHO3s8fBYBEWi:
+      _id: 2whBHO3s8fBYBEWi
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdSpellcasti
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdRitualAdep
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdArcaneReco
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 1
       title: Class Features
-    - _id: JTCSb4dfm8Auy6WD
+      flags: {}
+      hint: ''
+    JTCSb4dfm8Auy6WD:
+      _id: JTCSb4dfm8Auy6WD
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdScholar000
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 2
       title: Class Features
-    - _id: tQSiUAW1DhfY3Idi
+      flags: {}
+      hint: ''
+    tQSiUAW1DhfY3Idi:
+      _id: tQSiUAW1DhfY3Idi
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdMemorizeSp
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 5
       title: Class Features
-    - _id: rZqSZS149KxDBwjI
+      flags: {}
+      hint: ''
+    rZqSZS149KxDBwjI:
+      _id: rZqSZS149KxDBwjI
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdSpellMaste
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 18
       title: Class Features
-    - _id: ssLPH7qn9DUncfJ1
+      flags: {}
+      hint: ''
+    ssLPH7qn9DUncfJ1:
+      _id: ssLPH7qn9DUncfJ1
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbwzdSignatureS
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
       title: Class Features
-    - _id: bwCLOdauuzoHofil
+      flags: {}
+      hint: ''
+    bwCLOdauuzoHofil:
+      _id: bwCLOdauuzoHofil
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -190,10 +243,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 4
       title: ''
-    - _id: mRSh9oUVjLU33e7p
+      flags: {}
+      hint: ''
+    mRSh9oUVjLU33e7p:
+      _id: mRSh9oUVjLU33e7p
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -207,10 +264,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 8
       title: ''
-    - _id: mhZh3LfLMa15tXee
+      flags: {}
+      hint: ''
+    mhZh3LfLMa15tXee:
+      _id: mhZh3LfLMa15tXee
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -224,10 +285,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 12
       title: ''
-    - _id: FOf5CkGnSs0OlppY
+      flags: {}
+      hint: ''
+    FOf5CkGnSs0OlppY:
+      _id: FOf5CkGnSs0OlppY
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -241,10 +306,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 16
       title: ''
-    - _id: EvuUhx2TrDAsAxgN
+      flags: {}
+      hint: ''
+    EvuUhx2TrDAsAxgN:
+      _id: EvuUhx2TrDAsAxgN
       type: ScaleValue
       configuration:
         identifier: max-prepared
@@ -293,7 +362,9 @@ system:
       value: {}
       title: Max Prepared Spells
       hint: ''
-    - _id: ZTnATJgznTj4W6ZG
+      flags: {}
+    ZTnATJgznTj4W6ZG:
+      _id: ZTnATJgznTj4W6ZG
       type: ScaleValue
       configuration:
         identifier: ''
@@ -310,7 +381,9 @@ system:
       value: {}
       title: Cantrips Known
       hint: ''
-    - _id: S1H3INPWaAiRkB6G
+      flags: {}
+    S1H3INPWaAiRkB6G:
+      _id: S1H3INPWaAiRkB6G
       type: Trait
       configuration:
         mode: expertise
@@ -333,7 +406,9 @@ system:
         While studying magic, you also specialized in another field of study.
         Choose one of the following skills in which you have proficiency. You
         have Expertise in the chosen skill.
-    - _id: KTYjh1MKLvOtrZ3u
+      flags: {}
+    KTYjh1MKLvOtrZ3u:
+      _id: KTYjh1MKLvOtrZ3u
       type: Subclass
       configuration: {}
       value:
@@ -342,7 +417,9 @@ system:
       level: 3
       title: ''
       hint: ''
-    - _id: 4ImCjedK6yWbC2ni
+      flags: {}
+    4ImCjedK6yWbC2ni:
+      _id: 4ImCjedK6yWbC2ni
       type: Trait
       configuration:
         mode: default
@@ -357,7 +434,9 @@ system:
       title: Saving Throw Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: 73lag0NN0ElcSq94
+      flags: {}
+    73lag0NN0ElcSq94:
+      _id: 73lag0NN0ElcSq94
       type: Trait
       configuration:
         mode: default
@@ -379,7 +458,9 @@ system:
       title: Skill Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: IxWyp7l1BPCaw3jl
+      flags: {}
+    IxWyp7l1BPCaw3jl:
+      _id: IxWyp7l1BPCaw3jl
       type: Trait
       configuration:
         mode: default
@@ -393,8 +474,11 @@ system:
       title: Weapon Proficiencies
       hint: ''
       classRestriction: primary
-    - type: AbilityScoreImprovement
-      _id: ZIWoRmmzRs9v7AWv
+      flags: {}
+    29Ufd0MpG7PBckVs:
+      type: AbilityScoreImprovement
+      title: Epic Boon
+      _id: 29Ufd0MpG7PBckVs
       configuration:
         cap: 2
         fixed:
@@ -406,12 +490,13 @@ system:
           cha: 0
         locked: []
         points: 2
-        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
+        recommendation: Compendium.dnd-players-handbook.feats.Item.phbBoonofSpellRe
         max: null
-      value: {}
+      value:
+        type: asi
       level: 19
-      title: ''
       hint: ''
+      flags: {}
   spellcasting:
     progression: full
     ability: int
@@ -426,18 +511,19 @@ system:
     denomination: d6
     spent: 0
     additional: ''
+  properties: []
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866273692
-  modifiedTime: 1757541790477
+  systemVersion: 6.0.0
+  createdTime: 1787616014991
+  modifiedTime: 1787616014991
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 0
+sort: 50000
 ownership:
   default: 0
 _key: '!items!phbwzdWizard0000'

@@ -9,16 +9,16 @@ system:
       <p>You gain a
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.sbHImaCB8ZMEHYkb]{Fighting
       Style feat} of your choice. Instead of choosing one of those feats, you
-      can choose the option below.</p><hr
-      /><p>@Embed[Compendium.dnd5e.classes24.Item.phbfstDruidicWar
+      can choose the option
+      below.</p><hr><p>@Embed[Compendium.dnd-players-handbook.feats.Item.phbfstDruidicWar
       caption=false]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -28,24 +28,24 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
+    repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: fighting-style
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735932734523
-  modifiedTime: 1745514415082
+  systemVersion: 6.0.0
+  createdTime: 1787616014988
+  modifiedTime: 1787616014988
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

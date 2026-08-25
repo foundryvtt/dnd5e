@@ -15,9 +15,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -27,12 +27,15 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: superior-critical
+  advancement: {}
+  crewed: false
 effects:
   - name: Superior Critical
     img: icons/skills/melee/strike-sword-dagger-runes-red.webp
@@ -45,7 +48,18 @@ effects:
           priority: null
           type: downgrade
           phase: initial
-          _id: tyGR9i3HJywUTkYh
+          _id: X9Ctrd2oB4MkeciV
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -60,32 +74,27 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbftrImprovedCr.ActiveEffect.fbCF0jqdt3NMZdkc
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102035
-      modifiedTime: 1783544102035
+      createdTime: 1787616014998
+      modifiedTime: 1787616014998
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbftrSuperiorCr.kKOE6KCEE0v4a5lw'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866578955
-  modifiedTime: 1783544102035
+  systemVersion: 6.0.0
+  createdTime: 1787616014997
+  modifiedTime: 1787616014997
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

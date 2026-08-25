@@ -23,9 +23,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -35,61 +35,15 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
   properties: []
   requirements: ''
-  activities:
-    nwLsJcC3bXA6i7QZ:
-      type: utility
-      name: Aura of Protection
-      _id: nwLsJcC3bXA6i7QZ
-      activation:
-        type: ''
-        value: null
-        override: false
-        condition: ''
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-        units: self
-        special: ''
-      target:
-        template:
-          contiguous: false
-          units: ft
-          type: radius
-          size: '@scale.paladin.aura'
-          count: ''
-        affects:
-          choice: false
-          count: ''
-          type: ally
-          special: ''
-        override: false
-        prompt: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: Bonus
-        formula: (max(1,@abilities.cha.mod))
+  activities: {}
   enchant: {}
   identifier: aura-of-protection
+  advancement: {}
+  crewed: false
 effects:
   - name: Protected
     img: icons/magic/defensive/barrier-shield-dome-deflect-teal.webp
@@ -102,7 +56,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: YNfhFQaCpNHc8qhG
+          _id: YoofNXVuGwW4kQqR
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -119,29 +84,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544103060
-      modifiedTime: 1783544103060
+      createdTime: 1787616015003
+      modifiedTime: 1787616015003
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnProtection.WOJ5r71FCDRmElea'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1783544103060
+  systemVersion: 6.0.0
+  createdTime: 1787616015003
+  modifiedTime: 1787616015003
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

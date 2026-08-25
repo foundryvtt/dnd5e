@@ -6,64 +6,86 @@ img: systems/dnd5e/icons/classes/open-hand.webp
 system:
   description:
     value: >-
-      <blockquote><p>Master Unarmed Combat
-      Techniques</p></blockquote><p>Warriors of the Open Hand are masters of
-      unarmed combat. They learn techniques to push and trip their opponents and
-      manipulate their own energy to protect themselves from harm.</p>
+      <p><em>Master Unarmed Combat Techniques</em></p><p>Warriors of the Open
+      Hand are masters of unarmed combat. They learn techniques to push and trip
+      their opponents and manipulate their own energy to protect themselves from
+      harm.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbMonk000000000.JournalEntryPage.qha7pVaUwH2gYdk1]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: hand
   classIdentifier: monk
   advancement:
-    - _id: VeL49OqjttBKjx3J
+    VeL49OqjttBKjx3J:
+      _id: VeL49OqjttBKjx3J
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: KKc6VtzWsSGh2NnC
+      flags: {}
+      hint: ''
+    KKc6VtzWsSGh2NnC:
+      _id: KKc6VtzWsSGh2NnC
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbmnkWholenessO
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 6
       title: Subclass Features
-    - _id: M7cvHrnI6p0Yo150
+      flags: {}
+      hint: ''
+    M7cvHrnI6p0Yo150:
+      _id: M7cvHrnI6p0Yo150
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbmnkFleetStep0
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 11
       title: Subclass Features
-    - _id: 1kqB8Z5f6UcgmGjY
+      flags: {}
+      hint: ''
+    1kqB8Z5f6UcgmGjY:
+      _id: 1kqB8Z5f6UcgmGjY
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbmnkQuiveringP
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 17
       title: Subclass Features
+      flags: {}
+      hint: ''
   spellcasting:
     progression: none
     ability: ''
@@ -73,11 +95,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866574822
-  modifiedTime: 1745256763260
+  systemVersion: 6.0.0
+  createdTime: 1787616014985
+  modifiedTime: 1787616014985
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

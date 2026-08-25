@@ -22,9 +22,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -34,12 +34,15 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
   activities: {}
   enchant: {}
   identifier: primal-knowledge
+  advancement: {}
+  crewed: false
 effects:
   - name: Primal Knowledge
     img: icons/creatures/birds/raptor-owl-flying-moon.webp
@@ -52,31 +55,50 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 6yJOQP9AU4koplCO
+          _id: A20WIWMB0JpSYSvk
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.itm.bonuses.check
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: KP7skIT3vfjuhnap
+          _id: 8JnXHStU2gFFWAN3
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.prc.bonuses.check
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: bm6RQcKQcWZTlKrL
+          _id: WkutrnEYFuChjUcU
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.ste.bonuses.check
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: lJ4cad5bqdkb2yXi
+          _id: 0CPP7DQ8q02KWx09
+          conditions: '{}'
+          replacement: ''
         - key: system.skills.sur.bonuses.check
           value: max(0, @abilities.str.mod - @mod)
           priority: null
           type: add
           phase: initial
-          _id: XTAJj2uPpnG0wOef
+          _id: AUKDOUHPuMbZzMs9
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -91,14 +113,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbbrbPrimalKnow.ActiveEffect.ktAO4M4jvixfzyuO
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544101247
-      modifiedTime: 1783544101247
+      createdTime: 1787616014993
+      modifiedTime: 1787616014993
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start:
@@ -112,18 +133,14 @@ effects:
     folder: null
     _key: '!items.effects!phbbrbPrimalKnow.ufbJRsGGW3REMmJm'
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1783544101246
+  systemVersion: 6.0.0
+  createdTime: 1787616014993
+  modifiedTime: 1787616014993
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -10,9 +10,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: '@scale.sorcerer.points'
     spent: 0
@@ -24,6 +25,7 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -56,6 +58,7 @@ system:
               formula: ''
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -70,6 +73,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -87,6 +91,13 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/damage/force.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     qAphJay1yKd7VWxH:
       type: utility
       name: Regain Sorcery Points
@@ -109,13 +120,14 @@ system:
               mode: level
               formula: ''
           - type: itemUses
-            value: 0 - @scaling
+            value: '-1'
             target: ''
             scaling:
               mode: amount
-              formula: ''
+              formula: '-1'
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -130,6 +142,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -147,21 +160,29 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/activity/heal.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: font-of-magic
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866286897
-  modifiedTime: 1745256765502
+  systemVersion: 6.0.0
+  createdTime: 1787616014989
+  modifiedTime: 1787616014989
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

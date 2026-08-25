@@ -12,9 +12,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     recovery: []
@@ -24,6 +24,7 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
   properties: []
   requirements: Path of the Berserker
@@ -44,6 +45,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
@@ -63,7 +65,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -83,22 +86,27 @@ system:
       sort: 0
       name: Retaliate
       img: systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: retaliation
+  advancement: {}
+  crewed: false
 effects: []
 folder: bEMqmmgGROsTGe0J
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866492370
-  modifiedTime: 1740680080827
+  systemVersion: 6.0.0
+  createdTime: 1787616014976
+  modifiedTime: 1787616014976
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

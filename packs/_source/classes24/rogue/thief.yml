@@ -6,67 +6,90 @@ img: systems/dnd5e/icons/classes/thief.webp
 system:
   description:
     value: >-
-      <blockquote><p>Hunt for Treasure as a Classic
-      Adventurer</p></blockquote><p>A mix of burglar, treasure hunter, and
-      explorer, you are the epitome of an adventurer. In addition to improving
-      your agility and stealth, you gain abilities useful for delving into ruins
-      and getting maximum benefit from the magic items you find there.</p>
+      <p><em>Hunt for Treasure as a Classic Adventurer</em></p><p>A mix of
+      burglar, treasure hunter, and explorer, you are the epitome of an
+      adventurer. In addition to improving your agility and stealth, you gain
+      abilities useful for delving into ruins and getting maximum benefit from
+      the magic items you find there.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbRogue00000000.JournalEntryPage.BiqRuwpBfYi32N2p]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: thief
   classIdentifier: rogue
   advancement:
-    - _id: 52x82ltPXCgmrh1K
+    52x82ltPXCgmrh1K:
+      _id: 52x82ltPXCgmrh1K
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgeFastHands0
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbrgeSecondstor
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: MlEcUhyGRGitfiUJ
+      flags: {}
+      hint: ''
+    MlEcUhyGRGitfiUJ:
+      _id: MlEcUhyGRGitfiUJ
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgeSupremeSne
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 9
       title: Subclass Features
-    - _id: aNcqA4J0puHsYiyv
+      flags: {}
+      hint: ''
+    aNcqA4J0puHsYiyv:
+      _id: aNcqA4J0puHsYiyv
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgeUseMagicDe
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 13
       title: Subclass Features
-    - _id: Q45sJX4IS3NbsrtV
+      flags: {}
+      hint: ''
+    Q45sJX4IS3NbsrtV:
+      _id: Q45sJX4IS3NbsrtV
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbrgeThiefsRefl
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 17
       title: Subclass Features
+      flags: {}
+      hint: ''
   spellcasting:
     progression: none
     ability: int
@@ -76,14 +99,14 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866560489
-  modifiedTime: 1745256764583
+  systemVersion: 6.0.0
+  createdTime: 1787616014987
+  modifiedTime: 1787616014987
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 500000
+sort: 700000
 ownership:
   default: 0
 _key: '!items!phbrgeThief00000'

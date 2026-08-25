@@ -11,18 +11,22 @@ system:
       table, you thereafter always have the listed spells
       prepared.</p><table><caption>Oath of Devotion
       Spells</caption><thead><tr><td>Paladin
-      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection
+      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbEvilAndGoodPr]{Protection
       from Evil and Good},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplShieldofFa]{Shield of
-      Faith}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplAid0000000]{Aid},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplZoneofTrut]{Zone of
-      Truth}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplBeaconofHo]{Beacon
-      of Hope}, @UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
-      Magic}</td></tr><tr><td>13</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFreedomofM]{Freedom
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplShieldofFa]{Shield
+      of
+      Faith}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000]{Aid},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplZoneofTrut]{Zone
+      of
+      Truth}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplBeaconofHo]{Beacon
+      of Hope},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDispelMagi]{Dispel
+      Magic}</td></tr><tr><td>13</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFreedomofM]{Freedom
       of Movement},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplGuardianof]{Guardian of
-      Faith}</td></tr><tr><td>17</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommune000]{Commune},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplFlameStrik]{Flame
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGuardianof]{Guardian
+      of
+      Faith}</td></tr><tr><td>17</td><td>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplCommune000]{Commune},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFlameStrik]{Flame
       Strike}</td></tr></tbody></table><section class="secret"
       id="secret-BJb1nvUMxSS77zuz"><p><strong>Foundry Note</strong></p><p>The
       spells will be automatically granted as you level up.</p></section>
@@ -30,9 +34,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -42,25 +46,24 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: oath-of-devotion-spells
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866569467
-  modifiedTime: 1745256763679
+  systemVersion: 6.0.0
+  createdTime: 1787616014986
+  modifiedTime: 1787616014986
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

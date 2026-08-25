@@ -6,174 +6,227 @@ img: systems/dnd5e/icons/classes/devotion.webp
 system:
   description:
     value: >-
-      <blockquote><p>Uphold the Ideals of Justice and
-      Order</p></blockquote><p>The Oath of Devotion binds Paladins to the ideals
-      of justice and order. These Paladins meet the archetype of the knight in
-      shining armor. They hold themselves to the highest standards of conduct,
-      and some—for better or worse—hold the rest of the world to the same
-      standards.</p><p>Many who swear this oath are devoted to gods of law and
-      good and use their gods' tenets as the measure of personal devotion.
-      Others hold angels as their ideals and incorporate images of angelic wings
-      into their helmets or coats of arms.</p><p>These paladins share the
-      following tenets:</p><ul><li>Let your word be your
-      promise.</li><li>Protect the weak and never fear to act.</li><li>Let your
-      honorable deeds be an example.</li></ul>
+      <p><em>Uphold the Ideals of Justice and Order</em></p><p>The Oath of
+      Devotion binds Paladins to the ideals of justice and order. These Paladins
+      meet the archetype of the knight in shining armor. They hold themselves to
+      the highest standards of conduct, and some—for better or worse—hold the
+      rest of the world to the same standards.</p><p>Many who swear this oath
+      are devoted to gods of law and good and use their gods' tenets as the
+      measure of personal devotion. Others hold angels as their ideals and
+      incorporate images of angelic wings into their helmets or coats of
+      arms.</p><p>These paladins share the following tenets:</p><ul><li><p>Let
+      your word be your promise.</p></li><li><p>Protect the weak and never fear
+      to act.</p></li><li><p>Let your honorable deeds be an
+      example.</p></li></ul><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbPaladin000000.JournalEntryPage.dw8zIx4aur7rRtx3]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   identifier: devotion
   classIdentifier: paladin
   advancement:
-    - _id: jxzvTfXzjLzIvQbF
+    jxzvTfXzjLzIvQbF:
+      _id: jxzvTfXzjLzIvQbF
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbpdnDevotionSp
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbpdnSacredWeap
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
       title: Subclass Features
-    - _id: jix1tV556sLlpGYr
+      flags: {}
+      hint: ''
+    jix1tV556sLlpGYr:
+      _id: jix1tV556sLlpGYr
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbpdnDevotionAu
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 7
       title: Subclass Features
-    - _id: 3t0heVzpZV6AClAz
+      flags: {}
+      hint: ''
+    3t0heVzpZV6AClAz:
+      _id: 3t0heVzpZV6AClAz
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbpdnSmiteOfPro
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 15
       title: Subclass Features
-    - _id: 1Koj8mZO5gVtRril
+      flags: {}
+      hint: ''
+    1Koj8mZO5gVtRril:
+      _id: 1Koj8mZO5gVtRril
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbpdnHolyNimbus
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
       title: Subclass Features
-    - _id: vplzciS9QHhcjdQt
+      flags: {}
+      hint: ''
+    vplzciS9QHhcjdQt:
+      _id: vplzciS9QHhcjdQt
       type: ItemGrant
       configuration:
         items:
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplShieldofFa
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplShieldofFa
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbEvilAndGoodPr
             optional: false
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 3
       title: Oath of Devotion Spells
       hint: ''
-    - _id: 9rAVikjK0DFEkhXH
+      flags: {}
+    9rAVikjK0DFEkhXH:
+      _id: 9rAVikjK0DFEkhXH
       type: ItemGrant
       configuration:
         items:
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplZoneofTrut
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplZoneofTrut
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplAid0000000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000
             optional: false
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 5
       title: Oath of Devotion Spells
       hint: ''
-    - _id: K8RRsq7vmiYuKAAv
+      flags: {}
+    K8RRsq7vmiYuKAAv:
+      _id: K8RRsq7vmiYuKAAv
       type: ItemGrant
       configuration:
         items:
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplDispelMagi
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDispelMagi
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplBeaconofHo
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplBeaconofHo
             optional: false
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 9
       title: Oath of Devotion Spells
       hint: ''
-    - _id: VuZSFzUklRDrpP5g
+      flags: {}
+    VuZSFzUklRDrpP5g:
+      _id: VuZSFzUklRDrpP5g
       type: ItemGrant
       configuration:
         items:
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplGuardianof
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplGuardianof
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplFreedomofM
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFreedomofM
             optional: false
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 13
       title: Oath of Devotion Spells
       hint: ''
-    - _id: Qji0iHmIWmCZcKt8
+      flags: {}
+    Qji0iHmIWmCZcKt8:
+      _id: Qji0iHmIWmCZcKt8
       type: ItemGrant
       configuration:
         items:
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplFlameStrik
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFlameStrik
             optional: false
-          - uuid: Compendium.dnd5e.spells24.Item.phbsplCommune000
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplCommune000
             optional: false
+            sort: 0
         optional: false
         spell:
           ability: []
-          preparation: always
           uses:
             max: ''
             per: ''
             requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
       value: {}
       level: 17
       title: Oath of Devotion Spells
       hint: ''
+      flags: {}
   spellcasting:
     progression: none
     ability: ''
@@ -183,11 +236,11 @@ effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866569467
-  modifiedTime: 1745256763863
+  systemVersion: 6.0.0
+  createdTime: 1787616014986
+  modifiedTime: 1787616014986
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

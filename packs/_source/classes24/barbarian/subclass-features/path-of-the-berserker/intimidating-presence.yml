@@ -25,8 +25,8 @@ system:
     custom: ''
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: '1'
     recovery:
@@ -38,6 +38,7 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
   requirements: Path of the Berserker
@@ -60,6 +61,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
@@ -67,6 +69,8 @@ system:
       effects:
         - _id: 3LofAPFLZJMQJirN
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -78,6 +82,7 @@ system:
           type: radius
           size: '30'
           count: ''
+          stationary: false
         affects:
           choice: true
           count: ''
@@ -97,9 +102,18 @@ system:
         ability:
           - wis
         dc:
-          calculation: ''
+          calculation: custom
           formula: 8 + @abilities.str.mod + @prof
+        visible: true
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Qr0vi4CEDfbdMNMa:
       type: utility
       _id: Qr0vi4CEDfbdMNMa
@@ -123,6 +137,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
@@ -137,6 +152,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -155,8 +171,17 @@ system:
         formula: ''
       name: Recharge with Rage
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: intimidating-presence
+  advancement: {}
+  crewed: false
 effects:
   - name: Intimidated
     origin: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
@@ -172,6 +197,15 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -181,30 +215,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.0
+      createdTime: 1787616014993
+      modifiedTime: 1787616014993
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
     folder: null
     _key: '!items.effects!phbbrbIntimidati.3LofAPFLZJMQJirN'
 folder: bEMqmmgGROsTGe0J
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866492370
-  modifiedTime: 1745256759960
+  systemVersion: 6.0.0
+  createdTime: 1787616014993
+  modifiedTime: 1787616014993
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

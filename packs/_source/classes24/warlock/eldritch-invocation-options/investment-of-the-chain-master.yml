@@ -4,14 +4,15 @@ type: feat
 img: icons/magic/control/debuff-chains-orb-movement-blue.webp
 system:
   description:
-    value: "<blockquote><p>Prerequisite: Level 5+ Warlock, @UUID[Compendium.dnd5e.classes24.Item.phbinvPactChain0]{Pact of the Chain} Invocation</p></blockquote><p>When you cast @UUID[Compendium.dnd5e.spells24.Item.phbsplFindFamili]{Find Familiar}, you infuse the summoned familiar with a measure of your eldritch power, granting the creature the following benefits.</p><p><strong>Aerial or Aquatic.</strong> The familiar gains either a Fly Speed or a Swim Speed (your choice) of 40 feet.</p><p><strong>Quick Attack.</strong> As a Bonus Action, you can command the familiar to take the\_Attack\_action.</p><p><strong>Necrotic or Radiant Damage.</strong> Whenever the familiar deals Bludgeoning, Piercing, or Slashing damage, you can make it deal Necrotic or Radiant damage instead.</p><p><strong>Your Save DC.</strong> If the familiar forces a creature to make a saving throw, it uses your spell save DC.</p><p><strong>Resistance.</strong> When the familiar takes damage, you can take a Reaction to grant it Resistance against that damage.</p><section class=\"secret\" id=\"secret-D3vSCo0uEG4Kp1X6\"><p><strong>Foundry Note</strong></p><p>The <strong>Find Familiar with Flight</strong> and <strong>with Swimming</strong> activities both allow you to summon a familiar with the relevant movement bonus. Both activities consume a Pact Magic spell slot.</p><p>The <strong>Invest with Resistance</strong> activity includes an Active Effect for resisting each type of damage which can be applied to get the relevant resistance. Be sure you disable/delete the previous Active Effect in the \"Effects\" tab of your sheet when you change Resistances.</p><p>The familiar automatically uses your Save DC.</p></section>"
+    value: "<blockquote><p>Prerequisite: Level 5+ Warlock, @UUID[Compendium.dnd5e.classes24.Item.phbinvPactChain0]{Pact of the Chain} Invocation</p></blockquote><p>When you cast @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFindFamili]{Find Familiar}, you infuse the summoned familiar with a measure of your eldritch power, granting the creature the following benefits.</p><p><strong>Aerial or Aquatic.</strong> The familiar gains either a Fly Speed or a Swim Speed (your choice) of 40 feet.</p><p><strong>Quick Attack.</strong> As a Bonus Action, you can command the familiar to take the\_Attack\_action.</p><p><strong>Necrotic or Radiant Damage.</strong> Whenever the familiar deals Bludgeoning, Piercing, or Slashing damage, you can make it deal Necrotic or Radiant damage instead.</p><p><strong>Your Save DC.</strong> If the familiar forces a creature to make a saving throw, it uses your spell save DC.</p><p><strong>Resistance.</strong> When the familiar takes damage, you can take a Reaction to grant it Resistance against that damage.</p><section class=\"secret\" id=\"secret-D3vSCo0uEG4Kp1X6\"><p><strong>Foundry Note</strong></p><p>The <strong>Find Familiar</strong> activities will apply both <strong>Aerial</strong> and <strong>Aquatic</strong> effects to the summoned creature. The unused effect on the creature may be deleted.</p><p>The <strong>Resistance</strong> activity includes optional Active Effect for resisting each type of damage.</p></section>"
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -21,173 +22,15 @@ system:
     subtype: eldritchInvocation
   prerequisites:
     level: 5
-    repeatable: false
     items:
       - pact-of-the-chain
+    repeatable: false
   properties: []
-  requirements: ''
+  requirements: Pact of the Chain Invocation
   activities:
-    wk5D1U5DnMRJ40KK:
-      type: summon
-      name: Find Familiar with Flight
-      _id: wk5D1U5DnMRJ40KK
-      sort: 0
-      activation:
-        type: hour
-        value: 1
-        override: false
-        condition: ''
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets:
-          - type: attribute
-            value: '1'
-            target: spells.pact.value
-            scaling: {}
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects:
-        - _id: Ziuu5P6LoAvevtuN
-      range:
-        override: false
-        units: ft
-        special: ''
-        value: '10'
-      target:
-        template:
-          contiguous: false
-          units: ft
-          type: ''
-        affects:
-          choice: false
-          count: '1'
-          type: space
-          special: ''
-        override: false
-        prompt: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      bonuses:
-        ac: ''
-        hd: ''
-        hp: ''
-        attackDamage: ''
-        saveDamage: ''
-        healing: ''
-      creatureSizes: []
-      creatureTypes:
-        - celestial
-        - fey
-        - fiend
-      match:
-        attacks: false
-        proficiency: false
-        saves: true
-      profiles:
-        - count: '1'
-          cr: '0'
-          name: CR 0 Beast
-          _id: e5dWV5L2uBJ2KPAM
-          uuid: ''
-          types:
-            - beast
-          level:
-            min: null
-            max: null
-      summon:
-        prompt: true
-        mode: cr
-        identifier: ''
-    uehA2kfgOCKRIqAs:
-      type: summon
-      name: Find Familiar with Swimming
-      sort: 0
-      activation:
-        type: hour
-        value: 1
-        override: false
-        condition: ''
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets:
-          - type: attribute
-            value: '1'
-            target: spells.pact.value
-            scaling: {}
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects:
-        - _id: Ziuu5P6LoAvevtuN
-      range:
-        override: false
-        value: '10'
-        units: ft
-        special: ''
-      target:
-        template:
-          contiguous: false
-          units: ft
-          type: ''
-        affects:
-          choice: false
-          count: '1'
-          type: space
-          special: ''
-        override: false
-        prompt: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      bonuses:
-        ac: ''
-        hd: ''
-        hp: ''
-        attackDamage: ''
-        saveDamage: ''
-        healing: ''
-      creatureSizes: []
-      creatureTypes:
-        - celestial
-        - fey
-        - fiend
-      match:
-        attacks: false
-        proficiency: false
-        saves: true
-      profiles:
-        - count: '1'
-          cr: '0'
-          name: CR 0 Beast
-          _id: e5dWV5L2uBJ2KPAM
-          uuid: ''
-          types:
-            - beast
-          level:
-            min: null
-            max: null
-      summon:
-        prompt: true
-        identifier: ''
-        mode: cr
-      _id: uehA2kfgOCKRIqAs
     fHEY2QcPTBaT4lBF:
       type: utility
-      name: Invest with Resistance
+      name: Resistance
       _id: fHEY2QcPTBaT4lBF
       sort: 0
       activation:
@@ -202,24 +45,77 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: chVfpaM9kmt2hOWW
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: SzrV0ZUdpHCl8ury
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: dNB2b7C34xZ8f1VC
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: J9HrAcFSX8Oiz5Os
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: 931L7kMtCmfeKCke
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: ftnhEVvBRxrbAfa3
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: wNoq81xzNrVLdSGT
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: 8tJH6UHt7riDLp1q
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: W1jLBRVt0gryqFMJ
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: XYrQSl0kdJtV6Bf0
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: hNA4gzQMT9cM2ALU
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: QDl6CxMONYK8Kru1
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: 0vsrMfL3s6IQtWcM
+          level:
+            min: null
+            max: null
+          uuid: null
       range:
         override: false
         units: self
@@ -229,6 +125,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -246,11 +143,333 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/trait-damage-resistances.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
+    icfBGsxAZABbkcqD:
+      type: summon
+      name: Find Familiar
+      sort: -100000
+      activation:
+        type: hour
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: Ziuu5P6LoAvevtuN
+          level:
+            min: null
+            max: null
+          uuid: null
+        - _id: VxM3FsirIcd3Of7q
+          level:
+            min: null
+            max: null
+          uuid: null
+      range:
+        override: false
+        value: '10'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - celestial
+        - fey
+        - fiend
+      match:
+        attacks: false
+        proficiency: false
+        saves: true
+        disposition: true
+        ability: cha
+      profiles:
+        - count: '1'
+          cr: '0'
+          name: CR 0 Beast
+          _id: e5dWV5L2uBJ2KPAM
+          uuid: null
+          types:
+            - beast
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: cr
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      tempHP: ''
+      flags: {}
+      _id: icfBGsxAZABbkcqD
+      behaviors: []
+    VuSBWUN8wdL0B4fZ:
+      type: summon
+      name: Find Familiar (Expanded Options)
+      sort: -50000
+      activation:
+        type: hour
+        value: 1
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        value: ''
+      effects:
+        - _id: Ziuu5P6LoAvevtuN
+          level:
+            min: null
+            max: null
+          uuid: null
+        - _id: VxM3FsirIcd3Of7q
+          uuid: null
+          level: {}
+      range:
+        override: false
+        value: '10'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes:
+        - celestial
+        - fey
+        - fiend
+      match:
+        attacks: false
+        proficiency: false
+        saves: true
+        disposition: true
+        ability: cha
+      profiles:
+        - count: ''
+          name: ''
+          _id: Rr8F49wXgEzvI3Je
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobImp0000000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: Cg8B2qkwRo7qh7oZ
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobPseudodrag
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: 8NAn0ZR5HRnRJvqs
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobQuasit0000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: Gik7lMg53Gno0nSf
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSphinxofWo
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: m5hfZoWAcEjKrkxo
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSkeleton00
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: mDue5EQkMxi5G6Pf
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSlaadTadpo
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: U60QGv6hzjT15bFK
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobSprite0000
+          level:
+            min: null
+            max: null
+          types: []
+        - count: ''
+          name: ''
+          _id: ZtrQLBrDRmN97IvI
+          uuid: Compendium.dnd-players-handbook.actors.Actor.phbmobVenomousSn
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      tempHP: ''
+      flags: {}
+      _id: VuSBWUN8wdL0B4fZ
+      behaviors: []
+    nVygzzH0AxhOMaxu:
+      type: utility
+      name: Quick Attack
+      _id: nVygzzH0AxhOMaxu
+      img: ''
+      sort: 100000
+      activation:
+        type: bonus
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: The familiar takes the Attack action
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: any
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ally
+          count: '1'
+          special: the familiar
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      behaviors: []
   enchant: {}
   identifier: investment-of-the-chain-master
+  advancement: {}
+  crewed: false
 effects:
-  - name: Investment of Flight
-    img: icons/magic/control/debuff-chains-orb-movement-blue.webp
+  - name: Aerial
+    img: icons/magic/holy/angel-wings-gray.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     _id: Ziuu5P6LoAvevtuN
@@ -262,34 +481,49 @@ effects:
           priority: null
           type: upgrade
           phase: initial
-          _id: G0ULKzkzgO6uw216
+          _id: xsbipqgAejcpKJZC
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
       units: seconds
       expiry: null
       expired: false
-    description: ''
+    description: >-
+      <p><strong>Aerial or Aquatic.</strong> The familiar gains either a Fly
+      Speed or a Swim Speed (your choice) of 40 feet.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015020
+      modifiedTime: 1787616015020
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbinvInvestment.Ziuu5P6LoAvevtuN'
-  - name: Investment of Swimming
-    img: icons/magic/control/debuff-chains-orb-movement-blue.webp
+  - name: Aquatic
+    img: icons/creatures/fish/fish-pirahna-tan.webp
     origin: Compendium.dnd5e.classes24.Item.phbinvInvestment
     transfer: false
     _id: VxM3FsirIcd3Of7q
@@ -301,26 +535,41 @@ effects:
           priority: null
           type: upgrade
           phase: initial
-          _id: 1opJ7cLiYt1oMMDL
+          _id: 1BtCuL6Ejer2aBE7
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
       units: seconds
       expiry: null
       expired: false
-    description: ''
+    description: >-
+      <p><strong>Aerial or Aquatic.</strong> The familiar gains either a Fly
+      Speed or a Swim Speed (your choice) of 40 feet.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -340,7 +589,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: zyBzJdkGF4eCNnOD
+          _id: eKrei7qTzVWDM571
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -353,14 +613,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.jZGIulxQFLY7uRDe
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -379,7 +638,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: jH4dB3yWWfD45FEB
+          _id: MoUj1D1FMjGyP89L
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -392,14 +662,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.HybTLXiZgGa3t61e
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: SzrV0ZUdpHCl8ury
@@ -419,7 +688,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: vWp3hOAr9qJKdFnf
+          _id: Ipw5sX5QzOASuLV9
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -432,14 +712,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.6z5fLOHiOiHHcuac
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: dNB2b7C34xZ8f1VC
@@ -459,7 +738,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: RblgwhyTzPyTtxiL
+          _id: pdIjg50FnOGSZ3TI
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -472,14 +762,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.DW6JJBsbBtR1Z75R
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: J9HrAcFSX8Oiz5Os
@@ -499,7 +788,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: ggRgtJGtIjaP5D5P
+          _id: G9r4UBrGLj5SCX7O
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -512,14 +812,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.2kTlaPSpacxduIm7
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 931L7kMtCmfeKCke
@@ -539,7 +838,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 8E2BmYp6zcjKFmqU
+          _id: wyEITPte0VTu8niQ
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -552,14 +862,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.5ZizSWuVy8cy77K1
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102306
-      modifiedTime: 1783544102306
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: ftnhEVvBRxrbAfa3
@@ -579,7 +888,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: HIojTwhFYC4WPByi
+          _id: gOquVkKyHy4WS0Dw
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -592,14 +912,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.fcFLysPw4llFTQsg
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102307
-      modifiedTime: 1783544102307
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: wNoq81xzNrVLdSGT
@@ -619,7 +938,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: nR2r7tBPoDz8g0EE
+          _id: 66BaZZ3aFGGTov3x
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -632,14 +962,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.8Uf0Dw8A3l7CI8Fd
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102307
-      modifiedTime: 1783544102307
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 8tJH6UHt7riDLp1q
@@ -659,7 +988,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Y837cRUECVqRYF6g
+          _id: K2uN8eXPWqkFORPW
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -672,14 +1012,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.PpWYucbhugNEIBJ7
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102307
-      modifiedTime: 1783544102307
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: W1jLBRVt0gryqFMJ
@@ -699,7 +1038,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: IBaC008IK5RDcIOX
+          _id: 3m6MBTdPBckEJt2A
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -712,14 +1062,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.BbvC3rh4RDmi06XI
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102307
-      modifiedTime: 1783544102307
+      createdTime: 1787616015021
+      modifiedTime: 1787616015021
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: XYrQSl0kdJtV6Bf0
@@ -739,7 +1088,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 5PN0M1eDqHn25dOm
+          _id: xlaksrPOk5qm83Y2
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -752,14 +1112,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.IFg9ae4ZyhMDPa3m
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102307
-      modifiedTime: 1783544102307
+      createdTime: 1787616015022
+      modifiedTime: 1787616015022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: hNA4gzQMT9cM2ALU
@@ -779,7 +1138,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: eAjHBBttBoa8UNKQ
+          _id: aeLiLqZwjCPAILtR
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -792,14 +1162,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.30KWef6vBjF8RChr
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102307
-      modifiedTime: 1783544102307
+      createdTime: 1787616015022
+      modifiedTime: 1787616015022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: QDl6CxMONYK8Kru1
@@ -819,7 +1188,18 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 3IHpHCTLEUmObQX8
+          _id: GRr5lByNFmEdm07l
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 1
@@ -832,14 +1212,13 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe.ActiveEffect.P7YUT6Y1NXGpo5Er
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783544102307
-      modifiedTime: 1783544102307
+      createdTime: 1787616015022
+      modifiedTime: 1787616015022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _id: 0vsrMfL3s6IQtWcM
@@ -848,18 +1227,14 @@ effects:
     folder: null
     _key: '!items.effects!phbinvInvestment.0vsrMfL3s6IQtWcM'
 folder: BjeMHiqnKNWkWhox
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1735866281378
-  modifiedTime: 1783544102306
+  systemVersion: 6.0.0
+  createdTime: 1787616015020
+  modifiedTime: 1787616015020
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

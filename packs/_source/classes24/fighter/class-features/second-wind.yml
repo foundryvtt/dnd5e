@@ -22,9 +22,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '@scale.fighter.second-wind'
     spent: 0
@@ -39,6 +39,7 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -62,6 +63,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -76,6 +78,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -98,22 +101,29 @@ system:
         scaling:
           number: 1
         bonus: '@classes.fighter.levels'
+        modifiers: []
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: second-wind
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866361253
-  modifiedTime: 1745256761713
+  systemVersion: 6.0.0
+  createdTime: 1787616014982
+  modifiedTime: 1787616014982
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
