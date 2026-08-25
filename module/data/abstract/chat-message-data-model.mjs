@@ -103,7 +103,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
       if ( !uuid ) continue;
       Object.assign(e.dataset, {
         tooltipHtml: loadingTooltip({ uuid }),
-        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip",
+        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip document-tooltip",
         tooltipDirection: "LEFT"
       });
     }

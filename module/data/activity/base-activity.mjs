@@ -980,7 +980,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     });
     if ( obj.canOverride && !obj.override && !obj.overrideSet && !this.isRider ) {
       foundry.utils.mergeObject(obj, foundry.utils.getProperty(item.system, keyPath));
-      obj.overrideSet = true;
+      Object.defineProperty(obj, "overrideSet", { value: true, configurable: true, enumerable: false });
     }
   }
 }

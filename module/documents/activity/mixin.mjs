@@ -1248,7 +1248,7 @@ export default function ActivityMixin(Base) {
         content: await foundry.applications.handlebars.renderTemplate(
           this.constructor.ACTIVITY_TOOLTIP_TEMPLATE, await this.getTooltipData(enrichmentOptions)
         ),
-        classes: ["dnd5e2", "dnd5e-tooltip", "activity-tooltip"]
+        classes: ["dnd5e2", "dnd5e-tooltip", "activity-tooltip", "document-tooltip"]
       };
     }
 

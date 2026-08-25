@@ -95,12 +95,11 @@ export default class BaseCastActivityData extends BaseActivityData {
   async getTooltipData({ extras, ...enrichmentOptions }={}) {
     const context = await super.getTooltipData({ extras, ...enrichmentOptions });
 
-    if ( !context.description ) {
-      const cachedSpell = this.cachedSpell;
-      context.description = await TextEditor.enrichHTML(
-        cachedSpell?.system.description.value || "",
-        { ...enrichmentOptions, relativeTo: cachedSpell }
-      );
+    const cachedSpell = this.cachedSpell;
+    if ( !context.description && cachedSpell?.system.description.value ) {
+      context.description = await TextEditor.enrichHTML(cachedSpell.system.description.value, {
+        ...enrichmentOptions, relativeTo: cachedSpell, rollData: cachedSpell.getRollData()
+      });
     }
 
     return context;
