@@ -43,7 +43,8 @@ export default function EmbeddableDocumentMixin(Base) {
       // Place headers as the first child, place inline names inside first paragraph
       let prepend = element.querySelector("figure.content-embed") ?? element;
       if ( config.nameStyle === "inline" ) {
-        prepend = element.querySelector(":scope > figure.content-embed p") ?? prepend;
+        prepend = element
+          .querySelector(":scope > figure.content-embed > div > p, :scope > figure.content-embed > p") ?? prepend;
       }
       prepend.prepend(nameElement);
 
