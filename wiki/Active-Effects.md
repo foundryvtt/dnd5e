@@ -29,6 +29,12 @@ The system provides a set of special change types called rules. Rather than bein
 
 More information on these change types can be found on the [active effect rules page](Active-Effect-Rules.md).
 
+## Change Replacement
+
+When active effects are applied to an actor or item, their change values are left unmodified by default. The *Replacement* option can be used to modify the values, replacing attribute strings (e.g. `@abilities.wis.mod`) with a final value from either the actor applying the effect (using the "Origin" option) or the actor to which the effect is being applied (using the "Target" option).
+
+![Active Effect Replacement Options](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/effect/effect-change-replacement.jpg)
+
 ## Active Effect Compendium
 
 The system comes with a compendium of stock active effects that can be used covering things like damage resistances, various conditions, speed enhancements, and advantages/disadvantages. These effects can be referenced directly using an activity if no changes are required (other than duration, which will be applied automatically from the activity), or copied onto an item to use as the basis for a modified version.
