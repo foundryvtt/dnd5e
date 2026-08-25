@@ -154,7 +154,7 @@ export default function PseudoDocumentMixin(Base) {
      * @returns {string}
      */
     get link() {
-      return `@UUID[${this.uuid}]{${foundry.utils.escapeHTML(this.name ?? this.title)}}`;
+      return `@UUID[${this.uuid}]{${foundry.utils.escapeHTML(this.name)}}`;
     }
 
     /* -------------------------------------------- */
@@ -274,7 +274,7 @@ export default function PseudoDocumentMixin(Base) {
     async deleteDialog({ sheet, ...options }={}) {
       const type = _loc(this.metadata.label);
       const config = foundry.utils.mergeObject({
-        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
+        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}` },
         content: `
           <p>
             <strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}

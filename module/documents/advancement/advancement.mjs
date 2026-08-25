@@ -150,6 +150,16 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   /* -------------------------------------------- */
 
   /**
+   * Name of the advancement.
+   * @type {string}
+   */
+  get name() {
+    return this.title;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this Advancement type support HTML hints in the config dialog, flow, and summary?
    * Any Advancement type that has upgraded its Flow application to ApplicationV2 is assumed to support this.
    * @type {boolean}
