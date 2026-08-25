@@ -370,7 +370,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
         const updates = [];
 
         // Advance bastion facilities
-        if ( advanceFacilities && bastion?.availableForActor(actor) && actor.itemTypes.facility.length ) {
+        if ( advanceFacilities && bastion.availableForActor(actor) && actor.itemTypes.facility.length ) {
           const results = await dnd5e.bastion.advanceAllFacilities(actor, {
             duration: timePassageData.midnights, performUpdates: false, summary: "auto", turn: false
           });
@@ -417,10 +417,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       if ( lastBastionTurn === undefined ) {
         await game.settings.set("dnd5e", "bastionTurns", [game.time.worldTime]);
       } else {
-        const days = lastBastionTurn !== undefined ? CalendarData5e.dayDifference(
+        const days = CalendarData5e.dayDifference(
           game.time.calendar.timeToComponents(lastBastionTurn),
           game.time.calendar.timeToComponents(game.time.worldTime)
-        ) : Infinity;
+        );
         const previousDays = days - timePassageData.midnights;
         if ( Math.floor(days / bastion.duration) > Math.floor(previousDays / bastion.duration) ) {
           messageConfig.create = true;
