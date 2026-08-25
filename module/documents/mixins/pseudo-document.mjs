@@ -1,4 +1,10 @@
 import CreateDocumentDialog from "../../applications/create-document-dialog.mjs";
+import EmbeddableDocumentMixin from "./embeddable.mjs";
+
+const COPIED_METHODS = [
+  "toAnchor", "toDragData", "_createDocumentLink", "_onClickDocumentLink",
+  "toEmbed", "onEmbed", "_buildEmbedHTML", "_createInlineEmbed", "_createFigureEmbed"
+];
 
 /**
  * A mixin which extends a DataModel to provide behavior shared between activities & advancement.
@@ -8,7 +14,9 @@ import CreateDocumentDialog from "../../applications/create-document-dialog.mjs"
  * @mixin
  */
 export default function PseudoDocumentMixin(Base) {
-  class PseudoDocument extends Base {
+  const _PseudoDocument = class extends Base {};
+  COPIED_METHODS.forEach(m => _PseudoDocument.prototype[m] ??= Actor.prototype[m]);
+  class PseudoDocument extends EmbeddableDocumentMixin(_PseudoDocument) {
     constructor(data, { parent=null, ...options }={}) {
       if ( parent instanceof Item ) parent = parent.system;
       super(data, { parent, ...options });
@@ -142,6 +150,26 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Return a string which creates a dynamic link to this PseudoDocument instance.
+     * @returns {string}
+     */
+    get link() {
+      return `@UUID[${this.uuid}]{${foundry.utils.escapeHTML(this.name)}}`;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Compendium pack containing this activity.
+     * @type {CompendiumCollection|null}
+     */
+    get pack() {
+      return this.item?.pack ?? null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Lazily obtain a Application instance used to configure this PseudoDocument, or null if no sheet is available.
      * @type {Application|ApplicationV2|null}
      */
@@ -246,7 +274,7 @@ export default function PseudoDocumentMixin(Base) {
     async deleteDialog({ sheet, ...options }={}) {
       const type = _loc(this.metadata.label);
       const config = foundry.utils.mergeObject({
-        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name || this.title}` },
+        window: { title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name}` },
         content: `
           <p>
             <strong>${_loc("COMMON.AreYouSure")}</strong> ${_loc("SIDEBAR.DeleteWarning", { type })}
@@ -261,13 +289,35 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Serialize salient information for this PseudoDocument when dragging it.
-     * @returns {object}  An object of drag data.
+     * Handle obtaining the relevant PseudoDocument from dropped data provided via a DataTransfer event.
+     * @param {object} data               The data object extracted from a DataTransfer event.
+     * @returns {Promise<PseudoDocument>} The resolved PseudoDocument.
+     * @throws If a PseudoDocument could not be retrieved from the provided data.
      */
-    toDragData() {
-      const dragData = { type: this.documentName, data: this.toObject() };
-      if ( this.id ) dragData.uuid = this.uuid;
-      return dragData;
+    static async fromDropData(data) {
+      let doc = null;
+
+      // Case 1 - Data explicitly provided
+      if ( data.data ) {
+        const Class = this.documentConfig[data.data.type]?.documentClass;
+        if ( !Class ) throw new Error(
+          `Invalid ${this.documentName} type '${data.data.type}' provided to ${this.name}.fromDropData.`
+        );
+        doc = new Class(data.data);
+      }
+
+      // Case 2 - UUID provided
+      else if ( data.uuid ) doc = await fromUuid(data.uuid);
+
+      // Ensure that we retrieved a valid document
+      if ( !doc ) {
+        throw new Error("Failed to resolve Document from provided DragData. Either data or a UUID must be provided.");
+      }
+      if ( doc.documentName !== this.documentName ) {
+        throw new Error(`Invalid Document type '${doc.type}' provided to ${this.name}.fromDropData.`);
+      }
+
+      return doc;
     }
 
     /* -------------------------------------------- */

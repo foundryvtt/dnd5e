@@ -38,7 +38,7 @@ export default function ActivityMixin(Base) {
      */
     static metadata = Object.freeze({
       collection: "activities",
-      label: "DOCUMENT.DND5E.Activity",
+      label: "DOCUMENT.Activity",
       name: "Activity",
       sheetClass: ActivitySheet,
       targetPhase: "",
@@ -1182,6 +1182,21 @@ export default function ActivityMixin(Base) {
         range: this.range,
         uses: { ...this.uses, name: "uses.value" }
       };
+    }
+
+    /* -------------------------------------------- */
+    /*  Helpers                                     */
+    /* -------------------------------------------- */
+
+    /** @override */
+    async _buildEmbedHTML(config, options={}) {
+      if ( !this.description?.value ) return null;
+      const enriched = await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.description.value, {
+        ...options, rollData: this.getRollData(), relativeTo: this.item
+      });
+      const container = document.createElement("div");
+      container.innerHTML = enriched;
+      return container.children;
     }
 
     /* -------------------------------------------- */

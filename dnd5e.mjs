@@ -99,6 +99,28 @@ Hooks.once("init", function() {
   CONFIG.ui.items = applications.item.ItemDirectory5e;
   CONFIG.ux.DragDrop = DragDrop5e;
 
+  // Add configuration sections for activities & advancement
+  CONFIG.Activity = {
+    documentClass: documents.activity.UtilityActivity,
+    embedHandlers: [],
+    sidebarIcon: "fa-solid fa-person-hiking",
+    typeLabels: new Proxy(CONFIG.DND5E.activityTypes, {
+      get(target, prop) {
+        return target[prop]?.documentClass?.metadata?.title;
+      }
+    })
+  };
+  CONFIG.Advancement = {
+    documentClass: documents.advancement.Advancement,
+    embedHandlers: [],
+    sidebarIcon: "fa-solid fa-person-dress-burst",
+    typeLabels: new Proxy(CONFIG.DND5E.advancementTypes, {
+      get(target, prop) {
+        return target[prop]?.documentClass?.metadata?.title;
+      }
+    })
+  };
+
   // Register System Settings
   registerSystemSettings();
   registerSystemKeybindings();
