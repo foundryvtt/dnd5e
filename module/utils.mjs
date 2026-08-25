@@ -1355,6 +1355,7 @@ const _attributeLabelCache = {
  * @returns {string|void}
  */
 export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemName=true }={}) {
+  attr = ActiveEffect.implementation.SHIM_FIELDS[attr]?.key ?? attr;
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
 
   // Check any actor-specific names first.
@@ -1439,6 +1440,14 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   else if ( attr.startsWith("flags.dnd5e.") ) {
     const key = attr.replace("flags.dnd5e.", "");
     if ( key in CONFIG.DND5E.characterFlags ) label = CONFIG.DND5E.characterFlags[key].name;
+  }
+
+  // Tokens
+  else if ( attr.startsWith("token.") ) {
+    if ( attr === "token.light.dim" ) label = _loc("DND5E.TOKEN.Attribute.DimRadius");
+    else if ( attr === "token.light.bright" ) label = _loc("DND5E.TOKEN.Attribute.BrightRadius");
+    else label = TokenDocument.schema.getField(attr.slice(6))?.label;
+    if ( label ) label = _loc("DND5E.TOKEN.Attribute.Label", { attribute: label });
   }
 
   // Derived fields
