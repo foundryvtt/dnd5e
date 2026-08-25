@@ -556,6 +556,7 @@ Hooks.once("i18nInit", () => {
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.activityBehaviorTypes).forEach(c => c.model.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.BastionSetting);
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarConfigSetting);
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarPreferencesSetting);
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);

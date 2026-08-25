@@ -1,6 +1,22 @@
 <div class="chat-card time-passed-card">
     {{{ content }}}
 
+    {{!-- Bastions --}}
+    {{#if bastion.message}}
+    <section class="bastion">
+        <strong class="roboto-condensed-upper">{{ localize "DND5E.Bastion.Label" }}</strong>
+        <p>{{ bastion.message }}</p>
+        {{#unless bastion.triggered}}
+        <div class="card-buttons">
+            <button type="button" data-action="bastionTurn">
+                <i class="fa-solid fa-chess-rook" inert></i>
+                <span>{{ localize "DND5E.Bastion.Action.Advance" }}</span>
+            </button>
+        </div>
+        {{/unless}}
+    </section>
+    {{/if}}
+
     {{!-- Deltas --}}
     {{#if deltas.length}}{{> "dnd5e.card-deltas" }}{{/if}}
 </div>

@@ -12,6 +12,8 @@ export default class BastionSettingsConfig extends BaseSettingsConfig {
     }
   };
 
+  /* -------------------------------------------- */
+
   /** @override */
   static PARTS = {
     ...super.PARTS,
@@ -28,9 +30,7 @@ export default class BastionSettingsConfig extends BaseSettingsConfig {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     context.fields = BastionSetting.schema.fields;
-    context.source = game.settings.get("dnd5e", "bastionConfiguration");
+    context.source = dnd5e.settings.bastionConfiguration._source;
     return context;
   }
 }
-
-export { BastionSetting };

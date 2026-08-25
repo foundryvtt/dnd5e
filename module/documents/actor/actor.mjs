@@ -2161,12 +2161,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const clone = this.clone();
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     config = foundry.utils.mergeObject({
-      dialog: true, chat: restConfig.chat !== false,
+      dialog: true,
+      chat: restConfig.chat !== false,
       duration: restConfig.duration[game.settings.get("dnd5e", "restVariant")],
       newDay: restConfig.newDay === true,
-      advanceBastionTurn: restConfig.advanceBastionTurn === true, advanceTime: restConfig.advanceTime === true,
-      autoHD: restConfig.autoHD === true, autoHDThreshold: 3,
-      recoverTemp: restConfig.recoverTemp, recoverTempMax: restConfig.recoverTempMax,
+      advanceBastionTurn: restConfig.advanceBastionTurn === true,
+      advanceTime: restConfig.advanceTime === true,
+      autoHD: restConfig.autoHD === true,
+      autoHDThreshold: 3,
+      recoverTemp: restConfig.recoverTemp,
+      recoverTempMax: restConfig.recoverTempMax,
       exhaustionDelta: restConfig.exhaustionDelta
     }, config);
     config.dialogClass ??= restConfig.dialogClass ?? BaseRestDialog;

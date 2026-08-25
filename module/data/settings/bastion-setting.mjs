@@ -10,18 +10,19 @@ const { BooleanField, NumberField } = foundry.data.fields;
  * @mixes BastionSettingData
  */
 export default class BastionSetting extends foundry.abstract.DataModel {
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.Bastion"];
+
+  /* -------------------------------------------- */
+
   /** @override */
   static defineSchema() {
     return {
-      button: new BooleanField({
-        required: true, label: "DND5E.Bastion.Button.Label", hint: "DND5E.Bastion.Button.Hint"
-      }),
-      duration: new NumberField({
-        required: true, positive: true, integer: true, initial: 7, label: "DND5E.Bastion.Duration.Label"
-      }),
-      enabled: new BooleanField({
-        required: true, label: "DND5E.Bastion.Enabled.Label", hint: "DND5E.Bastion.Enabled.Hint"
-      })
+      button: new BooleanField({ required: true }),
+      duration: new NumberField({ required: true, positive: true, integer: true, initial: 7 }),
+      enabled: new BooleanField({ required: true }),
+      reminder: new BooleanField({ required: true, initial: true })
     };
   }
 

@@ -229,7 +229,11 @@
 
 /**
  * @typedef TimePassedMessageSystemData
+ * @property {object} [bastion]
+ * @property {boolean} [bastion.reminder]    Should the bastion turn reminder button be displayed?
+ * @property {boolean} [bastion.triggered]   The GM has advanced a bastion turn from this card.
  * @property {DocumentDeltasData[]} changes  Item recovery from this time change.
+ * @property {number} time                   World time after the time passage.
  */
 
 /**
