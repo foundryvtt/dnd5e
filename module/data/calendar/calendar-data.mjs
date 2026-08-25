@@ -317,7 +317,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
       return 0;
     };
 
-    const days = CalendarData5e.#dayDifference(previousTime, nowTime);
+    const days = CalendarData5e.dayDifference(previousTime, nowTime);
     foundry.utils.setProperty(options, "dnd5e.deltas", {
       midnights: days,
       middays: days + passedHour(game.time.calendar.days.hoursPerDay / 2),
@@ -357,9 +357,10 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
     const changes = [];
     const rolls = [];
+    let hasBastion = false;
 
     const bastion = dnd5e.settings.bastionConfiguration;
-    const advanceFacilities = timePassageData.midnights > 0;
+    const advanceFacilities = dnd5e.settings.calendarConfig.enabled && (timePassageData.midnights > 0);
     const recoverUses = !dnd5e.settings.calendarConfig.manualRecovery && periods.size;
     if ( advanceFacilities || recoverUses ) {
       const operations = [];
@@ -369,11 +370,12 @@ export default class CalendarData5e extends foundry.data.CalendarData {
         const updates = [];
 
         // Advance bastion facilities
-        if ( advanceFacilities && bastion?.availableForActor(actor) && actor.itemTypes.facility.length ) {
+        if ( advanceFacilities && bastion.availableForActor(actor) && actor.itemTypes.facility.length ) {
           const results = await dnd5e.bastion.advanceAllFacilities(actor, {
             duration: timePassageData.midnights, performUpdates: false, summary: "auto", turn: false
           });
           updates.push(...results.updates);
+          hasBastion = true;
         }
 
         // Recover item & activity uses
@@ -408,6 +410,24 @@ export default class CalendarData5e extends foundry.data.CalendarData {
         type: "timePassed"
       }
     };
+
+    // Display bastion turn reminder
+    if ( advanceFacilities && bastion.enabled && bastion.reminder && hasBastion ) {
+      const lastBastionTurn = dnd5e.settings.bastionTurns.at(-1);
+      if ( lastBastionTurn === undefined ) {
+        await game.settings.set("dnd5e", "bastionTurns", [game.time.worldTime]);
+      } else {
+        const days = CalendarData5e.dayDifference(
+          game.time.calendar.timeToComponents(lastBastionTurn),
+          game.time.calendar.timeToComponents(game.time.worldTime)
+        );
+        const previousDays = days - timePassageData.midnights;
+        if ( Math.floor(days / bastion.duration) > Math.floor(previousDays / bastion.duration) ) {
+          messageConfig.create = true;
+          messageConfig.data.system.bastion = { reminder: true };
+        }
+      }
+    }
 
     /**
      * A hook event that fires before a time passed chat message is created.
@@ -465,7 +485,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @param {Components} currentTime
    * @returns {number}
    */
-  static #dayDifference(previousTime, currentTime) {
+  static dayDifference(previousTime, currentTime) {
     // If years are the same, simple subtraction should work
     if ( previousTime.year === currentTime.year ) return currentTime.day - previousTime.day;
 

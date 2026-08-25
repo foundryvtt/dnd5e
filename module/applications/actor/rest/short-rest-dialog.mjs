@@ -44,10 +44,6 @@ export default class ShortRestDialog extends BaseRestDialog {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.autoRoll = new BooleanField({
-      label: _loc("DND5E.REST.HitDice.AutoSpend.Label"),
-      hint: _loc("DND5E.REST.HitDice.AutoSpend.Hint")
-    });
 
     if ( this.actor.system.isNPC ) {
       const hd = this.actor.system.attributes.hd;
@@ -73,18 +69,6 @@ export default class ShortRestDialog extends BaseRestDialog {
         ? this.#denom : context.hitDice.options.find(o => o.number > 0)?.value;
     }
 
-    else {
-      if ( !context.fields.length ) {
-        context.formSections.unshift({ legend: "DND5E.REST.Configuration", fields: context.fields });
-      }
-      context.fields.unshift({
-        field: context.autoRoll,
-        input: context.inputs.createCheckboxInput,
-        name: "autoHD",
-        value: context.config.autoHD
-      });
-    }
-
     const denom = Number(context.hitDice.denomination?.slice(1));
     if ( denom ) {
       const { pct, effectiveMax: max } = this.actor.system.attributes.hp;
@@ -103,6 +87,26 @@ export default class ShortRestDialog extends BaseRestDialog {
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareFields(context, options) {
+    await super._prepareFields(context, options);
+
+    context.autoRoll = new BooleanField({
+      label: _loc("DND5E.REST.HitDice.AutoSpend.Label"),
+      hint: _loc("DND5E.REST.HitDice.AutoSpend.Hint")
+    });
+
+    if ( this.actor.system.isNPC || foundry.utils.hasProperty(this.actor, "system.attributes.hd") ) return;
+    context.fields.unshift({
+      field: context.autoRoll,
+      input: context.inputs.createCheckboxInput,
+      name: "autoHD",
+      value: context.config.autoHD
+    });
   }
 
   /* -------------------------------------------- */
