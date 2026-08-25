@@ -73,6 +73,15 @@ The set date dialog allows for jumping to a specific year, month, and day in the
 ![Set Date Dialog](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/calendar/set-date-dialog.jpg)
 
 
+## Bastion Interaction
+
+When both the calendar system and bastion system are enabled bastion turn handling will be tied into the passage of time. When a new day occurs each outstanding bastion order will be progressed by a day, and any completed orders will have their results posted to chat.
+
+![Bastion Configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/bastion/bastion-configuration.jpg)
+
+There is also a system for automatic reminders of bastion turns. After the bastion turn duration has passed since the last bastion turn a message will be posted in chat for GM users with a button to trigger a new bastion turn. This button will automatically issue the maintain order to any facilities without outstanding orders and perform any other bastion turn events.
+
+
 ## Calendar API
 
 While Foundry provides the basic implementation for the calendar system, DnD5e extends it with some additional tools and APIs to make it work better with the calendar interface and selection.
