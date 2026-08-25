@@ -25,9 +25,6 @@ system:
       value: 17
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -42,9 +39,6 @@ system:
       value: 13
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -59,9 +53,6 @@ system:
       value: 15
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -76,9 +67,6 @@ system:
       value: 4
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -93,9 +81,6 @@ system:
       value: 14
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -110,9 +95,6 @@ system:
       value: 3
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -155,22 +137,6 @@ system:
     sp: 0
     cp: 0
   bonuses:
-    mwak:
-      attack: ''
-      damage: ''
-    rwak:
-      attack: ''
-      damage: ''
-    msak:
-      attack: ''
-      damage: ''
-    rsak:
-      attack: ''
-      damage: ''
-    abilities:
-      check: ''
-      save: ''
-      skill: ''
     spell:
       dc: ''
   skills:
@@ -182,7 +148,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ani:
       ability: wis
@@ -192,7 +157,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     arc:
       ability: int
@@ -202,7 +166,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ath:
       ability: str
@@ -212,7 +175,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     dec:
       ability: cha
@@ -222,7 +184,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     his:
       ability: int
@@ -232,7 +193,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ins:
       ability: wis
@@ -242,7 +202,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     itm:
       ability: cha
@@ -252,7 +211,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     inv:
       ability: int
@@ -262,7 +220,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     med:
       ability: wis
@@ -272,7 +229,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     nat:
       ability: int
@@ -282,7 +238,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prc:
       ability: wis
@@ -292,7 +247,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prf:
       ability: cha
@@ -302,7 +256,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     per:
       ability: cha
@@ -312,7 +265,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     rel:
       ability: int
@@ -322,7 +274,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     slt:
       ability: dex
@@ -332,7 +283,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ste:
       ability: dex
@@ -342,7 +292,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     sur:
       ability: wis
@@ -352,7 +301,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
   tools: {}
   spells:
@@ -393,13 +341,13 @@ system:
         min: null
         max: null
         mode: 0
-      bonus: ''
     movement:
-      climb: '40'
-      walk: '40'
       units: null
       hover: false
       ignoredDifficultTerrain: []
+      speeds:
+        walk: '40'
+        climb: '40'
     attunement:
       max: 3
     senses:
@@ -418,12 +366,13 @@ system:
         min: null
         max: null
         mode: 0
-      bonuses:
-        save: ''
       limit: 1
     ac:
       flat: 11
-      calc: natural
+      calcs:
+        - natural
+      formulas: []
+      override: null
     hd:
       spent: 0
     hp:
@@ -439,8 +388,6 @@ system:
         mode: 0
       success: 0
       failure: 0
-      bonuses:
-        save: ''
     spell:
       level: 0
     loyalty: {}
@@ -462,18 +409,19 @@ system:
     rules: '2024'
     custom: ''
     revision: 1
+  rolls: {}
 _id: phbginGiantSpide
 img: null
 prototypeToken:
   name: Giant Insect
-  displayName: 20
+  displayName: 0
   actorLink: false
   appendNumber: false
   prependAdjective: false
   width: 2
   height: 2
   texture:
-    src: null
+    src: modules/dnd-players-handbook/assets/tokens/giant-spider-*.webp
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -485,7 +433,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: 1
-  displayBars: 20
+  displayBars: 0
   bar1:
     attribute: attributes.hp
   bar2:
@@ -569,7 +517,8 @@ items:
         level: null
         items: []
         repeatable: false
-      properties: []
+      properties:
+        - trait
       requirements: ''
       activities: {}
       enchant: {}
@@ -589,12 +538,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693573240
+      modifiedTime: 1787693573240
     _key: '!actors.items!phbginGiantSpide.phbaoiSpiderClim'
   - name: Multiattack
     system:
@@ -638,6 +587,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -658,6 +608,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -683,6 +634,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: multiattack
       advancement: {}
@@ -704,12 +656,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693573240
+      modifiedTime: 1787693573240
     _key: '!actors.items!phbginGiantSpide.phbaoiMultiattac'
   - name: Poison Jab
     system:
@@ -753,6 +705,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -774,6 +727,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -805,6 +759,7 @@ items:
                   - piercing
                 scaling:
                   number: 1
+                modifiers: []
               - custom:
                   enabled: false
                   formula: ''
@@ -815,6 +770,7 @@ items:
                   - poison
                 scaling:
                   number: 1
+                modifiers: []
           uses:
             spent: 0
             recovery: []
@@ -828,6 +784,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: poison-jab
       advancement: {}
@@ -849,12 +806,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693573241
+      modifiedTime: 1787693573241
     _key: '!actors.items!phbginGiantSpide.phbaoiPoisonJab0'
   - name: Web Bolt
     system:
@@ -899,6 +856,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -908,6 +866,7 @@ items:
           effects:
             - _id: Gvwt9wpCcJgC0yMl
               level: {}
+              uuid: null
           range:
             value: '60'
             units: ft
@@ -922,6 +881,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -955,6 +915,7 @@ items:
                   mode: whole
                   number: null
                   formula: ''
+                modifiers: []
           uses:
             spent: 0
             recovery: []
@@ -966,6 +927,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: web-bolt
       advancement: {}
@@ -993,34 +955,43 @@ items:
               priority: null
               type: downgrade
               phase: initial
-              _id: n4iffgs0cx6q7wNM
+              _id: 2ed3oasE3lTlQHuL
+              conditions: '{}'
             - key: system.attributes.movement.burrow
               value: 0
               priority: null
               type: downgrade
               phase: initial
-              _id: zdFhF36YsF6UmKHe
+              _id: VYSprXRgd3LRxyV4
+              conditions: '{}'
             - key: system.attributes.movement.climb
               value: 0
               priority: null
               type: downgrade
               phase: initial
-              _id: kSF2xMYHHOViMNby
+              _id: F6Qr2zoofx3XsFtE
+              conditions: '{}'
             - key: system.attributes.movement.fly
               value: 0
               priority: null
               type: downgrade
               phase: initial
-              _id: ZfiUPsdFcYnaPkJA
+              _id: sqDPIIKWsn6XzGSL
+              conditions: '{}'
             - key: system.attributes.movement.swim
               value: 0
               priority: null
               type: downgrade
               phase: initial
-              _id: DIgWHuCQJlsf5dP2
+              _id: HTdBohYXtOZsJ6vU
+              conditions: '{}'
+          conditions: '{}'
+          magical: false
+          rider:
+            statuses: []
         description: >-
-          <p><span style="font-family:Signika, sans-serif">The target’s Speed is
-          reduced to 0 until the start of the insect’s next turn.</span></p>
+          <p>The target’s Speed is reduced to 0 until the start of the insect’s
+          next turn.</p>
         tint: '#ffffff'
         transfer: false
         statuses: []
@@ -1029,12 +1000,12 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '14.364'
+          coreVersion: '14.367'
           systemId: dnd5e
           systemVersion: 6.0.0
           lastModifiedBy: dnd5ebuilder0000
-          createdTime: 1783544184547
-          modifiedTime: 1783544184547
+          createdTime: 1787693573241
+          modifiedTime: 1787693573241
         start: null
         showIcon: 1
         folder: null
@@ -1049,12 +1020,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
+      systemVersion: 6.0.0
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1783544184547
-      modifiedTime: 1783544184547
+      createdTime: 1787693573241
+      modifiedTime: 1787693573241
     _key: '!actors.items!phbginGiantSpide.phbaoiWebBoltSpi'
 effects: []
 folder: beGRXWKaYfeeR1Iz
@@ -1067,10 +1038,10 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 6.0.0
-  createdTime: 1783544184546
-  modifiedTime: 1783544184546
+  createdTime: 1787693573240
+  modifiedTime: 1787693573240
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbginGiantSpide'

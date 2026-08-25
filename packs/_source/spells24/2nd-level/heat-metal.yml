@@ -18,9 +18,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -35,9 +36,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '60'
     units: ft
@@ -58,9 +60,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -78,12 +77,16 @@ system:
         spellSlot: false
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: true
+        concentration: false
       effects:
         - _id: VVQbCUE5W44bF4QU
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: true
         units: any
@@ -94,6 +97,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -104,10 +108,12 @@ system:
         onSave: none
         parts: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
@@ -115,8 +121,13 @@ system:
       sort: 100000
       name: On Damage Save
       img: ''
-      appliedEffects:
-        - VVQbCUE5W44bF4QU
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     2jWlvr2titPfBMEm:
       type: damage
       _id: 2jWlvr2titPfBMEm
@@ -132,6 +143,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -139,10 +151,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -167,9 +181,16 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       name: Cast and Heat
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     YPEmwJHX7g68307N:
       type: damage
       sort: 0
@@ -185,6 +206,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -192,10 +214,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -220,11 +244,20 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       name: Reheat
       _id: YPEmwJHX7g68307N
       img: systems/dnd5e/icons/svg/statuses/concentrating.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: heat-metal
+  method: spell
+  prepared: 0
 _id: phbsplHeatMetal0
 type: spell
 img: icons/magic/fire/flame-burning-chain.webp
@@ -238,11 +271,14 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     description: >-
       <p>If a creature is holding or wearing the object and takes the damage
@@ -257,11 +293,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725651192762
-      modifiedTime: 1783543975459
+      createdTime: 1787693585380
+      modifiedTime: 1787693585380
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -272,18 +308,14 @@ folder: 3SjcO2acsFnWegp4
 sort: 2900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425958340
-  modifiedTime: 1783543975459
+  systemVersion: 6.0.0
+  createdTime: 1787693585377
+  modifiedTime: 1787693585377
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHeatMetal0'

@@ -28,9 +28,6 @@ system:
       value: 18
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -45,9 +42,6 @@ system:
       value: 12
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -62,9 +56,6 @@ system:
       value: 14
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -79,9 +70,6 @@ system:
       value: 6
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -96,9 +84,6 @@ system:
       value: 12
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -113,9 +98,6 @@ system:
       value: 8
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -158,22 +140,6 @@ system:
     sp: 0
     cp: 0
   bonuses:
-    mwak:
-      attack: ''
-      damage: ''
-    rwak:
-      attack: ''
-      damage: ''
-    msak:
-      attack: ''
-      damage: ''
-    rsak:
-      attack: ''
-      damage: ''
-    abilities:
-      check: ''
-      save: ''
-      skill: ''
     spell:
       dc: ''
   skills:
@@ -185,7 +151,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ani:
       ability: wis
@@ -195,7 +160,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     arc:
       ability: int
@@ -205,7 +169,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ath:
       ability: str
@@ -215,7 +178,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     dec:
       ability: cha
@@ -225,7 +187,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     his:
       ability: int
@@ -235,7 +196,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ins:
       ability: wis
@@ -245,7 +205,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     itm:
       ability: cha
@@ -255,7 +214,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     inv:
       ability: int
@@ -265,7 +223,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     med:
       ability: wis
@@ -275,7 +232,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     nat:
       ability: int
@@ -285,7 +241,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prc:
       ability: wis
@@ -295,7 +250,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prf:
       ability: cha
@@ -305,7 +259,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     per:
       ability: cha
@@ -315,7 +268,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     rel:
       ability: int
@@ -325,7 +277,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     slt:
       ability: dex
@@ -335,7 +286,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ste:
       ability: dex
@@ -345,7 +295,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     sur:
       ability: wis
@@ -355,7 +304,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
   tools: {}
   spells:
@@ -396,12 +344,12 @@ system:
         min: null
         max: null
         mode: 0
-      bonus: ''
     movement:
-      walk: '60'
       units: null
       hover: false
       ignoredDifficultTerrain: []
+      speeds:
+        walk: '60'
     attunement:
       max: 3
     senses:
@@ -420,12 +368,13 @@ system:
         min: null
         max: null
         mode: 0
-      bonuses:
-        save: ''
       limit: 1
     ac:
       flat: 10
-      calc: natural
+      calcs:
+        - natural
+      formulas: []
+      override: null
     hd:
       spent: 0
     hp:
@@ -441,8 +390,6 @@ system:
         mode: 0
       success: 0
       failure: 0
-      bonuses:
-        save: ''
     spell:
       level: 0
     loyalty: {}
@@ -463,13 +410,14 @@ system:
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+  rolls: {}
 _id: phbostFey0000000
 img: ''
 prototypeToken:
   name: Otherworldly Steed
-  displayName: 20
+  displayName: 0
   actorLink: true
   appendNumber: false
   prependAdjective: false
@@ -488,7 +436,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: 1
-  displayBars: 20
+  displayBars: 0
   bar1:
     attribute: attributes.hp
   bar2:
@@ -529,14 +477,14 @@ prototypeToken:
   occludable:
     radius: 0
   ring:
-    enabled: false
+    enabled: true
     colors:
       ring: null
       background: null
     effects: 1
     subject:
       scale: 1
-      texture: null
+      texture: modules/dnd-players-handbook/assets/subjects/horse-01.webp
   flags: {}
   randomImg: false
   turnMarker:
@@ -558,8 +506,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: ''
-        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -570,15 +516,14 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
         items: []
+        repeatable: false
       properties: []
       requirements: You regain Hit Points from a spell
       activities: {}
       enchant: {}
       identifier: life-bond
       advancement: {}
-      cover: null
       crewed: false
     _id: phbaoiLifeBond00
     type: feat
@@ -597,12 +542,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693557542
+      modifiedTime: 1787693557542
     _key: '!actors.items!phbostFey0000000.phbaoiLifeBond00'
   - name: Otherworldly Slam
     system:
@@ -615,8 +560,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        book: ''
-        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -627,8 +570,8 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
         items: []
+        repeatable: false
       properties: []
       requirements: ''
       activities:
@@ -648,6 +591,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -669,6 +613,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -702,6 +647,7 @@ items:
                   mode: whole
                   number: null
                   formula: ''
+                modifiers: []
           uses:
             spent: 0
             recovery: []
@@ -713,10 +659,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: otherworldly-slam
       advancement: {}
-      cover: null
       crewed: false
     _id: phbaoiOtherworld
     type: feat
@@ -731,12 +677,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693557542
+      modifiedTime: 1787693557542
     _key: '!actors.items!phbostFey0000000.phbaoiOtherworld'
   - name: Fey Step
     system:
@@ -749,8 +695,6 @@ items:
         custom: ''
         revision: 1
         rules: '2024'
-        book: ''
-        license: CC-BY-4.0
       uses:
         max: '1'
         recovery:
@@ -762,8 +706,8 @@ items:
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
         items: []
+        repeatable: false
       properties: []
       requirements: ''
       activities:
@@ -787,6 +731,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -808,6 +753,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: '1'
               type: space
@@ -833,10 +779,10 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: fey-step
       advancement: {}
-      cover: null
       crewed: false
     _id: phbaoiFeyStepFey
     type: feat
@@ -855,12 +801,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693557542
+      modifiedTime: 1787693557542
     _key: '!actors.items!phbostFey0000000.phbaoiFeyStepFey'
 effects: []
 folder: l9ar6UzbvIRDyYmA
@@ -873,10 +819,10 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452721143
-  modifiedTime: 1771452721143
+  systemVersion: 6.0.0
+  createdTime: 1787693557542
+  modifiedTime: 1787693557542
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbostFey0000000'

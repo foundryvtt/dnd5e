@@ -13,9 +13,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -35,6 +36,7 @@ system:
       type: radius
       size: '30'
       count: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -54,9 +56,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     jbvvkjZ7szK9wjeA:
       type: utility
@@ -72,18 +71,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: csA26qg5YSsji1ZZ
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -100,8 +104,13 @@ system:
         formula: ''
       name: Create Aura
       img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
-      appliedEffects:
-        - csA26qg5YSsji1ZZ
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     0kylpwRauH0WgW0G:
       type: save
       _id: 0kylpwRauH0WgW0G
@@ -117,6 +126,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: round
         concentration: false
@@ -124,6 +134,9 @@ system:
         value: '1'
       effects:
         - _id: wqBjgsd2xRnmSm8Z
+          uuid: null
+          level: {}
+          onSave: false
       range:
         override: true
         units: any
@@ -133,6 +146,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -149,14 +163,24 @@ system:
         parts: []
         onSave: half
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: Fiend/Undead Save
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: holy-aura
+  method: spell
+  prepared: 0
 _id: phbsplHolyAura00
 type: spell
 img: icons/magic/life/ankh-shadow-green.webp
@@ -174,38 +198,47 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: HORkT3BebgGm685E
+          _id: EV62Bc7O88IABjNl
+          conditions: '{}'
         - key: system.abilities.dex.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: iUICMTfrVBzAHRNO
+          _id: iJzk8PkKQ4anoeT6
+          conditions: '{}'
         - key: system.abilities.con.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: wOXzAVh720Z1057V
+          _id: gI8xMnwgAUqtqTrh
+          conditions: '{}'
         - key: system.abilities.int.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: 0YTiqe2iuDBpw3VO
+          _id: ITkZAF4CX6jTJwse
+          conditions: '{}'
         - key: system.abilities.wis.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: y7McdUDwOQorGA7M
+          _id: i4hUJGQtMR5VpKfJ
+          conditions: '{}'
         - key: system.abilities.cha.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: jrtnBvW3RK2zspWS
+          _id: D7PVYGPG1Bgq5IfK
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 60
@@ -218,16 +251,15 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725305728157
-      modifiedTime: 1783543975632
+      createdTime: 1787693588718
+      modifiedTime: 1787693588718
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -243,11 +275,14 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: targetEnd
       expired: false
     description: >-
       <p>The attacker has the &amp;Reference[Blinded apply=false] condition
@@ -260,11 +295,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725306554545
-      modifiedTime: 1783543975632
+      createdTime: 1787693588718
+      modifiedTime: 1787693588718
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -278,11 +313,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1724425959000
-  modifiedTime: 1783543975632
+  systemVersion: 6.0.0
+  createdTime: 1787693588718
+  modifiedTime: 1787693588718
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHolyAura00'

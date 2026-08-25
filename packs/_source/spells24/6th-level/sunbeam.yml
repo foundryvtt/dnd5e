@@ -14,8 +14,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -36,6 +37,7 @@ system:
       size: '60'
       width: '5'
       count: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -55,9 +57,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     o3kffaumfNGjVvg9:
       type: save
@@ -73,18 +72,24 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: RZmnRyi6pyjIRN1i
+          uuid: null
+          level: {}
+          onSave: false
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -100,22 +105,31 @@ system:
               enabled: false
               formula: ''
             number: 6
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - radiant
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
         onSave: half
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: Initial Cast
       img: ''
-      appliedEffects:
-        - RZmnRyi6pyjIRN1i
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Y0cJvZuD7EfwGqkf:
       type: save
       name: Create New Sunbeam
@@ -131,18 +145,24 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: true
       effects:
         - _id: RZmnRyi6pyjIRN1i
+          uuid: null
+          level: {}
+          onSave: false
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -158,22 +178,33 @@ system:
               enabled: false
               formula: ''
             number: 6
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - radiant
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
         onSave: half
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       img: systems/dnd5e/icons/svg/statuses/concentrating.svg
-      appliedEffects:
-        - RZmnRyi6pyjIRN1i
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: sunbeam
+  method: spell
+  prepared: 0
 _id: phbsplSunbeam000
 type: spell
 img: icons/magic/light/beam-rays-orange-large.webp
@@ -187,11 +218,14 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: sourceStart
       expired: false
     description: >-
       <p>The target has the &amp;Reference[Blinded apply=false] condition until
@@ -204,11 +238,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1724798213021
-      modifiedTime: 1783543977318
+      createdTime: 1787693656196
+      modifiedTime: 1787693656196
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -219,18 +253,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 100782
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425974121
-  modifiedTime: 1783543977318
+  systemVersion: 6.0.0
+  createdTime: 1787693656196
+  modifiedTime: 1787693656196
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSunbeam000'

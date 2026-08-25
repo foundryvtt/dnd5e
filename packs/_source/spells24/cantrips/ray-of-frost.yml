@@ -156,9 +156,9 @@ effects:
       conditions: '{}'
     disabled: false
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     description: >-
       <p>The target's Speed is reduced by 10 feet until the start of your next
@@ -172,11 +172,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1786481140886
-      modifiedTime: 1786481140886
+      createdTime: 1787693619069
+      modifiedTime: 1787693619069
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -190,11 +190,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.365'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 6.0.0
-  createdTime: 1786481140886
-  modifiedTime: 1786481140886
+  createdTime: 1787693619069
+  modifiedTime: 1787693619069
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRayofFrost'

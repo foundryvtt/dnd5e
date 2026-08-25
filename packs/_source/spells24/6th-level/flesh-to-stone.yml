@@ -24,7 +24,7 @@ system:
     book: ''
     page: ''
     license: CC-BY-4.0
-    revision: 2
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -167,11 +167,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1786481111223
-      modifiedTime: 1786481111223
+      createdTime: 1787693563696
+      modifiedTime: 1787693563696
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -199,9 +199,9 @@ effects:
       conditions: '{}'
     disabled: false
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: sourceStart
       expired: false
     description: >-
       <p>On a successful save, its Speed is 0 until the start of your next
@@ -215,11 +215,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1786481111223
-      modifiedTime: 1786481111223
+      createdTime: 1787693563696
+      modifiedTime: 1787693563696
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -233,11 +233,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.365'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 6.0.0
-  createdTime: 1786481111223
-  modifiedTime: 1786481111223
+  createdTime: 1787693563696
+  modifiedTime: 1787693563696
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFleshtoSto'

@@ -14,9 +14,6 @@ system:
       value: 0
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -31,9 +28,6 @@ system:
       value: 0
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -48,9 +42,6 @@ system:
       value: 0
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -65,9 +56,6 @@ system:
       value: 0
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -82,9 +70,6 @@ system:
       value: 0
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -99,9 +84,6 @@ system:
       value: 0
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -113,22 +95,6 @@ system:
           max: null
           mode: 0
   bonuses:
-    mwak:
-      attack: ''
-      damage: ''
-    rwak:
-      attack: ''
-      damage: ''
-    msak:
-      attack: ''
-      damage: ''
-    rsak:
-      attack: ''
-      damage: ''
-    abilities:
-      check: ''
-      save: ''
-      skill: ''
     spell:
       dc: ''
   skills:
@@ -140,7 +106,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ani:
       ability: wis
@@ -150,7 +115,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     arc:
       ability: int
@@ -160,7 +124,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ath:
       ability: str
@@ -170,7 +133,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     dec:
       ability: cha
@@ -180,7 +142,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     his:
       ability: int
@@ -190,7 +151,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ins:
       ability: wis
@@ -200,7 +160,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     itm:
       ability: cha
@@ -210,7 +169,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     inv:
       ability: int
@@ -220,7 +178,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     med:
       ability: wis
@@ -230,7 +187,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     nat:
       ability: int
@@ -240,7 +196,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prc:
       ability: wis
@@ -250,7 +205,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prf:
       ability: cha
@@ -260,7 +214,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     per:
       ability: cha
@@ -270,7 +223,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     rel:
       ability: int
@@ -280,7 +232,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     slt:
       ability: dex
@@ -290,7 +241,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ste:
       ability: dex
@@ -300,7 +250,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     sur:
       ability: wis
@@ -310,7 +259,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
   tools: {}
   spells:
@@ -351,11 +299,11 @@ system:
         min: null
         max: null
         mode: 0
-      bonus: ''
     movement:
       units: null
       hover: false
       ignoredDifficultTerrain: []
+      speeds: {}
     attunement:
       max: 3
     senses:
@@ -374,12 +322,14 @@ system:
         min: null
         max: null
         mode: 0
-      bonuses:
-        save: ''
       limit: 1
     ac:
       flat: 0
-      calc: flat
+      override: 0
+      calcs:
+        - unarmored
+        - armored
+      formulas: []
     hd:
       spent: 0
     hp:
@@ -395,8 +345,6 @@ system:
         mode: 0
       success: 0
       failure: 0
-      bonuses:
-        save: ''
     spell:
       level: 0
     loyalty: {}
@@ -463,12 +411,13 @@ system:
     important: false
   source:
     rules: '2024'
-    license: CC-BY-4.0
-    book: ''
     revision: 1
+    book: ''
+    license: CC-BY-4.0
+  rolls: {}
 prototypeToken:
   name: Conjured Fey
-  displayName: 20
+  displayName: 0
   actorLink: false
   appendNumber: false
   prependAdjective: false
@@ -487,7 +436,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: -2
-  displayBars: 20
+  displayBars: 0
   bar1:
     attribute: attributes.hp
   bar2:
@@ -528,14 +477,14 @@ prototypeToken:
   occludable:
     radius: 0
   ring:
-    enabled: false
+    enabled: true
     colors:
       ring: null
       background: null
     effects: 1
     subject:
       scale: 1
-      texture: null
+      texture: modules/dnd-players-handbook/assets/subjects/fey-spirit.webp
   flags: {}
   randomImg: false
   turnMarker:
@@ -570,6 +519,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             units: inst
             concentration: false
@@ -577,6 +527,7 @@ items:
           effects:
             - _id: sEpCnDgBAYjTuRgI
               level: {}
+              uuid: null
           range:
             override: false
             value: '5'
@@ -587,6 +538,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -623,6 +575,7 @@ items:
                   - psychic
                 scaling:
                   number: 1
+                modifiers: []
           name: ''
           img: ''
           flags: {}
@@ -631,6 +584,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
         ooHKOg5gGPyp0Jzy:
           type: attack
           activation:
@@ -646,6 +600,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             units: inst
             concentration: false
@@ -653,6 +608,7 @@ items:
           effects:
             - _id: sEpCnDgBAYjTuRgI
               level: {}
+              uuid: null
           range:
             override: false
             value: '35'
@@ -663,6 +619,7 @@ items:
               contiguous: false
               units: ft
               type: ''
+              stationary: false
             affects:
               choice: false
               count: '1'
@@ -699,6 +656,7 @@ items:
                   - psychic
                 scaling:
                   number: 1
+                modifiers: []
           name: Teleport and Attack
           _id: ooHKOg5gGPyp0Jzy
           img: ''
@@ -708,28 +666,26 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       uses:
         spent: 0
         recovery: []
         max: ''
       source:
         rules: '2024'
-        book: ''
-        license: CC-BY-4.0
-        revision: 1
+        revision: 2
       enchant: {}
       type:
         value: monster
         subtype: ''
       prerequisites:
         level: null
-        repeatable: false
         items: []
+        repeatable: false
       properties: []
       requirements: ''
       identifier: command
       advancement: {}
-      cover: null
       crewed: false
     _id: phbaoiAttackAtta
     type: feat
@@ -743,11 +699,15 @@ items:
         type: base
         system:
           changes: []
+          conditions: '{}'
+          magical: false
+          rider:
+            statuses: []
         disabled: false
         duration:
-          value: 1
-          units: rounds
-          expiry: turnStart
+          value: null
+          units: seconds
+          expiry: sourceStart
           expired: false
         description: >-
           <p>The target has the &amp;Reference[Frightened apply=false] condition
@@ -762,12 +722,12 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '14.364'
+          coreVersion: '14.367'
           systemId: dnd5e
-          systemVersion: 5.3.0
-          lastModifiedBy: null
-          createdTime: null
-          modifiedTime: null
+          systemVersion: 6.0.0
+          lastModifiedBy: dnd5ebuilder0000
+          createdTime: 1787693535144
+          modifiedTime: 1787693535144
         showIcon: 2
         start: null
         folder: null
@@ -783,15 +743,15 @@ items:
           activity: []
           effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.actors24.Actor.phbsplConjuredFe.Item.phbaoiAttackAtta
+      compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693535144
+      modifiedTime: 1787693535144
     _key: '!actors.items!phbsplConjuredFe.phbaoiAttackAtta'
 effects: []
 folder: 9mmdDqYZFLIJBacj
@@ -801,11 +761,11 @@ flags:
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452721552
-  modifiedTime: 1771452721552
+  systemVersion: 6.0.0
+  createdTime: 1787693535144
+  modifiedTime: 1787693535144
   lastModifiedBy: dnd5ebuilder0000
 sort: 1200000
 ownership:

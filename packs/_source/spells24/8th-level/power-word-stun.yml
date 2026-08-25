@@ -15,7 +15,7 @@ system:
     book: ''
     page: ''
     license: CC-BY-4.0
-    revision: 3
+    revision: 4
   activation:
     type: action
     condition: ''
@@ -146,11 +146,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1786481136430
-      modifiedTime: 1786481136430
+      createdTime: 1787693609840
+      modifiedTime: 1787693609840
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -178,9 +178,9 @@ effects:
       conditions: '{}'
     disabled: false
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     description: <p>The target's Speed is 0 until the start of your next turn.</p>
     tint: '#ffffff'
@@ -192,11 +192,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1786481136430
-      modifiedTime: 1786481136430
+      createdTime: 1787693609840
+      modifiedTime: 1787693609840
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -210,11 +210,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.365'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 6.0.0
-  createdTime: 1786481136430
-  modifiedTime: 1786481136430
+  createdTime: 1787693609840
+  modifiedTime: 1787693609840
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPowerWordS'

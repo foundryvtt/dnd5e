@@ -186,8 +186,7 @@ effects:
     disabled: false
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     img: icons/magic/time/clock-spinning-gold-pink.webp
     _id: NEFWcyysYgsE6de3
     type: base
@@ -234,11 +233,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1786481118454
-      modifiedTime: 1786481118454
+      createdTime: 1787693581584
+      modifiedTime: 1787693581584
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -248,9 +247,9 @@ effects:
   - name: Lethargy
     origin: Compendium.dnd5e.spells24.Item.phbsplHaste00000
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: targetEnd
       expired: false
     disabled: false
     flags:
@@ -284,11 +283,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1786481118454
-      modifiedTime: 1786481118454
+      createdTime: 1787693581584
+      modifiedTime: 1787693581584
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -302,11 +301,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.365'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 6.0.0
-  createdTime: 1786481118454
-  modifiedTime: 1786481118454
+  createdTime: 1787693581584
+  modifiedTime: 1787693581584
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHaste00000'

@@ -14,9 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -30,8 +31,9 @@ system:
       count: '1'
       choice: false
     template:
-      units: ''
+      units: ft
       contiguous: false
+      stationary: false
   range:
     value: '60'
     units: ft
@@ -50,9 +52,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -66,23 +65,32 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: yril8uhQgO1dR507
           onSave: false
+          uuid: null
+          level: {}
         - _id: uaHZaHEalgWa6eoC
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -90,15 +98,27 @@ system:
         onSave: half
         parts: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: ray-of-enfeeblement
+  method: spell
+  prepared: 0
 _id: phbsplRayofEnfee
 type: spell
 img: icons/magic/lightning/bolt-strike-beam-purple.webp
@@ -106,9 +126,9 @@ effects:
   - name: Brief Enfeeblement
     origin: Compendium.dnd5e.spells24.Item.phbsplRayofEnfee
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     disabled: false
     flags: {}
@@ -118,6 +138,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>The target has Disadvantage on the next attack roll it makes until the
       start of your next turn.</p>
@@ -128,11 +151,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543976519
-      modifiedTime: 1783543976519
+      createdTime: 1787693616932
+      modifiedTime: 1787693616932
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -149,8 +172,7 @@ effects:
     disabled: false
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     img: icons/skills/wounds/blood-cells-disease-green.webp
     _id: uaHZaHEalgWa6eoC
     type: base
@@ -161,38 +183,47 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 1uDwblWGdJVTQbBr
+          _id: ogXXyFIH4SZaHtGc
+          conditions: '{}'
         - key: system.bonuses.rwak.damage
           value: '- 1d8'
           priority: null
           type: add
           phase: initial
-          _id: Dil2VSCdXVsZ21rG
+          _id: U6mQsDGcLB1Gi9eC
+          conditions: '{}'
         - key: system.bonuses.msak.damage
           value: '- 1d8'
           priority: null
           type: add
           phase: initial
-          _id: FYKlWyCltgtXaEFg
+          _id: 0fEsVBVIa4MQxEHl
+          conditions: '{}'
         - key: system.bonuses.rsak.damage
           value: '- 1d8'
           priority: null
           type: add
           phase: initial
-          _id: bGHcPQ4Ul0orTs30
+          _id: sUz6h4vGlJHEPjER
+          conditions: '{}'
         - key: system.abilities.str.check.roll.mode
           value: -1
           priority: null
           type: add
           phase: initial
-          _id: Qc2sxBt76YreaDmM
+          _id: WeGsSzxJX8j4qy1F
+          conditions: '{}'
         - key: system.abilities.str.save.roll.mode
           value: -1
           priority: null
           type: add
           phase: initial
-          _id: XVoVArAG1dZU0iwP
+          _id: 72BZsWuUnO9SncJg
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>The target has Disadvantage on Strength-based D20 Tests for the
       duration. During that time, it also subtracts 1d8 from all its damage
@@ -205,11 +236,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543976519
-      modifiedTime: 1783543976519
+      createdTime: 1787693616932
+      modifiedTime: 1787693616932
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -223,11 +254,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1724425968070
-  modifiedTime: 1783543976519
+  systemVersion: 6.0.0
+  createdTime: 1787693616931
+  modifiedTime: 1787693616931
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRayofEnfee'

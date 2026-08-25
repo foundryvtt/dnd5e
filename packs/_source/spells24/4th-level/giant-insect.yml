@@ -1,13 +1,14 @@
 name: Giant Insect
 system:
   description:
-    value: "<p>You summon a giant centipede, spider, or wasp (chosen when you cast the spell). It manifests in an unoccupied space you can see within range and uses the <strong>@UUID[Compendium.dnd5e.actors24.Actor.phbmobGiantInsec]{Giant Insect}</strong> stat block. The form you choose determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the &amp;Reference[Dodge] action and uses its movement to avoid danger.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Use the spell slot's level for the spell's level in the stat block.</p><section class=\"fvtt advice\" style=\"margin:0.5rem;padding:0.5rem\"><article><p>In addition to the noted usage of the spell's level in the insect's Traits and Actions, the following attributes are also affected.</p><table><caption>Giant Insect</caption><tbody><tr><td><strong>AC</strong></td><td>11 + the spell's level</td></tr><tr><td><strong>HP</strong></td><td>30 + 10 for each spell level above 4</td></tr><tr><td><strong>Speed</strong></td><td>40 ft., Climb 40 ft., Fly 40 ft. (Wasp only)</td></tr><tr><td><strong>PB</strong></td><td>equals your Proficiency Bonus</td></tr></tbody></table></article></section>"
+    value: "<p>You summon a giant centipede, spider, or wasp (chosen when you cast the spell). It manifests in an unoccupied space you can see within range and uses the <strong>@UUID[Compendium.dnd5e.actors24.Actor.phbmobGiantInsec]{Giant Insect}</strong> stat block. The form you choose determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.</p><p>The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don't issue any, it takes the &amp;Reference[Dodge] action and uses its movement to avoid danger.</p><p><strong>Using a Higher-Level Spell Slot.</strong>\_Use the spell slot's level for the spell's level in the stat block.</p><p>@Embed[Compendium.dnd5e.actors24.Actor.phbmobGiantInsec statblock caption=false]</p>"
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -22,9 +23,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '60'
     units: ft
@@ -44,9 +46,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -60,18 +59,23 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -88,6 +92,8 @@ system:
         proficiency: true
         attacks: true
         saves: true
+        disposition: true
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -114,7 +120,6 @@ system:
             max: null
           types: []
       summon:
-        identifier: ''
         mode: ''
         prompt: true
       uses:
@@ -124,8 +129,20 @@ system:
       sort: 0
       name: ''
       img: ''
-      appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      tempHP: ''
+      behaviors: []
+      effects: []
+      flags: {}
   identifier: giant-insect
+  method: spell
+  prepared: 0
 _id: phbsplGiantInsec
 type: spell
 img: icons/creatures/invertebrates/bee-yellow.webp
@@ -134,18 +151,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 1900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425956378
-  modifiedTime: 1745256793724
+  systemVersion: 6.0.0
+  createdTime: 1787693573229
+  modifiedTime: 1787693573229
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGiantInsec'

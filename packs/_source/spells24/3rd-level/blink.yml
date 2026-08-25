@@ -19,8 +19,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -31,11 +32,15 @@ system:
   target:
     affects:
       choice: false
+      type: self
     template:
-      units: ''
+      units: ft
       contiguous: false
+      type: ''
+      stationary: false
   range:
     units: self
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -50,9 +55,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -66,20 +68,27 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: La5ofK0TnPSTL3iq
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -92,7 +101,17 @@ system:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: blink
+  method: spell
+  prepared: 0
 _id: phbsplBlink00000
 type: spell
 img: icons/magic/unholy/hand-marked-pink.webp
@@ -100,32 +119,37 @@ effects:
   - name: Ethereal
     origin: Compendium.dnd5e.spells24.Item.phbsplBlink00000
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
-    disabled: false
-    flags: {}
+    disabled: true
+    flags:
+      dnd5e:
+        riders: {}
     img: systems/dnd5e/icons/svg/statuses/ethereal.svg
     _id: La5ofK0TnPSTL3iq
     type: base
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: ''
     tint: '#ffffff'
-    transfer: false
+    transfer: true
     statuses:
       - ethereal
     sort: 0
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543974237
-      modifiedTime: 1783543974237
+      createdTime: 1787693505475
+      modifiedTime: 1787693505475
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -136,18 +160,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 3400000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425943980
-  modifiedTime: 1783543974237
+  systemVersion: 6.0.0
+  createdTime: 1787693505475
+  modifiedTime: 1787693505475
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBlink00000'
