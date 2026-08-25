@@ -1102,6 +1102,51 @@ Active effects have a special syntax that allows them to hide items on the actor
 ------------------------
 
 
+## Token Changes
+Active effects can also be used to make changes directly onto a token.
+
+![Token Light Changes](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/effect/effect-change-tokens.jpg)
+
+### Token Lighting
+
+```
+token.light.alpha
+            angle
+            animation.type
+                      speed
+                      intensity
+                      reverse
+            bright
+            color
+            dim
+            negative
+```
+
+Some useful values for animations and colors can be found in the [Lighting section](https://foundryvtt.com/article/content-creation-guide/#lighting) of the Content Creation Style Guide.
+
+#### Emit torch light from token
+E.g. Modifying the light emitted by a token to appear as torch light.
+
+| Attribute Key                | Change Mode | Effect Value  | Roll Data? | Example   |
+| ---------------------------- | ----------- | ------------- | ---------- | --------- |
+| `token.light.dim`            | Override    | `[number]`    | No         | `40`      |
+| `token.light.bright`         | Override    | `[number]`    | No         | `20`      |
+| `token.light.color`          | Override    | `[color]`     | No         | `#a2642a` |
+| `token.light.alpha`          | Override    | `[number]`    | No         | `0.7`     |
+| `token.light.animation.type` | Override    | `[animation]` | No         | `flame`   |
+
+#### Creating area of darkness
+E.g. From the Darkness spell.
+
+| Attribute Key          | Change Mode | Effect Value  | Roll Data? | Example   |
+| ---------------------- | ----------- | ------------- | ---------- | --------- |
+| `token.light.dim`      | Override    | `[number]`    | No         | `15`      |
+| `token.light.negative` | Override    | `[boolean]`   | No         | `true`    |
+
+
+------------------------
+
+
 ## Honorable Mentions
 You can override the name of an actor (on the actor sheet, not the token), as well as its displayed image.
 
