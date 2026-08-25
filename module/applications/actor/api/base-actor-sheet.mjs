@@ -796,7 +796,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _prepareActivity(activity) {
-    let { _id, activation, img, labels, name, range, save, uses } = activity.prepareSheetContext();
+    let { _id, activation, img, labels, name, range, save, uses, uuid } = activity.prepareSheetContext();
 
     // Activation
     const activationAbbr = {
@@ -819,7 +819,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     uses.prop = "uses.value";
 
     return {
-      _id, img, labels, name, range, uses,
+      _id, img, labels, name, range, uses, uuid,
       activation: activationAbbr
         ? `${activation.value ?? ""}${_loc(activationAbbr)}`
         : labels.activation,

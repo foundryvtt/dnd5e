@@ -266,7 +266,7 @@ export default class Tooltips5e {
     game.tooltip._setAnchor(direction);
 
     // Set overflowing styles for item tooltips.
-    if ( this.tooltip.classList.contains("item-tooltip") ) {
+    if ( this.tooltip.classList.contains("document-tooltip") ) {
       const description = this.tooltip.querySelector(".description");
       description?.classList.toggle("overflowing", description.clientHeight < description.scrollHeight);
     }
