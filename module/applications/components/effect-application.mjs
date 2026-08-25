@@ -135,7 +135,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
       Object.assign(li.dataset, {
         id: effect.id,
         tooltipHtml: loadingTooltip({ uuid: effect.uuid }),
-        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip",
+        tooltipClass: "dnd5e2 dnd5e-tooltip effect-tooltip document-tooltip",
         tooltipDirection: "LEFT",
         uuid: effect.uuid
       });

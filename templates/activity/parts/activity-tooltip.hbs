@@ -1,0 +1,39 @@
+<section class="content">
+    <section class="header">
+        <div class="top">
+            <div class="images">
+                <img src="{{ item.img }}" alt="{{ item.name }}">
+                {{ dnd5e-icon img alt=name }}
+            </div>
+            <div class="name name-stacked">
+                <span class="title">{{ name }}</span>
+                <span class="subtitle">{{{ subtitle }}}</span>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="charges">
+                {{#if uses.max}}
+                <span class="value">{{ uses.value }}</span>
+                <span class="separator">&sol;</span>
+                <span class="max">{{ uses.max }}</span>
+                <span>{{ localize "DND5E.Charges" }}</span>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+    {{#if extras}}<p class="extras">{{{ extras }}}</p>{{/if}}
+    <section class="description">{{{ description }}}</section>
+    <ul class="pills">
+        {{#each properties}}
+        <li class="pill transparent">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+    </ul>
+    {{#if controlHints}}
+    <div class="control-hint lock-hint">
+        <img src="systems/dnd5e/icons/svg/mouse-middle.svg" alt="{{ localize "DND5E.Controls.MiddleClick" }}">
+        <span>{{ localize "DND5E.Controls.LockHint" }}</span>
+    </div>
+    {{/if}}
+</section>

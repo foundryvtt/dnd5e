@@ -1374,7 +1374,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       content: await foundry.applications.handlebars.renderTemplate(
         "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", context
       ),
-      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip"]
+      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip", "document-tooltip"]
     };
   }
 

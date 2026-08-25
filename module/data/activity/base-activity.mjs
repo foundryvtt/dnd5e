@@ -6,6 +6,7 @@ import FormulaField from "../fields/formula-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
+import PropertyField from "../shared/property-field.mjs";
 import RangeField from "../shared/range-field.mjs";
 import TargetField from "../shared/target-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
@@ -13,6 +14,7 @@ import AppliedBehaviorField from "./fields/applied-behavior-field.mjs";
 import AppliedEffectField from "./fields/applied-effect-field.mjs";
 import ConsumptionTargetsField from "./fields/consumption-targets-field.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const {
   ArrayField, BooleanField, DocumentFlagsField, DocumentIdField, FilePathField,
   HTMLField, IntegerSortField, NumberField, SchemaField, StringField
@@ -609,6 +611,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       this._setOverride("range");
       if ( this.range.long > this.range.value ) this.range.value = this.range.long;
       else if ( this.range.reach && !this.range.value ) this.range.value = this.range.reach;
+      if ( this.type !== "attack" ) delete this.range.reach;
     }
     if ( this.target ) this._setOverride("target");
 
@@ -718,7 +721,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         isOnCooldown: hasRecharge && (this.uses.value < 1),
         prop: "uses.value",
         pct: this.uses.max ? Math.clamp((this.uses.value / this.uses.max) * 100, 0, 100) : 0
-      } : null
+      } : null,
+      uuid: this.uuid
     };
   }
 
@@ -758,9 +762,44 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   async getCardData() {
     const { description, id, img, name, type, uuid } = this;
     return {
+      activity: { id, img, name, type, uuid, chatFlavor: description.chatFlavor },
       description: description.value,
-      activity: { id, img, name, type, uuid, chatFlavor: description.chatFlavor }
+      properties: [
+        ...PropertyField.getUsageProperties(this.getUsageData())
+      ],
+      subtitle: []
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare activity tooltip template data.
+   * @param {EnrichmentOptions} [options={}]  Options for text enrichment.
+   * @param {string} [options.extras]         Extra HTML displayed with the tooltip.
+   * @returns {Promise<object>}
+   */
+  async getTooltipData({ extras, ...enrichmentOptions }={}) {
+    enrichmentOptions.rollData ??= this.getRollData();
+    enrichmentOptions.relativeTo ??= this.item;
+    const context = await this.getCardData();
+
+    let { name, type, img, uses } = this;
+    uses = this._source.uses.max || this.uses.max ? uses : null;
+
+    Object.assign(context, {
+      name, type, img, uses, extras,
+      config: CONFIG.DND5E,
+      controlHints: game.settings.get("dnd5e", "controlHints"),
+      description: await TextEditor.enrichHTML(context.description || "", enrichmentOptions),
+      item: {
+        name: this.item.name, img: this.item.img
+      },
+      labels: foundry.utils.deepClone(this.labels),
+      properties: PropertyField.getLabels(context.properties, this),
+      subtitle: context.subtitle.filterJoin(" • ")
+    });
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -939,8 +978,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       configurable: true,
       enumerable: false
     });
-    if ( obj.canOverride && !obj.override && !this.isRider ) {
+    if ( obj.canOverride && !obj.override && !obj.overrideSet && !this.isRider ) {
       foundry.utils.mergeObject(obj, foundry.utils.getProperty(item.system, keyPath));
+      Object.defineProperty(obj, "overrideSet", { value: true, configurable: true, enumerable: false });
     }
   }
 }

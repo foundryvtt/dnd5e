@@ -697,7 +697,7 @@ export default class CompendiumBrowser extends Application5e {
     const element = foundry.utils.parseHTML(html);
     if ( documentClass !== "Item" ) return element;
     element.dataset.tooltipHtml = loadingTooltip({ uuid });
-    element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip";
+    element.dataset.tooltipClass = "dnd5e2 dnd5e-tooltip item-tooltip document-tooltip";
     element.dataset.tooltipDirection ??= "RIGHT";
     if ( context.prerequisites ) element.dataset.tooltipExtras = game.i18n.getListFormatter({ type: "unit" }).format(
       context.prerequisites.results.values().map(r =>

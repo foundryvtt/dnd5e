@@ -1,8 +1,8 @@
-<li class="activity-row draggable item-row" data-activity-id="{{ _id }}">
+<li class="activity-row draggable item-row" data-activity-id="{{ _id }}" data-uuid="{{ uuid }}">
 
     {{!-- Name --}}
-    <div class="activity-name item-name item-action {{ @root.rollableClass }}" role="button" aria-label="{{ name }}"
-         data-action="activity-use">
+    <div class="activity-name item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
+         aria-label="{{ name }}" data-action="activity-use">
 
         {{ dnd5e-icon img alt=name classes="activity-image item-image gold-icon" }}
 
