@@ -1444,8 +1444,8 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
 
   // Tokens
   else if ( attr.startsWith("token.") ) {
-    if ( attr === "token.light.dim" ) label = _loc("DND5E.TOKEN.Attribute.DimRadius");
-    else if ( attr === "token.light.bright" ) label = _loc("DND5E.TOKEN.Attribute.BrightRadius");
+    if ( attr === "token.light.dim" ) label = _loc("DND5E.TOKEN.Attribute.LightDimRadius");
+    else if ( attr === "token.light.bright" ) label = _loc("DND5E.TOKEN.Attribute.LightBrightRadius");
     else label = TokenDocument.schema.getField(attr.slice(6))?.label;
     if ( label ) label = _loc("DND5E.TOKEN.Attribute.Label", { attribute: label });
   }
