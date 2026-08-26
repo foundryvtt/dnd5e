@@ -19,7 +19,8 @@
                 {{#each activities}}
 
                 {{!-- Activities --}}
-                <li class="item activity" data-activity-id="{{ id }}" data-uuid="{{ uuid }}">
+                <li class="item activity {{~#if isRider}} rider{{/if}}" data-activity-id="{{ id }}"
+                    data-uuid="{{ uuid }}">
 
                     {{!-- Primary Activity --}}
                     <div class="item-row draggable">
