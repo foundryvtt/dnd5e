@@ -262,7 +262,7 @@ export default class UsageMessageData extends ItemMessageData {
       obj[action] ??= { icon, entries: [] };
       if ( canGroup ) {
         context.rows[action] ??= { icon, entries: [], label: `DND5E.CHATMESSAGE.Row.${action}` };
-        context.rows[action].entries.push(label);
+        context.rows[action].entries.push({ label });
         if ( obj[action].entries.length ) {
           obj[action].entries[0].singleton = false;
           return obj;

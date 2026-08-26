@@ -21,13 +21,5 @@
     {{/each}}
 
     {{!-- Buttons --}}
-    {{#if buttons.length}}
-    <div class="card-buttons">
-        {{#each buttons}}
-        <button type="button" {{ dnd5e-dataset dataset }}>
-            <i class="{{ icon }}" inert></i> <span>{{ localize label }}</span>
-        </button>
-        {{/each}}
-    </div>
-    {{/if}}
+    {{> "dnd5e.card-buttons" }}
 </div>

@@ -11,32 +11,28 @@
     <p class="order-description">{{ localize "DND5E.Bastion.Summary.NoOrders" }}</p>
     {{/if}}
 
-    {{!-- Items --}}
-    {{#if items.length}}
-    <ul class="unlist item-summary">
-        {{#each items}}
-        <li class="item-tooltip" data-uuid="{{ uuid }}" data-quantity="{{ quantity }}" data-action="viewItem"
-            data-tooltip-html="{{ dnd5e-tooltip uuid=uuid }}">
-            <img src="{{ img }}" alt="{{ name }}">
-        </li>
-        {{/each}}
-    </ul>
-    {{/if}}
-
     {{!-- Supplements --}}
     {{#each supplements}}
     <p class="supplement">{{{ this }}}</p>
     {{/each}}
 
     {{!-- Buttons --}}
-    {{#if buttons.length}}
-    <div class="card-buttons">
-        {{#each buttons}}
-        <button type="button" {{ dnd5e-dataset dataset }}>
-            {{{ icon }}} <span>{{{ label }}}</span>
-        </button>
-        {{/each}}
-    </div>
+    {{> "dnd5e.card-buttons" }}
+
+    {{!-- Items --}}
+    {{#if items.length}}
+    <section class="icon-row">
+        <i class="fa-fw fa-solid fa-treasure-chest" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Items" }}"></i>
+        <ul class="unlist item-summary">
+            {{#each items}}
+            <li class="item-tooltip{{#if claimed}} claimed{{/if}}" data-uuid="{{ uuid }}" data-index="{{ index }}"
+                data-quantity="{{ quantity }}" data-action="viewItem" data-tooltip-html="{{ dnd5e-tooltip uuid=uuid }}">
+                <img src="{{ img }}" alt="{{ name }}">
+                <div class="quantity">&times;{{ quantity }}</div>
+            </li>
+            {{/each}}
+        </ul>
+    </section>
     {{/if}}
 
 </div>

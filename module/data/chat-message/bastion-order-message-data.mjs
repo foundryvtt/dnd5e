@@ -1,6 +1,7 @@
 import CurrencyManager from "../../applications/currency-manager.mjs";
 import { bulkFromUuid } from "../../utils.mjs";
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
+import SourceReferenceField from "./fields/source-reference-field.mjs";
 
 const {
   ArrayField, BooleanField, DocumentUUIDField, NumberField, SchemaField, StringField
@@ -33,6 +34,7 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
         item: new DocumentUUIDField({ type: "Item" }),
         quantity: new NumberField({ integer: true, positive: true })
       }),
+      item: new SourceReferenceField(),
       order: new StringField({ required: true }),
       trade: new SchemaField({
         creatures: new ArrayField(new DocumentUUIDField({ type: "Actor" })),
@@ -70,9 +72,25 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element, options={}) {
+    super._onRender(element, options);
+    element.classList.add("compact");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _prepareContext() {
-    const { actor, costs, craft, item, order, trade } = this;
-    const context = { buttons: [], supplements: [] };
+    const { actor, costs, craft, order, trade } = this;
+    const item = this.parent.getAssociatedItem();
+    const context = { supplements: [] };
 
     if ( item ) {
       const facilityType = _loc(`DND5E.FACILITY.Types.${item.system.type.value.titleCase()}.Label.one`);
@@ -126,16 +144,21 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
       value: trade.value
     });
 
-    if ( costs.gold && !costs.paid && (game.user.isGM || actor?.isOwner) ) context.buttons.push({
-      dataset: { action: "pay", method: "automatic" },
-      icon: "fa-solid fa-coins",
-      label: "DND5E.FACILITY.Costs.Automatic"
-    }, {
-      dataset: { action: "pay", method: "manual" },
-      icon: "fa-solid fa-clipboard-check",
-      label: "DND5E.FACILITY.Costs.Manual"
-    });
+    const buttons = {};
+    if ( costs.gold && !costs.paid && (game.user.isGM || actor?.isOwner) ) {
+      buttons.pay = { entries: [{
+        dataset: { action: "pay", method: "automatic" },
+        icon: "fa-solid fa-coins",
+        label: "DND5E.FACILITY.Costs.Automatic"
+      }] };
+      buttons.mark = { entries: [{
+        dataset: { action: "pay", method: "manual" },
+        icon: "fa-solid fa-clipboard-check",
+        label: "DND5E.FACILITY.Costs.Manual"
+      }] };
+    }
 
+    if ( !foundry.utils.isEmpty(buttons) ) context.buttonGroups = buttons;
     return context;
   }
 
@@ -151,7 +174,8 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
    * @returns {Promise<void>}
    */
   static async #onPay(event, target) {
-    const { actor, costs, item } = this;
+    const { actor, costs } = this;
+    const item = this.parent.getAssociatedItem();
     if ( !costs.gold || costs.paid ) return;
     target.disabled = true;
     try {

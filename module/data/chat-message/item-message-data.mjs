@@ -107,7 +107,7 @@ export default class ItemMessageData extends ChatMessageDataModel {
         properties: {
           entries: PropertyField.getLabels(showIdentity ? this.properties : this.properties.filter(p => !p.identity), {
             ...this, properties: item.properties
-          }),
+          }).map(label => ({ label })),
           icon: "fa-solid fa-tag",
           label: "DND5E.CHATMESSAGE.Row.Properties"
         }

@@ -13,6 +13,12 @@ const { BooleanField, DocumentIdField, NumberField } = foundry.data.fields;
  */
 export default class BastionAttackMessageData extends ChatMessageDataModel {
 
+  /**
+   * Template used to render each individual roll within the message.
+   * @type {string}
+   */
+  static ROLL_TEMPLATE = "systems/dnd5e/templates/chat/parts/roll-compact.hbs";
+
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -54,19 +60,37 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
+  _getEnrichmentOptions() {
+    return { avatar: false };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onRender(element, options={}) {
+    super._onRender(element, options);
+    element.classList.add("compact");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _prepareContext() {
     const context = {};
     const plurals = new Intl.PluralRules(game.i18n.lang);
     const key = this.undefended ? "Undefended" : this.deaths ? `Deaths.${plurals.select(this.deaths)}` : "NoDeaths";
+    const isPrivate = !this.parent.isContentVisible;
     context.description = _loc(`DND5E.Bastion.Attack.Result.${key}`, { deaths: this.deaths });
-    context.roll = await this.parent.rolls[0].render();
-    context.buttons = [];
+    context.rolls = await Promise.all(this.parent.rolls.map(roll => roll.render({
+      isPrivate, message: this.parent, template: this.constructor.ROLL_TEMPLATE
+    })));
+    const buttons = {};
     if ( !this.resolved && (this.deaths || this.undefended) ) {
-      context.buttons.push({
-        label: _loc("DND5E.Bastion.Attack.Automatic"),
-        icon: '<i class="fa-solid fa-bolt" inert></i>',
-        dataset: { action: "resolve" }
-      });
+      buttons.resolve = { entries: [{
+        dataset: { action: "resolve" },
+        icon: "fa-solid fa-bolt",
+        label: "DND5E.Bastion.Attack.Automatic"
+      }] };
     }
     if ( this.damaged ) {
       const facility = this.actor?.items.get(this.damaged);
@@ -74,6 +98,7 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
         link: facility.toAnchor().outerHTML
       });
     }
+    if ( !foundry.utils.isEmpty(buttons) )context.buttonGroups = buttons;
     return context;
   }
 
