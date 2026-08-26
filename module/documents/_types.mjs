@@ -23,6 +23,7 @@
 
 /**
  * @typedef BastionTurnItem
+ * @property {boolean} claimed  Whether the Item has been claimed.
  * @property {string} uuid      The UUID of the generated Item.
  * @property {number} quantity  The quantity of items generated.
  */

@@ -1827,7 +1827,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this._onDropSingleItem(event, itemData, { container: container.id });
       }
     });
-    const created = await Item5e.createDocuments(toCreate, { parent: this.inventorySource, keepId: true });
+    let bastionClaim;
+    for ( const itemData of toCreate ) {
+      bastionClaim ??= foundry.utils.getProperty(itemData, "flags.dnd5e.bastionClaim");
+      foundry.utils.deleteProperty(itemData, "flags.dnd5e.bastionClaim");
+    }
+    const created = await Item5e.createDocuments(toCreate, {
+      dnd5e: { bastionClaim }, keepId: true, parent: this.inventorySource
+    });
     if ( event._behavior === "move" ) item.delete({ deleteContents: true });
     return created;
   }
@@ -1881,7 +1888,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this._onDropSingleItem(event, item);
       }
     });
-    const created = await Item5e.createDocuments(toCreate, { parent: this.inventorySource, keepId: true });
+    let bastionClaim;
+    for ( const itemData of toCreate ) {
+      bastionClaim ??= foundry.utils.getProperty(itemData, "flags.dnd5e.bastionClaim");
+      foundry.utils.deleteProperty(itemData, "flags.dnd5e.bastionClaim");
+    }
+    const created = await Item5e.createDocuments(toCreate, {
+      dnd5e: { bastionClaim }, keepId: true, parent: this.inventorySource
+    });
     if ( behavior === "move" ) items.forEach(i => i.delete({ deleteContents: true }));
     return created;
   }
@@ -1985,7 +1999,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( !similarItem ) return null;
     return similarItem.update({
       "system.quantity": similarItem.system.quantity + Math.max(itemData.system.quantity, 1)
-    });
+    }, { dnd5e: { bastionClaim: itemData.flags?.dnd5e?.bastionClaim } });
   }
 
   /* -------------------------------------------- */

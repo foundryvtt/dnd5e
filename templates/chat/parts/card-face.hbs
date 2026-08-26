@@ -43,20 +43,7 @@
     {{/each}}
 
     {{!-- Rows --}}
-    {{#each rows}}
-    {{#if entries.length}}
-    <section class="icon-row">
-        <i class="fa-fw {{ icon }}" aria-label="{{ localize label }}"></i>
-        <ul class="pills unlist">
-            {{#each entries}}
-            <li class="pill transparent">
-                <span class="label">{{ this }}</span>
-            </li>
-            {{/each}}
-        </ul>
-    </section>
-    {{/if}}
-    {{/each}}
+    {{> "dnd5e.card-rows" }}
 
     {{!-- Targets --}}
     {{#if showTargets}}
@@ -64,22 +51,5 @@
     {{/if}}
 
     {{!-- Buttons --}}
-    {{#if buttonGroups}}
-    <section class="icon-row">
-        <i class="fa-solid fa-fw fa-circle-play" aria-label="{{ localize "DND5E.CHATMESSAGE.Row.Actions" }}"></i>
-        <ul class="unlist">
-            {{#each buttonGroups}}
-            {{#each entries}}
-            <li>
-                <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}"
-                        {{#if (and canGroup (not singleton))}}data-group data-forward-action="{{ action }}"
-                        {{else}}data-action="{{ action }}" data-index="{{ index }}"{{/if}}>
-                    {{ dnd5e-icon icon }}
-                </button>
-            </li>
-            {{/each}}
-            {{/each}}
-        </ul>
-    </section>
-    {{/if}}
+    {{> "dnd5e.card-buttons" }}
 </div>
