@@ -4,6 +4,7 @@ import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import TravelField from "../../data/actor/fields/travel-field.mjs";
 import AttributesFields from "../../data/actor/templates/attributes.mjs";
+import BastionTurnMessageData from "../../data/chat-message/bastion-turn-message-data.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
@@ -3365,6 +3366,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
     }
+    if ( game.user.isActiveGM ) await BastionTurnMessageData.applyClaim(options);
   }
 
   /* -------------------------------------------- */

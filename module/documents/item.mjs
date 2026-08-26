@@ -4,6 +4,7 @@ import AdvancementConfirmationDialog from "../applications/advancement/advanceme
 import ContextMenu5e from "../applications/context-menu.mjs";
 import CreateDocumentDialog from "../applications/create-document-dialog.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
+import BastionTurnMessageData from "../data/chat-message/bastion-turn-message-data.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
 import EquipmentData from "../data/item/equipment.mjs";
@@ -1143,6 +1144,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     await this.system.onCreateActivities?.(data, options, userId);
+    if ( game.user.isActiveGM ) await BastionTurnMessageData.applyClaim(options);
   }
 
   /* -------------------------------------------- */
@@ -1159,6 +1161,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   async _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
     await this.system.onUpdateActivities?.(changed, options, userId);
+    if ( game.user.isActiveGM ) await BastionTurnMessageData.applyClaim(options);
   }
 
   /* -------------------------------------------- */

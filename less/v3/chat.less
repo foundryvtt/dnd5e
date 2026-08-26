@@ -614,8 +614,106 @@
 
   &.rest-card, &.time-passed-card {
     > p {
-      font-size: var(--font-size-11);
+      font-size: var(--font-size-12);
+      font-style: italic;
       margin: 0;
+    }
+
+    .bastion {
+      border-block-start: 1px dashed var(--dnd5e-color-blue-gray-3);
+      margin: 4px -8px 0;
+      padding: 8px 8px 0;
+
+      p {
+        font-size: var(--font-size-12);
+        margin-block-start: 4px;
+      }
+    }
+  }
+}
+
+/* -------------------------------------------- */
+/*  Bastion Cards                               */
+/* -------------------------------------------- */
+
+.dnd5e2 .chat-card.order-card {
+  padding-block-start: 4px;
+}
+
+.dnd5e2 .chat-card {
+  &.order-card { padding-block-start: 4px; }
+
+  .order-description {
+    padding: 8px;
+    text-align: center;
+    text-wrap: balance;
+
+    + .order-description { margin-top: -.5em; }
+  }
+
+  .bastion-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .order-summary {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-size-12);
+    gap: 6px;
+  }
+
+  .item-summary {
+    display: flex;
+    gap: 4px;
+
+    li {
+      block-size: 28px;
+      border: var(--dnd5e-border-gold);
+      border-radius: 3px;
+      cursor: var(--cursor-pointer);
+      flex: 0 0 28px;
+      inline-size: 28px;
+      overflow: visible;
+      position: relative;
+
+      > img {
+        background: var(--dnd5e-background-alt-2);
+        block-size: 100%;
+        border: none;
+        inline-size: 100%;
+        max-width: unset;
+        object-fit: cover;
+        pointer-events: none;
+      }
+
+      .quantity {
+        background: var(--dnd5e-color-black);
+        border-radius: 3px;
+        color: var(--dnd5e-color-gold);
+        font-size: var(--font-size-11);
+        inset: auto 2px -8px 2px;
+        position: absolute;
+        text-align: center;
+      }
+
+      &.claimed {
+        border-style: dashed;
+        border-width: 2px;
+        display: inline-grid;
+        place-content: center;
+
+        img, .quantity { display: none; }
+
+        &::after {
+          color: var(--color-text-tertiary);
+          content: "\f00c";
+          font-family: var(--font-awesome);
+          font-size: var(--font-size-9);
+          font-weight: bold;
+        }
+      }
     }
   }
 }
