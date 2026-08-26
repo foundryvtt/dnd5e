@@ -61,7 +61,7 @@ export default class ScaleValueAdvancement extends Advancement {
    * @type {string}
    */
   get identifier() {
-    return this.configuration.identifier || formatIdentifier(this.title);
+    return this.configuration.identifier || formatIdentifier(this.name);
   }
 
   /* -------------------------------------------- */
@@ -78,8 +78,8 @@ export default class ScaleValueAdvancement extends Advancement {
   /** @inheritDoc */
   titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const value = this.valueForLevel(level)?.display;
-    if ( (!value && (value !== 0)) || !legacyDisplay ) return this.title;
-    return `${this.title}: <strong>${value}</strong>`;
+    if ( (!value && (value !== 0)) || !legacyDisplay ) return this.name;
+    return `${this.name}: <strong>${value}</strong>`;
   }
 
   /* -------------------------------------------- */

@@ -229,7 +229,7 @@ export default class JournalClassPageSheet extends JournalEntryPageHandlebarsShe
     const headers = [[{content: _loc("DND5E.Level")}]];
     if ( item.type === "class" ) headers[0].push({content: _loc("DND5E.ProficiencyBonus")});
     if ( hasFeatures ) headers[0].push({content: _loc("DND5E.Features")});
-    headers[0].push(...scaleValues.map(a => ({content: a.title})));
+    headers[0].push(...scaleValues.map(a => ({ content: a.name })));
     if ( spellProgression?.headers?.length > 1 ) {
       headers[0].forEach(h => h.rowSpan = 2);
       headers[0].push(...spellProgression.headers[0]);

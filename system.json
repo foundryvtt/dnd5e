@@ -148,25 +148,25 @@
       },
       "race": {
         "filePathFields": {
-          "advancement.*.icon": ["IMAGE"]
+          "advancement.*.img": ["IMAGE"]
         },
         "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "background": {
         "filePathFields": {
-          "advancement.*.icon": ["IMAGE"]
+          "advancement.*.img": ["IMAGE"]
         },
         "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "class": {
         "filePathFields": {
-          "advancement.*.icon": ["IMAGE"]
+          "advancement.*.img": ["IMAGE"]
         },
         "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
       "subclass": {
         "filePathFields": {
-          "advancement.*.icon": ["IMAGE"]
+          "advancement.*.img": ["IMAGE"]
         },
         "htmlFields": ["advancement.*.hint", "description.value", "description.chat"]
       },
@@ -179,7 +179,7 @@
       "feat": {
         "filePathFields": {
           "activities.*.img": ["IMAGE"],
-          "advancement.*.icon": ["IMAGE"]
+          "advancement.*.img": ["IMAGE"]
         },
         "htmlFields": ["activities.*.description.value", "advancement.*.hint", "description.value", "description.chat"]
       },

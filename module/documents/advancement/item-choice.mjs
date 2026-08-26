@@ -61,8 +61,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     let tag;
     if ( data.count ) tag = _loc("DND5E.ADVANCEMENT.ItemChoice.Choose", { count: data.count });
     else if ( data.replacement ) tag = _loc("DND5E.ADVANCEMENT.ItemChoice.Replacement.Title");
-    else return this.title;
-    return `${this.title} <em>(${tag})</em>`;
+    else return this.name;
+    return `${this.name} <em>(${tag})</em>`;
   }
 
   /* -------------------------------------------- */
