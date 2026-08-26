@@ -1,12 +1,16 @@
 <div class="chat-card bastion-card">
 
     {{!-- Orders --}}
-    {{#if orders.length}}
+    {{#if (gt orders.length 1)}}
     <ul class="unlist order-summary">
         {{#each orders}}
         <li>{{{ localize "DND5E.Bastion.Summary.Order" link=contentLink order=order }}}</li>
         {{/each}}
     </ul>
+    {{else if orders.length}}
+    <p class="order-description">
+        {{{ localize "DND5E.Bastion.Summary.Order" link=orders.0.contentLink order=orders.0.order }}}
+    </p>
     {{else}}
     <p class="order-description">{{ localize "DND5E.Bastion.Summary.NoOrders" }}</p>
     {{/if}}

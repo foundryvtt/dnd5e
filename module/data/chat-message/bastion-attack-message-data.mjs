@@ -98,7 +98,7 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
         link: facility.toAnchor().outerHTML
       });
     }
-    if ( !foundry.utils.isEmpty(buttons) )context.buttonGroups = buttons;
+    if ( !foundry.utils.isEmpty(buttons) ) context.buttonGroups = buttons;
     return context;
   }
 
