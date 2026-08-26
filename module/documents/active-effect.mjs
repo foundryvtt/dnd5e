@@ -751,7 +751,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( effectData ) {
         delete effectData._id;
         delete effectData.flags?.dnd5e?.rider;
-        foundry.utils.setProperty(effectData, "system.origin", this.system.origin);
+        foundry.utils.setProperty(effectData, "system.origin", { ...this.system.origin });
       }
       return effectData;
     }));
