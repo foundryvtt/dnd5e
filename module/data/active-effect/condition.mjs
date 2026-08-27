@@ -50,7 +50,7 @@ export default class ConditionData extends foundry.data.ActiveEffectTypeDataMode
 
   /** @inheritDoc */
   get isSuppressed() {
-    return this.parent.actor?.system.traits?.ci?.value.has(this.type);
+    return super.isSuppressed || this.parent.actor?.system.traits?.ci?.value.has(this.type);
   }
 
   /* -------------------------------------------------- */
