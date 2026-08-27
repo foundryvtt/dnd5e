@@ -71,19 +71,19 @@ export default class BackgroundData extends ItemDataModel.mixin(
   /** @override */
   _advancementToCreate(options) {
     if ( dnd5e.settings.rulesVersion === "legacy" ) return [
-      { type: "Trait", title: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
-      { type: "ItemGrant", title: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundFeature") }
+      { type: "Trait", name: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
+      { type: "ItemGrant", name: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundFeature") }
     ];
 
     return [
       { type: "AbilityScoreImprovement", configuration: { points: 3 } },
-      { type: "Trait", title: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
+      { type: "Trait", name: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundProficiencies") },
       {
         type: "Trait",
-        title: _loc("DND5E.ADVANCEMENT.Defaults.ChooseLanguages"),
+        name: _loc("DND5E.ADVANCEMENT.Defaults.ChooseLanguages"),
         configuration: { grants: ["languages:standard:common"] }
       },
-      { type: "ItemGrant", title: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundFeat") }
+      { type: "ItemGrant", name: _loc("DND5E.ADVANCEMENT.Defaults.BackgroundFeat") }
     ];
   }
 

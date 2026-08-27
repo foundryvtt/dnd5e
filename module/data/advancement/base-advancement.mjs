@@ -53,11 +53,11 @@ export default class BaseAdvancementData extends SparseDataModel {
     super.migrateData(source);
     if ( !source ) return source;
 
-    if ( source.title ) {
+    if ( "title" in source ) {
       source.name ||= source.title;
       delete source.title;
     }
-    if ( source.icon ) {
+    if ( "icon" in source ) {
       source.img ||= source.icon;
       delete source.icon;
     }
