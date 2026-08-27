@@ -14,6 +14,14 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   #senseOverrides;
 
   /* -------------------------------------------- */
+
+  /**
+   * Cache size to detect when it has changed.
+   * @type {string}
+   */
+  #size;
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -514,7 +522,14 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @inheritDoc */
   _onRelatedUpdate(update={}, operation={}) {
     super._onRelatedUpdate(update, operation);
-    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+
+    const size = this.actor?.system.traits?.size;
+    if ( dnd5e.settings.tokenSizeSync && (size !== this.#size) ) {
+      this.#size = size;
+      this.object?.renderFlags.set({ refreshMesh: true });
+    }
+
+    if ( !dnd5e.settings.senseVisionSync ) return;
     const senses = this.actor?.system?.attributes?.senses;
     if ( !senses ) return;
 

@@ -399,7 +399,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     super.applyActiveEffects(phase);
-    if ( (phase !== "initial") || !this.system.isCreature ) return;
+    if ( (phase !== "initial") || !this.system.isCreature || !dnd5e.settings.tokenSizeSync ) return;
 
     // Translate this Actor's size category into Token changes
     const sizeData = CONFIG.DND5E.actorSizes[this.system.traits?.size];
@@ -412,16 +412,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       value: tokenSize,
       conditions: new Filter({ o: "NOT", v: { k: "token.flags.dnd5e.lockSize", v: true } })
     })));
-    const tokenScale = sizeData.dynamicTokenScale ?? 1;
-    if ( tokenScale !== 1 ) {
-      this.tokenActiveEffectChanges[phase].push(...["texture.scaleX", "texture.scaleY"].map(key => ({
-        key, phase,
-        type: "multiply",
-        priority: 0,
-        value: tokenScale,
-        conditions: new Filter({ o: "NOT", v: { k: "token.flags.dnd5e.lockScale", v: true } })
-      })));
-    }
   }
 
   /* -------------------------------------------- */

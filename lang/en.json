@@ -5634,11 +5634,11 @@
     "LightDimRadius": "Light Dim Radius"
   },
   "LockScale": {
-    "Hint": "Prevent a scaling adjustment from being applied to Token if Actor's size is small.",
+    "Hint": "Prevent a scaling adjustment from being applied to Token if Actor's size is Small.",
     "Label": "Lock Scale"
   },
   "LockSize": {
-    "Hint": "Prevent this Token's size from being modified when its Actor's size is changed.",
+    "Hint": "Unlock to input dimensions for this token manually, and prevent them from being adjusted automatically based on the creature size.",
     "Label": "Lock Size"
   }
 },
@@ -6837,6 +6837,10 @@
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
   "AUTOMATION": {
+    "Autosize": {
+      "Hint": "Automatically adjust a token's dimensions and scale based on their size category.",
+      "Name": "Sync Token Size"
+    },
     "Falling": {
       "Name": "Disable Falling Automation",
       "Hint": "Do not track the falling status of tokens."

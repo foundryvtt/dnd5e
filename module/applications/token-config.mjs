@@ -8,6 +8,15 @@ const { BooleanField } = foundry.data.fields;
  */
 export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
 
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      toggleSizeLock: TokenConfig5e._onToggleSizeLock
+    }
+  };
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
@@ -40,20 +49,39 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
   /* -------------------------------------------- */
 
   /**
+   * Adjust form state based on lockSize state.
+   * @internal
+   */
+  _applySizeLockState() {
+    const lockSize = this.form.elements["flags.dnd5e.lockSize"].checked;
+    ["width", "height", "depth"].forEach(name => this.form.elements[name].readOnly = !lockSize);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Add control to link token scale to actor scale.
    * @param {HTMLElement} html  The rendered markup.
    * @protected
    */
   _applyTokenScaleLock(html) {
-    if ( html.querySelector('[name="flags.dnd5e.lockScale"]') ) return;
+    if ( !dnd5e.settings.tokenSizeSync ) return;
+    const sizeGroup = this.form.elements.width.closest(".form-group");
+    if ( !sizeGroup || sizeGroup.querySelector("[data-action=toggleSizeLock]") ) return;
 
-    const lockSize = new BooleanField().toFormGroup({
-      hint: _loc("DND5E.TOKEN.LockSize.Hint"),
-      label: _loc("DND5E.TOKEN.LockSize.Label")
-    }, {
-      name: "flags.dnd5e.lockSize",
-      value: this.token._source.flags.dnd5e?.lockSize
-    });
+    const lockSize = this.token._source.flags.dnd5e?.lockSize;
+    const lockSizeInput = new BooleanField().toInput({ name: "flags.dnd5e.lockSize", value: lockSize });
+    lockSizeInput.hidden = true;
+    const toggleSizeLock = document.createElement("button");
+    toggleSizeLock.type = "button";
+    toggleSizeLock.classList.add("inline-control", "icon", "fa-solid", lockSize ? "fa-lock-open" : "fa-lock");
+    toggleSizeLock.toggleAttribute("data-tooltip", true);
+    toggleSizeLock.dataset.action = "toggleSizeLock";
+    toggleSizeLock.ariaLabel = _loc("DND5E.TOKEN.LockSize.Hint");
+    sizeGroup.querySelector(".form-fields").append(lockSizeInput, toggleSizeLock);
+    this._applySizeLockState();
+
+    if ( html.querySelector('[name="flags.dnd5e.lockScale"]') ) return;
     const lockScale = new BooleanField().toFormGroup({
       hint: _loc("DND5E.TOKEN.LockScale.Hint"),
       label: _loc("DND5E.TOKEN.LockScale.Label")
@@ -63,7 +91,24 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
     });
 
     const lockRotation = html.querySelector('.form-group:has([name="lockRotation"])');
-    lockRotation.after(lockSize, lockScale);
+    lockRotation.after(lockScale);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle toggling the token size lock.
+   * @this {TokenConfig5e|PrototypeTokenConfig5e}
+   * @param {PointerEvent} event        The triggering event.
+   * @param {HTMLButtonElement} target  The action target.
+   * @internal
+   */
+  static _onToggleSizeLock(event, target) {
+    const input = this.form.elements["flags.dnd5e.lockSize"];
+    const lockSize = input.checked = !input.checked;
+    target.classList.toggle("fa-lock-open", lockSize);
+    target.classList.toggle("fa-lock", !lockSize);
+    TokenConfig5e.prototype._applySizeLockState.call(this);
   }
 
   /* -------------------------------------------- */
@@ -167,6 +212,16 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
  * Custom prototype token configuration application for handling dynamic rings & resource labels.
  */
 export class PrototypeTokenConfig5e extends foundry.applications.sheets.PrototypeTokenConfig {
+
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      toggleSizeLock: TokenConfig5e._onToggleSizeLock
+    }
+  };
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
