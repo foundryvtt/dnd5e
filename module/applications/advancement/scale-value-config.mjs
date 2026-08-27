@@ -59,7 +59,7 @@ export default class ScaleValueConfig extends AdvancementConfig {
       .map(([value, { label }]) => ({ value, label }));
     context.identifier = {
       placeholder: config.identifier
-        || formatIdentifier(this.advancement.title || this.advancement.constructor.metadata.title)
+        || formatIdentifier(this.advancement.name || this.advancement.constructor.metadata.title)
     };
     context.identifier.hint = _loc(type.metadata.identifier, {
       class: this.item.identifier, identifier: context.identifier.placeholder

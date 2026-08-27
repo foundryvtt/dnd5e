@@ -108,7 +108,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     for ( const level of Array.fromRange(this.level) ) {
       const added = value.added[level];
       if ( added ) context.sections.set(level, {
-        header: _loc(`DND5E.AdvancementLevel${level === "0" ? "AnyHeader" : "Header"}`, { level }),
+        header: _loc(`DND5E.ADVANCEMENT.Level.${level === "0" ? "Any" : "Specific"}`, { level }),
         items: Object.entries(added).map(([id, uuid]) => {
           const { name, img } = actor.items.get(id) ?? fromUuidSync(uuid);
           previouslySelected.add(uuid);

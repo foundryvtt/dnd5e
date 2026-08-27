@@ -68,8 +68,8 @@ export default class TraitAdvancement extends Advancement {
   prepareData() {
     const rep = this.representedTraits();
     const traitConfig = rep.size === 1 ? CONFIG.DND5E.traits[rep.first()] : null;
-    this.title = this.title || traitConfig?.labels.title || this._defaultTitle;
-    this.icon = this.icon || traitConfig?.icon || this._defaultIcon;
+    this.name ||= traitConfig?.labels.title || this._defaultTitle;
+    this.img ||= traitConfig?.icon || this._defaultIcon;
   }
 
   /* -------------------------------------------- */

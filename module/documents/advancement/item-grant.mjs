@@ -205,7 +205,7 @@ export default class ItemGrantAdvancement extends Advancement {
     if ( !item ) return false;
     if ( this.constructor.VALID_TYPES.has(item.type) ) return true;
     const type = _loc(CONFIG.Item.typeLabels[item.type]);
-    if ( strict ) throw new Error(_loc("DND5E.AdvancementItemTypeInvalidWarning", {type}));
+    if ( strict ) throw new Error(_loc("DND5E.ADVANCEMENT.ItemGrant.Warning.Type", { type }));
     return false;
   }
 }

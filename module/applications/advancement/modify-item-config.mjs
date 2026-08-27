@@ -67,8 +67,8 @@ export default class ModifyItemConfig extends AdvancementConfig {
    */
   static async #addChange(event, target) {
     const effectData = {
-      name: this.advancement._source.title || this.item.name,
-      img: this.advancement._source.icon || this.item.img,
+      name: this.advancement._source.name || this.item.name,
+      img: this.advancement._source.img || this.item.img,
       type: "enchantment",
       transfer: false
     };

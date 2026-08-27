@@ -14,7 +14,7 @@ export default class AdvancementTemplate extends SystemDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      advancement: new AdvancementCollectionField({ label: "DND5E.AdvancementTitle" })
+      advancement: new AdvancementCollectionField({ label: "DND5E.ADVANCEMENT.Label" })
     };
   }
 

@@ -89,7 +89,7 @@ export default class AdvancementFlow extends Application5e {
 
   /** @inheritDoc */
   get title() {
-    return this.advancement.title;
+    return this.advancement.name;
   }
 
   /* -------------------------------------------- */

@@ -73,7 +73,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
       name: "Advancement",
       order: 100,
       typeIcon: "icons/svg/upgrade.svg",
-      title: _loc("DND5E.AdvancementTitle"),
+      title: _loc("DND5E.ADVANCEMENT.Label"),
       validItemTypes: new Set(["background", "class", "race", "subclass"]),
       apps: {
         config: AdvancementConfig,
@@ -139,6 +139,28 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
   /* -------------------------------------------- */
 
   /**
+   * Icon for the advancement.
+   * @type {string}
+   */
+  get icon() {
+    foundry.utils.logCompatibilityWarning(
+      "The `icon` property on `Advancement` has been moved to `img`.",
+      { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+    );
+    return this.img;
+  }
+
+  set icon(value) {
+    foundry.utils.logCompatibilityWarning(
+      "The `icon` property on `Advancement` has been moved to `img`.",
+      { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+    );
+    this.img = value;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * List of levels in which this advancement object should be displayed. Will be a list of class levels if this
    * advancement is being applied to classes or subclasses, otherwise a list of character levels.
    * @returns {number[]}
@@ -153,8 +175,20 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
    * Name of the advancement.
    * @type {string}
    */
-  get name() {
-    return this.title;
+  get title() {
+    foundry.utils.logCompatibilityWarning(
+      "The `title` property on `Advancement` has been moved to `name`.",
+      { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+    );
+    return this.name;
+  }
+
+  set title(value) {
+    foundry.utils.logCompatibilityWarning(
+      "The `title` property on `Advancement` has been moved to `name`.",
+      { since: "DnD5e 6.0", until: "DnD5e 7.0" }
+    );
+    this.name = value;
   }
 
   /* -------------------------------------------- */
@@ -176,8 +210,8 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
    * Prepare data for the Advancement.
    */
   prepareData() {
-    this.title = this.title || this._defaultTitle;
-    this.icon = this.icon || this._defaultIcon;
+    this.name ||= this._defaultTitle;
+    this.img ||= this._defaultIcon;
   }
 
   /* -------------------------------------------- */
@@ -243,7 +277,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancementData
    * @returns {string}                               HTML title with any level-specific information.
    */
   titleForLevel(level, options={}) {
-    return this.title;
+    return this.name;
   }
 
   /* -------------------------------------------- */
