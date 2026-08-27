@@ -384,7 +384,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Pre-collect statuses so they can be reliably used for conditions
     if ( phase === "initial" ) {
+      const replacementData = this.getRollData();
       for ( const effect of this.allApplicableEffects() ) {
+        effect.system.evaluateCondition?.(replacementData);
         if ( effect.active ) for ( const statusId of effect.statuses ) this.statuses.add(statusId);
       }
     }

@@ -475,6 +475,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const changes = [];
     const replacementData = this.getRollData();
     for ( const effect of this.allApplicableEffects() ) {
+      effect.system.evaluateCondition?.(replacementData);
       if ( !effect.active ) continue;
       for ( const change of effect.system.changes ) {
         if ( (change.key === "") || !effect.shouldApplyChange(change, { replacementData, phase: change.phase }) ) {

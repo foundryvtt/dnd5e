@@ -46,6 +46,7 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
 
   /** @inheritDoc */
   prepareBaseData() {
+    this.#conditionSuppressed = null;
     super.prepareBaseData();
     if ( this.isOnActivity ) this.parent.transfer = this.parent.disabled = false;
   }
@@ -71,6 +72,14 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   get applicableType() {
     return "Actor";
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Cached evaluation of effect's condition during the initial application phase.
+   * @type {boolean|null}
+   */
+  #conditionSuppressed = null;
 
   /* -------------------------------------------- */
 
@@ -101,7 +110,7 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
    * @type {boolean}
    */
   get isSuppressed() {
-    return false;
+    return this.#conditionSuppressed ?? false;
   }
 
   /* -------------------------------------------- */
@@ -128,6 +137,16 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Evaluate the effect's conditions and store the result.
+   * @param {RollData} baseData
+   */
+  evaluateCondition(baseData) {
+    this.#conditionSuppressed = this.conditions?.check(this.parent.getReplacementData(baseData)) === false;
+  }
+
   /* -------------------------------------------- */
 
   /**
