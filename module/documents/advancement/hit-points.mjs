@@ -80,8 +80,8 @@ export default class HitPointsAdvancement extends Advancement {
   /** @inheritDoc */
   titleForLevel(level, { configMode=false, legacyDisplay=false }={}) {
     const hp = this.valueForLevel(level);
-    if ( !hp || configMode || !legacyDisplay ) return this.title;
-    return `${this.title}: <strong>${hp}</strong>`;
+    if ( !hp || configMode || !legacyDisplay ) return this.name;
+    return `${this.name}: <strong>${hp}</strong>`;
   }
 
   /* -------------------------------------------- */

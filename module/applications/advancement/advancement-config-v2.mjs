@@ -75,9 +75,9 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
       },
       levels,
       classRestrictionOptions: [
-        { value: "", label: _loc("DND5E.AdvancementClassRestrictionNone") },
-        { value: "primary", label: _loc("DND5E.AdvancementClassRestrictionPrimary") },
-        { value: "secondary", label: _loc("DND5E.AdvancementClassRestrictionSecondary") }
+        { value: "", label: _loc("DND5E.ADVANCEMENT.FIELDS.classRestriction.none") },
+        { value: "primary", label: _loc("DND5E.ADVANCEMENT.FIELDS.classRestriction.primary") },
+        { value: "secondary", label: _loc("DND5E.ADVANCEMENT.FIELDS.classRestriction.secondary") }
       ],
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.metadata.multiLevel,

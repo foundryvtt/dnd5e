@@ -73,7 +73,7 @@ export default class AdvancementFlow extends FormApplication {
 
   /** @inheritDoc */
   get title() {
-    return this.advancement.title;
+    return this.advancement.name;
   }
 
   /* -------------------------------------------- */

@@ -208,9 +208,7 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( !dialog.submitted ) return;
       const { createData, createOptions } = dialog.options;
       if ( !createData.folder ) delete createData.folder;
-      // TODO: Temp patch until advancement data is migrated (https://github.com/foundryvtt/dnd5e/issues/5782)
-      if ( documentType.documentName === "Advancement" ) createData.title = createData.name;
-      else if ( (documentType.documentName !== "Activity") && !createData.name?.trim() ) {
+      if ( (documentType.documentName !== "Activity") && !createData.name?.trim() ) {
         createData.name = documentType.defaultName?.({
           type: createData.type, parent: createOptions.parent, pack: createOptions.pack
         });

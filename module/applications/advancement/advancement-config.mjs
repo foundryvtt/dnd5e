@@ -64,7 +64,7 @@ export default class AdvancementConfig extends FormApplication {
   /** @inheritDoc */
   get title() {
     const type = this.advancement.constructor.metadata.title;
-    return `${_loc("DND5E.AdvancementConfigureTitle", { item: this.item.name })}: ${type}`;
+    return `${_loc("DND5E.ADVANCEMENT.Config.Title", { item: this.item.name })}: ${type}`;
   }
 
   /* -------------------------------------------- */
@@ -81,7 +81,7 @@ export default class AdvancementConfig extends FormApplication {
   getData() {
     const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
-    else levels[0] = _loc("DND5E.AdvancementLevelAnyHeader");
+    else levels[0] = _loc("DND5E.ADVANCEMENT.Level.Any");
     const context = {
       appId: this.id,
       CONFIG: CONFIG.DND5E,
@@ -95,9 +95,9 @@ export default class AdvancementConfig extends FormApplication {
       },
       levels,
       classRestrictionOptions: [
-        { value: "", label: _loc("DND5E.AdvancementClassRestrictionNone") },
-        { value: "primary", label: _loc("DND5E.AdvancementClassRestrictionPrimary") },
-        { value: "secondary", label: _loc("DND5E.AdvancementClassRestrictionSecondary") }
+        { value: "", label: _loc("DND5E.ADVANCEMENT.FIELDS.classRestriction.none") },
+        { value: "primary", label: _loc("DND5E.ADVANCEMENT.FIELDS.classRestriction.primary") },
+        { value: "secondary", label: _loc("DND5E.ADVANCEMENT.FIELDS.classRestriction.secondary") }
       ],
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.constructor.metadata.multiLevel

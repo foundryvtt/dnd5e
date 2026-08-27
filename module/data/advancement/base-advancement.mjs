@@ -36,15 +36,11 @@ export default class BaseAdvancementData extends SparseDataModel {
       configuration: new AdvancementDataField(this, { required: true }),
       flags: new DocumentFlagsField(),
       value: new AdvancementDataField(this, { required: true }),
-      level: new NumberField({
-        integer: true, initial: this.metadata?.multiLevel ? undefined : 0, min: 0, label: "DND5E.Level"
-      }),
-      title: new StringField({ initial: undefined, label: "DND5E.AdvancementCustomTitle" }),
-      hint: new HTMLField({ label: "DND5E.AdvancementHint" }),
-      icon: new FilePathField({
-        initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon", base64: true
-      }),
-      classRestriction: new StringField({ initial: undefined, label: "DND5E.AdvancementClassRestriction" })
+      level: new NumberField({ integer: true, initial: this.metadata?.multiLevel ? undefined : 0, min: 0 }),
+      name: new StringField({ initial: undefined }),
+      hint: new HTMLField(),
+      img: new FilePathField({ initial: undefined, categories: ["IMAGE"], base64: true }),
+      classRestriction: new StringField({ initial: undefined })
     };
   }
 
@@ -57,6 +53,14 @@ export default class BaseAdvancementData extends SparseDataModel {
     super.migrateData(source);
     if ( !source ) return source;
 
+    if ( "title" in source ) {
+      source.name ||= source.title;
+      delete source.title;
+    }
+    if ( "icon" in source ) {
+      source.img ||= source.icon;
+      delete source.icon;
+    }
     if ( source.configuration?.hint ) source.hint = source.configuration.hint;
 
     return source;

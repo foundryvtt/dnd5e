@@ -48,8 +48,8 @@ export default class ModifyItemAdvancement extends Advancement {
         const clone = effect.clone({
           _id: foundry.utils.randomID(),
           _stats: {
-            [effect.inCompendium ? "compendiumSource" : "duplicateSource"] : effect.uuid,
-            [effect.inCompendium ? "duplicateSource" : "compendiumSource"] : null
+            [effect.inCompendium ? "compendiumSource" : "duplicateSource"]: effect.uuid,
+            [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
           },
           flags: {
             dnd5e: {

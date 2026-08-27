@@ -493,12 +493,12 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
           id: a.id,
           uuid: a.uuid,
           order: a.constructor.order,
-          title: a.title,
-          icon: a.icon,
+          title: a.name,
+          icon: a.img,
           classRestriction: a.classRestriction,
           configured: false,
           tags: this._getAdvancementTags(a),
-          classes: [a.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
+          classes: [a.img?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
         })),
         configured: "partial"
       };
@@ -512,13 +512,13 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         uuid: advancement.uuid,
         order: advancement.sortingValueForLevel(level),
         title: advancement.titleForLevel(level, { configMode, legacyDisplay }),
-        icon: advancement.icon,
+        icon: advancement.img,
         classRestriction: advancement.classRestriction,
         summary: await advancement.summaryForLevel(level, { configMode, legacyDisplay }),
         configured: advancement.configuredForLevel(level),
         tags: this._getAdvancementTags(advancement),
         value: advancement.displayValueForLevel?.(level),
-        classes: [advancement.icon?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
+        classes: [advancement.img?.endsWith(".svg") ? "svg" : ""].filterJoin(" ")
       })));
       if ( !items.length ) continue;
       advancement[level] = {
@@ -542,12 +542,12 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const tags = [];
     if ( advancement.classRestriction === "primary" ) {
       tags.push({
-        label: "DND5E.AdvancementClassRestrictionPrimary",
+        label: "DND5E.ADVANCEMENT.FIELDS.classRestriction.primary",
         icon: "systems/dnd5e/icons/svg/original-class.svg"
       });
     } else if ( advancement.classRestriction === "secondary" ) {
       tags.push({
-        label: "DND5E.AdvancementClassRestrictionSecondary",
+        label: "DND5E.ADVANCEMENT.FIELDS.classRestriction.secondary",
         icon: "systems/dnd5e/icons/svg/multiclass.svg"
       });
     }

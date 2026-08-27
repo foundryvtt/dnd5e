@@ -480,11 +480,9 @@
   }
 },
 
-"DND5E.ActiveEffectOverrideWarning": "This value is being modified by an Active Effect and cannot be edited. Disable the effect to edit it.",
 "DND5E.Add": "Add",
 "DND5E.AdditionalControls": "Additional Controls",
 "DND5E.AdditionalSettings": "Additional Settings",
-"DND5E.AddEmbeddedItemPromptHint": "Do you want to add these items to your character sheet?",
 "DND5E.Advanced": "Advanced",
 
 "DND5E.ADVANCEMENT": {
@@ -556,11 +554,17 @@
     "Delete": "Delete Advancement",
     "Duplicate": "Duplicate Advancement",
     "Edit": "Edit Advancement",
+    "ModifyChoices": "Modify Choices",
     "View": "View Advancement"
   },
   "Config": {
     "AnyLevel": "Any",
-    "Details": "Advancement Details"
+    "Details": "Advancement Details",
+    "Status": {
+      "Complete": "Fully Configured",
+      "Incomplete": "Not Configured"
+    },
+    "Title": "Configure {item} Advancement"
   },
   "Defaults": {
     "BackgroundFeat": "Background Feat",
@@ -579,6 +583,26 @@
     },
     "Label": "Remove Changes",
     "Options": "Options"
+  },
+  "FIELDS": {
+    "classRestriction": {
+      "label": "Class Restriction",
+      "none": "All Classes",
+      "primary": "Original Class Only",
+      "secondary": "Multiclass Only"
+    },
+    "hint": {
+      "label": "Hint"
+    },
+    "img": {
+      "label": "Custom Icon"
+    },
+    "level": {
+      "label": "Level"
+    },
+    "name": {
+      "label": "Custom Title"
+    }
   },
   "HitPoints": {
     "Action": {
@@ -697,8 +721,15 @@
     "Warning": {
       "Container": "Container contents will not be added with containers.",
       "Duplicate": "That item already exists on this advancement.",
-      "Recursive": "You cannot grant an item in its own advancement."
+      "Recursive": "You cannot grant an item in its own advancement.",
+      "Type": "{type} items cannot be added with this advancement type."
     }
+  },
+  "Label": "Advancement",
+  "Level": {
+    "Any": "Any Level",
+    "None": "No Level",
+    "Specific": "Level {level}"
   },
   "Manager": {
     "Action": {
@@ -957,36 +988,6 @@
   }
 },
 
-"DND5E.AdvancementChoices": "choices",
-"DND5E.AdvancementClassRestriction": "Class Restriction",
-"DND5E.AdvancementClassRestrictionNone": "All Classes",
-"DND5E.AdvancementClassRestrictionPrimary": "Original Class Only",
-"DND5E.AdvancementClassRestrictionSecondary": "Multiclass Only",
-"DND5E.AdvancementConfigurationActionDisable": "Disable Configuration",
-"DND5E.AdvancementConfigurationActionEnable": "Enable Configuration",
-"DND5E.AdvancementConfigurationModeDisabled": "Configuration Disabled",
-"DND5E.AdvancementConfigurationModeEnabled": "Configuration Enabled",
-"DND5E.AdvancementConfigureTitle": "Configure {item} Advancement",
-"DND5E.AdvancementConfigureAllowDrops": "Allow Drops",
-"DND5E.AdvancementConfigureAllowDropsHint": "Should players be able to drop their own choices into this advancement?",
-"DND5E.AdvancementConfigureDropAreaHint": "Drop Items here to add them to the pool from which a player can choose.",
-"DND5E.AdvancementConfiguredComplete": "Fully Configured",
-"DND5E.AdvancementConfiguredIncomplete": "Not Configured",
-"DND5E.AdvancementCustomIcon": "Custom Icon",
-"DND5E.AdvancementCustomTitle": "Custom Title",
-"DND5E.AdvancementFlowDropAreaHint": "Drop an Item here to choose it.",
-"DND5E.AdvancementHint": "Hint",
-"DND5E.AdvancementItemTypeInvalidWarning": "{type} items cannot be added with this advancement type.",
-"DND5E.AdvancementLevelHeader": "Level {level}",
-"DND5E.AdvancementLevelAnyHeader": "Any Level",
-"DND5E.AdvancementLevelNoneHeader": "No Level",
-"DND5E.AdvancementLevelDownConfirmationMessage": "Leveling this class down will also undo all advancement choices made for it. These changes will be removed from your character as long as the checkbox below is checked.",
-"DND5E.AdvancementLevelDownConfirmationTitle": "Confirm Leveling Down",
-"DND5E.AdvancementModifyChoices": "Modify Choices",
-"DND5E.AdvancementSaveButton": "Save Advancement",
-"DND5E.AdvancementSelectionCreateButton": "Create Advancement",
-"DND5E.AdvancementSelectionTitle": "Select Advancement Type",
-"DND5E.AdvancementTitle": "Advancement",
 "DND5E.Advantage": "Advantage",
 "DND5E.AdvantageMode": "Advantage Mode",
 

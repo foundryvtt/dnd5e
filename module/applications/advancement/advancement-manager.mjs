@@ -96,7 +96,7 @@ export default class AdvancementManager extends Application5e {
     // Class/Subclass level
     let level = this.step.flow.level;
     if ( this.step.class && ["class", "subclass"].includes(item.type) ) level = this.step.class.level;
-    if ( level ) parts.push(_loc("DND5E.AdvancementLevelHeader", { level }));
+    if ( level ) parts.push(_loc("DND5E.ADVANCEMENT.Level.Specific", { level }));
 
     // Step Count
     const visibleSteps = this.steps.filter(s => !s.automatic);
