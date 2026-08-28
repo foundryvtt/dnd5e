@@ -1,13 +1,13 @@
 _id: ewXgnWiYQhS8KArS
 name: Ring of Three Wishes
 type: equipment
-img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+img: icons/equipment/finger/ring-cabochon-silver-gold-green.webp
 system:
   description:
     value: >-
       <p>While wearing this ring, you can use an action to expend 1 of its 3
       charges to cast the
-      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell from it.
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{wish} spell from it.
       The ring becomes nonmagical when you use the last charge.</p>
     chat: ''
   source:
@@ -35,7 +35,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -51,6 +51,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -122,11 +123,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037244371
-  modifiedTime: 1764620478238
+  modifiedTime: 1784686238086
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ewXgnWiYQhS8KArS'

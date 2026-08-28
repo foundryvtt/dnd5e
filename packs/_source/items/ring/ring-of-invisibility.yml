@@ -1,16 +1,15 @@
 _id: 1J0dsxyKRhVXYQf5
 name: Ring of Invisibility
 type: equipment
-img: icons/equipment/finger/ring-faceted-silver-orange.webp
+img: icons/equipment/finger/ring-cabochon-engraved-purple.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While wearing this ring, you can turn invisible as an action. Anything
-      you are wearing or carrying is invisible with you. You remain invisible
-      until the ring is removed, until you attack or cast a spell, or until you
-      use a bonus action to become visible again.</p>
+      <p><em>Ring (requires attunement)</em></p><p>While wearing this ring, you
+      can turn &amp;reference[invisible] as an action. Anything you are wearing
+      or carrying is invisible with you. You remain invisible until the ring is
+      removed, until you attack or cast a spell, or until you use a bonus action
+      to become visible again.</p>
     chat: ''
   source:
     custom: ''
@@ -37,7 +36,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -53,13 +52,13 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    CsqmMMQ7e4ckKXHu:
       type: utility
       activation:
         type: action
@@ -74,6 +73,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
@@ -85,6 +85,7 @@ system:
           level:
             min: null
             max: null
+          uuid: null
       range:
         units: self
         special: ''
@@ -97,7 +98,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -114,39 +116,43 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       name: Become Invisible
       img: ''
-      appliedEffects:
-        - 7KHJyEznWKJ8rc5s
       visibility:
         requireMagic: true
         level:
           min: null
           max: null
         identifier: ''
-        requireIdentification: true
+        requireIdentification: false
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: CsqmMMQ7e4ckKXHu
   attuned: false
   identifier: ring-of-invisibility
 effects:
   - name: Invisibility
-    img: icons/equipment/finger/ring-faceted-silver-orange.webp
+    img: icons/creatures/magical/spirit-undead-ghost-blue.webp
     origin: Compendium.dnd5e.items.Item.1J0dsxyKRhVXYQf5
     transfer: false
     _id: 7KHJyEznWKJ8rc5s
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
+      magical: true
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are &amp;reference[invisible apply=false]. Anything you are wearing
+      or carrying is invisible with you.</p><p>You remain invisible until the
+      ring is removed, until you attack or cast a spell, or until you use a
+      bonus action to become visible again.</p>
     tint: '#ffffff'
     statuses:
       - invisible
@@ -155,13 +161,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 6.0.0
       createdTime: 1731017665728
-      modifiedTime: 1731017671713
+      modifiedTime: 1783737037967
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!1J0dsxyKRhVXYQf5.7KHJyEznWKJ8rc5s'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
@@ -170,11 +179,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037085047
-  modifiedTime: 1764618703407
+  modifiedTime: 1783737661944
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!1J0dsxyKRhVXYQf5'

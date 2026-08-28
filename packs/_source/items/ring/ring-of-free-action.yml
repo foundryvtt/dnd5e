@@ -1,15 +1,15 @@
 _id: i2puCDRaTxkuFfB4
 name: Ring of Free Action
 type: equipment
-img: icons/equipment/finger/ring-cabochon-notched-gold-green.webp
+img: icons/equipment/finger/ring-cabochon-curved-gold-green.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While you wear this ring, difficult terrain doesn't cost you extra
-      movement. In addition, magic can neither reduce your speed nor cause you
-      to be paralyzed or restrained.</p>
+      <p><em>Ring (requires attunement)</em></p><p>While you wear this ring,
+      &amp;reference[difficult terrain] doesn't cost you extra movement. In
+      addition, magic can neither reduce your speed nor cause you to be
+      &amp;reference[paralyzed apply=false] or &amp;reference[restrained
+      apply=false].</p>
     chat: ''
   source:
     custom: ''
@@ -36,7 +36,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -52,6 +52,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -59,7 +60,72 @@ system:
   activities: {}
   attuned: false
   identifier: ring-of-free-action
-effects: []
+effects:
+  - name: Freedom of Movement
+    origin: Compendium.dnd5e.items.Item.i2puCDRaTxkuFfB4
+    duration:
+      value: 1
+      units: hours
+      expiry: turnStart
+      expired: false
+    disabled: false
+    _id: QzyLpm4ZsBWbRV2o
+    description: >-
+      <p>Your movement is unaffected by &amp;reference[difficult terrain], and
+      magic can neither reduce your speed nor cause you to be
+      &amp;reference[Paralyzed apply=false] or &amp;reference[Restrained
+      apply=false].</p>
+    transfer: true
+    statuses: []
+    flags:
+      dnd5e:
+        riders: {}
+    tint: '#ffffff'
+    _stats:
+      compendiumSource: >-
+        Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT.ActiveEffect.OnWa3f4IQ3pneB5T
+      duplicateSource: null
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783737698140
+      modifiedTime: 1783737767025
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    img: icons/skills/movement/arrow-upward-yellow.webp
+    type: base
+    system:
+      changes:
+        - key: system.traits.di.value
+          value: paralyzed
+          priority: null
+          type: add
+          phase: initial
+          _id: FGiCRO1osWrJ253M
+          conditions: '{}'
+        - key: system.traits.di.value
+          value: restrained
+          priority: null
+          type: add
+          phase: initial
+          _id: 1ZU4XUlir9w1twG2
+          conditions: '{}'
+        - key: system.attributes.movement.ignoredDifficultTerrain
+          value: all
+          priority: null
+          type: add
+          phase: initial
+          _id: HYMZXcbCl3MoSCYN
+          conditions: '{}'
+      rider:
+        statuses: []
+      conditions: '{}'
+      magical: true
+    sort: 0
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!i2puCDRaTxkuFfB4.QzyLpm4ZsBWbRV2o'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
@@ -71,11 +137,11 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037258714
-  modifiedTime: 1750697344647
+  modifiedTime: 1783790951078
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!i2puCDRaTxkuFfB4'

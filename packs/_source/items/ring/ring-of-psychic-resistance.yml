@@ -1,20 +1,17 @@
 _id: Q7E6MgPzVkwBeZ6l
 name: Ring of Psychic Resistance
 type: equipment
-img: icons/equipment/finger/ring-cabochon-notched-gold-green.webp
+img: icons/equipment/finger/ring-ball-gold-pink.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p><em>This ring has been inlaid with a jade stone that gleams when it
-      catches the light.</em></p>
-
-      <p>You have resistance to psychic damage while wearing this ring.</p>
-
-      <p>For other rings of resistance, roll on the
+      <p><em>Ring (requires attunement)</em></p><p><em>This ring has been inlaid
+      with a jade stone that gleams when it catches the light.</em></p><p>You
+      have resistance to psychic damage while wearing this ring.</p><section
+      id="secret-Ox8MHY2DViPl3rNJ" class="secret"><p><strong>Foundry
+      Note</strong></p><p>For other rings of resistance, roll on the
       @UUID[Compendium.dnd5e.tables.RollTable.MdTxWyYVhTIgtNcG]{Ring of
-      Resistance} table.</p>
+      Resistance} table.</p></section>
     chat: ''
   source:
     custom: ''
@@ -41,7 +38,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -56,7 +53,10 @@ system:
     value: ring
     baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This ring has been inlaid with a jade stone that gleams when it catches
+      the light.</p>
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -66,42 +66,47 @@ system:
   identifier: ring-of-psychic-resistance
 effects:
   - name: Psychic Resistance
-    img: icons/equipment/finger/ring-cabochon-notched-gold-green.webp
-    _id: euYYPfyCFWqOW1Qx
-    type: base
-    system: {}
-    changes:
-      - key: system.traits.dr.value
-        mode: 2
-        value: psychic
-        priority: null
-    disabled: false
-    duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-    description: ''
-    origin: null
-    tint: '#ffffff'
+    img: icons/magic/lightning/bolt-strike-purple.webp
+    origin: Compendium.dnd5e.items.Item.Q7E6MgPzVkwBeZ6l
     transfer: true
+    _id: uSdrSlqQeUOfBvPe
+    type: base
+    system:
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: psychic
+          phase: initial
+          priority: null
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to psychic damage.</p>
+    tint: '#ffffff'
     statuses: []
+    showIcon: 1
+    folder: null
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.361'
       systemId: dnd5e
-      systemVersion: 4.1.0
-      createdTime: 1731017767691
-      modifiedTime: 1731017873101
+      systemVersion: 6.0.0
+      createdTime: 1781984138137
+      modifiedTime: 1781985996780
       lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.c0luemOP0iW8L23R.ActiveEffect.uvppImdMsIuq4DrH
+      duplicateSource: null
       exportSource: null
-    _key: '!items.effects!Q7E6MgPzVkwBeZ6l.euYYPfyCFWqOW1Qx'
+    _key: '!items.effects!Q7E6MgPzVkwBeZ6l.uSdrSlqQeUOfBvPe'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
 ownership:
@@ -109,11 +114,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037183014
-  modifiedTime: 1750697344647
+  modifiedTime: 1783737430874
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Q7E6MgPzVkwBeZ6l'

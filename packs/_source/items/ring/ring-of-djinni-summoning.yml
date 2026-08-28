@@ -1,27 +1,24 @@
 _id: hdlBOEbEjiwUjTW5
 name: Ring of Djinni Summoning
 type: equipment
-img: icons/equipment/finger/ring-faceted-gold-purple.webp
+img: icons/equipment/finger/ring-crown-dragon-green.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While wearing this ring, you can speak its command word as an action to
-      summon a particular
-      @UUID[Compendium.dnd5e.monsters.Actor.5P1VGAZQwOilwZQf]{Djinni} from the
+      <p><em>Ring (requires attunement)</em></p><p>While wearing this ring, you
+      can speak its command word as an action to summon a particular
+      @UUID[Compendium.dnd5e.monsters.Actor.5P1VGAZQwOilwZQf]{djinni} from the
       Elemental Plane of Air. The djinni appears in an unoccupied space you
-      choose within 120 feet of you. It remains as long as you concentrate (as
-      if concentrating on a spell), to a maximum of 1 hour, or until it drops to
-      0 hit points. It then returns to its home plane.</p>
-
-      <p>While summoned, the djinni is friendly to you and your companions. It
-      obeys any commands you give it, no matter what language you use. If you
-      fail to command it, the djinni defends itself against attackers but takes
-      no other actions.</p>
-
-      <p>After the djinni departs, it can't be summoned again for 24 hours, and
-      the ring becomes nonmagical if the djinni dies.</p>
+      choose within [[lookup @labels.description.range
+      activity=bKvrvjMmBWMZU3eo]] of you. It remains as long as you concentrate
+      (as if concentrating on a spell), to a maximum of [[lookup
+      @labels.duration activity=bKvrvjMmBWMZU3eo]], or until it drops to 0 hit
+      points. It then returns to its home plane.</p><p>While summoned, the
+      djinni is friendly to you and your companions. It obeys any commands you
+      give it, no matter what language you use. If you fail to command it, the
+      djinni defends itself against attackers but takes no other
+      actions.</p><p>After the djinni departs, it can't be summoned again for 24
+      hours, and the ring becomes nonmagical if the djinni dies.</p>
     chat: ''
   source:
     custom: ''
@@ -50,7 +47,7 @@ system:
   armor:
     value: 0
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -66,6 +63,7 @@ system:
     baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Ring
   container: null
   crewed: false
   properties:
@@ -100,7 +98,7 @@ system:
         override: false
         units: ft
         special: ''
-        value: '1220'
+        value: '120'
       target:
         template:
           contiguous: false
@@ -109,7 +107,7 @@ system:
         affects:
           choice: false
           count: ''
-          type: ''
+          type: space
         override: false
         prompt: true
       uses:
@@ -130,6 +128,7 @@ system:
         proficiency: false
         saves: false
         ability: ''
+        disposition: true
       profiles:
         - count: ''
           name: ''
@@ -142,7 +141,7 @@ system:
         prompt: true
         mode: ''
         identifier: ''
-      name: ''
+      name: Speak Command Word
       img: ''
       appliedEffects: []
       visibility:
@@ -152,6 +151,7 @@ system:
           max: null
         identifier: ''
         requireIdentification: true
+      tempHP: ''
   attuned: false
   identifier: ring-of-djinni-summoning
 effects: []
@@ -162,11 +162,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037257586
-  modifiedTime: 1764620585491
+  modifiedTime: 1783789772753
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hdlBOEbEjiwUjTW5'
