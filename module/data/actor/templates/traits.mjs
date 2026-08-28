@@ -163,7 +163,7 @@ export default class TraitsField {
    */
   static async preUpdateSize(changes, options) {
     const newSize = foundry.utils.getProperty(changes, "system.traits.size");
-    if ( !newSize || (newSize === this.traits.size)
+    if ( !dnd5e.settings.tokenSizeSync || !newSize || (newSize === this.traits.size)
       || foundry.utils.hasProperty(changes, "prototypeToken.width") ) return;
     const size = CONFIG.DND5E.actorSizes[newSize].token ?? 1;
     changes.prototypeToken ??= {};
