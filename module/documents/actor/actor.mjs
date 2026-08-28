@@ -10,7 +10,7 @@ import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mj
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import {
-  convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
+  convertTime, defaultUnits, formatIdentifier, formatLength, formatNumber, formatTime, simplifyBonus, staticID
 } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
@@ -155,6 +155,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.statuses.has("coverThreeQuarters") ) return coverThreeQuarters?.coverBonus;
     else if ( this.statuses.has("coverHalf") ) return coverHalf?.coverBonus;
     return 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A string that uniquely identifies this creature for game rule purposes.
+   * @type {string}
+   */
+  get identifier() {
+    if ( this.system.identifier ) return this.system.identifier;
+    return formatIdentifier(this.name);
   }
 
   /* -------------------------------------------- */

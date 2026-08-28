@@ -1,4 +1,5 @@
 import Proficiency from "../../documents/actor/proficiency.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import SystemDataModel from "./system-data-model.mjs";
 
 /**
@@ -15,6 +16,17 @@ export default class ActorDataModel extends SystemDataModel {
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: false
   }, { inplace: false }));
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return this.mergeSchema(super.defineSchema(), {
+      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" })
+    });
+  }
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -99,4 +111,14 @@ export default class ActorDataModel extends SystemDataModel {
    * @param {CombatRecoveryResults} results  Updates to perform on the actor and containing items.
    */
   async recoverCombatUses(periods, results) {}
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    if ( !data.system?.identifier ) this.parent.updateSource({ "system.identifier": this.parent.identifier });
+  }
 }
