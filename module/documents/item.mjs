@@ -12,7 +12,7 @@ import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import PropertyField from "../data/shared/property-field.mjs";
-import { formatIdentifier, staticID } from "../utils.mjs";
+import { staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
@@ -252,17 +252,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    */
   get hasSave() {
     return this.system.hasSave ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Return an item's identifier.
-   * @type {string}
-   */
-  get identifier() {
-    if ( this.system.identifier ) return this.system.identifier;
-    return formatIdentifier(this.name);
   }
 
   /* --------------------------------------------- */
