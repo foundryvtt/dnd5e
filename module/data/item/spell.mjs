@@ -305,6 +305,23 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+
+  #spellLists;
+
+  /**
+   * Typed identifiers for all of the spell lists to which this spell belongs.
+   * @type {Set<string>}
+   */
+  get spellLists() {
+    if ( this.#spellLists ) return this.#spellLists;
+    const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
+    const spellLists = new Set(Array.from(dnd5e.registry.spellLists.forSpell(uuid))
+      .map(({ metadata }) => `${metadata.type}:${metadata.identifier}`));
+    if ( dnd5e.registry.spellLists.ready ) this.#spellLists = spellLists;
+    return spellLists;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migration                              */
   /* -------------------------------------------- */
 
@@ -408,6 +425,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    this.#spellLists = null;
+    super.prepareBaseData();
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -681,8 +706,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /** @inheritDoc */
   getRollData(...options) {
     const data = super.getRollData(...options);
+    data.item.classIdentifier = this.classIdentifier;
     data.item.level = data.item.level + (this.parent.getFlag("dnd5e", "scaling")
       ?? (this.level !== 0 ? this.scalingIncrease : 0));
+    data.item.spellLists = this.spellLists;
     return data;
   }
 
