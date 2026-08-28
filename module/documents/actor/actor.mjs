@@ -1242,11 +1242,28 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * Handle rolling a saving throw as part of a requested group saving throw.
+   * @param {Actor5e} actor                                    The actor.
+   * @param {ChatMessage5e} request                            The request message.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Roll configuration.
+   * @param {RequestOptions5e} [requestOptions]                Options that configure the request.
+   * @returns {Promise<ChatMessage5e|null>}
+   */
+  static async handleSavingThrowRequest(actor, request, config, { event }={}) {
+    const data = {};
+    foundry.utils.setProperty(data, "flags.dnd5e.requestResult", { actorUuid: actor.uuid, requestId: request.id });
+    const [roll] = (await actor.rollSavingThrow({ ...config, event }, {}, { data })) ?? [];
+    return roll?.parent ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle rolling a skill as part of a requested group check.
    * @param {Actor5e} actor                                      The actor.
    * @param {ChatMessage5e} request                              The request message.
    * @param {Partial<SkillToolRollProcessConfiguration>} config  Roll configuration.
-   * @param {RequestOptions5e} [requestOptions]
+   * @param {RequestOptions5e} [requestOptions]                  Options that configure the request.
    * @returns {Promise<ChatMessage5e|null>}
    */
   static async handleSkillCheckRequest(actor, request, config, { event }={}) {
@@ -1525,6 +1542,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
    */
   async rollSavingThrow(config={}, dialog={}, message={}) {
+    if ( (typeof this.system.rollSavingThrow === "function")
+      && (await this.system.rollSavingThrow(config, dialog, message) === false) ) return null;
+    if ( !this.system.abilities ) return null;
     const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
