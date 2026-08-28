@@ -27,9 +27,10 @@ export default class BasicDie extends Die {
     const { count, adv, size } = expansion;
     const sets = Array(count + 1);
     let targetTotal = adv ? -Infinity : Infinity;
+    const selectedResults = this.results.filter(r => r.active);
     for ( const index of sets.keys() ) {
       const startIndex = size * index;
-      sets[index] = { results: this.results.slice(startIndex, startIndex + size) };
+      sets[index] = { results: selectedResults.slice(startIndex, startIndex + size) };
       sets[index].total = sets[index].results.reduce((total, { result }) => total + result, 0);
       targetTotal = Math[adv ? "max" : "min"](targetTotal, sets[index].total);
     }
