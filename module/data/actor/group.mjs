@@ -7,7 +7,7 @@ import GroupTemplate from "./templates/group.mjs";
 const { ArrayField, ForeignDocumentField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @import { SkillToolRollProcessConfiguration } from "../../dice/_types.mjs";
+ * @import { AbilityRollProcessConfiguration, SkillToolRollProcessConfiguration } from "../../dice/_types.mjs";
  * @import { RestResult } from "../../documents/_types.mjs";
  * @import { GroupActorSystemData, GroupRestConfiguration, TravelPaceDescriptor } from "./_types.mjs";
  */
@@ -270,6 +270,33 @@ export default class GroupData extends GroupTemplate {
       throw new Error(`Actor id "${actorId}" is not a group member`);
     }
     return this.parent.update({"system.members": membersCollection});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Request that each member of the group make a saving throw.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Roll configuration.
+   * @returns {Promise<false|void>}
+   */
+  async rollSavingThrow(config) {
+    if ( !config.ability ) return;
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    await foundry.documents.ChatMessage.implementation.create({
+      flavor: _loc("DND5E.SavePromptTitle", { ability: abilityLabel }),
+      speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
+      system: {
+        button: {
+          icon: "fa-solid fa-shield-heart",
+          label: _loc("DND5E.SavingThrowRoll", { ability: abilityLabel })
+        },
+        data: { ...config },
+        handler: "save",
+        targets: this.creatures.map(actor => ({ actor: actor.uuid }))
+      },
+      type: "request"
+    });
+    return false;
   }
 
   /* -------------------------------------------- */

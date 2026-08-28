@@ -4759,6 +4759,7 @@ DND5E.expiryEvents = Object.seal({
  */
 DND5E.requests = {
   rest: Actor5e.handleRestRequest,
+  save: Actor5e.handleSavingThrowRequest,
   skill: Actor5e.handleSkillCheckRequest
 };
 
