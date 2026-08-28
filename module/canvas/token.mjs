@@ -262,6 +262,14 @@ export default class Token5e extends foundry.canvas.placeables.Token {
   /** @inheritDoc */
   _refreshMeshSizeAndScale() {
     super._refreshMeshSizeAndScale();
+
+    const actor = this.document.actor;
+    if ( dnd5e.settings.tokenSizeSync && actor?.system.isCreature && !this.document.flags.dnd5e?.lockScale ) {
+      const scale = CONFIG.DND5E.actorSizes[actor.system.traits?.size]?.dynamicTokenScale ?? 1;
+      this.mesh.scale.x *= scale;
+      this.mesh.scale.y *= scale;
+    }
+
     if ( !CONFIG.DND5E.elevationScaling || !canvas.level ) return;
 
     // Calculate elevation relative to the viewed level so that tokens farther away from the 'camera' appear smaller.

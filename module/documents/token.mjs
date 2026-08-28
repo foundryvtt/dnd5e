@@ -14,6 +14,14 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   #senseOverrides;
 
   /* -------------------------------------------- */
+
+  /**
+   * Cache size to detect when it has changed.
+   * @type {string}
+   */
+  #size;
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -155,6 +163,16 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _getReplacementData() {
+    return {
+      ...super._getReplacementData(),
+      token: this
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static getTrackedAttributeChoices(attributes) {
     const groups = super.getTrackedAttributeChoices(attributes);
     const i18n = {
@@ -185,23 +203,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   getGroupingKey(prefix) {
     if ( this.actorLink || !this.baseActor ) return null;
     return `${prefix === undefined ? "" : `${prefix}:`}${this.disposition}:${this.baseActor.id}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  prepareData() {
-    super.prepareData();
-    if ( !this.hasDynamicRing ) return;
-    let size = this.baseActor?.system.traits?.size;
-    if ( !this.actorLink ) {
-      const deltaSize = this.delta?.system.traits?.size;
-      if ( deltaSize ) size = deltaSize;
-    }
-    if ( !size ) return;
-    const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
-    this.texture.scaleX = this._source.texture.scaleX * dts;
-    this.texture.scaleY = this._source.texture.scaleY * dts;
   }
 
   /* -------------------------------------------- */
@@ -510,10 +511,25 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  async _onOverrideSize(changes) {
+    if ( !this.persisted || this.object?.isPreview ) this.updateSource(changes);
+    else if ( game.user.isActiveGM ) this.update(changes);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   _onRelatedUpdate(update={}, operation={}) {
     super._onRelatedUpdate(update, operation);
-    if ( !game.settings.get("dnd5e", "senseVisionSync") ) return;
+
+    const size = this.actor?.system.traits?.size;
+    if ( dnd5e.settings.tokenSizeSync && (size !== this.#size) ) {
+      this.#size = size;
+      this.object?.renderFlags.set({ refreshMesh: true });
+    }
+
+    if ( !dnd5e.settings.senseVisionSync ) return;
     const senses = this.actor?.system?.attributes?.senses;
     if ( !senses ) return;
 

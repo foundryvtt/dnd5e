@@ -9,6 +9,7 @@ import ActivationsField from "../../data/chat-message/fields/activations-field.m
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
+import { Filter } from "../../filter.mjs";
 import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
 } from "../../utils.mjs";
@@ -397,7 +398,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this._prepareSpellcasting();
     }
 
-    return super.applyActiveEffects(phase);
+    super.applyActiveEffects(phase);
+    if ( (phase !== "initial") || !this.system.isCreature || !dnd5e.settings.tokenSizeSync ) return;
+
+    // Translate this Actor's size category into Token changes
+    const sizeData = CONFIG.DND5E.actorSizes[this.system.traits?.size];
+    if ( !sizeData ) return;
+    const tokenSize = sizeData.token ?? 1;
+    this.tokenActiveEffectChanges[phase].push(...["width", "height", "depth"].map(key => ({
+      key, phase,
+      type: "override",
+      priority: 0,
+      value: tokenSize,
+      conditions: new Filter({ o: "NOT", v: { k: "token.flags.dnd5e.lockSize", v: true } })
+    })));
   }
 
   /* -------------------------------------------- */

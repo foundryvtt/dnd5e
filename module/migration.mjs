@@ -153,7 +153,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   // Migrate Actor Override Tokens
   for ( const s of game.scenes ) {
     try {
-      const updateData = migrateSceneData(s, migrationData);
+      const updateData = migrateSceneData(s, migrationData, { bypassVersionCheck });
       if ( !foundry.utils.isEmpty(updateData) ) {
         log(`Migrating Scene document ${s.name}`);
         await s.update(updateData, {enforceTypes: false, render: false});
@@ -511,6 +511,10 @@ export async function migrateSettings() {
 export function migrateActorData(actor, actorData, migrationData, flags={}, { actorUuid }={}) {
   const updateData = {};
   _migrateTokenImage(actorData, updateData);
+  if ( (flags.bypassVersionCheck || foundry.utils.isNewerVersion("6.0.0", actorData._stats?.systemVersion))
+    && !actor.isToken && (actor.system.traits?.size === "sm") && !actorData.prototypeToken.ring.enabled ) {
+    updateData["prototypeToken.flags.dnd5e.lockScale"] = true;
+  }
   _migrateActorAC(actorData, updateData);
   _migrateActorFlags(actorData, updateData);
   _migrateActorMovementSenses(actorData, updateData);
@@ -938,15 +942,21 @@ export function migrateRollTableData(table, migrationData) {
 /**
  * Migrate a single Scene document to incorporate changes to the data model of its actor data overrides
  * Return an Object of updateData to be applied
- * @param {object} scene            The Scene data to Update
- * @param {object} [migrationData]  Additional data to perform the migration
+ * @param {object} scene                                The Scene data to Update.
+ * @param {object} [migrationData]                      Additional data to perform the migration.
+ * @param {object} [options]
+ * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
+ *                                                      version stored in item stats.
  * @returns {object}                The updateData to apply
  */
-export function migrateSceneData(scene, migrationData) {
+export function migrateSceneData(scene, migrationData, { bypassVersionCheck }={}) {
   const tokens = scene.tokens.reduce((arr, token) => {
     const t = token instanceof foundry.abstract.DataModel ? token.toObject() : token;
     const update = {};
     _migrateTokenImage(t, update);
+    const size = t.delta?.system?.traits?.size ?? game.actors.get(t.actorId)?.system?.traits?.size;
+    if ( (bypassVersionCheck || foundry.utils.isNewerVersion("6.0.0", scene._stats?.systemVersion))
+      && (size === "sm") && !t.ring.enabled ) update["flags.dnd5e.lockScale"] = true;
     if ( !game.actors.has(t.actorId) ) update.actorId = null;
     if ( !foundry.utils.isEmpty(update) ) arr.push({ ...update, _id: t._id });
     return arr;
