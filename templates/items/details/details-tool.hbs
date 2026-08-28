@@ -1,6 +1,10 @@
 <fieldset>
     <legend>{{ localize "DND5E.ItemToolProperties" }}</legend>
 
+    {{!-- Identifier --}}
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true rootId=partId }}
+
     {{!-- Tool Type --}}
     {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.toolTypes label="DND5E.ItemToolType"
                  blank="" localize=true rootId=partId }}

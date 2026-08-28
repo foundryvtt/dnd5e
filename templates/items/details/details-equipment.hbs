@@ -1,6 +1,10 @@
 <fieldset>
     <legend>{{ localize "DND5E.ItemEquipmentDetails" }}</legend>
 
+    {{!-- Identifier --}}
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true rootId=partId }}
+
     {{!-- Equipment Type --}}
     {{ formField fields.type.fields.value value=source.type.value label="DND5E.ItemEquipmentType" blank=""
                  localize=true options=equipmentTypeOptions rootId=partId }}

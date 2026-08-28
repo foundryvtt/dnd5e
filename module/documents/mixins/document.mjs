@@ -1,3 +1,4 @@
+import { formatIdentifier } from "../../utils.mjs";
 import AppliedRules from "../applied-rules.mjs";
 import DependentDocumentMixin from "./dependent.mjs";
 import EmbeddableDocumentMixin from "./embeddable.mjs";
@@ -22,6 +23,17 @@ export default function SystemDocumentMixin(Base) {
      * @type {AppliedRules}
      */
     appliedRules = this.appliedRules;
+
+    /* -------------------------------------------- */
+
+    /**
+     * A string that uniquely identifies a particular game entity for game rule purposes.
+     * @type {string}
+     */
+    get identifier() {
+      if ( this.system.identifier ) return this.system.identifier;
+      return formatIdentifier(this.name);
+    }
 
     /* -------------------------------------------- */
 

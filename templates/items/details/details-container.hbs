@@ -1,6 +1,10 @@
 <fieldset>
     <legend>{{ localize "DND5E.CONTAINER.Details" }}</legend>
 
+    {{!-- Identifier --}}
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true rootId=partId }}
+
     {{!-- Container Properties --}}
     {{ formField fields.properties options=properties.options input=inputs.createMultiCheckboxInput stacked=true
                  classes="checkbox-grid checkbox-grid-3" }}
