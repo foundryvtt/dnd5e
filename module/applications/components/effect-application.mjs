@@ -246,6 +246,9 @@ export default class EffectApplicationElement extends ChatTrayElement {
         ...durationOverride,
         _id: existingEffect.id,
         disabled: false,
+        duration: {
+          expired: false
+        },
         start: effect.constructor.getEffectStart()
       }, effectFlags) };
     }

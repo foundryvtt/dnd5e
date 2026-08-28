@@ -245,7 +245,12 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
           // Effect already exists, reset its duration
           if ( appliedEffect ) operations.push({
             action: "update", documentName: "ActiveEffect", updates: [foundry.utils.mergeObject({
-              _id: appliedEffect._id, start: ActiveEffect.implementation.getEffectStart(), disabled: false
+              _id: appliedEffect._id,
+              disabled: false,
+              duration: {
+                expired: false
+              },
+              start: ActiveEffect.implementation.getEffectStart()
             }, effectFlags)], parent: target
           });
 
