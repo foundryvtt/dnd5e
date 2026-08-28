@@ -1,6 +1,10 @@
 <fieldset>
     <legend>{{ localize "DND5E.SpellDetails" }}</legend>
 
+    {{!-- Identifier --}}
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true rootId=partId }}
+
     {{!-- Spell Level --}}
     {{ formField fields.level value=source.level choices=CONFIG.spellLevels localize=true rootId=partId }}
 

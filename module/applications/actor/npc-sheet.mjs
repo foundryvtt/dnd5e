@@ -412,6 +412,13 @@ export default class NPCActorSheet extends BaseActorSheet {
     context.flags.sections.unshift({
       label: _loc("DND5E.NPC.Label"),
       fields: [{
+        field: fields.identifier,
+        hint: "DND5E.IdentifierError",
+        localize: true,
+        name: "system.identifier",
+        placeholder: this.document.identifier,
+        value: context.source.identifier
+      }, {
         field: fields.traits.fields.important,
         input: createCheckboxInput,
         name: "system.traits.important",

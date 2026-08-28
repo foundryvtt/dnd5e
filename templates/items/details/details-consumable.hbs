@@ -1,6 +1,10 @@
 <fieldset>
     <legend>{{ localize "DND5E.ItemConsumableDetails" }}</legend>
 
+    {{!-- Identifier --}}
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true rootId=partId }}
+
     {{!-- Consumable Type --}}
     {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.consumableTypes labelAttr="label"
                  label="DND5E.ItemConsumableType" localize=true rootId=partId }}
