@@ -28,13 +28,15 @@ export default class TransformUsageDialog extends ActivityUsageDialog {
   async _prepareCreationContext(context, options) {
     context = await super._prepareCreationContext(context, options);
 
+    const { formless, mode } = this.activity.transform;
     const profiles = this.activity.availableProfiles;
-    if ( this._shouldDisplay("create.transform") && (profiles.length > 1) ) {
+    const profilesCount = profiles.length + ((mode === "form") && formless ? 1 : 0);
+    if ( this._shouldDisplay("create.transform") && (profilesCount > 1) ) {
       const rollData = this.activity.getRollData();
       let options = profiles.map(profile => ({
         value: profile._id, label: this.getProfileLabel(profile, rollData)
       }));
-      if ( (this.activity.transform.mode === "form") && this.activity.transform.formless ) options.unshift({
+      if ( (mode === "form") && formless ) options.unshift({
         value: "", label: _loc("DND5E.TRANSFORM.NoForm"), rule: true
       });
       context.hasCreation = true;

@@ -69,7 +69,9 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
 
   /** @inheritDoc */
   _requiresConfigurationDialog(config) {
-    return super._requiresConfigurationDialog(config) || (this.availableProfiles.length > 1);
+    let profilesCount = this.availableProfiles.length;
+    if ( (this.transform.mode === "form") && this.transform.formless ) profilesCount += 1;
+    return super._requiresConfigurationDialog(config) || (profilesCount > 1);
   }
 
   /* -------------------------------------------- */
