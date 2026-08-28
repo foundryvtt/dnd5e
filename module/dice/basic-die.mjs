@@ -27,9 +27,10 @@ export default class BasicDie extends Die {
     const { count, adv, size } = expansion;
     const sets = Array(count + 1);
     let targetTotal = adv ? -Infinity : Infinity;
+    const selectedResults = this.results.filter(r => r.active);
     for ( const index of sets.keys() ) {
       const startIndex = size * index;
-      sets[index] = { results: this.results.slice(startIndex, startIndex + size) };
+      sets[index] = { results: selectedResults.slice(startIndex, startIndex + size) };
       sets[index].total = sets[index].results.reduce((total, { result }) => total + result, 0);
       targetTotal = Math[adv ? "max" : "min"](targetTotal, sets[index].total);
     }
@@ -94,10 +95,12 @@ export default class BasicDie extends Die {
 
   /** @inheritDoc */
   async _evaluateModifiers() {
+    // Rerolls need to apply before advantage selects which expanded results to keep.
     // Since adv/dis internally calls roll and modifies the count, they must be evaluated first in order for subsequent
     // modifiers to operate on the correct dice.
-    const [rest, selection] = this.modifiers.partition(m => /^(adv|dis)\d*/i.test(m));
-    if ( selection.length ) this.modifiers = selection.concat(rest);
+    const [rerolls, rest] = this.modifiers.partition(m => /^rr?/i.test(m));
+    const [remaining, selection] = rest.partition(m => /^(adv|dis)\d*/i.test(m));
+    if ( selection.length ) this.modifiers = rerolls.concat(selection, remaining);
     return super._evaluateModifiers();
   }
 }
