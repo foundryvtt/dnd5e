@@ -142,17 +142,14 @@ effects:
     transfer: false
     _id: 6Hdp1jf98UcJrEkD
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 6
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 6
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>You cannot regain hit points until the start of the caster's next
       turn.</p>
@@ -167,17 +164,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772660185086
       modifiedTime: 1772660203990
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!vrN18tbTw7io5MWd.6Hdp1jf98UcJrEkD'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037366315

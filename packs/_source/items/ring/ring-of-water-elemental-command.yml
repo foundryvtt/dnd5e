@@ -384,21 +384,18 @@ effects:
     origin: Compendium.dnd5e.items.Item.HnIERWmmra74hSCw
     _id: GDk5vt4XBMKVZJh4
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.swim
-        mode: 4
-        value: '60'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.swim
+          value: 60
+          priority: null
+          type: upgrade
     disabled: true
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -412,12 +409,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.350'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.2.0
       createdTime: 1759793788791
       modifiedTime: 1759793805448
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!HnIERWmmra74hSCw.GDk5vt4XBMKVZJh4'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
@@ -426,7 +426,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1725037152579

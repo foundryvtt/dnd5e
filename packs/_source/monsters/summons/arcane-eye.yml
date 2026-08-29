@@ -401,9 +401,6 @@ prototypeToken:
     src: null
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     tint: '#ffffff'
     anchorX: 0.5
     anchorY: 0.5
@@ -452,7 +449,7 @@ prototypeToken:
     saturation: 0
     contrast: 0
     color: null
-  detectionModes: []
+  detectionModes: {}
   flags:
     dnd5e: {}
   randomImg: false
@@ -473,6 +470,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items: []
 effects:
   - name: Invisible
@@ -486,23 +484,19 @@ effects:
       makes or any tracks it leaves.</li><li>Attack rolls against the creature
       have disadvantage, and the creature's attack rolls have
       advantage.</li></ul>
-    changes: []
     disabled: false
     duration:
-      startTime: 0
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: null
     transfer: false
     flags: {}
     _stats:
       compendiumSource: Actor.eIQIKf1xngnKcRpg.ActiveEffect.dnd5einvisible00
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -511,9 +505,19 @@ effects:
       exportSource: null
     img: systems/dnd5e/icons/svg/statuses/invisible.svg
     type: base
-    system: {}
+    system:
+      changes: []
     tint: '#ffffff'
     sort: 0
+    showIcon: 2
+    start:
+      combat: null
+      round: null
+      time: 0
+      turn: null
+      combatant: null
+      initiative: null
+    folder: null
     _key: '!actors.effects!tuHyePQ9GazMTyc0.VUI3PxyI4LH2J8tm'
 sort: 500000
 ownership:
@@ -521,7 +525,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171263873

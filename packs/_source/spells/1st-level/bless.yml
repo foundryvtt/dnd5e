@@ -118,36 +118,12 @@ effects:
       dnd5e:
         riders:
           statuses: []
-    changes:
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.mwak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: 1d4
-        priority: null
-      - key: system.bonuses.rwak.attack
-        mode: 2
-        value: 1d4
-        priority: null
     disabled: true
     duration:
-      startTime: null
-      seconds: 60
-      rounds: 10
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Item.kZZAZ6kp9YzgPQEe
     tint: '#ffffff'
     transfer: false
@@ -160,7 +136,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: null
@@ -169,8 +145,32 @@ effects:
       exportSource: null
     img: icons/magic/symbols/runes-carved-stone-yellow.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.bonuses.abilities.save
+          value: 1d4
+          priority: null
+          type: add
+        - key: system.bonuses.mwak.attack
+          value: 1d4
+          priority: null
+          type: add
+        - key: system.bonuses.msak.attack
+          value: 1d4
+          priority: null
+          type: add
+        - key: system.bonuses.rsak.attack
+          value: 1d4
+          priority: null
+          type: add
+        - key: system.bonuses.rwak.attack
+          value: 1d4
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE'
 folder: ERuXllkhTQF51rDJ
 sort: 0
@@ -179,7 +179,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037349054

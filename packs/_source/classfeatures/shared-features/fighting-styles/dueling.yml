@@ -31,20 +31,12 @@ system:
 effects:
   - _id: B5KM6oYsKC7vRMgG
     flags: {}
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: '+2'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.UOgk9fNed1qugAqH
     tint: '#ffffff'
     transfer: true
@@ -54,7 +46,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -63,8 +55,16 @@ effects:
       exportSource: null
     img: icons/skills/melee/hand-grip-sword-orange.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: '+2'
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!hCop9uJrWhF1QPb4.B5KM6oYsKC7vRMgG'
 folder: 159EPyqZTcus1HNJ
 sort: 0
@@ -73,7 +73,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037386883

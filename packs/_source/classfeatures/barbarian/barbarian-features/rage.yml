@@ -92,40 +92,12 @@ effects:
       dnd5e:
         riders:
           statuses: []
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: +@scale.barbarian.rage-damage
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: slashing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: piercing
-        priority: null
-      - key: system.traits.dr.value
-        mode: 2
-        value: bludgeoning
-        priority: null
-      - key: system.abilities.str.check.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
-      - key: system.abilities.str.save.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
     disabled: true
     duration:
-      startTime: null
-      rounds: 10
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 10
+      units: rounds
+      expiry: turnStart
+      expired: false
     origin: Item.bdfYHJstcltQC7SZ
     tint: '#ffffff'
     transfer: true
@@ -135,7 +107,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.348'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.2.0
       createdTime: null
@@ -144,8 +116,36 @@ effects:
       exportSource: null
     img: icons/creatures/abilities/mouth-teeth-human.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: +@scale.barbarian.rage-damage
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+        - key: system.abilities.str.check.roll.mode
+          value: 1
+          priority: null
+          type: add
+        - key: system.abilities.str.save.roll.mode
+          value: 1
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!VoR0SUrNX5EJVPIO.eWhL8hUr0c2ujDUm'
 folder: Q2ZQ0SlqfbgueFys
 sort: 0
@@ -154,7 +154,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037384722

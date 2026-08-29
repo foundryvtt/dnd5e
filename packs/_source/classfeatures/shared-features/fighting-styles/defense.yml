@@ -32,20 +32,12 @@ img: icons/equipment/shield/heater-stone-orange.webp
 effects:
   - _id: U3so0zDcVt4sIBRz
     flags: {}
-    changes:
-      - key: system.attributes.ac.bonus
-        value: '+1'
-        mode: 2
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.4mQUDmiDBePkQD6Y
     tint: '#ffffff'
     transfer: true
@@ -55,7 +47,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -64,14 +56,22 @@ effects:
       exportSource: null
     img: icons/equipment/shield/heater-stone-orange.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: '+1'
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!zSlV0O2rQMdoq6pB.U3so0zDcVt4sIBRz'
 folder: 159EPyqZTcus1HNJ
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037390653

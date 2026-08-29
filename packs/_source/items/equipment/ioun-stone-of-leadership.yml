@@ -77,20 +77,12 @@ system:
 effects:
   - origin: Compendium.dnd5e.items.hDF4RSCzMO8iI14x
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     _id: 3hbyQMgvW8GyQotV
-    changes:
-      - key: system.abilities.cha.value
-        mode: 2
-        value: '+2'
-        priority: null
     tint: '#ffffff'
     transfer: true
     flags: {}
@@ -100,7 +92,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -109,8 +101,16 @@ effects:
       exportSource: null
     img: icons/commodities/stone/ore-pile-purple.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.abilities.cha.value
+          value: '+2'
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!hDF4RSCzMO8iI14x.3hbyQMgvW8GyQotV'
 folder: aJgMxnZED9XdoN2W
 sort: 0
@@ -119,7 +119,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1725037254815

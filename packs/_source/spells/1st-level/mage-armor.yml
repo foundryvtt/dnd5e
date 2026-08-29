@@ -108,20 +108,12 @@ system:
   identifier: mage-armor
 effects:
   - _id: cfwMU7LuOJ619Lny
-    changes:
-      - key: system.attributes.ac.calc
-        mode: 5
-        value: mage
-        priority: null
     disabled: true
     duration:
-      startTime: null
-      seconds: 28800
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 28800
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Compendium.dnd5e.spells.CKZTpZlxj7hjjo2H
     transfer: false
     flags:
@@ -139,7 +131,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: null
@@ -148,8 +140,16 @@ effects:
       exportSource: null
     img: icons/equipment/chest/robe-layered-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.calc
+          value: mage
+          priority: null
+          type: override
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!CKZTpZlxj7hjjo2H.cfwMU7LuOJ619Lny'
 folder: ERuXllkhTQF51rDJ
 sort: 0
@@ -158,7 +158,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037350935

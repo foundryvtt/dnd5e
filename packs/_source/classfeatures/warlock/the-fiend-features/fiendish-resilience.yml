@@ -88,20 +88,12 @@ img: icons/magic/defensive/armor-stone-skin.webp
 effects:
   - _id: reg3sjReHspgkd0I
     flags: {}
-    changes:
-      - key: system.traits.dr.custom
-        value: Fiendish Resilience
-        mode: 2
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
-      combat: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.C2lYHOGH2UpEifk7
     tint: '#ffffff'
     transfer: true
@@ -111,7 +103,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -120,14 +112,22 @@ effects:
       exportSource: null
     img: icons/magic/defensive/armor-stone-skin.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.traits.dr.custom
+          value: Fiendish Resilience
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!9UZ2WjUF2k58CQug.reg3sjReHspgkd0I'
 folder: AjZEXaNUIFQ13Z3F
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037381075

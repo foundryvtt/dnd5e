@@ -381,25 +381,22 @@ effects:
     img: icons/weapons/hammers/hammer-double-glowing-yellow.webp
     _id: 95tYhecAl2D69Gtv
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.str.value
-        mode: 2
-        value: '4'
-        priority: null
-      - key: system.abilities.str.max
-        mode: 4
-        value: '30'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: 4
+          priority: null
+          type: add
+        - key: system.abilities.str.max
+          value: 30
+          priority: null
+          type: upgrade
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>While attuned to the Hammer of Thunderbolts, your Strength score
       increases by 4 and can exceed 20, but not 30.</p>
@@ -412,13 +409,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: 1727820504791
       modifiedTime: 1727820574644
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!wGDDt17DpBcXPuUD.95tYhecAl2D69Gtv'
 folder: MLMTCAvKsuFE3vYA
 sort: 0
@@ -427,7 +427,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1725037317730

@@ -62,20 +62,12 @@ system:
 effects:
   - origin: Compendium.dnd5e.items.ORKf6RRcalrdD6Qp
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     _id: uTXTubfcSCEANSBh
-    changes:
-      - key: system.abilities.str.value
-        mode: 4
-        value: '23'
-        priority: null
     tint: '#ffffff'
     transfer: true
     flags: {}
@@ -85,7 +77,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -94,8 +86,16 @@ effects:
       exportSource: null
     img: icons/equipment/waist/cloth-sash-purple.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.abilities.str.value
+          value: 23
+          priority: null
+          type: upgrade
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!ORKf6RRcalrdD6Qp.uTXTubfcSCEANSBh'
 folder: aJgMxnZED9XdoN2W
 sort: 0
@@ -104,7 +104,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1725037177048

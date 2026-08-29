@@ -60,24 +60,12 @@ system:
   identifier: cloak-of-protection
 effects:
   - _id: jxfin1rh71p1xjjv
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '+1'
-        priority: null
-      - key: system.bonuses.abilities.save
-        mode: 2
-        value: '+1'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.items.lvaMqEhfidfHDGf5
     transfer: true
     flags: {}
@@ -88,7 +76,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -97,8 +85,20 @@ effects:
       exportSource: null
     img: icons/equipment/back/cloak-heavy-fur-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: '+1'
+          priority: null
+          type: add
+        - key: system.bonuses.abilities.save
+          value: '+1'
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!lvaMqEhfidfHDGf5.jxfin1rh71p1xjjv'
 folder: aJgMxnZED9XdoN2W
 sort: 0
@@ -107,7 +107,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1725037276814

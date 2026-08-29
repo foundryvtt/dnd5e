@@ -72,29 +72,26 @@ effects:
     origin: Compendium.dnd5e.items.Item.j2ZGEwx8MhHZXds4
     _id: uuh2qSmWVNoHcqTc
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.con.value
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.attributes.senses.darkvision
-        mode: 4
-        value: '60'
-        priority: null
-      - key: system.traits.languages.value
-        mode: 2
-        value: dwarvish
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.con.value
+          value: 2
+          priority: null
+          type: add
+        - key: system.attributes.senses.darkvision
+          value: 60
+          priority: null
+          type: upgrade
+        - key: system.traits.languages.value
+          value: dwarvish
+          priority: null
+          type: add
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -108,12 +105,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.0.0
       createdTime: 1745428424759
       modifiedTime: 1745428481635
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!j2ZGEwx8MhHZXds4.uuh2qSmWVNoHcqTc'
 folder: aJgMxnZED9XdoN2W
 sort: 0
@@ -122,7 +122,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1725037264111

@@ -176,16 +176,12 @@ effects:
   - name: Entangle
     origin: Compendium.dnd5e.spells.Item.gMrWeG8fMDPRFiVe
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: fO14IutGR3Hrepun
-    changes: []
     description: >-
       <p>You are &amp;reference[Restrained apply=false] by the entangling Plants
       until the spell ends. While restrained by the plants, you can use your
@@ -202,7 +198,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: null
@@ -211,8 +207,12 @@ effects:
       exportSource: null
     img: icons/magic/nature/root-vine-entangle-foot-green.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!gMrWeG8fMDPRFiVe.fO14IutGR3Hrepun'
 flags: {}
 _id: gMrWeG8fMDPRFiVe
@@ -222,7 +222,7 @@ ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037362549

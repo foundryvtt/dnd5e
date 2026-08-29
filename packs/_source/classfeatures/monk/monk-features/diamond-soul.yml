@@ -93,20 +93,12 @@ flags: {}
 img: icons/magic/water/projectile-icecicle.webp
 effects:
   - _id: v6jhyPoAYRIIXBG1
-    changes:
-      - key: flags.dnd5e.diamondSoul
-        mode: 5
-        value: 'true'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.PRME1bZBvnc2E0iH
     transfer: true
     flags: {}
@@ -117,7 +109,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -126,14 +118,22 @@ effects:
       exportSource: null
     img: icons/magic/water/projectile-icecicle.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: flags.dnd5e.diamondSoul
+          value: true
+          priority: null
+          type: override
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!7D2EkLdISwShEDlN.v6jhyPoAYRIIXBG1'
 folder: TMmNG8ujFDBEWXRe
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037380495

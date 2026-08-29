@@ -124,16 +124,12 @@ effects:
   - name: Charm Person
     origin: Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs
     duration:
-      startTime: null
-      seconds: 3600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: 1QhUB3231btaCO0b
-    changes: []
     description: >-
       <p>You are &amp;reference[Charmed apply=false] by the caster until the
       spell ends. You regard the caster as a friendly acquaintance. When the
@@ -149,7 +145,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: null
@@ -158,13 +154,17 @@ effects:
       exportSource: null
     img: icons/magic/life/heart-shadow-red.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!eS7XnnApoxRxYXPs.1QhUB3231btaCO0b'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037361811

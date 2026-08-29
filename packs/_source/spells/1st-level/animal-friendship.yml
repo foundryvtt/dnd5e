@@ -127,17 +127,14 @@ effects:
     transfer: false
     _id: nxfOXuxeCg02WVId
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 86400
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 86400
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>You are &amp;reference[charmed apply=false] by the caster for the
       duration of the spell. If the caster or one of their allies harms you, the
@@ -154,17 +151,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772819953767
       modifiedTime: 1772820008420
       lastModifiedBy: dnd5ebuilder0000
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!hDOENzjuj5WpLq7B.nxfOXuxeCg02WVId'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037363056

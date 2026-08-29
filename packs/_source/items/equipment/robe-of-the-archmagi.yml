@@ -77,20 +77,12 @@ system:
   identifier: robe-of-the-archmagi
 effects:
   - _id: x6gy8sik893jvxea
-    changes:
-      - key: system.attributes.ac.armor
-        mode: 5
-        value: '15'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Compendium.dnd5e.items.mr96Z8YTI490ExhP
     transfer: true
     flags: {}
@@ -101,7 +93,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -110,8 +102,16 @@ effects:
       exportSource: null
     img: icons/magic/symbols/rune-sigil-black-pink.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.armor
+          value: 15
+          priority: null
+          type: override
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mr96Z8YTI490ExhP.x6gy8sik893jvxea'
 folder: aJgMxnZED9XdoN2W
 sort: 0
@@ -124,7 +124,7 @@ flags:
       effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1725037279916

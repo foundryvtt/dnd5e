@@ -34,20 +34,12 @@ flags: {}
 img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
 effects:
   - _id: vMMZHZQ0qT7MT4I4
-    changes:
-      - key: flags.dnd5e.reliableTalent
-        mode: 5
-        value: 'true'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.YN9xm6MCvse4Y60u
     transfer: true
     flags: {}
@@ -58,7 +50,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -67,14 +59,22 @@ effects:
       exportSource: null
     img: icons/skills/ranged/target-bullseye-arrow-glowing.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: flags.dnd5e.reliableTalent
+          value: true
+          priority: null
+          type: override
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!YN9xm6MCvse4Y60u.vMMZHZQ0qT7MT4I4'
 folder: RMtv55MamGWKrCfq
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037385020
