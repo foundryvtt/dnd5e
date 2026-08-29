@@ -251,7 +251,7 @@ export default class WelcomeScreen extends Application5e {
       await game.settings.set("core", "moduleConfiguration", moduleConfiguration);
     }
 
-    if ( dnd5e.settings.firstRun && foundry.utils.isEmpty(dnd5e.settings.packSourceConfiguration) ) {
+    if ( dnd5e.settings.firstRun ) {
       const sourceBook = settings.rulesVersion === "modern" ? "SRD 5.2" : "SRD 5.1";
       const disabledSources = game.system.packs.reduce((sources, pack) => {
         const book = pack.flags?.dnd5e?.sourceBook;
@@ -269,8 +269,8 @@ export default class WelcomeScreen extends Application5e {
       await game.settings.set("dnd5e", "packSourceConfiguration",
         Object.fromEntries(game.system.packs.map(p => [p.id, !disabledSources.has(p.id)]))
       );
+      await game.settings.set("dnd5e", "firstRun", false);
     }
-    if ( dnd5e.settings.firstRun ) await game.settings.set("dnd5e", "firstRun", false);
 
     if ( !foundry.utils.isEmpty(actions) ) {
       await this.#handleAdventureImportActions(foundry.utils.flattenObject(actions));
