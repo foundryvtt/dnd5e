@@ -21,7 +21,7 @@ system:
     book: ''
     page: ''
     license: CC-BY-4.0
-    revision: 2
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -100,7 +100,7 @@ system:
         ac: ''
         hd: ''
         hp: ''
-        attackDamage: '@mod + (@item.level - 6)d12'
+        attackDamage: '@mod + (@scaling)d12'
         saveDamage: ''
         healing: ''
       creatureSizes: []

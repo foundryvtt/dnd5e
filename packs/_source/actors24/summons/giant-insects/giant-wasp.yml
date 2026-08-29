@@ -415,14 +415,14 @@ _id: phbginGiantWasp0
 img: null
 prototypeToken:
   name: Giant Insect
-  displayName: 0
+  displayName: 20
   actorLink: false
   appendNumber: false
   prependAdjective: false
   width: 2
   height: 2
   texture:
-    src: modules/dnd-players-handbook/assets/tokens/giant-wasp.webp
+    src: null
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -434,7 +434,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -478,14 +478,14 @@ prototypeToken:
   occludable:
     radius: 0
   ring:
-    enabled: true
+    enabled: false
     colors:
       ring: null
       background: null
     effects: 1
     subject:
       scale: 1
-      texture: modules/dnd-players-handbook/assets/subjects/giant-wasp.webp
+      texture: null
   flags: {}
   randomImg: false
   turnMarker:
@@ -506,6 +506,7 @@ items:
       source:
         custom: ''
         rules: '2024'
+        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -557,6 +558,7 @@ items:
       source:
         custom: ''
         rules: '2024'
+        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -675,6 +677,7 @@ items:
       source:
         custom: ''
         rules: '2024'
+        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''

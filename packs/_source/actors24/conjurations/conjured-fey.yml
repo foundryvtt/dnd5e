@@ -417,7 +417,7 @@ system:
   rolls: {}
 prototypeToken:
   name: Conjured Fey
-  displayName: 0
+  displayName: 20
   actorLink: false
   appendNumber: false
   prependAdjective: false
@@ -436,7 +436,7 @@ prototypeToken:
   rotation: 0
   alpha: 1
   disposition: -2
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: attributes.hp
   bar2:
@@ -477,14 +477,14 @@ prototypeToken:
   occludable:
     radius: 0
   ring:
-    enabled: true
+    enabled: false
     colors:
       ring: null
       background: null
     effects: 1
     subject:
       scale: 1
-      texture: modules/dnd-players-handbook/assets/subjects/fey-spirit.webp
+      texture: null
   flags: {}
   randomImg: false
   turnMarker:
@@ -673,6 +673,7 @@ items:
         max: ''
       source:
         rules: '2024'
+        license: CC-BY-4.0
         revision: 2
       enchant: {}
       type:
