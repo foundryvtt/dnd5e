@@ -14,10 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
     page: ''
-    revision: 2
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -29,7 +29,7 @@ system:
     affects:
       choice: false
       count: ''
-      type: creature
+      type: enemy
       special: ''
     template:
       units: ft
@@ -37,6 +37,7 @@ system:
       size: '15'
       contiguous: false
       count: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -55,9 +56,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -75,9 +73,11 @@ system:
         spellSlot: false
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: true
+        concentration: false
       effects: []
       range:
         override: true
@@ -90,10 +90,11 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
-          type: any
+          type: creature
           special: ''
         override: true
       damage:
@@ -105,7 +106,7 @@ system:
               enabled: false
               formula: ''
             number: 2
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - acid
@@ -116,6 +117,7 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       uses:
         spent: 0
         recovery: []
@@ -123,7 +125,15 @@ system:
       sort: 100000
       name: Bonus Attack Damage
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     VSwMJFQoi3KU3Ais:
       type: utility
       _id: VSwMJFQoi3KU3Ais
@@ -138,6 +148,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -145,10 +156,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -165,8 +178,21 @@ system:
         formula: ''
       name: Cast
       img: ''
-      appliedEffects: []
+      behaviors:
+        - type: difficultTerrain
+          _id: r6D64e8FznKMOLcT
+          config:
+            types: []
+          level: {}
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: conjure-minor-elementals
+  method: spell
+  prepared: 0
 _id: phbsplConjureMin
 type: spell
 img: icons/creatures/magical/spirit-fire-orange.webp
@@ -175,18 +201,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 3100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.2
-  createdTime: 1724425947075
-  modifiedTime: 1746119620226
+  systemVersion: 6.0.0
+  createdTime: 1786472030811
+  modifiedTime: 1786472030811
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplConjureMin'

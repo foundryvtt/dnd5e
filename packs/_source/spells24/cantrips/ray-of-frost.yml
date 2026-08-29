@@ -12,8 +12,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -28,9 +30,10 @@ system:
       type: creature
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -49,9 +52,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: always
-    prepared: false
   activities:
     VQQgdw0BEVD6wapC:
       type: attack
@@ -68,18 +68,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: 7dnnwBMWLykrVJub
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -106,16 +111,26 @@ system:
               enabled: false
               formula: ''
             number: 1
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - cold
             scaling:
               mode: whole
+              number: 1
+            modifiers: []
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: ray-of-frost
+  method: spell
+  prepared: 2
 _id: phbsplRayofFrost
 type: spell
 img: icons/magic/water/projectile-icecicle-glowing.webp
@@ -128,42 +143,22 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.bonus
           value: -10
           priority: null
           type: add
           phase: initial
-          _id: wrvzbPmvNz5F1tPd
-        - key: system.attributes.movement.swim
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: Mu729JPOwGIthoCj
-        - key: system.attributes.movement.climb
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: 7EPUbpfVRbLluYX7
-        - key: system.attributes.movement.fly
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: BThq46tD4JD0FeY8
-        - key: system.attributes.movement.burrow
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: nimG03cIeDoOBgI5
+          _id: IfmY3KgiCyQ3SUWQ
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     description: >-
       <p>The target's Speed is reduced by 10 feet until the start of your next
@@ -171,15 +166,17 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725489565438
-      modifiedTime: 1783543976545
+      createdTime: 1787693619069
+      modifiedTime: 1787693619069
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -190,18 +187,14 @@ folder: 4FhsY9FJQd7h7MZb
 sort: 200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425968524
-  modifiedTime: 1783543976545
+  systemVersion: 6.0.0
+  createdTime: 1787693619069
+  modifiedTime: 1787693619069
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRayofFrost'

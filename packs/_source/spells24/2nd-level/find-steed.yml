@@ -6,8 +6,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -22,9 +23,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '30'
     units: ft
@@ -43,9 +45,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -59,18 +58,23 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -87,6 +91,8 @@ system:
         proficiency: true
         attacks: true
         saves: true
+        disposition: true
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -113,7 +119,6 @@ system:
             max: 3
           types: []
       summon:
-        identifier: ''
         mode: ''
         prompt: true
       uses:
@@ -123,8 +128,17 @@ system:
       sort: 0
       name: Summon Steed
       img: ''
-      appliedEffects: []
       effects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      tempHP: ''
+      behaviors: []
+      flags: {}
     o4YsONnsS8rOOEaS:
       type: summon
       activation:
@@ -139,17 +153,20 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
         concentration: false
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -166,6 +183,8 @@ system:
         proficiency: true
         attacks: true
         saves: true
+        disposition: true
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -192,7 +211,6 @@ system:
             max: null
           types: []
       summon:
-        identifier: ''
         mode: ''
         prompt: true
       uses:
@@ -203,11 +221,25 @@ system:
       name: Summon Flying Steed
       effects:
         - _id: SgNNVLaKxZOVKyKx
+          level:
+            min: null
+            max: null
+          uuid: null
       _id: o4YsONnsS8rOOEaS
       img: ''
-      appliedEffects:
-        - SgNNVLaKxZOVKyKx
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      tempHP: ''
+      behaviors: []
+      flags: {}
   identifier: find-steed
+  method: spell
+  prepared: 0
 _id: phbsplFindSteed0
 type: spell
 img: icons/commodities/claws/claw-blue-grey.webp
@@ -231,8 +263,12 @@ effects:
           priority: null
           type: upgrade
           phase: initial
-          _id: rleCxwtCK7SuesbT
+          _id: rA2Vxk7c088zbppZ
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>The steed has a Fly speed of 60ft. when summoned by a level 4+
       spell.</p>
@@ -243,11 +279,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543975120
-      modifiedTime: 1783543975120
+      createdTime: 1787693557532
+      modifiedTime: 1787693557532
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -258,18 +294,14 @@ folder: 3SjcO2acsFnWegp4
 sort: 3500000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425953437
-  modifiedTime: 1783543975120
+  systemVersion: 6.0.0
+  createdTime: 1787693557532
+  modifiedTime: 1787693557532
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplFindSteed0'

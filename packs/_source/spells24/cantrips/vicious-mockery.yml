@@ -12,8 +12,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -28,9 +29,10 @@ system:
       type: creature
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -48,9 +50,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: always
-    prepared: false
   activities:
     DwMhkWD6NEwUa1L3:
       type: save
@@ -67,6 +66,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -74,12 +74,16 @@ system:
       effects:
         - _id: suEeAQQXl0X2JqzF
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -101,16 +105,27 @@ system:
             scaling:
               mode: whole
               number: 1
+            modifiers: []
         onSave: none
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: vicious-mockery
+  method: spell
+  prepared: 2
 _id: phbsplViciousMoc
 type: spell
 img: icons/magic/control/fear-fright-monster-grin-green.webp
@@ -124,11 +139,14 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: targetEnd
       expired: false
     description: >-
       <p>The target has Disadvantage on the next attack roll it makes before the
@@ -140,11 +158,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725573178035
-      modifiedTime: 1783543977536
+      createdTime: 1787693667914
+      modifiedTime: 1787693667914
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -155,18 +173,14 @@ folder: 4FhsY9FJQd7h7MZb
 sort: 100013
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425976745
-  modifiedTime: 1783543977536
+  systemVersion: 6.0.0
+  createdTime: 1787693667914
+  modifiedTime: 1787693667914
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplViciousMoc'

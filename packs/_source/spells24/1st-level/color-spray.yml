@@ -10,8 +10,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -31,6 +33,7 @@ system:
       size: '15'
       contiguous: false
       count: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -49,9 +52,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -65,20 +65,28 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: DKl58EVNaSX976co
+          uuid: null
+          level: {}
+          onSave: false
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -86,15 +94,27 @@ system:
         onSave: half
         parts: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: color-spray
+  method: spell
+  prepared: 0
 _id: phbsplColorSpray
 type: spell
 img: icons/magic/light/hand-sparks-smoke-green.webp
@@ -108,47 +128,49 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: turns
+      expiry: sourceEnd
       expired: false
     description: ''
     tint: '#ffffff'
-    statuses: []
+    statuses:
+      - blinded
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725046777685
-      modifiedTime: 1783543974386
+      createdTime: 1787693525856
+      modifiedTime: 1787693525856
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
-    showIcon: 1
+    showIcon: 2
     folder: null
     _key: '!items.effects!phbsplColorSpray.DKl58EVNaSX976co'
 folder: pBaAAtXBCq9FVEnL
 sort: 4800000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425945486
-  modifiedTime: 1783543974386
+  systemVersion: 6.0.0
+  createdTime: 1787693525856
+  modifiedTime: 1787693525856
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplColorSpray'

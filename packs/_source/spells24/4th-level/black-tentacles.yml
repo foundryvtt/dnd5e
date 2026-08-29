@@ -16,10 +16,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
     page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -38,6 +38,7 @@ system:
       size: '20'
       contiguous: false
       count: ''
+      stationary: false
   range:
     value: '90'
     units: ft
@@ -58,9 +59,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -74,21 +72,28 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: NDytclFrNmC418CS
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -107,16 +112,34 @@ system:
               mode: ''
               number: null
               formula: ''
+            modifiers: []
       save:
-        ability: str
+        ability:
+          - str
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors:
+        - type: difficultTerrain
+          _id: 9QZR7Lz1ZILzgkHb
+          config:
+            types: []
+          level: {}
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: black-tentacles
+  method: spell
+  prepared: 0
 _id: phbsplEvardsBlac
 type: spell
 img: icons/creatures/tentacles/tentacles-suctioncups-pink.webp
@@ -136,6 +159,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>A &amp;Reference[Restrained apply=false] creature can take an action to
       make a [[/check ability=str skill=ath dc=@attributes.spell.dc]] check
@@ -149,11 +175,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543975026
-      modifiedTime: 1783543975026
+      createdTime: 1786472055059
+      modifiedTime: 1786472055059
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -164,18 +190,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 2400000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1724425952514
-  modifiedTime: 1783543975026
+  systemVersion: 6.0.0
+  createdTime: 1786472055059
+  modifiedTime: 1786472055059
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplEvardsBlac'

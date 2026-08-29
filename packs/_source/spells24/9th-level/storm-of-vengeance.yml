@@ -24,8 +24,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -45,6 +47,7 @@ system:
       type: circle
       size: '300'
       count: ''
+      stationary: false
   range:
     units: mi
     special: ''
@@ -64,9 +67,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     8QALATRgSsmWWxCl:
       type: save
@@ -83,18 +83,24 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: ujpteFz6imf8RZsj
+          uuid: null
+          level: {}
+          onSave: false
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -110,21 +116,30 @@ system:
               enabled: false
               formula: ''
             number: 2
-            denomination: '6'
+            denomination: 6
             bonus: ''
             types:
               - thunder
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
         onSave: none
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       img: systems/dnd5e/icons/svg/statuses/exhaustion-1.svg
-      appliedEffects:
-        - ujpteFz6imf8RZsj
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     WOo8u0FLAzNMpMJN:
       type: damage
       name: 'Turn 2: Acid Rain'
@@ -141,6 +156,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -155,6 +171,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -175,14 +192,22 @@ system:
               enabled: false
               formula: ''
             number: 4
-            denomination: '6'
+            denomination: 6
             bonus: ''
             types:
               - acid
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
       img: systems/dnd5e/icons/svg/statuses/exhaustion-2.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Fd8ZGgmDyNmJJuj3:
       type: save
       name: 'Turn 3: Lightning'
@@ -199,6 +224,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -213,6 +239,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -231,20 +258,30 @@ system:
               enabled: false
               formula: ''
             number: 10
-            denomination: '6'
+            denomination: 6
             bonus: ''
             types:
               - lightning
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
         onSave: half
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       img: systems/dnd5e/icons/svg/statuses/exhaustion-3.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     H4uCtCkANBkttnov:
       type: damage
       _id: H4uCtCkANBkttnov
@@ -260,6 +297,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -274,6 +312,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -294,15 +333,23 @@ system:
               enabled: false
               formula: ''
             number: 2
-            denomination: '6'
+            denomination: 6
             bonus: ''
             types:
               - bludgeoning
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
       name: 'Turn 4: Hailstones'
       img: systems/dnd5e/icons/svg/statuses/exhaustion-4.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     yt2oWWelZl1zV4CB:
       type: damage
       name: 'Turn 5+: Gusts and Rain'
@@ -319,6 +366,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -332,7 +380,10 @@ system:
         template:
           contiguous: false
           units: ft
-          type: ''
+          type: circle
+          stationary: false
+          size: '300'
+          count: ''
         affects:
           choice: false
           count: ''
@@ -360,9 +411,25 @@ system:
             scaling:
               mode: ''
               number: 1
+            modifiers: []
       img: systems/dnd5e/icons/svg/statuses/exhaustion-5.svg
-      appliedEffects: []
+      behaviors:
+        - type: difficultTerrain
+          _id: vlKWM9EV0sp0BoDg
+          config:
+            types: []
+          level: {}
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: storm-of-vengeance
+  method: spell
+  prepared: 0
 _id: phbsplStormofVen
 type: spell
 img: icons/magic/lightning/bolt-cloud-sky-white.webp
@@ -376,6 +443,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 60
@@ -391,11 +461,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725386260763
-      modifiedTime: 1783543977270
+      createdTime: 1786472117938
+      modifiedTime: 1786472117938
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -406,18 +476,14 @@ folder: iG0Zia8jh6uK39TB
 sort: 100196
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425973107
-  modifiedTime: 1783543977270
+  systemVersion: 6.0.0
+  createdTime: 1786472117937
+  modifiedTime: 1786472117937
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplStormofVen'

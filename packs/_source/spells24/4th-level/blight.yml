@@ -13,8 +13,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -29,9 +30,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '30'
     units: ft
@@ -50,9 +52,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -66,19 +65,24 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -97,16 +101,29 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: blight
+  method: spell
+  prepared: 0
 _id: phbsplBlight0000
 type: spell
 img: icons/magic/unholy/strike-body-life-soul-green.webp
@@ -115,18 +132,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 3500000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425943709
-  modifiedTime: 1745256786999
+  systemVersion: 6.0.0
+  createdTime: 1787693501964
+  modifiedTime: 1787693501964
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBlight0000'

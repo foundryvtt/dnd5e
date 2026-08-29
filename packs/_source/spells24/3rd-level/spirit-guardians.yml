@@ -19,8 +19,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -40,6 +42,7 @@ system:
       size: '15'
       contiguous: false
       count: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -59,9 +62,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -69,24 +69,28 @@ system:
       activation:
         type: ''
         value: null
-        override: true
+        override: false
         condition: ''
       consumption:
         targets: []
         scaling:
           allowed: false
           max: ''
-        spellSlot: false
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
-        override: true
+        override: false
+        concentration: false
       effects:
         - _id: Q3CLqX7crfusAxkj
           onSave: true
+          uuid: null
+          level: {}
       range:
-        override: true
+        override: false
         units: ft
         special: ''
         value: '15'
@@ -96,12 +100,13 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
           type: creature
           special: ''
-        override: true
+        override: false
       damage:
         onSave: half
         parts:
@@ -109,7 +114,7 @@ system:
               enabled: false
               formula: ''
             number: 3
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - necrotic
@@ -118,57 +123,31 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
         max: ''
       sort: 200000
-      name: Emanation Save
+      name: Cast and Save
       img: ''
-      appliedEffects:
-        - Q3CLqX7crfusAxkj
-    Rw9xP3RWH9K4eDya:
-      type: utility
-      name: Cast
-      _id: Rw9xP3RWH9K4eDya
-      sort: 100000
-      activation:
-        type: action
-        value: null
-        override: false
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description: {}
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-      target:
-        template:
-          contiguous: false
-          units: ft
-        affects:
-          choice: false
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-      roll:
-        prompt: false
-        visible: false
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: spirit-guardians
+  method: spell
+  prepared: 0
 _id: phbsplSpiritGuar
 type: spell
 img: icons/magic/light/orb-hands-humanoid-yellow.webp
@@ -181,43 +160,25 @@ effects:
       expiry: turnStart
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/magic/movement/abstract-ribbons-red-orange.webp
     _id: Q3CLqX7crfusAxkj
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 0.5
           priority: null
           type: multiply
           phase: initial
-          _id: SXTBNKL9ZnffurSB
-        - key: system.attributes.movement.fly
-          value: 0.5
-          priority: null
-          type: multiply
-          phase: initial
-          _id: VhIMQqp5A7Jlk5zO
-        - key: system.attributes.movement.climb
-          value: 0.5
-          priority: null
-          type: multiply
-          phase: initial
-          _id: h6yMByEiTBe8Ozua
-        - key: system.attributes.movement.swim
-          value: 0.5
-          priority: null
-          type: multiply
-          phase: initial
-          _id: ulFnA6cFzUqf8p3B
-        - key: system.attributes.movement.burrow
-          value: 0.5
-          priority: null
-          type: multiply
-          phase: initial
-          _id: Twm9zOQE3S2v00cj
+          _id: UWErnBwYMRBgOtap
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: <p>The creature's speed is halved while within the Emanation.</p>
     tint: '#ffffff'
     transfer: false
@@ -226,11 +187,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543977173
-      modifiedTime: 1783543977173
+      createdTime: 1786481154204
+      modifiedTime: 1786481154204
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -241,18 +202,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 101563
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425972143
-  modifiedTime: 1783543977173
+  systemVersion: 6.0.0
+  createdTime: 1786481154204
+  modifiedTime: 1786481154204
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSpiritGuar'

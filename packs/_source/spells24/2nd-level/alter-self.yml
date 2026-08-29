@@ -26,8 +26,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -42,9 +44,10 @@ system:
       type: self
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -63,9 +66,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -79,20 +79,27 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: 6SL9vuAkx7nAfS5D
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -108,8 +115,13 @@ system:
       sort: 0
       name: Aquatic Adaptation
       img: icons/creatures/fish/fish-bluefin-yellow-blue.webp
-      appliedEffects:
-        - 6SL9vuAkx7nAfS5D
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     wQGpfux8qzcvwsDo:
       type: utility
       _id: wQGpfux8qzcvwsDo
@@ -124,18 +136,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: 1jrUeJtfZMGhJOZa
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -152,8 +169,13 @@ system:
         formula: ''
       name: Change Appearance
       img: icons/creatures/magical/spirit-undead-ghost-blue.webp
-      appliedEffects:
-        - 1jrUeJtfZMGhJOZa
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     dQnMvyjoGqhgl9wP:
       type: utility
       _id: dQnMvyjoGqhgl9wP
@@ -168,18 +190,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: baEBDez6IgWNpkSX
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -196,8 +223,13 @@ system:
         formula: ''
       name: Natural Weapons
       img: icons/creatures/abilities/fang-tooth-blood-red.webp
-      appliedEffects:
-        - baEBDez6IgWNpkSX
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     SEwXqOHdPCyejSYR:
       type: attack
       name: 'Attack: Claws'
@@ -213,6 +245,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -227,6 +260,7 @@ system:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -254,14 +288,22 @@ system:
               enabled: false
               formula: ''
             number: 1
-            denomination: '6'
+            denomination: 6
             bonus: '@mod'
             types:
               - slashing
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     osceJQzUOQPJ9CLn:
       type: attack
       name: 'Attack: Fangs/Horns'
@@ -276,6 +318,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -290,6 +333,7 @@ system:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -317,15 +361,23 @@ system:
               enabled: false
               formula: ''
             number: 1
-            denomination: '6'
+            denomination: 6
             bonus: '@mod'
             types:
               - piercing
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
       _id: osceJQzUOQPJ9CLn
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     eHtpASAnamFUc69H:
       type: attack
       name: 'Attack: Hooves'
@@ -340,6 +392,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -354,6 +407,7 @@ system:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -381,16 +435,26 @@ system:
               enabled: false
               formula: ''
             number: 1
-            denomination: '6'
+            denomination: 6
             bonus: '@mod'
             types:
               - bludgeoning
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
       _id: eHtpASAnamFUc69H
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: alter-self
+  method: spell
+  prepared: 0
 _id: phbsplAlterSelf0
 type: spell
 img: icons/magic/control/silhouette-hold-change-green.webp
@@ -404,12 +468,16 @@ effects:
     system:
       changes:
         - key: system.attributes.movement.swim
-          value: 1
+          value: '@attributes.movement.speed'
           priority: null
           type: upgrade
           phase: initial
-          _id: RMkElG5syvNWdrap
+          _id: Y1VzPEUPwB3QhhV2
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 3600
@@ -422,15 +490,17 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725048208451
-      modifiedTime: 1783543973848
+      createdTime: 1786481079598
+      modifiedTime: 1786481079598
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -446,6 +516,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 3600
@@ -460,11 +533,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725048980878
-      modifiedTime: 1783543973849
+      createdTime: 1786481079599
+      modifiedTime: 1786481079599
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -480,6 +553,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 3600
@@ -499,11 +575,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725049566534
-      modifiedTime: 1783543973849
+      createdTime: 1786481079599
+      modifiedTime: 1786481079599
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -514,18 +590,14 @@ folder: 3SjcO2acsFnWegp4
 sort: 5600000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1724425940243
-  modifiedTime: 1783543973848
+  systemVersion: 6.0.0
+  createdTime: 1786481079598
+  modifiedTime: 1786481079598
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAlterSelf0'

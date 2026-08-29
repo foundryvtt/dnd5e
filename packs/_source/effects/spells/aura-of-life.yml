@@ -1,0 +1,47 @@
+name: Aura of Life
+origin: null
+duration:
+  value: null
+  units: minutes
+  expiry: null
+  expired: false
+disabled: false
+flags: {}
+img: icons/magic/life/ankh-gold-blue.webp
+_id: phbeffAuraLife00
+type: base
+system:
+  changes:
+    - key: system.traits.dr.value
+      value: necrotic
+      priority: null
+      type: add
+      phase: initial
+      _id: BFfQCpqoUoA9soAX
+      conditions: '{}'
+  magical: true
+  rider:
+    statuses: []
+  conditions: '{}'
+description: >-
+  <p>While in the aura, you and your allies have Resistance to Necrotic damage,
+  and your Hit Point maximums can’t be reduced. If an ally with 0 Hit Points
+  starts its turn in the aura, that ally regains [[/healing 1 type=healing]]{1
+  Hit Point}.</p>
+tint: '#ffffff'
+transfer: false
+statuses: []
+_stats:
+  coreVersion: '14.365'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1786472007764
+  modifiedTime: 1786472507248
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+start: null
+showIcon: 1
+folder: xOsCK7cF2ShkrOva
+sort: 100000
+_key: '!effects!phbeffAuraLife00'
