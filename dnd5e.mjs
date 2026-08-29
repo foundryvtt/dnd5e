@@ -589,6 +589,7 @@ Hooks.once("ready", function() {
 
 /**
  * Determine whether a system migration is required and feasible and run it.
+ * @returns {Promise}
  */
 async function _handleMigration() {
   if ( !game.user.isGM ) return;

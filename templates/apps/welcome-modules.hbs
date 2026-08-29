@@ -2,6 +2,10 @@
     {{#each modules}}
     {{> ".section" }}
     {{/each}}
+    <div class="modules">
+        <h3>{{ localize "DND5E.WELCOME.Section.more" }}</h3>
+        {{{ moreMessage }}}
+    </div>
 </section>
 
 {{#*inline ".section"}}
@@ -12,7 +16,7 @@
         <div class="module-entry flexrow">
             <img class="key-art" src="{{ img }}" alt="{{ name }}">
             <div class="module-content">
-                <h4 class="title"><a href="https://foundryvtt.com/packages/{{ @key }}">{{ name }}</a></h4>
+                <h4 class="title"><a href="https://www.foundryvtt.store/products/{{ @key }}">{{ name }}</a></h4>
                 <div class="description">{{{ description }}}</div>
                 <div class="status">
                     {{#if installed}}
@@ -28,6 +32,6 @@
             </div>
         </div>
         {{/each}}
-    </ul>
+    </div>
 </div>
 {{/inline}}

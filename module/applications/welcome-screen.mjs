@@ -3,7 +3,7 @@ import Application5e from "./api/application.mjs";
 import { createCheckboxInput } from "./fields.mjs";
 import BaseSettingsConfig from "./settings/base-settings.mjs";
 
-const { BooleanField } = foundry.data.fields;
+const { BooleanField, StringField } = foundry.data.fields;
 
 /**
  * @import { OfficialModuleListing } from "./_types.mjs";
@@ -34,6 +34,20 @@ export default class WelcomeScreen extends Application5e {
       icon: "fa-solid fa-handshake",
       title: "DND5E.WELCOME.Title"
     }
+  };
+
+  /* -------------------------------------------- */
+
+  /**
+   * Links provided to the localized text.
+   * @type {Record<string>}
+   */
+  static LINKS = {
+    changes: "https://github.com/foundryvtt/dnd5e/releases/latest",
+    discord: "https://discord.gg/foundryvtt",
+    issues: "https://github.com/foundryvtt/dnd5e/issues",
+    marketplace: "https://www.foundryvtt.store/systems/dnd5e",
+    wiki: "https://github.com/foundryvtt/dnd5e/wiki"
   };
 
   /* -------------------------------------------- */
@@ -102,19 +116,13 @@ export default class WelcomeScreen extends Application5e {
   async _prepareMainContext(context, options) {
     context.tab = context.tabs.main;
 
-    const links = {
-      changes: "https://github.com/foundryvtt/dnd5e/releases/latest",
-      discord: "https://discord.gg/foundryvtt",
-      issues: "https://github.com/foundryvtt/dnd5e/issues",
-      wiki: "https://github.com/foundryvtt/dnd5e/wiki"
-    };
     const bullets = ["Changes", "Documentation", "Content", "Bugs"]
-      .map(k => `<li>${_loc(`DND5E.WELCOME.Message.${k}`, links)}</li>`)
+      .map(k => `<li>${_loc(`DND5E.WELCOME.Message.${k}`, WelcomeScreen.LINKS)}</li>`)
       .join("");
     context.message = `${_loc("DND5E.WELCOME.Message.Introduction")}<ul>${bullets}</ul>`;
 
     const calendar = BaseSettingsConfig.createSettingField("calendar");
-    calendar.field.blank = true;
+    calendar.field = new StringField({ ...calendar.field.options, blank: true });
     if ( !dnd5e.settings.calendarConfig.enabled ) calendar.value = "";
     context.fields = [
       BaseSettingsConfig.createSettingField("rulesVersion"),
@@ -178,6 +186,7 @@ export default class WelcomeScreen extends Application5e {
         data.enabled = config?.active === true;
       }
     }
+    context.moreMessage = _loc("DND5E.WELCOME.Message.MoreContent", WelcomeScreen.LINKS);
     return context;
   }
 
@@ -221,7 +230,7 @@ export default class WelcomeScreen extends Application5e {
     if ( !game.user.isGM ) return;
 
     const { actions, modules, ...settings } = foundry.utils.expandObject(formData.object);
-    settings.calendarConfig = { enabled: settings.calendar !== "" };
+    settings.calendarConfig = dnd5e.settings.calendarConfig.clone({ enabled: settings.calendar !== "" }).toObject();
     if ( settings.calendar === "" ) delete settings.calendar;
     if ( !this.element.querySelector('[name="metric"]').indeterminate ) {
       settings.metricLengthUnits = settings.metricVolumeUnits = settings.metricWeightUnits = settings.metric;
@@ -229,7 +238,7 @@ export default class WelcomeScreen extends Application5e {
     delete settings.metric;
     let { requiresClientReload, requiresWorldReload } = await BaseSettingsConfig.commitChanges(settings);
 
-    const toggledModules = Object.entries(modules).reduce((map, [id, enabled]) => {
+    const toggledModules = Object.entries(modules ?? {}).reduce((map, [id, enabled]) => {
       if ( enabled !== game.modules.get(id)?.active ) map.set(id, enabled);
       return map;
     }, new Map());
@@ -242,7 +251,7 @@ export default class WelcomeScreen extends Application5e {
       await game.settings.set("core", "moduleConfiguration", moduleConfiguration);
     }
 
-    if ( dnd5e.settings.firstRun ) {
+    if ( dnd5e.settings.firstRun && foundry.utils.isEmpty(dnd5e.settings.packSourceConfiguration) ) {
       const sourceBook = settings.rulesVersion === "modern" ? "SRD 5.2" : "SRD 5.1";
       const disabledSources = game.system.packs.reduce((sources, pack) => {
         const book = pack.flags?.dnd5e?.sourceBook;
@@ -257,12 +266,11 @@ export default class WelcomeScreen extends Application5e {
       if ( modules["dnd-players-handbook"] && modules["dnd-dungeon-masters-guide"] ) {
         disabledSources.add("dnd5e.equipment24");
       }
-      await game.settings.set("dnd5e", "packSourceConfiguration", {
-        ...dnd5e.settings.packSourceConfiguration,
-        ...Object.fromEntries(game.system.packs.map(p => [p.id, !disabledSources.has(p.id)]))
-      });
-      await game.settings.set("dnd5e", "firstRun", false);
+      await game.settings.set("dnd5e", "packSourceConfiguration",
+        Object.fromEntries(game.system.packs.map(p => [p.id, !disabledSources.has(p.id)]))
+      );
     }
+    if ( dnd5e.settings.firstRun ) await game.settings.set("dnd5e", "firstRun", false);
 
     if ( !foundry.utils.isEmpty(actions) ) {
       await this.#handleAdventureImportActions(foundry.utils.flattenObject(actions));
@@ -316,15 +324,13 @@ export default class WelcomeScreen extends Application5e {
 
     const local = await fetch(LOCAL_PATH).then(r => r.json());
     let remote;
-    try {
-      remote = await fetch(REMOTE_PATH).then(r => r.json());
-    } catch(err) {}
+    try { remote = await fetch(REMOTE_PATH).then(r => r.json()); } catch {}
 
     for ( const [section, modules] of Object.entries(local) ) {
       for ( const [id, data] of Object.entries(modules) ) {
         data.img = `systems/dnd5e/ui/official/products/${id}.webp`;
       }
-      for ( const [id, data] of Object.entries(remote?.[section]?.modules ?? {}) ) {
+      for ( const [id, data] of Object.entries(remote?.[section] ?? {}) ) {
         if ( !(id in modules) ) modules[id] = {
           ...data,
           img: `https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/ui/official/products/${id}.webp`
