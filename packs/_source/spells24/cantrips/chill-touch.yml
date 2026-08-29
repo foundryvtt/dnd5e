@@ -11,8 +11,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -27,9 +28,10 @@ system:
       type: any
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: touch
     special: ''
@@ -47,9 +49,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: always
-    prepared: false
   activities:
     mUy5EZouOr5kqvYN:
       type: attack
@@ -66,18 +65,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: zwks0mAqBHGZC1Pk
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -104,7 +108,7 @@ system:
               enabled: false
               formula: ''
             number: 1
-            denomination: '10'
+            denomination: 10
             bonus: ''
             types:
               - necrotic
@@ -112,11 +116,19 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       name: ''
       img: ''
-      appliedEffects:
-        - zwks0mAqBHGZC1Pk
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: chill-touch
+  method: spell
+  prepared: 2
 _id: phbsplChillTouch
 type: spell
 img: icons/magic/unholy/strike-hand-glow-pink.webp
@@ -130,25 +142,30 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: turns
+      expiry: sourceEnd
       expired: false
     description: <p>The target can’t regain Hit Points until the end of your next turn.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725396574015
-      modifiedTime: 1783543974362
+      createdTime: 1787693517022
+      modifiedTime: 1787693517022
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -159,18 +176,14 @@ folder: 4FhsY9FJQd7h7MZb
 sort: 1900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425944733
-  modifiedTime: 1783543974362
+  systemVersion: 6.0.0
+  createdTime: 1787693517022
+  modifiedTime: 1787693517022
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplChillTouch'

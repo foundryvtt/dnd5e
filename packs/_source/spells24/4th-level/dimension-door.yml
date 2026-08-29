@@ -16,8 +16,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -32,9 +33,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '500'
     units: ft
@@ -52,9 +54,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -68,19 +67,24 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -100,15 +104,79 @@ system:
             scaling:
               mode: ''
               number: 1
+            modifiers: []
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 200000
       name: ''
-      img: systems/dnd5e/icons/svg/trait-saves.svg
-      appliedEffects: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+    hCOnUZIondeOKxE5:
+      type: teleport
+      name: ''
+      _id: hCOnUZIondeOKxE5
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: ft
+        override: true
+        special: ''
+        value: '5'
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: true
+        units: ft
+        value: '500'
   identifier: dimension-door
+  method: spell
+  prepared: 0
 _id: phbsplDimensionD
 type: spell
 img: icons/environment/wilderness/portal.webp
@@ -117,18 +185,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 2700000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425949835
-  modifiedTime: 1745256790484
+  systemVersion: 6.0.0
+  createdTime: 1786473177191
+  modifiedTime: 1786473177191
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDimensionD'

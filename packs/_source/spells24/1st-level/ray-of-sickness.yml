@@ -4,33 +4,39 @@ system:
     value: >-
       <p>You shoot a greenish ray at a creature within range. Make a ranged
       spell attack against the target. On a hit, the target takes 2d8 Poison
-      damage and has the &amp;Reference[poisoned] condition until the end of
-      your next turn.</p><p><strong>Using a Higher-Level Spell Slot.</strong>
-      The damage increases by 1d8 for each spell slot level above 1.</p>
+      damage and has the &amp;Reference[poisoned apply=false] condition until
+      the end of your next turn.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> The damage increases by 1d8 for each spell slot level above
+      1.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
     value: null
   duration:
-    value: ''
+    value: '1'
     units: inst
   target:
     affects:
       type: creature
       count: '1'
       choice: false
+      special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
+      type: ''
+      stationary: false
   range:
     value: '60'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -45,9 +51,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -61,19 +64,27 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
-      effects: []
+        concentration: false
+      effects:
+        - _id: twUSPBjcoiuiu1mJ
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -103,31 +114,82 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   identifier: ray-of-sickness
+  method: spell
+  prepared: 0
 _id: phbsplRayofSickn
 type: spell
 img: icons/magic/unholy/beam-impact-green.webp
-effects: []
+effects:
+  - name: Poisoned
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplRayofSickn
+    type: base
+    _id: twUSPBjcoiuiu1mJ
+    system:
+      changes: []
+      magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
+    disabled: false
+    duration:
+      value: null
+      units: turns
+      expiry: sourceEnd
+      expired: false
+    description: ''
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '14.367'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1787693621452
+      modifiedTime: 1787693621452
+      lastModifiedBy: dnd5ebuilder0000
+    showIcon: 2
+    start: null
+    folder: null
+    _key: '!items.effects!phbsplRayofSickn.twUSPBjcoiuiu1mJ'
 folder: pBaAAtXBCq9FVEnL
 sort: 900000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425968661
-  modifiedTime: 1745256797477
+  systemVersion: 6.0.0
+  createdTime: 1787693621452
+  modifiedTime: 1787693621452
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplRayofSickn'

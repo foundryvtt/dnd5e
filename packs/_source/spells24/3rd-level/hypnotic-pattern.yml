@@ -14,8 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -26,14 +28,18 @@ system:
   target:
     affects:
       choice: false
+      type: ''
     template:
       units: ft
       type: cube
       size: '30'
       contiguous: false
+      count: ''
+      stationary: false
   range:
     value: '120'
     units: ft
+    special: ''
   uses:
     max: ''
     recovery: []
@@ -43,14 +49,12 @@ system:
   properties:
     - somatic
     - material
+    - concentration
   materials:
     value: a pinch of confetti
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -64,21 +68,28 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: mjAs8ssQlgp0AQOp
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -86,15 +97,27 @@ system:
         onSave: half
         parts: []
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: hypnotic-pattern
+  method: spell
+  prepared: 0
 _id: phbsplHypnoticPa
 type: spell
 img: icons/magic/control/hypnosis-mesmerism-swirl.webp
@@ -107,43 +130,25 @@ effects:
       expiry: turnStart
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
     _id: mjAs8ssQlgp0AQOp
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 0
           priority: null
-          type: downgrade
+          type: override
           phase: initial
-          _id: 4bmIn7pTXc7o8QP3
-        - key: system.attributes.movement.burrow
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: dTkSYIlZL52bRapI
-        - key: system.attributes.movement.climb
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: vI4AVqelMSLR56rE
-        - key: system.attributes.movement.fly
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: zFbAt7zaiabzUUVJ
-        - key: system.attributes.movement.swim
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: GrhFyvkGAnFgWrNy
+          _id: EnLoDmMiguoOeZ1a
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
       <p>While &amp;Reference[charmed apply=false], the creature has the
       &amp;Reference[incapacitated apply=false] condition and a Speed of
@@ -159,11 +164,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543975684
-      modifiedTime: 1783543975684
+      createdTime: 1786481123747
+      modifiedTime: 1786481123747
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -174,18 +179,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 1500000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425959310
-  modifiedTime: 1783543975684
+  systemVersion: 6.0.0
+  createdTime: 1786481123747
+  modifiedTime: 1786481123747
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplHypnoticPa'

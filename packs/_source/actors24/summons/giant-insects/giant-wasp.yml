@@ -26,9 +26,6 @@ system:
       value: 17
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -43,9 +40,6 @@ system:
       value: 13
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -60,9 +54,6 @@ system:
       value: 15
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -77,9 +68,6 @@ system:
       value: 4
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -94,9 +82,6 @@ system:
       value: 14
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -111,9 +96,6 @@ system:
       value: 3
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
@@ -156,22 +138,6 @@ system:
     sp: 0
     cp: 0
   bonuses:
-    mwak:
-      attack: ''
-      damage: ''
-    rwak:
-      attack: ''
-      damage: ''
-    msak:
-      attack: ''
-      damage: ''
-    rsak:
-      attack: ''
-      damage: ''
-    abilities:
-      check: ''
-      save: ''
-      skill: ''
     spell:
       dc: ''
   skills:
@@ -183,7 +149,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ani:
       ability: wis
@@ -193,7 +158,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     arc:
       ability: int
@@ -203,7 +167,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ath:
       ability: str
@@ -213,7 +176,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     dec:
       ability: cha
@@ -223,7 +185,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     his:
       ability: int
@@ -233,7 +194,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ins:
       ability: wis
@@ -243,7 +203,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     itm:
       ability: cha
@@ -253,7 +212,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     inv:
       ability: int
@@ -263,7 +221,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     med:
       ability: wis
@@ -273,7 +230,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     nat:
       ability: int
@@ -283,7 +239,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prc:
       ability: wis
@@ -293,7 +248,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prf:
       ability: cha
@@ -303,7 +257,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     per:
       ability: cha
@@ -313,7 +266,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     rel:
       ability: int
@@ -323,7 +275,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     slt:
       ability: dex
@@ -333,7 +284,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ste:
       ability: dex
@@ -343,7 +293,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     sur:
       ability: wis
@@ -353,7 +302,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
   tools: {}
   spells:
@@ -394,14 +342,14 @@ system:
         min: null
         max: null
         mode: 0
-      bonus: ''
     movement:
-      climb: '40'
-      fly: '40'
-      walk: '40'
       units: null
       hover: false
       ignoredDifficultTerrain: []
+      speeds:
+        walk: '40'
+        climb: '40'
+        fly: '40'
     attunement:
       max: 3
     senses:
@@ -420,12 +368,13 @@ system:
         min: null
         max: null
         mode: 0
-      bonuses:
-        save: ''
       limit: 1
     ac:
       flat: 11
-      calc: natural
+      calcs:
+        - natural
+      formulas: []
+      override: null
     hd:
       spent: 0
     hp:
@@ -441,8 +390,6 @@ system:
         mode: 0
       success: 0
       failure: 0
-      bonuses:
-        save: ''
     spell:
       level: 0
     loyalty: {}
@@ -464,6 +411,7 @@ system:
     rules: '2024'
     custom: ''
     revision: 1
+  rolls: {}
 _id: phbginGiantWasp0
 img: null
 prototypeToken:
@@ -531,7 +479,7 @@ prototypeToken:
   occludable:
     radius: 0
   ring:
-    enabled: true
+    enabled: false
     colors:
       ring: null
       background: null
@@ -559,6 +507,7 @@ items:
       source:
         custom: ''
         rules: '2024'
+        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -571,7 +520,8 @@ items:
         level: null
         items: []
         repeatable: false
-      properties: []
+      properties:
+        - trait
       requirements: ''
       activities: {}
       enchant: {}
@@ -591,12 +541,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693573238
+      modifiedTime: 1787693573238
     _key: '!actors.items!phbginGiantWasp0.phbaoiSpiderClim'
   - name: Multiattack
     system:
@@ -609,6 +559,7 @@ items:
       source:
         custom: ''
         rules: '2024'
+        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -640,6 +591,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -660,6 +612,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -685,6 +638,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: multiattack
       advancement: {}
@@ -706,12 +660,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693573238
+      modifiedTime: 1787693573238
     _key: '!actors.items!phbginGiantWasp0.phbaoiMultiattac'
   - name: Poison Jab
     system:
@@ -724,6 +678,7 @@ items:
       source:
         custom: ''
         rules: '2024'
+        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -755,6 +710,7 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
@@ -776,6 +732,7 @@ items:
               width: ''
               height: ''
               units: ft
+              stationary: false
             affects:
               count: ''
               type: ''
@@ -807,6 +764,7 @@ items:
                   - piercing
                 scaling:
                   number: 1
+                modifiers: []
               - custom:
                   enabled: false
                   formula: ''
@@ -817,6 +775,7 @@ items:
                   - poison
                 scaling:
                   number: 1
+                modifiers: []
           uses:
             spent: 0
             recovery: []
@@ -830,6 +789,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: poison-jab
       advancement: {}
@@ -851,12 +811,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.0
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1787693573238
+      modifiedTime: 1787693573238
     _key: '!actors.items!phbginGiantWasp0.phbaoiPoisonJab0'
 effects: []
 folder: beGRXWKaYfeeR1Iz
@@ -867,10 +827,10 @@ flags: {}
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.3.0
-  createdTime: 1771452719984
-  modifiedTime: 1771452719984
+  systemVersion: 6.0.0
+  createdTime: 1787693573237
+  modifiedTime: 1787693573237
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbginGiantWasp0'

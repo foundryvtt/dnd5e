@@ -15,8 +15,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -31,13 +33,14 @@ system:
       type: space
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
       size: ''
       width: ''
       height: ''
       count: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -57,9 +60,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     Y0nT1EvDbg7IDovC:
       type: save
@@ -72,8 +72,10 @@ system:
         targets: []
         scaling:
           allowed: false
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -81,6 +83,7 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
@@ -90,6 +93,7 @@ system:
           width: '5'
           height: '20'
           count: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -108,21 +112,36 @@ system:
               enabled: false
               formula: ''
             number: 6
-            denomination: '10'
+            denomination: 10
             bonus: ''
             types:
               - force
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
         onSave: half
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: Blade Wall
       img: ''
-      appliedEffects: []
+      behaviors:
+        - type: difficultTerrain
+          _id: GOjsz7ypzDPQ94Pe
+          config:
+            types: []
+          level: {}
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     SRwETzebAYXEJKux:
       type: save
       activation:
@@ -133,8 +152,10 @@ system:
         targets: []
         scaling:
           allowed: false
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -142,15 +163,17 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
           count: ''
-          type: cylinder
+          type: ring
           size: '30'
           width: '5'
           height: '20'
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -169,23 +192,43 @@ system:
               enabled: false
               formula: ''
             number: 6
-            denomination: '10'
+            denomination: 10
             bonus: ''
             types:
               - force
             scaling:
               mode: ''
+              number: 1
+            modifiers: []
         onSave: half
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       name: Blade Ring
       _id: SRwETzebAYXEJKux
       img: ''
-      appliedEffects: []
+      behaviors:
+        - type: difficultTerrain
+          _id: Ij7UtePKpUtTcCZu
+          config:
+            types: []
+          level: {}
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: blade-barrier
+  method: spell
+  prepared: 0
 _id: phbsplBladeBarri
 type: spell
 img: icons/magic/defensive/shield-barrier-blades-teal.webp
@@ -194,18 +237,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425943425
-  modifiedTime: 1745256786934
+  systemVersion: 6.0.0
+  createdTime: 1786472018951
+  modifiedTime: 1786472018951
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplBladeBarri'

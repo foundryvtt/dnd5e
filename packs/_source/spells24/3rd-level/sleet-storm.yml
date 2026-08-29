@@ -14,8 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -35,6 +37,7 @@ system:
       contiguous: false
       height: ''
       count: ''
+      stationary: false
   range:
     value: '150'
     units: ft
@@ -55,9 +58,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -71,19 +71,24 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -91,15 +96,41 @@ system:
         onSave: half
         parts: []
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      img: ''
+      behaviors:
+        - name: ''
+          _id: g8r7ffr94j68JiS6
+          type: difficultTerrain
+          config:
+            types:
+              - ice
+          level:
+            min: null
+            max: null
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      name: ''
   identifier: sleet-storm
+  method: spell
+  prepared: 0
 _id: phbsplSleetStorm
 type: spell
 img: icons/magic/water/projectile-icecicles-salvo.webp
@@ -108,18 +139,14 @@ folder: HCovEE4VoPGlIbKi
 sort: 125000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425971321
-  modifiedTime: 1745256798385
+  systemVersion: 6.0.0
+  createdTime: 1786472106603
+  modifiedTime: 1786472106603
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplSleetStorm'

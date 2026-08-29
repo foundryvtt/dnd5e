@@ -5,15 +5,17 @@ system:
       <p>You launch a mote of light at one creature or object within range. Make
       a ranged spell attack against the target. On a hit, the target takes 1d8
       Radiant damage, and until the end of your next turn, it emits Dim Light in
-      a 10-foot radius and can't benefit from the &amp;Reference[Invisible]
-      condition.</p><p><strong>Cantrip Upgrade.</strong> The damage increases by
-      1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).</p>
+      a 10-foot radius and can't benefit from the &amp;Reference[Invisible
+      apply=false] condition.</p><p><strong>Cantrip Upgrade.</strong> The damage
+      increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17
+      (4d8).</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -28,9 +30,10 @@ system:
       type: creatureOrObject
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -49,9 +52,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: always
-    prepared: false
   activities:
     iuVRPWuNTiTm0fkj:
       type: attack
@@ -68,18 +68,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: T9kBIL7LS3j0Upwz
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -106,16 +111,26 @@ system:
               enabled: false
               formula: ''
             number: 1
-            denomination: '8'
+            denomination: 8
             bonus: ''
             types:
               - radiant
             scaling:
               mode: whole
+              number: 1
+            modifiers: []
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: starry-wisp
+  method: spell
+  prepared: 2
 _id: phbsplStarryWisp
 type: spell
 img: icons/magic/light/orb-hand-green.webp
@@ -129,11 +144,14 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: sourceEnd
       expired: false
     description: >-
       <p>Until the end of your next turn, it emits Dim Light in a 10-foot radius
@@ -141,15 +159,17 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725561224825
-      modifiedTime: 1783543977198
+      createdTime: 1787693638044
+      modifiedTime: 1787693638044
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -160,18 +180,14 @@ folder: 4FhsY9FJQd7h7MZb
 sort: 100782
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425972403
-  modifiedTime: 1783543977198
+  systemVersion: 6.0.0
+  createdTime: 1787693638044
+  modifiedTime: 1787693638044
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplStarryWisp'

@@ -1,0 +1,48 @@
+name: Silenced
+_id: phbeffSilenced00
+img: icons/magic/control/encase-creature-humanoid-hold.webp
+type: base
+system:
+  changes:
+    - key: system.traits.di.value
+      type: add
+      value: thunder
+      phase: initial
+      _id: ngm6hLRTOqg1czSH
+      priority: null
+      conditions: '{}'
+  magical: true
+  rider:
+    statuses: []
+  conditions: '{}'
+disabled: false
+start: null
+duration:
+  value: null
+  units: minutes
+  expiry: null
+  expired: false
+description: >-
+  <p>Any creature or object entirely inside the Sphere has Immunity to Thunder
+  damage, and creatures have the Deafened condition while entirely inside it.
+  Casting a spell that includes a Verbal component is impossible there.</p>
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses:
+  - deafened
+  - silenced
+showIcon: 1
+folder: xOsCK7cF2ShkrOva
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.365'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1786472101980
+  modifiedTime: 1786472508027
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!effects!phbeffSilenced00'

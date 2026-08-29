@@ -11,9 +11,9 @@ system:
       your living body (and ending the spell) or attempting to possess a
       Humanoid's body.</p><p>You can attempt to possess any Humanoid within 100
       feet of you that you can see (creatures warded by a
-      <em>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection from
-      Evil and Good}</em> or
-      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplMagicCircl]{Magic
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbEvilAndGoodPr]{Protection
+      from Evil and Good}</em> or
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMagicCircl]{Magic
       Circle}</em> spell can't be possessed). The target makes a Charisma saving
       throw. On a failed save, your soul enters the target's body, and the
       target's soul becomes trapped in the container. On a successful save, the
@@ -39,8 +39,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    page: ''
+    license: CC-BY-4.0
   activation:
     type: minute
     condition: ''
@@ -52,12 +54,13 @@ system:
     affects:
       choice: false
       count: '1'
-      type: object
-      special: container used for the Material component
+      type: self
+      special: and the container used as the Material component
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -76,9 +79,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     rWrSlmlxvdtAcieq:
       type: utility
@@ -94,18 +94,23 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: JUeiirjbzslhBtNL
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -120,10 +125,15 @@ system:
         visible: false
         name: ''
         formula: ''
-      name: Transfer Soul
+      name: Cast and Transfer Soul
       img: systems/dnd5e/icons/svg/ink-pot.svg
-      appliedEffects:
-        - JUeiirjbzslhBtNL
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Ak9GmFAQNh9o2ioq:
       type: save
       _id: Ak9GmFAQNh9o2ioq
@@ -139,12 +149,16 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: dstr
         concentration: false
         override: true
       effects:
         - _id: rgKqVmb0inZoKREu
+          uuid: null
+          level: {}
+          onSave: false
       range:
         override: true
         units: ft
@@ -155,6 +169,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -171,14 +186,21 @@ system:
         parts: []
         onSave: none
       save:
-        ability: cha
+        ability:
+          - cha
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: Possess Humanoid
       img: systems/dnd5e/icons/svg/multiclass.svg
-      appliedEffects:
-        - rgKqVmb0inZoKREu
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     lXTy3zj3DwBH2QJc:
       type: utility
       _id: lXTy3zj3DwBH2QJc
@@ -194,6 +216,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -201,10 +224,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -221,8 +246,16 @@ system:
         formula: ''
       name: Return from Host
       img: systems/dnd5e/icons/svg/trait-saves.svg
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: magic-jar
+  method: spell
+  prepared: 0
 _id: phbsplMagicJar00
 type: spell
 img: icons/containers/kitchenware/jug-bottle-clay-brown-gold-blue.webp
@@ -230,13 +263,16 @@ effects:
   - name: Catatonic
     img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
     origin: Compendium.dnd5e.spells24.Item.phbsplMagicJar00
-    transfer: false
+    transfer: true
     _id: JUeiirjbzslhBtNL
     type: base
     system:
       changes: []
       magical: true
-    disabled: false
+      rider:
+        statuses: []
+      conditions: '{}'
+    disabled: true
     duration:
       value: null
       units: seconds
@@ -250,15 +286,17 @@ effects:
     statuses:
       - silenced
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1724775242350
-      modifiedTime: 1783543975864
+      createdTime: 1786481129640
+      modifiedTime: 1786481129640
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -273,37 +311,17 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 0
           priority: null
-          type: downgrade
+          type: override
           phase: initial
-          _id: G59DvaycH5ATg9ys
-        - key: system.attributes.movement.climb
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: Q9Dpk3BFtFePWzPe
-        - key: system.attributes.movement.fly
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: rFIO3I40qJbQKYcH
-        - key: system.attributes.movement.swim
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: 4u05AbJ0r3waZk3P
-        - key: system.attributes.movement.burrow
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: tz4RBdOXsSlbzhJ2
+          _id: rOV54LG9qKFd6CUH
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: null
@@ -318,15 +336,17 @@ effects:
     statuses:
       - incapacitated
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1724778161589
-      modifiedTime: 1783543975864
+      createdTime: 1786481129640
+      modifiedTime: 1786481129640
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -337,18 +357,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 400000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425962300
-  modifiedTime: 1783543975864
+  systemVersion: 6.0.0
+  createdTime: 1786481129640
+  modifiedTime: 1786481129640
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplMagicJar00'

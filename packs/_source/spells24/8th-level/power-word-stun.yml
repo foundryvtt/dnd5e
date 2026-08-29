@@ -12,9 +12,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 2
+    page: ''
+    license: CC-BY-4.0
+    revision: 4
   activation:
     type: action
     condition: ''
@@ -29,9 +30,10 @@ system:
       type: creature
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -49,9 +51,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     Sy5x2VhhG7mcnPvF:
       type: utility
@@ -67,19 +66,26 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       effects:
         - _id: o7XJceFSBTiIIPFo
+          uuid: null
+          level: {}
         - _id: B5dLPDfw1fDtfRW1
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -96,8 +102,16 @@ system:
         formula: ''
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: power-word-stun
+  method: spell
+  prepared: 0
 _id: phbsplPowerWordS
 type: spell
 img: icons/magic/unholy/strike-body-life-soul-purple.webp
@@ -111,6 +125,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: null
@@ -129,11 +146,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725309558474
-      modifiedTime: 1783543976329
+      createdTime: 1787693609840
+      modifiedTime: 1787693609840
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -148,56 +165,38 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 0
           priority: null
-          type: downgrade
+          type: override
           phase: initial
-          _id: cUf9ouWOHimBfnRx
-        - key: system.attributes.movement.climb
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: Zazei337YU6J0Tq2
-        - key: system.attributes.movement.swim
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: pkll3KT00SnFBGyI
-        - key: system.attributes.movement.fly
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: UO48xgcZ5Kol7T3m
-        - key: system.attributes.movement.burrow
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: WU2XY0ZqEqiqI56V
+          _id: NkUmiPsajiHlEqyV
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     description: <p>The target's Speed is 0 until the start of your next turn.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1725309698245
-      modifiedTime: 1783543976330
+      createdTime: 1787693609840
+      modifiedTime: 1787693609840
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -208,18 +207,14 @@ folder: M5CvwK9zVtzx6Dnn
 sort: 100013
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425966817
-  modifiedTime: 1783543976329
+  systemVersion: 6.0.0
+  createdTime: 1787693609840
+  modifiedTime: 1787693609840
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplPowerWordS'

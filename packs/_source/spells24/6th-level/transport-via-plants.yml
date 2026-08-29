@@ -11,8 +11,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -27,9 +28,10 @@ system:
       type: object
       special: Large or larger inanimate plant
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -48,12 +50,9 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     HgtppydN1kkpdVyw:
-      type: utility
+      type: teleport
       name: ''
       _id: HgtppydN1kkpdVyw
       sort: 0
@@ -68,6 +67,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -75,10 +75,12 @@ system:
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -87,12 +89,22 @@ system:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      teleport:
+        override: true
+        units: ft
   identifier: transport-via-plants
+  method: spell
+  prepared: 0
 _id: phbsplTransportv
 type: spell
 img: icons/magic/nature/tree-spirit-green.webp
@@ -101,18 +113,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 100196
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425975925
-  modifiedTime: 1745256799326
+  systemVersion: 6.0.0
+  createdTime: 1786473208062
+  modifiedTime: 1786473208062
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplTransportv'

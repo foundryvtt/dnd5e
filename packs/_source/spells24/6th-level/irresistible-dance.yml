@@ -5,20 +5,20 @@ system:
       <p>One creature that you can see within range must make a Wisdom saving
       throw. On a successful save, the target dances comically until the end of
       its next turn, during which it must spend all its movement to dance in
-      place.</p><p>On a failed save, the target has the Charmed condition for
-      the duration. While Charmed, the target dances comically, must use all its
-      movement to dance in place, and has Disadvantage on Dexterity saving
-      throws and attack rolls, and other creatures have Advantage on attack
-      rolls against it. On each of its turns, the target can take an action to
-      collect itself and repeat the save, ending the spell on itself on a
-      success.</p>
+      place.</p><p>On a failed save, the target has the &amp;Reference[Charmed
+      apply=false] condition for the duration. While Charmed, the target dances
+      comically, must use all its movement to dance in place, and has
+      Disadvantage on Dexterity saving throws and attack rolls, and other
+      creatures have Advantage on attack rolls against it. On each of its turns,
+      the target can take an action to collect itself and repeat the save,
+      ending the spell on itself on a success.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
-    page: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -33,9 +33,10 @@ system:
       type: creature
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -54,9 +55,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     DonYhtwZ56TnAk3B:
       type: save
@@ -72,6 +70,7 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -79,14 +78,20 @@ system:
       effects:
         - _id: MpToumiJ2o3S16K7
           onSave: false
+          uuid: null
+          level: {}
         - _id: UhFtBDEZEDpVgz9G
           onSave: true
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -100,16 +105,24 @@ system:
         parts: []
         onSave: none
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       name: ''
       img: ''
-      appliedEffects:
-        - MpToumiJ2o3S16K7
-        - UhFtBDEZEDpVgz9G
-  identifier: irresistible-dance
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+  identifier: ottos-irresistible-dance
+  method: spell
+  prepared: 0
 _id: phbsplOttosIrres
 type: spell
 img: icons/magic/control/voodoo-doll-pain-damage-green.webp
@@ -123,6 +136,9 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
       value: 60
@@ -144,11 +160,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1724789517489
-      modifiedTime: 1783543976221
+      createdTime: 1787693604312
+      modifiedTime: 1787693604312
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -164,11 +180,14 @@ effects:
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     disabled: false
     duration:
-      value: 1
+      value: null
       units: turns
-      expiry: turnStart
+      expiry: targetEnd
       expired: false
     description: >-
       <p>The target dances comically until the end of its next turn, during
@@ -180,11 +199,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1724789679356
-      modifiedTime: 1783543976221
+      createdTime: 1787693604312
+      modifiedTime: 1787693604312
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -195,18 +214,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 112500
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1724425965394
-  modifiedTime: 1783543976221
+  systemVersion: 6.0.0
+  createdTime: 1787693604312
+  modifiedTime: 1787693604312
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplOttosIrres'

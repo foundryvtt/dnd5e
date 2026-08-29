@@ -23,8 +23,9 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: minute
     condition: ''
@@ -38,8 +39,9 @@ system:
       count: '1'
       choice: false
     template:
-      units: ''
+      units: ft
       contiguous: false
+      stationary: false
   range:
     units: spec
   uses:
@@ -57,9 +59,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -73,21 +72,28 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: x52Ga7U45IJOPFxK
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -106,16 +112,29 @@ system:
               mode: ''
               number: null
               formula: ''
+            modifiers: []
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: dream
+  method: spell
+  prepared: 0
 _id: phbsplDream00000
 type: spell
 img: icons/magic/control/sleep-bubble-purple.webp
@@ -128,46 +147,28 @@ effects:
       expiry: turnStart
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/magic/control/hypnosis-mesmerism-eye-tan.webp
     _id: x52Ga7U45IJOPFxK
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.multiplier
           value: 0
           priority: null
-          type: downgrade
+          type: override
           phase: initial
-          _id: vRpWCiIB5wLxG7rq
-        - key: system.attributes.movement.fly
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: 3BkI4V5IRpCq6fhA
-        - key: system.attributes.movement.swim
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: 6UZGd2wahbWqc56N
-        - key: system.attributes.movement.burrow
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: ijHUjR1pTMDf9anA
-        - key: system.attributes.movement.climb
-          value: 0
-          priority: null
-          type: downgrade
-          phase: initial
-          _id: AhRoSEja5VYZfNwe
+          _id: Zx8G6G78n4ba25pw
+          conditions: '{}'
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
-      <p><span style="font-family:Signika, sans-serif">While in the trance, the
-      messenger is Incapacitated and has a Speed of 0.</span></p>
+      <p><span style="font-family:'Signika, sans-serif'">While in the trance,
+      the messenger is Incapacitated and has a Speed of 0.</span></p>
     tint: '#ffffff'
     transfer: false
     statuses:
@@ -176,11 +177,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.365'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543974823
-      modifiedTime: 1783543974823
+      createdTime: 1786481093942
+      modifiedTime: 1786481093942
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -191,18 +192,14 @@ folder: beZ8MTpWY2cMEUlp
 sort: 2100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425951385
-  modifiedTime: 1783543974823
+  systemVersion: 6.0.0
+  createdTime: 1786481093942
+  modifiedTime: 1786481093942
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplDream00000'

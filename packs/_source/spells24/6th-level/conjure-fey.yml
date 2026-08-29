@@ -18,10 +18,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
-    revision: 3
     page: ''
+    license: CC-BY-4.0
+    revision: 3
   activation:
     type: action
     condition: ''
@@ -36,9 +36,10 @@ system:
       type: space
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     units: ft
     special: ''
@@ -58,9 +59,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     w2sWkRQ3xMVRf7g3:
       type: summon
@@ -73,18 +71,22 @@ system:
         targets: []
         scaling:
           allowed: false
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -108,6 +110,7 @@ system:
         proficiency: true
         saves: false
         ability: ''
+        disposition: false
       profiles:
         - count: ''
           name: ''
@@ -116,13 +119,20 @@ system:
           level:
             min: null
             max: null
+          types: []
       summon:
         prompt: true
         mode: ''
-        identifier: ''
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors: []
+      effects: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     sKmRcy0IDp9aOuAt:
       type: utility
       _id: sKmRcy0IDp9aOuAt
@@ -135,8 +145,10 @@ system:
         targets: []
         scaling:
           allowed: false
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
@@ -152,6 +164,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -171,8 +184,16 @@ system:
         formula: ''
       name: Teleport and Attack
       img: ''
-      appliedEffects: []
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: conjure-fey
+  method: spell
+  prepared: 0
 _id: phbsplConjureFey
 type: spell
 img: icons/creatures/magical/spirit-poison-smoke-green.webp
@@ -181,18 +202,14 @@ folder: 8WmlLARx1Df3Ii9v
 sort: 1800000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.2
-  createdTime: 1724425946958
-  modifiedTime: 1746119659353
+  systemVersion: 6.0.0
+  createdTime: 1787693535141
+  modifiedTime: 1787693535141
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplConjureFey'

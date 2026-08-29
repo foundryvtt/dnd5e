@@ -14,8 +14,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 2
     book: ''
+    page: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -35,6 +37,7 @@ system:
       contiguous: false
       height: ''
       count: ''
+      stationary: false
   range:
     value: '300'
     units: ft
@@ -54,9 +57,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -70,19 +70,24 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects: []
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -93,27 +98,35 @@ system:
               enabled: false
               formula: (@item.level - 2)d10
             number: 2
-            denomination: '10'
+            denomination: 10
             bonus: ''
+            modifiers: []
             types:
               - bludgeoning
             scaling:
               mode: whole
+              number: 1
+              formula: ''
           - custom:
               enabled: false
               formula: ''
             number: 4
-            denomination: '6'
+            denomination: 6
             bonus: ''
+            modifiers: []
             types:
               - cold
             scaling:
               mode: ''
+              number: 1
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: spellcasting
           formula: ''
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
@@ -121,8 +134,27 @@ system:
       sort: 0
       name: ''
       img: ''
-      appliedEffects: []
+      behaviors:
+        - name: ''
+          _id: QsUrxfdGYAfydDDX
+          type: difficultTerrain
+          config:
+            types:
+              - ice
+          level:
+            min: null
+            max: null
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: ice-storm
+  method: spell
+  prepared: 0
 _id: phbsplIceStorm00
 type: spell
 img: icons/magic/water/projectile-ice-chunks-salvo.webp
@@ -131,18 +163,14 @@ folder: qi3IbnEwap7mRw4b
 sort: 1400000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425959498
-  modifiedTime: 1745256794969
+  systemVersion: 6.0.0
+  createdTime: 1786472072064
+  modifiedTime: 1786472072064
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplIceStorm00'

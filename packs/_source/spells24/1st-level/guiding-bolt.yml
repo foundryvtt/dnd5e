@@ -11,8 +11,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -27,9 +29,10 @@ system:
       choice: false
       special: ''
     template:
-      units: ''
+      units: ft
       contiguous: false
       type: ''
+      stationary: false
   range:
     value: '120'
     units: ft
@@ -48,9 +51,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -64,20 +64,27 @@ system:
         scaling:
           allowed: false
           max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
+        concentration: false
       effects:
         - _id: rHzZCeXfdeTcYyk8
+          uuid: null
+          level: {}
       range:
         override: false
+        units: self
       target:
         prompt: true
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -107,11 +114,22 @@ system:
               mode: whole
               number: 1
               formula: ''
+            modifiers: []
       uses:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: guiding-bolt
+  method: spell
+  prepared: 0
 _id: phbsplGuidingBol
 type: spell
 img: icons/magic/light/projectile-flare-blue.webp
@@ -119,22 +137,26 @@ effects:
   - name: Guiding Bolt
     origin: Compendium.dnd5e.spells24.Item.phbsplGuidingBol
     duration:
-      value: 1
-      units: rounds
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: sourceEnd
       expired: false
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     img: icons/skills/targeting/target-strike-triple-blue.webp
     _id: rHzZCeXfdeTcYyk8
     type: base
     system:
       changes: []
       magical: true
+      rider:
+        statuses: []
+      conditions: '{}'
     description: >-
-      <p><span style="font-family:Signika, sans-serif">The next attack roll made
-      against the target before the end of your next turn has
-      Advantage.</span></p>
+      <p>The next attack roll made against the target before the end of your
+      next turn has Advantage.</p>
     tint: '#ffffff'
     transfer: false
     statuses:
@@ -143,11 +165,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.0
-      createdTime: 1783543975409
-      modifiedTime: 1783543975409
+      createdTime: 1787693578383
+      modifiedTime: 1787693578383
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -158,18 +180,14 @@ folder: pBaAAtXBCq9FVEnL
 sort: 2500000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425957500
-  modifiedTime: 1783543975409
+  systemVersion: 6.0.0
+  createdTime: 1787693578383
+  modifiedTime: 1787693578383
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplGuidingBol'
