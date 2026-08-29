@@ -37,21 +37,18 @@ effects:
     origin: Compendium.dnd5e.monsterfeatures.Item.mUwZfxiOyao1Xuxt
     _id: VW9jjwa34EHjrXBB
     type: base
-    system: {}
-    changes:
-      - key: flags.dnd5e.powerfulBuild
-        mode: 5
-        value: '1'
-        priority: null
+    system:
+      changes:
+        - key: flags.dnd5e.powerfulBuild
+          value: 1
+          priority: null
+          type: override
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     tint: '#ffffff'
     transfer: true
@@ -61,19 +58,22 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1725304976506
       modifiedTime: 1725304976506
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!mUwZfxiOyao1Xuxt.VW9jjwa34EHjrXBB'
 folder: null
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725304976506

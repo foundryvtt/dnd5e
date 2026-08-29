@@ -64,21 +64,18 @@ effects:
     origin: Compendium.dnd5e.items.Item.iiQxTvDOhPGW5spF
     _id: EDhQAxztAvrCtTMV
     type: base
-    system: {}
-    changes:
-      - key: system.abilities.con.value
-        mode: 4
-        value: '19'
-        priority: null
+    system:
+      changes:
+        - key: system.abilities.con.value
+          value: 19
+          priority: null
+          type: upgrade
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>Your Constitution score is 19 while you wear this amulet. It has no
       effect on you if your Constitution is already 19 or higher without it.</p>
@@ -94,12 +91,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.0.0
       createdTime: 1745428281095
       modifiedTime: 1745428312509
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!iiQxTvDOhPGW5spF.EDhQAxztAvrCtTMV'
 folder: aJgMxnZED9XdoN2W
 sort: 0
@@ -108,7 +108,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.1.0
   createdTime: 1725037262170

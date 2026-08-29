@@ -1395,28 +1395,25 @@ effects:
   - name: Staff of the Magi
     origin: Compendium.dnd5e.items.Item.l3V7V8VCXpmAAysQ
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/weapons/staves/staff-ornate-eye.webp
     _id: eppPFRx8i3sCHN2E
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 2
+          priority: null
+          type: add
+        - key: system.bonuses.rsak.attack
+          value: 2
+          priority: null
+          type: add
     description: >-
       <p>While holding this staff, you gain a +2 bonus to spell attack
       rolls.</p>
@@ -1427,13 +1424,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!l3V7V8VCXpmAAysQ.eppPFRx8i3sCHN2E'
 folder: MLMTCAvKsuFE3vYA
 sort: 0
@@ -1442,7 +1442,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1725037271431

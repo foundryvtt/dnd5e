@@ -114,17 +114,14 @@ effects:
     transfer: false
     _id: gMdi8F2ylxkgG58U
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 60
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Your rate of descent slows to 60 feet per round until the spell ends.
       If you land before the spell ends, you take no falling damage and can land
@@ -140,17 +137,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772822823602
       modifiedTime: 1772823074092
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!pub0OWVEB71XQx1n.gMdi8F2ylxkgG58U'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037365567

@@ -123,16 +123,12 @@ effects:
   - name: Sleep
     origin: Compendium.dnd5e.spells.Item.KhwiSi9fwVfUPtku
     duration:
-      startTime: null
-      seconds: 60
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: false
     _id: MowBnXpRu2aG48i9
-    changes: []
     description: >-
       <p>You have fallen &amp;reference[Unconscious apply=faklse] until the
       spell ends, you take damage, or someone uses an action to shake or slap
@@ -149,7 +145,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: null
@@ -158,8 +154,12 @@ effects:
       exportSource: null
     img: icons/magic/control/sleep-bubble-purple.webp
     type: base
-    system: {}
+    system:
+      changes: []
     sort: 0
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!KhwiSi9fwVfUPtku.MowBnXpRu2aG48i9'
 folder: ERuXllkhTQF51rDJ
 sort: 0
@@ -168,7 +168,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037353656

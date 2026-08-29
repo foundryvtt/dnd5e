@@ -33,24 +33,12 @@ flags: {}
 img: icons/commodities/flowers/lotus-pink.webp
 effects:
   - _id: Jxpz4MZmgTy7z7cm
-    changes:
-      - key: system.traits.ci.value
-        mode: 2
-        value: diseased
-        priority: null
-      - key: system.traits.ci.value
-        mode: 2
-        value: poisoned
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.OTvrJSJSUgAwXrWX
     transfer: true
     flags: {}
@@ -61,7 +49,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -70,14 +58,26 @@ effects:
       exportSource: null
     img: icons/commodities/flowers/lotus-pink.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.traits.ci.value
+          value: diseased
+          priority: null
+          type: add
+        - key: system.traits.ci.value
+          value: poisoned
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!OTvrJSJSUgAwXrWX.Jxpz4MZmgTy7z7cm'
 folder: oPF5p4Kt9rOawCdU
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037383558

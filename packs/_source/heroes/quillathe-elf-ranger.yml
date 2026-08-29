@@ -501,9 +501,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -518,7 +515,7 @@ prototypeToken:
     attenuation: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -538,6 +535,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Monster Hunter
     type: background
@@ -569,7 +567,7 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -807,7 +805,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.A69KxdH1renVPrQV
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -863,7 +861,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.cnTbpPPeGW7vGjOV
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -919,7 +917,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.4v2PiBrAbqDizdSJ
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1521,7 +1519,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classes.Item.VkRQ7glQvTWWiOCS
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1589,7 +1587,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.4Vpj9vCOB37GtXk6
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1660,7 +1658,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.8fbZt2Qh7ZttwIan
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1711,7 +1709,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1FSubnBpSTDmVaYV
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1841,7 +1839,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1L5wkmbw0fmNAr38
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1997,7 +1995,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.29ZLE8PERtFVD3QU
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2075,7 +2073,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.3c7JXOzsv55gqJS5
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2244,7 +2242,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.3cymOVja8jXbzrdT
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2302,7 +2300,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.4MtQKPn9qMWCFjDA
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2429,7 +2427,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.8d95YV1jHcxPygJ9
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2480,7 +2478,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.DVXmyetZuvxbzAwW
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2541,7 +2539,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.H8YCd689ezlD26aT
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2675,7 +2673,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.QXmaarJ4X8P0C1HV
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2727,7 +2725,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.V13fjV5oSmvbRdgP
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2803,7 +2801,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2970,7 +2968,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.osLzOwQdPtrK3rQH
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -3107,7 +3105,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.spells.Item.udsLtG0BugXHR2JQ
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -3128,7 +3126,7 @@ flags:
 _id: cYD0wRXLW4B17aoY
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.1.0
   createdTime: 1725036841671

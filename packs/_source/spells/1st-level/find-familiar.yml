@@ -276,21 +276,18 @@ effects:
     transfer: false
     _id: ElS7F2Oh06jeZtpi
     type: base
-    system: {}
-    changes:
-      - key: name
-        mode: 5
-        value: '{} Familiar'
-        priority: null
+    system:
+      changes:
+        - key: name
+          value: '{} Familiar'
+          priority: null
+          type: override
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: >-
       <p>This creature is a
       @UUID[Compendium.dnd5e.spells.Item.JGT5bNqu9REL7Fuz]{Familiar}. A familiar
@@ -306,17 +303,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772822662813
       modifiedTime: 1772822776833
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!JGT5bNqu9REL7Fuz.ElS7F2Oh06jeZtpi'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037352867

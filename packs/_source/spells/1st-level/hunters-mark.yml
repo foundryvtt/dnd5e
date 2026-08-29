@@ -185,17 +185,14 @@ effects:
     transfer: false
     _id: kvWA9VXTXLNvjBIn
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 3600
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 3600
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>You have been mystically marked as the caster's quarry. Until the spell
       ends, they deal an extra 1d6 damage to you whenever they hit you with a
@@ -212,17 +209,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772822066856
       modifiedTime: 1772822167647
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!0xmXiPiuYws1OGcX.kvWA9VXTXLNvjBIn'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037345248

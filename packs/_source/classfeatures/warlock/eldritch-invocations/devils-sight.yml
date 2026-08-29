@@ -33,20 +33,12 @@ flags: {}
 img: icons/magic/perception/silhouette-stealth-shadow.webp
 effects:
   - _id: 3JYlSTG0olbm1FQC
-    changes:
-      - key: system.attributes.senses.darkvision
-        mode: 4
-        value: '120'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.3sN91lT1R3oxcDKd
     transfer: true
     flags: {}
@@ -57,7 +49,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -66,14 +58,22 @@ effects:
       exportSource: null
     img: icons/magic/perception/silhouette-stealth-shadow.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.senses.darkvision
+          value: 120
+          priority: null
+          type: upgrade
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!3sN91lT1R3oxcDKd.3JYlSTG0olbm1FQC'
 folder: 0uFCjs5gYeVtl38i
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037379825

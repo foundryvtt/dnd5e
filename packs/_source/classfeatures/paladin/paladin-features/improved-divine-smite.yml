@@ -102,20 +102,12 @@ flags: {}
 img: icons/magic/symbols/cog-shield-white-blue.webp
 effects:
   - _id: yvLL91omI6kHMHau
-    changes:
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: +1d8[Radiant]
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.FAk41RPCTcvCk6KI
     transfer: true
     flags: {}
@@ -126,7 +118,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -135,14 +127,22 @@ effects:
       exportSource: null
     img: icons/magic/symbols/cog-shield-white-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.bonuses.mwak.damage
+          value: +1d8[Radiant]
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!FAk41RPCTcvCk6KI.yvLL91omI6kHMHau'
 folder: 01K0hSSl7NQjYLb8
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037382034

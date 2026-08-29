@@ -109,25 +109,22 @@ effects:
     transfer: false
     _id: YNlbHxIwut5swF2d
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.rwak.damage
-        mode: 2
-        value: 1d4[radiant]
-        priority: null
-      - key: system.bonuses.mwak.damage
-        mode: 2
-        value: 1d4[radiant]
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.rwak.damage
+          value: 1d4[radiant]
+          priority: null
+          type: add
+        - key: system.bonuses.mwak.damage
+          value: 1d4[radiant]
+          priority: null
+          type: add
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 60
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>Your prayer empowers you with divine radiance. Until the spell ends,
       your weapon attacks deal an extra 1d4 radiant damage on a hit.</p>
@@ -142,17 +139,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772820368056
       modifiedTime: 1772820409886
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!8MICCMeOXT3aJUy9.YNlbHxIwut5swF2d'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037348703

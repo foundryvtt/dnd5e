@@ -114,20 +114,12 @@ effects:
   - name: Shield of Faith
     origin: Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo
     duration:
-      startTime: null
-      seconds: 600
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 600
+      units: seconds
+      expiry: turnStart
+      expired: false
     disabled: true
     _id: FKDbXBUs6VJlf8ZY
-    changes:
-      - key: system.attributes.ac.bonus
-        mode: 2
-        value: '2'
-        priority: null
     description: >-
       <p>A shimmering field appears and surrounds you, granting you a +2 bonus
       to AC for the duration of this spell.</p>
@@ -141,7 +133,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: null
@@ -150,13 +142,21 @@ effects:
       exportSource: null
     img: icons/magic/defensive/shield-barrier-deflect-gold.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          value: 2
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!jZ6JNykRtdQ90MOo.FKDbXBUs6VJlf8ZY'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037363559

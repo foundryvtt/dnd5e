@@ -59,21 +59,18 @@ effects:
     img: icons/equipment/finger/ring-cabochon-notched-gold-green.webp
     _id: Shw1dARwswVkzUYD
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.swim
-        mode: 5
-        value: '40'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.swim
+          value: 40
+          priority: null
+          type: override
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: ''
     origin: null
     tint: '#ffffff'
@@ -84,13 +81,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: 1731017580350
       modifiedTime: 1731017635652
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!aA7MbjnpHYoYvmuW.Shw1dARwswVkzUYD'
 folder: 5jrDZJ1U23Q9jDqB
 sort: 0
@@ -99,7 +99,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1725037221551

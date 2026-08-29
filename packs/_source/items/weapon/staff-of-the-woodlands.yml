@@ -690,28 +690,25 @@ effects:
   - name: Staff of the Woodlands
     origin: Compendium.dnd5e.items.Item.caEn3ixCUFBnHTx6
     duration:
-      rounds: null
-      startTime: null
-      seconds: null
-      combat: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     flags: {}
     img: icons/weapons/staves/staff-nature-spiral.webp
     _id: ySNgKEIdpRR6Eyc7
     type: base
-    system: {}
-    changes:
-      - key: system.bonuses.msak.attack
-        mode: 2
-        value: '2'
-        priority: null
-      - key: system.bonuses.rsak.attack
-        mode: 2
-        value: '2'
-        priority: null
+    system:
+      changes:
+        - key: system.bonuses.msak.attack
+          value: 2
+          priority: null
+          type: add
+        - key: system.bonuses.rsak.attack
+          value: 2
+          priority: null
+          type: add
     description: >-
       <p>While holding this staff, you have a +2 bonus to spell attack
       rolls.</p>
@@ -722,13 +719,16 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
       exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!caEn3ixCUFBnHTx6.ySNgKEIdpRR6Eyc7'
 folder: MLMTCAvKsuFE3vYA
 sort: 0
@@ -737,7 +737,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1725037231207

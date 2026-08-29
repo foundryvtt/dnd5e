@@ -114,21 +114,18 @@ effects:
     transfer: false
     _id: hfN31FqOkSYoQVz3
     type: base
-    system: {}
-    changes:
-      - key: system.attributes.movement.bonus
-        mode: 2
-        value: '10'
-        priority: null
+    system:
+      changes:
+        - key: system.attributes.movement.bonus
+          value: 10
+          priority: null
+          type: add
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     description: <p>Your speed increases by 10 feet until the spell ends.</p>
     tint: '#ffffff'
     statuses: []
@@ -141,17 +138,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772823676300
       modifiedTime: 1772823702800
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!B0pnIcc52O6G8hi8.hfN31FqOkSYoQVz3'
 folder: ERuXllkhTQF51rDJ
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037350256

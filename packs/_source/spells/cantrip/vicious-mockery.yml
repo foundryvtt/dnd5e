@@ -135,17 +135,14 @@ effects:
     transfer: false
     _id: imsGW3YRra9KF6iK
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 6
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 6
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: >-
       <p>You have disadvantage on the next attack roll you make before the end
       of your next turn.</p>
@@ -160,17 +157,20 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772660959541
       modifiedTime: 1772660981291
       lastModifiedBy: dnd5ebuilder0000
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!cdrYKaFi98YWaBMw.imsGW3YRra9KF6iK'
 folder: Z8kZlnggh1PtuF3Y
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037360458

@@ -490,9 +490,6 @@ prototypeToken:
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
-    offsetX: 0
-    offsetY: 0
-    rotation: 0
     anchorX: 0.5
     anchorY: 0.5
     fit: contain
@@ -507,7 +504,7 @@ prototypeToken:
     attenuation: 0.1
     saturation: 0
     contrast: 0
-  detectionModes: []
+  detectionModes: {}
   appendNumber: false
   prependAdjective: false
   occludable:
@@ -527,6 +524,7 @@ prototypeToken:
     src: null
     disposition: false
   movementAction: null
+  depth: 1
 items:
   - name: Vigilante
     type: background
@@ -557,7 +555,7 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -720,7 +718,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.ZgYBjYYfiUstQD6f
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -781,7 +779,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.LOMdcNAGWh5xpfm4
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -833,7 +831,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.7Yoo9hG0hfPSmBoC
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -887,7 +885,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.PqxZgcJzp1VVgP8t
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -941,7 +939,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.GWPjKFeIthBBeCFJ
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1507,7 +1505,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classes.Item.pvEzGSv71zBhaolc
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1607,32 +1605,12 @@ items:
     effects:
       - _id: eWhL8hUr0c2ujDUm
         flags: {}
-        changes:
-          - key: system.bonuses.mwak.damage
-            mode: 2
-            value: +@scale.barbarian.rage-damage
-            priority: null
-          - key: system.traits.dr.value
-            mode: 2
-            value: slashing
-            priority: null
-          - key: system.traits.dr.value
-            mode: 2
-            value: piercing
-            priority: null
-          - key: system.traits.dr.value
-            mode: 2
-            value: bludgeoning
-            priority: null
         disabled: true
         duration:
-          startTime: 0
-          rounds: 10
-          seconds: null
-          combat: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: 10
+          units: rounds
+          expiry: turnStart
+          expired: false
         origin: Item.bdfYHJstcltQC7SZ
         tint: '#ffffff'
         transfer: true
@@ -1642,7 +1620,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.367'
           systemId: dnd5e
           systemVersion: 4.1.0
           createdTime: null
@@ -1651,8 +1629,34 @@ items:
           exportSource: null
         img: icons/creatures/abilities/mouth-teeth-human.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.bonuses.mwak.damage
+              value: +@scale.barbarian.rage-damage
+              priority: null
+              type: add
+            - key: system.traits.dr.value
+              value: slashing
+              priority: null
+              type: add
+            - key: system.traits.dr.value
+              value: piercing
+              priority: null
+              type: add
+            - key: system.traits.dr.value
+              value: bludgeoning
+              priority: null
+              type: add
         sort: 0
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!irWonyO6ZLh47sN7.AnS6HmWkKIBxPgMb.eWhL8hUr0c2ujDUm
     folder: Q2ZQ0SlqfbgueFys
@@ -1666,7 +1670,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1714,20 +1718,12 @@ items:
     img: icons/magic/control/silhouette-hold-change-blue.webp
     effects:
       - _id: hEgUnQNVxtBo2zkK
-        changes:
-          - key: system.attributes.ac.calc
-            mode: 5
-            value: unarmoredBarb
-            priority: null
         disabled: false
         duration:
-          startTime: 0
-          seconds: null
-          combat: null
-          rounds: null
-          turns: null
-          startRound: null
-          startTurn: null
+          value: null
+          units: seconds
+          expiry: null
+          expired: false
         origin: Item.aIMXb43ACIxMItbh
         transfer: true
         flags: {}
@@ -1738,7 +1734,7 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '13.344'
+          coreVersion: '14.367'
           systemId: dnd5e
           systemVersion: 4.1.0
           createdTime: null
@@ -1747,8 +1743,22 @@ items:
           exportSource: null
         img: icons/magic/control/silhouette-hold-change-blue.webp
         type: base
-        system: {}
+        system:
+          changes:
+            - key: system.attributes.ac.calc
+              value: unarmoredBarb
+              priority: null
+              type: override
         sort: 0
+        start:
+          combat: null
+          round: null
+          time: 0
+          turn: null
+          combatant: null
+          initiative: null
+        showIcon: 1
+        folder: null
         _key: >-
           !actors.items.effects!irWonyO6ZLh47sN7.SfgUIeZgxtkm17Ls.hEgUnQNVxtBo2zkK
     folder: Q2ZQ0SlqfbgueFys
@@ -1756,7 +1766,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1807,7 +1817,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1FSubnBpSTDmVaYV
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -1937,7 +1947,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1L5wkmbw0fmNAr38
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2106,7 +2116,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1Lxk6kmoRhG8qQ0u
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2260,7 +2270,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.29ZLE8PERtFVD3QU
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2389,7 +2399,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.8d95YV1jHcxPygJ9
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2440,7 +2450,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.DVXmyetZuvxbzAwW
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2606,7 +2616,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.DWLMnODrnHn8IbAG
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2667,7 +2677,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.H8YCd689ezlD26aT
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2801,7 +2811,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.QXmaarJ4X8P0C1HV
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -2853,7 +2863,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.V13fjV5oSmvbRdgP
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -3020,7 +3030,7 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.eO7Fbv5WBk5zvGOc
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
@@ -3042,7 +3052,7 @@ flags:
 _id: irWonyO6ZLh47sN7
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.1.0
   createdTime: 1725036842158

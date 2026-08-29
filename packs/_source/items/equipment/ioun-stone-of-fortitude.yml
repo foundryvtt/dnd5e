@@ -76,20 +76,12 @@ system:
 effects:
   - origin: Compendium.dnd5e.items.ig5DOQtQYJPXJId4
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     disabled: false
     _id: FpwzPfzNKZokKZF4
-    changes:
-      - key: system.abilities.con.value
-        mode: 2
-        value: '+2'
-        priority: null
     tint: '#ffffff'
     transfer: true
     flags: {}
@@ -99,7 +91,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -108,8 +100,16 @@ effects:
       exportSource: null
     img: icons/commodities/gems/gem-rough-cushion-purple-pink.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.abilities.con.value
+          value: '+2'
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!ig5DOQtQYJPXJId4.FpwzPfzNKZokKZF4'
 folder: aJgMxnZED9XdoN2W
 sort: 0
@@ -118,7 +118,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.2.0
   createdTime: 1725037261866

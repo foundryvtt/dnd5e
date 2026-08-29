@@ -117,17 +117,14 @@ effects:
     transfer: false
     _id: eDXjhC3F3I0x2fUd
     type: base
-    system: {}
-    changes: []
+    system:
+      changes: []
     disabled: false
     duration:
-      startTime: null
-      combat: null
-      seconds: 6
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: 6
+      units: seconds
+      expiry: turnStart
+      expired: false
     description: <p>You are &amp;reference[blinded apply=false] until the spell ends.</p>
     tint: '#ffffff'
     statuses:
@@ -141,12 +138,15 @@ effects:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '13.351'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 5.3.0
       createdTime: 1772825813074
       modifiedTime: 1772825848818
       lastModifiedBy: dnd5ebuilder0000
+    showIcon: 2
+    start: null
+    folder: null
     _key: '!items.effects!LWTUqKkUQdMAmOe0.eDXjhC3F3I0x2fUd'
 folder: ERuXllkhTQF51rDJ
 sort: 0
@@ -155,7 +155,7 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 5.3.0
   createdTime: 1725037354037

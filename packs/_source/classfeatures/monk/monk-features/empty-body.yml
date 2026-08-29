@@ -93,64 +93,12 @@ img: icons/magic/perception/silhouette-stealth-shadow.webp
 effects:
   - _id: 4dvYtqvbQGDsVi51
     flags: {}
-    changes:
-      - key: system.traits.dr.value
-        value: fire
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: cold
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: acid
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: bludgeoning
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: lightning
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: necrotic
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: piercing
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: psychic
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: radiant
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: slashing
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: thunder
-        mode: 2
-        priority: null
-      - key: system.traits.dr.value
-        value: poison
-        mode: 2
-        priority: null
     disabled: true
     duration:
-      startTime: null
-      seconds: 60
-      rounds: 10
-      turns: null
-      startRound: null
-      startTurn: null
-      combat: null
+      value: 60
+      units: seconds
+      expiry: turnStart
+      expired: false
     origin: Item.xqRleciuHDZlYCl6
     tint: '#ffffff'
     transfer: false
@@ -160,7 +108,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -169,14 +117,66 @@ effects:
       exportSource: null
     img: icons/magic/perception/silhouette-stealth-shadow.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.traits.dr.value
+          value: fire
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: cold
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: acid
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: bludgeoning
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: lightning
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: necrotic
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: piercing
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: psychic
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: radiant
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: slashing
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: thunder
+          priority: null
+          type: add
+        - key: system.traits.dr.value
+          value: poison
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!3jwFt3hSqDswBlOH.4dvYtqvbQGDsVi51'
 folder: TMmNG8ujFDBEWXRe
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037379770

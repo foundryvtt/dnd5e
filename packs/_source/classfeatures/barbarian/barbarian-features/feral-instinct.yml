@@ -36,20 +36,12 @@ flags: {}
 img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
 effects:
   - _id: q7TkJQX7PeVOzTQH
-    changes:
-      - key: system.attributes.init.roll.mode
-        mode: 2
-        value: '1'
-        priority: null
     disabled: false
     duration:
-      startTime: null
-      seconds: null
-      combat: null
-      rounds: null
-      turns: null
-      startRound: null
-      startTurn: null
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
     origin: Item.o1i0LwvZQPm0Bxpa
     transfer: true
     flags: {}
@@ -60,7 +52,7 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '13.344'
+      coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
@@ -69,14 +61,22 @@ effects:
       exportSource: null
     img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
     type: base
-    system: {}
+    system:
+      changes:
+        - key: system.attributes.init.roll.mode
+          value: 1
+          priority: null
+          type: add
     sort: 0
+    start: null
+    showIcon: 1
+    folder: null
     _key: '!items.effects!NlXslw4yAqmKZWtN.q7TkJQX7PeVOzTQH'
 folder: Q2ZQ0SlqfbgueFys
 sort: 0
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037383406
