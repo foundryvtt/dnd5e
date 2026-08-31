@@ -79,8 +79,8 @@ export default class CharacterData extends CreatureTemplate {
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
           }),
           threshold: new SchemaField({
-            success: new NumberField({ integer: true, min: 1, initial: 3 }),
-            failure: new NumberField({ integer: true, min: 1, initial: 3 })
+            success: new NumberField({ integer: true, min: 1, initial: 3, nullable: false }),
+            failure: new NumberField({ integer: true, min: 1, initial: 3, nullable: false })
           }, { persisted: false }),
           bonuses: new SchemaField({}, { persisted: false })
         }, { label: "DND5E.DeathSave", labelPrefix: "DND5E.DEATH.FIELDS.attributes.death.roll." }),
