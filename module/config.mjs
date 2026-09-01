@@ -4206,8 +4206,8 @@ DND5E.epicBoonInterval = 30000;
 DND5E.traits = {
   saves: {
     labels: {
-      title: "DND5E.TRAIT.Saves.title",
-      localization: "DND5E.TRAIT.Saves"
+      title: "DND5E.TRAIT.Save.title",
+      localization: "DND5E.TRAIT.Save"
     },
     icon: "icons/magic/life/ankh-gold-blue.webp",
     actorKeyPath: "system.abilities",
@@ -4216,8 +4216,8 @@ DND5E.traits = {
   },
   skills: {
     labels: {
-      title: "DND5E.TRAIT.Skills.title",
-      localization: "DND5E.TRAIT.Skills"
+      title: "DND5E.TRAIT.Skill.title",
+      localization: "DND5E.TRAIT.Skill"
     },
     icon: "icons/tools/instruments/harp-yellow-teal.webp",
     actorKeyPath: "system.skills",
