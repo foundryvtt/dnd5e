@@ -40,7 +40,7 @@ export default class WelcomeScreen extends Application5e {
 
   /**
    * Links provided to the localized text.
-   * @type {Record<string>}
+   * @type {Record<string, string>}
    */
   static LINKS = {
     changes: "https://github.com/foundryvtt/dnd5e/releases/latest",
@@ -177,6 +177,7 @@ export default class WelcomeScreen extends Application5e {
   async _prepareModulesContext(context, options) {
     context.tab = context.tabs.modules;
     context.modules = await this.getModules();
+    context.moreMessage = _loc("DND5E.WELCOME.Message.MoreContent", WelcomeScreen.LINKS);
     if ( !context.modules ) return context;
     context.modules = foundry.utils.deepClone(context.modules);
     for ( const category of Object.values(context.modules) ) {
@@ -186,7 +187,6 @@ export default class WelcomeScreen extends Application5e {
         data.enabled = config?.active === true;
       }
     }
-    context.moreMessage = _loc("DND5E.WELCOME.Message.MoreContent", WelcomeScreen.LINKS);
     return context;
   }
 
@@ -229,8 +229,8 @@ export default class WelcomeScreen extends Application5e {
   static async #handleFormSubmission(event, form, formData) {
     if ( !game.user.isGM ) return;
 
-    const { actions, modules, ...settings } = foundry.utils.expandObject(formData.object);
-    settings.calendarConfig = dnd5e.settings.calendarConfig.clone({ enabled: settings.calendar !== "" }).toObject();
+    const { actions, modules={}, ...settings } = foundry.utils.expandObject(formData.object);
+    settings.calendarConfig = { enabled: settings.calendar !== "" };
     if ( settings.calendar === "" ) delete settings.calendar;
     if ( !this.element.querySelector('[name="metric"]').indeterminate ) {
       settings.metricLengthUnits = settings.metricVolumeUnits = settings.metricWeightUnits = settings.metric;
@@ -238,7 +238,7 @@ export default class WelcomeScreen extends Application5e {
     delete settings.metric;
     let { requiresClientReload, requiresWorldReload } = await BaseSettingsConfig.commitChanges(settings);
 
-    const toggledModules = Object.entries(modules ?? {}).reduce((map, [id, enabled]) => {
+    const toggledModules = Object.entries(modules).reduce((map, [id, enabled]) => {
       if ( enabled !== game.modules.get(id)?.active ) map.set(id, enabled);
       return map;
     }, new Map());

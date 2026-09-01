@@ -121,10 +121,11 @@ export default class BaseSettingsConfig extends Application5e {
   static async commitChanges(changes, { namespace="dnd5e" }={}) {
     let requiresClientReload = false;
     let requiresWorldReload = false;
-    for ( const [key, value] of Object.entries(changes) ) {
+    for ( let [key, value] of Object.entries(changes) ) {
       const setting = game.settings.settings.get(`${namespace}.${key}`);
       const current = game.settings.get(namespace, key, { document: true });
       const prior = current?._source?.value ?? current;
+      if ( current.value instanceof foundry.abstract.DataModel ) value = current.value.clone(value).toObject();
       const updated = await game.settings.set(namespace, key, value, { document: true });
       if ( prior === (updated?._source?.value ?? updated) ) continue;
       requiresClientReload ||= (setting.scope !== "world") && setting.requiresReload;
