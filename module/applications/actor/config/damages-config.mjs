@@ -25,6 +25,16 @@ export default class DamagesConfig extends TraitsConfig {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
+  /**
+   * Equivalent healing trait for this damage trait.
+   * @type {string}
+   */
+  get healingTrait() {
+    return this.options.trait !== "dm" ? this.options.trait.replace("d", "h") : this.options.trait;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get otherLabel() {
     return _loc("DND5E.DamageTypes");
@@ -32,6 +42,30 @@ export default class DamagesConfig extends TraitsConfig {
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _getChoices(trait) {
+    const damageChoices = await super._getChoices(trait);
+    if ( trait.endsWith("m") ) return damageChoices;
+    const healingChoices = await super._getChoices(this.healingTrait);
+    return new SelectChoices({
+      damage: {
+        category: true,
+        children: damageChoices,
+        label: _loc("DND5E.DamageTypes"),
+        selectable: false
+      },
+      healing: {
+        category: true,
+        children: healingChoices,
+        keyPath: Trait.actorKeyPath(this.healingTrait),
+        label: _loc("DND5E.HEAL.Types"),
+        selectable: false
+      }
+    });
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -64,9 +98,19 @@ export default class DamagesConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processChoice(data, key, choice, categoryChosen=false) {
-    super._processChoice(data, key, choice, categoryChosen);
-    const config = CONFIG.DND5E.damageTypes[key];
+  _processChoices(data, choices, category) {
+    if ( (category?.key === "healing") && (this.options.trait !== "dm") ) {
+      data = foundry.utils.getProperty(this.document._source, Trait.actorKeyPath(this.healingTrait));
+    }
+    super._processChoices(data, choices, category);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _processChoice(data, key, choice, category) {
+    super._processChoice(data, key, choice, category);
+    const config = CONFIG.DND5E.damageTypes[key] ?? CONFIG.DND5E.healingTypes[key];
     if ( config ) choice.icon = { src: config.icon };
   }
 
@@ -86,6 +130,7 @@ export default class DamagesConfig extends TraitsConfig {
       }
     }
     this._filterData(submitData, `${Trait.actorKeyPath(this.options.trait)}.bypasses`);
+    this._filterData(submitData, `${Trait.actorKeyPath(this.healingTrait)}.value`);
     return submitData;
   }
 }

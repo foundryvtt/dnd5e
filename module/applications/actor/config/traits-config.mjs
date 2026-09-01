@@ -60,16 +60,27 @@ export default class TraitsConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Fetch the choices data for this trait.
+   * @param {string} trait  Trait for which to get the choices.
+   * @returns {SelectChoices}
+   */
+  async _getChoices(trait) {
+    const chosen = new Set(
+      filteredKeys(await Trait.actorValues(this.document, trait)).map(k => k.split(":").pop())
+    );
+    return await Trait.choices(trait, { chosen });
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     context.keyPath = Trait.actorKeyPath(this.options.trait);
     context.data = foundry.utils.getProperty(this.document._source, context.keyPath);
     context.checkbox = new foundry.data.fields.BooleanField();
-    const chosen = new Set(
-      filteredKeys(await Trait.actorValues(this.document, this.options.trait)).map(k => k.split(":").pop())
-    );
-    context.choices = await Trait.choices(this.options.trait, { chosen });
+    context.choices = await this._getChoices(this.options.trait);
     context.fields = Trait.actorFields(this.document, this.options.trait);
 
     // Handle custom traits not in a top-level category
@@ -96,13 +107,17 @@ export default class TraitsConfig extends BaseConfigSheet {
    * masteries are only enabled if character has proficiency.
    * @param {object} data                     Traits data.
    * @param {SelectChoices} choices           Choices object.
-   * @param {boolean} [categoryChosen=false]  Is the category above this one selected?
+   * @param {object} [category]
+   * @param {boolean} [category.chosen=false]  Is the category above this one selected?
+   * @param {string} [category.key]            Key for the category containing these choice.
    * @protected
    */
-  _processChoices(data, choices, categoryChosen=false) {
+  _processChoices(data, choices, category) {
     for ( const [key, choice] of Object.entries(choices) ) {
-      this._processChoice(data, key, choice, categoryChosen);
-      if ( choice.children ) this._processChoices(data, choice.children, choice.chosen && (key !== "OTHER"));
+      this._processChoice(data, key, choice, category);
+      if ( choice.children ) this._processChoices(data, choice.children, {
+        key, chosen: choice.chosen && (key !== "OTHER")
+      });
     }
   }
 
@@ -110,14 +125,16 @@ export default class TraitsConfig extends BaseConfigSheet {
 
   /**
    * Perform any modification on a choice.
-   * @param {object} data                     Traits data.
-   * @param {string} key                      Choice key.
-   * @param {object} choice                   Data for the choice.
-   * @param {boolean} [categoryChosen=false]  Is the category above this one selected?
+   * @param {object} data                      Traits data.
+   * @param {string} key                       Choice key.
+   * @param {object} choice                    Data for the choice.
+   * @param {object} [category={}]
+   * @param {boolean} [category.chosen=false]  Is the category above this one selected?
+   * @param {string} [category.key]            Key for the category containing this choice.
    * @protected
    */
-  _processChoice(data, key, choice, categoryChosen=false) {
-    if ( (data.value?.includes?.("ALL") && (key !== "ALL")) || categoryChosen ) {
+  _processChoice(data, key, choice, category) {
+    if ( ((data.value?.includes?.("ALL") && (key !== "ALL")) || category?.chosen) && (choice.selectable !== false) ) {
       choice.chosen = true;
       choice.disabled = true;
     }

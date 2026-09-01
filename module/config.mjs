@@ -4307,6 +4307,33 @@ DND5E.traits = {
     configKey: "damageTypes",
     dataType: Number
   },
+  hi: {
+    labels: {
+      title: "DND5E.TRAIT.Healing.Immunity.title",
+      localization: "DND5E.TRAIT.Healing.Immunity",
+      all: "DND5E.HEAL.All"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
+    configKey: "healingTypes"
+  },
+  hr: {
+    labels: {
+      title: "DND5E.TRAIT.Healing.Resistance.title",
+      localization: "DND5E.TRAIT.Healing.Resistance",
+      all: "DND5E.HEAL.All"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
+    configKey: "healingTypes"
+  },
+  hv: {
+    labels: {
+      title: "DND5E.TRAIT.Healing.Vulnerability.title",
+      localization: "DND5E.TRAIT.Healing.Vulnerability",
+      all: "DND5E.HEAL.All"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
+    configKey: "healingTypes"
+  },
   ci: {
     labels: {
       title: "DND5E.TRAIT.Condition.Immunity.title",

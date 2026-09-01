@@ -3607,6 +3607,7 @@
 "DND5E.HalfProficient": "Half Proficient",
 
 "DND5E.HEAL": {
+  "All": "All Healing",
   "FIELDS": {
     "healing": {
       "label": "Healing",
@@ -3665,7 +3666,8 @@
     "MaximumShort": "Max HP",
     "Temporary": "Temporary Hit Points",
     "TemporaryShort": "Temp HP"
-  }
+  },
+  "Types": "Healing Types"
 },
 
 "DND5E.Height": "Height",
@@ -5764,6 +5766,23 @@
     "one": "Trait",
     "other": "Traits",
     "title": "Traits"
+  },
+  "Healing": {
+    "Immunity": {
+      "one": "Healing Nullification",
+      "other": "Healing Nullifications",
+      "title": "Healing Nullification"
+    },
+    "Resistance": {
+      "one": "Healing Halving",
+      "other": "Healing Halvings",
+      "title": "Healing Halving"
+    },
+    "Vulnerability": {
+      "one": "Healing Doubling",
+      "other": "Healing Doublings",
+      "title": "Healing Doubling"
+    }
   },
   "Language": {
     "one": "Language",

@@ -37,6 +37,9 @@ export default class TraitsField {
           label: "DND5E.DAMAGE.PhysicalBypass.Label", hint: "DND5E.DAMAGE.PhysicalBypass.Hint"
         })
       }),
+      hi: new DamageTraitField({ bypasses: false }, { label: "DND5E.TRAIT.Healing.Immunity.title" }),
+      hr: new DamageTraitField({ bypasses: false }, { label: "DND5E.TRAIT.Healing.Resistance.title" }),
+      hv: new DamageTraitField({ bypasses: false }, { label: "DND5E.TRAIT.Healing.Vulnerability.title" }),
       ci: new SimpleTraitField({}, { label: "DND5E.TRAIT.Condition.Immunity.title" })
     };
   }
@@ -125,14 +128,16 @@ export default class TraitsField {
     }
 
     // Clear other damage resistances/immunities/vulnerabilities if All is set
-    for ( const key of ["dr", "di", "dv"] ) {
+    for ( const key of ["dr", "di", "dv", "hr", "hi", "hv"] ) {
       const entry = this.traits[key];
       if ( entry.value.has("ALL") ) {
         entry.value.clear();
         entry.value.add("ALL");
         if ( key === "di" ) this.traits.dr.value.clear();
+        else if ( key === "hi" ) this.traits.hr.value.clear();
       }
       else if ( key === "di" ) entry.value.forEach(k => this.traits.dr.value.delete(k));
+      else if ( key === "hi" ) entry.value.forEach(k => this.traits.hr.value.delete(k));
     }
   }
 
