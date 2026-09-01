@@ -1995,7 +1995,6 @@
 "DND5E.ConExhaustion": "Exhaustion",
 "DND5E.ConFrightened": "Frightened",
 "DND5E.ConGrappled": "Grappled",
-"DND5E.ConImm": "Condition Immunities",
 "DND5E.ConIncapacitated": "Incapacitated",
 "DND5E.ConInvisible": "Invisible",
 "DND5E.ConParalyzed": "Paralyzed",
@@ -2519,11 +2518,6 @@
     "Thunder": "Thunder"
   }
 },
-
-"DND5E.DamImm": "Damage Immunities",
-"DND5E.DamMod": "Damage Modification",
-"DND5E.DamRes": "Damage Resistances",
-"DND5E.DamVuln": "Damage Vulnerabilities",
 
 "DND5E.Damage": "Damage",
 "DND5E.DamageApplication": {
@@ -5697,47 +5691,92 @@
 "DND5E.ToolPromptTitle": "{tool} Check",
 "DND5E.ToolThieves": "Thieves' Tools",
 "DND5E.ToolVehicle": "Vehicles",
-"DND5E.TraitAll": "All {category}",
-"DND5E.TraitArmorPlural.one": "Armor Training",
-"DND5E.TraitArmorPlural.other": "Armor Training",
-"DND5E.TraitArmorProf": "Armor Training",
-"DND5E.TraitArmorLegacyPlural.one": "Armor Proficiency",
-"DND5E.TraitArmorLegacyPlural.other": "Armor Proficiencies",
-"DND5E.TraitArmorLegacyProf": "Armor Proficiencies",
-"DND5E.TraitCIPlural.one": "Condition Immunity",
-"DND5E.TraitCIPlural.other": "Condition Immunities",
-"DND5E.TraitConfig": "Configure {trait}",
-"DND5E.TraitConfigChooseAnyCounted": "any {count} {type}",
-"DND5E.TraitConfigChooseAnyUncounted": "any {type}",
-"DND5E.TraitConfigChooseList": "{count} from {list}",
-"DND5E.TraitConfigChooseOther": "{count} other {type}",
-"DND5E.TraitConfigChooseWrapper": "Choose {choices}",
-"DND5E.TraitDIPlural.one": "Damage Immunity",
-"DND5E.TraitDIPlural.other": "Damage Immunities",
-"DND5E.TraitDMPlural.one": "Damage Modification",
-"DND5E.TraitDMPlural.other": "Damage Modifications",
-"DND5E.TraitDRPlural.one": "Damage Resistance",
-"DND5E.TraitDRPlural.other": "Damage Resistances",
-"DND5E.TraitDVPlural.one": "Damage Vulnerability",
-"DND5E.TraitDVPlural.other": "Damage Vulnerabilities",
-"DND5E.TraitGenericPlural.one": "Trait",
-"DND5E.TraitGenericPlural.other": "Traits",
-"DND5E.TraitLanguagesPlural.one": "Language",
-"DND5E.TraitLanguagesPlural.other": "Languages",
-"DND5E.TraitSave": "Update",
-"DND5E.TraitSavesPlural.one": "Saving Throw Proficiency",
-"DND5E.TraitSavesPlural.other": "Saving Throw Proficiencies",
-"DND5E.TraitSelectorSpecial": "Special (Split with Semi-Colon)",
-"DND5E.TraitSkillsPlural.one": "Skill Proficiency",
-"DND5E.TraitSkillsPlural.other": "Skill Proficiencies",
-"DND5E.TraitToolPlural.one": "Tool Proficiency",
-"DND5E.TraitToolPlural.other": "Tool Proficiencies",
-"DND5E.TraitToolProf": "Tool Proficiencies",
-"DND5E.TraitWeaponPlural.one": "Weapon Proficiency",
-"DND5E.TraitWeaponPlural.other": "Weapon Proficiencies",
-"DND5E.TraitWeaponProf": "Weapon Proficiencies",
+
+"DND5E.TRAIT": {
+  "Action": {
+    "Configure": "Configure {trait}"
+  },
+  "All": "All {category}",
+  "Armor": {
+    "one": "Armor Training",
+    "other": "Armor Training",
+    "title": "Armor Training"
+  },
+  "ArmorLegacy": {
+    "one": "Armor Proficiency",
+    "other": "Armor Proficiencies",
+    "title": "Armor Proficiencies"
+  },
+  "Condition": {
+    "Immunity": {
+      "one": "Condition Immunity",
+      "other": "Condition Immunities",
+      "title": "Condition Immunities"
+    }
+  },
+  "Choose": {
+    "AnyCounted": "any {count} {type}",
+    "AnyUncounted": "any {type}",
+    "List": "{count} from {list}",
+    "Other": "{count} other {type}",
+    "Wrapper": "Choose {choices}"
+  },
+  "Chosen": "Chosen Traits",
+  "Damage": {
+    "Immunity": {
+      "one": "Damage Immunity",
+      "other": "Damage Immunities",
+      "title": "Damage Immunities"
+    },
+    "Modification": {
+      "one": "Damage Modification",
+      "other": "Damage Modifications",
+      "title": "Damage Modification"
+    },
+    "Resistance": {
+      "one": "Damage Resistance",
+      "other": "Damage Resistances",
+      "title": "Damage Resistances"
+    },
+    "Vulnerability": {
+      "one": "Damage Vulnerability",
+      "other": "Damage Vulnerabilities",
+      "title": "Damage Vulnerabilities"
+    }
+  },
+  "Generic": {
+    "one": "Trait",
+    "other": "Traits",
+    "title": "Traits"
+  },
+  "Language": {
+    "one": "Language",
+    "other": "Languages",
+    "title": "Languages"
+  },
+  "Saves": {
+    "one": "Saving Throw Proficiency",
+    "other": "Saving Throw Proficiencies",
+    "title": "Saving Throw Proficiencies"
+  },
+  "Skill": {
+    "one": "Skill Proficiency",
+    "other": "Skill Proficiencies",
+    "title": "Skill Proficiencies"
+  },
+  "Tool": {
+    "one": "Tool Proficiency",
+    "other": "Tool Proficiencies",
+    "title": "Tool Proficiencies"
+  },
+  "Weapon": {
+    "one": "Weapon Proficiency",
+    "other": "Weapon Proficiencies",
+    "title": "Weapon Proficiencies"
+  }
+},
+
 "DND5E.Traits": "Traits",
-"DND5E.TraitsChosen": "Chosen Traits",
 
 "DND5E.TRANSFORM": {
   "Action": {

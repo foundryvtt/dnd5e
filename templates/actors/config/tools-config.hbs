@@ -10,7 +10,7 @@
 {{#*inline ".tool-list"}}
 <ol class="unlist trait-list">
     {{#if (and children topLevel (not otherGroup))}}
-    {{> ".tool-entry" label=(localize "DND5E.TraitAll" category=label) children=false }}
+    {{> ".tool-entry" label=(localize "DND5E.TRAIT.All" category=label) children=false }}
     {{/if}}
     {{#each choices}}{{> ".tool-entry" }}{{/each}}
 </ol>

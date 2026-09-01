@@ -543,12 +543,11 @@ Hooks.once("i18nInit", () => {
           translations.DND5E?.TARGET?.Type?.Radius ?? {},
           { inplace: false }
         ),
-        TraitArmorPlural: foundry.utils.mergeObject(
-          _fallback.DND5E?.TraitArmorLegacyPlural ?? {},
-          translations.DND5E?.TraitArmorLegacyPlural ?? {},
+        "TRAIT.Armor": foundry.utils.mergeObject(
+          _fallback.DND5E?.TRAIT?.ArmorLegacy ?? {},
+          translations.DND5E?.TRAIT?.ArmorLegacy ?? {},
           { inplace: false }
-        ),
-        TraitArmorProf: _loc("DND5E.TraitArmorLegacyProf")
+        )
       }
     });
   }

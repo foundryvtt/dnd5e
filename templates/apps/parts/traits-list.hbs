@@ -1,7 +1,7 @@
 <ol class="unlist trait-list">
     {{#if (and children selectable topLevel (not otherGroup))}}
     <li>
-        <label class="name">{{ localize "DND5E.TraitAll" category=label }}</label>
+        <label class="name">{{ localize "DND5E.TRAIT.All" category=label }}</label>
         <div class="proficiency">
             {{ formInput field name=(concat keyPath @key) value=chosen input=input }}
         </div>

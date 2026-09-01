@@ -351,7 +351,7 @@ export function traitIndexFields() {
 export function traitLabel(trait, count) {
   const traitConfig = CONFIG.DND5E.traits[trait];
   const pluralRule = (count !== undefined) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
-  if ( !traitConfig ) return _loc(`DND5E.TraitGenericPlural.${pluralRule}`);
+  if ( !traitConfig ) return _loc(`DND5E.TRAIT.Generic.${pluralRule}`);
   return _loc(`${traitConfig.labels.localization}.${pluralRule}`);
 }
 
@@ -463,7 +463,7 @@ export function keyLabel(key, config={}) {
       } while ( parts.length );
       type = _innerLabel(category, traitConfig);
     } else type = categoryLabel.toLowerCase();
-    const localization = `DND5E.TraitConfigChoose${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
+    const localization = `DND5E.TRAIT.Choose.${final ? "Other" : `Any${count ? "Counted" : "Uncounted"}`}`;
     return _loc(localization, { count: count ?? 1, type });
   }
 
@@ -558,7 +558,7 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 
   // Select from a list of options (e.g. "2 from Thieves' Tools or any skill proficiency")
   const choices = Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _);
-  return _loc("DND5E.TraitConfigChooseList", {
+  return _loc("DND5E.TRAIT.Choose.List", {
     count: choice.count,
     list: listFormatter.format(choices)
   });
@@ -595,7 +595,7 @@ export function localizedList({ grants=new Set(), choices=[] }) {
 
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
   if ( !sections.length || grants.size ) return listFormatter.format(sections.filter(_ => _));
-  return _loc("DND5E.TraitConfigChooseWrapper", {
+  return _loc("DND5E.TRAIT.Choose.Wrapper", {
     choices: listFormatter.format(sections)
   });
 }

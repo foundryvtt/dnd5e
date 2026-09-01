@@ -8,7 +8,7 @@
         <button type="button" class="config-button unbutton"
                 {{~#if configAction}} data-action="showConfiguration" data-config="{{ configAction }}"
                 {{~else}} data-action="showConfiguration" data-trait="{{ key }}"{{/if}}
-                data-tooltip aria-label="{{ localize 'DND5E.TraitConfig' trait=(localize label) }}">
+                data-tooltip aria-label="{{ localize 'DND5E.TRAIT.Action.Configure' trait=(localize label) }}">
             <i class="fas fa-cog" inert></i>
         </button>
         {{/if}}

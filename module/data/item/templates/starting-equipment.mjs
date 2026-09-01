@@ -291,7 +291,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
     if ( !label ) return "";
     if ( this.type === "currency" ) return label;
     if ( this.count > 1 ) label = `${formatNumber(this.count)}&times; ${label}`;
-    else if ( this.type !== "linked" ) label = _loc("DND5E.TraitConfigChooseAnyUncounted", { type: label });
+    else if ( this.type !== "linked" ) label = _loc("DND5E.TRAIT.Choose.AnyUncounted", { type: label });
     if ( (this.type === "linked") && this.requiresProficiency ) {
       label += ` (${_loc("DND5E.StartingEquipment.IfProficient").toLowerCase()})`;
     }

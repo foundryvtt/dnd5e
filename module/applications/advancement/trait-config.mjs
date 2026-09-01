@@ -126,7 +126,7 @@ export default class TraitConfig extends AdvancementConfig {
       context.default.title = traitConfig.labels.title;
       context.default.icon = traitConfig.icon;
     } else {
-      context.default.title = _loc("DND5E.TraitGenericPlural.other");
+      context.default.title = _loc("DND5E.TRAIT.Generic.title");
       context.default.icon = this.advancement.constructor.metadata.icon;
     }
     context.default.hint = Trait.localizedList({ grants: this.config.grants, choices: this.config.choices });
@@ -136,7 +136,7 @@ export default class TraitConfig extends AdvancementConfig {
       input: context.inputs.createCheckboxInput,
       options: await Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 }),
       selected: this.trait,
-      selectedHeader: `${CONFIG.DND5E.traits[this.trait].labels.localization}.other`,
+      selectedHeader: `${CONFIG.DND5E.traits[this.trait].labels.localization}.title`,
       typeField: new StringField({
         required: true, blank: false, label: _loc("DND5E.ADVANCEMENT.Trait.TraitType")
       }),

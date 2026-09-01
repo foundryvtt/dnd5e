@@ -25,7 +25,7 @@
 <ol class="unlist trait-list">
     {{#if (and children topLevel (not otherGroup))}}
     <li>
-        <label class="name">{{ localize "DND5E.TraitAll" category=label }}</label>
+        <label class="name">{{ localize "DND5E.TRAIT.All" category=label }}</label>
         <div class="proficiency">
             {{ formInput @root.checkbox name=(concat "system.traits.weaponProf.value." @key) value=chosen
                          input=@root.inputs.createCheckboxInput }}

@@ -268,13 +268,13 @@
     {{!-- Immunities --}}
     {{#if editable}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di" color="green"
-        icon="fa-solid fa-shield" label="DND5E.DamImm" }}
+        icon="fa-solid fa-shield" label="DND5E.TRAIT.Damage.Immunity.title" }}
     {{else}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.di key="di" color="green"
         icon="fa-solid fa-shield" label="DND5E.Immunities" }}
     {{/if}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.ci key="ci" color="green"
-        svg="rosa-shield" label="DND5E.ConImm" }}
+        svg="rosa-shield" label="DND5E.TRAIT.Condition.Immunity.title" }}
 
     {{!-- Vulnerabilities --}}
     {{> "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs" values=traits.dv key="dv" color="maroon"
