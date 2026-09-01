@@ -38,8 +38,8 @@ export default class SkillsConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _processChoice(data, key, choice, categoryChosen=false) {
-    super._processChoice(data, key, choice, categoryChosen);
+  _processChoice(data, key, choice, category) {
+    super._processChoice(data, key, choice, category);
     const skill = data[key];
     if ( skill ) {
       choice.value = skill.value;

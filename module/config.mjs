@@ -2443,6 +2443,10 @@ DND5E.damageResistanceTypes = {
     label: "DND5E.DAMAGE.Resistance.Falling",
     icon: "systems/dnd5e/icons/svg/statuses/falling.svg",
     filter: new Filter({ k: "properties", o: "has", v: "falling" })
+  },
+  maximum: {
+    label: "DND5E.HEAL.Type.Maximum",
+    icon: "systems/dnd5e/icons/svg/damage/maxhp.svg"
   }
 };
 preLocalize("damageResistanceTypes", { key: "label" });
@@ -4401,6 +4405,42 @@ DND5E.traits = {
       configKey: "damageResistanceTypes",
       label: "DND5E.DAMAGE.Resistance.UniqueCategory"
     },
+    dataType: Number
+  },
+  hi: {
+    labels: {
+      title: "DND5E.TRAIT.Healing.Immunity.title",
+      localization: "DND5E.TRAIT.Healing.Immunity",
+      all: "DND5E.HEAL.All"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
+    configKey: "healingTypes"
+  },
+  hr: {
+    labels: {
+      title: "DND5E.TRAIT.Healing.Resistance.title",
+      localization: "DND5E.TRAIT.Healing.Resistance",
+      all: "DND5E.HEAL.All"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
+    configKey: "healingTypes"
+  },
+  hv: {
+    labels: {
+      title: "DND5E.TRAIT.Healing.Vulnerability.title",
+      localization: "DND5E.TRAIT.Healing.Vulnerability",
+      all: "DND5E.HEAL.All"
+    },
+    icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
+    configKey: "healingTypes"
+  },
+  hm: {
+    labels: {
+      title: "DND5E.TRAIT.Healing.Modification.title",
+      localization: "DND5E.TRAIT.Healing.Modification",
+      all: "DND5E.HEAL.All"
+    },
+    configKey: "healingTypes",
     dataType: Number
   },
   ci: {

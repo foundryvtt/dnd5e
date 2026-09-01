@@ -725,14 +725,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     for ( const [trait, config] of Object.entries(CONFIG.DND5E.traits) ) {
       const key = config.actorKeyPath ?? `system.traits.${trait}`;
       const data = foundry.utils.deepClone(foundry.utils.getProperty(this.actor, key));
-      if ( ["dm", "languages"].includes(trait) || !data ) continue;
+      if ( ["dm", "hm", "languages"].includes(trait) || !data ) continue;
 
       let values = data.value;
       if ( !values ) values = [];
       else if ( values instanceof Set ) values = Array.from(values);
       else if ( !Array.isArray(values) ) values = [values];
+      const isDamageTrait = ["dr", "dv", "di", "hr", "hv", "hi"].includes(trait);
       values = values.map(key => {
-        const value = { key, label: Trait.keyLabel(key, { trait }) ?? key };
+        const value = {
+          key, label: Trait.keyLabel(key, { trait }) ?? key,
+          color: isDamageTrait ? ["dr", "di", "hv"].includes(trait) ? "green" : "maroon" : undefined
+        };
         const icons = value.icons = [];
         if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[key]?.isPhysical ) icons.push(...data.bypasses.map(p => {
           const type = CONFIG.DND5E.itemProperties[p]?.label;
@@ -757,24 +761,34 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Prepare damage modifications
-    const dm = this.actor.system.traits?.dm;
-    if ( dm ) {
-      const rollData = this.actor.getRollData({ deterministic: true });
-      const values = Object.entries(dm.amount).map(([k, v]) => {
-        const total = simplifyBonus(v, rollData);
-        if ( !total ) return null;
-        const value = {
-          label: `${Trait.keyLabel(k, { trait: "dm" })} ${formatNumber(total, { signDisplay: "always" })}`,
-          color: total > 0 ? "maroon" : "green"
-        };
-        const icons = value.icons = [];
-        if ( dm.bypasses.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
-          const type = CONFIG.DND5E.itemProperties[p]?.label;
-          return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
-        }));
-        return value;
-      }).filter(f => f);
-      if ( values.length ) traits.dm = values;
+    const rollData = this.actor.getRollData({ deterministic: true });
+    for ( const trait of ["dm", "hm"] ) {
+      const data = this.actor.system.traits?.[trait];
+      if ( data ) {
+        const values = Object.entries(data.amount).map(([k, v]) => {
+          const total = simplifyBonus(v, rollData);
+          if ( !total ) return null;
+          const value = {
+            label: `${Trait.keyLabel(k, { trait })} ${formatNumber(total, { signDisplay: "always" })}`,
+            color: ((total > 0) && (trait === "dm")) || ((total < 0) && (trait === "hm")) ? "maroon" : "green"
+          };
+          const icons = value.icons = [];
+          if ( data.bypasses?.size && CONFIG.DND5E.damageTypes[k]?.isPhysical ) icons.push(...dm.bypasses.map(p => {
+            const type = CONFIG.DND5E.itemProperties[p]?.label;
+            return { icon: p, label: _loc("DND5E.DAMAGE.PhysicalBypass.DescriptionShort", { type }) };
+          }));
+          return value;
+        }).filter(f => f);
+        if ( values.length ) traits[trait] = values;
+      }
+    }
+
+    // Merge healing traits into damage traits
+    for ( const trait of ["r", "v", "i", "m"] ) {
+      if ( !traits[`h${trait}`] ) continue;
+      traits[`d${trait}`] ??= [];
+      traits[`d${trait}`].push(...traits[`h${trait}`]);
+      delete traits[`h${trait}`];
     }
 
     // Prepare languages

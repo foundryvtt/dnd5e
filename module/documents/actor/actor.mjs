@@ -881,20 +881,25 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       return false;
     };
 
-    const dm = this.system.traits?.dm ?? {};
     const rollData = this.getRollData({ deterministic: true });
-    const modifications = Object.entries(dm.amount ?? {}).reduce((obj, [type, formula]) => {
-      obj[type] = simplifyBonus(formula, rollData);
-      return obj;
-    }, {});
+    const resolvedModifications = {
+      damage: Object.entries(this.system.traits?.dm?.amount ?? {}).reduce((obj, [type, formula]) => {
+        obj[type] = simplifyBonus(formula, rollData);
+        return obj;
+      }, {}),
+      healing: Object.entries(this.system.traits?.hm?.amount ?? {}).reduce((obj, [type, formula]) => {
+        obj[type] = simplifyBonus(formula, rollData);
+        return obj;
+      }, {})
+    };
     const recordModification = (changes, type) => {
       const isSpecial = !(type in CONFIG.DND5E.damageTypes) && !(type in CONFIG.DND5E.healingTypes) && (type !== "ALL");
       this.#setDamageActive(
         "modification", changes, type === "ALL" ? "all" : isSpecial ? "special" : "type", isSpecial ? type : null
       );
     };
-    const applyModification = (d, type) => {
-      if ( this.#changeIsIgnored("modification", type, { options }) ) return;
+    const applyModification = (d, type, modifications) => {
+      if ( this.#changeIsIgnored("modification", type, { isHealing, options }) ) return;
       recordModification(d.active, type);
       const originalValue = d.value;
       if ( Math.sign(d.value) !== Math.sign(d.value + modifications[type]) ) d.value = 0;
@@ -903,15 +908,20 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     };
     const handleModifications = (d, handler) => {
       if ( CONFIG.DND5E.damageTypes[d.type]?.isPhysical && d.properties?.size
-        && dm.bypasses?.intersection(d.properties).size ) return;
-      if ( modifications[d.type] ) handler(d, d.type);
+        && this.system.traits?.dm?.bypasses?.intersection(d.properties).size ) return;
+      const modifications = resolvedModifications[
+        (d.type === "ALL") || (d.type === "maximum")
+          ? isHealing ? "healing" : "damage"
+          : d.type in CONFIG.DND5E.damageTypes ? "damage" : "healing"
+      ];
+      if ( modifications[d.type] ) handler(d, d.type, modifications);
       for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
-        if ( filter.check(d) && modifications[key] ) handler(d, key);
+        if ( filter && filter.check(d) && modifications[key] ) handler(d, key, modifications);
       }
-      if ( !(d.type in CONFIG.DND5E.healingTypes) && modifications.ALL ) handler(d, "ALL");
+      if ( modifications.ALL ) handler(d, "ALL", modifications);
     };
-    const recordDamage = (d, category, changes, options) => {
-      const source = this.#changeHasEffect(category, d, options);
+    const recordDamage = (d, category, changes, o) => {
+      const source = this.#changeHasEffect(category, d, o);
       if ( source ) this.#setDamageActive(category, changes, source.type, source.subtype);
       return !!source;
     };
@@ -921,13 +931,15 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       d.potential ??= {};
       d.potential.multiplier ??= 1;
 
-      recordDamage(d, "immunity", d.potential);
-      recordDamage(d, "resistance", d.potential);
-      recordDamage(d, "vulnerability", d.potential);
+      const o = { isHealing: d.type === "maximum" ? isHealing : (d.type in CONFIG.DND5E.healingTypes) };
+      recordDamage(d, "immunity", d.potential, o);
+      recordDamage(d, "resistance", d.potential, o);
+      recordDamage(d, "vulnerability", d.potential, o);
       handleModifications(d, (d, type) => recordModification(d.potential, type));
+      o.options = options;
 
       // Skip damage types with immunity
-      if ( skipped(d.type) || recordDamage(d, "immunity", d.active, { options }) ) {
+      if ( skipped(d.type) || recordDamage(d, "immunity", d.active, o) ) {
         d.value = 0;
         d.active.multiplier = 0;
         continue;
@@ -940,13 +952,13 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       let appliedDamage = d.value * multiplier;
 
       // Apply damage resistance
-      if ( recordDamage(d, "resistance", d.active, { options }) ) {
+      if ( recordDamage(d, "resistance", d.active, o) ) {
         damageMultiplier /= 2;
         appliedDamage = Math.trunc(appliedDamage / 2);
       }
 
       // Apply damage vulnerability
-      if ( recordDamage(d, "vulnerability", d.active, { options }) ) {
+      if ( recordDamage(d, "vulnerability", d.active, o) ) {
         damageMultiplier *= 2;
         appliedDamage *= 2;
       }
@@ -1003,22 +1015,23 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
    * @param {DamageAffectCategory} category                  Type of change that should be considered.
    * @param {DamageDescription} damage                       Damage description to consider or a specific type.
    * @param {object} [options={}]
+   * @param {boolean} [options.isHealing]                    Is this damage being calculated from a healing roll?
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
    * @returns {{ type: "type"|"special", [subtype]: string }|null}
    */
-  #changeHasEffect(category, damage, { options={} }={}) {
-    const config = this.system.traits?.[`d${category.slice(0, 1)}`];
+  #changeHasEffect(category, damage, { isHealing, options={} }={}) {
+    const type = damage.type;
+    const config = this.system.traits?.[`${isHealing ? "h" : "d"}${category.slice(0, 1)}`];
     const downgrade = type => (options.downgrade === true) || options.downgrade?.has?.(type)
       || options.downgrade?.has?.("ALL");
-    const type = damage.type;
-    const isHealingType = type in CONFIG.DND5E.healingTypes;
+    const o = { isHealing, options };
 
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
-      if ( downgrade(type) && this.#hasImmunity(type, options) ) return { type: "type" };
+      if ( downgrade(type) && this.#hasImmunity(type, o) ) return { type: "type" };
       for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
-        if ( !downgrade(key) || !this.system.traits?.di?.value.has(key) || !filter.check(damage) ) continue;
-        if ( this.#hasImmunity(key, options) ) return { type: "special", subtype: key };
+        if ( !downgrade(key) || !this.system.traits?.di?.value.has(key) || !filter || !filter.check(damage) ) continue;
+        if ( this.#hasImmunity(key, o) ) return { type: "special", subtype: key };
       }
     }
 
@@ -1028,14 +1041,13 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
 
     // If specific damage type isn't ignored and actor either has all damage in this category
     // (healing types are excluded from "All Damage") or has specific damage type in this category
-    const o = { options };
     if ( !this.#changeIsIgnored(category, type, o)
-      && ((!isHealingType && config?.value.has("ALL")) || config?.value.has(type)) ) return { type: "type" };
+      && (config?.value.has("ALL") || config?.value.has(type)) ) return { type: "type" };
 
     // Check filters against special resistance types
     for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
       if ( !config?.value.has(key) || this.#changeIsIgnored(category, key, o) ) continue;
-      if ( filter.check(damage) ) return { type: "special", subtype: key };
+      if ( filter && filter.check(damage) ) return { type: "special", subtype: key };
     }
 
     return null;
@@ -1048,11 +1060,12 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
    * @param {DamageAffectCategory} category                  Type of change that should be considered.
    * @param {string} type                                    Specific damage type to consider.
    * @param {object} [options={}]
+   * @param {boolean} [options.isHealing]                    Is this damage being calculated from a healing roll?
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
    * @param {boolean} [options.skipDowngrade=false]          Should downgrades not be taken into account?
    * @returns {boolean}
    */
-  #changeIsIgnored(category, type, { options={}, skipDowngrade=false }={}) {
+  #changeIsIgnored(category, type, { isHealing, options={}, skipDowngrade=false }={}) {
     const downgrade = type => (options.downgrade === true) || options.downgrade?.has?.(type)
       || options.downgrade?.has?.("ALL");
 
@@ -1067,7 +1080,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     if ( (category === "immunity") && downgrade(type) && !skipDowngrade ) return true;
 
     // When downgrading, resistances should be decided by whether immunity is applied
-    if ( (category === "resistance") && downgrade(type) && !this.#hasImmunity(type) ) return true;
+    if ( (category === "resistance") && downgrade(type) && !this.#hasImmunity(type, { isHealing }) ) return true;
 
     return false;
   }
@@ -1076,14 +1089,16 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
 
   /**
    * Whether this creature has immunity to the given damage type.
-   * @param {string} type                            The damage type.
-   * @param {DamageApplicationOptions} [options={}]  Options forwarded to #changeIsIgnored.
+   * @param {string} type                                    The damage type.
+   * @param {object} [options={}]
+   * @param {boolean} [options.isHealing]                    Is this damage being calculated from a healing roll?
+   * @param {DamageApplicationOptions} [options.options={}]  Options forwarded to #changeIsIgnored.
    * @returns {boolean}
    */
-  #hasImmunity(type, options={}) {
-    if ( this.#changeIsIgnored("immunity", type, { options, skipDowngrade: true }) ) return false;
-    const value = this.system.traits?.di?.value;
-    return (!(type in CONFIG.DND5E.healingTypes) && value?.has("ALL")) || value?.has(type);
+  #hasImmunity(type, { isHealing, options={} }={}) {
+    if ( this.#changeIsIgnored("immunity", type, { isHealing, options, skipDowngrade: true }) ) return false;
+    const value = this.system.traits?.[isHealing ? "hi" : "di"]?.value;
+    return value?.has("ALL") || value?.has(type);
   }
 
   /* -------------------------------------------- */
