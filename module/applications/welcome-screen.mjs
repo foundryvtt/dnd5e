@@ -72,8 +72,8 @@ export default class WelcomeScreen extends Application5e {
   static TABS = {
     sheet: {
       tabs: [
-        { id: "main", icon: "fa-solid fa-face-grin" },
-        { id: "modules", icon: "fa-solid fa-play" }
+        { id: "main", icon: "fa-brands fa-d-and-d" },
+        { id: "modules", icon: "fa-solid fa-books" }
       ],
       initial: "main",
       labelPrefix: "DND5E.WELCOME.Tab"
