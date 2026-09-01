@@ -857,11 +857,14 @@ export default class NPCData extends CreatureTemplate {
       context.definitions.lower = [
         summary.saves ? { label: "DND5E.ClassSaves", definitions: [summary.saves] } : null,
         summary.skills ? { label: "DND5E.Skills", definitions: [summary.skills] } : null,
-        summary.vulnerabilities ? lowerCase({ label: "DND5E.DamVuln", definitions: [summary.vulnerabilities] }) : null,
-        summary.resistances ? lowerCase({ label: "DND5E.DamRes", definitions: [summary.resistances] }) : null,
-        summary.immunities ? lowerCase({ label: "DND5E.DamImm", definitions: [summary.immunities] }) : null,
-        summary.conditionImmunities
-          ? lowerCase({ label: "DND5E.TraitCIPlural.other", definitions: [summary.conditionImmunities] }) : null,
+        summary.vulnerabilities ? lowerCase({
+          label: "DND5E.TRAIT.Damage.Vulnerability.title", definitions: [summary.vulnerabilities] }) : null,
+        summary.resistances ? lowerCase({
+          label: "DND5E.TRAIT.Damage.Resistance.title", definitions: [summary.resistances] }) : null,
+        summary.immunities ? lowerCase({
+          label: "DND5E.TRAIT.Damage.Immmunity.title", definitions: [summary.immunities] }) : null,
+        summary.conditionImmunities ? lowerCase({
+          label: "DND5E.TRAIT.Condition.Immmunity.title", definitions: [summary.conditionImmunities] }) : null,
         { label: "DND5E.Senses", definitions: [summary.senses] },
         { label: "DND5E.Languages", definitions: [summary.languages] },
         { label: "DND5E.Challenge", classes: "half-width", definitions: [summary.cr] },

@@ -21,9 +21,8 @@
         <filigree-box class="tools">
             {{#if editable}}
             <button type="button" class="trait-selector config-button unbutton" data-action="showConfiguration"
-                    data-trait="tool"
-                    data-tooltip="{{ localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitToolProf') }}"
-                    aria-label="{{ localize 'DND5E.TraitConfig' trait=(localize 'DND5E.TraitToolProf') }}">
+                    data-trait="tool" data-tooltip
+                    aria-label="{{ localize 'DND5E.TRAIT.Action.Configure' trait=(localize 'DND5E.TRAIT.Tool.title') }}">
                 <i class="fas fa-cog" inert></i>
             </button>
             {{/if}}
@@ -151,12 +150,13 @@
         {{!-- Immunities --}}
         {{#if editable}}
             {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
-                label="DND5E.DamImm" }}
+                label="DND5E.TRAIT.Damage.Immunity.title" }}
         {{else}}
             {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
                 label="DND5E.Immunities" }}
         {{/if}}
-        {{> "dnd5e.actor-trait-pills" values=traits.ci key="ci" color="green" svg="rosa-shield" label="DND5E.ConImm" }}
+        {{> "dnd5e.actor-trait-pills" values=traits.ci key="ci" color="green" svg="rosa-shield"
+            label="DND5E.TRAIT.Condition.Immunity.title" }}
 
         {{!-- Vulnerabilities --}}
         {{> "dnd5e.actor-trait-pills" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack"

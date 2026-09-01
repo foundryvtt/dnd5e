@@ -22,18 +22,18 @@ export default class TraitsField {
   static get common() {
     return {
       size: new ActorSizeField({ required: true, initial: "med", label: "DND5E.Size" }),
-      di: new DamageTraitField({}, { label: "DND5E.DamImm" }),
-      dr: new DamageTraitField({}, { label: "DND5E.DamRes" }),
-      dv: new DamageTraitField({}, { label: "DND5E.DamVuln" }),
+      di: new DamageTraitField({}, { label: "DND5E.TRAIT.Damage.Immunity.title" }),
+      dr: new DamageTraitField({}, { label: "DND5E.TRAIT.Damage.Resistance.title" }),
+      dv: new DamageTraitField({}, { label: "DND5E.TRAIT.Damage.Vulnerability.title" }),
       dm: new SchemaField({
         amount: new MappingField(new FormulaField({ deterministic: true }), {
-          label: "DND5E.DamMod", labels: { value: "DND5E.DamMod" }
+          label: "DND5E.TRAIT.Damage.Modification.title", labels: { value: "DND5E.TRAIT.Damage.Modification.title" }
         }),
         bypasses: new SetField(new StringField(), {
           label: "DND5E.DAMAGE.PhysicalBypass.Label", hint: "DND5E.DAMAGE.PhysicalBypass.Hint"
         })
       }),
-      ci: new SimpleTraitField({}, { label: "DND5E.ConImm" })
+      ci: new SimpleTraitField({}, { label: "DND5E.TRAIT.Condition.Immunity.title" })
     };
   }
 

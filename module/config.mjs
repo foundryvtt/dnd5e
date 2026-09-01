@@ -4206,8 +4206,8 @@ DND5E.epicBoonInterval = 30000;
 DND5E.traits = {
   saves: {
     labels: {
-      title: "DND5E.ClassSaves",
-      localization: "DND5E.TraitSavesPlural"
+      title: "DND5E.TRAIT.Saves.title",
+      localization: "DND5E.TRAIT.Saves"
     },
     icon: "icons/magic/life/ankh-gold-blue.webp",
     actorKeyPath: "system.abilities",
@@ -4216,8 +4216,8 @@ DND5E.traits = {
   },
   skills: {
     labels: {
-      title: "DND5E.Skills",
-      localization: "DND5E.TraitSkillsPlural"
+      title: "DND5E.TRAIT.Skills.title",
+      localization: "DND5E.TRAIT.Skills"
     },
     icon: "icons/tools/instruments/harp-yellow-teal.webp",
     actorKeyPath: "system.skills",
@@ -4227,16 +4227,16 @@ DND5E.traits = {
   },
   languages: {
     labels: {
-      title: "DND5E.Languages",
-      localization: "DND5E.TraitLanguagesPlural",
+      title: "DND5E.TRAIT.Language.title",
+      localization: "DND5E.TRAIT.Language",
       all: "DND5E.Language.All"
     },
     icon: "icons/skills/social/diplomacy-peace-alliance.webp"
   },
   armor: {
     labels: {
-      title: "DND5E.TraitArmorProf",
-      localization: "DND5E.TraitArmorPlural"
+      title: "DND5E.TRAIT.Armor.title",
+      localization: "DND5E.TRAIT.Armor"
     },
     icon: "icons/equipment/chest/breastplate-helmet-metal.webp",
     actorKeyPath: "system.traits.armorProf",
@@ -4245,8 +4245,8 @@ DND5E.traits = {
   },
   weapon: {
     labels: {
-      title: "DND5E.TraitWeaponProf",
-      localization: "DND5E.TraitWeaponPlural"
+      title: "DND5E.TRAIT.Weapon.title",
+      localization: "DND5E.TRAIT.Weapon"
     },
     icon: "icons/skills/melee/weapons-crossed-swords-purple.webp",
     actorKeyPath: "system.traits.weaponProf",
@@ -4256,8 +4256,8 @@ DND5E.traits = {
   },
   tool: {
     labels: {
-      title: "DND5E.TraitToolProf",
-      localization: "DND5E.TraitToolPlural"
+      title: "DND5E.TRAIT.Tool.title",
+      localization: "DND5E.TRAIT.Tool"
     },
     icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
     actorKeyPath: "system.tools",
@@ -4270,8 +4270,8 @@ DND5E.traits = {
   },
   di: {
     labels: {
-      title: "DND5E.DamImm",
-      localization: "DND5E.TraitDIPlural",
+      title: "DND5E.TRAIT.Damage.Immunity.title",
+      localization: "DND5E.TRAIT.Damage.Immunity",
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
@@ -4279,8 +4279,8 @@ DND5E.traits = {
   },
   dr: {
     labels: {
-      title: "DND5E.DamRes",
-      localization: "DND5E.TraitDRPlural",
+      title: "DND5E.TRAIT.Damage.Resistance.title",
+      localization: "DND5E.TRAIT.Damage.Resistance",
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
@@ -4288,8 +4288,8 @@ DND5E.traits = {
   },
   dv: {
     labels: {
-      title: "DND5E.DamVuln",
-      localization: "DND5E.TraitDVPlural",
+      title: "DND5E.TRAIT.Damage.Vulnerability.title",
+      localization: "DND5E.TRAIT.Damage.Vulnerability",
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
@@ -4297,8 +4297,8 @@ DND5E.traits = {
   },
   dm: {
     labels: {
-      title: "DND5E.DamMod",
-      localization: "DND5E.TraitDMPlural",
+      title: "DND5E.TRAIT.Damage.Modification.title",
+      localization: "DND5E.TRAIT.Damage.Modification",
       all: "DND5E.DAMAGE.All"
     },
     configKey: "damageTypes",
@@ -4306,8 +4306,8 @@ DND5E.traits = {
   },
   ci: {
     labels: {
-      title: "DND5E.ConImm",
-      localization: "DND5E.TraitCIPlural"
+      title: "DND5E.TRAIT.Condition.Immunity.title",
+      localization: "DND5E.TRAIT.Condition.Immunity"
     },
     icon: "systems/dnd5e/icons/svg/trait-condition-immunities.svg",
     configKey: "conditionTypes",

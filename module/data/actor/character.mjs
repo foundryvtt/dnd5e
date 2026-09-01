@@ -122,8 +122,8 @@ export default class CharacterData extends CreatureTemplate {
             value: new SetField(new StringField()),
             bonus: new SetField(new StringField())
           })
-        }, { label: "DND5E.TraitWeaponProf" }),
-        armorProf: new SimpleTraitField({}, { label: "DND5E.TraitArmorProf" })
+        }, { label: "DND5E.TRAIT.Weapon.title" }),
+        armorProf: new SimpleTraitField({}, { label: "DND5E.TRAIT.Armor.title" })
       }, { label: "DND5E.Traits" }),
       resources: new SchemaField({
         primary: makeResourceField({ label: "DND5E.ResourcePrimary" }),
