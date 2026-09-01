@@ -260,8 +260,10 @@ export default class WelcomeScreen extends Application5e {
       }, new Set());
       const moduleData = await this.getModules();
       for ( const [id, enabled] of Object.entries(modules) ) {
-        if ( !enabled || !moduleData.core[id]?.disabledSources?.length ) continue;
-        moduleData.core[id].disabledSources.forEach(id => disabledSources.add(`dnd5e.${id}`));
+        for ( const category of Object.values(moduleData) ) {
+          if ( !enabled || !category[id]?.disabledSources?.length ) continue;
+          category[id].disabledSources.forEach(id => disabledSources.add(`dnd5e.${id}`));
+        }
       }
       if ( modules["dnd-players-handbook"] && modules["dnd-dungeon-masters-guide"] ) {
         disabledSources.add("dnd5e.equipment24");
