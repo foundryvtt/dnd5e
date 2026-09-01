@@ -519,8 +519,7 @@ export async function enrichCheck(config, label, options) {
     delete config.activity;
   }
 
-  // TODO: Support "spellcasting" ability
-  let abilityConfig = CONFIG.DND5E.abilities[config.ability];
+  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( config.ability && !abilityConfig ) {
     logWarning(`Ability "${config.ability}" not found while enriching ${config._input}.`, options);
     invalid = true;
@@ -591,7 +590,7 @@ export async function enrichCheck(config, label, options) {
       // Multiple associated proficiencies, link each individually
       if ( associated.length > 1 ) parts.push(
         _loc("EDITOR.DND5E.Inline.SpecificCheck", {
-          ability: CONFIG.DND5E.abilities[ability].label,
+          ability: CONFIG.DND5E.enrichmentLookup.abilities[ability].label,
           type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML ))
         })
       );
