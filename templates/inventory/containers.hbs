@@ -4,9 +4,11 @@
         <a class="item-action" data-action="showDocument" data-tooltip aria-label="{{ name }}">
             {{#dnd5e-itemContext this as |ctx|}}
             {{#with ctx.capacity}}
+            {{#unless hidden}}
             <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
                  aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
                  style="--bar-percentage: {{ pct }}%"></div>
+            {{/unless}}
             {{/with}}
             {{/dnd5e-itemContext}}
             <img src="{{ img }}" alt="{{ name }}" draggable="false">

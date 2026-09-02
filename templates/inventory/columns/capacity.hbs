@@ -1,5 +1,6 @@
 {{#with ctx.capacity}}
-<div class="item-detail item-capacity always-visible" data-column-id="capacity">
+<div class="item-detail item-capacity always-visible {{#if hidden}}empty{{/if}}" data-column-id="capacity">
+    {{#unless hidden}}
     <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}" aria-valuetext="{{ value }}"
          aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
         <div class="label">
@@ -9,5 +10,6 @@
             <span class="max">{{{ maxLabel }}}</span>
         </div>
     </div>
+    {{/unless}}
 </div>
 {{/with}}
