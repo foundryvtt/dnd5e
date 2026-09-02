@@ -98,6 +98,6 @@ export default class DurationField extends SchemaField {
       case "year": units = "years"; break;
       default: return expiry ? { expiry, value: null } : {};
     }
-    return { expiry, value, units };
+    return { value, units, expiry: expiry ?? "turnStart" };
   }
 }

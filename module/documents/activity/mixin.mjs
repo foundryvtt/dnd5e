@@ -1201,9 +1201,13 @@ export default function ActivityMixin(Base) {
      */
     getAppliedEffectChanges(effect, { chatMessage, target }={}) {
       const changes = {};
-      if ( !Number.isFinite(effect.duration.value) && !effect.duration.expiry ) {
-        const duration = this.duration?.getEffectData();
-        if ( !foundry.utils.isEmpty(duration) ) changes.duration = duration;
+      if ( !effect.duration.expiry ) {
+        if ( !Number.isFinite(effect.duration.value) ) {
+          const duration = this.duration?.getEffectData();
+          if ( !foundry.utils.isEmpty(duration) ) changes.duration = duration;
+        } else {
+          changes.duration = { expiry: "turnStart" };
+        }
       }
       return changes;
     }

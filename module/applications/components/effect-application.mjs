@@ -214,8 +214,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
     }
 
     // Get any effect changes provided by the activity & add flags
-    const changes = this.chatMessage.getAssociatedActivity({ scaled: true })
-      ?.getAppliedEffectChanges(effect, { chatMessage: this.chatMessage, target: actor }) ?? {};
+    const changes = activity?.getAppliedEffectChanges(effect, { chatMessage: this.chatMessage, target: actor }) ?? {};
     foundry.utils.mergeObject(changes, {
       flags: {
         dnd5e: {
