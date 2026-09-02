@@ -48,6 +48,11 @@ export default class GroupActorSheet extends MultiActorSheet {
       ],
       scrollable: [".sidebar", ".body"]
     },
+    effects: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/tabs/actor-effects.hbs",
+      scrollable: [""]
+    },
     biography: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/group/biography.hbs",
@@ -61,6 +66,7 @@ export default class GroupActorSheet extends MultiActorSheet {
   static TABS = [
     { tab: "members", label: "DND5E.Group.Member.other" },
     { tab: "inventory", label: "DND5E.Inventory" },
+    { tab: "effects", label: "DND5E.EFFECT.Tab" },
     { tab: "biography", label: "DND5E.Biography" }
   ];
 
@@ -175,6 +181,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
       case "biography": return this._prepareDescriptionContext(context, options);
+      case "effects": return this._prepareEffectsContext(context, options);
       case "header": return this._prepareHeaderContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
       case "members": return this._prepareMembersContext(context, options);
