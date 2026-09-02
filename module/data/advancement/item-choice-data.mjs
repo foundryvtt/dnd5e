@@ -31,7 +31,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
     return {
       allowDrops: new BooleanField({ initial: true }),
       choices: new MappingField(new SchemaField({
-        count: new NumberField({integer: true, min: 0}),
+        count: new NumberField({ integer: true, min: 0 }),
         replacement: new BooleanField()
       })),
       pool: new ArrayField(new SchemaField({
@@ -41,6 +41,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
       restriction: new SchemaField({
         level: new StringField(),
         list: new SetField(new StringField()),
+        school: new SetField(new StringField()),
         subtype: new StringField(),
         type: new StringField()
       }),

@@ -312,6 +312,14 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       });
     }
 
+    // If spell school is specified, ensure the spell is of that school
+    if ( (type === "spell") && restriction.school.size && !restriction.school.has(item.system.school) ) {
+      const schools = Array.from(restriction.school).map(s => CONFIG.DND5E.spellSchools[s]?.label).filter(_ => _);
+      return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellSchool", {
+        schools: game.i18n.getListFormatter({ type: "disjunction" }).format(schools)
+      });
+    }
+
     return true;
   }
 }
