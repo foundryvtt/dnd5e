@@ -190,7 +190,7 @@ export default class ContainerSheet extends ItemSheet5e {
     if ( !this.item.isOwner || (folder.type !== "Item") ) return [];
 
     // Warn before adding to a container whose contents the player cannot see
-    if ( await this.item.system.canDropContents() === false ) return [];
+    if ( !(await this.item.system.canDropContents()) ) return [];
 
     let recursiveWarning = false;
     const parentContainers = await this.item.system.allContainers();
@@ -235,9 +235,6 @@ export default class ContainerSheet extends ItemSheet5e {
     let item = await Item.implementation.fromDropData(data);
     if ( !this.item.isOwner || !item || (behavior === "none") ) return false;
 
-    // Warn before adding to a container whose contents the player cannot see
-    if ( await this.item.system.canDropContents() === false ) return false;
-
     // If item already exists in this container, just adjust its sorting
     if ( (behavior === "move") && (item.system.container === this.item.id) ) {
       return this._onSortItem(event, item);
@@ -249,6 +246,9 @@ export default class ContainerSheet extends ItemSheet5e {
       ui.notifications.error("DND5E.ContainerRecursiveError");
       return;
     }
+
+    // Warn before adding to a container whose contents the player cannot see
+    if ( !(await this.item.system.canDropContents()) ) return false;
 
     // If item already exists in same DocumentCollection, just adjust its container property
     if ( (behavior === "move") && (item.actor === this.item.actor) && (item.pack === this.item.pack) ) {

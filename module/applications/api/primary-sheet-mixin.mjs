@@ -229,11 +229,10 @@ export default function PrimarySheetMixin(Base) {
           this.element.querySelector(`[data-application-part="${this.tabGroups.primary}"]`)?.remove();
         }
         const id = Object.keys(tabs)[0];
-        this.tabGroups.primary = id;
-        Object.assign(tabs[id], {
-          active: true,
-          cssClass: "active"
-        });
+        if ( id ) {
+          this.tabGroups.primary = id;
+          Object.assign(tabs[id], { active: true, cssClass: "active" });
+        }
       }
 
       return tabs;
