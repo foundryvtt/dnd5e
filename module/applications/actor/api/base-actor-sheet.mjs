@@ -90,15 +90,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       submitOnChange: true
     },
     window: {
-      controls: [
-        {
-          action: "restoreTransformation",
-          icon: "fa-solid fa-backward",
-          label: "DND5E.TRANSFORM.Action.Restore",
-          ownership: "OWNER",
-          visible: BaseActorSheet.#canRestoreTransformation
-        }
-      ],
       resizable: true
     }
   };
@@ -752,6 +743,17 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     warnings.setAttribute("aria-label", _loc("Warnings"));
     this.window.subtitle.after(warnings);
 
+    // Restore transformation
+    const restore = document.createElement("button");
+    restore.type = "button";
+    restore.classList.add("header-control", "restore-transformation", "icon", "fa-solid", "fa-backward");
+    const restoreLabel = _loc("DND5E.TRANSFORM.Action.Restore");
+    Object.assign(restore.dataset, {
+      action: "restoreTransformation", tooltip: restoreLabel, tooltipDirection: "DOWN"
+    });
+    restore.setAttribute("aria-label", restoreLabel);
+    this.window.subtitle.after(restore);
+
     return html;
   }
 
@@ -1175,6 +1177,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Display warnings
     const warnings = this.element.querySelector(".window-header .preparation-warnings");
     warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited) || !context.warnings?.length);
+
+    // Display the restore transformation button only while a transformation is active
+    const restore = this.element.querySelector(".window-header .restore-transformation");
+    restore?.toggleAttribute("hidden", !BaseActorSheet.#canRestoreTransformation.call(this));
 
     if ( this.isEditable ) {
       // Class level changes
