@@ -86,7 +86,7 @@ export default class WelcomeScreen extends Application5e {
 
   /**
    * Cached version of the module JSON.
-   * @type {Promise<Record<string, OfficialModuleListing[]>|void>}
+   * @type {Record<string, Record<string, OfficialModuleListing>>}
    */
   static #modules;
 
@@ -319,7 +319,7 @@ export default class WelcomeScreen extends Application5e {
 
   /**
    * Retrieve listing of official modules to display.
-   * @returns {Promise<Record<string, OfficialModuleListing[]>>}
+   * @returns {Promise<Record<string, OfficialModuleListing>>}
    */
   async getModules() {
     if ( WelcomeScreen.#modules ) return WelcomeScreen.#modules;
