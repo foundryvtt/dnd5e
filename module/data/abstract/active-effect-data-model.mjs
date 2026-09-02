@@ -22,6 +22,7 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
         behavior: new DocumentUUIDField({ required: false, type: "RegionBehavior" }),
         effect: new DocumentUUIDField({ relative: true, required: false, type: "ActiveEffect" }),
         item: new DocumentUUIDField({ relative: true, required: false, type: "Item" }),
+        message: new DocumentUUIDField({ required: false, type: "ChatMessage" }),
         profile: new DocumentIdField({ readonly: false, required: false })
       })
     };

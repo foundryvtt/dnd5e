@@ -169,6 +169,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       system: {
         origin: {
           activity: this.uuid,
+          message: chatMessage?.uuid,
           profile: profileId
         }
       },
