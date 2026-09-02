@@ -1162,6 +1162,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @returns {boolean}
    */
   static itemHasEffects(item) {
-    return this.isItemIdentified(item) && item.system.constructor.metadata.hasEffects;
+    if ( !this.isItemIdentified(item) ) return false;
+    const { hasEffects } = item.system.constructor.metadata;
+    if ( hasEffects === null ) return item.effects.size > 0;
+    return hasEffects;
   }
 }
