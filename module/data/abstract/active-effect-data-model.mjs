@@ -107,10 +107,11 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
 
   /**
    * Is there some system logic that makes this Active Effect ineligible for application?
-   * @type {boolean}
+   * @type {boolean|void}  Returns a boolean to indicate explicit suppression status, otherwise defers to the base
+   *                       ActiveEffect suppression logic.
    */
   get isSuppressed() {
-    return this.#conditionSuppressed ?? false;
+    return this.#conditionSuppressed || undefined;
   }
 
   /* -------------------------------------------- */

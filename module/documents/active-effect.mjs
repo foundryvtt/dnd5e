@@ -173,7 +173,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   get isSuppressed() {
-    if ( super.isSuppressed || this.system.isSuppressed ) return true;
     if ( this.system.magical && this.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
     if ( this.type === "condition" ) return false;
