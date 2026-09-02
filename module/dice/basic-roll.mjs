@@ -52,10 +52,7 @@ export default class BasicRoll extends Roll {
     for ( const [key, value] of Object.entries(parts) ) {
       if ( !value && (value !== 0) ) continue;
       finalParts.push(`@${key}`);
-      foundry.utils.setProperty(
-        data, key, foundry.utils.getType(value) === "string"
-          ? BasicRoll.replaceFormulaData(value, data, { missing: 0 }) : value
-      );
+      foundry.utils.setProperty(data, key, value);
     }
     return { parts: finalParts, data };
   }
@@ -329,11 +326,9 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static replaceFormulaData(formula, data, options) {
-    // This looks for the pattern `$!!$` and replaces it with just the value between the marks (the bang has
-    // been added to ensure this is a deliberate shim from the system, not a unintentional usage that should
-    // show an error).
-    return super.replaceFormulaData(formula, data, options).replaceAll(/\$"?!(.+?)!"?\$/g, "$1");
+  static replaceFormulaData(formula, data, options={}, _r=0) {
+    options.recursive ??= true;
+    return super.replaceFormulaData(formula, data, options, _r);
   }
 
   /* -------------------------------------------- */
