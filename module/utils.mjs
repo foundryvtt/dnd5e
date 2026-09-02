@@ -533,7 +533,6 @@ export function replaceFormulaData(formula, data, options={}) {
         return value;
       }
       case "boolean": return String(Number(value));
-      case "number": return String(value);
       default: return String(value).trim();
     }
   });
