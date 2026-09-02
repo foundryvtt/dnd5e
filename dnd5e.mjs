@@ -76,7 +76,7 @@ Hooks.once("init", function() {
   CONFIG.Combatant.documentClass = documents.Combatant5e;
   CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
-  CONFIG.Item.compendiumIndexFields.push("system.container", "system.identifier");
+  CONFIG.Item.compendiumIndexFields.push("system.container", "system.identifier", "system.source");
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
@@ -520,16 +520,15 @@ let _originalLookup;
 /**
  * Return entries that match the given string prefix.
  * @param {string} query                      The search prefix or phrase.
- * @param {object} [options]                  Additional options to configure behaviour.
- * @param {string[]} [options.ignoreCompendiumFiltering]  Don't filter based on pack source configuration.
- * @returns {Record<string, WordTreeEntry[]>} A number of entries that have the given prefix, grouped by document
- *                                            type.
+ * @param {object} [options]                  Additional options to configure behavior.
+ * @param {boolean} [options.ignoreCompendiumFiltering]  Don't filter based on pack source configuration.
+ * @returns {Record<string, WordTreeEntry[]>} A number of entries that have the given prefix, grouped by document type.
  */
 function documentIndexLookup(query, { ignoreCompendiumFiltering, ...options }={}) {
   return _originalLookup.call(this, query, {
     ...options,
     filterEntries: entry => {
-      if ( fromUuidSync(entry.uuid, { strict: false })?.system?.container ) return false;
+      if ( entry.entry.system?.container ) return false;
       if ( !ignoreCompendiumFiltering && (dnd5e.settings.packSourceConfiguration[entry.pack] === false) ) return false;
       return options.filterEntries?.(entry) ?? true;
     }
@@ -616,9 +615,6 @@ Hooks.once("ready", function() {
 
   // Register items by type
   dnd5e.registry.items.initialize();
-
-  // Re-index any item compendiums to ensure container property is indexed
-  game.packs.filter(p => p.documentName === "Item").forEach(p => p.getIndex());
 
   // Chat message listeners
   documents.ChatMessage5e.activateListeners();
