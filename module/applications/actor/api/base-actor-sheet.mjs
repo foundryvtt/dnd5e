@@ -1745,6 +1745,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       }
     }
 
+    // Warn before adding to a container whose contents the player cannot see
+    if ( !(await container.system.canDropContents()) ) return;
+
     // If the item is from the same actor, move it into the container
     if ( (event._behavior === "move") && (this.inventorySource.uuid === item.parent?.uuid) ) {
       return item.update({ "system.container": container.id });

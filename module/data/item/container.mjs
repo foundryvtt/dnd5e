@@ -125,6 +125,17 @@ export default class ContainerData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * Can the current user view this container's contents? Hidden from non-GMs when the container is unidentified and
+   * has the "unidentifiedContents" property.
+   * @type {boolean}
+   */
+  get canViewContents() {
+    return game.user.isGM || (this.identified !== false) || !this.properties.has("unidentifiedContents");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get all of the items in this container and any sub-containers. A promise if item is within a compendium.
    * @type {Collection<Item5e>|Promise<Collection<Item5e>>}
    */
@@ -221,10 +232,11 @@ export default class ContainerData extends ItemDataModel.mixin(
 
   /**
    * @typedef {object} Item5eCapacityDescriptor
-   * @property {number} value  The current total weight or number of items in the container.
-   * @property {number} max    The maximum total weight or number of items in the container.
-   * @property {number} pct    The percentage of total capacity.
-   * @property {string} units  The units label.
+   * @property {number} value    The current total weight or number of items in the container.
+   * @property {number} max      The maximum total weight or number of items in the container.
+   * @property {number} pct      The percentage of total capacity.
+   * @property {string} units    The units label.
+   * @property {boolean} hidden  Should this capacity be hidden from the current user?
    */
 
   /**
@@ -243,6 +255,7 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.units = CONFIG.DND5E.weightUnits[this.capacity.weight.units]?.label ?? "";
     }
     context.value = context.value.toNearest(0.1);
+    context.hidden = !this.canViewContents;
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }
@@ -386,6 +399,22 @@ export default class ContainerData extends ItemDataModel.mixin(
     if ( contents?.size ) await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {
       pack: this.parent.pack,
       parent: this.parent.parent
+    });
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Confirm with user when trying to add items to an unidentified container.
+   * @returns {Promise<boolean>|boolean}
+   */
+  canDropContents() {
+    if ( this.canViewContents ) return true;
+    return foundry.applications.api.DialogV2.confirm({
+      content: `<p>${_loc("DND5E.CONTAINER.UnidentifiedContentsWarning.Message")}</p>`,
+      window: { title: "DND5E.CONTAINER.UnidentifiedContentsWarning.Title", icon: "fa-solid fa-box" }
     });
   }
 }

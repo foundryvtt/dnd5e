@@ -32,7 +32,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /** @override */
   static TABS = [
-    { tab: "contents", label: "DND5E.ITEM.SECTIONS.Contents" },
+    { tab: "contents", label: "DND5E.ITEM.SECTIONS.Contents", condition: this.canViewContents.bind(this) },
     ...super.TABS
   ];
 
@@ -189,6 +189,9 @@ export default class ContainerSheet extends ItemSheet5e {
     const folder = await Folder.implementation.fromDropData(data);
     if ( !this.item.isOwner || (folder.type !== "Item") ) return [];
 
+    // Warn before adding to a container whose contents the player cannot see
+    if ( !(await this.item.system.canDropContents()) ) return [];
+
     let recursiveWarning = false;
     const parentContainers = await this.item.system.allContainers();
     const containers = new Set();
@@ -243,6 +246,9 @@ export default class ContainerSheet extends ItemSheet5e {
       ui.notifications.error("DND5E.ContainerRecursiveError");
       return;
     }
+
+    // Warn before adding to a container whose contents the player cannot see
+    if ( !(await this.item.system.canDropContents()) ) return false;
 
     // If item already exists in same DocumentCollection, just adjust its container property
     if ( (behavior === "move") && (item.actor === this.item.actor) && (item.pack === this.item.pack) ) {
@@ -416,5 +422,18 @@ export default class ContainerSheet extends ItemSheet5e {
   _sortChildren(collection, mode) {
     if ( collection === "items" ) return this._sortItems(this._items, mode);
     return [];
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether the current user can view a container's contents.
+   * @param {Item5e} item  The Item.
+   * @returns {boolean}
+   */
+  static canViewContents(item) {
+    return item.system.canViewContents;
   }
 }
