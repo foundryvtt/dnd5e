@@ -17,7 +17,6 @@
     {{/if}}
     {{else if @root.owner}}
     {{!-- Attuning --}}
-    {{#unless ctx.concealDetails}}
     {{#with ctx.attunement}}
     {{#if applicable}}
     <button type="button" class="unbutton config-button item-control item-action {{ cls }}" data-action="attune"
@@ -26,7 +25,6 @@
     </button>
     {{/if}}
     {{/with}}
-    {{/unless}}
 
     {{!-- Equipping --}}
     {{#with ctx.equip}}

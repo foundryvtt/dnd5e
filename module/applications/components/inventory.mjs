@@ -325,7 +325,6 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
   _getContextOptions(item, element) {
     const compendiumLocked = game.packs.get(item.pack)?.locked;
     const inFavorites = !!element.closest(".favorites");
-    const concealDetails = !game.user.isGM && (item.system.identified === false);
 
     // Standard options.
     const options = [{
@@ -392,7 +391,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       label: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
       group: "state",
-      visible: () => !concealDetails && item.system.attunement && item.isOwner && !compendiumLocked,
+      visible: () => ItemSheet5e.isItemIdentified(item) && item.system.attunement && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "attune", { event })
     }, {
       label: `DND5E.ContextMenuAction${item.system.equipped ? "Unequip" : "Equip"}`,
