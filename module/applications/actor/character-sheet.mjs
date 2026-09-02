@@ -141,9 +141,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /**
-   * Whether the user has manually opened the death save tray.
+   * Death save tray state.
    * @type {boolean}
-   * @protected
+   * @internal
    */
   _deathTrayOpen = false;
 
@@ -915,13 +915,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-
     if ( !this.actor.limited ) {
       this._renderAttunement(context, options);
       this._renderSpellbook(context, options);
     }
-
-    if ( options.openDeathTray ) this._toggleDeathTray(true);
   }
 
   /* -------------------------------------------- */
@@ -1054,8 +1051,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     const tab = tray.querySelector(".death-tab");
     tray.classList.toggle("open", open);
     this._deathTrayOpen = tray.classList.contains("open");
-    tab.dataset.tooltip = `DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`;
-    tab.setAttribute("aria-label", _loc(tab.dataset.tooltip));
+    tab.setAttribute("aria-label", _loc(`DND5E.DeathSave${this._deathTrayOpen ? "Hide" : "Show"}`));
   }
 
   /* -------------------------------------------- */

@@ -226,9 +226,9 @@
             </div>
 
             <button type="button" class="death-tab card-tab horizontal unbutton always-interactive"
-                    data-action="toggleDeathTray" {{#if death.open~}}
-                    data-tooltip="DND5E.DeathSaveShow" aria-label="{{ localize 'DND5E.DeathSaveShow' }}"{{else~}}
-                    data-tooltip="DND5E.DeathSaveHide" aria-label="{{ localize 'DND5E.DeathSaveHide' }}"{{/if}}>
+                    data-action="toggleDeathTray" data-tooltip {{#if death.open~}}
+                    aria-label="{{ localize 'DND5E.DeathSaveHide' }}"{{else~}}
+                    aria-label="{{ localize 'DND5E.DeathSaveShow' }}"{{/if}}>
                 <i class="fas fa-skull" inert></i>
             </button>
         </div>

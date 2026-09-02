@@ -296,7 +296,7 @@ export default class CharacterData extends CreatureTemplate {
 
     const hp = foundry.utils.getProperty(changed, "system.attributes.hp.value");
     if ( !options.isAdvancement && (hp === 0) && (this.attributes.hp.max > 0) && this.parent.sheet?.rendered ) {
-      this.parent.sheet.render(false, { openDeathTray: true });
+      this.parent.sheet._deathTrayOpen = true;
     }
   }
 
