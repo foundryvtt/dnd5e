@@ -149,7 +149,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const general = _loc("DND5E.EFFECT.Expiry.Group.General");
     const specific = _loc("DND5E.EFFECT.Expiry.Group.Specific");
     return [
-      ...Object.entries(ActiveEffect5e.EXPIRY_EVENTS).map(([value, l]) => ({ value, label: _loc(l), group: general })),
+      ...Object.entries(this.EXPIRY_EVENTS).map(([value, l]) => ({ value, label: _loc(l), group: general })),
       ...Object.entries(CONFIG.DND5E.pseudoExpiryEvents).map(([value, label]) => ({ value, label, group: specific }))
     ];
   }
@@ -1305,7 +1305,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @returns {boolean}
    */
   expirySupportsDuration(expiry=this.duration.expiry) {
-    return ActiveEffect5e.expirySupportsDuration(expiry);
+    return this.constructor.expirySupportsDuration(expiry);
   }
 
   /* -------------------------------------------- */

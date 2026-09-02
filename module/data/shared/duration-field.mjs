@@ -93,7 +93,7 @@ export default class DurationField extends SchemaField {
       case "second": units = "seconds"; break;
       case "minute": units = "minutes"; break;
       case "hour": units = "hours"; break;
-      case "day": units = "days" ; break;
+      case "day": units = "days"; break;
       case "month": units = "months"; break;
       case "year": units = "years"; break;
       default: return expiry ? { expiry, value: null } : {};

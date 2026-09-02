@@ -4754,12 +4754,12 @@ DND5E.expiryEvents = Object.seal({
 /**
  * System-specific "expiry" choices which do not require registration or custom expiry events, and instead
  * are handled dynamically in `ActiveEffect#isExpiryEvent`.
- * @type {Record<string>}
+ * @type {Record<string, string>}
  */
 DND5E.pseudoExpiryEvents = Object.seal({
   sourceStart: "DND5E.EFFECT.Expiry.Type.SourceStart",
-  sourceEnd: "DND5E.EFFECT.Expiry.Type.SourceEnd",
   targetStart: "DND5E.EFFECT.Expiry.Type.TargetStart",
+  sourceEnd: "DND5E.EFFECT.Expiry.Type.SourceEnd",
   targetEnd: "DND5E.EFFECT.Expiry.Type.TargetEnd"
 });
 preLocalize("pseudoExpiryEvents");
