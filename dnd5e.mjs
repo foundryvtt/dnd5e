@@ -76,7 +76,7 @@ Hooks.once("init", function() {
   CONFIG.Combatant.documentClass = documents.Combatant5e;
   CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
-  CONFIG.Item.compendiumIndexFields.push("system.container", "system.identifier");
+  CONFIG.Item.compendiumIndexFields.push("system.container", "system.identifier", "system.source");
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
@@ -507,7 +507,33 @@ Hooks.once("setup", function() {
   document.body.append(probe);
   document.documentElement.style.setProperty("--dnd5e-scrollbar-width", `${probe.offsetWidth - probe.clientWidth}px`);
   probe.remove();
+
+  // Patch Document Index
+  _originalLookup = game.documentIndex.lookup;
+  game.documentIndex.lookup = documentIndexLookup;
 });
+
+/* --------------------------------------------- */
+
+let _originalLookup;
+
+/**
+ * Return entries that match the given string prefix.
+ * @param {string} query                      The search prefix or phrase.
+ * @param {object} [options]                  Additional options to configure behavior.
+ * @param {boolean} [options.ignoreCompendiumFiltering]  Don't filter based on pack source configuration.
+ * @returns {Record<string, WordTreeEntry[]>} A number of entries that have the given prefix, grouped by document type.
+ */
+function documentIndexLookup(query, { ignoreCompendiumFiltering, ...options }={}) {
+  return _originalLookup.call(this, query, {
+    ...options,
+    filterEntries: entry => {
+      if ( entry.entry.system?.container ) return false;
+      if ( !ignoreCompendiumFiltering && (dnd5e.settings.packSourceConfiguration[entry.pack] === false) ) return false;
+      return options.filterEntries?.(entry) ?? true;
+    }
+  });
+}
 
 /* --------------------------------------------- */
 
