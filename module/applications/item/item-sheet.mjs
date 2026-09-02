@@ -689,16 +689,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _replaceHTML(result, content, options) {
-    if ( !this.constructor.itemHasEffects(this.document) ) {
-      this.element.querySelector("[data-application-part=effects]")?.remove();
-    }
-    super._replaceHTML(result, content, options);
-  }
-
-  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
@@ -1173,7 +1163,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    */
   static itemHasEffects(item) {
     if ( !this.isItemIdentified(item) ) return false;
-
     const { hasEffects } = item.system.constructor.metadata;
     if ( hasEffects === null ) return item.effects.size > 0;
     return hasEffects;
