@@ -244,7 +244,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !limit ) return concentration;
 
     for ( const effect of this.effects ) {
-      if ( !effect.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ) continue;
+      if ( !effect.active || !effect.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ) continue;
       const data = effect.getFlag("dnd5e", "item");
       concentration.effects.add(effect);
       if ( data ) {
