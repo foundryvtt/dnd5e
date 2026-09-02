@@ -173,6 +173,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   get isSuppressed() {
+    if ( super.isSuppressed ) return true;
     if ( this.system.magical && this.actor?.statuses.has("antimagic") ) return true;
     if ( this.type === "enchantment" ) return false;
     if ( this.type === "condition" ) return false;
@@ -602,13 +603,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  shouldApplyChange(change, options) {
+  shouldApplyChange(change, options={}) {
     if ( !super.shouldApplyChange(change, options) ) return false;
-    const conditionData = options?.replacementData;
-    if ( conditionData && !CONFIG.ActiveEffect.changeTypes[change.type]?.skipConditions ) {
-      if ( this.system.conditions?.check(conditionData) === false ) return false;
-      if ( change.conditions?.check(conditionData) === false ) return false;
+    const conditionData = options.replacementData;
+    if ( this.system.evaluateCondition && this.system.changes.some(c => c.phase === options.phase) ) {
+      this.system.evaluateCondition(conditionData);
+      if ( this.isSuppressed ) return false;
     }
+    if ( conditionData && !CONFIG.ActiveEffect.changeTypes[change.type]?.skipConditions
+      && (change.conditions?.check(conditionData) === false) ) return false;
     change.applied = true;
     return true;
   }

@@ -387,7 +387,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( phase === "initial" ) {
       const replacementData = this.getRollData();
       for ( const effect of this.allApplicableEffects() ) {
-        effect.system.evaluateCondition?.(replacementData);
+        if ( effect.statuses.size ) effect.system.evaluateCondition?.(replacementData);
         if ( effect.active ) for ( const statusId of effect.statuses ) this.statuses.add(statusId);
       }
     }
@@ -399,6 +399,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     super.applyActiveEffects(phase);
+
+    // Ensure conditions are evaluated for all effects even if they don't have changes
+    if ( phase === "final" ) {
+      const replacementData = this.getRollData();
+      for ( const effect of this.allApplicableEffects() ) {
+        effect.system.evaluateCondition?.(replacementData);
+      }
+    }
+
     if ( (phase !== "initial") || !this.system.isCreature || !dnd5e.settings.tokenSizeSync ) return;
 
     // Translate this Actor's size category into Token changes

@@ -2787,7 +2787,11 @@
   "Suppressed": {
     "Hint": "Source item must be equipped or attuned to activate these"
   },
-  "Tab": "Effects"
+  "Tab": "Effects",
+  "Warning": {
+    "RollCondition": "Effect conditions cannot reference 'roll.' properties. Move this condition into the individual changes for the effect to be applied.",
+    "StatusCondition": "Effect that grant statuses cannot also be conditional on statuses. Move this condition into the individual changes for the effect to be applied."
+  }
 },
 
 "DND5E.ENCHANT": {
