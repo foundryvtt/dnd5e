@@ -519,8 +519,7 @@ export async function enrichCheck(config, label, options) {
     delete config.activity;
   }
 
-  // TODO: Support "spellcasting" ability
-  let abilityConfig = CONFIG.DND5E.abilities[config.ability];
+  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
   if ( config.ability && !abilityConfig ) {
     logWarning(`Ability "${config.ability}" not found while enriching ${config._input}.`, options);
     invalid = true;
@@ -591,7 +590,7 @@ export async function enrichCheck(config, label, options) {
       // Multiple associated proficiencies, link each individually
       if ( associated.length > 1 ) parts.push(
         _loc("EDITOR.DND5E.Inline.SpecificCheck", {
-          ability: CONFIG.DND5E.abilities[ability].label,
+          ability: CONFIG.DND5E.enrichmentLookup.abilities[ability].label,
           type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML ))
         })
       );
@@ -878,7 +877,7 @@ export function parseSaveConfig(config, options={}) {
 async function rollCheckSave(config, event) {
   const { type, ability, skill, tool, dc } = config;
   const options = { event };
-  if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+  if ( (ability in CONFIG.DND5E.abilities) || (ability === "spellcasting") ) options.ability = ability;
   if ( dc ) options.target = Number(dc);
 
   const actors = config.actor ? [config.actor] : getSceneTargets().map(t => t.actor);
@@ -1587,8 +1586,8 @@ function createPassiveTag(label, dataset) {
  * @returns {string}
  */
 export function createRollLabel(config) {
-  const { label: ability, abbreviation } = CONFIG.DND5E.abilities[config.ability] ?? {};
-  const skill = CONFIG.DND5E.skills[config.skill]?.label;
+  const { label: ability, abbreviation } = CONFIG.DND5E.enrichmentLookup.abilities[config.ability] ?? {};
+  const skill = CONFIG.DND5E.enrichmentLookup.skills[config.skill]?.label;
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
   const tool = toolUUID?.id ? Trait.getBaseItem(toolUUID.id, { indexOnly: true })?.name : toolUUID?.label ?? null;
   const longSuffix = config.format === "long" ? "Long" : "Short";

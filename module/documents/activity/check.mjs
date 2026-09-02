@@ -53,7 +53,8 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     const dc = this.check.dc.value;
 
     const createButton = (abilityKey, associated) => {
-      const ability = CONFIG.DND5E.abilities[abilityKey]?.label;
+      const ability = abilityKey === "spellcasting"
+        ? _loc("DND5E.Spellcasting") : CONFIG.DND5E.abilities[abilityKey]?.label;
       const checkType = (associated in CONFIG.DND5E.skills) ? "skill"
         : (associated in CONFIG.DND5E.tools) ? "tool": "ability";
       const dataset = { ability: abilityKey };
@@ -107,7 +108,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     const { ability, dc, skill, tool } = message.system.getButton(target)?.dataset ?? {};
     const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.check.bonus }, this.getRollData());
-    if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;
+    if ( (ability in CONFIG.DND5E.abilities) || (ability === "spellcasting") ) rollData.ability = ability;
 
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
