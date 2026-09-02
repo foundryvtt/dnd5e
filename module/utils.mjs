@@ -497,6 +497,9 @@ export function prepareFormulaValue(model, keyPath, label, rollData) {
 
 /* -------------------------------------------- */
 
+const DEPTH = Symbol("depth");
+const MISSING = Symbol("missingReferences");
+
 /**
  * Replace referenced data attributes in the roll formula with values from the provided data.
  * If the attribute is not found in the provided data, display a warning on the actor.
@@ -507,21 +510,34 @@ export function prepareFormulaValue(model, keyPath, label, rollData) {
  * @param {Item5e} [options.item]              Item for which the value is being prepared.
  * @param {string|null} [options.missing="0"]  Value to use when replacing missing references, or `null` to not replace.
  * @param {string} [options.property]          Name of the property to which this formula belongs.
+ * @param {boolean} [options.recursive=true]   Recursively replace data references.
  * @returns {string}                 Formula with replaced data.
  */
-export function replaceFormulaData(formula, data, { actor, item, missing="0", property }={}) {
+export function replaceFormulaData(formula, data, options={}) {
+  let {
+    actor, item, missing="0", property, recursive=true, [DEPTH]: depth=0, [MISSING]: missingReferences=new Set()
+  } = options;
   const dataRgx = new RegExp(/@([a-z.0-9_-]+)/gi);
-  const missingReferences = new Set();
   formula = String(formula).replace(dataRgx, (match, term) => {
     let value = foundry.utils.getProperty(data, term);
     if ( value == null ) {
       missingReferences.add(match);
       return missing ?? match[0];
     }
-    return String(value).trim();
+    switch ( foundry.utils.getType(value) ) {
+      case "string": {
+        value = value.trim();
+        if ( recursive && (depth < 3) && value.includes("@") ) {
+          return replaceFormulaData(value, data, { ...options, [DEPTH]: depth + 1, [MISSING]: missingReferences });
+        }
+        return value;
+      }
+      case "boolean": return String(Number(value));
+      default: return String(value).trim();
+    }
   });
   actor ??= item?.parent;
-  if ( (missingReferences.size > 0) && actor && property ) {
+  if ( (depth < 1) && (missingReferences.size > 0) && actor && property ) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
     const message = _loc("DND5E.FormulaMissingReferenceWarn", {
       property, name: item?.name ?? actor.name, references: listFormatter.format(missingReferences)
@@ -538,7 +554,7 @@ export function replaceFormulaData(formula, data, { actor, item, missing="0", pr
  * @param {number|string|null} bonus  Bonus formula.
  * @param {object} [data={}]          Data to use for replacing @ strings.
  * @param {object} [options={}]
- * @param {boolean} [option.strict]   Throw error if evaluation fails.
+ * @param {boolean} [options.strict]  Throw error if evaluation fails.
  * @returns {number}                  Simplified bonus as an integer.
  * @protected
  */
