@@ -889,10 +889,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const newEncumbrance = data.statuses?.[0];
     const name = this.name;
 
-    // Delete expired concentration effects immediately, and other expired effects outside of combat
+    // If out of combat & effect expires, delete it
     if ( game.user.isActiveGM && data.duration?.expired ) {
-      const isConcentration = this.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING);
-      if ( isConcentration ) return this.delete();
       const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
       const combat = this.start?.combat ?? game.combat;
       if ( !combat?.getCombatantsByActor(actor).length ) return this.delete();
