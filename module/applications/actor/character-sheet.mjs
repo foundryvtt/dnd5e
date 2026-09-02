@@ -876,7 +876,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
     ctx.isStack = Number.isNumeric(item.system.quantity) && (item.system.quantity !== 1);
 
-    if ( item.system.attunement ) ctx.attunement = item.system.attuned ? {
+    if ( item.system.attunement && !ctx.concealDetails ) ctx.attunement = item.system.attuned ? {
       icon: "fa-sun",
       cls: "attuned",
       title: "DND5E.AttunementAttuned"

@@ -391,7 +391,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       label: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
       icon: "fa-solid fa-sun fa-fw",
       group: "state",
-      visible: () => item.system.attunement && item.isOwner && !compendiumLocked,
+      visible: () => ItemSheet5e.isItemIdentified(item) && item.system.attunement && item.isOwner && !compendiumLocked,
       onClick: (event, target) => this._onAction(target, "attune", { event })
     }, {
       label: `DND5E.ContextMenuAction${item.system.equipped ? "Unequip" : "Equip"}`,
