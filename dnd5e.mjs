@@ -602,20 +602,30 @@ Hooks.once("ready", function() {
     dnd5e.ui.calendar.render({ force: true });
   }
 
-  // Run migrations & post-import actions for quickstarted adventures
-  _handleMigration()
-    .then(() => applications.adventure.AdventureQuickstartDialog.handleQuickstart());
+  /**
+   * A hook event that fires after core's `ready` hook once any system migrations have completed.
+   * @function dnd5e.ready
+   * @memberof hookEvents
+   */
+
+  // Run migrations & trigger system ready hook once complete
+  _handleMigration().then(() => Hooks.callAll("dnd5e.ready"));
 });
 
 /* -------------------------------------------- */
 
 /**
  * Determine whether a system migration is required and feasible and run it.
+ * @returns {Promise}
  */
 async function _handleMigration() {
   if ( !game.user.isGM ) return;
 
-  const cv = game.settings.get("dnd5e", "systemMigrationVersion") || game.world.flags.dnd5e?.version;
+  if ( dnd5e.settings.systemMigrationVersion && dnd5e.settings.firstRun ) {
+    await game.settings.set("dnd5e", "firstRun", false);
+  }
+
+  const cv = dnd5e.settings.systemMigrationVersion || game.world.flags.dnd5e?.version;
   const totalDocuments = game.actors.size + game.scenes.size + game.items.size;
   if ( !cv && totalDocuments === 0 ) return game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
   if ( cv && !foundry.utils.isNewerVersion(game.system.flags.needsMigrationVersion, cv) ) return;
@@ -632,6 +642,17 @@ async function _handleMigration() {
 
   await migrations.migrateWorld();
 }
+
+/* -------------------------------------------- */
+/*  Post-migration                              */
+/* -------------------------------------------- */
+
+/**
+ * Display the welcome dialog if required.
+ */
+Hooks.once("dnd5e.ready", () => {
+  applications.WelcomeScreen.presentScreen();
+});
 
 /* -------------------------------------------- */
 /*  System Styling                              */

@@ -122,7 +122,7 @@ export default [
       "dot-notation": "warn",
       "@stylistic/indent": ["warn", 2, { SwitchCase: 1 }],
       "@stylistic/key-spacing": "warn",
-      "@stylistic/keyword-spacing": ["warn", { overrides: { catch: { before: true, after: false } } }],
+      "@stylistic/keyword-spacing": ["warn"],
       "@stylistic/max-len": ["warn", {
         code: 120,
         ignoreTrailingComments: true,
@@ -151,7 +151,8 @@ export default [
       "@stylistic/space-before-function-paren": ["warn", {
         anonymous: "never",
         named: "never",
-        asyncArrow: "always"
+        asyncArrow: "always",
+        catch: "always"
       }],
       "@stylistic/spaced-comment": "warn",
 
