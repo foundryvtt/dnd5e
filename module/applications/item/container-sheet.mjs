@@ -44,17 +44,6 @@ export default class ContainerSheet extends ItemSheet5e {
   };
 
   /* -------------------------------------------- */
-
-  /**
-   * Determine whether the current user can view a container's contents.
-   * @param {Item5e} item  The Item.
-   * @returns {boolean}
-   */
-  static canViewContents(item) {
-    return item.system.canViewContents;
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -433,5 +422,18 @@ export default class ContainerSheet extends ItemSheet5e {
   _sortChildren(collection, mode) {
     if ( collection === "items" ) return this._sortItems(this._items, mode);
     return [];
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether the current user can view a container's contents.
+   * @param {Item5e} item  The Item.
+   * @returns {boolean}
+   */
+  static canViewContents(item) {
+    return item.system.canViewContents;
   }
 }
