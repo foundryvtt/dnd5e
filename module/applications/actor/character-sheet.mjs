@@ -100,7 +100,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/character-ability-scores.hbs"
     },
     warnings: {
-      template: "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs"
+      template: "systems/dnd5e/templates/shared/sheet-warnings-dialog.hbs"
     },
     tabs: {
       id: "tabs",

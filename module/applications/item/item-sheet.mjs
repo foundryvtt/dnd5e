@@ -84,6 +84,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     effects: {
       template: "systems/dnd5e/templates/items/effects.hbs",
       scrollable: [""]
+    },
+    warnings: {
+      template: "systems/dnd5e/templates/shared/sheet-warnings-dialog.hbs"
     }
   };
 
