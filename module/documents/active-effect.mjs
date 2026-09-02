@@ -391,7 +391,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   static applyChangeField(model, change, options={}) {
-    const current = foundry.utils.getProperty(model, change.key);
+    let current = foundry.utils.getProperty(model, change.key);
     const { field, replacementData } = options;
 
     // Replace value when using string interpolation syntax
@@ -407,7 +407,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       try {
         delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
         limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
-      } catch (err) {
+      } catch ( err ) {
         const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
         console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
         return current;
@@ -417,9 +417,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         : Math.min(current, Math.max(current - delta, limit));
       return super.applyChangeField(model, { ...change, type: "override", value: result }, options);
     }
-
-    // If current value is `null`, UPGRADE & DOWNGRADE should always just set the value
-    if ( (current === null) && ["upgrade", "downgrade"].includes(change.type) ) change.type = "override";
 
     // Handle removing entries from sets
     if ( (field instanceof SetField) && (change.type === "add") && (foundry.utils.getType(current) === "Set") ) {
@@ -433,17 +430,25 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // If attempting to apply active effect to empty MappingField entry, create it
     if ( (current === undefined) && change.key.startsWith("system.") ) {
-      let keyPath = change.key;
-      let mappingField = field;
-      while ( !(mappingField instanceof MappingField) && mappingField ) {
-        if ( mappingField.name ) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
-        mappingField = mappingField.parent;
+      const parts = change.key.split(".");
+      const entries = [];
+      let f = field;
+      while ( f ) {
+        const { parent } = f;
+        if ( parent instanceof MappingField ) entries.unshift({ field: parent, path: parts.join(".") });
+        parts.pop();
+        f = parent;
       }
-      if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
+      for ( const { path, field: mappingField } of entries ) {
+        if ( foundry.utils.getProperty(model, path) !== undefined ) continue;
         const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
-        foundry.utils.setProperty(model, keyPath, created);
+        foundry.utils.setProperty(model, path, created);
       }
+      if ( entries.length ) current = foundry.utils.getProperty(model, change.key);
     }
+
+    // If current value is `null` or missing, UPGRADE & DOWNGRADE should always just set the value
+    if ( ([null, undefined].includes(current)) && ["upgrade", "downgrade"].includes(change.type) ) change.type = "override";
 
     // Parse any JSON provided when targeting an object
     if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
