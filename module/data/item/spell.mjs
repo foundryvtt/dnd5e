@@ -496,7 +496,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   prepareFinalData() {
     const rollData = this.parent.getRollData({ deterministic: true });
     const labels = this.parent.labels ??= {};
-    this.prepareFinalActivityData(rollData);
+    this.prepareFinalActivityData();
     ActivationField.prepareData.call(this, rollData, labels);
     DurationField.prepareData.call(this, rollData, labels);
     RangeField.prepareData.call(this, rollData, labels);

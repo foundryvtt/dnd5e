@@ -154,6 +154,7 @@ Hooks.once("init", function() {
   // Hook up system data types
   Object.assign(CONFIG.ActiveEffect.changeTypes, DND5E.activeEffectChangeTypes);
   Object.assign(CONFIG.ActiveEffect.dataModels, dataModels.activeEffect.config);
+  Object.assign(CONFIG.ActiveEffect.phases, dataModels.activeEffect.phases);
   CONFIG.Actor.dataModels = dataModels.actor.config;
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;

@@ -191,7 +191,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+    this.prepareFinalActivityData();
   }
 
   /* -------------------------------------------- */

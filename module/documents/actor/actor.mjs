@@ -392,6 +392,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }
 
+    // Prepare item uses, if present
+    if ( phase === "postAbilities" ) {
+      this.items.forEach(item => item.system?.prepareUsesData?.())
+    }
+
     // Prepare final attributes & spellcasting so that they can be used/modified in "final" phase
     if ( phase === "final" ) {
       this.items.forEach(item => item.prepareFinalAttributes());

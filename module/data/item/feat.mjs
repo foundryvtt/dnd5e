@@ -283,7 +283,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+    this.prepareFinalActivityData();
   }
 
   /* -------------------------------------------- */
