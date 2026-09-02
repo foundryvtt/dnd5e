@@ -22,6 +22,8 @@ export default function PrimarySheetMixin(Base) {
         editDocument: PrimarySheet5e.#showDocument,
         editImage: PrimarySheet5e._onEditImage,
         deleteDocument: PrimarySheet5e.#deleteDocument,
+        inspectWarning: PrimarySheet5e.#inspectWarning,
+        openWarnings: PrimarySheet5e.#openWarnings,
         showDocument: PrimarySheet5e.#showDocument
       }
     };
@@ -116,6 +118,17 @@ export default function PrimarySheetMixin(Base) {
     async _renderFrame(options) {
       const html = await super._renderFrame(options);
       if ( !game.user.isGM && this.document.limited ) html.classList.add("limited");
+
+      // Preparation warnings
+      const warnings = document.createElement("button");
+      warnings.type = "button";
+      warnings.classList.add(
+        "header-control", "preparation-warnings", "icon", "fa-solid", "fa-triangle-exclamation"
+      );
+      Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
+      warnings.setAttribute("aria-label", _loc("Warnings"));
+      this.window.subtitle?.after(warnings);
+
       return html;
     }
 
@@ -167,6 +180,7 @@ export default function PrimarySheetMixin(Base) {
       context.locked = !this.isEditable;
       context.editable = this.isEditable && this.isEditMode;
       context.tabs = this._getTabs();
+      context.warnings = foundry.utils.deepClone(this.document._preparationWarnings);
       return context;
     }
 
@@ -253,6 +267,10 @@ export default function PrimarySheetMixin(Base) {
       this.element.classList.toggle("interactable", this.isEditable && (this._mode === this.constructor.MODES.PLAY));
       this.element.classList.toggle("locked", !this.isEditable);
 
+      // Display warnings
+      const warnings = this.element.querySelector(".window-header .preparation-warnings");
+      warnings?.toggleAttribute("hidden", (!game.user.isGM && this.document.limited) || !context.warnings?.length);
+
       // Add event listeners
       this.element.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
 
@@ -320,6 +338,53 @@ export default function PrimarySheetMixin(Base) {
      */
     static #changeMode(event, target) {
       this.changeMode();
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle following a warning link to its document.
+     * @this {PrimarySheet5e}
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Link that was clicked.
+     */
+    static async #inspectWarning(event, target) {
+      if ( this._inspectWarning(event, target) === false ) return;
+      const doc = await fromUuid(target.dataset.target);
+      if ( doc?.sheet ) this._renderChild(doc.sheet);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle following a warning link.
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Link that was clicked.
+     * @returns {any}               Return `false` to prevent default behavior.
+     * @protected
+     */
+    _inspectWarning(event, target) {}
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle opening the preparation warnings dialog.
+     * @this {PrimarySheet5e}
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Button that was clicked.
+     */
+    static async #openWarnings(event, target) {
+      event.stopImmediatePropagation();
+      const { top, left, height } = target.getBoundingClientRect();
+      const { clientWidth } = document.documentElement;
+      const dialog = this.element.querySelector("dialog.warnings");
+      dialog.classList.remove("themed", "theme-light", "theme-dark");
+      const nearestThemed = dialog.closest(".themed") ?? dialog.ownerDocument.body;
+      const [, theme] = nearestThemed.className.match(/(?:^|\s)(theme-\w+)/) ?? [];
+      if ( theme ) dialog.classList.add("themed", theme);
+      Object.assign(dialog.style, { top: `${top + height}px`, left: `${Math.min(left - 16, clientWidth - 300)}px` });
+      dialog.showModal();
+      dialog.addEventListener("click", () => dialog.close(), { once: true });
     }
 
     /* -------------------------------------------- */

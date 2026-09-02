@@ -71,8 +71,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
-      inspectWarning: BaseActorSheet.#inspectWarning,
-      openWarnings: BaseActorSheet.#openWarnings,
       rest: BaseActorSheet.#rest,
       restoreTransformation: BaseActorSheet.#restoreTransformation,
       roll: BaseActorSheet.#roll,
@@ -221,8 +219,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       rollableClass: this.isEditable ? "rollable" : "",
       sidebarCollapsed: !!game.user.getFlag("dnd5e", this._sidebarCollapsedKeyPath),
       system: this.actor.system,
-      user: game.user,
-      warnings: foundry.utils.deepClone(this.actor._preparationWarnings)
+      user: game.user
     };
     context.source = context.editable ? this.actor.system._source : this.actor.system;
     context.config = context.CONFIG; // TODO: Temporary patch until all templates have been updated
@@ -737,25 +734,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _renderFrame(options) {
-    const html = await super._renderFrame(options);
-
-    // Preparation warnings
-    const warnings = document.createElement("button");
-    warnings.type = "button";
-    warnings.classList.add(
-      "header-control", "preparation-warnings", "icon", "fa-solid", "fa-triangle-exclamation"
-    );
-    Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
-    warnings.setAttribute("aria-label", _loc("Warnings"));
-    this.window.subtitle.after(warnings);
-
-    return html;
-  }
-
-  /* -------------------------------------------- */
   /*  Item Preparation Helpers                    */
   /* -------------------------------------------- */
 
@@ -1172,10 +1150,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       if ( v.paused ) v.play();
     });
 
-    // Display warnings
-    const warnings = this.element.querySelector(".window-header .preparation-warnings");
-    warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited) || !context.warnings?.length);
-
     if ( this.isEditable ) {
       // Class level changes
       for ( const element of this.element.querySelectorAll(".level-selector") ) {
@@ -1293,34 +1267,18 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
-   * Handle following a warning link.
-   * @this {BaseActorSheet}
+   * Handle following a warning link, intercepting the `armor` target to open the armor class configuration.
    * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static async #inspectWarning(event, target) {
-    if ( this._inspectWarning(event, target) === false ) return;
-    switch ( target.dataset.target ) {
-      case "armor":
-        this._renderChild(new ArmorClassConfig({ document: this.actor }));
-        break;
-      default:
-        const item = await fromUuid(target.dataset.target);
-        if ( item?.sheet ) this._renderChild(item.sheet);
-        break;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle following a warning link.
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
+   * @param {HTMLElement} target  Link that was clicked.
    * @returns {any}               Return `false` to prevent default behavior.
    * @protected
    */
-  _inspectWarning(event, target) {}
+  _inspectWarning(event, target) {
+    if ( target.dataset.target === "armor" ) {
+      this._renderChild(new ArmorClassConfig({ document: this.actor }));
+      return false;
+    }
+  }
 
   /* -------------------------------------------- */
 
@@ -1363,28 +1321,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       const submit = new Event("submit", { cancelable: true });
       this.form.dispatchEvent(submit);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle opening the preparation warnings dialog.
-   * @this {BaseActorSheet}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static async #openWarnings(event, target) {
-    event.stopImmediatePropagation();
-    const { top, left, height } = event.target.getBoundingClientRect();
-    const { clientWidth } = document.documentElement;
-    const dialog = this.form.querySelector("dialog.warnings");
-    Object.assign(dialog.style, { top: `${top + height}px`, left: `${Math.min(left - 16, clientWidth - 300)}px` });
-    dialog.classList.remove("themed", "theme-light", "theme-dark");
-    const nearestThemed = dialog.closest(".themed") ?? dialog.ownerDocument.body;
-    const [, theme] = nearestThemed.className.match(/(?:^|\s)(theme-\w+)/) ?? [];
-    if ( theme ) dialog.classList.add("themed", theme);
-    dialog.showModal();
-    dialog.addEventListener("click", () => dialog.close(), { once: true });
   }
 
   /* -------------------------------------------- */
