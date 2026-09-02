@@ -281,7 +281,7 @@ export default class GroupData extends GroupTemplate {
    */
   async rollSavingThrow(config) {
     if ( !config.ability ) return;
-    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const abilityLabel = CONFIG.DND5E.enrichmentLookup.abilities[config.ability]?.label ?? "";
     await foundry.documents.ChatMessage.implementation.create({
       flavor: _loc("DND5E.SavePromptTitle", { ability: abilityLabel }),
       speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
@@ -311,7 +311,7 @@ export default class GroupData extends GroupTemplate {
     const skillConfig = CONFIG.DND5E.skills[config.skill];
     const ability = config.ability ?? skillConfig?.ability ?? "";
     const skillLabel = skillConfig?.label ?? "";
-    const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
+    const abilityLabel = CONFIG.DND5E.enrichmentLookup.abilities[ability]?.label ?? "";
     await foundry.documents.ChatMessage.implementation.create({
       flavor: _loc("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
       speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
