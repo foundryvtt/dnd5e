@@ -594,18 +594,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     // Advancement
     this._prepareAdvancement();
 
-    // Warn about scale values that share an identifier
-    const scaleValues = (this.advancement.byType.ScaleValue ?? []).reduce((acc, a) => {
-      (acc[a.identifier] ??= []).push(a);
-      return acc;
-    }, {});
-    for ( const [identifier, advancements] of Object.entries(scaleValues) ) {
-      if ( advancements.length > 1 ) this._preparationWarnings.push({
-        message: _loc("DND5E.ADVANCEMENT.ScaleValue.Warning.DuplicateIdentifier", { identifier }),
-        link: advancements[0].uuid, type: "warning"
-      });
-    }
-
     // Item Properties
     if ( this.system.properties ) {
       this.labels.properties = this.system.properties.reduce((acc, prop) => {
@@ -639,6 +627,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       byType: {},
       needingConfiguration: []
     };
+    const scaleValues = { primary: new Set(), secondary: new Set() };
     for ( const advancement of this.system.advancement ?? [] ) {
       if ( !(advancement instanceof Advancement) ) continue;
       this.advancement.byId[advancement.id] = advancement;
@@ -648,6 +637,19 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( !advancement.levels.length
         || ((advancement.levels.length === 1) && (advancement.levels[0] < minAdvancementLevel)) ) {
         this.advancement.needingConfiguration.push(advancement);
+      }
+      if ( advancement.type === "ScaleValue" ) {
+        const { classRestriction, identifier } = advancement;
+        const primary = classRestriction !== "secondary";
+        const secondary = classRestriction !== "primary";
+        const isDuplicate = (primary && scaleValues.primary.has(identifier))
+          || (secondary && scaleValues.secondary.has(identifier));
+        if ( isDuplicate ) this._preparationWarnings.push({
+          message: _loc("DND5E.ADVANCEMENT.ScaleValue.Warning.DuplicateIdentifier", { identifier }),
+          link: advancement.uuid, type: "warning"
+        });
+        if ( primary ) scaleValues.primary.add(identifier);
+        if ( secondary ) scaleValues.secondary.add(identifier);
       }
     }
     Object.entries(this.advancement.byLevel).forEach(([lvl, data]) => data.sort((a, b) => {

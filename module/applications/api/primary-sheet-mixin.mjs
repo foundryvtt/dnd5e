@@ -127,7 +127,7 @@ export default function PrimarySheetMixin(Base) {
       );
       Object.assign(warnings.dataset, { action: "openWarnings", tooltip: "Warnings", tooltipDirection: "DOWN" });
       warnings.setAttribute("aria-label", _loc("Warnings"));
-      this.window.subtitle.after(warnings);
+      this.window.subtitle?.after(warnings);
 
       return html;
     }
@@ -378,6 +378,10 @@ export default function PrimarySheetMixin(Base) {
       const { top, left, height } = target.getBoundingClientRect();
       const { clientWidth } = document.documentElement;
       const dialog = this.element.querySelector("dialog.warnings");
+      dialog.classList.remove("themed", "theme-light", "theme-dark");
+      const nearestThemed = dialog.closest(".themed") ?? dialog.ownerDocument.body;
+      const [, theme] = nearestThemed.className.match(/(?:^|\s)(theme-\w+)/) ?? [];
+      if ( theme ) dialog.classList.add("themed", theme);
       Object.assign(dialog.style, { top: `${top + height}px`, left: `${Math.min(left - 16, clientWidth - 300)}px` });
       dialog.showModal();
       dialog.addEventListener("click", () => dialog.close(), { once: true });
