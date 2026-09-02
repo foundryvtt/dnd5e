@@ -114,7 +114,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /* -------------------------------------------- */
 
   /** @inheritdoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.EFFECT"];
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -137,6 +137,21 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   get dependentOrigin() {
     if ( !(this.parent instanceof Item) ) return null;
     return this.item.effects.get(this.flags.dnd5e?.dependentOn) ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Possible expiry options.
+   * @type {FormSelectOption[]}
+   */
+  static get expiryOptions() {
+    const general = _loc("DND5E.EFFECT.Expiry.Group.General");
+    const specific = _loc("DND5E.EFFECT.Expiry.Group.Specific");
+    return [
+      ...Object.entries(this.EXPIRY_EVENTS).map(([value, l]) => ({ value, label: _loc(l), group: general })),
+      ...Object.entries(CONFIG.DND5E.pseudoExpiryEvents).map(([value, label]) => ({ value, label, group: specific }))
+    ];
   }
 
   /* -------------------------------------------- */
@@ -255,7 +270,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     if ( !expiry ) return null;
     return {
       icon: expiry.startsWith("target") ? "fa-bullseye" : "fa-user",
-      label: _loc(`DND5E.ACTIVEEFFECT.Expiry.Abbreviation.${expiry.endsWith("Start") ? "Start" : "End"}`)
+      label: _loc(`DND5E.EFFECT.Expiry.Abbreviation.${expiry.endsWith("Start") ? "Start" : "End"}`)
     };
   }
 
@@ -635,22 +650,23 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   _prepareDuration(duration, context) {
     duration = super._prepareDuration(duration, context);
-    if ( duration.expired && !Number.isFinite(duration.value) ) {
-      duration.label = _loc("DND5E.ACTIVEEFFECT.Expired");
-    }
+
+    // Expired effects say "Expired"
+    if ( duration.expired && !Number.isFinite(duration.value) ) duration.label = _loc("DND5E.EFFECT.Expired");
 
     // Pseudo expires adjust label based on relationship to actor
     else if ( this.constructor.PSEUDO_EXPIRIES.has(duration.expiry) ) {
       const useYour = (this.modifiesActor || this.isAppliedEnchantment)
         && (duration.expiry.startsWith("target") || (this.getSourceActor() === this.actor));
-      if ( useYour ) duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.Your${duration.expiry.slice(6)}`);
-      else duration.label = _loc(`DND5E.ACTIVEEFFECT.Expiry.${duration.expiry.capitalize()}`);
+      if ( useYour ) duration.label = _loc(`DND5E.EFFECT.Expiry.Type.Your${duration.expiry.slice(6)}`);
+      else duration.label = CONFIG.DND5E.pseudoExpiryEvents[duration.expiry];
     }
 
-    // Durationless expiries just use expiry name
+    // Duration-less expiries use expiry name
     else if ( this.constructor.DURATIONLESS_EXPIRIES.has(duration.expiry) ) {
       duration.label = _loc(CONFIG.ActiveEffect.expiryEvents[duration.expiry]);
     }
+
     return duration;
   }
 
@@ -1274,11 +1290,22 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /**
    * Determine whether the provided expiry should be able to display duration fields.
+   * @param {string} [expiry]  Active effect expiry event to check.
+   * @returns {boolean}
+   */
+  static expirySupportsDuration(expiry) {
+    return !this.PSEUDO_EXPIRIES.has(expiry) && !this.DURATIONLESS_EXPIRIES.has(expiry);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether the provided expiry should be able to display duration fields.
    * @param {string} [expiry]  Active effect expiry event to check, defaults to this effect's current expiry.
    * @returns {boolean}
    */
   expirySupportsDuration(expiry=this.duration.expiry) {
-    return !this.constructor.PSEUDO_EXPIRIES.has(expiry) && !this.constructor.DURATIONLESS_EXPIRIES.has(expiry);
+    return this.constructor.expirySupportsDuration(expiry);
   }
 
   /* -------------------------------------------- */

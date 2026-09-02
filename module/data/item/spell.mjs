@@ -642,6 +642,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         return { value, label, group: "DND5E.DurationPermanent" };
       })
     ];
+    context.expiryOptions = ActiveEffect.implementation.expiryOptions;
 
     // Targets
     context.targetTypes = [

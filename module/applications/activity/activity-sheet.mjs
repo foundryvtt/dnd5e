@@ -182,6 +182,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         value, label, group: _loc("DND5E.RangeDistance")
       }))
     ];
+    context.expiryOptions = ActiveEffect.implementation.expiryOptions;
 
     // Consumption targets
     const canScale = this.activity.canConfigureScaling;
