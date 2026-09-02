@@ -13,3 +13,10 @@ export const config = {
   condition: ConditionData,
   enchantment: EnchantmentData
 };
+
+export const phases = {
+  postAbilities: {
+    label: "DND5E.EFFECT.PHASES.postAbilities.label",
+    hint: "DND5E.EFFECT.PHASES.postAbilities.hint"
+  }
+};
