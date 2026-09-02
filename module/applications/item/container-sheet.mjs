@@ -32,7 +32,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /** @override */
   static TABS = [
-    { tab: "contents", label: "DND5E.ITEM.SECTIONS.Contents" },
+    { tab: "contents", label: "DND5E.ITEM.SECTIONS.Contents", condition: this.canViewContents.bind(this) },
     ...super.TABS
   ];
 
@@ -42,6 +42,17 @@ export default class ContainerSheet extends ItemSheet5e {
   tabGroups = {
     primary: "contents"
   };
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether the current user can view a container's contents.
+   * @param {Item5e} item  The Item.
+   * @returns {boolean}
+   */
+  static canViewContents(item) {
+    return item.system.canViewContents;
+  }
 
   /* -------------------------------------------- */
   /*  Properties                                  */
@@ -105,8 +116,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
     // Contents
     const Inventory = customElements.get(this.options.elements.inventory);
-    const contents = this.item.system.canViewContents ? await this.item.system.contents : [];
-    for ( const item of contents ) {
+    for ( const item of await this.item.system.contents ) {
       const ctx = context.itemContext[item.id] ??= {};
       ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
       ctx.isExpanded = this.expandedSections.get(`items.${item.id}`);

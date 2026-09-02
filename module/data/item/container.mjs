@@ -232,10 +232,11 @@ export default class ContainerData extends ItemDataModel.mixin(
 
   /**
    * @typedef {object} Item5eCapacityDescriptor
-   * @property {number} value  The current total weight or number of items in the container.
-   * @property {number} max    The maximum total weight or number of items in the container.
-   * @property {number} pct    The percentage of total capacity.
-   * @property {string} units  The units label.
+   * @property {number} value    The current total weight or number of items in the container.
+   * @property {number} max      The maximum total weight or number of items in the container.
+   * @property {number} pct      The percentage of total capacity.
+   * @property {string} units    The units label.
+   * @property {boolean} hidden  Should this capacity be hidden from the current user?
    */
 
   /**
@@ -253,7 +254,8 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.max = this.capacity.weight.value;
       context.units = CONFIG.DND5E.weightUnits[this.capacity.weight.units]?.label ?? "";
     }
-    context.value = this.canViewContents ? context.value.toNearest(0.1) : 0;
+    context.value = context.value.toNearest(0.1);
+    context.hidden = !this.canViewContents;
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;
   }

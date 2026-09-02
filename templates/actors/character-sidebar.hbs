@@ -282,7 +282,7 @@
                 <div class="info">
                     <div class="primary {{ css }}">
                         {{!-- Item Uses & Capacity --}}
-                        {{#if uses.max}}
+                        {{#if (and uses.max (not uses.hidden))}}
                         {{#with uses}}
                         {{#if (and name @root.actor.isOwner)}}
                         <input type="text" class="uninput value" value="{{ value }}"
