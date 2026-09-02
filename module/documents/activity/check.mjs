@@ -81,11 +81,15 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
 
     const associated = Array.from(this.check.associated);
     if ( !associated.length && (this.item.type === "tool") ) associated.push(this.item.system.type.baseItem);
-    if ( associated.length ) associated.forEach(a => {
-      const ability = this.getAbility(a);
-      if ( ability ) createButton(ability, a);
-    });
-    else if ( this.check.ability ) createButton(this.check.ability);
+    const abilities = this.abilities;
+    if ( associated.length && abilities.size ) {
+      associated.forEach(a => abilities.forEach(ability => createButton(ability, a)));
+    } else if ( associated.length ) {
+      associated.forEach(a => {
+        const ability = this.getAbility(a);
+        if ( ability ) createButton(ability, a);
+      });
+    } else abilities.forEach(ability => createButton(ability));
 
     return buttons.concat(super._usageChatButtons(message));
   }
@@ -107,7 +111,9 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     const { ability, dc, skill, tool } = message.system.getButton(target)?.dataset ?? {};
     const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.check.bonus }, this.getRollData());
+    const abilities = Array.from(this.abilities).filter(ability => ability in CONFIG.DND5E.abilities);
     if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;
+    if ( abilities.length ) rollData.abilities = abilities;
 
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
