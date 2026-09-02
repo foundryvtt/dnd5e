@@ -392,7 +392,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static applyChangeField(model, change, options={}) {
     let current = foundry.utils.getProperty(model, change.key);
-    const { field } = options;
+    const { field, replacementData } = options;
 
     // Replace value when using string interpolation syntax
     if ( (field instanceof StringField) && (change.type === "override") && change.value?.includes?.("{}") ) {
@@ -407,7 +407,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       try {
         delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
         limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
-      } catch (err) {
+      } catch ( err ) {
         const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
         console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
         return current;
@@ -430,17 +430,21 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
     // If attempting to apply active effect to empty MappingField entry, create it
     if ( (current === undefined) && change.key.startsWith("system.") ) {
-      let keyPath = change.key;
-      let mappingField = field;
-      while ( !(mappingField instanceof MappingField) && mappingField ) {
-        if ( mappingField.name ) keyPath = keyPath.substring(0, keyPath.length - mappingField.name.length - 1);
-        mappingField = mappingField.parent;
+      const parts = change.key.split(".");
+      const entries = [];
+      let f = field;
+      while ( f ) {
+        const { parent } = f;
+        if ( parent instanceof MappingField ) entries.unshift({ field: parent, path: parts.join(".") });
+        parts.pop();
+        f = parent;
       }
-      if ( mappingField && (foundry.utils.getProperty(model, keyPath) === undefined) ) {
+      for ( const { path, field: mappingField } of entries ) {
+        if ( foundry.utils.getProperty(model, path) !== undefined ) continue;
         const created = mappingField.model.initialize(mappingField.model.getInitialValue(), mappingField);
-        foundry.utils.setProperty(model, keyPath, created);
-        current = foundry.utils.getProperty(model, change.key);
+        foundry.utils.setProperty(model, path, created);
       }
+      if ( entries.length ) current = foundry.utils.getProperty(model, change.key);
     }
 
     // If current value is `null` or missing, UPGRADE & DOWNGRADE should always just set the value
