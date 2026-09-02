@@ -921,12 +921,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       this._renderSpellbook(context, options);
     }
 
-    // Show death tray at 0 HP
-    const renderContext = options.renderContext ?? options.action;
-    const renderData = options.renderData ?? options.data;
-    const isUpdate = (renderContext === "update") || (renderContext === "updateActor");
-    const hp = foundry.utils.getProperty(renderData ?? {}, "system.attributes.hp.value");
-    if ( isUpdate && (hp === 0) ) this._toggleDeathTray(true);
+    if ( options.openDeathTray ) this._toggleDeathTray(true);
   }
 
   /* -------------------------------------------- */
