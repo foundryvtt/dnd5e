@@ -293,6 +293,11 @@ export default class CharacterData extends CreatureTemplate {
     super._onUpdate(changed, options, userId);
     AttributesFields.onUpdateHP.call(this, changed, options, userId);
     AttributesFields.onUpdateDeathSaves.call(this, changed, options, userId);
+
+    const hp = foundry.utils.getProperty(changed, "system.attributes.hp.value");
+    if ( !options.isAdvancement && (hp === 0) && (this.attributes.hp.max > 0) && this.parent.sheet?.rendered ) {
+      this.parent.sheet._deathTrayOpen = true;
+    }
   }
 
   /* -------------------------------------------- */
