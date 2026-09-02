@@ -408,13 +408,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       label: "DND5E.SpellsSearch",
       list: "spells",
       filters: [
-        { key: "action", label: "DND5E.Action" },
-        { key: "bonus", label: "DND5E.BonusAction" },
-        { key: "reaction", label: "DND5E.Reaction" },
-        { key: "concentration", label: "DND5E.Concentration" },
-        { key: "ritual", label: "DND5E.Ritual" },
-        { key: "prepared", label: "DND5E.Prepared" },
-        ...Object.entries(CONFIG.DND5E.spellSchools).map(([key, { label }]) => ({ key, label }))
+        { key: "action", label: "DND5E.Action", group: "activation" },
+        { key: "bonus", label: "DND5E.BonusAction", group: "activation" },
+        { key: "reaction", label: "DND5E.Reaction", group: "activation" },
+        { key: "concentration", label: "DND5E.Concentration", group: "property" },
+        { key: "ritual", label: "DND5E.Ritual", group: "property" },
+        { key: "prepared", label: "DND5E.Prepared", group: "property" },
+        ...Object.entries(CONFIG.DND5E.spellSchools).map(([key, { label }]) => ({ key, label, group: "school" }))
       ],
       sorting: [
         { key: "a", label: "SIDEBAR.SortModeAlpha", dataset: { icon: "fa-solid fa-arrow-down-a-z" } },
