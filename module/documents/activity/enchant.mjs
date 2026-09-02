@@ -164,7 +164,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
 
     const flags = { enchantmentProfile: profileId };
     if ( concentration ) flags.dependentOn = concentration.uuid;
-    const enchantmentData = effect.clone({
+    const enchantmentData = effect.clone(foundry.utils.mergeObject({
       "flags.dnd5e": flags,
       system: {
         origin: {
@@ -175,7 +175,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       },
       disabled: false,
       transfer: true
-    }).toObject();
+    }, this.getAppliedEffectChanges(effect, { chatMessage, target: item }))).toObject();
     enchantmentData.system.changes =
       await ActiveEffect.implementation.forApplication(enchantmentData.system.changes, this, item);
 

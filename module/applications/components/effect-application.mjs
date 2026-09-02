@@ -213,7 +213,9 @@ export default class EffectApplicationElement extends ChatTrayElement {
       throw new Error(_loc("DND5E.EFFECT.Application.Warning.Ownership"));
     }
 
-    const effectFlags = {
+    // Get any effect changes provided by the activity & add flags
+    const changes = activity?.getAppliedEffectChanges(effect, { chatMessage: this.chatMessage, target: actor }) ?? {};
+    foundry.utils.mergeObject(changes, {
       flags: {
         dnd5e: {
           dependentOn: concentration?.uuid,
@@ -230,41 +232,31 @@ export default class EffectApplicationElement extends ChatTrayElement {
             ? activity.effects?.find(e => (e.uuid === effect.uuid) || (e._id === effect.id))?._id : undefined
         }
       }
-    };
-
-    // Inherit the activity's duration only when the applied effect has a duration expiry and  no explicit duration of
-    // its own.
-    let durationOverride = {};
-    if ( !Number.isFinite(effect.duration.value) && effect.expirySupportsDuration() ) {
-      const effectDuration = activity?.duration.getEffectData();
-      if ( !foundry.utils.isEmpty(effectDuration) ) durationOverride = { duration: effectDuration };
-    }
+    });
 
     // Enable an existing effect on the target if it originated from this effect
     const existingEffect = actor.effects.find(e => e._stats[sourceKey] === effect.uuid);
     if ( existingEffect ) {
       return { action: "update", data: foundry.utils.mergeObject({
-        ...durationOverride,
         _id: existingEffect.id,
         disabled: false,
         duration: {
           expired: false
         },
         start: effect.constructor.getEffectStart()
-      }, effectFlags) };
+      }, changes) };
     }
 
     // Otherwise, create a new effect on the target
     const effectData = foundry.utils.mergeObject({
       ...effect.toObject(),
-      ...durationOverride,
       disabled: false,
       transfer: false,
       _stats: {
         [sourceKey]: effect.uuid,
         [effect.inCompendium ? "duplicateSource" : "compendiumSource"]: null
       }
-    }, effectFlags);
+    }, changes);
 
     effectData.system.changes = await ActiveEffect.implementation.forApplication(
       effectData.system.changes,

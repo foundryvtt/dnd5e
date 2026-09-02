@@ -16,6 +16,7 @@ export default class DurationField extends SchemaField {
     fields = {
       value: new FormulaField({ deterministic: true }),
       units: new StringField({ required: true, blank: false, initial: "inst" }),
+      expiry: new StringField(),
       special: new StringField(),
       ...fields
     };
@@ -80,21 +81,23 @@ export default class DurationField extends SchemaField {
   /**
    * Create duration data usable for an active effect based on this duration.
    * @this {DurationData}
-   * @returns {EffectDurationData}
+   * @returns {Partial<EffectDurationData>}
    */
   static getEffectDuration() {
-    if ( !Number.isNumeric(this.value) ) return {};
-    const { value, units } = this;
+    let { expiry, value, units } = this;
+    if ( !Number.isNumeric(value) ) return expiry ? { expiry, value: null } : {};
+    if ( expiry && !ActiveEffect.implementation.expirySupportsDuration(expiry) ) return { expiry, value: null };
     switch ( units ) {
-      case "turn": return { value, units: "turns" };
-      case "round": return { value, units: "rounds" };
-      case "second": return { value, units: "seconds" };
-      case "minute": return { value, units: "minutes" };
-      case "hour": return { value, units: "hours" };
-      case "day": return { value, units: "days" };
-      case "month": return { value, units: "months" };
-      case "year": return { value, units: "years" };
-      default: return {};
+      case "turn": units = "turns"; break;
+      case "round": units = "rounds"; break;
+      case "second": units = "seconds"; break;
+      case "minute": units = "minutes"; break;
+      case "hour": units = "hours"; break;
+      case "day": units = "days"; break;
+      case "month": units = "months"; break;
+      case "year": units = "years"; break;
+      default: return expiry ? { expiry, value: null } : {};
     }
+    return { value, units, expiry: expiry ?? "turnStart" };
   }
 }

@@ -113,18 +113,9 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @protected
    */
   async _prepareDurationContext(context, options) {
-    const general = _loc("DND5E.ACTIVEEFFECT.Expiry.GROUPS.General");
-    const specific = _loc("DND5E.ACTIVEEFFECT.Expiry.GROUPS.Specific");
-
-    for ( const [expiry, label] of Object.entries(context.expiryEvents) ) {
-      context.expiryEvents[expiry] = { group: general, label };
-    }
-    for ( const expiry of dnd5e.documents.ActiveEffect5e.PSEUDO_EXPIRIES ) {
-      context.expiryEvents[expiry] = {
-        group: specific,
-        label: _loc(`DND5E.ACTIVEEFFECT.Expiry.${expiry.capitalize()}`)
-      };
-    }
+    context.expiryEvents = Object.fromEntries(
+      ActiveEffect.implementation.expiryOptions.map(({ value, ...data }) => [value, data])
+    );
     return context;
   }
 

@@ -69,6 +69,7 @@
  * @typedef DurationData
  * @property {string} value             Scalar value for the activity's duration.
  * @property {string} units             Units that are used for the duration.
+ * @property {string} expiry            Active effect expiry event.
  * @property {string} special           Description of any special duration details.
  */
 

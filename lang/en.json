@@ -326,52 +326,6 @@
   }
 },
 
-"DND5E.ACTIVEEFFECT": {
-  "AttributeKeyTooltip": "For a list of common keys and their accepted values, see <a href=\"{url}\">the wiki</a>.",
-  "ChangeType": {
-    "Advantage": {
-      "Label": "Advantage Mode"
-    },
-    "Bonus": {
-      "Label": "Bonus"
-    },
-    "Group": {
-      "Custom": "Custom",
-      "Rules": "Rules",
-      "Standard": "Standard"
-    },
-    "Maximum": {
-      "Label": "Roll Maximum"
-    },
-    "Minimum": {
-      "Label": "Roll Minimum"
-    }
-  },
-  "Expired": "Expired",
-  "Expiry": {
-    "Abbreviation": {
-      "End": "End",
-      "Start": "Start"
-    },
-    "GROUPS": {
-      "General": "General",
-      "Specific": "Specific"
-    },
-    "SourceStart": "Start of Source's Next Turn",
-    "SourceEnd": "End of Source's Next Turn",
-    "TargetStart": "Start of Target's Next Turn",
-    "TargetEnd": "End of Target's Next Turn",
-    "YourStart": "Start of Your Next Turn",
-    "YourEnd": "End of Your Next Turn"
-  },
-  "FIELDS": {
-    "statuses": {
-      "label": "Status Conditions",
-      "hint": "While affected by this Active Effect, the target will be treated as having these additional status conditions."
-    }
-  }
-},
-
 "DND5E.ACTIVITY": {
   "Action": {
     "Create": "Create Activity",
@@ -2641,6 +2595,10 @@
         "label": "Concentration",
         "hint": "Creature must maintain concentration while active."
       },
+      "expiry": {
+        "label": "Expiry Event",
+        "hint": "Event that triggers the end of the usage."
+      },
       "override": {
         "label": "Override Duration",
         "hint": "Use these duration values instead of the item's when using this activity."
@@ -2699,6 +2657,7 @@
       "Ownership": "Effects cannot be applied to tokens you are not the owner of."
     }
   },
+  "AttributeKeyTooltip": "For a list of common keys and their accepted values, see <a href=\"{url}\">the wiki</a>.",
   "BASE": {
     "FIELDS": {
       "changes": {
@@ -2747,8 +2706,27 @@
   },
   "Change": {
     "Configuration": "Change Configuration",
+    "Group": {
+      "Custom": "Custom",
+      "Rules": "Rules",
+      "Standard": "Standard"
+    },
     "Label": "Change",
-    "Title": "{effect} Change #{number}"
+    "Title": "{effect} Change #{number}",
+    "Type": {
+      "Advantage": {
+        "Label": "Advantage Mode"
+      },
+      "Bonus": {
+        "Label": "Bonus"
+      },
+      "Maximum": {
+        "Label": "Roll Maximum"
+      },
+      "Minimum": {
+        "Label": "Roll Minimum"
+      }
+    }
   },
   "DisabledTooltip": {
     "Disabled": "This effect is currently selected in one or more of its Item's Activities, and therefore cannot be suspended.",
@@ -2756,9 +2734,32 @@
   },
   "DropHint": "Drop an Active Effect here",
   "Empty": "No associated effects. Use the <i class=\"fas fa-plus\"></i> button above to create one, or select an existing effect from the drop-down.",
+  "Expired": "Expired",
   "Expiry": {
-    "LongRest": "End of Long Rest",
-    "ShortRest": "End of Short Rest"
+    "Abbreviation": {
+      "End": "End",
+      "Start": "Start"
+    },
+    "Group": {
+      "General": "General",
+      "Specific": "Specific"
+    },
+    "Type": {
+      "LongRest": "End of Long Rest",
+      "ShortRest": "End of Short Rest",
+      "SourceEnd": "End of Source's Next Turn",
+      "SourceStart": "Start of Source's Next Turn",
+      "TargetEnd": "End of Target's Next Turn",
+      "TargetStart": "Start of Target's Next Turn",
+      "YourEnd": "End of Your Next Turn",
+      "YourStart": "Start of Your Next Turn"
+    }
+  },
+  "FIELDS": {
+    "statuses": {
+      "label": "Status Conditions",
+      "hint": "While affected by this Active Effect, the target will be treated as having these additional status conditions."
+    }
   },
   "Label": "Available Effects",
   "New": "New Effect",
