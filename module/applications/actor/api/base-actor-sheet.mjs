@@ -1746,13 +1746,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Warn before adding to a container whose contents the player cannot see
-    if ( !game.user.isGM && !container.system.canViewContents ) {
-      const confirmed = await foundry.applications.api.DialogV2.confirm({
-        content: `<p>${_loc("DND5E.CONTAINER.UnidentifiedContentsWarning.Message")}</p>`,
-        window: { title: "DND5E.CONTAINER.UnidentifiedContentsWarning.Title", icon: "fa-solid fa-box" }
-      });
-      if ( !confirmed ) return;
-    }
+    if ( await container.system.canDropContents() === false ) return;
 
     // If the item is from the same actor, move it into the container
     if ( (event._behavior === "move") && (this.inventorySource.uuid === item.parent?.uuid) ) {

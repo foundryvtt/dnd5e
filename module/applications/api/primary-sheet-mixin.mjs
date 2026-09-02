@@ -213,7 +213,7 @@ export default function PrimarySheetMixin(Base) {
      * @protected
      */
     _getTabs() {
-      return this.constructor.TABS.reduce((tabs, { tab, condition, ...config }) => {
+      const tabs = this.constructor.TABS.reduce((tabs, { tab, condition, ...config }) => {
         if ( !condition || condition(this.document) ) tabs[tab] = {
           ...config,
           id: tab,
@@ -223,6 +223,20 @@ export default function PrimarySheetMixin(Base) {
         };
         return tabs;
       }, {});
+
+      if ( !(this.tabGroups.primary in tabs) ) {
+        if ( this.rendered ) {
+          this.element.querySelector(`[data-application-part="${this.tabGroups.primary}"]`)?.remove();
+        }
+        const id = Object.keys(tabs)[0];
+        this.tabGroups.primary = id;
+        Object.assign(tabs[id], {
+          active: true,
+          cssClass: "active"
+        });
+      }
+
+      return tabs;
     }
 
     /* -------------------------------------------- */

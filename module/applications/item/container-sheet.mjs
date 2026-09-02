@@ -200,6 +200,9 @@ export default class ContainerSheet extends ItemSheet5e {
     const folder = await Folder.implementation.fromDropData(data);
     if ( !this.item.isOwner || (folder.type !== "Item") ) return [];
 
+    // Warn before adding to a container whose contents the player cannot see
+    if ( await this.item.system.canDropContents() === false ) return [];
+
     let recursiveWarning = false;
     const parentContainers = await this.item.system.allContainers();
     const containers = new Set();
@@ -242,6 +245,9 @@ export default class ContainerSheet extends ItemSheet5e {
     const behavior = this._dropBehavior(event, data);
     let item = await Item.implementation.fromDropData(data);
     if ( !this.item.isOwner || !item || (behavior === "none") ) return false;
+
+    // Warn before adding to a container whose contents the player cannot see
+    if ( await this.item.system.canDropContents() === false ) return false;
 
     // If item already exists in this container, just adjust its sorting
     if ( (behavior === "move") && (item.system.container === this.item.id) ) {

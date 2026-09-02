@@ -401,4 +401,20 @@ export default class ContainerData extends ItemDataModel.mixin(
       parent: this.parent.parent
     });
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Confirm with user when trying to add items to an unidentified container.
+   * @returns {Promise<boolean}
+   */
+  canDropContents() {
+    if ( game.user.isGM || this.canViewContents ) return true;
+    return foundry.applications.api.DialogV2.confirm({
+      content: `<p>${_loc("DND5E.CONTAINER.UnidentifiedContentsWarning.Message")}</p>`,
+      window: { title: "DND5E.CONTAINER.UnidentifiedContentsWarning.Title", icon: "fa-solid fa-box" }
+    });
+  }
 }
