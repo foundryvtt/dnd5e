@@ -608,7 +608,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         save: sc.save
       });
       const key = item.system.spellcasting.progression === sc.progression ? item.identifier : item.subclass?.identifier;
-      context.listControls.filters.push({ key, label: name });
+      context.listControls.filters.push({ key, label: name, group: "class" });
     }
 
     return context;

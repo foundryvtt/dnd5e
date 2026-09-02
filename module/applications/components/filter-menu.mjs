@@ -47,16 +47,24 @@ export default class FilterMenu extends foundry.applications.ux.ContextMenu {
     if ( foundry.utils.isEmpty(filters) ) return;
     const menu = document.createElement("menu");
     menu.classList.add("context-items");
-    for ( const [filter, label] of Object.entries(filters) ) {
+    const groups = {};
+    for ( const { key, label, group } of Object.values(filters) ) {
       const item = document.createElement("li");
-      item.dataset.filter = filter;
+      item.dataset.filter = key;
       item.classList.add("context-item", "filter-item", "always-interactive");
-      item.classList.toggle("active", state.properties.has(filter));
-      item.classList.toggle("excluded", state.properties.has(`!${filter}`));
+      item.classList.toggle("active", state.properties.has(key));
+      item.classList.toggle("excluded", state.properties.has(`!${key}`));
       const span = document.createElement("span");
       span.append(label);
       item.append(span);
-      menu.append(item);
+      if ( group && !groups[group] ) {
+        const li = document.createElement("li");
+        li.classList.add("context-group");
+        li.dataset.groupId = group;
+        groups[group] = li.appendChild(document.createElement("ol"));
+        menu.append(li);
+      }
+      (groups[group] ?? menu).append(item);
     }
     const onClickItem = this.#onClickItem.bind(this, controls);
     menu.addEventListener("click", onClickItem);

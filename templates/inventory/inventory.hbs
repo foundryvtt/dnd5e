@@ -32,7 +32,9 @@
             {{#if listControls.filters.length}}
             <datalist data-list="filters">
                 {{#each listControls.filters}}
-                <option value="{{ key }}" {{ dnd5e-dataset dataset }}>{{ localize label }}</option>
+                <option value="{{ key }}" data-group="{{ group }}" {{ dnd5e-dataset dataset }}>
+                    {{ localize label }}
+                </option>
                 {{/each}}
             </datalist>
             {{/if}}

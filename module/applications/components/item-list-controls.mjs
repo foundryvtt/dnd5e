@@ -24,11 +24,11 @@ export default class ItemListControlsElement extends MaybeAdoptable {
       label: "DND5E.InventorySearch",
       list: "inventory",
       filters: [
-        { key: "action", label: "DND5E.Action" },
-        { key: "bonus", label: "DND5E.BonusAction" },
-        { key: "reaction", label: "DND5E.Reaction" },
-        { key: "equipped", label: "DND5E.Equipped" },
-        { key: "mgc", label: "DND5E.ITEM.Property.Magical" }
+        { key: "action", label: "DND5E.Action", group: "activation" },
+        { key: "bonus", label: "DND5E.BonusAction", group: "activation" },
+        { key: "reaction", label: "DND5E.Reaction", group: "activation" },
+        { key: "equipped", label: "DND5E.Equipped", group: "property" },
+        { key: "mgc", label: "DND5E.ITEM.Property.Magical", group: "property" }
       ],
       sorting: [
         { key: "m", label: "SIDEBAR.SortModeManual", dataset: { icon: "fa-solid fa-arrow-down-short-wide" } },
@@ -240,10 +240,7 @@ export default class ItemListControlsElement extends MaybeAdoptable {
     const controls = search.querySelector(".controls");
 
     // Filtering
-    this.#filters = Array.from(this.querySelectorAll('[data-list="filters"] option')).reduce((obj, opt) => {
-      obj[opt.value] = opt.innerText;
-      return obj;
-    }, {});
+    this.#filters = this.#parseControlOptions("filters");
     if ( !foundry.utils.isEmpty(this.#filters) ) {
       const item = document.createElement("li");
       item.innerHTML = `
@@ -333,8 +330,7 @@ export default class ItemListControlsElement extends MaybeAdoptable {
    */
   #parseControlOptions(list) {
     return Array.from(this.querySelectorAll(`[data-list="${list}"] option`)).reduce((obj, opt) => {
-      const descriptor = { key: opt.value, label: opt.innerText, icon: opt.dataset.icon };
-      if ( "classes" in opt.dataset ) descriptor.classes = opt.dataset.classes;
+      const descriptor = { key: opt.value, label: opt.innerText, ...opt.dataset };
       obj[opt.value] = descriptor;
       return obj;
     }, {});
