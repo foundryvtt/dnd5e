@@ -53,8 +53,21 @@ export default class BaseSettingsConfig extends Application5e {
    * @returns {object}
    */
   createSettingField(name) {
-    const setting = game.settings.settings.get(`${this.options.namespace}.${name}`);
-    if ( !setting ) throw new Error(`Setting \`${this.options.namespace}.${name}\` not registered.`);
+    return BaseSettingsConfig.createSettingField(name);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the field data for a specific setting.
+   * @param {string} name                         Setting key.
+   * @param {object} [options={}]
+   * @param {string} [options.namespace="dnd5e"]  Namespace for the settings to change.
+   * @returns {object}
+   */
+  static createSettingField(name, { namespace="dnd5e" }={}) {
+    const setting = game.settings.settings.get(`${namespace}.${name}`);
+    if ( !setting ) throw new Error(`Setting \`${namespace}.${name}\` not registered.`);
     const isDataField = setting.type instanceof DataField;
     const Field = { [Boolean]: BooleanField, [Number]: NumberField, [String]: StringField }[setting.type];
     if ( !isDataField && !Field ) {
@@ -65,7 +78,7 @@ export default class BaseSettingsConfig extends Application5e {
       field: isDataField ? setting.type : new Field({ required: true, blank: false }),
       hint: _loc(setting.hint),
       label: _loc(setting.name),
-      value: game.settings.get(this.options.namespace, name)
+      value: game.settings.get(namespace, name)
     };
     if ( (setting.type === Boolean) || (setting.type instanceof BooleanField) ) data.input = createCheckboxInput;
     if ( setting.choices ) data.options = Object.entries(setting.choices)
@@ -87,19 +100,37 @@ export default class BaseSettingsConfig extends Application5e {
    * @returns {Promise<void>}            Resolves once the settings are updated, or prompts for a reload if required.
    */
   static async #onCommitChanges(event, form, formData) {
+    const changes = foundry.utils.expandObject(formData.object);
+    const { requiresClientReload, requiresWorldReload } = await BaseSettingsConfig.commitChanges(changes, {
+      namespace: this.options.namespace
+    });
+    if ( requiresClientReload || requiresWorldReload ) {
+      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Commit changes to various `dnd5e` settings and determine if a reload is required.
+   * @param {object} changes                      Changes to apply to settings within the dnd5e namespace.
+   * @param {object} [options={}]
+   * @param {string} [options.namespace="dnd5e"]  Namespace for the settings to change.
+   * @returns {{ requiresClientReload: boolean, requiresWorldReload: boolean }}
+   */
+  static async commitChanges(changes, { namespace="dnd5e" }={}) {
     let requiresClientReload = false;
     let requiresWorldReload = false;
-    for ( const [key, value] of Object.entries(foundry.utils.expandObject(formData.object)) ) {
-      const setting = game.settings.settings.get(`${this.options.namespace}.${key}`);
-      const current = game.settings.get(this.options.namespace, key, { document: true });
+    for ( let [key, value] of Object.entries(changes) ) {
+      const setting = game.settings.settings.get(`${namespace}.${key}`);
+      const current = game.settings.get(namespace, key, { document: true });
       const prior = current?._source?.value ?? current;
-      const updated = await game.settings.set(this.options.namespace, key, value, { document: true });
+      if ( current.value instanceof foundry.abstract.DataModel ) value = current.value.clone(value).toObject();
+      const updated = await game.settings.set(namespace, key, value, { document: true });
       if ( prior === (updated?._source?.value ?? updated) ) continue;
       requiresClientReload ||= (setting.scope !== "world") && setting.requiresReload;
       requiresWorldReload ||= (setting.scope === "world") && setting.requiresReload;
     }
-    if ( requiresClientReload || requiresWorldReload ) {
-      return foundry.applications.settings.SettingsConfig.reloadConfirm({ world: requiresWorldReload });
-    }
+    return { requiresClientReload, requiresWorldReload };
   }
 }

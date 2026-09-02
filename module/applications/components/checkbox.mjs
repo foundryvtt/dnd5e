@@ -248,6 +248,7 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
   /** @override */
   _onClick(event) {
     event.preventDefault();
+    if ( this.indeterminate ) this.indeterminate = false;
     this.checked = !this.checked;
     this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
     this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
