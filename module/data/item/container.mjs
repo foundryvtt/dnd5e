@@ -363,6 +363,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     this.preCreateGear(data, options, user);
+    if ( this.parent.isEmbedded ) this.parent.updateSource({ "system.equipped": true });
   }
 
   /* -------------------------------------------- */
