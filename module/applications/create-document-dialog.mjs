@@ -189,7 +189,8 @@ export default class CreateDocumentDialog extends Dialog5e {
    * @returns {Promise<Document|PseudoDocument|object|void>}
    */
   static async prompt(documentType, data={}, { folders, types, ...createOptions }={}, { ok={}, sheet, ...config }={}) {
-    const label = _loc(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentType.documentName}`);
+    const { documentName } = documentType;
+    const label = _loc(documentType.metadata.label ?? `DOCUMENT.DND5E.${documentName}`);
     const title = _loc("DOCUMENT.Create", { type: label });
 
     foundry.utils.mergeObject(config, {
@@ -208,7 +209,7 @@ export default class CreateDocumentDialog extends Dialog5e {
       if ( !dialog.submitted ) return;
       const { createData, createOptions } = dialog.options;
       if ( !createData.folder ) delete createData.folder;
-      if ( (documentType.documentName !== "Activity") && !createData.name?.trim() ) {
+      if ( (documentName !== "Activity") && (documentName !== "Advancement") && !createData.name?.trim() ) {
         createData.name = documentType.defaultName?.({
           type: createData.type, parent: createOptions.parent, pack: createOptions.pack
         });
@@ -217,8 +218,8 @@ export default class CreateDocumentDialog extends Dialog5e {
       createOptions.renderSheet ??= true;
       if ( foundry.utils.isSubclass(documentType, foundry.abstract.Document) ) {
         resolve(documentType.create(createData, createOptions));
-      } else if ( createOptions.parent?.[`create${documentType.documentName}`] ) {
-        resolve(createOptions.parent[`create${documentType.documentName}`](createData.type, createData, createOptions));
+      } else if ( createOptions.parent?.[`create${documentName}`] ) {
+        resolve(createOptions.parent[`create${documentName}`](createData.type, createData, createOptions));
       } else {
         resolve(createData);
       }
