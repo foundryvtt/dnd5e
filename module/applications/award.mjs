@@ -106,6 +106,7 @@ export default class Award extends Application5e {
     context.destinations = Award.prepareDestinations(this.transferDestinations, this.award.savedDestinations);
     context.each = this.award.each ?? false;
     context.hideXP = game.settings.get("dnd5e", "levelingMode") === "noxp";
+    context.inspiration = this.award.inspiration ?? false;
     context.noPrimaryParty = !game.actors.party && !this.isPartyAward;
     context.xp = this.award.xp ?? this.origin?.system.details?.xp?.value;
 
@@ -161,7 +162,7 @@ export default class Award extends Application5e {
     const formData = new foundry.applications.ux.FormDataExtended(this.element);
     const data = foundry.utils.expandObject(formData.object);
     let valid = true;
-    if ( !filteredKeys(data.amount ?? {}).length && !data.xp ) valid = false;
+    if ( !filteredKeys(data.amount ?? {}).length && !data.xp && !data.inspiration ) valid = false;
     if ( !filteredKeys(data.destination ?? {}).length ) valid = false;
     this.element.querySelector('button[name="transfer"]').disabled = !valid;
   }
@@ -183,6 +184,7 @@ export default class Award extends Application5e {
     const results = new Map();
     await this.constructor.awardCurrency(data.amount, destinations, { each, origin: this.origin, results });
     await this.constructor.awardXP(data.xp, destinations, { each, origin: this.origin, results });
+    await this.constructor.awardInspiration(data.inspiration, destinations, { results });
     this.constructor.displayAwardMessages(results);
     this.close();
   }
@@ -283,6 +285,28 @@ export default class Award extends Application5e {
   /* -------------------------------------------- */
 
   /**
+   * Grant inspiration to the provided destinations. Inspiration is character-only, so selected groups
+   * grant it to their members.
+   * @param {boolean} grant            Whether inspiration should be granted.
+   * @param {Actor5e[]} destinations   Actors that should receive inspiration.
+   * @param {object} [config={}]
+   * @param {Map<Actor5e|Item5e, object>} [config.results]  Results of the award operation.
+   */
+  static async awardInspiration(grant, destinations, { results=new Map() }={}) {
+    if ( !grant ) return;
+    const characters = new Set(destinations
+      .flatMap(d => d.system.isGroup ? d.system.transferDestinations : d)
+      .filter(d => d.system.isCharacter));
+    for ( const destination of characters ) {
+      await destination.update({ "system.attributes.inspiration": true });
+      if ( !results.has(destination) ) results.set(destination, {});
+      results.get(destination).inspiration = true;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Display chat messages for awarded currency and XP.
    * @param {Map<Actor5e|Item5e, object>} results  Results of any award operations.
    */
@@ -304,6 +328,7 @@ export default class Award extends Application5e {
           ${formatNumber(result.xp)} ${_loc("DND5E.ExperiencePoints.Abbreviation")}
         </span>
       `);
+      if ( result.inspiration ) entries.push(`<span class="award-entry">${_loc("DND5E.Inspiration")}</span>`);
       if ( !entries.length ) continue;
 
       const content = _loc("DND5E.Award.Message", {

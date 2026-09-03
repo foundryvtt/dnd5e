@@ -18,6 +18,10 @@
         </label>
         {{/each}}
     </section>
+    <label class="inspiration">
+        <dnd5e-checkbox name="inspiration" {{ checked inspiration }}></dnd5e-checkbox>
+        <span class="roboto-upper">{{ localize "DND5E.Inspiration" }}</span>
+    </label>
     <div class="destinations">
         {{#if noPrimaryParty}}
         <p class="no-primary-party">{{ localize "DND5E.Award.NoPrimaryParty" }}</p>
