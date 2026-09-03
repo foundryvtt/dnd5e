@@ -166,7 +166,7 @@ export default class ConditionData extends foundry.data.ActiveEffectTypeDataMode
     super._onUpdate(data, options, userId);
 
     if ( !this.hasLevels ) return;
-    const delta = this.level - options.dnd5e?.originalLevel;
+    const delta = this.level - (options.dnd5e?.originalLevel ?? Infinite);
     if ( Number.isFinite(delta) ) this.parent._displayScrollingStatus(delta > 0);
   }
 

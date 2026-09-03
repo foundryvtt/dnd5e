@@ -126,7 +126,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
               activity, { ...change, key: keyPath, value }
             );
           }
-        } catch(err) {}
+        } catch {}
         return false;
       case "system.damage.types":
         const adjust = (damage, keyPath) =>

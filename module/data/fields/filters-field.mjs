@@ -19,7 +19,7 @@ export default class FiltersField extends foundry.data.fields.JSONField {
   initialize(value, model, options={}) {
     try {
       return new Filter(JSON.parse(value));
-    } catch(err) {
+    } catch {
       return null;
     }
   }

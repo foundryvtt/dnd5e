@@ -138,6 +138,8 @@ export default class JournalEntrySheet5e extends foundry.applications.sheets.jou
 
   /**
    * Handle opening the navigation configuration application.
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
   static async #onConfigureTableOfContents(event, target) {
     new JournalTOCConfig({ document: this.entry }).render({ force: true });

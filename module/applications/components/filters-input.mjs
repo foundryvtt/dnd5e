@@ -81,7 +81,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
     let filters;
     try {
       filters = JSON.parse(this.value);
-    } catch(err) {
+    } catch {
       this.#breakdown.innerText = _loc("DND5E.FILTER.Invalid");
       return;
     }
@@ -188,7 +188,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
 /**
  * Small custom element to insert separators between elements in the comparison.
  */
-class FilterOperatorElement extends HTMLElement {
+export class FilterOperatorElement extends HTMLElement {
 
   static {
     window.customElements.define("filter-operator", FilterOperatorElement);

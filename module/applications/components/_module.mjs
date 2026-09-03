@@ -8,7 +8,7 @@ import EffectApplicationElement from "./effect-application.mjs";
 import EffectsElement from "./effects.mjs";
 import EnchantmentApplicationElement from "./enchantment-application.mjs";
 import FiligreeBoxElement from "./filigree-box.mjs";
-import FiltersInputElement from "./filters-input.mjs";
+import {default as FiltersInputElement, FilterOperatorElement} from "./filters-input.mjs";
 import FilterStateElement from "./filter-state.mjs";
 import IconElement from "./icon.mjs";
 import IdentifierInputElement from "./identifier-input.mjs";
@@ -42,7 +42,7 @@ window.customElements.define(TargetPillElement.tagName, TargetPillElement);
 export {
   ActivitiesElement, AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement,
   DoubleRangePickerElement, EffectApplicationElement, EffectsElement, EnchantmentApplicationElement,
-  FiligreeBoxElement, FiltersInputElement, FilterStateElement, IconElement, IdentifierInputElement,
-  InventoryElement, ItemListControlsElement, ProficiencyCycleElement, RecordedTargetsElement, SlideToggleElement,
-  TargetPillElement
+  FiligreeBoxElement, FiltersInputElement, FilterOperatorElement, FilterStateElement, IconElement,
+  IdentifierInputElement, InventoryElement, ItemListControlsElement, ProficiencyCycleElement, RecordedTargetsElement,
+  SlideToggleElement, TargetPillElement
 };

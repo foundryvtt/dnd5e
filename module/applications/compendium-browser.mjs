@@ -903,8 +903,8 @@ export default class CompendiumBrowser extends Application5e {
     try {
       const { type } = foundry.utils.parseUuid(uuid);
       event.dataTransfer.setData("text/plain", JSON.stringify({ type, uuid }));
-    } catch(e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
     }
   }
 

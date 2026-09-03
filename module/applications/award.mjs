@@ -389,7 +389,7 @@ export default class Award extends Application5e {
         const app = new Award({ award: { currency, xp, each, savedDestinations } });
         app.render({ force: true });
       }
-    } catch(err) {
+    } catch (err) {
       ui.notifications.warn(err.message);
     }
   }
@@ -420,7 +420,7 @@ export default class Award extends Application5e {
         else if ( part === "each" ) each = true;
         else if ( part === "party" ) party = true;
         else throw new Error();
-      } catch(err) {
+      } catch {
         unrecognized.push(part);
       }
     }

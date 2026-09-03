@@ -331,7 +331,7 @@ export function formatTime(value, unit, options={}) {
   }
   try {
     return formatNumber(value, { ...options, style: "unit", unit });
-  } catch(err) {
+  } catch {
     return formatNumber(value, options);
   }
 }
@@ -486,7 +486,7 @@ export function prepareFormulaValue(model, keyPath, label, rollData) {
     const formula = replaceFormulaData(value, rollData, { item, property });
     const roll = new Roll(formula);
     foundry.utils.setProperty(model, keyPath, roll.evaluateSync().total);
-  } catch(err) {
+  } catch (err) {
     if ( item.isEmbedded ) {
       const message = _loc("DND5E.FormulaMalformedError", { property, name: model.name ?? item.name });
       item.actor._preparationWarnings.push({ message, link: item.uuid, type: "error" });
@@ -564,8 +564,8 @@ export function simplifyBonus(bonus, data={}, { strict }={}) {
   try {
     const roll = new Roll(bonus, data);
     return roll.isDeterministic ? roll.evaluateSync().total : 0;
-  } catch(error) {
-    if ( strict ) throw error;
+  } catch (err) {
+    if ( strict ) throw err;
     console.error(error);
     return 0;
   }
@@ -927,7 +927,7 @@ export function defaultUnits(type) {
 /*  Validators                                  */
 /* -------------------------------------------- */
 
-const IDENTIFIER_REGEX = /^([a-zA-Z0-9_\-]+)$/i;
+const IDENTIFIER_REGEX = /^([a-zA-Z0-9_-]+)$/i;
 
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
@@ -970,7 +970,7 @@ export function isValidUnit(unit) {
  * @returns {any}       The parsed value, or the original value if it was not serialized JSON.
  */
 export function parseOrString(raw) {
-  try { return JSON.parse(raw); } catch(err) {}
+  try { return JSON.parse(raw); } catch {}
   return raw;
 }
 

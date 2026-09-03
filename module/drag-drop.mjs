@@ -30,7 +30,7 @@ export default class DragDrop5e extends foundry.applications.ux.DragDrop {
     if ( event.dataTransfer.items.length ) {
       event.stopPropagation();
       let data = event.dataTransfer.getData("application/json") || event.dataTransfer.getData("text/plain");
-      try { data = JSON.parse(data); } catch(err) {}
+      try { data = JSON.parse(data); } catch {}
       DragDrop5e.#payload = data ? { event, data } : null;
     } else {
       DragDrop5e.#payload = null;

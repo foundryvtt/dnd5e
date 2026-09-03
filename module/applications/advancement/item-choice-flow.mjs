@@ -348,7 +348,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     let data;
     try {
       data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
+    } catch {
       return false;
     }
 
@@ -358,7 +358,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     try {
       this.advancement._validateItemType(item);
       item.system.assertPrerequisites?.(this.advancement.actor, { level: this.featureLevel, throwError: true });
-    } catch(err) {
+    } catch (err) {
       ui.notifications.error(err.message);
       return null;
     }

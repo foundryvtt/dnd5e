@@ -704,11 +704,11 @@ export default class AdvancementManager extends Application5e {
         }
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch (error) {
-      if ( !(error instanceof Advancement.ERROR) ) throw error;
+    } catch (err) {
+      if ( !(err instanceof Advancement.ERROR) ) throw err;
       ui.notifications.error(error.message);
       this.step.automatic = false;
-      this.step.error = error;
+      this.step.error = err;
       if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
       this.#advancing = false;
@@ -825,9 +825,9 @@ export default class AdvancementManager extends Application5e {
         this.#preEmbeddedItems = null;
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch (error) {
-      if ( !(error instanceof Advancement.ERROR) ) throw error;
-      ui.notifications.error(error.message);
+    } catch (err) {
+      if ( !(err instanceof Advancement.ERROR) ) throw error;
+      ui.notifications.error(err.message);
       this.step.automatic = false;
     } finally {
       this.#advancing = false;

@@ -671,7 +671,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       const formula = parts.join(" + ");
       try {
         return new CONFIG.Dice.DamageRoll(formula, data, { base, ...options });
-      } catch(err) {
+      } catch (err) {
         console.warn(`Unable to prepare formula "${formula}" for ${this.name} in item ${this.item.name}${
           this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
         } (${this.uuid})`, err);
@@ -683,7 +683,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       try {
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: false });
-      } catch(err) {
+      } catch (err) {
         console.warn(`Unable to simplify formula "${roll.formula}" for ${this.name} in item ${this.item.name}${
           this.actor ? ` on ${this.actor.name} (${this.actor.id})` : ""
         } (${this.uuid})`, err);

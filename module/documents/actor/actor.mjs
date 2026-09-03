@@ -1870,7 +1870,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       ability: abilityId,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
-      halflingLucky: flags.halflingLucky ?? false,
+      halflingLucky: flags.halflingLucky ?? false
     }, options);
 
     const rollConfig = { parts, data, options, subject: this };
@@ -2244,7 +2244,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.dialog ) {
       try {
         Object.assign(config, await config.dialogClass.configure(this, config));
-      } catch(err) { return; }
+      } catch { return; }
     }
 
     /**
@@ -2715,7 +2715,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async _prepareArmorClassAttribution({ title }={}) {
     const rollData = this.getRollData({ deterministic: true });
     const ac = rollData.attributes.ac;
-    const cfg = CONFIG.DND5E.armorClasses[ac.calc];
     const attribution = [];
 
     if ( Number.isFinite(ac.override) ) {

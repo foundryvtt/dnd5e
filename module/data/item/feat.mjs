@@ -375,10 +375,10 @@ export default class FeatData extends ItemDataModel.mixin(
    * @param {Actor5e} [context.actor]   Actor against which the prerequisites should be checked.
    * @param {Item5e[]} [context.added]  Items that are pending addition to the Actor.
    * @param {number} [context.level]    Level to validate. Falls back to character level if actor is provided.
-   * @param {object} [_options]
+   * @param {object} [_options={}]
    * @returns {PrerequisiteValidationResults}
    */
-  validatePrerequisites(context={}, _options) {
+  validatePrerequisites(context={}, _options={}) {
     if ( context instanceof Actor ) {
       foundry.utils.logCompatibilityWarning(
         "`FeatData#validatePrerequisites` has been renamed `assertPrerequisites`.",

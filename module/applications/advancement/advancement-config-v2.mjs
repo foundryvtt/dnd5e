@@ -196,7 +196,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
     try {
       this._validateDroppedItem(event, item);
-    } catch(err) {
+    } catch (err) {
       ui.notifications.error(err.message);
       return;
     }

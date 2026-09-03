@@ -185,7 +185,7 @@ export default class BastionOrderMessageData extends ChatMessageDataModel {
             recursive: true,
             priority: "high"
           });
-        } catch ( err ) {
+        } catch (err) {
           ui.notifications.error(err.message);
           return;
         }

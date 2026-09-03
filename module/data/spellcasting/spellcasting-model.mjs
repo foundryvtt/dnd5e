@@ -96,8 +96,8 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
       if ( !Model ) return delete spellcasting[key];
       try {
         spellcasting[key] = new Model(config, { key });
-      } catch(e) {
-        console.error(`Failed to instantiate model for spellcasting method '${key}'`, e);
+      } catch (err) {
+        console.error(`Failed to instantiate model for spellcasting method '${key}'`, err);
         return delete spellcasting[key];
       }
       Object.entries(config.progression ?? {}).forEach(([k, v]) => {

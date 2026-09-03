@@ -1,6 +1,6 @@
 import FormulaField from "../fields/formula-field.mjs";
 
-const { NumberField, SchemaField } = foundry.data.fields;
+const { SchemaField } = foundry.data.fields;
 
 /**
  * Field for storing modifications on a damage roll.

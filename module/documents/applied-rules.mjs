@@ -211,7 +211,7 @@ class RulesIterator extends Iterator {
 
   /**
    * Transform each rule element into its underlying value.
-   * @param {Number|String} [type]  Transform value into specific primitive type.
+   * @param {number | string} [type]  Transform value into specific primitive type.
    * @returns {RulesIterator<any>}
    */
   values(type) {

@@ -11,7 +11,7 @@ export default class ModifyItemFlow extends AdvancementFlow {
     content: {
       template: "systems/dnd5e/templates/advancement/modify-item-flow.hbs"
     }
-  }
+  };
 
   /* -------------------------------------------- */
   /*  Rendering                                   */

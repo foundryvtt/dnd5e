@@ -119,7 +119,7 @@ export default class SubclassFlow extends AdvancementFlow {
     let data;
     try {
       data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch(err) {
+    } catch {
       return;
     }
 

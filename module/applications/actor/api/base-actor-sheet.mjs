@@ -1244,8 +1244,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
             sheet: this
           });
           if ( shouldRemoveAdvancements ) return this._renderChild(manager);
-        }
-        catch(err) {
+        } catch {
           return;
         }
       }

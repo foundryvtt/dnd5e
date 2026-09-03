@@ -354,7 +354,7 @@ export async function enrichAward(config, label, options) {
   let parsed;
   try {
     parsed = Award.parseAwardCommand(command);
-  } catch(err) {
+  } catch (err) {
     logWarning(err.message, options);
     return null;
   }
@@ -822,6 +822,7 @@ export async function enrichSave(config, label, options) {
 /**
  * Handle a save command in chat.
  * @param {object} config  Configuration data.
+ * @returns {void}
  */
 async function handleSaveCommand(config) {
   config = parseSaveConfig(config);

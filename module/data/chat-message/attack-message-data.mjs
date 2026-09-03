@@ -57,7 +57,7 @@ export default class AttackMessageData extends RollMessageData {
     try {
       actor._embeddedPreparation = true;
       item = new Item.implementation(data, { parent: actor });
-    } catch ( err ) {
+    } catch (err) {
       Hooks.onError("AttackMessageData#ammunitionItem", err, { log: "error" });
       return null;
     } finally {

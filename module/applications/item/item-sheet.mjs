@@ -1059,7 +1059,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     if ( showDialog ) {
       try {
         advancements = await AdvancementMigrationDialog.createDialog(this.item, advancements);
-      } catch(err) {
+      } catch {
         return false;
       }
     }

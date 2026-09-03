@@ -81,6 +81,7 @@ export default class D20RollModificationField extends SchemaField {
    * Helper to create a rules iterator from a category and the provided rules configuration.
    * @param {string} type         Rules type to fetch (e.g. "advantage" or "bonus").
    * @param {RulesDetails} rules  Data used to configure the rules object.
+   * @returns {RulesIterator}
    */
   static #makeRulesIterator(type, rules) {
     return AppliedRules.collect(`${rules.category}:${type}`, rules.actor, rules.item).filterWith(rules.rollData);

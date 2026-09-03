@@ -102,7 +102,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     if ( config.create?.summons ) {
       try {
         results.summoned = await this.placeSummons(config.summons);
-      } catch(err) {
+      } catch (err) {
         results.summoned = [];
         Hooks.onError("SummonActivity#use", err, { log: "error", notify: "error" });
       }
@@ -193,7 +193,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
         tokensData.push(tokenData);
       }
-    } catch(err) {
+    } catch (err) {
       Hooks.onError("SummonActivity#placeSummons", err, {
         msg: _loc("DND5E.SUMMON.Warning.PlaceTokens"),
         log: "error",
@@ -585,14 +585,14 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
             create: { summons: true }
           }
         });
-      } catch(err) {
+      } catch {
         return;
       }
     }
 
     try {
       await this.placeSummons(config.summons);
-    } catch(err) {
+    } catch (err) {
       Hooks.onError("SummonsActivity#placeSummons", err, { log: "error", notify: "error" });
     }
   }

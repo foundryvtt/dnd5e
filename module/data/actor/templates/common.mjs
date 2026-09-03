@@ -3,7 +3,6 @@ import AppliedRules from "../../../documents/applied-rules.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
 import ActorDataModel from "../../abstract/actor-data-model.mjs";
 import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
-import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -203,13 +202,13 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     }
     if ( paths ) return;
     for ( const value of Object.values(source.abilities ?? {}) ) {
-      CommonTemplate.#migrateBonusData(value, CommonTemplate.#ABILITY_BONUS_FIELD_PATHS)
+      CommonTemplate.#migrateBonusData(value, CommonTemplate.#ABILITY_BONUS_FIELD_PATHS);
     }
     for ( const value of Object.values(source.skills ?? {}) ) {
-      CommonTemplate.#migrateBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS)
+      CommonTemplate.#migrateBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS);
     }
     for ( const value of Object.values(source.tools ?? {}) ) {
-      CommonTemplate.#migrateBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS)
+      CommonTemplate.#migrateBonusData(value, CommonTemplate.#SKILL_TOOL_BONUS_FIELD_PATHS);
     }
   }
 

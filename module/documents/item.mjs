@@ -1199,7 +1199,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
             return;
           }
           return this.delete({ shouldRemoveAdvancements });
-        } catch(err) {
+        } catch {
           return;
         }
       }

@@ -378,7 +378,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       visible: () => item.isOwner && !compendiumLocked && ((item.system.quantity ?? 0) > 1),
       onClick: () => {
         if ( item.system.quantity === 2 ) item.system.split();
-        else new SplitStackDialog({ document: item }).render({ force: true })
+        else new SplitStackDialog({ document: item }).render({ force: true });
       },
       group: "action"
     }, {

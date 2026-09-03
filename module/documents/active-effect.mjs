@@ -421,7 +421,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       try {
         delta = simplifyBonus(field._replaceDataRefs(delta, replacementData), {}, { strict: true });
         limit = simplifyBonus(field._replaceDataRefs(limit, replacementData), {}, { strict: true });
-      } catch ( err ) {
+      } catch (err) {
         const warningHeader = change.effect ? `Active Effect (${change.effect.uuid}) | ` : "";
         console.warn(`${warningHeader} "${change.type}" change to ${change.key} failed to resolve: ${err.message}`);
         return current;

@@ -1156,8 +1156,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
     let data;
     try {
       data = JSON.parse(dragData);
-    } catch(e) {
-      console.error(e);
+    } catch (err) {
+      console.error(err);
       return;
     }
     const { action, type, id } = data.dnd5e ?? {};

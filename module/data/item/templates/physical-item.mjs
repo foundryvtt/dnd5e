@@ -393,7 +393,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /**
    * Split a stack of this item into two.
    * @param {number} [splitQuantity=1]  Number of items to split off into a new stack.
-   * @returns {Promise}
+   * @returns {Promise|void}
    */
   split(splitQuantity=1) {
     const remainingQuantity = this.quantity - splitQuantity;

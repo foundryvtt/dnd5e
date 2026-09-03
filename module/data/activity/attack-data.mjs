@@ -56,8 +56,8 @@ export default class BaseAttackActivityData extends BaseActivityData {
     if ( this.attack.abilities?.size === 1 ) return this.attack.abilities.first();
     const abilities = this.actor?.system.abilities ?? {};
     return this.attack.abilities.reduce((largest, ability) =>
-      (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest
-    , this.attack.abilities.first());
+      (abilities[ability]?.mod ?? -Infinity) > (abilities[largest]?.mod ?? -Infinity) ? ability : largest,
+    this.attack.abilities.first());
   }
 
   /* -------------------------------------------- */

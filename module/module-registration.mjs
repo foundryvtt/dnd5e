@@ -15,7 +15,7 @@ export function registerModuleData() {
     try {
       const complete = registerMethods.map(m => m(manifest)).filter(r => r);
       if ( complete.length ) log(`Registered ${manifest.title} data: ${complete.join(", ")}`);
-    } catch(err) {
+    } catch (err) {
       log(`Error registering ${manifest.title}\n`, { extras: [err.message], level: "error" });
     }
   }
@@ -64,7 +64,7 @@ export function setupModulePacks() {
     try {
       const complete = setupMethods.map(m => m(pack)).filter(r => r);
       if ( complete.length ) log(`Finished setting up ${pack.metadata.label}: ${complete.join(", ")}`);
-    } catch(err) {
+    } catch (err) {
       log(`Error setting up ${pack.title}\n`, { extras: [err.message], level: "error" });
     }
   }

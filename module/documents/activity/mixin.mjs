@@ -260,7 +260,7 @@ export default function ActivityMixin(Base) {
       if ( dialogConfig.configure && activity._requiresConfigurationDialog(usageConfig) ) {
         try {
           await dialogConfig.applicationClass.create(activity, usageConfig, dialogConfig.options);
-        } catch(err) {
+        } catch {
           return;
         }
       }
@@ -598,7 +598,7 @@ export default function ActivityMixin(Base) {
           if ( target.hasZeroCost(config) ) continue;
           try {
             await target.consume(config, updates);
-          } catch(err) {
+          } catch (err) {
             if ( err instanceof ConsumptionError ) errors.push(err);
             else throw err;
           }
@@ -921,6 +921,7 @@ export default function ActivityMixin(Base) {
      * @param {DamageRollConfiguration} config          Configuration for a specific roll.
      * @param {FormDataExtended|void} formData          Any data entered into the rolling prompt.
      * @param {number} index                            Index of the roll within all rolls being prepared.
+     * @returns {DamageRollConfiguration}
      */
     _buildDamageConfig(process, config, formData, index) {
       if ( index === 0 ) process.rules = {
@@ -1114,7 +1115,7 @@ export default function ActivityMixin(Base) {
       try {
         const result = await TemplatePlacement.fromActivity(this);
         if ( result ) templates.push(...result);
-      } catch(err) {
+      } catch (err) {
         Hooks.onError("Activity#placeTemplate", err, {
           msg: _loc("DND5E.TARGET.Warning.PlaceTemplate"),
           log: "error",

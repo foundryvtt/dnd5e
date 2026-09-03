@@ -213,7 +213,7 @@ export default class AdvancementConfig extends FormApplication {
 
     try {
       this._validateDroppedItem(event, item);
-    } catch(err) {
+    } catch (err) {
       ui.notifications.error(err.message);
       return null;
     }

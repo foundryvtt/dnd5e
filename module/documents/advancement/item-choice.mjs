@@ -5,7 +5,7 @@ import ItemGrantAdvancement from "./item-grant.mjs";
 
 /**
  * @import {
- *   ItemChoiceAdvancementReversalOptions, ItemChoiceAdvancementReversalOptions, ItemChoiceRetainedData
+ *   ItemChoiceAdvancementApplicationData, ItemChoiceAdvancementReversalOptions, ItemChoiceRetainedData
  * } from "./_types.mjs";
  */
 
@@ -156,7 +156,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
           level: level || this.actor.system.details?.level, throwError: true
         });
         items.push(item);
-      } catch(err) {
+      } catch (err) {
         messages.push(err.message);
       }
     }

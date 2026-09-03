@@ -276,9 +276,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
   #getTargets() {
     const recordedTargets = this.closest("[data-message-id]").querySelector("recorded-targets");
     if ( recordedTargets ) return recordedTargets.targets;
-    return canvas.tokens?.controlled?.map(t => {
-      if ( t.actor ) return t.document.uuid;
-    }).filter(_ => _) ?? [];
+    return canvas.tokens?.controlled?.map(t => t.actor ? t.document.uuid : null).filter(_ => _) ?? [];
   }
 
   /* -------------------------------------------- */
@@ -302,7 +300,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
         try {
           const operation = await this._prepareEffectData(effect, actor);
           (operation.action === "create" ? data : updates).push(operation.data);
-        } catch ( err ) {
+        } catch (err) {
           Hooks.onError("EffectApplicationElement._prepareEffectData", err, { notify: "warn", log: "warn" });
         }
       }

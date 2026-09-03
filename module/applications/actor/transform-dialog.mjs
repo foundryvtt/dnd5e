@@ -264,8 +264,8 @@ export default class TransformDialog extends Dialog5e {
       dialogOptions.transform.source = source;
       const dialog = new this(dialogOptions);
       dialog.addEventListener("close", event =>
-        resolve(dialog.shouldTransform ? dialog.settings : null)
-      , { once: true });
+        resolve(dialog.shouldTransform ? dialog.settings : null),
+      { once: true });
       dialog.render({ force: true, ...(windowId ? { window: { windowId, detached: true } } : {}) });
     });
   }

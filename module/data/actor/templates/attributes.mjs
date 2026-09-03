@@ -324,7 +324,7 @@ export default class AttributesFields {
           if ( config.id === "armored" ) ac.label = ac.equippedArmor.name;
           else ac.label = config.label ?? "";
         }
-      } catch(error) {
+      } catch {
         this.parent._preparationWarnings.push({
           message: _loc("DND5E.WarnBadACFormula", { formula: config.formula }), link: "armor", type: "error"
         });

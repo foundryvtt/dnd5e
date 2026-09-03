@@ -222,8 +222,8 @@ export default class CurrencyManager extends Application5e {
     // Convert all currently to smallest denomination
     const smallestConversion = currencies.at(-1)[1].conversion;
     let amount = currencies.reduce((amount, [denomination, config]) =>
-      amount + (currency[denomination] * (smallestConversion / config.conversion))
-    , 0);
+      amount + (currency[denomination] * (smallestConversion / config.conversion)),
+    0);
 
     // Convert base units into the highest denomination possible
     for ( const [denomination, config] of currencies) {

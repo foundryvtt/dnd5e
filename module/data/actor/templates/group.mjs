@@ -83,7 +83,7 @@ export default class GroupTemplate extends ActorDataModel.mixin(CurrencyTemplate
         if ( appendNumber ) TokenPlacement.adjustAppendedNumber(tokenDocument, placement);
         tokensData.push(tokenDocument.toObject());
       }
-    } catch(err) {
+    } catch (err) {
       Hooks.onError("GroupTemplate#placeMembers", err, {
         msg: _loc("DND5E.Group.Warning.PlaceMembers"),
         log: "error",
