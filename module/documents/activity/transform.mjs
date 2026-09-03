@@ -186,7 +186,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     const targets = getSceneTargets();
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) {
-      ui.notifications.warn("DND5E.ActionWarningNoToken");
+      ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
       return;
     }
 
@@ -195,7 +195,7 @@ export default class TransformActivity extends ActivityMixin(BaseTransformActivi
     const uuid = message.getFlag("dnd5e", "transform.uuid") ?? await this.queryActor(profile);
     const source = await fromUuid(uuid);
     if ( !source ) {
-      ui.notifications.warn("DND5E.TRANSFORM.Warning.SourceActor");
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.SourceActor", { localize: true });
       return;
     }
 

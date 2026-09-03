@@ -217,11 +217,11 @@ export default function ActivityMixin(Base) {
     async use(usage={}, dialog={}, message={}) {
       if ( !this.item.isEmbedded ) return;
       if ( !this.item.isOwner ) {
-        ui.notifications.error("DND5E.DocumentUseWarn");
+        ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
         return;
       }
       if ( !this.canUse ) {
-        ui.notifications.error("DND5E.ACTIVITY.Warning.UsageNotAllowed");
+        ui.notifications.error("DND5E.ACTIVITY.Warning.UsageNotAllowed", { localize: true });
         return;
       }
 

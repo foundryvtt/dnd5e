@@ -515,7 +515,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
       tokenUpdates.texture ??= {};
       tokenUpdates.texture.src ??= actor.img;
-      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard");
+      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard", { localize: true });
     }
 
     delete placement.prototypeToken;

@@ -43,7 +43,7 @@ export default class ForwardActivity extends ActivityMixin(BaseForwardActivityDa
     }, usage);
 
     const activity = this.item.system.activities.get(this.activity.id);
-    if ( !activity ) ui.notifications.error("DND5E.FORWARD.Warning.NoActivity");
+    if ( !activity ) ui.notifications.error("DND5E.FORWARD.Warning.NoActivity", { localize: true });
     return activity?.use(usageConfig, dialog, message);
   }
 }

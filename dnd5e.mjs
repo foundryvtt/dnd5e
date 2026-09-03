@@ -664,7 +664,7 @@ async function _handleMigration() {
 
   // Perform the migration
   if ( cv && foundry.utils.isNewerVersion(game.system.flags.compatibleMigrationVersion, cv) ) {
-    ui.notifications.error("MIGRATION.DND5E.Warning.VersionTooOld", { permanent: true });
+    ui.notifications.error("MIGRATION.DND5E.Warning.VersionTooOld", { localize: true, permanent: true });
   }
 
   await migrations.migrateWorld();

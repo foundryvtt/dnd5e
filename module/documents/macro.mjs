@@ -10,7 +10,7 @@ export async function create5eMacro(dropData, slot) {
     case "Activity":
       const activity = await fromUuid(dropData.uuid);
       if ( !activity ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn");
+        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
         return null;
       }
       foundry.utils.mergeObject(macroData, {
@@ -24,7 +24,7 @@ export async function create5eMacro(dropData, slot) {
     case "Item":
       const itemData = await Item.implementation.fromDropData(dropData);
       if ( !itemData ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn");
+        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
         return null;
       }
       foundry.utils.mergeObject(macroData, {
@@ -37,7 +37,7 @@ export async function create5eMacro(dropData, slot) {
     case "ActiveEffect":
       const effectData = await ActiveEffect.implementation.fromDropData(dropData);
       if ( !effectData ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn");
+        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
         return null;
       }
       foundry.utils.mergeObject(macroData, {

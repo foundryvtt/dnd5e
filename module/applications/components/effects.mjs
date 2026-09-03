@@ -421,7 +421,7 @@ export default class EffectsElement extends (foundry.applications.elements.Adopt
     const doc = await fromUuid(uuid);
     if ( !doc ) return;
     if ( !doc.testUserPermission(game.user, "LIMITED") ) {
-      ui.notifications.warn("DND5E.DocumentViewWarn");
+      ui.notifications.warn("DND5E.DocumentViewWarn", { localize: true });
       return;
     }
     doc.sheet.render(true);

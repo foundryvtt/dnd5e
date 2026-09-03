@@ -229,7 +229,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const config = this.advancement.configuration;
     const { current, max } = this.counts;
     if ( current >= max ) {
-      ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected");
+      ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected", { localize: true });
       return;
     }
 

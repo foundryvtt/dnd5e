@@ -1747,7 +1747,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( item.type === "container" ) {
       const parentContainers = await container.system.allContainers();
       if ( (container.id === item.id) || parentContainers.includes(item) ) {
-        ui.notifications.error("DND5E.ContainerRecursiveError");
+        ui.notifications.error("DND5E.ContainerRecursiveError", { localize: true });
         return;
       }
     }
@@ -1814,7 +1814,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.size);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
-      ui.notifications.warn("DND5E.WarnCantAddMultipleAdvancements");
+      ui.notifications.warn("DND5E.WarnCantAddMultipleAdvancements", { localize: true });
       items = itemsWithoutAdvancement;
     }
 

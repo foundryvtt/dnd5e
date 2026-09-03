@@ -192,7 +192,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
     // Enchantments cannot be added directly to actors
     if ( this.parent.parent instanceof Actor ) {
-      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor");
+      ui.notifications.error("DND5E.ENCHANTMENT.Warning.NotOnActor", { localize: true });
       return false;
     }
 
