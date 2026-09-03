@@ -594,11 +594,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Is this actor under the effect of this property from some status or due to its level of a condition?
-   * @param {string} key      A key in `DND5E.conditionEffects`.
-   * @returns {boolean}       Whether the actor is affected.
+   * Is this actor under the effect of this property from some status or due to its level of exhaustion?
+   * @param {string} key                     A key in `DND5E.conditionEffects`.
+   * @param {object} [options={}]
+   * @param {boolean} [options.label=false]  Return the responsible status label rather than a boolean.
+   * @returns {boolean|string}               Whether the actor is affected, or the label of the responsible status.
    */
-  hasConditionEffect(key) {
+  hasConditionEffect(key, { label=false }={}) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
     const conditions = this.system.conditions ?? {};
     const imms = this.system.traits?.ci?.value ?? new Set();
@@ -622,7 +624,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return Number(level) <= conditions[status];
     };
 
-    return props.some(applyCondition);
+    const match = props.find(applyCondition);
+    if ( !label ) return !!match;
+    if ( !match ) return null;
+    const [, n] = match.match(/^exhaustion-(\d+)$/) ?? [];
+    return n ? _loc("DND5E.ExhaustionLevel", { n: Number(n) })
+      : _loc(CONFIG.DND5E.conditionTypes[match]?.name ?? match);
   }
 
   /* -------------------------------------------- */
@@ -2797,6 +2804,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( value ) attributions.push({ value, label: source, document: e, type: "add" });
     }
     return attributions;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Break down the sources of advantage and disadvantage for one or more roll mode fields.
+   * @param {string|string[]} keyPaths    Path(s) to the roll mode field(s).
+   * @returns {AttributionDescription[]}  Individual contributions to this roll's mode.
+   * @protected
+   */
+  _prepareRollModeAttributions(keyPaths) {
+    keyPaths = Array.isArray(keyPaths) ? keyPaths : [keyPaths];
+    const unknown = _loc("COMMON.Unknown");
+    return AdvantageModeField.collectSources(this.system, keyPaths).map(({ value, source }) => {
+      if ( !source ) return { value, label: _loc("DND5E.AdvantageModeManual"), document: null };
+      if ( source.effect ) {
+        let label = source.effect.sourceName;
+        if ( !source.effect.origin || (source.effect.origin === this.uuid)
+          || (label === unknown) ) label = source.effect.name;
+        return { value, label, document: source.effect };
+      }
+      return { value, label: source.label, document: null };
+    });
   }
 
   /* -------------------------------------------- */
