@@ -143,9 +143,11 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
 
   /**
    * Evaluate the effect's conditions and store the result.
-   * @param {RollData} baseData
+   * @param {RollData} [baseData]
    */
   evaluateCondition(baseData) {
+    if ( this.#conditionSuppressed !== null ) return;
+    baseData ??= this.parent.target?.getRollData() ?? {};
     this.#conditionSuppressed = this.conditions?.check(this.parent.getReplacementData(baseData)) === false;
   }
 

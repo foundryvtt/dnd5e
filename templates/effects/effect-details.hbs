@@ -5,6 +5,9 @@
 
     {{#if systemFields.conditions}}
     {{ formGroup systemFields.conditions value=source.system.conditions rootId=partId }}
+    {{#if conditionsWarning}}
+    <div class="note warn">{{ localize conditionsWarning }}</div>
+    {{/if}}
     {{/if}}
 
     {{#if isActorEffect}}

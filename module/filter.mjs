@@ -33,10 +33,21 @@ export class Filter {
     try {
       if ( foundry.utils.isEmpty(this.#definition) ) return true;
       else return performCheck(data, this.#definition);
-    } catch(err) {
+    } catch (err) {
       console.error(err);
       return false;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Evaluate the callback for each individual filter, returning early if the callback returns `true` for any filter.
+   * @param {Function} cb
+   * @returns {boolean}
+   */
+  some(cb) {
+    return _some(cb, this.#definition);
   }
 }
 
@@ -96,6 +107,23 @@ function _check(data, keyPath, value, operation="exact") {
   const comparison = COMPARISON_FUNCTIONS[operation];
   if ( !comparison ) throw new Error(`Comparison function "${operation}" could not be found.`);
   return comparison(foundry.utils.getProperty(data, keyPath), value);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Evaluate the callback for each individual filter, returning early if the callback returns `true` for any filter.
+ * @param {Function} cb
+ * @param {FilterDescription|FilterDescription[]} filter
+ * @returns {boolean}
+ * @internal
+ */
+function _some(cb, filter=[]) {
+  if ( Array.isArray(filter) && filter.some(f => _some(cb, f)) ) return true;
+  if ( !foundry.utils.isPlainObject(filter) ) return false;
+  if ( cb(filter) === true ) return true;
+  if ( filter.o in OPERATOR_FUNCTIONS ) return _some(cb, filter.v);
+  return false;
 }
 
 /* -------------------------------------------- */
