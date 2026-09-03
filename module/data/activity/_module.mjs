@@ -7,6 +7,7 @@ export {default as DamageActivityData} from "./damage-data.mjs";
 export {default as EnchantActivityData} from "./enchant-data.mjs";
 export {default as ForwardActivityData} from "./forward-data.mjs";
 export {default as HealActivityData} from "./heal-data.mjs";
+export {default as MacroActivityData} from "./macro-data.mjs";
 export {default as SaveActivityData} from "./save-data.mjs";
 export {default as SummonActivityData} from "./summon-data.mjs";
 export {default as TeleportActivityData} from "./teleport-data.mjs";

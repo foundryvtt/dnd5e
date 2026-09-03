@@ -4509,6 +4509,9 @@ DND5E.activityTypes = {
   heal: {
     documentClass: activities.HealActivity
   },
+  macro: {
+    documentClass: activities.MacroActivity
+  },
   order: {
     documentClass: activities.OrderActivity,
     configurable: false

@@ -1,0 +1,24 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.MACRO.FIELDS.macro.uuid.label" }}</legend>
+        <ul class="separated-list">
+            <li>
+                {{#if macro}}
+                <div class="details flexrow">
+                    <img class="gold-icon" src="{{ macro.img }}" alt="{{ macro.name }}">
+                    {{{ contentLink }}}
+                    <div class="list-controls flexrow">
+                        <button type="button" class="unbutton control-button" data-action="removeMacro"
+                                data-tooltip aria-label="{{ localize 'DND5E.MACRO.Action.Remove' }}">
+                            <i class="fa-solid fa-trash" inert></i>
+                        </button>
+                    </div>
+                </div>
+                {{else}}
+                {{ formInput fields.macro.fields.uuid value=source.macro.uuid }}
+                {{/if}}
+            </li>
+        </ul>
+    </fieldset>
+    {{> "systems/dnd5e/templates/activity/parts/activity-effects.hbs" }}
+</section>
