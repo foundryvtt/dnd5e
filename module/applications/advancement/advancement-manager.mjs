@@ -770,6 +770,7 @@ export default class AdvancementManager extends Application5e {
 
     if ( (this.step.type === "delete") && this.step.synthetic ) return;
     for ( const deletedId of deletedIds ) {
+      if ( this.step.item?.id === deletedId ) continue;
       let item = this.#preEmbeddedItems.find(i => i.id === deletedId);
       if ( !item?.hasAdvancement ) continue;
 
