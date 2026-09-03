@@ -704,7 +704,7 @@ export default class AdvancementManager extends Application5e {
         }
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch(error) {
+    } catch (error) {
       if ( !(error instanceof Advancement.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
@@ -734,7 +734,7 @@ export default class AdvancementManager extends Application5e {
     const preIds = new Set(this.#preEmbeddedItems.map(i => i.id));
     const postIds = new Set(this.clone.items.map(i => i.id));
     const addedIds = postIds.difference(preIds).difference(initialIds);
-    const deletedIds = preIds.difference(postIds).difference(initialIds);
+    const deletedIds = preIds.difference(postIds);
 
     const getLevel = (step, advancementClassLinked) => (advancementClassLinked ? undefined : step?.level)
       ?? step?.flow?.level ?? step?.class?.level ?? step?.level;
@@ -774,7 +774,7 @@ export default class AdvancementManager extends Application5e {
       if ( !item?.hasAdvancement ) continue;
 
       // Temporarily add the item back
-      this.clone.updateSource({items: [item.toObject()]});
+      this.clone.updateSource({ items: [item.toObject()] });
       item = this.clone.items.get(item.id);
 
       // Check for advancement from the maximum level handled by this manager to zero
@@ -824,7 +824,7 @@ export default class AdvancementManager extends Application5e {
         this.#preEmbeddedItems = null;
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch(error) {
+    } catch (error) {
       if ( !(error instanceof Advancement.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
