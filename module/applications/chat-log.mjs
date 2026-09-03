@@ -36,6 +36,7 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
     this.constructor.applyTheme();
     new MutationObserver(this.#onLogMutated.bind(this)).observe(log, { childList: true });
     this.#intersections = new IntersectionObserver(this.#onCardIntersects.bind(this), { root: scroll });
+    this.element.addEventListener("toggle", this.#onTrayToggle.bind(this), { capture: true });
     return super._onFirstRender(context, options);
   }
 
@@ -78,5 +79,30 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
       for ( const node of addedNodes ) this.#intersections.observe(node);
       for ( const node of removedNodes ) this.#intersections.unobserve(node);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Keep the log pinned to the bottom while a tray expands, when already scrolled to the bottom.
+   * @param {Event} event  The tray's toggle event.
+   */
+  #onTrayToggle(event) {
+    const tray = event.target;
+    if ( !tray.matches?.(ChatMessage5e.TRAY_TYPES.join(", ")) || !tray.open || !this.isAtBottom ) return;
+    // Re-pin each frame across the tray's open transition so the log follows it.
+    let running = true;
+    const pin = () => {
+      this.scrollBottom();
+      if ( running ) requestAnimationFrame(pin);
+    };
+    const transitionend = () => {
+      running = false;
+      tray.removeEventListener("transitionend", transitionend);
+      tray.removeEventListener("transitioncancel", transitionend);
+    };
+    tray.addEventListener("transitionend", transitionend);
+    tray.addEventListener("transitioncancel", transitionend);
+    pin();
   }
 }
