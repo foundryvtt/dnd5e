@@ -904,9 +904,14 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, formulaOptions);
     const parts = scaledFormula ? [scaledFormula] : [];
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+    // Fall back to the item's base damage type when this part specifies none (e.g. weapon/ammo base damage).
+    let { types } = damage;
+    if ( !types.size && this.item.system.offersBaseDamage && (this.constructor.damageRuleCategory !== "healing") ) {
+      types = this.item.system.damage.base.types;
+    }
     const data = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
     data.roll.damage ??= {};
-    data.roll.damage.type = (damage.types.has(lastType) ? lastType : null) ?? damage.types.first();
+    data.roll.damage.type = (types.has(lastType) ? lastType : null) ?? types.first();
 
     if ( index === 0 ) {
       const actionType = this.getActionType(rollConfig.attackMode);
@@ -929,7 +934,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       data, parts,
       options: {
         type: data.roll.damage.type,
-        types: Array.from(damage.types),
+        types: Array.from(types),
         properties: data.roll.properties
       }
     };
