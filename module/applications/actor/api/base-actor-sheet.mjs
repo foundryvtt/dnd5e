@@ -877,7 +877,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   async _prepareItemFeature(item, ctx) {
     // Classes & Subclasses
     if ( ["class", "subclass"].includes(item.type) ) {
-      ctx.prefixedImage = item.img ? foundry.utils.getRoute(item.img) : null;
       if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => {
         const value = level - item.system.levels;
         const label = value ? `${level} (${formatNumber(value, { signDisplay: "always" })})` : `${level}`;

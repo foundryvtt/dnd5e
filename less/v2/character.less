@@ -1278,19 +1278,23 @@
         border: var(--dnd5e-border-gold);
         background: var(--dnd5e-background-card);
 
-        &::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: var(--underlay) center / cover;
-          mask-image: linear-gradient(135deg, transparent 35%, black);
+        > .underlay {
+          block-size: 100%;
           border-radius: 5px;
+          border: none;
+          inline-size: 100%;
+          inset: 0;
+          mask-image: linear-gradient(135deg, transparent 35%, black);
+          object-fit: cover;
           opacity: .5;
+          pointer-events: none;
+          position: absolute;
         }
 
-        &:has(> .facility-progress)::before {
-          top: var(--bar-height);
+        &:has(> .facility-progress) > .underlay {
+          block-size: calc(100% - var(--bar-height));
           border-radius: 0 0 5px 5px;
+          inset-block-start: var(--bar-height);
         }
       }
 

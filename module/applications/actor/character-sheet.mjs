@@ -797,13 +797,12 @@ export default class CharacterActorSheet extends BaseActorSheet {
     ];
     if ( trade.stock.max ) subtitle.push(`${trade.stock.value ?? 0} &sol; ${trade.stock.max}`);
     Object.assign(ctx, {
-      id, labels, name, building, disabled, free, progress,
+      id, img, labels, name, building, disabled, free, progress,
       craft: craft.item ? await fromUuid(craft.item) : null,
       creatures: await this._prepareItemFacilityLivestock(trade),
       defenders: await this._prepareItemFacilityOccupants(defenders),
       executing: CONFIG.DND5E.facilities.orders[progress.order]?.icon,
       hirelings: await this._prepareItemFacilityOccupants(hirelings),
-      img: foundry.utils.getRoute(img),
       isSpecial: type.value === "special",
       subtitle: subtitle.join(" &bull; ")
     });

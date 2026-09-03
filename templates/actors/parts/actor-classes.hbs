@@ -2,7 +2,8 @@
     {{#each classes as |cls|}}
     {{#if (eq cls.type "class")}}
     {{#dnd5e-itemContext cls as |ctx|}}
-    <div class="class pill-lg" data-item-id="{{ cls.id }}" style="--underlay: url('{{ ctx.prefixedImage }}');">
+    <div class="class pill-lg" data-item-id="{{ cls.id }}">
+        <img class="underlay" src="{{ cls.img }}" alt="" inert>
         <div class="icons {{#if cls.subclass}}subclass{{/if}}">
             <img class="draggable gold-icon item-tooltip" src="{{ cls.img }}" alt="{{ cls.name }}"
                  data-action="showDocument" data-uuid="{{ cls.uuid }}" data-item-id="{{ cls.id }}">
