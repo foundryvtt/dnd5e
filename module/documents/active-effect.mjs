@@ -606,7 +606,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   shouldApplyChange(change, options={}) {
     if ( !super.shouldApplyChange(change, options) ) return false;
     const conditionData = options.replacementData;
-    if ( this.system.evaluateCondition && this.system.changes.some(c => c.phase === options.phase) ) {
+    if ( this.system.evaluateCondition ) {
       this.system.evaluateCondition(conditionData);
       if ( this.isSuppressed ) return false;
     }
