@@ -158,6 +158,7 @@ Hooks.once("init", function() {
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
+  Object.assign(CONFIG.JournalEntryPage.typeIcons, dataModels.journal.icons);
   Object.assign(CONFIG.RegionBehavior.dataModels, dataModels.regionBehavior.config);
   Object.assign(CONFIG.RegionBehavior.typeIcons, dataModels.regionBehavior.icons);
 

@@ -19,3 +19,11 @@ export const config = {
   spells: SpellListJournalPageData,
   subclass: SubclassJournalPageData
 };
+
+export const icons = {
+  class: "fa-solid fa-file-shield",
+  map: "fa-solid fa-map",
+  rule: "fa-solid fa-book-section",
+  spells: "fa-solid fa-book-sparkles",
+  subclass: "fa-solid fa-diagram-subtask"
+};
