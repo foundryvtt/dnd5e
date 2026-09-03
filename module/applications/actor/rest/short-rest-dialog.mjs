@@ -69,7 +69,7 @@ export default class ShortRestDialog extends BaseRestDialog {
         ? this.#denom : context.hitDice.options.find(o => o.number > 0)?.value;
     }
 
-    const denom = Number(context.hitDice.denomination?.slice(1));
+    const denom = Number(context.hitDice?.denomination?.slice(1));
     if ( denom ) {
       const { pct, effectiveMax: max } = this.actor.system.attributes.hp;
       context.progress = { pct };
