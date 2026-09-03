@@ -117,6 +117,15 @@ export default class EquippableItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _resetData(source) {
+    super._resetData(source);
+    delete source.equipped;
+    delete source.attuned;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

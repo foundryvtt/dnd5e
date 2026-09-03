@@ -68,7 +68,7 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
    */
   static _immiscible = new Set(["length", "mixed", "name", "prototype", "cleanData", "_cleanData",
     "_initializationOrder", "validateJoint", "_validateJoint", "migrateData", "_migrateData",
-    "shimData", "_shimData", "defineSchema"]);
+    "shimData", "_shimData", "defineSchema", "resetData", "_resetData"]);
 
   /* -------------------------------------------- */
 
@@ -275,6 +275,31 @@ export default class SystemDataModel extends foundry.abstract.TypeDataModel {
   static _shimData(data, options) {
     for ( const template of this._schemaTemplates ) {
       template._shimData(data, options);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset user-modified state.
+   * @param {object} source  The source data, modified in place.
+   * @returns {object}       The cleaned source data.
+   */
+  static resetData(source) {
+    this._resetData(source);
+    return source;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset user-modified state across the type's templates.
+   * @param {object} source  The source data, modified in place.
+   * @protected
+   */
+  static _resetData(source) {
+    for ( const template of this._schemaTemplates ) {
+      template._resetData(source);
     }
   }
 

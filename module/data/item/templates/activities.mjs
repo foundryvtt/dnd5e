@@ -300,6 +300,15 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _resetData(source) {
+    super._resetData(source);
+    delete source.uses?.spent;
+    for ( const activity of Object.values(source.activities ?? {}) ) delete activity.uses?.spent;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
