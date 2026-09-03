@@ -1,10 +1,10 @@
 _id: XEH5YErAN1WSytln
 name: Figurine of Wondrous Power (Serpentine Owl)
-type: consumable
+type: equipment
 img: icons/commodities/materials/feather-white.webp
 system:
   description:
-    value: "<p><em>Wondrous item</em></p>\n<p>A\_<em>figurine of wondrous power</em>\_is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p>\n<p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p>\n<p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p>\n<p><strong>Serpentine Owl</strong>. This serpentine statuette of an owl can become a @UUID[Compendium.dnd5e.monsters.Actor.VVXly3ue0i3YgGrB]{Giant Owl} for up to 8 hours. Once it has been used, it can't be used again until 2 days have passed. The owl can telepathically communicate with you at any range if you and it are on the same plane of existence.</p>"
+    value: "<p><em>Wondrous item</em></p><p>A\_<em>figurine of wondrous power</em>\_is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within [[lookup @labels.description.range activity=bN8n4l2fO9VpA4UT]] of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p><p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p><p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p><p><strong>Serpentine Owl</strong>. This serpentine statuette of an owl can become a @UUID[Compendium.dnd5e.monsters.Actor.VVXly3ue0i3YgGrB]{giant owl} for up to [[lookup @labels.duration activity=bN8n4l2fO9VpA4UT]]. Once it has been used, it can't be used again until 2 days have passed. The owl can telepathically communicate with you at any range if you and it are on the same plane of existence.</p>"
     chat: ''
   source:
     custom: ''
@@ -12,6 +12,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 0.1
@@ -26,98 +27,165 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: <p>A serpentine statuette of an owl.</p>
+    name: Unidentified Owl Figurine
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    bN8n4l2fO9VpA4UT:
+      type: summon
+      name: Summon Serpentine Owl
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: When you speak the figurine's command word.
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '8'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '8'
+      effects:
+        - _id: VGp98gsBhT8aS86C
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
-        value: '60'
         units: ft
-        special: ''
         override: false
+        special: ''
+        value: '60'
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
+          stationary: false
           units: ft
+          type: ''
         affects:
-          count: '10'
-          type: space
           choice: false
+          type: space
           special: ''
-        prompt: true
+          count: '1'
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: true
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: uIEu6OVsgQRfr1fv
+          uuid: Compendium.dnd5e.monsters.Actor.VVXly3ue0i3YgGrB
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: bN8n4l2fO9VpA4UT
   attuned: false
   identifier: figurine-of-wondrous-power-serpentine-owl
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Serpentine Owl
+    img: icons/commodities/materials/feather-white.webp
+    origin: Compendium.dnd5e.items.Item.XEH5YErAN1WSytln
+    transfer: false
+    _id: VGp98gsBhT8aS86C
+    type: base
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Serpentine Owl
+          phase: initial
+          _id: 976fxZS8V6LmOeIG
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784649532099
+      modifiedTime: 1784649544201
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!XEH5YErAN1WSytln.VGp98gsBhT8aS86C'
 folder: UnUwTG4YIgd0kaUJ
 sort: 6200000
 ownership:
@@ -125,11 +193,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037208395
-  modifiedTime: 1764620145088
+  modifiedTime: 1784650403367
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!XEH5YErAN1WSytln'

@@ -1,23 +1,21 @@
 _id: TwYeck6buBZ602mg
 name: Crystal Ball of Mind Reading
-type: consumable
+type: equipment
 img: icons/commodities/gems/pearl-swirl-teal.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>The Crystal Ball is about 6 inches in diameter. While touching it, you
-      can cast the
-      @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying}spell (save
-      DC 17) with it.</p>
-
-      <p>You can use an action to cast the
-      @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect Thoughts}
-      spell (save DC 17) while you are Scrying with the Crystal Ball, targeting
-      creatures you can see within 30 feet of the spell's sensor. You don't need
-      to concentrate on this Detect Thoughts to maintain it during its duration,
-      but it ends if Scrying ends.</p>
+      <p><em>Wondrous item (requires attunement)</em></p><p>The Crystal Ball is
+      about 6 inches in diameter. While touching it, you can cast the
+      @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{scrying} spell (save
+      DC [[lookup @spell.challenge.save activity=tZv4jpd4zviSzUWu]]) with
+      it.</p><p>You can use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{detect thoughts}
+      spell (save DC [[lookup @spell.challenge.save activity=fRkGCqgiCHP528xk]])
+      while you are scrying with the Crystal Ball, targeting creatures you can
+      see within 30 feet of the spell's sensor. You don't need to concentrate on
+      this detect thoughts to maintain it during its duration, but it ends if
+      scrying ends.</p>
     chat: ''
   source:
     custom: ''
@@ -25,6 +23,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 7
@@ -39,42 +38,31 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: <p>The Crystal Ball is about 6 inches in diameter.</p>
+    name: Unidentified Crystal Ball
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
     tZv4jpd4zviSzUWu:
       type: cast
       spell:
         uuid: Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20
         challenge:
-          attack: null
-          save: 17
+          save: '17'
           override: true
-        level: '5'
+        level: 5
         properties:
           - vocal
           - somatic
           - material
         ability: ''
+        spellbook: true
       _id: tZv4jpd4zviSzUWu
       sort: 0
       activation:
@@ -88,16 +76,19 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -114,20 +105,26 @@ system:
           min: null
           max: null
         identifier: ''
+        requireAttunement: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
     fRkGCqgiCHP528xk:
       type: cast
       spell:
         uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
         challenge:
-          attack: null
-          save: 17
+          attack: ''
+          save: '17'
           override: true
-        level: '2'
+        level: 2
         properties:
           - vocal
           - somatic
           - material
+          - concentration
         ability: ''
+        spellbook: true
       _id: fRkGCqgiCHP528xk
       sort: 0
       activation:
@@ -142,17 +139,20 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: spec
         concentration: false
         override: true
-        special: As long as the Scrying spell is active
+        special: As long as the scrying spell is active.
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -169,8 +169,20 @@ system:
           min: null
           max: null
         identifier: ''
+        requireAttunement: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   attuned: false
   identifier: crystal-ball-of-mind-reading
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 5600000
@@ -179,11 +191,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037195309
-  modifiedTime: 1764620007946
+  modifiedTime: 1784649260894
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TwYeck6buBZ602mg'

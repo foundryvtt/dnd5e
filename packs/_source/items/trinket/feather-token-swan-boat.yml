@@ -5,22 +5,19 @@ img: icons/commodities/materials/feather-blue-grey.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This tiny object looks like a feather. Different types of feather
-      tokens exist, each with a different single-use effect. The GM chooses the
-      kind of token or determines it randomly from the
-      @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather Token}
-      table.</p>
-
-      <p><strong>Swan Boat.</strong> You can use an action to touch the token to
-      a body of water at least 60 feet in diameter. The token disappears, and a
-      50-foot-long, 20-foot- wide boat shaped like a swan takes its place. The
-      boat is self-propelled and moves across water at a speed of 6 miles per
-      hour. You can use an action while on the boat to command it to move or to
-      turn up to 90 degrees. The boat can carry up to thirty-two Medium or
-      smaller creatures. A Large creature counts as four Medium creatures, while
-      a Huge creature counts as nine. The boat remains for 24 hours and then
+      <p><em>Wondrous item</em></p><p>This tiny object looks like a feather.
+      Different types of feather tokens exist, each with a different single-use
+      effect. The GM chooses the kind of token or determines it randomly from
+      the @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather
+      Token} table.</p><p><strong>Swan Boat.</strong> You can use an action to
+      touch the token to a body of water at least 60 feet in diameter. The token
+      disappears, and a 50-foot-long, 20-foot- wide boat shaped like a swan
+      takes its place. The boat is self-propelled and moves across water at a
+      speed of 6 miles per hour. You can use an action while on the boat to
+      command it to move or to turn up to 90 degrees. The boat can carry up to
+      thirty-two Medium or smaller creatures. A Large creature counts as four
+      Medium creatures, while a Huge creature counts as nine. The boat remains
+      for [[lookup @labels.duration activity=EpnJ8GnCjryUyLgi]] and then
       disappears. You can dismiss the boat as an action.</p>
     chat: ''
   source:
@@ -56,7 +53,7 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -131,6 +128,103 @@ system:
         identifier: ''
         requireIdentification: true
       appliedEffects: []
+    EpnJ8GnCjryUyLgi:
+      type: summon
+      name: Summon Swan Boat
+      _id: EpnJ8GnCjryUyLgi
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        value: >-
+          <p>You can use an action to touch the token to a body of water at
+          least 60 feet in diameter. The token disappears, and a 50-foot-long,
+          20-foot- wide boat shaped like a swan takes its place. The boat is
+          self-propelled and moves across water at a speed of 6 miles per hour.
+          You can use an action while on the boat to command it to move or to
+          turn up to 90 degrees. The boat can carry up to thirty-two Medium or
+          smaller creatures. A Large creature counts as four Medium creatures,
+          while a Huge creature counts as nine. The boat remains for [[lookup
+          @labels.duration activity=EpnJ8GnCjryUyLgi]] and then disappears. You
+          can dismiss the boat as an action.</p>
+        chatFlavor: ''
+      duration:
+        units: hour
+        concentration: false
+        override: false
+        value: '24'
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: space
+          special: ''
+          count: '1'
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: DS3JXgoMCKGku4aN
+          uuid: Compendium.dnd5e.monsters.Actor.irodIc8jrVZ3q5qA
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   attuned: false
   identifier: feather-token-swan-boat
 effects: []
@@ -141,11 +235,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037198518
-  modifiedTime: 1764620059377
+  modifiedTime: 1784665492866
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!UgnUJhu0tW1tLt7g'

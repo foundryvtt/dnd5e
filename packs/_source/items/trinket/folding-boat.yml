@@ -1,36 +1,28 @@
 _id: u4ewpAFZjLrWrmQv
 name: Folding Boat
-type: consumable
+type: equipment
 img: icons/containers/boxes/crate-heavy-yellow.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This object appears as a wooden box that measures 12 inches long, 6
-      inches wide, and 6 inches deep. It weighs 4 pounds and floats. It can be
-      opened to store items inside. This item also has three command words, each
-      requiring you to use an action to speak it.</p>
-
-      <p>One command word causes the box to unfold into a boat 10 feet long, 4
-      feet wide, and 2 feet deep. The boat has one pair of oars, an anchor, a
-      mast, and a lateen sail. The boat can hold up to four Medium creatures
-      comfortably.</p>
-
-      <p>The second command word causes the box to unfold into a ship 24 feet
-      long, 8 feet wide, and 6 feet deep. The ship has a deck, rowing seats,
-      five sets of oars, a steering oar, an anchor, a deck cabin, and a mast
-      with a square sail. The ship can hold fifteen Medium creatures
-      comfortably.</p>
-
-      <p>When the box becomes a vessel, its weight becomes that of a normal
-      vessel its size, and anything that was stored in the box remains in the
-      boat.</p>
-
-      <p>The third command word causes the folding boat to fold back into a box,
-      provided that no creatures are aboard. Any objects in the vessel that
-      can't fit inside the box remain outside the box as it folds. Any objects
-      in the vessel that can fit inside the box do so.</p>
+      <p><em>Wondrous item</em></p><p>This object appears as a wooden box that
+      measures 12 inches long, 6 inches wide, and 6 inches deep. It weighs 4
+      pounds and floats. It can be opened to store items inside. This item also
+      has three command words, each requiring you to use an action to speak
+      it.</p><p>One command word causes the box to unfold into a boat 10 feet
+      long, 4 feet wide, and 2 feet deep. The boat has one pair of oars, an
+      anchor, a mast, and a lateen sail. The boat can hold up to four Medium
+      creatures comfortably.</p><p>The second command word causes the box to
+      unfold into a ship 24 feet long, 8 feet wide, and 6 feet deep. The ship
+      has a deck, rowing seats, five sets of oars, a steering oar, an anchor, a
+      deck cabin, and a mast with a square sail. The ship can hold fifteen
+      Medium creatures comfortably.</p><p>When the box becomes a vessel, its
+      weight becomes that of a normal vessel its size, and anything that was
+      stored in the box remains in the boat.</p><p>The third command word causes
+      the folding boat to fold back into a box, provided that no creatures are
+      aboard. Any objects in the vessel that can't fit inside the box remain
+      outside the box as it folds. Any objects in the vessel that can fit inside
+      the box do so.</p>
     chat: ''
   source:
     custom: ''
@@ -38,6 +30,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 4
@@ -52,92 +45,266 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This object appears as a wooden box that measures 12 inches long, 6
+      inches wide, and 6 inches deep. It weighs 4 pounds and floats. It can be
+      opened to store items inside.</p>
+    name: Unidentified Wooden Box
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    p58LwS2zuobxUn8k:
+      type: summon
+      name: Speak First Command Word
+      _id: p58LwS2zuobxUn8k
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: When you speak the boat's first command word.
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: >-
+          <p>One command word causes the box to unfold into a boat 10 feet long,
+          4 feet wide, and 2 feet deep. The boat has one pair of oars, an
+          anchor, a mast, and a lateen sail. The boat can hold up to four Medium
+          creatures comfortably.</p>
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: touch
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: ''
           choice: false
+          count: '1'
+          type: object
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '1'
+          name: ''
+          _id: NZ1WWvJzU1pEQS92
+          uuid: Compendium.dnd5e.monsters.Actor.lqaILiT9c1hwm4Iu
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+    FjRtjisLN8Yo3Rtg:
+      type: summon
+      name: Speak Second Command Word
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: When you speak the boat's second command word.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>The second command word causes the box to unfold into a ship 24
+          feet long, 8 feet wide, and 6 feet deep. The ship has a deck, rowing
+          seats, five sets of oars, a steering oar, an anchor, a deck cabin, and
+          a mast with a square sail. The ship can hold fifteen Medium creatures
+          comfortably.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: true
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '1'
+          name: ''
+          _id: NZ1WWvJzU1pEQS92
+          uuid: Compendium.dnd5e.monsters.Actor.SmZrCFJyuOCVYiLt
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: FjRtjisLN8Yo3Rtg
+    piq8syuiPTp50LrM:
+      type: utility
+      name: Speak Third Command Word
+      _id: piq8syuiPTp50LrM
+      img: ''
+      sort: 300000
+      activation:
+        type: action
+        override: false
+        condition: When you speak the boat's third command word.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>The third command word causes the folding boat to fold back into a
+          box, provided that no creatures are aboard. Any objects in the vessel
+          that can't fit inside the box remain outside the box as it folds. Any
+          objects in the vessel that can fit inside the box do so.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
   attuned: false
   identifier: folding-boat
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 10300000
@@ -146,11 +313,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037310887
-  modifiedTime: 1764621207585
+  modifiedTime: 1784683389301
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!u4ewpAFZjLrWrmQv'

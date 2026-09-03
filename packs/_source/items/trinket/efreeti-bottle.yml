@@ -5,16 +5,13 @@ img: icons/consumables/potions/potion-flask-corked-orange.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This painted brass bottle weighs 1 pound. When you use an action to
-      remove the stopper, a cloud of thick smoke flows out of the bottle. At the
-      end of your turn, the smoke disappears with a flash of harmless fire, and
-      an @UUID[Compendium.dnd5e.monsters.Actor.LTomFUTBrkRi0Pj5]{Efreeti}
-      appears in an unoccupied space within 30 feet of you.</p>
-
-      <p>The first time the bottle is opened, the GM rolls to determine what
-      happens from the
+      <p><em>Wondrous item</em></p><p>This painted brass bottle weighs 1 pound.
+      When you use an action to remove the stopper, a cloud of thick smoke flows
+      out of the bottle. At the end of your turn, the smoke disappears with a
+      flash of harmless fire, and an
+      @UUID[Compendium.dnd5e.monsters.Actor.LTomFUTBrkRi0Pj5]{Efreeti} appears
+      in an unoccupied space within 30 feet of you.</p><p>The first time the
+      bottle is opened, the GM rolls to determine what happens from the
       @UUID[Compendium.dnd5e.tables.RollTable.yZMFNfocj5qyVuOC]{Efreeti Bottle}
       table.</p>
     chat: ''
@@ -54,78 +51,93 @@ system:
     value: trinket
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>This painted brass bottle weighs 1 pound.</p>
+    name: Unidentified Brass Bottle
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    SbzOkgyyZwqIpJbP:
+      type: summon
+      name: Remove Stopper
+      _id: SbzOkgyyZwqIpJbP
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
-        value: '30'
-        units: ft
-        special: ''
+        units: self
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: square
-          size: '10'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
-        affects:
-          count: ''
           type: ''
+        affects:
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: ibjtmIyunUqtNAtL
+          uuid: Compendium.dnd5e.monsters.Actor.LTomFUTBrkRi0Pj5
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   attuned: false
   identifier: efreeti-bottle
 effects: []
@@ -136,11 +148,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037248493
-  modifiedTime: 1764620509537
+  modifiedTime: 1784652765989
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!fbcQsOgWCjhEAGY7'

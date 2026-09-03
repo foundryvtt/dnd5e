@@ -1,22 +1,19 @@
 _id: cGUPm15mLfhGDz2b
 name: Dust of Disappearance
 type: consumable
-img: icons/magic/water/bubbles-air-water-light.webp
+img: icons/commodities/materials/bowl-powder-teal.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>Found in a small packet, this powder resembles very fine sand. There is
-      enough of it for one use.</p>
-
-      <p>When you use an action to throw the dust into the air, you and each
-      creature and object within 10 feet of you become invisible for 2d4
-      minutes. The duration is the same for all subjects, and the dust is
-      consumed when its magic takes effect.</p>
-
-      <p>If a creature affected by the dust attacks or casts a spell, the
-      invisibility ends for that creature.</p>
+      <p><em>Wondrous item</em></p><p>Found in a small packet, this powder
+      resembles very fine sand. There is enough of it for one use.</p><p>When
+      you use an action to throw the dust into the air, you and [[lookup
+      @labels.description.affects activity=09qtSuoTt7ESB10g]] within [[lookup
+      @target.template.size activity=09qtSuoTt7ESB10g]] feet of you become
+      &amp;reference[invisible] for 2d4 minutes. The duration is the same for
+      all subjects, and the dust is consumed when its magic takes
+      effect.</p><p>If a creature affected by the dust attacks or casts a spell,
+      the invisibility ends for that creature.</p>
     chat: ''
   source:
     custom: ''
@@ -51,17 +48,17 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
+    name: Dust of Disappearance
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    09qtSuoTt7ESB10g:
       type: utility
       activation:
         type: action
@@ -73,19 +70,24 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
-        value: ''
+        value: '4'
         units: minute
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: NTgTThLfQDv4kDZX
+          uuid: null
+          level: {}
       range:
         units: self
         special: ''
@@ -99,9 +101,10 @@ system:
           width: ''
           height: ''
           units: ft
+          stationary: true
         affects:
           count: ''
-          type: ''
+          type: creatureOrObject
           choice: false
           special: ''
         prompt: true
@@ -115,8 +118,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Throw Dust
       img: ''
       visibility:
         requireMagic: true
@@ -124,10 +127,54 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: 09qtSuoTt7ESB10g
   attuned: false
   identifier: dust-of-disappearance
-effects: []
+effects:
+  - name: Dust of Disappearance
+    img: icons/commodities/materials/bowl-powder-teal.webp
+    origin: Compendium.dnd5e.items.Item.cGUPm15mLfhGDz2b
+    transfer: false
+    _id: NTgTThLfQDv4kDZX
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 4
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[invisible apply=false] for the duration. If you
+      attack or cast a spell, the invisibility ends for you.</p>
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784653181709
+      modifiedTime: 1784653233694
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!cGUPm15mLfhGDz2b.NTgTThLfQDv4kDZX'
 folder: UnUwTG4YIgd0kaUJ
 sort: 6500000
 ownership:
@@ -135,11 +182,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037230098
-  modifiedTime: 1764620307178
+  modifiedTime: 1784653242531
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!cGUPm15mLfhGDz2b'

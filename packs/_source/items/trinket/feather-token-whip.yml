@@ -5,24 +5,21 @@ img: icons/commodities/materials/feather-colored-blue.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This tiny object looks like a feather. Different types of feather
-      tokens exist, each with a different single-use effect. The GM chooses the
-      kind of token or determines it randomly from the
-      @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather Token}
-      table.</p>
-
-      <p><strong>Whip.</strong> You can use an action to throw the token to a
-      point within 10 feet of you. The token disappears, and a floating whip
-      takes its place. You can then use a bonus action to make a melee spell
-      attack against a creature within 10 feet of the whip, with an attack bonus
-      of +9. On a hit, the target takes 1d6 + 5 force damage.</p>
-
-      <p>As a bonus action on your turn, you can direct the whip to fly up to 20
-      feet and repeat the attack against a creature within 10 feet of it. The
-      whip disappears after 1 hour, when you use an action to dismiss it, or
-      when you are incapacitated or die.</p>
+      <p><em>Wondrous item</em></p><p>This tiny object looks like a feather.
+      Different types of feather tokens exist, each with a different single-use
+      effect. The GM chooses the kind of token or determines it randomly from
+      the @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather
+      Token} table.</p><p><strong>Whip.</strong> You can use an action to throw
+      the token to a point within [[lookup @labels.description.range
+      activity=j2v9V9EiGGVvjPrU]] of you. The token disappears, and a floating
+      whip takes its place. You can then use a bonus action to make a melee
+      spell attack against a creature within 10 feet of the whip, with an attack
+      bonus of +9. On a hit, the target takes 1d6 + 5 force damage.</p><p>As a
+      bonus action on your turn, you can direct the whip to fly up to 20 feet
+      and repeat the attack against a creature within 10 feet of it. The whip
+      disappears after [[lookup @labels.duration activity=j2v9V9EiGGVvjPrU]],
+      when you use an action to dismiss it, or when you are
+      &amp;reference[incapacitated apply=false] or die.</p>
     chat: ''
   source:
     custom: ''
@@ -71,90 +68,102 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: attack
+    j2v9V9EiGGVvjPrU:
+      type: summon
+      name: Summon Whip
+      _id: j2v9V9EiGGVvjPrU
+      img: ''
+      sort: 0
       activation:
         type: action
-        value: 1
-        condition: A bonus action is used to control the whip.
         override: false
+        condition: ''
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: >-
+          <p>You can use an action to throw the token to a point within 10 feet
+          of you. The token disappears, and a floating whip takes its place. You
+          can then use a bonus action to make a melee spell attack against a
+          creature within 10 feet of the whip, with an attack bonus of +9. On a
+          hit, the target takes 1d6 + 5 force damage.</p><p>As a bonus action on
+          your turn, you can direct the whip to fly up to 20 feet and repeat the
+          attack against a creature within 10 feet of it. The whip disappears
+          after 1 hour, when you use an action to dismiss it, or when you are
+          incapacitated or die.</p>
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '1'
         units: hour
-        special: ''
+        concentration: false
         override: false
+        value: '1'
       effects: []
+      flags: {}
       range:
-        value: '10'
         units: ft
-        special: ''
         override: false
+        special: ''
+        value: '10'
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
+          stationary: false
           units: ft
+          type: ''
         affects:
-          count: '5'
-          type: space
           choice: false
+          type: space
+          count: '1'
           special: ''
-        prompt: true
         override: false
-      attack:
-        ability: ''
-        bonus: '9'
-        critical:
-          threshold: null
-        flat: false
-        type:
-          value: melee
-          classification: weapon
-      damage:
-        critical:
-          bonus: ''
-        includeBase: true
-        parts:
-          - custom:
-              enabled: false
-              formula: ''
-            number: 1
-            denomination: 6
-            bonus: '5'
-            types:
-              - force
+        prompt: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-        requireIdentification: true
-      appliedEffects: []
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: 6qZ2Xl8MdwX1Yoxt
+          uuid: Compendium.dnd5e.monsters.Actor.HvssL8faKrqpmaFn
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
   attuned: false
   identifier: feather-token-whip
 effects: []
@@ -165,11 +174,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037143784
-  modifiedTime: 1764619484961
+  modifiedTime: 1784667674029
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Fgkj11diTJJ7H3JC'

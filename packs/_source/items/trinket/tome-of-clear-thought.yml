@@ -1,15 +1,14 @@
 _id: 2BYm8to5KldN8eYu
 name: Tome of Clear Thought
-type: consumable
+type: equipment
 img: icons/sundries/books/book-symbol-triangle-silver-blue.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This book contains memory and logic exercises, and its words are
-      charged with magic. If you spend 48 hours over a period of 6 days or fewer
-      studying the book's contents and practicing its guidelines, your
+      <p><em>Wondrous item</em></p><p>This book contains memory and logic
+      exercises, and its words are charged with magic. If you spend [[lookup
+      @labels.activation activity=qE9YwIl2TIzMOCgx]] over a period of 6 days or
+      fewer studying the book's contents and practicing its guidelines, your
       Intelligence score increases by 2, as does your maximum for that score.
       The manual then loses its magic, but regains it in a century.</p>
     chat: ''
@@ -19,6 +18,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 1
@@ -33,30 +33,18 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: true
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Tome
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    qE9YwIl2TIzMOCgx:
       type: utility
       activation:
         type: hour
@@ -68,21 +56,26 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: perm
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: s3KobZ9lfK7Ek6C1
+          uuid: null
+          level: {}
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -93,7 +86,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -110,8 +104,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Study Tome
       img: ''
       visibility:
         requireMagic: true
@@ -119,10 +113,75 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: qE9YwIl2TIzMOCgx
   attuned: false
   identifier: tome-of-clear-thought
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Blessing of Clear Thoughts
+    img: icons/sundries/books/book-symbol-triangle-silver-blue.webp
+    origin: Compendium.dnd5e.items.Item.2BYm8to5KldN8eYu
+    transfer: false
+    _id: s3KobZ9lfK7Ek6C1
+    type: base
+    system:
+      changes:
+        - key: system.abilities.int.value
+          type: add
+          value: 2
+          phase: initial
+          _id: qbv2ShU9c6GcwQgM
+          conditions: '{}'
+          priority: null
+        - key: system.abilities.int.max
+          type: add
+          value: 2
+          phase: initial
+          _id: CPoyEgldJo5HjHcO
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>Your Intelligence score increases by 2, as does your maximum for that
+      score.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783793160098
+      modifiedTime: 1783793327226
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!2BYm8to5KldN8eYu.s3KobZ9lfK7Ek6C1'
 folder: UnUwTG4YIgd0kaUJ
 sort: 400000
 ownership:
@@ -130,11 +189,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037088569
-  modifiedTime: 1764618816507
+  modifiedTime: 1784591147546
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!2BYm8to5KldN8eYu'

@@ -1,31 +1,29 @@
 _id: iB3gunzgxZ8xK6Z5
 name: Talisman of Pure Good
 type: consumable
-img: icons/magic/life/ankh-gold-blue.webp
+img: icons/equipment/neck/pendant-faceted-silver-green.webp
 system:
   description:
     value: >-
       <p><em>Wondrous item, (requires attunement by a creature of good
-      alignment)</em></p>
-
-      <p>This talisman is a mighty symbol of goodness. A creature that is
-      neither good nor evil in alignment takes 6d6 radiant damage upon touching
-      the talisman. An evil creature takes 8d6 radiant damage upon touching the
-      talisman. Either sort of creature takes the damage again each time it ends
-      its turn holding or carrying the talisman.</p>
-
-      <p>If you are a good cleric or paladin, you can use the talisman as a holy
-      symbol, and you gain a +2 bonus to spell attack rolls while you wear or
-      hold it.</p>
-
-      <p>The talisman has 7 charges. If you are wearing or holding it, you can
-      use an action to expend 1 charge from it and choose one creature you can
-      see on the ground within 120 feet of you. If the target is of evil
-      alignment, a flaming fissure opens under it. The target must succeed on a
-      DC 20 Dexterity saving throw or fall into the fissure and be destroyed,
-      leaving no remains. The fissure then closes, leaving no trace of its
-      existence. When you expend the last charge, the talisman disperses into
-      motes of golden light and is destroyed.</p>
+      alignment)</em></p><p>This talisman is a mighty symbol of goodness. A
+      creature that is neither good nor evil in alignment takes [[/damage
+      activity=NHlT1xOujDFWegFu]] damage upon touching the talisman. An evil
+      creature takes [[/damage activity=R7YK5cZ7HZ8Z25Pl]] damage upon touching
+      the talisman. Either sort of creature takes the damage again each time it
+      ends its turn holding or carrying the talisman.</p><p>If you are a good
+      cleric or paladin, you can use the talisman as a holy symbol, and you gain
+      a +2 bonus to spell attack rolls while you wear or hold it.</p><p>The
+      talisman has 7 charges. If you are wearing or holding it, you can use an
+      action to expend 1 charge from it and choose [[lookup
+      @labels.description.affects activity=XF0eIVDXqVLUo7YL]] you can see on the
+      ground within [[lookup @labels.description.range
+      activity=XF0eIVDXqVLUo7YL]] of you. If the target is of evil alignment, a
+      flaming fissure opens under it. The target must succeed on a [[/save]]
+      saving throw or fall into the fissure and be destroyed, leaving no
+      remains. The fissure then closes, leaving no trace of its existence. When
+      you expend the last charge, the talisman disperses into motes of golden
+      light and is destroyed.</p>
     chat: ''
   source:
     custom: ''
@@ -65,7 +63,7 @@ system:
         formula: ''
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -74,55 +72,145 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    XF0eIVDXqVLUo7YL:
       type: save
+      name: Create Flaming Fissure
+      img: ''
+      sort: 0
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: >-
+          <p>If you are wearing or holding it, you can use an action to expend 1
+          charge from the talisman and choose [[lookup
+          @labels.description.affects activity=SuInyZ9zQk6pkXUY]] you can see on
+          the ground within [[lookup @labels.description.range
+          activity=SuInyZ9zQk6pkXUY]] of you. If the target is of good
+          alignment, a flaming fissure opens under it. The target must succeed
+          on a [[/save]] saving throw or fall into the fissure and be destroyed,
+          leaving no remains. The fissure then closes, leaving no trace of its
+          existence. When you expend the last charge, the talisman dissolves
+          into foul-smelling slime and is destroyed.</p>
         chatFlavor: ''
       duration:
-        concentration: false
-        value: ''
         units: inst
-        special: ''
+        concentration: false
         override: false
       effects: []
+      flags: {}
       range:
-        value: '120'
         units: ft
-        special: ''
         override: false
+        value: '120'
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
+          choice: false
           count: '1'
           type: creature
-          choice: false
           special: ''
-        prompt: true
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
       damage:
-        onSave: half
+        onSave: none
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: ''
+          formula: '20'
+        visible: true
+        bonus: ''
+      _id: XF0eIVDXqVLUo7YL
+    NHlT1xOujDFWegFu:
+      type: damage
+      name: 'Contact Damage: Neutral Alignment'
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: false
+        condition: When you touch this talisman.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>A creature that is neither good nor evil in alignment takes
+          [[/damage activity=NHlT1xOujDFWegFu]] damage upon touching the
+          talisman. A creature takes the damage again each time it ends its turn
+          holding or carrying the talisman.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      damage:
+        critical:
+          allow: false
         parts:
           - custom:
               enabled: false
@@ -130,79 +218,70 @@ system:
             number: 6
             denomination: 6
             bonus: ''
+            modifiers: []
             types:
               - radiant
-      save:
-        ability: dex
-        dc:
-          calculation: ''
-          formula: '20'
+            scaling:
+              number: 1
+      _id: NHlT1xOujDFWegFu
+    R7YK5cZ7HZ8Z25Pl:
+      type: damage
+      name: 'Contact Damage: Evil Alignment'
+      img: ''
+      sort: 200000
+      activation:
+        type: special
+        override: false
+        condition: When you touch this talisman.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: >-
+          <p>An evil creature takes [[/damage activity=R7YK5cZ7HZ8Z25Pl]] damage
+          upon touching the talisman. A creature takes the damage again each
+          time it ends its turn holding or carrying the talisman.</p>
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: self
+          special: ''
+        override: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-        requireIdentification: true
-      appliedEffects: []
-    dnd5eactivity200:
-      _id: dnd5eactivity200
-      type: damage
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: inst
-        special: ''
-        override: false
-      effects: []
-      range:
-        value: '120'
-        units: ft
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: '1'
-          type: creature
-          choice: false
-          special: ''
-        prompt: true
-        override: false
       damage:
         critical:
           allow: false
-          bonus: ''
         parts:
           - custom:
               enabled: false
@@ -210,25 +289,70 @@ system:
             number: 8
             denomination: 6
             bonus: ''
-            types: []
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
-      img: ''
-      visibility:
-        requireMagic: true
-        level:
-          min: null
-          max: null
-        identifier: ''
-        requireIdentification: false
-      appliedEffects: []
+            modifiers: []
+            types:
+              - radiant
+            scaling:
+              number: 1
+      _id: R7YK5cZ7HZ8Z25Pl
   attuned: false
   identifier: talisman-of-pure-good
-effects: []
+effects:
+  - name: Talisman of Pure Good
+    img: icons/magic/holy/saint-glass-portrait-halo.webp
+    origin: Compendium.dnd5e.items.Item.iB3gunzgxZ8xK6Z5
+    system:
+      magical: true
+      changes:
+        - key: system.bonuses.msak.attack
+          type: add
+          value: 2
+          phase: initial
+          _id: CqdhI67rH6JkOsuV
+          conditions: '{}'
+          priority: null
+        - key: system.bonuses.rsak.attack
+          type: add
+          value: 2
+          phase: initial
+          conditions: '{}'
+          priority: null
+          _id: 4YyKP3fW2SmMSCIb
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: BaSW3xvTyPPXMFUq
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>If you are an good cleric or paladin, you can use the talisman as a
+      holy symbol, and you gain a +2 bonus to spell attack rolls while you wear
+      or hold it.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784591389573
+      modifiedTime: 1784591421950
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.PAXfmZ2ErDlCVy0N.ActiveEffect.0rQURYD7Ls7Punoj
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!iB3gunzgxZ8xK6Z5.BaSW3xvTyPPXMFUq'
 folder: UnUwTG4YIgd0kaUJ
 sort: 7400000
 ownership:
@@ -236,11 +360,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037259857
-  modifiedTime: 1764620640617
+  modifiedTime: 1784591434546
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!iB3gunzgxZ8xK6Z5'

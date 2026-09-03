@@ -1,21 +1,19 @@
 _id: vZdLYfHlLcZqQ8zc
 name: Chime of Opening
 type: consumable
-img: icons/commodities/tech/pipe-cylinder.webp
+img: icons/commodities/treasure/case-red-silver.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This hollow metal tube measures about 1 foot long and weighs 1 pound.
-      You can strike it as an action, pointing it at an object within 120 feet
-      of you that can be opened, such as a door, lid, or lock. The chime issues
-      a clear tone, and one lock or latch on the object opens unless the sound
-      can't reach the object. If no locks or latches remain, the object itself
-      opens.</p>
-
-      <p>The chime can be used ten times. After the tenth time, it cracks and
-      becomes useless.</p>
+      <p><em>Wondrous item</em></p><p>This hollow metal tube measures about 1
+      foot long and weighs 1 pound. You can strike it as an action, pointing it
+      at [[lookup @labels.description.affects activity=wyqM6G8qyCOeKuYy]] within
+      [[lookup @labels.description.range activity=wyqM6G8qyCOeKuYy]] of you that
+      can be opened, such as a door, lid, or lock. The chime issues a clear
+      tone, and one lock or latch on the object opens unless the sound can't
+      reach the object. If no locks or latches remain, the object itself
+      opens.</p><p>The chime can be used ten times. After the tenth time, it
+      cracks and becomes useless.</p>
     chat: ''
   source:
     custom: ''
@@ -50,17 +48,19 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This hollow metal tube measures about 1 foot long and weighs 1
+      pound.</p>
+    name: Unidentified Metal Tube
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    wyqM6G8qyCOeKuYy:
       type: utility
       activation:
         type: action
@@ -72,16 +72,18 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -98,10 +100,11 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
-          count: ''
-          type: ''
+          count: '1'
+          type: object
           choice: false
           special: ''
         prompt: true
@@ -115,8 +118,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Open Lock
       img: ''
       visibility:
         requireMagic: true
@@ -125,7 +128,10 @@ system:
           max: null
         identifier: ''
         requireIdentification: true
-      appliedEffects: []
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: wyqM6G8qyCOeKuYy
   attuned: false
   identifier: chime-of-opening
 effects: []
@@ -136,11 +142,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037315479
-  modifiedTime: 1764621235762
+  modifiedTime: 1784648315280
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!vZdLYfHlLcZqQ8zc'

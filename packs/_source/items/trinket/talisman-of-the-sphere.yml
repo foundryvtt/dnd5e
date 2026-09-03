@@ -1,11 +1,11 @@
 _id: 46ikeR4RrSim6DsN
 name: Talisman of the Sphere
 type: equipment
-img: icons/commodities/treasure/brooch-jeweled-pink.webp
+img: icons/commodities/gems/pearl-purple.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p><p>When you make an
+      <p><em>Wondrous item (requires attunement)</em></p><p>When you make an
       Intelligence (Arcana) check to control a Sphere of Annihilation while you
       are holding this talisman, you double your proficiency bonus on the check.
       In addition, when you start your turn with control over a Sphere of
@@ -54,6 +54,7 @@ system:
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Talisman
   container: null
   properties:
     - mgc
@@ -127,6 +128,8 @@ system:
         requireIdentification: true
   attuned: false
   identifier: talisman-of-the-sphere
+  armor:
+    magicalBonus: ''
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 1100000
@@ -135,11 +138,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037098121
-  modifiedTime: 1764618939109
+  modifiedTime: 1784591125211
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!46ikeR4RrSim6DsN'

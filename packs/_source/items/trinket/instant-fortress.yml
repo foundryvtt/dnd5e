@@ -1,39 +1,34 @@
 _id: 9stfX2i2I1YPo8vx
 name: Instant Fortress
 type: consumable
-img: icons/commodities/treasure/token-engraved-blue.webp
+img: icons/commodities/metal/ingot-steel-cube.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>You can use an action to place this 1-inch metal cube on the ground and
-      speak its command word. The cube rapidly grows into a fortress that
-      remains until you use an action to speak the command word that dismisses
-      it, which works only if the fortress is empty.</p>
-
-      <p>The fortress is a square tower, 20 feet on a side and 30 feet high,
-      with arrow slits on all sides and a battlement atop it. Its interior is
-      divided into two floors, with a ladder running along one wall to connect
-      them. The ladder ends at a trapdoor leading to the roof. When activated,
-      the tower has a small door on the side facing you. The door opens only at
-      your command, which you can speak as a bonus action. It is immune to the
-      @UUID[Compendium.dnd5e.spells.Item.1nhIxh0DsJsntCfj]{Knock} spell and
-      similar magic, such as that of a
-      @UUID[Compendium.dnd5e.items.Item.vZdLYfHlLcZqQ8zc]{Chime of Opening}.</p>
-
-      <p>Each creature in the area where the fortress appears must make a DC 15
-      Dexterity saving throw, taking 10d10 bludgeoning damage on a failed save,
-      or half as much damage on a successful one. In either case, the creature
-      is pushed to an unoccupied space outside but next to the fortress. Objects
-      in the area that aren't being worn or carried take this damage and are
-      pushed automatically.</p>
-
-      <p>The tower is made of adamantine, and its magic prevents it from being
-      tipped over. The roof, the door, and the walls each have 100 hit points,
-      immunity to damage from nonmagical weapons excluding siege weapons, and
-      resistance to all other damage. Only a
-      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell can
+      <p><em>Wondrous item</em></p><p>You can use an action to place this 1-inch
+      metal cube on the ground and speak its command word. The cube rapidly
+      grows into a fortress that remains until you use an action to speak the
+      command word that dismisses it, which works only if the fortress is
+      empty.</p><p>The fortress is a square tower, 20 feet on a side and 30 feet
+      high, with arrow slits on all sides and a battlement atop it. Its interior
+      is divided into two floors, with a ladder running along one wall to
+      connect them. The ladder ends at a trapdoor leading to the roof. When
+      activated, the tower has a small door on the side facing you. The door
+      opens only at your command, which you can speak as a bonus action. It is
+      immune to the @UUID[Compendium.dnd5e.spells.Item.1nhIxh0DsJsntCfj]{knock}
+      spell and similar magic, such as that of a
+      @UUID[Compendium.dnd5e.items.Item.vZdLYfHlLcZqQ8zc]{Chime of
+      Opening}.</p><p>Each creature in the area where the fortress appears must
+      make a [[/save activity=1DWy0O5NTgBxBxH8]] saving throw, taking [[/damage
+      activity=1DWy0O5NTgBxBxH8]] damage on a failed save, or half as much
+      damage on a successful one. In either case, the creature is pushed to an
+      unoccupied space outside but next to the fortress. Objects in the area
+      that aren't being worn or carried take this damage and are pushed
+      automatically.</p><p>The tower is made of adamantine, and its magic
+      prevents it from being tipped over. The roof, the door, and the walls each
+      have 100 hit points, immunity to damage from nonmagical weapons excluding
+      siege weapons, and resistance to all other damage. Only a
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{wish} spell can
       repair the fortress (this use of the spell counts as replicating a spell
       of 8th level or lower). Each casting of Wish causes the roof, the door, or
       one wall to regain 50 hit points.</p>
@@ -76,22 +71,22 @@ system:
         formula: ''
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>An intricate 1-inch metal cube.</p>
+    name: Unidentified Metal Cube
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    1DWy0O5NTgBxBxH8:
       type: save
       activation:
         type: action
         value: 1
-        condition: Command word.
+        condition: When you speak the cube's command word.
         override: false
       consumption:
         targets: []
@@ -101,10 +96,11 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -121,6 +117,7 @@ system:
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -139,16 +136,22 @@ system:
             bonus: ''
             types:
               - bludgeoning
+            modifiers: []
+            scaling:
+              number: 1
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: ''
           formula: '15'
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       name: ''
       img: ''
       visibility:
@@ -157,7 +160,11 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: 1DWy0O5NTgBxBxH8
   attuned: false
   identifier: instant-fortress
 effects: []
@@ -168,11 +175,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037120567
-  modifiedTime: 1764619174317
+  modifiedTime: 1784596983914
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!9stfX2i2I1YPo8vx'

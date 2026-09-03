@@ -1,22 +1,18 @@
 _id: rRMaaGZ7qbzqMvoI
 name: Bowl of Commanding Water Elementals
-type: consumable
+type: equipment
 img: icons/commodities/materials/bowl-liquid-white.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>While this bowl is filled with water, you can use an action to speak
-      the bowl's command word and summon a
-      <em>@UUID[Compendium.dnd5e.monsters.Actor.namJz755U1EhvEJa]{Water
-      Elemental}</em>, as if you had cast the
-      <em>@UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure
-      Elemental}</em> spell. The bowl can't be used this way again until the
-      next dawn.</p>
-
-      <p>The bowl is about 1 foot in diameter and half as deep. It weighs 3
-      pounds and holds about 3 gallons.</p>
+      <p><em>Wondrous item</em></p><p>While this bowl is filled with water, you
+      can use an action to speak the bowl's command word and summon a
+      @UUID[Compendium.dnd5e.monsters.Actor.namJz755U1EhvEJa]{water elemental},
+      as if you had cast the
+      @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{conjure elemental}
+      spell. The bowl can't be used this way again until the next
+      dawn.</p><p>The bowl is about 1 foot in diameter and half as deep. It
+      weighs 3 pounds and holds about 3 gallons.</p>
     chat: ''
   source:
     custom: ''
@@ -24,6 +20,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 3
@@ -38,99 +35,93 @@ system:
   uses:
     max: '1'
     recovery:
-      - period: day
+      - period: dawn
         type: recoverAll
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>The bowl is about 1 foot in diameter and half as deep. It weighs 3
+      pounds and holds about 3 gallons.</p>
+    name: Unidentified Bowl
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    LEtPPiH7jKKUY2bL:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: Command word.
-        override: false
+        override: true
+        condition: When you speak the bowl's command word.
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: '1'
-        units: hour
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        value: '90'
-        units: ft
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: square
-          size: '10'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: false
+        identifier: ''
+      _id: LEtPPiH7jKKUY2bL
+      name: Conjure Water Elemental
   attuned: false
   identifier: bowl-of-commanding-water-elementals
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 9200000
@@ -139,11 +130,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037298834
-  modifiedTime: 1764621066878
+  modifiedTime: 1784645356233
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!rRMaaGZ7qbzqMvoI'

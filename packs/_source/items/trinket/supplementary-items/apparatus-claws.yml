@@ -1,0 +1,165 @@
+name: Apparatus Claws
+type: weapon
+system:
+  type:
+    value: siege
+    baseItem: ''
+  activities:
+    641q4Lpueg4bWtWP:
+      _id: 641q4Lpueg4bWtWP
+      type: attack
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      attack:
+        critical:
+          threshold: null
+        flat: true
+        type:
+          value: melee
+          classification: ''
+        ability: ''
+        bonus: '8'
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 6
+            bonus: ''
+            modifiers: []
+            types:
+              - bludgeoning
+            scaling:
+              number: 1
+      name: ''
+  damage:
+    base:
+      types: []
+      custom:
+        enabled: false
+      modifiers: []
+      scaling:
+        number: 1
+      number: null
+      denomination: null
+      bonus: ''
+    versatile:
+      types: []
+      custom:
+        enabled: false
+      modifiers: []
+      scaling:
+        number: 1
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: ''
+    chat: ''
+  identifier: new-item
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+    max: null
+  ammunition: {}
+  armor:
+    value: null
+  properties: []
+  proficient: null
+  range:
+    units: ft
+    value: 5
+    long: null
+    reach: null
+  cover: 0
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  mastery: ''
+img: icons/commodities/claws/claw-pincer-pink.webp
+effects: []
+folder: fNie4LCXK3X2lb9F
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.365'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1784671675813
+  modifiedTime: 1784671675908
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_id: jvSFJ4yIaa14d1Jj
+sort: 100000
+_key: '!items!jvSFJ4yIaa14d1Jj'

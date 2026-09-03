@@ -1,15 +1,13 @@
 _id: nAqDwI9GyXS1diiz
 name: Horseshoes of Speed
-type: consumable
+type: equipment
 img: icons/tools/smithing/horsehoe-worn-steel-grey.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>These iron horseshoes come in a set of four. While all four shoes are
-      affixed to the hooves of a horse or similar creature, they increase the
-      creature's walking speed by 30 feet.</p>
+      <p><em>Wondrous item</em></p><p>These iron horseshoes come in a set of
+      four. While all four shoes are affixed to the hooves of a horse or similar
+      creature, they increase the creature's walking speed by 30 feet.</p>
     chat: ''
   source:
     custom: ''
@@ -17,6 +15,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 8
@@ -30,32 +29,73 @@ system:
   identified: true
   uses:
     max: ''
-    autoDestroy: true
     spent: 0
     recovery: []
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: <p>These iron horseshoes come in a set of four.</p>
+    name: Unidentified Set of Horseshoes
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities: {}
   attuned: false
   identifier: horseshoes-of-speed
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Horseshoes of Speed
+    img: icons/skills/movement/feet-winged-boots-glowing-yellow.webp
+    origin: Compendium.dnd5e.items.Item.nAqDwI9GyXS1diiz
+    system:
+      magical: true
+      changes:
+        - key: system.attributes.movement.walk
+          type: add
+          value: 30
+          phase: initial
+          _id: lzb3e713PccLDYcX
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: 25lZlZhVVppo233M
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>Your walking speed increases by 30 feet.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784668326328
+      modifiedTime: 1784668358906
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!nAqDwI9GyXS1diiz.25lZlZhVVppo233M'
 folder: UnUwTG4YIgd0kaUJ
 sort: 8200000
 ownership:
@@ -63,11 +103,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037281026
-  modifiedTime: 1750697344647
+  modifiedTime: 1784668366169
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!nAqDwI9GyXS1diiz'

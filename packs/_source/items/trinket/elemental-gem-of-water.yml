@@ -5,13 +5,11 @@ img: icons/commodities/gems/gem-rough-cushion-green.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This emerald contains a mote of elemental energy. When you use an
-      action to break the gem, a
-      @UUID[Compendium.dnd5e.monsters.Actor.namJz755U1EhvEJa]{Water Elemental}
+      <p><em>Wondrous item</em></p><p>This emerald contains a mote of elemental
+      energy. When you use an action to break the gem, a
+      @UUID[Compendium.dnd5e.monsters.Actor.namJz755U1EhvEJa]{water elemental}
       is summoned as if you had cast the
-      @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure Elemental}
+      @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{conjure elemental}
       spell, and the gem's magic is lost.</p>
     chat: ''
   source:
@@ -47,81 +45,78 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>This emerald contains a mote of magical energy.</p>
+    name: Unidentified Gem
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    SBbrqyKMmsNgctgt:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      _id: SBbrqyKMmsNgctgt
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
-      effects: []
+      flags: {}
       range:
-        value: '90'
-        units: ft
-        special: ''
+        units: self
         override: false
       target:
         template:
-          count: ''
           contiguous: false
-          type: square
-          size: '10'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
         identifier: ''
-      appliedEffects: []
+      name: Conjure Water Elemental
   attuned: false
   identifier: elemental-gem-of-water
 effects: []
@@ -132,11 +127,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037149770
-  modifiedTime: 1764619521909
+  modifiedTime: 1784652645504
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!HLEhnzLbpRbYdAHo'

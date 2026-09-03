@@ -5,8 +5,8 @@ img: icons/tools/fasteners/chain-steel-grey.webp
 system:
   description:
     value: >-
-      <p>A chain has 10 hit points. It can be burst with a successful DC 20
-      Strength check.</p>
+      <p>A chain has 10 hit points. It can be burst with a successful [[/check]]
+      check.</p>
     chat: ''
   source:
     custom: ''
@@ -49,8 +49,7 @@ system:
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    oKqgCAH0F1G5TTOT:
       type: check
       activation:
         type: action
@@ -65,15 +64,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -84,7 +84,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -93,67 +94,31 @@ system:
         prompt: true
         override: false
       check:
-        ability: ''
-        dc: {}
-      uses:
-        spent: 0
-        recovery: []
-      sort: 0
-    dnd5eactivity100:
-      _id: dnd5eactivity100
-      type: save
-      activation:
-        type: action
-        value: 1
-        condition: ''
-        override: false
-      consumption:
-        targets: []
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        concentration: false
-        value: ''
-        units: ''
-        special: ''
-        override: false
-      effects: []
-      range:
-        units: ''
-        special: ''
-        override: false
-      target:
-        template:
-          count: ''
-          contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
-        affects:
-          count: ''
-          type: ''
-          choice: false
-          special: ''
-        prompt: true
-        override: false
-      damage:
-        onSave: half
-        parts: []
-      save:
         ability: str
         dc:
           calculation: ''
           formula: '20'
+        associated: []
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      name: Break Chain Check
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        identifier: ''
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: oKqgCAH0F1G5TTOT
   attuned: false
   identifier: chain-10-feet
 effects: []
@@ -164,11 +129,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037160642
-  modifiedTime: 1725992504063
+  modifiedTime: 1784647955324
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!JvoufrTkSDMsS9Sm'

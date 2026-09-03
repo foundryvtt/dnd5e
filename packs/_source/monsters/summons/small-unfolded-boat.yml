@@ -1,0 +1,313 @@
+folder: 89daM0oezivxN75Y
+name: Small Unfolded Boat
+type: vehicle
+_id: lqaILiT9c1hwm4Iu
+img: systems/dnd5e/icons/svg/actors/vehicle.svg
+system:
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  abilities:
+    str:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    dex:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    con:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    int:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    wis:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+    cha:
+      value: 0
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+      check:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+  attributes:
+    ac:
+      calc: flat
+      calcs:
+        - unarmored
+        - armored
+      flat: null
+      formulas: []
+      override: null
+    init:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonus: ''
+    movement:
+      speeds: {}
+      units: null
+      hover: false
+      ignoredDifficultTerrain: []
+    hp:
+      max: null
+      temp: 0
+      tempmax: 0
+      value: null
+      mt: null
+    actions:
+      max: 3
+      spent: 0
+      stations: true
+      thresholds:
+        '0': null
+        '1': null
+        '2': null
+    capacity:
+      cargo:
+        units: lb
+        value: null
+      creature: ''
+    price:
+      value: null
+      denomination: gp
+    quality:
+      value: 4
+    travel:
+      paces: {}
+      speeds: {}
+      time: 24
+      units: mph
+  crew:
+    value: []
+    max: null
+  details:
+    biography:
+      value: >-
+        <p>Unfolded form of a
+        @UUID[Compendium.dnd5e.items.Item.u4ewpAFZjLrWrmQv]{Folding
+        Boat}</p><p>@embed[Compendium.dnd5e.items.Item.u4ewpAFZjLrWrmQv
+        inline]</p>
+      public: ''
+    type: water
+  draft:
+    value: []
+  passengers:
+    value: []
+    max: 4
+  source:
+    revision: 1
+    rules: '2014'
+  traits:
+    size: lg
+    di:
+      value: []
+      custom: ''
+      bypasses: []
+    dr:
+      value: []
+      custom: ''
+      bypasses: []
+    dv:
+      value: []
+      custom: ''
+      bypasses: []
+    dm:
+      amount: {}
+      bypasses: []
+    ci:
+      value: []
+      custom: ''
+    weight:
+      units: lb
+      value: null
+    keel:
+      units: ft
+      value: 4
+    beam:
+      units: ft
+      value: 10
+    dimensions: ''
+  cargo:
+    crew: []
+    passengers: []
+prototypeToken:
+  name: Small Unfolded Boat
+  displayName: 0
+  actorLink: false
+  width: 2
+  height: 2
+  depth: 1
+  texture:
+    src: systems/dnd5e/icons/svg/actors/vehicle.svg
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    scaleX: 1
+    scaleY: 1
+    tint: '#ffffff'
+    alphaThreshold: 0.75
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  light:
+    negative: false
+    priority: 0
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    color: null
+    coloration: 1
+    dim: 0
+    attenuation: 0.5
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      type: null
+      speed: 5
+      intensity: 5
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+  sight:
+    enabled: false
+    range: 0
+    angle: 360
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    brightness: 0
+    saturation: 0
+    contrast: 0
+  detectionModes: {}
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
+  flags: {}
+  randomImg: false
+  appendNumber: false
+  prependAdjective: false
+items: []
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.365'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1784682920180
+  modifiedTime: 1784682991187
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!actors!lqaILiT9c1hwm4Iu'

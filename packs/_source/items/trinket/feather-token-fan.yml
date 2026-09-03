@@ -5,19 +5,17 @@ img: icons/commodities/materials/feather-colored-red.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This tiny object looks like a feather. Different types of feather
-      tokens exist, each with a different single-use effect. The GM chooses the
-      kind of token or determines it randomly from the
-      @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather Token}
-      table.</p>
-
-      <p><strong>Fan.</strong> If you are on a boat or ship, you can use an
-      action to toss the token up to 10 feet in the air. The token disappears,
-      and a giant flapping fan takes its place. The fan floats and creates a
-      wind strong enough to fill the sails of one ship, increasing its speed by
-      5 miles per hour for 8 hours. You can dismiss the fan as an action.</p>
+      <p><em>Wondrous item</em></p><p>This tiny object looks like a feather.
+      Different types of feather tokens exist, each with a different single-use
+      effect. The GM chooses the kind of token or determines it randomly from
+      the @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather
+      Token} table.</p><p><strong>Fan.</strong> If you are on a boat or ship,
+      you can use an action to toss the token up to [[lookup
+      @labels.description.range activity=BKdz2nAdDeCMsu5Z]] in the air. The
+      token disappears, and a giant flapping fan takes its place. The fan floats
+      and creates a wind strong enough to fill the sails of one ship, increasing
+      its speed by 5 miles per hour for [[lookup @labels.duration
+      activity=BKdz2nAdDeCMsu5Z]]. You can dismiss the fan as an action.</p>
     chat: ''
   source:
     custom: ''
@@ -52,7 +50,7 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -61,8 +59,7 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    BKdz2nAdDeCMsu5Z:
       type: utility
       activation:
         type: action
@@ -74,19 +71,33 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>If you are on a boat or ship, you can use an action to toss the
+          token up to [[lookup @labels.description.range
+          activity=BKdz2nAdDeCMsu5Z]] in the air. The token disappears, and a
+          giant flapping fan takes its place. The fan floats and creates a wind
+          strong enough to fill the sails of one ship, increasing its speed by 5
+          miles per hour for [[lookup @labels.duration
+          activity=BKdz2nAdDeCMsu5Z]]. You can dismiss the fan as an action.</p>
       duration:
         concentration: false
         value: '8'
         units: hour
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: q4xKdG648esWjrYT
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         value: '10'
         units: ft
@@ -100,13 +111,14 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
           choice: false
           special: ''
-        prompt: true
+        prompt: false
         override: false
       roll:
         formula: ''
@@ -117,8 +129,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Raise Feather Token
       img: ''
       visibility:
         requireMagic: true
@@ -127,10 +139,59 @@ system:
           max: null
         identifier: ''
         requireIdentification: true
-      appliedEffects: []
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: BKdz2nAdDeCMsu5Z
   attuned: false
   identifier: feather-token-fan
-effects: []
+effects:
+  - name: Feather Fan
+    img: icons/commodities/materials/feather-stained-glass-blue.webp
+    origin: Compendium.dnd5e.items.Item.e98hfROZjztt7ccO
+    transfer: false
+    _id: q4xKdG648esWjrYT
+    type: base
+    system:
+      changes:
+        - key: system.attributes.travel.speeds.water
+          type: add
+          value: 5
+          phase: initial
+          _id: iJDpoxgwUpUQj1Ju
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 8
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>This ship's speed is increased by 5 miles per hour for the
+      duration.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784664804330
+      modifiedTime: 1784664853433
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!e98hfROZjztt7ccO.q4xKdG648esWjrYT'
 folder: UnUwTG4YIgd0kaUJ
 sort: 6800000
 ownership:
@@ -138,11 +199,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037238323
-  modifiedTime: 1764620401847
+  modifiedTime: 1784665538437
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!e98hfROZjztt7ccO'

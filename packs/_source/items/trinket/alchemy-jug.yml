@@ -1,6 +1,6 @@
 _id: TZggpdbOYqOCG7mY
 name: Alchemy Jug
-type: consumable
+type: equipment
 img: icons/consumables/drinks/clay-jar-glowing-orange-blue.webp
 system:
   description:
@@ -15,16 +15,18 @@ system:
       depends on the liquid you named.</p><p>Once the jug starts producing a
       liquid, it can't produce a different one, or more of one that has reached
       its maximum, until the next
-      dawn.</p><table><thead><tr><th>Liquid</th><th>Max
-      Amount</th></tr></thead><tbody><tr><td>Acid</td><td>8
-      ounces</td></tr><tr><td>Basic poison</td><td>1/2
-      ounce</td></tr><tr><td>Beer</td><td>4
-      gallons</td></tr><tr><td>Honey</td><td>1
-      gallon</td></tr><tr><td>Mayonnaise</td><td>2
-      gallons</td></tr><tr><td>Oil</td><td>1
-      quart</td></tr><tr><td>Vinegar</td><td>2 gallons</td></tr><tr><td>Water,
-      fresh</td><td>8 gallons</td></tr><tr><td>Water, salt</td><td>12
-      gallons</td></tr><tr><td>Wine</td><td>1 gallon</td></tr></tbody></table>
+      dawn.</p><table><thead><tr><th><p>Liquid</p></th><th><p>Max
+      Amount</p></th></tr></thead><tbody><tr><td><p>Acid</p></td><td><p>8
+      ounces</p></td></tr><tr><td><p>Basic poison</p></td><td><p>1/2
+      ounce</p></td></tr><tr><td><p>Beer</p></td><td><p>4
+      gallons</p></td></tr><tr><td><p>Honey</p></td><td><p>1
+      gallon</p></td></tr><tr><td><p>Mayonnaise</p></td><td><p>2
+      gallons</p></td></tr><tr><td><p>Oil</p></td><td><p>1
+      quart</p></td></tr><tr><td><p>Vinegar</p></td><td><p>2
+      gallons</p></td></tr><tr><td><p>Water, fresh</p></td><td><p>8
+      gallons</p></td></tr><tr><td><p>Water, salt</p></td><td><p>12
+      gallons</p></td></tr><tr><td><p>Wine</p></td><td><p>1
+      gallon</p></td></tr></tbody></table>
     chat: ''
   source:
     custom: ''
@@ -32,6 +34,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 12
@@ -46,35 +49,26 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This ceramic jug appears to be able to hold a gallon of liquid and
+      weighs 12 pounds whether full or empty. Sloshing sounds can be heard from
+      within the jug when it is shaken, even if the jug is empty.</p>
+    name: Unidentified Jug
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    nWTqMr5USpxAHGcT:
       type: utility
       activation:
         type: action
         value: 1
-        condition: ''
+        condition: When you name a liquid the alchemy jug can pour.
         override: false
       consumption:
         targets: []
@@ -84,15 +78,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: touch
         special: ''
         override: false
       target:
@@ -103,7 +98,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -120,8 +116,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Pour Liquid
       img: ''
       visibility:
         requireMagic: true
@@ -130,9 +126,20 @@ system:
           max: null
         identifier: ''
         requireIdentification: true
-      appliedEffects: []
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: nWTqMr5USpxAHGcT
   attuned: false
   identifier: alchemy-jug
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 5300000
@@ -141,11 +148,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037193569
-  modifiedTime: 1764619984302
+  modifiedTime: 1784646981462
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TZggpdbOYqOCG7mY'

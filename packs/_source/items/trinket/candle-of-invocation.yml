@@ -5,30 +5,26 @@ img: icons/sundries/lights/candle-unlit-yellow.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>This slender taper is dedicated to a deity and shares that deity's
-      alignment. The candle's alignment can be detected with the Detect Evil and
-      Good spell. The GM chooses the god and associated alignment or determines
-      the alignment randomly from the
+      <p><em>Wondrous item (requires attunement)</em></p><p>This slender taper
+      is dedicated to a deity and shares that deity's alignment. The candle's
+      alignment can be detected with the
+      @UUID[Compendium.dnd5e.spells.Item.Mzh95utKDPIrjiH8]{detect evil and good}
+      spell. The GM chooses the god and associated alignment or determines the
+      alignment randomly from the
       @UUID[Compendium.dnd5e.tables.RollTable.C1N8LjO7gOjEWgh4]{Candle of
-      Invocation} table.</p>
-
-      <p>The candle's magic is activated when the candle is lit, which requires
-      an action. After burning for 4 hours, the candle is destroyed. You can
-      snuff it out early for use at a later time. Deduct the time it burned in
-      increments of 1 minute from the candle's total burn time.</p>
-
-      <p>While lit, the candle sheds dim light in a 30-foot radius. Any creature
-      within that light whose alignment matches that of the candle makes attack
-      rolls, saving throws, and ability checks with advantage. In addition, a
-      cleric or druid in the light whose alignment matches the candle's can cast
-      1st- level spells he or she has prepared without expending spell slots,
-      though the spell's effect is as if cast with a 1st-level slot.</p>
-
-      <p>Alternatively, when you light the candle for the first time, you can
-      cast the
-      <em>@UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{Gate}</em>spell
+      Invocation} table.</p><p>The candle's magic is activated when the candle
+      is lit, which requires an action. After burning for 4 hours, the candle is
+      destroyed. You can snuff it out early for use at a later time. Deduct the
+      time it burned in increments of 1 minute from the candle's total burn
+      time.</p><p>While lit, the candle sheds &amp;reference[dim light] in a
+      30-foot radius. Any creature within that light whose alignment matches
+      that of the candle makes attack rolls, saving throws, and ability checks
+      with advantage. In addition, a cleric or druid in the light whose
+      alignment matches the candle's can cast 1st- level spells he or she has
+      prepared without expending spell slots, though the spell's effect is as if
+      cast with a 1st-level slot.</p><p>Alternatively, when you light the candle
+      for the first time, you can cast the
+      <em>@UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{gate} </em>spell
       with it. Doing so destroys the candle.</p>
     chat: ''
   source:
@@ -49,9 +45,9 @@ system:
   rarity: veryRare
   identified: true
   uses:
-    max: '1'
+    max: '240'
     recovery: []
-    autoDestroy: false
+    autoDestroy: true
     spent: 0
   damage:
     base:
@@ -64,95 +60,345 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
+    name: Unidentified Candle
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    kgoXK2tr4dKRKFfc:
+      type: enchant
+      name: Light Candle
+      _id: kgoXK2tr4dKRKFfc
+      img: ''
+      sort: 0
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: '4'
-        units: hour
-        special: ''
         override: false
-      effects: []
+      effects:
+        - _id: Z37KLJKtHzMfOJBK
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity:
+              - 3Fzs9ed01BZDAeOt
+              - TYFk73Syjh1Q2J9D
+            effect:
+              - ePqMPVOf2ueRhmcI
+            item: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: self
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: radius
-          size: '30'
-          width: ''
-          height: ''
+          stationary: false
           units: ft
-        affects:
-          count: ''
           type: ''
+        affects:
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      roll:
-        formula: ''
-        name: ''
         prompt: false
-        visible: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-      appliedEffects: []
+      enchant:
+        self: true
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: ''
+    3Fzs9ed01BZDAeOt:
+      type: utility
+      name: Subtract Remaining Time
+      _id: 3Fzs9ed01BZDAeOt
+      img: ''
+      sort: 100000
+      activation:
+        type: special
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: true
+          max: '@item.uses.value'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: '1'
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+    TYFk73Syjh1Q2J9D:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 9
+      _id: TYFk73Syjh1Q2J9D
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: itemUses
+            value: '240'
+            target: ''
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: ''
   attuned: false
   identifier: candle-of-invocation
-effects: []
+effects:
+  - type: enchantment
+    name: Lit Candle
+    img: icons/sundries/lights/candle-unlit-yellow.webp
+    disabled: true
+    _id: Z37KLJKtHzMfOJBK
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Lit {}
+          phase: initial
+          _id: zcwxIqrbOvRq2w3H
+          conditions: '{}'
+          priority: null
+        - key: system.activities.kgoXK2tr4dKRKFfc.name
+          type: override
+          value: Extinguish Candle
+          phase: initial
+          _id: zMHZAyapyF8MXgXj
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: 4
+      units: hours
+      expiry: turnStart
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784672085274
+      modifiedTime: 1784672431068
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZoUVmRA3HfAK2eZy.Z37KLJKtHzMfOJBK'
+  - name: Candle Illumination
+    img: icons/sundries/lights/candle-unlit-yellow.webp
+    origin: Compendium.dnd5e.items.Item.ZoUVmRA3HfAK2eZy
+    system:
+      magical: true
+      changes:
+        - key: token.light.dim
+          type: upgrade
+          value: 30
+          phase: initial
+          _id: 0fN2o6xZ5WxotKyV
+          conditions: '{}'
+          priority: null
+        - key: token.light.animate.type
+          type: override
+          value: torch
+          phase: initial
+          _id: 5erMXskUdvwVsAve
+          conditions: '{}'
+          priority: null
+        - key: token.light.color
+          type: override
+          value: '#983d16'
+          phase: initial
+          _id: OfE07vMohT3nUcx6
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: ePqMPVOf2ueRhmcI
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784672307334
+      modifiedTime: 1784672376254
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ZoUVmRA3HfAK2eZy.ePqMPVOf2ueRhmcI'
 folder: UnUwTG4YIgd0kaUJ
 sort: 6400000
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity:
+        - 3Fzs9ed01BZDAeOt
+        - TYFk73Syjh1Q2J9D
+      effect:
+        - ePqMPVOf2ueRhmcI
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037220102
-  modifiedTime: 1764620231197
+  modifiedTime: 1784672473739
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ZoUVmRA3HfAK2eZy'

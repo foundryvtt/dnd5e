@@ -1,18 +1,18 @@
 _id: TjWk2mpNXjDdfIDM
 name: Carpet of Flying (6x9)
-type: consumable
+type: equipment
 img: icons/commodities/cloth/cloth-bolt-embroidered-pink.webp
 system:
   description:
     value: >-
       <p><em>Wondrous item</em></p><p>You can speak the carpet's command word as
       an action to make the carpet hover and fly. It moves according to your
-      spoken directions, provided that you are within 30 feet of it.</p><p>This
+      spoken directions, provided that you are within [[lookup
+      @labels.description.range activity=LeLDmduodDk7lqsZ]] of it.</p><p>This
       carpet is 6 ft. x 9 ft. and has a speed of 30 feet carrying up to 800 lb,
-      or half that speed when carrying up to 1600 lb.</p>
-
-      <p>Four sizes of carpet of flying exist. The GM chooses the size of a
-      given carpet or determines it randomly from the
+      or half that speed when carrying up to 1600 lb.</p><p>Four sizes of carpet
+      of flying exist. The GM chooses the size of a given carpet or determines
+      it randomly from the
       @UUID[Compendium.dnd5e.tables.RollTable.Z2OG7jt9R8zofxnJ]{Carpet of
       Flying} table.</p>
     chat: ''
@@ -22,6 +22,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 10
@@ -36,93 +37,110 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Carpet
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    LeLDmduodDk7lqsZ:
+      type: summon
+      name: 'Speak Command Word: Animate Carpet'
+      img: ''
+      sort: 200000
       activation:
         type: action
-        value: 1
-        condition: Command word.
         override: false
+        condition: When you speak the carpet's command word.
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
+        units: inst
         concentration: false
-        value: ''
-        units: ''
-        special: ''
         override: false
       effects: []
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: ft
         override: false
+        value: '30'
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: ''
           choice: false
+          count: '1'
+          type: space
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
         prompt: false
-        visible: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: true
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: '1'
+          name: ''
+          _id: Zk7JNWUTofLTha6v
+          uuid: Compendium.dnd5e.monsters.Actor.Xi7sNkXlZMyag8S9
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: LeLDmduodDk7lqsZ
   attuned: false
   identifier: carpet-of-flying-6x9
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 5400000
@@ -131,11 +149,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037194122
-  modifiedTime: 1764619995895
+  modifiedTime: 1784670612741
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TjWk2mpNXjDdfIDM'

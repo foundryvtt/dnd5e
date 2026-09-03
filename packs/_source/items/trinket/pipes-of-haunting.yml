@@ -1,24 +1,24 @@
 _id: oNLfJNRQgUHpU8c7
 name: Pipes of Haunting
-type: consumable
+type: equipment
 img: icons/tools/instruments/flute-simple-wood.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>You must be proficient with wind instruments to use these pipes. They
-      have 3 charges. You can use an action to play them and expend 1 charge to
-      create an eerie, spellbinding tune. Each creature within 30 feet of you
-      that hears you play must succeed on a DC 15 Wisdom saving throw or become
-      frightened of you for 1 minute. If you wish, all creatures in the area
-      that aren't hostile toward you automatically succeed on the saving throw.
-      A creature that fails the saving throw can repeat it at the end of each of
-      its turns, ending the effect on itself on a success. A creature that
-      succeeds on its saving throw is immune to the effect of these pipes for 24
-      hours.</p>
-
-      <p>The pipes regain 1d3 expended charges daily at dawn.</p>
+      <p><em>Wondrous item</em></p><p>You must be proficient with wind
+      instruments to use these pipes. They have [[lookup @item.uses.max]]
+      charges. You can use an action to play them and expend 1 charge to create
+      an eerie, spellbinding tune. Each creature within [[lookup
+      @labels.description.range activity=XmF0TUzoaFDcdOwM]] of you that hears
+      you play must succeed on a [[/save activity=XmF0TUzoaFDcdOwM]] saving
+      throw or become &amp;reference[frightened] of you for [[lookup
+      @labels.duration activity=XmF0TUzoaFDcdOwM]]. If you wish, all creatures
+      in the area that aren't hostile toward you automatically succeed on the
+      saving throw. A creature that fails the saving throw can repeat it at the
+      end of each of its turns, ending the effect on itself on a success. A
+      creature that succeeds on its saving throw is immune to the effect of
+      these pipes for 24 hours.</p><p>The pipes regain 1d3 expended charges
+      daily at dawn.</p>
     chat: ''
   source:
     custom: ''
@@ -26,6 +26,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 1
@@ -40,57 +41,53 @@ system:
   uses:
     max: '3'
     recovery:
-      - period: lr
+      - period: dawn
         type: formula
         formula: 1d3
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
     description: ''
+    name: Unidentified Pipes
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    XmF0TUzoaFDcdOwM:
       type: save
       activation:
         type: action
         value: 1
-        condition: Proficiency with wind instruments.
+        condition: Requires proficiency with wind instruments.
         override: false
       consumption:
         targets:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: minute
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: DAvozHAiBH7M3T8u
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
       range:
         value: '30'
         units: ft
@@ -100,32 +97,36 @@ system:
         template:
           count: ''
           contiguous: false
-          type: ''
-          size: ''
+          type: radius
+          size: '30'
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: true
         affects:
           count: ''
-          type: ''
-          choice: false
+          type: creature
+          choice: true
           special: ''
         prompt: true
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts: []
       save:
-        ability: wis
+        ability:
+          - wis
         dc:
           calculation: ''
           formula: '15'
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Play Instruments
       img: ''
       visibility:
         requireMagic: true
@@ -133,10 +134,62 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: XmF0TUzoaFDcdOwM
   attuned: false
   identifier: pipes-of-haunting
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Haunting Tune
+    img: icons/magic/control/fear-fright-monster-grin-purple-blue.webp
+    origin: Compendium.dnd5e.items.Item.oNLfJNRQgUHpU8c7
+    transfer: false
+    _id: DAvozHAiBH7M3T8u
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>You are &amp;reference[frightened apply=false] for the duration. You
+      can repeat the saving throw at the end of each of your turns, ending the
+      effect on yourself on a success.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784683532722
+      modifiedTime: 1784683587815
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!oNLfJNRQgUHpU8c7.DAvozHAiBH7M3T8u'
 folder: UnUwTG4YIgd0kaUJ
 sort: 8600000
 ownership:
@@ -144,11 +197,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037286054
-  modifiedTime: 1764620949587
+  modifiedTime: 1784683807360
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!oNLfJNRQgUHpU8c7'

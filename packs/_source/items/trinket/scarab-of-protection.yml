@@ -5,23 +5,16 @@ img: icons/environment/creatures/bug-larva-orange.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>If you hold this beetle-shaped medallion in your hand for 1 round, an
-      inscription appears on its surface revealing its magical nature. It
-      provides two benefits while it is on your person:</p>
-
-      <ul>
-
-      <li>You have advantage on saving throws against spells.</li>
-
-      <li>The scarab has 12 charges. If you fail a saving throw against a
-      necromancy spell or a harmful effect originating from an undead creature,
-      you can use your reaction to expend 1 charge and turn the failed save into
-      a successful one. The scarab crumbles into powder and is destroyed when
-      its last charge is expended.</li>
-
-      </ul>
+      <p><em>Wondrous item (requires attunement)</em></p><p>If you hold this
+      beetle-shaped medallion in your hand for 1 round, an inscription appears
+      on its surface revealing its magical nature. It provides two benefits
+      while it is on your person:</p><ul><li><p>You have advantage on saving
+      throws against spells.</p></li><li><p>The scarab has 12 charges. If you
+      fail a saving throw against a necromancy spell or a harmful effect
+      originating from an undead creature, you can use your reaction to expend 1
+      charge and turn the failed save into a successful one. The scarab crumbles
+      into powder and is destroyed when its last charge is
+      expended.</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -56,7 +49,7 @@ system:
         number: 1
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -65,75 +58,113 @@ system:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    1fGtWl2aSaqQKhu6:
       type: utility
+      name: Resist Necromancy
+      _id: 1fGtWl2aSaqQKhu6
+      img: ''
+      sort: 100000
       activation:
         type: reaction
-        value: 1
-        condition: Charges are consumed by necromancy spells or an undead caster.
         override: false
+        condition: >-
+          When you fail a saving throw against a necromancy spell or harmful
+          effect originating from an undead creature.
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
-            target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: >-
+          <p>If you fail a saving throw against a necromancy spell or a harmful
+          effect originating from an undead creature, you can use your reaction
+          to expend 1 charge and turn the failed save into a successful one. The
+          scarab crumbles into powder and is destroyed when its last charge is
+          expended.</p>
         chatFlavor: ''
       duration:
-        concentration: false
-        value: ''
         units: inst
-        special: ''
+        concentration: false
         override: false
       effects: []
+      flags: {}
       range:
         units: self
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: self
           choice: false
-          special: ''
-        prompt: true
+          type: self
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-        requireIdentification: true
-      appliedEffects: []
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: scarab-of-protection
-effects: []
+effects:
+  - name: Scarab's Magical Protection
+    img: icons/magic/defensive/barrier-shield-dome-deflect-blue.webp
+    origin: Compendium.dnd5e.items.Item.xjRSY2ECcc9viSz3
+    system:
+      magical: true
+      changes: []
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: PVL7x7HD0yn9dbcf
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have advantage on saving throws against spells.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784591723991
+      modifiedTime: 1784591753240
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!xjRSY2ECcc9viSz3.PVL7x7HD0yn9dbcf'
 folder: UnUwTG4YIgd0kaUJ
 sort: 10700000
 ownership:
@@ -141,11 +172,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037323702
-  modifiedTime: 1764621384428
+  modifiedTime: 1784591764633
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!xjRSY2ECcc9viSz3'

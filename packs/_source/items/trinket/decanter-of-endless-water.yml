@@ -1,32 +1,28 @@
 _id: qXcUKfCVxEvV3VU8
 name: Decanter of Endless Water
-type: consumable
-img: icons/consumables/potions/potion-flask-corked-blue.webp
+type: equipment
+img: icons/consumables/potions/bottle-round-corked-blue.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This stoppered flask sloshes when shaken, as if it contains water. The
-      decanter weighs 2 pounds.</p>
-
-      <p>You can use an action to remove the stopper and speak one of three
-      command words, whereupon an amount of fresh water or salt water (your
-      choice) pours out of the flask. The water stops pouring out at the start
-      of your next turn. Choose from the following options:</p>
-
-      <p>• "Stream" produces 1 gallon of water.</p>
-
-      <p>• "Fountain" produces 5 gallons of water.</p>
-
-      <p>• "Geyser" produces 30 gallons of water that gushes forth in a geyser
-      30 feet long and 1 foot wide. As a Bonus Action while holding the
-      decanter, you can aim the geyser at a creature you can see within 30 feet
-      of you. The target must succeed on a DC 13 Strength saving throw or take
-      1d4 bludgeoning damage and fall prone. Instead of a creature, you can
-      target an object that isn't being worn or carried and that weighs no more
-      than 200 pounds. The object is either knocked over or pushed up to 15 feet
-      away from you.</p>
+      <p><em>Wondrous item</em></p><p>This stoppered flask sloshes when shaken,
+      as if it contains water. The decanter weighs 2 pounds.</p><p>You can use
+      an action to remove the stopper and speak one of three command words,
+      whereupon an amount of fresh water or salt water (your choice) pours out
+      of the flask. The water stops pouring out at the start of your next turn.
+      Choose from the following options:</p><ul><li><p>"Stream" produces 1
+      gallon of water.</p></li><li><p>"Fountain" produces 5 gallons of
+      water.</p></li><li><p>"Geyser" produces 30 gallons of water that gushes
+      forth in a geyser [[lookup @labels.description.templateSize
+      activity=WfgvLw5h2EyjI06T]]. As a bonus action while holding the decanter,
+      you can aim the geyser at a creature you can see within [[lookup
+      @target.template.size activity=WfgvLw5h2EyjI06T]] feet of you. The target
+      must succeed on a [[/save activity=WfgvLw5h2EyjI06T]] saving throw or take
+      [[/damage activity=WfgvLw5h2EyjI06T]] damage and fall
+      &amp;reference[prone]. Instead of a creature, you can target an object
+      that isn't being worn or carried and that weighs no more than 200 pounds.
+      The object is either knocked over or pushed up to 15 feet away from
+      you.</p></li></ul>
     chat: ''
   source:
     custom: ''
@@ -34,6 +30,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 2
@@ -48,40 +45,143 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: 1
-      denomination: 4
-      bonus: ''
-      types:
-        - bludgeoning
-      custom:
-        enabled: false
-        formula: ''
-      scaling:
-        mode: ''
-        number: null
-        formula: ''
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This stoppered flask sloshes when shaken, as if it contains water. The
+      decanter weighs 2 pounds.</p>
+    name: Unidentified Stoppered Flask
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    ecnacTATDeFxRROR:
+      type: utility
+      name: 'Speak Command Word: Stream'
+      _id: ecnacTATDeFxRROR
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+        condition: When you speak the "Stream" command word.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+    95F5E7iuCwxNi8EL:
+      type: utility
+      name: 'Speak Command Word: Fountain'
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: When you speak the "Fountain" command word.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: object
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: true
+        requireMagic: true
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      _id: 95F5E7iuCwxNi8EL
+    WfgvLw5h2EyjI06T:
       type: save
       activation:
         type: action
         value: 1
-        condition: Command word.
+        condition: When you speak the "Geyser" command word.
         override: false
       consumption:
         targets: []
@@ -91,6 +191,7 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
@@ -108,18 +209,19 @@ system:
           contiguous: false
           type: line
           size: '30'
-          width: ''
+          width: '1'
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
-          type: ''
+          type: creature
           choice: false
           special: ''
         prompt: true
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts:
           - custom:
               enabled: false
@@ -129,17 +231,23 @@ system:
             bonus: ''
             types:
               - bludgeoning
+            modifiers: []
+            scaling:
+              number: 1
       save:
-        ability: str
+        ability:
+          - str
         dc:
           calculation: ''
           formula: '13'
+        visible: true
+        bonus: ''
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 300000
+      name: 'Speak Command Word: Geyser'
       img: ''
       visibility:
         requireMagic: true
@@ -148,9 +256,20 @@ system:
           max: null
         identifier: ''
         requireIdentification: true
-      appliedEffects: []
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: WfgvLw5h2EyjI06T
   attuned: false
   identifier: decanter-of-endless-water
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 9100000
@@ -159,11 +278,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037295363
-  modifiedTime: 1764621046819
+  modifiedTime: 1784650819434
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!qXcUKfCVxEvV3VU8'

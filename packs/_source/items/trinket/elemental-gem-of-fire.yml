@@ -5,10 +5,8 @@ img: icons/commodities/gems/gem-rough-cushion-red.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This red corundum contains a mote of elemental energy. When you use an
-      action to break the gem, a
+      <p><em>Wondrous item</em></p><p>This red corundum contains a mote of
+      elemental energy. When you use an action to break the gem, a
       @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{Fire Elemental} is
       summoned as if you had cast the
       @UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure Elemental}
@@ -50,7 +48,8 @@ system:
     value: trinket
     subtype: ''
   unidentified:
-    description: ''
+    description: <p>This red corundum contains a mote of magical energy.</p>
+    name: Unidentified Gem
   container: null
   properties:
     - mgc
@@ -122,6 +121,67 @@ system:
           max: null
         identifier: ''
       appliedEffects: []
+    t3BmDD5bNeqIa4DC:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR
+        challenge:
+          override: false
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      _id: t3BmDD5bNeqIa4DC
+      img: ''
+      sort: 100000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: Conjure Fire Elemental
   attuned: false
   identifier: elemental-gem-of-fire
 effects: []
@@ -132,11 +192,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037236532
-  modifiedTime: 1764620381219
+  modifiedTime: 1784652601820
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!dsjke4vPPsc9gsxH'

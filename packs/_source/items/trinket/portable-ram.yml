@@ -1,7 +1,7 @@
 _id: srTRzwTfWKO5opOo
 name: Portable Ram
 type: consumable
-img: icons/weapons/maces/mace-skull-ram.webp
+img: icons/commodities/wood/bamboo-brown.webp
 system:
   description:
     value: >-
@@ -54,8 +54,7 @@ system:
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    263S1hcqZvfGFMQS:
       type: check
       activation:
         type: action
@@ -70,10 +69,11 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -89,7 +89,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: object
@@ -99,11 +100,30 @@ system:
         override: false
       check:
         ability: str
-        dc: {}
+        dc:
+          calculation: ''
+          formula: ''
+        associated: []
+        visible: true
+        bonus: '4'
       uses:
         spent: 0
         recovery: []
-      sort: 0
+        max: ''
+      sort: 100000
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      _id: 263S1hcqZvfGFMQS
+      name: Ram Door
   attuned: false
   identifier: portable-ram
 effects: []
@@ -114,11 +134,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037304892
-  modifiedTime: 1725992552611
+  modifiedTime: 1784670095490
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!srTRzwTfWKO5opOo'

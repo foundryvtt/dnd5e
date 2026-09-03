@@ -1,6 +1,6 @@
 _id: TqyvIglHDj5kfohR
 name: Piton
-type: consumable
+type: equipment
 img: icons/tools/fasteners/nail-steel.webp
 system:
   description:
@@ -15,6 +15,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 0.25
@@ -29,26 +30,14 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
     value: trinket
-    subtype: ''
+    baseItem: ''
   unidentified:
     description: ''
   container: null
   properties: []
-  magicalBonus: null
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -72,10 +61,11 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -92,7 +82,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -109,8 +100,23 @@ system:
         spent: 0
         recovery: []
       sort: 0
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   attuned: false
   identifier: piton
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+  proficient: null
+  strength: null
 effects: []
 folder: UnUwTG4YIgd0kaUJ
 sort: 5500000
@@ -119,11 +125,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037195001
-  modifiedTime: 1725992515701
+  modifiedTime: 1784670051548
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!TqyvIglHDj5kfohR'

@@ -1,23 +1,22 @@
 _id: hFAVm9pTJDm0nu3g
 name: Broom of Flying
-type: consumable
+type: equipment
 img: icons/tools/hand/broom-straw-brown.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This wooden broom, which weighs 3 pounds, functions like a mundane
-      broom until you stand astride it and speak its command word. It then
-      hovers beneath you and can be ridden in the air. It has a flying speed of
-      50 feet. It can carry up to 400 pounds, but its flying speed becomes 30
-      feet while carrying over 200 pounds. The broom stops hovering when you
-      land.</p>
-
-      <p>You can send the broom to travel alone to a destination within 1 mile
-      of you if you speak the command word, name the location, and are familiar
-      with that place. The broom comes back to you when you speak another
-      command word, provided that the broom is still within 1 mile of you.</p>
+      <p><em>Wondrous item</em></p><p>This wooden broom, which weighs 3 pounds,
+      functions like a mundane broom until you stand astride it and speak its
+      command word. It then hovers beneath you and can be ridden in the air. It
+      has a flying speed of 50 feet. It can carry up to 400 pounds, but its
+      flying speed becomes 30 feet while carrying over 200 pounds. The broom
+      stops hovering when you land.</p><p>You can send the broom to travel alone
+      to a destination within [[lookup @labels.description.range
+      activity=icTlYAIywCpkDXPW]] of you if you speak the command word, name the
+      location, and are familiar with that place. The broom comes back to you
+      when you speak another command word, provided that the broom is still
+      within [[lookup @labels.description.range activity=icTlYAIywCpkDXPW]] of
+      you.</p>
     chat: ''
   source:
     custom: ''
@@ -25,6 +24,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 3
@@ -39,35 +39,23 @@ system:
   uses:
     max: ''
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: <p>This wooden broom weighs 3 pounds.</p>
+    name: Unidentified Broom
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    GyF6q8r1Rwad4gBN:
       type: utility
       activation:
         type: action
         value: 1
-        condition: Command word.
+        condition: When you speak the broom's command word.
         override: false
       consumption:
         targets: []
@@ -77,16 +65,20 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: fYdR0dFIS21NHEzM
+          uuid: null
+          level: {}
       range:
-        value: '1'
-        units: mi
+        value: ''
+        units: touch
         special: ''
         override: false
       target:
@@ -97,10 +89,11 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
-          type: ''
+          type: self
           choice: false
           special: ''
         prompt: true
@@ -114,8 +107,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: 'Speak Command Word: Animate Broom'
       img: ''
       visibility:
         requireIdentification: true
@@ -124,10 +117,127 @@ system:
           max: null
         identifier: ''
         requireMagic: true
-      appliedEffects: []
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: GyF6q8r1Rwad4gBN
+    icTlYAIywCpkDXPW:
+      type: utility
+      name: 'Speak Command Word: Send / Call Broom'
+      _id: icTlYAIywCpkDXPW
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: When you speak the broom's command word.
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: mi
+        override: false
+        value: '1'
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
   attuned: false
   identifier: broom-of-flying
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Flying on Broom
+    img: icons/tools/hand/broom-straw-brown.webp
+    origin: Compendium.dnd5e.items.Item.hFAVm9pTJDm0nu3g
+    transfer: false
+    _id: fYdR0dFIS21NHEzM
+    type: base
+    system:
+      changes:
+        - key: system.attributes.movement.fly
+          type: upgrade
+          value: 50
+          phase: initial
+          _id: kMUiLlsbRhVmDxRe
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>The Broom of Flying hovers beneath you and can be ridden in the air. It
+      has a flying speed of 50 feet. It can carry up to 400 pounds, but its
+      flying speed becomes 30 feet while carrying over 200 pounds. The broom
+      stops hovering when you land.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784646795911
+      modifiedTime: 1784646857864
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!hFAVm9pTJDm0nu3g.fYdR0dFIS21NHEzM'
 folder: UnUwTG4YIgd0kaUJ
 sort: 7100000
 ownership:
@@ -135,11 +245,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037255100
-  modifiedTime: 1764620560420
+  modifiedTime: 1784646975251
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!hFAVm9pTJDm0nu3g'

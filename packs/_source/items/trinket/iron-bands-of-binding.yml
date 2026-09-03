@@ -1,32 +1,26 @@
 _id: E9G4jALlSA96fKAN
 name: Iron Bands of Binding
-type: consumable
-img: icons/commodities/metal/clasp-steel-braid.webp
+type: equipment
+img: icons/commodities/gems/pearl-brown.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item</em></p>
-
-      <p>This rusty iron sphere measures 3 inches in diameter and weighs 1
-      pound. You can use an action to speak the command word and throw the
-      sphere at a Huge or smaller creature you can see within 60 feet of you. As
+      <p><em>Wondrous item</em></p><p>This rusty iron sphere measures 3 inches
+      in diameter and weighs 1 pound. You can use an action to speak the command
+      word and throw the sphere at a Huge or smaller creature you can see within
+      [[lookup @labels.description.range activity=TOp02WLRhBY5Y9BK]] of you. As
       the sphere moves through the air, it opens into a tangle of metal
-      bands.</p>
-
-      <p>Make a ranged attack roll with an attack bonus equal to your Dexterity
-      modifier plus your proficiency bonus. On a hit, the target is restrained
-      until you take a bonus action to speak the command word again to release
-      it. Doing so, or missing with the attack, causes the bands to contract and
-      become a sphere once more.</p>
-
-      <p>A creature, including the one restrained, can use an action to make a
-      DC 20 Strength check to break the iron bands. On a success, the item is
+      bands.</p><p>Make a ranged attack roll with an attack bonus equal to your
+      Dexterity modifier plus your proficiency bonus. On a hit, the target is
+      &amp;reference[restrained] until you take a bonus action to speak the
+      command word again to release it. Doing so, or missing with the attack,
+      causes the bands to contract and become a sphere once more.</p><p>A
+      creature, including the one restrained, can use an action to make a DC 20
+      Strength check to break the iron bands. On a success, the item is
       destroyed, and the restrained creature is freed. If the check fails, any
       further attempts made by that creature automatically fail until 24 hours
-      have elapsed.</p>
-
-      <p>Once the bands are used, they can't be used again until the next
-      dawn.</p>
+      have elapsed.</p><p>Once the bands are used, they can't be used again
+      until the next dawn.</p>
     chat: ''
   source:
     custom: ''
@@ -34,6 +28,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 1
@@ -48,36 +43,22 @@ system:
   uses:
     max: '1'
     recovery:
-      - period: day
+      - period: dawn
         type: recoverAll
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      bonus: ''
-      types: []
-      custom:
-        enabled: true
-        formula: d20 + @attributes.prof + @mod
-      scaling:
-        mode: ''
-        number: null
-        formula: ''
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>This rusty iron sphere measures 3 inches in diameter and weighs 1
+      pound.</p>
+    name: Unidentified Rusty Iron Sphere
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    TOp02WLRhBY5Y9BK:
       type: attack
       activation:
         type: action
@@ -89,19 +70,26 @@ system:
           - type: itemUses
             value: '1'
             target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: GQiJyzoUhuQmGutq
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         value: '60'
         units: ft
@@ -115,7 +103,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -136,19 +125,12 @@ system:
         critical:
           bonus: ''
         includeBase: true
-        parts:
-          - custom:
-              enabled: true
-              formula: d20 + @attributes.prof + @mod
-            number: null
-            denomination: null
-            bonus: ''
-            types: []
+        parts: []
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
+      sort: 100000
       name: ''
       img: ''
       visibility:
@@ -157,10 +139,65 @@ system:
           min: null
           max: null
         identifier: ''
-      appliedEffects: []
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+      _id: TOp02WLRhBY5Y9BK
   attuned: false
   identifier: iron-bands-of-binding
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Restrained by Bands of Binding
+    img: icons/commodities/metal/clasp-steel-braid.webp
+    origin: Compendium.dnd5e.items.Item.E9G4jALlSA96fKAN
+    transfer: false
+    _id: GQiJyzoUhuQmGutq
+    type: base
+    system:
+      changes: []
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You are &amp;reference[restrained apply=false] by the Iron Bands of
+      Binding.</p><p>A creature, including you, can use an action to make a
+      [[/check 20 str]] check to break the iron bands. On a success, the item is
+      destroyed, and you are freed. If the check fails, and any further attempts
+      made by that creature automatically fail until 24 hours have elapsed.</p>
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784596544728
+      modifiedTime: 1784596687420
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!E9G4jALlSA96fKAN.GQiJyzoUhuQmGutq'
 folder: UnUwTG4YIgd0kaUJ
 sort: 3000000
 ownership:
@@ -168,11 +205,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037136255
-  modifiedTime: 1764619396891
+  modifiedTime: 1784596775356
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!E9G4jALlSA96fKAN'

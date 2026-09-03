@@ -1,10 +1,10 @@
 _id: s2kQs21J3cFg7ZSs
 name: Figurine of Wondrous Power (Ebony Fly)
-type: consumable
+type: equipment
 img: icons/commodities/biological/legs-insect-brown.webp
 system:
   description:
-    value: "<p><em>Wondrous item</em></p>\n<p>A\_<em>figurine of wondrous power</em>\_is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p>\n<p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p>\n<p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p>\n<p><strong>Ebony Fly</strong>. This ebony statuette is carved in the likeness of a horsefly. It can become a @UUID[Compendium.dnd5e.monsters.Actor.rLl22hYeAH3ljhdI]{Giant Fly} for up to 12 hours and can be ridden as a mount. Once it has been used, it can't be used again until 2 days have passed.</p>"
+    value: "<p><em>Wondrous item</em></p><p>A\_<em>figurine of wondrous power</em>\_is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within [[lookup @labels.description.range activity=4AC41rEhwzYFbjDu]] of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p><p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p><p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p><p><strong>Ebony Fly</strong>. This ebony statuette is carved in the likeness of a horsefly. It can become a @UUID[Compendium.dnd5e.monsters.Actor.rLl22hYeAH3ljhdI]{Giant Fly} for up to [[lookup @labels.duration activity=4AC41rEhwzYFbjDu]] and can be ridden as a mount. Once it has been used, it can't be used again until 2 days have passed.</p>"
     chat: ''
   source:
     custom: ''
@@ -12,6 +12,7 @@ system:
     page: ''
     license: CC-BY-4.0
     rules: '2014'
+    revision: 1
   quantity: 1
   weight:
     value: 0.1
@@ -26,98 +27,165 @@ system:
   uses:
     max: '1'
     recovery: []
-    autoDestroy: false
     spent: 0
-  damage:
-    base:
-      number: null
-      denomination: null
-      types: []
-      custom:
-        enabled: false
-      scaling:
-        number: 1
-    replace: false
   type:
-    value: trinket
-    subtype: ''
+    value: wondrous
+    baseItem: ''
   unidentified:
-    description: ''
+    description: <p>This ebony statuette is carved in the likeness of a horsefly.</p>
+    name: Unidentified Fly Figurine
   container: null
   properties:
     - mgc
-  magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: utility
+    4AC41rEhwzYFbjDu:
+      type: summon
+      name: Summon Ebony Fly
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: When you speak the figurine's command word.
+      behaviors: []
       consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
             target: ''
-        scaling:
-          allowed: false
-          max: ''
-        spellSlot: true
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '12'
         units: hour
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '12'
+      effects:
+        - _id: VHSyre0K0TDxGIwH
+          uuid: null
+          level:
+            min: null
+            max: null
+      flags: {}
       range:
-        value: '60'
         units: ft
-        special: ''
         override: false
+        special: ''
+        value: '60'
       target:
         template:
-          count: ''
           contiguous: false
-          type: ''
-          size: ''
-          width: ''
-          height: ''
+          stationary: false
           units: ft
+          type: ''
         affects:
-          count: '10'
-          type: space
           choice: false
+          type: space
+          count: '1'
           special: ''
-        prompt: true
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
-        identifier: ''
+        requireAttunement: false
         requireIdentification: true
-      appliedEffects: []
+        requireMagic: true
+        identifier: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        disposition: true
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: uIEu6OVsgQRfr1fv
+          uuid: Compendium.dnd5e.monsters.Actor.rLl22hYeAH3ljhdI
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      tempHP: ''
+      _id: 4AC41rEhwzYFbjDu
   attuned: false
   identifier: figurine-of-wondrous-power-ebony-fly
-effects: []
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  strength: null
+effects:
+  - name: Ebony Fly
+    img: icons/commodities/biological/legs-insect-brown.webp
+    origin: Compendium.dnd5e.items.Item.s2kQs21J3cFg7ZSs
+    transfer: false
+    _id: VHSyre0K0TDxGIwH
+    type: base
+    system:
+      changes:
+        - key: name
+          type: override
+          value: Ebony Fly
+          phase: initial
+          _id: hKQugmRIYcSE3Jc0
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784667859723
+      modifiedTime: 1784667870673
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!s2kQs21J3cFg7ZSs.VHSyre0K0TDxGIwH'
 folder: UnUwTG4YIgd0kaUJ
 sort: 9400000
 ownership:
@@ -125,11 +193,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037300878
-  modifiedTime: 1764621107851
+  modifiedTime: 1784680670210
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!s2kQs21J3cFg7ZSs'

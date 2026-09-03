@@ -5,20 +5,23 @@ img: icons/containers/bags/coinpouch-simple-leather-tan.webp
 system:
   description:
     value: >-
-      <p>Inside this heavy cloth bag are [[/r 3d4 #Bag of Beans contents]] dry
-      beans. The bag weighs 1/2 pound plus 1/4 pound for each bean it
-      contains.</p><p>If you dump the bag's contents out on the ground, they
-      explode in a 10-foot radius, extending from the beans. Each creature in
-      the area, including you, must make a DC 15 Dexterity saving throw, taking
-      5d4 fire damage on a failed save, or half as much damage on a successful
-      one. The fire ignites flammable objects in the area that aren't being worn
-      or carried.</p><p>If you remove a bean from the bag, plant it in dirt or
-      sand, and then water it, the bean produces an effect 1 minute later from
-      the ground where it was planted. The GM can choose an effect from the
+      <p><em>Wonderous item</em></p><p>Inside this heavy cloth bag are [[/r 3d4
+      #Bag of Beans contents]] dry beans. The bag weighs 1/2 pound plus 1/4
+      pound for each bean it contains.</p><p>If you dump the bag's contents out
+      on the ground, they explode in a [[lookup @labels.description.range
+      activity=uMJvV0SFUzlNKf9C]], extending from the beans. Each creature in
+      the area, including you, must make a [[/save activity=uMJvV0SFUzlNKf9C]]
+      saving throw, taking [[/damage activity=uMJvV0SFUzlNKf9C]] damage on a
+      failed save, or half as much damage on a successful one. The fire ignites
+      flammable objects in the area that aren't being worn or carried.</p><p>If
+      you remove a bean from the bag, plant it in dirt or sand, and then water
+      it, the bean produces an effect [[lookup @labels.duration
+      activity=N6TtWYqA9l63g6WV]] later from the ground where it was planted.
+      The GM can choose an effect from the
       @UUID[Compendium.dnd5e.tables.RollTable.4ryVFV5LPHPzRKxl]{Bag of Beans}
       table, determine it randomly, or create an
       effect.</p><p>@Embed[Compendium.dnd5e.tables.RollTable.4ryVFV5LPHPzRKxl
-      rollable]</p>
+      rollable inline]</p>
     chat: ''
   source:
     custom: ''
@@ -58,61 +61,79 @@ system:
         formula: ''
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
-    description: ''
+    description: >-
+      <p>Inside this heavy cloth bag are [[/r 3d4 #Bag of Beans contents]] dry
+      beans. The bag weighs 1/2 pound plus 1/4 pound for each bean it
+      contains.</p>
+    name: Unidentified Bag of Beans
   container: null
   properties:
     - mgc
   magicalBonus: null
   activities:
-    dnd5eactivity100:
-      _id: dnd5eactivity100
+    uMJvV0SFUzlNKf9C:
       type: save
+      name: Dump Beans on Ground
+      _id: uMJvV0SFUzlNKf9C
+      img: ''
+      sort: 300000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: ''
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets:
+          - type: itemUses
+            value: '@item.uses.value'
+            target: ''
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: ''
         units: inst
-        special: ''
+        concentration: false
         override: false
       effects: []
+      flags: {}
       range:
         units: self
-        special: ''
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
-          type: circle
-          size: '10'
-          width: ''
-          height: ''
+          stationary: true
           units: ft
-        affects:
+          type: radius
+          size: '10'
           count: ''
-          type: creature
+        affects:
           choice: false
+          type: creature
+          count: ''
           special: ''
-        prompt: true
         override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
       damage:
         onSave: half
         parts:
@@ -122,27 +143,83 @@ system:
             number: 5
             denomination: 4
             bonus: ''
+            modifiers: []
             types:
               - fire
+            scaling:
+              number: 1
       save:
-        ability: dex
+        ability:
+          - dex
         dc:
           calculation: ''
           formula: '15'
+        visible: true
+        bonus: ''
+    N6TtWYqA9l63g6WV:
+      type: utility
+      name: Plant Bean
+      _id: N6TtWYqA9l63g6WV
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+        condition: ''
+        value: 1
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '1'
+      effects: []
+      flags: {}
+      range:
+        units: touch
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: space
+          count: '1'
+          special: ''
+        override: false
+        prompt: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
-      appliedEffects: []
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: bag-of-beans
 effects: []
@@ -153,11 +230,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037141214
-  modifiedTime: 1764619446760
+  modifiedTime: 1784640695012
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!F8QpasPjLrw2POzE'

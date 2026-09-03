@@ -9,17 +9,14 @@ system:
       can splash the oil in this flask onto a creature within 5 feet of you or
       throw it up to 20 feet, shattering it on impact. Make a ranged attack
       against a target creature or object, treating the oil as an improvised
-      weapon.</p>
-
-      <p>On a hit, the target is covered in oil. If the target takes any fire
-      damage before the oil dries (after 1 minute), the target takes an
-      additional 5 fire damage from the burning oil. You can also pour a flask
-      of oil on the ground to cover a 5-foot-square area, provided that the
-      surface is level.</p>
-
-      <p>If lit, the oil burns for 2 rounds and deals 5 fire damage to any
-      creature that enters the area or ends its turn in the area. A creature can
-      take this damage only once per turn.</p>
+      weapon.</p><p>On a hit, the target is covered in oil. If the target takes
+      any fire damage before the oil dries (after [[lookup @labels.duration
+      activity=1wjGtKOMP1SACmFQ]]), the target takes an additional 5 fire damage
+      from the burning oil. You can also pour a flask of oil on the ground to
+      cover a 5-foot-square area, provided that the surface is level.</p><p>If
+      lit, the oil burns for 2 rounds and deals 5 fire damage to any creature
+      that enters the area or ends its turn in the area. A creature can take
+      this damage only once per turn.</p>
     chat: ''
   source:
     custom: ''
@@ -67,8 +64,7 @@ system:
   properties: []
   magicalBonus: null
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    1wjGtKOMP1SACmFQ:
       type: attack
       activation:
         type: action
@@ -89,13 +85,17 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: '1'
         units: minute
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: AIqnepIzaSHPsqgL
+          uuid: null
+          level: {}
       range:
         value: '5'
         units: ft
@@ -109,7 +109,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: '1'
           type: creature
@@ -130,26 +131,69 @@ system:
         critical:
           bonus: ''
         includeBase: true
-        parts:
-          - number: null
-            denomination: null
-            bonus: ''
-            types:
-              - fire
-            custom:
-              enabled: true
-              formula: '5'
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
+        parts: []
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      sort: 100000
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: 1wjGtKOMP1SACmFQ
   attuned: false
   identifier: oil-flask
-effects: []
+effects:
+  - name: Covered in Oil
+    img: icons/tools/laboratory/bowl-liquid-black.webp
+    origin: Compendium.dnd5e.items.Item.psoZaItkOScMVaHL
+    transfer: false
+    _id: AIqnepIzaSHPsqgL
+    type: base
+    system:
+      changes:
+        - key: system.traits.dm.amount.fire
+          type: add
+          value: 5
+          phase: initial
+          _id: r9qv8nGLG67UJK99
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>The next time you take fire damage before the oil dries, you take an
+      additional 5 fire damage.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.365'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1784682566904
+      modifiedTime: 1784682730034
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!psoZaItkOScMVaHL.AIqnepIzaSHPsqgL'
 folder: UnUwTG4YIgd0kaUJ
 sort: 8800000
 ownership:
@@ -157,11 +201,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.365'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 6.0.0
   createdTime: 1725037291158
-  modifiedTime: 1725992547959
+  modifiedTime: 1784682786994
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!psoZaItkOScMVaHL'
