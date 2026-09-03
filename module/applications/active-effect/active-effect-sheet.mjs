@@ -100,6 +100,14 @@ export default class ActiveEffectSheet5e extends ApplicationV2Mixin(ActiveEffect
    * @protected
    */
   async _prepareDetailsContext(context, options) {
+    const { statuses, system } = context.document;
+    if ( system.conditions ) {
+      if ( statuses.size && system.conditions.some(f => f.k?.startsWith?.("statuses.")) ) {
+        context.conditionsWarning = "DND5E.EFFECT.Warning.StatusCondition";
+      } else if ( system.conditions.some(f => f.k?.startsWith?.("roll.")) ) {
+        context.conditionsWarning = "DND5E.EFFECT.Warning.RollCondition";
+      }
+    }
     return context;
   }
 
