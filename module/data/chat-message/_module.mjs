@@ -10,6 +10,7 @@ import HitDieMessageData from "./hit-die-message-data.mjs";
 import HitPointsMessageData from "./hit-points-message-data.mjs";
 import ItemMessageData from "./item-message-data.mjs";
 import PromptMessageData from "./prompt-message-data.mjs";
+import RechargeMessageData from "./recharge-message-data.mjs";
 import RequestMessageData from "./request-message-data.mjs";
 import RestMessageData from "./rest-message-data.mjs";
 import RollMessageData from "./roll-message-data.mjs";
@@ -31,6 +32,7 @@ export {
   HitPointsMessageData,
   ItemMessageData,
   PromptMessageData,
+  RechargeMessageData,
   RequestMessageData,
   RestMessageData,
   RollMessageData,
@@ -54,6 +56,7 @@ export const config = {
   hitPoints: HitPointsMessageData,
   item: ItemMessageData,
   prompt: PromptMessageData,
+  recharge: RechargeMessageData,
   request: RequestMessageData,
   rest: RestMessageData,
   save: SaveMessageData,

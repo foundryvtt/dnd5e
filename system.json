@@ -92,6 +92,11 @@
         "htmlFields": ["description"]
       },
       "prompt": {},
+      "recharge": {
+        "filePathFields": {
+          "targets.*.img": ["IMAGE", "VIDEO"]
+        }
+      },
       "request": {},
       "rest": {},
       "save": {

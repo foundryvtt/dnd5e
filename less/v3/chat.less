@@ -275,37 +275,6 @@
         display: inline-block;
         flex: 1;
         text-align: center;
-
-        .total {
-          align-items: center;
-          border: 1px solid var(--dnd5e-color-gold);
-          border-radius: 3px;
-          color: var(--color-text-emphatic);
-          display: inline-flex;
-          font-family: var(--dnd5e-font-roboto-slab);
-          font-size: var(--font-size-16);
-          font-weight: bold;
-          justify-content: center;
-          min-inline-size: 26px;
-          position: relative;
-
-          &::before, &::after {
-            block-size: 1px;
-            content: "";
-            inline-size: 28px;
-            position: absolute;
-          }
-
-          &::before {
-            background: linear-gradient(to left, var(--dnd5e-color-gold), transparent);
-            inset-inline-end: 100%;
-          }
-
-          &::after {
-            background: linear-gradient(to right, var(--dnd5e-color-gold), transparent);
-            inset-inline-start: 100%;
-          }
-        }
       }
 
       &.critical {
@@ -322,12 +291,7 @@
     }
 
     .roll-breakdown {
-      background: var(--dnd5e-background-parchment);
-      border: var(--dnd5e-chat-breakdown-border);
-      border-radius: 5px;
-      box-shadow: 0 0 8px var(--dnd5e-shadow-45);
       inset: calc(anchor(end) + 4px) anchor(end) auto anchor(start);
-      margin: 0;
       position-anchor: auto;
       position-try-fallbacks: flip-block;
       width: unset;
@@ -366,6 +330,7 @@
       > strong { font-size: var(--font-size-12); }
 
       .delta {
+        align-items: center;
         display: flex;
         font-size: var(--font-size-11);
 
@@ -593,8 +558,8 @@
         i { height: 14px; }
       }
 
-      &.success { color: var(--dnd5e-color-success); }
-      &.failure { color: var(--dnd5e-color-failure); }
+      &.success { color: var(--dnd5e-chat-status-success); }
+      &.failure { color: var(--dnd5e-chat-status-failure); }
     }
 
     .total {
@@ -727,5 +692,53 @@
     cursor: inherit;
     .chevron { display: none; }
     & ~ .card-description { display: none; }
+  }
+}
+
+/* -------------------------------------------- */
+/*  Dice Rolls                                  */
+/* -------------------------------------------- */
+
+.dice-roll {
+  :is(.result, .dice-total) > .total {
+    align-items: center;
+    border: 1px solid var(--dnd5e-color-gold);
+    border-radius: 3px;
+    color: var(--color-text-emphatic);
+    display: inline-flex;
+    font-family: var(--dnd5e-font-roboto-slab);
+    font-size: var(--font-size-16);
+    font-weight: bold;
+    justify-content: center;
+    min-inline-size: 26px;
+    position: relative;
+
+    &::before, &::after {
+      block-size: 1px;
+      content: "";
+      inline-size: 28px;
+      position: absolute;
+    }
+
+    &::before {
+      background: linear-gradient(to left, var(--dnd5e-color-gold), transparent);
+      inset-inline-end: 100%;
+    }
+
+    &::after {
+      background: linear-gradient(to right, var(--dnd5e-color-gold), transparent);
+      inset-inline-start: 100%;
+    }
+  }
+}
+
+.message-content {
+  .roll-breakdown, .inline-roll.expanded > .dice-tooltip {
+    background: var(--dnd5e-background-parchment);
+    border: var(--dnd5e-chat-breakdown-border);
+    border-radius: 5px;
+    box-shadow: 0 0 8px var(--dnd5e-shadow-45);
+    margin: 0;
+    padding: 0;
   }
 }

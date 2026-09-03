@@ -298,6 +298,20 @@ export default class BasicRoll extends Roll {
   }
 
   /* -------------------------------------------- */
+
+  async _prepareChatRenderContext(options) {
+    const context = await super._prepareChatRenderContext(options);
+    context.classes = "";
+    context.icons = [];
+    context.isPrivate = options.isPrivate;
+    if ( options.isPrivate || !this._evaluated || !Number.isFinite(this.options.target) ) return context;
+    const success = this.isSuccess || options.forceSuccess;
+    context.classes = success ? "success" : "failure";
+    context.icons.push(success ? "fa-check" : "fa-xmark");
+    return context;
+  }
+
+  /* -------------------------------------------- */
   /*  Evaluate Methods                            */
   /* -------------------------------------------- */
 

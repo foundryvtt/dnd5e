@@ -150,16 +150,6 @@ export default class SaveMessageData extends RollMessageData {
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onRender(element, options={}) {
-    super._onRender(element, options);
-    if ( element.querySelector(".chat-card .card-header") ) {
-      element.querySelector(".message-header .flavor-text")?.remove();
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
