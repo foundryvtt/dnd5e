@@ -86,11 +86,12 @@
     > .left { flex: none; }
 
     > .middle {
-      flex: 1;
+      align-items: center;
       display: flex;
+      flex: 1;
       flex-direction: column;
       justify-content: space-evenly;
-      align-items: center;
+      min-inline-size: 0;
     }
 
     > .right {
@@ -113,13 +114,14 @@
 
     /* Subtitles */
     .identity-info .subtitles {
+      block-size: 32px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 4px;
       font-family: var(--dnd5e-font-roboto-condensed);
       font-size: var(--font-size-14);
-      height: 32px;
+      gap: 4px;
+      inline-size: 100%;
+      justify-content: center;
 
       &:empty { display: none; }
 
@@ -144,8 +146,27 @@
 
       /* Rarity */
       .item-rarity {
+        min-inline-size: 0;
         text-transform: capitalize;
-        > select { text-transform: capitalize; }
+
+        .tags.input-element-tags {
+          flex-wrap: nowrap;
+
+          .tag {
+            min-inline-size: 0;
+
+            > span {
+              min-inline-size: 0;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+
+            > a.remove { flex: none; }
+          }
+        }
+
+        select { text-transform: capitalize; }
       }
     }
 

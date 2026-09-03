@@ -166,7 +166,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    */
   get physicalItemSheetFields() {
     return [{
-      label: Array.from(this.rarities).map(r => CONFIG.DND5E.itemRarity[r]).filterJoin(", "),
+      label: this.rarities.size > 1 ? _loc("DND5E.ITEM.Rarity.Varies") : CONFIG.DND5E.itemRarity[this.rarity],
       value: this._source.rarities,
       requiresIdentification: true,
       field: this.schema.getField("rarities"),
