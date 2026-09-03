@@ -196,7 +196,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
     if ( item.inCompendium ) {
       const actor = this.actor.isOwner ? this.actor : (getSceneTargets()[0]?.actor ?? game.user.character);
       if ( !actor ) {
-        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor");
+        ui.notifications.warn("DND5E.ENCHANT.Warning.NoTargetActor", { localize: true });
         return null;
       }
       enchantmentData._id = foundry.utils.randomID();

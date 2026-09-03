@@ -1664,7 +1664,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
-      ui.notifications.warn("DND5E.DeathSaveUnnecessary");
+      ui.notifications.warn("DND5E.DeathSaveUnnecessary", { localize: true });
       return null;
     }
 
@@ -2204,7 +2204,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async initiateRest(config={}) {
     if ( this.system.isVehicle ) return;
     if ( !game.user.isGM && !game.settings.get("dnd5e", "allowRests") && !config.request ) {
-      ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { console: false });
+      ui.notifications.warn("DND5E.REST.Warning.OnlyByRequest", { console: false, localize: true });
       return;
     }
 
@@ -2837,7 +2837,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoPermission");
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoPermission", { localize: true });
       return null;
     }
 
@@ -3209,7 +3209,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async revertOriginalForm(options={}) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
-      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoOwnership");
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoOwnership", { localize: true });
       return null;
     }
 

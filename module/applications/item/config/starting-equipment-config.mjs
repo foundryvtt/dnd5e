@@ -239,7 +239,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
         if ( dragEntry.children.some(c => c.type in EquipmentEntryData.GROUPING_TYPES) ) depth += 1;
       }
       if ( depth > EquipmentEntryData.MAX_DEPTH ) {
-        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth");
+        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth", { localize: true });
         return;
       }
       updateData = { [`startingEquipment.${dragEntry._id}.group`]: dropEntry._id };

@@ -309,7 +309,7 @@ export default class ClassData extends ItemDataModel.mixin(
 
     // Check to make sure the updated class level isn't below zero
     if ( changed.system.levels <= 0 ) {
-      ui.notifications.warn("DND5E.MaxClassLevelMinimumWarn");
+      ui.notifications.warn("DND5E.MaxClassLevelMinimumWarn", { localize: true });
       changed.system.levels = 1;
     }
 
