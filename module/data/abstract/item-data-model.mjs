@@ -312,10 +312,10 @@ export default class ItemDataModel extends SystemDataModel {
     let days = 0;
     let gold = 0;
     if ( !("price" in this) ) return { days, gold };
-    const { price, type, rarity } = this;
+    const { price, type, rarities, rarity } = this;
 
     // Mundane Items
-    if ( !this.properties.has("mgc") || !rarity ) {
+    if ( !this.properties.has("mgc") || !rarities.size ) {
       const { mundane } = CONFIG.DND5E.crafting;
       const valueInGP = price.valueInGP ?? 0;
       return { days: Math.ceil(valueInGP * mundane.days), gold: Math.floor(valueInGP * mundane.gold) };

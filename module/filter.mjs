@@ -227,7 +227,7 @@ export function NOT(data, filter) {
  */
 export const COMPARISON_FUNCTIONS = {
   exact, contains, icontains, startswith, istartswith, endswith, iendswith,
-  has, hasany, hasall, in: in_, gt, gte, lt, lte
+  empty, has, hasany, hasall, subsetof, in: in_, gt, gte, lt, lte
 };
 
 /* -------------------------------------------- */
@@ -317,6 +317,18 @@ export function iendswith(data, value) {
 /* -------------------------------------------- */
 
 /**
+ * Check if the data is empty.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function empty(data, value=true) {
+  return ((data === "") || foundry.utils.isEmpty(data)) === value;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Check that the data collection has the provided value.
  * @param {*} data
  * @param {*} value
@@ -355,6 +367,20 @@ export function hasany(data, value) {
  */
 export function hasall(data, value) {
   return Array.from(value).every(v => has(data, v));
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Check that the data collection is a subset of the provided values.
+ * @param {*} data
+ * @param {*} value
+ * @returns {boolean}
+ */
+export function subsetof(data, value) {
+  const type = foundry.utils.getType(data);
+  if ( (type !== "Array") && (type !== "Set") ) return false;
+  return Array.from(data).every(d => in_(d, value));
 }
 
 /* -------------------------------------------- */

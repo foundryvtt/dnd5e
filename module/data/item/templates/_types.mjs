@@ -63,7 +63,7 @@
  * @property {object} price
  * @property {number} price.value         Item's cost in the specified denomination.
  * @property {string} price.denomination  Currency denomination used to determine price.
- * @property {string} rarity              Item rarity as defined in `DND5E.itemRarity`.
+ * @property {string[]} rarities          Item rarities as defined in `DND5E.itemRarity`.
  */
 
 /**

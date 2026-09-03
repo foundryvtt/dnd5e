@@ -1459,8 +1459,7 @@ DND5E.itemRarity = {
   rare: "DND5E.ITEM.Rarity.Rare",
   veryRare: "DND5E.ITEM.Rarity.VeryRare",
   legendary: "DND5E.ITEM.Rarity.Legendary",
-  artifact: "DND5E.ITEM.Rarity.Artifact",
-  varies: "DND5E.ITEM.Rarity.Varies"
+  artifact: "DND5E.ITEM.Rarity.Artifact"
 };
 preLocalize("itemRarity");
 

@@ -128,6 +128,8 @@ filters-input {
     &[operator$="contains"] > filter-key::after { content: "⊇"; }
     &[operator^="has"] > filter-key::after { content: "∋"; }
     &[operator="in"] > filter-key::after { content: "∈"; }
+    &[operator="empty"] > filter-key::after { content: "∅"; }
+    &[operator="subsetof"] > filter-key::after { content: "⊆"; }
   }
   filter-operator {
     flex-wrap: wrap;

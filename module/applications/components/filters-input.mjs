@@ -93,9 +93,9 @@ export default class FiltersInputElement extends foundry.applications.elements.A
       return;
     }
 
-    this.#breakdown.replaceChildren(this.#renderBreakdownNode(
-      Array.isArray(filters) ? { o: "AND", v: filters } : filters
-    ));
+    const breakdown = this.#renderBreakdownNode(Array.isArray(filters) ? { o: "AND", v: filters } : filters);
+    if ( breakdown ) this.#breakdown.replaceChildren(breakdown);
+    else this.#breakdown.innerText = _loc("DND5E.FILTER.Invalid");
   }
 
   /* -------------------------------------------- */
@@ -107,14 +107,15 @@ export default class FiltersInputElement extends foundry.applications.elements.A
    */
   #renderBreakdownNode(filter) {
     let { k: key, o: operator="exact", v: value } = filter;
-    if ( value === undefined ) return;
 
     // If in OPERATOR_FUNCTIONS, create group and recurse
     if ( operator in OPERATOR_FUNCTIONS ) {
       const node = document.createElement("filter-operator");
       node.setAttribute("operator", operator);
-      if ( !Array.isArray(value) ) value = [value];
-      node.replaceChildren(...value.map(v => this.#renderBreakdownNode(v)).filter(_ => _));
+      if ( !foundry.utils.isEmpty(value) ) {
+        if ( !Array.isArray(value) ) value = [value];
+        node.replaceChildren(...value.map(v => this.#renderBreakdownNode(v)).filter(_ => _));
+      }
       return node;
     }
 
@@ -124,14 +125,17 @@ export default class FiltersInputElement extends foundry.applications.elements.A
       node.setAttribute("operator", operator);
       const keyElement = document.createElement("filter-key");
       keyElement.innerText = getHumanReadableAttributeLabel(key) ?? key;
-      const valueElement = document.createElement("filter-value");
-      if ( foundry.utils.isPlainObject(value) ) {
-        const innerNode = this.#renderBreakdownNode(value);
-        if ( innerNode ) valueElement.replaceChildren(innerNode);
+      if ( foundry.utils.isEmpty(value) ) {
+        node.replaceChildren(keyElement);
       } else {
-        valueElement.innerText = Array.isArray(value) ? value.join(", ") : value;
+        const valueElement = document.createElement("filter-value");
+        if ( foundry.utils.isPlainObject(value) ) {
+          const innerNode = this.#renderBreakdownNode(value);
+          if ( innerNode ) valueElement.replaceChildren(innerNode);
+        } else {
+          valueElement.innerText = Array.isArray(value) ? value.join(", ") : value;
+        }
       }
-      node.replaceChildren(keyElement, valueElement);
       return node;
     }
   }
