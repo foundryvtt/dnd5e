@@ -302,6 +302,9 @@ export default class UsesField extends SchemaField {
       name: this.name,
       result: _loc(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
     });
+    if ( !config.apply && rolls[0].isSuccess ) {
+      messageConfig.create = false;
+    }
     await CONFIG.Dice.BasicRoll.buildPost(rolls, rollConfig, messageConfig);
 
     const updates = {};
