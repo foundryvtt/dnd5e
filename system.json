@@ -116,7 +116,7 @@
           "activities.*.img": ["IMAGE"]
         },
         "htmlFields": [
-          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+          "activities.*.description.value", "description.value", "description.chat", "description.gmOnly", "unidentified.description"
         ]
       },
       "equipment": {
@@ -124,7 +124,7 @@
           "activities.*.img": ["IMAGE"]
         },
         "htmlFields": [
-          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+          "activities.*.description.value", "description.value", "description.chat", "description.gmOnly", "unidentified.description"
         ]
       },
       "consumable": {
@@ -132,7 +132,7 @@
           "activities.*.img": ["IMAGE"]
         },
         "htmlFields": [
-          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+          "activities.*.description.value", "description.value", "description.chat", "description.gmOnly", "unidentified.description"
         ]
       },
       "tool": {
@@ -140,11 +140,11 @@
           "activities.*.img": ["IMAGE"]
         },
         "htmlFields": [
-          "activities.*.description.value", "description.value", "description.chat", "unidentified.description"
+          "activities.*.description.value", "description.value", "description.chat", "description.gmOnly", "unidentified.description"
         ]
       },
       "loot": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "race": {
         "filePathFields": {
@@ -184,10 +184,10 @@
         "htmlFields": ["activities.*.description.value", "advancement.*.hint", "description.value", "description.chat"]
       },
       "container": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "backpack": {
-        "htmlFields": ["description.value", "description.chat", "unidentified.description"]
+        "htmlFields": ["description.value", "description.chat", "description.gmOnly", "unidentified.description"]
       },
       "facility": {
         "filePathFields": {

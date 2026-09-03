@@ -34,6 +34,8 @@
  * @property {object} description               Various item descriptions.
  * @property {string} description.value         Full item description.
  * @property {string} description.chat          Description displayed in chat card.
+ * @property {string} description.gmOnly        Description displayed only for GM users.
+ * @property {boolean} description.revealed     Is the GM-only description visible to non-GMs?
  * @property {string} identifier                Identifier slug for this item.
  * @property {SourceData} source                Adventure or sourcebook where this item originated.
  */
