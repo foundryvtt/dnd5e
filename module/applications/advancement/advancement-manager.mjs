@@ -704,7 +704,7 @@ export default class AdvancementManager extends Application5e {
         }
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch(error) {
+    } catch (error) {
       if ( !(error instanceof Advancement.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
@@ -734,24 +734,29 @@ export default class AdvancementManager extends Application5e {
     const preIds = new Set(this.#preEmbeddedItems.map(i => i.id));
     const postIds = new Set(this.clone.items.map(i => i.id));
     const addedIds = postIds.difference(preIds).difference(initialIds);
-    const deletedIds = preIds.difference(postIds).difference(initialIds);
+    const deletedIds = preIds.difference(postIds);
+
+    const getLevel = (step, advancementClassLinked) => (advancementClassLinked ? undefined : step?.level)
+      ?? step?.flow?.level ?? step?.class?.level ?? step?.level;
 
     for ( const addedId of addedIds ) {
       const item = this.clone.items.get(addedId);
       if ( !item.hasAdvancement ) continue;
 
-      let handledLevel = 0;
+      let maximumLevel = 0;
+      let handledLevel = -Infinity;
       for ( let idx = this.#stepIndex; idx < this.steps.length; idx++ ) {
         // Find spots where the level increases
-        const getLevel = step => (item.system.advancementClassLinked ? undefined : step?.level)
-          ?? step?.flow?.level ?? step?.class?.level ?? step?.level;
-        const thisLevel = getLevel(this.steps[idx]);
-        const nextLevel = getLevel(this.steps[idx + 1]);
-        if ( (thisLevel < handledLevel) || (thisLevel >= nextLevel) ) continue;
+        const thisLevel = getLevel(this.steps[idx], item.system.advancementClassLinked);
+        const nextLevel = getLevel(this.steps[idx + 1], item.system.advancementClassLinked);
+        if ( maximumLevel < thisLevel ) maximumLevel = thisLevel;
+        if ( (thisLevel <= handledLevel) || (thisLevel >= nextLevel) ) continue;
 
         // Determine if there is any advancement to be done for the added item to this level
         // from the previously handled level
-        const steps = Array.fromRange(thisLevel - handledLevel + 1, handledLevel)
+        const rangeStart = Math.max(0, handledLevel + 1);
+        const rangeEnd = nextLevel === undefined ? maximumLevel : (nextLevel - 1);
+        const steps = Array.fromRange(rangeEnd + 1 - rangeStart, rangeStart)
           .flatMap(l => this.constructor.flowsForLevel(item, l, { findExisting: this.steps }))
           .map(flow => ({ type: "forward", flow, synthetic: true }));
 
@@ -759,17 +764,18 @@ export default class AdvancementManager extends Application5e {
         this.steps.splice(idx + 1, 0, ...steps);
         idx += steps.length;
 
-        handledLevel = nextLevel ?? handledLevel;
+        handledLevel = rangeEnd;
       }
     }
 
     if ( (this.step.type === "delete") && this.step.synthetic ) return;
     for ( const deletedId of deletedIds ) {
+      if ( this.step.item?.id === deletedId ) continue;
       let item = this.#preEmbeddedItems.find(i => i.id === deletedId);
       if ( !item?.hasAdvancement ) continue;
 
       // Temporarily add the item back
-      this.clone.updateSource({items: [item.toObject()]});
+      this.clone.updateSource({ items: [item.toObject()] });
       item = this.clone.items.get(item.id);
 
       // Check for advancement from the maximum level handled by this manager to zero
@@ -819,7 +825,7 @@ export default class AdvancementManager extends Application5e {
         this.#preEmbeddedItems = null;
         this.clone.reset();
       } while ( this.step?.automatic );
-    } catch(error) {
+    } catch (error) {
       if ( !(error instanceof Advancement.ERROR) ) throw error;
       ui.notifications.error(error.message);
       this.step.automatic = false;
