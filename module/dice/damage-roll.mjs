@@ -21,6 +21,7 @@ export default class DamageRoll extends BasicRoll {
    */
   constructor(formula, data, options) {
     super(formula, data, options);
+    this.#applyModifiers();
     if ( !this.options.preprocessed ) this.preprocessFormula();
     if ( !this.options.configured ) this.configureDamage();
   }
@@ -129,6 +130,21 @@ export default class DamageRoll extends BasicRoll {
   /* -------------------------------------------- */
 
   /**
+   * Apply configured modifiers to each die term.
+   * @param {DiceTerm[]} [terms]  Terms to modify.
+   * @protected
+   */
+  #applyModifiers(terms=this.dice) {
+    const modifiers = this.options.modifiers;
+    if ( !modifiers?.length ) return;
+    for ( const term of terms ) {
+      term.modifiers = Array.from(new Set(term.modifiers.concat(modifiers)));
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Apply optional modifiers which customize the behavior of the d20term.
    * @param {object} [options={}]
    * @param {CriticalDamageConfiguration} [options.critical={}]  Critical configuration to take into account, will be
@@ -149,9 +165,11 @@ export default class DamageRoll extends BasicRoll {
         else newTerms.push(...this.#applyCriticalTerm(term, critical, i));
       }
 
-      // Add extra, unmodified critical damage.
+      // Add extra critical damage without critical scaling.
       if ( critical.bonusDamage ) {
-        const bonusTerms = new Roll(critical.bonusDamage, this.data).terms;
+        const bonusRoll = new Roll(critical.bonusDamage, this.data);
+        this.#applyModifiers(bonusRoll.dice);
+        const bonusTerms = bonusRoll.terms;
         if ( !(bonusTerms[0] instanceof OperatorTerm) ) newTerms.push(new OperatorTerm({ operator: "+" }));
         newTerms.push(...bonusTerms);
       }
