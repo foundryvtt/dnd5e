@@ -1448,6 +1448,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
     else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
     else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+    else if ( attr === "properties" ) label = "DND5E.Properties";
     else label = getSchemaLabel(attr, "Item", item);
   }
 
@@ -1484,6 +1485,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   // Senses
   else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".").at(-1)]?.label;
 
+  // Currency
+  else if ( attr.startsWith("currency.") ) {
+    const [, key] = attr.split(".");
+    label = CONFIG.DND5E.currencies[key]?.label;
+  }
+
   // Resources
   else if ( attr === "resources.legact.spent" ) label = "DND5E.LegendaryAction.LabelPl";
   else if ( attr === "resources.legact.value" ) label = "DND5E.LegendaryAction.Remaining";
@@ -1508,13 +1515,6 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     }
   }
 
-  // Tools
-  else if ( attr.startsWith("tools.") ) {
-    const [, key, ...keyPath] = attr.split(".");
-    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("tools");
-    label = mapping.getFieldLabel(key, keyPath.toReversed());
-  }
-
   // Spell slots
   else if ( attr.startsWith("spells.") ) {
     const [, key] = attr.split(".");
@@ -1526,10 +1526,11 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     }
   }
 
-  // Currency
-  else if ( attr.startsWith("currency.") ) {
-    const [, key] = attr.split(".");
-    label = CONFIG.DND5E.currencies[key]?.label;
+  // Tools
+  else if ( attr.startsWith("tools.") ) {
+    const [, key, ...keyPath] = attr.split(".");
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("tools");
+    label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
   // Attempt to find the attribute in a data model

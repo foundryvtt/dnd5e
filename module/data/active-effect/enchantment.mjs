@@ -253,7 +253,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   async getSheetChangeContext(change) {
     return {
       name: getHumanReadableAttributeLabel(change.key, {
-        item: this.isAppliedEnchantment ? this.item : true, prefixItemName: false
+        item: this.isApplied ? this.item : true, prefixItemName: false
       })
     };
   }
