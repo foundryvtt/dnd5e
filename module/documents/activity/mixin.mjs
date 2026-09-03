@@ -1205,7 +1205,7 @@ export default function ActivityMixin(Base) {
         if ( !Number.isFinite(effect.duration.value) ) {
           const duration = this.duration?.getEffectData();
           if ( !foundry.utils.isEmpty(duration) ) changes.duration = duration;
-        } else {
+        } else if ( effect.duration.units !== "turns" ) {
           changes.duration = { expiry: "turnStart" };
         }
       }

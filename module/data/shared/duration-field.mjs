@@ -16,7 +16,7 @@ export default class DurationField extends SchemaField {
     fields = {
       value: new FormulaField({ deterministic: true }),
       units: new StringField({ required: true, blank: false, initial: "inst" }),
-      expiry: new StringField(),
+      expiry: new StringField({ nullable: true, blank: false, initial: null }),
       special: new StringField(),
       ...fields
     };
@@ -98,6 +98,7 @@ export default class DurationField extends SchemaField {
       case "year": units = "years"; break;
       default: return expiry ? { expiry, value: null } : {};
     }
-    return { value, units, expiry: expiry ?? "turnStart" };
+    if ( units !== "turns" ) expiry ??= "turnStart";
+    return { value, units, expiry };
   }
 }
