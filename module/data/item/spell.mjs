@@ -433,13 +433,11 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
-  /*  Data Copying                                */
-  /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static _resetActorContextData(source) {
-    super._resetActorContextData(source);
-    delete source.preparation?.prepared;
+  static _resetData(source) {
+    super._resetData(source);
+    delete source.prepared;
   }
 
   /* -------------------------------------------- */

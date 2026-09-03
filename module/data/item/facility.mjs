@@ -110,6 +110,22 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
   }
 
   /* -------------------------------------------- */
+
+  static _resetData(source) {
+    super._resetData(source);
+    delete source.building;
+    delete source.craft;
+    delete source.defenders?.value;
+    delete source.disabled;
+    delete source.hirelings?.value;
+    delete source.progress;
+    delete source.trade?.creatures?.value;
+    delete source.trade?.pending;
+    delete source.trade?.stock?.stocked;
+    delete source.trade?.stocked?.value;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 

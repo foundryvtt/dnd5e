@@ -300,12 +300,10 @@ export default class ActivitiesTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
-  /*  Data Copying                                */
-  /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static _resetActorContextData(source) {
-    super._resetActorContextData(source);
+  static _resetData(source) {
+    super._resetData(source);
     delete source.uses?.spent;
     for ( const activity of Object.values(source.activities ?? {}) ) delete activity.uses?.spent;
   }
