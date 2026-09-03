@@ -111,6 +111,7 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
   static _resetData(source) {
     super._resetData(source);
     delete source.building;
