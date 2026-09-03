@@ -313,12 +313,20 @@ export default class ActivitiesTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
-   * Prepare final data for the activities & uses.
+   * Prepare final uses data.
    * @param {ItemRollData} rollData
    */
-  prepareFinalActivityData(rollData) {
+  prepareUsesData(rollData=this.parent.getRollData({ deterministic: true })) {
     const labels = this.parent.labels;
     UsesField.prepareData.call(this, rollData, labels);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare final data for the activities.
+   */
+  prepareFinalActivityData() {
     for ( const activity of this.activities ) activity.prepareFinalData();
   }
 

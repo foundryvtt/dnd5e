@@ -35,6 +35,18 @@ export default class BaseEffectData extends ActiveEffectDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    for ( const change of this.changes ) {
+      if ( change.value.includes?.("@item.uses.value") ) change.phase = "postAbilities";
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
