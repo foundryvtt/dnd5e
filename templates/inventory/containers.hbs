@@ -12,6 +12,9 @@
             {{/with}}
             {{/dnd5e-itemContext}}
             <img src="{{ img }}" alt="{{ name }}" draggable="false">
+            {{#if system.equipped}}
+            <i class="equipped fa-solid fa-shield-halved" data-tooltip aria-label="{{ localize "DND5E.Equipped" }}"></i>
+            {{/if}}
         </a>
     </li>
     {{/each}}
