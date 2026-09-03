@@ -384,6 +384,7 @@
             margin-top: -7px;
 
             .lozenge {
+              position: relative;
               width: 68px;
               height: 45px;
               background: transparent url("ui/lozenge.svg") no-repeat top center / contain;
@@ -405,6 +406,17 @@
                 .config-button {
                   color: inherit;
                   font-size: inherit;
+                }
+
+                .advantage-mode {
+                  color: inherit;
+                  font-size: var(--font-size-9);
+                  line-height: 1;
+                  position: absolute;
+                  top: 10px;
+
+                  &.advantage { left: 7px; }
+                  &.disadvantage { right: 7px; }
                 }
               }
 
@@ -739,15 +751,34 @@
         flex: 1;
         font-family: var(--dnd5e-font-roboto-condensed);
         font-size: var(--font-size-14);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .bonus {
+        display: flex;
+        align-items: center;
+        gap: 2px;
         width: 20px;
         font-size: var(--font-size-14);
         font-weight: bold;
         text-align: center;
 
-        > .sign { color: var(--color-text-tertiary); }
+        .sign { color: var(--color-text-tertiary); }
+
+        > .modifier {
+          flex: 1;
+          text-align: right;
+        }
+      }
+
+      .advantage-mode {
+        color: var(--color-text-tertiary);
+        font-size: var(--font-size-9);
+        line-height: 1;
+        margin-left: -7px;
+        width: 7px;
       }
 
       .passive {
@@ -994,6 +1025,28 @@
         color: inherit;
         font-size: inherit;
         font-weight: inherit;
+      }
+
+      .mod {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1px;
+        width: 44px;
+
+        .sign { color: var(--color-text-tertiary); }
+      }
+
+      .advantage-mode {
+        color: var(--color-text-tertiary);
+        font-size: var(--font-size-9);
+        line-height: 1;
+        position: absolute;
+        top: 33px;
+        width: 7px;
+
+        &.advantage { left: 2px; }
+        &.disadvantage { right: 2px; }
       }
 
       .score {

@@ -16,6 +16,16 @@
 {{#*inline ".ability-score"}}
     <div class="ability-score {{~#if flipped}} flipped{{/if}}" data-ability="{{ key }}">
         <a class="label {{ @root.rollableClass }} ability-check" data-action="roll" data-type="ability">{{ abbr }}</a>
+        {{#unless @root.editable}}
+        {{#if (eq checkAdvantageMode 1)}}<span class="advantage-mode advantage" data-tooltip="DND5E.Advantage"
+                                                aria-label="{{ localize 'DND5E.Advantage' }}">
+            <i class="fas fa-angles-up" inert></i>
+        </span>{{/if}}
+        {{#if (eq checkAdvantageMode -1)}}<span class="advantage-mode disadvantage" data-tooltip="DND5E.Disadvantage"
+                                                 aria-label="{{ localize 'DND5E.Disadvantage' }}">
+            <i class="fas fa-angles-down" inert></i>
+        </span>{{/if}}
+        {{/unless}}
         <div class="mod">
             {{#if @root.editable}}
             <button type="button" class="config-button unbutton" data-action="showConfiguration" data-config="ability"
@@ -24,7 +34,7 @@
                 <i class="fas fa-cog" inert></i>
             </button>
             {{else}}
-            {{ dnd5e-formatModifier mod }}
+            <span class="modifier">{{ dnd5e-formatModifier mod }}</span>
             {{/if}}
         </div>
         <div class="score">

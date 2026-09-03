@@ -93,6 +93,14 @@
                         </button>
                         {{else}}
                         <span>
+                            {{#if (eq initiativeAdvantageMode 1)}}<span class="advantage-mode advantage"
+                                    data-tooltip="DND5E.Advantage" aria-label="{{ localize 'DND5E.Advantage' }}">
+                                <i class="fas fa-angles-up" inert></i>
+                            </span>{{/if}}
+                            {{#if (eq initiativeAdvantageMode -1)}}<span class="advantage-mode disadvantage"
+                                    data-tooltip="DND5E.Disadvantage" aria-label="{{ localize 'DND5E.Disadvantage' }}">
+                                <i class="fas fa-angles-down" inert></i>
+                            </span>{{/if}}
                             {{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}
                         </span>
                         {{/if}}
