@@ -1,9 +1,11 @@
 import stylistic from "@stylistic/eslint-plugin";
+import { defineConfig, includeIgnoreFile } from "eslint/config";
 import jsdoc from "eslint-plugin-jsdoc";
 import globals from "globals";
+import { fileURLToPath } from "node:url";
 
-export default [
-  { ignores: ["dnd5e-compiled*", "dist/", "packs/"] },
+export default defineConfig([
+  includeIgnoreFile(fileURLToPath(new URL(".gitignore", import.meta.url)), { gitignoreResolution: true }),
   {
     languageOptions: {
       ecmaVersion: "latest",
@@ -145,7 +147,7 @@ export default [
       }],
       "prefer-template": "warn",
       "@stylistic/quote-props": ["warn", "as-needed", { keywords: false }],
-      "@stylistic/quotes": ["warn", "double", { avoidEscape: true, allowTemplateLiterals: false }],
+      "@stylistic/quotes": ["warn", "double", { avoidEscape: true, allowTemplateLiterals: "never" }],
       "@stylistic/semi": "warn",
       "@stylistic/space-before-blocks": ["warn", "always"],
       "@stylistic/space-before-function-paren": ["warn", {
@@ -211,4 +213,4 @@ export default [
       }
     }
   }
-];
+]);
