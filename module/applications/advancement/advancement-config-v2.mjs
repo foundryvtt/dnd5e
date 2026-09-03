@@ -191,33 +191,51 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
     // Try to extract the data
     const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
 
-    if ( data?.type !== "Item" ) return;
-    const item = await Item.implementation.fromDropData(data);
-
-    try {
-      this._validateDroppedItem(event, item);
-    } catch(err) {
-      ui.notifications.error(err.message);
-      return;
+    // Resolve a single dropped item or all items within a dropped folder
+    let items;
+    if ( data?.type === "Item" ) items = [await Item.implementation.fromDropData(data)];
+    else if ( data?.type === "Folder" ) {
+      const folder = await Folder.implementation.fromDropData(data);
+      if ( folder?.type !== "Item" ) return;
+      items = await Promise.all(folder.contents.map(async i => {
+        if ( !(i instanceof Item) ) i = await fromUuid(i.uuid);
+        return i;
+      }));
+      items = items.filter(i => i && !i.system.container);
     }
+    else return;
 
     const existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
+    const toAdd = [];
+    for ( const item of items ) {
+      if ( !item ) continue;
 
-    // Abort if this uuid is the parent item
-    if ( item.uuid === this.item.uuid ) {
-      ui.notifications.error("DND5E.ADVANCEMENT.ItemGrant.Warning.Recursive");
-      return;
+      try {
+        this._validateDroppedItem(event, item);
+      } catch(err) {
+        ui.notifications.error(err.message);
+        continue;
+      }
+
+      // Skip the parent item
+      if ( item.uuid === this.item.uuid ) {
+        ui.notifications.error("DND5E.ADVANCEMENT.ItemGrant.Warning.Recursive");
+        continue;
+      }
+
+      // Skip items that already exist
+      if ( existingItems.find(i => i.uuid === item.uuid) || toAdd.find(i => i.uuid === item.uuid) ) {
+        ui.notifications.warn("DND5E.ADVANCEMENT.ItemGrant.Warning.Duplicate");
+        continue;
+      }
+
+      toAdd.push({ uuid: item.uuid });
     }
 
-    // Abort if this uuid exists already
-    if ( existingItems.find(i => i.uuid === item.uuid) ) {
-      ui.notifications.warn("DND5E.ADVANCEMENT.ItemGrant.Warning.Duplicate");
-      return;
-    }
-
+    if ( !toAdd.length ) return;
     await this.submit({
       updateData: {
-        [`configuration.${this.options.dropKeyPath}`]: [...existingItems, { uuid: item.uuid }]
+        [`configuration.${this.options.dropKeyPath}`]: [...existingItems, ...toAdd]
       }
     });
   }
