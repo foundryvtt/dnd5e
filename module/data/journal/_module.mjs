@@ -21,9 +21,9 @@ export const config = {
 };
 
 export const icons = {
-  class: "fa-solid fa-file-lines",
-  map: "fa-solid fa-file-lines",
-  rule: "fa-solid fa-file-lines",
-  spells: "fa-solid fa-file-lines",
-  subclass: "fa-solid fa-file-lines"
+  class: "fa-solid fa-file-shield",
+  map: "fa-solid fa-map",
+  rule: "fa-solid fa-book-section",
+  spells: "fa-solid fa-book-sparkles",
+  subclass: "fa-solid fa-diagram-subtask"
 };
