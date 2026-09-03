@@ -1,7 +1,7 @@
 import { convertWeight, defaultUnits } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract/system-data-model.mjs";
 
-const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ForeignDocumentField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { CompendiumBrowserFilterDefinitionEntry } from "../../../applications/compendium-browser.mjs";
@@ -39,7 +39,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, blank: false, initial: () => CONFIG.DND5E.defaultCurrency, label: "DND5E.Currency"
         })
       }, { label: "DND5E.Price" }),
-      rarity: new StringField({ required: true, blank: true, label: "DND5E.Rarity" })
+      rarities: new SetField(new StringField(), { label: "DND5E.Rarity" })
     };
   }
 
@@ -74,8 +74,51 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           choices: Object.entries(CONFIG.DND5E.itemRarity).reduce((obj, [key, label]) => {
             obj[key] = { label: label.capitalize() };
             return obj;
-          }, {}),
-          keyPath: "system.rarity"
+          }, {})
+        },
+        createFilter: (filters, value) => {
+          const { include, exclude } = Object.entries(value ?? {}).reduce((d, [key, value]) => {
+            if ( key === "_blank" ) key = "";
+            if ( value === 1 ) d.include.push(key);
+            else if ( value === -1 ) d.exclude.push(key);
+            return d;
+          }, { include: [], exclude: [] });
+
+          const mundane = { o: "AND", v: [
+            { k: "system.rarities", o: "empty" },
+            { k: "system.rarity", o: "empty" }
+          ] };
+
+          const matchAny = values => {
+            const rarities = values.filter(_ => _);
+            const predicates = [];
+            if ( rarities.length ) predicates.push(
+              { k: "system.rarities", o: "hasany", v: rarities },
+              { k: "system.rarity", o: "in", v: rarities }
+            );
+            if ( rarities.length < values.length ) predicates.push(mundane);
+            return { o: "OR", v: predicates };
+          };
+
+          const matchSubset = values => {
+            const rarities = values.filter(_ => _);
+            const predicates = [];
+            if ( rarities.length ) predicates.push(
+              { o: "AND", v: [
+                { k: "system.rarities", o: "empty", v: false },
+                { k: "system.rarities", o: "subsetof", v: rarities }
+              ] },
+              { k: "system.rarity", o: "in", v: rarities }
+            );
+            if ( rarities.length < values.length ) predicates.push(mundane);
+            return { o: "OR", v: predicates };
+          };
+
+          // If an item has a rarity that is included, the item is included.
+          if ( include.length ) filters.push(matchAny(include));
+
+          // If all of the item's rarities are excluded, the item is excluded.
+          if ( exclude.length ) filters.push({ o: "NOT", v: matchSubset(exclude) });
         }
       }]
     ];
@@ -98,6 +141,16 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the lowest (or only) rarity of the item.
+   * @returns {string}
+   */
+  get rarity() {
+    return this.rarities.first();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The weight of all of the items in an item stack.
    * @type {number}
    */
@@ -113,12 +166,11 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    */
   get physicalItemSheetFields() {
     return [{
-      label: CONFIG.DND5E.itemRarity[this.rarity],
-      value: this._source.rarity,
+      label: Array.from(this.rarities).map(r => CONFIG.DND5E.itemRarity[r]).filterJoin(", "),
+      value: this._source.rarities,
       requiresIdentification: true,
-      field: this.schema.getField("rarity"),
-      choices: CONFIG.DND5E.itemRarity,
-      blank: "DND5E.Rarity",
+      field: this.schema.getField("rarities"),
+      options: Object.entries(CONFIG.DND5E.itemRarity).map(([value, label]) => ({ label, value })),
       classes: "item-rarity"
     }];
   }
@@ -157,10 +209,15 @@ export default class PhysicalItemTemplate extends SystemDataModel {
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateRarity(source) {
-    if ( !("rarity" in source) || CONFIG.DND5E.itemRarity[source.rarity] ) return;
-    source.rarity = Object.keys(CONFIG.DND5E.itemRarity).find(key =>
-      CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase()
-    ) ?? "";
+    if ( ("rarities" in source) || !("rarity" in source) ) return;
+    if ( source.rarity in CONFIG.DND5E.itemRarity ) source.rarities = [source.rarity];
+    else {
+      const key = Object.keys(CONFIG.DND5E.itemRarity).find(key => {
+        return CONFIG.DND5E.itemRarity[key].toLowerCase() === source.rarity.toLowerCase();
+      }) ?? "";
+      if ( key ) source.rarities = [key];
+    }
+    delete source.rarity;
   }
 
   /* -------------------------------------------- */

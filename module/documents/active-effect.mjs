@@ -99,7 +99,8 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.bonuses.rsak.damage": { key: "system.rolls.damage.rsak.bonus" },
     "system.bonuses.abilities.check": { key: "system.rolls.ability.check.bonus" },
     "system.bonuses.abilities.save": { key: "system.rolls.ability.save.bonus" },
-    "system.bonuses.abilities.skill": { key: "system.rolls.ability.skill.bonus" }
+    "system.bonuses.abilities.skill": { key: "system.rolls.ability.skill.bonus" },
+    "system.rarity": { key: "system.rarities" }
   };
 
   /* -------------------------------------------- */
