@@ -90,12 +90,19 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
   #onTrayToggle(event) {
     const tray = event.target;
     if ( !tray.matches?.(ChatMessage5e.TRAY_TYPES.join(", ")) || !tray.open || !this.isAtBottom ) return;
-    // Re-pin each frame across the tray's 250ms open animation so the log follows it.
-    const until = performance.now() + 250;
-    const pin = now => {
+    // Re-pin each frame across the tray's open transition so the log follows it.
+    let running = true;
+    const pin = () => {
       this.scrollBottom();
-      if ( now < until ) requestAnimationFrame(pin);
+      if ( running ) requestAnimationFrame(pin);
     };
-    requestAnimationFrame(pin);
+    const transitionend = () => {
+      running = false;
+      tray.removeEventListener("transitionend", transitionend);
+      tray.removeEventListener("transitioncancel", transitionend);
+    };
+    tray.addEventListener("transitionend", transitionend);
+    tray.addEventListener("transitioncancel", transitionend);
+    pin();
   }
 }
