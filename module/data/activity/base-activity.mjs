@@ -906,7 +906,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
     // Fall back to the item's base damage type when this part specifies none (e.g. weapon/ammo base damage).
     let { types } = damage;
-    if ( !types.size && this.item.system.offersBaseDamage ) types = this.item.system.damage.base.types;
+    if ( !types.size && this.item.system.offersBaseDamage && (this.constructor.damageRuleCategory !== "healing") ) {
+      types = this.item.system.damage.base.types;
+    }
     const data = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
     data.roll.damage ??= {};
     data.roll.damage.type = (types.has(lastType) ? lastType : null) ?? types.first();
