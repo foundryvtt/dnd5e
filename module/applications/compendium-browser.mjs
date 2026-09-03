@@ -68,7 +68,7 @@ export default class CompendiumBrowser extends Application5e {
       locked: {},
       initial: {
         documentClass: "Item",
-        types: new Set(["class"])
+        types: new Set(["physical"])
       }
     },
     selection: {
