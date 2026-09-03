@@ -129,9 +129,9 @@ export default class WelcomeScreen extends Application5e {
       calendar,
       {
         field: new BooleanField(),
-        hint: _loc("DND5E.Bastion.Enabled.Hint"),
+        hint: _loc("DND5E.Bastion.FIELDS.enabled.hint"),
         input: createCheckboxInput,
-        label: _loc("DND5E.Bastion.Enabled.Label"),
+        label: _loc("DND5E.Bastion.FIELDS.enabled.label"),
         name: "bastionConfiguration.enabled",
         value: dnd5e.settings.bastionConfiguration.enabled
       },
