@@ -47,11 +47,22 @@ export default class DamagesConfig extends TraitsConfig {
     }, {}));
     context.value = {};
     if ( this.options.trait === "dm" ) {
-      context.choices.forEach((key, data) => data.chosen = context.data.amount[key] ?? "");
+      context.choices = new SelectChoices({
+        amount: context.choices.OTHER,
+        multiply: {
+          label: context.choices.OTHER.label,
+          // TODO: Should this different hint & field be moved elsewhere? Probably
+          hint: "DND5E.DamageModification.MultiplyHint",
+          field: new foundry.data.fields.NumberField(),
+          // TODO: Technically this won't be immediately accurate, but there's relevance for `chosen` here anyway
+          children: context.choices.OTHER.children.clone()
+        }
+      });
+      context.choices.amount.children.forEach((key, data) => data.chosen = context.data.amount[key] ?? "");
+      context.choices.multiply.children.forEach((key, data) => data.chosen = context.data.multiply[key] ?? "");
       context.bypassHint = "DND5E.DamageModification.BypassHint";
       context.hint = "DND5E.DamageModification.Hint";
       context.value.field = new FormulaField({ determinstic: true });
-      context.value.key = "amount";
     } else {
       context.bypassHint = "DND5E.DAMAGE.PhysicalBypass.Hint";
       context.value.field = context.checkbox;
@@ -78,10 +89,12 @@ export default class DamagesConfig extends TraitsConfig {
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
     if ( this.options.trait === "dm" ) {
-      for ( const [type, formula] of Object.entries(submitData.system?.traits?.dm?.amount ?? {}) ) {
-        if ( !formula ) {
-          delete submitData.system.traits.dm.amount[type];
-          submitData.system.traits.dm.amount[type] = _del;
+      for ( const subKey of ["amount", "multiply"] ) {
+        for ( const [type, modification] of Object.entries(submitData.system?.traits?.dm?.[subKey] ?? {}) ) {
+          if ( !modification ) {
+            delete submitData.system.traits.dm[subKey][type];
+            submitData.system.traits.dm[subKey][type] = _del;
+          }
         }
       }
     }
