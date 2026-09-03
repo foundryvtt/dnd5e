@@ -1,17 +1,17 @@
 _id: SypSoinJkES0o5FB
 name: Glamoured Studded Leather
 type: equipment
-img: icons/equipment/chest/breastplate-rivited-red.webp
+img: icons/equipment/chest/breastplate-layered-gold.webp
 system:
   description:
     value: >-
-      <p>While wearing this armor, you gain a +1 bonus to AC. You can also use a
-      bonus action to speak the armor's command word and cause the armor to
-      assume the appearance of a normal set of clothing or some other kind of
-      armor. You decide what it looks like, including color, style, and
-      accessories, but the armor retains its normal bulk and weight. The
-      illusory appearance lasts until you use this property again or remove the
-      armor.</p>
+      <p><em>Armor</em></p><p>While wearing this armor, you gain a +1 bonus to
+      AC. You can also use a bonus action to speak the armor's command word and
+      cause the armor to assume the appearance of a normal set of clothing or
+      some other kind of armor. You decide what it looks like, including color,
+      style, and accessories, but the armor retains its normal bulk and weight.
+      The illusory appearance lasts until you use this property again or remove
+      the armor.</p>
     chat: ''
   source:
     custom: ''
@@ -36,9 +36,9 @@ system:
     recovery: []
     spent: 0
   armor:
-    value: 13
+    value: 12
     dex: null
-    magicalBonus: null
+    magicalBonus: '1'
   hp:
     value: 0
     max: 0
@@ -59,8 +59,7 @@ system:
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    OOVmUgjN7zzGcQjH:
       type: utility
       activation:
         type: bonus
@@ -75,15 +74,16 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: self
         special: ''
         override: false
       target:
@@ -94,7 +94,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -110,7 +111,16 @@ system:
       uses:
         spent: 0
         recovery: []
-      sort: 0
+      sort: 100000
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      _id: OOVmUgjN7zzGcQjH
   attuned: false
   identifier: glamoured-studded-leather
 effects: []
@@ -121,11 +131,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037192140
-  modifiedTime: 1750697344647
+  modifiedTime: 1783734770361
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!SypSoinJkES0o5FB'

@@ -1,15 +1,13 @@
 _id: kpDbCYgUivh7NApp
 name: Spellguard Shield
 type: equipment
-img: icons/equipment/shield/kite-wooden-sigil-purple.webp
+img: icons/equipment/shield/targe-steel-blue.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While holding this shield, you have advantage on saving throws against
-      spells and other magical effects, and spell attacks have disadvantage
-      against you.</p>
+      <p><em>Armor (requires attunement)</em></p><p>While holding this shield,
+      you have advantage on saving throws against spells and other magical
+      effects, and spell attacks have disadvantage against you.</p>
     chat: ''
   source:
     custom: ''
@@ -37,7 +35,7 @@ system:
   armor:
     value: 2
     dex: null
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -59,7 +57,46 @@ system:
   activities: {}
   attuned: false
   identifier: spellguard-shield
-effects: []
+effects:
+  - name: Spellguard Ward
+    img: icons/magic/defensive/shield-barrier-deflect-teal.webp
+    origin: Compendium.dnd5e.items.Item.kpDbCYgUivh7NApp
+    system:
+      magical: true
+      changes: []
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: O3AAHu4ztesQHlLu
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You have advantage on saving throws against spells and other magical
+      effects, and spell attacks have disadvantage against you.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783734949313
+      modifiedTime: 1783734968090
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!kpDbCYgUivh7NApp.O3AAHu4ztesQHlLu'
 folder: JqTP017wj3uxDJ8g
 sort: 0
 ownership:
@@ -67,11 +104,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037270294
-  modifiedTime: 1750697344647
+  modifiedTime: 1783734995907
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!kpDbCYgUivh7NApp'

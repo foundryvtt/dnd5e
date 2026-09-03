@@ -1,19 +1,18 @@
 _id: NG8BlE2nwYJxCjWO
 name: Animated Shield
 type: equipment
-img: icons/equipment/shield/heater-steel-sword-yellow-black.webp
+img: icons/equipment/shield/heater-steel-segmented-purple.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While holding this shield, you can speak its command word as a bonus
-      action to cause it to animate. The shield leaps into the air and hovers in
-      your space to protect you as if you were wielding it, leaving your hands
-      free. The shield remains animated for 1 minute, until you use a bonus
-      action to end this effect, or until you are incapacitated or die, at which
-      point the shield falls to the ground or into your hand if you have one
-      free.</p>
+      <p><em>Armor (requires attunement)</em></p><p>While holding this shield,
+      you can speak its command word as a bonus action to cause it to animate.
+      The shield leaps into the air and hovers in your space to protect you as
+      if you were wielding it, leaving your hands free. The shield remains
+      animated for [[lookup @labels.duration activity=66XL8miWx4CzKR3V]], until
+      you use a bonus action to end this effect, or until you are
+      &amp;reference[incapacitated apply=false] or die, at which point the
+      shield falls to the ground or into your hand if you have one free.</p>
     chat: ''
   source:
     custom: ''
@@ -40,7 +39,7 @@ system:
   armor:
     value: 2
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -61,72 +60,120 @@ system:
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    66XL8miWx4CzKR3V:
       type: utility
+      name: Speak Command Word
+      _id: 66XL8miWx4CzKR3V
+      img: ''
+      sort: 100000
       activation:
         type: bonus
-        value: 1
-        condition: Command Word
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: '1'
         units: minute
-        special: ''
+        concentration: false
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: fiafOrSLt3eV3GjJ
+          uuid: null
+          level: {}
+      flags: {}
       range:
-        units: ''
-        special: ''
+        units: self
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: self
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      roll:
-        formula: ''
-        name: ''
-        prompt: false
-        visible: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
       visibility:
-        requireMagic: true
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
         identifier: ''
-        requireIdentification: true
-      appliedEffects: []
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
   attuned: false
   identifier: animated-shield
-effects: []
+effects:
+  - name: Floating Animated Shield
+    img: icons/equipment/shield/heater-steel-segmented-purple.webp
+    origin: Compendium.dnd5e.items.Item.NG8BlE2nwYJxCjWO
+    transfer: false
+    _id: fiafOrSLt3eV3GjJ
+    type: base
+    system:
+      changes:
+        - key: system.attributes.ac.bonus
+          type: add
+          value: 2
+          phase: initial
+          _id: HFGoRSWsIruIfv4B
+          conditions: '{}'
+          priority: null
+      conditions: '{}'
+      magical: true
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: seconds
+      expiry: turnStart
+      expired: false
+    description: >-
+      <p>For the duration, the animated shield hovers in your space to protect
+      you as if you were wielding it, leaving your hands free.</p><p>The shield
+      remains animated for the duration, until you use a bonus action to end
+      this effect, or until you are &amp;reference[incapacitated apply=false] or
+      die, at which point the shield falls to the ground or into your hand if
+      you have one free.</p>
+    tint: '#ffffff'
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783735091375
+      modifiedTime: 1783735264593
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!NG8BlE2nwYJxCjWO.fiafOrSLt3eV3GjJ'
 folder: JqTP017wj3uxDJ8g
 sort: 0
 ownership:
@@ -134,11 +181,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037173027
-  modifiedTime: 1764619744403
+  modifiedTime: 1783735330330
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!NG8BlE2nwYJxCjWO'

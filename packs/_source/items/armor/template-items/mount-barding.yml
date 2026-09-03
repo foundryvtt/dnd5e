@@ -1,0 +1,194 @@
+folder: D3ufaDHnyE4MJyWy
+name: Mount Barding
+type: equipment
+_id: Bm0qUyCScfSk1Um8
+img: icons/commodities/leather/leather-buckle-steel-tan.webp
+system:
+  activities:
+    odY3gu88PJe12vC4:
+      type: enchant
+      name: Apply Equipment Template
+      _id: odY3gu88PJe12vC4
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: GVSMCnrz1AyE2ApQ
+          uuid: null
+          level: {}
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories:
+          - heavy
+          - light
+          - medium
+        properties: []
+        type: equipment
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>Barding is armor designed to protect an animal's head, neck, chest, and
+      body. Any type of armor can be purchased as barding. The cost is four
+      times the equivalent armor made for humanoids, and it weighs twice as
+      much.</p>
+    chat: ''
+  identifier: mount-barding
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+  proficient: null
+  properties: []
+  strength: null
+  type:
+    value: ''
+    baseItem: ''
+effects:
+  - type: enchantment
+    name: Mount Barding
+    img: icons/commodities/leather/leather-buckle-steel-tan.webp
+    disabled: true
+    _id: GVSMCnrz1AyE2ApQ
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} Barding'
+          phase: initial
+          _id: z6UVlH631DXNkrWm
+          conditions: '{}'
+          priority: null
+        - key: system.price.value
+          type: multiply
+          value: '4'
+          phase: initial
+          _id: NvkTW5nQHNxJCwX7
+          conditions: '{}'
+          priority: null
+        - key: system.weight.value
+          type: multiply
+          value: '2'
+          phase: initial
+          _id: QM0JtSXZMGzjMYRs
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.Bm0qUyCScfSk1Um8 inline]'
+          phase: initial
+          _id: 6FmnGTbI6jsfSjuH
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.Bm0qUyCScfSk1Um8 inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783736608368
+      modifiedTime: 1783736695374
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!Bm0qUyCScfSk1Um8.GVSMCnrz1AyE2ApQ'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1783736503051
+  modifiedTime: 1783736608440
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Bm0qUyCScfSk1Um8'

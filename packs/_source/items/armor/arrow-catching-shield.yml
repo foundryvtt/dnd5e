@@ -1,15 +1,16 @@
 _id: uWUD93jwuO2Jxkti
 name: Arrow-Catching Shield
 type: equipment
-img: icons/equipment/shield/wardoor-wooden-boss-brown.webp
+img: icons/equipment/shield/heater-wooden-steel-boss.webp
 system:
   description:
     value: >-
-      <p>You gain a +2 bonus to AC against ranged attacks while you wield this
-      shield. This bonus is in addition to the shield's normal bonus to AC. In
-      addition, whenever an attacker makes a ranged attack against a target
-      within 5 feet of you, you can use your reaction to become the target of
-      the attack instead.</p>
+      <p><em>Armor (requires attunement)</em></p><p>You gain a +2 bonus to AC
+      against ranged attacks while you wield this shield. This bonus is in
+      addition to the shield's normal bonus to AC. In addition, whenever an
+      attacker makes a ranged attack against a target within [[lookup
+      @labels.description.range activity=JLd6ncASQwCLjGUA]] of you, you can use
+      your reaction to become the target of the attack instead.</p>
     chat: ''
   source:
     custom: ''
@@ -24,7 +25,7 @@ system:
   price:
     value: 4000
     denomination: gp
-  attunement: ''
+  attunement: required
   equipped: false
   rarity: rare
   identified: true
@@ -37,7 +38,7 @@ system:
   armor:
     value: 2
     dex: 0
-    magicalBonus: null
+    magicalBonus: ''
   hp:
     value: 0
     max: 0
@@ -57,13 +58,14 @@ system:
   properties:
     - mgc
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
+    JLd6ncASQwCLjGUA:
       type: utility
       activation:
         type: reaction
         value: 1
-        condition: A ranged attack within 5 ft.
+        condition: >-
+          Whenever an attacker makes a ranged attack against a target within 5
+          feet of you.
         override: false
       consumption:
         targets: []
@@ -73,17 +75,23 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: >-
+          <p>Whenever an attacker makes a ranged attack against a target within
+          [[lookup @labels.description.range activity=JLd6ncASQwCLjGUA]] of you,
+          you can use your reaction to become the target of the attack
+          instead.</p>
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
       range:
-        units: ''
+        units: ft
         special: ''
         override: false
+        value: '5'
       target:
         template:
           count: ''
@@ -92,10 +100,11 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
-          count: ''
-          type: self
+          count: '1'
+          type: creature
           choice: false
           special: ''
         prompt: true
@@ -109,8 +118,8 @@ system:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
+      sort: 100000
+      name: Intercept Ranged Attack
       img: ''
       visibility:
         requireMagic: true
@@ -119,7 +128,10 @@ system:
           max: null
         identifier: ''
         requireIdentification: true
-      appliedEffects: []
+        requireAttunement: false
+      behaviors: []
+      flags: {}
+      _id: JLd6ncASQwCLjGUA
   attuned: false
   identifier: arrow-catching-shield
 effects: []
@@ -130,11 +142,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.0
   createdTime: 1725037312834
-  modifiedTime: 1764621224419
+  modifiedTime: 1783734810381
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!uWUD93jwuO2Jxkti'

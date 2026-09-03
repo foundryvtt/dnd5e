@@ -1,0 +1,425 @@
+folder: D3ufaDHnyE4MJyWy
+name: Armor +1, +2, or +3,
+type: equipment
+_id: CI8VSKwfZK8BzEoI
+img: icons/equipment/chest/breastplate-gorget-steel-white.webp
+system:
+  activities:
+    CzMZEq5NpAdlORce:
+      type: enchant
+      name: Apply Magic Item Template
+      _id: CzMZEq5NpAdlORce
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: FzkFisOn6bqhR8XP
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: skazP4TDDlHxZC9J
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item: []
+        - _id: mqvSxFH72zhrk6Lq
+          uuid: null
+          level: {}
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories:
+          - heavy
+          - light
+          - medium
+        properties: []
+        type: equipment
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor</em><span class="hide-in-embed"><em> (light, medium, or
+      heavy), rare (+3), very rare (+2), or legendary (+3)</em></span></p><p>You
+      have a [[lookup @item.flags.world.template-armor-magic-bonus]]{ } bonus to
+      AC while wearing this armor. <span class="hide-in-embed">The bonus is
+      determined by its rarity.</span></p>
+    chat: ''
+  identifier: armor-1--or-3
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: varies
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  properties:
+    - mgc
+  strength: null
+  type:
+    value: ''
+    baseItem: ''
+effects:
+  - type: enchantment
+    name: Armor +1
+    img: icons/equipment/chest/breastplate-gorget-steel-white.webp
+    disabled: true
+    _id: FzkFisOn6bqhR8XP
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} +1'
+          phase: initial
+          _id: fSZA4nkqiFXHwBJM
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          _id: s1M4kHSIKxzGY9ju
+          conditions: '{}'
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          _id: fYeFBdkaCMxTi5C8
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: FYE64kS4EwB8MF67
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 1
+          phase: initial
+          _id: rsXPPIcBHdyKZaaO
+          conditions: '{}'
+          priority: null
+        - key: flags.world.template-armor-magic-bonus
+          type: override
+          value: '+1'
+          phase: initial
+          _id: QiKsLYA13FRN7Om1
+          conditions: '{}'
+          priority: null
+        - key: system.price.denomination
+          type: override
+          value: gp
+          phase: initial
+          _id: pSHeEYsuipqCJKRt
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.CI8VSKwfZK8BzEoI inline]'
+          phase: initial
+          _id: EEEZoWx1EN3ZuYz3
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a +1 bonus to AC while wearing this armor.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783780508041
+      modifiedTime: 1783782418664
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!CI8VSKwfZK8BzEoI.FzkFisOn6bqhR8XP'
+  - type: enchantment
+    name: Armor +2
+    img: icons/equipment/chest/breastplate-gorget-steel.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} +2'
+          phase: initial
+          _id: fSZA4nkqiFXHwBJM
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: veryRare
+          phase: initial
+          _id: s1M4kHSIKxzGY9ju
+          conditions: '{}'
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 40000
+          phase: initial
+          _id: fYeFBdkaCMxTi5C8
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: FYE64kS4EwB8MF67
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 2
+          phase: initial
+          _id: rsXPPIcBHdyKZaaO
+          conditions: '{}'
+          priority: null
+        - key: flags.world.template-armor-magic-bonus
+          type: override
+          value: '+2'
+          phase: initial
+          _id: QiKsLYA13FRN7Om1
+          conditions: '{}'
+          priority: null
+        - key: system.price.denomination
+          type: override
+          value: gp
+          phase: initial
+          _id: pSHeEYsuipqCJKRt
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.CI8VSKwfZK8BzEoI inline]'
+          phase: initial
+          _id: EEEZoWx1EN3ZuYz3
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a +1 bonus to AC while wearing this armor.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783781926575
+      modifiedTime: 1783782408148
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.CI8VSKwfZK8BzEoI.ActiveEffect.FzkFisOn6bqhR8XP
+      duplicateSource: null
+      exportSource: null
+    _id: skazP4TDDlHxZC9J
+    _key: '!items.effects!CI8VSKwfZK8BzEoI.skazP4TDDlHxZC9J'
+  - type: enchantment
+    name: Armor +3
+    img: icons/equipment/chest/breastplate-collared-steel-green.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} +3'
+          phase: initial
+          _id: fSZA4nkqiFXHwBJM
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: legendary
+          phase: initial
+          _id: s1M4kHSIKxzGY9ju
+          conditions: '{}'
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 200000
+          phase: initial
+          _id: fYeFBdkaCMxTi5C8
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: FYE64kS4EwB8MF67
+          conditions: '{}'
+          priority: null
+        - key: system.armor.magicalBonus
+          type: upgrade
+          value: 3
+          phase: initial
+          _id: rsXPPIcBHdyKZaaO
+          conditions: '{}'
+          priority: null
+        - key: flags.world.template-armor-magic-bonus
+          type: override
+          value: '+3'
+          phase: initial
+          _id: QiKsLYA13FRN7Om1
+          conditions: '{}'
+          priority: null
+        - key: system.price.denomination
+          type: override
+          value: gp
+          phase: initial
+          _id: pSHeEYsuipqCJKRt
+          conditions: '{}'
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.CI8VSKwfZK8BzEoI inline]'
+          phase: initial
+          _id: EEEZoWx1EN3ZuYz3
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have a +1 bonus to AC while wearing this armor.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783781927529
+      modifiedTime: 1783782403422
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.CI8VSKwfZK8BzEoI.ActiveEffect.FzkFisOn6bqhR8XP
+      duplicateSource: null
+      exportSource: null
+    _id: mqvSxFH72zhrk6Lq
+    _key: '!items.effects!CI8VSKwfZK8BzEoI.mqvSxFH72zhrk6Lq'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1783780381461
+  modifiedTime: 1783782441699
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!CI8VSKwfZK8BzEoI'

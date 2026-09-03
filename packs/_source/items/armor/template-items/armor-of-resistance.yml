@@ -1,0 +1,1351 @@
+folder: D3ufaDHnyE4MJyWy
+name: Armor of Resistance
+type: equipment
+_id: JNpleeDjfDINO8rV
+img: icons/equipment/shoulder/pauldron-engraved-steel-blue.webp
+system:
+  activities:
+    oPI6La5Ed22VFLhL:
+      type: enchant
+      name: Apply Magic Item Template
+      _id: oPI6La5Ed22VFLhL
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: eqjyHgMf7p6plbvf
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - efkxw40Ajg09M3LE
+            item: []
+        - _id: dbhbNZfGDHhIF681
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - omhuuRZ5vK3KSGkG
+            item: []
+        - _id: FTIWcFyd6YM7Bc1T
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - qbreUUbiM57SmWs7
+            item: []
+        - _id: zO5wOf6mHFoZHiEZ
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - LvG7s3ErPlXZk85t
+            item: []
+        - _id: 4v3nSNHr9UVsv2C7
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - kGgT1IGw6hxbVIOr
+            item: []
+        - _id: sYGu4arFQYhQnCa3
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - 7f6Jbg5mjCeOsuOB
+            item: []
+        - _id: DlnNoOjukNb2VNgN
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - V2rRlXaZxlT28pcW
+            item: []
+        - _id: LiOJ6q8Oj0E7Orxu
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - Y76jsN86GiBFoR83
+            item: []
+        - _id: Yoch07LTm3QVGIrM
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - JwxfntEuzXrMbzO4
+            item: []
+        - _id: qPeEV4EjDuHelizI
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect:
+              - fLtnLnL3QBOt8T9h
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories:
+          - heavy
+          - light
+          - medium
+        properties: []
+        type: equipment
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Armor (requires attunement)</em></p><p>You have resistance to
+      [[lookup @item.flags.world.armor-of-resistance-type]]{one type of} damage
+      while you wear this armor. <span class="hide-in-embed">The GM chooses the
+      type or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.VRqG3F72ebgNHyVR]{Armor of
+      Resistance} table.</span></p>
+    chat: ''
+  identifier: armor-of-resistance
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  properties:
+    - mgc
+  strength: null
+  type:
+    value: ''
+    baseItem: ''
+effects:
+  - type: enchantment
+    name: Armor of Acid Resistance
+    img: icons/magic/acid/projectile-faceted-glob.webp
+    disabled: true
+    _id: eqjyHgMf7p6plbvf
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Acid Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: acid
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783435582347
+      modifiedTime: 1783436210192
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!JNpleeDjfDINO8rV.eqjyHgMf7p6plbvf'
+  - type: enchantment
+    name: Armor of Cold Resistance
+    img: icons/magic/water/snowflake-ice-blue-white.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Cold Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: cold
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436249223
+      modifiedTime: 1783436278621
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: dbhbNZfGDHhIF681
+    _key: '!items.effects!JNpleeDjfDINO8rV.dbhbNZfGDHhIF681'
+  - type: enchantment
+    name: Armor of Fire Resistance
+    img: icons/magic/fire/flame-burning-earth-yellow.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Fire Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: fire
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436279731
+      modifiedTime: 1783436297490
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: FTIWcFyd6YM7Bc1T
+    _key: '!items.effects!JNpleeDjfDINO8rV.FTIWcFyd6YM7Bc1T'
+  - type: enchantment
+    name: Armor of Force Resistance
+    img: icons/magic/lightning/bolt-beam-strike-blue.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Force Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: force
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436299200
+      modifiedTime: 1783436325002
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: zO5wOf6mHFoZHiEZ
+    _key: '!items.effects!JNpleeDjfDINO8rV.zO5wOf6mHFoZHiEZ'
+  - type: enchantment
+    name: Armor of Lightning Resistance
+    img: icons/magic/lightning/bolt-blue.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Lightning Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: lightning
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436299990
+      modifiedTime: 1783436359282
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: 4v3nSNHr9UVsv2C7
+    _key: '!items.effects!JNpleeDjfDINO8rV.4v3nSNHr9UVsv2C7'
+  - type: enchantment
+    name: Armor of Necrotic Resistance
+    img: icons/magic/death/hand-withered-gray.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Necrotic Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: necrotic
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436300810
+      modifiedTime: 1783436379916
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: sYGu4arFQYhQnCa3
+    _key: '!items.effects!JNpleeDjfDINO8rV.sYGu4arFQYhQnCa3'
+  - type: enchantment
+    name: Armor of Poison Resistance
+    img: icons/skills/toxins/cauldron-bubbles-overflow-green.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Poison Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: poison
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436301989
+      modifiedTime: 1783436414800
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: DlnNoOjukNb2VNgN
+    _key: '!items.effects!JNpleeDjfDINO8rV.DlnNoOjukNb2VNgN'
+  - type: enchantment
+    name: Armor of Psychic Resistance
+    img: icons/magic/lightning/bolt-strike-purple.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Psychic Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: psychic
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436302848
+      modifiedTime: 1783436440349
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: LiOJ6q8Oj0E7Orxu
+    _key: '!items.effects!JNpleeDjfDINO8rV.LiOJ6q8Oj0E7Orxu'
+  - type: enchantment
+    name: Armor of Radiant Resistance
+    img: icons/magic/light/explosion-glow-spiral-yellow.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Fire Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: fire
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436303680
+      modifiedTime: 1783436485363
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: Yoch07LTm3QVGIrM
+    _key: '!items.effects!JNpleeDjfDINO8rV.Yoch07LTm3QVGIrM'
+  - type: enchantment
+    name: Armor of Thunder Resistance
+    img: icons/magic/sonic/explosion-shock-wave-teal.webp
+    disabled: true
+    system:
+      changes:
+        - key: name
+          type: override
+          value: '{} of Thunder Resistance'
+          phase: initial
+          priority: null
+        - key: flags.world.armor-of-resistance-type
+          type: override
+          value: thunder
+          phase: initial
+          priority: null
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]'
+          phase: initial
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 4000
+          phase: initial
+          priority: null
+        - key: system.rarity
+          type: override
+          value: rare
+          phase: initial
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          priority: null
+        - key: system.attunement
+          type: override
+          value: required
+          phase: initial
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436304463
+      modifiedTime: 1783436899386
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: >-
+        Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV.ActiveEffect.eqjyHgMf7p6plbvf
+      duplicateSource: null
+      exportSource: null
+    _id: qPeEV4EjDuHelizI
+    _key: '!items.effects!JNpleeDjfDINO8rV.qPeEV4EjDuHelizI'
+  - name: Acid Resistance
+    img: icons/magic/acid/projectile-faceted-glob.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: acid
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    _id: efkxw40Ajg09M3LE
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to acid damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436501521
+      modifiedTime: 1783436547922
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!JNpleeDjfDINO8rV.efkxw40Ajg09M3LE'
+  - name: Cold Resistance
+    img: icons/magic/water/snowflake-ice-blue-white.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: cold
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to cold damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436560824
+      modifiedTime: 1783436584466
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: omhuuRZ5vK3KSGkG
+    _key: '!items.effects!JNpleeDjfDINO8rV.omhuuRZ5vK3KSGkG'
+  - name: Fire Resistance
+    img: icons/magic/fire/flame-burning-earth-yellow.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: fire
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to fire damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436561689
+      modifiedTime: 1783436600451
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: qbreUUbiM57SmWs7
+    _key: '!items.effects!JNpleeDjfDINO8rV.qbreUUbiM57SmWs7'
+  - name: Force Resistance
+    img: icons/magic/lightning/bolt-beam-strike-blue.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: force
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to force damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436562531
+      modifiedTime: 1783436618932
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: LvG7s3ErPlXZk85t
+    _key: '!items.effects!JNpleeDjfDINO8rV.LvG7s3ErPlXZk85t'
+  - name: Lightning Resistance
+    img: icons/magic/lightning/bolt-blue.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: lightning
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to lightning damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436563302
+      modifiedTime: 1783436633905
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: kGgT1IGw6hxbVIOr
+    _key: '!items.effects!JNpleeDjfDINO8rV.kGgT1IGw6hxbVIOr'
+  - name: Necrotic Resistance
+    img: icons/magic/death/hand-withered-gray.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: necrotic
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to necrotic damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436564127
+      modifiedTime: 1783436704155
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: 7f6Jbg5mjCeOsuOB
+    _key: '!items.effects!JNpleeDjfDINO8rV.7f6Jbg5mjCeOsuOB'
+  - name: Poison Resistance
+    img: icons/skills/toxins/cauldron-bubbles-overflow-green.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: poison
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to poison damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436564898
+      modifiedTime: 1783436725824
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: V2rRlXaZxlT28pcW
+    _key: '!items.effects!JNpleeDjfDINO8rV.V2rRlXaZxlT28pcW'
+  - name: Psychic Resistance
+    img: icons/magic/lightning/bolt-strike-purple.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: psychic
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to psychic damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436565701
+      modifiedTime: 1783436744803
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: Y76jsN86GiBFoR83
+    _key: '!items.effects!JNpleeDjfDINO8rV.Y76jsN86GiBFoR83'
+  - name: Radiant Resistance
+    img: icons/magic/light/explosion-glow-spiral-yellow.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: radiant
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to radiant damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436566516
+      modifiedTime: 1783436760346
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: JwxfntEuzXrMbzO4
+    _key: '!items.effects!JNpleeDjfDINO8rV.JwxfntEuzXrMbzO4'
+  - name: Thunder Resistance
+    img: icons/magic/sonic/explosion-shock-wave-teal.webp
+    origin: Compendium.dnd5e.items.Item.JNpleeDjfDINO8rV
+    system:
+      magical: false
+      changes:
+        - key: system.traits.dr.value
+          type: add
+          value: thunder
+          phase: initial
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You have resistance to thunder damage.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783436567313
+      modifiedTime: 1783436778865
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _id: fLtnLnL3QBOt8T9h
+    _key: '!items.effects!JNpleeDjfDINO8rV.fLtnLnL3QBOt8T9h'
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - efkxw40Ajg09M3LE
+        - omhuuRZ5vK3KSGkG
+        - qbreUUbiM57SmWs7
+        - LvG7s3ErPlXZk85t
+        - kGgT1IGw6hxbVIOr
+        - 7f6Jbg5mjCeOsuOB
+        - V2rRlXaZxlT28pcW
+        - Y76jsN86GiBFoR83
+        - JwxfntEuzXrMbzO4
+        - fLtnLnL3QBOt8T9h
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1783435317227
+  modifiedTime: 1783734627791
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!JNpleeDjfDINO8rV'

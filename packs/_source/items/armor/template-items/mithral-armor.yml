@@ -1,0 +1,217 @@
+folder: D3ufaDHnyE4MJyWy
+name: Mithral Armor
+type: equipment
+_id: 3qhWbiyfbTdz2R9Y
+img: icons/equipment/shoulder/shoulderpad-steel-blue.webp
+system:
+  activities:
+    sYPCDuUqnihwhyag:
+      type: enchant
+      name: Apply Magic Item Template
+      _id: sYPCDuUqnihwhyag
+      img: ''
+      sort: 0
+      activation:
+        type: ''
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: SX6msQYlJ6cnHUTV
+          uuid: null
+          level: {}
+          riders:
+            activity: []
+            effect: []
+            item: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: false
+        categories:
+          - medium
+          - heavy
+        properties: []
+        type: equipment
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><span class="hide-in-embed"><em>Armor (medium or heavy, but not
+      hide)</em></span></p><p>Mithral is a light, flexible metal. A mithral
+      chain shirt or breastplate can be worn under normal clothes. If the armor
+      normally imposes disadvantage on Dexterity (Stealth) checks or has a
+      Strength requirement, the mithral version of the armor doesn't.</p>
+    chat: ''
+  identifier: mithral-armor
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  rarity: uncommon
+  attunement: ''
+  attuned: false
+  equipped: false
+  crew:
+    value: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: ''
+  proficient: null
+  properties:
+    - mgc
+  strength: null
+  type:
+    value: ''
+    baseItem: ''
+effects:
+  - type: enchantment
+    name: Mithral Armor
+    img: icons/equipment/shoulder/shoulderpad-steel-blue.webp
+    disabled: true
+    _id: SX6msQYlJ6cnHUTV
+    system:
+      changes:
+        - key: system.description.value
+          type: override
+          value: '{} @embed[Compendium.dnd5e.items.Item.3qhWbiyfbTdz2R9Y inline]'
+          phase: initial
+          _id: MoiNgndx0oTp4Fxb
+          conditions: '{}'
+          priority: null
+        - key: name
+          type: override
+          value: Mithral {}
+          phase: initial
+          _id: aavdhXy9MzvzpctI
+          conditions: '{}'
+          priority: null
+        - key: system.strength
+          type: downgrade
+          value: 0
+          phase: initial
+          _id: y7gWq2R6m4IcunOr
+          conditions: '{}'
+          priority: null
+        - key: system.price.value
+          type: add
+          value: 400
+          phase: initial
+          _id: QFgTfuXRafCBnxQY
+          conditions: '{}'
+          priority: null
+        - key: system.rarity
+          type: override
+          value: uncommon
+          phase: initial
+          _id: pOR7XTti9RfL4FoI
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: '-stealthDisadvantage'
+          phase: initial
+          _id: Wp7WYS5pZpt8kgFI
+          conditions: '{}'
+          priority: null
+        - key: system.properties
+          type: add
+          value: mgc
+          phase: initial
+          _id: BIUBqeIuYNJo2ULy
+          conditions: '{}'
+          priority: null
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>@embed[Compendium.dnd5e.items.Item.3qhWbiyfbTdz2R9Y inline]</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783731543697
+      modifiedTime: 1783731678392
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!3qhWbiyfbTdz2R9Y.SX6msQYlJ6cnHUTV'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.361'
+  systemId: dnd5e
+  systemVersion: 6.0.0
+  createdTime: 1783731435307
+  modifiedTime: 1783734654270
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!3qhWbiyfbTdz2R9Y'

@@ -5,20 +5,18 @@ img: icons/equipment/chest/breastplate-layered-leather-green.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>While wearing this plate armor, you gain a +1 bonus to AC, and you can
-      understand and speak Abyssal. In addition, the armor's clawed gauntlets
-      turn unarmed strikes with your hands into magic weapons that deal slashing
-      damage, with a +1 bonus to attack rolls and damage rolls and a damage die
-      of 1d8.</p>
-
-      <p><strong>Curse</strong>. Once you don this cursed armor, you can't doff
-      it unless you are targeted by the
-      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      <p><em>Armor (requires attunement)</em></p><p>While wearing this plate
+      armor, you gain a +1 bonus to AC, and you can understand and speak
+      Abyssal. In addition, the armor's clawed gauntlets turn unarmed strikes
+      with your hands into magic weapons that deal slashing damage, with a +1
+      bonus to attack rolls and damage rolls and a damage die of
+      1d8.</p><section id="secret-HFWgOIjQH7GMC8q9"
+      class="secret"><p><strong>Curse</strong>. Once you don this cursed armor,
+      you can't doff it unless you are targeted by the
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{remove curse} spell
       or similar magic. While wearing the armor, you have disadvantage on attack
       rolls against demons and on saving throws against their spells and special
-      abilities.</p>
+      abilities.</p></section>
     chat: ''
   source:
     custom: ''
@@ -67,83 +65,156 @@ system:
     - mgc
     - stealthDisadvantage
   activities:
-    dnd5eactivity000:
-      _id: dnd5eactivity000
-      type: attack
+    l0brYYvAdVcy7HeJ:
+      type: enchant
+      name: Gain Clawed Gauntlets
+      _id: l0brYYvAdVcy7HeJ
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: 1
-        condition: ''
         override: false
+        condition: ''
+      behaviors: []
       consumption:
-        targets: []
         scaling:
           allowed: false
-          max: ''
         spellSlot: true
+        targets: []
       description:
+        value: ''
         chatFlavor: ''
       duration:
-        concentration: false
-        value: ''
         units: inst
-        special: ''
+        concentration: false
         override: false
-      effects: []
+      effects:
+        - _id: npCchM4XtaFqvl0h
+          uuid: null
+          level:
+            min: null
+            max: null
+          riders:
+            activity: []
+            effect: []
+            item:
+              - Compendium.dnd5e.items.Item.IjtyMaZy0uPKvUM6
+      flags: {}
       range:
-        value: '5'
-        units: ft
-        special: ''
+        units: self
         override: false
+        special: ''
       target:
         template:
-          count: ''
           contiguous: false
+          stationary: false
+          units: ft
           type: ''
-          size: ''
-          width: ''
-          height: ''
-          units: ''
         affects:
-          count: ''
-          type: ''
           choice: false
-          special: ''
-        prompt: true
+          type: ''
         override: false
-      attack:
-        ability: str
-        bonus: '1'
-        critical:
-          threshold: null
-        flat: false
-        type:
-          value: melee
-          classification: weapon
-      damage:
-        critical:
-          bonus: ''
-        includeBase: true
-        parts:
-          - custom:
-              enabled: false
-              formula: ''
-            number: 1
-            denomination: '8'
-            bonus: '@mod + 1'
-            types:
-              - slashing
+        prompt: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      name: ''
-      img: ''
-      appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: true
+        identifier: ''
+      enchant:
+        self: false
+      restrictions:
+        allowMagical: true
+        categories: []
+        properties: []
+        type: ''
   attuned: false
   identifier: demon-armor
-effects: []
+effects:
+  - type: enchantment
+    name: Demon Armor Gauntlets
+    img: icons/weapons/fist/claw-hooked-grey.webp
+    disabled: true
+    _id: npCchM4XtaFqvl0h
+    system:
+      changes: []
+      magical: true
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>You currently have the clawed guantlets that are part of the Demon
+      Armor.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783648181884
+      modifiedTime: 1783648438911
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ejEt6hLQxOux04lS.npCchM4XtaFqvl0h'
+  - name: Demonic Tongue
+    img: icons/creatures/unholy/demon-hairy-winged-pink.webp
+    origin: Compendium.dnd5e.items.Item.ejEt6hLQxOux04lS
+    system:
+      magical: true
+      changes:
+        - key: system.traits.languages.value
+          type: add
+          value: abyssal
+          phase: initial
+          _id: f0V8JCQyneTx1xvt
+          priority: null
+      rider:
+        statuses: []
+    type: base
+    _id: GxvjsLrel5MRaKls
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>You can understand and speak Abyssal.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.361'
+      systemId: dnd5e
+      systemVersion: 6.0.0
+      createdTime: 1783648448593
+      modifiedTime: 1783648558584
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!ejEt6hLQxOux04lS.GxvjsLrel5MRaKls'
 folder: JqTP017wj3uxDJ8g
 sort: 0
 ownership:
@@ -151,11 +222,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.345'
+  coreVersion: '14.361'
   systemId: dnd5e
-  systemVersion: 5.1.0
+  systemVersion: 6.0.0
   createdTime: 1725037243508
-  modifiedTime: 1750697344647
+  modifiedTime: 1783734910249
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!ejEt6hLQxOux04lS'
