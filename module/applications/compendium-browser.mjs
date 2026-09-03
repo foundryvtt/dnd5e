@@ -1,6 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import { bulkFromUuid, getPluralRules, loadingTooltip } from "../utils.mjs";
+import {bulkFromUuid, formatIdentifier, getPluralRules, loadingTooltip} from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
@@ -1155,6 +1155,7 @@ export default class CompendiumBrowser extends Application5e {
         .map(i => {
           const source = foundry.utils.getProperty(i, "system.source");
           if ( (foundry.utils.getType(source) === "Object") && i.uuid ) SourceField.prepareData.call(source, i.uuid);
+          if ( i.system && ("identifier" in i.system) ) i.system.identifier ||= formatIdentifier(i.name);
           return i;
         })
 

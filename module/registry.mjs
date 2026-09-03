@@ -534,7 +534,7 @@ export class SpellList {
    */
   get identifiers() {
     return new Set([
-      ...this.indexes.map(s => s.system?.identifier),
+      ...this.indexes.map(s => s.system?.identifier || formatIdentifier(s.name)),
       ...this.#unlinked.map(u => u.identifier)
     ].filter(_ => _));
   }
