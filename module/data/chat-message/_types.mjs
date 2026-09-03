@@ -187,6 +187,12 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {RollMessageSystemData} RechargeMessageSystemData
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef RequestMessageSystemData
  * @property {object} button
  * @property {string} [button.icon]         Font awesome code or path to SVG icon for the request button.

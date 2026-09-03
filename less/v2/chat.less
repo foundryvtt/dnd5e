@@ -199,17 +199,20 @@
   }
 
   .dice-formula, .dice-total {
+    background: var(--dnd5e-chat-button-background);
+    border-color: var(--dnd5e-chat-button-border);
     border-radius: 3px;
-    background: var(--dnd5e-background-5);
-    padding: .25rem;
-    line-height: normal;
+    box-shadow: none;
     flex: auto;
+    line-height: normal;
     margin: 0;
+    padding: .25rem;
   }
+
+  .dice-formula { font-family: var(--dnd5e-font-roboto-condensed); }
 
   .dice-total {
     font-weight: bold;
-    font-size: var(--font-size-28);
     padding: .125rem;
     margin-top: .25rem;
     font-family: var(--font-primary);
@@ -217,23 +220,23 @@
 
     &::before, &::after {
       position: absolute;
-      inset: 6px 0 6px auto;
+      inset: 4px 0 4px auto;
     }
 
     &::before {
       content: "";
-      width: 36px;
+      width: 32px;
       border-inline-start: var(--dnd5e-border-separator-heavy);
     }
 
     &::after {
-      content: "\f054";
-      font-family: var(--font-awesome);
-      display: grid;
-      place-content: center;
-      padding: 0 .8125rem;
       color: var(--color-text-secondary);
-      font-size: var(--font-size-16);
+      content: "\f054";
+      display: grid;
+      font-family: var(--font-awesome);
+      font-size: var(--font-size-12);
+      padding: 0 12px;
+      place-content: center;
       transition: all 250ms ease;
     }
 

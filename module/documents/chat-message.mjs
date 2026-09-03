@@ -245,13 +245,17 @@ export default class ChatMessage5e extends ChatMessage {
     });
 
     // Dice rolls
-    if ( this.isContentVisible ) {
-      html.querySelectorAll(".dice-roll").forEach(el => {
-        el.addEventListener("click", this._onClickDiceRoll.bind(this));
-      });
-    } else {
-      html.querySelectorAll(".dice-roll").forEach(el => el.classList.add("secret-roll"));
-    }
+    html.querySelectorAll(".dice-roll").forEach(el => {
+      const total = el.querySelector(".dice-total");
+      if ( total ) {
+        const children = total.childNodes;
+        const wrapper = total.appendChild(document.createElement("span"));
+        wrapper.classList.add("total");
+        wrapper.appendChild(...children);
+      }
+      if ( this.isContentVisible ) el.addEventListener("click", this._onClickDiceRoll.bind(this));
+      else el.classList.add("secret-roll");
+    });
   }
 
   /* -------------------------------------------- */

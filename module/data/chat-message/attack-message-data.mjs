@@ -135,14 +135,4 @@ export default class AttackMessageData extends RollMessageData {
       .map(target => ({ ...target, showAC, showResult, hasAC: target.ac !== null }))
       .sort((lhs, rhs) => (lhs.isMiss === rhs.isMiss) ? 0 : (lhs.isMiss ? 1 : -1));
   }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onRender(element, options={}) {
-    super._onRender(element, options);
-    if ( element.querySelector(".chat-card .card-header") ) {
-      element.querySelector(".message-header .flavor-text")?.remove();
-    }
-  }
 }

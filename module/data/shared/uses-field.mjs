@@ -287,10 +287,18 @@ export default class UsesField extends SchemaField {
 
     const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
 
+    const sources = this instanceof Item ? {
+      item: {
+        compendiumSource: this._stats?.compendiumSource, id: this.id, img: this.img, name: this.name, type: this.type,
+        uuid: this.uuid
+      }
+    } : this.messageSources;
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
-        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
+        speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+        system: sources,
+        type: "recharge"
       },
       rollMode: CONFIG.Dice.BasicRoll.getMessageMode()
     }, message);

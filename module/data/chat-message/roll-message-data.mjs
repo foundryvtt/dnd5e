@@ -102,5 +102,8 @@ export default class RollMessageData extends ChatMessageDataModel {
   _onRender(element, options={}) {
     super._onRender(element, options);
     if ( !options.summary ) element.classList.add("compact");
+    if ( element.querySelector(".chat-card .card-header") ) {
+      element.querySelector(".message-header .flavor-text")?.remove();
+    }
   }
 }
