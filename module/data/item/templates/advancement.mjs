@@ -46,6 +46,14 @@ export default class AdvancementTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _resetData(source) {
+    super._resetData(source);
+    for ( const advancement of Object.values(source.advancement ?? {}) ) delete advancement.value;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 

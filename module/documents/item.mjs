@@ -1313,7 +1313,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       if ( newItemData instanceof Item ) newItemData = game.items.fromCompendium(newItemData, {
         clearSort: false, keepId: true, clearOwnership: false
       });
-      foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
+      foundry.utils.mergeObject(newItemData, { "system.container": containerId ?? null } );
       if ( !keepId ) newItemData._id = foundry.utils.randomID();
 
       created.push(newItemData);

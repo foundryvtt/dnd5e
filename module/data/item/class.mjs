@@ -194,6 +194,15 @@ export default class ClassData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _resetData(source) {
+    super._resetData(source);
+    delete source.levels;
+    delete source.hd?.spent;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
