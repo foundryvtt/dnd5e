@@ -73,7 +73,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    * @type {Record<string, { key: string, [type]: string, [value]: any, [warning]: object }>}
    */
   static SHIM_FIELDS = {
-    "activities[attack].attack.ability": { key: "activities[attack].attack.abilities" },
     "flags.dnd5e.initiativeAdv": { key: "system.attributes.init.roll.mode", type: "add", value: 1 },
     "system.attributes.concentration.bonuses.save": { key: "system.attributes.concentration.roll.bonus" },
     "system.attributes.death.bonuses.save": { key: "system.attributes.death.roll.bonus" },

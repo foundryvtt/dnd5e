@@ -198,21 +198,17 @@ export default class BaseAttackActivityData extends BaseActivityData {
     super.prepareData();
     this.attack.type.value ||= this.item.system.attackType ?? "melee";
     this.attack.type.classification ||= this.item.system.attackClassification ?? "weapon";
-
-    if ( this.attack.ability in CONFIG.DND5E.abilities ) this.attack.abilities.add(this.attack.ability);
-    else if ( !this.attack.ability ) {
-      for ( const ability of this.availableAbilities ) this.attack.abilities.add(ability);
-    }
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   prepareFinalData(rollData) {
-    // Must be resolved here because we do not know all spellcasting classes and their spellcasting abilities until
-    // class items have finished preparing.
-    if ( (this.attack.ability === "spellcasting") && this.spellcastingAbility ) {
+    if ( this.attack.ability in CONFIG.DND5E.abilities ) this.attack.abilities.add(this.attack.ability);
+    else if ( (this.attack.ability === "spellcasting") && this.spellcastingAbility ) {
       this.attack.abilities.add(this.spellcastingAbility);
+    } else if ( !this.attack.ability ) {
+      for ( const ability of this.availableAbilities ) this.attack.abilities.add(ability);
     }
 
     if ( this.damage.includeBase && this.item.system.offersBaseDamage && this.item.system.damage.base.formula ) {
