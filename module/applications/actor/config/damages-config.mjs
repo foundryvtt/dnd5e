@@ -66,7 +66,7 @@ export default class DamagesConfig extends TraitsConfig {
   /** @inheritDoc */
   _processChoice(data, key, choice, categoryChosen=false) {
     super._processChoice(data, key, choice, categoryChosen);
-    const config = CONFIG.DND5E.damageTypes[key];
+    const config = CONFIG.DND5E.damageTypes[key] ?? CONFIG.DND5E.healingTypes[key];
     if ( config ) choice.icon = { src: config.icon };
   }
 

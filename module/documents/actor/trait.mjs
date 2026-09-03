@@ -1,4 +1,5 @@
 import SelectChoices from "./select-choices.mjs";
+import { sortObjectEntries } from "../../utils.mjs";
 
 /**
  * Cached version of the base items compendia indices with the needed subtype fields.
@@ -17,6 +18,21 @@ const _cachedIndices = {};
 function _innerLabel(data, config) {
   return foundry.utils.getType(data) === "Object"
     ? foundry.utils.getProperty(data, config.labelKeyPath ?? "label") : data;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Resolve the config object for a trait, merging in any additional config (e.g. healing types for damage traits).
+ * @param {object} traitConfig  Trait configuration from `CONFIG.DND5E.traits`.
+ * @param {string} trait        Trait key as defined in `CONFIG.DND5E.traits`.
+ * @returns {object}            Combined config keyed by trait value.
+ * @private
+ */
+function _traitConfigData(traitConfig, trait) {
+  const data = CONFIG.DND5E[traitConfig?.configKey ?? trait] ?? {};
+  if ( !traitConfig?.additionalConfig ) return data;
+  return { ...data, ...CONFIG.DND5E[traitConfig.additionalConfig] };
 }
 
 /* -------------------------------------------- */
@@ -121,7 +137,10 @@ export function changeKeyPath(key, trait) {
  */
 export async function categories(trait) {
   const traitConfig = CONFIG.DND5E.traits[trait];
-  const config = foundry.utils.deepClone(CONFIG.DND5E[traitConfig.configKey ?? trait]);
+  let config = foundry.utils.deepClone(_traitConfigData(traitConfig, trait));
+
+  // Re-sort by label so merged additional config (e.g. healing types) interleaves rather than trailing.
+  if ( traitConfig.additionalConfig ) config = sortObjectEntries(config, "label");
 
   for ( const key of Object.keys(config) ) {
     if ( foundry.utils.getType(config[key]) !== "Object" ) config[key] = { label: config[key] };
@@ -370,7 +389,7 @@ export function keyIcon(key, { trait }={}) {
 
   // For simple traits, retrieve from config directly
   const traitConfig = CONFIG.DND5E.traits[trait];
-  const traitIcon = CONFIG.DND5E[traitConfig?.configKey ?? trait]?.[parts[0]]?.icon;
+  const traitIcon = _traitConfigData(traitConfig, trait)?.[parts[0]]?.icon;
   if ( traitIcon ) return traitIcon;
 
   // For other traits, try to find base item
@@ -441,7 +460,7 @@ export function keyLabel(key, config={}) {
   if ( !trait ) trait = parts.shift();
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return key;
-  const traitData = CONFIG.DND5E[traitConfig.configKey ?? trait] ?? {};
+  const traitData = _traitConfigData(traitConfig, trait);
   let categoryLabel = _loc(`${traitConfig.labels.localization}.${
     pluralRules.select(count ?? 1)}`);
 

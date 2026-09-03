@@ -4279,7 +4279,8 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    additionalConfig: "healingTypes"
   },
   dr: {
     labels: {
@@ -4288,7 +4289,8 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    additionalConfig: "healingTypes"
   },
   dv: {
     labels: {
@@ -4297,7 +4299,8 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    additionalConfig: "healingTypes"
   },
   dm: {
     labels: {
