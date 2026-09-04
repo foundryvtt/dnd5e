@@ -195,7 +195,7 @@ export default class BaseRestDialog extends Dialog5e {
     });
 
     if ( context.isGroup && dnd5e.settings.calendarConfig.enabled ) {
-      const duration = convertTime(this.duration, "minute", { strict: false });
+      const duration = convertTime(this.duration, "minute");
       context.duration = {
         fields: [
           {
@@ -254,7 +254,7 @@ export default class BaseRestDialog extends Dialog5e {
   _processFormData(event, form, formData) {
     const data = foundry.utils.expandObject(formData.object);
     if ( foundry.utils.isPlainObject(data.duration) ) {
-      data.duration = convertTime(data.duration.value, data.duration.unit, { strict: false, to: "minute" }).value;
+      data.duration = convertTime(data.duration.value, data.duration.unit, { to: "minute" }).value;
     }
     return data;
   }
