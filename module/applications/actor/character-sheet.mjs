@@ -1,4 +1,4 @@
-import { formatNumber } from "../../utils.mjs";
+import { formatNumber, getPluralLocalizationKey } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
@@ -486,9 +486,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     // Experience & Epic Boons
     if ( context.system.details.xp.boonsEarned !== undefined ) {
-      const pluralRules = new Intl.PluralRules(game.i18n.lang);
       context.epicBoonsEarned = _loc(
-        `DND5E.ExperiencePoints.Boons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
+        getPluralLocalizationKey(context.system.details.xp.boonsEarned, pr => `DND5E.ExperiencePoints.Boons.${pr}`),
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
@@ -528,7 +527,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
     context.portrait = await this._preparePortrait(context);
 
     // Death Saves
-    const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
     context.death = {
       open: this._deathTrayOpen
     };
@@ -544,7 +542,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         context.death[deathSave].push({
           n, filled,
           tooltip: i18nKey,
-          label: _loc(`${i18nKey}N.${plurals.select(n)}`),
+          label: _loc(getPluralLocalizationKey(n, pr => `${i18nKey}N.${pr}`, { type: "ordinal" })),
           classes: classes.join(" ")
         });
       }
@@ -736,10 +734,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
         img: model?.img || CONFIG.DND5E.spellcasting.pact.img
       };
 
-      const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       return {
         uses, level, method,
-        title: _loc(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
+        title: _loc(getPluralLocalizationKey(level, pr => `DND5E.SpellSlotsN.${pr}`), { n: level }),
         subtitle: _loc(`DND5E.Abbreviation${model.isSR ? "SR" : "LR"}`),
         img: model.img.replace("{id}", id)
       };

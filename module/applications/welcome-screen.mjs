@@ -1,4 +1,4 @@
-import { getPluralRules } from "../utils.mjs";
+import { getPluralLocalizationKey } from "../utils.mjs";
 import Application5e from "./api/application.mjs";
 import { createCheckboxInput } from "./fields.mjs";
 import BaseSettingsConfig from "./settings/base-settings.mjs";
@@ -307,10 +307,10 @@ export default class WelcomeScreen extends Application5e {
     for ( const { adventures, handler } of Object.values(importActions) ) await handler(adventures);
     await game.settings.set("core", "adventureImports", adventureImports);
 
-    const pr = getPluralRules();
-    ui.notifications.success(`DND5E.ADVENTURE.Finished.${pr.select(this.options.adventures.length)}`, {
-      format: { adventure: this.options.adventures[0].name, number: this.options.adventures.length }
-    });
+    ui.notifications.success(
+      getPluralLocalizationKey(this.options.adventures.length, pr => `DND5E.ADVENTURE.Finished.${pr}`),
+      { format: { adventure: this.options.adventures[0].name, number: this.options.adventures.length } }
+    );
   }
 
   /* -------------------------------------------- */
