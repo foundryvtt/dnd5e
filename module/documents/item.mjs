@@ -1156,6 +1156,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
+    super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+    if ( (userId === game.user.id) && (collection === "effects") ) this.updateRiderFlags();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
     await this.system.preUpdateActivities?.(changed, options, user);
@@ -1173,12 +1181,71 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId) {
+    super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+    if ( (userId === game.user.id) && (collection === "effects") ) this.updateRiderFlags();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onDelete(options, userId) {
     super._onDelete(options, userId);
     await this.system.onDeleteActivities?.(options, userId);
     if ( game.user.isActiveGM ) this.effects.forEach(e => e.getDependents().forEach(e => e.delete()));
     if ( userId !== game.user.id ) return;
     this.parent?.endConcentration?.(this);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId) {
+    super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+    if ( (userId === game.user.id) && (collection === "effects") ) this.updateRiderFlags();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Track changes to rider activities & effects and store values in flag.
+   * @param {{ activity: Set<string>, effect: Set<string> }} [activityRiders]  Prepared riders from activities.
+   * @param {object} [changes]                                                 Ongoing change from a pre-update.
+   */
+  updateRiderFlags(activityRiders, changes) {
+    const riders = activityRiders ?? { activity: new Set(), effect: new Set() };
+
+    // Consolidate riders from included enchantments
+    for ( const effect of this.effects ) {
+      if ( !effect.system.trackRiders ) continue;
+      effect.system.rider.activities?.forEach(a => riders.activity.add(a));
+    }
+
+    // Consolidate riders from activities if not already provided
+    if ( !activityRiders && this.system.activities ) {
+      for ( const activity of this.system.activities.getByType("enchant") ) {
+        activity.effects.forEach(profile => {
+          profile.riders.activity.forEach(a => riders.activity.add(a));
+          profile.riders.effect.forEach(e => riders.effect.add(e));
+        });
+      }
+    }
+
+    // Completely remove flag if no riders set
+    if ( !riders.activity.size && !riders.effect.size ) {
+      if ( changes ) foundry.utils.setProperty(changes, "flags.dnd5e.riders", _del);
+      else this.unsetFlag("dnd5e", "riders");
+    }
+
+    // Selectively add/remove categories and set flag
+    else {
+      const update = Object.entries(riders).reduce((update, [key, value]) => {
+        update[key] = value.size ? Array.from(value) : _del;
+        return update;
+      }, {});
+      if ( changes ) foundry.utils.setProperty(changes, "flags.dnd5e.riders", update);
+      else this.update({ flags: { dnd5e: { riders: { ...update } } } });
+    }
   }
 
   /* -------------------------------------------- */
