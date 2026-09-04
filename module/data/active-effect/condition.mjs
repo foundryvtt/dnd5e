@@ -1,9 +1,11 @@
+import RiderProviderMixin from "./mixins/rider-provider.mjs";
+
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
  * System data model for condition active effects.
  */
-export default class ConditionData extends foundry.data.ActiveEffectTypeDataModel {
+export default class ConditionData extends RiderProviderMixin(foundry.data.ActiveEffectTypeDataModel) {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {

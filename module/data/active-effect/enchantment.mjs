@@ -1,4 +1,5 @@
-import { getHumanReadableAttributeLabel } from "../../utils.mjs";
+import Item5e from "../../documents/item.mjs";
+import { bulkFromUuid, getHumanReadableAttributeLabel } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
@@ -57,7 +58,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
    * @type {Item5e|void}
    */
   get item() {
-    return this.parent.parent;
+    return this.parent.item;
   }
 
   /* -------------------------------------------- */
@@ -247,6 +248,92 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async collectRiders(options) {
+    const operations = [];
+    let item;
+    let profile;
+    const { chatMessageOrigin } = options;
+    const { enchantmentProfile, activityId } = options.dnd5e ?? {};
+
+    if ( chatMessageOrigin ) {
+      const message = game.messages.get(chatMessageOrigin);
+      item = message?.getAssociatedItem();
+      const activity = message?.getAssociatedActivity();
+      profile = activity?.effects.find(e => e._id === message?.getFlag("dnd5e", "use.enchantmentProfile"));
+    } else if ( enchantmentProfile && activityId ) {
+      let activity;
+      const origin = await fromUuid(this.parent.origin);
+      if ( origin instanceof dnd5e.documents.activity.EnchantActivity ) {
+        activity = origin;
+        item = activity.item;
+      } else if ( origin instanceof Item ) {
+        item = origin;
+        activity = item.system.activities?.get(activityId);
+      }
+      profile = activity?.effects.find(e => e._id === enchantmentProfile);
+    }
+
+    if ( !profile || !item ) return [];
+
+    // Create Activities
+    const riderActivities = {};
+    let riderEffects = [];
+    for ( const id of profile.riders.activity ) {
+      const activity = item?.system.activities.get(id);
+      if ( !activity ) continue;
+      const activityData = activity.toObject();
+      activityData._id = foundry.utils.randomID();
+      foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", this.parent.id);
+      riderActivities[activityData._id] = activityData;
+      riderEffects.push(...(activity.effects
+        ?.map(e => e.uuid ? null : activity.item.effects.get(e._id)?.toObject())
+        .filter(e => e && !this.item.effects.has(e._id)) ?? []));
+    }
+    if ( !foundry.utils.isEmpty(riderActivities) ) operations.push({
+      action: "update", documentName: "Item", parent: this.item.actor,
+      updates: [{ _id: this.item.id, "system.activities": riderActivities }]
+    });
+
+    // Create Effects
+    riderEffects.push(...profile.riders.effect.map(id => {
+      const effectData = item.effects.get(id)?.toObject();
+      if ( effectData ) {
+        delete effectData._id;
+        delete effectData.flags?.dnd5e?.rider;
+        foundry.utils.setProperty(effectData, "system.origin", { ...this.origin });
+      }
+      return effectData;
+    }));
+    riderEffects = riderEffects.filter(_ => _);
+    riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.parent.id));
+    operations.push({
+      action: "create", documentName: "ActiveEffect", data: riderEffects, parent: this.item, keepId: true
+    });
+
+    // Create Items
+    if ( this.item.isEmbedded ) {
+      const items = await bulkFromUuid(profile.riders.item);
+      const riderItems = await Item5e.createWithContents(
+        items.values(), {
+          transformAll: item => {
+            const itemData = item.clone({}, { keepId: true }).toObject();
+            foundry.utils.setProperty(itemData, "flags.dnd5e.dependentOn", this.parent.uuid);
+            foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment.origin", this.parent.uuid);
+            return itemData;
+          }
+        }
+      );
+      operations.push({
+        action: "create", documentName: "Item", data: riderItems, parent: this.item.actor, keepId: true
+      });
+    }
+
+    return operations;
+  }
+
   /* -------------------------------------------- */
 
   /** @override */

@@ -3,7 +3,6 @@ import ConditionData from "../data/active-effect/condition.mjs";
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, simplifyBonus, staticID } from "../utils.mjs";
-import Item5e from "./item.mjs";
 import DependentDocumentMixin from "./mixins/dependent.mjs";
 import Scaling from "./scaling.mjs";
 
@@ -11,8 +10,9 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import Actor5e from "./actor/actor.mjs";
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
+ * @import Actor5e from "./actor/actor.mjs";
+ * @import Item5e from "./item.mjs";
  */
 
 const BONUS_SHIM_REGEX = new RegExp(/system\.(abilities|skills|tools)\.(\w+)\.bonuses\.(check|save)/);
@@ -691,124 +691,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /**
-   * Gather batch entries for conditions that are applied separately from an effect.
-   * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
-   */
-  async collectRiderConditions() {
-    const riders = new Set(this.system.rider?.statuses ?? []);
-
-    for ( const status of this.statuses ) {
-      const r = CONFIG.statusEffects[status]?.riders ?? [];
-      for ( const p of r ) riders.add(p);
-    }
-
-    if ( !riders.size ) return [];
-
-    const createRider = async id => {
-      const existing = this.parent.effects.get(staticID(`dnd5e${id}`));
-      if ( existing ) return;
-      const effect = await ActiveEffect5e.fromStatusEffect(id);
-      return effect.toObject();
-    };
-
-    const data = (await Promise.all(Array.from(riders).map(createRider))).filter(_ => _);
-    if ( !data.length ) return [];
-    return [{ action: "create", documentName: "ActiveEffect", data, parent: this.parent, keepId: true }];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Gather batch entries for additional activities, effects, and items applied separately from an enchantment.
-   * @param {object} options                       Options passed to the effect creation.
-   * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
-   */
-  async collectRiderEnchantments(options={}) {
-    const batchedUpdates = [];
-    let item;
-    let profile;
-    const { chatMessageOrigin } = options;
-    const { enchantmentProfile, activityId } = options.dnd5e ?? {};
-
-    if ( chatMessageOrigin ) {
-      const message = game.messages.get(chatMessageOrigin);
-      item = message?.getAssociatedItem();
-      const activity = message?.getAssociatedActivity();
-      profile = activity?.effects.find(e => e._id === message?.getFlag("dnd5e", "use.enchantmentProfile"));
-    } else if ( enchantmentProfile && activityId ) {
-      let activity;
-      const origin = await fromUuid(this.origin);
-      if ( origin instanceof dnd5e.documents.activity.EnchantActivity ) {
-        activity = origin;
-        item = activity.item;
-      } else if ( origin instanceof Item ) {
-        item = origin;
-        activity = item.system.activities?.get(activityId);
-      }
-      profile = activity?.effects.find(e => e._id === enchantmentProfile);
-    }
-
-    if ( !profile || !item ) return [];
-
-    // Create Activities
-    const riderActivities = {};
-    let riderEffects = [];
-    for ( const id of profile.riders.activity ) {
-      const activityData = item.system.activities.get(id)?.toObject();
-      if ( !activityData ) continue;
-      activityData._id = foundry.utils.randomID();
-      foundry.utils.setProperty(activityData, "flags.dnd5e.dependentOn", this.id);
-      riderActivities[activityData._id] = activityData;
-    }
-    if ( !foundry.utils.isEmpty(riderActivities) ) {
-      batchedUpdates.push({
-        action: "update", documentName: "Item", parent: this.item.actor,
-        updates: [{ _id: this.item.id, "system.activities": riderActivities }]
-      });
-      riderEffects = Object.values(riderActivities).flatMap(a =>
-        a.effects?.map(e => item.effects.get(e._id)?.toObject())
-      ).filter(e => e && !this.item.effects.has(e._id));
-    }
-
-    // Create Effects
-    riderEffects.push(...profile.riders.effect.map(id => {
-      const effectData = item.effects.get(id)?.toObject();
-      if ( effectData ) {
-        delete effectData._id;
-        delete effectData.flags?.dnd5e?.rider;
-        foundry.utils.setProperty(effectData, "system.origin", { ...this.system.origin });
-      }
-      return effectData;
-    }));
-    riderEffects = riderEffects.filter(_ => _);
-    riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.id));
-    batchedUpdates.push({
-      action: "create", documentName: "ActiveEffect", data: riderEffects, parent: this.item, keepId: true
-    });
-
-    // Create Items
-    if ( this.item.isEmbedded ) {
-      const riderItems = await Item5e.createWithContents(
-        (await Promise.all(profile.riders.item.map(uuid => fromUuid(uuid)))).filter(_ => _), {
-          transformAll: item => {
-            const itemData = item.clone({}, { keepId: true }).toObject();
-            foundry.utils.setProperty(itemData, "flags.dnd5e.dependentOn", this.uuid);
-            foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment.origin", this.uuid);
-            return itemData;
-          }
-        }
-      );
-      batchedUpdates.push({
-        action: "create", documentName: "Item", data: riderItems, parent: this.actor, keepId: true
-      });
-    }
-
-    return batchedUpdates;
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   toDragData() {
     const data = super.toDragData();
@@ -861,10 +743,9 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
         prompted.add(effect.parent);
         await effect.parent.promptConcentrationEnd();
       }
-      if ( effect.active && (effect.parent instanceof Actor) ) {
-        batch.push(...await effect.collectRiderConditions());
+      if ( effect.active ) {
+        batch.push(...(await effect.system.collectRiders?.(operation) ?? []));
       }
-      if ( effect.isAppliedEnchantment ) batch.push(...await effect.collectRiderEnchantments(operation));
     }
     if ( batch.length ) await foundry.documents.modifyBatch(batch);
   }
@@ -1416,12 +1297,12 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   async createRiderConditions() {
     foundry.utils.logCompatibilityWarning(
-      "The `createRiderConditions` method has been deprecated in favor of `collectRiderConditions`, which returns "
+      "The `createRiderConditions` method has been deprecated in favor of `system.collectRiders`, which returns "
       + "batch entries rather than creating documents.",
       { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
     );
     const created = [];
-    for ( const { data, keepId, parent } of await this.collectRiderConditions() ) {
+    for ( const { data, keepId, parent } of await this.system.collectRiders?.() ?? [] ) {
       created.push(...await ActiveEffect5e.createDocuments(data, { keepId, parent }));
     }
     return created;
@@ -1436,11 +1317,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
    */
   async createRiderEnchantments(options={}) {
     foundry.utils.logCompatibilityWarning(
-      "The `createRiderEnchantments` method has been deprecated in favor of `collectRiderEnchantments`, which returns "
+      "The `createRiderEnchantments` method has been deprecated in favor of `system.collectRiders`, which returns "
       + "batch entries rather than applying them.",
       { since: "DnD5e 6.0", until: "DnD5e 6.2", once: true }
     );
-    const batch = await this.collectRiderEnchantments(options);
+    const batch = await this.system.collectRiders(options);
     if ( batch.length ) await foundry.documents.modifyBatch(batch);
   }
 }

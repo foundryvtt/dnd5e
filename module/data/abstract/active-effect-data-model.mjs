@@ -1,4 +1,5 @@
 import { getHumanReadableAttributeLabel } from "../../utils.mjs";
+import RiderProviderMixin from "../active-effect/mixins/rider-provider.mjs";
 import FiltersField from "../fields/filters-field.mjs";
 
 const { DocumentIdField, DocumentUUIDField, SchemaField, StringField } = foundry.data.fields;
@@ -7,7 +8,7 @@ const { DocumentIdField, DocumentUUIDField, SchemaField, StringField } = foundry
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
  * @abstract
  */
-export default class ActiveEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
+export default class ActiveEffectDataModel extends RiderProviderMixin(foundry.data.ActiveEffectTypeDataModel) {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
