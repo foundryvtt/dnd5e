@@ -237,8 +237,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   canEnchant(item, { chatMessage }={}) {
     const errors = [];
 
-    if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc")
-      && ("quantity" in item.system) ) {
+    if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc") && item.system.isPhysical ) {
       errors.push(new EnchantmentError(_loc("DND5E.ENCHANT.Warning.NoMagicalItems")));
     }
 
