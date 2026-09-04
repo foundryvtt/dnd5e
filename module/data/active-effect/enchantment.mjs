@@ -251,7 +251,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  async collectRiders(options) {
+  async collectRiders(options={}) {
     const operations = [];
     let item;
     let profile;

@@ -7,7 +7,6 @@ export {
   ConditionData,
   EnchantmentData
 };
-export {default as RiderProviderMixin} from "./mixins/rider-provider.mjs";
 
 export const config = {
   base: BaseEffectData,

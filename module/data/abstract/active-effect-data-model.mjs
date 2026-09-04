@@ -1,5 +1,4 @@
-import { getHumanReadableAttributeLabel } from "../../utils.mjs";
-import RiderProviderMixin from "../active-effect/mixins/rider-provider.mjs";
+import { getHumanReadableAttributeLabel, staticID } from "../../utils.mjs";
 import FiltersField from "../fields/filters-field.mjs";
 
 const { DocumentIdField, DocumentUUIDField, SchemaField, StringField } = foundry.data.fields;
@@ -8,7 +7,7 @@ const { DocumentIdField, DocumentUUIDField, SchemaField, StringField } = foundry
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
  * @abstract
  */
-export default class ActiveEffectDataModel extends RiderProviderMixin(foundry.data.ActiveEffectTypeDataModel) {
+export default class ActiveEffectDataModel extends foundry.data.ActiveEffectTypeDataModel {
   /* -------------------------------------------- */
   /*  Model Configuration                         */
   /* -------------------------------------------- */
@@ -140,6 +139,36 @@ export default class ActiveEffectDataModel extends RiderProviderMixin(foundry.da
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle creating rider documents when this active effect is created.
+   * @param {DatabaseOperation} [options={}]       Options passed to the create or update operation.
+   * @returns {Promise<DatabaseWriteOperation[]>}  Batch entries suitable for `foundry.documents.modifyBatch`.
+   */
+  async collectRiders(options={}) {
+    if ( !(this.parent.target instanceof Actor) ) return [];
+
+    const riders = new Set(this.rider?.statuses ?? []);
+
+    for ( const status of this.parent.statuses ) {
+      const r = CONFIG.statusEffects[status]?.riders ?? [];
+      for ( const p of r ) riders.add(p);
+    }
+
+    if ( !riders.size ) return [];
+
+    const createRider = async id => {
+      if ( this.parent.actor.effects.has(staticID(`dnd5e${id}`)) ) return;
+      const effect = await ActiveEffect.implementation.fromStatusEffect(id);
+      return effect.toObject();
+    };
+
+    const data = (await Promise.all(Array.from(riders).map(createRider))).filter(_ => _);
+    if ( !data.length ) return [];
+    return [{ action: "create", documentName: "ActiveEffect", data, parent: this.parent.actor, keepId: true }];
+  }
+
   /* -------------------------------------------- */
 
   /**
