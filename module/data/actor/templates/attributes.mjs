@@ -411,7 +411,7 @@ export default class AttributesFields {
       if ( threshold === "maximum" ) maximumMultiplier = multiplier;
       if ( this.isVehicle ) {
         const { cargo } = attributes.capacity;
-        base = convertWeight(cargo.value || Infinity, cargo.units, baseUnits[unitSystem]);
+        base = convertWeight(cargo.value || Infinity, cargo.units, { legacy: false, to: baseUnits[unitSystem] }).value;
       }
       else multiplier *= (config.threshold[threshold]?.[unitSystem] ?? 1) * sizeMod;
       return (base * multiplier).toNearest(0.1) + bonus;
