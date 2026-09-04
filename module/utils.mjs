@@ -927,7 +927,7 @@ export function defaultUnits(type) {
 /*  Validators                                  */
 /* -------------------------------------------- */
 
-const IDENTIFIER_REGEX = /^([a-zA-Z0-9_-]+)$/i;
+const IDENTIFIER_REGEX = /^([a-zA-Z0-9_\-]+)$/i;
 
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.

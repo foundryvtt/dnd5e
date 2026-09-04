@@ -138,7 +138,7 @@ export default defineConfig([
       "@stylistic/no-tabs": "warn",
       "no-throw-literal": "error",
       "@stylistic/no-trailing-spaces": "warn",
-      "no-useless-escape": "warn",
+      "no-useless-escape": ["warn", { allowRegexCharacters: ["-"] }],
       "no-unused-vars": ["warn", { args: "none" }],
       "@stylistic/nonblock-statement-body-position": ["warn", "beside"],
       "one-var": ["warn", "never"],
