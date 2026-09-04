@@ -50,6 +50,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
+   * A queue for updating falling state. Several post-CRUD hooks fire falling checks independently and are serialized
+   * here.
+   * @type {Promise<void>}
+   * @internal
+   */
+  _falling = this._falling ?? Promise.resolve();
+
+  /* -------------------------------------------- */
+
+  /**
    * Lazily computed store of classes, subclasses, background, and species.
    * @type {Record<string, Record<string, Item5e|Item5e[]|string>>}
    */

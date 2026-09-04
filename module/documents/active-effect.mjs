@@ -850,29 +850,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /* -------------------------------------------- */
 
-  /**
-   * Re-evaluate whether an actor should have the falling status. A creature that becomes prone or incapacitated while
-   * airborne starts falling unless it can hover.
-   * @param {Actor5e} actor  The actor to re-evaluate.
-   * @returns {Promise<void>}
-   */
-  static async #updateFalling(actor) {
-    if ( dnd5e.settings.disableFalling || !(actor instanceof Actor) ) return;
-    const falling = actor.statuses.has("falling");
-    if ( !falling && !actor.statuses.has("prone") && !actor.statuses.has("incapacitated") ) return;
-    const shouldFall = actor.getActiveTokens(false, true).some(token => token._isFalling());
-    if ( shouldFall === falling ) return;
-    await actor.toggleStatusEffect("falling", { active: shouldFall });
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   static async _onCreateOperation(documents, operation, user) {
     await super._onCreateOperation(documents, operation, user);
     if ( user.id !== game.userId ) return;
     const batch = [];
-    const actors = new Set();
     const prompted = new Set();
     for ( const effect of documents ) {
       if ( effect._shouldPromptConcentrationEnd() && !prompted.has(effect.parent) ) {
@@ -881,12 +863,10 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       }
       if ( effect.active && (effect.parent instanceof Actor) ) {
         batch.push(...await effect.collectRiderConditions());
-        actors.add(effect.parent);
       }
       if ( effect.isAppliedEnchantment ) batch.push(...await effect.collectRiderEnchantments(operation));
     }
     if ( batch.length ) await foundry.documents.modifyBatch(batch);
-    for ( const actor of actors ) await ActiveEffect5e.#updateFalling(actor);
   }
 
   /* -------------------------------------------- */
@@ -970,15 +950,6 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       ];
       if ( batch.length ) await foundry.documents.modifyBatch(batch);
     }
-
-    if ( user.id !== game.userId ) return;
-
-    // Re-evaluate falling once per affected actor, since removing prone or incapacitating effects can end a fall.
-    const actors = new Set();
-    for ( const effect of documents ) {
-      if ( !effect.statuses.has("falling") && (effect.parent instanceof Actor) ) actors.add(effect.parent);
-    }
-    for ( const actor of actors ) await ActiveEffect5e.#updateFalling(actor);
   }
 
   /* -------------------------------------------- */
