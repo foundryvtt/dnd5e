@@ -195,7 +195,16 @@ async function compilePacks(packName) {
     const src = path.join(PACK_SRC, folder.name);
     const dest = path.join(PACK_DEST, folder.name);
     logger.info(`Compiling pack ${folder.name}`);
-    await compilePack(src, dest, { recursive: true, log: true, transformEntry: cleanPackEntry, yaml: true });
+    const packedFolders = new Map();
+    await compilePack(src, dest, {
+      recursive: true, log: true, yaml: true, transformEntry: entry => {
+        cleanPackEntry(entry);
+        if ( !entry._key?.startsWith("!folders!") ) return;
+        // Skip duplicate folders explicitly to avoid tripping the CLI's overwrite safety measures.
+        if ( packedFolders.get(entry._key) === entry.name ) return false;
+        packedFolders.set(entry._key, entry.name);
+      }
+    });
   }
 }
 
