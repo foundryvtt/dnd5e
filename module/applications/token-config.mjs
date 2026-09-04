@@ -79,7 +79,7 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
     toggleSizeLock.dataset.action = "toggleSizeLock";
     toggleSizeLock.ariaLabel = _loc("DND5E.TOKEN.LockSize.Hint");
     sizeGroup.querySelector(".form-fields").append(lockSizeInput, toggleSizeLock);
-    this._applySizeLockState();
+    TokenConfig5e.prototype._applySizeLockState.call(this);
 
     if ( html.querySelector('[name="flags.dnd5e.lockScale"]') ) return;
     const lockScale = new BooleanField().toFormGroup({
