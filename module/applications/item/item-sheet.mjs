@@ -1004,7 +1004,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const config = CONFIG.DND5E.activityTypes[activity.type] ?? {};
 
     // Reordering
-    if ( source ) {
+    if ( activity.parent === source?.parent ) {
       const targetId = event.target.closest(".activity[data-activity-id]")?.dataset.activityId;
       const target = this.item.system.activities.get(targetId);
       if ( !target || (target === source) ) return;
