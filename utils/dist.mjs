@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import * as YAML from "js-yaml";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 
@@ -104,9 +105,24 @@ function compileManifest() {
 function copyCompendiumContent() {
   console.info("Copying compendium content...");
   const source = path.join(paths.free, "packs", "_source");
+  const target = path.join(paths.dist, "packs", "_source");
+
+  // Determine all keys currently existing in the destination.
+  const existing = new Set();
+  for ( const file of fs.readdirSync(target, { recursive: true, withFileTypes: true }) ) {
+    if ( !file.isFile() ) continue;
+    const key = extractKey(target, path.join(file.parentPath, file.name));
+    if ( key ) existing.add(key);
+  }
+
   for ( const file of fs.readdirSync(source, { recursive: true, withFileTypes: true }) ) {
     if ( !file.isFile() ) continue;
     const src = path.join(file.parentPath, file.name);
+    const key = extractKey(source, src);
+    if ( existing.has(key) ) {
+      console.info(`Skipping ${src}, already present in the system.`);
+      continue;
+    }
     const dest = path.join(paths.dist, path.relative(paths.free, src));
     fs.mkdirSync(path.dirname(dest), { recursive: true });
 
@@ -125,6 +141,19 @@ function copyCompendiumContent() {
 function copyImages() {
   console.log("Copying images...");
   fs.cpSync(path.join(paths.free, "icons"), path.join(paths.dist, "icons"), { recursive: true });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Extract the document's _key from its file.
+ * @param {string} root  The root file path.
+ * @param {string} file  The filename.
+ * @returns {string|void}
+ */
+function extractKey(root, file) {
+  const { _key } = YAML.load(fs.readFileSync(file, "utf8")) ?? {};
+  if ( _key ) return `${path.relative(root, file).split(path.sep)[0]}/${_key}`;
 }
 
 /* -------------------------------------------- */
