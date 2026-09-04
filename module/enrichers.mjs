@@ -1058,7 +1058,7 @@ export async function enrichDamage(configs, label, options) {
 
     let localizationType = "Short";
     if ( config.average ) {
-      localizationType = "Long";
+      localizationType = "Average";
       if ( config.average === true ) {
         const minRoll = Roll.create(formula).evaluate({ minimize: true });
         const maxRoll = Roll.create(formula).evaluate({ maximize: true });
@@ -1084,10 +1084,12 @@ export async function enrichDamage(configs, label, options) {
     link.innerHTML = game.i18n.getListFormatter().format(parts);
   }
 
-  if ( config.format === "extended" ) {
+  if ( (config.format === "long") || (config.format === "extended") ) {
     const span = document.createElement("span");
-    span.className = "damage-extended";
-    span.innerHTML = _loc("EDITOR.DND5E.Inline.DamageExtended", { damage: link.outerHTML });
+    span.className = `damage-${config.format}`;
+    let damage = _loc("EDITOR.DND5E.Inline.DamageLong", { damage: link.outerHTML });
+    if ( config.format === "extended" ) damage = _loc("EDITOR.DND5E.Inline.DamageExtended", { damage });
+    span.innerHTML = damage;
     return span;
   }
 
