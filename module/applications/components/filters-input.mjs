@@ -135,6 +135,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
         } else {
           valueElement.innerText = Array.isArray(value) ? value.join(", ") : value;
         }
+        node.replaceChildren(keyElement, valueElement);
       }
       return node;
     }

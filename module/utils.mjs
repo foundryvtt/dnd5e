@@ -1372,6 +1372,10 @@ const _attributeLabelCache = {
 export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemName=true }={}) {
   attr = ActiveEffect.implementation.SHIM_FIELDS[attr]?.key ?? attr;
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
+  else if ( attr.startsWith("item.") ) {
+    attr = attr.slice(5);
+    item ??= true;
+  }
 
   // Check any actor-specific names first.
   if ( attr.match(/^resources\.(?:primary|secondary|tertiary)/) && actor ) {
@@ -1447,8 +1451,9 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     type = "item";
     if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
     else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
-    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+    else if ( attr === "level" ) label = "DND5E.Level";
     else if ( attr === "properties" ) label = "DND5E.Properties";
+    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
     else label = getSchemaLabel(attr, "Item", item);
   }
 
