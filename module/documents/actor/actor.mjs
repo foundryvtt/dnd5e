@@ -1672,8 +1672,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const death = this.system.attributes?.death;
     if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
 
-    // Display a warning if we are not at zero HP or if we already have reached 3
-    if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
+    // Display a warning if we are not at zero HP or if we already reached a death save threshold.
+    if ( (this.system.attributes.hp.value > 0) || (death.failure >= death.threshold.failure)
+      || (death.success >= death.threshold.success) ) {
       ui.notifications.warn("DND5E.DeathSaveUnnecessary", { localize: true });
       return null;
     }
@@ -3665,7 +3666,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Do not auto-apply statuses outside of combat or if already dead
     if ( !this.inCombat || isDead ) return;
-    const failedDeathSaves = this.system.attributes.death.failure >= 3;
+    const death = this.system.attributes.death;
+    const failedDeathSaves = death.failure >= death.threshold.failure;
     let toApply = null;
     if ( this.type === "npc" ) {
       if ( !this.system.traits.important ) toApply = "dead";

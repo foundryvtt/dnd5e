@@ -2534,7 +2534,7 @@
 "DND5E.DeathSaveFailures": "Failures",
 "DND5E.DeathSaveRoll": "Roll a Death Saving Throw",
 "DND5E.DeathSavingThrow": "Death Saving Throw",
-"DND5E.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached 3 successes or failures.",
+"DND5E.DeathSaveUnnecessary": "You do not need to roll death saves because you have a positive number of hit points or have already reached the required successes or failures.",
 
 "DND5E.DEATH": {
   "FIELDS": {
@@ -2550,9 +2550,9 @@
     }
   },
   "Outcome": {
-    "death": "{name} has died with 3 death save failures!",
+    "death": "{name} has died after reaching the required number of death save failures!",
     "revive": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
-    "stable": "{name} has survived with 3 death save successes and is now stable!"
+    "stable": "{name} has survived after reaching the required number of death save successes and is now stable!"
   }
 },
 
@@ -6983,7 +6983,7 @@
     },
     "AutoApplyDowned": {
       "Name": "Auto-Apply Downed",
-      "Hint": "Automatically mark a creature as Dead or Unconscious when it is reduced to 0 HP in combat. Unimportant NPCs are marked Dead. Important NPCs and PCs are marked Unconscious first, and Dead if they fail three death saving throws.",
+      "Hint": "Automatically mark a creature as Dead or Unconscious when it is reduced to 0 HP in combat. Unimportant NPCs are marked Dead. Important NPCs and PCs are marked Unconscious first, and Dead when they reach their failed death save threshold.",
       "None": "Never",
       "DeadOnly": "For NPCs (dead only)",
       "NPCs": "For NPCs (dead and unconscious)",
