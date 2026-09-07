@@ -1724,6 +1724,15 @@ dialog.dnd5e2.application {
     column-count: 2;
     .traits:not(:last-of-type) { margin-block-end: 12px; }
   }
+
+  @supports (display: grid-lanes) {
+    &:not(.trait-columns) [data-application-part="traits"] {
+      display: grid-lanes;
+      grid-template-columns: 1fr 1fr;
+      fieldset:not(.traits) { grid-column: 1 / -1; }
+    }
+  }
+
   .traits {
     --checkbox-size: 16px;
     display: inline-grid;
