@@ -28,6 +28,7 @@ export default function EmbeddableDocumentMixin(Base) {
       // Create the new name element
       const nameElement = document.createElement(tagName);
       nameElement.classList.add("embed-name");
+      if ( config.values.includes("no-toc") || config["no-toc"] ) nameElement.dataset.noToc = "";
       if ( originalElement ) {
         if ( (originalElement === citation) && config.label ) {
           const link = originalElement.querySelector("a");
