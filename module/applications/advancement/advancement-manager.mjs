@@ -706,7 +706,7 @@ export default class AdvancementManager extends Application5e {
       } while ( this.step?.automatic );
     } catch (err) {
       if ( !(err instanceof Advancement.ERROR) ) throw err;
-      ui.notifications.error(error.message);
+      ui.notifications.error(err.message);
       this.step.automatic = false;
       this.step.error = err;
       if ( this.step.type === "restore" ) this.step.type = "forward";
@@ -758,7 +758,9 @@ export default class AdvancementManager extends Application5e {
         const rangeEnd = nextLevel === undefined ? maximumLevel : (nextLevel - 1);
         const steps = Array.fromRange(rangeEnd + 1 - rangeStart, rangeStart)
           .flatMap(l => this.constructor.flowsForLevel(item, l, { findExisting: this.steps }))
-          .map(flow => ({ type: "forward", flow, synthetic: true }));
+          .map(flow => flow.retainedData
+            ? { type: "restore", flow, automatic: true, synthetic: true }
+            : { type: "forward", flow, synthetic: true });
 
         // Add new steps at the end of the level group
         this.steps.splice(idx + 1, 0, ...steps);
@@ -826,7 +828,7 @@ export default class AdvancementManager extends Application5e {
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch (err) {
-      if ( !(err instanceof Advancement.ERROR) ) throw error;
+      if ( !(err instanceof Advancement.ERROR) ) throw err;
       ui.notifications.error(err.message);
       this.step.automatic = false;
     } finally {
