@@ -25,6 +25,7 @@ export default class WelcomeScreen extends Application5e {
     form: {
       handler: WelcomeScreen.#handleFormSubmission
     },
+    id: "dnd5e-welcome-screen",
     position: {
       width: 720,
       top: 100
@@ -121,31 +122,32 @@ export default class WelcomeScreen extends Application5e {
       .join("");
     context.message = `${_loc("DND5E.WELCOME.Message.Introduction")}<ul>${bullets}</ul>`;
 
-    const calendar = BaseSettingsConfig.createSettingField("calendar");
-    calendar.field = new StringField({ ...calendar.field.options, blank: true });
-    if ( !dnd5e.settings.calendarConfig.enabled ) calendar.value = "";
-    context.fields = [
-      BaseSettingsConfig.createSettingField("rulesVersion"),
-      calendar,
-      {
-        field: new BooleanField(),
-        hint: _loc("DND5E.Bastion.FIELDS.enabled.hint"),
-        input: createCheckboxInput,
-        label: _loc("DND5E.Bastion.FIELDS.enabled.label"),
-        name: "bastionConfiguration.enabled",
-        value: dnd5e.settings.bastionConfiguration.enabled
-      },
-      {
-        field: new BooleanField(),
-        hint: _loc("DND5E.WELCOME.Settings.Metric.Hint"),
-        input: createCheckboxInput,
-        label: _loc("DND5E.WELCOME.Settings.Metric.Label"),
-        name: "metric",
-        value: dnd5e.settings.metricLengthUnits
-          || dnd5e.settings.metricVolumeUnits
-          || dnd5e.settings.metricWeightUnits
-      }
-    ];
+    context.fields = [BaseSettingsConfig.createSettingField("rulesVersion")];
+
+    if ( CONFIG.DND5E.calendar.calendars.length ) {
+      const calendar = BaseSettingsConfig.createSettingField("calendar");
+      calendar.field = new StringField({ ...calendar.field.options, blank: true });
+      if ( !dnd5e.settings.calendarConfig.enabled ) calendar.value = "";
+      context.fields.push(calendar);
+    }
+
+    context.fields.push({
+      field: new BooleanField(),
+      hint: _loc("DND5E.Bastion.FIELDS.enabled.hint"),
+      input: createCheckboxInput,
+      label: _loc("DND5E.Bastion.FIELDS.enabled.label"),
+      name: "bastionConfiguration.enabled",
+      value: dnd5e.settings.bastionConfiguration.enabled
+    }, {
+      field: new BooleanField(),
+      hint: _loc("DND5E.WELCOME.Settings.Metric.Hint"),
+      input: createCheckboxInput,
+      label: _loc("DND5E.WELCOME.Settings.Metric.Label"),
+      name: "metric",
+      value: dnd5e.settings.metricLengthUnits
+        || dnd5e.settings.metricVolumeUnits
+        || dnd5e.settings.metricWeightUnits
+    });
 
     const importActions = {};
     for ( const adventure of this.options.adventures ) {
@@ -230,8 +232,10 @@ export default class WelcomeScreen extends Application5e {
     if ( !game.user.isGM ) return;
 
     const { actions, modules={}, ...settings } = foundry.utils.expandObject(formData.object);
-    settings.calendarConfig = { enabled: settings.calendar !== "" };
-    if ( settings.calendar === "" ) delete settings.calendar;
+    if ( "calendar" in settings ) {
+      settings.calendarConfig = { enabled: settings.calendar !== "" };
+      if ( settings.calendar === "" ) delete settings.calendar;
+    }
     if ( !this.element.querySelector('[name="metric"]').indeterminate ) {
       settings.metricLengthUnits = settings.metricVolumeUnits = settings.metricWeightUnits = settings.metric;
     }
