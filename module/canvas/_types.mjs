@@ -43,5 +43,6 @@
  * @property {number} x
  * @property {number} y
  * @property {number} elevation
+ * @property {string} level
  * @property {number} rotation
  */

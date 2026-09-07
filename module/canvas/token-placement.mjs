@@ -18,13 +18,29 @@ export default class TokenPlacement extends BasePlacement {
   async _place() {
     const results = [];
     const uniqueTokens = new Map();
-    await canvas.tokens.placeTokens(this.config.tokens.map(t => t.toObject()), {
+    const base = this.config.origin?.elevation ?? canvas.level.elevation.base; // Use the summoner's elevation.
+    await canvas.tokens.placeTokens(this.config.tokens.map(t => ({
+      ...t.toObject(), elevation: base, level: canvas.level.id
+    })), {
       create: false,
+      onChange: ({ document, preview }) => {
+        let elevation = base;
+        // Don't summon a summon in mid-air so it immediately falls, find the closest surface on or below the
+        // summoner's elevation.
+        if ( canvas.scene.getSurfaces({ type: "move" }).length ) {
+          const position = { ...document._source, elevation: base };
+          ({elevation=base } = document._findSupportingSurface({ position }) ?? {});
+        }
+        if ( elevation === document._source.elevation ) return;
+        document.updateSource({ elevation });
+        preview.renderFlags.set({ refreshElevation: true });
+      },
       preConfirm: ({ document, index }) => {
         const actorId = this.config.tokens[index].parent.id;
         uniqueTokens.set(actorId, (uniqueTokens.get(actorId) ?? -1) + 1);
         results.push({
-          x: document.x, y: document.y, elevation: document.elevation, rotation: document.rotation,
+          x: document.x, y: document.y, elevation: document.elevation, level: document.level,
+          rotation: document.rotation,
           prototypeToken: this.config.tokens[index],
           index: { total: index, unique: uniqueTokens.get(actorId) }
         });
