@@ -11,7 +11,7 @@
 
     {{{ enriched.value }}}
 
-    <h{{ title.level2 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.Features.Header" }}</h{{ title.level2 }}>
+    <h{{ title.level2 }} class="class-features">{{ localize "JOURNALENTRYPAGE.DND5E.Class.Features.Header" }}</h{{ title.level2 }}>
 
     {{#if modernStyle}}
     <p>
@@ -35,32 +35,34 @@
         caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableCaption" class=linked.name) }}
 
     {{#each features}}
-    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    <h{{ @root.title.level4 }} class="class-feature-name">{{ this.name }}</h{{ @root.title.level4 }}>
     {{{ this.description }}}
     {{/each}}
 
     {{#if optionalTable}}
-    <h{{ title.level2 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption" }}</h{{ title.level2 }}>
+    <h{{ title.level2 }} class="optional-features">
+        {{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption" }}
+    </h{{ title.level2 }}>
     <p>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription" class=linked.lowercaseName }}</p>
 
     {{> "dnd5e.journal-table" table=optionalTable level=title.level3
         caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption" class=linked.name) }}
 
     {{#each optionalFeatures}}
-    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    <h{{ @root.title.level4 }} class="class-feature-name">{{ this.name }}</h{{ @root.title.level4 }}>
     {{{ this.description }}}
     {{/each}}
     {{/if}}
 
     {{#if (or enriched.subclass subclasses)}}
-    <h{{title.level2}}>
+    <h{{title.level2}} class="subclasses">
         {{#if system.subclassHeader}}{{ system.subclassHeader }}
         {{else}}{{ localize "JOURNALENTRYPAGE.DND5E.Class.FIELDS.subclassItems.label" }}{{/if}}
     </h{{title.level2}}>
     {{{ enriched.subclass }}}
 
     {{#each subclasses}}
-    <h{{ @root.title.level3 }}>{{ this.name }}</h{{ @root.title.level3 }}>
+    <h{{ @root.title.level3 }} class="subclass-name">{{ this.name }}</h{{ @root.title.level3 }}>
     {{{this.description}}}
 
     {{#if this.table}}
@@ -69,7 +71,7 @@
     {{/if}}
 
     {{#each this.features}}
-    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    <h{{ @root.title.level4 }} class="subclass-feature-name">{{ this.name }}</h{{ @root.title.level4 }}>
     {{{ this.description }}}
     {{/each}}
     {{/each}}

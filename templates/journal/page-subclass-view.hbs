@@ -12,19 +12,21 @@
     {{> "dnd5e.journal-table" table=table level=title.level3 caption=linked.name }}
 
     {{#each features}}
-    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    <h{{ @root.title.level4 }} class="subclass-feature-name">{{ this.name }}</h{{ @root.title.level4 }}>
     {{{ this.description }}}
     {{/each}}
 
     {{#if optionalTable}}
-    <h{{ title.level2 }}>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption" }}</h{{ title.level2 }}>
+    <h{{ title.level2 }} class="optional-features">
+        {{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesCaption" }}
+    </h{{ title.level2 }}>
     <p>{{ localize "JOURNALENTRYPAGE.DND5E.Class.OptionalFeaturesDescription" class=linked.lowercaseName }}</p>
 
     {{> "dnd5e.journal-table" table=optionalTable level=title.level3
         caption=(localize "JOURNALENTRYPAGE.DND5E.Class.TableOptionalCaption" class=linked.name) }}
 
     {{#each optionalFeatures}}
-    <h{{ @root.title.level4 }}>{{ this.name }}</h{{ @root.title.level4 }}>
+    <h{{ @root.title.level4 }} class="subclass-feature-name">{{ this.name }}</h{{ @root.title.level4 }}>
     {{{ this.description }}}
     {{/each}}
     {{/if}}
