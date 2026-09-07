@@ -32,7 +32,7 @@ Useful examples:
 | Override    | Replaces the defined attribute with the value provided in the Effect Value field. If applied to a text value such as a name or description a pair of curly brackets like `{}` can be used to include the value being overriden in the final output. So overriding on the name of "Breastplate" with `Arcane Propulsive {}` will result in the final name of "Arcane Propulsive Breastplate". |
 | Downgrade   | Reduces the defined attribute only in cases where the current value of that attribute would be greater than value specified in the Effect Value field.|
 | Upgrade     | Increases the defined attribute only in cases where the current value of that attribute would be less than value specified in the Effect Value field. |
-| Custom      | The Custom change mode applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Mode|
+| Custom      | The Custom change type applies logic defined by a game system or add-on module. The dnd5e system does not utilize the Custom Change Type|
 
 ## Modify Roll Mode
 
@@ -91,57 +91,57 @@ system.abilities.[abbreviation].value
 ### Overriding an Ability Score
 E.g. an Item or potion that sets an ability score to a set value while in use
 
-| Attribute Key                           | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                           | Change Type | Effect Value | Roll Data? |
 | --------------------------------------- | ----------- | ------------ | ---------- |
 | `system.abilities.[abbreviation].value` | Override    | `[number]`   | No         |
 
 ### Upgrading an Ability Score
 E.g. an Item or potion that sets an ability score to a set value, if the value does not already exceed that value, such as the Gauntlets of Ogre Power
 
-| Attribute Key                           | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                           | Change Type | Effect Value | Roll Data? |
 | --------------------------------------- | ----------- | ------------ | ---------- |
 | `system.abilities.[abbreviation].value` | Upgrade     | `[number]`   | No         |
 
 ### Increasing an Ability Score with a Maximum
 E.g. an Item that increases an ability score up to 20
 
-| Attribute Key                           | Change Mode | Effect Value           | Roll Data?  | Example           |
+| Attribute Key                           | Change Type | Effect Value           | Roll Data?  | Example           |
 | --------------------------------------- | ----------- | ---------------------- | ----------- | ----------------- |
 | `system.abilities.[abbreviation].value` | Add         | `[number] <= [number]` | Yes         | `2 <= 18 + @prof` |
 
 ### Bonus to a Specific Saving Throw
 
-| Attribute Key                                     | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                     | Change Type | Effect Value | Roll Data? |
 | ------------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.abilities.[abbreviation].save.roll.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Bonus to a Specific Ability Check
 
-| Attribute Key                                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                      | Change Type | Effect Value | Roll Data? |
 | -------------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.abilities.[abbreviation].check.roll.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Disadvantage on Attacks with Certain Ability
 
-| Attribute Key                                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                      | Change Type | Effect Value | Roll Data? |
 | -------------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.abilities.[abbreviation].attack.roll.mode` | Add         | `-1`         | No         |
 
 ### Advantage on a Specific Saving Throw
 
-| Attribute Key                                    | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                    | Change Type | Effect Value | Roll Data? |
 | ------------------------------------------------ | ----------- | ------------ | ---------- |
 | `system.abilities.[abbreviation].save.roll.mode` | Add         | `1`          | No         |
 
 ### Bonus to All Ability Checks
 
-| Attribute Key                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                      | Change Type | Effect Value | Roll Data? |
 | ---------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.check.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Advantage on All Ability Checks
 
-| Attribute Key                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                      | Change Type | Effect Value | Roll Data? |
 | ---------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.check.mode`  | Add         | `1`          | No         |
 
@@ -149,33 +149,33 @@ E.g. an Item that increases an ability score up to 20
 
 E.g. Paladin Aura of Protection
 
-| Attribute Key                     | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                     | Change Type | Effect Value | Roll Data? |
 | --------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.save.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Disadvantage on All Ability Saves
 
-| Attribute Key                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                      | Change Type | Effect Value | Roll Data? |
 | ---------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.save.mode`   | Add         | `-1`         | No         |
 
 ### Grant Proficiency in All Ability Checks
 The number must be one of 0, 0.5, 1, and 2.
 
-| Attribute Key                             | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                             | Change Type | Effect Value | Roll Data? |
 | ----------------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.check.proficiency`  | Upgrade     | `[number]`   | No         |
 
 ### Grant Proficiency in All Ability Saves
 The number must be one of 0 or 1.
 
-| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                            | Change Type | Effect Value | Roll Data? |
 | ---------------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.save.proficiency`  | Upgrade     | `[number]`   | No         |
 
 ### Bonus to Initiative
 
-| Attribute Key                       | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                       | Change Type | Effect Value | Roll Data? |
 | ----------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.init.roll.bonus` | Add         | `[formula]`  | Yes        |
 
@@ -187,7 +187,7 @@ The number must be one of 0 or 1.
 
 ### Increase Maximum Attainment Slots
 
-| Attribute Key                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                      | Change Type | Effect Value | Roll Data? |
 | ---------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.attunement.max` | Add         | `[number]`   | No         |
 
@@ -200,14 +200,14 @@ The number must be one of 0 or 1.
 ### Bonus to Concentration
 Add a bonus to concentration saving throws.
 
-| Attribute Key                                | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                | Change Type | Effect Value | Roll Data? |
 | -------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.concentration.roll.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Concentration Limit
 Change the amount of effects you can maintain concentration on at the same time.
 
-| Attribute Key                           | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                           | Change Type | Effect Value | Roll Data? |
 | --------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.concentration.limit` | Override    | `[number]`   | No         |
 
@@ -256,39 +256,39 @@ system.skills.[abbreviation].value
 
 ### Bonus to a Specific Skill Check
 
-| Attribute Key                             | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                             | Change Type | Effect Value | Roll Data? |
 | ----------------------------------------- | ----------- | ------------ | ---------- |
 | `system.skills.[abbreviation].roll.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Bonus to a Specific Skill Passive
 
-| Attribute Key                                  | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                  | Change Type | Effect Value | Roll Data? |
 | ---------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.skills.[abbreviation].bonuses.passive` | Add         | `[number]`   | No         |
 
 ### Advantage on a Specific Skill
 
-| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                            | Change Type | Effect Value | Roll Data? |
 | ---------------------------------------- | ----------- | ------------ | ---------- |
 | `system.skills.[abbreviation].roll.mode` | Add         | `1`          | No         |
 
 ### Upgrade Proficiency Level to Expertise
 The number must be one of 0, 0.5, 1, and 2.
 
-| Attribute Key                        | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                        | Change Type | Effect Value | Roll Data? |
 | ------------------------------------ | ----------- | ------------ | ---------- |
 | `system.skills.[abbreviation].value` | Upgrade     | `[number]`   | No         |
 
 ### Bonus to All Skill Checks
 
-| Attribute Key                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                      | Change Type | Effect Value | Roll Data? |
 | ---------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.skill.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Grant Proficiency in All Skill Checks
 The number must be one of 0, 0.5, 1, and 2.
 
-| Attribute Key                             | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                             | Change Type | Effect Value | Roll Data? |
 | ----------------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.skill.proficiency`  | Upgrade     | `[number]`   | No         |
 
@@ -342,27 +342,27 @@ system.attributes.movement.bonus
 ### Add a different Speed
 E.g. An Item or Spell which grants an Actor a flying or swimming speed. **Note**: Speeds can reference any speed prepared earlier (in the order of the movement types listed above). So when setting the fly speed you can use `@attributes.movement.speed` to reference the character's walk speed, but not the other way around.
 
-| Attribute Key                                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                      | Change Type | Effect Value | Roll Data? |
 | -------------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.movement.speeds.[movementType]` | Upgrade     | `[formula]`  | Yes        |
 
 ### Give a bonus to all speeds
 E.g. A Feature or Spell which increases all movement speeds by a certain amount.
 
-| Attribute Key                      | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                      | Change Type | Effect Value | Roll Data? |
 | ---------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.movement.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Multiply all speeds by amount
 E.g. An Item or Spell which doubles/halves/etc. an Actor's speed.
 
-| Attribute Key                           | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                           | Change Type | Effect Value | Roll Data? |
 | --------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.movement.multiplier` | Multiply    | `[number]`   | No         |
 
 ### Add a type of difficult terrain to ignore
 
-| Attribute Key                                        | Change Mode | Effect Value                | Roll Data? |
+| Attribute Key                                        | Change Type | Effect Value                | Roll Data? |
 | ---------------------------------------------------- | ----------- | --------------------------- | ---------- |
 | `system.attributes.movement.ignoredDifficultTerrain` | Add         | `[difficultTerrainTypes]`   | No         |
 
@@ -413,14 +413,14 @@ system.attributes.senses.ranges.[senseType]
 ### Set or Upgrade a Sense
 E.g. A Feature or Spell which grants or upgrades darkvision.
 
-| Attribute Key                                   | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                   | Change Type | Effect Value | Roll Data? |
 | ----------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.senses.ranges.[senseType]`   | Upgrade     | `[number]`   | No         |
 
 ### Override a Sense
 E.g. A Feature which sets a sense to an exact value.
 
-| Attribute Key                                   | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                                   | Change Type | Effect Value | Roll Data? |
 | ----------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.senses.ranges.[senseType]`   | Override    | `[number]`   | No         |
 
@@ -443,14 +443,14 @@ system.attributes.ac.bonus
 ### Add a Bonus to AC
 E.g. An Item or Spell which adds something to the Actor's current AC for the duration.
 
-| Attribute Key                | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                | Change Type | Effect Value | Roll Data? |
 | ---------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.ac.bonus` | Add         | `[number]`   | Yes        |
 
 ### Add a new custom AC formula
 E.g. An Item or Spell which sets the Actor's AC to `12 + @abilities.int.mod` for the duration.
 
-| Attribute Key                   | Change Mode | Effect Value |
+| Attribute Key                   | Change Type | Effect Value |
 | ------------------------------- | ----------- | ------------ |
 | `system.attributes.ac.formulas` | Add         | `[formula]`  |
 | `system.attributes.ac.formulas` | Add         | `[object]`   |
@@ -480,7 +480,7 @@ Examples of an AC formula object:
 
 #### Bonus to Spell DCs
 
-| Attribute Key             | Change Mode | Effect Value | Roll Data? |
+| Attribute Key             | Change Type | Effect Value | Roll Data? |
 | ------------------------- | ----------- | ------------ | ---------- |
 | `system.bonuses.spell.dc` | Add         | `[number]`   | Yes        |
 
@@ -513,21 +513,21 @@ system.rolls.attack.[type].bonus
 
 ### Bonus to All Melee Attack Rolls (both spell and weapon)
 
-| Attribute Key                    | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                    | Change Type | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.attack.mwak.bonus` | Add         | `[formula]`  | Yes        |
 | `system.rolls.attack.msak.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Bonus to All Ranged Attack Rolls (both spell and weapon)
 
-| Attribute Key                    | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                    | Change Type | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.attack.rwak.bonus` | Add         | `[formula]`  | Yes        |
 | `system.rolls.attack.rsak.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Advantage on All Spell Attack Rolls
 
-| Attribute Key                   | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                   | Change Type | Effect Value | Roll Data? |
 | ------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.attack.msak.mode` | Add         | `1`          | No         |
 | `system.rolls.attack.rsak.mode` | Add         | `1`          | No         |
@@ -558,14 +558,14 @@ system.rolls.damage.[type].bonus
 
 ### Bonus to All Melee Attack Damage Rolls (both spell and weapon)
 
-| Attribute Key                    | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                    | Change Type | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
 | `sysetm.rolls.damage.mwak.bonus` | Add         | `[formula]`  | Yes        |
 | `sysetm.rolls.damage.msak.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Bonus to All Ranged Attack Damage Rolls (both spell and weapon)
 
-| Attribute Key                    | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                    | Change Type | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
 | `sysetm.rolls.damage.rwak.bonus` | Add         | `[formula]`  | Yes        |
 | `sysetm.rolls.damage.rsak.bonus` | Add         | `[formula]`  | Yes        |
@@ -574,7 +574,7 @@ system.rolls.damage.[type].bonus
 
 Damage types can be specified for bonus damage by adding them in square brackets after the dice formula. For example, to add 1d8 radiant damage to melee weapon attacks:
 
-| Attribute Key                    | Change Mode | Effect Value    | Roll Data? |
+| Attribute Key                    | Change Type | Effect Value    | Roll Data? |
 | -------------------------------- | ----------- | --------------- | ---------- |
 | `sysetm.rolls.damage.mwak.bonus` | Add         | `1d8[radiant]`  | Yes        |
 
@@ -611,20 +611,20 @@ system.traits.size
 
 ### Make the Creature a Specific Size
 
-| Attribute Key        | Change Mode | Effect Value      |
+| Attribute Key        | Change Type | Effect Value      |
 | -------------------- | ----------- | ----------------- |
 | `system.traits.size` | Overrride   | `[size]`          |
 
 ### Increase the Size to a Specific Size if not larger
 
-| Attribute Key        | Change Mode | Effect Value      |
+| Attribute Key        | Change Type | Effect Value      |
 | -------------------- | ----------- | ----------------- |
 | `system.traits.size` | Upgrade     | `[size]`          |
 
 ### Increase the Size of the Creature one Size Class
 E.g. The Enlarge/Reduce spell or Potion of Growth
 
-| Attribute Key        | Change Mode | Effect Value      |
+| Attribute Key        | Change Type | Effect Value      |
 | -------------------- | ----------- | ----------------- |
 | `system.traits.size` | Add         | `[number]`        |
 
@@ -671,7 +671,7 @@ system.traits.ci.value
 > </details>
 
 
-| Attribute Key            | Change Mode | Effect Value      |
+| Attribute Key            | Change Type | Effect Value      |
 | ------------------------ | ----------- | ----------------- |
 | `system.traits.ci.value` | Add         | `[conditionType]` |
 
@@ -700,26 +700,26 @@ system.traits.ci.value
 > Source: `CONFIG.DND5E.damageTypes`
 > </details>
 
-| Attribute Key            | Change Mode | Effect Value   |
+| Attribute Key            | Change Type | Effect Value   |
 | ------------------------ | ----------- | -------------- |
 | `system.traits.di.value` | Add         | `[damageType]` |
 
 ### Add a Damage Type Resistance
 
-| Attribute Key            | Change Mode | Effect Value   |
+| Attribute Key            | Change Type | Effect Value   |
 | ------------------------ | ----------- | -------------- |
 | `system.traits.dr.value` | Add         | `[damageType]` |
 
 ### Add a Damage Type Vulnerability
 
-| Attribute Key            | Change Mode | Effect Value   |
+| Attribute Key            | Change Type | Effect Value   |
 | ------------------------ | ----------- | -------------- |
 | `system.traits.dv.value` | Add         | `[damageType]` |
 
 ### Add a Damage Type Modification
 These are properties that cause the actor to take increased or decreased damage from certain damage types.
 
-| Attribute Key                          | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                          | Change Type | Effect Value | Roll Data? |
 | -------------------------------------- | ----------- | ------------ | ---------- |
 | `system.traits.dm.amount.[damageType]` | Add         | `[number]`   | Yes        |
 
@@ -807,7 +807,7 @@ system.traits.weaponProf.value
 
 ### Add a Weapon Proficiency
 
-| Attribute Key                    | Change Mode | Effect Value    |
+| Attribute Key                    | Change Type | Effect Value    |
 | -------------------------------- | ----------- | --------------- |
 | `system.traits.weaponProf.value` | Add         | `[weaponType]`  |
 
@@ -815,7 +815,7 @@ system.traits.weaponProf.value
 
 Adding to the `mastery.value` will add a new normal weapon mastery such as one gained when taking the normal "Weapon Mastery" feature.
 
-| Attribute Key                            | Change Mode | Effect Value    |
+| Attribute Key                            | Change Type | Effect Value    |
 | ---------------------------------------- | ----------- | --------------- |
 | `system.traits.weaponProf.mastery.value` | Add         | `[weaponType]`  |
 
@@ -823,7 +823,7 @@ Adding to the `mastery.value` will add a new normal weapon mastery such as one g
 
 Adding to `mastery.bonus` gives a bonus weapon mastery that can be chosen when attacking with any weapon with which you have an existing mastery.
 
-| Attribute Key                            | Change Mode | Effect Value      |
+| Attribute Key                            | Change Type | Effect Value      |
 | ---------------------------------------- | ----------- | ----------------- |
 | `system.traits.weaponProf.mastery.bonus` | Add         | `[weaponMastery]` |
 
@@ -927,27 +927,27 @@ system.tools.[abbreviation].value
 
 ### Bonus to a Specific Tool Check
 
-| Attribute Key                             | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                             | Change Type | Effect Value | Roll Data? |
 | ----------------------------------------- | ----------- | ------------ | ---------- |
 | `system.tools.[abbreviation].roll.bonus`  | Add         | `[formula]`  | Yes        |
 
 ### Upgrade Proficiency Level to Expertise
 The number must be one of 0, 0.5, 1, and 2.
 
-| Attribute Key                        | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                        | Change Type | Effect Value | Roll Data? |
 | ------------------------------------ | ----------- | ------------ | ---------- |
 | `system.tools.[abbreviation].value`  | Upgrade     | `[number]`   | No         |
 
 ### Bonus to All Tool Checks
 
-| Attribute Key                     | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                     | Change Type | Effect Value | Roll Data? |
 | --------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.tool.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Grant Proficiency in All Tool Checks
 The number must be one of 0, 0.5, 1, and 2.
 
-| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                            | Change Type | Effect Value | Roll Data? |
 | ---------------------------------------- | ----------- | ------------ | ---------- |
 | `system.rolls.ability.tool.proficiency`  | Upgrade     | `[number]`   | No         |
 
@@ -982,7 +982,7 @@ Temporarily override the displayed creature type of an actor. For example using 
 > Source: `CONFIG.DND5E.creatureTypes`
 > </details>
 
-| Attribute Key                 | Change Mode | Effect Value     |
+| Attribute Key                 | Change Type | Effect Value     |
 | ----------------------------- | ----------- | ---------------- |
 | `system.details.type.value`   | Override    | `[creatureType]` |
 | `system.details.type.subtype` | Override    | `[text]`         |
@@ -1019,7 +1019,7 @@ system.scale.[classIdentifier].[scaleIdentifier].value
 ### Increase the value of a Scale Value
 E.g., an Item or Spell which allows additional use(s) of a Class Feature (e.g. adds an additional use of a Barbarian's Rage).
 
-| Attribute Key                        | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                        | Change Type | Effect Value | Roll Data? |
 | ------------------------------------ | ----------- | ------------ | ---------- |
 | `system.scale.barbarian.rages.value` | Add         | `[number]`   | No         |
 
@@ -1027,7 +1027,7 @@ E.g., an Item or Spell which allows additional use(s) of a Class Feature (e.g. a
 ### Increase the number of die of a Dice Scale Value
 E.g., an Item or Spell which increases the number of die in a Dice Scale Value (e.g. adds a die to a Rogue's Sneak Attack), and increases the size of the dice.
 
-| Attribute Key                            | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                            | Change Type | Effect Value | Roll Data? |
 | ---------------------------------------- | ----------- | ------------ | ---------- |
 | `system.scale.rogue.sneak-attack.number` | Add         | `[number]`   | No         |
 | `system.scale.rogue.sneak-attack.faces`  | Add         | `[number]`   | No         |
@@ -1036,7 +1036,7 @@ E.g., an Item or Spell which increases the number of die in a Dice Scale Value (
 ### Add a dice modifier to a Dice Scale Value
 E.g., making Sneak Attack reroll 1s by using the Effect Value `r=1`. For details on dice modifiers, see [Dice Modifiers](https://foundryvtt.com/article/dice-modifiers/).
 
-| Attribute Key                               | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                               | Change Type | Effect Value | Roll Data? |
 | ------------------------------------------- | ----------- | ------------ | ---------- |
 | `system.scale.rogue.sneak-attack.modifiers` | Add         | `[text]`     | No         |
 
@@ -1061,27 +1061,27 @@ system.attributes.hp.dt
 ### Temporary Bonus to the Maximum HP
 E.g. An Item or Spell which temporarily increases a character's Max HP (e.g. Aid).
 
-| Attribute Key                  | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                  | Change Type | Effect Value | Roll Data? |
 | ------------------------------ | ----------- | ------------ | ---------- |
 | `system.attributes.hp.tempmax` | Add         | `[number]`   | No         |
 
 ### Bonus to the Maximum HP
 E.g. An Item or Feature which increases a character's Max HP by a flat amount.
 
-| Attribute Key                          | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                          | Change Type | Effect Value | Roll Data? |
 | -------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.hp.bonuses.overall` | Add         | `[number]`   | Yes        |
 
 ### Bonus HP for each Character Level
 E.g. An effect that provides a bonus to the hit points a character gains for each level they acquire (e.g., the Tough feat).
 
-| Attribute Key                        | Change Mode | Effect Value | Roll Data? |
+| Attribute Key                        | Change Type | Effect Value | Roll Data? |
 | ------------------------------------ | ----------- | ------------ | ---------- |
 | `system.attributes.hp.bonuses.level` | Add         | `[number]`   | Yes        |
 
 ### Set the Damage Threshold
 
-| Attribute Key             | Change Mode | Effect Value | Roll Data? |
+| Attribute Key             | Change Type | Effect Value | Roll Data? |
 | ------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.hp.dt` | Override    | `[number]`   | No         |
 
@@ -1092,7 +1092,7 @@ E.g. An effect that provides a bonus to the hit points a character gains for eac
 ## Hiding Items
 Active effects have a special syntax that allows them to hide items on the actor sheet. Specific items can be referenced using their ID or their identifier.
 
-| Attribute Key             | Change Mode | Effect Value          | Roll Data? |
+| Attribute Key             | Change Type | Effect Value          | Roll Data? |
 | ------------------------- | ----------- | --------------------- | ---------- |
 | `items.hidden`            | Add         | `[id]`                | No         |
 | `items.hidden`            | Add         | `[identifier]`        | No         |
@@ -1127,7 +1127,7 @@ Some useful values for animations and colors can be found in the [Lighting secti
 #### Emit torch light from token
 E.g. Modifying the light emitted by a token to appear as torch light.
 
-| Attribute Key                | Change Mode | Effect Value  | Roll Data? | Example   |
+| Attribute Key                | Change Type | Effect Value  | Roll Data? | Example   |
 | ---------------------------- | ----------- | ------------- | ---------- | --------- |
 | `token.light.dim`            | Override    | `[number]`    | No         | `40`      |
 | `token.light.bright`         | Override    | `[number]`    | No         | `20`      |
@@ -1135,10 +1135,19 @@ E.g. Modifying the light emitted by a token to appear as torch light.
 | `token.light.alpha`          | Override    | `[number]`    | No         | `0.7`     |
 | `token.light.animation.type` | Override    | `[animation]` | No         | `flame`   |
 
+Alternatively the entire `token.light` object can be overwritten to avoid potential issues with other sources of light:
+
+```json
+// Key: token.light
+// Type: Override
+// Value:
+{ "dim": 40, "bright": 20, "color": "#a2642a", "alpha": 0.7, "animation": { "type": "flame" } }
+```
+
 #### Creating area of darkness
 E.g. From the Darkness spell.
 
-| Attribute Key          | Change Mode | Effect Value  | Roll Data? | Example   |
+| Attribute Key          | Change Type | Effect Value  | Roll Data? | Example   |
 | ---------------------- | ----------- | ------------- | ---------- | --------- |
 | `token.light.dim`      | Override    | `[number]`    | No         | `15`      |
 | `token.light.negative` | Override    | `[boolean]`   | No         | `true`    |
@@ -1150,13 +1159,13 @@ E.g. From the Darkness spell.
 ## Honorable Mentions
 You can override the name of an actor (on the actor sheet, not the token), as well as its displayed image.
 
-| Attribute Key | Change Mode | Effect Value        | Roll Data? |
+| Attribute Key | Change Type | Effect Value        | Roll Data? |
 | ------------- | ----------- | ------------------- | ---------- |
 | `name`        | Override    | `Steve`             | No         |
 | `img`         | Override    | `assets/steve.webp` | No         |
 
 Overriding or adding to the proficiency modifier of the actor.
 
-| Attribute Key            | Change Mode | Effect Value | Roll Data? |
+| Attribute Key            | Change Type | Effect Value | Roll Data? |
 | ------------------------ | ----------- | ------------ | ---------- |
 | `system.attributes.prof` | Override    | `[number]`   | No         |
