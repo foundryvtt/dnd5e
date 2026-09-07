@@ -28,6 +28,8 @@ Embeds can also use the `inline` option, which disables both the citation and ca
 
 The system adds an additional option when embedding actors, items, or activities that gives greater control over where the document's name appears. Using the `nameStyle` option it is possible to place the document's name either as a header preceding the embedded text (`nameStyle=h4`) or inline with the first paragraph of the text (`nameStyle=inline`). The name will be a link to the document unless `cite=false` is set, in which case it will be plain text.
 
+When using a header as the name style, the `no-toc` option can be used to prevent the embed header from appearing in a journal's table of contents sidebar.
+
 ```
 // Display as header with link
 @Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 caption=false]
@@ -35,6 +37,7 @@ The system adds an additional option when embedding actors, items, or activities
 // Display as plain text header
 @Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 cite=false]
 @Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 caption=false cite=false]
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 cite=false no-toc]
 
 // Display as plain text header with citation link below embed
 @Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2]
