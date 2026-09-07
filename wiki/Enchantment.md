@@ -143,10 +143,11 @@ The valid effect values depend on the item type, and in the case of consumables 
 > <details>
 > <summary>Container Properties</summary>
 >
-> | Container Property  | Abbreviation         |
-> | ------------------- | -------------------- |
-> | Magical             | `mgc`                |
-> | Weightless Contents | `weightlessContents` |
+> | Container Property         | Abbreviation           |
+> | -------------------------- | ---------------------- |
+> | Magical                    | `mgc`                  |
+> | Hide Unidentified Contents | `unidentifiedContents` |
+> | Weightless Contents        | `weightlessContents`   |
 >
 > Source: `CONFIG.DND5E.validProperties.container`
 > </details>

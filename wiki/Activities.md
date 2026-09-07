@@ -64,7 +64,7 @@ The "Activation" tab contains three sub-tabs: "Time", "Consumption", and "Target
 
 The "Activation" section contains details on how long it takes to use the activity and under what conditions it can be used. If activation data is provided by the item (such as on spells), this will default to the details from the item but can be overridden using a checkbox next to the name.
 
-The "Duration" section contains details on how long the usage of the activity lasts. This can also be derived from the item’s data if present. When applying an active effect from the activity, the duration here will be used for the effect unless the effect already has a duration specified.
+The "Duration" section contains details on how long the usage of the activity lasts. This can also be derived from the item’s data if present. When applying an active effect from the activity, the duration and expiry event here will be used for the effect unless the effect already has a duration specified.
 
 #### Consumption
 
