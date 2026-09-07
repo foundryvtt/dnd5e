@@ -50,7 +50,7 @@ This also accepts deterministic formulas, so you can enter a minimum of `@prof` 
 
 Rules are extremely broad by default. Adding a damage bonus rule means that that bonus is applied to all damage, whether it be from a spell or weapon, melee or ranged, and of any type. To narrow down when a rule is applied, effect & change conditions can be used.
 
-The [active effect conditions page](Active-Effects.md#Conditions) goes over the details on how conditions are defined and what data can be generally filtered on. Of special importance to rules is the rolling description fields which provide additional information that can be used to narrow down when a rule should be applied (e.g. using the `roll.damageType` to only apply a bonus when the character does fire damage, or `roll.attack.mode` to apply a bonus only to thrown weapon attacks).
+The [active effect conditions page](Active-Effects.md#Conditions) goes over the details on how conditions are defined and what data can be generally filtered on. Of special importance to rules is the rolling description fields which provide additional information that can be used to narrow down when a rule should be applied (e.g. using the `roll.damage.type` to only apply a bonus when the character does fire damage, or `roll.attack.mode` to apply a bonus only to thrown weapon attacks). Any `roll.` keys can only be referenced in change conditions, not effect conditions.
 
 ### Minimum Roll on Ranged Attacks
 

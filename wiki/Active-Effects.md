@@ -14,6 +14,8 @@ A variety of valid attribute keys and their values used in normal active effects
 
 Conditions are a system that allows for active effects and their conditions to be applied only if a specific set of circumstances are met. They can be defined on the effect as a whole or to a specific change, allowing for very precise control over what is applied.
 
+Conditions applied to the effect as a whole will suppress the effect and all of its changes if they evaluate to false. Effect conditions are evaluated immediately before the first change in the effect is applied, unless there is a status attached to the effect, in which case they are evaluated before the status is applied to the actor. This means that conditions on effects that apply statuses cannot reference `statuses.`. Because of the early evaluation, effect condition also shouldn't be used with rule change types when checking against `roll.`, because that information isn't available at that time.
+
 Information on how to construct filters can be found on the [filters page](Filters.md).
 
 ## Durations & Expiry Events
