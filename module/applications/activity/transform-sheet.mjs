@@ -85,7 +85,10 @@ export default class TransformSheet extends ActivitySheet {
       fields: this.activity.schema.fields.profiles.element.fields,
       prefix: `profiles.${index}.`,
       source: context.source.profiles[index] ?? data
-    })).sort((lhs, rhs) => (lhs.name || "").localeCompare(rhs.name || "", game.i18n.lang));
+    })).sort((lhs, rhs) => {
+      return (lhs.data.name || lhs.document?.name || "")
+        .localeCompare(rhs.data.name || rhs.document?.name || "", game.i18n.lang);
+    });
 
     context.effects = {
       labels: {
