@@ -136,6 +136,16 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Whether to force a particular targeting mode.
+     * @type {"selected"|"targeted"|null}
+     */
+    get forcedTargetingMode() {
+      return null;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Whether this activity supports pass/fail outcomes.
      * @type {boolean}
      */

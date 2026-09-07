@@ -39,6 +39,14 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
+  get forcedTargetingMode() {
+    if ( game.user.isGM ) return null;
+    return "selected";
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   get hasOutcomes() {
     return Number.isFinite(this.save.dc.value);
   }

@@ -83,7 +83,7 @@ export default class UsageMessageData extends ItemMessageData {
       if ( checked.get(descriptor.token) === false ) return null;
       const { actor, token } = TargetsField.resolve(descriptor);
       return token?.document ?? actor;
-    }).filter(_ => _);
+    }).filter(t => t?.isOwner);
   }
 
   /* -------------------------------------------- */

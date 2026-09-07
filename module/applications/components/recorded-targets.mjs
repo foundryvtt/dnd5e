@@ -30,6 +30,16 @@ export default class RecordedTargetsElement extends foundry.applications.element
   /* -------------------------------------------- */
 
   /**
+   * Whether to force a particular targeting mode.
+   * @type {"selected"|"targeted"|null}
+   */
+  get forcedTargetingMode() {
+    return this.chatMessage?.getAssociatedActivity()?.forcedTargetingMode ?? null;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Whether the associated chat message recorded any targets.
    * @type {boolean}
    */
@@ -99,6 +109,7 @@ export default class RecordedTargetsElement extends foundry.applications.element
   }
 
   set targetingMode(mode) {
+    mode = this.forcedTargetingMode ?? mode;
     if ( !this.hasRecordedTargets ) mode = "selected";
     this.#targetingMode = mode;
     if ( this.chatMessage ) this.chatMessage._targetState.mode = mode;
@@ -349,7 +360,7 @@ export default class RecordedTargetsElement extends foundry.applications.element
     const targeted = this.targetingMode === "targeted";
     this.targetSourceControl.dataset.mode = this.targetingMode;
     this.targetSourceControl.ariaLabel = _loc(`DND5E.Tokens.${targeted ? "Targeted" : "Selected"}`);
-    this.targetSourceControl.disabled = !this.hasRecordedTargets;
+    this.targetSourceControl.disabled = !this.hasRecordedTargets || !!this.forcedTargetingMode;
   }
 
   /* -------------------------------------------- */
