@@ -5,9 +5,9 @@
     {{#each buttonGroups}}
     {{#each entries}}
     <li>
-        <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}" {{ dnd5e-dataset dataset }}
+        <button type="button" class="icon" data-tooltip aria-label="{{ localize label }}"
             {{#if (and canGroup (not singleton))}}data-group data-forward-action="{{ action}}"
-            {{else}}data-action="{{ action }}" data-index="{{ index }}"{{/if}}>
+            {{else}}{{ dnd5e-dataset dataset }} data-action="{{ action }}" data-index="{{ index }}"{{/if}}>
             {{ dnd5e-icon icon }}
         </button>
     </li>
