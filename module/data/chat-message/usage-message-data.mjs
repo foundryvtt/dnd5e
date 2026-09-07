@@ -135,6 +135,23 @@ export default class UsageMessageData extends ItemMessageData {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve this message's configured effects, pulling from the snapshot of any consumed items if necessary.
+   * @returns {Promise<ActiveEffect5e[]>}
+   */
+  async getEffects() {
+    const item = this.parent.getAssociatedItem();
+    const effects = await Promise.all(this.effects.map(async uuid => {
+      const effect = await fromUuid(uuid, { relative: item });
+      if ( effect ) return effect;
+      const { id, type } = foundry.utils.parseUuid(uuid, { relative: item }) ?? {};
+      return (type === "ActiveEffect") ? item?.effects.get(id) : null;
+    }));
+    return effects.filter(_ => _);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Perform operations when one of the descendent cards is created, updated, or deleted.
    * @param {ChatMessage5e} message  The descendent.
    * @returns {Promise}
@@ -214,13 +231,12 @@ export default class UsageMessageData extends ItemMessageData {
       }
     }
 
-    const item = this.parent.getAssociatedItem();
     const activity = this.parent.getAssociatedActivity();
     context.showTargets = this.effects.length || (activity.metadata.targetPhase === "pre");
     const allowPlayerApplication = this.targets?.some(t => TargetsField.resolve(t).token?.isOwner)
       || ((this.parent.author?.id === game.user.id) && (activity?.target.affects.type === "self"));
-    context.effects = (await Promise.all(this.effects.map(uuid => fromUuid(uuid, { relative: item }))))
-      .filter(e => e && (game.user.isGM || (dnd5e.settings.allowPlayerEffectsTray && allowPlayerApplication)));
+    const canApply = game.user.isGM || (dnd5e.settings.allowPlayerEffectsTray && allowPlayerApplication);
+    context.effects = canApply ? await this.getEffects() : [];
     return context;
   }
 

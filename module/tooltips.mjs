@@ -127,6 +127,9 @@ export default class Tooltips5e {
    * @protected
    */
   async _onHoverContentLink(doc, { extras }={}) {
+    // TODO: Need a way to ask the chat message how to resolve the UUID via a destroyed Item, but don't want to put chat
+    //  message-specific logic here.
+    if ( !doc ) return game.tooltip.deactivate();
     if ( extras ) extras = foundry.utils.cleanHTML(extras);
     const { content, classes } = await (doc.richTooltip?.({ extras }) ?? doc.system?.richTooltip?.({ extras }) ?? {});
     if ( !content ) return;

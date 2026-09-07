@@ -86,9 +86,9 @@ export default class EffectApplicationElement extends ChatTrayElement {
     // Build the frame HTML only once
     if ( !this.effectsList ) {
       let effectPromise;
-      if ( !this.effects.length ) effectPromise = Promise.all(
+      if ( !this.effects.length ) effectPromise = (this.chatMessage.system.getEffects?.() ?? Promise.all(
         Array.from(this.querySelectorAll("option")).map(o => fromUuid(o.value))
-      ).then(p => this.effects = p.filter(_ => _));
+      )).then(p => this.effects = p.filter(_ => _));
       const div = document.createElement("div");
       div.classList.add("card-tray", "effects-tray", "collapsible");
       if ( !this.open ) div.classList.add("collapsed");
