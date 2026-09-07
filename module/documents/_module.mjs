@@ -10,6 +10,7 @@ export {default as Combatant5e} from "./combatant.mjs";
 export {default as CombatantGroup5e} from "./combatant-group.mjs";
 export {default as Item5e} from "./item.mjs";
 export {default as JournalEntryPage5e} from "./journal-entry-page.mjs";
+export {default as RollTable5e} from "./roll-table.mjs";
 export {default as TokenDocument5e} from "./token.mjs";
 export {default as User5e} from "./user.mjs";
 

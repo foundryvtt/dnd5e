@@ -79,6 +79,7 @@ Hooks.once("init", function() {
   CONFIG.Item.compendiumIndexFields.push("system.container", "system.identifier", "system.source");
   CONFIG.Item.documentClass = documents.Item5e;
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
+  CONFIG.RollTable.documentClass = documents.RollTable5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.hudClass = applications.hud.TokenHUD5e;
   CONFIG.Token.objectClass = canvas.Token5e;
