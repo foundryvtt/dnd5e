@@ -501,13 +501,14 @@ export default class CompendiumBrowser extends Application5e {
     }
 
     else if ( partId === "types" ) {
-      context.showTypes = (types.length !== 1) || (types[0] === "physical");
+      const isPhysical = (types[0] === "physical") && (context.filters.documentClass === "Item");
+      context.showTypes = (types.length !== 1) || isPhysical;
       context.types = CONFIG[context.filters.documentClass].documentClass.compendiumBrowserTypes({
         chosen: context.filters.types
       });
 
       // Special case handling for 'Items' tab in basic mode.
-      if ( types[0] === "physical" ) context.types = context.types.physical.children;
+      if ( isPhysical ) context.types = context.types.physical.children;
 
       if ( context.isLocked.types ) {
         for ( const [key, value] of Object.entries(context.types) ) {
