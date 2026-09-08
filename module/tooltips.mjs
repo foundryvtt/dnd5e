@@ -124,6 +124,7 @@ export default class Tooltips5e {
    * @param {Document} doc             The document linked by the content link.
    * @param {object} [options={}]
    * @param {string} [options.extras]  Extra HTML displayed with the tooltip.
+   * @returns {void}
    * @protected
    */
   async _onHoverContentLink(doc, { extras }={}) {
