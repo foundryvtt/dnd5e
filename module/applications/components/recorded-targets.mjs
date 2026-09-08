@@ -333,7 +333,7 @@ export default class RecordedTargetsElement extends foundry.applications.element
   _buildTargetSourceControl() {
     const control = document.createElement("button");
     control.type = "button";
-    control.classList.add("unbutton", "control-button", "target-source-toggle");
+    control.classList.add("icon", "target-source-toggle");
     control.toggleAttribute("data-tooltip", true);
     control.addEventListener("click", this._onChangeTargetMode.bind(this));
     return control;

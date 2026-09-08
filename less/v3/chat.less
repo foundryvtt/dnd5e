@@ -204,10 +204,8 @@
       --button-size: 24px;
       box-shadow: none;
 
-      &.target-source-toggle, &.icon {
-        block-size: var(--button-size);
-        padding: 0;
-      }
+      &.target-source-toggle, &.icon { block-size: var(--button-size); }
+      &.icon:not(.target-source-toggle) { padding: 0; }
 
       &:hover:not(:disabled), &:focus { box-shadow: 0 0 5px var(--dnd5e-color-gold); }
       &[hidden] { display: none; }
@@ -300,10 +298,10 @@
     /* Targets */
     .icon-row > button.target-source-toggle {
       align-self: stretch;
-      block-size: unset;
       color: var(--dnd5e-color-gold);
       font-size: var(--font-size-12);
       inline-size: 1.25em;
+      margin-inline-start: -4px;
 
       &::before {
         content: "\f140";
@@ -312,13 +310,7 @@
       }
 
       &[data-mode=selected]::before { content: "\f065"; }
-
-      &:hover:not(:disabled), &:focus {
-        box-shadow: none;
-        text-shadow: 0 0 5px var(--color-shadow-highlight);
-      }
-
-      &:disabled:hover { text-shadow: none; }
+      &:hover:not(:disabled), &:focus { box-shadow: none; }
     }
 
     /* Deltas */
@@ -371,7 +363,6 @@
         }
       }
 
-      .icon-row.with-buttons { gap: 0; }
       .supplement { text-align: center; }
     }
   }
