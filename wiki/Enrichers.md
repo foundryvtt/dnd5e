@@ -63,7 +63,7 @@ The enricher is also helpful when building items for NPC stat blocks, because it
 
 #### Chat Usage
 
-The attack enricher can be used from chat, bringing up the attack dialog. If used when a token is selected, it will roll using the stats from actor. Otherwise it will fall back to the player's assigned character, or roll generically if no character is assigned.
+The attack enricher can be used from chat, bringing up the attack dialog. If used when a token is selected, it will roll using the stats from that actor. Otherwise it will fall back to the player's assigned character, or roll generically if no character is assigned.
 
 ```
 // Example: Flat attack roll
@@ -210,11 +210,11 @@ The check enricher can be used from chat. If used when a token is selected, it w
 | ---------- | ------- | --------- | --------- | --------- |
 | `ability`  | Choice  |     ✔︎     |           |     ✔︎     |
 | `activity` | ID      |           |           |           |
-| `dc`       | Formula |		 ✔︎     |           |     ✔︎     |
+| `dc`       | Formula |     ✔︎     |           |     ✔︎     |
 | `format`   | Choice  |     ✔︎     |           |           |
 | `rules`    | Choice  |           |           |           |
-| `skill`    | Choice  |		 ✔︎     |           |     ✔︎     |
-| `tool`     | Choice  |		 ✔︎     |           |     ✔︎     |
+| `skill`    | Choice  |     ✔︎     |           |     ✔︎     |
+| `tool`     | Choice  |     ✔︎     |           |     ✔︎     |
 
 - `ability`: Ability to use with the check
 - `activity`: ID of an activity on the same item from which the details should be derived
@@ -356,7 +356,7 @@ When inferring an activity, the `heal` form will fetch the first [heal activity]
 
 #### Chat Usage
 
-The damage enricher can be used from chat, bringing up the damage dialog. If used when a token is selected, it will roll using the stats from actor. Otherwise it will fall back to the player's assigned character, or roll generically if no character is assigned.
+The damage enricher can be used from chat, bringing up the damage dialog. If used when a token is selected, it will roll using the stats from that actor. Otherwise it will fall back to the player's assigned character, or roll generically if no character is assigned.
 
 ```
 // Example: Damage rolls
