@@ -4,7 +4,7 @@ The DnD5e system extends Foundry's calendar system with a new HUD to display the
 
 ![Calendar HUD, Settings, and Set Date Dialog](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/calendar/calendar-summary.jpg)
 
-In addition to the calendar HUD, the system uses the passage of time for several gameplay mechanics. Items and activities with "Dawn", "Dusk", or "Day" usage recovery will automatically regain their uses as sunrise, sunset, or midnight respectively. Also, if the bastion system is enabled, bastion actions will automatically progress towards completion as new days occur.
+In addition to the calendar HUD, the system uses the passage of time for several gameplay mechanics. Items and activities with "Dawn", "Dusk", or "Day" usage recovery will automatically regain their uses at sunrise, sunset, or midnight respectively. Also, if the bastion system is enabled, bastion actions will automatically progress towards completion as new days occur.
 
 
 ## Calendar Setup
@@ -23,7 +23,7 @@ The GM's calendar settings has an additional "Configuration" section that isn't 
 
 - *Enabled*: Controls whether the calendar interface as a whole is enabled. If this is unchecked, no user will be able to view the calendar interface or change any of the options under "Calendar Preferences".
 - *Calendar*: Select a specific Calendar that will be used to measure time. The system provides support for the default simplified Gregorian calendar, the Calendar of Greyhawk, the Calendar of Harptos (from the Forgotten Realms), and the Calendar of Khorvaire (from Eberron). **Note:** Changing the calendar requires a restart.
-- *Daily Recovery Mode*: Controls how items with Dawn, Dusk, and Day recovery modes are handled. The default setting goes off of whether the calendar system is enabled or not. The Calendar Recovery mode means that items will recover uses when time is advances in the calendar. The Manual Recovery mode requires the selection of "New Day" in rest dialogs to trigger time-based usage recovery.
+- *Daily Recovery Mode*: Controls how items with Dawn, Dusk, and Day recovery modes are handled. By default, Calendar Recovery is used if the Calendar is enabled, otherwise Manual Recovery is used, but you may force a particular mode if you prefer. The Calendar Recovery mode means that items will recover uses when time is advances in the calendar. The Manual Recovery mode requires the selection of "New Day" in rest dialogs to trigger time-based usage recovery.
 
 
 ## Calendar HUD
@@ -79,7 +79,7 @@ When both the calendar system and bastion system are enabled bastion turn handli
 
 ![Bastion Configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/bastion/bastion-configuration.jpg)
 
-There is also a system for automatic reminders of bastion turns. After the bastion turn duration has passed since the last bastion turn a message will be posted in chat for GM users with a button to trigger a new bastion turn. This button will automatically issue the maintain order to any facilities without outstanding orders and perform any other bastion turn events.
+There is also a system for automatic reminders of bastion turns. After the configured bastion turn duration has passed since the last bastion turn, a message will be posted in chat for GM users with a button to trigger a new bastion turn. This button will automatically issue the maintain order to any facilities that have not otherwise been given any orders, and perform any other bastion turn events.
 
 
 ## Calendar API
