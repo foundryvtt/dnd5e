@@ -85,6 +85,6 @@ export default class HealActivity extends ActivityMixin(BaseHealActivityData) {
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static #rollHealing(event, target, message) {
-    this.rollDamage({ event });
+    this.rollDamage({ event }, {}, { data: { system: { targets: message.system.targets } } });
   }
 }

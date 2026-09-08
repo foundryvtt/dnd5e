@@ -8,7 +8,7 @@
 <div class="card-summary" data-message-id="{{ id }}" data-target-uuid="{{ token.uuid }}">{{{ html }}}</div>
 {{/each}}
 
-{{#if (and effects.length showTargets)}}
+{{#if effects.length}}
 <effect-application class="dnd5e2">
     {{#each effects}}
     <option value="{{ uuid }}"></option>

@@ -39,14 +39,6 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
   /* -------------------------------------------- */
 
   /** @override */
-  get forcedTargetingMode() {
-    if ( game.user.isGM ) return null;
-    return "selected";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   get hasOutcomes() {
     return Number.isFinite(this.save.dc.value);
   }
@@ -110,7 +102,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static #rollDamage(event, target, message) {
-    this.rollDamage({ event });
+    this.rollDamage({ event }, {}, { data: { system: { targets: message.system.targets } } });
   }
 
   /* -------------------------------------------- */

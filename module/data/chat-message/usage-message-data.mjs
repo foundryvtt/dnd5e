@@ -79,11 +79,13 @@ export default class UsageMessageData extends ItemMessageData {
     const { checked, mode } = this.parent._targetState;
     if ( !mode ) return;
     if ( mode === "selected" ) return canvas.tokens?.controlled;
-    return this.targets.map(descriptor => {
+    const targets = this.targets.map(descriptor => {
       if ( checked.get(descriptor.token) === false ) return null;
       const { actor, token } = TargetsField.resolve(descriptor);
       return token?.document ?? actor;
     }).filter(t => t?.isOwner);
+    if ( !targets.length && !game.user.isGM ) return canvas.tokens?.controlled;
+    return targets;
   }
 
   /* -------------------------------------------- */
@@ -217,7 +219,6 @@ export default class UsageMessageData extends ItemMessageData {
       context = await super._prepareContext(options);
       context.activity = this.activity;
       context.buttons = this._prepareButtons();
-      context.showTargets = true;
       this._prepareButtonGroups(context);
       if ( this.activity.name ) context.subtitle = this.activity.name;
       if ( game.settings.get("dnd5e", "chatCardSummary") ) {
@@ -232,7 +233,8 @@ export default class UsageMessageData extends ItemMessageData {
     }
 
     const activity = this.parent.getAssociatedActivity();
-    context.showTargets = this.effects.length || (activity.metadata.targetPhase === "pre");
+    const { targetPhase } = activity.metadata;
+    context.showTargets = (targetPhase !== "post") && (this.effects.length || (targetPhase === "pre"));
     const allowPlayerApplication = this.targets?.some(t => TargetsField.resolve(t).token?.isOwner)
       || ((this.parent.author?.id === game.user.id) && (activity?.target.affects.type === "self"));
     const canApply = game.user.isGM || (dnd5e.settings.allowPlayerEffectsTray && allowPlayerApplication);

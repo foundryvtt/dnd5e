@@ -48,6 +48,16 @@ export default class EffectApplicationElement extends ChatTrayElement {
   /* -------------------------------------------- */
 
   /**
+   * Whether the tray itself manages its target selector.
+   * @type {boolean}
+   */
+  get managesTargets() {
+    return this.chatMessage?.getAssociatedActivity()?.metadata.targetPhase === "post";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * The container for the targets.
    * @type {RecordedTargetsElement}
    */
@@ -101,6 +111,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
         <div class="collapsible-content">
           <div class="wrapper">
             <menu class="effects unlist"></menu>
+            <template></template>
             <button type="button" class="apply-button" data-action="apply">
               <i class="fa-light fa-reply-all fa-flip-horizontal" inert></i>
               <span>${_loc("DND5E.EFFECT.Action.Apply")}</span>
@@ -110,6 +121,9 @@ export default class EffectApplicationElement extends ChatTrayElement {
       `;
       this.replaceChildren(div);
       this.effectsList = div.querySelector(".effects");
+      const slot = div.querySelector("template");
+      if ( this.managesTargets ) slot.replaceWith(this.buildTargetContainer());
+      else slot.remove();
       if ( effectPromise ) effectPromise.then(() => this.buildEffectsList());
       else this.buildEffectsList();
       this.effectsList.addEventListener("click", this._onCheckEffect.bind(this));
@@ -154,6 +168,18 @@ export default class EffectApplicationElement extends ChatTrayElement {
       li.querySelector(".title").append(effect.name);
       this.effectsList.append(li);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Build a managed target selector.
+   * @returns {RecordedTargetsElement}
+   */
+  buildTargetContainer() {
+    this.targetList = document.createElement("recorded-targets");
+    this.targetList.suspended = !this.open;
+    return this.targetList;
   }
 
   /* -------------------------------------------- */
@@ -274,13 +300,21 @@ export default class EffectApplicationElement extends ChatTrayElement {
    * @returns {string[]}
    */
   #getTargets() {
-    const recordedTargets = this.closest("[data-message-id]").querySelector("recorded-targets");
+    const recordedTargets = this.targetList ?? this.closest("[data-message-id]").querySelector("recorded-targets");
     if ( recordedTargets ) return recordedTargets.targets;
     return canvas.tokens?.controlled?.map(t => t.actor ? t.document.uuid : null).filter(_ => _) ?? [];
   }
 
   /* -------------------------------------------- */
   /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _handleToggleOpen(open) {
+    super._handleToggleOpen(open);
+    if ( this.targetList ) this.targetList.suspended = !open;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -293,7 +327,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
     for ( const uuid of this.#getTargets() ) {
       const doc = await fromUuid(uuid);
       const actor = doc?.actor ?? doc;
-      if ( !actor ) continue;
+      if ( !actor?.isOwner ) continue;
       const data = [];
       const updates = [];
       for ( const effect of effects ) {

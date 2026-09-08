@@ -64,6 +64,6 @@ export default class DamageActivity extends ActivityMixin(BaseDamageActivityData
    * @param {ChatMessage5e} message  Message associated with the activation.
    */
   static #rollDamage(event, target, message) {
-    this.rollDamage({ event });
+    this.rollDamage({ event }, {}, { data: { system: { targets: message.system.targets } } });
   }
 }

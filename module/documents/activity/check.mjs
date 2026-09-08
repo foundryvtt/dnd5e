@@ -39,14 +39,6 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
   /* -------------------------------------------- */
 
   /** @override */
-  get forcedTargetingMode() {
-    if ( game.user.isGM ) return null;
-    return "selected";
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
   get hasOutcomes() {
     return Number.isFinite(this.check.dc.value);
   }
