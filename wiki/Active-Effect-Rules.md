@@ -1,6 +1,6 @@
 ![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
-Rules are a special type of active effect changes provided by the system. Rather than being applied directly to data on an actor or item, these rules are evaluated at roll time an modify only a specific roll.
+Rules are a special type of active effect changes provided by the system. Rather than being applied directly to data on an actor or item, these rules are evaluated at roll time and modify only a specific roll.
 
 ## Categories
 

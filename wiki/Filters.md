@@ -21,7 +21,7 @@ The Filters system is used in several places throughout the system to allow for 
 
 ## Operators & Comparisons
 
-The `o` property in a filter control how an individual filter is evaluated. They come in two varieties: comparisons and operators. If not operator is provided for a filter, then the `exact` comparison operator is used.
+The `o` property in a filter control how an individual filter is evaluated. They come in two varieties: comparisons and operators. If an operator is not provided for a filter, then the `exact` comparison operator is used.
 
 ### Comparison Functions
 

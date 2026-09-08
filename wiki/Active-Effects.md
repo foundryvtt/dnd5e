@@ -33,7 +33,11 @@ More information on these change types can be found on the [active effect rules 
 
 ## Change Replacement
 
-When active effects are applied to an actor or item, their change values are left unmodified by default. The *Replacement* option can be used to modify the values, replacing attribute strings (e.g. `@abilities.wis.mod`) with a final value from either the actor applying the effect (using the "Origin" option) or the actor to which the effect is being applied (using the "Target" option).
+When active effects are applied to an actor or item, their change values are left unmodified by default. The *Replacement* option can be used to modify the values, replacing attribute strings (e.g. `@abilities.wis.mod`) with a static value. It has three modes:
+
+- No Change: Attribute strings are left as-is and evaluated dynamically
+- Origin: Attribute strings are replaced using static data from the actor applying the effect
+- Target: Attribute strings are replaced using static data from the actor to which the effect is being applied
 
 ![Active Effect Replacement Options](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/effect/effect-change-replacement.jpg)
 
