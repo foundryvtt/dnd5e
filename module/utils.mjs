@@ -1420,11 +1420,20 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     if ( attr === "name" ) return "DND5E.BASE.Name";
     if ( attr === "img" ) return "DND5E.BASE.Image";
     if ( doc instanceof foundry.abstract.Document ) return doc.system.schema.getField(attr)?.label;
+    else if ( doc instanceof foundry.abstract.DataModel ) return doc.getField(attr)?.label;
     for ( const model of Object.values(CONFIG[type].dataModels) ) {
       const field = model.schema.getField(attr);
       if ( field ) return field.label;
     }
   };
+
+  // Classes
+  if ( attr.startsWith("classes.") ) {
+    const [, identifier, ...rest] = attr.split(".");
+    attr = rest.join(".");
+    name = dnd5e.registry.classes.get(identifier)?.name ?? identifier;
+    item = dnd5e.dataModels.item.ClassData;
+  }
 
   // Activity labels
   if ( (item instanceof Item) && attr.startsWith("activities.") ) {
@@ -1471,12 +1480,6 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     if ( label ) label = _loc("DND5E.TOKEN.Attribute.Label", { attribute: label });
   }
 
-  // Derived fields
-  else if ( attr === "attributes.init.total" ) label = "DND5E.INITIATIVE.FIELDS.attributes.init.roll.bonus.label";
-  else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
-  else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
-  else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
-
   // Abilities
   else if ( attr.startsWith("abilities.") || attr.startsWith("attributes.ac.clamped.") ) {
     const [key, ...keyPath] = attr.split(".").slice(attr.startsWith("abilities.") ? 1 : 3);
@@ -1484,10 +1487,13 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     label = mapping.getFieldLabel(key, keyPath.toReversed());
   }
 
-  // Movement
+  // Attributes
+  else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
+  else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
+  else if ( attr === "attributes.init.total" ) label = "DND5E.INITIATIVE.FIELDS.attributes.init.roll.bonus.label";
+  else if ( attr === "attributes.spell.attack" ) label = "DND5E.SpellAttackBonus";
+  else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
   else if ( attr.startsWith("attributes.movement.") ) label = CONFIG.DND5E.movementTypes[attr.split(".").at(-1)]?.label;
-
-  // Senses
   else if ( attr.startsWith("attributes.senses.") ) label = CONFIG.DND5E.senses[attr.split(".").at(-1)]?.label;
 
   // Currency
@@ -1501,12 +1507,24 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
   else if ( attr === "resources.legact.value" ) label = "DND5E.LegendaryAction.Remaining";
   else if ( attr === "resources.legres.spent" ) label = "DND5E.LegendaryResistance.LabelPl";
   else if ( attr === "resources.legres.value" ) label = "DND5E.LegendaryResistance.Remaining";
-  else if ( attr === "attributes.actions.value" ) label = "DND5E.VEHICLE.FIELDS.attributes.actions.label";
 
   // Rolls
   else if ( attr.startsWith("roll.") ) {
     const key = `DND5E.ROLL.Description.${attr.slice(5)}`;
     if ( game.i18n.has(key) ) label = key;
+  }
+
+  // Scale Values
+  else if ( attr.startsWith("scale.") && actor ) {
+    const [, docIdentifier, scaleIdentifier, ...rest] = attr.split(".");
+    const scaleValue = foundry.utils.getProperty(actor.system, `scale.${docIdentifier}.${scaleIdentifier}`);
+    if ( scaleValue?.parent ) {
+      label = scaleValue.parent.name;
+      if ( rest.length ) {
+        const field = scaleValue.schema.getField(rest.join("."));
+        if ( field ) label = `${label}: ${field.label}`;
+      }
+    }
   }
 
   // Skills
@@ -1531,11 +1549,26 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     }
   }
 
+  // Subclasses
+  else if ( attr.startsWith("subclasses.") ) {
+    const [, identifier, ...rest] = attr.split(".");
+    attr = rest.join(".");
+    name = dnd5e.registry.subclasses.get(identifier)?.name ?? identifier;
+    if ( attr === "levels" ) label = "DND5E.LevelPl";
+  }
+
   // Tools
   else if ( attr.startsWith("tools.") ) {
     const [, key, ...keyPath] = attr.split(".");
     const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("tools");
     label = mapping.getFieldLabel(key, keyPath.toReversed());
+  }
+
+  // Traits
+  else if ( attr.startsWith("traits.dm.amount.") ) {
+    const key = attr.replace("traits.dm.amount.", "");
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("traits.dm.amount");
+    label = mapping.getFieldLabel(key);
   }
 
   // Attempt to find the attribute in a data model

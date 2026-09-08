@@ -26,9 +26,13 @@ export default class TraitsField {
       dr: new DamageTraitField({}, { label: "DND5E.TRAIT.Damage.Resistance.title" }),
       dv: new DamageTraitField({}, { label: "DND5E.TRAIT.Damage.Vulnerability.title" }),
       dm: new SchemaField({
-        amount: new MappingField(new FormulaField({ deterministic: true }), {
-          label: "DND5E.TRAIT.Damage.Modification.title", labels: { value: "DND5E.TRAIT.Damage.Modification.title" }
-        }),
+        amount: new MappingField(
+          new FormulaField({ deterministic: true, labelFormatter: "DND5E.DamageModification.Formatter" }),
+          {
+            label: "DND5E.TRAIT.Damage.Modification.title", labels: { value: "DND5E.TRAIT.Damage.Modification.title" },
+            entryLabel: key => CONFIG.DND5E.damageTypes[key]?.label
+          }
+        ),
         bypasses: new SetField(new StringField(), {
           label: "DND5E.DAMAGE.PhysicalBypass.Label", hint: "DND5E.DAMAGE.PhysicalBypass.Hint"
         })

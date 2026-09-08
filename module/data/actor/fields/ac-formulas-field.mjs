@@ -18,7 +18,7 @@ export default class ACFormulasField extends ArrayField {
       shielded: new BooleanField({
         nullable: true, initial: null, label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.element.shielded.label"
       })
-    }));
+    }), { label: "DND5E.ARMORCLASS.FIELDS.attributes.ac.formulas.label" });
   }
 
   /* -------------------------------------------- */

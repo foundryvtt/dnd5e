@@ -38,7 +38,7 @@
 /**
  * @callback MappingFieldEntryLabelBuilder
  * @param {string} key       The key within the object.
- * @returns {object}         Label used to describe this entry.
+ * @returns {string|void}    Label used to describe this entry.
  */
 
 /**

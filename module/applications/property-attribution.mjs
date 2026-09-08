@@ -110,6 +110,6 @@ export default class PropertyAttribution extends Application5e {
     } else if ( (parts[0] === "prof") || (property === "attributes.prof") ) {
       return _loc("DND5E.Proficiency");
     }
-    return getHumanReadableAttributeLabel(property);
+    return getHumanReadableAttributeLabel(property, this.object instanceof Actor ? { actor: this.object } : {});
   }
 }

@@ -95,12 +95,12 @@ export default class MappingField extends foundry.data.fields.TypedObjectField {
 
   /**
    * Get the formatted label for the specified field within the element of the provided key.
-   * @param {string} key     Key of the entry listing in the `MappingField` (e.g. `dex`, `str`).
-   * @param {string[]} path  Path parts to a field within the field's element (e.g. `["mode", "roll", "save"]`).
+   * @param {string} key          Key of the entry listing in the `MappingField` (e.g. `dex`, `str`).
+   * @param {string[]} [path=[]]  Path parts to a field within the field's element (e.g. `["mode", "roll", "save"]`).
    * @returns {string|void}  Formatted name for the field if a formatter is provided. Falls back to the field's generic
    *                         label if no formatter is provided, or nothing if field isn't found or it isn't labeled.
    */
-  getFieldLabel(key, path) {
+  getFieldLabel(key, path=[]) {
     const field = this.element._getField(path);
     if ( !field ) return;
     const name = this.entryLabel?.(key);
