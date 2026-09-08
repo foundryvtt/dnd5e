@@ -27,9 +27,10 @@ export default class ACFormulasField extends ArrayField {
 
   /** @inheritDoc */
   applyChange(value, model, change, options) {
-    if ( (change.type === "add") && (typeof change.value === "string") ) change.value = {
-      formula: change.value, label: change.effect?.name ?? _loc("DND5E.ARMORCLASS.Calculation.Custom")
-    };
+    if ( (change.type === "add") && ((typeof change.value === "string") || (typeof change.value === "number")) ) {
+      change.value = { formula: String(change.value) };
+    }
+    change.value.label ||= change.effect?.name ?? _loc("DND5E.ARMORCLASS.Calculation.Custom");
     return super.applyChange(value, model, change, options);
   }
 }
