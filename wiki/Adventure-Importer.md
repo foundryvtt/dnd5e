@@ -8,7 +8,7 @@ The system provides a custom adventure importer dialog which supports additional
 
 The first step to making use of the system's importer is to select the "D&D 5e Adventure Importer" inside the Sheet Configuration dialog for the adventure importer.
 
-The import actions to use for the adventure can then be configured in two ways. For simple setups, the `importActions` flag inside the `dnd5e` namespace on the adventure itself can be set. For setups involving custom actions, or if modules the provide multiple adventures that all use the same actions, the actions can be configured by adding to `CONFIG.DND5E.adventure.config`. A config object can be added using either a specific adventure's UUID, or the module ID can be used to specify actions that will apply to all adventures within that module.
+The import actions to use for the adventure can then be configured in two ways. For simple setups, the `importActions` flag inside the `dnd5e` namespace on the adventure itself can be set. For setups involving custom actions, or if a module provides multiple adventures and wishes to use the same actions for each, the actions can be configured by adding to `CONFIG.DND5E.adventure.config`. A config object can be added using either a specific adventure's UUID, or the module ID can be used to specify actions that will apply to all adventures within that module.
 
 ```javascript
 {
@@ -67,7 +67,7 @@ ID: `activateScene`
 
 #### Display Journal
 
-This import action can display a specific journal entry once importing the adventure is complete, perfect for showing the introduction or getting started pages. This action will also run when using quickstart.
+This import action can display a specific journal entry once importing the adventure is complete, perfect for showing the introduction or 'getting started' pages. This action will also run when using quickstart.
 
 ID: `displayJournal`
 
@@ -76,7 +76,7 @@ ID: `displayJournal`
 
 #### Customize World
 
-This import action will modify the world to set a custom join background and description. Since the quickstart process already performs does this, this action will not run during quickstart.
+This import action will modify the world to set a custom join background and description. Since the quickstart process already performs this, this action will not run during quickstart.
 
 ID: `customizeWorld`
 
@@ -99,8 +99,8 @@ CONFIG.DND5E.adventure.importActions.activateScene = {
 ```
 
 - `default`: Whether the action should be selected by default in the import dialog. Ignored if the `silent` option is specified.
-- `handler`: Function that is called to run this action if it selected in the import dialog.
+- `handler`: Function that is called to run this action if it is selected in the import dialog.
 - `label`: Localization string for the action displayed in the dialog. Required for any action that doesn't have the `silent` option.
-- `lifecycle`: When this action is run, `pre` being before any importing has occurred to customize the imported content and `post` after the import.
+- `lifecycle`: When this action is run, `pre` being before any importing has occurred to customize the imported content, and `post` after the import.
 - `quickstartHandler`: Method called to use this action when quickstarting the adventure. If not provided, then the action will not be run when quickstart is used.
 - `silent`: Silent actions aren't displayed in the import dialog and are always run.

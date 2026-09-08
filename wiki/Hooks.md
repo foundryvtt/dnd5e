@@ -99,7 +99,7 @@ Fires after an activity usage card is created.
 
 ### `dnd5e.preCreateMeasuredTemplate`
 
-Fires before player is prompted for template placement. Returning `false` will prevent template placement.
+Fires before the player is prompted for template placement. Returning `false` will prevent template placement.
 
 | Name            | Type                             | Description                                      |
 | --------------- | -------------------------------- | ------------------------------------------------ |
@@ -117,7 +117,7 @@ Fires after templates have been placed by the player but before they have been c
 
 ### `dnd5e.postCreateMeasuredTemplate`
 
-Fires after a template are created for an Activity.
+Fires after templates are created for an Activity.
 
 | Name         | Type              | Description                                      |
 | ------------ | ----------------- | ------------------------------------------------ |

@@ -39,7 +39,9 @@ By default no journal entries are displayed in the table of contents. The Table 
 
 ![Table of contents pack configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/journal/table-of-contents-pack-config.jpg)
 
-The pack configuration dialog displays all journal entries within the compendium grouped by their containing folder. The general position of each entry can be configured using this dialog. For an entry to appear in the table of contents, it must be given a type.
+### Compendium Configuration
+
+The pack configuration dialog displays all journal entries within the compendium, grouped by their containing folder. The general position of each entry can be configured using this dialog. For an entry to appear in the table of contents, it must be given a type.
 
 #### Type
 
@@ -51,7 +53,7 @@ The type indicates how the journal entry will be sorted and displayed on the ToC
 
 #### Position
 
-The position is available for chapters, appendices, and special entries. For chapters and appendices this is a number to indicate the order in which each chapter and appendix should appear with each type (e.g. give "Chapter 1" a position of `1`, "Chapter 2" a position of `2`, and "Appendix A" a position of `1`).
+The position is available for chapters, appendices, and special entries. For chapters and appendices this is a number to indicate the order in which each chapter and appendix should appear within each type (e.g. give "Chapter 1" a position of `1`, "Chapter 2" a position of `2`, and "Appendix A" a position of `1`).
 
 For special entries this changes to a dropdown. The default position of special pages is at the end of the table of contents after all chapters and appendices, but it can be positioned grouped inside a specific chapter or appendix by selecting that entry in this dropdown.
 
@@ -60,7 +62,7 @@ For special entries this changes to a dropdown. The default position of special 
 
 ### Customizing Journal Entries
 
-Once all of the journal entries are placed in the correct location within the table of contents more configuration its appearance can be further customized using the entry configuration. This can be accessed using the option in the header controls dropdown for an individual journal entry.
+Once all of the journal entries are placed in the correct location within the table of contents its appearance can be further customized using the entry configuration. This can be accessed using the option in the header controls dropdown for an individual journal entry.
 
 ![Table of contents journal entry configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/journal/table-of-contents-entry-config.jpg)
 
@@ -84,7 +86,7 @@ Special entries appended to chapters or appendices will not display any of their
 
 #### Hidden Pages
 
-Whenever an entry is displaying its pages, this control allows to hiding specific pages.
+Whenever an entry is displaying its pages, this control allows hiding specific pages.
 
 
 ## Setting up Using Flags
@@ -109,7 +111,7 @@ journalEntry.setFlag("dnd5e", "showPages", false);
 journalEntry.setFlag("dnd5e", "position", 1);
 
 // Append
-// Only used for `special` types to indicate what `chapter` or `appendix` it should append to
+// Only used for `special` types to indicate what `chapter` or `appendix` it should append to.
 // This is the absolute chapter position starting at `1`, so if you have 5 chapters and 2 appendices, the range of
 // valid values will be 1–7, with 1–5 being the chapters and 6 & 7 being the appendices
 journalEntry.setFlag("dnd5e", "append", 3);
