@@ -8,7 +8,7 @@ The Modify Items advancement allows for applying an [enchantment](Enchantment.md
 
 Configuring a Modify Items advancement first involves adding an enchantment. This can be done directly using the plus button to create an enchantment directly on this item, selecting an existing enchantment on the item from the dropdown, or dropping an enchantment from a compendium onto the configuration dialog.
 
-Once an enchantment is specific, the items it applies to can be controlled using the "Modified Items" input. This field takes either plain identifiers (e.g. `wild-shape` or `bane`) or typed identifiers (e.g. `feat:wild-shape` or `spell:bane`). The provided enchantment will be applied to all items that match the provided identifier, so it is usually better to include the type to avoid any potential over-application.
+Once an enchantment is specified, the items it applies to can be controlled using the "Modified Items" input. This field takes either plain identifiers (e.g. `wild-shape` or `bane`) or typed identifiers (e.g. `feat:wild-shape` or `spell:bane`). The provided enchantment will be applied to all items that match the provided identifier, so it is usually better to include the type to avoid any potential over-application.
 
 ## Usage
 

@@ -16,7 +16,7 @@ There are two sorting modes to the items list. By default it is set to manual so
 
 ![Grant Items Configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/item-grant-configuration-spells.jpg)
 
-When using the advancement to grant spells to a character, additional controls will appear that allow configuring the added spell. These controls allow for setting a options for ability modified, spellcasting method, and preparation mode on the added spell, as well is giving it limited uses.
+When using the advancement to grant spells to a character, additional controls will appear that allow configuring the added spell. These controls allow for setting options for ability modified, spellcasting method, and preparation mode on the added spell, as well as giving it limited uses.
 
 The way in which limited uses are added varies depending on the preparation method and the "Require Slot" checkbox:
 - "Spellcasting Method" is *Spellcasting* or *Pact Magic*, "Required Slot" is *unchecked*: A new [Forward activity](Activity-Type-Forward) will be added to the spell allowing it to be case a number of times and to be cast using spell slots as normal.

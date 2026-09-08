@@ -26,7 +26,7 @@ For the "Dice" scale value type there are several additional options for access.
 
 ![Configuration Scale Value Recovery](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/scale-value-usage-recovery.jpg)
 
-For the "Usage" scale value type, there is also the option use the scale value to define the recovery period on an item or activity. For non-embedded items, selecting the "Scale Value" option in the recovery period dropdown will create a text area where the scale value's formula path can be entered (e.g. `@scale.bard.inspiration-uses`). Items that are already embedded will instead show a list of available usage scale values. When a scale value is entered into recovery, those uses will then recover based on the period entered in the scale value at the current level, allowing features to recover on a Long Rest at one level and change to Short Rest at a higher level.
+For the "Usage" scale value type, there is also the option to use the scale value to define the recovery period on an item or activity. For non-embedded items, selecting the "Scale Value" option in the recovery period dropdown will create a text area where the scale value's formula path can be entered (e.g. `@scale.bard.inspiration-uses`). Items that are already embedded will instead show a list of available usage scale values. When a scale value is entered into recovery, those uses will then recover based on the period entered in the scale value at the current level, allowing features to recover on a Long Rest at one level and change to Short Rest at a higher level.
 
 ## API
 
