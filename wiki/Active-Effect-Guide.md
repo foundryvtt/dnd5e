@@ -154,6 +154,7 @@ Grant permanent advantage/disadvantage on concentration saving throws. Effect va
 | ------------------------------------------- | ----------- | ----------------- | ---------- |
 | `system.attributes.concentration.roll.mode` | Add         | `1`/`-1`          | No         |
 
+
 ------------------------
 
 
