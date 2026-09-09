@@ -2,7 +2,7 @@
 
 Unlike most information listed on a spell, there is no field even in edit mode to list the eligible classes. This guide provides a walkthrough for how to define eligible classes for a spell, either for a new spell or for new classes (this also works for any Subclass, Background, or Species that may want a spell list, however those will only be visible in the Compendium Browser and will not appear on the spell sheet).
 
-[Mage Hand Class Spells](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/guides/spell-class-header.jpg)
+![Mage Hand Class Spells](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/guides/spell-class-header.jpg)
 
 ## Step 1: Setup your Personal Module
 
@@ -14,7 +14,7 @@ If you already have a personal module, you may still need to add a compendium pa
 
 Switch to the "Compendium Packs" tab and add a JournalEntry compendium. You can name it whatever you like; we will only be adding a single JournalEntry to it.
 
-[Adding a Journal Compendium](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/guides/add-journal-compendium.jpg)
+![Adding a Journal Compendium](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/guides/add-journal-compendium.jpg)
 
 You can reuse the compendium for any other journals you want to share between worlds, such as other specialized Journal Page types added by the system.
 
