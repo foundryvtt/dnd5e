@@ -41,6 +41,13 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   _initializeSource(data, options={}) {
     if ( data instanceof foundry.abstract.DataModel ) data = data.toObject();
 
+    // Migrate base -> condition.
+    const statuses = new Set(foundry.utils.iterateValues(CONFIG.statusEffects).map(s => s._id));
+    for ( const effect of data.delta?.effects ?? [] ) {
+      if ( (effect.type === "condition") || !statuses.has(effect._id) ) continue;
+      foundry.utils.mergeObject(effect, { type: "condition", "system.type": effect.statuses[0] });
+    }
+
     // Migrate backpack -> container.
     for ( const item of data.delta?.items ?? [] ) {
       // This will be correctly flagged as needing a source migration when the synthetic actor is created, but we need
