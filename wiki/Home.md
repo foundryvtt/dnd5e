@@ -36,6 +36,7 @@
 - [Hooks](Hooks.md)
 - [Journal Pages](Journal-Pages.md)
 - Module Development
+  - [Linking Class Spells](Linking-Class-Spells.md)
   - [Module Registration](Module-Registration.md)
   - [System HTML](System-HTML.md)
   - [Table of Contents](Table-of-Contents.md)
