@@ -186,10 +186,11 @@ export default class RecordedTargetsElement extends foundry.applications.element
     super.connectedCallback?.();
     this.#abortController = new AbortController();
     this.chatMessage = game.messages.get(this.closest("[data-message-id]")?.dataset.messageId);
+    const origin = this.chatMessage?.getOriginatingMessage();
     if ( !this.targetList ) this.replaceChildren(this.buildTargetContainer());
     this.addEventListener("change", this._onCheckTarget.bind(this), { signal: this.#abortController.signal });
     this.#targetOptions = this.chatMessage?._targetState.checked ?? new Map();
-    this.targetingMode = this.chatMessage?._targetState.mode || "targeted";
+    this.targetingMode = this.chatMessage?._targetState.mode || origin?._targetState.mode || "targeted";
   }
 
   /* -------------------------------------------- */
