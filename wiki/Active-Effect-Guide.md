@@ -147,6 +147,7 @@ Change the amount of effects you can maintain concentration on at the same time.
 | --------------------------------------- | ----------- | ------------ | ---------- |
 | `system.attributes.concentration.limit` | Override    | `[number]`   | No         |
 
+
 ------------------------
 
 ## Death Saving Throws
@@ -158,7 +159,9 @@ Grant permanent advantage/disadvantage on death saving throws. Effect value `1` 
 | ----------------------------------- | ----------- | ----------------- | ---------- |
 | `system.attributes.death.roll.mode` | Add         | `1`/`-1`          | No         |
 
+
 ------------------------
+
 
 ## Skills
 
