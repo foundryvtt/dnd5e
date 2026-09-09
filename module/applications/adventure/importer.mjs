@@ -52,7 +52,7 @@ export default class AdventureImporter5e extends ApplicationV2Mixin(AdventureImp
   /** @inheritDoc */
   async _configureImport(importOptions) {
     await super._configureImport(importOptions);
-    importOptions.actions = filteredKeys(importOptions.actions);
+    importOptions.actions = filteredKeys(importOptions.actions ?? {});
   }
 
   /* -------------------------------------------- */
@@ -88,7 +88,7 @@ export default class AdventureImporter5e extends ApplicationV2Mixin(AdventureImp
     const target = event.target;
     const section = target.closest(".import-controls");
     const checked = target.checked;
-    section.querySelectorAll("dnd5e-checkbox").forEach(input => {
+    section.querySelectorAll("input[type=checkbox]").forEach(input => {
       if ( input === target ) return;
       if ( input.value !== "folders" ) input.disabled = checked;
       if ( checked ) input.checked = true;

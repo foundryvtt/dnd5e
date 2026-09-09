@@ -21,16 +21,16 @@
             {{else if imported}}
             <div class="form-group">
                 <label class="checkbox">
-                    <dnd5e-checkbox name="importFields" value="all" data-tooltip
-                                    aria-label="{{ localize 'ADVENTURE.ImportAll' }}" checked></dnd5e-checkbox>
+                    <input type="checkbox" name="importFields" value="all" data-tooltip
+                           aria-label="{{ localize 'ADVENTURE.ImportAll' }}" checked>
                     {{ localize "ADVENTURE.ImportAll" }}
                 </label>
             </div>
             {{#each contents}}
             <div class="form-group">
                 <label class="checkbox">
-                    <dnd5e-checkbox name="importFields" value="{{ field }}" checked disabled data-tooltip
-                                    aria-label="{{ localize 'ADVENTURE.ImportContent' label=label }}"></dnd5e-checkbox>
+                    <input type="checkbox" name="importFields" value="{{ field }}" checked disabled data-tooltip
+                           aria-label="{{ localize 'ADVENTURE.ImportContent' label=label }}">
                     <i class="{{ icon }} fa-fw" inert></i>
                     {{ count }} {{ label }}
                 </label>
