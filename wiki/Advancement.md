@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 ## Advancement System
 
@@ -26,6 +26,9 @@ The [grant items advancement](Advancement-Type-Item-Grant) defines a list of fea
 
 ### Hit Points *(class only)*
 The [hit points advancement](Advancement-Type-Hit-Points) keeps track of hit point values for each level of a class. The player will have an option for rolling their hit points or taking the average value.
+
+### Modify Items
+The [modify items advancement](Advancement-Type-Modify-Items) allows for applying enchantments to items on the actor's sheet, changing how those items behave.
 
 ### Scale Value
 [Scale values](Advancement-Type-Scale-Value) are formula values that change arbitrarily depending on the level of the class or subclass to which they belong. These values are then made available to be used in roll formulas or elsewhere in the system. A few examples of this include a Bard's inspiration die size, a Rogue's sneak attack value, or a Cleric's channel divinity uses.
@@ -65,6 +68,7 @@ The `order` value in the `Advancement#metadata` object determines in which order
 * `30` - Trait
 * `40` - Grant Items
 * `50` - Choose Items
+* `55` - Modify Items
 * `60` - Scale Value
 * `70` - Subclass
 * `100` - (base advancement class)
