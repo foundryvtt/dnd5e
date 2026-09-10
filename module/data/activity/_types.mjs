@@ -27,6 +27,7 @@
  * @property {string} description.value          Full activity description displayed in chat.
  * @property {DurationData} duration             Duration of the effect.
  * @property {boolean} duration.concentration    Does this effect require concentration?
+ * @property {boolean} duration.ignoreDamageConcentration  Ignore concentration saves caused by damage?
  * @property {boolean} duration.override         Override duration values inferred from item.
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
  * @property {Record<string, object>} flags      Arbitrary flag data for this activity.
