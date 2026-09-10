@@ -219,7 +219,9 @@
  * @property {"melee"|"ranged"} [attack.type]  Whether this is a melee or ranged attack.
  * @property {object} [damage]
  * @property {string} [damage.type]            Type of damage being applied for a single damage part.
+ * @property {object} [item]                   The item used for the roll.
  * @property {boolean} [proficient]            Whether proficiency was added to the roll.
+ * @property {Scaling} [scaling]               Any scaling applied to the item used for the roll.
  * @property {string} [skill]                  ID of skill associated with the roll.
  * @property {string} [tool]                   ID of tool associated with the roll.
  * @property {string} type                     Type of roll being performed (e.g. "attack", "skill", "tool", etc.).
