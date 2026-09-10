@@ -200,7 +200,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       isEmbedded: this.item.isEmbedded,
       isIdentifiable: "identified" in this.item.system,
       isIdentified: this.item.system.identified !== false,
-      isPhysical: "quantity" in this.item.system,
+      isPhysical: this.item.system.isPhysical,
       item: this.item,
       labels: this.item.labels,
       system: this.item.system,

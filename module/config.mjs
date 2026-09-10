@@ -1104,6 +1104,11 @@ preLocalize("activityActivationTypes", { key: "label" });
  * @enum {ActivityBehaviorConfiguration}
  */
 DND5E.activityBehaviorTypes = {
+  antimagic: {
+    label: "TYPES.RegionBehavior.dnd5e.antimagic",
+    icon: "systems/dnd5e/icons/svg/behaviors/antimagic.svg",
+    model: regionBehaviors.AntimagicActivityBehavior
+  },
   applyActiveEffect: {
     label: "TYPES.RegionBehavior.applyActiveEffect",
     icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
@@ -3906,6 +3911,17 @@ DND5E.statusEffects = {
  * @type {Set<string>}
  */
 DND5E.neverBlockStatuses = new Set();
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration for the special antimagic status effect.
+ * @type {{ name: string, img: string }}
+ */
+DND5E.antimagic = {
+  name: "EFFECT.DND5E.StatusAntimagic",
+  img: "systems/dnd5e/icons/svg/statuses/antimagic.svg"
+};
 
 /* -------------------------------------------- */
 

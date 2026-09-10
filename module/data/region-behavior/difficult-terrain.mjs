@@ -99,7 +99,7 @@ export default class DifficultTerrainRegionBehaviorType extends foundry.data.reg
 
 /**
  * Data model representing the difficult terrain activity behavior configuration.
- * @extends {foundry.abstract.DataModel<DifficultTerrainActivityBehaviorData>}
+ * @extends {BaseActivityBehavior<DifficultTerrainActivityBehaviorData>}
  * @mixes DifficultTerrainActivityBehaviorData
  */
 export class DifficultTerrainActivityBehavior extends BaseActivityBehavior {
