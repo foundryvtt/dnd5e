@@ -1371,6 +1371,7 @@ const _attributeLabelCache = {
  */
 export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemName=true }={}) {
   attr = ActiveEffect.implementation.SHIM_FIELDS[attr]?.key ?? attr;
+  if ( attr.startsWith("roll.item.") ) attr = attr.slice(5);
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
   else if ( attr.startsWith("item.") ) {
     attr = attr.slice(5);
