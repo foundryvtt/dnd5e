@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
@@ -49,11 +49,13 @@
 
 #### Armor Class
 
-`@attributes.ac.flat` - Value that will be used as final `value` if `flat` calculation is set, or as `base` with `natural` calculation
+`@attributes.ac.flat` - User-entered value that can be referred to in certain AC formulas.
 
 `@attributes.ac.armor` - Base value of equipped armor or `10` if no armor is worn
 
 `@attributes.ac.dex` - Actor's dexterity modifier capped by any max dexterity allowed by equipped armor
+
+`@attributes.ac.clamped.*` - Each ability score clamped in the same manner as the dexterity, to be used in special AC formulas.
 
 `@attributes.ac.base` - Base AC, result of the selected AC formula
 
@@ -66,7 +68,6 @@
 `@attributes.ac.value` - Final AC value, result of adding `ac.base + ac.shield + ac.bonus + ac.cover`
 
 `@attributes.ac.label` - Localized name of the armor calculation.
-
 
 #### Attunement
 
@@ -134,25 +135,29 @@
 
 #### Movement
 
-`@attributes.movement.burrow` - The actor's burrowing speed.
+`@attributes.movement.speeds.burrow` - The actor's burrowing speed.
 
-`@attributes.movement.climb` - The actor's climbing speed.
+`@attributes.movement.speeds.climb` - The actor's climbing speed.
 
-`@attributes.movement.fly` - The actor's flying speed.
+`@attributes.movement.speeds.fly` - The actor's flying speed.
 
-`@attributes.movement.swim` - The actor's swimming speed.
+`@attributes.movement.speeds.swim` - The actor's swimming speed.
 
-`@attributes.movement.walk` or `@attributes.movement.speed` - The actor's walking speed.
+`@attributes.movement.speeds.walk` or `@attributes.movement.speed` - The actor's walking speed.
+
+#### Piety
+
+`@attributes.piety.value` - The actor's current Piety value.
 
 #### Senses
 
-`@attributes.senses.blindsight` - The actor's blindsight range.
+`@attributes.senses.ranges.blindsight` - The actor's blindsight range.
 
-`@attributes.senses.darkvision` - The actor's darkvision range.
+`@attributes.senses.ranges.darkvision` - The actor's darkvision range.
 
-`@attributes.senses.tremorsense` - The actor's tremorsense range.
+`@attributes.senses.ranges.tremorsense` - The actor's tremorsense range.
 
-`@attributes.senses.truesight` - The actor's truesight range.
+`@attributes.senses.ranges.truesight` - The actor's truesight range.
 
 #### Other Attributes
 
@@ -165,6 +170,7 @@
 `@attributes.spell.attack` - Spell attack bonus for the actor's selected spellcasting ability.
 
 `@attributes.spell.abilityLabel` - Localized label for the actor's selected spellcasting ability.
+
 
 ### Classes
 
@@ -180,9 +186,11 @@
 
 `@subclasses.*.levels` - The current level of the class to which a certain subclass belongs.
 
+
 ### Currency
 
 `@currency.pp`, `.gp`, `.sp`, `.ep`, `.cp` - Amount of each type of current held by actor.
+
 
 ### Details
 
@@ -198,9 +206,11 @@
 
 `@details.xp.pct` - Progress towards the next level.
 
+
 ### Flags
 
 `@flags.*` - An arbitrary object added to the roll data object for convenience. There are no rules regarding the properties held here, as they are added as needed by the system, modules, or macros.
+
 
 ### Proficiency
 
@@ -214,6 +224,7 @@
 
 `@prof.multiplier` - The contextual multiplier depending on proficiency level (0, 0.5, 1, or 2).
 
+
 ### Resources
 
 `@resources.primary`, `.secondary`, `.tertiary` - Three resource slots
@@ -223,6 +234,7 @@
 `@resources.*.value` - The remaining resource value.
 
 `@resources.*.max` - The maximum value of this resource.
+
 
 ### Scale
 
@@ -251,6 +263,7 @@
 `@scale.*.**.die` - *Scale Value Type: Dice Only* - The Die defined in the Scale Value (e.g. `d8` of `3d8`).
 
 `@scale.*.**.faces` - *Scale Value Type: Dice Only* - The number of faces on the Die defined in the Scale Value (e.g. `8` of `3d8`).
+
 
 ### Skills
 
@@ -302,6 +315,7 @@
 
 `@skills.*.passive` - Passive skill value equalling `10 + total + bonuses.passive`.
 
+
 ### Spells
 
 `@spells.spell1`, `.spell2`, `.spell3`, etc. - Normal spell slot levels.
@@ -320,6 +334,7 @@
 
 `@spells.*.label` - Localized label for the spellcasting level.
 
+
 ### Status Effects
 
 ***Note:** Replace the `*` in the following formulas with a status effect ID.*
@@ -329,6 +344,8 @@
 `@statuses.concentrating` - The number of effects currently being concentrated upon by the actor.
 
 `@statuses.exhaustion` - The number of levels of exhaustion on the actor.
+
+
 
 ## Item Properties
 
@@ -352,11 +369,14 @@ The most common `@item` properties are:
 
 `@item.levels` - The class level of this item (for classes only).
 
+
 ### Labels
 
 Spells as well as activities have a number of useful properties when used with the [[lookup enricher]](Enrichers.md#lookup-enrichers). These can be used directly on a spell, or by using the `activity=` option to fetch them from an activity on an item.
 
 `@labels.activation` - "Action"
+
+`@labels.legacyActivation` - "1 action"
 
 `@labels.description.affects` -  "each creature"
 
@@ -368,11 +388,18 @@ Spells as well as activities have a number of useful properties when used with t
 
 `@labels.description.templateType` - "Sphere"
 
-`@level` - "1st Level"
+`@labels.duration` - "1 minute"
+
+`@labels.level` - "1st Level"
+
+`@labels.school` - "Transmutation"
+
 
 ### Flags
 
 `@flags.*` - An arbitrary object added to the roll data object for convenience. There are no rules regarding the properties held here, as they are added as needed by the system, modules, or macros.
+
+
 
 ## Special Roll Modifiers
 
