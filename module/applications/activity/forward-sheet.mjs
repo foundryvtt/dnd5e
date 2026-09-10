@@ -43,13 +43,66 @@ export default class ForwardSheet extends ActivitySheet {
   /** @inheritDoc */
   async _prepareEffectContext(context, options) {
     context = await super._prepareEffectContext(context, options);
+
+    const actor = this.item.actor;
+    const sourceTarget = this.activity._source.targetItem;
+    const selectedTarget = this.activity._remapConsumptionTarget(sourceTarget);
+    let targetItem;
+
+    if ( actor ) {
+      const validItems = actor.items.filter(item => this.#getAvailableActivities(item).length);
+      context.itemOptions = [
+        { value: "", label: _loc("DND5E.FORWARD.Target.Item.Current") },
+        ...validItems
+          .filter(item => item !== this.item)
+          .map(item => ({ value: item.id, label: item.name }))
+      ];
+
+      targetItem = sourceTarget ? actor.items.get(selectedTarget) : this.item;
+      if ( sourceTarget && (targetItem !== this.item) ) {
+        const selectedOption = context.itemOptions.find(option => option.value === selectedTarget);
+        if ( selectedOption ) selectedOption.value = sourceTarget;
+        else context.itemOptions.unshift({ value: sourceTarget, label: `[${sourceTarget}]` });
+      }
+    } else {
+      context.itemOptions = null;
+      targetItem = sourceTarget ? null : this.item;
+    }
+
+    const availableActivities = targetItem ? this.#getAvailableActivities(targetItem) : [];
     context.activityOptions = [
       { value: "", label: "" },
-      ...this.item.system.activities.contents
-        .filter(a => (a.type !== "forward") && (CONFIG.DND5E.activityTypes[a.type] !== false))
-        .map(activity => ({ value: activity.id, label: activity.name }))
+      ...availableActivities.map(activity => ({ value: activity.id, label: activity.name }))
     ];
+    context.selectedTargetItem = targetItem === this.item ? "" : sourceTarget ?? "";
+    context.showActivitySelect = !!targetItem;
+
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get activities on an item that may be forwarded to.
+   * @param {Item5e} item  Item containing the activities.
+   * @returns {Activity[]}
+   */
+  #getAvailableActivities(item) {
+    return (item.system.activities?.contents ?? []).filter(activity => this.activity.canForwardTo(activity));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onChangeForm(formConfig, event) {
+    if ( event.target.name === "targetItem" ) {
+      await this.activity.update({
+        targetItem: event.target.value || null,
+        activity: null
+      });
+      return this.render({ force: true });
+    }
+    return super._onChangeForm(formConfig, event);
   }
 
   /* -------------------------------------------- */
