@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The Transform activity is designed to change one or more actors using the stats of another. It is based on the same transformation system that has been long supported by dragging one actor onto another, but with the activity the transformation settings can be pre-configured and a compendium browser can be shown to make it easy to select which creature to transform into.
 
@@ -37,21 +37,31 @@ The Profiles sub-tab contains the configuration for the creatures that the targe
 
 Each profile has a *Display Name* which affects how that profile will be displayed in the transform dialog. Changing this name will not modify the transformed creature’s name, only how it displays in the usage prompt.
 
-#### By Challenge Rating and Type
+#### Creature Stats (by Challenge Rating)
 
-In **Challenge Rating and Type** mode the profile contains a *CR* field for setting the maximum CR of creature that can be selected to transform into. This field accepts numbers and formulas. Beneath the "Additional Settings" dropdown are several more fields to further restrict what creatures can be selected. The *Creature Sizes* and *Creature Types* fields allow selection only from a specific set of sizes and types if populated. The *Restricted Movement Types* field prevents creatures with certain movement types from being chosen.
+In **Creature Stats (by Challenge Rating)** mode the profile contains a *CR* field for setting the maximum CR of creature that can be selected to transform into. This field accepts numbers and formulas. Beneath the "Additional Settings" dropdown are several more fields to further restrict what creatures can be selected. The *Creature Sizes* and *Creature Types* fields allow selection only from a specific set of sizes and types if populated. The *Restricted Movement Types* field prevents creatures with certain movement types from being chosen.
 
 ![Transform Sheet - Profiles Tab, Challenge Rating & Type](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/transformation/transform-profiles-challenge-rating.jpg)
 
-In the example above, the "Wild Shape" feature, there are three profiles created to match with the changes that feature undergoes at various Druid levels. The CRs for each profile are configured to 0.25, 0.5, and 1 with matching display names (the display name will be auto-generated using the specified CR if not included). The center profile shows a creature type limitation to "Beast" and a movement restriction on creatures with a "Fly" speed. It is also limited to be only available for Druid levels 6 & 7.
+In the example above, the 5e "Wild Shape" feature, there are three profiles created to match with the changes that feature undergoes at various Druid levels. The CRs for each profile are configured to 0.25, 0.5, and 1 with matching display names (the display name will be auto-generated using the specified CR if not included). The center profile shows a creature type limitation to "Beast" and a movement restriction on creatures with a "Fly" speed. It is also limited to be only available for Druid levels 6 & 7.
 
-#### By Direct Link
+#### Creature Stats (by Direct Link)
 
-In **Direct Link** mode it is easy to add creatures by dragging and dropping them from the world or a compendium onto the sheet. Dropping it directly onto an existing profile will associate that creature with that profile and dropping elsewhere will create a new profile for that creature.
+In **Creature Stats (by Direct Link)** mode it is easy to add creatures by dragging and dropping them from the world or a compendium onto the sheet. Dropping it directly onto an existing profile will associate that creature with that profile and dropping elsewhere will create a new profile for that creature.
 
 ![Transform Sheet - Profiles Tab, Direct Link](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/transformation/transform-profiles-direct-link.jpg)
 
-In the example above, a "Shape-Shift" feature on a Weretiger, includes two profiles for each of the different types of transformation the creature can perform, either into its "Hybrid Form" or its "Tiger Form".
+In the example above, the 5.5e "Wild Shape" feature, there are four profiles created to match the forms known by the Druid. These forms are linked to Ape, Cat, Giant Fire Beetle, and Giant Wolf Spider, and allow the Druid to only transform into one of those four forms.
+
+#### Select Form
+
+In **Select Form** mode the transform activity behaves differently. In this mode, the different transformations are defined using active effects on the item rather than separate actors. This mode works perfectly for features like lycanthrope shape shifting or the "Disguise Self" spell. The *Formless* option specifies whether the user can change the actor back to a mode where no transformation is applied.
+
+Because all of the changes are defined by the active effects, the "Settings" tab isn't available in this mode.
+
+![Transform Sheet - Profiles Tab, Select Form](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/transformation/transform-profiles-select-form.jpg)
+
+In the example above, a "Shape-Shift" feature on a Weretiger, includes three profiles for each of the different types of transformation the creature can perform, between its "Humanoid Form", "Hybrid Form", and "Tiger Form".
 
 #### Transform Level
 
