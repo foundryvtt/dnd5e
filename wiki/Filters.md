@@ -106,7 +106,8 @@ When used in an enchantment, this applies to any weapon that is ranged or has th
   "v": [
     {
       "k": "item.type.value",
-      "v": "ranged"
+      "o": "in",
+      "v": ["simpleR", "martialR"]
     },
     {
       "k": "item.properties",

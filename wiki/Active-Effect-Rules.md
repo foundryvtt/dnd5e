@@ -52,6 +52,20 @@ Rules are extremely broad by default. Adding a damage bonus rule means that that
 
 The [active effect conditions page](Active-Effects.md#Conditions) goes over the details on how conditions are defined and what data can be generally filtered on. Of special importance to rules is the rolling description fields which provide additional information that can be used to narrow down when a rule should be applied (e.g. using the `roll.damage.type` to only apply a bonus when the character does fire damage, or `roll.attack.mode` to apply a bonus only to thrown weapon attacks). Any `roll.` keys can only be referenced in change conditions, not effect conditions.
 
+| Key                        | Description                                                                                                                        | Example                                |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| roll.ability               | Ability associated with a D20 roll.                                                                                                | `dex`, `str`, etc.                     |
+| roll.attack.classification | Source of the attack.                                                                                                              | `weapon`, `spell`, or `unarmed`        |
+| roll.attack.mode           | Selected weapon attack mode.                                                                                                       | `oneHanded`, `thrown`, `offhand`, etc. |
+| roll.attack.type           | Whether this is a melee or ranged attack.                                                                                          | `melee` or `ranged`                    |
+| roll.damage.type           | Type of damage being applied for a single damage part.                                                                             | `cold`, `fire`, etc.                   |
+| roll.item                  | Roll data for item performing the attack (while the `item`) at the top level contains data for the item that provided the rule AE. |                                        |
+| roll.proficient            | Whether proficiency was added to the roll.                                                                                         | `true` or `false`                      |
+| roll.scaling               | Any scaling applied tot he item used for the roll.                                                                                 |                                        |
+| roll.skill                 | ID of skill associated with the roll.                                                                                              | `acr`, `ath`, etc.                     |
+| roll.tool                  | ID of tool associated with the roll.                                                                                               | `thief`, `carpenter`, etc.             |
+| roll.type                  | Type of roll being performed.                                                                                                      | `attack`, `skill`, `tool`, etc.        |
+
 ### Minimum Roll on Ranged Attacks
 
 - **Key**: attack
