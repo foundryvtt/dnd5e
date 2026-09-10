@@ -1,0 +1,175 @@
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
+
+Foundry provides an [enricher](Enrichers) that allows embedding a document within a journal page or description on an item or actor. The DnD5e system extends this functionality in several useful ways.
+
+### Standard Embed Usage
+
+The core embed system is invoked using the `@Embed` enricher format. A document can be easily embedded by dragging the document into the editor window to create a document link (e.g. `@UUID[...]{Name}`) and replacing the `@UUID` portion with `@Embed` (the name is also not required, but it doesn't do any harm).
+
+```
+@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ]
+```
+
+By default the embed will include a caption and a citation linking to the document. In most cases both of these will display the document name, so if this repetition isn't desired then the caption can be disabled using `caption=false`. If the citation link isn't desired on the other hand, then `cite=false` can be used to disable it. Both can be used at the same time to disable both items.
+
+Embeds can also use the `inline` option, which disables both the citation and caption at the same time and removes some of the extra markup around the embed, potentially allowing it to be inserted in the middle of a paragraph (though that depends on the content being embedded).
+
+```
+// Disable caption or citation
+@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ caption=false]
+@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ cite=false]
+@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ caption=false cite=false]
+
+// Display inline
+@Embed[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ inline]
+```
+
+### Name Style Option
+
+The system adds an additional option when embedding actors, items, or activities that gives greater control over where the document's name appears. Using the `nameStyle` option it is possible to place the document's name either as a header preceding the embedded text (`nameStyle=h4`) or inline with the first paragraph of the text (`nameStyle=inline`). The name will be a link to the document unless `cite=false` is set, in which case it will be plain text.
+
+When using a header as the name style, the `no-toc` option can be used to prevent the embed header from appearing in a journal's table of contents sidebar.
+
+```
+// Display as header with link
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 caption=false]
+
+// Display as plain text header
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 cite=false]
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 caption=false cite=false]
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2 cite=false no-toc]
+
+// Display as plain text header with citation link below embed
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details nameStyle=h2]
+
+// Display inline link
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline caption=false]
+
+// Display plain text inline name
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline cite=false]
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline caption=false cite=false]
+
+// Display plain text inline name with citation link below embed
+@Embed[Compendium.dnd5e.classes24.Item.phbdrdBeastSpell nameStyle=inline]
+```
+
+## Actors & Items
+
+Using the standard embed format for actors will embed their public biography and embedding items will display their standard description, unless the item is unidentified and the player is not a GM user, in which case the unidentified description will be embedded instead.
+
+```
+// Actor embed
+@Embed[Compendium.dnd5e.heroes.Actor.kfzBL0q1Y7LgGs2x]
+
+// Item embed
+@Embed[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]
+```
+
+## Activities
+
+Activities on items can also be embedded using the activity's UUID. These embeds will display the activity's description. When embedding an activity in the description of its containing item, it is a good idea to use a relative UUID rather than the absolute UUID so the connection remains consistent when the item is moved around. After copying the UUID from the activity sheet or dragging the activity into the editor, remove everything before `.Activity.` to turn it into a relative UUID.
+
+```
+// Using absolute UUID
+@Embed[Compendium.dnd5e.equipment24.Item.dmgStaffOfPower0.Activity.udI31yfOHiwPCiSF]
+
+// Using relative UUID
+@Embed[.Activity.udI31yfOHiwPCiSF]
+```
+
+### NPC Stat Blocks
+
+The system offers a custom `statblock` option for actor embeds that displays them as a stat block.
+
+![Stat Block Simple](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/embeds/stat-block-simple.jpg)
+
+For complex actors, the `double-column` class can be added to format the contents into two columns.
+
+![Stat Block Two Column](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/embeds/stat-block-two-column.jpg)
+
+The stat blocks also support legacy style presentation to match older books. This style is used automatically for any actor with the 2014 rules set in its source configuration, or it can be forced by setting the `rules` enricher option to be `2014` (using `2024` will force the modern style on older creatures).
+
+![Stat Block Legacy](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/embeds/stat-block-legacy.jpg)
+
+```
+// NPC stat block
+@Embed[Compendium.dnd5e.monsters.Actor.K5cKmPoFkpuOotis statblock]
+
+// Double-column stat block
+@Embed[Compendium.dnd5e.monsters.Actor.SNT0JNVSngUTsj4m statblock classes="double-column"]
+
+// Legacy stat block (using legacy monster)
+@Embed[Compendium.dnd5e.monsters.Actor.D5WjGwKskeUT8HXa statblock]
+
+// Legacy stat block (using modern monster)
+@Embed[Compendium.dnd5e.actors24.Actor.mmBlackBear00000 statblock rules=2014]
+```
+
+The stat block contains special handling for the legendary actions description, looking for an item on the actor with the `legendary-actions` identifier and displaying it with special formatting at the start of the "Legendary Actions" section. The identifier can be set by opening the source config dialog on the item.
+
+#### Stat Block Overrides
+
+There are some situations where a value in a stat block from a book might not closely match what is automatically generated by the system. In these instances a mechanism has been provided to override any of the auto-generated values in a stat block. This is done using the `dnd5e.statBlockOverride` object in flags:
+
+![Stat Block Overrides](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/embeds/stat-block-overrides.jpg)
+
+```javascript
+{
+  "dnd5e.statBlockOverride": {
+    ac: "11 + the spell's level",
+    hp: "20 (Air only) or 30 (Land and Water only) + 5 for each spell level above 2",
+    speed: "30 ft.; Climb 30 ft. (Land only); Fly 60 ft. (Air only); Swim 30 ft. (Water only)",
+    pb: "equals your Proficiency Bonus"
+  }
+}
+```
+
+Keys are available to override everything in the upper section of the stat block (except the ability scores) using the following keys: `tag` (itself composed of `size`, `type`, and `alignment`), `ac`, `hp`, `speed`, `senses`, `cr`, `xp`, `pb`, `gear`, `languages`, `vulnerabilities`, `resistances`, `immunities`, `conditionImmunities`, `initiative`, and `skills`. Not all of these will be used depending on the rules version used when embedding.
+
+### Spells
+
+Spell items support an extra option when embedded, `details`. When used, this adds a new section above the description that includes the spells level, school, spell lists (in 2024 rules), casting time, range, components, and duration. This is formatted to match the presentation of spells in core rulebooks.
+
+![Spell Details](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/embeds/spell-details.jpg)
+
+```
+@Embed[Compendium.dnd5e.spells24.Item.phbsplMelfsAcidA details]
+```
+
+## Roll Tables
+
+Core Foundry provides support for embedding roll tables, which will be displayed as a standard HTML table with the roll on the left and the result on the right. The `rollable` option can be used to add a button to the header that allows for rolling directly from the table.
+
+By default the table's description will be displayed beneath the table. If you wish to display the caption above the table instead, you can use the `caption-top` class.
+
+```
+// Standard table
+@Embed[Compendium.dnd5e.tables.RollTable.LHEts1oDaDwcehuj]
+
+// Rollable table
+@Embed[Compendium.dnd5e.tables.RollTable.LHEts1oDaDwcehuj rollable]
+
+// Caption at Top
+@Embed[Compendium.dnd5e.tables.RollTable.LHEts1oDaDwcehuj classes="caption-top"]
+```
+
+## Spell Lists
+
+The spells journal entry page includes some extra embed options allowing for setting the grouping mode and display it as a table.
+
+By default spell lists will display with whatever default grouping mode is set on the page, but the `grouping` option can be used to display it using a different mode. It accepts `none` for no grouping, `alphabetical` for grouping by first letter, `level` for grouping by spell level, and `school` for grouping by spell school.
+
+Spell lists can also be displayed in a table format using the `table` option. This will display the grouping category on the left and the list of spells within that category on the right.
+
+![Spells Table](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/embeds/spells-table.jpg)
+
+```
+// Set grouping modes
+@Embed[Compendium.dnd-players-handbook.content.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5 grouping=none]
+@Embed[Compendium.dnd-players-handbook.content.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5 grouping=alphabetical]
+@Embed[Compendium.dnd-players-handbook.content.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5 grouping=level]
+@Embed[Compendium.dnd-players-handbook.content.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5 grouping=school]
+
+// Display as table
+@Embed[Compendium.dnd-players-handbook.content.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5 table]
+```
