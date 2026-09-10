@@ -154,7 +154,14 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
     const tokensData = [];
     try {
       // Figure out where to place the summons
-      const placements = await this.getPlacement(actor.prototypeToken, profile, options);
+      const tokenUpdates = {};
+      if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
+        tokenUpdates.texture ??= {};
+        tokenUpdates.texture.src ??= actor.img;
+        ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard", { localize: true });
+      }
+      const prototypeToken = await actor.getTokenDocument(tokenUpdates, { parent: canvas.scene });
+      const placements = await this.getPlacement(prototypeToken, profile, options);
 
       for ( const placement of placements ) {
         // Prepare changes to actor data, re-calculating per-token for potentially random values
@@ -512,14 +519,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
    * @returns {object}
    */
   async getTokenData({ actor, placement, tokenUpdates, actorUpdates }) {
-    if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
-      tokenUpdates.texture ??= {};
-      tokenUpdates.texture.src ??= actor.img;
-      ui.notifications.warn("DND5E.SUMMON.Warning.Wildcard", { localize: true });
-    }
-
+    const prototypeToken = placement.prototypeToken;
     delete placement.prototypeToken;
-    const tokenDocument = await actor.getTokenDocument(foundry.utils.mergeObject(placement, tokenUpdates));
+    const tokenDocument = prototypeToken.clone(
+      foundry.utils.mergeObject(placement, tokenUpdates), { parent: canvas.scene }
+    );
 
     // Linked summons require more explicit updates before token creation
     if ( tokenDocument.actorLink ) {
