@@ -1,4 +1,4 @@
-![Up to date as of 5.3.0](https://img.shields.io/static/v1?label=dnd5e&message=5.3.0&color=informational)
+![Up to date as of 6.0.0](https://img.shields.io/static/v1?label=dnd5e&message=6.0.0&color=informational)
 
 The system includes a number of features allowing modules and worlds to register information for the system directly in their manifests, rather than requiring separate scripts.
 
@@ -8,7 +8,7 @@ These flags should be applied to the `flags` object within an individual compend
 
 ### Display Mode
 
-The `dnd5e.display` flag can be used to specify that a specific compendium should use the [Table of Contents][Table-of-Contents.md] display rather than the default compendium interface. It should only be used for compendiums with the `JournalEntry` document type.
+The `dnd5e.display` flag can be used to specify that a specific compendium should use the [Table of Contents](Table-of-Contents.md) display rather than the default compendium interface. It should only be used for compendiums with the `JournalEntry` document type.
 
 ```json
 {
