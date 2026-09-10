@@ -1,4 +1,4 @@
-import { formatNumber, formatTime, getPluralRules } from "../../utils.mjs";
+import { formatNumber, formatTime, getPluralLocalizationKey } from "../../utils.mjs";
 
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -41,7 +41,7 @@ export default class ActivationField extends SchemaField {
     let scalar;
     if ( activation.type in CONFIG.DND5E.timeUnits ) scalar = formatTime(value ?? 1, activation.type);
     else if ( config?.counted ) scalar = _loc(
-      `${config.counted}.${getPluralRules().select(value ?? 1)}`,
+      getPluralLocalizationKey(value ?? 1, pr => `${config.counted}.${pr}`),
       { number: formatNumber(value ?? 1) }
     );
     else scalar = `${formatNumber(value ?? 1)} ${config?.label ?? ""}`;
