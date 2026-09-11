@@ -93,7 +93,10 @@ export default class FiltersInputElement extends foundry.applications.elements.A
       return;
     }
 
-    const breakdown = this.#renderBreakdownNode(Array.isArray(filters) ? { o: "AND", v: filters } : filters);
+    let breakdown;
+    try {
+      breakdown = this.#renderBreakdownNode(Array.isArray(filters) ? { o: "AND", v: filters } : filters);
+    } catch {}
     if ( breakdown ) this.#breakdown.replaceChildren(breakdown);
     else this.#breakdown.innerText = _loc("DND5E.FILTER.Invalid");
   }
@@ -106,6 +109,7 @@ export default class FiltersInputElement extends foundry.applications.elements.A
    * @returns {HTMLElement|void}
    */
   #renderBreakdownNode(filter) {
+    if ( !foundry.utils.isPlainObject(filter) ) throw new Error("Invalid breakdown");
     let { k: key, o: operator="exact", v: value } = filter;
 
     // If in OPERATOR_FUNCTIONS, create group and recurse
