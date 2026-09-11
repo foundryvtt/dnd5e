@@ -1,4 +1,5 @@
 import Application5e from "./api/application.mjs";
+import { isValidFilter } from "../filter.mjs";
 
 /**
  * Application for creating and modifying filters.
@@ -49,6 +50,23 @@ export default class FiltersEditor extends Application5e {
    */
   get value() {
     return this.#editor.value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async close(options={}) {
+    const value = this.value.trim() || "{}";
+    let isValid = false;
+    try {
+      isValid = isValidFilter(JSON.parse(value));
+    } catch {}
+    if ( !isValid ) {
+      ui.notifications.warn("DND5E.FILTER.Invalid", { localize: true });
+      return;
+    }
+    this.#editor.value = value;
+    return super.close(options);
   }
 
   /* -------------------------------------------- */

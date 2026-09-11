@@ -1,4 +1,4 @@
-import { COMPARISON_FUNCTIONS, OPERATOR_FUNCTIONS } from "../../filter.mjs";
+import { COMPARISON_FUNCTIONS, isValidFilter, OPERATOR_FUNCTIONS } from "../../filter.mjs";
 import { getHumanReadableAttributeLabel } from "../../utils.mjs";
 import FiltersEditor from "../filters-editor.mjs";
 
@@ -90,6 +90,11 @@ export default class FiltersInputElement extends foundry.applications.elements.A
     this.#breakdown.classList.toggle("empty", isEmpty);
     if ( isEmpty ) {
       this.#breakdown.innerText = _loc("DND5E.FILTER.Empty");
+      return;
+    }
+
+    if ( !isValidFilter(filters) ) {
+      this.#breakdown.innerText = _loc("DND5E.FILTER.Invalid");
       return;
     }
 
