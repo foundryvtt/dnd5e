@@ -7,7 +7,10 @@ import GroupTemplate from "./templates/group.mjs";
 const { ArrayField, ForeignDocumentField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @import { AbilityRollProcessConfiguration, SkillToolRollProcessConfiguration } from "../../dice/_types.mjs";
+ * @import {
+ *   AbilityRollProcessConfiguration, BasicRollDialogConfiguration, BasicRollMessageConfiguration,
+ *   SkillToolRollProcessConfiguration
+ * } from "../../dice/_types.mjs";
  * @import { RestResult } from "../../documents/_types.mjs";
  * @import { GroupActorSystemData, GroupRestConfiguration, TravelPaceDescriptor } from "./_types.mjs";
  */
@@ -277,13 +280,15 @@ export default class GroupData extends GroupTemplate {
   /**
    * Request that each member of the group make a saving throw.
    * @param {Partial<AbilityRollProcessConfiguration>} config  Roll configuration.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Dialog configuration.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Message configuration.
    * @returns {Promise<false|void>}
    */
-  async rollSavingThrow(config) {
+  async rollSavingThrow(config={}, dialog={}, message={}) {
     if ( !config.ability ) return;
     const abilityLabel = CONFIG.DND5E.enrichmentLookup.abilities[config.ability]?.label ?? "";
     await foundry.documents.ChatMessage.implementation.create({
-      flavor: _loc("DND5E.SavePromptTitle", { ability: abilityLabel }),
+      flavor: message.data?.flavor ?? _loc("DND5E.SavePromptTitle", { ability: abilityLabel }),
       speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
       system: {
         button: {
@@ -304,16 +309,18 @@ export default class GroupData extends GroupTemplate {
   /**
    * Request a group ability check with a given skill.
    * @param {Partial<SkillToolRollProcessConfiguration>} config  Roll configuration.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Dialog configuration.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Message configuration.
    * @returns {Promise<false|void>}
    */
-  async rollSkill(config) {
+  async rollSkill(config={}, dialog={}, message={}) {
     if ( !config.skill ) return;
     const skillConfig = CONFIG.DND5E.skills[config.skill];
     const ability = config.ability ?? skillConfig?.ability ?? "";
     const skillLabel = skillConfig?.label ?? "";
     const abilityLabel = CONFIG.DND5E.enrichmentLookup.abilities[ability]?.label ?? "";
     await foundry.documents.ChatMessage.implementation.create({
-      flavor: _loc("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+      flavor: message.data?.flavor ?? _loc("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
       speaker: ChatMessage.getSpeaker({ actor: this.parent, alias: this.parent.name }),
       system: {
         button: {
