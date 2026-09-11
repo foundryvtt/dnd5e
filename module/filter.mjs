@@ -70,6 +70,32 @@ export function performCheck(data, filter=[]) {
 /* -------------------------------------------- */
 
 /**
+ * Test whether a filter definition is valid.
+ * @param {*} filter  Filter definition to test.
+ * @returns {boolean}
+ */
+export function isValidFilter(filter) {
+  if ( Array.isArray(filter) ) return filter.every(isValidFilter);
+  if ( !foundry.utils.isPlainObject(filter) ) return false;
+  
+  // Blank input is normalized to "{}" before validation in FiltersEditor.
+  if ( foundry.utils.isEmpty(filter) ) return true;
+  
+  const { k: key, o: operator="exact", v: value } = filter;
+  if ( Object.hasOwn(OPERATOR_FUNCTIONS, operator) ) {
+    if ( operator === "NOT" ) {
+      return foundry.utils.isPlainObject(value) && !foundry.utils.isEmpty(value) && isValidFilter(value);
+    }
+    return Array.isArray(value) && value.every(isValidFilter);
+  }
+  if ( !Object.hasOwn(COMPARISON_FUNCTIONS, operator) || (typeof key !== "string") || !key.trim() ) return false;
+  if ( operator === "empty" ) return !Object.hasOwn(filter, "v") || (typeof value === "boolean");
+  return Object.hasOwn(filter, "v");
+}
+
+/* -------------------------------------------- */
+
+/**
  * Determine the unique keys referenced by a set of filters.
  * @param {FilterDescription[]} filter  Filter to examine.
  * @returns {Set<string>}
