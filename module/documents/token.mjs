@@ -45,7 +45,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const statuses = new Set(foundry.utils.iterateValues(CONFIG.statusEffects).map(s => s._id));
     for ( const effect of data.delta?.effects ?? [] ) {
       if ( (effect.type === "condition") || !statuses.has(effect._id) ) continue;
-      foundry.utils.mergeObject(effect, { type: "condition", "system.type": effect.statuses[0] });
+      foundry.utils.mergeObject(effect, { type: "condition", "system.type": effect.statuses?.[0] });
     }
 
     // Migrate backpack -> container.
