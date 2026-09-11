@@ -71,13 +71,14 @@ npm run build:clean
 ## Issues
 
 Check that your issue isn't a duplicate (also check the closed issues, as sometimes work which has not been released closes an issue).
-Issues which are assigned to a Milestone are considered prioritized. This assignment is not permanent and issues might be pushed out of milestones if the milestone is approaching a releaseable state without that work being done.
+Issues which are assigned to a Milestone are considered prioritized. This assignment is not permanent and issues might be pushed out of milestones if the milestone is approaching a releasable state without that work being done.
 
 ### Bugs
 
-- Ensure that the bug is reproducible with no modules active. If the bug only happens when a module is active, report it to the module's author instead.
+- Ensure that the bug is reproducible with **no modules active**. If the bug only happens when a module is active, report it to the module's author instead.
 - Provide hosting details as they might be relevant.
 - Provide clear step-by-step reproduction instructions, as well as what you expected to happen during those steps vs what actually happened.
+- Bug reports authored by AI agents or written by AI will not be considered. Bugs identified using AI tools must first be reproduced by a human before being accepted. Submitters with history of erroneous bug reports may be blocked from the project at the maintainers digression.
 
 ### Feature Requests
 
@@ -113,6 +114,10 @@ Instead of opening an PR with translation files, create one of these modules (or
 Here are some guidelines for contributing code to this project.
 
 To contribute code, [fork this project](https://docs.github.com/en/get-started/quickstart/fork-a-repo) and submit a [pull request (PR)](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) against the correct development branch.
+
+### AI Contributions
+
+The system does not accept code produced by AI coding tools. PR descriptions should also not be produced using AI writing tools.
 
 ### Style
 
