@@ -718,14 +718,15 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
-   * Trigger auto-downed logic if failed three death saves.
+   * Trigger auto-downed logic if the failed death save threshold is reached.
    * @this {CharacterData|NPCData}
    * @param {object} changed  The differential data that was changed relative to the document's prior values.
    * @param {object} options  Additional options which modify the update request.
    * @param {string} userId   The id of the User requesting the document update.
    */
   static async onUpdateDeathSaves(changed, options, userId) {
-    if ( changed.system?.attributes?.death?.failure !== 3 ) return;
+    const failure = changed.system?.attributes?.death?.failure;
+    if ( (failure === undefined) || (failure < this.attributes.death.threshold.failure) ) return;
 
     // If hp update is included, updateDowned will be called in onUpdateHP, so exit early
     if ( changed.system.attributes.hp ) return;
@@ -738,7 +739,10 @@ export default class AttributesFields {
 
   /**
    * Determine the actor updates and terminal outcome resulting from a death saving throw.
-   * @param {{ success: number, failure: number }} death  Current death save success/failure counts.
+   * @param {object} death                            Current death save data.
+   * @param {number} death.success                    Number of successful death saves.
+   * @param {number} death.failure                    Number of failed death saves.
+   * @param {{ success: number, failure: number }} death.threshold  Success and failure thresholds.
    * @param {object} result
    * @param {boolean} result.isSuccess                    Whether the save succeeded.
    * @param {boolean} [result.isCritical]                 Whether the save was a natural 20.
@@ -761,8 +765,8 @@ export default class AttributesFields {
         outcome = "revive";
       }
 
-      // Normal success - stabilize on the third.
-      else if ( successes >= 3 ) {
+      // Normal success - stabilize when the success threshold is reached.
+      else if ( successes >= death.threshold.success ) {
         Object.assign(updates, {
           "system.attributes.death.success": 0,
           "system.attributes.death.failure": 0
@@ -770,13 +774,13 @@ export default class AttributesFields {
         outcome = "stable";
       }
 
-      else updates["system.attributes.death.success"] = Math.clamp(successes, 0, 3);
+      else updates["system.attributes.death.success"] = Math.clamp(successes, 0, death.threshold.success);
     }
 
     else {
-      const failures = Math.clamp((death.failure || 0) + (isFumble ? 2 : 1), 0, 3);
+      const failures = Math.clamp((death.failure || 0) + (isFumble ? 2 : 1), 0, death.threshold.failure);
       updates["system.attributes.death.failure"] = failures;
-      if ( failures >= 3 ) outcome = "death";
+      if ( failures >= death.threshold.failure ) outcome = "death";
     }
 
     return { outcome, updates };
