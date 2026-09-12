@@ -118,11 +118,11 @@ export default class TravelField extends foundry.data.fields.SchemaField {
     const fromConfig = CONFIG.DND5E.movementUnits[initialUnit];
     const toConfig = CONFIG.DND5E.movementUnits[finalUnit];
     if ( (fromConfig?.type === "metric") && (toConfig?.type === "metric") ) {
-      value = convertLength(value, initialUnit, "m", { strict: false });
-      return convertTravelSpeed(value / 2, "kph", { strict: false, to: finalUnit }).value;
+      value = convertLength(value, initialUnit, { to: "m", legacy: false }).value;
+      return convertTravelSpeed(value / 2, "kph", { to: finalUnit }).value;
     } else {
-      value = convertLength(value, initialUnit, "ft", { strict: false });
-      return convertTravelSpeed(value / 10, "mph", { strict: false, to: finalUnit }).value;
+      value = convertLength(value, initialUnit, { to: "ft", legacy: false }).value;
+      return convertTravelSpeed(value / 10, "mph", { to: finalUnit }).value;
     }
   }
 

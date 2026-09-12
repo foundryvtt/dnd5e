@@ -389,8 +389,8 @@ export default class AttributesFields {
       weight += convertWeight(
         numCoins / currencyPerWeight,
         config.baseUnits.default[unitSystem],
-        baseUnits[unitSystem]
-      );
+        { to: baseUnits[unitSystem], legacy: false }
+      ).value;
     }
 
     // Determine the Encumbrance size class
@@ -411,7 +411,7 @@ export default class AttributesFields {
       if ( threshold === "maximum" ) maximumMultiplier = multiplier;
       if ( this.isVehicle ) {
         const { cargo } = attributes.capacity;
-        base = convertWeight(cargo.value || Infinity, cargo.units, baseUnits[unitSystem]);
+        base = convertWeight(cargo.value || Infinity, cargo.units, { to: baseUnits[unitSystem], legacy: false }).value;
       }
       else multiplier *= (config.threshold[threshold]?.[unitSystem] ?? 1) * sizeMod;
       return (base * multiplier).toNearest(0.1) + bonus;
@@ -559,7 +559,7 @@ export default class AttributesFields {
       && !this.parent.flags.dnd5e?.ignoreArmorSpeedReduction && this.isCreature ) {
       reduction += CONFIG.DND5E.armorSpeedReduction;
     }
-    reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
+    reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, { to: units, legacy: false }).value;
     const bonus = simplifyBonus(this.attributes.movement.bonus, rollData);
     const multiplier = this.attributes.movement.multiplier * (halfMovement ? 0.5 : 1);
     this.attributes.movement.max = 0;
