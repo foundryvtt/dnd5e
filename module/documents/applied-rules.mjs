@@ -124,6 +124,11 @@ class RulesIterator extends Iterator {
     return new RulesIterator(this.filter(r => {
       if ( consumed?.has(r) ) return false;
       const conditionData = r.effect?.getReplacementData(rollData) ?? rollData;
+      if ( r.effect?.item ) {
+        conditionData.sourceItem = conditionData.item;
+        conditionData.item = rollData.item;
+        conditionData.scaling = rollData.scaling;
+      }
       if ( r.effect?.system.conditions?.check(conditionData) === false ) return false;
       if ( r.conditions?.check(conditionData) === false ) return false;
       if ( consumed ) consumed.add(r);
