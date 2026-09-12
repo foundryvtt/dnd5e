@@ -3,7 +3,7 @@ import { bulkFromUuid, getHumanReadableAttributeLabel } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
-const { BooleanField } = foundry.data.fields;
+const { BooleanField, DocumentIdField, DocumentUUIDField, SchemaField, SetField } = foundry.data.fields;
 
 /**
  * @import { EnchantmentActiveEffectSystemData } from "./_types.mjs";
@@ -28,7 +28,12 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      magical: new BooleanField({ initial: true })
+      magical: new BooleanField({ initial: true }),
+      rider: new SchemaField({
+        activities: new SetField(new DocumentIdField()),
+        effects: new SetField(new DocumentUUIDField({ type: "ActiveEffect" })),
+        items: new SetField(new DocumentUUIDField({ type: "Item" }))
+      })
     };
   }
 
@@ -59,6 +64,13 @@ export default class EnchantmentData extends ActiveEffectDataModel {
    */
   get item() {
     return this.parent.item;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get trackRiders() {
+    return !this.isApplied && (!!this.rider?.activities?.size || !!this.rider?.effects?.size);
   }
 
   /* -------------------------------------------- */
@@ -274,14 +286,16 @@ export default class EnchantmentData extends ActiveEffectDataModel {
         activity = item.system.activities?.get(activityId);
       }
       profile = activity?.effects.find(e => e._id === enchantmentProfile);
+    } else {
+      item = (await fromUuid(this.parent._stats.compendiumSource))?.item;
     }
 
-    if ( !profile || !item ) return [];
+    const documents = await bulkFromUuid([...this.rider.effects, ...this.rider.items, ...(profile?.riders.item ?? [])]);
 
     // Create Activities
     const riderActivities = {};
     let riderEffects = [];
-    for ( const id of profile.riders.activity ) {
+    for ( const id of [...this.rider.activities, ...(profile?.riders.activity ?? [])] ) {
       const activity = item?.system.activities.get(id);
       if ( !activity ) continue;
       const activityData = activity.toObject();
@@ -298,8 +312,9 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     });
 
     // Create Effects
-    riderEffects.push(...profile.riders.effect.map(id => {
-      const effectData = item.effects.get(id)?.toObject();
+    const effectIds = [...this.rider.effects, ...(profile?.riders.effect ?? [])];
+    riderEffects.push(...effectIds.map(id => {
+      const effectData = (documents.get(id) ?? item?.effects.get(id))?.toObject();
       if ( effectData ) {
         delete effectData._id;
         delete effectData.flags?.dnd5e?.rider;
@@ -315,9 +330,8 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
     // Create Items
     if ( this.item.isEmbedded ) {
-      const items = await bulkFromUuid(profile.riders.item);
       const riderItems = await Item5e.createWithContents(
-        items.values(), {
+        itemUuids.map(uuid => documents.get(uuid)).filter(_ => _), {
           transformAll: item => {
             const itemData = item.clone({}, { keepId: true }).toObject();
             foundry.utils.setProperty(itemData, "flags.dnd5e.dependentOn", this.parent.uuid);
@@ -343,5 +357,26 @@ export default class EnchantmentData extends ActiveEffectDataModel {
         item: this.isApplied ? this.item : true, prefixItemName: false
       })
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async getSheetData(context) {
+    if ( this.isApplied ) return;
+
+    context.additionalChangesFields.unshift({
+      field: context.systemFields.rider.fields.effects,
+      value: context.source.system.rider.effects
+    }, {
+      field: context.systemFields.rider.fields.items,
+      value: context.source.system.rider.items
+    });
+
+    if ( this.item?.system.activities ) context.additionalChangesFields.unshift({
+      field: context.systemFields.rider.fields.activities,
+      options: this.item.system.activities.map(a => ({ value: a.id, label: a.name })),
+      value: context.source.system.rider.activities
+    });
   }
 }
