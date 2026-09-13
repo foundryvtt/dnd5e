@@ -61,7 +61,7 @@ The [active effect conditions page](Active-Effects.md#Conditions) goes over the 
 | roll.damage.type           | Type of damage being applied for a single damage part.                                                                             | `cold`, `fire`, etc.                   |
 | roll.item                  | Roll data for item performing the attack (while the `item`) at the top level contains data for the item that provided the rule AE. |                                        |
 | roll.proficient            | Whether proficiency was added to the roll.                                                                                         | `true` or `false`                      |
-| roll.scaling               | Any scaling applied tot he item used for the roll.                                                                                 |                                        |
+| roll.scaling               | Any scaling applied to the item used for the roll.                                                                                 |                                        |
 | roll.skill                 | ID of skill associated with the roll.                                                                                              | `acr`, `ath`, etc.                     |
 | roll.tool                  | ID of tool associated with the roll.                                                                                               | `thief`, `carpenter`, etc.             |
 | roll.type                  | Type of roll being performed.                                                                                                      | `attack`, `skill`, `tool`, etc.        |

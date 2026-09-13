@@ -579,15 +579,15 @@ system.rolls.damage.[type].bonus
 
 | Attribute Key                    | Change Type | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
-| `sysetm.rolls.damage.mwak.bonus` | Add         | `[formula]`  | Yes        |
-| `sysetm.rolls.damage.msak.bonus` | Add         | `[formula]`  | Yes        |
+| `system.rolls.damage.mwak.bonus` | Add         | `[formula]`  | Yes        |
+| `system.rolls.damage.msak.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Bonus to All Ranged Attack Damage Rolls (both spell and weapon)
 
 | Attribute Key                    | Change Type | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
-| `sysetm.rolls.damage.rwak.bonus` | Add         | `[formula]`  | Yes        |
-| `sysetm.rolls.damage.rsak.bonus` | Add         | `[formula]`  | Yes        |
+| `system.rolls.damage.rwak.bonus` | Add         | `[formula]`  | Yes        |
+| `system.rolls.damage.rsak.bonus` | Add         | `[formula]`  | Yes        |
 
 ### Specifying Damage Types
 
@@ -595,7 +595,7 @@ Damage types can be specified for bonus damage by adding them in square brackets
 
 | Attribute Key                    | Change Type | Effect Value    | Roll Data? |
 | -------------------------------- | ----------- | --------------- | ---------- |
-| `sysetm.rolls.damage.mwak.bonus` | Add         | `1d8[radiant]`  | Yes        |
+| `system.rolls.damage.mwak.bonus` | Add         | `1d8[radiant]`  | Yes        |
 
 This works with any damage type and any of the attack damage bonuses (mwak, rwak, msak, rsak). The damage type needs to be in English and all lowercase. Examples:
 - `1d6[fire]` - 1d6 fire damage
