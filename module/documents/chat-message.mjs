@@ -337,6 +337,9 @@ export default class ChatMessage5e extends ChatMessage {
   async #refreshOrigin() {
     const origin = this.system?.origin;
     if ( !origin ) return;
+    await Promise.resolve();
+    // wait for Dice So Nice animation if there's one
+    await game.dice3d?.waitFor3DAnimationByMessageID(this.id);
     await origin.system?.onDescendentRefresh?.(this);
     ui.chat?.updateMessage(origin);
   }

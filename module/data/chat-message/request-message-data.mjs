@@ -161,7 +161,7 @@ export default class RequestMessageData extends ChatMessageDataModel {
    * @param {string} result.actorUuid  The UUID of the actor fulfilling the request.
    * @param {string} result.requestId  The ID of the original request message.
    */
-  static #updateRequestTargets(message, result) {
+  static async #updateRequestTargets(message, result) {
     const actor = fromUuidSync(result.actorUuid);
     const request = game.messages.get(result.requestId);
     if ( !actor || !request ) return;
@@ -169,6 +169,11 @@ export default class RequestMessageData extends ChatMessageDataModel {
     const index = request.system.targets.findIndex(t => t.actor === result.actorUuid);
     const target = request.system.targets[index];
     if ( !target ) return;
+
+    await Promise.resolve();
+
+    // wait for Dice So Nice animation if there's one
+    await game.dice3d?.waitFor3DAnimationByMessageID(message.id);
 
     const targetsData = request.system.toObject().targets ?? [];
     targetsData[index].result = message.id;
