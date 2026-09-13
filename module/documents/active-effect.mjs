@@ -769,7 +769,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const name = this.name;
 
     // If out of combat & effect expires, delete it
-    if ( game.user.isActiveGM && data.duration?.expired ) {
+    if ( game.user.isActiveGM && data.duration?.expired && !this.getFlag("dnd5e", "dependentOn") ) {
       const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
       const combat = this.start?.combat ?? game.combat;
       if ( !combat?.getCombatantsByActor(actor).length ) return this.delete();
