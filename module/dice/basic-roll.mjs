@@ -1,8 +1,7 @@
 import RollConfigurationDialog from "../applications/dice/roll-configuration-dialog.mjs";
 import BasicDie from "./basic-die.mjs";
-import simplifyRollFormula from "./simplify-roll-formula.mjs";
 
-const { DiceTerm, NumericTerm, PoolTerm } = foundry.dice.terms;
+const { DiceTerm, NumericTerm, PoolTerm, RollTerm } = foundry.dice.terms;
 
 /**
  * @import {
@@ -290,9 +289,11 @@ export default class BasicRoll extends Roll {
 
   /** @inheritDoc */
   async getTooltip() {
-    const constant = Number(simplifyRollFormula(this._formula, { deterministic: true }));
+    const ast = CONFIG.Dice.parser.toAST(this.clone().terms);
+    const constants = this.constructor.collectConstants?.(ast);
+    const constant = constants.reduce((sum, term) => sum + term.total, 0);
     return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, {
-      constant: constant || null,
+      constant, constants,
       parts: this.dice.map(d => d.getTooltipData())
     });
   }
@@ -337,6 +338,32 @@ export default class BasicRoll extends Roll {
 
   /* -------------------------------------------- */
   /*  Roll Formula Parsing                        */
+  /* -------------------------------------------- */
+
+  /**
+   * Collect constant terms from an AST node.
+   * @param {RollParseNode} node     The node.
+   * @param {number} [multiplier=1]  The outer multiplier, if any.
+   * @returns {{ flavor: string, total: number }[]}
+   */
+  static collectConstants(node, multiplier=1) {
+    if ( (node.class === "Node") && ((node.operator === "+") || (node.operator === "-")) ) {
+      const [left, right] = node.operands;
+      return [
+        ...this.collectConstants(left, multiplier),
+        ...this.collectConstants(right, node.operator === "-" ? -multiplier : multiplier)
+      ];
+    }
+    const terms = CONFIG.Dice.parser.flattenTree(node).map(term => {
+      return term instanceof RollTerm ? term : RollTerm.fromData(term);
+    });
+    const roll = Roll.fromTerms(terms);
+    if ( !roll.isDeterministic ) return [];
+    const flavor = terms.map(term => term.flavor).filterJoin(", ");
+    const total = roll.evaluateSync().total * multiplier;
+    return [{ flavor, total }];
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

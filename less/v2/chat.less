@@ -102,18 +102,31 @@
 
 .dice-tooltip {
   .tooltip-part {
-    border-bottom: var(--dnd5e-border-separator-heavy);
-    padding: .125rem 0;
+    border-top: var(--dnd5e-border-separator-warning);
+    padding: 2px 0;
 
-    &:last-child {
-      border: none;
-      padding-bottom: 0;
-    }
+    &:first-child { border: none; }
+    &:last-child { padding-block-end: 0; }
+    &.constant:last-child { border-top: var(--dnd5e-border-separator-heavy); }
 
-    &.constant {
-      padding-right: 6px;
-      min-height: 40px;
+    &.constant, &.constant-term {
       display: grid;
+      min-block-size: 32px;
+
+      .dice {
+        > .flavor {
+          color: var(--color-text-secondary);
+          flex: 1;
+          font-size: var(--font-size-11);
+          margin-inline-start: 10px;
+          text-transform: uppercase;
+        }
+
+        > .total {
+          align-items: end;
+          margin-inline-end: 20px;
+        }
+      }
     }
   }
 
