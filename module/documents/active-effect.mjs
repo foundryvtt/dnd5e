@@ -635,15 +635,45 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   getReplacementData(baseData) {
-    if ( !this.item ) return super.getReplacementData(baseData);
-    baseData = { ...super.getReplacementData(baseData) };
-    baseData.item = {
-      ...this.item.system,
-      flags: this.item.flags,
-      name: this.item.name
+    const sourceData = this.#getEffectItemData();
+    if ( !sourceData ) return super.getReplacementData(baseData);
+    return {
+      ...super.getReplacementData(baseData),
+      item: sourceData.sourceItem,
+      scaling: sourceData.sourceScaling,
+      ...sourceData
     };
-    baseData.scaling = new Scaling(this.item.scalingIncrease);
-    return baseData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get data for evaluating conditions.
+   * @param {object} baseData  Base roll data.
+   * @returns {object}
+   */
+  getRuleConditionData(baseData) {
+    const sourceData = this.#getEffectItemData();
+    if ( !sourceData ) return super.getReplacementData(baseData);
+    return { ...super.getReplacementData(baseData), ...sourceData };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get data for the item this effect belongs to.
+   * @returns {{sourceItem: object, sourceScaling: Scaling}|void}
+   */
+  #getEffectItemData() {
+    if ( !this.item ) return;
+    return {
+      sourceItem: {
+        ...this.item.system,
+        flags: this.item.flags,
+        name: this.item.name
+      },
+      sourceScaling: new Scaling(this.item.scalingIncrease)
+    };
   }
 
   /* -------------------------------------------- */
