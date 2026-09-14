@@ -728,6 +728,17 @@ Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRender
 Hooks.on("getActorContextOptions", documents.Actor5e.addDirectoryContextOptions);
 Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
 
+Hooks.on("preImportAdventure", (adventure, options, toCreate, toUpdate) => {
+  for ( const scene of toUpdate.Scene ?? [] ) {
+    for ( const token of scene.tokens ?? [] ) {
+      for ( const effect of token.delta?.effects ?? [] ) {
+        // Wrap effects on deltas in a _replace to workaround https://github.com/foundryvtt/foundryvtt/issues/14373
+        if ( effect.type === "condition" ) effect.system = _replace(effect.system);
+      }
+    }
+  }
+});
+
 Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrowser.injectSidebarButton(html));
 
 Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e.onRenderJournalPageSheet);
