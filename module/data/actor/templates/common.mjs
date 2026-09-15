@@ -320,6 +320,11 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const attackBonus = simplifyBonus(this.rolls?.attack?.bonus, rollData);
     const rollReduction = this.parent.conditionRollReduction;
 
+    // Adjust attack rolling mode
+    if ( this.parent.hasConditionEffect("attackDisadvantage") ) {
+      AdvantageModeField.setMode(this, "rolls.attack.mode", -1);
+    }
+
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
       abl.proficient = Math.max(abl.proficient, this.rolls?.ability?.save?.proficiency ?? -Infinity);
@@ -369,8 +374,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       // Adjust rolling mode
       const isPhysicalAbility = CONFIG.DND5E.abilities[id]?.type === "physical";
-      if ( this.parent.hasConditionEffect("attackDisadvantage")
-        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalAttackDisadvantage")) ) {
+      if ( isPhysicalAbility && this.parent.hasConditionEffect("physicalAttackDisadvantage") ) {
         AdvantageModeField.setMode(this, `abilities.${id}.attack.roll.mode`, -1);
       }
       if ( this.parent.hasConditionEffect("abilityCheckDisadvantage")
