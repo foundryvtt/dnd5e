@@ -77,10 +77,11 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
   /** @override */
   async _prepareContext() {
     const context = {};
-    const plurals = new Intl.PluralRules(game.i18n.lang);
-    const key = this.undefended ? "Undefended" : this.deaths ? `Deaths.${plurals.select(this.deaths)}` : "NoDeaths";
+    let key = this.undefended ? "Undefended" : this.deaths ? null : "NoDeaths";
+    if ( key ) key = `DND5E.Bastion.Attack.Result.${key}`;
+    else key = getPluralLocalizationKey(deaths, pr => `DND5E.Bastion.Attack.Result.${pr}`);
     const isPrivate = !this.parent.isContentVisible;
-    context.description = _loc(`DND5E.Bastion.Attack.Result.${key}`, { deaths: this.deaths });
+    context.description = _loc(key, { deaths: this.deaths });
     context.rolls = await Promise.all(this.parent.rolls.map(roll => roll.render({
       isPrivate, message: this.parent, template: this.constructor.ROLL_TEMPLATE
     })));
