@@ -102,8 +102,9 @@ export default class RequestMessageData extends ChatMessageDataModel {
         const visible = game.user.isGM || (!!t.user && (game.user === t.user)) || (!t.user && actor.isOwner);
         const { result } = t;
         const completed = result !== null;
+        const messageId = result?.id;
         const total = result?.rolls[0]?.total;
-        return { actor, completed, total, visible };
+        return { actor, completed, messageId, total, visible };
       }).filter(_ => _)
     };
   }
