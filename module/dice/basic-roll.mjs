@@ -290,10 +290,9 @@ export default class BasicRoll extends Roll {
   /** @inheritDoc */
   async getTooltip() {
     const ast = CONFIG.Dice.parser.toAST(this.clone().terms);
-    const constants = this.constructor.collectConstants?.(ast);
-    const constant = constants.reduce((sum, term) => sum + term.total, 0);
+    const constants = this.constructor.collectConstants?.(ast).filter(({ flavor, total }) => flavor || total);
     return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, {
-      constant, constants,
+      constants,
       parts: this.dice.map(d => d.getTooltipData())
     });
   }

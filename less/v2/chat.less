@@ -102,14 +102,13 @@
 
 .dice-tooltip {
   .tooltip-part {
-    border-top: var(--dnd5e-border-separator-warning);
+    border-top: var(--dnd5e-border-dotted);
     padding: 2px 0;
 
     &:first-child { border: none; }
     &:last-child { padding-block-end: 0; }
-    &.constant:last-child { border-top: var(--dnd5e-border-separator-heavy); }
 
-    &.constant, &.constant-term {
+    &.constant-term {
       display: grid;
       min-block-size: 32px;
 
