@@ -2510,7 +2510,8 @@
   "Label": "Damage Modification",
   "Hint": "Formulas for amounts that will be added to typed damage applied to this actor. Negative values will reduce the damage taken.",
   "BypassHint": "These weapon properties will bypass damage modification for physical damage.",
-  "Formatter": "{name} Damage Modification"
+  "Formatter": "{name} Damage Modification",
+  "MultiplyHint": "Multipliers that will be applied to typed damage applied to this actor. Negative values will result in restoring health, rather than decreasing it."
 },
 "DND5E.DamageRoll": "Damage Roll",
 "DND5E.DamageThreshold": "Damage Threshold",
