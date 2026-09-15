@@ -1023,9 +1023,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     let update = { [`system.advancement.${advancement.id}`]: advancement.toObject() };
     if ( !source && this._needsAdvancementMigration ) update = {
-      "system.==advancement": foundry.utils.mergeObject(
-        this.system.toObject().advancement, { [advancement.id]: advancement.toObject() }
-      )
+      "system.advancement": _replace(foundry.utils.mergeObject(this.system.toObject().advancement, {
+        [advancement.id]: advancement.toObject()
+      }))
     };
     if ( source ) return this.updateSource(update);
     return this.update(update).then(() => {
@@ -1426,6 +1426,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         if ( activity[key]?.override !== false ) continue;
         activity[key].override = true;
         foundry.utils.mergeObject(activity[key], itemData.system[key]);
+        if ( key === "duration" ) activity.duration.concentration = properties.includes("concentration");
       }
       activity.consumption.targets.push({ type: "itemUses", target: "", value: "1" });
       if ( activity.type === "attack" ) {

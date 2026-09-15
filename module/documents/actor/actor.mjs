@@ -245,7 +245,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {{items: Set<Item5e>, effects: Set<ActiveEffect5e>}}
    */
   get concentration() {
-    const concentration = {
+    if ( this._lazy.concentration !== undefined ) return this._lazy.concentration;
+    const concentration = this._lazy.concentration = {
       items: new Set(),
       effects: new Set()
     };

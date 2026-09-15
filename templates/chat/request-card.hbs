@@ -9,7 +9,7 @@
                 <span class="name-stacked">
                     <span class="title">{{ actor.name }}</span>
                 </span>
-                <div class="status">
+                <div class="status" {{#if messageId}}data-message-id="{{ messageId }}"{{/if}}>
                     {{#if total includeZero=true}}
                     <span class="total">{{ total }}</span>
                     {{else if completed}}

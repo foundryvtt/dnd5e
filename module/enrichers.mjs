@@ -1771,7 +1771,7 @@ async function handleAward(event, target) {
  * @param {HTMLElement} [target]  Button that was clicked.
  */
 async function handlePostRequest(dataset, target) {
-  if ( dataset instanceof Event ) {
+  if ( target ) {
     window.getSelection().empty();
     dataset = getRollActionDataset(target);
   }

@@ -302,7 +302,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       && Object.values(CONFIG.statusEffects).some(e => e._id === data._id) ) {
       foundry.utils.mergeObject(data, {
         type: "condition",
-        "system.type": data.statuses[0],
+        "system.type": data.statuses?.[0],
         "flags.dnd5e.persistSourceMigration": true
       });
     }
@@ -635,15 +635,45 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   getReplacementData(baseData) {
-    if ( !this.item ) return super.getReplacementData(baseData);
-    baseData = { ...super.getReplacementData(baseData) };
-    baseData.item = {
-      ...this.item.system,
-      flags: this.item.flags,
-      name: this.item.name
+    const sourceData = this.#getEffectItemData();
+    if ( !sourceData ) return super.getReplacementData(baseData);
+    return {
+      ...super.getReplacementData(baseData),
+      item: sourceData.sourceItem,
+      scaling: sourceData.sourceScaling,
+      ...sourceData
     };
-    baseData.scaling = new Scaling(this.item.scalingIncrease);
-    return baseData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get data for evaluating conditions.
+   * @param {object} baseData  Base roll data.
+   * @returns {object}
+   */
+  getRuleConditionData(baseData) {
+    const sourceData = this.#getEffectItemData();
+    if ( !sourceData ) return super.getReplacementData(baseData);
+    return { ...super.getReplacementData(baseData), ...sourceData };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get data for the item this effect belongs to.
+   * @returns {{sourceItem: object, sourceScaling: Scaling}|void}
+   */
+  #getEffectItemData() {
+    if ( !this.item ) return;
+    return {
+      sourceItem: {
+        ...this.item.system,
+        flags: this.item.flags,
+        name: this.item.name
+      },
+      sourceScaling: new Scaling(this.item.scalingIncrease)
+    };
   }
 
   /* -------------------------------------------- */
@@ -769,7 +799,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const name = this.name;
 
     // If out of combat & effect expires, delete it
-    if ( game.user.isActiveGM && data.duration?.expired ) {
+    if ( game.user.isActiveGM && data.duration?.expired && !this.getFlag("dnd5e", "dependentOn") ) {
       const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
       const combat = this.start?.combat ?? game.combat;
       if ( !combat?.getCombatantsByActor(actor).length ) return this.delete();
