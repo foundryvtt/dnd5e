@@ -1426,6 +1426,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         if ( activity[key]?.override !== false ) continue;
         activity[key].override = true;
         foundry.utils.mergeObject(activity[key], itemData.system[key]);
+        if ( key === "duration" ) activity.duration.concentration = properties.includes("concentration");
       }
       activity.consumption.targets.push({ type: "itemUses", target: "", value: "1" });
       if ( activity.type === "attack" ) {

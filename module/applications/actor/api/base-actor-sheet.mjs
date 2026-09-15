@@ -1767,8 +1767,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const toCreate = await Item5e.createWithContents([item], {
       container,
       transformFirst: itemData => {
+        const options = { container: container.id };
+        if ( itemData.pack ) options.compendiumUuid = itemData.uuid;
         if ( itemData instanceof foundry.abstract.Document ) itemData = itemData.toObject();
-        return this._onDropSingleItem(event, itemData, { container: container.id });
+        return this._onDropSingleItem(event, itemData, options);
       }
     });
     let bastionClaim;
@@ -1828,8 +1830,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
       transformFirst: item => {
+        const options = {};
+        if ( item.pack ) options.compendiumUuid = item.uuid;
         if ( item instanceof foundry.abstract.Document ) item = item.toObject();
-        return this._onDropSingleItem(event, item);
+        return this._onDropSingleItem(event, item, options);
       }
     });
     let bastionClaim;
@@ -1852,11 +1856,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @param {object} itemData                  The item data to create.
    * @param {object} [options={}]
    * @param {string} [options.container=null]  ID of the container into which this item is being dropped.
+   * @param {string} [options.compendiumUuid]  The UUID of this item if dropped from a compendium.
    * @returns {Promise<object|boolean>}        The item data to create after processing, or false if the item should
    *                                           not be created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(event, itemData, { container=null }={}) {
+  async _onDropSingleItem(event, itemData, { compendiumUuid, container=null }={}) {
     const actor = this.inventorySource;
 
     // Check to make sure items of this type are allowed on this actor
@@ -1873,7 +1878,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Create a Consumable spell scroll on the Inventory tab
     if ( (itemData.type === "spell")
       && ((this.tabGroups.primary === "inventory") || (actor.type === "vehicle")) ) {
-      const scroll = await Item5e.createScrollFromSpell(itemData);
+      const scroll = compendiumUuid
+        ? await Item5e.createScrollFromCompendiumSpell(compendiumUuid)
+        : await Item5e.createScrollFromSpell(itemData);
       return scroll?.toObject?.() ?? false;
     }
 
