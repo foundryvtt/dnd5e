@@ -369,6 +369,10 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       // Adjust rolling mode
       const isPhysicalAbility = CONFIG.DND5E.abilities[id]?.type === "physical";
+      if ( this.parent.hasConditionEffect("attackDisadvantage")
+        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalAttackDisadvantage")) ) {
+        AdvantageModeField.setMode(this, `abilities.${id}.attack.roll.mode`, -1);
+      }
       if ( this.parent.hasConditionEffect("abilityCheckDisadvantage")
         || (isPhysicalAbility && this.parent.hasConditionEffect("physicalCheckDisadvantage")) ) {
         AdvantageModeField.setMode(this, `abilities.${id}.check.roll.mode`, -1);
