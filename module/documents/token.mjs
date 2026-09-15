@@ -409,7 +409,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const waypoint = { action: "fall", elevation: surface.elevation };
     if ( surface.level && (surface.level.id !== this._source.level) ) waypoint.level = surface.level.id;
     await this.move(waypoint, { animate: false, dnd5e: { fall: { distance } } });
-    await actor.toggleStatusEffect("falling", { active: false });
+    await this.updateFalling();
     await postFallDamage([this], distance);
   }
 
@@ -417,24 +417,29 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /**
    * Update the falling status of this token.
+   * @param {TokenMovementOperation} [movement]
    * @returns {Promise<void>}
    */
-  updateFalling() {
+  updateFalling(movement) {
     const { actor } = this;
     if ( !actor ) return Promise.resolve();
-    return actor._falling = actor._falling.then(() => this.#updateFalling()).catch(err => console.error(err));
+    return actor._falling = actor._falling.then(() => this.#updateFalling(movement)).catch(err => console.error(err));
   }
 
   /* -------------------------------------------- */
 
   /**
    * Update the falling status of this token.
+   * @param {TokenMovementOperation} [movement]
    * @returns {Promise<void>}
    */
-  async #updateFalling() {
+  async #updateFalling(movement) {
     const { actor } = this;
     if ( !actor || dnd5e.settings.disableFalling ) return;
-    const shouldFall = this._isFalling();
+    const shouldFall = actor.getDependentTokens({ linked: true, concreteOnly: true }).some(token => {
+      if ( (token === this) && movement ) return this.#shouldFall(movement);
+      return token._isFalling();
+    });
     if ( shouldFall === actor.statuses.has("falling") ) return;
     await actor.toggleStatusEffect("falling", { active: shouldFall });
   }
@@ -557,9 +562,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     super._onRelatedUpdate(update, operation);
 
     const { actor } = this;
-    const concrete = this.parent?.isView && (this.parent.tokens.get(this.id) === this);
+    const concrete = this.parent?.tokens.get(this.id) === this;
     const canUpdateFalling = concrete && actor && game.user.isDesignated(u => {
-      return u.active && (u.viewedScene === this.parent.id) && actor.canUserModify(u, "update");
+      return u.active && actor.canUserModify(u, "update");
     });
     if ( canUpdateFalling ) void this.updateFalling();
 
@@ -592,9 +597,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
     const { actor } = this;
     if ( !actor ) return;
-    const shouldFall = this.#shouldFall(movement);
-    if ( shouldFall === actor.statuses.has("falling") ) return;
-    await actor.toggleStatusEffect("falling", { active: shouldFall });
+    await this.updateFalling(movement);
   }
 
   /* -------------------------------------------- */
