@@ -2536,7 +2536,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _getRestHitDiceRecovery({ maxHitDice, fraction, ...config }={}, result={}) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     if ( !this.system.attributes.hd || !restConfig?.recoverHitDice ) return;
-    fraction ??= dnd5e.settings.rulesVersion === "modern" ? 1 : 0.5;
+    fraction ??= this.system.attributes.hd.recovery ?? (dnd5e.settings.rulesVersion === "modern" ? 1 : 0.5);
 
     // Handle simpler HD recovery for NPCs
     if ( this.system.isNPC ) {
