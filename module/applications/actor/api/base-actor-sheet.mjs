@@ -472,7 +472,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       ctx.clickAction = "use";
       this._prepareItem(item, ctx);
       if ( item.type === "spell" ) await this._prepareItemSpell(item, ctx);
-      else if ( "quantity" in item.system ) await this._prepareItemPhysical(item, ctx);
+      else if ( item.system.isPhysical ) await this._prepareItemPhysical(item, ctx);
       else await this._prepareItemFeature(item, ctx);
 
       // Handle expanded data
@@ -570,6 +570,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _prepareSpellbook(context) {
     const { SingleLevelSpellcasting } = dnd5e.dataModels.spellcasting;
     const spellbook = {};
+    if ( this.actor.statuses.has("antimagic") ) return spellbook;
     const columns = customElements.get(this.options.elements.inventory).mapColumns([
       "school", "time", "range", "target", "roll", { id: "uses", order: 650, priority: 300 },
       { id: "formula", priority: 200 }, "controls"
