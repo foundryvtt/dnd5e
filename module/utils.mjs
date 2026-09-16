@@ -566,7 +566,7 @@ export function simplifyBonus(bonus, data={}, { strict }={}) {
     return roll.isDeterministic ? roll.evaluateSync().total : 0;
   } catch (err) {
     if ( strict ) throw err;
-    console.error(error);
+    console.error(err);
     return 0;
   }
 }
