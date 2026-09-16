@@ -137,7 +137,11 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   static getCounts(model, keyPath) {
     keyPath = foundry.utils.getType(keyPath) === "Object" ? keyPath.key : keyPath;
     const parentKey = keyPath.substring(0, keyPath.lastIndexOf("."));
-    const roll = foundry.utils.getProperty(model, parentKey) ?? {};
+    let roll = foundry.utils.getProperty(model, parentKey);
+    if ( !roll ) {
+      roll = {};
+      foundry.utils.setProperty(model, parentKey, roll);
+    }
     return roll.modeCounts ??= {
       override: null,
       advantages: { count: 0, suppressed: false },
