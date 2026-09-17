@@ -384,6 +384,8 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       CommonTemplate.shimAbilityData(abl, id);
     }
+
+    this.parent.applyActiveEffects("postAbilities");
   }
 
   /* -------------------------------------------- */
