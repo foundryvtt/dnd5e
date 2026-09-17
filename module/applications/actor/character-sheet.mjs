@@ -1077,7 +1077,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( !target.classList.contains("rollable") ) return;
     const { facilityId } = target.closest("[data-facility-id]")?.dataset ?? {};
     const facility = this.actor.items.get(facilityId);
-    facility?.use({ legacy: false, chooseActivity: true, event });
+    facility?.use({ chooseActivity: true, event });
   }
 
   /* -------------------------------------------- */

@@ -20,7 +20,7 @@ import { convertLength, formatLength } from "../utils.mjs";
  */
 export function getFallDamageFormula(distance, units) {
   const { damageDie, distancePerDie, maximumDice } = CONFIG.DND5E.falling;
-  const feet = convertLength(distance, units, "ft", { strict: false });
+  const feet = convertLength(distance, units, "ft");
   const dice = Math.min(maximumDice, Math.floor(feet / distancePerDie));
   return dice ? `${dice}${damageDie}` : null;
 }
