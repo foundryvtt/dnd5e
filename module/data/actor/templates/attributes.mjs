@@ -14,7 +14,9 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { ActorRollData, DeathSaveOutcome } from "../../../documents/_types.mjs";
- * @import { ArmorClassData, AttributesCommonData, AttributesCreatureData, HitPointsData } from "./_types.mjs";
+ * @import {
+ *   ArmorClassData, AttributesCommonData, AttributesCreatureData, HitDiceData, HitPointsData
+ * } from "./_types.mjs";
  */
 
 /**
@@ -64,6 +66,22 @@ export default class AttributesFields {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Hit dice fields shared between characters and NPCs.
+   * @type {HitDiceData}
+   */
+  static get hitDice() {
+    return {
+      recovery: new NumberField({
+        min: -1, max: 1, persisted: false, initial: () => dnd5e.settings.rulesVersion === "modern" ? 1 : 0.5,
+        label: "DND5E.HITDICE.FIELDS.attributes.hd.recovery.label"
+      })
+    };
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Hit points fields shared between NPCs, objects, and vehicles.
    * @type {HitPointsData}
