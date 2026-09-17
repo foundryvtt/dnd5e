@@ -1,3 +1,4 @@
+import { getPluralLocalizationKey } from "../../utils.mjs";
 import SelectChoices from "./select-choices.mjs";
 
 /**
@@ -350,9 +351,9 @@ export function traitIndexFields() {
  */
 export function traitLabel(trait, count) {
   const traitConfig = CONFIG.DND5E.traits[trait];
-  const pluralRule = (count !== undefined) ? new Intl.PluralRules(game.i18n.lang).select(count) : "other";
-  if ( !traitConfig ) return _loc(`DND5E.TRAIT.Generic.${pluralRule}`);
-  return _loc(`${traitConfig.labels.localization}.${pluralRule}`);
+  return _loc(getPluralLocalizationKey(count, pr =>
+    `${traitConfig?.labels?.localization ?? "DND5E.TRAIT.Generic"}.${pr}`
+  ));
 }
 
 /* -------------------------------------------- */
@@ -434,16 +435,15 @@ export function keyIcon(key, { trait }={}) {
  */
 export function keyLabel(key, config={}) {
   let { count, trait, final } = config;
-
   let parts = key.split(":");
-  const pluralRules = new Intl.PluralRules(game.i18n.lang);
 
   if ( !trait ) trait = parts.shift();
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return key;
   const traitData = CONFIG.DND5E[traitConfig.configKey ?? trait] ?? {};
-  let categoryLabel = _loc(`${traitConfig.labels.localization}.${
-    pluralRules.select(count ?? 1)}`);
+  let categoryLabel = _loc(getPluralLocalizationKey(count ?? 1, pr =>
+    `${traitConfig.labels.localization}.${pr}`
+  ));
 
   // Trait (e.g. "Tool Proficiency")
   const lastKey = parts.pop();

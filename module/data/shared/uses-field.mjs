@@ -1,5 +1,5 @@
 import { ScaleValueTypeUsage } from "../../data/advancement/scale-value-data.mjs";
-import { formatNumber, formatRange, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
+import { formatNumber, formatRange, getPluralLocalizationKey, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -143,10 +143,10 @@ export default class UsesField extends SchemaField {
     // Legendary/Mythic Actions
     if ( (this.activation?.type === "legendary") || (this.activation?.type === "mythic") ) {
       if ( this.activation.value < 2 ) return "";
-      const pr = getPluralRules();
-      return _loc(`DND5E.NPC.ActionCostCounted.${pr.select(this.activation.value)}`, {
-        number: formatNumber(this.activation.value)
-      });
+      return _loc(
+        getPluralLocalizationKey(this.activation.value, pr => `DND5E.NPC.ActionCostCounted.${pr}`),
+        { number: formatNumber(this.activation.value) }
+      );
     }
 
     if ( !this.uses.max || (this.uses.recovery.length !== 1) ) return "";
