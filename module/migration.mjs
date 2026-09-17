@@ -163,6 +163,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
     }
 
     // Migrate ActorDeltas individually in order to avoid issues with ActorDelta bulk updates.
+    const actorCollections = Object.keys(Actor.hierarchy);
     for ( const token of s.tokens ) {
       if ( token.actorLink || !token.actor ) {
         incrementProgress();
@@ -178,12 +179,20 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
             updateData = foundry.utils.mergeObject(source, updateData, { inplace: false });
           } else {
             // Workaround for core issue of bulk updating ActorDelta collections.
-            ["items", "effects"].forEach(col => {
+            actorCollections.forEach(col => {
               for ( const [i, update] of (updateData[col] ?? []).entries() ) {
                 const original = token.actor[col].get(update._id);
                 updateData[col][i] = foundry.utils.mergeObject(original.toObject(), update, { inplace: false });
               }
             });
+          }
+          // Do not attempt to persist embedded documents that were migrated on the base actor if they were not already
+          // managed by the delta. The delta will inherit those migrations from the migrated base actor.
+          for ( const collection of actorCollections ) {
+            if ( !(collection in updateData) ) continue;
+            updateData[collection] = updateData[collection]
+              .filter(update => token.delta[collection].manages(update._id));
+            if ( !updateData[collection].length ) delete updateData[collection];
           }
           await token.actor.update(updateData, {
             enforceTypes: false, diff: !flags.persistSourceMigration,

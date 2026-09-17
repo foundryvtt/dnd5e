@@ -36,6 +36,15 @@ export default class D20RollModificationField extends SchemaField {
   }
 
   /* -------------------------------------------- */
+  /*  Data Initialization                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  initialize(value, model, options={}) {
+    return super.initialize(value ?? {}, model, options);
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
