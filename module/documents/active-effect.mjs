@@ -751,13 +751,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     });
 
     // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
-    const { units, expiry } = this.duration;
+    const { expiry, units, value } = this.duration;
     if ( expiry && !this.expirySupportsDuration(expiry) ) this.updateSource({ "duration.value": null });
 
     // Default non-turns expiry to turnStart to avoid effect expiry at round turnover
     const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
     if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
-    if ( !expiry && (units !== "turns") ) this.updateSource({ "duration.expiry": "turnStart" });
+    if ( !expiry && Number.isFinite(value) && (units !== "turns") ) {
+      this.updateSource({ "duration.expiry": "turnStart" });
+    }
   }
 
   /* -------------------------------------------- */
