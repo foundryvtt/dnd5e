@@ -85,7 +85,11 @@ folder: epDf8I2SD3cS6ctz
 sort: 0
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    spellLevel:
+      base: 9
+      value: 9
 _stats:
   duplicateSource: null
   coreVersion: '14.361'
