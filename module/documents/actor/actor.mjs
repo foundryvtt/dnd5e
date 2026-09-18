@@ -2380,10 +2380,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( expiryEvents.length ) {
       const expired = new Map();
       const expireEffect = effect => {
-        for ( const event of expiryEvents ) {
-          if ( !effect.isExpiryEvent(event) ) continue;
-          expired.getOrInsert(effect.parent, []).push(effect.id);
-        }
+        if ( expiryEvents.includes(effect.duration.expiry) ) expired.getOrInsert(effect.parent, []).push(effect.id);
       };
       for ( const effect of this.effects ) {
         if ( !effect.getFlag("dnd5e", "dependentOn") ) expireEffect(effect);

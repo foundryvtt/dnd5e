@@ -1,3 +1,4 @@
+import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import AppliedRules from "../../../documents/applied-rules.mjs";
 import { applyFallProne } from "../../../rules/falling.mjs";
@@ -445,7 +446,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    this.attributes.exhaustion = this.conditions.exhaustion ?? 0;
+    this.attributes.exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION)?.system.level ?? 0;
   }
 
   /* -------------------------------------------- */
