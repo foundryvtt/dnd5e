@@ -1,0 +1,147 @@
+folder: ZzUfnm1OuSL02nLG
+name: Purple Worm Poison
+type: consumable
+_id: PWUGVaKaYHkvNMDr
+img: icons/consumables/potions/conical-ornate-purple.webp
+system:
+  activities:
+    hUYyc9zYsJJvCovr:
+      type: save
+      name: ''
+      _id: hUYyc9zYsJJvCovr
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects: []
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: 6
+            bonus: ''
+            modifiers: []
+            types:
+              - poison
+            scaling:
+              number: 1
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '19'
+        visible: true
+        bonus: ''
+  damage:
+    base:
+      types: []
+      custom:
+        enabled: false
+      modifiers: []
+      scaling:
+        number: 1
+    replace: false
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p>This poison must be harvested from a dead or incapacitated purple worm.
+      A creature subjected to this poison must make a [[/save]] saving throw,
+      taking [[/damage average]] damage on a failed save, or half as much damage
+      on a successful one.</p>
+    chat: ''
+  identifier: purple-worm-poison
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  rarities: []
+  attunement: ''
+  attuned: false
+  equipped: false
+  properties: []
+  type:
+    value: poison
+    subtype: injury
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.367'
+  systemId: dnd5e
+  systemVersion: 6.0.3
+  createdTime: 1789765602869
+  modifiedTime: 1789767298466
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!PWUGVaKaYHkvNMDr'
