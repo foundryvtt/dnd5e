@@ -166,7 +166,7 @@ export default class RollConfigurationDialog extends Dialog5e {
       }
     };
 
-    this.rolls.forEach(roll => identifyDice(roll.terms));
+    this.rolls.forEach(roll => identifyDice(roll.clone().simplify().terms));
     if ( dice.length > this.options.rendering.dice.max ) {
       // Compact dice display.
       const byDenom = dice.reduce((obj, { icon, denomination }) => {

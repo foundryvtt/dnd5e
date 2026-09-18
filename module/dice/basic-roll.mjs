@@ -495,6 +495,7 @@ export default class BasicRoll extends Roll {
 
   /**
    * Replace number and faces of dice terms with numeric values where possible.
+   * @returns {this}
    */
   simplify() {
     for ( const die of this.dice ) {
@@ -508,6 +509,7 @@ export default class BasicRoll extends Roll {
     }
 
     this.resetFormula();
+    return this;
   }
 
   /* -------------------------------------------- */
