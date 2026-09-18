@@ -20,6 +20,9 @@
  * @property {Omit<RollConfigData, "ability">} attributes.death
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
+ * @property {object} attributes.death.threshold           Death save thresholds.
+ * @property {number} attributes.death.threshold.success   Successes required to stabilize.
+ * @property {number} attributes.death.threshold.failure   Failures required to die.
  * @property {number} attributes.inspiration              Does this character have inspiration?
  * @property {object} attributes.piety
  * @property {number} attributes.piety.value              The creature's piety score.
@@ -138,6 +141,9 @@
  * @property {Omit<RollConfigData, "ability">} attributes.death
  * @property {number} attributes.death.success        Number of successful death saves.
  * @property {number} attributes.death.failure        Number of failed death saves.
+ * @property {object} attributes.death.threshold      Death save thresholds.
+ * @property {number} attributes.death.threshold.success  Successes required to stabilize.
+ * @property {number} attributes.death.threshold.failure  Failures required to die.
  * @property {object} attributes.price
  * @property {number|null} attributes.price.value     The creature's value in the specified denomination.
  * @property {string} attributes.price.denomination   The currency denomination.
