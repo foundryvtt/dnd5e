@@ -71,6 +71,7 @@
  * @property {string} units             Units that are used for the duration.
  * @property {string} expiry            Active effect expiry event.
  * @property {string} special           Description of any special duration details.
+ * @property {boolean} [ignoreDamageConcentration]  Ignore concentration saves caused by damage?
  */
 
 /**

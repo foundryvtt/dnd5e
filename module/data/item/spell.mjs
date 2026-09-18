@@ -41,7 +41,9 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     return this.mergeSchema(super.defineSchema(), {
       ability: new StringField({ label: "DND5E.SpellAbility" }),
       activation: new ActivationField(),
-      duration: new DurationField(),
+      duration: new DurationField({
+        ignoreDamageConcentration: new BooleanField()
+      }),
       level: new NumberField({ required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel" }),
       materials: new SchemaField({
         value: new StringField({ required: true, label: "DND5E.SpellMaterialsDescription" }),
