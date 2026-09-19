@@ -195,7 +195,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
 
 /**
  * Data model representing the active effect activity behavior configuration.
- * @extends {foundry.abstract.DataModel<ApplyActiveEffectActivityBehaviorData>}
+ * @extends {BaseActivityBehavior<ApplyActiveEffectActivityBehaviorData>}
  * @mixes ApplyActiveEffectActivityBehaviorData
  */
 export class ApplyActiveEffectActivityBehavior extends BaseActivityBehavior {
