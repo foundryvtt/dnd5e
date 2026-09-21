@@ -180,10 +180,19 @@ export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
 
     // Lock sight to the derived values; these bind to source, so they would otherwise show stale, editable data.
     if ( sight.enabled ) {
-      const range = html.querySelector('[name="sight.range"]');
-      const mode = html.querySelector('[name="sight.visionMode"]');
-      if ( range ) Object.assign(range, { value: sight.range, disabled: true });
-      if ( mode ) Object.assign(mode, { value: sight.visionMode, disabled: true });
+      for ( const [key, value] of Object.entries(sight) ) {
+        if ( key === "enabled" ) continue;
+        const field = html.querySelector(`[name="sight.${key}"]`);
+        if ( !field ) continue;
+        if ( foundry.utils.isElementInstanceOf(field, foundry.applications.elements.AbstractFormInputElement) ) {
+          // Avoid firing a change event that will trigger a preview refresh.
+          field._setValue(value ?? "");
+          field._refresh();
+        } else {
+          field.value = value ?? "";
+        }
+        field.disabled = true;
+      }
     }
 
     // Hide the override control on sense-derived rows; core already renders their derived range disabled.
