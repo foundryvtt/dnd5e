@@ -298,7 +298,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
-    else if ( (data.type !== "condition")
+    else if ( (data.type !== "condition") && data._id
       && Object.values(CONFIG.statusEffects).some(e => e._id === data._id) ) {
       foundry.utils.mergeObject(data, {
         type: "condition",
