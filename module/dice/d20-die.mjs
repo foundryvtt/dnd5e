@@ -86,11 +86,17 @@ export default class D20Die extends BasicDie {
     this.options[flag] = enabled;
 
     // Halfling Lucky, re-roll a natural 1 once
-    if ( flag === "halflingLucky" ) {
-      const index = this.modifiers.findIndex(m => m === "r1=1");
-      if ( enabled && (index === -1) ) this.modifiers.push("r1=1");
-      else if ( !enabled && (index !== -1) ) this.modifiers.splice(index, 1);
-    }
+    if ( flag === "halflingLucky" ) this.toggleModifier("r1=1", enabled);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add arbitrary modifiers to the die.
+   * @param {Set<string>} modifiers  Modifiers to apply.
+   */
+  applyModifiers(modifiers) {
+    modifiers?.forEach(m => this.toggleModifier(m));
   }
 
   /* -------------------------------------------- */
