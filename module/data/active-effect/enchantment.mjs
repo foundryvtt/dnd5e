@@ -1,5 +1,5 @@
 import Item5e from "../../documents/item.mjs";
-import { bulkFromUuid, getHumanReadableAttributeLabel } from "../../utils.mjs";
+import { bulkFromUuid } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
@@ -337,11 +337,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  async getSheetChangeContext(change) {
-    return {
-      name: getHumanReadableAttributeLabel(change.key, {
-        item: this.isApplied ? this.item : true, prefixItemName: false
-      })
-    };
+  async getSheetChangeContext(change, options) {
+    return super.getSheetChangeContext(change, { item: this.isApplied ? this.item : true, prefixItemName: false });
   }
 }
