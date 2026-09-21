@@ -282,7 +282,9 @@ export default class AttributesFields {
       });
       ac.equippedArmor = armors[0];
       ac.armor = ac.equippedArmor.system.armor.value ?? ac.armor;
-      if ( ac.equippedArmor.system.properties.has("stealthDisadvantage") && this.skills ) {
+      if ( ac.equippedArmor.system.properties.has("stealthDisadvantage")
+        && ("ste" in CONFIG.DND5E.skills)
+        && this.skills ) {
         AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
       }
     }
