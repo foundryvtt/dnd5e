@@ -3950,6 +3950,7 @@ DND5E.elevationScaling = true;
 DND5E.activeEffectChangeTypes = Object.freeze({
   "dnd5e.advantage": {
     label: "DND5E.EFFECT.Change.Type.Advantage.Label",
+    hint: "DND5E.EFFECT.Change.Type.Advantage.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
@@ -3957,6 +3958,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.bonus": {
     label: "DND5E.EFFECT.Change.Type.Bonus.Label",
+    hint: "DND5E.EFFECT.Change.Type.Bonus.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
@@ -3964,6 +3966,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.maximum": {
     label: "DND5E.EFFECT.Change.Type.Maximum.Label",
+    hint: "DND5E.EFFECT.Change.Type.Maximum.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
@@ -3971,6 +3974,15 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.minimum": {
     label: "DND5E.EFFECT.Change.Type.Minimum.Label",
+    hint: "DND5E.EFFECT.Change.Type.Minimum.Hint",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    group: "DND5E.EFFECT.Change.Group.Rules",
+    skipConditions: true
+  },
+  "dnd5e.modifier": {
+    label: "DND5E.EFFECT.Change.Type.Modifier.Label",
+    hint: "DND5E.EFFECT.Change.Type.Modifier.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",

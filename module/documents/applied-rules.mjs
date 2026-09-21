@@ -189,6 +189,17 @@ class RulesIterator extends Iterator {
   /* -------------------------------------------- */
 
   /**
+   * Convert the values in the iterator into a set of modifiers.
+   * @param {Set<string>} [initial]  Other modifiers to combine with ones from the iterator.
+   * @returns {Set<string>}
+   */
+  toModifiers(initial=new Set()) {
+    return new Set(this.values(String)).union(initial);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Find the lowest value among all of the provided rules, or `Infinity` if no rules are available.
    * @param {number} [initial]  Starting value to compare against.
    * @returns {number}
