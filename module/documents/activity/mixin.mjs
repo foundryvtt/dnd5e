@@ -1078,15 +1078,27 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async #consumeResource(event, target, message) {
-      const messageConfig = {};
-      const scaling = message.system.scaling;
-      const usageConfig = { consume: true, event, scaling };
+      const messageConfig = { message };
+      const usageConfig = this._prepareConsumeResourceUsageConfig(event, message);
       const linkedActivity = this.getLinkedActivity(message.system.cause);
       if ( linkedActivity ) usageConfig.cause = {
         activity: linkedActivity.relativeUUID, resources: linkedActivity.consumption.targets.length > 0
       };
       await this.consume(usageConfig, messageConfig);
       if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare necessary parts of usage configuration from message data for resource consumption.
+     * @param {PointerEvent} event     Triggering click event.
+     * @param {ChatMessage5e} message  Message associated with the activation.
+     * @returns {Partial<ActivityUseConfiguration>}
+     */
+    _prepareConsumeResourceUsageConfig(event, message) {
+      const scaling = message.system.scaling;
+      return { consume: true, event, scaling };
     }
 
     /* -------------------------------------------- */
