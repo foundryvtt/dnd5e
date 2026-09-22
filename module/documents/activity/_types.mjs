@@ -13,6 +13,10 @@
  * @property {string} img                               Default icon.
  * @property {string} title                             Default title.
  * @property {string} [hint]                            Hint about how this activity type functions.
+ * @property {string} [like]                            Another activity type that this activity is considered like.
+ *                                                      This allows certain system features that are expecting a certain
+ *                                                      activity type to also work with a subclass of that activity
+ *                                                      (e.g. subclass of Enchant activity that can define riders).
  * @property {typeof ActivitySheet} sheetClass          Sheet class used to configure this activity.
  * @property {""|"pre"|"post"} targetPhase              Whether this activity selects targets before its initial use or
  *                                                      afterward.

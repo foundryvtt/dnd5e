@@ -703,7 +703,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         concentrationDuration: activity.labels.concentrationDuration,
         ritualActivation: activity.labels.ritualActivation
       });
-      if ( activity.type === "attack" ) {
+      if ( activity.isLike("attack") ) {
         const { toHit, modifier } = activity.labels;
         attacks.push({ toHit, modifier });
       }

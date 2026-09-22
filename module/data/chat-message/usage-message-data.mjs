@@ -159,7 +159,7 @@ export default class UsageMessageData extends ItemMessageData {
    * @returns {Promise}
    */
   async onDescendentRefresh(message) {
-    if ( message.type !== this.activity.type ) return; // The descendent wasn't an outcome, it was some other action.
+    if ( !this.activity.isLike(message.type) ) return; // The descendent wasn't an outcome, it was some other action.
     this.#outcomes = undefined;
     return Promise.all(this.parent.getAssociatedRolls("damage").map(m => ui.chat?.updateMessage(m)));
   }

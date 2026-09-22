@@ -273,7 +273,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const origins = {};
     const riders = [];
     context.activities = (this.item.system.activities ?? []).reduce((arr, activity) => {
-      if ( activity.type === "enchant" ) {
+      if ( activity.isLike("enchant") ) {
         for ( const effect of activity.effects ?? [] ) {
           for ( const id of effect.riders.activity ) {
             origins[id] ??= [];

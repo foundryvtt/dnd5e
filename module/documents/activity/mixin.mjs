@@ -1284,6 +1284,17 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Is this activity a certain type or like that type?
+     * @param {string} type  Activity type.
+     * @returns {boolean}
+     */
+    isLike(type) {
+      return (this.type === type) || (this.metadata.like === type);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Render a rich tooltip for this activity.
      * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
      * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
