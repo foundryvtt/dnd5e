@@ -122,7 +122,8 @@ export default class ShortRestDialog extends BaseRestDialog {
   static async #rollHitDie(event, target) {
     this.#denom = this.form.denom.value;
     await this.actor.rollHitDie({ denomination: this.#denom });
-    foundry.utils.mergeObject(this.config, new foundry.applications.ux.FormDataExtended(this.form).object);
+    const formData = new foundry.applications.ux.FormDataExtended(this.form);
+    foundry.utils.mergeObject(this.config, this._processFormData(event, this.form, formData));
     this.render();
   }
 
@@ -132,7 +133,8 @@ export default class ShortRestDialog extends BaseRestDialog {
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
     this.#denom = this.form.denom?.value;
-    foundry.utils.mergeObject(this.config, new foundry.applications.ux.FormDataExtended(this.form).object);
+    const formData = new foundry.applications.ux.FormDataExtended(this.form);
+    foundry.utils.mergeObject(this.config, this._processFormData(event, this.form, formData));
     this.render();
   }
 }

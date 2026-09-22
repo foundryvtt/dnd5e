@@ -1,3 +1,4 @@
+import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import AppliedRules from "../../../documents/applied-rules.mjs";
 import { applyFallProne } from "../../../rules/falling.mjs";
@@ -281,7 +282,9 @@ export default class AttributesFields {
       });
       ac.equippedArmor = armors[0];
       ac.armor = ac.equippedArmor.system.armor.value ?? ac.armor;
-      if ( ac.equippedArmor.system.properties.has("stealthDisadvantage") && this.skills ) {
+      if ( ac.equippedArmor.system.properties.has("stealthDisadvantage")
+        && ("ste" in CONFIG.DND5E.skills)
+        && this.skills ) {
         AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
       }
     }
@@ -445,7 +448,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareExhaustionLevel() {
-    this.attributes.exhaustion = this.conditions.exhaustion ?? 0;
+    this.attributes.exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION)?.system.level ?? 0;
   }
 
   /* -------------------------------------------- */

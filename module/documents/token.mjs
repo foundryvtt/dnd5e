@@ -44,7 +44,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     // Migrate base -> condition.
     const statuses = new Set(foundry.utils.iterateValues(CONFIG.statusEffects).map(s => s._id));
     for ( const effect of data.delta?.effects ?? [] ) {
-      if ( (effect.type === "condition") || !statuses.has(effect._id) ) continue;
+      if ( (effect.type === "condition") || !effect._id || !statuses.has(effect._id) ) continue;
       foundry.utils.mergeObject(effect, { type: "condition", "system.type": effect.statuses?.[0] });
     }
 
@@ -108,6 +108,13 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const sight = maxSightRange > 0
       ? { enabled: true, range: maxSightRange, visionMode: sightVisionMode ?? "basic" }
       : {};
+    if ( sight.enabled ) {
+      const defaults = CONFIG.Canvas.visionModes[sight.visionMode]?.vision.defaults ?? {};
+      Object.assign(sight, foundry.utils.objectEntries(defaults).reduce((obj, [k, v]) => {
+        if ( v !== undefined ) obj[k] = v;
+        return obj;
+      }, {}));
+    }
 
     return { sight, detectionModes };
   }
@@ -130,7 +137,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
 
     if ( sight.enabled ) {
-      Object.assign(target.sight, { range: sight.range, visionMode: sight.visionMode });
+      const overrides = { ...sight };
+      delete overrides.enabled;
+      Object.assign(target.sight, overrides);
     }
   }
 

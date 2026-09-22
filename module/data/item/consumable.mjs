@@ -312,7 +312,10 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getCraftCost(options={}) {
     const { days, gold } = await super.getCraftCost(options);
-    const { consumable, magic } = CONFIG.DND5E.crafting;
+    const { consumable, exceptions, magic, scrolls } = CONFIG.DND5E.crafting;
+    if ( this.parent.identifier in exceptions ) return { days, gold };
+    const scroll = (this.type.value === "scroll") && scrolls[this.parent.getFlag("dnd5e", "spellLevel")?.value];
+    if ( scroll ) return scroll;
     const { rarity } = this;
     if ( !this.properties.has("mgc") || !(rarity in magic) ) return { days, gold };
     const costs = magic[rarity];

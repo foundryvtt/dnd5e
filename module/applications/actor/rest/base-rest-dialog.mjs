@@ -148,6 +148,7 @@ export default class BaseRestDialog extends Dialog5e {
 
     if ( this.isPartyGroup ) {
       const restSettings = this.actor.getFlag("dnd5e", "restSettings") ?? {};
+      const { autoRest=restSettings.autoRest, targets } = this.#config;
       context.request = [
         {
           field: new BooleanField({
@@ -156,7 +157,7 @@ export default class BaseRestDialog extends Dialog5e {
           }),
           name: "autoRest",
           input: context.inputs.createCheckboxInput,
-          value: restSettings.autoRest
+          value: autoRest
         },
         ...this.actor.system.members
           .filter(m => m.actor?.system.isCreature)
@@ -166,7 +167,7 @@ export default class BaseRestDialog extends Dialog5e {
             }),
             name: `targets.${m.actor.id}`,
             input: context.inputs.createCheckboxInput,
-            value: restSettings.targets ? restSettings.targets?.has(m.actor.id) : true
+            value: targets?.[m.actor.id] ?? (restSettings.targets ? restSettings.targets.has(m.actor.id) : true)
           }))
       ];
     }
@@ -243,6 +244,24 @@ export default class BaseRestDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
+   * Customize how form data is extracted into an expanded object.
+   * @param {SubmitEvent|null} event     The originating form submission event.
+   * @param {HTMLFormElement} form       The form element that was submitted.
+   * @param {FormDataExtended} formData  Processed data for the submitted form.
+   * @returns {object}                   An expanded object of processed form data.
+   * @protected
+   */
+  _processFormData(event, form, formData) {
+    const data = foundry.utils.expandObject(formData.object);
+    if ( foundry.utils.isPlainObject(data.duration) ) {
+      data.duration = convertTime(data.duration.value, data.duration.unit, { strict: false, to: "minute" }).value;
+    }
+    return data;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle submission of the dialog using the form buttons.
    * @this {BaseRestDialog}
    * @param {Event|SubmitEvent} event    The form submission event.
@@ -250,13 +269,10 @@ export default class BaseRestDialog extends Dialog5e {
    * @param {FormDataExtended} formData  Data from the dialog.
    */
   static async #handleFormSubmission(event, form, formData) {
-    const data = foundry.utils.expandObject(formData.object);
+    const data = this._processFormData(event, form, formData);
     if ( this.isPartyGroup ) {
       data.targets = filteredKeys(data.targets ?? {});
       this.actor.setFlag("dnd5e", "restSettings", data);
-    }
-    if ( foundry.utils.isPlainObject(data.duration) ) {
-      data.duration = convertTime(data.duration.value, data.duration.unit, { strict: false, to: "minute" }).value;
     }
     foundry.utils.mergeObject(this.config, data);
     this.#rested = true;

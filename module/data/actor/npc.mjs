@@ -762,7 +762,9 @@ export default class NPCData extends CreatureTemplate {
               ),
             ...splitSemicolons(this.attributes.senses.special)
           ].sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))),
-          `${_loc("DND5E.PassivePerception")} ${formatNumber(this.skills.prc.passive)}`
+          "prc" in CONFIG.DND5E.skills
+            ? `${_loc("DND5E.PassivePerception")} ${formatNumber(this.skills.prc.passive)}`
+            : null
         ].filterJoin("; "),
 
         // Skills (e.g. `Perception +17, Stealth +7`)

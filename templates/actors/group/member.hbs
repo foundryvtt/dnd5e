@@ -102,6 +102,7 @@
             </div>
         </div>
         <div class="info">
+            {{#if skills.prc}}
             <div>
                 <a class="{{ skills.prc.css }}" data-action="roll" data-type="skill" data-key="prc"
                    data-tooltip aria-label="{{ skills.prc.label }}">
@@ -112,6 +113,8 @@
                     <span class="passive">({{ skills.prc.passive }})</span>
                 </div>
             </div>
+            {{/if}}
+            {{#if skills.ste}}
             <div>
                 <a class="{{ skills.ste.css }}" data-action="roll" data-type="skill" data-key="ste"
                    data-tooltip aria-label="{{ skills.ste.label }}">
@@ -122,6 +125,8 @@
                     <span class="passive">({{ skills.ste.passive }})</span>
                 </div>
             </div>
+            {{/if}}
+            {{#if skills.sur}}
             <div>
                 <a class="{{ skills.sur.css }}" data-action="roll" data-type="skill" data-key="sur"
                    data-tooltip aria-label="{{ skills.sur.label }}">
@@ -132,6 +137,7 @@
                     <span class="passive">({{ skills.sur.passive }})</span>
                 </div>
             </div>
+            {{/if}}
         </div>
         {{/if}}
     </div>

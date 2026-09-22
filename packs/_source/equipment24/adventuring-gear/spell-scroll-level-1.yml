@@ -27,7 +27,8 @@ system:
   weight:
     value: 0
     units: lb
-  rarity: ''
+  rarities:
+    - common
   attunement: ''
   attuned: false
   equipped: false
@@ -67,6 +68,9 @@ flags:
     riders:
       activity: []
       effect: []
+    spellLevel:
+      base: 1
+      value: 1
 _stats:
   duplicateSource: null
   coreVersion: '13.344'

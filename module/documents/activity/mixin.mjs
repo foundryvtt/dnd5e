@@ -1304,7 +1304,7 @@ export default function ActivityMixin(Base) {
     /** @override */
     static _createDialogTypes(parent) {
       return Object.entries(CONFIG.DND5E.activityTypes)
-        .filter(([, c]) => (c.configurable !== false) && c.documentClass.availableForItem(parent))
+        .filter(([, c]) => !c.hidden && (c.configurable !== false) && c.documentClass.availableForItem(parent))
         .map(([k]) => k);
     }
 

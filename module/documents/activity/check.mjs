@@ -107,7 +107,12 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     const { ability, dc, skill, tool } = message.system.getButton(target)?.dataset ?? {};
     const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
-    const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: this.check.bonus }, this.getRollData());
+    const ownerData = this.getRollData();
+    if ( this.ability === "spellcasting" ) {
+      ownerData.mod = this.actor?.system.abilities?.[this.spellcastingAbility]?.mod ?? 0;
+    }
+    const bonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.check.bonus, ownerData, { missing: 0 });
+    const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: bonus });
     if ( (ability in CONFIG.DND5E.abilities) || (ability === "spellcasting") ) rollData.ability = ability;
 
     for ( const token of targets ) {
