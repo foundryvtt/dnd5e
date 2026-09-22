@@ -1,3 +1,4 @@
+import { getPluralLocalizationKey } from "../../utils.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import AdvancementFlow from "./advancement-flow-v2.mjs";
 
@@ -131,11 +132,13 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const modernRules = dnd5e.settings.rulesVersion === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
     context.pointCap = _loc(
-      `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(context.points.cap)}`,
+      getPluralLocalizationKey(context.points.cap, pr => `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pr}`),
       { points: context.points.cap }
     );
     context.pointsRemaining = _loc(
-      `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(context.points.available)}`,
+      getPluralLocalizationKey(context.points.available, pr =>
+        `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pr}`
+      ),
       { points: context.points.available }
     );
     context.showASIFeat = modernRules && this.advancement.allowFeat;
