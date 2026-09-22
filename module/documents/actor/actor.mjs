@@ -2965,7 +2965,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( settings.keep.has("class") && ((i.type === "feat") || (i.type === "weapon")) && profDiff ) {
           // Items gained from the source should use the source's proficiency bonus.
           Object.values(i.system.activities).forEach(activity => {
-            if ( activity.type === "attack" ) {
+            if ( dnd5e.documents.activity.UtilityActivity.isLike(activity.type, "attack") ) {
               activity.attack.bonus ??= "";
               activity.attack.bonus += ` ${profDiff < 0 ? "" : "+"}${profDiff}`;
             }

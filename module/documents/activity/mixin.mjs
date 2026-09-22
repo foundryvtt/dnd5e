@@ -1285,6 +1285,19 @@ export default function ActivityMixin(Base) {
 
     /**
      * Is this activity a certain type or like that type?
+     * @param {string} activityType  Activity type.
+     * @param {string} otherType     Type to compare against.
+     * @returns {boolean}
+     */
+    static isLike(activityType, otherType) {
+      return (activityType === otherType)
+        || (CONFIG.DND5E.activityTypes[activityType]?.documentClass?.metadata.like === otherType);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity a certain type or like that type?
      * @param {string} type  Activity type.
      * @returns {boolean}
      */

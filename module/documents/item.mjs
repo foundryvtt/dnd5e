@@ -1429,10 +1429,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         if ( key === "duration" ) activity.duration.concentration = properties.includes("concentration");
       }
       activity.consumption.targets.push({ type: "itemUses", target: "", value: "1" });
-      if ( activity.type === "attack" ) {
+      if ( dnd5e.documents.activity.UtilityActivity.isLike(activity.type, "attack") ) {
         activity.attack.flat = true;
         activity.attack.bonus = values.bonus;
-      } else if ( activity.type === "save" ) {
+      } else if ( dnd5e.documents.activity.UtilityActivity.isLike(activity.type, "save") ) {
         activity.save.dc.calculation = "";
         activity.save.dc.formula = values.dc;
       }

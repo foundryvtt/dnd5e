@@ -742,11 +742,19 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Get a list of all chat messages containing rolls that originated from this message.
-   * @param {string} [type]  Type of rolls to get. If empty, all roll types will be fetched.
+   * @param {string} [type]          Type of rolls to get. If empty, all roll types will be fetched.
+   * @param {object} [options={}]
+   * @param {string} [options.like]  When type is provided, also get messages produced from like activities.
    * @returns {ChatMessage5e[]}
    */
-  getAssociatedRolls(type) {
-    return dnd5e.registry.messages.get(this.id, type);
+  getAssociatedRolls(type, { like=true }={}) {
+    const messages = dnd5e.registry.messages.get(this.id, type);
+    if ( type && like ) return messages.concat(
+      Object.entries(CONFIG.DND5E.activityTypes)
+        .filter(([, { documentClass }]) => documentClass?.metadata.like === type)
+        .flatMap(([t]) => dnd5e.registry.messages.get(this.id, t))
+    );
+    return messages;
   }
 
   /* -------------------------------------------- */
