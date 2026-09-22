@@ -437,7 +437,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       icon: "fa-solid fa-axe fa-fw",
       group: "state",
       visible: () => !!this.actor.system.isNPC && item.isOwner && !compendiumLocked
-        && !!CONFIG.Item.dataModels[item.type]?.schema.has("quantity"),
+        && !!CONFIG.Item.dataModels[item.type]?.isPhysical,
       onClick: (event, target) => this._onAction(target, "toggleGear", { event })
     }, {
       label: expanded ? "APPLICATION.ACTIONS.Collapse" : "APPLICATION.ACTIONS.Expand",

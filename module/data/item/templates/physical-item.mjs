@@ -129,6 +129,20 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Is this a physical item?
+   * @type {boolean}
+   */
+  static get isPhysical() {
+    return true;
+  }
+
+  get isPhysical() {
+    return this.constructor.isPhysical;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get a human-readable label for the price and denomination.
    * @type {string}
    */
