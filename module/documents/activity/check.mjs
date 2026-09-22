@@ -111,7 +111,7 @@ export default class CheckActivity extends ActivityMixin(BaseCheckActivityData) 
     if ( this.ability === "spellcasting" ) {
       ownerData.mod = this.actor?.system.abilities?.[this.spellcastingAbility]?.mod ?? 0;
     }
-    const bonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.check.bonus, ownerData, { missing: 0 });
+    const bonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.check.bonus ?? "", ownerData, { missing: 0 });
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: bonus });
     if ( (ability in CONFIG.DND5E.abilities) || (ability === "spellcasting") ) rollData.ability = ability;
 

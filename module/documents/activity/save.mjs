@@ -119,7 +119,7 @@ export default class SaveActivity extends ActivityMixin(BaseSaveActivityData) {
     if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     const { ability, dc } = message.system.getButton(target)?.dataset ?? {};
-    const bonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.save.bonus, this.getRollData(), { missing: 0 });
+    const bonus = CONFIG.Dice.BasicRoll.replaceFormulaData(this.save.bonus ?? "", this.getRollData(), { missing: 0 });
     const bonusData = CONFIG.Dice.BasicRoll.constructParts({ activityBonus: bonus });
     for ( const token of targets ) {
       const actor = token instanceof Actor ? token : token.actor;
