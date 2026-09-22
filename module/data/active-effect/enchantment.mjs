@@ -309,7 +309,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     }));
     riderEffects = riderEffects.filter(_ => _);
     riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.parent.id));
-    operations.push({
+    if ( riderEffects.length ) operations.push({
       action: "create", documentName: "ActiveEffect", data: riderEffects, parent: this.item, keepId: true
     });
 
@@ -326,7 +326,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
           }
         }
       );
-      operations.push({
+      if ( riderItems.length ) operations.push({
         action: "create", documentName: "Item", data: riderItems, parent: this.item.actor, keepId: true
       });
     }
