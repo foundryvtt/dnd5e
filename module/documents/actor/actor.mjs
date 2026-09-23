@@ -14,6 +14,7 @@ import {
   convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
 } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
+import AppliedRules from "../applied-rules.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
@@ -1478,7 +1479,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       type: type
     });
 
-    const { bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+    const { bonus, maximum, minimum, modifiers } = D20RollModificationField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll`,
       "rolls.ability.check",
       `rolls.ability.${type}`,
@@ -1495,7 +1496,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Add condition reductions.
     this.addConditionRollReduction(parts, data);
 
-    config.options = CONFIG.Dice.D20Roll.mergeOptions({ maximum, minimum }, config.options ?? {});
+    config.options = CONFIG.Dice.D20Roll.mergeOptions({ maximum, minimum, modifiers }, config.options ?? {});
     config.parts = [...(config.parts ?? []), ...parts];
     config.data = { ...data, ...(config.data ?? {}) };
     config.data.abilityId = abilityId;
@@ -1855,7 +1856,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       proficient: init.prof.multiplier >= 1,
       type: "initiative"
     });
-    const { advantage, disadvantage, bonus, maximum, minimum } = D20RollModificationField.combineFields(this.system, [
+    const { bonus, ...additionalOptions } = D20RollModificationField.combineFields(this.system, [
       `abilities.${abilityId}.check.roll`, "attributes.init.roll", "rolls.ability.check"
     ], { rules: { category: "check", actor: this, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
@@ -1876,8 +1877,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const scoreMode = game.settings.get("dnd5e", "initiativeScore");
     const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && this.system.isNPC);
 
-    options = foundry.utils.mergeObject({
-      advantage, disadvantage, maximum, minimum,
+    options = CONFIG.Dice.D20Roll.mergeOptions({
+      ...additionalOptions,
       ability: abilityId,
       fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? _loc("DND5E.Initiative"),
@@ -2025,12 +2026,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         return null;
       }
     }
+
+    const rollData = this.getRollData({ roll: true });
+    rollData.roll.hitDie = Number(config.denomination.slice(1));
     const rulesVersion = dnd5e.settings.rulesVersion;
     const minimumValue = rulesVersion === "modern" ? 1 : 0;
-    formula ??= `max(${minimumValue}, 1${config.denomination} + @abilities.con.mod)`;
+    const modifiers = AppliedRules.collect("hitDie:modifier", this).filterWith(rollData).toModifiers();
+    formula ??= `max(${minimumValue}, 1${config.denomination}${Array.from(modifiers).join("")} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "hitDie"];
-    rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
+    rollConfig.rolls = [{ parts: [formula], data: rollData }].concat(config.rolls ?? []);
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -2109,9 +2114,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
+
+    const rollData = item.getRollData({ roll: true });
+    rollData.roll.hitDie = Number(item.system.hd.denomination.slice(1));
+    const modifiers = AppliedRules.collect("hitDie:modifier", this).filterWith(rollData).toModifiers();
     const config = {
-      formula: `1${item.system.hd.denomination}`,
-      data: item.getRollData(),
+      formula: `1${item.system.hd.denomination}${Array.from(modifiers).join("")}`,
+      data: rollData,
       chatMessage
     };
     const flavor = _loc("DND5E.ADVANCEMENT.HitPoints.Action.RollClass", { class: item.name });
