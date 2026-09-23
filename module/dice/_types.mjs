@@ -177,6 +177,8 @@
  * @property {boolean} [configure=true]                           Display a configuration dialog for the rolling
  *                                                                process.
  * @property {typeof RollConfigurationDialog} [applicationClass]  Alternate configuration application to use.
+ * @property {boolean} [autoPosition]                             Automatically position the dialog near
+ *                                                                the triggering control.
  * @property {BasicRollConfigurationDialogOptions} [options]      Additional options passed to the dialog.
  * @property {ApplicationV2} [sheet]                              Sheet to render the dialog as a child of.
  */
