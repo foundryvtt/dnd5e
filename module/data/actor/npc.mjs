@@ -57,7 +57,10 @@ export default class NPCData extends CreatureTemplate {
         ...AttributesFields.common,
         ...AttributesFields.creature,
         hd: new SchemaField({
-          spent: new NumberField({ integer: true, min: 0, initial: 0 })
+          ...AttributesFields.hitDice,
+          spent: new NumberField({
+            integer: true, min: 0, initial: 0, label: "DND5E.HITDICE.FIELDS.attributes.hd.spent.label"
+          })
         }, { label: "DND5E.HitDice" }),
         hp: new SchemaField({
           ...AttributesFields.hitPoints,
