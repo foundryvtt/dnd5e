@@ -74,6 +74,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }),
       duration: new DurationField({
         concentration: new BooleanField(),
+        ignoreDamageConcentration: new BooleanField(),
         override: new BooleanField()
       }),
       effects: new ArrayField(new AppliedEffectField()),

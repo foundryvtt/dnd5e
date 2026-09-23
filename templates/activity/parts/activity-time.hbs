@@ -31,5 +31,9 @@
             durationUnits=durationUnits expiryOptions=expiryOptions inputs=inputs }}
         {{ formField fields.duration.fields.concentration value=data.duration.concentration
            input=inputs.createCheckboxInput rootId=partId }}
+        {{#if activity.requiresConcentration}}
+        {{ formField fields.duration.fields.ignoreDamageConcentration
+           value=data.duration.ignoreDamageConcentration input=inputs.createCheckboxInput rootId=partId }}
+        {{/if}}
     </fieldset>
 </section>
