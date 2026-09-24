@@ -66,7 +66,10 @@ system:
         condition: ''
         override: false
       consumption:
-        targets: []
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -149,7 +152,7 @@ _stats:
   systemVersion: 6.0.3
   coreVersion: '14.367'
   createdTime: 1789765525748
-  modifiedTime: 1789766879869
+  modifiedTime: 1790271318158
   lastModifiedBy: dnd5ebuilder0000
   duplicateSource: null
   exportSource: null
