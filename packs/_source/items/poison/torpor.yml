@@ -1,0 +1,185 @@
+folder: ZzUfnm1OuSL02nLG
+name: Torpor
+type: consumable
+_id: BTBhiXNbSnkW8HP3
+img: icons/consumables/potions/potion-jar-corked-green.webp
+system:
+  activities:
+    IRCDrJoYLqgcv7Hx:
+      type: save
+      name: ''
+      _id: IRCDrJoYLqgcv7Hx
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects:
+        - _id: QnTGMuIGAsENzvHa
+          uuid: null
+          onSave: false
+          level:
+            min: null
+            max: null
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: ''
+          formula: '15'
+        visible: true
+        bonus: ''
+  damage:
+    base:
+      types: []
+      custom:
+        enabled: false
+      modifiers: []
+      scaling:
+        number: 1
+    replace: false
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p>A creature subjected to this poison must succeed on a [[/save]] saving
+      throw or become &amp;Reference[poisoned apply=false]{poisoned} for [[/r
+      4d6]] hours. The poisoned creature is &amp;Reference[incapacitated
+      apply=false]{incapacitated}.</p>
+    chat: ''
+  identifier: torpor
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 600
+    denomination: gp
+  rarities: []
+  attunement: ''
+  attuned: false
+  equipped: false
+  properties: []
+  type:
+    value: poison
+    subtype: ingested
+effects:
+  - folder: IfLBBXmSvJFGNJaF
+    name: Poisoned & Incapacitated
+    type: base
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    system:
+      changes: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.items.Item.BTBhiXNbSnkW8HP3
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - incapacitated
+      - poisoned
+    showIcon: 1
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.367'
+      systemId: dnd5e
+      systemVersion: 6.0.3
+      lastModifiedBy: dnd5ebuilder0000
+      duplicateSource: null
+      exportSource: null
+      createdTime: 1789767057193
+      modifiedTime: 1790271147581
+      compendiumSource: Compendium.dnd5e.effects.ActiveEffect.wAnw5y4atBxNJHUP
+    _id: QnTGMuIGAsENzvHa
+    _key: '!items.effects!BTBhiXNbSnkW8HP3.QnTGMuIGAsENzvHa'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.367'
+  systemId: dnd5e
+  systemVersion: 6.0.3
+  createdTime: 1789765609786
+  modifiedTime: 1789767318795
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!BTBhiXNbSnkW8HP3'

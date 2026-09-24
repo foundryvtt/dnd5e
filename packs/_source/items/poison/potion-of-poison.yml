@@ -9,15 +9,15 @@ system:
       or other beneficial potion.</em></p><p>However, it is actually poison
       masked by illusion magic. An identify spell reveals its true
       nature.</p><p>If you drink it, you take [[/damage]] damage, and you must
-      succeed on a [[/save]] saving throw or be &amp;reference[poisoned]. At the
-      start of each of your turns while you are poisoned in this way, you take
-      [[/damage]] damage. At the end of each of your turns, you can repeat the
-      saving throw. On a successful save, the poison damage you take on your
-      subsequent turns decreases by 1d6. The poison ends when the damage
-      decreases to 0.</p><section class="secret"
-      id="secret-zrLCcwvOwukVWTvT"><p>For convenience, you can use these
-      enrichers ([[/damage 2d6 poison]] or [[/damage 1d6 poison]]) to perform
-      the damage roll for the reduced damage.</p></section>
+      succeed on a [[/save]] saving throw or be &amp;Reference[poisoned
+      apply=false]{poisoned}. At the start of each of your turns while you are
+      poisoned in this way, you take [[/damage]] damage. At the end of each of
+      your turns, you can repeat the saving throw. On a successful save, the
+      poison damage you take on your subsequent turns decreases by 1d6. The
+      poison ends when the damage decreases to 0.</p><section
+      id="secret-zrLCcwvOwukVWTvT" class="secret"><p>For convenience, you can
+      use these enrichers ([[/damage 2d6 poison]] or [[/damage 1d6 poison]]) to
+      perform the damage roll for the reduced damage.</p></section>
     chat: ''
   source:
     custom: ''
@@ -91,7 +91,11 @@ system:
         units: spec
         special: ''
         override: false
-      effects: []
+      effects:
+        - _id: be3nxDanNX7bg2dn
+          uuid: null
+          level: {}
+          onSave: false
       range:
         units: touch
         special: ''
@@ -120,6 +124,7 @@ system:
         dc:
           calculation: ''
           formula: '13'
+        bonus: ''
       uses:
         spent: 0
         recovery: []
@@ -196,7 +201,49 @@ system:
         identifier: ''
   attuned: false
   identifier: potion-of-poison
-effects: []
+effects:
+  - folder: IfLBBXmSvJFGNJaF
+    name: Poisoned
+    type: base
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    system:
+      changes: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.items.Item.qBSEGJyHxdKIlBfj
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    showIcon: 1
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.367'
+      systemId: dnd5e
+      systemVersion: 6.0.3
+      lastModifiedBy: dnd5ebuilder0000
+      duplicateSource: null
+      exportSource: null
+      createdTime: 1789766919168
+      modifiedTime: 1789766919168
+      compendiumSource: Compendium.dnd5e.effects.ActiveEffect.wAnw5y4atBxNJHUP
+    _id: be3nxDanNX7bg2dn
+    _key: '!items.effects!qBSEGJyHxdKIlBfj.be3nxDanNX7bg2dn'
 folder: ZzUfnm1OuSL02nLG
 sort: 300000
 ownership:
@@ -204,11 +251,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 5.2.0
+  systemVersion: 6.0.3
   createdTime: 1725037292318
-  modifiedTime: 1764621009509
+  modifiedTime: 1789766943317
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!qBSEGJyHxdKIlBfj'

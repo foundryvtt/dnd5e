@@ -1,0 +1,193 @@
+folder: ZzUfnm1OuSL02nLG
+name: Assassin's Blood
+type: consumable
+_id: Ak7k7JVu0iiI6N8r
+img: icons/consumables/potions/potion-tube-corked-orange.webp
+system:
+  activities:
+    Gs9nmjS4JZmNiE56:
+      type: save
+      name: ''
+      _id: Gs9nmjS4JZmNiE56
+      img: ''
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: inst
+        expiry: null
+        concentration: false
+        override: false
+      effects:
+        - _id: CPeuvBUuMeeY5K06
+          uuid: null
+          level: {}
+          onSave: false
+      flags: {}
+      range:
+        units: self
+        override: false
+        special: ''
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: creature
+          count: '1'
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 12
+            bonus: ''
+            modifiers: []
+            types:
+              - poison
+            scaling:
+              number: 1
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '10'
+        visible: true
+        bonus: ''
+  damage:
+    base:
+      types: []
+      custom:
+        enabled: false
+      modifiers: []
+      scaling:
+        number: 1
+    replace: false
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  description:
+    value: >-
+      <p>A creature subjected to this poison must make a [[/save]] saving throw.
+      On a failed save, it takes [[/damage average]] damage and is
+      &amp;Reference[poisoned apply=false]{poisoned} for 24 hours. On a
+      successful save, the creature takes half damage and isn't poisoned.</p>
+    chat: ''
+  identifier: assassins-blood
+  source:
+    revision: 1
+    rules: '2014'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 150
+    denomination: gp
+  rarities: []
+  attunement: ''
+  attuned: false
+  equipped: false
+  properties: []
+  type:
+    value: poison
+    subtype: ingested
+effects:
+  - folder: IfLBBXmSvJFGNJaF
+    name: Poisoned
+    type: base
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    system:
+      changes: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.items.Item.Ak7k7JVu0iiI6N8r
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    showIcon: 1
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.367'
+      systemId: dnd5e
+      systemVersion: 6.0.3
+      lastModifiedBy: dnd5ebuilder0000
+      duplicateSource: null
+      exportSource: null
+      createdTime: 1789765875049
+      modifiedTime: 1789765881314
+      compendiumSource: Compendium.dnd5e.effects.ActiveEffect.wAnw5y4atBxNJHUP
+    _id: CPeuvBUuMeeY5K06
+    _key: '!items.effects!Ak7k7JVu0iiI6N8r.CPeuvBUuMeeY5K06'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.367'
+  systemId: dnd5e
+  systemVersion: 6.0.3
+  createdTime: 1789765555490
+  modifiedTime: 1789766905966
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!Ak7k7JVu0iiI6N8r'

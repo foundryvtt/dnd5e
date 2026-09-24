@@ -1,42 +1,41 @@
-_id: eVbPkYjpl29RE2uW
-name: Basic Poison
+folder: ZzUfnm1OuSL02nLG
+name: Wyvern Poison
 type: consumable
-img: icons/consumables/potions/potion-bottle-skull-label-poison-teal.webp
+img: icons/consumables/potions/bottle-ornate-bat-teal.webp
 system:
   description:
     value: >-
-      <p>You can use the poison in this vial to coat one slashing or piercing
-      weapon or up to three pieces of ammunition. Applying the poison takes an
-      action. A creature hit by the poisoned weapon or ammunition must make a
-      [[/save]] saving throw or take [[/damage]] damage. Once applied, the
-      poison retains potency for 1 minute before drying.</p>
+      <p>This poison must be harvested from a dead or incapacitated wyvern. A
+      creature subjected to this poison must make a [[/save]] saving throw,
+      taking [[/damage average]] damage on a failed save, or half as much damage
+      on a successful one.</p>
     chat: ''
   source:
-    custom: ''
+    custom: SRD 5.1
     book: ''
     page: ''
-    license: CC-BY-4.0
+    license: ''
+    revision: 1
     rules: '2014'
   quantity: 1
   weight:
     value: 0
     units: lb
   price:
-    value: 100
+    value: 1200
     denomination: gp
   attunement: ''
   equipped: false
-  rarity: ''
   identified: true
   uses:
-    max: '3'
+    max: '1'
     recovery: []
     autoDestroy: true
     spent: 0
   damage:
     base:
-      number: 1
-      denomination: 4
+      number: 7
+      denomination: 6
       bonus: ''
       types:
         - poison
@@ -47,15 +46,15 @@ system:
         mode: ''
         number: null
         formula: ''
+      modifiers: []
     replace: false
+  properties: []
+  unidentified:
+    description: ''
   type:
     value: poison
     subtype: injury
-  unidentified:
-    description: ''
   container: null
-  properties: []
-  magicalBonus: null
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
@@ -63,7 +62,7 @@ system:
       activation:
         type: action
         value: 1
-        condition: one slashing or piercing weapon, or up to three pieces of ammunition
+        condition: ''
         override: false
       consumption:
         targets:
@@ -77,15 +76,17 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         concentration: false
-        value: '1'
-        units: minute
+        value: ''
+        units: inst
         special: ''
         override: false
+        expiry: null
       effects: []
       range:
-        units: touch
+        units: self
         special: ''
         override: false
       target:
@@ -96,22 +97,27 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
-          count: ''
-          type: ''
+          count: '1'
+          type: creature
           choice: false
           special: ''
         prompt: true
         override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
       damage:
-        onSave: none
+        onSave: half
         parts:
           - custom:
               enabled: false
               formula: ''
-            number: 1
-            denomination: 4
+            number: 7
+            denomination: 6
             bonus: ''
             modifiers: []
             types:
@@ -119,38 +125,42 @@ system:
             scaling:
               number: 1
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: ''
-          formula: '10'
+          formula: '15'
+        visible: true
         bonus: ''
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      name: ''
       img: ''
+      sort: 0
+      flags: {}
       visibility:
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
         identifier: ''
+      behaviors: []
+      name: ''
+  identifier: wyvern-poison
   attuned: false
-  identifier: basic-poison
+  rarities: []
 effects: []
-folder: ZzUfnm1OuSL02nLG
-sort: 200000
-ownership:
-  default: 0
 flags: {}
 _stats:
-  duplicateSource: null
-  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 6.0.3
-  createdTime: 1725037241703
-  modifiedTime: 1789766859707
+  coreVersion: '14.367'
+  createdTime: 1789765529148
+  modifiedTime: 1789767241155
   lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
   exportSource: null
-_key: '!items!eVbPkYjpl29RE2uW'
+ownership:
+  default: 0
+_id: tJC6SG4kAO2Vt4Qd
+sort: 431250
+_key: '!items!tJC6SG4kAO2Vt4Qd'
