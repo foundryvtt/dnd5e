@@ -65,8 +65,8 @@ export default class DamageRollConfigurationDialog extends RollConfigurationDial
   async _prepareFormulasContext(context, options) {
     context = await super._prepareFormulasContext(context, options);
     const allTypes = foundry.utils.mergeObject(CONFIG.DND5E.damageTypes, CONFIG.DND5E.healingTypes, { inplace: false });
-    context.rolls = context.rolls.map(({ roll }) => ({
-      roll,
+    context.rolls = context.rolls.map(({ roll, displayFormula }) => ({
+      roll, displayFormula,
       damageConfig: allTypes[roll.options.type] ?? allTypes[roll.options.types?.[0]],
       damageTypes: roll.options.types?.length > 1 ? Object.entries(allTypes).map(([key, config]) => {
         if ( !roll.options.types?.includes(key) ) return null;

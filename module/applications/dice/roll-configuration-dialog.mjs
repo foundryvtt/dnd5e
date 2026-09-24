@@ -1,3 +1,4 @@
+import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
 import Dialog5e from "../api/dialog.mjs";
 
 const { DiceTerm } = foundry.dice.terms;
@@ -251,7 +252,12 @@ export default class RollConfigurationDialog extends Dialog5e {
    * @protected
    */
   async _prepareFormulasContext(context, options) {
-    context.rolls = this.rolls.map(roll => ({ roll }));
+    context.rolls = this.rolls.map(roll => {
+      let displayFormula = roll.formula;
+      try { displayFormula = simplifyRollFormula(displayFormula, { preserveFlavor: true }); }
+      catch (err) { console.warn(`Unable to simplify roll formula "${displayFormula}" for display:`, err); }
+      return { roll, displayFormula };
+    });
     context.dice = this._identifyDiceTerms() || [];
     return context;
   }
