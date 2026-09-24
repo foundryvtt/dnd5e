@@ -66,6 +66,12 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false, det
   // Perform arithmetic simplification on the existing roll terms.
   roll.terms = _simplifyOperatorTerms(roll.terms);
 
+  // Resolve deterministic subexpressions before multiplication or division prevents broader simplification.
+  if ( /[*/]/.test(roll.formula) ) {
+    const simplified = _simplifyDeterministicSubexpressions(roll.formula);
+    if ( simplified !== roll.formula ) roll.terms = Roll.parse(simplified);
+  }
+
   // If the formula contains multiplication or division we cannot easily simplify
   if ( /[*/]/.test(roll.formula) ) {
     if ( roll.isDeterministic && !/d\(/.test(roll.formula) && (!/\[/.test(roll.formula) || !preserveFlavor) ) {
@@ -87,6 +93,66 @@ export default function simplifyRollFormula(formula, { preserveFlavor=false, det
   const simplifiedTerms = [diceTerms, poolTerms, mathTerms, numericTerms].flat().filter(Boolean);
   if ( simplifiedTerms[0]?.operator === "+" ) simplifiedTerms.shift();
   return roll.constructor.getFormula(simplifiedTerms);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Evaluate constant parts of a formula without changing the structure of terms containing dice.
+ * @param {string} formula  The formula to simplify.
+ * @returns {string}
+ */
+function _simplifyDeterministicSubexpressions(formula) {
+  const evaluate = expression => {
+    if ( /\[/.test(expression) ) return null;
+    try {
+      const roll = new Roll(expression);
+      if ( roll.isDeterministic ) {
+        const value = roll.evaluateSync().total;
+        if ( Number.isFinite(value) ) return String(value);
+      }
+    } catch {
+      // Leave expressions that cannot be evaluated unchanged.
+    }
+    return null;
+  };
+
+  const formatTerm = term => {
+    if ( term.flavor ) return term.formula;
+    if ( term instanceof FunctionTerm ) {
+      const value = evaluate(term.formula);
+      if ( value !== null ) return value;
+      const args = term.terms.map(arg => {
+        try { return _simplifyDeterministicSubexpressions(arg); }
+        catch { return arg; }
+      });
+      return `${term.fn}(${args.join(",")})`;
+    }
+    if ( term instanceof ParentheticalTerm ) {
+      return evaluate(term.formula) ?? `(${_simplifyDeterministicSubexpressions(term.term)})`;
+    }
+    return term.formula;
+  };
+
+  const result = [];
+  let chunk = [];
+  const appendChunk = () => {
+    if ( !chunk.length ) return;
+    const arithmetic = chunk.some(term => (term instanceof FunctionTerm) || (term instanceof ParentheticalTerm)
+      || ((term instanceof OperatorTerm) && ["*", "/", "%"].includes(term.operator)));
+    const value = arithmetic && !chunk.some(term => term.flavor) ? evaluate(Roll.getFormula(chunk)) : null;
+    result.push(value ?? chunk.map(formatTerm).join(""));
+    chunk = [];
+  };
+
+  for ( const term of Roll.parse(formula) ) {
+    if ( (term instanceof OperatorTerm) && ["+", "-"].includes(term.operator) ) {
+      appendChunk();
+      result.push(term.formula);
+    } else chunk.push(term);
+  }
+  appendChunk();
+  return result.join("");
 }
 
 /* -------------------------------------------- */
