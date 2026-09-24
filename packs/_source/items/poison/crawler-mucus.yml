@@ -1,0 +1,197 @@
+folder: ZzUfnm1OuSL02nLG
+name: Crawler Mucus
+type: consumable
+img: icons/consumables/potions/potion-bottle-corked-white.webp
+system:
+  description:
+    value: >-
+      <p>This poison must be harvested from a dead or incapacitated crawler. A
+      creature subjected to this poison must succeed on a [[/save]] saving throw
+      or be &amp;Reference[poisoned apply=false]{poisoned} for 1 minute. The
+      poisoned creature is &amp;Reference[paralyzed apply=false]{paralyzed}. The
+      creature can repeat the saving throw at the end of each of its turns,
+      ending the effect on itself on a success.</p>
+    chat: ''
+  source:
+    custom: SRD 5.1
+    book: ''
+    page: ''
+    license: ''
+    revision: 1
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 200
+    denomination: gp
+  attunement: ''
+  equipped: false
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      modifiers: []
+    replace: false
+  properties: []
+  unidentified:
+    description: ''
+  type:
+    value: poison
+    subtype: contact
+  container: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+        expiry: null
+      effects:
+        - _id: nczzAQLDBNlAgWjq
+          uuid: null
+          level: {}
+          onSave: false
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ft
+          stationary: false
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '13'
+        visible: true
+        bonus: ''
+      img: ''
+      sort: 0
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      behaviors: []
+      name: ''
+  identifier: crawler-mucus
+  attuned: false
+  rarities: []
+effects:
+  - folder: IfLBBXmSvJFGNJaF
+    name: Poisoned & Paralyzed
+    type: base
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    system:
+      changes: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.items.Item.B018Yhz1M7Np8JCW
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    disabled: false
+    start: null
+    duration:
+      value: 1
+      units: minutes
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - paralyzed
+      - poisoned
+    showIcon: 1
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.367'
+      systemId: dnd5e
+      systemVersion: 6.0.3
+      lastModifiedBy: dnd5ebuilder0000
+      duplicateSource: null
+      exportSource: null
+      createdTime: 1789766207120
+      modifiedTime: 1789766224725
+      compendiumSource: Compendium.dnd5e.effects.ActiveEffect.wAnw5y4atBxNJHUP
+    _id: nczzAQLDBNlAgWjq
+    _key: '!items.effects!B018Yhz1M7Np8JCW.nczzAQLDBNlAgWjq'
+flags: {}
+_stats:
+  systemId: dnd5e
+  systemVersion: 6.0.3
+  coreVersion: '14.367'
+  createdTime: 1789765522394
+  modifiedTime: 1789766249245
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_id: B018Yhz1M7Np8JCW
+sort: 350000
+_key: '!items!B018Yhz1M7Np8JCW'

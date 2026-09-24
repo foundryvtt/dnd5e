@@ -68,11 +68,9 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
+            scaling: {}
         scaling:
           allowed: false
           max: ''
@@ -107,29 +105,37 @@ system:
         prompt: true
         override: false
       damage:
-        onSave: half
+        onSave: none
         parts:
-          - number: 1
-            denomination: 4
-            bonus: ''
-            types:
-              - poison
-            custom:
+          - custom:
               enabled: false
               formula: ''
+            number: 1
+            denomination: 4
+            bonus: ''
+            modifiers: []
+            types:
+              - poison
             scaling:
-              mode: whole
-              number: null
-              formula: ''
+              number: 1
       save:
         ability: con
         dc:
           calculation: ''
           formula: '10'
+        bonus: ''
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
   attuned: false
   identifier: basic-poison
 effects: []
@@ -140,11 +146,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.367'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 6.0.3
   createdTime: 1725037241703
-  modifiedTime: 1725992531189
+  modifiedTime: 1789766859707
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!eVbPkYjpl29RE2uW'
