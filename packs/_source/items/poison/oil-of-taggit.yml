@@ -1,31 +1,31 @@
-name: Truth Serum
+folder: ZzUfnm1OuSL02nLG
+name: Oil of Taggit
 type: consumable
-img: icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp
+img: icons/consumables/potions/potion-bottle-corked-stopper-ornate-yellow.webp
 system:
   description:
     value: >-
       <p>A creature subjected to this poison must succeed on a [[/save]] saving
-      throw or become &amp;Reference[poisoned apply=false]{poisoned} for 1 hour.
-      The poisoned creature can't knowingly speak a lie, as if under the effect
-      of a @UUID[Compendium.dnd5e.spells.Item.CylBa7jR8DSbo8Z3]{Zone of Truth}
-      spell.</p>
+      throw or become &amp;Reference[poisoned apply=false]{poisoned} for 24
+      hours. The poisoned creature is &amp;Reference[unconscious
+      apply=false]{unconscious}. The creature wakes up if it takes damage.</p>
     chat: ''
   source:
-    custom: ''
+    custom: SRD 5.1
     book: ''
     page: ''
-    license: CC-BY-4.0
+    license: ''
+    revision: 1
     rules: '2014'
   quantity: 1
   weight:
     value: 0
     units: lb
   price:
-    value: 150
+    value: 400
     denomination: gp
   attunement: ''
   equipped: false
-  rarity: ''
   identified: true
   uses:
     max: '1'
@@ -34,151 +34,162 @@ system:
     spent: 0
   damage:
     base:
-      number: null
-      denomination: null
       types: []
       custom:
         enabled: false
       scaling:
         number: 1
+      modifiers: []
     replace: false
-  type:
-    value: poison
-    subtype: ingested
+  properties: []
   unidentified:
     description: ''
+  type:
+    value: poison
+    subtype: contact
   container: null
-  properties: []
-  magicalBonus: null
   activities:
-    IXiAkr30YyhobMw8:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
       type: save
-      _id: IXiAkr30YyhobMw8
       activation:
         type: action
-        value: null
-        override: false
+        value: 1
         condition: ''
+        override: false
       consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
         targets:
           - type: itemUses
             value: '1'
+            target: ''
             scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
-        units: inst
         concentration: false
+        value: '24'
+        units: hour
+        special: ''
         override: false
+        expiry: null
       effects:
-        - _id: XJxOfIIj9oraLfCb
+        - _id: MZS6EZWckpKRqLp1
           uuid: null
           level: {}
           onSave: false
       range:
-        override: false
         units: self
         special: ''
+        override: false
       target:
         template:
+          count: ''
           contiguous: false
-          units: ft
           type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ft
+          stationary: false
         affects:
-          choice: false
           count: '1'
           type: creature
+          choice: false
           special: ''
-        override: false
         prompt: true
+        override: false
       uses:
         spent: 0
-        recovery: []
         max: ''
-      sort: 0
+        recovery: []
       damage:
-        parts: []
         onSave: half
+        parts: []
       save:
-        ability: con
+        ability:
+          - con
         dc:
           calculation: ''
-          formula: '11'
+          formula: '13'
+        visible: true
         bonus: ''
-      name: ''
       img: ''
-      appliedEffects: []
+      sort: 0
+      flags: {}
       visibility:
         level:
           min: null
           max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
         identifier: ''
+      behaviors: []
+      name: ''
+  identifier: oil-of-taggit
   attuned: false
-  identifier: truth-serum
+  rarities: []
 effects:
-  - name: Can't Lie
-    img: icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp
+  - folder: IfLBBXmSvJFGNJaF
+    name: Poisoned & Unconscious
+    type: base
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
     system:
-      origin:
-        item: Compendium.dnd5e.items.Item.a86F565Pjdzym1jH
-        actor: null
-        behavior: null
-        effect: null
-        message: null
       changes: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.items.Item.0R4VzaAY99facLlm
+        message: null
       conditions: '{}'
       magical: false
       rider:
-        statuses: []
-    transfer: false
-    _id: XJxOfIIj9oraLfCb
-    type: base
+        statuses:
+          - unconscious
     disabled: false
     start: null
     duration:
-      value: 1
+      value: 24
       units: hours
       expiry: null
       expired: false
-    description: >-
-      <p>You can't knowingly speak a lie, as if under the effect of a
-      @UUID[Compendium.dnd5e.spells.Item.CylBa7jR8DSbo8Z3]{Zone of Truth}
-      spell.</p>
+    description: ''
     origin: null
     tint: '#ffffff'
+    transfer: false
     statuses:
       - poisoned
     showIcon: 1
-    folder: null
     sort: 0
     flags: {}
     _stats:
       coreVersion: '14.367'
       systemId: dnd5e
       systemVersion: 6.0.3
-      createdTime: 1789767178445
-      modifiedTime: 1790271363539
       lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
       duplicateSource: null
       exportSource: null
-    _key: '!items.effects!a86F565Pjdzym1jH.XJxOfIIj9oraLfCb'
-sort: 100000
+      createdTime: 1789766640669
+      modifiedTime: 1789766657313
+      compendiumSource: Compendium.dnd5e.effects.ActiveEffect.wAnw5y4atBxNJHUP
+    _id: MZS6EZWckpKRqLp1
+    _key: '!items.effects!0R4VzaAY99facLlm.MZS6EZWckpKRqLp1'
 flags: {}
-_id: a86F565Pjdzym1jH
-folder: ZzUfnm1OuSL02nLG
-ownership:
-  default: 0
 _stats:
-  duplicateSource: null
-  coreVersion: '14.367'
   systemId: dnd5e
   systemVersion: 6.0.3
-  createdTime: 1725037220965
-  modifiedTime: 1789767178485
+  coreVersion: '14.367'
+  createdTime: 1789765508502
+  modifiedTime: 1789766683850
   lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
   exportSource: null
-_key: '!items!a86F565Pjdzym1jH'
+ownership:
+  default: 0
+_id: 0R4VzaAY99facLlm
+sort: 400000
+_key: '!items!0R4VzaAY99facLlm'
