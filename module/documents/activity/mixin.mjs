@@ -40,6 +40,7 @@ export default function ActivityMixin(Base) {
       collection: "activities",
       label: "DOCUMENT.Activity",
       name: "Activity",
+      hasRiders: false,
       sheetClass: ActivitySheet,
       targetPhase: "",
       usage: {
@@ -1279,6 +1280,30 @@ export default function ActivityMixin(Base) {
       const activityUpdates = foundry.utils.expandObject(updates.activity);
       if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
       else updates.item[itemIndex][keyPath] = activityUpdates;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity a certain type or like that type?
+     * @param {string} activityType  Activity type.
+     * @param {string} otherType     Type to compare against.
+     * @returns {boolean}
+     */
+    static isLike(activityType, otherType) {
+      return (activityType === otherType)
+        || (CONFIG.DND5E.activityTypes[activityType]?.documentClass?.metadata.like === otherType);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity a certain type or like that type?
+     * @param {string} type  Activity type.
+     * @returns {boolean}
+     */
+    isLike(type) {
+      return (this.type === type) || (this.metadata.like === type);
     }
 
     /* -------------------------------------------- */
