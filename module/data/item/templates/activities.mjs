@@ -426,8 +426,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     // Track changes to rider activities & effects and store in item flags
     const cloneChanges = foundry.utils.deepClone(changed);
-    const riders = this.parent.clone(cloneChanges).system.activities.getByType("enchant").reduce((riders, a) => {
-      a.effects.forEach(e => {
+    const riders = this.parent.clone(cloneChanges).system.activities.reduce((riders, a) => {
+      if ( a.metadata.hasRiders ) a.effects.forEach(e => {
         e.riders.activity.forEach(activity => riders.activity.add(activity));
         e.riders.effect.forEach(effect => riders.effect.add(effect));
       });

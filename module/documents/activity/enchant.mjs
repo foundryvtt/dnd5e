@@ -25,6 +25,7 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
       img: "systems/dnd5e/icons/svg/activity/enchant.svg",
       title: "DND5E.ENCHANT.Title",
       hint: "DND5E.ENCHANT.Hint",
+      hasRiders: true,
       sheetClass: EnchantSheet,
       usage: {
         applyEffectsInChat: false,
