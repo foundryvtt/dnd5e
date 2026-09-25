@@ -134,7 +134,10 @@ export class ActivityCollection extends Collection {
 
   /** @inheritDoc */
   delete(key) {
-    this.#types.get(this.get(key)?.type)?.delete(key);
+    const type = this.get(key)?.type;
+    this.#types.get(type)?.delete(key);
+    const like = CONFIG.DND5E.activityTypes[type]?.documentClass.metadata.like;
+    if ( like ) this.#like.get(like)?.delete(key);
     return super.delete(key);
   }
 

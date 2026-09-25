@@ -160,7 +160,7 @@ export default class UsageMessageData extends ItemMessageData {
    */
   async onDescendentRefresh(message) {
     // The descendent wasn't an outcome, it was some other action.
-    if ( dnd5e.documents.activity.UtilityActivity.isLike(this.activity.type, message.type) ) return;
+    if ( !dnd5e.documents.activity.UtilityActivity.isLike(this.activity.type, message.type) ) return;
     this.#outcomes = undefined;
     return Promise.all(this.parent.getAssociatedRolls("damage").map(m => ui.chat?.updateMessage(m)));
   }

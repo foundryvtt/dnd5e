@@ -33,6 +33,7 @@ export default class AttackActivity extends ActivityMixin(BaseAttackActivityData
       title: "DND5E.ATTACK.Title.one",
       hint: "DND5E.ATTACK.Hint",
       sheetClass: AttackSheet,
+      like: "attack",
       targetPhase: "post",
       usage: {
         actions: {

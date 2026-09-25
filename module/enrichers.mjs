@@ -502,7 +502,7 @@ export async function enrichCheck(config, label, options) {
     : !anything ? options.relativeTo?.system?.activities?.getByType("check")[0] : null;
 
   if ( activity ) {
-    if ( activity.isLike("check") ) {
+    if ( !activity.isLike("check") ) {
       logWarning(`Check enricher linked to non-check activity when enriching ${config._input}.`, options);
       return null;
     }
