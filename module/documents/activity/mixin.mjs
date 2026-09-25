@@ -40,6 +40,7 @@ export default function ActivityMixin(Base) {
       collection: "activities",
       label: "DOCUMENT.Activity",
       name: "Activity",
+      hasRiders: false,
       sheetClass: ActivitySheet,
       targetPhase: "",
       usage: {

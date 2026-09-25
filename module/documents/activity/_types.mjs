@@ -13,6 +13,7 @@
  * @property {string} img                               Default icon.
  * @property {string} title                             Default title.
  * @property {string} [hint]                            Hint about how this activity type functions.
+ * @property {boolean} [hasRiders]                      This activity provides rider activities & effects.
  * @property {string} [like]                            Another activity type that this activity is considered like.
  *                                                      This allows certain system features that are expecting a certain
  *                                                      activity type to also work with a subclass of that activity
