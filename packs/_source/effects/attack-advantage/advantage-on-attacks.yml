@@ -1,0 +1,74 @@
+folder: mY1ayhqsfJxaCfmQ
+name: Advantage on Attacks
+type: base
+_id: TD3ynP1vGUlJ7R5P
+img: systems/dnd5e/icons/svg/activity/attack.svg
+system:
+  changes:
+    - key: system.rolls.attack.mwak.mode
+      type: add
+      value: 1
+      phase: initial
+      _id: vU4yFQL3H1ZR4IlH
+      conditions: '{}'
+      replacement: ''
+      priority: null
+    - key: system.rolls.attack.rwak.mode
+      type: add
+      value: 1
+      phase: initial
+      conditions: '{}'
+      replacement: ''
+      priority: null
+      _id: 8tdj5p3Jo48Zcjy4
+    - key: system.rolls.attack.msak.mode
+      type: add
+      value: 1
+      phase: initial
+      conditions: '{}'
+      replacement: ''
+      priority: null
+      _id: 3Zau9KU6SCwvzWxe
+    - key: system.rolls.attack.rsak.mode
+      type: add
+      value: 1
+      phase: initial
+      conditions: '{}'
+      replacement: ''
+      priority: null
+      _id: XgO1CSfC7hGHCql3
+  origin:
+    actor: null
+    behavior: null
+    effect: null
+    item: null
+    message: null
+  conditions: '{}'
+  magical: false
+  rider:
+    statuses: []
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.5
+  createdTime: 1790360814010
+  modifiedTime: 1790360947503
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!effects!TD3ynP1vGUlJ7R5P'

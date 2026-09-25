@@ -1,0 +1,50 @@
+folder: mY1ayhqsfJxaCfmQ
+name: Advantage on Ranged Spell Attacks
+type: base
+img: systems/dnd5e/icons/svg/activity/attack.svg
+system:
+  changes:
+    - key: system.rolls.attack.rsak.mode
+      type: add
+      value: 1
+      phase: initial
+      conditions: '{}'
+      replacement: ''
+      priority: null
+      _id: XgO1CSfC7hGHCql3
+  origin:
+    actor: null
+    behavior: null
+    effect: null
+    item: null
+    message: null
+  conditions: '{}'
+  magical: false
+  rider:
+    statuses: []
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 0
+flags: {}
+_stats:
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.5
+  createdTime: 1790361057633
+  modifiedTime: 1790361077288
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_id: soRAWkj2Of7DvQNI
+_key: '!effects!soRAWkj2Of7DvQNI'
