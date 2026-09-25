@@ -97,9 +97,10 @@ export default class UsageMessageData extends ItemMessageData {
   get outcomes() {
     if ( this.#outcomes ) return this.#outcomes;
     const outcomes = new Map();
+    const like = CONFIG.DND5E.activityTypes[this.activity.type]?.documentClass?.metadata.like;
     const rolls = [
       ...this.parent.getAssociatedRolls(this.activity.type),
-      ...this.parent.getAssociatedRolls(CONFIG.DND5E.activityTypes[this.activity.type]?.documentClass?.metadata.like)
+      ...(like ? this.parent.getAssociatedRolls(like) : [])
     ].sort((lhs, rhs) => lhs.timestamp - rhs.timestamp);
     for ( const message of rolls ) {
       const [roll] = message.rolls;
