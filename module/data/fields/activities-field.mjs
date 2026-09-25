@@ -69,6 +69,14 @@ export class ActivityCollection extends Collection {
   /* -------------------------------------------- */
 
   /**
+   * Pre-organized arrays of activity IDs that are like a certain type.
+   * @type {Map<string, Set<string>>}
+   */
+  #like = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
    * The parent DataModel to which this ActivityCollection belongs.
    * @type {DataModel}
    */
@@ -77,7 +85,7 @@ export class ActivityCollection extends Collection {
   /* -------------------------------------------- */
 
   /**
-   * Pre-organized arrays of activities by type.
+   * Pre-organized arrays of activity IDs by type.
    * @type {Map<string, Set<string>>}
    */
   #types = new Map();
@@ -88,11 +96,15 @@ export class ActivityCollection extends Collection {
 
   /**
    * Fetch an array of activities of a certain type.
-   * @param {string} type  Activity type.
+   * @param {string} type                  Activity type.
+   * @param {object} [options={}]
+   * @param {boolean} [options.like=true]  Also select activities that are like the requested type.
    * @returns {Activity[]}
    */
-  getByType(type) {
-    return Array.from(this.#types.get(type) ?? []).map(key => this.get(key));
+  getByType(type, { like=true }={}) {
+    let keys = Array.from(this.#types.get(type) ?? []);
+    if ( like && this.#like.has(type) ) keys = keys.concat(Array.from(this.#like.get(type)));
+    return keys.map(key => this.get(key));
   }
 
   /* -------------------------------------------- */
@@ -112,8 +124,9 @@ export class ActivityCollection extends Collection {
 
   /** @inheritDoc */
   set(key, value) {
-    if ( !this.#types.has(value.type) ) this.#types.set(value.type, new Set());
-    this.#types.get(value.type).add(key);
+    this.#types.getOrInsert(value.type, new Set()).add(key);
+    const like = CONFIG.DND5E.activityTypes[value.type]?.documentClass.metadata.like;
+    if ( like ) this.#like.getOrInsert(like, new Set()).add(key);
     return super.set(key, value);
   }
 
@@ -121,7 +134,10 @@ export class ActivityCollection extends Collection {
 
   /** @inheritDoc */
   delete(key) {
-    this.#types.get(this.get(key)?.type)?.delete(key);
+    const type = this.get(key)?.type;
+    this.#types.get(type)?.delete(key);
+    const like = CONFIG.DND5E.activityTypes[type]?.documentClass.metadata.like;
+    if ( like ) this.#like.get(like)?.delete(key);
     return super.delete(key);
   }
 

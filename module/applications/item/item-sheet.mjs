@@ -273,7 +273,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const origins = {};
     const riders = [];
     context.activities = (this.item.system.activities ?? []).reduce((arr, activity) => {
-      if ( activity.type === "enchant" ) {
+      if ( activity.metadata.hasRiders ) {
         for ( const effect of activity.effects ?? [] ) {
           for ( const id of effect.riders.activity ) {
             origins[id] ??= [];
@@ -428,7 +428,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         return arr;
       }, []);
     }
-    const origins = (this.item.system.activities?.getByType("enchant") ?? [])
+    const origins = (this.item.system.activities ?? []).values().filter(a => a.metadata.hasRiders)
       .flatMap(a => a.effects)
       .reduce((obj, effects) => {
         const { _id, riders } = effects;

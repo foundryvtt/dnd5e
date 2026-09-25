@@ -397,7 +397,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( activity ) apply(activity, keyPath.join("."));
     } else {
       const { type, key } = change.key.match(/activities\[(?<type>[^\]]+)]\.(?<key>.+)/)?.groups ?? {};
-      item.system.activities?.getByType(type)?.forEach(activity => apply(activity, key));
+      item.system.activities?.getByType(type, { like: false })?.forEach(activity => apply(activity, key));
     }
     return changes;
   }
