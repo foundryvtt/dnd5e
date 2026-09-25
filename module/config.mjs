@@ -4483,6 +4483,20 @@ preLocalize("groupTypes");
 /* -------------------------------------------- */
 
 /**
+ * @typedef FactionCategory5e
+ * @property {string} label  The name of the faction category.
+ */
+
+/**
+ * Faction categories.
+ * @type {Record<string, FactionCategory5e>}
+ */
+DND5E.factionCategories = {};
+preLocalize("factionCategories", { key: "label", sort: true });
+
+/* -------------------------------------------- */
+
+/**
  * Configuration information for activity types.
  * @enum {ActivityTypeConfiguration}
  */

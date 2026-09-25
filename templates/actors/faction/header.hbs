@@ -1,4 +1,4 @@
-<header class="sheet-header">
+<section class="sheet-header">
 
     {{!-- Portrait --}}
     <div class="left">
@@ -8,8 +8,8 @@
         </div>
     </div>
 
-    {{!-- Name & Cards --}}
-    <div class="right">
+    {{!-- Name & Category --}}
+    <div class="middle">
 
         {{!-- Name --}}
         {{#if editable}}
@@ -18,5 +18,18 @@
         <div class="document-name">{{ document.name }}</div>
         {{/if}}
 
+        {{!-- Category --}}
+        <ul class="subtitles unlist">
+            {{~#if editable}}
+            {{#if category.options.length}}
+            <li>{{ formInput fields.type.fields.value value=source.type.value options=category.options blank="" }}</li>
+            {{/if}}
+            {{else if category.label}}
+            <li><span>{{ category.label }}</span></li>
+            {{/if~}}
+        </ul>
+
     </div>
-</header>
+
+    <div class="right"></div>
+</section>

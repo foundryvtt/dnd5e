@@ -99,6 +99,8 @@
  * @property {FactionMemberData[]} members  Members in this group with associated metadata.
  * @property {string[]} ranks               Ranks members can achieve within the faction.
  * @property {SourceData} source            Adventure or sourcebook where this faction originated.
+ * @property {object} type
+ * @property {string} type.value            The faction category.
  */
 
 /**

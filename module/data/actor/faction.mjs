@@ -1,4 +1,5 @@
 import { bulkFromUuid } from "../../utils.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import GroupTemplate from "./templates/group.mjs";
 
@@ -32,8 +33,11 @@ export default class FactionData extends GroupTemplate {
         rank: new StringField(),
         role: new StringField()
       }), { label: "DND5E.Group.Member.other" }),
+      ranks: new ArrayField(new StringField()),
       source: new SourceField(),
-      ranks: new ArrayField(new StringField())
+      type: new SchemaField({
+        value: new IdentifierField()
+      })
     });
   }
 
@@ -72,9 +76,13 @@ export default class FactionData extends GroupTemplate {
    */
   async addMember(...actors) {
     const members = this.toObject().members;
+    const uuids = new Set(this.members.uuids);
     for ( const actor of actors ) {
       if ( !actor.system.isCreature ) throw new Error("Only creature actors can be part of factions.");
-      if ( !this.members.uuids.has(actor.uuid) ) members.push({ uuid: actor.uuid });
+      if ( !uuids.has(actor.uuid) ) {
+        members.push({ uuid: actor.uuid });
+        uuids.add(actor.uuid);
+      }
     }
     return this.parent.update({ "system.members": members });
   }
@@ -121,7 +129,6 @@ export default class FactionData extends GroupTemplate {
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    console.log(options.dnd5e?.unregisterFaction);
     if ( options.dnd5e?.unregisterFaction ) {
       dnd5e.registry.renown.unregisterFaction(this.parent, options.dnd5e.unregisterFaction);
       dnd5e.registry.renown.registerFaction(this.parent);

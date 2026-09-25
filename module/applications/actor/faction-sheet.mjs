@@ -1,3 +1,4 @@
+import CompendiumBrowser from "../compendium-browser.mjs";
 import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 
 /**
@@ -6,12 +7,18 @@ import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 export default class FactionActorSheet extends MultiActorSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
+    actions: {
+      browse: FactionActorSheet.#onBrowse
+    },
     classes: ["faction"],
     position: {
-      width: 700,
-      height: 700
+      width: 500,
+      height: "auto"
     },
-    tab: "members"
+    tab: "description",
+    window: {
+      resizable: false
+    }
   };
 
   /* -------------------------------------------- */
@@ -30,16 +37,7 @@ export default class FactionActorSheet extends MultiActorSheet {
       template: "systems/dnd5e/templates/actors/faction/members.hbs",
       scrollable: [""]
     },
-    inventory: {
-      container: { classes: ["tab-body"], id: "tabs" },
-      template: "systems/dnd5e/templates/actors/faction/inventory.hbs",
-      templates: [
-        "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
-        "systems/dnd5e/templates/inventory/containers.hbs", "systems/dnd5e/templates/inventory/encumbrance.hbs"
-      ],
-      scrollable: [".sidebar", ".body"]
-    },
-    biography: {
+    description: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/group/biography.hbs",
       scrollable: [""]
@@ -50,9 +48,8 @@ export default class FactionActorSheet extends MultiActorSheet {
 
   /** @override */
   static TABS = [
-    { tab: "members", label: "DND5E.Group.Member.other" },
-    { tab: "inventory", label: "DND5E.Inventory" },
-    { tab: "biography", label: "DND5E.Biography" }
+    { tab: "members", label: "DND5E.Group.Member.other", condition: this.showMembersTab },
+    { tab: "description", label: "DND5E.Description" }
   ];
 
   /* -------------------------------------------- */
@@ -61,7 +58,7 @@ export default class FactionActorSheet extends MultiActorSheet {
 
   /** @override */
   tabGroups = {
-    primary: "members"
+    primary: "description"
   };
 
   /* -------------------------------------------- */
@@ -76,6 +73,11 @@ export default class FactionActorSheet extends MultiActorSheet {
    * @protected
    */
   async _prepareHeaderContext(context, options) {
+    const categories = CONFIG.DND5E.factionCategories;
+    context.category = {
+      label: categories[this.actor.system.type.value]?.label,
+      options: Object.entries(categories).map(([value, { label }]) => ({ label, value }))
+    };
     return context;
   }
 
@@ -91,12 +93,11 @@ export default class FactionActorSheet extends MultiActorSheet {
   async _prepareMembersContext(context, options) {
     const members = await this.actor.system.getMembers();
     context.members = await Promise.all(members.map(async ({ actor }, index) => {
-      const { name, system, uuid } = actor;
+      const { name, uuid } = actor;
       const member = { index, name, uuid };
       member.subtitle = [
         // TODO: Rank & role
       ].filterJoin(" • ");
-      member.underlay = `var(--underlay-npc-${system.details.type.value})`;
       await this._prepareMemberPortrait(actor, member);
       return member;
     }));
@@ -111,9 +112,8 @@ export default class FactionActorSheet extends MultiActorSheet {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
-      case "biography": return this._prepareDescriptionContext(context, options);
+      case "description": return this._prepareDescriptionContext(context, options);
       case "header": return this._prepareHeaderContext(context, options);
-      case "inventory": return this._prepareInventoryContext(context, options);
       case "members": return this._prepareMembersContext(context, options);
     }
     return context;
@@ -151,7 +151,40 @@ export default class FactionActorSheet extends MultiActorSheet {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    this._renderContainers(context, options);
+    await super._onRender(context, options);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the compendium browser to add actors.
+   * @this {FactionActorSheet}
+   */
+  static async #onBrowse() {
+    if ( !this.isEditable ) return;
+    const results = await CompendiumBrowser.select({
+      filters: {
+        locked: {
+          documentClass: "Actor",
+          types: new Set(["character", "npc"])
+        }
+      },
+      selection: {
+        min: 1
+      }
+    });
+    if ( results ) {
+      const actors = await Promise.all(results.map(fromUuid));
+      this.actor.system.addMember(...actors);
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -183,5 +216,20 @@ export default class FactionActorSheet extends MultiActorSheet {
     const target = await fromUuid(uuid);
     if ( target instanceof foundry.documents.Actor ) return target.sheet._onDropCreateItems(event, [item]);
     return super._onDropItem(event, item);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Whether to show the members tab.
+   * @param {Actor5e} actor                  The group actor.
+   * @param {object} [options]
+   * @param {ApplicationV2} [options.sheet]  The sheet instance if called in a sheet context.
+   * @returns {boolean}
+   */
+  static showMembersTab(actor, { sheet }={}) {
+    return actor.system.members.length || (sheet?.isEditable && sheet.isEditMode);
   }
 }
