@@ -1,0 +1,50 @@
+folder: S2FKINrrR8PZ6fGm
+name: Disadvantage on Melee Spell Attacks
+type: base
+img: systems/dnd5e/icons/svg/activity/attack.svg
+system:
+  changes:
+    - key: system.rolls.attack.msak.mode
+      type: add
+      value: -1
+      phase: initial
+      conditions: '{}'
+      replacement: ''
+      priority: null
+      _id: 3Zau9KU6SCwvzWxe
+  origin:
+    actor: null
+    behavior: null
+    effect: null
+    item: null
+    message: null
+  conditions: '{}'
+  magical: false
+  rider:
+    statuses: []
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: null
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: false
+statuses: []
+showIcon: 1
+sort: 100000
+flags: {}
+_stats:
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.5
+  createdTime: 1790361132089
+  modifiedTime: 1790361189867
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_id: nwbfJgbLbUqaPPiw
+_key: '!effects!nwbfJgbLbUqaPPiw'
