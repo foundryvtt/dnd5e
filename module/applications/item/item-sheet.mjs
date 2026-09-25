@@ -428,7 +428,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         return arr;
       }, []);
     }
-    const origins = (this.item.system.activities?.getByType("enchant") ?? [])
+    const origins = (this.item.system.activities ?? []).values().filter(a => a.metadata.hasRiders)
       .flatMap(a => a.effects)
       .reduce((obj, effects) => {
         const { _id, riders } = effects;

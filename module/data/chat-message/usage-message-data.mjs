@@ -97,7 +97,11 @@ export default class UsageMessageData extends ItemMessageData {
   get outcomes() {
     if ( this.#outcomes ) return this.#outcomes;
     const outcomes = new Map();
-    for ( const message of this.parent.getAssociatedRolls(this.activity.type) ) {
+    const rolls = [
+      ...this.parent.getAssociatedRolls(this.activity.type),
+      ...this.parent.getAssociatedRolls(CONFIG.DND5E.activityTypes[this.activity.type]?.documentClass?.metadata.like)
+    ].sort((lhs, rhs) => lhs.timestamp - rhs.timestamp);
+    for ( const message of rolls ) {
       const [roll] = message.rolls;
       if ( !(roll instanceof CONFIG.Dice.D20Roll) ) continue;
       const uuid = message.getAssociatedToken()?.uuid;
