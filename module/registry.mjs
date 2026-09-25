@@ -469,9 +469,8 @@ class RenownRegistry {
    */
   static async registerFaction(uuid) {
     let actor;
-    if ( uuid instanceof Actor ) {
-      actor = uuid;
-    } else {
+    if ( uuid instanceof Actor ) actor = uuid;
+    else {
       RegistryStatus.set("renown", false);
       this.#loading.add(uuid);
       if ( !game.ready ) {
@@ -481,17 +480,19 @@ class RenownRegistry {
       actor = await fromUuid(uuid);
     }
 
-    if ( !actor ) throw new Error(`Actor "${uuid}" could not be found to register as faction.`);
-    if ( actor.type !== "faction" ) throw new Error(`Actor "${actor.uuid}" is not a Faction.`);
+    try {
+      if ( !actor ) throw new Error(`Actor "${uuid}" could not be found to register as faction.`);
+      if ( actor.type !== "faction" ) throw new Error(`Actor "${actor.uuid}" is not a Faction.`);
 
-    const entry = this.#factions.getOrInsert(actor.identifier, {
-      renown: new Map(), name: actor.name, sources: new Set()
-    });
-    entry.sources.add(actor);
-
-    if ( !(uuid instanceof Actor) ) {
-      this.#loading.delete(uuid);
-      if ( this.ready ) RegistryStatus.set("renown", true);
+      const entry = this.#factions.getOrInsert(actor.identifier, {
+        renown: new Map(), name: actor.name, sources: new Set()
+      });
+      entry.sources.add(actor);
+    } finally {
+      if ( !(uuid instanceof Actor) ) {
+        this.#loading.delete(uuid);
+        if ( this.ready ) RegistryStatus.set("renown", true);
+      }
     }
   }
 
@@ -499,16 +500,17 @@ class RenownRegistry {
 
   /**
    * Unregister a specific world actor faction from the registry.
-   * @param {Actor5e} actor  World actor to unregister.
+   * @param {Actor5e} actor        World actor to unregister.
+   * @param {string} [identifier]  Identifier to unregister, defaults to actor's identifier.
    */
-  static unregisterFaction(actor) {
+  static unregisterFaction(actor, identifier=actor.identifier) {
     if ( actor.inCompendium ) {
       throw new Error(`Actor "${actor.uuid}" is a compendium Faction, only world Factions can be unregistered.`);
     }
-    const entry = this.#factions.get(actor.identifier);
+    const entry = this.#factions.get(identifier);
     if ( entry ) {
       entry.sources.delete(actor);
-      if ( !entry.sources.size ) this.#factions.delete(actor.identifier);
+      if ( !entry.sources.size && !entry.renown.size ) this.#factions.delete(identifier);
     }
   }
 }
@@ -615,29 +617,31 @@ class SpellListRegistry {
       return;
     }
 
-    const page = await fromUuid(uuid);
-    if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
-    if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
+    try {
+      const page = await fromUuid(uuid);
+      if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
+      if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
 
-    const list = SpellListRegistry.#byType
-      .getOrInsert(page.system.type, new Map())
-      .getOrInsertComputed(page.system.identifier, () => new SpellList({
-        identifier: page.system.identifier, name: page.name, type: page.system.type
+      const list = SpellListRegistry.#byType
+        .getOrInsert(page.system.type, new Map())
+        .getOrInsertComputed(page.system.identifier, () => new SpellList({
+          identifier: page.system.identifier, name: page.name, type: page.system.type
+        }));
+      await Promise.all(Array.from(list.contribute(page)).map(async uuid => {
+        SpellListRegistry.#bySpell.getOrInsert(uuid, new Set()).add(list);
+        const { collection } = foundry.utils.parseUuid(uuid);
+        if ( (collection instanceof foundry.documents.collections.CompendiumCollection)
+          && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
+          this.#compendiumsIndexed.add(collection.metadata.id);
+          this.#loading.add(collection.metadata.id);
+          await collection.getIndex();
+          this.#loading.delete(collection.metadata.id);
+        }
       }));
-    await Promise.all(Array.from(list.contribute(page)).map(async uuid => {
-      SpellListRegistry.#bySpell.getOrInsert(uuid, new Set()).add(list);
-      const { collection } = foundry.utils.parseUuid(uuid);
-      if ( (collection instanceof foundry.documents.collections.CompendiumCollection)
-        && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
-        this.#compendiumsIndexed.add(collection.metadata.id);
-        this.#loading.add(collection.metadata.id);
-        await collection.getIndex();
-        this.#loading.delete(collection.metadata.id);
-      }
-    }));
-
-    this.#loading.delete(uuid);
-    if ( this.ready ) RegistryStatus.set("spellLists", true);
+    } finally {
+      this.#loading.delete(uuid);
+      if ( this.ready ) RegistryStatus.set("spellLists", true);
+    }
   }
 }
 

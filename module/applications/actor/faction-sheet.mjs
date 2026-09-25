@@ -133,11 +133,11 @@ export default class FactionActorSheet extends MultiActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onClose(options) {
+  async _onClose(options) {
     super._onClose(options);
-    this.actor.system.members.forEach(({ actor }) => {
-      if ( actor ) delete actor.apps[this.id];
-    });
+    this.actor.system.getMembers().then(members =>
+      members.forEach(({ actor }) => delete actor.apps[this.id])
+    );
   }
 
   /* -------------------------------------------- */
@@ -145,9 +145,9 @@ export default class FactionActorSheet extends MultiActorSheet {
   /** @inheritDoc */
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
-    this.actor.system.members.forEach(({ actor }) => {
-      if ( actor ) actor.apps[this.id] = this;
-    });
+    this.actor.system.getMembers().then(members =>
+      members.forEach(({ actor }) => actor.apps[this.id] = this)
+    );
   }
 
   /* -------------------------------------------- */

@@ -13,7 +13,7 @@ const { ArrayField, DocumentUUIDField, SchemaField, StringField } = foundry.data
  * @extends {GroupTemplate<FactionActorSystemData>}
  * @mixes FactionActorSystemData
  */
-export default class GroupData extends GroupTemplate {
+export default class FactionData extends GroupTemplate {
 
   /* -------------------------------------------- */
   /*  Model Configuration                         */
@@ -74,7 +74,7 @@ export default class GroupData extends GroupTemplate {
     const members = this.toObject().members;
     for ( const actor of actors ) {
       if ( !actor.system.isCreature ) throw new Error("Only creature actors can be part of factions.");
-      if ( !this.members.uuids.has(actor.uuids) ) members.push({ uuid: actor.uuid });
+      if ( !this.members.uuids.has(actor.uuid) ) members.push({ uuid: actor.uuid });
     }
     return this.parent.update({ "system.members": members });
   }
@@ -105,6 +105,29 @@ export default class GroupData extends GroupTemplate {
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    if ( await super._preUpdate(changes, options, user) === false ) return false;
+    const identifierChanged = (("name" in changes) && !this.identifier) || ("identifier" in (changes.system ?? {}));
+    if ( !this.parent.inCompendium && identifierChanged ) {
+      foundry.utils.setProperty(options, "dnd5e.unregisterFaction", this.parent.identifier);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    console.log(options.dnd5e?.unregisterFaction);
+    if ( options.dnd5e?.unregisterFaction ) {
+      dnd5e.registry.renown.unregisterFaction(this.parent, options.dnd5e.unregisterFaction);
+      dnd5e.registry.renown.registerFaction(this.parent);
+    }
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
