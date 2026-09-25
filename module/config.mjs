@@ -4483,6 +4483,20 @@ preLocalize("groupTypes");
 /* -------------------------------------------- */
 
 /**
+ * @typedef FactionCategory5e
+ * @property {string} label  The name of the faction category.
+ */
+
+/**
+ * Faction categories.
+ * @type {Record<string, FactionCategory5e>}
+ */
+DND5E.factionCategories = {};
+preLocalize("factionCategories", { key: "label", sort: true });
+
+/* -------------------------------------------- */
+
+/**
  * Configuration information for activity types.
  * @enum {ActivityTypeConfiguration}
  */
@@ -4590,6 +4604,7 @@ DND5E.defaultArtwork = {
   Actor: {
     character: "systems/dnd5e/icons/svg/actors/character.svg",
     encounter: "systems/dnd5e/icons/svg/actors/encounter.svg",
+    faction: "systems/dnd5e/icons/svg/actors/faction.svg",
     group: "systems/dnd5e/icons/svg/actors/group.svg",
     npc: "systems/dnd5e/icons/svg/actors/npc.svg",
     vehicle: "systems/dnd5e/icons/svg/actors/vehicle.svg"

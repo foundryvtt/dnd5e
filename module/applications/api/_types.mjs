@@ -16,6 +16,8 @@
 
 /**
  * @callback SheetTabCondition5e
- * @param {Document} doc  The Document instance.
+ * @param {Document} doc                   The Document instance.
+ * @param {object} [options]
+ * @param {ApplicationV2} [options.sheet]  The sheet instance if invoked in a sheet context.
  * @returns {boolean}     Whether to render the tab.
  */
