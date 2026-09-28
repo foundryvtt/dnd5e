@@ -12,6 +12,8 @@
   "characterPl": "Player Characters",
   "encounter": "Encounter",
   "encounterPl": "Encounters",
+  "faction": "Faction",
+  "factionPl": "Factions",
   "group": "Group",
   "groupPl": "Groups",
   "npc": "Non-Player Character",
@@ -3304,6 +3306,12 @@
   }
 },
 
+"DND5E.FACTION": {
+  "Action": {
+    "AddMember": "Add Member"
+  }
+},
+
 "DND5E.FALLING": {
   "DamageFlavor": "Fell {distance}",
   "MovementAction": "Fall",
@@ -4712,6 +4720,7 @@
   "Container": "D&D 5e Container Sheet",
   "DifficultTerrain": "D&D 5e Difficult Terrain Sheet",
   "Encounter": "D&D 5e Encounter Sheet",
+  "Faction": "D&D 5e Faction Sheet",
   "Group": "D&D 5e Group Sheet",
   "Item": "D&D 5e Item Sheet",
   "JournalEntry": "D&D 5e Journal Entry Sheet",

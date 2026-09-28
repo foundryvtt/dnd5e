@@ -376,6 +376,146 @@ class MessageRegistry {
 }
 
 /* -------------------------------------------- */
+/*  Renown                                      */
+/* -------------------------------------------- */
+
+class RenownRegistry {
+  /**
+   * Factions by identifier, with the actor and a list of renown actors have with that faction.
+   * @type {Map<string, { name: string, renown: Map<string, number>, sources: Actor5e[] }>}
+   */
+  static #factions = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Renown that individual actors have with each faction.
+   * @type {Map<string, Map<string, number>>}
+   */
+  static #renown = new Map();
+
+  /* -------------------------------------------- */
+
+  /**
+   * UUIDs of factions in the process of being loaded.
+   * @type {Set<string>}
+   */
+  static #loading = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
+   * Options for each faction.
+   * @type {FormSelectOption[]}
+   */
+  static get factionOptions() {
+    return this.#factions
+      .entries()
+      .map(([identifier, { name }]) => ({ value: identifier, label: name }))
+      .toArray();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Have factions finished loading?
+   * @type {boolean}
+   */
+  static get ready() {
+    return this.#loading.size === 0;
+  }
+
+  /* -------------------------------------------- */
+  /*  Methods                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the actor representing a specific faction.
+   * @param {string} identifier  Identifier for the faction.
+   * @returns {Actor5e|void}
+   */
+  static faction(identifier) {
+    return this.#factions.get(identifier)?.sources.first();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the renown an actor has with all factions.
+   * @param {Actor5e} actor  Actor for which to retrieve the renown.
+   * @returns {Map<string, number>|void}
+   */
+  static forActor(actor) {
+    return this.#renown.get(actor.uuid);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get all renown that any actor has with a specific faction.
+   * @param {Actor5e|string} actor  Faction actor or identifier for the faction.
+   * @returns {Map<string, number>|void}
+   */
+  static forFaction(actor) {
+    const identifier = actor instanceof Actor ? actor.identifier : actor;
+    return this.#factions.get(identifier)?.renown;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Register a specific faction in the registry.
+   * @param {string|Actor5e} uuid  UUID of faction actor to register or actor instance.
+   */
+  static async registerFaction(uuid) {
+    let actor;
+    if ( uuid instanceof Actor ) actor = uuid;
+    else {
+      RegistryStatus.set("renown", false);
+      this.#loading.add(uuid);
+      if ( !game.ready ) {
+        Hooks.once("ready", () => this.registerFaction(uuid));
+        return;
+      }
+      actor = await fromUuid(uuid);
+    }
+
+    try {
+      if ( !actor ) throw new Error(`Actor "${uuid}" could not be found to register as faction.`);
+      if ( actor.type !== "faction" ) throw new Error(`Actor "${actor.uuid}" is not a Faction.`);
+
+      const entry = this.#factions.getOrInsert(actor.identifier, {
+        renown: new Map(), name: actor.name, sources: new Set()
+      });
+      entry.sources.add(actor);
+    } finally {
+      if ( !(uuid instanceof Actor) ) {
+        this.#loading.delete(uuid);
+        if ( this.ready ) RegistryStatus.set("renown", true);
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Unregister a specific world actor faction from the registry.
+   * @param {Actor5e} actor        World actor to unregister.
+   * @param {string} [identifier]  Identifier to unregister, defaults to actor's identifier.
+   */
+  static unregisterFaction(actor, identifier=actor.identifier) {
+    if ( actor.inCompendium ) {
+      throw new Error(`Actor "${actor.uuid}" is a compendium Faction, only world Factions can be unregistered.`);
+    }
+    const entry = this.#factions.get(identifier);
+    if ( entry ) {
+      entry.sources.delete(actor);
+      if ( !entry.sources.size && !entry.renown.size ) this.#factions.delete(identifier);
+    }
+  }
+}
+
+/* -------------------------------------------- */
 /*  Spell Lists                                 */
 /* -------------------------------------------- */
 
@@ -477,29 +617,31 @@ class SpellListRegistry {
       return;
     }
 
-    const page = await fromUuid(uuid);
-    if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
-    if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
+    try {
+      const page = await fromUuid(uuid);
+      if ( !page ) throw new Error(`Journal entry page "${uuid}" could not be found to register as spell list.`);
+      if ( page.type !== "spells" ) throw new Error(`Journal entry page "${uuid}" is not a Spell List.`);
 
-    const list = SpellListRegistry.#byType
-      .getOrInsert(page.system.type, new Map())
-      .getOrInsertComputed(page.system.identifier, () => new SpellList({
-        identifier: page.system.identifier, name: page.name, type: page.system.type
+      const list = SpellListRegistry.#byType
+        .getOrInsert(page.system.type, new Map())
+        .getOrInsertComputed(page.system.identifier, () => new SpellList({
+          identifier: page.system.identifier, name: page.name, type: page.system.type
+        }));
+      await Promise.all(Array.from(list.contribute(page)).map(async uuid => {
+        SpellListRegistry.#bySpell.getOrInsert(uuid, new Set()).add(list);
+        const { collection } = foundry.utils.parseUuid(uuid);
+        if ( (collection instanceof foundry.documents.collections.CompendiumCollection)
+          && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
+          this.#compendiumsIndexed.add(collection.metadata.id);
+          this.#loading.add(collection.metadata.id);
+          await collection.getIndex();
+          this.#loading.delete(collection.metadata.id);
+        }
       }));
-    await Promise.all(Array.from(list.contribute(page)).map(async uuid => {
-      SpellListRegistry.#bySpell.getOrInsert(uuid, new Set()).add(list);
-      const { collection } = foundry.utils.parseUuid(uuid);
-      if ( (collection instanceof foundry.documents.collections.CompendiumCollection)
-        && !this.#compendiumsIndexed.has(collection.metadata.id) ) {
-        this.#compendiumsIndexed.add(collection.metadata.id);
-        this.#loading.add(collection.metadata.id);
-        await collection.getIndex();
-        this.#loading.delete(collection.metadata.id);
-      }
-    }));
-
-    this.#loading.delete(uuid);
-    if ( this.ready ) RegistryStatus.set("spellLists", true);
+    } finally {
+      this.#loading.delete(uuid);
+      if ( this.ready ) RegistryStatus.set("spellLists", true);
+    }
   }
 }
 
@@ -767,6 +909,7 @@ export default {
   items: ItemRegistry,
   messages: MessageRegistry,
   ready: RegistryStatus.ready,
+  renown: RenownRegistry,
   species: new ItemRegistry("race"),
   spellLists: SpellListRegistry,
   subclasses: new ItemRegistry("subclass"),

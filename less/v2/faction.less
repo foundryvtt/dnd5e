@@ -1,0 +1,54 @@
+/* -------------------------------------------- */
+/*  Basic Structure                             */
+/* -------------------------------------------- */
+
+.dnd5e2.sheet.actor.faction {
+
+  /* -------------------------------------------- */
+  /*  Outer Window                                */
+  /* -------------------------------------------- */
+
+  &:not(.minimized)::before {
+    content: var(--dnd5e-faction-header-content, none);
+    background: var(--dnd5e-faction-header-image) no-repeat center / cover;
+  }
+
+  /* -------------------------------------------- */
+  /*  Header                                      */
+  /* -------------------------------------------- */
+
+  .sheet-header .subtitles {
+    font-family: var(--dnd5e-font-roboto-condensed);
+    font-size: var(--font-size-14);
+    &:empty { display: none; }
+  }
+
+  /* -------------------------------------------- */
+  /*  Inventory                                   */
+  /* -------------------------------------------- */
+
+  .tab[data-tab=inventory] { padding: 8px 4px calc(1.5rem + 30px) 16px; }
+
+  /* -------------------------------------------- */
+  /*  Members                                     */
+  /* -------------------------------------------- */
+
+  .tab[data-tab=members] {
+    padding-block-end: 32px;
+
+    .pill-lg.empty { margin-block-end: 0; }
+
+    .member .vitals::before {
+      background: url("ui/texture-gray2.webp") no-repeat bottom right;
+      content: "";
+      filter: none;
+      inset: 0;
+      mask-image: linear-gradient(190deg, transparent 15%, black);
+      mix-blend-mode: var(--dnd5e-vehicle-station-blend-mode);
+      opacity: .75;
+      position: absolute;
+      transform: scaleX(-1);
+    }
+  }
+
+}
