@@ -468,12 +468,155 @@
   }
 }
 
+/* -------------------------------------------- */
+/*  Member List Sheets                          */
+/* -------------------------------------------- */
+
+.dnd5e2.sheet.actor {
+  &.encounter, &.faction {
+    --dnd5e-sheet-header-height: 170px;
+
+    &:not(.minimized)::before {
+      block-size: 150px;
+      border-radius: 5px 5px 0 0;
+      filter: grayscale(1);
+      inset: 0 0 auto 0;
+      mask-image: linear-gradient(to bottom, black, transparent);
+      opacity: .1;
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .window-content {
+      gap: 0;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    /* -------------------------------------------- */
+    /*  Sheet Header                                */
+    /* -------------------------------------------- */
+
+    .sheet-header {
+      align-items: stretch;
+      display: flex;
+      gap: 8px;
+      padding: 0 16px;
+
+      > .left { flex: none; }
+
+      > .middle {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+
+      > .right {
+        align-items: center;
+        display: flex;
+        flex: 0 0 96px;
+        gap: 8px;
+      }
+
+      .portrait {
+        block-size: 96px;
+        inline-size: 96px;
+
+        img {
+          block-size: 100%;
+          border: none;
+          border-radius: 8px;
+          inline-size: 100%;
+          margin: 0;
+          max-inline-size: unset;
+          object-fit: contain;
+        }
+      }
+
+      .document-name {
+        --input-background-color: var(--npc-header-input-background);
+        font-family: var(--dnd5e-font-modesto);
+        font-size: var(--font-size-32);
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+
+    /* -------------------------------------------- */
+    /*  Sheet Body                                  */
+    /* -------------------------------------------- */
+
+    .sheet-body {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+
+      .main-content {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        .tab-body {
+          flex: 1;
+          position: relative;
+        }
+      }
+    }
+
+    .sheet-tabs { margin-block-start: 8px; }
+
+    .tab {
+      max-block-size: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
+      overflow: hidden auto;
+      padding: 16px 0 8px 16px;
+      .scroll-gutter(16px);
+    }
+
+    /* -------------------------------------------- */
+    /*  Group Members                               */
+    /* -------------------------------------------- */
+
+    .tab[data-tab=members] {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .pill-lg.empty {
+        max-width: unset;
+        margin-inline: 16px;
+        margin-bottom: 8px;
+      }
+
+      .member { padding-inline: 16px; }
+
+      .card {
+        flex: 1;
+        padding-inline-end: 16px;
+      }
+
+      .name-stacked {
+        flex: 1;
+        justify-content: center;
+
+        .title { font-size: var(--font-size-14); }
+        .subtitle { font-size: var(--font-size-12); }
+      }
+    }
+
+    .tab[data-tab=inventory] { overflow-y: auto; }
+
+  }
+}
+
 /* ---------------------------------- */
 /*  Biography                         */
 /* ---------------------------------- */
 
 .dnd5e2.sheet.actor {
-  &.group, &.encounter {
+  &.group, &.encounter, &.faction {
     .tab[data-tab=biography], .tab[data-tab=description] {
       padding-block: 8px;
       gap: 16px;
@@ -509,6 +652,29 @@
 }
 
 /* -------------------------------------------- */
+/*  Description                                 */
+/* -------------------------------------------- */
+
+.dnd5e2.sheet.actor {
+  &.encounter, &.faction {
+    .tab[data-tab=description] {
+      &.editing {
+        padding: 8px 0;
+        margin: 0;
+        scrollbar-gutter: auto;
+      }
+
+      .middle, .bottom { padding: 0; }
+
+      > .editor .editor-content {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}
+
+/* -------------------------------------------- */
 /*  Limited                                     */
 /* -------------------------------------------- */
 
@@ -520,7 +686,7 @@
     }
   }
 
-  &.group, &.encounter {
+  &.group, &.encounter, &.faction {
     &.limited {
       .window-content { padding: 0; }
 
