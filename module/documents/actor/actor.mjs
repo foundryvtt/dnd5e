@@ -1394,7 +1394,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     ], {
       advantages: { count: Number(doubleProf) + Number(pace.advantage) },
       disadvantages: { count: Number(pace.disadvantage) },
-      rules: { category: "check", actor: this, rollData }
+      rules: { category: "check", actor: this, item: config.item, rollData }
     });
 
     const rollConfig = foundry.utils.mergeObject({
@@ -1489,7 +1489,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       "rolls.ability.check",
       `rolls.ability.${type}`,
       `${type}s.${type === "skill" ? process.skill : process.tool}.roll`
-    ], { rules: { category: "check", actor: this, rollData } });
+    ], { rules: { category: "check", actor: this, item: process.item, rollData } });
 
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
@@ -1615,7 +1615,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     });
     const { bonus, ...options } = D20RollModificationField.combineFields(this.system, [
       `abilities.${config.ability}.${type}.roll`, `rolls.ability.${type}`
-    ], { rules: { category: type, actor: this, rollData } });
+    ], { rules: { category: type, actor: this, item: config.item, rollData } });
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({
       mod: ability?.mod,
       prof: ability?.[type].prof.hasProficiency ? ability[type].prof.term : null,
