@@ -140,6 +140,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
         }
         if ( damage.active.all?.[category] ) active[category].add("ALL");
         if ( damage.active.type?.[category] ) active[category].add(damage.type);
+        for ( const [special, value] of Object.entries(damage.active.special ?? {}) ) {
+          if ( value[category] ) active[category].add(special);
+        }
       }
     }
     temp = Math.floor(Math.max(0, temp));
@@ -424,7 +427,8 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const title = _loc(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
       type: type === "ALL"
         ? _loc("DND5E.DAMAGE.All")
-        : CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
+        : (CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type]
+          ?? CONFIG.DND5E.damageResistanceTypes[type])?.label
     });
     let label = title;
     if ( mode === "ignore" ) label = _loc("DND5E.DamageApplication.Ignoring", { source: title });
@@ -484,7 +488,8 @@ export default class DamageApplicationElement extends ChatTrayElement {
           ? "systems/dnd5e/icons/svg/damage/all.svg"
           : change === "threshold"
             ? "systems/dnd5e/icons/svg/damage/threshold.svg"
-            : (CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type])?.icon;
+            : (CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type]
+              ?? CONFIG.DND5E.damageResistanceTypes[type])?.icon;
         if ( !icon ) continue;
         const { label, mode, pressed, title } = this.getChangeSourceOptions(type, change, options);
         const li = document.createElement("li");
