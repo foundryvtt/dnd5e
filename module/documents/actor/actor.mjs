@@ -3739,7 +3739,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !foundry.utils.isEmpty(updates.actor) ) operations.push(this.parent
       ? {
         action: "update", documentName: "ActorDelta", parent: this.parent,
-        updates: [{ _id: this.parent.delta.id, ...updates.actor }], ...options
+        updates: [{ ...updates.actor, _id: this.parent.delta.id }], ...options
       }
       : { action: "update", documentName: "Actor", updates: [{ _id: this.id, ...updates.actor }], ...options }
     );
