@@ -351,7 +351,9 @@ export class SingleLevelSpellcasting extends SlotSpellcasting {
     slot.type = this.key;
     slot.label = this.label;
     const override = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : null;
-    if ( (level === 0) && actor.system.isNPC && (override !== null) ) level = actor.system.attributes.spell?.level ?? 0;
+    if ( (level === 0) && actor?.system.isNPC && (override !== null) ) {
+      level = actor.system.attributes.spell?.level ?? 0;
+    }
     const slots = this.calculateSlots(level);
     if ( foundry.utils.isEmpty(slots) && !override ) return;
     const [[slotLevel, slotAmount]=[]] = Object.entries(slots);
