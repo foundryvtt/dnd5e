@@ -361,6 +361,15 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef FactionDescriptor
+ * @property {string} name                 The faction name.
+ * @property {Map<string, number>} renown  The Actors that have renown with this faction and how much.
+ * @property {Set<Actor5e>} sources        The faction Actors with this identifier.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * A filter description.
  *
  * @typedef FilterDescription

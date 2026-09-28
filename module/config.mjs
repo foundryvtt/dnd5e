@@ -4619,6 +4619,7 @@ DND5E.defaultArtwork = {
     feat: "systems/dnd5e/icons/svg/items/feature.svg",
     loot: "systems/dnd5e/icons/svg/items/loot.svg",
     race: "systems/dnd5e/icons/svg/items/race.svg",
+    renown: "systems/dnd5e/icons/svg/items/renown.svg",
     spell: "systems/dnd5e/icons/svg/items/spell.svg",
     subclass: "systems/dnd5e/icons/svg/items/subclass.svg",
     tool: "systems/dnd5e/icons/svg/items/tool.svg",

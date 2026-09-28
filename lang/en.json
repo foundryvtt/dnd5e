@@ -58,6 +58,8 @@
   "racePl": "Species",
   "raceLegacy": "Race",
   "raceLegacyPl": "Races",
+  "renown": "Renown",
+  "renownPl": "Renown",
   "spell": "Spell",
   "spellPl": "Spells",
   "subclass": "Subclass",
@@ -4350,6 +4352,26 @@
     },
     "Warning": {
       "RecursiveRegion": "Cannot rotate same region that contains the behavior."
+    }
+  }
+},
+
+"DND5E.RENOWN": {
+  "Action": {
+    "AddModifier": "Add Renown Modifier",
+    "DeleteModifier": "Delete Renown Modifier"
+  },
+  "Empty": "No renown modifiers yet. Use the <i class=\"fas fa-plus\"></i> button above to add one.",
+  "FIELDS": {
+    "modifiers": {
+      "element": {
+        "faction.label": "Faction",
+        "value": {
+          "label": "Value",
+          "placeholder": "0"
+        }
+      },
+      "label": "Modifiers"
     }
   }
 },

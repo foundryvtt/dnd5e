@@ -12,7 +12,7 @@
     {{/if}}
 
     {{#if info}}
-    <div class="info-block">
+    <div class="info-block {{ item.type }}">
         {{#each info}}
         <div {{#if classes}}class="{{ classes }}"{{/if}}>
             {{#if label}}
