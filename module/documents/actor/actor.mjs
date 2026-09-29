@@ -534,6 +534,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareDerivedData() {
+    dnd5e.registry.renown.track(this);
     const origin = this.getFlag("dnd5e", "summon.origin");
     if ( origin && this.token?.id ) {
       const { collection, primaryId } = foundry.utils.parseUuid(origin);
@@ -3436,6 +3437,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     super._onDelete(options, userId);
+    dnd5e.registry.renown.untrack(this);
 
     const origin = this.getFlag("dnd5e", "summon.origin");
     if ( origin ) {

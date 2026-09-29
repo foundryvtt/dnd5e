@@ -95,7 +95,7 @@ export default class LootData extends ItemDataModel.mixin(
 
   /**
    * Properties displayed in chat.
-   * @type {string[]}
+   * @type {object[]}
    */
   get chatProperties() {
     return [

@@ -134,15 +134,15 @@ export default class MultiActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   async _onDropCreateItems(event, items, behavior) {
-    let foundNonPhysical = false;
+    let foundUnsupported = false;
     items = items.filter(item => {
-      if ( !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
-        foundNonPhysical = true;
+      if ( (item.type !== "renown") && !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
+        foundUnsupported = true;
         return false;
       }
       return true;
     });
-    if ( foundNonPhysical ) ui.notifications.warn("DND5E.Group.Warning.PhysicalItemOnly", { localize: true });
+    if ( foundUnsupported ) ui.notifications.warn("DND5E.Group.Warning.SupportedItemOnly", { localize: true });
     return super._onDropCreateItems(event, items, behavior);
   }
 

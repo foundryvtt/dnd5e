@@ -2,7 +2,7 @@ import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import { formatIdentifier } from "./utils.mjs";
 
 /**
- * @import { RegisteredItemData } from "./_types.mjs";
+ * @import { FactionDescriptor, RegisteredItemData } from "./_types.mjs";
  */
 
 const STATUS_STATES = Object.freeze({
@@ -382,7 +382,7 @@ class MessageRegistry {
 class RenownRegistry {
   /**
    * Factions by identifier, with the actor and a list of renown actors have with that faction.
-   * @type {Map<string, { name: string, renown: Map<string, number>, sources: Actor5e[] }>}
+   * @type {Map<string, FactionDescriptor>}
    */
   static #factions = new Map();
 
@@ -464,6 +464,17 @@ class RenownRegistry {
   /* -------------------------------------------- */
 
   /**
+   * Get information on a faction.
+   * @param {string} identifier  The faction identifier.
+   * @returns {FactionDescriptor|void}
+   */
+  static get(identifier) {
+    return this.#factions.get(identifier);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Register a specific faction in the registry.
    * @param {string|Actor5e} uuid  UUID of faction actor to register or actor instance.
    */
@@ -488,11 +499,37 @@ class RenownRegistry {
         renown: new Map(), name: actor.name, sources: new Set()
       });
       entry.sources.add(actor);
+      entry.name = entry.sources.first().name;
     } finally {
       if ( !(uuid instanceof Actor) ) {
         this.#loading.delete(uuid);
         if ( this.ready ) RegistryStatus.set("renown", true);
       }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Track an Actor's renown scores.
+   * @param {Actor5e} actor  The Actor.
+   */
+  static track(actor) {
+    if ( !actor?.uuid || actor?.inCompendium ) return;
+    this.untrack(actor);
+    const renown = new Map();
+    for ( const item of actor.itemTypes.renown ) {
+      for ( const { faction, value } of item.system.modifiers ?? [] ) {
+        if ( !faction || !value ) continue;
+        const total = renown.getOrInsert(faction, 0) + value;
+        if ( total ) renown.set(faction, total);
+        else renown.delete(faction);
+      }
+    }
+    if ( renown.size ) this.#renown.set(actor.uuid, renown);
+    for ( const [id, score] of renown.entries() ) {
+      const faction = this.#factions.getOrInsert(id, { name: id, renown: new Map(), sources: new Set() });
+      faction.renown.set(actor.uuid, score);
     }
   }
 
@@ -512,6 +549,24 @@ class RenownRegistry {
       entry.sources.delete(actor);
       if ( !entry.sources.size && !entry.renown.size ) this.#factions.delete(identifier);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove an Actor's renown scores.
+   * @param {Actor5e} actor  The World Actor to unregister.
+   */
+  static untrack(actor) {
+    if ( !actor?.uuid || actor?.inCompendium ) return;
+    const renown = this.#renown.get(actor.uuid) ?? new Map();
+    for ( const id of renown.keys() ) {
+      const faction = this.#factions.get(id);
+      if ( !faction ) continue;
+      faction.renown.delete(actor.uuid);
+      if ( !faction.renown.size && !faction.sources.size ) this.#factions.delete(id);
+    }
+    this.#renown.delete(actor.uuid);
   }
 }
 
