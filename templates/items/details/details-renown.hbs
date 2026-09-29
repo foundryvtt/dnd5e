@@ -1,0 +1,37 @@
+<fieldset>
+    <legend>{{ localize "TYPES.Item.renown" }}</legend>
+
+    {{ formField fields.identifier value=source.identifier placeholder=item.identifier hint="DND5E.IdentifierError"
+                 localize=true rootId=partId }}
+</fieldset>
+
+<fieldset>
+    <legend>
+        <span>{{ localize "DND5E.RENOWN.FIELDS.modifiers.label" }}</span>
+        <button type="button" class="unbutton control-button" data-action="addRenown" data-tooltip
+                aria-label="{{ localize "DND5E.RENOWN.Action.AddModifier" }}">
+            <i class="fa-solid fa-plus" inert></i>
+        </button>
+    </legend>
+    {{#each modifiers}}
+    <div class="form-group split-group full-width card" data-index="{{ @index }}">
+        <div class="form-fields">
+            {{ formField fields.value name=(concat prefix "value") value=data.value classes="label-top"
+                         rootId=@root.partId }}
+            {{#if options.length}}
+            {{ formField fields.faction name=(concat prefix "faction") value=data.faction options=options blank=""
+                         classes="label-top" rootId=@root.partId }}
+            {{else}}
+            {{ formField fields.faction name=(concat prefix "faction") value=data.faction classes="label-top"
+                         rootId=@root.partId }}
+            {{/if}}
+            <button type="button" class="unbutton control-button" data-action="deleteRenown" data-tooltip
+                    aria-label="{{ localize "DND5E.RENOWN.Action.DeleteModifier" }}">
+                <i class="fa-solid fa-minus" inert></i>
+            </button>
+        </div>
+    </div>
+    {{else}}
+    <div class="empty">{{{ localize "DND5E.RENOWN.Empty" }}}</div>
+    {{/each}}
+</fieldset>

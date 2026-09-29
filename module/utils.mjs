@@ -1030,6 +1030,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-feat.hbs",
     "systems/dnd5e/templates/items/details/details-loot.hbs",
     "systems/dnd5e/templates/items/details/details-mountable.hbs",
+    "systems/dnd5e/templates/items/details/details-renown.hbs",
     "systems/dnd5e/templates/items/details/details-species.hbs",
     "systems/dnd5e/templates/items/details/details-spell.hbs",
     "systems/dnd5e/templates/items/details/details-spellcasting.hbs",

@@ -212,7 +212,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /**
    * Properties displayed in chat.
-   * @type {string[]}
+   * @type {object[]}
    */
   get chatProperties() {
     return [
@@ -224,7 +224,10 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
-  /** @override */
+  /**
+   * Properties displayed on the item card.
+   * @type {object[]}
+   */
   get cardProperties() {
     return [...this.tagProperties, { type: "components" }];
   }
