@@ -1,4 +1,5 @@
 import { defaultUnits, formatLength, formatNumber, formatWeight } from "../../utils.mjs";
+import IdentifierField from "../fields/identifier-field.mjs";
 import ActivationField from "./activation-field.mjs";
 import DurationField from "./duration-field.mjs";
 import RangeField from "./range-field.mjs";
@@ -31,6 +32,7 @@ export default class PropertyField extends TypedSchemaField {
       property: { property: new StringField() },
       range: {},
       reach: {},
+      renown: { faction: new IdentifierField(), value: new NumberField({ integer: true }) },
       school: { school: new StringField() },
       target: {},
       text: { text: new StringField() },
@@ -90,6 +92,10 @@ export default class PropertyField extends TypedSchemaField {
         case "reach": return _loc("DND5E.RANGE.Formatted.Reach", {
           reach: formatLength(range.reach, range.units)
         }).capitalize();
+        case "renown": {
+          const faction = dnd5e.registry.renown.get(p.faction)?.name ?? p.faction;
+          return `${formatNumber(p.value, { signDisplay: "always" })} ${faction}`;
+        }
         case "school": return CONFIG.DND5E.spellSchools[p.school]?.label;
         case "target": {
           const labels = TargetField.getLabels({ target, capitalize: true });

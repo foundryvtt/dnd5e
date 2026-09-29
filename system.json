@@ -154,6 +154,9 @@
       "loot": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
+      "renown": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
       "race": {
         "filePathFields": {
           "advancement.*.img": ["IMAGE"]
