@@ -15,6 +15,12 @@
  *                                                           hidden in order to retain this minimum.
  * @property {(string|InventoryColumnDescriptor)[]} columns  A list of column descriptors or IDs of well-known columns.
  * @property {Record<string, string>} [dataset]              Section data stored in the DOM.
+ * @property {boolean} [collapsible]                         Whether this section is collapsible.
+ * @property {boolean} [collapsed]                           Whether the section is currently collapsed. Set externally.
+ * @property {boolean} [inheritGroups]                       Whether rows in this section should inherit the group from
+ *                                                           the section rather than its own grouping designation. Used
+ *                                                           only for views where the same item can appear under
+ *                                                           multiple different sections.
  */
 
 /**
@@ -51,6 +57,8 @@
 
 /**
  * @typedef ListControlConfiguration
+ * @property {string} [collection]              A special collection identifier. Otherwise this is the embedded
+ *                                              collection.
  * @property {string} label                     The placeholder value to use in the main search box.
  * @property {string} list                      The identifier of the item list associated with these controls.
  * @property {ListControlDescriptor[]} filters  Filter configuration.
