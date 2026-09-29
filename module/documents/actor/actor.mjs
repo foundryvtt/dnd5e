@@ -1000,6 +1000,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true }) ) {
         return this.#setDamageActive(category, damage, "type");
       }
+      for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
+        if ( !downgrade(key) || !filter.check(damage) ) continue;
+        if ( this.#changeHasEffect("immunity", key, { skipDowngrade: true }) ) {
+          return this.#setDamageActive(category, damage, "special", key);
+        }
+      }
     }
 
     // If damage type is physical and bypass present in properties, skip further checks

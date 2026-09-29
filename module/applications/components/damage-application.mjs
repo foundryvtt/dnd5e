@@ -486,7 +486,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
           ? "systems/dnd5e/icons/svg/damage/all.svg"
           : change === "threshold"
             ? "systems/dnd5e/icons/svg/damage/threshold.svg"
-            : Trait.keyIcon(type, { trait: `d${change.slice(0, 1)}` });
+            : Trait.keyIcon(type, { trait: `d${change.slice(0, 1)}` }) ?? CONFIG.DND5E.healingTypes[type]?.icon;
         if ( !icon ) continue;
         const { label, mode, pressed, title } = this.getChangeSourceOptions(type, change, options);
         const li = document.createElement("li");
