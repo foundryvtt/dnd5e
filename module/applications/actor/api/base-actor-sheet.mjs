@@ -199,6 +199,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       parts.features.templates ??= [];
       parts.features.templates.push(...customElements.get(this.options.elements.inventory).templates);
     }
+    if ( "renown" in parts ) {
+      parts.renown.templates ??= [];
+      parts.renown.templates.push(...customElements.get(this.options.elements.inventory).templates);
+    }
     if ( "effects" in parts ) {
       parts.effects.templates ??= [];
       parts.effects.templates.push(...customElements.get(this.options.elements.effects).templates);
@@ -347,6 +351,61 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
+   * Prepare rendering context for the renown tab.
+   * @param {ApplicationRenderContext} context  Render context.
+   * @param {HandlebarsRenderOptions} options   Render options.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareRenownContext(context, options) {
+    const Inventory = customElements.get(this.options.elements.inventory);
+    const totals = dnd5e.registry.renown.forActor(this.actor);
+    const factionName = id => dnd5e.registry.renown.get(id)?.name ?? id;
+    const factions = {};
+    const unknown = [];
+    for ( const item of context.itemCategories.renown ?? [] ) {
+      const ctx = context.itemContext[item.id];
+      const renown = ctx.renown = {};
+      for ( const { faction, value } of item.system.modifiers ) {
+        if ( faction && value ) renown[faction] = (renown[faction] ?? 0) + value;
+      }
+      for ( const faction of foundry.utils.objectKeys(renown) ) (factions[faction] ??= []).push(item);
+      if ( foundry.utils.isEmpty(renown) ) unknown.push(item);
+      ctx.dataset["group-contents"] = "contents";
+      ctx.subtitle = Object.entries(renown).map(([id, value]) => {
+        return `${formatNumber(value, { signDisplay: "always" })} ${foundry.utils.escapeHTML(factionName(id))}`;
+      }).join(" • ");
+    }
+    const sections = Object.entries(factions).map(([id, items]) => ({
+      id, items,
+      collapsible: true,
+      groups: { faction: id },
+      inheritGroups: true,
+      columns: [{
+        faction: id,
+        id: "renown",
+        label: formatNumber(totals?.get(id) ?? 0, { signDisplay: "always" })
+      }, "controls"],
+      label: factionName(id)
+    })).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    if ( unknown.length ) sections.push({
+      collapsible: true,
+      columns: ["controls"],
+      groups: { faction: "" },
+      id: "",
+      inheritGroups: true,
+      items: unknown,
+      label: "DND5E.RENOWN.Unknown"
+    });
+    sections.push({ columns: ["controls"], groups: { contents: "contents" }, id: "contents", label: "DND5E.Contents" });
+    context.sections = Inventory.prepareSections(sections, { expanded: this.expandedSections });
+    context.listControls = foundry.utils.deepClone(ItemListControlsElement.CONFIG.renown);
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare rendering context for the special traits tab.
    * @param {ApplicationRenderContext} context  Context being prepared.
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
@@ -464,6 +523,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     context.itemCategories = {};
     context.itemContext = {};
     context.items = Array.from(this.inventorySource.items).filter(i => !this.actor.items.has(i.system.container));
+    if ( this.inventorySource !== this.actor ) context.items.push(...this.actor.itemTypes.renown);
     await Promise.all(context.items.map(async item => {
       if ( !this._isItemVisible(item) ) return;
 
@@ -753,6 +813,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _assignItemCategories(item) {
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
+    if ( item.type === "renown" ) return new Set(["renown"]);
     if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
   }
@@ -1192,7 +1253,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       icon: "icons/svg/aura.svg"
     }, { parent: this.actor, renderSheet: true });
 
-    const actor = this.inventorySource;
+    const actor = (this.tabGroups.primary === "renown") ? this.actor : this.inventorySource;
     const types = this._addDocumentItemTypes(this.tabGroups.primary)
       .filter(type => !CONFIG.Item.dataModels[type].metadata?.singleton || !actor.itemTypes[type].length);
     if ( types.length > 1 ) return Item.implementation.createDialog({}, { types, parent: actor }, { sheet: this });
@@ -1216,6 +1277,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       case "inventory": return Object.entries(CONFIG.Item.dataModels)
         .filter(([type, model]) => ("inventorySection" in model) && (type !== "backpack"))
         .map(([type]) => type);
+      case "renown": return ["renown"];
       case "spells": return ["spell"];
       default: return [];
     }
@@ -1998,8 +2060,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _filterChildren(collection, filters) {
     switch ( collection ) {
-      case "items": return this._filterItems(this.inventorySource.items, filters);
       case "effects": return this._filterEffects(Array.from(this.actor.allApplicableEffects()), filters);
+      case "items": return this._filterItems(this.inventorySource.items, filters);
+      case "renown": return this._filterItems(this.actor.itemTypes.renown, filters);
     }
     return [];
   }
@@ -2117,8 +2180,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   _sortChildren(collection, mode) {
     switch ( collection ) {
-      case "items": return this._sortItems(this.inventorySource.items.contents, mode);
       case "effects": return this._sortEffects(Array.from(this.actor.allApplicableEffects()), mode);
+      case "items": return this._sortItems(this.inventorySource.items.contents, mode);
+      case "renown": return this._sortItems(this.actor.itemTypes.renown, mode);
     }
     return [];
   }
@@ -2134,6 +2198,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   canExpand(item) {
     return !["class", "subclass"].includes(item.type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @param {Actor5e} actor
+   * @returns {boolean}
+   */
+  static hasRenown(actor) {
+    return dnd5e.settings.renownScore && !actor.inCompendium;
   }
 
   /* -------------------------------------------- */

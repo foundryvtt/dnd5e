@@ -191,6 +191,16 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Renown
+  game.settings.register("dnd5e", "renownScore", {
+    name: "SETTINGS.DND5E.RENOWN.Name",
+    hint: "SETTINGS.DND5E.RENOWN.Hint",
+    scope: "world",
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
   // Disable Advancements
   game.settings.register("dnd5e", "disableAdvancements", {
     name: "SETTINGS.5eNoAdvancementsN",

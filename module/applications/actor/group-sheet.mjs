@@ -53,6 +53,12 @@ export default class GroupActorSheet extends MultiActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/actor-effects.hbs",
       scrollable: [""]
     },
+    renown: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/tabs/actor-renown.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs"],
+      scrollable: [""]
+    },
     biography: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/group/biography.hbs",
@@ -67,6 +73,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     { tab: "members", label: "DND5E.Group.Member.other" },
     { tab: "inventory", label: "DND5E.Inventory" },
     { tab: "effects", label: "DND5E.EFFECT.Tab" },
+    { tab: "renown", label: "TYPES.Item.renownPl", condition: this.hasRenown },
     { tab: "biography", label: "DND5E.Biography" }
   ];
 
@@ -185,6 +192,7 @@ export default class GroupActorSheet extends MultiActorSheet {
       case "header": return this._prepareHeaderContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
       case "members": return this._prepareMembersContext(context, options);
+      case "renown": return this._prepareRenownContext(context, options);
     }
     return context;
   }

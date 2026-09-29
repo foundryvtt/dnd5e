@@ -3450,6 +3450,7 @@
 "DND5E.Filter": "Filter",
 "DND5E.FilterClear": "Clear Filters",
 "DND5E.FilterGroupCategory": "Group by Category",
+"DND5E.FilterGroupFaction": "Group by Faction",
 "DND5E.FilterGroupOrigin": "Group by Origin",
 "DND5E.FilterGroupAction": "Group by Action",
 "DND5E.FilterNoSpells": "No spells found for this set of filters.",
@@ -4373,7 +4374,9 @@
       },
       "label": "Modifiers"
     }
-  }
+  },
+  "Search": "Search renown",
+  "Unknown": "Unknown"
 },
 
 "DND5E.Remaining": "Remaining",
@@ -7126,6 +7129,10 @@
       "Hint": "Allow players to transform their own actors. Players must also have the Create Actors & Create Tokens core permissions.",
       "Name": "Allow Transformation"
     }
+  },
+  "RENOWN": {
+    "Hint": "Enable optional Renown tracking for characters and groups.",
+    "Name": "Renown Scores"
   },
   "RULESVERSION": {
     "Name": "Rules Version",

@@ -70,6 +70,13 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
       label: "DND5E.SpellHeader.Range",
       template: "systems/dnd5e/templates/inventory/columns/range.hbs"
     },
+    renown: {
+      id: "renown",
+      width: 60,
+      order: 900,
+      priority: 1000,
+      template: "systems/dnd5e/templates/inventory/columns/renown.hbs"
+    },
     recovery: {
       id: "recovery",
       width: 60,
@@ -850,7 +857,7 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
     if ( (this.document instanceof Item) && (this.document.type === "container") ) {
       return this.document.system.getContainedItem(id);
     }
-    return this.actor?.items.get(id);
+    return this.actor?.items.get(id) ?? this.app.actor?.items.get(id);
   }
 
   /* -------------------------------------------- */
@@ -871,12 +878,15 @@ export default class InventoryElement extends (foundry.applications.elements.Ado
 
   /**
    * Prepare section descriptors for rendering.
-   * @param {Partial<InventorySectionDescriptor>[]} sections
+   * @param {Partial<InventorySectionDescriptor>[]} sections  The section descriptors.
+   * @param {object} [options]
+   * @param {Map<string, boolean>} [options.expanded]         Stored expansion state.
    * @returns {InventorySectionDescriptor[]}
    */
-  static prepareSections(sections) {
+  static prepareSections(sections, { expanded }={}) {
     for ( const section of sections ) {
       section.items ??= [];
+      if ( section.collapsible ) section.collapsed = expanded?.get(`sections.${section.id}`) === false;
       section.order ??= 0;
       section.dataset ??= {};
       Object.assign(section.dataset, Object.fromEntries(Object.entries(section.groups ?? {}).map(([k, v]) => {
