@@ -3716,6 +3716,18 @@
   "Counted": {
     "one": "{number} hit die",
     "other": "{number} hit dice"
+  },
+  "FIELDS": {
+    "attributes": {
+      "hd": {
+        "recovery": {
+          "label": "Hit Dice Recovery Fraction"
+        },
+        "spent": {
+          "label": "Spent Hit Dice"
+        }
+      }
+    }
   }
 },
 
