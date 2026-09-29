@@ -301,8 +301,14 @@ body.detached .dnd5e2.sheet .tab { max-height: unset; }
     line-height: 24px;
   }
 
-  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes) .create-child,
-  &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes) .create-child {
+  form:is(
+    .tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes,
+    .tab-renown
+  ) .create-child,
+  &:is(
+    .tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities, .tab-crew, .tab-changes,
+    .tab-renown
+  ) .create-child {
     display: block;
   }
 }

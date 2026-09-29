@@ -275,6 +275,21 @@
       /* Item Recovery */
       .item-recovery { width: 60px; }
 
+      /* Renown */
+      .item-renown {
+        width: 60px;
+        font-weight: bold;
+        .value { font-size: var(--font-size-14); }
+        .sign { color: var(--color-text-tertiary); }
+      }
+
+      .item-header.item-renown {
+        font-family: var(--dnd5e-font-roboto);
+        font-size: var(--font-size-14);
+        padding-block-start: 2px;
+        text-shadow: 0 0 8px var(--dnd5e-color-gold);
+      }
+
       /* Spell School, Cast Time, & To Hit / DC */
       .item-school, .item-time, .item-roll { width: 40px; }
 
@@ -449,7 +464,20 @@
       }
 
       h3 { color: inherit; }
+
+      &[data-action] { cursor: var(--cursor-pointer); }
+
+      .marker {
+        align-self: center;
+        color: var(--dnd5e-color-gold);
+        font-size: var(--font-size-12);
+        transition: transform 250ms ease;
+        translate: 30px 0;
+      }
     }
+
+    &.collapsed > .items-header .marker { transform: rotate(-90deg); }
+    &[data-group-faction] .item .subtitle { display: none; }
 
     .item {
       border-bottom: var(--dnd5e-border-dotted);

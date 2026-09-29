@@ -26,7 +26,8 @@
     {{#if listControls}}
     <div class="middle">
 
-        <item-list-controls for="{{ listControls.list }}" collection="items" label="{{ localize listControls.label }}"
+        <item-list-controls for="{{ listControls.list }}" label="{{ localize listControls.label }}"
+                            collection="{{ ifThen listControls.collection listControls.collection "items" }}"
                             {{~#if keepEmpty}} keep-empty{{/if}}>
 
             {{#if listControls.filters.length}}
@@ -66,27 +67,33 @@
 
         {{!-- Sections / Categories --}}
         {{#each sections}}
-        <div class="items-section card" {{ dnd5e-dataset dataset }}>
+        <div class="items-section card {{~#if collapsible}} collapsible{{/if}}{{#if collapsed}} collapsed{{/if}}"
+             {{ dnd5e-dataset dataset }}>
 
             {{!-- Section Header --}}
-            <div class="items-header header {{~#if draggable}} draggable{{/if}}">
+            <div class="items-header header {{~#if draggable}} draggable{{/if}}"
+                 {{~#if collapsible}} data-action="toggleCollapsed" data-expand-id="sections.{{ id }}"{{/if}}>
                 <h3 class="item-name">{{ localize label }}</h3>
                 {{#each columns}}
                 <div class="item-header item-{{ id }}" data-column-id="{{ id }}" data-column-width="{{ width }}"
                      data-column-priority="{{ priority }}">
                     {{~#if label}}{{ localize label }}{{/if~}}
+                    {{~#if (and ../collapsible (eq id "controls"))}}
+                    <i class="marker fa-solid fa-chevron-down" inert></i>
+                    {{/if~}}
                 </div>
                 {{/each}}
             </div>
 
             {{!-- Section Contents --}}
+            {{#if collapsible}}<div class="collapsible-content"><div class="wrapper">{{/if}}
             <ol class="item-list unlist">
                 {{~#each items as |item|}}
                 {{#dnd5e-itemContext item as |ctx|}}
 
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-uuid="{{ item.uuid }}"
                     data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}" data-item-name="{{ item.name }}"
-                    {{ dnd5e-dataset ctx.dataset }}>
+                    {{ dnd5e-dataset ctx.dataset }} {{#if ../inheritGroups}}{{ dnd5e-dataset ../dataset }}{{/if}}>
 
                     {{!-- Row Summary --}}
                     <div class="item-row draggable">
@@ -173,6 +180,7 @@
                 {{/dnd5e-itemContext}}
                 {{/each~}}
             </ol>
+            {{#if collapsible}}</div></div>{{/if}}
 
         </div>
         {{/each}}

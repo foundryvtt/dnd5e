@@ -42,6 +42,23 @@ export default class ItemListControlsElement extends MaybeAdoptable {
         },
         { key: "contents", label: "DND5E.FilterGroupCategory", dataset: { icon: "fa-solid fa-layer-group" } }
       ]
+    },
+    renown: {
+      collection: "renown",
+      label: "DND5E.RENOWN.Search",
+      list: "renown",
+      sorting: [
+        { key: "m", label: "SIDEBAR.SortModeManual", dataset: { icon: "fa-solid fa-arrow-down-short-wide" } },
+        { key: "a", label: "SIDEBAR.SortModeAlpha", dataset: { icon: "fa-solid fa-arrow-down-a-z" } }
+      ],
+      grouping: [
+        {
+          key: "faction",
+          label: "DND5E.FilterGroupFaction",
+          dataset: { icon: "fa-solid fa-layer-group", classes: "active" }
+        },
+        { key: "contents", label: "DND5E.FilterGroupFaction", dataset: { icon: "fa-solid fa-layer-group" } }
+      ]
     }
   };
 
@@ -388,12 +405,16 @@ export default class ItemListControlsElement extends MaybeAdoptable {
     if ( !this.keepEmpty ) this.list.querySelectorAll(".items-section").forEach(el => el.hidden = true);
     this.list.querySelectorAll(".item-list .item").forEach(el => {
       const uniqueID = el.dataset.parentId ? `${el.dataset.parentId}.${el.dataset.entryId}` : el.dataset.entryId;
-      elementMap[uniqueID] = el;
+      (elementMap[uniqueID] ??= []).push(el);
       el.hidden = true;
     });
     for ( const entry of entries ) {
-      const el = elementMap[`${entry.parent?.id}.${entry.id}`] ?? elementMap[entry.id];
-      if ( el ) el.hidden = false;
+      const lists = new Set();
+      for ( const el of elementMap[`${entry.parent?.id}.${entry.id}`] ?? elementMap[entry.id] ?? [] ) {
+        if ( lists.has(el.parentElement) ) continue;
+        lists.add(el.parentElement);
+        el.hidden = false;
+      }
     }
     this.list.querySelectorAll(".items-section:has(.item-list .item:not([hidden]))").forEach(el => el.hidden = false);
   }
@@ -447,11 +468,11 @@ export default class ItemListControlsElement extends MaybeAdoptable {
     const elementMap = {};
     this.list.querySelectorAll(".item-list .item").forEach(el => {
       const uniqueID = el.dataset.parentId ? `${el.dataset.parentId}.${el.dataset.entryId}` : el.dataset.entryId;
-      elementMap[uniqueID] = el;
+      (elementMap[uniqueID] ??= []).push(el);
     });
     for ( const entry of entries ) {
-      const el = elementMap[`${entry.parent?.id}.${entry.id}`] ?? elementMap[entry.id];
-      if ( el ) el.parentElement.append(el);
+      const els = elementMap[`${entry.parent?.id}.${entry.id}`] ?? elementMap[entry.id] ?? [];
+      els.forEach(el => el.parentElement.append(el));
     }
   }
 

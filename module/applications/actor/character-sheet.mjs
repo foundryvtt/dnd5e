@@ -90,6 +90,12 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/character-bastion.hbs",
       scrollable: [""]
     },
+    renown: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/tabs/actor-renown.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs"],
+      scrollable: [""]
+    },
     specialTraits: {
       classes: ["flexcol"],
       container: { classes: ["tab-body"], id: "tabs" },
@@ -133,6 +139,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     { tab: "effects", label: "DND5E.EFFECT.Tab", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
     { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook", condition: this.hasBastion },
+    { tab: "renown", label: "TYPES.Item.renownPl", icon: "fa-solid fa-wreath-laurel", condition: this.hasRenown },
     { tab: "specialTraits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
 
@@ -205,6 +212,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       case "features": return this._prepareFeaturesContext(context, options);
       case "header": return this._prepareHeaderContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
+      case "renown": return this._prepareRenownContext(context, options);
       case "sidebar": return this._prepareSidebarContext(context, options);
       case "specialTraits": return this._prepareSpecialTraitsContext(context, options);
       case "spells": return this._prepareSpellsContext(context, options);
