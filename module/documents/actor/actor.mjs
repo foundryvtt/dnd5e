@@ -891,8 +891,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const originalValue = d.value;
       if ( Math.sign(d.value) !== Math.sign(d.value + modifications[type]) ) d.value = 0;
       else d.value += modifications[type];
-      const isType = (type in CONFIG.DND5E.damageTypes) || (type in CONFIG.DND5E.healingTypes);
-      this.#setDamageActive("modification", d, type === "ALL" ? "all" : isType ? "type" : "special", type);
+      const isSpecial = !(type in CONFIG.DND5E.damageTypes) && !(type in CONFIG.DND5E.healingTypes) && (type !== "ALL");
+      this.#setDamageActive(
+        "modification", d, type === "ALL" ? "all" : isSpecial ? "special" : "type", isSpecial ? type : null
+      );
       modifications[type] += originalValue - d.value;
     };
 
@@ -993,10 +995,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
       if ( !isHealingType && downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
-        return this.#setDamageActive("all");
+        return this.#setDamageActive(category, damage, "all");
       }
       if ( downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true }) ) {
-        return this.#setDamageActive("type");
+        return this.#setDamageActive(category, damage, "type");
       }
     }
 
@@ -1008,18 +1010,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !isHealingType
       && !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade })
       && config?.value.has("ALL") ) {
-      return this.#setDamageActive("all");
+      return this.#setDamageActive(category, damage, "all");
     }
 
     // If specific type damage resistance is present and not ignored
     if ( !this.#changeIsIgnored(category, type, { options, skipDowngrade }) && config?.value.has(type) ) {
-      return this.#setDamageActive("type");
+      return this.#setDamageActive(category, damage, "type");
     }
 
     // Check filters against special resistance types
     for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
       if ( !config?.value.has(key) || this.#changeIsIgnored(category, key, { options, skipDowngrade }) ) continue;
-      if ( filter.check(damage) ) return this.#setDamageActive("special", key);
+      if ( filter.check(damage) ) return this.#setDamageActive(category, damage, "special", key);
     }
 
     return false;
