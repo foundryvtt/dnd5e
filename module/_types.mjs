@@ -294,6 +294,15 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef DamageResistanceConfiguration
+ * @property {string} label   Localized label.
+ * @property {string} icon    Icon representing this type.
+ * @property {Filter} filter  Filter checked against the damage description to decide if the resistance should apply.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for damage types.
  *
  * @typedef DamageTypeConfiguration
@@ -672,6 +681,10 @@
  *                                         the options be found within `CONFIG.DND5E`?
  * @property {boolean|number} [dataType]   Type of data represented.
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
+ * @property {object} [special]
+ * @property {string} [special.configKey]  Name of object in `CONFIG.DND5E` that describes additional traits that don't
+ *                                         fit within the general config category.
+ * @property {string} [special.label]      Label used for category containing special traits.
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
  *                                         Deprecated in favor of the standardized `system.type.value`.

@@ -46,7 +46,7 @@ export async function postFallDamage(targets, distance) {
   const { damageType } = CONFIG.DND5E.falling;
   const rolls = await CONFIG.Dice.DamageRoll.build({
     hookNames: ["damage"],
-    rolls: [{ parts: [formula], options: { type: damageType, types: [damageType] } }]
+    rolls: [{ parts: [formula], options: { properties: ["falling"], type: damageType, types: [damageType] } }]
   }, { configure: false }, {
     create: true,
     data: {
