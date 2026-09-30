@@ -229,6 +229,19 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
 
   Object.entries(categoryData).forEach(([k, v]) => prepareCategory(k, v, result, trait, true));
 
+  const specialCategory = CONFIG.DND5E[traitConfig.special?.configKey];
+  if ( specialCategory ) {
+    const key = prefixed ? `${trait}:SPECIAL` : "SPECIAL";
+    result[key] = {
+      label: _loc(traitConfig.special.label),
+      children: {},
+      chosen: false,
+      selectable: false,
+      sorting: false
+    };
+    Object.entries(specialCategory).forEach(([k, v]) => prepareCategory(k, v, result[key].children, trait));
+  }
+
   return new SelectChoices(result).sort();
 }
 
@@ -370,7 +383,8 @@ export function keyIcon(key, { trait }={}) {
 
   // For simple traits, retrieve from config directly
   const traitConfig = CONFIG.DND5E.traits[trait];
-  const traitIcon = CONFIG.DND5E[traitConfig?.configKey ?? trait]?.[parts[0]]?.icon;
+  const traitIcon = CONFIG.DND5E[traitConfig?.configKey ?? trait]?.[parts[0]]?.icon
+    ?? CONFIG.DND5E[traitConfig?.special?.configKey]?.[parts[0]]?.icon;
   if ( traitIcon ) return traitIcon;
 
   // For other traits, try to find base item
@@ -441,7 +455,10 @@ export function keyLabel(key, config={}) {
   if ( !trait ) trait = parts.shift();
   const traitConfig = CONFIG.DND5E.traits[trait];
   if ( !traitConfig ) return key;
-  const traitData = CONFIG.DND5E[traitConfig.configKey ?? trait] ?? {};
+  const traitData = {
+    ...(CONFIG.DND5E[traitConfig.configKey ?? trait] ?? {}),
+    ...(CONFIG.DND5E[traitConfig?.special?.configKey] ?? {})
+  };
   let categoryLabel = _loc(`${traitConfig.labels.localization}.${
     pluralRules.select(count ?? 1)}`);
 

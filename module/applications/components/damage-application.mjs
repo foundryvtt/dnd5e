@@ -1,5 +1,6 @@
 import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
 import DamageRoll from "../../dice/damage-roll.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
 import { formatNumber } from "../../utils.mjs";
 import ChatTrayElement from "./chat-tray-element.mjs";
 
@@ -140,6 +141,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
         }
         if ( damage.active.all?.[category] ) active[category].add("ALL");
         if ( damage.active.type?.[category] ) active[category].add(damage.type);
+        for ( const [special, value] of Object.entries(damage.active.special ?? {}) ) {
+          if ( value[category] ) active[category].add(special);
+        }
       }
     }
     temp = Math.floor(Math.max(0, temp));
@@ -422,9 +426,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     else if ( (change === "immunity") && options.downgrade?.has(type) ) mode = "downgrade";
 
     const title = _loc(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
-      type: type === "ALL"
-        ? _loc("DND5E.DAMAGE.All")
-        : CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
+      type: CONFIG.DND5E.healingTypes[type]?.label ?? Trait.keyLabel(type, { trait: `d${change.slice(0, 1)}` })
     });
     let label = title;
     if ( mode === "ignore" ) label = _loc("DND5E.DamageApplication.Ignoring", { source: title });
@@ -484,7 +486,8 @@ export default class DamageApplicationElement extends ChatTrayElement {
           ? "systems/dnd5e/icons/svg/damage/all.svg"
           : change === "threshold"
             ? "systems/dnd5e/icons/svg/damage/threshold.svg"
-            : (CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type])?.icon;
+            : CONFIG.DND5E.healingTypes[type]?.icon
+              ?? Trait.keyIcon(type, { trait: `d${change.slice(0, 1)}` });
         if ( !icon ) continue;
         const { label, mode, pressed, title } = this.getChangeSourceOptions(type, change, options);
         const li = document.createElement("li");

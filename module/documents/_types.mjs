@@ -50,10 +50,12 @@
  * @typedef DamageDescription
  * @property {number} value                          Amount of damage.
  * @property {string} type                           Type of damage.
- * @property {Set<string>} [properties]              Physical properties that affect damage application.
+ * @property {Set<string>} [properties]              Properties that affect damage application.
  * @property {object} [active]
  * @property {DamageAffectDescription} [active.all]  How resistance/etc. targeting All Damage affected this total.
  * @property {number} [active.multiplier]            Final calculated multiplier.
+ * @property {Record<string, DamageAffectDescription>} [active.special]  How special resistance/etc. targeting this
+ *                                                   damage affect the total (e.g. falling resistance).
  * @property {boolean} [active.threshold]            Did threshold affect this description?
  * @property {DamageAffectDescription} [active.type] How resistance/etc. targeting this type affected this total.
  */

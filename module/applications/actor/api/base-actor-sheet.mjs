@@ -703,7 +703,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const total = simplifyBonus(v, rollData);
         if ( !total ) return null;
         const value = {
-          label: `${CONFIG.DND5E.damageTypes[k]?.label ?? k} ${formatNumber(total, { signDisplay: "always" })}`,
+          label: `${Trait.keyLabel(k, { trait: "dm" })} ${formatNumber(total, { signDisplay: "always" })}`,
           color: total > 0 ? "maroon" : "green"
         };
         const icons = value.icons = [];

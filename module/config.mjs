@@ -14,6 +14,7 @@ import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import Adventure5e from "./documents/adventure.mjs";
+import { Filter } from "./filter.mjs";
 import { preLocalize } from "./utils.mjs";
 
 /**
@@ -2423,6 +2424,21 @@ DND5E.healingTypes = {
 preLocalize("healingTypes", { keys: ["label", "labelShort"] });
 
 /* -------------------------------------------- */
+
+/**
+ * Additional special types of damage resistance, immunity, or vulnerability available for actors.
+ * @enum {DamageResistanceConfiguration}
+ */
+DND5E.damageResistanceTypes = {
+  falling: {
+    label: "DND5E.DAMAGE.Resistance.Falling",
+    icon: "systems/dnd5e/icons/svg/statuses/falling.svg",
+    filter: new Filter({ k: "properties", o: "has", v: "falling" })
+  }
+};
+preLocalize("damageResistanceTypes", { key: "label" });
+
+/* -------------------------------------------- */
 /*  Movement                                    */
 /* -------------------------------------------- */
 
@@ -4278,7 +4294,11 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    }
   },
   dr: {
     labels: {
@@ -4287,7 +4307,11 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    }
   },
   dv: {
     labels: {
@@ -4296,7 +4320,11 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    }
   },
   dm: {
     labels: {
@@ -4305,6 +4333,10 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    },
     dataType: Number
   },
   ci: {
@@ -4317,7 +4349,7 @@ DND5E.traits = {
     labelKeyPath: "name"
   }
 };
-preLocalize("traits", { keys: ["labels.title", "labels.all"] });
+preLocalize("traits", { keys: ["labels.title", "labels.all", "special.label"] });
 
 /* -------------------------------------------- */
 
