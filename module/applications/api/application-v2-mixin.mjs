@@ -340,7 +340,6 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
         onOpen: () => ui.context.menuItems = Array.from(this._getHeaderControlContextEntries())
       });
       super._attachFrameListeners();
-      this.element.addEventListener("plugins", this._onConfigurePlugins.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -351,7 +350,8 @@ export default function ApplicationV2Mixin(Base, { handlebars=true }={}) {
      * @protected
      */
     _onConfigurePlugins(event) {
-      event.plugins.highlightDocumentMatches =
+      super._onConfigurePlugins(event);
+      event.plugins.highlightDocumentMatches ??=
         ProseMirror.ProseMirrorHighlightMatchesPlugin.build(ProseMirror.defaultSchema);
     }
 
