@@ -376,7 +376,7 @@ export default class AttributesFields {
     const encumbrance = this.attributes.encumbrance ??= {};
     const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.parent.type]
       ?? CONFIG.DND5E.encumbrance.baseUnits.default;
-    const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    const unitSystem = dnd5e.settings.metricWeightUnits ? "metric" : "imperial";
     const { attributes } = this;
 
     // Get the total weight from items

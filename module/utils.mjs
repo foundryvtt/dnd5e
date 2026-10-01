@@ -1,7 +1,9 @@
 import TargetsField from "./data/chat-message/fields/targets-field.mjs";
 
 /**
- * @import { TargetDescriptor5e, UnitConfiguration, UnitConversionOptions } from "./_types.mjs";
+ * @import {
+ *   FilterTargetUnitsCallback, TargetDescriptor5e, UnitConfiguration, UnitConversionOptions
+ * } from "./_types.mjs";
  * @import { RollData } from "./documents/_types.mjs";
  */
 
@@ -873,7 +875,13 @@ export function convertLength(value, from, options={}, _options={}) {
  */
 export function convertTime(value, from, options={}) {
   let config = CONFIG.DND5E.timeUnits;
-  if ( !options.combat ) config = Object.fromEntries(Object.entries(config).filter(([, v]) => !v.combat));
+  if ( !options.combat ) {
+    const _filterTargetUnits = options.filterTargetUnits;
+    options.filterTargetUnits = (key, config) => {
+      if ( _filterTargetUnits && (_filterTargetUnits(key, config) === false) ) return false;
+      return !config.combat;
+    };
+  }
   const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
   return _convertSystemUnits(value, from, config, { ...options, message });
 }
@@ -935,20 +943,21 @@ export function convertWeight(value, from, options={}, _options={}) {
  * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
  * @returns {{ value: number, unit: string }}
  */
-export function _convertSystemUnits(value, from, config, { message, strict, system, truncate, to }) {
+export function _convertSystemUnits(value, from, config, { filterTargetUnits, message, strict, system, truncate, to }) {
   if ( (from === to) || (!to && system && (config[from]?.type === system)) ) return { value, unit: from };
   if ( strict && !config[from] ) throw new Error(message(from));
   if ( strict && to && !config[to] ) throw new Error(message(to));
-  if ( !config[from] ) return { value, unit: from ?? to };
+  if ( !config[from] ) return { value: truncate ? Math.floor(value) : value, unit: from ?? to };
 
   // If measurement system is provided and no target unit, convert to equivalent unit in other measurement system
-  if ( !to && system ) to = preferredUnit(from, { system, units: config });
+  if ( !to && system ) to = preferredUnit(from, { filterTargetUnits, system, units: config });
 
   // If no target unit available, find largest unit in current measurement system that can represent number
   else if ( !to ) {
     const base = value * (config[from].conversion ?? 1);
     const unitOptions = Object.entries(config)
       .reduce((arr, [key, v]) => {
+        if ( filterTargetUnits && !filterTargetUnits(key, v) ) return arr;
         const fits = truncate ? base >= v.conversion : ((base % v.conversion === 0) || (base >= v.conversion * 2));
         if ( fits && (config[from]?.type === v.type) ) arr.push({ key, conversion: v.conversion });
         return arr;
@@ -957,7 +966,7 @@ export function _convertSystemUnits(value, from, config, { message, strict, syst
     to = unitOptions[0]?.key ?? from;
   }
 
-  if ( !config[to] ) return { value, unit: from };
+  if ( !config[to] || (from === to) ) return { value: truncate ? Math.floor(value) : value, unit: from };
   const converted = value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
   return { value: truncate ? Math.floor(converted) : converted, unit: to };
 }
@@ -986,34 +995,37 @@ const _measurementSystemConversionCache = new Map();
  * Find the preferred unit from the config in the provided measurement system. Must provide either type or units.
  * @param {string} from                                       Original unit to find closest unit in preferred system.
  * @param {object} config
- * @param {string} config.system                              Target measurement system.
- * @param {string} [config.type]                              Type of unit to select.
- * @param {Record<string, UnitConfiguration>} [config.units]  Configuration data for the available units.
+ * @param {FilterTargetUnitsCallback} [config.filterTargetUnits]  Callback used to filter target units.
+ * @param {"imperial"|"metric"} config.system                     Target measurement system.
+ * @param {"length"|"speed"|"time"|"weight"} [config.type]        Type of unit to select.
+ * @param {Record<string, UnitConfiguration>} [config.units]      Configuration data for the available units.
  * @returns {string}
  */
-export function preferredUnit(from, { system, type, units }={}) {
+export function preferredUnit(from, { filterTargetUnits, system, type, units }={}) {
   if ( !units ) {
-    switch (type) {
-      case "length": units = CONFIG.DND5E.distanceUnits; break;
+    switch ( type ) {
+      case "length": units = CONFIG.DND5E.movementUnits; break;
       case "speed": units = CONFIG.DND5E.travelUnits; break;
       case "time": units = CONFIG.DND5E.timeUnits; break;
       case "weight": units = CONFIG.DND5E.weightUnits; break;
     }
   }
 
-  if ( !_measurementSystemConversionCache.has(from) ) {
+  const cacheKey = `${type}:${from}:${system}`;
+  if ( filterTargetUnits || !_measurementSystemConversionCache.has(cacheKey) ) {
     const baseConversion = Math.log10(units[from].conversion ?? 1);
     const unitOptions = Object.entries(units)
       .reduce((arr, [key, v]) => {
-        if ( system === v.type ) {
+        if ( (system === v.type) && (!filterTargetUnits || filterTargetUnits(key, v)) ) {
           arr.push({ key, difference: Math.abs(Math.log10(v.conversion ?? 1) - baseConversion) });
         }
         return arr;
       }, [])
       .sort((lhs, rhs) => lhs.difference - rhs.difference);
-    _measurementSystemConversionCache.set(from, unitOptions[0]?.key ?? from);
+    if ( filterTargetUnits ) return unitOptions[0]?.key ?? from;
+    _measurementSystemConversionCache.set(cacheKey, unitOptions[0]?.key ?? from);
   }
-  return _measurementSystemConversionCache.get(from);
+  return _measurementSystemConversionCache.get(cacheKey);
 }
 
 /* -------------------------------------------- */
