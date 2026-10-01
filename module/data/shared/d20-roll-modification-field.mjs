@@ -54,7 +54,10 @@ export default class D20RollModificationField extends SchemaField {
    * @param {string[]} keyPaths                        Paths to the individual fields to combine within the model.
    * @param {Partial<AdvantageModeData>} [options={}]  External sources of advantage or disadvantage.
    * @param {RulesDetails} [options.rules]             Data used to fetch rules.
-   * @returns {{ advantage: boolean, disadvantage: boolean, bonus: string, maximum: number, minimum: number }}
+   * @returns {{
+   *   advantage: boolean, disadvantage: boolean, bonus: string,
+   *   maximum: number, minimum: number, [modifiers]: Set<string>
+   * }}
    */
   static combineFields(model, keyPaths, { rules={}, ...options }={}) {
     let maximum = Infinity;
@@ -80,7 +83,10 @@ export default class D20RollModificationField extends SchemaField {
         : maximum,
       minimum: rules.actor
         ? D20RollModificationField.#makeRulesIterator("minimum", rules).resolve(rules.rollData).toLargest(minimum)
-        : minimum
+        : minimum,
+      modifiers: rules.actor
+        ? D20RollModificationField.#makeRulesIterator("modifier", rules).toModifiers()
+        : undefined
     };
   }
 
