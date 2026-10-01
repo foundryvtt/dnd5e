@@ -2,7 +2,7 @@ import CompendiumBrowser from "./applications/compendium-browser.mjs";
 import { formatIdentifier } from "./utils.mjs";
 
 /**
- * @import { FactionDescriptor, RegisteredItemData } from "./_types.mjs";
+ * @import { FactionDescriptor, RegisteredItemData, RenownChangeCallback } from "./_types.mjs";
  */
 
 const STATUS_STATES = Object.freeze({
@@ -389,6 +389,14 @@ class RenownRegistry {
   /* -------------------------------------------- */
 
   /**
+   * UUIDs of factions in the process of being loaded.
+   * @type {Set<string>}
+   */
+  static #loading = new Set();
+
+  /* -------------------------------------------- */
+
+  /**
    * Renown that individual actors have with each faction.
    * @type {Map<string, Map<string, number>>}
    */
@@ -397,10 +405,10 @@ class RenownRegistry {
   /* -------------------------------------------- */
 
   /**
-   * UUIDs of factions in the process of being loaded.
-   * @type {Set<string>}
+   * A list of subscribers to notify when renown changes for an Actor.
+   * @type {Set<RenownChangeCallback>}
    */
-  static #loading = new Set();
+  static #subscribers = new Set();
 
   /* -------------------------------------------- */
 
@@ -511,12 +519,22 @@ class RenownRegistry {
   /* -------------------------------------------- */
 
   /**
+   * Subscribe to renown change events.
+   * @param {RenownChangeCallback} handler  The renown change handler.
+   */
+  static subscribe(handler) {
+    this.#subscribers.add(handler);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Track an Actor's renown scores.
    * @param {Actor5e} actor  The Actor.
    */
   static track(actor) {
     if ( !actor?.uuid || actor?.inCompendium ) return;
-    this.untrack(actor);
+    const previous = this.#untrack(actor);
     const renown = new Map();
     for ( const item of actor.itemTypes.renown ) {
       for ( const { faction, value } of item.system.modifiers ?? [] ) {
@@ -531,6 +549,7 @@ class RenownRegistry {
       const faction = this.#factions.getOrInsert(id, { name: id, renown: new Map(), sources: new Set() });
       faction.renown.set(actor.uuid, score);
     }
+    this.#notify(actor, previous, renown);
   }
 
   /* -------------------------------------------- */
@@ -559,6 +578,47 @@ class RenownRegistry {
    */
   static untrack(actor) {
     if ( !actor?.uuid || actor?.inCompendium ) return;
+    this.#notify(actor, this.#untrack(actor), new Map());
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Unsubscribe from renown change events.
+   * @param {RenownChangeCallback} handler  The handler to remove.
+   */
+  static unsubscribe(handler) {
+    this.#subscribers.delete(handler);
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Notify subscribers of a renown change event.
+   * @param {Actor5e} actor                 The Actor whose renown changed.
+   * @param {Map<string, number>} previous  The Actor's previous renown scores.
+   * @param {Map<string, number>} current   The Actor's current renown scores.
+   */
+  static #notify(actor, previous, current) {
+    if ( !this.#subscribers.size ) return;
+    const changed = new Map();
+    for ( const id of new Set([...previous.keys(), ...current.keys()]) ) {
+      const delta = (current.get(id) ?? 0) - (previous.get(id) ?? 0);
+      if ( delta ) changed.set(id, delta);
+    }
+    if ( changed.size ) this.#subscribers.forEach(callback => callback(actor, changed));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove an Actor's renown scores.
+   * @param {Actor5e} actor          The World Actor to unregister.
+   * @returns {Map<string, number>}  The Actor's previous renown.
+   */
+  static #untrack(actor) {
     const renown = this.#renown.get(actor.uuid) ?? new Map();
     for ( const id of renown.keys() ) {
       const faction = this.#factions.get(id);
@@ -567,6 +627,7 @@ class RenownRegistry {
       if ( !faction.renown.size && !faction.sources.size ) this.#factions.delete(id);
     }
     this.#renown.delete(actor.uuid);
+    return renown;
   }
 }
 

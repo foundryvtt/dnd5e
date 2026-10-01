@@ -2,6 +2,10 @@ import CompendiumBrowser from "../compendium-browser.mjs";
 import MultiActorSheet from "./api/multi-actor-sheet.mjs";
 
 /**
+ * @import { RenownChangeCallback } from "../../_types.mjs";
+ */
+
+/**
  * Extension of the base actor sheet for faction actors.
  */
 export default class FactionActorSheet extends MultiActorSheet {
@@ -62,6 +66,14 @@ export default class FactionActorSheet extends MultiActorSheet {
   };
 
   /* -------------------------------------------- */
+
+  /**
+   * The renown change listener.
+   * @type {RenownChangeCallback}
+   */
+  #renownChanged = this.#onRenownChanged.bind(this);
+
+  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
@@ -101,8 +113,16 @@ export default class FactionActorSheet extends MultiActorSheet {
       await this._prepareMemberPortrait(actor, member);
       return member;
     }));
-    context.members = context.members.sort((a, b) => a.sort - b.sort);
-
+    context.members = context.members.sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
+    if ( this.actor.inCompendium ) return context;
+    const renown = dnd5e.registry.renown.forFaction(this.actor);
+    context.renown = (await Promise.all(Array.from(renown ?? [], async ([uuid, score]) => {
+      const actor = fromUuidSync(uuid);
+      if ( !actor ) return null;
+      const entry = { score, uuid, name: actor.name };
+      await this._prepareMemberPortrait(actor, entry);
+      return entry;
+    }))).filter(_ => _).sort((a, b) => (b.score - a.score) || a.name.localeCompare(b.name, game.i18n.lang));
     return context;
   }
 
@@ -135,6 +155,7 @@ export default class FactionActorSheet extends MultiActorSheet {
   /** @inheritDoc */
   async _onClose(options) {
     super._onClose(options);
+    dnd5e.registry.renown.unsubscribe(this.#renownChanged);
     this.actor.system.getMembers().then(members =>
       members.forEach(({ actor }) => delete actor.apps[this.id])
     );
@@ -145,6 +166,7 @@ export default class FactionActorSheet extends MultiActorSheet {
   /** @inheritDoc */
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
+    dnd5e.registry.renown.subscribe(this.#renownChanged);
     this.actor.system.getMembers().then(members =>
       members.forEach(({ actor }) => actor.apps[this.id] = this)
     );
@@ -183,6 +205,17 @@ export default class FactionActorSheet extends MultiActorSheet {
       const actors = await Promise.all(results.map(fromUuid));
       this.actor.system.addMember(...actors);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle an Actor gaining or losing renown with a faction.
+   * @param {Actor5e} actor                The actor.
+   * @param {Map<string, number>} changed  Renown change deltas keyed by faction identifier.
+   */
+  #onRenownChanged(actor, changed) {
+    if ( changed.has(this.actor.identifier) ) this.render();
   }
 
   /* -------------------------------------------- */
@@ -230,6 +263,7 @@ export default class FactionActorSheet extends MultiActorSheet {
    * @returns {boolean}
    */
   static showMembersTab(actor, { sheet }={}) {
-    return actor.system.members.length || (sheet?.isEditable && sheet.isEditMode);
+    return actor.system.members.length || (sheet?.isEditable && sheet.isEditMode)
+      || (!actor.inCompendium && !!dnd5e.registry.renown.forFaction(actor)?.size);
   }
 }

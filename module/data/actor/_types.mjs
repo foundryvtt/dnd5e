@@ -95,19 +95,25 @@
 
 /**
  * @typedef FactionActorSystemData
- * @property {string} identifier            Identifier used to represent the faction in the registry.
- * @property {FactionMemberData[]} members  Members in this group with associated metadata.
- * @property {string[]} ranks               Ranks members can achieve within the faction.
- * @property {SourceData} source            Adventure or sourcebook where this faction originated.
+ * @property {string} identifier                      Identifier used to represent the faction in the registry.
+ * @property {FactionMemberData[]} members            Members in this group with associated metadata.
+ * @property {Record<string, FactionRankData>} ranks  Ranks members can achieve within the faction.
+ * @property {SourceData} source                      Adventure or sourcebook where this faction originated.
  * @property {object} type
- * @property {string} type.value            The faction category.
+ * @property {string} type.value                      The faction category.
  */
 
 /**
  * @typedef FactionMemberData
  * @property {string} uuid                The UUID to the Actor.
- * @property {string} rank                Rank of the actor within the faction, from the preset ranks list.
+ * @property {string} rank                ID of the rank of the actor within the faction.
  * @property {string} role                Freeform role for this actor in the faction (e.g. "Leader", "Guard").
+ */
+
+/**
+ * @typedef FactionRankData
+ * @property {string} name         The name of the rank.
+ * @property {number|null} renown  The renown threshold required to attain this rank, if any.
  */
 
 /* -------------------------------------------- */
