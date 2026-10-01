@@ -39,8 +39,9 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
    * Check the conditions to decide if effects should be added to this token.
    * @param {TokenDocument5e} token  The token to which to add the effects.
    * @returns {boolean}
+   * @protected
    */
-  #evaluateConditions(token) {
+  _evaluateConditions(token) {
     if ( token.disposition === CONST.TOKEN_DISPOSITIONS.SECRET ) return false;
     if ( this.dispositions.size && !this.dispositions.has(token.disposition) ) return false;
     if ( this.sizes.size && !this.sizes.has(token.actor.system.traits?.size) ) return false;
@@ -59,10 +60,10 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
     if ( !event.user.isSelf ) return;
     const { token, movement } = event.data;
     const actor = token.actor;
-    if ( !actor || !this.#evaluateConditions(token) ) return;
+    if ( !actor || !this._evaluateConditions(token) ) return;
     const resumeMovement = movement ? token.pauseMovement() : undefined;
-    const effects = await Promise.all(this.effects.map(fromUuid));
-    const toCreate = await this.#getEffectsToCreate(actor, effects);
+    const effects = this.effects ? await Promise.all(this.effects.map(fromUuid)) : [];
+    const toCreate = await this._getEffectsToCreate(actor, effects);
     if ( toCreate.length ) await actor.createEmbeddedDocuments("ActiveEffect", toCreate);
     await resumeMovement?.();
   }
@@ -110,7 +111,7 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
    * @returns {Promise<void>}
    */
   async #recreateEffectsForAllTokens() {
-    const effects = await Promise.all(this.effects.map(fromUuid));
+    const effects = this.effects ? await Promise.all(this.effects.map(fromUuid)) : [];
     const operations = [];
     for ( const token of this.region.tokens ) {
       const actor = token.actor;
@@ -124,8 +125,8 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
           parent: actor
         });
       }
-      if ( !this.#evaluateConditions(token) ) continue;
-      const toCreate = await this.#getEffectsToCreate(actor, effects);
+      if ( !this._evaluateConditions(token) ) continue;
+      const toCreate = await this._getEffectsToCreate(actor, effects);
       if ( toCreate.length ) {
         operations.push({
           action: "create",
@@ -145,8 +146,9 @@ export default class ApplyActiveEffect5eRegionBehaviorType extends foundry.data.
    * @param {Actor5e} actor                  The actor the Active Effects should be created for.
    * @param {ActiveEffect5e[]} effects       The effects the Active Effects are created from.
    * @returns {Promise<ActiveEffectData[]>}  The data of Active Effects that should be created.
+   * @protected
    */
-  async #getEffectsToCreate(actor, effects) {
+  async _getEffectsToCreate(actor, effects) {
     const origin = await fromUuid(this.region.getFlag("dnd5e", "activity"));
     const toCreate = [];
     for ( const effect of effects ) {

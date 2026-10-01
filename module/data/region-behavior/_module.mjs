@@ -24,7 +24,7 @@ export const config = {
 };
 
 export const icons = {
-  "dnd5e.antimagic": "fa-solid-fa-plug-circle-xmark",
+  "dnd5e.antimagic": "fa-solid fa-plug-circle-xmark",
   "dnd5e.applyActiveEffect": "fa-solid fa-person-rays",
   "dnd5e.difficultTerrain": "fa-solid fa-hill-rockslide",
   "dnd5e.rotateArea": "fa-solid fa-arrows-spin"

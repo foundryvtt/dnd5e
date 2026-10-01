@@ -3845,6 +3845,11 @@ DND5E.conditionEffects = {
  * @enum {StatusEffectConfig5e}
  */
 DND5E.statusEffects = {
+  antimagic: {
+    name: "EFFECT.DND5E.StatusAntimagic",
+    img: "systems/dnd5e/icons/svg/statuses/antimagic.svg",
+    hud: false
+  },
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
     img: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
@@ -3927,17 +3932,6 @@ DND5E.statusEffects = {
  * @type {Set<string>}
  */
 DND5E.neverBlockStatuses = new Set();
-
-/* -------------------------------------------- */
-
-/**
- * Configuration for the special antimagic status effect.
- * @type {{ name: string, img: string }}
- */
-DND5E.antimagic = {
-  name: "EFFECT.DND5E.StatusAntimagic",
-  img: "systems/dnd5e/icons/svg/statuses/antimagic.svg"
-};
 
 /* -------------------------------------------- */
 
