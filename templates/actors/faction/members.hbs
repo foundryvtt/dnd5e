@@ -1,33 +1,53 @@
 <section data-group="{{ tab.group }}" data-tab="{{ tab.id }}" class="tab {{ tab.cssClass }} flex1">
-    {{#each members}}
-    <div class="member" data-uuid="{{ uuid }}" data-index="{{ index }}">
-        <div class="vitals card">
-            <div class="portrait">
+    {{#if members.length}}
+    <ul class="members unlist">
+        {{#each members}}
+        <li class="member" data-uuid="{{ uuid }}" data-index="{{ index }}">
+            <a class="portrait" data-action="showDocument" aria-label="{{ name }}">
                 {{#if portrait.isVideo}}
                 <video src="{{ portrait.src }}" autoplay muted playsinline disablepictureinpicture loop></video>
                 {{else}}
-                <img src="{{ portrait.src }}" alt="{{ name }}">
+                <img src="{{ portrait.src }}" alt="">
                 {{/if}}
-            </div>
-            <div class="name-stacked">
-                <a class="rollable title" data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
-                <div class="subtitle">{{ subtitle }}</div>
-            </div>
+            </a>
+            <span class="caption">{{ name }}</span>
+            {{#if @root.editable}}
             <div class="controls">
-                {{#if @root.editable}}
                 <button type="button" class="config-button unbutton" data-action="removeMember" data-tooltip
                         aria-label="{{ localize "DND5E.Group.Action.Remove" }}">
                     <i class="fa-solid fa-square-xmark" inert></i>
                 </button>
-                {{/if}}
             </div>
-        </div>
-    </div>
-    {{/each}}
+            {{/if}}
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
 
-    {{#if (or editable (not members.length))}}
+    {{#if (or editable (and (not members.length) (not renown.length)))}}
     <div class="pill-lg roboto-upper empty" data-action="browse">
         {{ localize "DND5E.FACTION.Action.AddMember" }}
     </div>
+    {{/if}}
+
+    {{#if renown.length}}
+    {{#if members.length}}<h3 class="sabers roboto-upper">{{ localize "TYPES.Item.renownPl" }}</h3>{{/if}}
+    <ul class="members unlist">
+        {{#each renown}}
+        <li class="renown" data-uuid="{{ uuid }}">
+            <a class="portrait" data-action="showDocument" aria-label="{{ name }}">
+                {{#if portrait.isVideo}}
+                <video src="{{ portrait.src }}" autoplay muted playsinline disablepictureinpicture loop></video>
+                {{else}}
+                <img src="{{ portrait.src }}" alt="">
+                {{/if}}
+                <span class="score {{#if (lt score 0)}}negative{{/if}}">
+                    {{ dnd5e-numberFormat score signDisplay="always" }}
+                </span>
+            </a>
+            <span class="caption">{{ name }}</span>
+        </li>
+        {{/each}}
+    </ul>
     {{/if}}
 </section>

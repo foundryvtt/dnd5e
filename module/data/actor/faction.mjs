@@ -3,7 +3,7 @@ import IdentifierField from "../fields/identifier-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import GroupTemplate from "./templates/group.mjs";
 
-const { ArrayField, DocumentUUIDField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, DocumentUUIDField, NumberField, SchemaField, StringField, TypedObjectField } = foundry.data.fields;
 
 /**
  * @import { FactionActorSystemData } from "./_types.mjs";
@@ -33,7 +33,10 @@ export default class FactionData extends GroupTemplate {
         rank: new StringField(),
         role: new StringField()
       }), { label: "DND5E.Group.Member.other" }),
-      ranks: new ArrayField(new StringField()),
+      ranks: new TypedObjectField(new SchemaField({
+        name: new StringField(),
+        renown: new NumberField({ integer: true })
+      }), { validateKey: foundry.data.validators.isValidId }),
       source: new SourceField(),
       type: new SchemaField({
         value: new IdentifierField()
