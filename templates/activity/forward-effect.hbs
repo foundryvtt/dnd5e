@@ -1,6 +1,21 @@
 <section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     <fieldset>
-        <legend>{{ localize "DND5E.FORWARD.FIELDS.activity.label" }}</legend>
-        {{ formInput fields.activity.fields.id value=source.activity.id options=activityOptions }}
+        <legend>{{ localize "DND5E.FORWARD.FIELDS.target.label" }}</legend>
+        {{#if itemOptions}}
+        {{ formField fields.targetItem value=selectedTargetItem options=itemOptions blank=false
+                     localize=true rootId=partId }}
+        {{else}}
+        {{ formField fields.targetItem value=source.targetItem
+                     placeholder=(localize "DND5E.FORWARD.Target.Item.Placeholder")
+                     localize=true rootId=partId }}
+        {{/if}}
+
+        {{#if showActivitySelect}}
+        {{ formField fields.activity value=source.activity options=activityOptions localize=true rootId=partId }}
+        {{else}}
+        {{ formField fields.activity value=source.activity
+                     placeholder=(localize "DND5E.FORWARD.Target.Activity.Placeholder")
+                     localize=true rootId=partId }}
+        {{/if}}
     </fieldset>
 </section>
