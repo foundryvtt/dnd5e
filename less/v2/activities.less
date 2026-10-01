@@ -196,10 +196,11 @@
   button {
     --button-size: 38px;
     --icon-fill: var(--activity-icon-color);
-    width: 100%;
-    display: flex;
     align-items: center;
+    display: flex;
+    inline-size: 100%;
     padding: 6px 56px 6px 6px;
+    position: relative;
 
     > .name {
       flex: 1;
@@ -207,6 +208,22 @@
       font-family: var(--dnd5e-font-roboto-slab);
       line-height: normal;
       font-size: var(--font-size-14);
+    }
+
+    > .uses {
+      align-items: center;
+      color: var(--color-text-secondary);
+      display: flex;
+      gap: 2px;
+      inline-size: 56px;
+      inset-inline-end: 0;
+      justify-content: center;
+      position: absolute;
+      white-space: nowrap;
+
+      &:not(.expended) {
+        .max, .value { color: var(--color-text-primary); }
+      }
     }
 
     > .icon {
