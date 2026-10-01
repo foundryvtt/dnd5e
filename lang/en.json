@@ -2596,6 +2596,10 @@
         "label": "Concentration",
         "hint": "Creature must maintain concentration while active."
       },
+      "ignoreDamageConcentration": {
+        "label": "Damage Cannot Break Concentration",
+        "hint": "Damage taken while concentrating on this spell or activity does not require a concentration saving throw."
+      },
       "expiry": {
         "label": "Expiry Event",
         "hint": "Event that triggers the end of the usage."
