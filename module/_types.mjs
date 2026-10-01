@@ -471,6 +471,14 @@
 /* -------------------------------------------- */
 
 /**
+ * @callback RenownChangeCallback
+ * @param {Actor5e} actor                The actor whose renown changed.
+ * @param {Map<string, number>} changed  The renown change deltas keyed by faction identifier.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for rest types.
  *
  * @typedef RestTypeConfiguration

@@ -38,16 +38,77 @@
 
     .pill-lg.empty { margin-block-end: 0; }
 
-    .member .vitals::before {
-      background: url("ui/texture-gray2.webp") no-repeat bottom right;
-      content: "";
-      filter: none;
-      inset: 0;
-      mask-image: linear-gradient(190deg, transparent 15%, black);
-      mix-blend-mode: var(--dnd5e-vehicle-station-blend-mode);
-      opacity: .75;
-      position: absolute;
-      transform: scaleX(-1);
+    .members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .member, .renown {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      inline-size: 72px;
+      justify-content: start;
+      padding-inline: 0;
+      position: relative;
+
+      .portrait {
+        background: var(--dnd5e-background-alt-2);
+        block-size: 64px;
+        border: 2px solid var(--dnd5e-color-gold);
+        border-radius: 5px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+        inline-size: 64px;
+        position: relative;
+
+        &:hover { box-shadow: 0 0 6px var(--dnd5e-color-gold); }
+
+        .score {
+          background: var(--dnd5e-color-black);
+          border: 1px solid var(--dnd5e-color-gold);
+          border-radius: 10px;
+          box-shadow: 0 0 8px var(--dnd5e-shadow-15);
+          color: var(--dnd5e-color-gold);
+          font-family: var(--dnd5e-font-roboto);
+          font-size: var(--font-size-11);
+          font-weight: bold;
+          inset: auto -6px -6px auto;
+          min-inline-size: 22px;
+          padding: 1px 5px;
+          position: absolute;
+          text-align: center;
+
+          &.negative {
+            background: var(--dnd5e-color-maroon);
+            color: var(--color-text-light-0);
+          }
+        }
+
+        img, video {
+          block-size: 100%;
+          border: none;
+          border-radius: 3px;
+          inline-size: 100%;
+          object-fit: cover;
+          object-position: top center;
+        }
+      }
+
+      .caption {
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        font-family: var(--dnd5e-font-roboto-condensed);
+        font-size: var(--font-size-11);
+        font-weight: bold;
+        line-height: 1.15;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .controls { inset-block-start: -6px; }
     }
   }
 
