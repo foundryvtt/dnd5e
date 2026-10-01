@@ -300,7 +300,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+    this.prepareFinalActivityData();
     this.prepareFinalEquippableData();
   }
 
