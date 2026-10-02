@@ -73,7 +73,7 @@ export default class EnchantSheet extends ActivitySheet {
         .map(value => ({ value, label: _loc(CONFIG.Item.typeLabels[value]) }))
     ];
     context.isTypePhysical = !context.source.restrictions.type
-      || !!CONFIG.Item.dataModels[context.source.restrictions.type]?.schema.has("quantity");
+      || !!CONFIG.Item.dataModels[context.source.restrictions.type]?.isPhysical;
 
     const type = context.source.restrictions.type;
     const typeDataModel = CONFIG.Item.dataModels[type];

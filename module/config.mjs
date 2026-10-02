@@ -1105,6 +1105,11 @@ preLocalize("activityActivationTypes", { key: "label" });
  * @enum {ActivityBehaviorConfiguration}
  */
 DND5E.activityBehaviorTypes = {
+  antimagic: {
+    label: "TYPES.RegionBehavior.dnd5e.antimagic",
+    icon: "systems/dnd5e/icons/svg/behaviors/antimagic.svg",
+    model: regionBehaviors.AntimagicActivityBehavior
+  },
   applyActiveEffect: {
     label: "TYPES.RegionBehavior.applyActiveEffect",
     icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
@@ -3840,6 +3845,11 @@ DND5E.conditionEffects = {
  * @enum {StatusEffectConfig5e}
  */
 DND5E.statusEffects = {
+  antimagic: {
+    name: "EFFECT.DND5E.StatusAntimagic",
+    img: "systems/dnd5e/icons/svg/statuses/antimagic.svg",
+    hud: false
+  },
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
     img: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
