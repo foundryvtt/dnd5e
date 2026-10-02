@@ -1866,14 +1866,36 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /**
    * Handle the final creation of dropped Item data on the Actor.
-   * @param {DragEvent} event             The concluding DragEvent which provided the drop data.
-   * @param {Item5e[]} items              The items requested for creation.
-   * @param {DropEffectValue} [behavior]  The specific drop behavior.
+   * @param {DragEvent} event                     The concluding DragEvent which provided the drop data.
+   * @param {Item5e[]} items                      The items requested for creation.
+   * @param {object} [options={}]
+   * @param {DropEffectValue} [options.behavior]  The drag behavior.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
-  async _onDropCreateItems(event, items, behavior) {
-    behavior ??= event._behavior;
+  async _onDropCreateItems(event, items, options={}) {
+    if ( typeof options === "string" ) {
+      foundry.utils.logCompatibilityWarning(
+        "`_onDropCreateItems` now takes an options object as its final parameter, rather than a behavior string.",
+        { since: "DnD5e 6.1", until: "DnD5e 6.3" }
+      );
+      options = { behavior: options };
+    }
+    options.behavior ??= event._behavior;
+    options.event ??= event;
+
+    /**
+     * A hook event that fires when items are dropped onto the actor sheet to be created.
+     * @function dnd5e.dropCreateItems
+     * @memberof hookEvents
+     * @param {BaseActorSheet} sheet                The sheet.
+     * @param {Item5e[]} items                      The items being dropped.
+     * @param {object} options
+     * @param {DropEffectValue} [options.behavior]  The drag behavior.
+     * @param {Event} options.event                 The event which triggered the item creation.
+     */
+    if ( Hooks.call("dnd5e.dropCreateItems", this, items, options) === false ) return [];
+
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.size);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
     if ( multipleAdvancements && !game.settings.get("dnd5e", "disableAdvancements") ) {
@@ -1907,7 +1929,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const created = await Item5e.createDocuments(toCreate, {
       dnd5e: { bastionClaim }, keepId: true, parent: this.inventorySource
     });
-    if ( behavior === "move" ) items.forEach(i => i.delete({ deleteContents: true }));
+    if ( options.behavior === "move" ) items.forEach(i => i.delete({ deleteContents: true }));
     return created;
   }
 
