@@ -263,7 +263,7 @@ export default class GroupActorSheet extends MultiActorSheet {
     const { pct, max, value } = encumbrance;
     const defaultUnits = CONFIG.DND5E.encumbrance.baseUnits.default;
     const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[actor.type] ?? defaultUnits;
-    const systemUnits = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    const systemUnits = dnd5e.settings.metricWeightUnits ? "metric" : "imperial";
     context.encumbrance = {
       pct,
       max: convertWeight(max, baseUnits[systemUnits], defaultUnits[systemUnits]),

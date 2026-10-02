@@ -371,7 +371,7 @@ export default class VehicleData extends CommonTemplate {
     const encumbrance = foundry.utils.deepClone(this.attributes.encumbrance);
     if ( Number.isFinite(encumbrance.max) || !this.draft?.value.length ) return encumbrance; // Encumbrance already calculated.
     const { baseUnits, draftMultiplier } = CONFIG.DND5E.encumbrance;
-    const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    const unitSystem = dnd5e.settings.metricWeightUnits ? "metric" : "imperial";
     const units = baseUnits.default[unitSystem];
     encumbrance.max = (await Promise.all(this.draft.value.map(fromUuid))).reduce((n, actor) => {
       const capacity = actor.system.attributes?.encumbrance?.max || 0;
