@@ -454,7 +454,7 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
     // X days have passed
     if ( timePassageData.midnights > 1 ) {
-      const { value, unit } = convertTime(timePassageData.midnights, "day", { strict: false });
+      const { value, unit } = convertTime(timePassageData.midnights, "day");
       const number = formatTime(value, unit, { words: true });
       message = _loc(
         getPluralLocalizationKey(value, pr => `DND5E.CALENDAR.TimePassage.TimePassed.${pr}`),
