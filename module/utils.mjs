@@ -873,12 +873,12 @@ export function convertLength(value, from, options={}, _options={}) {
  * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
  * @returns {{ value: number, unit: string }}
  */
-export function convertTime(value, from, options={}) {
+export function convertTime(value, from, { combat=false, ...options }={}) {
   let config = CONFIG.DND5E.timeUnits;
-  if ( options.combat !== undefined ) {
+  if ( !options.to ) {
     options.validTargetUnits ??= new Set();
     for ( const [k, v] of Object.entries(CONFIG.DND5E.timeUnits) ) {
-      if ( (options.combat && v.combat) || (!options.combat && !v.combat) ) options.validTargetUnits.add(k);
+      if ( (v.combat ?? false) === combat ) options.validTargetUnits.add(k);
     }
   }
   const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
