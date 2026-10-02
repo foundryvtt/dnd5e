@@ -1018,7 +1018,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
     }
 
     const result = await CompendiumBrowser.selectOne({ filters }, this._detachOptions());
-    if ( result ) this._onDropCreateItems(event, [game.items.fromCompendium(await fromUuid(result), { keepId: true })]);
+    if ( result ) this._onDropCreateItems(event, [new Item.implementation(
+      game.items.fromCompendium(await fromUuid(result), { keepId: true })
+    )]);
   }
 
   /* -------------------------------------------- */
