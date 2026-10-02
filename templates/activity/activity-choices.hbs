@@ -8,11 +8,11 @@
                 </span>
                 <span class="name">{{ name }}</span>
                 {{#with uses}}
-                <span class="uses {{#if (eq 0 value)}}expended{{/if}}">(
+                <span class="uses {{#if (eq 0 value)}}expended{{/if}}">
                     <span class="value">{{ value }}</span>
                     <span class="separator">&sol;</span>
                     <span class="max">{{ max }}</span>
-                )</span>
+                </span>
                 {{/with}}
             </button>
         </li>
