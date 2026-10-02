@@ -1,6 +1,6 @@
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
 import {
-  formatNumber, getHumanReadableAttributeLabel, getPluralLocalizationKey, simplifyBonus
+  formatNumber, getHumanReadableAttributeLabel, getPluralLocalizationKey, getPluralRules, simplifyBonus
 } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 

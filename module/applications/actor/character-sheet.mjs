@@ -744,7 +744,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
       return {
         uses, level, method,
-        title: _loc(getPluralLocalizationKey(level, pr => `DND5E.SpellSlotsN.${pr}`), { n: level }),
+        title: _loc(
+          getPluralLocalizationKey(level, pr => `DND5E.SpellSlotsN.${pr}`, { type: "ordinal" }), { n: level }
+        ),
         subtitle: _loc(`DND5E.Abbreviation${model.isSR ? "SR" : "LR"}`),
         img: model.img.replace("{id}", id)
       };

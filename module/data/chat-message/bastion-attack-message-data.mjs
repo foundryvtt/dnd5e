@@ -1,3 +1,4 @@
+import { getPluralLocalizationKey } from "../../utils.mjs";
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 
 const { BooleanField, DocumentIdField, NumberField } = foundry.data.fields;
@@ -79,7 +80,7 @@ export default class BastionAttackMessageData extends ChatMessageDataModel {
     const context = {};
     let key = this.undefended ? "Undefended" : this.deaths ? null : "NoDeaths";
     if ( key ) key = `DND5E.Bastion.Attack.Result.${key}`;
-    else key = getPluralLocalizationKey(deaths, pr => `DND5E.Bastion.Attack.Result.${pr}`);
+    else key = getPluralLocalizationKey(this.deaths, pr => `DND5E.Bastion.Attack.Result.Deaths.${pr}`);
     const isPrivate = !this.parent.isContentVisible;
     context.description = _loc(key, { deaths: this.deaths });
     context.rolls = await Promise.all(this.parent.rolls.map(roll => roll.render({

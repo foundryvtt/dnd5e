@@ -117,7 +117,8 @@ export default class TargetField extends SchemaField {
         : _loc(`${described}.${target.template.type ? "each" : "any"}`, { special }),
       sheet: affectsConfig?.counted ? fmt(
         count ? formatNumber(count) : _loc(`DND5E.TARGET.Count.${target.template.type ? "Every" : "Any"}`),
-        getPluralLocalizationKey(count, pr => `${affectsConfig.counted}.${pr}`),
+        count ? getPluralLocalizationKey(count, pr => `${affectsConfig.counted}.${pr}`)
+          : `${affectsConfig.counted}.other`,
         { capitalize }
       ).capitalize() : (affectsConfig?.label ?? ""),
       statblock: fmt(

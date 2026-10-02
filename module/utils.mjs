@@ -412,16 +412,17 @@ export function getPluralRules({ lang=game.i18n.lang, type="cardinal" }={}) {
 
 /**
  * Get a pluralized localization key using the provided formatting function which properly falls back to English
- * if the currently language is missing the key.
+ * if the current language is missing the key.
  * @param {number} value         Counted value.
  * @param {Function} format      Method that takes a plural rule value and returns the full localization key.
  * @param {object} [options={}]  Options passed to `getPluralRules`.
  * @returns {string}
  */
 export function getPluralLocalizationKey(value, format, options={}) {
-  const localizationKey = format(getPluralRules(options).select(value ?? 0));
+  if ( value === undefined ) return format("other");
+  const localizationKey = format(getPluralRules(options).select(value));
   if ( game.i18n.has(localizationKey) ) return localizationKey;
-  return format(getPluralRules({ ...options, lang: "en" }).select(value ?? 0));
+  return format(getPluralRules({ ...options, lang: "en" }).select(value));
 }
 
 /* -------------------------------------------- */
