@@ -4,7 +4,7 @@ import Item5e from "../../../documents/item.mjs";
 import {
   formatLength,
   formatNumber,
-  getPluralRules,
+  getPluralLocalizationKey,
   loadingTooltip,
   parseInputDelta,
   simplifyBonus,
@@ -668,7 +668,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         const label = temp
           ? _loc("DND5E.SpellSlotTemporary")
           : filled
-            ? _loc(`DND5E.SpellSlotN.${getPluralRules({ type: "ordinal" }).select(n)}`, { n })
+            ? _loc(getPluralLocalizationKey(n, pr => `DND5E.SpellSlotN.${pr}`, { type: "ordinal" }), { n })
             : _loc("DND5E.SpellSlotExpended");
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
@@ -2226,6 +2226,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
+   * Should the renown tab be displayed.
    * @param {Actor5e} actor
    * @returns {boolean}
    */
