@@ -7,14 +7,19 @@ system:
   description:
     value: >-
       <p>Your Speed increases by 10 feet while you aren't wearing Heavy armor.
-      You also have a Climb Speed and a Swim Speed equal to your Speed.</p>
+      You also have a Climb Speed and a Swim Speed equal to your
+      Speed.</p><section class="secret"
+      id="secret-XnQYiG0fJWJSHkQw"><p><strong>Foundry Note</strong></p><p>This
+      feature includes an Active Effect which can be disabled if you are wearing
+      Heavy armor.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   uses:
     max: ''
     spent: 0
@@ -24,11 +29,15 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
+    repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: roving
+  advancement: {}
+  crewed: false
 effects:
   - name: Roving
     img: icons/skills/movement/feet-winged-sandals-tan.webp
@@ -36,24 +45,40 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.bonus
           value: 10
           priority: null
           type: add
           phase: initial
-          _id: cFB3VgybBHLB981s
-        - key: system.attributes.movement.climb
-          value: '@attributes.movement.walk'
+          _id: J9uZxrlza9vLaQBg
+          conditions: '{}'
+          replacement: ''
+        - key: system.attributes.movement.speeds.climb
+          value: '@attributes.movement.speed'
           priority: null
           type: upgrade
           phase: initial
-          _id: i1MafrYl8OdKEkWG
-        - key: system.attributes.movement.swim
-          value: '@attributes.movement.walk'
+          _id: dLDq2byDvC7JFlq0
+          conditions: '{}'
+          replacement: ''
+        - key: system.attributes.movement.speeds.swim
+          value: '@attributes.movement.speed'
           priority: null
           type: upgrade
           phase: initial
-          _id: I8fbJmkb4iPdjxlx
+          _id: TmWPsDXEHzoBF6Tq
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -68,34 +93,29 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103503
-      modifiedTime: 1783544103503
+      systemVersion: 6.0.5
+      createdTime: 1790976133202
+      modifiedTime: 1790976133202
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbrgrRoving0000.J9RWCSmYGnP0fkn1'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735932734523
-  modifiedTime: 1783544103503
+  systemVersion: 6.0.5
+  createdTime: 1790976133202
+  modifiedTime: 1790976133202
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
