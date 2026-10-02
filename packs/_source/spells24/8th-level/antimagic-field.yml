@@ -12,15 +12,16 @@ system:
       aura.</p><p>Ongoing spells, except those cast by an Artifact or a deity,
       are suppressed in the area. While an effect is suppressed, it doesn't
       function, but the time it spends suppressed counts against its
-      duration.</p><p><em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      duration.</p><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDispelMagi]{Dispel
       Magic}</em> has no effect on the aura, and the auras created by different
       <em>Antimagic Field</em> spells don't nullify each other.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    license: CC-BY-4.0
+    revision: 1
     book: ''
+    license: CC-BY-4.0
   activation:
     type: action
     condition: ''
@@ -28,11 +29,12 @@ system:
   duration:
     value: '1'
     units: hour
+    expiry: null
   target:
     affects:
       choice: false
       count: ''
-      type: any
+      type: ''
       special: ''
     template:
       units: ft
@@ -40,6 +42,7 @@ system:
       type: radius
       size: '10'
       count: ''
+      stationary: false
   range:
     units: self
     special: ''
@@ -59,9 +62,6 @@ system:
     consumed: false
     cost: 0
     supply: 0
-  preparation:
-    mode: prepared
-    prepared: false
   activities:
     OxII9yaa3KpRduWZ:
       type: utility
@@ -77,17 +77,21 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
+        units: self
       target:
         template:
           contiguous: false
           units: ft
+          stationary: false
         affects:
           choice: false
         override: false
@@ -102,10 +106,24 @@ system:
         visible: false
         name: ''
         formula: ''
-      name: ''
+      name: Cast
       img: ''
-      appliedEffects: []
+      behaviors:
+        - type: antimagic
+          _id: F4DC37GVr0SXzDeE
+          config: {}
+          level: {}
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   identifier: antimagic-field
+  method: spell
+  prepared: 0
 _id: phbsplAntimagicF
 type: spell
 img: icons/magic/light/orb-container-orange.webp
@@ -114,18 +132,14 @@ folder: M5CvwK9zVtzx6Dnn
 sort: 200000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1724425940930
-  modifiedTime: 1745256785627
+  systemVersion: 6.0.5
+  createdTime: 1790961554250
+  modifiedTime: 1790961554250
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsplAntimagicF'
