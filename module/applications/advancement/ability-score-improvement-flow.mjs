@@ -130,7 +130,6 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     }
 
     const modernRules = dnd5e.settings.rulesVersion === "modern";
-    const pluralRules = new Intl.PluralRules(game.i18n.lang);
     context.pointCap = _loc(
       getPluralLocalizationKey(context.points.cap, pr => `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pr}`),
       { points: context.points.cap }

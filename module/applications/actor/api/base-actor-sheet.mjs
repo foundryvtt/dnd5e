@@ -2226,6 +2226,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
+   * Should the renown tab be displayed.
    * @param {Actor5e} actor
    * @returns {boolean}
    */
