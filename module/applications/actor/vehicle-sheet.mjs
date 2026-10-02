@@ -326,7 +326,7 @@ export default class VehicleActorSheet extends BaseActorSheet {
    */
   async _prepareDraftAnimals() {
     const { baseUnits, draftMultiplier } = CONFIG.DND5E.encumbrance;
-    const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    const unitSystem = dnd5e.settings.metricWeightUnits ? "metric" : "imperial";
     const units = baseUnits.default[unitSystem];
     return Promise.all(this.actor.system.draft.value.map(async uuid => {
       const actor = await fromUuid(uuid);
