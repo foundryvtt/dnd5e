@@ -1,4 +1,4 @@
-import { convertTime, formatNumber, formatTime, getPluralRules } from "../../utils.mjs";
+import { convertTime, formatNumber, formatTime, getPluralLocalizationKey } from "../../utils.mjs";
 import { IndividualDeltaField } from "../chat-message/fields/deltas-field.mjs";
 
 /**
@@ -454,12 +454,12 @@ export default class CalendarData5e extends foundry.data.CalendarData {
 
     // X days have passed
     if ( timePassageData.midnights > 1 ) {
-      const pr = getPluralRules();
       const { value, unit } = convertTime(timePassageData.midnights, "day", { strict: false });
       const number = formatTime(value, unit, { words: true });
-      message = _loc(`DND5E.CALENDAR.TimePassage.TimePassed.${pr.select(value)}`, {
-        number: number.capitalize(), numberLc: number
-      });
+      message = _loc(
+        getPluralLocalizationKey(value, pr => `DND5E.CALENDAR.TimePassage.TimePassed.${pr}`),
+        { number: number.capitalize(), numberLc: number }
+      );
     }
 
     // Sun has set and risen again
