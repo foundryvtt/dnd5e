@@ -8,22 +8,22 @@ system:
     value: >-
       <p>You gain one of the following feature options of your choice. Whenever
       you finish a Short or Long Rest, you can replace the chosen option with
-      the other one.</p><p><strong>Escape the Horde.</strong> Opportunity
-      Attacks have Disadvantage against you.</p><p><strong>Multiattack
-      Defense.</strong> When a creature hits you with an attack roll, that
-      creature has Disadvantage on all other attack rolls against you this
-      turn.</p><section class="secret"
-      id="secret-5BXeADNIjwRdwzBf"><p><strong>Foundry Note</strong></p><p>This
-      feature includes a <strong>Multiattack Defense</strong> activity with an
-      Active Effect which can be used to track a creature that has Disadvantage
-      against you but it does not automate the effect.</p></section>
+      the other one.</p><p><em><strong>Escape the Horde.</strong></em>
+      Opportunity Attacks have Disadvantage against
+      you.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbrgrDefensiveT.Activity.ioagLQG0o1axCBtr
+      caption=false cite=false nameStyle=inline]</p><section
+      id="secret-5BXeADNIjwRdwzBf" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes a <strong>Multiattack
+      Defense</strong> activity with an Active Effect which can be used to track
+      a creature that has Disadvantage against you but it does not automate the
+      effect.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -33,6 +33,7 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -53,12 +54,20 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: >-
+          <p>When a creature hits you with an attack roll, that creature has
+          Disadvantage on all other attack rolls against you this turn.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: oviiTMxQRTnne9oc
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -68,6 +77,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -85,8 +95,21 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: defensive-tactics
+  advancement: {}
+  crewed: false
 effects:
   - name: Multiattack Defense
     img: icons/skills/melee/strikes-sword-scimitar.webp
@@ -94,11 +117,21 @@ effects:
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
-      value: 1
-      units: turns
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: turnEnd
       expired: false
     description: ''
     origin: null
@@ -110,29 +143,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.5
+      createdTime: 1790979069171
+      modifiedTime: 1790979069171
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbrgrDefensiveT.oviiTMxQRTnne9oc'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866564824
-  modifiedTime: 1745256764720
+  systemVersion: 6.0.5
+  createdTime: 1790979069171
+  modifiedTime: 1790979069171
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

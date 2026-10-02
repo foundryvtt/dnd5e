@@ -7,20 +7,18 @@ system:
   description:
     value: >-
       <p>Thanks to your travels, you gain the following
-      benefits.</p><p><strong>Expertise.</strong> Choose one of your skill
-      proficiencies with which you lack Expertise. You gain Expertise in that
-      skill.</p><p><strong>Languages.</strong> You know two languages of your
-      choice from the language tables in chapter 2.</p><section class="secret"
-      id="secret-MKYXod5Sdpyj2x7V"><p><strong>Foundry Note</strong></p><p>You
-      will be prompted for choices when you add the Ranger class to your
-      character sheet.</p></section>
+      benefits.</p><p><em><strong>Expertise.</strong></em> Choose one of your
+      skill proficiencies with which you lack Expertise. You gain Expertise in
+      that skill.</p><p><em><strong>Languages.</strong></em> You know two
+      languages of your choice from the language tables in chapter 2.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -30,24 +28,62 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
+    repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: deft-explorer
+  advancement:
+    wzh6lW4bOlQy4geS:
+      _id: wzh6lW4bOlQy4geS
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - languages:*
+      value:
+        chosen: []
+      level: 2
+      hint: >-
+        <p>You know two languages of your choice from the language tables in
+        chapter 2.</p>
+      flags: {}
+      name: ''
+    PLqssMc398jEsEW4:
+      _id: PLqssMc398jEsEW4
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 2
+      hint: >-
+        <p>Choose one of your skill proficiencies with which you lack Expertise.
+        You gain Expertise in that skill.</p>
+      flags: {}
+      name: Expertise
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735932734523
-  modifiedTime: 1745256764748
+  systemVersion: 6.0.5
+  createdTime: 1790976133200
+  modifiedTime: 1790976133200
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
