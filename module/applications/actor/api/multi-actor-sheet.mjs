@@ -133,7 +133,7 @@ export default class MultiActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onDropCreateItems(event, items, behavior) {
+  async _onDropCreateItems(event, items, options) {
     let foundUnsupported = false;
     items = items.filter(item => {
       if ( (item.type !== "renown") && !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
@@ -143,7 +143,7 @@ export default class MultiActorSheet extends BaseActorSheet {
       return true;
     });
     if ( foundUnsupported ) ui.notifications.warn("DND5E.Group.Warning.SupportedItemOnly", { localize: true });
-    return super._onDropCreateItems(event, items, behavior);
+    return super._onDropCreateItems(event, items, options);
   }
 
   /* -------------------------------------------- */
