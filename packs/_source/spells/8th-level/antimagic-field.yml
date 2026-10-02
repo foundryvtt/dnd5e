@@ -143,6 +143,11 @@ system:
         level:
           min: null
           max: null
+      behaviors:
+        - type: antimagic
+          _id: nC8DnuglQ530YkOG
+          config: {}
+          level: {}
   identifier: antimagic-field
 sort: 0
 flags: {}
@@ -151,11 +156,11 @@ effects: []
 folder: x1XTiOgx4DJ34wc5
 _stats:
   duplicateSource: null
-  coreVersion: '14.361'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 6.0.0
+  systemVersion: 6.0.5
   createdTime: 1725037351648
-  modifiedTime: 1783214353290
+  modifiedTime: 1790961612885
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!Eon0jzGzQRNluTPQ'
