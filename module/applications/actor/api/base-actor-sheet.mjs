@@ -1873,7 +1873,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   async _onDropCreateItems(event, items, options={}) {
-    if ( foundry.utils.getType(options) === "String" ) {
+    if ( typeof options === "string" ) {
       foundry.utils.logCompatibilityWarning(
         "`_onDropCreateItems` now takes an options object as its final parameter, rather than a behavior string.",
         { since: "DnD5e 6.1", until: "DnD5e 6.3" }

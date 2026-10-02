@@ -133,7 +133,7 @@ export default class MultiActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onDropCreateItems(event, items, options) {
+  async _onDropCreateItems(event, items, options={}) {
     let foundUnsupported = false;
     items = items.filter(item => {
       if ( (item.type !== "renown") && !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
