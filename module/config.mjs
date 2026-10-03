@@ -3809,7 +3809,7 @@ DND5E.conditionEffects = {
   abilitySaveDisadvantage: new Set(),
   physicalSaveDisadvantage: new Set(["heavilyEncumbered"]),
   physicalAttackDisadvantage: new Set(["heavilyEncumbered"]),
-  attackDisadvantage: new Set(["poisoned"]),
+  attackDisadvantage: new Set(["blinded", "poisoned", "prone", "restrained"]),
   dexteritySaveDisadvantage: new Set(["restrained"]),
   dexteritySaveAdvantage: new Set(["dodging"]),
   initiativeAdvantage: new Set(["invisible"]),
