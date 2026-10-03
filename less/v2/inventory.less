@@ -456,6 +456,20 @@
       &:last-child { border: none; }
     }
 
+    .activity.rider {
+      padding-left: 20px;
+      position: relative;
+
+      &::before {
+        color: var(--activity-row-indent-color);
+        content: "━";
+        font-size: var(--font-size-12);
+        font-weight: bold;
+        inset: 14px auto auto 5px;
+        position: absolute;
+      }
+    }
+
     .activities .activity-row {
       position: relative;
       border-top: var(--activity-row-border);

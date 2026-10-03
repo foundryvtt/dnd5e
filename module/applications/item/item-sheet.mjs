@@ -293,11 +293,17 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       else arr.push(descriptor);
       return arr;
     }, []);
-    riders.forEach(r => {
+    context.activities.push(...riders.filter(r => {
+      let unmatched = true;
       for ( const origin of origins[r.id] ?? [] ) {
-        if ( origin in activityMap ) activityMap[origin].riders.add(r);
+        if ( origin in activityMap ) {
+          activityMap[origin].riders.add(r);
+          unmatched = false;
+        }
       }
-    });
+      r.isRider = true;
+      return unmatched;
+    }));
     return context;
   }
 
