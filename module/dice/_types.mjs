@@ -36,9 +36,11 @@
  * Configuration data for the process of rolling d20 rolls.
  *
  * @typedef {BasicRollProcessConfiguration} D20RollProcessConfiguration
+ * @property {Activity} [activity]             Activity that initiated the roll.
  * @property {boolean} [advantage]             Apply advantage to each roll.
  * @property {boolean} [disadvantage]          Apply disadvantage to each roll.
  * @property {boolean} [halflingLucky]         Add a re-roll once modifier to the d20 die.
+ * @property {Item5e} [item]                   Item that initiated the roll.
  * @property {boolean} [reliableTalent]        Set the minimum for the d20 roll to 10.
  * @property {D20RollConfiguration[]} rolls    Configuration data for individual rolls.
  */
@@ -94,7 +96,6 @@
  * @typedef {D20RollProcessConfiguration} SkillToolRollProcessConfiguration
  * @property {string} [ability]     The ability to be rolled with the skill.
  * @property {string} [bonus]       Additional bonus term added to the check.
- * @property {Item5e} [item]        Tool item used for rolling.
  * @property {string} [skill]       The skill to roll.
  * @property {string} [tool]        The tool to roll.
  * @property {TravelPace5e} [pace]  Whether a travel pace is being applied to the roll.
