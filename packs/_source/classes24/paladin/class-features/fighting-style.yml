@@ -9,16 +9,17 @@ system:
       <p>You gain a
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.sbHImaCB8ZMEHYkb]{Fighting
       Style feat} of your choice. Instead of choosing one of those feats, you
-      can choose the option below.</p><hr
-      /><p>@Embed[Compendium.dnd5e.classes24.Item.phbfstBlessedWar
-      caption=false]</p>
+      can choose the option
+      below.</p><p>@Embed[Compendium.dnd-players-handbook.feats.Item.phbfstBlessedWar
+      caption=false nameStyle=inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -28,25 +29,52 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: fighting-style
+  advancement:
+    g88kf6OtX8abBt5c:
+      _id: g88kf6OtX8abBt5c
+      type: ItemChoice
+      configuration:
+        choices:
+          '2':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - sort: 0
+            uuid: Compendium.dnd-players-handbook.feats.Item.phbfstBlessedWar
+        spell: null
+        restriction:
+          type: class
+          subtype: fightingStyle
+          list: []
+          school: []
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>You gain a Fighting Style feat of your choice. Instead of choosing
+        one of those feats, you can choose the option below.</p>
+      name: Fighting Style
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1745513511345
+  systemVersion: 6.0.5
+  createdTime: 1791224423981
+  modifiedTime: 1791224423981
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

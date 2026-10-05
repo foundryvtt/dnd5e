@@ -6,25 +6,22 @@ img: icons/magic/holy/projectiles-blades-salvo-yellow.webp
 system:
   description:
     value: >-
-      <p>As a Magic action, you can expend one use of this class's Channel
-      Divinity to overwhelm foes with awe. As you present your Holy Symbol or
-      weapon, you can target a number of creatures equal to your Charisma
-      modifier (minimum of one creature) that you can see within 60 feet of
-      yourself. Each target must succeed on a Wisdom saving throw or have the
-      &amp;Reference[Frightened] condition for 1 minute or until it takes any
-      damage. While Frightened in this way, a target can do only one of the
-      following on its turns: move, take an action, or take a Bonus
-      Action.</p><section class="secret"
-      id="secret-lu2BuwFj2pnJ367b"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which applies the Frightened
-      condition.</p></section>
+      <p>As a &amp;Reference[Magic] action, you can expend one use of this
+      class's Channel Divinity to overwhelm foes with awe. As you present your
+      Holy Symbol or weapon, you can target a number of creatures equal to your
+      Charisma modifier (minimum of one creature) that you can see within 60
+      feet of yourself. Each target must succeed on a Wisdom saving throw or
+      have the &amp;Reference[Frightened apply=false] condition for 1 minute or
+      until it takes any damage. While Frightened in this way, a target can do
+      only one of the following on its turns: move, take an action, or take a
+      Bonus Action.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -34,8 +31,10 @@ system:
     subtype: channelDivinity
   prerequisites:
     level: 9
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: ''
   activities:
     coLSoQzZ6lGbXtIw:
@@ -54,15 +53,22 @@ system:
           - type: itemUses
             value: '1'
             target: feat:channel-divinity-paladin
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: iY8KgqafX22tiBVw
+          uuid: null
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: ft
@@ -75,9 +81,10 @@ system:
           type: ''
           size: ''
           count: ''
+          stationary: false
         affects:
           choice: false
-          count: (max(1,@abilities.cha.mod))
+          count: max(1, @abilities.cha.mod)
           type: creature
           special: That you can see
         override: false
@@ -96,12 +103,24 @@ system:
         dc:
           calculation: spellcasting
           formula: ''
+        bonus: ''
+        visible: true
       name: ''
       img: ''
-      appliedEffects:
-        - iY8KgqafX22tiBVw
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: abjure-foes
+  advancement: {}
+  crewed: false
 effects:
   - name: Abjured
     img: icons/magic/holy/projectiles-blades-salvo-yellow.webp
@@ -111,6 +130,16 @@ effects:
     type: base
     system:
       changes: []
+      magical: true
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 60
@@ -126,12 +155,12 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.5
+      createdTime: 1791224423981
+      modifiedTime: 1791224423981
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
@@ -140,11 +169,11 @@ effects:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.1.10
-  createdTime: 1735866297701
-  modifiedTime: 1759426570845
+  systemVersion: 6.0.5
+  createdTime: 1791224423981
+  modifiedTime: 1791224423981
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

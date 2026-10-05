@@ -6,31 +6,33 @@ img: icons/skills/melee/strike-weapons-orange.webp
 system:
   description:
     value: >-
-      <p>When you take the Attack action, you can expend one use of your Channel
-      Divinity to imbue one Melee weapon that you are holding with positive
-      energy. For 10 minutes or until you use this feature again, you add your
-      Charisma modifier to attack rolls you make with that weapon (minimum bonus
-      of +1), and each time you hit with it, you cause it to deal its normal
-      damage type or Radiant damage.</p><p>The weapon also emits Bright Light in
-      a 20-foot radius and Dim Light 20 feet beyond that.</p><p>You can end this
-      effect early (no action required). This effect also ends if you aren't
-      carrying the weapon.</p>
+      <p>When you take the &amp;Reference[Attack] action, you can expend one use
+      of your Channel Divinity to imbue one Melee weapon that you are holding
+      with positive energy. For 10 minutes or until you use this feature again,
+      you add your Charisma modifier to attack rolls you make with that weapon
+      (minimum bonus of +1), and each time you hit with it, you cause it to deal
+      its normal damage type or Radiant damage.</p><p>The weapon also emits
+      Bright Light in a 20-foot radius and Dim Light 20 feet beyond
+      that.</p><p>You can end this effect early (no action required). This
+      effect also ends if you aren't carrying the weapon.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   uses:
     max: ''
     spent: 0
     recovery: []
   type:
     value: class
-    subtype: ''
+    subtype: channelDivinity
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -39,10 +41,10 @@ system:
       type: enchant
       _id: Ew70lNTD8dR3vREt
       activation:
-        type: special
+        type: action
         value: null
         override: false
-        condition: when taking the Attack action
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -51,21 +53,26 @@ system:
           - type: itemUses
             value: '1'
             target: feat:channel-divinity-paladin
+            scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: minute
         concentration: false
         override: false
         value: '10'
+        expiry: null
       effects:
         - _id: sEWDFOuWn47L5860
+          uuid: null
           level:
             min: null
             max: null
           riders:
             activity: []
-            effect: []
+            effect:
+              - 8uzTs90613ZVnU0w
             item: []
       range:
         override: false
@@ -76,10 +83,12 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
-          count: ''
-          type: ''
+          count: '1'
+          type: object
+          special: ''
         override: false
         prompt: false
       uses:
@@ -88,7 +97,7 @@ system:
         max: ''
       sort: 0
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -98,15 +107,20 @@ system:
         type: weapon
       name: ''
       img: ''
-      appliedEffects:
-        - sEWDFOuWn47L5860
       visibility:
         level:
           min: null
           max: null
         identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: sacred-weapon
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Sacred Weapon
@@ -120,19 +134,32 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: Yr5wphM5gvIy3y6n
+          _id: bt5UI8MwXnpUaVIx
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.types
           value: radiant
           priority: null
           type: add
           phase: initial
-          _id: 5QqndFGftPaI3u8U
+          _id: LBJw7witF9EzlUio
+          conditions: '{}'
+          replacement: ''
         - key: activities[attack].attack.bonus
-          value: (max(1,@abilities.cha.mod))
+          value: max(1, @abilities.cha.mod)
           priority: null
           type: add
           phase: initial
-          _id: F6hOnhARG2HlC74o
+          _id: 3ysbNx3cUbXNh0fA
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      magical: true
     duration:
       value: 600
       units: seconds
@@ -148,25 +175,88 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103117
-      modifiedTime: 1783544103117
+      systemVersion: 6.0.5
+      createdTime: 1791225411390
+      modifiedTime: 1791225411390
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnSacredWeap.sEWDFOuWn47L5860'
-flags: {}
+  - name: Sacred Weapon Light
+    img: icons/skills/melee/strike-weapons-orange.webp
+    system:
+      magical: false
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbpdnSacredWeap
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      changes:
+        - key: token.light.bright
+          type: override
+          value: 20
+          phase: initial
+          _id: 4tcZnnNNSqB9fetd
+          conditions: '{}'
+          replacement: ''
+          priority: null
+        - key: token.light.dim
+          type: override
+          value: 40
+          phase: initial
+          _id: 1TWphXaCgICSbLa5
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: 8uzTs90613ZVnU0w
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.368'
+      systemId: dnd5e
+      systemVersion: 6.0.5
+      createdTime: 1791225411390
+      modifiedTime: 1791225411390
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!phbpdnSacredWeap.8uzTs90613ZVnU0w'
+flags:
+  dnd5e:
+    riders:
+      effect:
+        - 8uzTs90613ZVnU0w
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1735866569467
-  modifiedTime: 1783544103117
+  systemVersion: 6.0.5
+  createdTime: 1791225411390
+  modifiedTime: 1791225411390
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
