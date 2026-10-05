@@ -316,6 +316,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   static migrateData(source) {
     source = super.migrateData(source);
 
+    if ( (source.system?.type === "exhaustion") && Number.isFinite(source.flags?.dnd5e?.exhaustionLevel) ) {
+      source.system.level ??= source.flags.dnd5e.exhaustionLevel;
+      delete source.flags.dnd5e.exhaustionLevel;
+    }
+
     if ( source.flags?.dnd5e?.riders?.statuses && !source.system?.rider?.statuses ) {
       foundry.utils.setProperty(source, "system.rider.statuses", source.flags.dnd5e.riders.statuses);
       delete source.flags.dnd5e.riders.statuses;
