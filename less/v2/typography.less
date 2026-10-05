@@ -400,7 +400,7 @@
     }
   }
 
-  :is(.editor-content, .card-content, .item-summary) {
+  :is(.editor-content, .card-content, .card-description, .item-summary) {
     h1, h2, h3 { font-family: var(--dnd5e-font-roboto-slab); }
     h1 { font-size: 1.5em; }
     h2 { font-size: 1.4em; }
@@ -412,7 +412,9 @@
     }
   }
 
-  :is(.journal-entry-content, .journal-page-content, .editor-content, .card-content, .item-summary) {
+  :is(
+    .journal-entry-content, .journal-page-content, .editor-content, .card-content, .card-description, .item-summary
+  ) {
     font-family: var(--dnd5e-font-roboto-condensed);
 
     h1, h2, h3, h4, h5, h6 { color: var(--color-text-emphatic); }
