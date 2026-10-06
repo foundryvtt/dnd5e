@@ -591,6 +591,14 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     updateData._stats = { systemVersion: game.system.version };
   }
 
+  if ( flags.persistSourceMigration && updateData.effects ) {
+    const effects = new Map(actorData.effects.map(effect => [effect._id, effect]));
+    const updates = new Map(updateData.effects.map(effect => [effect._id, effect]));
+    updateData.effects = actorData.effects.map(effect => foundry.utils.mergeObject(
+      effect, updates.get(effect._id) ?? {}, mergeOptions
+    )).concat(updateData.effects.filter(effect => !effects.has(effect._id)));
+  }
+
   return updateData;
 }
 

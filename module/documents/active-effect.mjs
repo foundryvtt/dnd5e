@@ -77,7 +77,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.attributes.concentration.bonuses.save": { key: "system.attributes.concentration.roll.bonus" },
     "system.attributes.death.bonuses.save": { key: "system.attributes.death.roll.bonus" },
     "system.attributes.init.bonus": { key: "system.attributes.init.roll.bonus" },
-    "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
+    "system.attributes.movement.speed": { key: "system.attributes.movement.speeds.walk" },
     "system.attributes.movement.burrow": { key: "system.attributes.movement.speeds.burrow" },
     "system.attributes.movement.climb": { key: "system.attributes.movement.speeds.climb" },
     "system.attributes.movement.fly": { key: "system.attributes.movement.speeds.fly" },
@@ -315,6 +315,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static migrateData(source) {
     source = super.migrateData(source);
+
+    if ( (source.system?.type === "exhaustion") && Number.isFinite(source.flags?.dnd5e?.exhaustionLevel) ) {
+      source.system.level ??= source.flags.dnd5e.exhaustionLevel;
+      delete source.flags.dnd5e.exhaustionLevel;
+    }
 
     if ( source.flags?.dnd5e?.riders?.statuses && !source.system?.rider?.statuses ) {
       foundry.utils.setProperty(source, "system.rider.statuses", source.flags.dnd5e.riders.statuses);

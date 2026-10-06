@@ -114,7 +114,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    * @type {Array}
    */
   static #SKILL_TOOL_BONUS_FIELD_PATHS = [
-    ["bonuses.check", "check.roll.bonus"]
+    ["bonuses.check", "roll.bonus"]
   ];
 
   /* -------------------------------------------- */

@@ -12,7 +12,7 @@
 
     {{#if isActorEffect}}
     {{ formGroup fields.origin value=source.origin rootId=rootId disabled=true }}
-    {{else if (or isItemEffect (eq source.type "enchantment"))}}
+    {{else}}
     {{ formGroup fields.transfer value=source.transfer input=inputs.createCheckboxInput rootId=rootId }}
     {{/if}}
 
