@@ -19,9 +19,9 @@ import { preLocalize } from "./utils.mjs";
 
 /**
  * @import {
- *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
- *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
- *   AdventureConfiguration, AdventureImportAction,
+ *   AbilityConfiguration, ActiveEffectChangeTypeConfig5e, ActivityActivationTypeConfiguration,
+ *   ActivityConsumptionTargetConfiguration, ActivityTypeConfiguration, ActorSizeConfiguration,
+ *   AdvancementTypeConfiguration, AdventureConfiguration, AdventureImportAction,
  *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
  *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
@@ -3969,9 +3969,23 @@ DND5E.elevationScaling = true;
 
 /* -------------------------------------------- */
 
+const D20_ROLLS = Object.freeze([
+  { value: "d20", label: "DND5E.EFFECT.Change.Key.D20" },
+  { value: "attack", label: "DND5E.EFFECT.Change.Key.Attack" },
+  { value: "check", label: "DND5E.EFFECT.Change.Key.Check" },
+  { value: "save", label: "DND5E.EFFECT.Change.Key.Save" }
+]);
+
+const DAMAGE_ROLLS = Object.freeze([
+  { value: "damage", label: "DND5E.EFFECT.Change.Key.Damage" },
+  { value: "healing", label: "DND5E.EFFECT.Change.Key.Healing" }
+]);
+
+const ALL_ROLLS = Object.freeze([...D20_ROLLS, { rule: true }, ...DAMAGE_ROLLS]);
+
 /**
  * System provided active effect change types.
- * @enum {ActiveEffectChangeTypeConfig & { [group]: string, [skipConditions]: boolean }}
+ * @enum {ActiveEffectChangeTypeConfig5e}
  */
 DND5E.activeEffectChangeTypes = Object.freeze({
   "dnd5e.advantage": {
@@ -3979,6 +3993,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: D20_ROLLS,
     skipConditions: true
   },
   "dnd5e.bonus": {
@@ -3986,6 +4001,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: ALL_ROLLS,
     skipConditions: true
   },
   "dnd5e.maximum": {
@@ -3993,6 +4009,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: D20_ROLLS,
     skipConditions: true
   },
   "dnd5e.minimum": {
@@ -4000,6 +4017,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: D20_ROLLS,
     skipConditions: true
   }
 });
