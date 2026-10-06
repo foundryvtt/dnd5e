@@ -1182,10 +1182,11 @@ async function rollDamage(config, event) {
     })
   };
 
+  const flavor = _loc(rollType === "healing" ? "DND5E.HEAL.HealingRoll" : "DND5E.DamageRoll");
   const messageConfig = {
     create: true,
     data: {
-      flavor: _loc(`DND5E.${rollType === "healing" ? "Healing" : "Damage"}Roll`),
+      flavor,
       speaker: ChatMessage.implementation.getSpeaker(),
       system: { targets: TargetsField.getDescriptors() },
       type: rollType === "healing" ? "healing" : "damage"
