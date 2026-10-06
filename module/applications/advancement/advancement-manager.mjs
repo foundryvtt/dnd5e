@@ -288,7 +288,8 @@ export default class AdvancementManager extends Application5e {
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
 
-    const flows = Array.fromRange(this.currentLevel(clonedItem, manager.clone) + 1).slice(level)
+    const currentLevel = this.currentLevel(clonedItem, manager.clone);
+    const flows = Array.fromRange(currentLevel + 1).slice(level)
       .flatMap(l => this.flowsForLevel(clonedItem, l));
 
     // Revert advancements through changed level
@@ -299,6 +300,10 @@ export default class AdvancementManager extends Application5e {
 
     // Create restore advancements for other levels
     flows.filter(f => f.level > level).forEach(flow => manager.steps.push({ type: "restore", flow, automatic: true }));
+
+    if ( manager.steps.length && currentLevel ) manager.steps.push({
+      type: "forward", automatic: true, level: currentLevel
+    });
 
     return manager;
   }
