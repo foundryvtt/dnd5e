@@ -627,6 +627,10 @@
           "hint": "Only allow spells from these schools.",
           "label": "Spell Schools"
         },
+        "subSchool": {
+          "hint": "Only allow spells from these sub-schools.",
+          "label": "Spell Sub-Schools"
+        },
         "subtype": {
           "label": "Subtype"
         },
@@ -657,7 +661,8 @@
       "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
       "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement.",
       "SpellList": "Only spells available on the {lists} spell list can be chosen for this advancement.",
-      "SpellSchool": "Only spells of the {schools} school can be chosen for this advancement."
+      "SpellSchool": "Only spells of the {schools} school can be chosen for this advancement.",
+      "SpellSubSchool": "Only Spells of the {subSchools} sub-school can be chosen for this advancement."
     }
   },
   "ItemGrant": {

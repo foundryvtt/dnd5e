@@ -19,6 +19,8 @@
                  options=@root.levelRestrictionOptions rootId=@root.partId }}
     {{ formGroup fields.school name="configuration.restriction.school" value=data.school
                  options=@root.schoolRestrictionOptions rootId=@root.partId }}
+    {{ formGroup fields.subSchool name="configuration.restriction.subSchool" value=data.subSchool
+                 options=@root.subSchoolRestrictionOptions rootID=@root.partId }}
     {{ formGroup fields.list name="configuration.restriction.list" value=data.list options=@root.listRestrictionOptions
                  rootId=@root.partId }}
     {{/if}}

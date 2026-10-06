@@ -280,6 +280,14 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       }, {});
     }
 
+    //Apply restrictions based on spell sub school
+    if ( (config.type === "spell") && config.restriction.subSchool.size ) {
+      filters.locked.additional.subschool = config.restriction.subSchool.reduce((obj, list) => {
+        obj[list] = 1;
+        return obj;
+      }, {});
+    }
+
     const result = await CompendiumBrowser.select({
       filters,
       prerequisites: {

@@ -42,6 +42,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
         level: new StringField(),
         list: new SetField(new StringField()),
         school: new SetField(new StringField()),
+        subSchool: new SetField(new StringField()),
         subtype: new StringField(),
         type: new StringField()
       }),
