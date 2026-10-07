@@ -3396,8 +3396,11 @@
   },
   "Monster": "Monster Feature",
   "PietyTrait": "Piety Trait",
-  "Species": "Species Feature",
-  "SpeciesLegacy": "Race Feature",
+  "Species": {
+    "Label": "Species Feature",
+    "LabelLegacy": "Race Feature",
+    "Lineage": "Lineage"
+  },
   "SupernaturalGift": {
     "Label": "Supernatural Gift",
     "Blessing": "Blessing",
