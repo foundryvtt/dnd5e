@@ -829,9 +829,10 @@ export default class NPCData extends CreatureTemplate {
       context.definitions.upper = [
         { label: "DND5E.AC", classes: "half-width", definitions: [o.ac ?? system.attributes.ac.value] },
         { label: "DND5E.Initiative", classes: "half-width", definitions: [summary.initiative] },
-        { label: "DND5E.HP", definitions: o.hp ? [o.hp] : system.attributes.hp.formula ? [
-          system.attributes.hp.max, `(${system.attributes.hp.formula})`
-        ] : [system.attributes.hp.max] },
+        o.tempHP ? { label: "DND5E.HEAL.Type.TemporaryShort", definitions: [o.tempHP] }
+          : { label: "DND5E.HP", definitions: o.hp ? [o.hp] : system.attributes.hp.formula ? [
+            system.attributes.hp.max, `(${system.attributes.hp.formula})`
+          ] : [system.attributes.hp.max] },
         { label: "DND5E.Speed", definitions: [summary.speed] }
       ];
       context.definitions.lower = [
@@ -879,6 +880,17 @@ export default class NPCData extends CreatureTemplate {
         ] }
       ].filter(_ => _);
       context.summary.tag = context.summary.tag.toLowerCase().capitalize();
+    }
+
+    if ( o.abilities ) {
+      context.hideAbilities = true;
+      for ( const { abilities, description } of o.abilities ) {
+        context.definitions.upper.push({
+          label: formatter
+            .format(abilities.map(a => CONFIG.DND5E.abilities[a]?.abbreviation?.capitalize()).filter(_ => _)),
+          definitions: [description]
+        });
+      }
     }
 
     for ( const item of this.parent.items ) {

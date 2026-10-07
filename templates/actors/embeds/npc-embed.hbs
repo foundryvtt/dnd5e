@@ -4,6 +4,7 @@
     <div class="statblock-content">
         <div class="statblock-header">
             {{> ".definitionList" entries=definitions.upper }}
+            {{#unless hideAbilities}}
             <div class="abilities">
                 {{#each abilityTables}}
                 <table>
@@ -35,6 +36,7 @@
                 {{/each}}
                 {{/each}}
             </div>
+            {{/unless}}
             {{> ".definitionList" entries=definitions.lower }}
         </div>
         {{#each actionSections}}
