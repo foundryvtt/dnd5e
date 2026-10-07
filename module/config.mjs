@@ -1887,7 +1887,10 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Monster"
   },
   race: {
-    label: "DND5E.Feature.Species"
+    label: "DND5E.Feature.Species.Label",
+    subtypes: {
+      lineage: "DND5E.Feature.Species.Lineage"
+    }
   },
   enchantment: {
     label: "DND5E.ENCHANTMENT.Label",

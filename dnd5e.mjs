@@ -560,7 +560,7 @@ Hooks.once("i18nInit", () => {
       },
       DND5E: {
         "Feature.Class.ArtificerPlan": _loc("DND5E.Feature.Class.ArtificerInfusion"),
-        "Feature.Species": _loc("DND5E.Feature.SpeciesLegacy"),
+        "Feature.Species": _loc("DND5E.Feature.Species.LabelLegacy"),
         FlagsAlertHint: _loc("DND5E.FlagsAlertHintLegacy"),
         FlagsRemarkableAthleteHint: _loc("DND5E.FlagsRemarkableAthleteHintLegacy"),
         ItemSpeciesDetails: _loc("DND5E.ItemSpeciesDetailsLegacy"),
