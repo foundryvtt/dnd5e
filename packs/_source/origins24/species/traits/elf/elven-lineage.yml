@@ -1,0 +1,110 @@
+_id: phbsptElvenLinea
+name: Elven Lineage
+type: feat
+img: icons/environment/wilderness/terrain-river-road-gray.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You are part of a lineage that grants you supernatural abilities.
+      Choose a lineage from the Elven Lineages table. You gain the level 1
+      benefit of that lineage.</p><p>When you reach character levels 3 and 5,
+      you learn a higher-level spell, as shown on the table. You always have
+      that spell prepared. You can cast it once without a spell slot, and you
+      regain the ability to cast it in that way when you finish a Long Rest. You
+      can also cast the spell using any spell slots you have of the appropriate
+      level. Intelligence, Wisdom, or Charisma is your spellcasting ability for
+      the spells you cast with this trait (choose the ability when you select
+      the lineage).</p><table><caption><p>Elven
+      Lineages</p></caption><thead><tr><td><p>Lineage</p></td><td><p>Level
+      1</p></td><td><p>Level 3</p></td><td><p>Level
+      5</p></td></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrowElfLin]{Drow}</p></td><td><p>The
+      range of your Darkvision increases to 120 feet. You also know the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDancingLig]{Dancing
+      Lights}</em>
+      cantrip.</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFaerieFire]{Faerie
+      Fire}</em></p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDarkness00]{Darkness}</em></p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptHighElfLin]{High
+      Elf}</p></td><td><p>You know the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplPrestidigi]{Prestidigitation}</em>
+      cantrip. Whenever you finish a Long Rest, you can replace that cantrip
+      with a different cantrip from the Wizard spell
+      list.</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDetectMagi]{Detect
+      Magic}</em></p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMistyStep0]{Misty
+      Step}</em></p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptWoodElfLin]{Wood
+      Elf}</p></td><td><p>Your Speed increases to 35 feet. You also know the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDruidcraft]{Druidcraft}</em>
+      cantrip.</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplLongstride]{Longstrider}</em></p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplPasswithou]{Pass
+      without Trace}</em></p></td></tr></tbody></table>
+    chat: ''
+  source:
+    revision: 2
+    rules: '2024'
+    book: ''
+    page: ''
+    custom: ''
+    license: ''
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    items: []
+    repeatable: false
+  properties: []
+  requirements: Elf
+  identifier: elven-lineage
+  advancement:
+    UXq1v36a9kxrZFZC:
+      name: Choose Lineage
+      type: ItemChoice
+      _id: UXq1v36a9kxrZFZC
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        pool:
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrowElfLin
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptHighElfLin
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptWoodElfLin
+            sort: 0
+        restriction:
+          list: []
+          school: []
+          type: race
+          subtype: lineage
+        sorting: a
+        spell: null
+        type: feat
+      flags: {}
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>You are part of a lineage that grants you supernatural abilities.
+        Choose a lineage from the Elven Lineages table.</p>
+  crewed: false
+effects: []
+folder: 3uafOaOCZJQeUNtw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791576272360
+  modifiedTime: 1791576272360
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptElvenLinea'
