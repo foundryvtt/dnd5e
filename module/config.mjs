@@ -1927,6 +1927,7 @@ preLocalize("featureTypes", { key: "label" });
 preLocalize("featureTypes.class.subtypes", { sort: true });
 preLocalize("featureTypes.enchantment.subtypes", { sort: true });
 preLocalize("featureTypes.feat.subtypes", { sort: true });
+preLocalize("featureTypes.race.subtypes", { sort: true });
 preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 
 /* -------------------------------------------- */
