@@ -48,7 +48,9 @@ system:
         condition: ''
         override: false
       consumption:
-        targets: []
+        targets:
+          - type: activityUses
+            value: '1'
         scaling:
           allowed: false
           max: ''
@@ -111,7 +113,9 @@ system:
               number: 1
       uses:
         spent: 0
-        recovery: []
+        recovery:
+          - period: turnStart
+            type: recoverAll
         max: '1'
       sort: 0
       _id: a1T6nHaqmvbLpyJr
