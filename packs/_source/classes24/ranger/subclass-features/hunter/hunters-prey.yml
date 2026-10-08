@@ -8,27 +8,27 @@ system:
     value: >-
       <p>You gain one of the following feature options of your choice. Whenever
       you finish a Short or Long Rest, you can replace the chosen option with
-      the other one.</p><p><strong>Colossus Slayer.</strong> Your tenacity can
-      wear down even the most resilient foes. When you hit a creature with a
-      weapon, the weapon deals an extra 1d8 damage to the target if it's missing
-      any of its Hit Points. You can deal this extra damage only once per
-      turn.</p><p><strong>Horde Breaker.</strong> Once on each of your turns
-      when you make an attack with a weapon, you can make another attack with
-      the same weapon against a different creature that is within 5 feet of the
-      original target, that is within the weapon's range, and that you haven't
-      attacked this turn.</p><section class="secret"
-      id="secret-I2q5Nm7g6mkLjH5Y"><p><strong>Foundry Note</strong></p><p>This
-      feature includes a <strong>Colossus Slayer</strong> activity for the
-      additional damage. You can select the correct damage type in the roll
+      the other
+      one.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbrgrHuntersPre.Activity.Ek6m8ZY5Df7Mp6DO
+      caption=false cite=false nameStyle=inline]</p><p><em><strong>Horde
+      Breaker.</strong></em> Once on each of your turns when you make an attack
+      with a weapon, you can make another attack with the same weapon against a
+      different creature that is within 5 feet of the original target, that is
+      within the weapon's range, and that you haven't attacked this
+      turn.</p><section id="secret-I2q5Nm7g6mkLjH5Y"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes a <strong>Colossus Slayer</strong> activity for the additional
+      damage. You can select the correct damage type in the roll
       dialog.</p><p>For the <strong>Horde Breaker</strong> option simply make
       another attack.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -38,6 +38,7 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -46,7 +47,7 @@ system:
       type: damage
       _id: Ek6m8ZY5Df7Mp6DO
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: Once per turn when you hit a creature with a weapon
@@ -57,10 +58,16 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: >-
+          <p>Your tenacity can wear down even the most resilient foes. When you
+          hit a creature with a weapon, the weapon deals an extra 1d8 damage to
+          the target if it’s missing any of its Hit Points. You can deal this
+          extra damage only once per turn.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -71,6 +78,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -85,7 +93,8 @@ system:
       sort: 0
       damage:
         critical:
-          allow: false
+          allow: true
+          bonus: ''
         parts:
           - custom:
               enabled: false
@@ -94,37 +103,47 @@ system:
             denomination: 8
             bonus: ''
             types:
-              - acid
               - bludgeoning
+              - piercing
+              - slashing
+              - acid
               - cold
               - fire
               - force
               - lightning
               - necrotic
-              - piercing
               - poison
               - psychic
               - radiant
-              - slashing
               - thunder
+            modifiers: []
             scaling:
               number: 1
-      name: ''
+      name: Colossus Slayer
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: hunters-prey
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866564824
-  modifiedTime: 1745256764985
+  systemVersion: 6.0.5
+  createdTime: 1790979069171
+  modifiedTime: 1790979069171
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

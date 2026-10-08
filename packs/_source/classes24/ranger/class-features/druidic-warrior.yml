@@ -2,14 +2,13 @@ name: Druidic Warrior
 system:
   description:
     value: >-
-      <p>You learn two
-      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU]{Druid
-      cantrips} of your choice.
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplGuidance00]{Guidance} and
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplStarryWisp]{Starry Wisp} are
-      recommended. The chosen cantrips count as Ranger spells for you, and
-      Wisdom is your spellcasting ability for them. Whenever you gain a Ranger
-      level, you can replace one of these cantrips with another Druid
+      <p>You learn two Druid cantrips of your choice.
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGuidance00]{Guidance}
+      and
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplStarryWisp]{Starry
+      Wisp} are recommended. The chosen cantrips count as Ranger spells for you,
+      and Wisdom is your spellcasting ability for them. Whenever you gain a
+      Ranger level, you can replace one of these cantrips with another Druid
       cantrip.</p>
     chat: ''
   activities: {}
@@ -22,24 +21,26 @@ system:
     revision: 2
     rules: '2024'
     book: ''
+    page: ''
     license: CC-BY-4.0
   enchant: {}
   type:
     value: class
     subtype: fightingStyle
   prerequisites:
-    level: 2
-    items:
-      - fighting-style
+    level: null
+    items: []
+    repeatable: false
   properties: []
   requirements: Ranger
   advancement:
-    - type: ItemChoice
+    6dwyqBA13Ui6p4Bf:
+      type: ItemChoice
       _id: 6dwyqBA13Ui6p4Bf
       configuration:
         allowDrops: true
         choices:
-          '0':
+          '2':
             count: 2
             replacement: false
         pool: []
@@ -47,6 +48,7 @@ system:
           list:
             - class:druid
           level: '0'
+          school: []
         spell:
           ability:
             - cha
@@ -57,31 +59,34 @@ system:
             requireSlot: false
           prepared: 2
         type: spell
+        sorting: a
       value:
         added: {}
         replaced: {}
-      title: Choose Cantrips
       hint: >-
         You learn two Druid cantrips of your choice. Guidance and Starry Wisp
         are recommended. The chosen cantrips count as Ranger spells for you, and
         Wisdom is your spellcasting ability for them. Whenever you gain a Ranger
         level, you can replace one of these cantrips with another Druid cantrip.
+      name: Choose Cantrips
+      flags: {}
+  crewed: false
 _id: phbfstDruidicWar
 type: feat
 folder: h5OUzaJcZzsNsOGc
 img: icons/magic/nature/root-vines-face-glow-green.webp
 effects: []
-sort: 0
+sort: 700000
 ownership:
   default: 0
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1726255124302
-  modifiedTime: 1760132451517
+  systemVersion: 6.0.6
+  createdTime: 1791495750940
+  modifiedTime: 1791495750940
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbfstDruidicWar'

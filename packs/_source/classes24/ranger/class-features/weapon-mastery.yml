@@ -15,9 +15,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -27,24 +28,41 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
+    repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: weapon-mastery
+  advancement:
+    cvPNAaphQTdoQqAb:
+      _id: cvPNAaphQTdoQqAb
+      type: Trait
+      configuration:
+        mode: mastery
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - weapon:*
+      value:
+        chosen: []
+      level: 1
+      hint: ''
+      flags: {}
+      name: Weapon Mastery
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735932734523
-  modifiedTime: 1745256765282
+  systemVersion: 6.0.5
+  createdTime: 1790976133201
+  modifiedTime: 1790976133201
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

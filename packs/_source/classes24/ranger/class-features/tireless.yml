@@ -7,24 +7,19 @@ system:
   description:
     value: >-
       <p>Primal forces now help fuel you on your journeys, granting you the
-      following benefits.</p><p><strong>Temporary Hit Points.</strong> As a
-      Magic action, you can give yourself a number of Temporary Hit Points equal
-      to 1d8 plus your Wisdom modifier (minimum of 1). You can use this action a
-      number of times equal to your Wisdom modifier (minimum of once), and you
-      regain all expended uses when you finish a Long
-      Rest.</p><p><strong>Decrease Exhaustion.</strong> Whenever you finish a
-      Short Rest, your Exhaustion level, if any, decreases by 1.</p><section
-      id="secret-wlhwV2MDwGKQ8plw" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Temporary Hit Points</strong> activity can
-      apply the Temporary Hit Points to you.</p><p>The <strong>Decrease
-      Exhaustion</strong> activity will decrease your Exhaustion.</p></section>
+      following
+      benefits.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbrgrTireless00.Activity.T17ZXCxvxeDwPoz5
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbrgrTireless00.Activity.y2cSZJxteG7Yew0u
+      caption=false cite=false nameStyle=inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -34,7 +29,10 @@ system:
     subtype: ''
   prerequisites:
     level: 10
-  properties: []
+    items: []
+    repeatable: false
+  properties:
+    - mgc
   requirements: ''
   activities:
     T17ZXCxvxeDwPoz5:
@@ -56,10 +54,17 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: >-
+          <p>As a &amp;Reference[Magic] action, you can give yourself a number
+          of Temporary Hit Points equal to 1d8 plus your Wisdom modifier
+          (minimum of 1). You can use this action a number of times equal to
+          your Wisdom modifier (minimum of once), and you regain all expended
+          uses when you finish a Long Rest.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -70,6 +75,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -82,7 +88,7 @@ system:
         recovery:
           - period: lr
             type: recoverAll
-        max: (max(1,@abilities.wis.mod))
+        max: max(1, @abilities.wis.mod)
       sort: 0
       healing:
         number: 1
@@ -93,16 +99,28 @@ system:
           enabled: false
         scaling:
           number: 1
-        bonus: (max(1,@abilities.wis.mod))
+        bonus: max(1, @abilities.wis.mod)
+        modifiers: []
+      img: ''
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
     y2cSZJxteG7Yew0u:
       type: utility
       name: Decrease Exhaustion
       _id: y2cSZJxteG7Yew0u
       activation:
-        type: ''
+        type: shortRest
         value: null
         override: false
-        condition: Whenever you finish a Short Rest
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -114,10 +132,14 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: >-
+          <p>Whenever you finish a Short Rest, your Exhaustion level, if any,
+          decreases by 1.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -128,6 +150,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -145,21 +168,30 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: tireless
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735932734523
-  modifiedTime: 1745256765256
+  systemVersion: 6.0.5
+  createdTime: 1790976133201
+  modifiedTime: 1790976133201
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
