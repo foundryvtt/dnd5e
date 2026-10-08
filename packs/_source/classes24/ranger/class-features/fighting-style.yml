@@ -8,7 +8,7 @@ system:
     value: >-
       <p>You gain a Fighting Style feat of your choice. Instead of choosing one
       of those feats, you can choose the option
-      below.</p><p>@Embed[Compendium.dnd-players-handbook.feats.Item.phbfstDruidicWar
+      below.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbfstDruidicWar
       caption=false nameStyle=inline]</p>
     chat: ''
   source:
@@ -46,11 +46,11 @@ system:
         allowDrops: true
         type: feat
         pool:
-          - sort: 0
-            uuid: Compendium.dnd-players-handbook.feats.Item.phbfstDruidicWar
+          - uuid: Compendium.dnd5e.classes24.Item.phbfstDruidicWar
+            sort: 0
         spell: null
         restriction:
-          type: class
+          type: feat
           subtype: fightingStyle
           list: []
           school: []
@@ -70,12 +70,12 @@ _stats:
   duplicateSource: null
   coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 6.0.5
-  createdTime: 1790979370276
-  modifiedTime: 1790979370276
+  systemVersion: 6.0.6
+  createdTime: 1791495750940
+  modifiedTime: 1791495750940
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
-sort: 0
+sort: 800000
 ownership:
   default: 0
 _key: '!items!phbrgrFightingSt'
