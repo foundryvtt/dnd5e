@@ -16,7 +16,7 @@
         <li>
             {{!-- Formula & Type --}}
             <div class="formula-line">
-                <span class="formula">{{ roll.formula }}</span>
+                <span class="formula">{{ displayFormula }}</span>
                 <span class="label">
                     {{#if damageTypes}}
                     <select name="roll.{{ @index }}.damageType">
