@@ -864,9 +864,7 @@ export default function ActivityMixin(Base) {
         options: {
           buildConfig,
           position: {
-            width: 400,
-            top: config.event ? config.event.clientY - 80 : null,
-            left: window.innerWidth - 710
+            width: 400
           },
           window: {
             title: this.damageFlavor,
