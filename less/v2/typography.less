@@ -286,6 +286,9 @@
         flex-wrap: wrap;
         margin: 0.5em 0;
 
+        &:has(+ dl) { margin-block-end: 0; }
+        + dl { margin-block-start: 0; }
+
         dd { margin-inline-start: 4px; }
         > div {
           flex: 1 0 100%;
