@@ -128,6 +128,7 @@
  * @property {ItemMessageProperty[]} properties  Item property descriptors.
  * @property {RangeData|null} range              Item range.
  * @property {string} school                     Spell school.
+ * @property {string|null} subSchool             Spell Subschool.
  * @property {string[]} subtitle                 Localized parts of the card's subtitle.
  * @property {TargetData|null} target            What the item's use targets.
  * @property {TargetDescriptor5e[]} targets      Tokens this message was rolled against.

@@ -12,6 +12,10 @@
     {{ formField fields.school value=source.school choices=CONFIG.spellSchools labelAttr="label" blank=""
                  localize=true rootId=partId }}
 
+    {{!-- Spell Sub School--}}
+    {{ formField fields.subSchool value=source.subSchool choices=CONFIG.spellSubSchools labelAttr="label" blank=""
+                localize=true rootID=partID }} 
+
     {{!-- Spell Components --}}
     {{ formField fields.properties options=properties.options label="DND5E.SpellComponents" localize=true
                  input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}

@@ -54,6 +54,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       properties: new SetField(new StringField(), { label: "DND5E.SpellComponents" }),
       range: new RangeField(),
       school: new StringField({ required: true, label: "DND5E.SpellSchool" }),
+      subSchool: new StringField({required: false, label: "DND5E.SpellSubSchool"}),
       sourceItem: new IdentifierField({ allowType: true, label: "DND5E.SourceItem.Label" }),
       target: new TargetField()
     });
@@ -87,6 +88,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         config: {
           choices: CONFIG.DND5E.spellSchools,
           keyPath: "system.school"
+        }
+      }],
+      ["subschool", {
+        label: "DND5E.SubSchool",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.spellSubSchools,
+          keyPath: "system.subSchool"
         }
       }],
       ["spelllist", {
@@ -451,7 +460,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
-
+  
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
@@ -462,6 +471,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const labels = this.parent.labels ??= {};
     labels.level = CONFIG.DND5E.spellLevels[this.level];
     labels.school = CONFIG.DND5E.spellSchools[this.school]?.label;
+    labels.subSchool = CONFIG.DND5E.spellSubSchools[this.subSchool]?.label;
     if ( this.properties.has("material") ) labels.materials = this.materials.value;
 
     labels.components = this.properties.reduce((obj, c) => {
@@ -526,12 +536,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const context = await super.getCardData(options);
     context.materials = this.properties.has("material") ? this.materials.value : "";
     context.school = this.school;
+    context.subSchool = this.subSchool;
     context.subtitle = [
-      CONFIG.DND5E.spellLevels[context.level], CONFIG.DND5E.spellSchools[this.school]?.label
+      CONFIG.DND5E.spellLevels[context.level], CONFIG.DND5E.spellSchools[this.school]?.label, CONFIG.DND5E.spellSubSchools[this.subSchool]?.label
     ].filter(_ => _);
     context.properties = [
       { type: "level", level: context.level, identity: true },
       { type: "school", school: this.school, identity: true },
+      { type: "subSchool", subSchool: this.subSchool, identity: true},
       ...context.properties.filter(p => !p.identity)
     ];
     return context;
@@ -579,6 +591,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     context.subtitles = [
       { label: context.labels.level },
       { label: context.labels.school },
+      { label: context.labels.subSchool },
       { label: CONFIG.DND5E.spellcasting[this.method]?.label }
     ];
 
@@ -752,7 +765,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       {
         level: formatNumber(this.level),
         levelOrdinal: formatNumber(this.level, { ordinal: true }),
-        school: CONFIG.DND5E.spellSchools[this.school]?.label ?? ""
+        school: CONFIG.DND5E.spellSchools[this.school]?.label ?? "",
+        subSchool: CONFIG.DND5E.spellSubSchools[this.subSchool]?.label ?? ""
       }
     );
     if ( (rulesVersion === "2014") && this.properties.has("ritual") ) {

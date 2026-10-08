@@ -627,6 +627,10 @@
           "hint": "Only allow spells from these schools.",
           "label": "Spell Schools"
         },
+        "subSchool": {
+          "hint": "Only allow spells from these sub-schools.",
+          "label": "Spell Sub-Schools"
+        },
         "subtype": {
           "label": "Subtype"
         },
@@ -657,7 +661,8 @@
       "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
       "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement.",
       "SpellList": "Only spells available on the {lists} spell list can be chosen for this advancement.",
-      "SpellSchool": "Only spells of the {schools} school can be chosen for this advancement."
+      "SpellSchool": "Only spells of the {schools} school can be chosen for this advancement.",
+      "SpellSubSchool": "Only Spells of the {subSchools} sub-school can be chosen for this advancement."
     }
   },
   "ItemGrant": {
@@ -4746,6 +4751,10 @@
 "DND5E.SchoolIll": "Illusion",
 "DND5E.SchoolNec": "Necromancy",
 "DND5E.SchoolTrs": "Transmutation",
+"DND5E.SubSchool": "Sub-School",
+"DND5E.SubSchoolChr": "Chronurgy",
+"DND5E.SubSchoolDun": "Dunamancy",
+"DND5E.SubSchoolGrv": "Graviturgy",
 "DND5E.Size": "Size",
 "DND5E.SizeGargantuan": "Gargantuan",
 "DND5E.SizeGargantuanAbbr": "Gt",
@@ -5024,6 +5033,7 @@
 "DND5E.SpellProgression": "Spell Progression",
 "DND5E.SpellsSearch": "Search spells",
 "DND5E.SpellSchool": "Spell School",
+"DND5E.SpellSubSchool": "Spell Sub-School",
 "DND5E.SpellScroll": "Spell Scroll",
 "DND5E.SpellSlotExpended": "Expended Spell Slot",
 "DND5E.SpellSlotN.one": "{n}st spell slot",

@@ -568,6 +568,15 @@
 /* -------------------------------------------- */
 
 /**
+ * Configuring data of spell subSchools
+ *
+ * @typedef SpellSubSchoolConfiguration
+ * @property {string} label       Localized label.
+ * @property {string} fullKey     Fully written key used as alternate for enrichers
+ * @property {string} [reference] Reference to a rule page describing this subschool.
+ */
+
+/**
  * @typedef SpellScrollValues
  * @property {number} bonus  Attack to hit bonus.
  * @property {number} dc     Saving throw DC.

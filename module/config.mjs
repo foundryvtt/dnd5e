@@ -27,7 +27,7 @@ import { preLocalize } from "./utils.mjs";
  *   IndividualTargetDefinition, ItemPropertyConfiguration, LimitedUsePeriodConfiguration,
  *   MapLocationMarkerStyle, MovementTypeConfiguration, MovementUnitConfiguration,
  *   RestTypeConfiguration, RequestCallback5e, RuleTypeConfiguration, SkillConfiguration,
- *   SpellcastingFocusConfiguration, SpellcastingPreparationState5e, SpellSchoolConfiguration,
+ *   SpellcastingFocusConfiguration, SpellcastingPreparationState5e, SpellSchoolConfiguration, SpellSubSchoolConfiguration
  *   SpellScrollValues, StatusEffectConfig5e, SubtypeTypeConfiguration, TimeUnitConfiguration,
  *   ToolConfiguration, TraitConfiguration, TransformationConfiguration, TravelPaceConfiguration,
  *   TravelUnitConfiguration, TreasureConfiguration5e, UnitConfiguration, WeaponMasterConfiguration
@@ -3367,6 +3367,29 @@ preLocalize("spellSchools", { key: "label", sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Subschools to which a spell can belong
+ * @enum {SpellSubSchoolConfiguration}
+ */
+DND5E.spellSubSchools = {
+  chr: {
+    label: "DND5E.SubSchoolChr",
+    fullKey: "chronurgy",
+    reference: ""
+  },
+  dun: {
+    label: "DND5E.SubSchoolDun",
+    fullKey: "dunamancy",
+    reference: ""
+  },
+  grv: {
+    label: "DND5E.SubSchoolGrv",
+    fullKey: "graviturgy",
+    reference: ""
+  }
+};
+preLocalize("spellSubSchools", { key: "label", sort: true });
+
+/**
  * Types of spell lists.
  * @enum {string}
  */
@@ -4826,6 +4849,10 @@ DND5E.ruleTypes = {
     label: "DND5E.SpellSchool",
     references: "enrichmentLookup.spellSchools"
   },
+  spellSubSChool: {
+    label: "DND5E.SpellSubSchool",
+    references: "enrichmentLookup.spellSubSchools"
+  },
   spellTag: {
     label: "DND5E.SpellTag",
     references: "itemProperties"
@@ -5044,6 +5071,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
         languages: _flattenConfig(DND5E.languages, { labelKey: "label", skipEntry: (k, d) => d.selectable === false }),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
+        spellSubSchools: foundry.utils.deepClone(DND5E.spellSubSchools),
         tools: foundry.utils.deepClone(DND5E.tools)
       };
       const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) => {
@@ -5053,6 +5081,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
+      addFullKeys("spellSubSchools");
       addFullKeys("tools");
       Object.entries(DND5E.vehicleTypes).forEach(([k, label]) => _enrichmentLookup.tools[k] = { label, key: k });
 

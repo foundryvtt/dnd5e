@@ -76,6 +76,8 @@ export default class ItemChoiceConfig extends ItemSharedConfig {
     context.listRestrictionOptions = dnd5e.registry.spellLists.options;
     context.schoolRestrictionOptions = Object.entries(CONFIG.DND5E.spellSchools)
       .map(([value, { label }]) => ({ value, label }));
+    context.subSchoolRestrictionOptions = Object.entries(CONFIG.DND5E.spellSubSchools)
+      .map(([value, { label }]) => ({ value, label }));
     context.showContainerWarning = context.items.some(i => i.index?.type === "container");
     context.showSpellConfig = this.advancement.configuration.type === "spell";
 

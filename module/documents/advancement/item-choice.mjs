@@ -320,6 +320,14 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       });
     }
 
+    //if spell Sub School is specified, ensure the spell is also of that sub school
+    if (( type === "spell") & restriction.subSchool.size && !restriction.subSchool.has(item.system.subSchool) ) {
+      const subSchools = Array.from(restriction,subSchool).map(s => CONFIG.DND5E.spellSubSchools[s]?.label).filter(_ => _);
+      return handleError("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellSubSchool", {
+        subSchools: game.il8n.getListFormatter({ type: "disjunction "}).format(schools)
+      });
+    }
+
     return true;
   }
 }

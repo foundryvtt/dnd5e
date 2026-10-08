@@ -32,6 +32,7 @@ export default class PropertyField extends TypedSchemaField {
       range: {},
       reach: {},
       school: { school: new StringField() },
+      subSchool: {subSchool: new StringField() },
       target: {},
       text: { text: new StringField() },
       "weapon:category": { category: new StringField() },
@@ -91,6 +92,7 @@ export default class PropertyField extends TypedSchemaField {
           reach: formatLength(range.reach, range.units)
         }).capitalize();
         case "school": return CONFIG.DND5E.spellSchools[p.school]?.label;
+        case "subSchool": return CONFIG.DND5E.spellSubSchools[p.subSchool]?.label;
         case "target": {
           const labels = TargetField.getLabels({ target, capitalize: true });
           return labels.template.statblock || labels.affects.sheet;
