@@ -8,28 +8,29 @@ system:
       <p>Your connection to this divine domain ensures you always have certain
       spells ready. When you reach a Cleric level specified in the Life Domain
       Spells table, you thereafter always have the listed spells
-      prepared.</p><table><caption>Life Domain
-      Spells</caption><thead><tr><td>Cleric Level</td><td>Prepared
-      Spells</td></tr></thead><tbody><tr><td>3</td><td><p>@UUID[Compendium.dnd5e.spells24.Item.phbsplAid0000000]{Aid},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplBless00000]{Bless},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure Wounds},<br
-      />@UUID[Compendium.dnd5e.spells24.Item.phbsplLesserRest]{Lesser
-      Restoration}</p></td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplMassHealin]{Mass
+      prepared.</p><table><caption><p>Life Domain
+      Spells</p></caption><thead><tr><td><p>Cleric Level</p></td><td><p>Prepared
+      Spells</p></td></tr></thead><tbody><tr><td><p>3</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000]{Aid},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplBless00000]{Bless},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplCureWounds]{Cure
+      Wounds},<br>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplLesserRest]{Lesser
+      Restoration}</p></td></tr><tr><td><p>5</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMassHealin]{Mass
       Healing Word},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplRevivify00]{Revivify}</td></tr><tr><td>7</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplAuraofLife]{Aura
-      of Life}, @UUID[Compendium.dnd5e.spells24.Item.phbsplDeathWard0]{Death
-      Ward}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
-      Restoration}, @UUID[Compendium.dnd5e.spells24.Item.phbsplMassCureWo]{Mass
-      Cure Wounds}</td></tr></tbody></table><section class="secret"
-      id="secret-Z9pAhvumQlf7onuP"><p><strong>Foundry Note</strong></p><p>These
-      spells are granted automatically as you advance.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplRevivify00]{Revivify}</p></td></tr><tr><td><p>7</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplAuraofLife]{Aura
+      of Life},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDeathWard0]{Death
+      Ward}</p></td></tr><tr><td><p>9</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGreaterRes]{Greater
+      Restoration},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMassCureWo]{Mass
+      Cure Wounds}</p></td></tr></tbody></table>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -39,26 +40,135 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: Life Domain
   activities: {}
   enchant: {}
   identifier: life-domain-spells
+  advancement:
+    MOUCVB3JGazDiUI3:
+      _id: MOUCVB3JGazDiUI3
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplCureWounds
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplLesserRest
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplBless00000
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 3
+      hint: ''
+      name: Life Domain Spells
+      flags: {}
+    zfcT1xCvqRLRZXiH:
+      _id: zfcT1xCvqRLRZXiH
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplMassHealin
+            sort: 0
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplRevivify00
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 5
+      hint: ''
+      name: Life Domain Spells
+      flags: {}
+    1FttAn0lw9lBpofn:
+      _id: 1FttAn0lw9lBpofn
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplAuraofLife
+            sort: 0
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDeathWard0
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 7
+      hint: ''
+      name: Life Domain Spells
+      flags: {}
+    iYrz7E0p8N6pp5Uy:
+      _id: iYrz7E0p8N6pp5Uy
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplGreaterRes
+            sort: 0
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplMassCureWo
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 9
+      hint: ''
+      name: Life Domain Spells
+      flags: {}
+  crewed: false
 effects: []
 folder: jWzqOsH9e7IW7WO7
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866589552
-  modifiedTime: 1745256760876
+  systemVersion: 6.0.5
+  createdTime: 1791233179440
+  modifiedTime: 1791233179440
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

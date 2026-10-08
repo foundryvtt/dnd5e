@@ -10,19 +10,14 @@ system:
       your Wisdom modifier (minimum of 1d8, currently [[lookup
       @abilities.wis.mod]]) and add the rolls together. Each Undead that fails
       its saving throw against that use of Turn Undead takes Radiant damage
-      equal to the roll's total. This damage doesn't end the turn
-      effect.</p><section class="secret"
-      id="secret-VJPPRFTlu1fFg8XB"><p><strong>Foundry Note</strong></p><p>This
-      feature can be used in place of Turn Undead. It consumes a use of Channel
-      Divinity, includes the Save, Active Effects for the conditions, and this
-      feature's damage roll.</p></section>
+      equal to the roll's total. This damage doesn't end the turn effect.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     recovery: []
@@ -32,126 +27,24 @@ system:
     subtype: channelDivinity
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
   requirements: Cleric
-  activities:
-    fW3U8L8Ca9a6O9Wx:
-      type: save
-      name: 'Channel Divinity: Turn Undead'
-      _id: fW3U8L8Ca9a6O9Wx
-      activation:
-        type: action
-        value: null
-        override: false
-        condition: ''
-      consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: feat:channel-divinity-cleric
-        scaling:
-          allowed: false
-        spellSlot: true
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-        value: ''
-      effects:
-        - _id: OftTd0Eiwnls76cX
-          onSave: false
-      range:
-        override: false
-        units: self
-        special: ''
-      target:
-        template:
-          contiguous: false
-          units: ft
-          type: radius
-          size: '30'
-          count: ''
-        affects:
-          choice: true
-          count: ''
-          type: creature
-          special: Undead
-        override: false
-        prompt: true
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      damage:
-        parts:
-          - custom:
-              enabled: true
-              formula: (@abilities.wis.mod)d8
-            number: null
-            denomination: 0
-            bonus: ''
-            types:
-              - radiant
-        onSave: none
-      save:
-        ability:
-          - wis
-        dc:
-          calculation: spellcasting
-          formula: ''
-      img: ''
-      appliedEffects:
-        - OftTd0Eiwnls76cX
+  activities: {}
   enchant: {}
   identifier: sear-undead
-effects:
-  - name: Turn Undead
-    img: systems/dnd5e/icons/svg/items/feature.svg
-    origin: Compendium.dnd5e.classes24.Item.phbclcSearUndead
-    transfer: false
-    _id: OftTd0Eiwnls76cX
-    type: base
-    system:
-      changes: []
-    disabled: false
-    duration:
-      value: 60
-      units: seconds
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses:
-      - frightened
-      - incapacitated
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    showIcon: 2
-    start: null
-    folder: null
-    _key: '!items.effects!phbclcSearUndead.OftTd0Eiwnls76cX'
+  advancement: {}
+  crewed: false
+effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.1.10
-  createdTime: 1735866373481
-  modifiedTime: 1759426506758
+  systemVersion: 6.0.5
+  createdTime: 1791232041726
+  modifiedTime: 1791232041726
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 900000

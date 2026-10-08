@@ -17,9 +17,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,6 +30,7 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: Life Domain
@@ -48,10 +50,12 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -62,11 +66,12 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
           type: creature
-          special: Create you cast a healing spell on
+          special: Creature you cast a healing spell on
         override: false
         prompt: false
       uses:
@@ -85,23 +90,30 @@ system:
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
       name: ''
       _id: Dm91WPfNiRty1bXv
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: disciple-of-life
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866589552
-  modifiedTime: 1745256760741
+  systemVersion: 6.0.5
+  createdTime: 1791496339685
+  modifiedTime: 1791496339685
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000
