@@ -13,19 +13,15 @@ system:
       modifier (minimum bonus of +1, currently [[lookup
       @abilities.cha.mod]]).</p><p>If another Paladin is present, a creature can
       benefit from only one Aura of Protection at a time; the creature chooses
-      which aura while in them.</p><section class="secret"
-      id="secret-PEdASVYFq26DP4Fq"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which automatically improves your Saving
-      Throws but it should not be used for other impacted characters because it
-      will add their Charisma modifier and not the Paladin's. They should add
-      your modifier manually.</p></section>
+      which aura while in them.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -35,61 +31,15 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
   properties: []
   requirements: ''
-  activities:
-    nwLsJcC3bXA6i7QZ:
-      type: utility
-      name: Aura of Protection
-      _id: nwLsJcC3bXA6i7QZ
-      activation:
-        type: ''
-        value: null
-        override: false
-        condition: ''
-      consumption:
-        scaling:
-          allowed: false
-        spellSlot: true
-        targets: []
-      description:
-        chatFlavor: ''
-      duration:
-        units: inst
-        concentration: false
-        override: false
-      effects: []
-      range:
-        override: false
-        units: self
-        special: ''
-      target:
-        template:
-          contiguous: false
-          units: ft
-          type: radius
-          size: '@scale.paladin.aura'
-          count: ''
-        affects:
-          choice: false
-          count: ''
-          type: ally
-          special: ''
-        override: false
-        prompt: false
-      uses:
-        spent: 0
-        recovery: []
-        max: ''
-      sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: Bonus
-        formula: (max(1,@abilities.cha.mod))
+  activities: {}
   enchant: {}
   identifier: aura-of-protection
+  advancement: {}
+  crewed: false
 effects:
   - name: Protected
     img: icons/magic/defensive/barrier-shield-dome-deflect-teal.webp
@@ -98,11 +48,23 @@ effects:
     system:
       changes:
         - key: system.bonuses.abilities.save
-          value: '@abilities.cha.mod'
+          value: max(1, @abilities.cha.mod)
           priority: null
           type: add
           phase: initial
-          _id: YNfhFQaCpNHc8qhG
+          _id: ugT3rimFHZXKMOOn
+          conditions: '{}'
+          replacement: origin
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -119,29 +81,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103060
-      modifiedTime: 1783544103060
+      systemVersion: 6.0.5
+      createdTime: 1791224423982
+      modifiedTime: 1791224423982
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnProtection.WOJ5r71FCDRmElea'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1783544103060
+  systemVersion: 6.0.5
+  createdTime: 1791224423982
+  modifiedTime: 1791224423982
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

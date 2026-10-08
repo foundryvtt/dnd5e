@@ -11,15 +11,16 @@ system:
       condition has no effect on that ally while there.</p><section
       id="secret-equ8xnC2DFxkcJAn" class="secret"><p><strong>Foundry
       Note</strong></p><p>This feature includes an Active Effect for tracking
-      who is within your aura but it is not automatically added/removed nor does
-      it remove the Frightened condition.</p></section>
+      who is within your aura but it is not automatically
+      added/removed.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,6 +30,7 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -48,12 +50,16 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: cJtDumOL6RUzrBHA
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -65,6 +71,7 @@ system:
           count: ''
           type: radius
           size: '@scale.paladin.aura'
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -83,17 +90,45 @@ system:
         formula: ''
         name: ''
       _id: 1z8NAZt2O22XPbGw
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: aura-of-courage
+  advancement: {}
+  crewed: false
 effects:
   - name: Courageous
-    img: systems/dnd5e/icons/svg/items/feature.svg
+    img: icons/magic/light/explosion-beam-impact-silhouette.webp
     origin: Compendium.dnd5e.classes24.Item.phbpdnCourageAur
     transfer: false
     _id: cJtDumOL6RUzrBHA
     type: base
     system:
-      changes: []
+      changes:
+        - key: system.traits.ci.value
+          type: add
+          value: frightened
+          phase: initial
+          _id: fnJ7Qxx4n8JPVbqB
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -108,29 +143,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.5
+      createdTime: 1791224423982
+      modifiedTime: 1791224423982
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnCourageAur.cJtDumOL6RUzrBHA'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1745256763632
+  systemVersion: 6.0.5
+  createdTime: 1791224423982
+  modifiedTime: 1791224423982
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

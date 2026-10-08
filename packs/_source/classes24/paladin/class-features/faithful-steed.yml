@@ -7,20 +7,17 @@ system:
   description:
     value: >-
       <p>You can call on the aid of an otherworldly steed. You always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplFindSteed0]{Find Steed} spell
-      prepared.</p><p>You can also cast the spell once without expending a spell
-      slot, and you regain the ability to do so when you finish a Long
-      Rest.</p><section class="secret"
-      id="secret-XC2S9ToogFr41act"><p><strong>Foundry Note</strong></p><p>The
-      Find Steed spell is added to your spell list as always prepared and with a
-      free use per Long Rest when you reach this level.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFindSteed0]{Find
+      Steed} spell prepared.</p><p>You can also cast the spell once without
+      expending a spell slot, and you regain the ability to do so when you
+      finish a Long Rest.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -30,25 +27,47 @@ system:
     subtype: ''
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: faithful-steed
+  advancement:
+    jIdizZFknw8W4QWV:
+      name: ''
+      type: ItemGrant
+      _id: jIdizZFknw8W4QWV
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFindSteed0
+            optional: false
+            sort: 0
+        optional: false
+        sorting: m
+        spell:
+          ability: []
+          method: spell
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          prepared: 2
+      flags: {}
+      value: {}
+      level: 5
+      hint: ''
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1745256763751
+  systemVersion: 6.0.5
+  createdTime: 1791224423981
+  modifiedTime: 1791224423981
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

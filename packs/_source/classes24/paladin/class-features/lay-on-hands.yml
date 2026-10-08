@@ -13,20 +13,18 @@ system:
       yourself) and draw power from the pool of healing to restore a number of
       Hit Points to that creature, up to the maximum amount remaining in the
       pool.</p><p>You can also expend 5 Hit Points from the pool of healing
-      power to remove the Poisoned condition from the creature; those points
-      don't also restore Hit Points to the creature.</p><section
-      id="secret-CgxYFHh5PcKwwbwk" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Heal</strong> activity allows you to
-      select the number of Hit Points you would like to restore and reduces your
-      Lay on Hands pool by that amount.</p><p>The <strong>Remove Poison</strong>
-      activity reduces your pool by 5 but does not automatically remove the
-      Poisoned condition.</p></section>
+      power to remove the &amp;Reference[Poisoned apply=false] condition from
+      the creature; those points don't also restore Hit Points to the
+      creature.</p><section id="secret-CgxYFHh5PcKwwbwk"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The <strong>Remove
+      Poison</strong> activity reduces your pool by 5 but does not automatically
+      remove the Poisoned condition.</p></section>
     chat: ''
   source:
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: 5 * @classes.paladin.levels
     spent: 0
@@ -38,6 +36,7 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -64,10 +63,12 @@ system:
               formula: ''
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -78,6 +79,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -92,7 +94,7 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
@@ -102,7 +104,16 @@ system:
           number: 1
           mode: ''
         bonus: ''
+        modifiers: []
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     K6UeXQwTyDHWvis8:
       type: utility
       name: Remove Poison
@@ -123,10 +134,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -137,6 +150,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -154,21 +168,27 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: lay-on-hands
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1745256763838
+  systemVersion: 6.0.5
+  createdTime: 1791224423981
+  modifiedTime: 1791224423981
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

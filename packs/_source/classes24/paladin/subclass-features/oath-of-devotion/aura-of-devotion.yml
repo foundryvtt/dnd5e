@@ -6,20 +6,21 @@ img: icons/magic/life/heart-glowing-red.webp
 system:
   description:
     value: >-
-      <p>You and your allies have Immunity to the Charmed condition while in
-      your Aura of Protection. If a Charmed ally enters the aura, that condition
-      has no effect on that ally while there.</p><section
-      id="secret-FUisOAkgNW9r118u" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect for tracking
-      characters impacted by your aura but does not automate the
-      effects.</p></section>
+      <p>You and your allies have Immunity to the &amp;Reference[Charmed
+      apply=false] condition while in your Aura of Protection. If a Charmed ally
+      enters the aura, that condition has no effect on that ally while
+      there.</p><section id="secret-FUisOAkgNW9r118u"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect for tracking characters impacted by your aura
+      but does not apply or remove it automatically.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,12 +30,15 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: aura-of-devotion
+  advancement: {}
+  crewed: false
 effects:
   - name: Devoted
     img: icons/magic/life/heart-glowing-red.webp
@@ -43,7 +47,25 @@ effects:
     _id: iKPJ2nBT687zLvTc
     type: base
     system:
-      changes: []
+      changes:
+        - key: system.traits.ci.value
+          type: add
+          value: charmed
+          phase: initial
+          _id: XnbFA1O5N3OYGauc
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -56,32 +78,27 @@ effects:
     sort: 0
     flags: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbpdnCourageAur.ActiveEffect.cJtDumOL6RUzrBHA
+      compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.5
+      createdTime: 1791225411390
+      modifiedTime: 1791225411390
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnDevotionAu.iKPJ2nBT687zLvTc'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866569467
-  modifiedTime: 1745256763655
+  systemVersion: 6.0.5
+  createdTime: 1791225411389
+  modifiedTime: 1791225411389
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
