@@ -9,30 +9,33 @@ system:
       <p>The magic of your oath ensures you always have certain spells ready;
       when you reach a Paladin level specified in the Oath of Devotion Spells
       table, you thereafter always have the listed spells
-      prepared.</p><table><caption>Oath of Devotion
-      Spells</caption><thead><tr><td>Paladin
-      Level</td><td>Spells</td></tr></thead><tbody><tr><td>3</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbEvilAndGoodPr]{Protection
+      prepared.</p><table><caption><p>Oath of Devotion
+      Spells</p></caption><thead><tr><td><p>Paladin
+      Level</p></td><td><p>Spells</p></td></tr></thead><tbody><tr><td><p>3</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbEvilAndGoodPr]{Protection
       from Evil and Good},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplShieldofFa]{Shield of
-      Faith}</td></tr><tr><td>5</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplAid0000000]{Aid},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplZoneofTrut]{Zone of
-      Truth}</td></tr><tr><td>9</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplBeaconofHo]{Beacon
-      of Hope}, @UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
-      Magic}</td></tr><tr><td>13</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplFreedomofM]{Freedom
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplShieldofFa]{Shield
+      of
+      Faith}</p></td></tr><tr><td><p>5</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000]{Aid},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplZoneofTrut]{Zone
+      of
+      Truth}</p></td></tr><tr><td><p>9</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplBeaconofHo]{Beacon
+      of Hope},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDispelMagi]{Dispel
+      Magic}</p></td></tr><tr><td><p>13</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFreedomofM]{Freedom
       of Movement},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplGuardianof]{Guardian of
-      Faith}</td></tr><tr><td>17</td><td>@UUID[Compendium.dnd5e.spells24.Item.phbsplCommune000]{Commune},
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplFlameStrik]{Flame
-      Strike}</td></tr></tbody></table><section class="secret"
-      id="secret-BJb1nvUMxSS77zuz"><p><strong>Foundry Note</strong></p><p>The
-      spells will be automatically granted as you level up.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplGuardianof]{Guardian
+      of
+      Faith}</p></td></tr><tr><td><p>17</p></td><td><p>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplCommune000]{Commune},
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFlameStrik]{Flame
+      Strike}</p></td></tr></tbody></table>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -42,25 +45,154 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: oath-of-devotion-spells
+  advancement:
+    vplzciS9QHhcjdQt:
+      _id: vplzciS9QHhcjdQt
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplShieldofFa
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbEvilAndGoodPr
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 3
+      hint: ''
+      name: Oath of Devotion Spells
+      flags: {}
+    9rAVikjK0DFEkhXH:
+      _id: 9rAVikjK0DFEkhXH
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplZoneofTrut
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplAid0000000
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 5
+      hint: ''
+      name: Oath of Devotion Spells
+      flags: {}
+    K8RRsq7vmiYuKAAv:
+      _id: K8RRsq7vmiYuKAAv
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDispelMagi
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplBeaconofHo
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 9
+      hint: ''
+      name: Oath of Devotion Spells
+      flags: {}
+    VuZSFzUklRDrpP5g:
+      _id: VuZSFzUklRDrpP5g
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplGuardianof
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFreedomofM
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 13
+      hint: ''
+      name: Oath of Devotion Spells
+      flags: {}
+    Qji0iHmIWmCZcKt8:
+      _id: Qji0iHmIWmCZcKt8
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFlameStrik
+            optional: false
+            sort: 0
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplCommune000
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 17
+      hint: ''
+      name: Oath of Devotion Spells
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866569467
-  modifiedTime: 1745256763679
+  systemVersion: 6.0.5
+  createdTime: 1791225411389
+  modifiedTime: 1791225411389
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

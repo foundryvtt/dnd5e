@@ -7,22 +7,24 @@ system:
   description:
     value: >-
       <p>When you use Lay On Hands on a creature, you can also remove one or
-      more of the following conditions from the creature: Blinded, Charmed,
-      Deafened, Frightened, Paralyzed, or Stunned. You must expend 5 Hit Points
-      from the healing pool of Lay On Hands for each of these conditions you
-      remove; those points don't also restore Hit Points to the
-      creature.</p><section class="secret"
-      id="secret-jxD0l6XyrF6DQqyI"><p><strong>Foundry Note</strong></p><p>This
-      feature includes a Scale prompt for selecting how many conditions you
-      would like to remove that will automatically consume the correct number
-      from your Lay on Hands pool.</p></section>
+      more of the following conditions from the creature: &amp;Reference[Blinded
+      apply=false], &amp;Reference[Charmed apply=false], &amp;Reference[Deafened
+      apply=false], &amp;Reference[Frightened apply=false],
+      &amp;Reference[Paralyzed apply=false], or &amp;Reference[Stunned
+      apply=false]. You must expend 5 Hit Points from the healing pool of Lay On
+      Hands for each of these conditions you remove; those points don't also
+      restore Hit Points to the creature.</p><section
+      id="secret-jxD0l6XyrF6DQqyI" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes a Scale prompt for selecting how
+      many conditions you would like to remove that will automatically consume
+      the correct number from your Lay on Hands pool.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -32,6 +34,7 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -51,27 +54,30 @@ system:
         spellSlot: true
         targets:
           - type: itemUses
-            value: 5 * @scaling
-            target: Compendium.dnd5e.classes24.Item.phbpdnLayOnHands
+            value: '5'
+            target: feat:lay-on-hands
             scaling:
-              mode: ''
-              formula: ''
+              mode: amount
+              formula: '5'
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: self
+        units: touch
         special: ''
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -90,21 +96,30 @@ system:
         name: ''
         formula: ''
       name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: restoring-touch
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1745256764004
+  systemVersion: 6.0.5
+  createdTime: 1791224423981
+  modifiedTime: 1791224423981
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

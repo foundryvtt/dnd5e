@@ -10,26 +10,28 @@ system:
       power, granting the benefits below for 10 minutes or until you end them
       (no action required). Once you use this feature, you can't use it again
       until you finish a Long Rest. You can also restore your use of it by
-      expending a level 5 spell slot (no action required).</p><p><strong>Holy
-      Ward.</strong> You have Advantage on any saving throw you are forced to
-      make by a Fiend or an Undead.</p><p><strong>Radiant Damage.</strong>
-      Whenever an enemy starts its turn in the aura, that creature takes Radiant
-      damage equal to your Charisma modifier plus your Proficiency
-      Bonus.</p><p><strong>Sunlight.</strong> The aura is filled with Bright
-      Light that is sunlight.</p><section id="secret-WendmZ2xiuj3cSwE"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
-      includes an Active Effect for tracking your Holy Nimbus but it does not
-      automate the Advantage on Saving Throws.</p><p>The <strong>Holy
-      Nimbus</strong> activity includes a damage roll.</p><p>The <strong>Regain
-      Use</strong> activity will consume a 5th level spell slot and restore a
-      use of this feature.</p></section>
+      expending a level 5 spell slot (no action
+      required).</p><p><em><strong>Holy Ward.</strong></em> You have Advantage
+      on any saving throw you are forced to make by a Fiend or an
+      Undead.</p><p><em><strong>Radiant Damage.</strong></em> Whenever an enemy
+      starts its turn in the aura, that creature takes Radiant damage equal to
+      your Charisma modifier plus your Proficiency
+      Bonus.</p><p><em><strong>Sunlight.</strong></em> The aura is filled with
+      &amp;Reference[Bright Light] that is sunlight.</p><section
+      id="secret-WendmZ2xiuj3cSwE" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature includes an Active Effect for tracking
+      your Holy Nimbus but it does not automate the Advantage on Saving
+      Throws.</p><p>The <strong>Holy Nimbus</strong> activity includes a damage
+      roll.</p><p>The <strong>Regain Use</strong> activity will consume a 5th
+      level spell slot and restore a use of this feature.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: '1'
     spent: 0
@@ -41,6 +43,7 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -65,12 +68,17 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: minute
         concentration: false
         override: false
         value: '10'
-      effects: []
+        expiry: null
+      effects:
+        - _id: aWH0EeuCWFgttRma
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -80,6 +88,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -104,8 +113,17 @@ system:
             bonus: ''
             types:
               - radiant
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     V0uofujMuoG0bIfp:
       type: utility
       name: Regain Use
@@ -130,10 +148,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -144,6 +164,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -160,15 +181,43 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: holy-nimbus
+  advancement: {}
+  crewed: false
 effects:
   - name: Holy Nimbus
     img: icons/magic/light/explosion-star-glow-blue-purple.webp
     _id: aWH0EeuCWFgttRma
     type: base
     system:
-      changes: []
+      changes:
+        - key: token.light.bright
+          type: override
+          value: 30
+          phase: initial
+          _id: f3EnDmClGQ2pHcCY
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: true
     duration:
       value: 600
@@ -185,29 +234,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.5
+      createdTime: 1791225411390
+      modifiedTime: 1791225411390
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbpdnHolyNimbus.aWH0EeuCWFgttRma'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866569467
-  modifiedTime: 1745256763806
+  systemVersion: 6.0.5
+  createdTime: 1791225411390
+  modifiedTime: 1791225411390
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
