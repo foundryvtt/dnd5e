@@ -21,6 +21,15 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {ActiveEffectChangeTypeConfig} ActiveEffectChangeTypeConfig5e
+ * @property {string} [group]                   Localized group this type will be displayed in.
+ * @property {FormSelectOption[]} [keyOptions]  Valid keys when this type is selected.
+ * @property {boolean} [skipConditions]         Don't evaluate conditions when this change is applied.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef ActivityActivationTypeConfiguration
  * @property {string} [counted]         Localized label for the countable activation type.
  * @property {string} label             Localized label for the activation type.

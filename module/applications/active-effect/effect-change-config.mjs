@@ -1,10 +1,20 @@
 import { formatNumber } from "../../utils.mjs";
 import DocumentSheet5e from "../api/document-sheet.mjs";
 
+const INTERNAL_RENDER = Symbol("internalRender");
+
 /**
  * Application for editing a single active effect change.
  */
 export default class EffectChangeConfig extends DocumentSheet5e {
+  constructor(options) {
+    super(options);
+
+    this.change = this.effect.system.toObject().changes.find(c => c._id === this.options.changeId);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     canImport: false,
@@ -42,9 +52,7 @@ export default class EffectChangeConfig extends DocumentSheet5e {
    * The change's source data.
    * @type {object}
    */
-  get change() {
-    return this.effect.system._source.changes.find(c => c._id === this.options.changeId);
-  }
+  change;
 
   /* -------------------------------------------- */
 
@@ -70,8 +78,8 @@ export default class EffectChangeConfig extends DocumentSheet5e {
 
   /** @override */
   _canRender(options) {
-    if ( !this.rendered ) return;
-    if ( !this.change ) this.close();
+    if ( !this.rendered || options[INTERNAL_RENDER] ) return;
+    if ( !this.effect.system.changes.find(c => c._id === this.options.changeId) ) this.close();
     return false;
   }
 
@@ -110,6 +118,9 @@ export default class EffectChangeConfig extends DocumentSheet5e {
     context.defaultPriority = ActiveEffect.CHANGE_TYPES[context.source?.type]?.defaultPriority;
     context.fields = this.effect.system.schema.fields.changes.element.fields;
 
+    const changeTypeConfig = CONFIG.ActiveEffect.changeTypes[context.source.type];
+    context.keyOptions = changeTypeConfig?.keyOptions;
+
     context.hintText = _loc("DND5E.EFFECT.AttributeKeyTooltip", {
       url: this.effect.type === "enchantment"
         ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
@@ -142,6 +153,19 @@ export default class EffectChangeConfig extends DocumentSheet5e {
 
   /* -------------------------------------------- */
   /*  Form Handling                               */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    if ( event.target.name !== "type" ) return;
+
+    const form = event.currentTarget;
+    const formData = new foundry.applications.ux.FormDataExtended(form);
+    foundry.utils.mergeObject(this.change, formData.object);
+    this.render({ [INTERNAL_RENDER]: true });
+  }
+
   /* -------------------------------------------- */
 
   /**

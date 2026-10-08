@@ -191,9 +191,9 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
    */
   async getSheetChangeContext(change, options) {
     options ??= { actor: this.actor, prefixItemName: false };
-    // Do not attempt human-readable label lookup for rule-type AEs.
-    if ( CONFIG.ActiveEffect.changeTypes[change.type]?.handler === this.parent.constructor._applyChangeRule ) {
-      return { name: change.key };
+    if ( CONFIG.ActiveEffect.changeTypes[change.type]?.keyOptions ) {
+      const name = CONFIG.ActiveEffect.changeTypes[change.type].keyOptions.find(k => k.value === change.key)?.label;
+      return { name: name ? _loc(name) : change.key };
     }
     return { name: getHumanReadableAttributeLabel(change.key, options) };
   }
