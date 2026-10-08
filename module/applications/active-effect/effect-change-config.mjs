@@ -79,7 +79,7 @@ export default class EffectChangeConfig extends DocumentSheet5e {
   /** @override */
   _canRender(options) {
     if ( !this.rendered || options[INTERNAL_RENDER] ) return;
-    if ( !this.change ) this.close();
+    if ( !this.effect.system.changes.find(c => c._id === this.options.changeId) ) this.close();
     return false;
   }
 
@@ -158,6 +158,7 @@ export default class EffectChangeConfig extends DocumentSheet5e {
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
+    if ( event.target.name !== "type" ) return;
 
     const form = event.currentTarget;
     const formData = new foundry.applications.ux.FormDataExtended(form);
