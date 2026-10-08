@@ -9,7 +9,10 @@ system:
       <p>When a spell you cast with a spell slot restores Hit Points to a
       creature, that creature regains additional Hit Points on the turn you cast
       the spell. The additional Hit Points equal 2 plus the spell slot's
-      level.</p>
+      level.</p><section class="secret"
+      id="secret-Gy6bYP3AKuabnUlQ"><p><strong>Foundry Note</strong></p><p>This
+      feature includes a healing activity. Set the scale to the spell slot level
+      you cast and it will provide a healing roll for you.</p></section>
     chat: ''
   source:
     custom: ''
@@ -31,76 +34,86 @@ system:
     repeatable: false
   properties: []
   requirements: Life Domain
-  activities: {}
+  activities:
+    Dm91WPfNiRty1bXv:
+      type: heal
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        targets: []
+        scaling:
+          allowed: true
+          max: '9'
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Creature you cast a healing spell on
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      healing:
+        number: null
+        denomination: 0
+        types:
+          - healing
+        custom:
+          enabled: true
+          formula: '@scaling + 2'
+        scaling:
+          number: 1
+        bonus: ''
+        modifiers: []
+      name: ''
+      _id: Dm91WPfNiRty1bXv
+      img: null
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: disciple-of-life
   advancement: {}
   crewed: false
-effects:
-  - name: Disciple of Life
-    img: icons/magic/life/cross-beam-green.webp
-    system:
-      magical: false
-      origin:
-        item: Compendium.dnd5e.classes24.Item.phbclcDiscipleOf
-        actor: null
-        behavior: null
-        effect: null
-        message: null
-      changes:
-        - key: healing
-          type: dnd5e.bonus
-          value: 2 + @item.level
-          phase: initial
-          _id: FZnmaX208IYDcVQn
-          conditions: |-
-            {
-              "k": "item.level",
-              "o": "gte",
-              "v": 1
-            }
-          replacement: ''
-          priority: null
-      conditions: '{}'
-      rider:
-        statuses: []
-    type: base
-    _id: lMK0Kbu0aIM6Ktul
-    disabled: false
-    start: null
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    description: ''
-    origin: null
-    tint: '#ffffff'
-    transfer: true
-    statuses: []
-    showIcon: 1
-    folder: null
-    sort: 0
-    flags: {}
-    _stats:
-      coreVersion: '14.368'
-      systemId: dnd5e
-      systemVersion: 6.0.5
-      createdTime: 1791233179440
-      modifiedTime: 1791233179440
-      lastModifiedBy: dnd5ebuilder0000
-      compendiumSource: null
-      duplicateSource: null
-      exportSource: null
-    _key: '!items.effects!phbclcDiscipleOf.lMK0Kbu0aIM6Ktul'
+effects: []
 flags: {}
 _stats:
   duplicateSource: null
   coreVersion: '14.368'
   systemId: dnd5e
   systemVersion: 6.0.5
-  createdTime: 1791233179440
-  modifiedTime: 1791233179440
+  createdTime: 1791496339685
+  modifiedTime: 1791496339685
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

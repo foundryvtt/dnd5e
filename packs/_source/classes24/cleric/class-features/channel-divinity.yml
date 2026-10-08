@@ -399,7 +399,7 @@ system:
         requireIdentification: false
         requireMagic: true
       damage:
-        onSave: half
+        onSave: none
         parts:
           - custom:
               enabled: true
@@ -481,8 +481,8 @@ effects:
       coreVersion: '14.368'
       systemId: dnd5e
       systemVersion: 6.0.5
-      createdTime: 1791233394969
-      modifiedTime: 1791233394969
+      createdTime: 1791496345915
+      modifiedTime: 1791496345915
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -495,8 +495,8 @@ _stats:
   coreVersion: '14.368'
   systemId: dnd5e
   systemVersion: 6.0.5
-  createdTime: 1791233394968
-  modifiedTime: 1791233394968
+  createdTime: 1791496345915
+  modifiedTime: 1791496345915
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000
