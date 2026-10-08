@@ -10,34 +10,31 @@ system:
     max: ''
   description:
     value: >-
-      <p>You have dedicated yourself to the following sacred
-      role:</p><p><strong>Thaumaturge.</strong> You know one extra cantrip from
-      the
+      <p>You know one extra cantrip from the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric
       spell list}. In addition, your mystical connection to the divine gives you
       a bonus to your Intelligence (Arcana or Religion) checks. The bonus equals
-      your Wisdom modifier (minimum of +1, currently [[lookup
-      @abilities.wis.mod]]).</p><section id="secret-9NLpq7kfc33QLf8I"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
-      includes an Active Effect which increases the number of cantrips you can
-      know and grants the bonus to your Intelligence (Arcana or Religion)
-      checks.</p></section>
+      your Wisdom modifier (minimum of +1<span class="hide-in-embed">, currently
+      [[lookup @abilities.wis.mod]]</span>).</p>
     chat: ''
   source:
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   enchant: {}
   type:
     value: class
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   identifier: divine-order-thaumaturge
+  advancement: {}
+  crewed: false
 effects:
   - name: Thaumaturge
     img: icons/magic/life/ankh-shadow-green.webp
@@ -50,19 +47,35 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: k3ohnfGoXYIYc5hv
-        - key: system.skills.arc.bonuses.check
-          value: (max(1,@abilities.wis.mod))
+          _id: 6B3IoyawhyvANetW
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.arc.roll.bonus
+          value: max(1, @abilities.wis.mod)
           priority: null
           type: add
           phase: initial
-          _id: D0rfzFnL94kxvIWe
-        - key: system.skills.rel.bonuses.check
-          value: (max(1,@abilities.wis.mod))
+          _id: WHeUyvSxxDUT0SrL
+          conditions: '{}'
+          replacement: ''
+        - key: system.skills.rel.roll.bonus
+          value: max(1, @abilities.wis.mod)
           priority: null
           type: add
           phase: initial
-          _id: 993UBoBWNJuPzfPl
+          _id: EIQgtuLyRdNlXnsc
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -79,11 +92,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544100904
-      modifiedTime: 1783544100904
+      systemVersion: 6.0.5
+      createdTime: 1791232041727
+      modifiedTime: 1791232041727
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -91,18 +104,14 @@ effects:
     folder: null
     _key: '!items.effects!phbDivineOrderTh.7fucT9vgkryEEoxI'
 folder: 3wY92TRgyyyDkpmF
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1783544100904
+  systemVersion: 6.0.5
+  createdTime: 1791232041726
+  modifiedTime: 1791232041726
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1400000

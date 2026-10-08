@@ -8,20 +8,20 @@ system:
     value: >-
       <p>You can call on even more powerful divine intervention. When you use
       your Divine Intervention feature, you can choose
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplWish000000]{Wish} when you
-      select a spell. If you do so, you can't use Divine Intervention again
-      until you finish [[/r 2d4]] Long Rests.</p><section class="secret"
-      id="secret-LP9WqNdaJevppYeM"><p><strong>Foundry Note</strong></p><p>This
-      feature will consume a use of your Divine Intervention but it can not
-      automatically recharge the usage after the rolled number of Long
-      Rests.</p></section>
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplWish000000]{Wish}</em>
+      when you select a spell. If you do so, you can't use Divine Intervention
+      again until you finish [[/r 2d4]] Long Rests.</p><section
+      id="secret-LP9WqNdaJevppYeM" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This feature will consume a use of your Divine
+      Intervention but it can not automatically recharge the usage after the
+      rolled number of Long Rests.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -31,75 +31,86 @@ system:
     subtype: ''
   prerequisites:
     level: 20
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: Cleric
   activities:
-    QF0ngRPf1dAyycw1:
-      type: utility
-      _id: QF0ngRPf1dAyycw1
+    s3KKPtM06fbBNMqp:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplWish000000
+        challenge:
+          override: false
+        properties:
+          - material
+        spellbook: false
+        ability: ''
+        level: 9
+      _id: s3KKPtM06fbBNMqp
+      img: ''
+      sort: 100000
       activation:
         type: action
-        value: null
         override: false
-        condition: ''
+      behaviors: []
       consumption:
-        targets:
-          - type: itemUses
-            value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbclcDivineInte
-            scaling: {}
         scaling:
           allowed: false
         spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: feat:divine-intervention
+            scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
+        expiry: null
         concentration: false
         override: false
-      effects: []
+      flags: {}
       range:
-        override: false
         units: self
-        special: ''
+        override: false
       target:
         template:
           contiguous: false
+          stationary: false
           units: ft
-          type: ''
         affects:
           choice: false
-          count: ''
-          type: ''
         override: false
-        prompt: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      sort: 0
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
       name: ''
   enchant: {}
   identifier: greater-divine-intervention
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1745256760820
+  systemVersion: 6.0.5
+  createdTime: 1791232041725
+  modifiedTime: 1791232041725
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 600000

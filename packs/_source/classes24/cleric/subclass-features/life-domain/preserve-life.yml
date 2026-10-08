@@ -6,34 +6,37 @@ img: icons/magic/life/heart-hand-gold-green.webp
 system:
   description:
     value: >-
-      <p>As a Magic action, you present your Holy Symbol and expend a use of
-      your Channel Divinity to evoke healing energy that can restore a number of
-      Hit Points equal to five times your Cleric level. Choose
-      &amp;Reference[Bloodied] creatures within 30 feet of yourself (which can
-      include you), and divide those Hit Points among them. This feature can
-      restore a creature to no more than half its Hit Point maximum.</p><section
-      class="secret" id="secret-vybBdwcDQO3jMVDo"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Heal</strong> activity does not
-      automatically restrict the HP gained to 50% of the target's
-      max.</p></section>
+      <p>As a &amp;Reference[Magic] action, you present your Holy Symbol and
+      expend a use of your Channel Divinity to evoke healing energy that can
+      restore a number of Hit Points equal to five times your Cleric level.
+      Choose &amp;Reference[Bloodied] creatures within 30 feet of yourself
+      (which can include you), and divide those Hit Points among them. This
+      feature can restore a creature to no more than half its Hit Point
+      maximum.</p><section id="secret-vybBdwcDQO3jMVDo"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Heal</strong> activity does not automatically restrict the HP
+      gained to 50% of the target's max.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     recovery: []
     spent: 0
   type:
     value: class
-    subtype: ''
+    subtype: channelDivinity
   prerequisites:
     level: 3
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: Life Domain
   activities:
     dnd5eactivity000:
@@ -49,33 +52,37 @@ system:
           - type: itemUses
             value: '1'
             target: feat:channel-divinity-cleric
+            scaling: {}
         scaling:
           allowed: false
           max: ''
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
         concentration: false
       effects: []
       range:
-        value: ''
-        units: self
+        value: '30'
+        units: ft
         special: ''
         override: false
       target:
         template:
           count: ''
           contiguous: false
-          type: radius
+          type: ''
           size: '30'
           width: ''
           height: ''
           units: ft
+          stationary: false
         affects:
           count: ''
           type: creature
@@ -96,6 +103,7 @@ system:
           mode: whole
           number: null
           formula: ''
+        modifiers: []
       uses:
         spent: 0
         recovery: []
@@ -103,18 +111,29 @@ system:
       sort: 0
       name: ''
       img: ''
-      appliedEffects: []
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: preserve-life
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.1.10
-  createdTime: 1735866589552
-  modifiedTime: 1759426524240
+  systemVersion: 6.0.5
+  createdTime: 1791233179440
+  modifiedTime: 1791233179440
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000
