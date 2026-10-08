@@ -900,18 +900,23 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {DamageRollConfiguration}
    * @protected
    */
-  _processDamagePart(damage, rollConfig, rollData, index=0, { formulaOptions, rules }={}) {
-    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, formulaOptions);
-    const parts = scaledFormula ? [scaledFormula] : [];
-    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
+  _processDamagePart(damage, rollConfig, rollData, index=0, { formulaOptions={}, rules }={}) {
     // Fall back to the item's base damage type when this part specifies none (e.g. weapon/ammo base damage).
     let { types } = damage;
     if ( !types.size && this.item.system.offersBaseDamage && (this.constructor.damageRuleCategory !== "healing") ) {
       types = this.item.system.damage.base.types;
     }
+    const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
     const data = { ...rollData, roll: foundry.utils.deepClone(rollData.roll ?? {}) };
     data.roll.damage ??= {};
     data.roll.damage.type = (types.has(lastType) ? lastType : null) ?? types.first();
+
+    if ( formulaOptions.modifiers !== false ) formulaOptions = { ...formulaOptions, modifiers: AppliedRules.collect(
+      `${this.constructor.damageRuleCategory}:modifier`, this.actor, this.item
+    ).filterWith(data).toModifiers(formulaOptions.modifiers) };
+
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling, formulaOptions);
+    const parts = scaledFormula ? [scaledFormula] : [];
 
     if ( index === 0 ) {
       const actionType = this.getActionType(rollConfig.attackMode);
