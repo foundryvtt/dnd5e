@@ -10,7 +10,7 @@ system:
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.sbHImaCB8ZMEHYkb]{Fighting
       Style feat} of your choice. Instead of choosing one of those feats, you
       can choose the option
-      below.</p><p>@Embed[Compendium.dnd-players-handbook.feats.Item.phbfstBlessedWar
+      below.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbfstBlessedWar
       caption=false nameStyle=inline]</p>
     chat: ''
   source:
@@ -42,17 +42,17 @@ system:
       type: ItemChoice
       configuration:
         choices:
-          '2':
+          '0':
             count: 1
             replacement: false
         allowDrops: true
         type: feat
         pool:
-          - sort: 0
-            uuid: Compendium.dnd-players-handbook.feats.Item.phbfstBlessedWar
+          - uuid: Compendium.dnd5e.classes24.Item.phbfstBlessedWar
+            sort: 0
         spell: null
         restriction:
-          type: class
+          type: feat
           subtype: fightingStyle
           list: []
           school: []
@@ -73,8 +73,8 @@ _stats:
   coreVersion: '14.368'
   systemId: dnd5e
   systemVersion: 6.0.5
-  createdTime: 1791224423981
-  modifiedTime: 1791224423981
+  createdTime: 1791494385871
+  modifiedTime: 1791494385871
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

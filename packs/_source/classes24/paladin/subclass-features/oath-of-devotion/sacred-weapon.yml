@@ -41,10 +41,10 @@ system:
       type: enchant
       _id: Ew70lNTD8dR3vREt
       activation:
-        type: action
+        type: special
         value: null
         override: false
-        condition: ''
+        condition: When you take the Attack action
       consumption:
         scaling:
           allowed: false
@@ -177,9 +177,9 @@ effects:
       duplicateSource: null
       coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.5
-      createdTime: 1791225411390
-      modifiedTime: 1791225411390
+      systemVersion: 6.0.6
+      createdTime: 1791493751226
+      modifiedTime: 1791493751226
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -237,9 +237,9 @@ effects:
     _stats:
       coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.5
-      createdTime: 1791225411390
-      modifiedTime: 1791225411390
+      systemVersion: 6.0.6
+      createdTime: 1791493751226
+      modifiedTime: 1791493751226
       lastModifiedBy: dnd5ebuilder0000
       compendiumSource: null
       duplicateSource: null
@@ -254,9 +254,9 @@ _stats:
   duplicateSource: null
   coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 6.0.5
-  createdTime: 1791225411390
-  modifiedTime: 1791225411390
+  systemVersion: 6.0.6
+  createdTime: 1791493751226
+  modifiedTime: 1791493751226
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
