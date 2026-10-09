@@ -244,7 +244,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareFinalData() {
-    this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
+    this.prepareFinalActivityData();
     this.prepareFinalEquippableData();
   }
 
