@@ -6,19 +6,14 @@ system:
       60 feet for 10 minutes. You must be on a stone surface or touching a stone
       surface to use this Tremorsense. The stone can be natural or worked. You
       can use this Bonus Action a number of times equal to your Proficiency
-      Bonus, and you regain all expended uses when you finish a Long
-      Rest.</p><section class="secret"
-      id="secret-7BtT80083mC3Eavg"><p><strong>Foundry Note</strong></p><p>This
-      feature includes the limited uses and an Active Effect that grants you the
-      60 feet of Tremorsense. It does not automatically update your Token's
-      vision settings.</p></section>
+      Bonus, and you regain all expended uses when you finish a Long Rest.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '@prof'
     spent: 0
@@ -30,6 +25,7 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Dwarf
@@ -55,13 +51,17 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: minute
         concentration: false
         override: false
         value: '10'
+        expiry: null
       effects:
         - _id: SAbuNo2AO3XXtkdv
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -71,6 +71,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -87,8 +88,17 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/items/tool.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: stonecunning
+  advancement: {}
+  crewed: false
 _id: phbsptStonecunni
 type: feat
 folder: R0KprZdOrRDNsTBv
@@ -102,12 +112,24 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.senses.tremorsense
+        - key: system.attributes.senses.ranges.tremorsense
           value: 60
           priority: null
-          type: add
+          type: upgrade
           phase: initial
-          _id: gILat0kKKoVbxaVp
+          _id: MqaB3yOWxztliQXS
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: 600
@@ -122,11 +144,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544082118
-      modifiedTime: 1783544082118
+      systemVersion: 6.0.6
+      createdTime: 1791577388394
+      modifiedTime: 1791577388394
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -136,18 +158,14 @@ effects:
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866718338
-  modifiedTime: 1783544082117
+  systemVersion: 6.0.6
+  createdTime: 1791577388394
+  modifiedTime: 1791577388394
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptStonecunni'
