@@ -1,0 +1,100 @@
+_id: phbspTiefling000
+name: Tiefling
+type: race
+img: icons/creatures/unholy/demon-female-succubus-orange.webp
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspTiefling000
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="abyssal">Abyssal</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspAbyssalTief
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="chthonic">Chthonic</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspChthonicTie
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="infernal">Infernal</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspInfernalTie
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="tiefling-traits">Tiefling Traits</h3><p><strong>Creature
+      Type</strong>: Humanoid<br><strong>Size: </strong>Medium (about 4–7 feet
+      tall) or Small (about 3–4 feet tall), chosen when you select this
+      species<br><strong>Speed:</strong> 30 feet</p><p>As a Tiefling, you have
+      the following special
+      traits.</p><p><em><strong>Darkvision.</strong></em><strong> </strong>You
+      have &amp;Reference[Darkvision] with a range of 60
+      feet.</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptFiendishLe
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptOtherworld
+      caption=false cite=false nameStyle=inline]</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    custom: ''
+    book: ''
+    license: CC-BY-4.0
+  advancement:
+    lskxIeib6rIreZ1h:
+      _id: lskxIeib6rIreZ1h
+      type: Size
+      configuration:
+        sizes:
+          - sm
+          - med
+      level: 0
+      hint: <p>Meidum (about 4-7 feet tall) or Small (about 3-4 feet tall)</p>
+      value: {}
+      name: ''
+      flags: {}
+    T8T6H9TudTleafUL:
+      _id: T8T6H9TudTleafUL
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptOtherworld
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptFiendishLe
+        optional: false
+        spell: null
+        sorting: a
+      value: {}
+      level: 0
+      hint: ''
+      name: Tiefling Traits
+      flags: {}
+  movement:
+    units: null
+    hover: false
+    speeds:
+      walk: '30'
+    ignoredDifficultTerrain: []
+  senses:
+    units: null
+    special: ''
+    ranges:
+      darkvision: 60
+      blindsight: null
+      tremorsense: null
+      truesight: null
+  type:
+    value: humanoid
+    subtype: ''
+    custom: ''
+  identifier: tiefling
+effects: []
+folder: Ulvo8nbygUegLa59
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791578299753
+  modifiedTime: 1791578299753
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbspTiefling000'

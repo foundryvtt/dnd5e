@@ -8,17 +8,15 @@ system:
       (no action required) or have the Incapacitated condition. During that
       time, you have a Fly Speed equal to your Speed. Your wings appear to be
       made of the same energy as your Breath Weapon. Once you use this trait,
-      you can't use it again until you finish a Long Rest.</p><section
-      id="secret-pP4PH5jVYBp1OEa3" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect for tracking
-      but it does not automatically grant the Fly Speed.</p></section>
+      you can't use it again until you finish a Long Rest.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
     book: ''
+    page: ''
     license: CC-BY-4.0
+    revision: 2
   uses:
     max: '1'
     spent: 0
@@ -30,9 +28,11 @@ system:
     subtype: ''
   prerequisites:
     level: 5
+    items: []
     repeatable: false
-  properties: []
-  requirements: Dragonborn
+  properties:
+    - mgc
+  requirements: ''
   activities:
     FrsJbUcch66Cr7OZ:
       type: utility
@@ -55,13 +55,19 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: minute
         concentration: false
         override: false
         value: '10'
+        expiry: null
       effects:
         - _id: waI4oHqhpbKUem0M
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -71,10 +77,12 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: false
       uses:
@@ -87,10 +95,19 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/damage/slashing.svg
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: draconic-flight
-  advancement: []
-  cover: null
+  advancement: {}
   crewed: false
 _id: phbsptDraconicFl
 type: feat
@@ -104,7 +121,25 @@ effects:
     _id: waI4oHqhpbKUem0M
     type: base
     system:
-      changes: []
+      changes:
+        - key: system.attributes.movement.speeds.fly
+          value: '@attributes.movement.speed'
+          priority: null
+          type: upgrade
+          phase: initial
+          _id: kbyCQpQ1idNuZ9F7
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: 600
@@ -115,36 +150,34 @@ effects:
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.6
+      createdTime: 1791576679015
+      modifiedTime: 1791576679015
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbsptDraconicFl.waI4oHqhpbKUem0M'
-sort: 300000
+sort: 800000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340795949
-  modifiedTime: 1745341995023
+  systemVersion: 6.0.6
+  createdTime: 1791576679015
+  modifiedTime: 1791576679015
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptDraconicFl'

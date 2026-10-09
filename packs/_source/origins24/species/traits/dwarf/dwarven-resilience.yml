@@ -10,38 +10,58 @@ system:
     max: ''
   description:
     value: >-
-      <p>You have Resistance to Poison damage. You also have Advantage on saving
-      throws you make to avoid or end the Poisoned condition.</p><section
+      <p>You have &amp;Reference[Resistance] to Poison damage. You also have
+      Advantage on saving throws you make to avoid or end the
+      &amp;Reference[Poisoned apply=false] condition.</p><section
       id="secret-EDaMIgklKLK2il2D" class="secret"><p><strong>Foundry
       Note</strong></p><p>You will automatically be granted Resistance to Poison
       damage but not Advantage on saving throws to avoid/end the Poisoned
       condition.</p></section>
     chat: ''
   source:
-    revision: 1
+    revision: 2
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Dwarf
   identifier: dwarven-resilience
+  advancement:
+    S3kro3b0bq0Ks6Y8:
+      _id: S3kro3b0bq0Ks6Y8
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - dr:poison
+        choices: []
+      value:
+        chosen: []
+      level: 0
+      hint: <p>You have Resistance to Poison damage.</p>
+      name: ''
+      flags: {}
+  crewed: false
 effects: []
 folder: R0KprZdOrRDNsTBv
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866718338
-  modifiedTime: 1740680089866
+  systemVersion: 6.0.6
+  createdTime: 1791577388393
+  modifiedTime: 1791577388393
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

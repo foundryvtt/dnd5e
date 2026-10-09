@@ -22,10 +22,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -36,6 +38,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -49,7 +52,7 @@ system:
         max: ''
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
@@ -57,6 +60,15 @@ system:
         scaling:
           number: 1
         bonus: '1'
+        modifiers: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery:
@@ -80,12 +92,12 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Orc
   identifier: relentless-endurance
-  advancement: []
-  cover: null
+  advancement: {}
   crewed: false
 _id: phbsptRelentless
 type: feat
@@ -95,18 +107,14 @@ effects: []
 sort: 400000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340861480
-  modifiedTime: 1745341995618
+  systemVersion: 6.0.6
+  createdTime: 1791578061041
+  modifiedTime: 1791578061041
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptRelentless'
