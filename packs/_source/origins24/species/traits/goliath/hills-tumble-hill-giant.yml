@@ -1,18 +1,21 @@
-_id: phbsptStonesEndu
-name: Stone's Endurance
+_id: phbsptHillsTumbl
+name: Hill's Tumble (Hill Giant)
 type: feat
-img: icons/magic/defensive/armor-stone-skin.webp
+img: icons/magic/control/silhouette-fall-slip-prone.webp
 system:
   activities:
-    vrWhAQ6Bj4gznxHq:
-      type: heal
-      _id: vrWhAQ6Bj4gznxHq
+    I2wKOUDxhIb5hHb7:
+      type: utility
+      name: Hill's Tumble
+      _id: I2wKOUDxhIb5hHb7
       sort: 0
       activation:
-        type: reaction
+        type: ''
         value: null
         override: false
-        condition: When you take damage
+        condition: >-
+          When you hit a Large or smaller creature with an attack roll and deal
+          damage to it
       consumption:
         scaling:
           allowed: false
@@ -24,24 +27,27 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: self
+        units: spec
         special: ''
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
-          count: ''
-          type: self
+          count: '1'
+          type: creature
           special: ''
         override: false
         prompt: false
@@ -49,17 +55,19 @@ system:
         spent: 0
         recovery: []
         max: ''
-      healing:
-        number: 1
-        denomination: 12
-        types:
-          - healing
-        custom:
-          enabled: false
-        scaling:
-          number: 1
-        bonus: '@abilities.con.mod'
-      name: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/slashing.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery:
@@ -68,9 +76,9 @@ system:
     max: '@prof'
   description:
     value: >-
-      <p>When you take damage, you can take a Reaction to roll 1d12. Add your
-      Constitution modifier to the number rolled and reduce the damage by that
-      total.</p>
+      <p>When you hit a Large or smaller creature with an attack roll and deal
+      damage to it, you can give that target the &amp;Reference[Prone]
+      condition.</p>
     chat: ''
   source:
     revision: 1
@@ -80,33 +88,30 @@ system:
   enchant: {}
   type:
     value: race
-    subtype: ''
+    subtype: lineage
   prerequisites:
     level: null
+    items:
+      - race:goliath
     repeatable: false
   properties: []
-  requirements: Goliath (Stone Giant)
-  identifier: stones-endurance
-  advancement: []
-  cover: null
+  requirements: Goliath
+  identifier: hills-tumble
+  advancement: {}
   crewed: false
 effects: []
 folder: 4KZykhQTGVAuVo1I
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340849458
-  modifiedTime: 1745341995718
+  systemVersion: 6.0.6
+  createdTime: 1791577738701
+  modifiedTime: 1791577738701
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
 ownership:
   default: 0
-_key: '!items!phbsptStonesEndu'
+_key: '!items!phbsptHillsTumbl'

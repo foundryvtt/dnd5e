@@ -1,5 +1,5 @@
 _id: phbsptFrostsChil
-name: Frost's Chill
+name: Frost's Chill (Frost Giant)
 type: feat
 img: icons/magic/water/heart-ice-freeze.webp
 system:
@@ -25,12 +25,18 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: YHKgdj2KIbQRBZWW
+          level:
+            min: null
+            max: null
+          uuid: null
       range:
         override: false
         units: spec
@@ -40,6 +46,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -53,7 +60,7 @@ system:
         max: ''
       damage:
         critical:
-          allow: false
+          allow: true
         parts:
           - custom:
               enabled: false
@@ -63,8 +70,20 @@ system:
             bonus: ''
             types:
               - cold
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   uses:
     spent: 0
     recovery:
@@ -75,28 +94,27 @@ system:
     value: >-
       <p>When you hit a target with an attack roll and deal damage to it, you
       can also deal 1d6 Cold damage to that target and reduce its Speed by 10
-      feet until the start of your next turn.</p><section
-      id="secret-jxuUuY0r33aiP0zL" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect which can be
-      used for tracking and reduces their Speed by 10.</p></section>
+      feet until the start of your next turn.</p>
     chat: ''
   source:
-    revision: 1
+    revision: 2
     rules: '2024'
     book: ''
+    page: ''
     license: CC-BY-4.0
   enchant: {}
   type:
     value: race
-    subtype: ''
+    subtype: lineage
   prerequisites:
     level: null
+    items:
+      - race:goliath
     repeatable: false
   properties: []
-  requirements: Goliath (Frost Giant)
+  requirements: Goliath
   identifier: frosts-chill
-  advancement: []
-  cover: null
+  advancement: {}
   crewed: false
 effects:
   - name: Chilled
@@ -107,55 +125,45 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
-          value: -10
+        - key: system.attributes.movement.bonus
+          value: 10
           priority: null
-          type: add
+          type: subtract
           phase: initial
-          _id: LVMTrMxOWjojc726
-        - key: system.attributes.movement.burrow
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: srqQUe7e3mmG0gOJ
-        - key: system.attributes.movement.climb
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: sb7F9ckbdoCCm05N
-        - key: system.attributes.movement.fly
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: Nrj5k4ELygN8OyP0
-        - key: system.attributes.movement.swim
-          value: -10
-          priority: null
-          type: add
-          phase: initial
-          _id: hDJZRNVPAHKEanKg
+          _id: 76bWNZbenGC19pDR
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
-      value: 1
-      units: turns
-      expiry: turnStart
+      value: null
+      units: seconds
+      expiry: sourceStart
       expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544081916
-      modifiedTime: 1783544081916
+      systemVersion: 6.0.6
+      createdTime: 1791577738702
+      modifiedTime: 1791577738702
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -163,18 +171,14 @@ effects:
     folder: null
     _key: '!items.effects!phbsptFrostsChil.YHKgdj2KIbQRBZWW'
 folder: 4KZykhQTGVAuVo1I
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340849458
-  modifiedTime: 1783544081916
+  systemVersion: 6.0.6
+  createdTime: 1791577738702
+  modifiedTime: 1791577738702
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

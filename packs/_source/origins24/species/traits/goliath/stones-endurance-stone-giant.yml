@@ -1,19 +1,18 @@
-_id: phbsptCloudsJaun
-name: Cloud's Jaunt
+_id: phbsptStonesEndu
+name: Stone's Endurance (Stone Giant)
 type: feat
-img: icons/magic/air/weather-clouds.webp
+img: icons/magic/defensive/armor-stone-skin.webp
 system:
   activities:
-    t4npBWLqABsnPZwL:
-      type: utility
-      name: Cloud's Jaunt
-      _id: t4npBWLqABsnPZwL
+    vrWhAQ6Bj4gznxHq:
+      type: heal
+      _id: vrWhAQ6Bj4gznxHq
       sort: 0
       activation:
-        type: bonus
+        type: reaction
         value: null
         override: false
-        condition: ''
+        condition: When you take damage
       consumption:
         scaling:
           allowed: false
@@ -21,41 +20,58 @@ system:
         targets:
           - type: itemUses
             value: '1'
+            target: ''
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: ft
+        units: self
         special: ''
-        value: '30'
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
-          type: space
-          special: Unoccupied space
+          type: self
+          special: ''
         override: false
         prompt: false
       uses:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
-      img: systems/dnd5e/icons/svg/trait-saves.svg
+      healing:
+        number: 1
+        denomination: 12
+        types:
+          - healing
+        custom:
+          enabled: false
+        scaling:
+          number: 1
+        bonus: '@abilities.con.mod'
+        modifiers: []
+      name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery:
@@ -64,8 +80,9 @@ system:
     max: '@prof'
   description:
     value: >-
-      <p>As a Bonus Action, you magically teleport up to 30 feet to an
-      unoccupied space you can see.</p>
+      <p>When you take damage, you can take a Reaction to roll 1d12. Add your
+      Constitution modifier to the number rolled and reduce the damage by that
+      total.</p>
     chat: ''
   source:
     revision: 1
@@ -75,33 +92,30 @@ system:
   enchant: {}
   type:
     value: race
-    subtype: ''
+    subtype: lineage
   prerequisites:
     level: null
+    items:
+      - race:goliath
     repeatable: false
   properties: []
-  requirements: Goliath (Cloud Giant)
-  identifier: clouds-jaunt
-  advancement: []
-  cover: null
+  requirements: Goliath
+  identifier: stones-endurance
+  advancement: {}
   crewed: false
 effects: []
 folder: 4KZykhQTGVAuVo1I
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340849458
-  modifiedTime: 1745341995019
+  systemVersion: 6.0.6
+  createdTime: 1791577738701
+  modifiedTime: 1791577738701
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
 ownership:
   default: 0
-_key: '!items!phbsptCloudsJaun'
+_key: '!items!phbsptStonesEndu'

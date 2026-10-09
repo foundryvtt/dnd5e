@@ -1,19 +1,19 @@
-_id: phbsptStormsThun
-name: Storm's Thunder
+_id: phbsptFiresBurn0
+name: Fire's Burn (Fire Giant)
 type: feat
-img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
+img: icons/magic/fire/flame-burning-fist-strike.webp
 system:
   activities:
-    3eWfDnXfYJVJqT1z:
+    002cv19dj8WGzSl2:
       type: damage
-      name: Storm's Thunder
-      _id: 3eWfDnXfYJVJqT1z
+      name: Burn
+      _id: 002cv19dj8WGzSl2
       sort: 0
       activation:
-        type: reaction
+        type: ''
         value: null
         override: false
-        condition: When you take damage from a creature within 60 feet of you
+        condition: When you hit a target with an attack roll and deal damage to it
       consumption:
         scaling:
           allowed: false
@@ -25,21 +25,23 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: ft
+        units: spec
         special: ''
-        value: '60'
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -53,18 +55,30 @@ system:
         max: ''
       damage:
         critical:
-          allow: false
+          allow: true
         parts:
           - custom:
               enabled: false
               formula: ''
             number: 1
-            denomination: 8
+            denomination: 10
             bonus: ''
             types:
-              - thunder
+              - fire
+            modifiers: []
             scaling:
               number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   uses:
     spent: 0
     recovery:
@@ -73,44 +87,42 @@ system:
     max: '@prof'
   description:
     value: >-
-      <p>When you take damage from a creature within 60 feet of you, you can
-      take a Reaction to deal 1d8 Thunder damage to that creature.</p>
+      <p>When you hit a target with an attack roll and deal damage to it, you
+      can also deal 1d10 Fire damage to that target.</p>
     chat: ''
   source:
-    revision: 1
+    revision: 2
     rules: '2024'
     book: ''
+    page: ''
     license: CC-BY-4.0
   enchant: {}
   type:
     value: race
-    subtype: ''
+    subtype: lineage
   prerequisites:
     level: null
+    items:
+      - race:goliath
     repeatable: false
   properties: []
-  requirements: Goliath (Storm Giant)
-  identifier: storms-thunder
-  advancement: []
-  cover: null
+  requirements: Goliath
+  identifier: fires-burn
+  advancement: {}
   crewed: false
 effects: []
 folder: 4KZykhQTGVAuVo1I
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340849458
-  modifiedTime: 1745341995921
+  systemVersion: 6.0.6
+  createdTime: 1791577738701
+  modifiedTime: 1791577738701
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
 ownership:
   default: 0
-_key: '!items!phbsptStormsThun'
+_key: '!items!phbsptFiresBurn0'
