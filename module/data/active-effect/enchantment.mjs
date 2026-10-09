@@ -31,8 +31,8 @@ export default class EnchantmentData extends ActiveEffectDataModel {
       magical: new BooleanField({ initial: true }),
       rider: new SchemaField({
         activities: new SetField(new DocumentIdField()),
-        effects: new SetField(new DocumentUUIDField({ type: "ActiveEffect" })),
-        items: new SetField(new DocumentUUIDField({ type: "Item" }))
+        effects: new SetField(new DocumentUUIDField({ embedded: false, type: "ActiveEffect" })),
+        items: new SetField(new DocumentUUIDField({ embedded: false, type: "Item" }))
       })
     };
   }
@@ -287,7 +287,8 @@ export default class EnchantmentData extends ActiveEffectDataModel {
       }
       profile = activity?.effects.find(e => e._id === enchantmentProfile);
     } else {
-      item = (await fromUuid(this.parent._stats.compendiumSource))?.item;
+      item = (await fromUuid(this.origin.item, { relative: this.parent }))
+        ?? (await fromUuid(this.parent._stats.compendiumSource))?.item;
     }
 
     const documents = await bulkFromUuid([...this.rider.effects, ...this.rider.items, ...(profile?.riders.item ?? [])]);
@@ -330,6 +331,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
     // Create Items
     if ( this.item.isEmbedded ) {
+      const itemUuids = [...this.rider.items, ...(profile?.riders.item ?? [])];
       const riderItems = await Item5e.createWithContents(
         itemUuids.map(uuid => documents.get(uuid)).filter(_ => _), {
           transformAll: item => {

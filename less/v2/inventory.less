@@ -490,10 +490,18 @@
 
       &::before {
         color: var(--activity-row-indent-color);
-        content: "━";
+        content: "\f0c1";
+        font-family: var(--font-awesome);
         font-size: var(--font-size-12);
         font-weight: bold;
         inset: 14px auto auto 5px;
+        position: absolute;
+      }
+
+      .rider-tooltip {
+        block-size: 100%;
+        inline-size: 20px;
+        inset-inline-start: 0;
         position: absolute;
       }
     }

@@ -304,6 +304,9 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         }
       }
       r.isRider = true;
+      if ( unmatched ) {
+        r.riderTooltip = "rider";
+      }
       return unmatched;
     }));
     return context;
