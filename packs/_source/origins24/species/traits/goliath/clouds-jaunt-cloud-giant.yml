@@ -5,7 +5,7 @@ img: icons/magic/air/weather-clouds.webp
 system:
   activities:
     t4npBWLqABsnPZwL:
-      type: utility
+      type: teleport
       name: Cloud's Jaunt
       _id: t4npBWLqABsnPZwL
       sort: 0
@@ -21,6 +21,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
+            target: ''
             scaling: {}
       description:
         chatFlavor: ''
@@ -45,7 +46,7 @@ system:
         affects:
           choice: false
           count: ''
-          type: space
+          type: self
           special: Unoccupied space
         override: false
         prompt: false
@@ -53,19 +54,20 @@ system:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
-      img: systems/dnd5e/icons/svg/trait-saves.svg
-      behaviors: []
-      flags: {}
+      img: ''
       visibility:
-        level: {}
+        level:
+          min: null
+          max: null
+        identifier: ''
         requireAttunement: false
         requireIdentification: false
         requireMagic: false
+      behaviors: []
+      flags: {}
+      teleport:
+        override: false
+        units: ft
   uses:
     spent: 0
     recovery:
@@ -103,8 +105,8 @@ _stats:
   coreVersion: '14.368'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1791577738701
-  modifiedTime: 1791577738701
+  createdTime: 1791581147973
+  modifiedTime: 1791581147973
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
