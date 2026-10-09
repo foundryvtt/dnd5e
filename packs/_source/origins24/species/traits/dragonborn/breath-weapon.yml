@@ -4,10 +4,9 @@ type: feat
 img: icons/creatures/reptiles/lizard-mouth-glowing-red.webp
 system:
   activities:
-    dxCRYmNSSGp6L2yh:
+    4sH1AHKZndhRFTkD:
       type: save
-      name: Breath Weapon (Cone)
-      _id: dxCRYmNSSGp6L2yh
+      name: Exhale Cone
       sort: 0
       activation:
         type: action
@@ -26,10 +25,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -42,6 +43,7 @@ system:
           type: cone
           size: '15'
           count: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -57,16 +59,17 @@ system:
         parts:
           - custom:
               enabled: true
-              formula: '@scale.dragonborn.breath'
+              formula: (@details.tier)d10
             number: null
             denomination: 0
             bonus: ''
+            modifiers: []
             types:
               - acid
               - cold
               - fire
-              - poison
               - lightning
+              - poison
             scaling:
               number: 1
         onSave: half
@@ -76,9 +79,23 @@ system:
         dc:
           calculation: con
           formula: ''
-    iyK44COq6gbdbkc2:
+        bonus: ''
+        visible: true
+      img: systems/dnd5e/icons/svg/damage/thunder.svg
+      _id: 4sH1AHKZndhRFTkD
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
+    aZ8ttfiUNwht6Xtz:
       type: save
-      name: Breath Weapon (Line)
+      name: Exhale Line
       sort: 0
       activation:
         type: action
@@ -96,10 +113,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -113,6 +132,7 @@ system:
           type: line
           size: '30'
           width: '5'
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -128,16 +148,17 @@ system:
         parts:
           - custom:
               enabled: true
-              formula: '@scale.dragonborn.breath'
+              formula: (@details.tier)d10
             number: null
             denomination: 0
             bonus: ''
+            modifiers: []
             types:
               - acid
               - cold
               - fire
-              - poison
               - lightning
+              - poison
             scaling:
               number: 1
         onSave: half
@@ -147,7 +168,20 @@ system:
         dc:
           calculation: con
           formula: ''
-      _id: iyK44COq6gbdbkc2
+        bonus: ''
+        visible: true
+      img: systems/dnd5e/icons/svg/damage/force.svg
+      _id: aZ8ttfiUNwht6Xtz
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
   uses:
     spent: 0
     recovery:
@@ -155,12 +189,13 @@ system:
         type: recoverAll
     max: '@prof'
   description:
-    value: "<p>When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in either a 15-foot Cone or a 30-foot Line that is 5 feet wide (choose the shape each time). Each creature in that area must make a Dexterity saving throw (DC 8 plus your Constitution modifier and Proficiency Bonus). On a failed save, a creature takes 1d10 damage of the type determined by your Draconic Ancestry trait. On a successful save, a creature takes half as much damage. This damage increases by 1d10 when you reach character levels 5 (2d10), 11 (3d10), and 17\_(4d10).You can use this Breath Weapon a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.</p><section class=\"secret\" id=\"secret-iuhfGfxgl8GeYWBf\"><p><strong>Foundry Note</strong></p><p>The <strong>Breath Weapon (Cone)</strong> and <strong>Breath Weapon (Line)</strong> activities are both configured for their template type and include each type of damage. The damage also scales as you level up.</p><p>You can select the damage type in the damage roll's dialog box. It will remember your damage choice afterwards. You can edit the activities to remove the other damage types to skip this.</p></section>"
+    value: "<p>When you take the Attack action on your turn, you can replace one of your attacks with an exhalation of magical energy in either a 15-foot Cone or a 30-foot Line that is 5 feet wide (choose the shape each time).</p><p>Each creature in that area must make a Dexterity saving throw (DC 8 plus your Constitution modifier and Proficiency Bonus). On a failed save, a creature takes 1d10 damage of the type determined by your Draconic Ancestry trait. On a successful save, a creature takes half as much damage.</p><p>This damage increases by 1d10 when you reach character levels 5 (2d10), 11 (3d10), and 17\_(4d10).You can use this Breath Weapon a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.</p>"
     chat: ''
   source:
-    revision: 1
+    revision: 2
     rules: '2024'
     book: ''
+    page: ''
     license: CC-BY-4.0
   enchant: {}
   type:
@@ -168,28 +203,25 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items:
+      - dragonborn
     repeatable: false
   properties:
     - mgc
   requirements: Dragonborn
   identifier: breath-weapon
-  advancement: []
-  cover: null
+  advancement: {}
   crewed: false
 effects: []
 folder: 2Bw096HjE0HyGMwM
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340795949
-  modifiedTime: 1745341995010
+  systemVersion: 6.0.6
+  createdTime: 1791576679014
+  modifiedTime: 1791576679014
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 700000
