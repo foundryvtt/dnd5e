@@ -1627,7 +1627,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   static _createDialogTypes(parent) {
-    return this.TYPES.filter(t => t !== "backpack");
+    return this.TYPES.filter(t => (t !== "backpack") && ((t !== "renown") || dnd5e.settings.renownScore));
   }
 
   /* -------------------------------------------- */

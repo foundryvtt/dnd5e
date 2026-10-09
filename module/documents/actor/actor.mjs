@@ -3439,6 +3439,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare default list of types if none are specified.
+   * @returns {string[]}
+   * @protected
+   */
+  static _createDialogTypes() {
+    return this.TYPES.filter(t => (t !== "faction") || dnd5e.settings.renownScore);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
