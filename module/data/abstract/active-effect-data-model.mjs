@@ -126,6 +126,16 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Does this active effect have rider activities or effects that should be tracked on the item.
+   * @type {boolean}
+   */
+  get trackRiders() {
+    return false;
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
