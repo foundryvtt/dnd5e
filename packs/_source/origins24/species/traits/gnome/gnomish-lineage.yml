@@ -1,0 +1,81 @@
+_id: phbsptGnomishLin
+name: Gnomish Lineage
+type: feat
+img: icons/environment/wilderness/terrain-river-road-gray.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You are part of a lineage that grants you supernatural abilities.
+      Whichever one you choose, Intelligence, Wisdom, or Charisma is your
+      spellcasting ability for the spells you cast with this trait (choose the
+      ability when you select the lineage).</p><div
+      class="hide-secrets"><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptForestGnom
+      caption=false cite=false classes="subfeature"
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptRockGnomeL
+      caption=false cite=false classes="subfeature" nameStyle=inline]</p></div>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+  enchant: {}
+  type:
+    value: race
+    subtype: ''
+  prerequisites:
+    level: null
+    items: []
+    repeatable: false
+  properties: []
+  requirements: Gnome
+  identifier: gnomish-lineage
+  advancement:
+    wC1sjM4Uf7Bc9Gg3:
+      name: Choose Lineage
+      type: ItemChoice
+      _id: wC1sjM4Uf7Bc9Gg3
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        pool:
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptForestGnom
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptRockGnomeL
+            sort: 0
+        restriction:
+          list: []
+          school: []
+          type: race
+          subtype: lineage
+        sorting: a
+        spell: null
+        type: feat
+      flags: {}
+      value:
+        added: {}
+        replaced: {}
+      hint: <p>You are part of a lineage that grants you supernatural abilities.</p>
+  crewed: false
+effects: []
+folder: e9Bx86LUj7rJMszu
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791577597819
+  modifiedTime: 1791577597819
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 200000
+ownership:
+  default: 0
+_key: '!items!phbsptGnomishLin'

@@ -1,0 +1,92 @@
+_id: phbspGnome000000
+name: Gnome
+type: race
+img: icons/environment/wilderness/terrain-rocks-brown.webp
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspGnome000000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="gnome-traits">Gnome
+      Traits</h3><p><strong>Creature Type: </strong>Humanoid<br><strong>Size:
+      </strong>Small (about 3–4 feet tall)<br><strong>Speed:</strong> 30
+      feet</p><p>As a Gnome, you have these special
+      traits.</p><p><em><strong>Darkvision.</strong></em><strong> </strong>You
+      have Darkvision with a range of 60
+      feet.</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptGnomishCun
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptGnomishLin
+      caption=false cite=false nameStyle=inline]</p>
+    chat: ''
+  source:
+    revision: 2
+    rules: '2024'
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+  advancement:
+    O7gYRGMSW3atQ2Yc:
+      _id: O7gYRGMSW3atQ2Yc
+      type: Size
+      configuration:
+        sizes:
+          - sm
+      level: 0
+      hint: <p>Small (about 3-4 feet tall)</p>
+      value: {}
+      name: ''
+      flags: {}
+    LcGnqnqKYFw0PcE9:
+      _id: LcGnqnqKYFw0PcE9
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptGnomishCun
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptGnomishLin
+            optional: false
+            sort: 0
+        optional: false
+        spell: null
+        sorting: a
+      value: {}
+      level: 0
+      hint: ''
+      name: Gnome Traits
+      flags: {}
+  movement:
+    units: null
+    hover: false
+    speeds:
+      walk: '30'
+    ignoredDifficultTerrain: []
+  senses:
+    units: null
+    special: ''
+    ranges:
+      darkvision: 60
+      blindsight: null
+      tremorsense: null
+      truesight: null
+  type:
+    value: humanoid
+    subtype: ''
+    custom: ''
+  identifier: gnome
+effects: []
+folder: Ulvo8nbygUegLa59
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791577597819
+  modifiedTime: 1791577597819
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbspGnome000000'
