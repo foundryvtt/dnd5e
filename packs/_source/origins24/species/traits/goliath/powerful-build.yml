@@ -12,10 +12,7 @@ system:
     value: >-
       <p>You have Advantage on any ability check you make to end the
       &amp;Reference[Grappled apply=false] condition. You also count as one size
-      larger when determining your carrying capacity.</p><section class="secret"
-      id="secret-7qaTRjmRe4PD41G3"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which automatically upgrades your size
-      when determining carrying capacity.</p></section>
+      larger when determining your carrying capacity.</p>
     chat: ''
   source:
     revision: 1
@@ -28,12 +25,12 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Goliath
   identifier: powerful-build
-  advancement: []
-  cover: null
+  advancement: {}
   crewed: false
 effects:
   - name: Powerful Build
@@ -47,7 +44,19 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: LutFs6Bou8XRDEuj
+          _id: TTW9JNH7vnTqa97Y
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -64,11 +73,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544082052
-      modifiedTime: 1783544082052
+      systemVersion: 6.0.6
+      createdTime: 1791577738702
+      modifiedTime: 1791577738702
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -79,11 +88,11 @@ folder: 4KZykhQTGVAuVo1I
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.2
-  createdTime: 1745340849458
-  modifiedTime: 1783544082052
+  systemVersion: 6.0.6
+  createdTime: 1791577738702
+  modifiedTime: 1791577738702
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

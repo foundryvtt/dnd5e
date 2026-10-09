@@ -1,21 +1,19 @@
-_id: phbsptHillsTumbl
-name: Hill's Tumble
+_id: phbsptStormsThun
+name: Storm's Thunder (Storm Giant)
 type: feat
-img: icons/magic/control/silhouette-fall-slip-prone.webp
+img: icons/magic/lightning/bolts-salvo-clouds-sky.webp
 system:
   activities:
-    I2wKOUDxhIb5hHb7:
-      type: utility
-      name: Hill's Tumble
-      _id: I2wKOUDxhIb5hHb7
+    3eWfDnXfYJVJqT1z:
+      type: damage
+      name: Storm's Thunder
+      _id: 3eWfDnXfYJVJqT1z
       sort: 0
       activation:
-        type: ''
+        type: reaction
         value: null
         override: false
-        condition: >-
-          When you hit a Large or smaller creature with an attack roll and deal
-          damage to it
+        condition: When you take damage from a creature within 60 feet of you
       consumption:
         scaling:
           allowed: false
@@ -27,20 +25,24 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: spec
+        units: ft
         special: ''
+        value: '60'
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -52,12 +54,29 @@ system:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
-      img: systems/dnd5e/icons/svg/damage/slashing.svg
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 8
+            bonus: ''
+            types:
+              - thunder
+            scaling:
+              number: 1
+            modifiers: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   uses:
     spent: 0
     recovery:
@@ -66,9 +85,8 @@ system:
     max: '@prof'
   description:
     value: >-
-      <p>When you hit a Large or smaller creature with an attack roll and deal
-      damage to it, you can give that target the &amp;Reference[Prone]
-      condition.</p>
+      <p>When you take damage from a creature within 60 feet of you, you can
+      take a Reaction to deal 1d8 Thunder damage to that creature.</p>
     chat: ''
   source:
     revision: 1
@@ -78,33 +96,30 @@ system:
   enchant: {}
   type:
     value: race
-    subtype: ''
+    subtype: lineage
   prerequisites:
     level: null
+    items:
+      - race:goliath
     repeatable: false
   properties: []
-  requirements: Goliath (Hill Giant)
-  identifier: hills-tumble
-  advancement: []
-  cover: null
+  requirements: Goliath
+  identifier: storms-thunder
+  advancement: {}
   crewed: false
 effects: []
 folder: 4KZykhQTGVAuVo1I
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340849458
-  modifiedTime: 1745341995324
+  systemVersion: 6.0.6
+  createdTime: 1791577738701
+  modifiedTime: 1791577738701
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
 ownership:
   default: 0
-_key: '!items!phbsptHillsTumbl'
+_key: '!items!phbsptStormsThun'
