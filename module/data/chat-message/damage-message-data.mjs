@@ -1,7 +1,7 @@
 import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
 import RollMessageData from "./roll-message-data.mjs";
 
-const { StringField } = foundry.data.fields;
+const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { DamageMessageSystemData } from "./_types.mjs";
@@ -22,6 +22,14 @@ export default class DamageMessageData extends RollMessageData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
+      applicationOptions: new SchemaField({
+        downgrade: new SetField(new StringField(), { required: false }),
+        ignore: new SchemaField({
+          immunity: new SetField(new StringField(), { required: false }),
+          resistance: new SetField(new StringField(), { required: false }),
+          vulnerability: new SetField(new StringField(), { required: false })
+        }, { required: false })
+      }, { required: false }),
       onSave: new StringField({ blank: false, initial: null, nullable: true, required: false })
     };
   }

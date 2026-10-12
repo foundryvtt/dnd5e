@@ -84,7 +84,17 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef DefaultDamageApplicationOptions
+ * @property {Set<string>} [downgrade]  Damage types for which resistances & immunities are downgraded.
+ * @property {object} [ignore]
+ * @property {Set<string>} [ignore.immunity]       Damage types for which immunity is ignored.
+ * @property {Set<string>} [ignore.resistance]     Damage types for which resistance is ignored.
+ * @property {Set<string>} [ignore.vulnerability]  Damage types for which vulnerability is ignored.
+ */
+
+/**
  * @typedef {RollMessageSystemData} DamageMessageSystemData
+ * @property {DefaultDamageApplicationOptions|null} applicationOptions  Damage application options to use.
  * @property {string|null} onSave  How this damage is affected by a successful save, if it followed one.
  */
 
