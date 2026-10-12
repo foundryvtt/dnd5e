@@ -10,7 +10,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @import { RollDataOptions } from "./_types.mjs";
+ * @import { EffectRollData, RollDataOptions } from "./_types.mjs";
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
  * @import Actor5e from "./actor/actor.mjs";
  * @import Item5e from "./item.mjs";
@@ -1236,7 +1236,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /**
    * Prepare a data object which defines the data schema used by dice roll commands against this ActiveEffect.
    * @param {RollDataOptions} [options]
-   * @returns {object}
+   * @returns {EffectRollData}
    */
   getRollData(options={}) {
     const rollData = this.isEmbedded ? this.parent.getRollData(options) : {};

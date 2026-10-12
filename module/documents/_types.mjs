@@ -174,6 +174,13 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {RollData & Maybe<ActorRollData> & Maybe<ItemRollData>} EffectRollData
+ * @property {object} effect        Object containing the effect's system data.
+ * @property {object} effect.flags  Flags set on the effect.
+ * @property {string} effect.name   Name of the effect.
+ */
+
+/**
  * @typedef {ItemRollData & Maybe<ActorRollData>} ActivityRollData
  * @property {object} activity         Object containing the activity's data.
  * @property {object} [consumed]       Information on what resources the activity's activation consumed.
