@@ -214,7 +214,7 @@ export default class DamageRoll extends BasicRoll {
     // Modified or complex terms are duplicated and placed via #placeCritical.
     const copies = (cm - 1) + cb;
     if ( !term.isDeterministic && (copies > 0) ) {
-      const clones = Array.from({ length: copies }, () => RollTerm.fromData(foundry.utils.deepClone(term.toJSON())));
+      const clones = Array.from({ length: copies }, () => RollTerm.fromJSON(JSON.stringify(term)));
       return this.#placeCritical(term, clones, index);
     }
 
