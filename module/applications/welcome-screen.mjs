@@ -140,6 +140,13 @@ export default class WelcomeScreen extends Application5e {
       value: dnd5e.settings.bastionConfiguration.enabled
     }, {
       field: new BooleanField(),
+      hint: _loc("SETTINGS.DND5E.RENOWN.Hint"),
+      input: createCheckboxInput,
+      label: _loc("SETTINGS.DND5E.RENOWN.Name"),
+      name: "renownScore",
+      value: dnd5e.settings.renownScore
+    }, {
+      field: new BooleanField(),
       hint: _loc("DND5E.WELCOME.Settings.Metric.Hint"),
       input: createCheckboxInput,
       label: _loc("DND5E.WELCOME.Settings.Metric.Label"),
