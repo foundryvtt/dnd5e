@@ -1,3 +1,4 @@
+import * as Trait from "../../../documents/actor/trait.mjs";
 import { defaultUnits, formatLength, splitSemicolons } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
@@ -30,7 +31,7 @@ export default class TraitsField {
           new FormulaField({ deterministic: true, labelFormatter: "DND5E.DamageModification.Formatter" }),
           {
             label: "DND5E.TRAIT.Damage.Modification.title", labels: { value: "DND5E.TRAIT.Damage.Modification.title" },
-            entryLabel: key => CONFIG.DND5E.damageTypes[key]?.label
+            entryLabel: key => Trait.keyLabel(key, { trait: "dm" })
           }
         ),
         bypasses: new SetField(new StringField(), {

@@ -143,6 +143,18 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Are the magical properties of this item, such as magical bonuses to armor & damage, available?
+   * @type {boolean}
+   */
+  get magicAvailable() {
+    return (!("attuned" in this) || this.attuned || (this.attunement !== "required"))
+      && (!("properties" in this) || !this.isPhysical || this.properties.has("mgc") || !this.validProperties.has("mgc"))
+      && !this.parent.actor?.statuses.has("antimagic");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Scaling increase for this item type.
    * @type {number|null}
    */
@@ -320,6 +332,10 @@ export default class ItemDataModel extends SystemDataModel {
       const valueInGP = price.valueInGP ?? 0;
       return { days: Math.ceil(valueInGP * mundane.days), gold: Math.floor(valueInGP * mundane.gold) };
     }
+
+    // Exceptions
+    const exception = CONFIG.DND5E.crafting.exceptions[this.parent.identifier];
+    if ( exception ) return exception;
 
     const base = await Trait.getBaseItem(type?.identifier ?? "", { fullItem: true });
     if ( base && (baseItem !== "none") ) {

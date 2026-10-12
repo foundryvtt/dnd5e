@@ -1,13 +1,17 @@
 folder: BLBEEFR859fCf2zo
 name: Fly Speed
 type: base
-img: icons/svg/wing.svg
+img: systems/dnd5e/icons/svg/movement/fly.svg
 system:
   changes:
-    - key: system.attributes.movement.fly
+    - key: system.attributes.movement.speeds.fly
       type: upgrade
       value: '@attributes.movement.speed'
       phase: initial
+      priority: null
+      _id: n70ot7xFpX3JnWeF
+      conditions: '{}'
+      replacement: ''
 disabled: false
 start: null
 duration:
@@ -24,13 +28,13 @@ showIcon: 1
 sort: 0
 flags: {}
 _stats:
-  coreVersion: '14.354'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.3.0
+  systemVersion: 6.0.5
   lastModifiedBy: dnd5ebuilder0000
   duplicateSource: null
   exportSource: null
   createdTime: 1769817035737
-  modifiedTime: 1769817087340
+  modifiedTime: 1790359128301
 _id: h8FIaFzsQaEWAlAj
 _key: '!effects!h8FIaFzsQaEWAlAj'

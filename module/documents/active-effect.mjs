@@ -77,7 +77,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     "system.attributes.concentration.bonuses.save": { key: "system.attributes.concentration.roll.bonus" },
     "system.attributes.death.bonuses.save": { key: "system.attributes.death.roll.bonus" },
     "system.attributes.init.bonus": { key: "system.attributes.init.roll.bonus" },
-    "system.attributes.movement.speed": { key: "system.attributes.movement.walk" },
+    "system.attributes.movement.speed": { key: "system.attributes.movement.speeds.walk" },
     "system.attributes.movement.burrow": { key: "system.attributes.movement.speeds.burrow" },
     "system.attributes.movement.climb": { key: "system.attributes.movement.speeds.climb" },
     "system.attributes.movement.fly": { key: "system.attributes.movement.speeds.fly" },
@@ -298,11 +298,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
-    else if ( (data.type !== "condition")
+    else if ( (data.type !== "condition") && data._id
       && Object.values(CONFIG.statusEffects).some(e => e._id === data._id) ) {
       foundry.utils.mergeObject(data, {
         type: "condition",
-        "system.type": data.statuses[0],
+        "system.type": data.statuses?.[0],
         "flags.dnd5e.persistSourceMigration": true
       });
     }
@@ -315,6 +315,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   /** @inheritDoc */
   static migrateData(source) {
     source = super.migrateData(source);
+
+    if ( (source.system?.type === "exhaustion") && Number.isFinite(source.flags?.dnd5e?.exhaustionLevel) ) {
+      source.system.level ??= source.flags.dnd5e.exhaustionLevel;
+      delete source.flags.dnd5e.exhaustionLevel;
+    }
 
     if ( source.flags?.dnd5e?.riders?.statuses && !source.system?.rider?.statuses ) {
       foundry.utils.setProperty(source, "system.rider.statuses", source.flags.dnd5e.riders.statuses);
@@ -397,7 +402,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       if ( activity ) apply(activity, keyPath.join("."));
     } else {
       const { type, key } = change.key.match(/activities\[(?<type>[^\]]+)]\.(?<key>.+)/)?.groups ?? {};
-      item.system.activities?.getByType(type)?.forEach(activity => apply(activity, key));
+      item.system.activities?.getByType(type, { like: false })?.forEach(activity => apply(activity, key));
     }
     return changes;
   }
@@ -635,15 +640,45 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
 
   /** @inheritDoc */
   getReplacementData(baseData) {
-    if ( !this.item ) return super.getReplacementData(baseData);
-    baseData = { ...super.getReplacementData(baseData) };
-    baseData.item = {
-      ...this.item.system,
-      flags: this.item.flags,
-      name: this.item.name
+    const sourceData = this.#getEffectItemData();
+    if ( !sourceData ) return super.getReplacementData(baseData);
+    return {
+      ...super.getReplacementData(baseData),
+      item: sourceData.sourceItem,
+      scaling: sourceData.sourceScaling,
+      ...sourceData
     };
-    baseData.scaling = new Scaling(this.item.scalingIncrease);
-    return baseData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get data for evaluating conditions.
+   * @param {object} baseData  Base roll data.
+   * @returns {object}
+   */
+  getRuleConditionData(baseData) {
+    const sourceData = this.#getEffectItemData();
+    if ( !sourceData ) return super.getReplacementData(baseData);
+    return { ...super.getReplacementData(baseData), ...sourceData };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get data for the item this effect belongs to.
+   * @returns {{sourceItem: object, sourceScaling: Scaling}|void}
+   */
+  #getEffectItemData() {
+    if ( !this.item ) return;
+    return {
+      sourceItem: {
+        ...this.item.system,
+        flags: this.item.flags,
+        name: this.item.name
+      },
+      sourceScaling: new Scaling(this.item.scalingIncrease)
+    };
   }
 
   /* -------------------------------------------- */
@@ -721,13 +756,15 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     });
 
     // Special expiries are evaluated live in isExpiryEvent so we set duration to `null` to so it's always triggered
-    const { units, expiry } = this.duration;
+    const { expiry, units, value } = this.duration;
     if ( expiry && !this.expirySupportsDuration(expiry) ) this.updateSource({ "duration.value": null });
 
     // Default non-turns expiry to turnStart to avoid effect expiry at round turnover
     const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
     if ( !(actor instanceof Actor) || !this.start?.combat?.started ) return;
-    if ( !expiry && (units !== "turns") ) this.updateSource({ "duration.expiry": "turnStart" });
+    if ( !expiry && Number.isFinite(value) && (units !== "turns") ) {
+      this.updateSource({ "duration.expiry": "turnStart" });
+    }
   }
 
   /* -------------------------------------------- */
@@ -769,7 +806,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
     const name = this.name;
 
     // If out of combat & effect expires, delete it
-    if ( game.user.isActiveGM && data.duration?.expired ) {
+    if ( game.user.isActiveGM && data.duration?.expired && !this.getFlag("dnd5e", "dependentOn") ) {
       const actor = this.isAppliedEnchantment ? this.parent.parent : this.parent;
       const combat = this.start?.combat ?? game.combat;
       if ( !combat?.getCombatantsByActor(actor).length ) return this.delete();

@@ -125,7 +125,7 @@
  * @typedef {BasicRollOptions} DamageRollOptions
  * @property {boolean} [isCritical]                    Should critical damage be calculated for this roll?
  * @property {CriticalDamageConfiguration} [critical]  Critical configuration for this roll.
- * @property {string[]} [properties]                   Physical properties of the source (e.g. magical, silvered).
+ * @property {string[]} [properties]                   Properties of the source (e.g. magical, silvered, falling).
  * @property {string} [type]                           Type of damage represented.
  * @property {string[]} [types]                        List of damage types selectable in the configuration app. If no
  *                                                     type is provided, then the first of these types will be used.

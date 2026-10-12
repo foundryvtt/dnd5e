@@ -120,7 +120,7 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /**
    * Properties displayed in chat.
-   * @type {string[]}
+   * @type {object[]}
    */
   get chatProperties() {
     return this.cardProperties;
@@ -130,7 +130,7 @@ export default class ToolData extends ItemDataModel.mixin(
 
   /**
    * Properties displayed on the item card.
-   * @type {string[]}
+   * @type {object[]}
    */
   get cardProperties() {
     return this.ability ? [{ type: "ability", ability: this.ability }] : [];

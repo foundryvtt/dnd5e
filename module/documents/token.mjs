@@ -44,7 +44,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     // Migrate base -> condition.
     const statuses = new Set(foundry.utils.iterateValues(CONFIG.statusEffects).map(s => s._id));
     for ( const effect of data.delta?.effects ?? [] ) {
-      if ( (effect.type === "condition") || !statuses.has(effect._id) ) continue;
+      if ( (effect.type === "condition") || !effect._id || !statuses.has(effect._id) ) continue;
       foundry.utils.mergeObject(effect, { type: "condition", "system.type": effect.statuses?.[0] });
     }
 
@@ -108,6 +108,13 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const sight = maxSightRange > 0
       ? { enabled: true, range: maxSightRange, visionMode: sightVisionMode ?? "basic" }
       : {};
+    if ( sight.enabled ) {
+      const defaults = CONFIG.Canvas.visionModes[sight.visionMode]?.vision.defaults ?? {};
+      Object.assign(sight, foundry.utils.objectEntries(defaults).reduce((obj, [k, v]) => {
+        if ( v !== undefined ) obj[k] = v;
+        return obj;
+      }, {}));
+    }
 
     return { sight, detectionModes };
   }
@@ -130,7 +137,9 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
 
     if ( sight.enabled ) {
-      Object.assign(target.sight, { range: sight.range, visionMode: sight.visionMode });
+      const overrides = { ...sight };
+      delete overrides.enabled;
+      Object.assign(target.sight, overrides);
     }
   }
 
@@ -409,7 +418,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const waypoint = { action: "fall", elevation: surface.elevation };
     if ( surface.level && (surface.level.id !== this._source.level) ) waypoint.level = surface.level.id;
     await this.move(waypoint, { animate: false, dnd5e: { fall: { distance } } });
-    await actor.toggleStatusEffect("falling", { active: false });
     await postFallDamage([this], distance);
   }
 
@@ -417,24 +425,29 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /**
    * Update the falling status of this token.
+   * @param {TokenMovementOperation} [movement]
    * @returns {Promise<void>}
    */
-  updateFalling() {
+  updateFalling(movement) {
     const { actor } = this;
     if ( !actor ) return Promise.resolve();
-    return actor._falling = actor._falling.then(() => this.#updateFalling()).catch(err => console.error(err));
+    return actor._falling = actor._falling.then(() => this.#updateFalling(movement)).catch(err => console.error(err));
   }
 
   /* -------------------------------------------- */
 
   /**
    * Update the falling status of this token.
+   * @param {TokenMovementOperation} [movement]
    * @returns {Promise<void>}
    */
-  async #updateFalling() {
+  async #updateFalling(movement) {
     const { actor } = this;
     if ( !actor || dnd5e.settings.disableFalling ) return;
-    const shouldFall = this._isFalling();
+    const lastMovedToken = actor.getFlag("dnd5e", "lastMovedToken");
+    const token = actor.getDependentTokens({ linked: true, concreteOnly: true }).find(t => t.uuid === lastMovedToken);
+    if ( !token ) return;
+    const shouldFall = (token === this) && movement ? this.#shouldFall(movement) : token._isFalling();
     if ( shouldFall === actor.statuses.has("falling") ) return;
     await actor.toggleStatusEffect("falling", { active: shouldFall });
   }
@@ -557,10 +570,11 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     super._onRelatedUpdate(update, operation);
 
     const { actor } = this;
-    const concrete = this.parent?.isView && (this.parent.tokens.get(this.id) === this);
-    const canUpdateFalling = concrete && actor && game.user.isDesignated(u => {
-      return u.active && (u.viewedScene === this.parent.id) && actor.canUserModify(u, "update");
-    });
+    const concrete = this.parent?.tokens.get(this.id) === this;
+    const canUpdateFalling = concrete && actor && (actor.getFlag("dnd5e", "lastMovedToken") === this.uuid)
+      && game.user.isDesignated(u => {
+        return u.active && actor.canUserModify(u, "update");
+      });
     if ( canUpdateFalling ) void this.updateFalling();
 
     const size = this.actor?.system.traits?.size;
@@ -587,14 +601,13 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /** @inheritDoc */
   async _onUpdateMovement(movement, operation, user) {
     await super._onUpdateMovement(movement, operation, user);
-    if ( !user.isSelf || dnd5e.settings.disableFalling || (movement.passed.waypoints.at(-1)?.action === "fall") ) {
-      return;
-    }
+    if ( dnd5e.settings.disableFalling ) return;
     const { actor } = this;
-    if ( !actor ) return;
-    const shouldFall = this.#shouldFall(movement);
-    if ( shouldFall === actor.statuses.has("falling") ) return;
-    await actor.toggleStatusEffect("falling", { active: shouldFall });
+    if ( !actor || !game.user.isDesignated(u => u.active && actor.canUserModify(u, "update")) ) return;
+    if ( actor.getFlag("dnd5e", "lastMovedToken") !== this.uuid ) {
+      await actor.setFlag("dnd5e", "lastMovedToken", this.uuid);
+    }
+    await this.updateFalling(movement);
   }
 
   /* -------------------------------------------- */

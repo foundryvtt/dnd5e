@@ -60,16 +60,27 @@ export default class TraitsConfig extends BaseConfigSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Fetch the choices data for this trait.
+   * @param {string} trait  Trait for which to get the choices.
+   * @returns {SelectChoices}
+   */
+  async _getChoices(trait) {
+    const chosen = new Set(
+      filteredKeys(await Trait.actorValues(this.document, trait)).map(k => k.split(":").pop())
+    );
+    return await Trait.choices(trait, { chosen });
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     context.keyPath = Trait.actorKeyPath(this.options.trait);
     context.data = foundry.utils.getProperty(this.document._source, context.keyPath);
     context.checkbox = new foundry.data.fields.BooleanField();
-    const chosen = new Set(
-      filteredKeys(await Trait.actorValues(this.document, this.options.trait)).map(k => k.split(":").pop())
-    );
-    context.choices = await Trait.choices(this.options.trait, { chosen });
+    context.choices = await this._getChoices(this.options.trait);
     context.fields = Trait.actorFields(this.document, this.options.trait);
 
     // Handle custom traits not in a top-level category
@@ -117,7 +128,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * @protected
    */
   _processChoice(data, key, choice, categoryChosen=false) {
-    if ( (data.value?.includes?.("ALL") && (key !== "ALL")) || categoryChosen ) {
+    if ( ((data.value?.includes?.("ALL") && (key !== "ALL")) || categoryChosen) && (choice.selectable !== false) ) {
       choice.chosen = true;
       choice.disabled = true;
     }

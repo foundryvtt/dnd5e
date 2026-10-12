@@ -117,7 +117,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /**
    * Properties displayed in chat.
-   * @type {string[]}
+   * @type {object[]}
    */
   get chatProperties() {
     return [{ type: "text", text: this.type.label }, ...this.cardProperties];
@@ -127,7 +127,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /**
    * Properties displayed on the item card.
-   * @type {string[]}
+   * @type {object[]}
    */
   get cardProperties() {
     return [

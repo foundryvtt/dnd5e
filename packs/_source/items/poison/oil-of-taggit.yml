@@ -1,0 +1,195 @@
+folder: ZzUfnm1OuSL02nLG
+name: Oil of Taggit
+type: consumable
+img: icons/consumables/potions/potion-bottle-corked-stopper-ornate-yellow.webp
+system:
+  description:
+    value: >-
+      <p>A creature subjected to this poison must succeed on a [[/save]] saving
+      throw or become &amp;Reference[poisoned apply=false]{poisoned} for 24
+      hours. The poisoned creature is &amp;Reference[unconscious
+      apply=false]{unconscious}. The creature wakes up if it takes damage.</p>
+    chat: ''
+  source:
+    custom: SRD 5.1
+    book: ''
+    page: ''
+    license: ''
+    revision: 1
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  attunement: ''
+  equipped: false
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      modifiers: []
+    replace: false
+  properties: []
+  unidentified:
+    description: ''
+  type:
+    value: poison
+    subtype: contact
+  container: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        concentration: false
+        value: '24'
+        units: hour
+        special: ''
+        override: false
+        expiry: null
+      effects:
+        - _id: MZS6EZWckpKRqLp1
+          uuid: null
+          level: {}
+          onSave: false
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ft
+          stationary: false
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      uses:
+        spent: 0
+        max: ''
+        recovery: []
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '13'
+        visible: true
+        bonus: ''
+      img: ''
+      sort: 0
+      flags: {}
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      behaviors: []
+      name: ''
+  identifier: oil-of-taggit
+  attuned: false
+  rarities: []
+effects:
+  - folder: IfLBBXmSvJFGNJaF
+    name: Poisoned & Unconscious
+    type: base
+    img: systems/dnd5e/icons/svg/statuses/poisoned.svg
+    system:
+      changes: []
+      origin:
+        behavior: null
+        item: Compendium.dnd5e.items.Item.0R4VzaAY99facLlm
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses:
+          - unconscious
+    disabled: false
+    start: null
+    duration:
+      value: 24
+      units: hours
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - poisoned
+    showIcon: 1
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.367'
+      systemId: dnd5e
+      systemVersion: 6.0.3
+      lastModifiedBy: dnd5ebuilder0000
+      duplicateSource: null
+      exportSource: null
+      createdTime: 1789766640669
+      modifiedTime: 1789766657313
+      compendiumSource: Compendium.dnd5e.effects.ActiveEffect.wAnw5y4atBxNJHUP
+    _id: MZS6EZWckpKRqLp1
+    _key: '!items.effects!0R4VzaAY99facLlm.MZS6EZWckpKRqLp1'
+flags: {}
+_stats:
+  systemId: dnd5e
+  systemVersion: 6.0.3
+  coreVersion: '14.367'
+  createdTime: 1789765508502
+  modifiedTime: 1789766683850
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+ownership:
+  default: 0
+_id: 0R4VzaAY99facLlm
+sort: 400000
+_key: '!items!0R4VzaAY99facLlm'

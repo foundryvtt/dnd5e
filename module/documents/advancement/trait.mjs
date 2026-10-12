@@ -4,7 +4,7 @@ import * as Trait from "../actor/trait.mjs";
 import TraitConfig from "../../applications/advancement/trait-config.mjs";
 import TraitFlow from "../../applications/advancement/trait-flow.mjs";
 import {TraitConfigurationData, TraitValueData} from "../../data/advancement/trait-data.mjs";
-import { filteredKeys, localizeSchema } from "../../utils.mjs";
+import { filteredKeys } from "../../utils.mjs";
 
 /**
  * @import { TraitAdvancementApplicationData, TraitAdvancementReversalOptions, TraitChoices } from "./_types.mjs";
@@ -34,21 +34,6 @@ export default class TraitAdvancement extends Advancement {
       }
     });
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform the pre-localization of this data model.
-   */
-  static localize() {
-    super.localize();
-    localizeSchema(
-      this.metadata.dataModels.configuration.schema.fields.choices.element,
-      ["DND5E.ADVANCEMENT.Trait.FIELDS.choices"]
-    );
-  }
-
-  /* -------------------------------------------- */
 
   /**
    * The maximum number of traits granted by this advancement. The number of traits actually granted may be lower if

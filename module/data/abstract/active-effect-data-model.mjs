@@ -185,13 +185,17 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
 
   /**
    * Prepare the context for individual changes to display on actor, item, or active effect sheets.
-   * @param {object} change  Change to prepare.
-   * @returns {object}       An object of chat data to render.
+   * @param {object} change     Change to prepare.
+   * @param {object} [options]  Options forwarded to getHumanReadableAttributeLabel.
+   * @returns {object}          An object of chat data to render.
    */
-  async getSheetChangeContext(change) {
-    return {
-      name: getHumanReadableAttributeLabel(change.key, { actor: this.actor, prefixItemName: false })
-    };
+  async getSheetChangeContext(change, options) {
+    options ??= { actor: this.actor, prefixItemName: false };
+    if ( CONFIG.ActiveEffect.changeTypes[change.type]?.keyOptions ) {
+      const name = CONFIG.ActiveEffect.changeTypes[change.type].keyOptions.find(k => k.value === change.key)?.label;
+      return { name: name ? _loc(name) : change.key };
+    }
+    return { name: getHumanReadableAttributeLabel(change.key, options) };
   }
 
   /* -------------------------------------------- */

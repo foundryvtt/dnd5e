@@ -35,6 +35,22 @@ export default class DamagesConfig extends TraitsConfig {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _getChoices(trait) {
+    const damageChoices = await super._getChoices(trait);
+    if ( foundry.utils.isEmpty(CONFIG.DND5E.damageResistanceTypes) ) return damageChoices;
+    return new SelectChoices({
+      damage: {
+        category: true,
+        children: damageChoices,
+        label: _loc("DND5E.DamageTypes"),
+        selectable: false
+      }
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     context.bypasses = new SelectChoices(Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {

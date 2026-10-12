@@ -66,7 +66,8 @@ export default class VariantRulesSettingsConfig extends BaseSettingsConfig {
       case "scores":
         context.fields = [
           this.createSettingField("loyaltyScore"),
-          this.createSettingField("pietyScore")
+          this.createSettingField("pietyScore"),
+          this.createSettingField("renownScore")
         ];
         context.legend = _loc("DND5E.AttributeScores");
         break;

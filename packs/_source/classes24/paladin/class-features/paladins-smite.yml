@@ -7,20 +7,18 @@ system:
   description:
     value: >-
       <p>You always have the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplDivineSmit]{Divine Smite} spell
-      prepared. In addition, you can cast it without expending a spell slot, but
-      you must finish a Long Rest before you can cast it in this way
-      again.</p><section id="secret-47mDL7wHB8aQP7SD"
-      class="secret"><p><strong>Foundry Note</strong></p><p>When you reach this
-      level the Divine Smite spell is added to your spells as Always Prepared
-      and with a free use.</p></section>
+      @UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDivineSmit]{Divine
+      Smite} spell prepared. In addition, you can cast it without expending a
+      spell slot, but you must finish a Long Rest before you can cast it in this
+      way again.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -30,25 +28,47 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: paladins-smite
+  advancement:
+    NDU3bJGHJJnOS506:
+      name: ''
+      type: ItemGrant
+      _id: NDU3bJGHJJnOS506
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDivineSmit
+            optional: false
+            sort: 0
+        optional: false
+        sorting: m
+        spell:
+          ability: []
+          method: spell
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          prepared: 2
+      flags: {}
+      value: {}
+      level: 2
+      hint: ''
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866297701
-  modifiedTime: 1745256763929
+  systemVersion: 6.0.5
+  createdTime: 1791224423981
+  modifiedTime: 1791224423981
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

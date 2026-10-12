@@ -191,6 +191,16 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Renown
+  game.settings.register("dnd5e", "renownScore", {
+    name: "SETTINGS.DND5E.RENOWN.Name",
+    hint: "SETTINGS.DND5E.RENOWN.Hint",
+    scope: "world",
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
   // Disable Advancements
   game.settings.register("dnd5e", "disableAdvancements", {
     name: "SETTINGS.5eNoAdvancementsN",
@@ -337,7 +347,8 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: false
+    default: false,
+    requiresReload: true
   });
 
   // Metric Volume Weights
@@ -347,7 +358,8 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: false
+    default: false,
+    requiresReload: true
   });
 
   // Metric Unit Weights
@@ -357,7 +369,8 @@ export function registerSystemSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: false
+    default: false,
+    requiresReload: true
   });
 
   // Strict validation

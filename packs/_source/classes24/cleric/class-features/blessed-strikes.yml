@@ -9,21 +9,18 @@ system:
       <p>Divine power infuses you in battle. You gain one of the following
       options of your choice (if you get either option from a Cleric subclass in
       an older book, use only the option you choose for this
-      feature).</p><p><strong>Divine Strike.</strong> Once on each of your turns
-      when you hit a creature with an attack roll using a weapon, you can cause
-      the target to take an extra 1d8 Necrotic or Radiant damage (your
-      choice).</p><p><strong>Potent Spellcasting.</strong> Add your Wisdom
-      modifier to the damage you deal with any Cleric cantrip.</p><section
-      id="secret-1YTjpzZamslVlTTM" class="secret"><p><strong>Foundry
-      Note</strong></p><p>During advancement you will be able to choose which
-      option you prefer.</p></section>
+      feature).</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbDivineStrike0
+      caption=false cite=false nameStyle=inline]{Divine
+      Strike}</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbClcPotentSpel
+      caption=false cite=false nameStyle=inline]{Potent Spellcasting}</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -33,25 +30,55 @@ system:
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: Cleric
   activities: {}
   enchant: {}
   identifier: blessed-strikes
+  advancement:
+    C9ABIfTHZkeFpUva:
+      _id: C9ABIfTHZkeFpUva
+      type: ItemChoice
+      configuration:
+        choices:
+          '7':
+            count: 1
+            replacement: false
+        allowDrops: false
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.classes24.Item.phbDivineStrike0
+            sort: 0
+          - uuid: Compendium.dnd5e.classes24.Item.phbClcPotentSpel
+            sort: 0
+        spell: null
+        restriction:
+          type: class
+          subtype: ''
+          list: []
+          school: []
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>Divine power infuses you in battle. You gain one of the following
+        options of your choice (if you get either option from a Cleric subclass
+        in an older book, use only the option you choose for this feature).</p>
+      name: Blessed Strikes Choice
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1745256760648
+  systemVersion: 6.0.5
+  createdTime: 1791232041725
+  modifiedTime: 1791232041725
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000
