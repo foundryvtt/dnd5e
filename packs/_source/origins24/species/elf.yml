@@ -1,0 +1,112 @@
+_id: phbspElf00000000
+name: Elf
+type: race
+img: icons/magic/nature/beam-hand-leaves-green.webp
+system:
+  description:
+    value: >-
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspElf00000000
+      inline classes="free-rules-embed"]</p><h3
+      data-anchor="drow">Drow</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspElf00000000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="high-elves">High
+      Elves</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspHighElf0000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="wood-elves">Wood
+      Elves</h3><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixSpeci.JournalEntryPage.phbspWoodElf0000
+      inline classes="free-rules-embed"]</p><h3 data-anchor="elf-traits">Elf
+      Traits</h3><p><strong>Creature Type:</strong> Humanoid<br><strong>Size:
+      </strong>Medium (about 5–6 feet tall)<br><strong>Speed:</strong> 30
+      feet</p><p>As an Elf, you have these special
+      traits.</p><p><em><strong>Darkvision.</strong></em><strong> </strong>You
+      have &amp;Reference[Darkvision] with a range of 60
+      feet.</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptElvenLinea
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptFeyAncestr
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptKeenSenses
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.origins24.Item.phbsptTrance0000
+      caption=false cite=false nameStyle=inline]</p>
+    chat: ''
+  source:
+    revision: 2
+    rules: '2024'
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+  advancement:
+    5w2FaHXRKiN7v1rE:
+      _id: 5w2FaHXRKiN7v1rE
+      type: Size
+      configuration:
+        sizes:
+          - med
+      level: 0
+      hint: <p>Medium (about 5–6 feet tall)</p>
+      value: {}
+      name: ''
+      flags: {}
+    boHzoT53gYPvJ9o2:
+      _id: boHzoT53gYPvJ9o2
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptFeyAncestr
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptKeenSenses
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptTrance0000
+          - optional: false
+            sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptElvenLinea
+        optional: false
+        spell: null
+        sorting: a
+      value: {}
+      level: 0
+      hint: ''
+      name: Elf Traits
+      flags: {}
+  movement:
+    units: ft
+    hover: false
+    speeds:
+      walk: '30'
+      burrow: ''
+      climb: ''
+      fly: ''
+      jump: ''
+      swim: ''
+    ignoredDifficultTerrain: []
+  senses:
+    units: null
+    special: ''
+    ranges:
+      darkvision: 60
+      blindsight: null
+      tremorsense: null
+      truesight: null
+  type:
+    value: humanoid
+    custom: ''
+    subtype: ''
+  identifier: elf
+effects: []
+folder: Ulvo8nbygUegLa59
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791576272359
+  modifiedTime: 1791576889349
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbspElf00000000'

@@ -16,23 +16,26 @@ system:
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Halfling
   identifier: halfling-nimbleness
+  advancement: {}
+  crewed: false
 effects:
   - name: Halfling Nimbleness
     img: icons/skills/movement/figure-running-gray.webp
     origin: Compendium.dnd5e.origins24.Item.phbsptHalflingNi
-    _id: HtNoV5usxEadPbqp
+    _id: GQdaDsAEio14WFfG
     type: base
     system:
       changes:
@@ -41,7 +44,19 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: oovW2jHgMjcQUfqh
+          _id: yZY9Sg7BMMuX8K69
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -55,35 +70,30 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1762280399491
-      modifiedTime: 1783544081952
+      systemVersion: 6.0.6
+      createdTime: 1791577895531
+      modifiedTime: 1791577895531
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
     folder: null
-    _key: '!items.effects!phbsptHalflingNi.HtNoV5usxEadPbqp'
+    _key: '!items.effects!phbsptHalflingNi.GQdaDsAEio14WFfG'
 folder: zVLJosGQ7viZqH14
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866704040
-  modifiedTime: 1783544081952
+  systemVersion: 6.0.6
+  createdTime: 1791577895531
+  modifiedTime: 1791577895531
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

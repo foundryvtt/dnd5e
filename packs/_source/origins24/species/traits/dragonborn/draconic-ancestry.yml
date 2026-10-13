@@ -1,0 +1,100 @@
+folder: 2Bw096HjE0HyGMwM
+name: Draconic Ancestry
+type: feat
+_id: phbsptDraconiAnc
+img: icons/environment/wilderness/terrain-river-road-gray.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  advancement:
+    XFXxfGcc0Z3nB070:
+      name: Choose Ancestry
+      type: ItemChoice
+      _id: XFXxfGcc0Z3nB070
+      configuration:
+        allowDrops: true
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        pool:
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncBlac
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncBlue
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncBras
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncBron
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncCopp
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncGold
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncGree
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncRed0
+          - sort: 0
+            uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncSilv
+          - uuid: Compendium.dnd5e.origins24.Item.phbsptDrgAncWhit
+            sort: 0
+        restriction:
+          list: []
+          school: []
+          type: race
+          subtype: lineage
+        sorting: a
+        spell: null
+        type: feat
+      flags: {}
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>Your lineage stems from a dragon progenitor. Choose the kind of
+        dragon from the Draconic Ancestors table. Your choice affects your
+        Breath Weapon and Damage Resistance traits as well as your
+        appearance.</p>
+  description:
+    value: >-
+      <p>Your lineage stems from a dragon progenitor. Choose the kind of dragon
+      from the Draconic Ancestors table. Your choice affects your Breath Weapon
+      and Damage Resistance traits as well as your
+      appearance.</p><table><caption><p>Draconic
+      Ancestors</p></caption><thead><tr><th><p>Dragon</p></th><th><p>Damage
+      Type</p></th><th><p>Dragon</p></th><th><p>Damage
+      Type</p></th></tr></thead><tbody><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncBlac]{Black}</p></td><td><p>Acid</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncGold]{Gold}</p></td><td><p>Fire</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncBlue]{Blue}</p></td><td><p>Lightning</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncGree]{Green}</p></td><td><p>Poison</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncBras]{Brass}</p></td><td><p>Fire</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncRed0]{Red}</p></td><td><p>Fire</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncBron]{Bronze}</p></td><td><p>Lightning</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncSilv]{Silver}</p></td><td><p>Cold</p></td></tr><tr><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncCopp]{Copper}</p></td><td><p>Acid</p></td><td><p>@UUID[Compendium.dnd5e.origins24.Item.phbsptDrgAncWhit]{White}</p></td><td><p>Cold</p></td></tr></tbody></table>
+    chat: ''
+  identifier: draconic-ancestry
+  source:
+    revision: 1
+    rules: '2024'
+  crewed: false
+  enchant: {}
+  prerequisites:
+    items: []
+    repeatable: false
+    level: null
+  properties: []
+  requirements: ''
+  type:
+    value: ''
+    subtype: ''
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791576679014
+  modifiedTime: 1791576679014
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!phbsptDraconiAnc'

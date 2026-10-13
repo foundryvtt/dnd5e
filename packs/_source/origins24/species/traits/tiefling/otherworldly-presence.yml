@@ -11,12 +11,9 @@ system:
   description:
     value: >-
       <p>You know the
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplThaumaturg]{Thaumaturgy}
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplThaumaturg]{Thaumaturgy}</em>
       cantrip. When you cast it with this trait, the spell uses the same
-      spellcasting ability you use for your Fiendish legacy trait.</p><section
-      id="secret-i3PjM9HLuO2Xcae7" class="secret"><p><strong>Foundry
-      Note</strong></p><p>When you're granted this spell it will allow you to
-      choose your spellcasting ability.</p></section>
+      spellcasting ability you use for your Fiendish legacy trait.</p>
     chat: ''
   source:
     revision: 1
@@ -29,23 +26,49 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Tiefling
   identifier: otherworldly-presence
-  advancement: []
-  cover: null
+  advancement:
+    YENpPevreTnGrRVK:
+      _id: YENpPevreTnGrRVK
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplThaumaturg
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+          method: spell
+        sorting: m
+      value: {}
+      level: 0
+      hint: ''
+      name: Cantrip
+      flags: {}
   crewed: false
 effects: []
 folder: VZQeqwpBruLqnL6x
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1745340871134
-  modifiedTime: 1745341995517
+  systemVersion: 6.0.6
+  createdTime: 1791578299754
+  modifiedTime: 1791578299754
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
