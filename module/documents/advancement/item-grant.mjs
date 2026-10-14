@@ -42,6 +42,17 @@ export default class ItemGrantAdvancement extends Advancement {
   static VALID_TYPES = new Set(["feat", "spell", "consumable", "container", "equipment", "loot", "tool", "weapon"]);
 
   /* -------------------------------------------- */
+  /*  Instance Properties                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get _defaultTitle() {
+    if ( this.item.type === "class" ) return _loc("DND5E.ADVANCEMENT.ItemGrant.DefaultTitle.ClassFeatures");
+    if ( this.item.type === "subclass" ) return _loc("DND5E.ADVANCEMENT.ItemGrant.DefaultTitle.SubclassFeatures");
+    return super._defaultTitle;
+  }
+
+  /* -------------------------------------------- */
   /*  Display Methods                             */
   /* -------------------------------------------- */
 
