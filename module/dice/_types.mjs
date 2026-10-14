@@ -39,6 +39,7 @@
  * @property {boolean} [advantage]             Apply advantage to each roll.
  * @property {boolean} [disadvantage]          Apply disadvantage to each roll.
  * @property {boolean} [halflingLucky]         Add a re-roll once modifier to the d20 die.
+ * @property {Set<string>} [modifiers]         Additional modifiers to apply to the d20 die.
  * @property {boolean} [reliableTalent]        Set the minimum for the d20 roll to 10.
  * @property {D20RollConfiguration[]} rolls    Configuration data for individual rolls.
  */
@@ -64,6 +65,7 @@
  * @property {boolean} [halflingLucky]   Add a re-roll once modifier to the d20 die.
  * @property {number} [maximum]          Maximum number the d20 die can roll.
  * @property {number} [minimum]          Minimum number the d20 die can roll.
+ * @property {Set<string>} [modifiers]   Additional modifiers to apply to the d20 die.
  */
 
 /**

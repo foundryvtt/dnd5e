@@ -3985,7 +3985,11 @@ const DAMAGE_ROLLS = Object.freeze([
   { value: "healing", label: "DND5E.EFFECT.Change.Key.Healing" }
 ]);
 
-const ALL_ROLLS = Object.freeze([...D20_ROLLS, { rule: true }, ...DAMAGE_ROLLS]);
+const HIT_DIE_ROLLS = Object.freeze([
+  { value: "hitDie", label: "DND5E.EFFECT.Change.Key.HitPointDice" }
+]);
+
+const ALL_ROLLS = Object.freeze([...D20_ROLLS, { rule: true }, ...DAMAGE_ROLLS, { rule: true }, ...HIT_DIE_ROLLS]);
 
 /**
  * System provided active effect change types.
@@ -3994,6 +3998,7 @@ const ALL_ROLLS = Object.freeze([...D20_ROLLS, { rule: true }, ...DAMAGE_ROLLS])
 DND5E.activeEffectChangeTypes = Object.freeze({
   "dnd5e.advantage": {
     label: "DND5E.EFFECT.Change.Type.Advantage.Label",
+    hint: "DND5E.EFFECT.Change.Type.Advantage.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
@@ -4002,14 +4007,16 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.bonus": {
     label: "DND5E.EFFECT.Change.Type.Bonus.Label",
+    hint: "DND5E.EFFECT.Change.Type.Bonus.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
-    keyOptions: ALL_ROLLS,
+    keyOptions: Object.freeze([...D20_ROLLS, { rule: true }, ...DAMAGE_ROLLS]),
     skipConditions: true
   },
   "dnd5e.maximum": {
     label: "DND5E.EFFECT.Change.Type.Maximum.Label",
+    hint: "DND5E.EFFECT.Change.Type.Maximum.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
@@ -4018,10 +4025,20 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.minimum": {
     label: "DND5E.EFFECT.Change.Type.Minimum.Label",
+    hint: "DND5E.EFFECT.Change.Type.Minimum.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
     keyOptions: D20_ROLLS,
+    skipConditions: true
+  },
+  "dnd5e.modifier": {
+    label: "DND5E.EFFECT.Change.Type.Modifier.Label",
+    hint: "DND5E.EFFECT.Change.Type.Modifier.Hint",
+    defaultPriority: 100,
+    handler: ActiveEffect5e._applyChangeRule,
+    group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: ALL_ROLLS,
     skipConditions: true
   }
 });
