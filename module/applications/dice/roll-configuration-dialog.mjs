@@ -257,6 +257,25 @@ export default class RollConfigurationDialog extends Dialog5e {
   }
 
   /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if ( options.isFirstRender && this.options.autoPosition ) {
+      options.position ??= {};
+      const { width } = this._updatePosition(options.position);
+      const { top, left, right } = this.options.autoPosition;
+      Object.assign(options.position, {
+        top: Math.clamp(top - 80, 40, window.innerHeight - 120),
+        left: right + 20
+      });
+      if ( (options.position.left + width) > window.innerWidth ) options.position.left = left - width - 20;
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Roll Handling                               */
   /* -------------------------------------------- */
 
@@ -429,6 +448,9 @@ export default class RollConfigurationDialog extends Dialog5e {
    * @returns {Promise<BasicRoll[]>}
    */
   static async configure(config={}, dialog={}, message={}) {
+    if ( dialog.autoPosition && (config.event?.target?.ownerDocument === document) ) {
+      foundry.utils.setProperty(dialog, "options.autoPosition", config.event.target.getBoundingClientRect());
+    }
     return new Promise(resolve => {
       const app = new this(config, message, dialog.options);
       app.addEventListener("close", () => resolve(app.rolls), { once: true });
