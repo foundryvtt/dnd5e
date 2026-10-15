@@ -6,39 +6,18 @@ img: systems/dnd5e/icons/classes/sorcerer.webp
 system:
   description:
     value: >-
-      <h3>Core Sorcerer Traits</h3><table
-      class="core-class-traits"><tbody><tr><th scope="row"><p><strong>Primary
-      Ability</strong></p></th><td><p>Charisma</p></td></tr><tr><th
-      scope="row"><p><strong>Hit Point Die</strong></p></th><td><p>D6 per
-      Sorcerer level</p></td></tr><tr><th scope="row"><p><strong>Saving Throw
-      Proficiencies</strong></p></th><td><p>Constitution and
-      Charisma</p></td></tr><tr><th scope="row"><p><strong>Skill
-      Proficiencies</strong></p></th><td><p><em>Choose 2:</em> Arcana,
-      Deception, Insight, Intimidation, Persuasion, or
-      Religion</p></td></tr><tr><th scope="row"><p><strong>Weapon
-      Proficiencies</strong></p></th><td><p>Simple weapons</p></td></tr><tr><th
-      scope="row"><p><strong>Armor
-      Training</strong></p></th><td><p>None</p></td></tr><tr><th
-      scope="row"><p><strong>Starting
-      Equipment</strong></p></th><td><p><em>Choose A or B: </em>(A)
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepSpear00000]{Spear}, 2
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Daggers},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane Focus}
-      (@UUID[Compendium.dnd5e.equipment24.Item.phbafcCrystal000]{crystal}),
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagDungeoneers]{Dungeoneer's
-      Pack}, and [[/award 28GP]]; or (B) [[/award
-      50GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbscrSorcerer00
-      inline classes="free-rules-embed"]</p><h2>Becoming a Sorcerer …</h2><h3>As
-      a Level 1 Character</h3><ul><li>Gain all the traits in the Core Sorcerer
-      Traits table.</li><li>Gain the Sorcerer's level 1 features, which are
-      listed in the
-      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSorcerer00000.JournalEntryPage.fsqRUA4acVXH4I3O#class-features]{Sorcerer
-      Features table}.</li></ul><h3>As a Multiclass Character</h3><ul><li>Gain
-      the Hit Point Die from the Core Sorcerer Traits table.</li><li>Gain the
-      Sorcerer's level 1 features, which are listed in the Sorcerer Features
-      table. See the
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbscrSorcerer00
+      inline classes="free-rules-embed"]</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbSorcerer00000]{Class
+      Details}</em></p><h3>Becoming a Sorcerer …</h3><h4>As a Level 1
+      Character</h4><ul><li><p>Gain all the traits in the Core Sorcerer Traits
+      table.</p></li><li><p>Gain the Sorcerer's level 1 features, which are
+      listed in the Sorcerer Features table.</p></li></ul><h4>As a Multiclass
+      Character</h4><ul><li><p>Gain the Hit Point Die from the Core Sorcerer
+      Traits table.</p></li><li><p>Gain the Sorcerer's level 1 features, which
+      are listed in the Sorcerer Features table. See the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.vcs4jfEKRxPCsgXm]{multiclassing
-      rules} to determine your available spell slots.</li></ul>
+      rules} to determine your available spell slots.</p></li></ul>
     chat: ''
   source:
     custom: ''
