@@ -11,16 +11,17 @@ system:
       using Strength until the start of your next turn, but attack rolls against
       you have Advantage during that time.</p><section
       id="secret-W7MI2ZVKsMQcSW6d" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature includes an Active Effect for tracking
-      whether you are reckless or not but it does not automate Advantage on your
-      attacks or attacks against you.</p></section>
+      Note</strong></p><p>This feature includes an Active Effect for handling
+      advantage on your attacks but it does not automate Advantage on attacks
+      against you.</p></section>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -30,19 +31,22 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
   activities: {}
   enchant: {}
   identifier: reckless-attack
+  advancement: {}
+  crewed: false
 effects:
   - name: Reckless
     origin: Compendium.dnd5e.classes24.Item.phbbrbRecklessAt
     duration:
-      value: 1
+      value: null
       units: rounds
-      expiry: turnStart
+      expiry: sourceStart
       expired: false
     disabled: false
     flags: {}
@@ -50,7 +54,29 @@ effects:
     _id: XA0GhXVB54U2IuRP
     type: base
     system:
-      changes: []
+      changes:
+        - key: attack
+          type: dnd5e.advantage
+          value: 1
+          phase: initial
+          _id: LGUHkxgPRTJ7Rgj7
+          conditions: |-
+            {
+              "k": "roll.ability",
+              "v": "str"
+            }
+          replacement: ''
+          priority: null
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     description: ''
     tint: '#ffffff'
     transfer: false
@@ -59,30 +85,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.6
+      createdTime: 1792088967436
+      modifiedTime: 1792088967436
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbbrbRecklessAt.XA0GhXVB54U2IuRP'
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1745256760101
+  systemVersion: 6.0.6
+  createdTime: 1792088967436
+  modifiedTime: 1792088967436
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
