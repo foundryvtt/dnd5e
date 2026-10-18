@@ -170,7 +170,7 @@ export default class ConditionData extends ActiveEffectDataModel {
     super._onUpdate(data, options, userId);
 
     if ( !this.hasLevels ) return;
-    const delta = this.level - (options.dnd5e?.originalLevel ?? Infinite);
+    const delta = this.level - (options.dnd5e?.originalLevel ?? Infinity);
     if ( Number.isFinite(delta) ) this.parent._displayScrollingStatus(delta > 0);
   }
 
