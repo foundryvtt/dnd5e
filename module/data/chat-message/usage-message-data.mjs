@@ -97,7 +97,12 @@ export default class UsageMessageData extends ItemMessageData {
   get outcomes() {
     if ( this.#outcomes ) return this.#outcomes;
     const outcomes = new Map();
-    for ( const message of this.parent.getAssociatedRolls(this.activity.type) ) {
+    const like = CONFIG.DND5E.activityTypes[this.activity.type]?.documentClass?.metadata.like;
+    const rolls = [
+      ...this.parent.getAssociatedRolls(this.activity.type),
+      ...(like ? this.parent.getAssociatedRolls(like) : [])
+    ].sort((lhs, rhs) => lhs.timestamp - rhs.timestamp);
+    for ( const message of rolls ) {
       const [roll] = message.rolls;
       if ( !(roll instanceof CONFIG.Dice.D20Roll) ) continue;
       const uuid = message.getAssociatedToken()?.uuid;
@@ -159,7 +164,8 @@ export default class UsageMessageData extends ItemMessageData {
    * @returns {Promise}
    */
   async onDescendentRefresh(message) {
-    if ( message.type !== this.activity.type ) return; // The descendent wasn't an outcome, it was some other action.
+    // The descendent wasn't an outcome, it was some other action.
+    if ( !dnd5e.documents.activity.UtilityActivity.isLike(this.activity.type, message.type) ) return;
     this.#outcomes = undefined;
     return Promise.all(this.parent.getAssociatedRolls("damage").map(m => ui.chat?.updateMessage(m)));
   }
@@ -209,34 +215,37 @@ export default class UsageMessageData extends ItemMessageData {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    let context;
-    if ( this.parent.content ) context = {
-      content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.parent.content, {
-        rollData: this.parent.getRollData()
-      })
-    };
-    else {
-      context = await super._prepareContext(options);
-      context.activity = this.activity;
-      context.buttons = this._prepareButtons();
-      this._prepareButtonGroups(context);
-      if ( this.activity.name ) context.subtitle = this.activity.name;
-      if ( game.settings.get("dnd5e", "chatCardSummary") ) {
-        context.summaries = (await Promise.all(this.parent.getAssociatedRolls()
-          .filter(m => m.visible)
-          .map(async m => {
-            const token = m.getAssociatedToken();
-            return { html: await m.system.render({ summary: true }), id: m.id, token: token };
-          })))
-          .filter(s => s.html);
-      }
+    if ( this.parent.content ) {
+      return {
+        content: await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.parent.content, {
+          rollData: this.parent.getRollData()
+        })
+      };
     }
 
+    const context = await super._prepareContext(options);
     const activity = this.parent.getAssociatedActivity();
+    context.activity = this.activity;
+    if ( activity ) {
+      context.buttons = this._prepareButtons();
+      this._prepareButtonGroups(context);
+    }
+    if ( this.activity.name ) context.subtitle = this.activity.name;
+    if ( game.settings.get("dnd5e", "chatCardSummary") ) {
+      context.summaries = (await Promise.all(this.parent.getAssociatedRolls()
+        .filter(m => m.visible)
+        .map(async m => {
+          const token = m.getAssociatedToken();
+          return { html: await m.system.render({ summary: true }), id: m.id, token: token };
+        })))
+        .filter(s => s.html);
+    }
+
+    if ( !activity ) return context;
     const { targetPhase } = activity.metadata;
     context.showTargets = (targetPhase !== "post") && (this.effects.length || (targetPhase === "pre"));
     const allowPlayerApplication = this.targets?.some(t => TargetsField.resolve(t).token?.isOwner)
-      || ((this.parent.author?.id === game.user.id) && (activity?.target.affects.type === "self"));
+      || ((this.parent.author?.id === game.user.id) && (activity.target.affects.type === "self"));
     const canApply = game.user.isGM || (dnd5e.settings.allowPlayerEffectsTray && allowPlayerApplication);
     context.effects = canApply ? await this.getEffects() : [];
     return context;

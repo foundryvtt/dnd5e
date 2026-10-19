@@ -21,6 +21,15 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef {ActiveEffectChangeTypeConfig} ActiveEffectChangeTypeConfig5e
+ * @property {string} [group]                   Localized group this type will be displayed in.
+ * @property {FormSelectOption[]} [keyOptions]  Valid keys when this type is selected.
+ * @property {boolean} [skipConditions]         Don't evaluate conditions when this change is applied.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * @typedef ActivityActivationTypeConfiguration
  * @property {string} [counted]         Localized label for the countable activation type.
  * @property {string} label             Localized label for the activation type.
@@ -294,6 +303,15 @@
 /* -------------------------------------------- */
 
 /**
+ * @typedef DamageResistanceConfiguration
+ * @property {string} label   Localized label.
+ * @property {string} icon    Icon representing this type.
+ * @property {Filter} filter  Filter checked against the damage description to decide if the resistance should apply.
+ */
+
+/* -------------------------------------------- */
+
+/**
  * Configuration data for damage types.
  *
  * @typedef DamageTypeConfiguration
@@ -356,6 +374,15 @@
  * @property {number} days     The number of days to build the facility.
  * @property {number} squares  The maximum area the facility may occupy in the bastion plan.
  * @property {number} value    The cost in gold pieces to build the facility.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef FactionDescriptor
+ * @property {string} name                 The faction name.
+ * @property {Map<string, number>} renown  The Actors that have renown with this faction and how much.
+ * @property {Set<Actor5e>} sources        The faction Actors with this identifier.
  */
 
 /* -------------------------------------------- */
@@ -448,6 +475,14 @@
  * @property {string} identifier   Item identifier.
  * @property {string} [img]        Item's icon.
  * @property {string[]} [sources]  UUIDs of different compendium items matching this identifier.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @callback RenownChangeCallback
+ * @param {Actor5e} actor                The actor whose renown changed.
+ * @param {Map<string, number>} changed  The renown change deltas keyed by faction identifier.
  */
 
 /* -------------------------------------------- */
@@ -663,6 +698,10 @@
  *                                         the options be found within `CONFIG.DND5E`?
  * @property {boolean|number} [dataType]   Type of data represented.
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
+ * @property {object} [special]
+ * @property {string} [special.configKey]  Name of object in `CONFIG.DND5E` that describes additional traits that don't
+ *                                         fit within the general config category.
+ * @property {string} [special.label]      Label used for category containing special traits.
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.
  *                                         Deprecated in favor of the standardized `system.type.value`.
@@ -751,6 +790,21 @@
  * @typedef {Omit<UnitConfiguration, "abbreviation">} TravelUnitConfiguration
  * @property {string} abbreviationDay   Abbreviated form when using days as the travel period.
  * @property {string} abbreviationHour  Abbreviated form when using hours as the travel period.
+ */
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef UnitConversionOptions
+ * @property {boolean} [strict]    Throw an error if either unit isn't found.
+ * @property {string} [to]         The final unit. If neither this nor the unit system is provided then will convert to
+ *                                 the largest unit that can represent the value as an integer.
+ * @property {boolean} [truncate]  Select the largest unit that can represent the value, discarding any
+ *                                 remainder, rather than the largest that represents it exactly.
+ * @property {"imperial"|"metric"} [system]  Target measurement system. If provided without target unit then the
+ *                                 value will be converted to the closest equivalent unit in the specified measurement
+ *                                 system (e.g. "mi" > "km").
+ * @property {Set<string>} [validTargetUnits]  Keys for units that can be used when auto-selecting a unit.
  */
 
 /* -------------------------------------------- */

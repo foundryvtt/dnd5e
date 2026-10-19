@@ -352,7 +352,7 @@ export default class ContainerSheet extends ItemSheet5e {
   /** @override */
   _filterChildren(collection, filters) {
     if ( collection === "items" ) return this._filterItems(this._items, filters);
-    return [];
+    return super._filterChildren(collection, filters);
   }
 
   /* -------------------------------------------- */

@@ -238,7 +238,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /**
    * Properties displayed in chat.
-   * @type {string[]}
+   * @type {object[]}
    */
   get chatProperties() {
     return [
@@ -250,7 +250,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /**
    * Properties displayed on the item card.
-   * @type {string[]}
+   * @type {object[]}
    */
   get cardProperties() {
     return (this.isMountable && this.armor.value) ? [{ type: "ac", value: this.armor.value }] : [];
@@ -485,7 +485,9 @@ export default class WeaponData extends ItemDataModel.mixin(
 
     if ( this.attackType === "ranged" ) this.range.reach = null;
     else if ( this.range.reach === null ) {
-      this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
+      this.range.reach = convertLength(
+        this.properties.has("rch") ? 10 : 5, "ft", { to: this.range.units, legacy: false }
+      ).value;
     }
     if ( !this.hasRange ) this.range.value = this.range.long = null;
   }

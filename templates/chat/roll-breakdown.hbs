@@ -1,4 +1,4 @@
-{{#if parts.length}}
+{{#if (or parts.length constants.length)}}
 <div class="dice-tooltip-collapser">
     <div class="dice-tooltip">
         {{#each parts}}
@@ -21,16 +21,16 @@
             </div>
         </section>
         {{/each}}
-        {{#if constant}}
-        <section class="tooltip-part constant">
+        {{#each constants}}
+        <section class="tooltip-part constant-term">
             <div class="dice">
-                <ol class="dice-rolls"></ol>
+                <span class="flavor">{{ flavor }}</span>
                 <div class="total">
-                    <span class="value">{{ dnd5e-formatModifier constant }}</span>
+                    <span class="value">{{ dnd5e-formatModifier total }}</span>
                 </div>
             </div>
         </section>
-        {{/if}}
+        {{/each}}
     </div>
 </div>
 {{/if}}

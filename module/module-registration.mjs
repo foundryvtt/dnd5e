@@ -22,7 +22,20 @@ export function registerModuleData() {
   console.groupEnd();
 }
 
-const registerMethods = [registerSourceBooks, registerSpellLists];
+const registerMethods = [registerFactions, registerSourceBooks, registerSpellLists];
+
+/* -------------------------------------------- */
+
+/**
+ * Register package factions from `flags.dnd5e.factions`.
+ * @param {Module|System|World} manifest  Manifest from which to register data.
+ * @returns {string|void}                 Description of the data registered.
+ */
+function registerFactions(manifest) {
+  if ( !manifest.flags.dnd5e?.factions ) return;
+  manifest.flags.dnd5e.factions.forEach(uuid => dnd5e.registry.renown.registerFaction(uuid));
+  return "factions";
+}
 
 /* -------------------------------------------- */
 

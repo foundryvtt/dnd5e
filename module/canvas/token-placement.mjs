@@ -20,7 +20,7 @@ export default class TokenPlacement extends BasePlacement {
     const uniqueTokens = new Map();
     const base = this.config.origin?.elevation ?? canvas.level.elevation.base; // Use the summoner's elevation.
     await canvas.tokens.placeTokens(this.config.tokens.map(t => ({
-      ...t.toObject(), elevation: base, level: canvas.level.id
+      ...t.toObject(), actorId: t.parent.id, elevation: base, level: canvas.level.id
     })), {
       create: false,
       onChange: ({ document, preview }) => {

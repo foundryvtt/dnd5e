@@ -1366,12 +1366,9 @@ dialog.dnd5e2.application {
         align-items: center;
       }
 
-      img {
-        border: none;
-        width: 64px;
-        height: 64px;
-        object-fit: contain;
-        object-position: bottom;
+      dnd5e-icon {
+        --icon-fill: #aaa;
+        --icon-size: 64px;
       }
 
       .label {
@@ -1830,6 +1827,9 @@ dialog.dnd5e2.application {
         &.mgc::before { content: "\f72b"; }
         &.sil::before { content: "\53"; }
       }
+
+      &.category > .name { grid-column: icon / proficiency; }
+      li { margin-block-end: 0; }
     }
   }
 }

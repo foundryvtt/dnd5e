@@ -7,16 +7,15 @@ system:
   description:
     value: >-
       <p>Choose two of your skill proficiencies with which you lack Expertise.
-      You gain Expertise in those skills.</p><section class="secret"
-      id="secret-8Sp7JCTIzt2U5K6u"><p><strong>Foundry Note</strong></p><p>You
-      will be prompted with a choice when you reach this level.</p></section>
+      You gain Expertise in those skills.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -26,24 +25,43 @@ system:
     subtype: ''
   prerequisites:
     level: 9
+    items: []
+    repeatable: false
   properties: []
   requirements: ''
   activities: {}
   enchant: {}
   identifier: expertise
+  advancement:
+    Yscwm2LPBUNjW0pk:
+      _id: Yscwm2LPBUNjW0pk
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 9
+      flags: {}
+      hint: >-
+        <p>Choose two of your skill proficiencies with which you lack Expertise.
+        You gain Expertise in those skills.</p>
+      name: Expertise
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735932734523
-  modifiedTime: 1745256764793
+  systemVersion: 6.0.5
+  createdTime: 1790976133200
+  modifiedTime: 1790976133200
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

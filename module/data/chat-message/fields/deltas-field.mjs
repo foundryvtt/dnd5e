@@ -33,7 +33,7 @@ export class ActorDeltasField extends SchemaField {
   static getDeltas(actor, updates) {
     const deltas = {
       actor: IndividualDeltaField.getDeltas(actor, updates.actor),
-      created: updates.create?.length ? Array.from(updates.create) : null,
+      created: updates.create?.length ? Array.from(updates.create).map(i => i._id) : null,
       deleted: updates.delete?.map(i => actor.items.get(i)?.toObject()).filter(_ => _),
       item: updates.item.reduce((obj, { _id, ...changes }) => {
         const deltas = IndividualDeltaField.getDeltas(actor.items.get(_id), changes);

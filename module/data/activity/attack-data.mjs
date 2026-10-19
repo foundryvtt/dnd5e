@@ -223,7 +223,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     this.prepareDamageLabel(rollData);
 
     const { data, parts } = this.getAttackData();
-    const roll = new Roll(parts.join("+"), data);
+    const roll = Roll.create(parts.join("+"), data);
     this.labels.modifier = simplifyRollFormula(roll.formula, { deterministic: true }).replaceAll(" ", "") || "0";
     const formula = simplifyRollFormula(roll.formula).trim() || "0";
     this.labels.toHit = !/^[+-]/.test(formula) ? `+${formula}` : formula;
@@ -361,7 +361,7 @@ export default class BaseAttackActivityData extends BaseActivityData {
     // Add reach for melee weapons, unless the activity is explicitly specified as a ranged attack
     if ( this.validAttackTypes.has("melee") ) {
       let { reach, units } = this.item.system.range;
-      if ( !reach ) reach = convertLength(5, "ft", units);
+      if ( !reach ) reach = convertLength(5, "ft", { to: units, legacy: false }).value;
       parts.push(_loc("DND5E.RANGE.Formatted.Reach", {
         reach: formatLength(reach, units, { strict: false })
       }));

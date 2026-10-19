@@ -40,6 +40,7 @@ export default function ActivityMixin(Base) {
       collection: "activities",
       label: "DOCUMENT.Activity",
       name: "Activity",
+      hasRiders: false,
       sheetClass: ActivitySheet,
       targetPhase: "",
       usage: {
@@ -1078,15 +1079,27 @@ export default function ActivityMixin(Base) {
      * @param {ChatMessage5e} message  Message associated with the activation.
      */
     async #consumeResource(event, target, message) {
-      const messageConfig = {};
-      const scaling = message.system.scaling;
-      const usageConfig = { consume: true, event, scaling };
+      const messageConfig = { message };
+      const usageConfig = this._prepareConsumeResourceUsageConfig(event, message);
       const linkedActivity = this.getLinkedActivity(message.system.cause);
       if ( linkedActivity ) usageConfig.cause = {
         activity: linkedActivity.relativeUUID, resources: linkedActivity.consumption.targets.length > 0
       };
       await this.consume(usageConfig, messageConfig);
       if ( !foundry.utils.isEmpty(messageConfig.data) ) await message.update(messageConfig.data);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare necessary parts of usage configuration from message data for resource consumption.
+     * @param {PointerEvent} event     Triggering click event.
+     * @param {ChatMessage5e} message  Message associated with the activation.
+     * @returns {Partial<ActivityUseConfiguration>}
+     */
+    _prepareConsumeResourceUsageConfig(event, message) {
+      const scaling = message.system.scaling;
+      return { consume: true, event, scaling };
     }
 
     /* -------------------------------------------- */
@@ -1272,6 +1285,30 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Is this activity a certain type or like that type?
+     * @param {string} activityType  Activity type.
+     * @param {string} otherType     Type to compare against.
+     * @returns {boolean}
+     */
+    static isLike(activityType, otherType) {
+      return (activityType === otherType)
+        || (CONFIG.DND5E.activityTypes[activityType]?.documentClass?.metadata.like === otherType);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Is this activity a certain type or like that type?
+     * @param {string} type  Activity type.
+     * @returns {boolean}
+     */
+    isLike(type) {
+      return (this.type === type) || (this.metadata.like === type);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Render a rich tooltip for this activity.
      * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
      * @param {string} [enrichmentOptions.extras]         Extra HTML displayed with the tooltip.
@@ -1304,7 +1341,7 @@ export default function ActivityMixin(Base) {
     /** @override */
     static _createDialogTypes(parent) {
       return Object.entries(CONFIG.DND5E.activityTypes)
-        .filter(([, c]) => (c.configurable !== false) && c.documentClass.availableForItem(parent))
+        .filter(([, c]) => !c.hidden && (c.configurable !== false) && c.documentClass.availableForItem(parent))
         .map(([k]) => k);
     }
 

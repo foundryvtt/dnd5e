@@ -1,11 +1,11 @@
-folder: TxqYeqxORIBFjl3d
-name: Damage Vulnerability
-_id: OdQ1asxcW6nN7lTo
-img: systems/dnd5e/icons/svg/damage/all.svg
+folder: w70rfvAVNHLuTPv3
+name: Immunity to All Damage
 type: base
+_id: VgKR27ZE6Z3Utiv7
+img: systems/dnd5e/icons/svg/damage/all.svg
 system:
   changes:
-    - key: system.traits.dv.value
+    - key: system.traits.di.value
       type: add
       value: ALL
       phase: initial
@@ -25,12 +25,12 @@ showIcon: 1
 sort: 0
 flags: {}
 _stats:
-  coreVersion: '14.354'
+  coreVersion: '14.368'
   systemId: dnd5e
   systemVersion: 6.0.0
   lastModifiedBy: dnd5ebuilder0000
   duplicateSource: null
   exportSource: null
-  createdTime: 1771883824158
-  modifiedTime: 1771883935857
-_key: '!effects!OdQ1asxcW6nN7lTo'
+  createdTime: 1771883976443
+  modifiedTime: 1790359915774
+_key: '!effects!VgKR27ZE6Z3Utiv7'

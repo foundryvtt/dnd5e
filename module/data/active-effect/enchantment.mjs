@@ -1,5 +1,5 @@
 import Item5e from "../../documents/item.mjs";
-import { bulkFromUuid, getHumanReadableAttributeLabel } from "../../utils.mjs";
+import { bulkFromUuid } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
@@ -309,7 +309,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     }));
     riderEffects = riderEffects.filter(_ => _);
     riderEffects.forEach(e => foundry.utils.setProperty(e, "flags.dnd5e.dependentOn", this.parent.id));
-    operations.push({
+    if ( riderEffects.length ) operations.push({
       action: "create", documentName: "ActiveEffect", data: riderEffects, parent: this.item, keepId: true
     });
 
@@ -326,7 +326,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
           }
         }
       );
-      operations.push({
+      if ( riderItems.length ) operations.push({
         action: "create", documentName: "Item", data: riderItems, parent: this.item.actor, keepId: true
       });
     }
@@ -337,11 +337,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  async getSheetChangeContext(change) {
-    return {
-      name: getHumanReadableAttributeLabel(change.key, {
-        item: this.isApplied ? this.item : true, prefixItemName: false
-      })
-    };
+  async getSheetChangeContext(change, options) {
+    return super.getSheetChangeContext(change, { item: this.isApplied ? this.item : true, prefixItemName: false });
   }
 }

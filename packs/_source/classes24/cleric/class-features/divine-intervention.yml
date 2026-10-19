@@ -7,7 +7,7 @@ system:
   description:
     value: >-
       <p>You can call on your deity or pantheon to intervene on your behalf. As
-      a Magic action, choose any
+      a &amp;Reference[Magic] action, choose any
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric
       spell} of level 5 or lower that doesn't require a Reaction to cast. As
       part of the same action, you cast that spell without expending a spell
@@ -21,8 +21,8 @@ system:
     custom: ''
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: '1'
     recovery:
@@ -34,8 +34,10 @@ system:
     subtype: ''
   prerequisites:
     level: 10
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: Cleric
   activities:
     dnd5eactivity000:
@@ -58,12 +60,14 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
         special: ''
         override: false
         concentration: false
+        expiry: null
       effects: []
       range:
         units: self
@@ -77,7 +81,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: ''
@@ -97,21 +102,29 @@ system:
       sort: 0
       name: ''
       img: systems/dnd5e/icons/svg/damage/force.svg
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: divine-intervention
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1740680081722
+  systemVersion: 6.0.5
+  createdTime: 1791232041725
+  modifiedTime: 1791232041725
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

@@ -20,7 +20,16 @@ export default class ChatLog5e extends foundry.applications.sidebar.tabs.ChatLog
    * Apply the configured chat log theme.
    */
   static applyTheme() {
-    const theme = game.settings.get("dnd5e", "chatLogTheme");
+    let theme = game.settings.get("dnd5e", "chatLogTheme");
+    // Core doesn't run configureUI on the stream view, so we need to emulate that here for the chat log only.
+    if ( !theme && (game.view === "stream") ) {
+      const { colorScheme={} } = game.settings.get("core", "uiConfig") ?? {};
+      const { interface: iface="" } = colorScheme;
+      let browserDefault;
+      if ( matchMedia("(prefers-color-scheme: dark)").matches ) browserDefault = "dark";
+      else if ( matchMedia("(prefers-color-scheme: light)").matches ) browserDefault = "light";
+      theme = iface || browserDefault;
+    }
     for ( const element of foundry.applications.detached.querySelectorAll(".chat-log, .chat-popout") ) {
       element.classList.remove("themed", "theme-light", "theme-dark");
       if ( theme ) element.classList.add("themed", `theme-${theme}`);

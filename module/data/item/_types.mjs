@@ -130,6 +130,17 @@
  */
 
 /**
+ * @typedef RenownModifier
+ * @property {string} faction  The faction identifier.
+ * @property {number} value    The magnitude of the renown adjustment.
+ */
+
+/**
+ * @typedef RenownItemSystemData
+ * @property {RenownModifier[]} modifiers  Renown modifiers.
+ */
+
+/**
  * @typedef SpellItemSystemData
  * @property {string} ability                    Override of default spellcasting ability.
  * @property {ActivationData} activation         Casting time & conditions.

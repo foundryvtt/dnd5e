@@ -189,6 +189,11 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClass.Vehicle"
   });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.FactionActorSheet, {
+    types: ["faction"],
+    makeDefault: true,
+    label: "DND5E.SheetClass.Faction"
+  });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.GroupActorSheet, {
     types: ["group"],
     makeDefault: true,
@@ -555,7 +560,7 @@ Hooks.once("i18nInit", () => {
       },
       DND5E: {
         "Feature.Class.ArtificerPlan": _loc("DND5E.Feature.Class.ArtificerInfusion"),
-        "Feature.Species": _loc("DND5E.Feature.SpeciesLegacy"),
+        "Feature.Species": _loc("DND5E.Feature.Species.LabelLegacy"),
         FlagsAlertHint: _loc("DND5E.FlagsAlertHintLegacy"),
         FlagsRemarkableAthleteHint: _loc("DND5E.FlagsRemarkableAthleteHintLegacy"),
         ItemSpeciesDetails: _loc("DND5E.ItemSpeciesDetailsLegacy"),
@@ -728,6 +733,17 @@ Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRender
 Hooks.on("getActorContextOptions", documents.Actor5e.addDirectoryContextOptions);
 Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
 
+Hooks.on("preImportAdventure", (adventure, options, toCreate, toUpdate) => {
+  for ( const scene of toUpdate.Scene ?? [] ) {
+    for ( const token of scene.tokens ?? [] ) {
+      for ( const effect of token.delta?.effects ?? [] ) {
+        // Wrap effects on deltas in a _replace to workaround https://github.com/foundryvtt/foundryvtt/issues/14373
+        if ( effect.type === "condition" ) effect.system = _replace(effect.system);
+      }
+    }
+  }
+});
+
 Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrowser.injectSidebarButton(html));
 
 Hooks.on("renderJournalEntryPageSheet", applications.journal.JournalEntrySheet5e.onRenderJournalPageSheet);
@@ -751,7 +767,10 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
     && !foundry.utils.getProperty(createData, "grid.units") ) {
     doc.updateSource({
-      grid: { distance: utils.convertLength(dnd5e.grid.distance, dnd5e.grid.units, units, { strict: false }), units }
+      grid: {
+        distance: utils.convertLength( dnd5e.grid.distance, dnd5e.grid.units, { to: units, legacy: false }).value,
+        units
+      }
     });
   }
 });

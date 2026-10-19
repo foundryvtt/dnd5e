@@ -152,20 +152,25 @@
 
   /* Embed Captions */
   .content-embed {
+    margin: 0;
+
     figcaption cite {
       display: block;
       text-align: right;
 
       &::before { content: "-"; }
     }
+  }
+  p > .embed-name {
+    font-style: italic;
+    font-weight: bold;
 
-    p > .embed-name {
-      font-style: italic;
-      font-weight: bold;
-
-      &:has(> a) > a::after { content: "."; }
-      &:not(:has(> a))::after { content: ". "; }
-    }
+    &:has(> a) > a::after { content: "."; }
+    &:not(:has(> a))::after { content: ". "; }
+  }
+  .subfeature {
+    text-indent: 1em hanging;
+    .embed-name { font-style: normal; }
   }
 
   /* Embedded Roll Tables */
@@ -280,6 +285,9 @@
         display: flex;
         flex-wrap: wrap;
         margin: 0.5em 0;
+
+        &:has(+ dl) { margin-block-end: 0; }
+        + dl { margin-block-start: 0; }
 
         dd { margin-inline-start: 4px; }
         > div {
@@ -400,7 +408,7 @@
     }
   }
 
-  :is(.editor-content, .card-content, .item-summary) {
+  :is(.editor-content, .card-content, .card-description, .item-summary) {
     h1, h2, h3 { font-family: var(--dnd5e-font-roboto-slab); }
     h1 { font-size: 1.5em; }
     h2 { font-size: 1.4em; }
@@ -410,9 +418,16 @@
       padding-bottom: 0;
       border-bottom: 1px solid var(--dnd5e-color-black);
     }
+    h5, h6 {
+      font-family: var(--font-sans);
+      font-weight: normal;
+      margin: 0 0 .5rem;
+    }
   }
 
-  :is(.journal-entry-content, .journal-page-content, .editor-content, .card-content, .item-summary) {
+  :is(
+    .journal-entry-content, .journal-page-content, .editor-content, .card-content, .card-description, .item-summary
+  ) {
     font-family: var(--dnd5e-font-roboto-condensed);
 
     h1, h2, h3, h4, h5, h6 { color: var(--color-text-emphatic); }
@@ -429,6 +444,7 @@
     }
 
     h5 { font-size: var(--font-size-13); }
+    h6 { font-size: var(--font-size-12); }
 
     ul, ol {
       margin: .5em 0;

@@ -14,13 +14,14 @@ import * as activities from "./documents/activity/_module.mjs";
 import Actor5e from "./documents/actor/actor.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import Adventure5e from "./documents/adventure.mjs";
+import { Filter } from "./filter.mjs";
 import { preLocalize } from "./utils.mjs";
 
 /**
  * @import {
- *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
- *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
- *   AdventureConfiguration, AdventureImportAction,
+ *   AbilityConfiguration, ActiveEffectChangeTypeConfig5e, ActivityActivationTypeConfiguration,
+ *   ActivityConsumptionTargetConfiguration, ActivityTypeConfiguration, ActorSizeConfiguration,
+ *   AdvancementTypeConfiguration, AdventureConfiguration, AdventureImportAction,
  *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
  *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
@@ -1104,6 +1105,11 @@ preLocalize("activityActivationTypes", { key: "label" });
  * @enum {ActivityBehaviorConfiguration}
  */
 DND5E.activityBehaviorTypes = {
+  antimagic: {
+    label: "TYPES.RegionBehavior.dnd5e.antimagic",
+    icon: "systems/dnd5e/icons/svg/behaviors/antimagic.svg",
+    model: regionBehaviors.AntimagicActivityBehavior
+  },
   applyActiveEffect: {
     label: "TYPES.RegionBehavior.applyActiveEffect",
     icon: "systems/dnd5e/icons/svg/behaviors/apply-active-effect.svg",
@@ -1881,7 +1887,10 @@ DND5E.featureTypes = {
     label: "DND5E.Feature.Monster"
   },
   race: {
-    label: "DND5E.Feature.Species"
+    label: "DND5E.Feature.Species.Label",
+    subtypes: {
+      lineage: "DND5E.Feature.Species.Lineage"
+    }
   },
   enchantment: {
     label: "DND5E.ENCHANTMENT.Label",
@@ -1918,6 +1927,7 @@ preLocalize("featureTypes", { key: "label" });
 preLocalize("featureTypes.class.subtypes", { sort: true });
 preLocalize("featureTypes.enchantment.subtypes", { sort: true });
 preLocalize("featureTypes.feat.subtypes", { sort: true });
+preLocalize("featureTypes.race.subtypes", { sort: true });
 preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
 
 /* -------------------------------------------- */
@@ -2421,6 +2431,21 @@ DND5E.healingTypes = {
   }
 };
 preLocalize("healingTypes", { keys: ["label", "labelShort"] });
+
+/* -------------------------------------------- */
+
+/**
+ * Additional special types of damage resistance, immunity, or vulnerability available for actors.
+ * @enum {DamageResistanceConfiguration}
+ */
+DND5E.damageResistanceTypes = {
+  falling: {
+    label: "DND5E.DAMAGE.Resistance.Falling",
+    icon: "systems/dnd5e/icons/svg/statuses/falling.svg",
+    filter: new Filter({ k: "properties", o: "has", v: "falling" })
+  }
+};
+preLocalize("damageResistanceTypes", { key: "label" });
 
 /* -------------------------------------------- */
 /*  Movement                                    */
@@ -3824,6 +3849,11 @@ DND5E.conditionEffects = {
  * @enum {StatusEffectConfig5e}
  */
 DND5E.statusEffects = {
+  antimagic: {
+    name: "EFFECT.DND5E.StatusAntimagic",
+    img: "systems/dnd5e/icons/svg/statuses/antimagic.svg",
+    hud: false
+  },
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
     img: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
@@ -3943,9 +3973,23 @@ DND5E.elevationScaling = true;
 
 /* -------------------------------------------- */
 
+const D20_ROLLS = Object.freeze([
+  { value: "d20", label: "DND5E.EFFECT.Change.Key.D20" },
+  { value: "attack", label: "DND5E.EFFECT.Change.Key.Attack" },
+  { value: "check", label: "DND5E.EFFECT.Change.Key.Check" },
+  { value: "save", label: "DND5E.EFFECT.Change.Key.Save" }
+]);
+
+const DAMAGE_ROLLS = Object.freeze([
+  { value: "damage", label: "DND5E.EFFECT.Change.Key.Damage" },
+  { value: "healing", label: "DND5E.EFFECT.Change.Key.Healing" }
+]);
+
+const ALL_ROLLS = Object.freeze([...D20_ROLLS, { rule: true }, ...DAMAGE_ROLLS]);
+
 /**
  * System provided active effect change types.
- * @enum {ActiveEffectChangeTypeConfig & { [group]: string, [skipConditions]: boolean }}
+ * @enum {ActiveEffectChangeTypeConfig5e}
  */
 DND5E.activeEffectChangeTypes = Object.freeze({
   "dnd5e.advantage": {
@@ -3953,6 +3997,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: D20_ROLLS,
     skipConditions: true
   },
   "dnd5e.bonus": {
@@ -3960,6 +4005,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: ALL_ROLLS,
     skipConditions: true
   },
   "dnd5e.maximum": {
@@ -3967,6 +4013,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: D20_ROLLS,
     skipConditions: true
   },
   "dnd5e.minimum": {
@@ -3974,6 +4021,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
+    keyOptions: D20_ROLLS,
     skipConditions: true
   }
 });
@@ -4278,7 +4326,11 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-immunities.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    }
   },
   dr: {
     labels: {
@@ -4287,7 +4339,11 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-resistances.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    }
   },
   dv: {
     labels: {
@@ -4296,7 +4352,11 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     icon: "systems/dnd5e/icons/svg/trait-damage-vulnerabilities.svg",
-    configKey: "damageTypes"
+    configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    }
   },
   dm: {
     labels: {
@@ -4305,6 +4365,10 @@ DND5E.traits = {
       all: "DND5E.DAMAGE.All"
     },
     configKey: "damageTypes",
+    special: {
+      configKey: "damageResistanceTypes",
+      label: "DND5E.DAMAGE.Resistance.UniqueCategory"
+    },
     dataType: Number
   },
   ci: {
@@ -4317,7 +4381,7 @@ DND5E.traits = {
     labelKeyPath: "name"
   }
 };
-preLocalize("traits", { keys: ["labels.title", "labels.all"] });
+preLocalize("traits", { keys: ["labels.title", "labels.all", "special.label"] });
 
 /* -------------------------------------------- */
 
@@ -4483,6 +4547,20 @@ preLocalize("groupTypes");
 /* -------------------------------------------- */
 
 /**
+ * @typedef FactionCategory5e
+ * @property {string} label  The name of the faction category.
+ */
+
+/**
+ * Faction categories.
+ * @type {Record<string, FactionCategory5e>}
+ */
+DND5E.factionCategories = {};
+preLocalize("factionCategories", { key: "label", sort: true });
+
+/* -------------------------------------------- */
+
+/**
  * Configuration information for activity types.
  * @enum {ActivityTypeConfiguration}
  */
@@ -4590,6 +4668,7 @@ DND5E.defaultArtwork = {
   Actor: {
     character: "systems/dnd5e/icons/svg/actors/character.svg",
     encounter: "systems/dnd5e/icons/svg/actors/encounter.svg",
+    faction: "systems/dnd5e/icons/svg/actors/faction.svg",
     group: "systems/dnd5e/icons/svg/actors/group.svg",
     npc: "systems/dnd5e/icons/svg/actors/npc.svg",
     vehicle: "systems/dnd5e/icons/svg/actors/vehicle.svg"
@@ -4604,6 +4683,7 @@ DND5E.defaultArtwork = {
     feat: "systems/dnd5e/icons/svg/items/feature.svg",
     loot: "systems/dnd5e/icons/svg/items/loot.svg",
     race: "systems/dnd5e/icons/svg/items/race.svg",
+    renown: "systems/dnd5e/icons/svg/items/renown.svg",
     spell: "systems/dnd5e/icons/svg/items/spell.svg",
     subclass: "systems/dnd5e/icons/svg/items/subclass.svg",
     tool: "systems/dnd5e/icons/svg/items/tool.svg",
@@ -4845,6 +4925,7 @@ preLocalize("ruleTypes", { key: "label" });
  */
 DND5E.rules = {
   inspiration: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.nkEPI89CiQnOaLYh",
+  heroicinspiration: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.nkEPI89CiQnOaLYh",
   carryingcapacity: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.1PnjDBKbQJIVyc2t",
   push: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.Hni8DjqLzoqsVjb6",
   lift: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.Hni8DjqLzoqsVjb6",
@@ -4915,9 +4996,11 @@ DND5E.rules = {
   opportunityattacks: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.eNvzQabiTqTtfzis",
   twoweaponfighting: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.FQTS08uH74A6psL2",
   grappling: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.YSLWJcQCP6kzsPql",
+  grapple: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.YSLWJcQCP6kzsPql",
   escapingagrapple: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.2TZKy9YbMN3ZY3h8",
   movingagrappledcreature: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.x5bUdhAD7u5Bt2rg",
   shoving: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.hrdqMF8hRXJdNzJx",
+  shove: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.hrdqMF8hRXJdNzJx",
   cover: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.W7f7PcRubNUMIq2S",
   halfcover: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.hv0J61IAfofuhy3Q",
   threequarterscover: "Compendium.dnd5e.content24.JournalEntry.phbAppendixDRule.JournalEntryPage.zAMStUjUrPV10dFm",

@@ -4,38 +4,41 @@ type: feat
 img: icons/magic/life/cross-yellow-green.webp
 system:
   activities:
-    2ADklkzUUW3aAeOt:
-      type: damage
-      _id: 2ADklkzUUW3aAeOt
+    J6MZEMU8tysM4Ada:
+      type: heal
       activation:
-        type: ''
+        type: special
         value: null
         override: false
-        condition: Deal damage with any Cleric cantrip
+        condition: When you cast a Cleric cantrip and deal damage to a creature with it
       consumption:
+        targets: []
         scaling:
           allowed: false
         spellSlot: true
-        targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
-        units: self
+        units: ft
         special: ''
+        value: '60'
       target:
         template:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
-          count: ''
+          count: '1'
           type: creature
           special: ''
         override: false
@@ -45,33 +48,31 @@ system:
         recovery: []
         max: ''
       sort: 0
-      damage:
-        critical:
-          allow: false
-        parts:
-          - custom:
-              enabled: false
-              formula: ''
-            number: null
-            denomination: 0
-            bonus: '@abilities.wis.mod'
-            types:
-              - acid
-              - bludgeoning
-              - cold
-              - fire
-              - force
-              - lightning
-              - necrotic
-              - piercing
-              - poison
-              - psychic
-              - radiant
-              - slashing
-              - thunder
-            scaling:
-              number: 1
-      name: ''
+      healing:
+        number: null
+        denomination: null
+        types:
+          - temphp
+        custom:
+          enabled: true
+          formula: 2 * @abilities.wis.mod
+        scaling:
+          number: 1
+        bonus: ''
+        modifiers: []
+      name: Heal
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: 14
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: cleric
+      _id: J6MZEMU8tysM4Ada
   uses:
     spent: 0
     recovery: []
@@ -79,45 +80,95 @@ system:
   description:
     value: >-
       <p>Add your Wisdom modifier to the damage you deal with any Cleric
-      cantrip.</p><section class="secret"
-      id="secret-bDHa7ClHZ3YPWKvs"><p><strong>Foundry Note</strong></p><p>This
-      bonus damage is not automatically included in your cantrips.</p><p>You can
-      add [[lookup @abilities.wis.mod]] to the Situational Bonus field of your
-      cantrip's damage rolls or you can permanently add it to your cantrips by
-      adding "@abilities.wis.mod" (minus the quotes) in the Bonus
-      field.</p><p>Alternatively, the <strong>Damage</strong> activity on this
-      feature includes your Wisdom modifier and allows you to choose the damage
-      type in the roll's dialog box.</p></section>
+      cantrip.</p>
     chat: ''
   source:
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   enchant: {}
   type:
     value: class
     subtype: ''
   prerequisites:
     level: 7
+    items: []
     repeatable: false
   properties: []
   requirements: Cleric
-  identifier: blessed-strikes-potent-spellcasting
-effects: []
+  identifier: potent-spellcasting
+  advancement: {}
+  crewed: false
+effects:
+  - name: Potent Spellcasting
+    img: icons/magic/life/cross-yellow-green.webp
+    system:
+      magical: false
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbClcPotentSpel
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      changes:
+        - key: damage
+          type: dnd5e.bonus
+          value: '@abilities.wis.mod'
+          phase: initial
+          _id: Z1WsDeqakxBcFt7W
+          conditions: |-
+            [{
+              "k": "item.classIdentifier",
+              "v": "cleric"
+            }, {
+              "k": "item.level",
+              "v": 0
+            }]
+          replacement: ''
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: OIqHubfrJ2gjeNYg
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.368'
+      systemId: dnd5e
+      systemVersion: 6.0.5
+      createdTime: 1791232041725
+      modifiedTime: 1791232041725
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!phbClcPotentSpel.OIqHubfrJ2gjeNYg'
 folder: 3wY92TRgyyyDkpmF
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1740685844407
+  systemVersion: 6.0.5
+  createdTime: 1791232041725
+  modifiedTime: 1791232041725
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 800000
