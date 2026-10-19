@@ -87,6 +87,15 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
     });
     await sheet.render({ force: true });
     config.classes = config.classes ? `spells ${config.classes ?? ""}` : "spells";
+    if ( config.caption && config.table ) {
+      const table = sheet.element.querySelector("table");
+      if ( table ) {
+        config.caption = false;
+        const caption = document.createElement("caption");
+        caption.innerText = config.label ?? this.parent.name;
+        table.prepend(caption);
+      }
+    }
     return sheet.element.children;
   }
 }
