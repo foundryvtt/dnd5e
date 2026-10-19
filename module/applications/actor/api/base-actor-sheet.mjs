@@ -1683,7 +1683,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const t = foundry.utils.parseUuid(this.inventorySource.uuid);
     const base = d.embedded?.length ? "document" : "primary";
     return (d.collection === t.collection) && (d[`${base}Id`] === t[`${base}Id`])
-    && (d[`${base}Type`] === t[`${base}Type`]) ? "move" : "copy";
+      && (d[`${base}Type`] === t[`${base}Type`]) ? "move" : "copy";
   }
 
   /* -------------------------------------------- */

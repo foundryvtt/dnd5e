@@ -927,6 +927,15 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
+  /** @override */
+  _defaultDropBehavior(event, data) {
+    const dropBehavior = super._defaultDropBehavior(event, data);
+    if ( data?.effectType !== "enchantment" ) return dropBehavior;
+    return dropBehavior === "copy" ? "link" : dropBehavior;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle beginning drag events on the sheet.
    * @param {DragEvent} event  The initiating drag start event.
@@ -972,6 +981,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   _onDrop(event) {
+    event._behavior = this._dropBehavior(event);
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
 
@@ -1018,18 +1028,24 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const options = { parent: this.item, keepOrigin: false };
 
     if ( effect.type === "enchantment" ) {
-      effectData.system.origin.item ??= effect.parent?.uuid;
-      if ( effect.system.isOnActivity ) effectData.transfer = true;
+      if ( event._behavior === "link" ) {
+        effectData.transfer = true;
+        if ( effect.parent ) effectData.system.origin.item = effect.parent?.uuid;
+      }
       options.keepOrigin = true;
-      options.dnd5e = {
-        enchantmentProfile: effect.id,
-        activityId: data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
-          a.effects.some(e => e._id === effect.id)
-        )?.id
-      };
+      const activityId = data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
+        a.effects.some(e => e._id === effect.id)
+      )?.id;
+      effectData.system.origin.item ??= effect.parent?.uuid;
+      if ( activityId ) {
+        effectData.system.origin.activity = activityId;
+        effectData.system.origin.profile = effect.id;
+      }
     }
 
-    return ActiveEffect.create(effectData, options);
+    const created = ActiveEffect.create(effectData, options);
+    if ( (event._behavior === "move") && (this.item.uuid !== effect.item?.uuid) ) effect.delete();
+    return created;
   }
 
   /* -------------------------------------------- */

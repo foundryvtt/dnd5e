@@ -733,6 +733,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
       return a.effects.some(e => e._id === this.id);
     });
     if ( activity ) data.activityId = activity.id;
+    data.effectType = this.type;
     return data;
   }
 

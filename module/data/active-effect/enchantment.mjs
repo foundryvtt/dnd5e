@@ -229,8 +229,9 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /** @inheritDoc */
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( options.chatMessageOrigin ) {
-      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+    const chatMessageOrigin = options.chatMessageOrigin ?? this.origin.message?.slice(12);
+    if ( chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${chatMessageOrigin}"] enchantment-application`)
         .forEach(element => element.buildItemList());
     }
   }
@@ -279,11 +280,13 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /** @override */
   async collectRiders(options={}) {
+    if ( !this.isApplied ) return [];
+
     const operations = [];
     let item;
     let profile;
-    const { chatMessageOrigin } = options;
-    const { enchantmentProfile, activityId } = options.dnd5e ?? {};
+    const chatMessageOrigin = options?.chatMessageOrigin ?? this.origin.message?.slice(12);
+    const { activity: activityId, profile: enchantmentProfile } = this.origin;
 
     if ( chatMessageOrigin ) {
       const message = game.messages.get(chatMessageOrigin);
