@@ -8,23 +8,20 @@ system:
     value: >-
       <p>Whenever you hit a creature with an attack granted by your Flurry of
       Blows, you can impose one of the following effects on that
-      target.</p><p><strong>Addle.</strong> The target can't make Opportunity
-      Attacks until the start of its next turn.</p><p><strong>Push.</strong> The
-      target must succeed on a Strength saving throw or be pushed up to 15 feet
-      away from you.</p><p><strong>Topple.</strong> The target must succeed on a
-      Dexterity saving throw or have the Prone condition.</p><section
-      id="secret-4BkgU26V2trst09S" class="secret"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Addle</strong> activity includes an Active
-      Effect for tracking the addled target.</p><p>The <strong>Topple</strong>
-      activity includes an Active Effect that applies the Prone
-      status.</p></section>
+      target.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe.Activity.1jdSaWanuRrdkVs3
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe.Activity.XoaS0RtDCGAqrQsf
+      caption=false cite=false
+      nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe.Activity.5Qgc0K3TfuonkPIG
+      caption=false cite=false nameStyle=inline]</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -34,16 +31,17 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Warrior of the Open Hand
   activities:
     1jdSaWanuRrdkVs3:
       type: utility
       name: Addle
       _id: 1jdSaWanuRrdkVs3
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: >-
@@ -56,12 +54,20 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: >-
+          <p>The target can't make Opportunity Attacks until the start of its
+          next turn.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: uQ474o5Wsv3sEAJK
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -71,6 +77,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -88,12 +95,23 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
     XoaS0RtDCGAqrQsf:
       type: save
       name: Push
       _id: XoaS0RtDCGAqrQsf
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: >-
@@ -106,10 +124,14 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: >-
+          <p>The target must succeed on a Strength saving throw or be pushed up
+          to 15 feet away from you.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -120,6 +142,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -141,12 +164,25 @@ system:
         dc:
           calculation: wis
           formula: ''
+        bonus: ''
+        visible: true
+      img: systems/dnd5e/icons/svg/action/push.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
     5Qgc0K3TfuonkPIG:
       type: save
       name: Topple
       _id: 5Qgc0K3TfuonkPIG
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: >-
@@ -159,13 +195,21 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: >-
+          <p>The target must succeed on a Dexterity saving throw or have the
+          &amp;Reference[Prone apply=false] condition.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
-        - _id: E1A8QE6kPsLgqTAP
+        - _id: CwqWlqGeoCREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.UVtVRNlaslbMIsuH
           onSave: false
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -175,6 +219,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -196,24 +241,51 @@ system:
         dc:
           calculation: wis
           formula: ''
+        bonus: ''
+        visible: true
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: open-hand-technique
+  advancement: {}
+  crewed: false
 effects:
   - name: Addled
-    img: systems/dnd5e/icons/svg/items/feature.svg
+    img: icons/magic/unholy/strike-hand-glow-pink.webp
     origin: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
     transfer: false
     _id: uQ474o5Wsv3sEAJK
     type: base
     system:
       changes: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
-      value: 1
+      value: null
       units: turns
-      expiry: turnStart
+      expiry: targetStart
       expired: false
-    description: ''
+    description: >-
+      <p>The target can't make Opportunity Attacks until the start of its next
+      turn.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
@@ -221,63 +293,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.6
+      createdTime: 1792443358648
+      modifiedTime: 1792443358648
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbmnkOpenHandTe.uQ474o5Wsv3sEAJK'
-  - name: Toppled
-    img: systems/dnd5e/icons/svg/items/feature.svg
-    origin: Compendium.dnd5e.classes24.Item.phbmnkOpenHandTe
-    transfer: false
-    _id: E1A8QE6kPsLgqTAP
-    type: base
-    system:
-      changes: []
-    disabled: false
-    duration:
-      value: null
-      units: seconds
-      expiry: null
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses:
-      - prone
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-      exportSource: null
-    showIcon: 2
-    start: null
-    folder: null
-    _key: '!items.effects!phbmnkOpenHandTe.E1A8QE6kPsLgqTAP'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866574822
-  modifiedTime: 1745256763235
+  systemVersion: 6.0.6
+  createdTime: 1792443358648
+  modifiedTime: 1792443358648
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
