@@ -78,7 +78,7 @@ Issues which are assigned to a Milestone are considered prioritized. This assign
 - Ensure that the bug is reproducible with **no modules active**. If the bug only happens when a module is active, report it to the module's author instead.
 - Provide hosting details as they might be relevant.
 - Provide clear step-by-step reproduction instructions, as well as what you expected to happen during those steps vs what actually happened.
-- Bug reports authored by AI agents or written by AI will not be considered. Bugs identified using AI tools must first be reproduced by a human before being accepted. Submitters with history of erroneous bug reports may be blocked from the project at the maintainers digression.
+- Bug reports obviously authored by AI agents will not be considered. Bugs identified using AI tools must first be reproduced by a human before being accepted. Submitters with history of spurious bug reports may be blocked from the project at the maintainers discretion.
 
 ### Feature Requests
 
@@ -117,7 +117,7 @@ To contribute code, [fork this project](https://docs.github.com/en/get-started/q
 
 ### AI Contributions
 
-The system does not accept code produced by AI coding tools. PR descriptions should also not be produced using AI writing tools.
+PR descriptions must be human authored and adequately explain the PR (see 'PR Size' below). Submitters must demonstrate more than surface-level understanding of the changes and must be able to defend them on review in their own words. Poor quality, majority AI-authored PRs will be rejected without review.
 
 ### Style
 
