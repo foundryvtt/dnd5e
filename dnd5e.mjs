@@ -189,6 +189,11 @@ Hooks.once("init", function() {
     makeDefault: true,
     label: "DND5E.SheetClass.Vehicle"
   });
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.FactionActorSheet, {
+    types: ["faction"],
+    makeDefault: true,
+    label: "DND5E.SheetClass.Faction"
+  });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.GroupActorSheet, {
     types: ["group"],
     makeDefault: true,
@@ -555,7 +560,7 @@ Hooks.once("i18nInit", () => {
       },
       DND5E: {
         "Feature.Class.ArtificerPlan": _loc("DND5E.Feature.Class.ArtificerInfusion"),
-        "Feature.Species": _loc("DND5E.Feature.SpeciesLegacy"),
+        "Feature.Species": _loc("DND5E.Feature.Species.LabelLegacy"),
         FlagsAlertHint: _loc("DND5E.FlagsAlertHintLegacy"),
         FlagsRemarkableAthleteHint: _loc("DND5E.FlagsRemarkableAthleteHintLegacy"),
         ItemSpeciesDetails: _loc("DND5E.ItemSpeciesDetailsLegacy"),
@@ -762,7 +767,10 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
     && !foundry.utils.getProperty(createData, "grid.units") ) {
     doc.updateSource({
-      grid: { distance: utils.convertLength(dnd5e.grid.distance, dnd5e.grid.units, units, { strict: false }), units }
+      grid: {
+        distance: utils.convertLength( dnd5e.grid.distance, dnd5e.grid.units, { to: units, legacy: false }).value,
+        units
+      }
     });
   }
 });

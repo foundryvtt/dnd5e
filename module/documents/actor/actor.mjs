@@ -11,7 +11,7 @@ import D20RollModificationField from "../../data/shared/d20-roll-modification-fi
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { Filter } from "../../filter.mjs";
 import {
-  convertTime, defaultUnits, formatLength, formatNumber, formatTime, simplifyBonus, staticID
+  convertTime, defaultUnits, formatLength, formatNumber, formatTime, getPluralLocalizationKey, simplifyBonus, staticID
 } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
@@ -534,6 +534,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareDerivedData() {
+    dnd5e.registry.renown.track(this);
     const origin = this.getFlag("dnd5e", "summon.origin");
     if ( origin && this.token?.id ) {
       const { collection, primaryId } = foundry.utils.parseUuid(origin);
@@ -891,7 +892,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const originalValue = d.value;
       if ( Math.sign(d.value) !== Math.sign(d.value + modifications[type]) ) d.value = 0;
       else d.value += modifications[type];
-      (d.active[type === "ALL" ? "all" : "type"] ??= {}).modification = true;
+      const isSpecial = !(type in CONFIG.DND5E.damageTypes) && !(type in CONFIG.DND5E.healingTypes) && (type !== "ALL");
+      this.#setDamageActive(
+        "modification", d, type === "ALL" ? "all" : isSpecial ? "special" : "type", isSpecial ? type : null
+      );
       modifications[type] += originalValue - d.value;
     };
 
@@ -909,6 +913,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( !CONFIG.DND5E.damageTypes[d.type]?.isPhysical || !d.properties?.size
         || !dm.bypasses?.intersection(d.properties).size ) {
         applyModification(d);
+        for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
+          if ( filter.check(d) ) applyModification(d, key);
+        }
         if ( !(d.type in CONFIG.DND5E.healingTypes) ) applyModification(d, "ALL");
       }
 
@@ -983,23 +990,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   #changeHasEffect(category, damage, { options={}, skipDowngrade=false }={}) {
     const config = this.system.traits?.[`d${category.slice(0, 1)}`];
     const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
-    const setActive = type => {
-      if ( damage.active ) {
-        damage.active[type] ??= {};
-        damage.active[type][category] = true;
-      }
-      return true;
-    };
     const type = typeof damage === "string" ? damage : damage.type;
     const isHealingType = type in CONFIG.DND5E.healingTypes;
 
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
       if ( !isHealingType && downgrade("ALL") && this.#changeHasEffect("immunity", "ALL", { skipDowngrade: true }) ) {
-        return setActive("all");
+        return this.#setDamageActive(category, damage, "all");
       }
       if ( downgrade(type) && this.#changeHasEffect("immunity", type, { skipDowngrade: true }) ) {
-        return setActive("type");
+        return this.#setDamageActive(category, damage, "type");
+      }
+      for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
+        if ( !downgrade(key) || !filter.check(damage) ) continue;
+        if ( this.#changeHasEffect("immunity", key, { skipDowngrade: true }) ) {
+          return this.#setDamageActive(category, damage, "special", key);
+        }
       }
     }
 
@@ -1011,12 +1017,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !isHealingType
       && !this.#changeIsIgnored(category, "ALL", { options, skipDowngrade })
       && config?.value.has("ALL") ) {
-      return setActive("all");
+      return this.#setDamageActive(category, damage, "all");
     }
 
     // If specific type damage resistance is present and not ignored
     if ( !this.#changeIsIgnored(category, type, { options, skipDowngrade }) && config?.value.has(type) ) {
-      return setActive("type");
+      return this.#setDamageActive(category, damage, "type");
+    }
+
+    // Check filters against special resistance types
+    for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
+      if ( !config?.value.has(key) || this.#changeIsIgnored(category, key, { options, skipDowngrade }) ) continue;
+      if ( filter.check(damage) ) return this.#setDamageActive(category, damage, "special", key);
     }
 
     return false;
@@ -1049,6 +1061,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( (category === "resistance") && downgrade(type) && !this.#changeHasEffect("immunity", type) ) return true;
 
     return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Set the active data for a damage description.
+   * @param {DamageAffectCategory} category  Type of change.
+   * @param {DamageDescription} damage       Damage description to consider or a specific type.
+   * @param {"all"|"type"|"special"} type    Top-level type.
+   * @param {string} [subtype]               Sub-type within the special type.
+   * @returns {true}
+   */
+  #setDamageActive(category, damage, type, subtype) {
+    if ( damage.active ) {
+      damage.active[type] ??= {};
+      if ( subtype ) {
+        damage.active[type][subtype] ??= {};
+        damage.active[type][subtype][category] = true;
+      } else {
+        damage.active[type][category] = true;
+      }
+    }
+    return true;
   }
 
   /* -------------------------------------------- */
@@ -2463,12 +2498,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Create a chat message
-    const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
       content: `<p>${_loc(message, {
         name: this.name,
-        dice: _loc(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
-        health: _loc(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
+        dice: _loc(getPluralLocalizationKey(dhd, pr => `DND5E.HITDICE.Counted.${pr}`), { number: formatNumber(dhd) }),
+        health: _loc(
+          getPluralLocalizationKey(dhp, pr => `DND5E.HITPOINTS.Counted.${pr}`), { number: formatNumber(dhp) }
+        )
       })}</p>`,
       flavor: this.createRestFlavor(config, result),
       type: "rest",
@@ -2974,7 +3010,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( settings.keep.has("class") && ((i.type === "feat") || (i.type === "weapon")) && profDiff ) {
           // Items gained from the source should use the source's proficiency bonus.
           Object.values(i.system.activities).forEach(activity => {
-            if ( activity.type === "attack" ) {
+            if ( dnd5e.documents.activity.UtilityActivity.isLike(activity.type, "attack") ) {
               activity.attack.bonus ??= "";
               activity.attack.bonus += ` ${profDiff < 0 ? "" : "+"}${profDiff}`;
             }
@@ -3412,6 +3448,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /* -------------------------------------------- */
 
+  /**
+   * Prepare default list of types if none are specified.
+   * @returns {string[]}
+   * @protected
+   */
+  static _createDialogTypes() {
+    return this.TYPES.filter(t => (t !== "faction") || dnd5e.settings.renownScore);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
@@ -3445,6 +3492,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     super._onDelete(options, userId);
+    dnd5e.registry.renown.untrack(this);
 
     const origin = this.getFlag("dnd5e", "summon.origin");
     if ( origin ) {
@@ -3748,7 +3796,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !foundry.utils.isEmpty(updates.actor) ) operations.push(this.parent
       ? {
         action: "update", documentName: "ActorDelta", parent: this.parent,
-        updates: [{ _id: this.parent.delta.id, ...updates.actor }], ...options
+        updates: [{ ...updates.actor, _id: this.parent.delta.id }], ...options
       }
       : { action: "update", documentName: "Actor", updates: [{ _id: this.id, ...updates.actor }], ...options }
     );

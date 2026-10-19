@@ -23,9 +23,11 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   static DEFAULT_OPTIONS = {
     actions: {
       addRecovery: ItemSheet5e.#addRecovery,
+      addRenown: ItemSheet5e.#addRenown,
       deleteCraft: ItemSheet5e.#deleteCraft,
       deleteDocument: ItemSheet5e.#deleteDocument,
       deleteRecovery: ItemSheet5e.#deleteRecovery,
+      deleteRenown: ItemSheet5e.#deleteRenown,
       editDescription: ItemSheet5e.#editDescription,
       modifyAdvancementChoices: ItemSheet5e.#modifyAdvancementChoices,
       showConfiguration: ItemSheet5e.#showConfiguration,
@@ -200,7 +202,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       isEmbedded: this.item.isEmbedded,
       isIdentifiable: "identified" in this.item.system,
       isIdentified: this.item.system.identified !== false,
-      isPhysical: "quantity" in this.item.system,
+      isPhysical: this.item.system.isPhysical,
       item: this.item,
       labels: this.item.labels,
       system: this.item.system,
@@ -273,7 +275,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const origins = {};
     const riders = [];
     context.activities = (this.item.system.activities ?? []).reduce((arr, activity) => {
-      if ( activity.type === "enchant" ) {
+      if ( activity.metadata.hasRiders ) {
         for ( const effect of activity.effects ?? [] ) {
           for ( const id of effect.riders.activity ) {
             origins[id] ??= [];
@@ -428,7 +430,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         return arr;
       }, []);
     }
-    const origins = (this.item.system.activities?.getByType("enchant") ?? [])
+    const origins = (this.item.system.activities ?? []).values().filter(a => a.metadata.hasRiders)
       .flatMap(a => a.effects)
       .reduce((obj, effects) => {
         const { _id, riders } = effects;
@@ -732,6 +734,17 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /* -------------------------------------------- */
 
   /**
+   * Handle adding a renown modifier.
+   * @this {ItemSheet5e}
+   * @returns {any}
+   */
+  static #addRenown() {
+    return this.submit({ updateData: { "system.modifiers": [...this.item.system.toObject().modifiers, {}] } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle removing an document.
    * @this {ItemSheet5e}
    * @param {Event} event         Triggering click event.
@@ -767,6 +780,20 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const recovery = this.item.system.toObject().uses.recovery;
     recovery.splice(target.closest("[data-index]").dataset.index, 1);
     this.submit({ updateData: { "system.uses.recovery": recovery } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing a renown modifier.
+   * @this {ItemSheet5e}
+   * @param {Event} event         The triggering event.
+   * @param {HTMLElement} target  The action target.
+   */
+  static #deleteRenown(event, target) {
+    const modifiers = this.item.system.toObject().modifiers;
+    modifiers.splice(target.closest("[data-index]").dataset.index, 1);
+    this.submit({ updateData: { "system.modifiers": modifiers } });
   }
 
   /* -------------------------------------------- */

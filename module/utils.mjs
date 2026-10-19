@@ -1,7 +1,9 @@
 import TargetsField from "./data/chat-message/fields/targets-field.mjs";
 
 /**
- * @import { TargetDescriptor5e, UnitConfiguration } from "./_types.mjs";
+ * @import {
+ *   FilterTargetUnitsCallback, TargetDescriptor5e, UnitConfiguration, UnitConversionOptions
+ * } from "./_types.mjs";
  * @import { RollData } from "./documents/_types.mjs";
  */
 
@@ -325,8 +327,8 @@ export function formatTime(value, unit, options={}) {
     if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
       return _loc(`${config.counted}.narrow`, { number: formatNumber(value, options) });
     } else {
-      const pr = new Intl.PluralRules(game.i18n.lang);
-      return _loc(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+      const localizationKey = getPluralLocalizationKey(value, pr => `${config.counted}.${pr}`);
+      return _loc(localizationKey, { number: formatNumber(value, options) });
     }
   }
   try {
@@ -376,7 +378,7 @@ export function formatWeight(value, unit, options={}) {
 function _formatSystemUnits(value, unit, config, { parts=false, ...options }={}) {
   options.unitDisplay ??= "short";
   if ( config?.counted ) {
-    const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
+    const localizationKey = getPluralLocalizationKey(value, pr => `${config.counted}.${options.unitDisplay}.${pr}`);
     return _loc(localizationKey, { number: formatNumber(value, options) });
   }
   unit = config?.formattingUnit ?? unit;
@@ -398,12 +400,31 @@ const _pluralRules = {};
 /**
  * Get a PluralRules object, fetching from cache if possible.
  * @param {object} [options={}]
+ * @param {string} [options.lang]
  * @param {string} [options.type=cardinal]
  * @returns {Intl.PluralRules}
  */
-export function getPluralRules({ type="cardinal" }={}) {
-  _pluralRules[type] ??= new Intl.PluralRules(game.i18n.lang, { type });
-  return _pluralRules[type];
+export function getPluralRules({ lang=game.i18n.lang, type="cardinal" }={}) {
+  const key = `${lang}_${type}`;
+  _pluralRules[key] ??= new Intl.PluralRules(lang, { type });
+  return _pluralRules[key];
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Get a pluralized localization key using the provided formatting function which properly falls back to English
+ * if the current language is missing the key.
+ * @param {number} value         Counted value.
+ * @param {Function} format      Method that takes a plural rule value and returns the full localization key.
+ * @param {object} [options={}]  Options passed to `getPluralRules`.
+ * @returns {string}
+ */
+export function getPluralLocalizationKey(value, format, options={}) {
+  if ( value === undefined ) return format("other");
+  const localizationKey = format(getPluralRules(options).select(value));
+  if ( game.i18n.has(localizationKey) ) return localizationKey;
+  return format(getPluralRules({ ...options, lang: "en" }).select(value));
 }
 
 /* -------------------------------------------- */
@@ -813,16 +834,32 @@ export function getSceneTargets(actor, { checkBaseActor }={}) {
 
 /**
  * Convert the provided length to another unit.
- * @param {number} value                   The length being converted.
- * @param {string} from                    The initial units.
- * @param {string} to                      The final units.
- * @param {object} [options={}]
- * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
- * @returns {number}
+ * @param {number} value                    The length being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.movementUnits`.
+ * @param {UnitConversionOptions} [options={}]
+ * @param {boolean} [options.legacy=true]   Only return converted value rather than value and units.
+ * @param {object} [_options]
+ * @returns {{ value: number, unit: string }|number}
  */
-export function convertLength(value, from, to, { strict=true }={}) {
+export function convertLength(value, from, options={}, _options={}) {
+  if ( foundry.utils.getType(options) !== "Object" ) {
+    foundry.utils.logCompatibilityWarning(
+      "The `to` parameter for `convertLength` is now passed in to the options object.",
+      { since: "DnD5e 6.1", until: "DnD5e 6.3", once: true }
+    );
+    options = { ..._options, to: options };
+  }
+
   const message = unit => `Length unit ${unit} not defined in CONFIG.DND5E.movementUnits`;
-  return _convertSystemUnits(value, from, to, CONFIG.DND5E.movementUnits, { message, strict });
+  const result = _convertSystemUnits(value, from, CONFIG.DND5E.movementUnits, { ...options, message });
+  if ( options.legacy !== false ) {
+    foundry.utils.logCompatibilityWarning(
+      "The `convertLength` function has been altered to return value and units. Pass a `legacy` of `false` to the options to return the new value.",
+      { since: "DnD5e 6.1", until: "DnD5e 6.3", once: true }
+    );
+    return result.value;
+  }
+  return result;
 }
 
 /* -------------------------------------------- */
@@ -830,33 +867,22 @@ export function convertLength(value, from, to, { strict=true }={}) {
 /**
  * Convert the provided time value to another unit. If no final unit is provided, then will convert it to the largest
  * unit that can still represent the value as a whole number.
- * @param {number} value                      The time being converted.
- * @param {string} from                       The initial unit as defined in `CONFIG.DND5E.timeUnits`.
- * @param {object} [options={}]
- * @param {boolean} [options.combat=false]    Use combat units when auto-selecting units, rather than normal units.
- * @param {boolean} [options.strict=true]     Throw an error if from unit isn't found.
- * @param {string} [options.to]               The final units, if explicitly provided.
- * @param {boolean} [options.truncate=false]  Select the largest unit that can represent the value, discarding any
- *                                            remainder, rather than the largest that represents it exactly.
+ * @param {number} value                    The time being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {UnitConversionOptions} [options={}]
+ * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
  * @returns {{ value: number, unit: string }}
  */
-export function convertTime(value, from, { combat=false, strict=true, to, truncate=false }={}) {
-  const base = value * (CONFIG.DND5E.timeUnits[from]?.conversion ?? 1);
-  if ( !to ) {
-    // Find unit with largest conversion value that can still display the value
-    const unitOptions = Object.entries(CONFIG.DND5E.timeUnits)
-      .reduce((arr, [key, v]) => {
-        const fits = truncate ? base >= v.conversion : (base % v.conversion === 0) || (base >= v.conversion * 2);
-        if ( ((v.combat ?? false) === combat) && fits ) arr.push({ key, conversion: v.conversion });
-        return arr;
-      }, [])
-      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
-    to = unitOptions[0]?.key ?? from;
+export function convertTime(value, from, { combat=false, ...options }={}) {
+  let config = CONFIG.DND5E.timeUnits;
+  if ( !options.to ) {
+    options.validTargetUnits ??= new Set();
+    for ( const [k, v] of Object.entries(CONFIG.DND5E.timeUnits) ) {
+      if ( (v.combat ?? false) === combat ) options.validTargetUnits.add(k);
+    }
   }
-
   const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
-  const converted = _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict });
-  return { unit: to, value: truncate ? Math.floor(converted) : converted };
+  return _convertSystemUnits(value, from, config, { ...options, message });
 }
 
 /* -------------------------------------------- */
@@ -865,30 +891,44 @@ export function convertTime(value, from, { combat=false, strict=true, to, trunca
  * Convert the provided travel speed to another unit.
  * @param {number} value                    The travel speed being converted.
  * @param {string} from                     The initial unit.
- * @param {object} options
- * @param {boolean} [options.strict=false]  Throw an error if either unit isn't found.
- * @param {string} options.to               The final unit.
+ * @param {UnitConversionOptions} [options={}]
  * @returns {{ value: number, unit: string }}
  */
-export function convertTravelSpeed(value, from, { strict=false, to }) {
+export function convertTravelSpeed(value, from, options={}) {
   const message = unit => `Travel speed unit ${unit} not defined in CONFIG.DND5E.travelUnits`;
-  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.travelUnits, { message, strict }), unit: to };
+  return _convertSystemUnits(value, from, CONFIG.DND5E.travelUnits, { ...options, message });
 }
 
 /* -------------------------------------------- */
 
 /**
  * Convert the provided weight to another unit.
- * @param {number} value                   The weight being converted.
- * @param {string} from                    The initial unit as defined in `CONFIG.DND5E.weightUnits`.
- * @param {string} to                      The final units.
- * @param {object} [options={}]
- * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
- * @returns {number}      Weight in the specified units.
+ * @param {number} value                    The weight being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.weightUnits`.
+ * @param {UnitConversionOptions} [options={}]
+ * @param {boolean} [options.legacy=true]   Only return converted value rather than value and units.
+ * @param {object} [_options]
+ * @returns {{ value: number, unit: string }|number}
  */
-export function convertWeight(value, from, to, { strict=true }={}) {
+export function convertWeight(value, from, options={}, _options={}) {
+  if ( foundry.utils.getType(options) !== "Object" ) {
+    foundry.utils.logCompatibilityWarning(
+      "The `to` parameter for `convertWeight` is now passed in to the options object.",
+      { since: "DnD5e 6.1", until: "DnD5e 6.3", once: true }
+    );
+    options = { ..._options, to: options };
+  }
+
   const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
-  return _convertSystemUnits(value, from, to, CONFIG.DND5E.weightUnits, { message, strict });
+  const result = _convertSystemUnits(value, from, CONFIG.DND5E.weightUnits, { ...options, message });
+  if ( options.legacy !== false ) {
+    foundry.utils.logCompatibilityWarning(
+      "The `convertWeight` function has been altered to return value and units. Pass a `legacy` of `false` to the options to return the new value.",
+      { since: "DnD5e 6.1", until: "DnD5e 6.3", once: true }
+    );
+    return result.value;
+  }
+  return result;
 }
 
 /* -------------------------------------------- */
@@ -897,18 +937,39 @@ export function convertWeight(value, from, to, { strict=true }={}) {
  * Convert from one unit to another using one of core's built-in unit types.
  * @param {number} value                                Value to display.
  * @param {string} from                                 The initial unit.
- * @param {string} to                                   The final unit.
- * @param {UnitConfiguration} config                    Configuration data for the unit.
- * @param {object} options
+ * @param {Record<string, UnitConfiguration>} config    Configuration data for the available units.
+ * @param {UnitConversionOptions} options
  * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
- * @param {boolean} [options.strict]                    Throw an error if either unit isn't found.
- * @returns {string}
+ * @returns {{ value: number, unit: string }}
  */
-function _convertSystemUnits(value, from, to, config, { message, strict }) {
-  if ( from === to ) return value;
+export function _convertSystemUnits(value, from, config, { message, strict, system, truncate, to, validTargetUnits }) {
+  if ( (from === to) || (!to && system && (config[from]?.type === system)) ) {
+    return { value: truncate ? Math.floor(value) : value, unit: from };
+  }
   if ( strict && !config[from] ) throw new Error(message(from));
-  if ( strict && !config[to] ) throw new Error(message(to));
-  return value * (config[from]?.conversion ?? 1) / (config[to]?.conversion ?? 1);
+  if ( strict && to && !config[to] ) throw new Error(message(to));
+  if ( !config[from] ) return { value: truncate ? Math.floor(value) : value, unit: from ?? to };
+
+  // If measurement system is provided and no target unit, convert to equivalent unit in other measurement system
+  if ( !to && system ) to = preferredUnit(from, { system, validTargetUnits, units: config });
+
+  // If no target unit available, find largest unit in current measurement system that can represent number
+  else if ( !to ) {
+    const base = value * (config[from].conversion ?? 1);
+    const unitOptions = Object.entries(config)
+      .reduce((arr, [key, v]) => {
+        if ( validTargetUnits && !validTargetUnits.has(key) ) return arr;
+        const fits = truncate ? base >= v.conversion : ((base % v.conversion === 0) || (base >= v.conversion * 2));
+        if ( fits && (config[from]?.type === v.type) ) arr.push({ key, conversion: v.conversion });
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+    to = unitOptions[0]?.key ?? from;
+  }
+
+  if ( !config[to] || (from === to) ) return { value: truncate ? Math.floor(value) : value, unit: from };
+  const converted = value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
+  return { value: truncate ? Math.floor(converted) : converted, unit: to };
 }
 
 /* -------------------------------------------- */
@@ -921,6 +982,51 @@ function _convertSystemUnits(value, from, to, config, { message, strict }) {
 export function defaultUnits(type) {
   const settingKey = type === "travel" ? "metricLengthUnits" : `metric${type.capitalize()}Units`;
   return CONFIG.DND5E.defaultUnits[type]?.[game.settings.get("dnd5e", settingKey) ? "metric" : "imperial"];
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Cache of best unit conversions from one measurement system to another.
+ * @type {Map<string, string>}
+ */
+const _measurementSystemConversionCache = new Map();
+
+/**
+ * Find the preferred unit from the config in the provided measurement system. Must provide either type or units.
+ * @param {string} from                                       Original unit to find closest unit in preferred system.
+ * @param {object} config
+ * @param {"imperial"|"metric"} config.system                 Target measurement system.
+ * @param {"length"|"speed"|"time"|"weight"} [config.type]    Type of unit to select.
+ * @param {Record<string, UnitConfiguration>} [config.units]  Configuration data for the available units.
+ * @param {Set<string>} [config.validTargetUnits]             Keys for units that can be used as the result.
+ * @returns {string}
+ */
+export function preferredUnit(from, { system, type, units, validTargetUnits }={}) {
+  if ( !units ) {
+    switch ( type ) {
+      case "length": units = CONFIG.DND5E.movementUnits; break;
+      case "speed": units = CONFIG.DND5E.travelUnits; break;
+      case "time": units = CONFIG.DND5E.timeUnits; break;
+      case "weight": units = CONFIG.DND5E.weightUnits; break;
+    }
+  }
+
+  const cacheKey = `${type}:${from}:${system}`;
+  if ( validTargetUnits || !_measurementSystemConversionCache.has(cacheKey) ) {
+    const baseConversion = Math.log10(units[from].conversion ?? 1);
+    const unitOptions = Object.entries(units)
+      .reduce((arr, [key, v]) => {
+        if ( (system === v.type) && (!validTargetUnits || validTargetUnits.has(key)) ) {
+          arr.push({ key, difference: Math.abs(Math.log10(v.conversion ?? 1) - baseConversion) });
+        }
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => lhs.difference - rhs.difference);
+    if ( validTargetUnits ) return unitOptions[0]?.key ?? from;
+    _measurementSystemConversionCache.set(cacheKey, unitOptions[0]?.key ?? from);
+  }
+  return _measurementSystemConversionCache.get(cacheKey);
 }
 
 /* -------------------------------------------- */
@@ -1030,6 +1136,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-feat.hbs",
     "systems/dnd5e/templates/items/details/details-loot.hbs",
     "systems/dnd5e/templates/items/details/details-mountable.hbs",
+    "systems/dnd5e/templates/items/details/details-renown.hbs",
     "systems/dnd5e/templates/items/details/details-species.hbs",
     "systems/dnd5e/templates/items/details/details-spell.hbs",
     "systems/dnd5e/templates/items/details/details-spellcasting.hbs",

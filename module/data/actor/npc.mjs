@@ -2,7 +2,9 @@ import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { getRulesVersion } from "../../enrichers.mjs";
-import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
+import {
+  defaultUnits, formatCR, formatLength, formatNumber, getPluralLocalizationKey, splitSemicolons
+} from "../../utils.mjs";
 import { ActorDeltasField } from "../chat-message/fields/deltas-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
@@ -541,7 +543,6 @@ export default class NPCData extends CreatureTemplate {
   getLegendaryActionsDescription(name=this.parent.name) {
     const max = this._source.resources.legact.max;
     if ( !max ) return "";
-    const pr = getPluralRules().select(max);
     const rulesVersion = this.source?.rules
       || (dnd5e.settings.rulesVersion === "modern" ? "2024" : "2014");
     return _loc(`DND5E.LegendaryAction.Description${rulesVersion === "2014" ? "Legacy" : ""}`, {
@@ -549,7 +550,10 @@ export default class NPCData extends CreatureTemplate {
       uses: this.resources.lair.value ? _loc("DND5E.LegendaryAction.LairUses", {
         normal: formatNumber(max), lair: formatNumber(max + 1)
       }) : formatNumber(max),
-      usesNamed: _loc(`DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`, { number: formatNumber(max) })
+      usesNamed: _loc(
+        getPluralLocalizationKey(max, pr => `DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`),
+        { number: formatNumber(max) }
+      )
     });
   }
 
@@ -825,9 +829,10 @@ export default class NPCData extends CreatureTemplate {
       context.definitions.upper = [
         { label: "DND5E.AC", classes: "half-width", definitions: [o.ac ?? system.attributes.ac.value] },
         { label: "DND5E.Initiative", classes: "half-width", definitions: [summary.initiative] },
-        { label: "DND5E.HP", definitions: o.hp ? [o.hp] : system.attributes.hp.formula ? [
-          system.attributes.hp.max, `(${system.attributes.hp.formula})`
-        ] : [system.attributes.hp.max] },
+        o.tempHP ? { label: "DND5E.HEAL.Type.TemporaryShort", definitions: [o.tempHP] }
+          : { label: "DND5E.HP", definitions: o.hp ? [o.hp] : system.attributes.hp.formula ? [
+            system.attributes.hp.max, `(${system.attributes.hp.formula})`
+          ] : [system.attributes.hp.max] },
         { label: "DND5E.Speed", definitions: [summary.speed] }
       ];
       context.definitions.lower = [
@@ -875,6 +880,17 @@ export default class NPCData extends CreatureTemplate {
         ] }
       ].filter(_ => _);
       context.summary.tag = context.summary.tag.toLowerCase().capitalize();
+    }
+
+    if ( o.abilities ) {
+      context.hideAbilities = true;
+      for ( const { abilities, description } of o.abilities ) {
+        context.definitions.upper.push({
+          label: formatter
+            .format(abilities.map(a => CONFIG.DND5E.abilities[a]?.abbreviation?.capitalize()).filter(_ => _)),
+          definitions: [description]
+        });
+      }
     }
 
     for ( const item of this.parent.items ) {

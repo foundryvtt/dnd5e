@@ -204,7 +204,7 @@ export async function enrichAttack(config, label, options) {
     : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
 
   if ( activity ) {
-    if ( activity.type !== "attack" ) {
+    if ( !activity.isLike("attack") ) {
       logWarning(`Attack enricher linked to non-attack activity when enriching ${config._input}`, options);
       return null;
     }
@@ -502,7 +502,7 @@ export async function enrichCheck(config, label, options) {
     : !anything ? options.relativeTo?.system?.activities?.getByType("check")[0] : null;
 
   if ( activity ) {
-    if ( activity.type !== "check" ) {
+    if ( !activity.isLike("check") ) {
       logWarning(`Check enricher linked to non-check activity when enriching ${config._input}.`, options);
       return null;
     }
@@ -774,7 +774,7 @@ export async function enrichSave(config, label, options) {
     : !config.ability.length ? options.relativeTo?.system?.activities?.getByType("save")[0] : null;
 
   if ( activity ) {
-    if ( activity.type !== "save" ) {
+    if ( !activity.isLike("save") ) {
       logWarning(`Save enricher linked to non-save activity when enriching ${config._input}`, options);
       return null;
     }
@@ -1182,10 +1182,11 @@ async function rollDamage(config, event) {
     })
   };
 
+  const flavor = _loc(rollType === "healing" ? "DND5E.HEAL.HealingRoll" : "DND5E.DamageRoll");
   const messageConfig = {
     create: true,
     data: {
-      flavor: _loc(`DND5E.${rollType === "healing" ? "Healing" : "Damage"}Roll`),
+      flavor,
       speaker: ChatMessage.implementation.getSpeaker(),
       system: { targets: TargetsField.getDescriptors() },
       type: rollType === "healing" ? "healing" : "damage"

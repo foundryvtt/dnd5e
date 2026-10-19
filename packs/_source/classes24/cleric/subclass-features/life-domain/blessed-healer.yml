@@ -17,9 +17,10 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,18 +30,22 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: Life Domain
   activities:
     65RBpJDqkywCR90I:
       type: heal
       _id: 65RBpJDqkywCR90I
       activation:
-        type: ''
+        type: special
         value: null
         override: false
-        condition: ''
+        condition: >-
+          When you cast a spell with a spell slot that restores Hit Points to
+          one or more creatures other than yourself
       consumption:
         targets: []
         scaling:
@@ -49,10 +54,12 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -63,6 +70,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -77,7 +85,7 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
@@ -87,6 +95,7 @@ system:
           number: 1
           mode: ''
         bonus: ''
+        modifiers: []
       name: ''
       img: ''
       visibility:
@@ -94,17 +103,24 @@ system:
           min: null
           max: null
         identifier: ''
+        requireMagic: true
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: blessed-healer
+  advancement: {}
+  crewed: false
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.351'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.2.4
-  createdTime: 1735866589552
-  modifiedTime: 1766595259786
+  systemVersion: 6.0.5
+  createdTime: 1791233179440
+  modifiedTime: 1791233179440
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

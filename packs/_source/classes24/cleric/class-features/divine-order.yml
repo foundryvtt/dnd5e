@@ -7,24 +7,18 @@ system:
   description:
     value: >-
       <p>You have dedicated yourself to one of the following sacred roles of
-      your choice.</p><p><strong>Protector.</strong> Trained for battle, you
-      gain proficiency with Martial weapons and training with Heavy
-      armor.</p><p><strong>Thaumaturge.</strong> You know one extra cantrip from
-      the
-      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric
-      spell list}. In addition, your mystical connection to the divine gives you
-      a bonus to your Intelligence (Arcana or Religion) checks. The bonus equals
-      your Wisdom modifier (minimum of +1).</p><section class="secret"
-      id="secret-mBkdTF86GHVjdNKD"><p><strong>Foundry Note</strong></p><p>During
-      advancement you will be able to choose which option you
-      prefer.</p></section>
+      your choice.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbDivineOrderPr
+      caption=false cite=false
+      nameStyle=inline]{Protector}</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbDivineOrderTh
+      caption=false cite=false nameStyle=inline]{Thaumaturge}</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -34,25 +28,54 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
   requirements: Cleric
   activities: {}
   enchant: {}
   identifier: divine-order
+  advancement:
+    V8GfnoZYTe1PLXPI:
+      _id: V8GfnoZYTe1PLXPI
+      type: ItemChoice
+      configuration:
+        choices:
+          '1':
+            count: 1
+            replacement: false
+        allowDrops: false
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.classes24.Item.phbDivineOrderPr
+            sort: 0
+          - uuid: Compendium.dnd5e.classes24.Item.phbDivineOrderTh
+            sort: 0
+        spell: null
+        restriction:
+          type: class
+          subtype: ''
+          list: []
+          school: []
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: >-
+        <p>You have dedicated yourself to one of the following sacred roles of
+        your choice.</p>
+      name: Divine Order Choice
+      flags: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866373481
-  modifiedTime: 1745256760771
+  systemVersion: 6.0.5
+  createdTime: 1791232041725
+  modifiedTime: 1791232041725
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 400000

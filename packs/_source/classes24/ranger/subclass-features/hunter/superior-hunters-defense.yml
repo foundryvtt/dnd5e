@@ -7,19 +7,15 @@ system:
     value: >-
       <p>When you take damage, you can take a Reaction to give yourself
       Resistance to that damage and any other damage of the same type until the
-      end of the current turn.</p><section class="secret"
-      id="secret-9xLaYNr0fhUQLYuZ"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect for resisting each type of damage which
-      can be applied to get the relevant resistance. Be sure you disable/delete
-      the previous Active Effect in the "Effects" tab of your sheet when you
-      change Resistances.</p></section>
+      end of the current turn.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -29,6 +25,7 @@ system:
     subtype: ''
   prerequisites:
     level: 15
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -49,24 +46,79 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        value: '1'
+        expiry: turnEnd
       effects:
-        - _id: jZGIulxQFLY7uRDe
-        - _id: HybTLXiZgGa3t61e
-        - _id: 6z5fLOHiOiHHcuac
-        - _id: DW6JJBsbBtR1Z75R
-        - _id: 2kTlaPSpacxduIm7
-        - _id: 5ZizSWuVy8cy77K1
-        - _id: fcFLysPw4llFTQsg
-        - _id: 8Uf0Dw8A3l7CI8Fd
-        - _id: PpWYucbhugNEIBJ7
-        - _id: BbvC3rh4RDmi06XI
-        - _id: IFg9ae4ZyhMDPa3m
-        - _id: 30KWef6vBjF8RChr
-        - _id: P7YUT6Y1NXGpo5Er
+        - _id: Pjc7rcLjRcREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.LgYCf64lsSs9CMJT
+          level:
+            min: null
+            max: null
+        - _id: 24NaoTGDrvREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.O6zfaImuJIxdGHdF
+          level:
+            min: null
+            max: null
+        - _id: ZptgYdV9WAREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.O9xghs0pD5GnHYhZ
+          level:
+            min: null
+            max: null
+        - _id: DDpB4Ul4EEREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.QM7b36MGNpZhgazC
+          level:
+            min: null
+            max: null
+        - _id: K5LB8u8cnLREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.6iFyLFsU5Hm6DujQ
+          level:
+            min: null
+            max: null
+        - _id: q9XQfJfH0xREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.ReKGnHejsakwCPu6
+          level:
+            min: null
+            max: null
+        - _id: plXrolA13vREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.Ov6uH9J75Acwill4
+          level:
+            min: null
+            max: null
+        - _id: WjDpStnF6PREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.IdNNpjW2XJ9FdmCh
+          level:
+            min: null
+            max: null
+        - _id: TASoBW2XxTREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.ym9IrYvM7nCXrS7w
+          level:
+            min: null
+            max: null
+        - _id: xK1PCem4upREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.gs15XxV40R4iHoxD
+          level:
+            min: null
+            max: null
+        - _id: hQ6MBiuXbaREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.cTO4X1NnWJAe35E2
+          level:
+            min: null
+            max: null
+        - _id: nJzalyy2XUREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.cwurJ5JjwCud9ix8
+          level:
+            min: null
+            max: null
+        - _id: jBS3DZGDxkREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.QascUtAkYgBnGi9C
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -76,6 +128,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -94,529 +147,30 @@ system:
         name: ''
         formula: ''
       img: systems/dnd5e/icons/svg/rosa-shield.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: superior-hunters-defense
-effects:
-  - name: 'Hunter''s Defense: Acid'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    _id: jZGIulxQFLY7uRDe
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: acid
-          priority: null
-          type: add
-          phase: initial
-          _id: 82lK4D8MLfXOl0JA
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103534
-      modifiedTime: 1783544103534
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.jZGIulxQFLY7uRDe'
-  - name: 'Hunter''s Defense: Bludgeoning'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: bludgeoning
-          priority: null
-          type: add
-          phase: initial
-          _id: 3BHGUHao09dIJEKF
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103534
-      modifiedTime: 1783544103534
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: HybTLXiZgGa3t61e
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.HybTLXiZgGa3t61e'
-  - name: 'Hunter''s Defense: Cold'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: cold
-          priority: null
-          type: add
-          phase: initial
-          _id: mR0XmjUISdf6jll8
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103534
-      modifiedTime: 1783544103534
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: 6z5fLOHiOiHHcuac
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.6z5fLOHiOiHHcuac'
-  - name: 'Hunter''s Defense: Fire'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: fire
-          priority: null
-          type: add
-          phase: initial
-          _id: PfavyWoJij8rwzB1
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103534
-      modifiedTime: 1783544103534
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: DW6JJBsbBtR1Z75R
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.DW6JJBsbBtR1Z75R'
-  - name: 'Hunter''s Defense: Force'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: force
-          priority: null
-          type: add
-          phase: initial
-          _id: B9whDli3sEU2Jjuc
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103534
-      modifiedTime: 1783544103534
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: 2kTlaPSpacxduIm7
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.2kTlaPSpacxduIm7'
-  - name: 'Hunter''s Defense: Lightning'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: lightning
-          priority: null
-          type: add
-          phase: initial
-          _id: czFkuBnm8E86Kgfe
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: 5ZizSWuVy8cy77K1
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.5ZizSWuVy8cy77K1'
-  - name: 'Hunter''s Defense: Necrotic'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: necrotic
-          priority: null
-          type: add
-          phase: initial
-          _id: U1rs5rIkclckbEAf
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: fcFLysPw4llFTQsg
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.fcFLysPw4llFTQsg'
-  - name: 'Hunter''s Defense: Piercing'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: piercing
-          priority: null
-          type: add
-          phase: initial
-          _id: kD3XklVCfIpw2yvp
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: 8Uf0Dw8A3l7CI8Fd
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.8Uf0Dw8A3l7CI8Fd'
-  - name: 'Hunter''s Defense: Poison'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: poison
-          priority: null
-          type: add
-          phase: initial
-          _id: EHoccku01mjP71dG
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: PpWYucbhugNEIBJ7
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.PpWYucbhugNEIBJ7'
-  - name: 'Hunter''s Defense: Psychic'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: psychic
-          priority: null
-          type: add
-          phase: initial
-          _id: IKoninYUG1qMGuDu
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: BbvC3rh4RDmi06XI
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.BbvC3rh4RDmi06XI'
-  - name: 'Hunter''s Defense: Radiant'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: radiant
-          priority: null
-          type: add
-          phase: initial
-          _id: 57NhW35yw6KyzkxI
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: IFg9ae4ZyhMDPa3m
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.IFg9ae4ZyhMDPa3m'
-  - name: 'Hunter''s Defense: Slashing'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: slashing
-          priority: null
-          type: add
-          phase: initial
-          _id: EOzsqrNXGQx3gRzq
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: 30KWef6vBjF8RChr
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.30KWef6vBjF8RChr'
-  - name: 'Hunter''s Defense: Thunder'
-    img: icons/magic/lightning/fist-unarmed-strike-blue-green.webp
-    origin: Compendium.dnd5e.classes24.Item.phbrgrSuperiorDe
-    transfer: false
-    type: base
-    system:
-      changes:
-        - key: system.traits.dr.value
-          value: thunder
-          priority: null
-          type: add
-          phase: initial
-          _id: W44VsDOZ1LpDkz32
-    disabled: false
-    duration:
-      value: 1
-      units: turns
-      expiry: turnStart
-      expired: false
-    description: ''
-    tint: '#ffffff'
-    statuses: []
-    sort: 0
-    flags: {}
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '14.364'
-      systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544103535
-      modifiedTime: 1783544103535
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _id: P7YUT6Y1NXGpo5Er
-    start: null
-    showIcon: 1
-    folder: null
-    _key: '!items.effects!phbrgrSuperiorDe.P7YUT6Y1NXGpo5Er'
+  advancement: {}
+  crewed: false
+effects: []
 folder: GWWL7NqfCEyqwfhZ
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866564824
-  modifiedTime: 1783544103534
+  systemVersion: 6.0.5
+  createdTime: 1790979069172
+  modifiedTime: 1790979069172
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

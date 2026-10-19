@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "6.0.5",
+  "version": "6.0.6",
   "compatibility": {
     "minimum": "14.367",
     "verified": "14"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-6.0.5/dnd5e-release-6.0.5.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-6.0.6/dnd5e-release-6.0.6.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -33,6 +33,9 @@
         "htmlFields": ["details.biography.value", "details.biography.public", "bastion.description"]
       },
       "encounter": {
+        "htmlFields": ["description.full", "description.summary"]
+      },
+      "faction": {
         "htmlFields": ["description.full", "description.summary"]
       },
       "group": {
@@ -151,6 +154,9 @@
       "loot": {
         "htmlFields": ["description.value", "description.chat", "unidentified.description"]
       },
+      "renown": {
+        "htmlFields": ["description.value", "description.chat"]
+      },
       "race": {
         "filePathFields": {
           "advancement.*.img": ["IMAGE"]
@@ -221,6 +227,7 @@
       }
     },
     "RegionBehavior": {
+      "dnd5e.antimagic": {},
       "dnd5e.applyActiveEffect": {},
       "dnd5e.difficultTerrain": {},
       "dnd5e.rotateArea": {}

@@ -97,7 +97,12 @@ export default class UsageMessageData extends ItemMessageData {
   get outcomes() {
     if ( this.#outcomes ) return this.#outcomes;
     const outcomes = new Map();
-    for ( const message of this.parent.getAssociatedRolls(this.activity.type) ) {
+    const like = CONFIG.DND5E.activityTypes[this.activity.type]?.documentClass?.metadata.like;
+    const rolls = [
+      ...this.parent.getAssociatedRolls(this.activity.type),
+      ...(like ? this.parent.getAssociatedRolls(like) : [])
+    ].sort((lhs, rhs) => lhs.timestamp - rhs.timestamp);
+    for ( const message of rolls ) {
       const [roll] = message.rolls;
       if ( !(roll instanceof CONFIG.Dice.D20Roll) ) continue;
       const uuid = message.getAssociatedToken()?.uuid;
@@ -159,7 +164,8 @@ export default class UsageMessageData extends ItemMessageData {
    * @returns {Promise}
    */
   async onDescendentRefresh(message) {
-    if ( message.type !== this.activity.type ) return; // The descendent wasn't an outcome, it was some other action.
+    // The descendent wasn't an outcome, it was some other action.
+    if ( !dnd5e.documents.activity.UtilityActivity.isLike(this.activity.type, message.type) ) return;
     this.#outcomes = undefined;
     return Promise.all(this.parent.getAssociatedRolls("damage").map(m => ui.chat?.updateMessage(m)));
   }

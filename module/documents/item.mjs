@@ -703,7 +703,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         concentrationDuration: activity.labels.concentrationDuration,
         ritualActivation: activity.labels.ritualActivation
       });
-      if ( activity.type === "attack" ) {
+      if ( activity.isLike("attack") ) {
         const { toHit, modifier } = activity.labels;
         attacks.push({ toHit, modifier });
       }
@@ -1141,7 +1141,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
     const isPhysical = this.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate);
-    if ( this.parent?.system?.isGroup && !isPhysical ) return false;
+    if ( this.parent?.system?.isGroup && !isPhysical && (this.type !== "renown") ) return false;
 
     // Create identifier based on name
     if ( this.system.hasOwnProperty("identifier") && !data.system?.identifier ) {
@@ -1429,10 +1429,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         if ( key === "duration" ) activity.duration.concentration = properties.includes("concentration");
       }
       activity.consumption.targets.push({ type: "itemUses", target: "", value: "1" });
-      if ( activity.type === "attack" ) {
+      if ( dnd5e.documents.activity.UtilityActivity.isLike(activity.type, "attack") ) {
         activity.attack.flat = true;
         activity.attack.bonus = values.bonus;
-      } else if ( activity.type === "save" ) {
+      } else if ( dnd5e.documents.activity.UtilityActivity.isLike(activity.type, "save") ) {
         activity.save.dc.calculation = "";
         activity.save.dc.formula = values.dc;
       }
@@ -1627,7 +1627,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @protected
    */
   static _createDialogTypes(parent) {
-    return this.TYPES.filter(t => t !== "backpack");
+    return this.TYPES.filter(t => (t !== "backpack") && ((t !== "renown") || dnd5e.settings.renownScore));
   }
 
   /* -------------------------------------------- */

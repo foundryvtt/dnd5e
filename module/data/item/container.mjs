@@ -1,4 +1,4 @@
-import { defaultUnits } from "../../utils.mjs";
+import { convertWeight, defaultUnits } from "../../utils.mjs";
 import ItemDataModel from "../abstract/item-data-model.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
@@ -251,13 +251,16 @@ export default class ContainerData extends ItemDataModel.mixin(
       context.max = this.capacity.count;
       context.units = _loc("DND5E.Items");
     } else if ( this.capacity.weight.value ) {
-      context.value = await this.contentsWeight;
+      context.value = convertWeight(await this.contentsWeight, this.weight.units, {
+        to: this.capacity.weight.units, legacy: false
+      }).value;
       context.max = this.capacity.weight.value;
       context.units = CONFIG.DND5E.weightUnits[this.capacity.weight.units]?.label ?? "";
     }
-    context.value = context.value.toNearest(0.1);
-    context.hidden = !this.canViewContents;
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
+    context.max = context.max.toNearest(0.01);
+    context.value = context.value.toNearest(0.01);
+    context.hidden = !this.canViewContents;
     return context;
   }
 
@@ -325,6 +328,12 @@ export default class ContainerData extends ItemDataModel.mixin(
     this.prepareDescriptionData();
     this.prepareIdentifiable();
     this.preparePhysicalData();
+
+    const unitSystem = dnd5e.settings.metricWeightUnits ? "metric" : "imperial";
+    const converted = convertWeight(this.capacity.weight.value, this.capacity.weight.units, {
+      system: unitSystem, legacy: false
+    });
+    Object.assign(this.capacity.weight, { value: converted.value, units: converted.unit });
   }
 
   /* -------------------------------------------- */

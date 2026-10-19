@@ -1,4 +1,4 @@
-import { formatNumber } from "../../utils.mjs";
+import { formatNumber, getPluralLocalizationKey } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
@@ -90,6 +90,12 @@ export default class CharacterActorSheet extends BaseActorSheet {
       template: "systems/dnd5e/templates/actors/tabs/character-bastion.hbs",
       scrollable: [""]
     },
+    renown: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/tabs/actor-renown.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs"],
+      scrollable: [""]
+    },
     specialTraits: {
       classes: ["flexcol"],
       container: { classes: ["tab-body"], id: "tabs" },
@@ -133,6 +139,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     { tab: "effects", label: "DND5E.EFFECT.Tab", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
     { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook", condition: this.hasBastion },
+    { tab: "renown", label: "TYPES.Item.renownPl", icon: "fa-solid fa-wreath-laurel", condition: this.hasRenown },
     { tab: "specialTraits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
 
@@ -205,6 +212,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       case "features": return this._prepareFeaturesContext(context, options);
       case "header": return this._prepareHeaderContext(context, options);
       case "inventory": return this._prepareInventoryContext(context, options);
+      case "renown": return this._prepareRenownContext(context, options);
       case "sidebar": return this._prepareSidebarContext(context, options);
       case "specialTraits": return this._prepareSpecialTraitsContext(context, options);
       case "spells": return this._prepareSpellsContext(context, options);
@@ -486,9 +494,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     // Experience & Epic Boons
     if ( context.system.details.xp.boonsEarned !== undefined ) {
-      const pluralRules = new Intl.PluralRules(game.i18n.lang);
       context.epicBoonsEarned = _loc(
-        `DND5E.ExperiencePoints.Boons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
+        getPluralLocalizationKey(context.system.details.xp.boonsEarned, pr => `DND5E.ExperiencePoints.Boons.${pr}`),
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
@@ -528,7 +535,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
     context.portrait = await this._preparePortrait(context);
 
     // Death Saves
-    const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
     context.death = {
       open: this._deathTrayOpen
     };
@@ -544,7 +550,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         context.death[deathSave].push({
           n, filled,
           tooltip: i18nKey,
-          label: _loc(`${i18nKey}N.${plurals.select(n)}`),
+          label: _loc(getPluralLocalizationKey(n, pr => `${i18nKey}N.${pr}`, { type: "ordinal" })),
           classes: classes.join(" ")
         });
       }
@@ -736,10 +742,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
         img: model?.img || CONFIG.DND5E.spellcasting.pact.img
       };
 
-      const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       return {
         uses, level, method,
-        title: _loc(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
+        title: _loc(
+          getPluralLocalizationKey(level, pr => `DND5E.SpellSlotsN.${pr}`, { type: "ordinal" }), { n: level }
+        ),
         subtitle: _loc(`DND5E.Abbreviation${model.isSR ? "SR" : "LR"}`),
         img: model.img.replace("{id}", id)
       };
@@ -1010,7 +1017,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
     }
 
     const result = await CompendiumBrowser.selectOne({ filters }, this._detachOptions());
-    if ( result ) this._onDropCreateItems(event, [game.items.fromCompendium(await fromUuid(result), { keepId: true })]);
+    if ( result ) this._onDropCreateItems(event, [new Item.implementation(
+      game.items.fromCompendium(await fromUuid(result), { keepId: true })
+    )]);
   }
 
   /* -------------------------------------------- */
@@ -1077,7 +1086,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( !target.classList.contains("rollable") ) return;
     const { facilityId } = target.closest("[data-facility-id]")?.dataset ?? {};
     const facility = this.actor.items.get(facilityId);
-    facility?.use({ legacy: false, chooseActivity: true, event });
+    facility?.use({ chooseActivity: true, event });
   }
 
   /* -------------------------------------------- */

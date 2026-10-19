@@ -1,7 +1,12 @@
 <fieldset>
     <legend>{{ localize "DND5E.EFFECT.Change.Configuration" }}</legend>
     <p class="note info">{{{ hintText }}}</p>
+    {{#if keyOptions}}
+    {{ formField fields.key name=(concat prefix "key") value=source.key options=keyOptions blank=false required=true
+                 localize=true rootId=partId }}
+    {{ else }}
     {{ formField fields.key name=(concat prefix "key") value=source.key rootId=partId }}
+    {{/if}}
     {{ formField fields.type name=(concat prefix "type") value=source.type options=typeOptions rootId=partId }}
     {{ formField fields.value name=(concat prefix "value") value=source.value elementType="input" rootId=partId }}
     {{ formField fields.priority name=(concat prefix "priority") value=source.priority

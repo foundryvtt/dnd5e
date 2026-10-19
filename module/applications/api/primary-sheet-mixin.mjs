@@ -92,12 +92,11 @@ export default function PrimarySheetMixin(Base) {
 
     /** @inheritDoc */
     _configureRenderOptions(options) {
-      super._configureRenderOptions(options);
-
       // Set initial mode
       let { mode, renderContext } = options;
       if ( (mode === undefined) && (renderContext === "createItem") ) mode = this.constructor.MODES.EDIT;
       this._mode = mode ?? this._mode ?? this.constructor.MODES.PLAY;
+      super._configureRenderOptions(options);
     }
 
     /* -------------------------------------------- */
@@ -107,7 +106,7 @@ export default function PrimarySheetMixin(Base) {
       const parts = super._configureRenderParts(options);
       for ( const key of Object.keys(parts) ) {
         const tab = this.constructor.TABS.find(t => t.tab === key);
-        if ( tab?.condition && !tab.condition(this.document) ) delete parts[key];
+        if ( tab?.condition && !tab.condition(this.document, { sheet: this }) ) delete parts[key];
       }
       return parts;
     }
@@ -214,7 +213,7 @@ export default function PrimarySheetMixin(Base) {
      */
     _getTabs() {
       const tabs = this.constructor.TABS.reduce((tabs, { tab, condition, ...config }) => {
-        if ( !condition || condition(this.document) ) tabs[tab] = {
+        if ( !condition || condition(this.document, { sheet: this }) ) tabs[tab] = {
           ...config,
           id: tab,
           group: "primary",
