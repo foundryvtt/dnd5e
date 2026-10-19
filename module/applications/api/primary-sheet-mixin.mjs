@@ -331,7 +331,7 @@ export default function PrimarySheetMixin(Base) {
         uuid = item?.uuid;
       } else if ( !uuid && target.dataset.effectId ) {
         const { effectId, parentId } = target.dataset;
-        const collection = parentId ? this.actor?.items.get(parentId).effects : this.actor?.effects;
+        const collection = parentId ? this.actor?.items.get(parentId).effects : this.document?.effects;
         uuid = collection?.get(effectId)?.uuid;
       }
       if ( !uuid ) return;
