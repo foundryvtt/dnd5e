@@ -342,11 +342,26 @@ export default class CompendiumBrowserSettingsConfig extends Application5e {
    */
   static collateSources() {
     const sources = new Set();
-    const setting = game.settings.get("dnd5e", "packSourceConfiguration");
-    for ( const { collection, documentName } of game.packs ) {
-      if ( (documentName !== "Actor") && (documentName !== "Item") ) continue;
-      if ( setting[collection] !== false ) sources.add(collection);
+    for ( const pack of game.packs ) {
+      if ( (pack.documentName !== "Actor") && (pack.documentName !== "Item") ) continue;
+      if ( this.isSourceEnabled(pack) ) sources.add(pack.collection);
     }
     return sources;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether a compendium source is available in the compendium browser.
+   * @param {CompendiumCollection} pack  The compendium pack.
+   * @returns {boolean}
+   */
+  static isSourceEnabled(pack) {
+    const { collection, metadata } = pack;
+    const setting = dnd5e.settings.packSourceConfiguration[collection];
+    if ( setting !== undefined ) return setting;
+    const sourceBook = metadata.flags?.dnd5e?.sourceBook;
+    if ( (metadata.packageType !== "system") || !sourceBook ) return true;
+    return sourceBook === (dnd5e.settings.rulesVersion === "modern" ? "SRD 5.2" : "SRD 5.1");
   }
 }
