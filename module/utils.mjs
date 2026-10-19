@@ -64,7 +64,7 @@ export function roundCurrency(value, denomination) {
  * @param {Document} [options.relative]  A Document to resolve relative UUIDs against.
  * @returns {Map<string, Document>}      Documents mapped to the provided UUID.
  */
-export async function bulkFromUuid(uuids, { relative }) {
+export async function bulkFromUuid(uuids, { relative }={}) {
   const collections = new Map();
   const fetches = [];
   const redirected = new Map();

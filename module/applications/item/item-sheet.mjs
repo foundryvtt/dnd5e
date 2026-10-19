@@ -304,9 +304,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         }
       }
       r.isRider = true;
-      if ( unmatched ) {
-        r.riderTooltip = "rider";
-      }
+      if ( unmatched ) r.riderTooltip = true;
       return unmatched;
     }));
     return context;
@@ -1033,12 +1031,13 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         if ( effect.parent ) effectData.system.origin.item = effect.parent?.uuid;
       }
       options.keepOrigin = true;
-      const activityId = data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
-        a.effects.some(e => e._id === effect.id)
-      )?.id;
+      const activity = effect.parent?.system.activities?.get(data.activityId)
+        ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
+          a.effects.some(e => e._id === effect.id)
+        );
       effectData.system.origin.item ??= effect.parent?.uuid;
-      if ( activityId ) {
-        effectData.system.origin.activity = activityId;
+      if ( activity ) {
+        effectData.system.origin.activity = activity.uuid;
         effectData.system.origin.profile = effect.id;
       }
     }
