@@ -174,13 +174,6 @@
 /* -------------------------------------------- */
 
 /**
- * @typedef {RollData & Maybe<ActorRollData> & Maybe<ItemRollData>} EffectRollData
- * @property {object} effect        Object containing the effect's system data.
- * @property {object} effect.flags  Flags set on the effect.
- * @property {string} effect.name   Name of the effect.
- */
-
-/**
  * @typedef {ItemRollData & Maybe<ActorRollData>} ActivityRollData
  * @property {object} activity         Object containing the activity's data.
  * @property {object} [consumed]       Information on what resources the activity's activation consumed.
@@ -194,6 +187,13 @@
  * @property {Proficiency} prof                 Actor's proficiency data.
  * @property {Record<string, number>} statuses  Status effects applied to the actor with a value of 1 if the effect is
  *                                              applied (or a higher number of statuses that have numeric value).
+ */
+
+/**
+ * @typedef {RollData & Maybe<ActorRollData> & Maybe<ItemRollData>} EffectRollData
+ * @property {object} effect        Object containing the effect's system data.
+ * @property {object} effect.flags  Flags set on the effect.
+ * @property {string} effect.name   Name of the effect.
  */
 
 /**
