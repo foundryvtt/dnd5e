@@ -302,17 +302,6 @@ export function formatRange(min, max, options) {
 /* -------------------------------------------- */
 
 /**
- * A helper function to format textarea text to HTML with linebreaks.
- * @param {string} value  The text to format.
- * @returns {Handlebars.SafeString}
- */
-export function formatText(value) {
-  return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
-}
-
-/* -------------------------------------------- */
-
-/**
  * A helper function that formats a time in a human-readable format.
  * @param {number} value         Time to display.
  * @param {string} unit          Units as defined in `CONFIG.DND5E.timeUnits`.
@@ -1366,7 +1355,6 @@ export function registerHandlebarsHelpers() {
     "dnd5e-numberFormat": (value, options) => formatNumber(value, options.hash),
     "dnd5e-numberParts": (value, options) => formatNumberParts(value, options.hash),
     "dnd5e-object": makeObject,
-    "dnd5e-textFormat": formatText,
     "dnd5e-tooltip": ({ hash }) => loadingTooltip(hash)
   });
 }
