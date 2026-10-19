@@ -423,6 +423,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.tab = context.tabs.effects;
     context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
     const columns = [EffectsElement.COLUMNS.detail, EffectsElement.COLUMNS.controls];
+    let origins = {};
     for ( const category of Object.values(context.effects) ) {
       category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {
@@ -434,12 +435,18 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
           hasTooltip: true,
           riders: []
         };
+        if ( effect.system.trackRiders ) {
+          for ( const uuid of effect.system.rider?.effects ?? [] ) {
+            if ( !uuid.startsWith(".ActiveEffect.") ) continue;
+            (origins[uuid.slice(14)] ??= []).push(effect.id);
+          }
+        }
         if ( riderIds.has(effect.id) ) riders.push(ctx);
         else arr.push(ctx);
         return arr;
       }, []);
     }
-    const origins = (this.item.system.activities ?? []).values().filter(a => a.metadata.hasRiders)
+    origins = (this.item.system.activities ?? []).values().filter(a => a.metadata.hasRiders)
       .flatMap(a => a.effects)
       .reduce((obj, effects) => {
         const { _id, riders } = effects;
@@ -448,7 +455,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
           obj[id].push(_id);
         }
         return obj;
-      }, {});
+      }, origins);
     riders.forEach(r => {
       for ( const origin of origins[r.id] ?? [] ) {
         if ( origin in effectMap ) effectMap[origin].riders.push(r);

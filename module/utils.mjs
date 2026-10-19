@@ -59,29 +59,31 @@ export function roundCurrency(value, denomination) {
 
 /**
  * Bulk version of `fromUuid` that performs only a single fetch per compendium.
- * @param {string[]} uuids           UUIDs of documents to retrieve.
- * @returns {Map<string, Document>}  Documents mapped to the provided UUID.
+ * @param {string[]} uuids               UUIDs of documents to retrieve.
+ * @param {object} [options={}]
+ * @param {Document} [options.relative]  A Document to resolve relative UUIDs against.
+ * @returns {Map<string, Document>}      Documents mapped to the provided UUID.
  */
-export async function bulkFromUuid(uuids) {
+export async function bulkFromUuid(uuids, { relative }) {
   const collections = new Map();
+  const fetches = [];
   const redirected = new Map();
 
   for ( const uuid of uuids ) {
-    const { collection, id, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid);
-    collections.getOrInsert(collection, []).push(id);
+    const { collection, id, primaryId, uuid: redirectedUuid } = foundry.utils.parseUuid(uuid, { relative });
+    collections.getOrInsert(collection, []).push(primaryId ?? id);
     redirected.set(redirectedUuid, uuid);
   }
 
-  const fetches = [];
   for ( const [collection, ids] of collections.entries() ) {
     if ( collection instanceof foundry.documents.collections.CompendiumCollection ) {
       fetches.push(collection.getDocuments({ _id__in: ids }));
-    } else {
-      fetches.push(ids.map(id => collection.get(id)));
     }
   }
 
-  return (await Promise.all(fetches)).flat().reduce((map, doc) => {
+  await Promise.all(fetches);
+
+  return (await Promise.all(uuids.map(uuid => fromUuid(uuid, { relative })))).reduce((map, doc) => {
     if ( doc ) map.set(redirected.get(doc.uuid), doc);
     return map;
   }, new Map());

@@ -31,7 +31,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
       magical: new BooleanField({ initial: true }),
       rider: new SchemaField({
         activities: new SetField(new DocumentIdField()),
-        effects: new SetField(new DocumentUUIDField({ embedded: false, type: "ActiveEffect" })),
+        effects: new SetField(new DocumentUUIDField({ relative: true, type: "ActiveEffect" })),
         items: new SetField(new DocumentUUIDField({ embedded: false, type: "Item" }))
       })
     };
@@ -238,6 +238,21 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preUpdate(updates, options, user) {
+    if ( (await super._preUpdate(updates, options, user)) === false ) return false;
+
+    // Transform absolute UUIDs for effects on this item into relative UUIDs
+    if ( updates.system?.rider?.effects?.length && this.parent.item ) {
+      updates.system.rider.effects = updates.system.rider.effects.map(uuid => {
+        if ( uuid.startsWith(this.parent.item.uuid) ) return foundry.utils.buildRelativeUuid(uuid, this.parent.item);
+        return uuid;
+      });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if ( this.isApplied ) dnd5e.registry.enchantments.untrack(this.parent.origin, this.parent.uuid);
@@ -291,7 +306,10 @@ export default class EnchantmentData extends ActiveEffectDataModel {
         ?? (await fromUuid(this.parent._stats.compendiumSource))?.item;
     }
 
-    const documents = await bulkFromUuid([...this.rider.effects, ...this.rider.items, ...(profile?.riders.item ?? [])]);
+    const documents = await bulkFromUuid(
+      [...this.rider.effects, ...this.rider.items, ...(profile?.riders.item ?? [])],
+      { relative: item }
+    );
 
     // Create Activities
     const riderActivities = {};

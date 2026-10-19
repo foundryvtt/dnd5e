@@ -1224,6 +1224,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     for ( const effect of this.effects ) {
       if ( !effect.system.trackRiders ) continue;
       effect.system.rider.activities?.forEach(a => riders.activity.add(a));
+      effect.system.rider.effects?.forEach(e => {
+        if ( e.startsWith(".ActiveEffect.") ) riders.effect.add(e.slice(14));
+      });
     }
 
     // Consolidate riders from activities if not already provided
