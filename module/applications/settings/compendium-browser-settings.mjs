@@ -360,8 +360,7 @@ export default class CompendiumBrowserSettingsConfig extends Application5e {
     const { collection, metadata } = pack;
     const setting = dnd5e.settings.packSourceConfiguration[collection];
     if ( setting !== undefined ) return setting;
-    const sourceBook = metadata.flags?.dnd5e?.sourceBook;
-    if ( (metadata.packageType !== "system") || !sourceBook ) return true;
-    return sourceBook === (dnd5e.settings.rulesVersion === "modern" ? "SRD 5.2" : "SRD 5.1");
+    const rulesVersion = metadata.flags?.dnd5e?.rulesVersion;
+    return !rulesVersion || (rulesVersion === dnd5e.settings.rulesVersion);
   }
 }
