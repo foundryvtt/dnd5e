@@ -213,7 +213,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
       const origin = await fromUuid(this.parent.origin);
       const errors = origin?.canEnchant?.(this.item);
       if ( errors?.length ) {
-        errors.forEach(err => console.error(err));
+        errors.forEach(err => ui.notifications.error(err.message, { console: false }));
         return false;
       }
       const start = this.parent.constructor.getEffectStart();
@@ -333,11 +333,10 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     const effectIds = [...this.rider.effects, ...(profile?.riders.effect ?? [])];
     riderEffects.push(...effectIds.map(id => {
       const effectData = (documents.get(id) ?? item?.effects.get(id))?.toObject();
-      if ( effectData?.type === "base" ) {
-        delete effectData._id;
-        delete effectData.flags?.dnd5e?.rider;
-        foundry.utils.setProperty(effectData, "system.origin", { ...this.origin });
-      }
+      if ( effectData?.type !== "base" ) return null;
+      delete effectData._id;
+      delete effectData.flags?.dnd5e?.rider;
+      foundry.utils.setProperty(effectData, "system.origin", { ...this.origin });
       return effectData;
     }));
     riderEffects = riderEffects.filter(_ => _);
