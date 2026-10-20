@@ -263,12 +263,7 @@ export default class WelcomeScreen extends Application5e {
     }
 
     if ( dnd5e.settings.firstRun ) {
-      const sourceBook = settings.rulesVersion === "modern" ? "SRD 5.2" : "SRD 5.1";
-      const disabledSources = game.system.packs.reduce((sources, pack) => {
-        const book = pack.flags?.dnd5e?.sourceBook;
-        if ( book && (book !== sourceBook) ) sources.add(pack.id);
-        return sources;
-      }, new Set());
+      const disabledSources = new Set();
       const moduleData = await this.getModules();
       for ( const [id, enabled] of Object.entries(modules) ) {
         for ( const category of Object.values(moduleData) ) {
@@ -280,7 +275,7 @@ export default class WelcomeScreen extends Application5e {
         disabledSources.add("dnd5e.equipment24");
       }
       await game.settings.set("dnd5e", "packSourceConfiguration",
-        Object.fromEntries(game.system.packs.map(p => [p.id, !disabledSources.has(p.id)]))
+        Object.fromEntries(disabledSources.map(id => [id, false]))
       );
       await game.settings.set("dnd5e", "firstRun", false);
     }
