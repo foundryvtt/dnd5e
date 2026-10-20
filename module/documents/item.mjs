@@ -540,10 +540,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static migrateData(source) {
     source = super.migrateData(source);
     ActivitiesTemplate.initializeActivities(source);
-    if ( source.type === "class" ) ClassData._migrateTraitAdvancement(source);
-    else if ( source.type === "container" ) ContainerData._migrateWeightlessData(source);
-    else if ( source.type === "equipment" ) EquipmentData._migrateStealth(source);
-    else if ( source.type === "spell" ) SpellData._migrateComponentData(source);
+    const type = foundry.data.operators.DataFieldOperator.get(source.type);
+    if ( type === "class" ) ClassData._migrateTraitAdvancement(source);
+    else if ( type === "container" ) ContainerData._migrateWeightlessData(source);
+    else if ( type === "equipment" ) EquipmentData._migrateStealth(source);
+    else if ( type === "spell" ) SpellData._migrateComponentData(source);
     return source;
   }
 

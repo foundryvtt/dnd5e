@@ -72,10 +72,11 @@ export default class BaseSaveActivityData extends BaseActivityData {
     let calculation = source.system.save?.scaling;
     if ( calculation === "flat" ) calculation = "";
     else if ( calculation === "spell" ) calculation = "spellcasting";
+    const isSpell = foundry.data.operators.DataFieldOperator.get(source.type) === "spell";
 
     return foundry.utils.mergeObject(activityData, {
       damage: {
-        onSave: (source.type === "spell") && (source.system.level === 0) ? "none" : "half",
+        onSave: isSpell && (source.system.level === 0) ? "none" : "half",
         parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
       },
       save: {

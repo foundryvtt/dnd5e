@@ -37,11 +37,15 @@ export default class AdvancementTemplate extends SystemDataModel {
    * @param {object} source  Candidate source data to migrate.
    */
   static #migrateStorage(source) {
-    if ( Array.isArray(source.advancement) ) {
-      source.advancement = source.advancement.reduce((obj, advancement) => {
+    const { DataFieldOperator, ForcedReplacement } = foundry.data.operators;
+    const data = DataFieldOperator.get(source.advancement);
+    if ( Array.isArray(data) ) {
+      const migrated = data.reduce((obj, advancement) => {
         obj[advancement._id] = advancement;
         return obj;
       }, {});
+      if ( source.advancement instanceof ForcedReplacement ) ForcedReplacement.set(source.advancement, migrated);
+      else source.advancement = migrated;
     }
   }
 
