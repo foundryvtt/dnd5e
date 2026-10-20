@@ -1033,12 +1033,17 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       options.keepOrigin = true;
       const activity = effect.parent?.system.activities?.get(data.activityId)
         ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
-          a.effects.some(e => e._id === effect.id)
+          !a.isHidden && a.effects.some(e => e._id === effect.id)
         );
       effectData.system.origin.item ??= effect.parent?.uuid;
       if ( activity ) {
         effectData.system.origin.activity = activity.uuid;
         effectData.system.origin.profile = effect.id;
+        const errors = activity.canEnchant(this.item);
+        if ( errors?.length ) {
+          errors.forEach(err => ui.notifications.error(err.message));
+          return false;
+        }
       }
     }
 
