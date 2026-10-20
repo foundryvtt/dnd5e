@@ -318,7 +318,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformActivationData(source, options) {
-    if ( source.type === "spell" ) return {};
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {};
     return {
       type: source.system.activation?.type === "none" ? "" : (source.system.activation?.type ?? ""),
       value: source.system.activation?.cost ?? null,
@@ -449,7 +449,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformDurationData(source, options) {
-    if ( source.type === "spell" ) return {};
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {};
     const concentration = !!source.system.properties?.findSplice(p => p === "concentration");
     return {
       concentration,
@@ -482,7 +482,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformRangeData(source, options) {
-    if ( source.type === "spell" ) return {};
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {};
     return {
       value: source.system.range?.value ?? null,
       units: source.system.range?.units ?? "",
@@ -499,7 +499,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @returns {object}        Creation data for new activity.
    */
   static transformTargetData(source, options) {
-    if ( source.type === "spell" ) return {
+    if ( foundry.data.operators.DataFieldOperator.get(source.type) === "spell" ) return {
       prompt: source.system.target?.prompt ?? true
     };
 
