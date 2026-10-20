@@ -213,7 +213,7 @@ export default class EnchantmentData extends ActiveEffectDataModel {
       const origin = await fromUuid(this.parent.origin);
       const errors = origin?.canEnchant?.(this.item);
       if ( errors?.length ) {
-        errors.forEach(err => ui.notifications.error(err.message, { console: false }));
+        errors.forEach(err => console.error(err));
         return false;
       }
       const start = this.parent.constructor.getEffectStart();
