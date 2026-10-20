@@ -537,7 +537,9 @@ function documentIndexLookup(query, { ignoreCompendiumFiltering, ...options }={}
     ...options,
     filterEntries: entry => {
       if ( entry.entry.system?.container ) return false;
-      if ( !ignoreCompendiumFiltering && (dnd5e.settings.packSourceConfiguration[entry.pack] === false) ) return false;
+      const pack = game.packs.get(entry.pack);
+      if ( !ignoreCompendiumFiltering && pack
+        && !applications.settings.CompendiumBrowserSettingsConfig.isSourceEnabled(pack) ) return false;
       return options.filterEntries?.(entry) ?? true;
     }
   });
