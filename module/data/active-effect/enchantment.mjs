@@ -3,7 +3,7 @@ import { bulkFromUuid } from "../../utils.mjs";
 import ActiveEffectDataModel from "../abstract/active-effect-data-model.mjs";
 import { DamageData } from "../shared/damage-field.mjs";
 
-const { BooleanField } = foundry.data.fields;
+const { BooleanField, DocumentIdField, DocumentUUIDField, SchemaField, SetField } = foundry.data.fields;
 
 /**
  * @import { EnchantmentActiveEffectSystemData } from "./_types.mjs";
@@ -28,7 +28,12 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   static defineSchema() {
     return {
       ...super.defineSchema(),
-      magical: new BooleanField({ initial: true })
+      magical: new BooleanField({ initial: true }),
+      rider: new SchemaField({
+        activities: new SetField(new DocumentIdField()),
+        effects: new SetField(new DocumentUUIDField({ relative: true, type: "ActiveEffect" })),
+        items: new SetField(new DocumentUUIDField({ embedded: false, type: "Item" }))
+      })
     };
   }
 
@@ -59,6 +64,13 @@ export default class EnchantmentData extends ActiveEffectDataModel {
    */
   get item() {
     return this.parent.item;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  get trackRiders() {
+    return !this.isApplied && (!!this.rider?.activities?.size || !!this.rider?.effects?.size);
   }
 
   /* -------------------------------------------- */
@@ -217,9 +229,27 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /** @inheritDoc */
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if ( options.chatMessageOrigin ) {
-      document.body.querySelectorAll(`[data-message-id="${options.chatMessageOrigin}"] enchantment-application`)
+    const chatMessageOrigin = options.chatMessageOrigin ?? this.origin.message?.slice(12);
+    if ( chatMessageOrigin ) {
+      document.body.querySelectorAll(`[data-message-id="${chatMessageOrigin}"] enchantment-application`)
         .forEach(element => element.buildItemList());
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(updates, options, user) {
+    if ( (await super._preUpdate(updates, options, user)) === false ) return false;
+
+    // Transform absolute UUIDs for effects on this item into relative UUIDs
+    if ( updates.system?.rider?.effects?.length && this.parent.item ) {
+      const effects = await bulkFromUuid(updates.system.rider.effects, { relative: this.item });
+      updates.system.rider.effects = updates.system.rider.effects.map(uuid => {
+        if ( effects.get(uuid)?.type !== "base" ) return null;
+        if ( uuid.startsWith(this.parent.item.uuid) ) return foundry.utils.buildRelativeUuid(uuid, this.parent.item);
+        return uuid;
+      }).filter(_ => _);
     }
   }
 
@@ -252,36 +282,38 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
   /** @override */
   async collectRiders(options={}) {
+    if ( !this.isApplied ) return [];
+
     const operations = [];
     let item;
     let profile;
-    const { chatMessageOrigin } = options;
-    const { enchantmentProfile, activityId } = options.dnd5e ?? {};
+    const chatMessageOrigin = options?.chatMessageOrigin ?? this.origin.message?.slice(12);
+    const { activity: activityUuid, profile: enchantmentProfile } = this.origin;
 
     if ( chatMessageOrigin ) {
       const message = game.messages.get(chatMessageOrigin);
       item = message?.getAssociatedItem();
       const activity = message?.getAssociatedActivity();
       profile = activity?.effects.find(e => e._id === message?.getFlag("dnd5e", "use.enchantmentProfile"));
-    } else if ( enchantmentProfile && activityId ) {
-      let activity;
-      const origin = await fromUuid(this.parent.origin);
-      if ( origin instanceof dnd5e.documents.activity.EnchantActivity ) {
-        activity = origin;
+    } else if ( enchantmentProfile && activityUuid ) {
+      const activity = await fromUuid(activityUuid);
+      if ( activity instanceof dnd5e.documents.activity.EnchantActivity ) {
         item = activity.item;
-      } else if ( origin instanceof Item ) {
-        item = origin;
-        activity = item.system.activities?.get(activityId);
+        profile = activity?.effects.find(e => e._id === enchantmentProfile);
       }
-      profile = activity?.effects.find(e => e._id === enchantmentProfile);
     }
+    item ??= (await fromUuid(this.origin.item, { relative: this.parent }))
+      ?? (await fromUuid(this.parent._stats.compendiumSource))?.item;
 
-    if ( !profile || !item ) return [];
+    const documents = await bulkFromUuid(
+      [...this.rider.effects, ...this.rider.items, ...(profile?.riders.item ?? [])],
+      { relative: item }
+    );
 
     // Create Activities
     const riderActivities = {};
     let riderEffects = [];
-    for ( const id of profile.riders.activity ) {
+    for ( const id of [...this.rider.activities, ...(profile?.riders.activity ?? [])] ) {
       const activity = item?.system.activities.get(id);
       if ( !activity ) continue;
       const activityData = activity.toObject();
@@ -298,13 +330,13 @@ export default class EnchantmentData extends ActiveEffectDataModel {
     });
 
     // Create Effects
-    riderEffects.push(...profile.riders.effect.map(id => {
-      const effectData = item.effects.get(id)?.toObject();
-      if ( effectData ) {
-        delete effectData._id;
-        delete effectData.flags?.dnd5e?.rider;
-        foundry.utils.setProperty(effectData, "system.origin", { ...this.origin });
-      }
+    const effectIds = [...this.rider.effects, ...(profile?.riders.effect ?? [])];
+    riderEffects.push(...effectIds.map(id => {
+      const effectData = (documents.get(id) ?? item?.effects.get(id))?.toObject();
+      if ( effectData?.type !== "base" ) return null;
+      delete effectData._id;
+      delete effectData.flags?.dnd5e?.rider;
+      foundry.utils.setProperty(effectData, "system.origin", { ...this.origin });
       return effectData;
     }));
     riderEffects = riderEffects.filter(_ => _);
@@ -315,9 +347,9 @@ export default class EnchantmentData extends ActiveEffectDataModel {
 
     // Create Items
     if ( this.item.isEmbedded ) {
-      const items = await bulkFromUuid(profile.riders.item);
+      const itemUuids = [...this.rider.items, ...(profile?.riders.item ?? [])];
       const riderItems = await Item5e.createWithContents(
-        items.values(), {
+        itemUuids.map(uuid => documents.get(uuid)).filter(_ => _), {
           transformAll: item => {
             const itemData = item.clone({}, { keepId: true }).toObject();
             foundry.utils.setProperty(itemData, "flags.dnd5e.dependentOn", this.parent.uuid);
@@ -339,5 +371,28 @@ export default class EnchantmentData extends ActiveEffectDataModel {
   /** @override */
   async getSheetChangeContext(change, options) {
     return super.getSheetChangeContext(change, { item: this.isApplied ? this.item : true, prefixItemName: false });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async getSheetData(context) {
+    if ( this.isApplied ) return;
+
+    context.additionalChangesFields.unshift({
+      field: context.systemFields.rider.fields.effects,
+      value: Array.from(context.source.system.rider.effects, uuid =>
+        foundry.utils.parseUuid(uuid, { relative: this.item })?.uuid ?? uuid
+      )
+    }, {
+      field: context.systemFields.rider.fields.items,
+      value: context.source.system.rider.items
+    });
+
+    if ( this.item?.system.activities ) context.additionalChangesFields.unshift({
+      field: context.systemFields.rider.fields.activities,
+      options: this.item.system.activities.map(a => ({ value: a.id, label: a.name })),
+      value: context.source.system.rider.activities
+    });
   }
 }

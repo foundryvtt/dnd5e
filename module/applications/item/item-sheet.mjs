@@ -295,11 +295,18 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       else arr.push(descriptor);
       return arr;
     }, []);
-    riders.forEach(r => {
+    context.activities.push(...riders.filter(r => {
+      let unmatched = true;
       for ( const origin of origins[r.id] ?? [] ) {
-        if ( origin in activityMap ) activityMap[origin].riders.add(r);
+        if ( origin in activityMap ) {
+          activityMap[origin].riders.add(r);
+          unmatched = false;
+        }
       }
-    });
+      r.isRider = true;
+      if ( unmatched ) r.riderTooltip = true;
+      return unmatched;
+    }));
     return context;
   }
 
@@ -414,6 +421,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     context.tab = context.tabs.effects;
     context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
     const columns = [EffectsElement.COLUMNS.detail, EffectsElement.COLUMNS.controls];
+    let origins = {};
     for ( const category of Object.values(context.effects) ) {
       category.columns = columns;
       category.effects = await category.effects.reduce(async (arr, effect) => {
@@ -425,12 +433,18 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
           hasTooltip: true,
           riders: []
         };
+        if ( effect.system.trackRiders ) {
+          for ( const uuid of effect.system.rider?.effects ?? [] ) {
+            if ( !uuid.startsWith(".ActiveEffect.") ) continue;
+            (origins[uuid.slice(14)] ??= []).push(effect.id);
+          }
+        }
         if ( riderIds.has(effect.id) ) riders.push(ctx);
         else arr.push(ctx);
         return arr;
       }, []);
     }
-    const origins = (this.item.system.activities ?? []).values().filter(a => a.metadata.hasRiders)
+    origins = (this.item.system.activities ?? []).values().filter(a => a.metadata.hasRiders)
       .flatMap(a => a.effects)
       .reduce((obj, effects) => {
         const { _id, riders } = effects;
@@ -439,7 +453,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
           obj[id].push(_id);
         }
         return obj;
-      }, {});
+      }, origins);
     riders.forEach(r => {
       for ( const origin of origins[r.id] ?? [] ) {
         if ( origin in effectMap ) effectMap[origin].riders.push(r);
@@ -911,6 +925,15 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
+  /** @override */
+  _defaultDropBehavior(event, data) {
+    const dropBehavior = super._defaultDropBehavior(event, data);
+    if ( data?.effectType !== "enchantment" ) return dropBehavior;
+    return dropBehavior === "copy" ? "link" : dropBehavior;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle beginning drag events on the sheet.
    * @param {DragEvent} event  The initiating drag start event.
@@ -956,6 +979,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   _onDrop(event) {
+    event._behavior = this._dropBehavior(event);
     const data = TextEditor.getDragEventData(event);
     const item = this.item;
 
@@ -1002,18 +1026,27 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const options = { parent: this.item, keepOrigin: false };
 
     if ( effect.type === "enchantment" ) {
-      effectData.system.origin.item ??= effect.parent?.uuid;
-      if ( effect.system.isOnActivity ) effectData.transfer = true;
+      if ( event._behavior === "link" ) {
+        effectData.transfer = true;
+        if ( effect.parent ) effectData.system.origin.item = effect.parent?.uuid;
+      }
       options.keepOrigin = true;
-      options.dnd5e = {
-        enchantmentProfile: effect.id,
-        activityId: data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
-          a.effects.some(e => e._id === effect.id)
-        )?.id
-      };
+      const activity = effect.parent?.system.activities?.get(data.activityId);
+      effectData.system.origin.item ??= effect.parent?.uuid;
+      if ( activity && effectData.transfer ) {
+        effectData.system.origin.activity = activity.uuid;
+        effectData.system.origin.profile = effect.id;
+        const errors = activity.canEnchant(this.item);
+        if ( errors?.length ) {
+          errors.forEach(err => ui.notifications.error(err.message));
+          return false;
+        }
+      }
     }
 
-    return ActiveEffect.create(effectData, options);
+    const created = ActiveEffect.create(effectData, options);
+    if ( (event._behavior === "move") && (this.item.uuid !== effect.item?.uuid) ) effect.delete();
+    return created;
   }
 
   /* -------------------------------------------- */
