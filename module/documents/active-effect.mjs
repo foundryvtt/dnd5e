@@ -730,7 +730,7 @@ export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect)
   toDragData() {
     const data = super.toDragData();
     const activity = this.item?.system.activities?.getByType("enchant").find(a => {
-      return a.effects.some(e => e._id === this.id);
+      return !a.isHidden && a.effects.some(e => e._id === this.id);
     });
     if ( activity ) data.activityId = activity.id;
     data.effectType = this.type;
