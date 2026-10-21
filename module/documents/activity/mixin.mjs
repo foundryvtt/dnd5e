@@ -931,7 +931,8 @@ export default function ActivityMixin(Base) {
       };
 
       config.data.roll ??= {};
-      config.data.roll.damageType = config.options.type;
+      config.data.roll.damage ??= {};
+      config.data.roll.damage.type = config.options.type;
       const ruleBonus = AppliedRules.createIterator(process.rules.bonus)
         .filterWith(config.data, { consumed: process.rules.consumed })
         .toFormula();
