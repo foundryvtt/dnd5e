@@ -1,7 +1,7 @@
 name: Release Creation
 
 env:
-  NODE_VERSION: 22
+  NODE_VERSION: 24
 
 
 on:
@@ -18,40 +18,7 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v4
-
-
-    - name: Load package type
-      id: type
-      uses: ActionsTools/read-json-action@main
-      with:
-        file_path: "./foundryvtt.json"
-        prop_path: "project.type"
-
-
-    - name: Load project premium status
-      id: premium
-      continue-on-error: true
-      uses: ActionsTools/read-json-action@main
-      with:
-        file_path: "./foundryvtt.json"
-        prop_path: "project.premium"
-
-
-    - name: Load project includes
-      id: config
-      continue-on-error: true
-      uses: ActionsTools/read-json-action@main
-      with:
-        file_path: "./foundryvtt.json"
-
-
-    - name: Load package ID
-      id: package-id
-      uses: ActionsTools/read-json-action@main
-      with:
-        file_path: "./${{ steps.type.outputs.value }}.json"
-        prop_path: "id"
+    - uses: actions/checkout@v7
 
 
     # Set up our some variables for future use
@@ -64,18 +31,19 @@ jobs:
       id: get_vars
       run: |
         TAG=${GITHUB_REF/refs\/tags\//}
-        PACKAGE_ID=${{ steps.package-id.outputs.value }}
-        PACKAGE_TYPE=${{ steps.type.outputs.value }}
+        PACKAGE_TYPE=$(jq -er '.project.type' foundryvtt.json)
+        PACKAGE_ID=$(jq -er '.id' "$PACKAGE_TYPE.json")
         echo "TAG_NAME=$TAG" >> $GITHUB_ENV
         echo "PACKAGE_ID=$PACKAGE_ID" >> $GITHUB_ENV
         echo "PACKAGE_TYPE=$PACKAGE_TYPE" >> $GITHUB_ENV
+        echo "PREMIUM=$(jq -r '.project.premium // false' foundryvtt.json)" >> $GITHUB_ENV
         echo "ZIP_NAME=$PACKAGE_ID-$TAG.zip" >> $GITHUB_ENV
         echo "RELEASE_DOWNLOAD_URL=https://github.com/${{ github.repository }}/releases/download/$TAG/$PACKAGE_ID-$TAG.zip" >> $GITHUB_ENV
         echo "RELEASE_INSTALL_URL=https://github.com/${{ github.repository }}/releases/download/$TAG/$PACKAGE_TYPE.json" >> $GITHUB_ENV
 
 
     - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
@@ -98,22 +66,16 @@ jobs:
         mv --force dnd5e-compiled.mjs dnd5e.mjs
 
 
-    - name: Load Manifest
-      id: manifest
-      uses: ActionsTools/read-json-action@main
-      with:
-        file_path: "./${{ steps.type.outputs.value }}.json"
-
-
     # Run some tests to make sure our `system.json` is correct
     - name: Verify correct naming
       env:
         TAG_NAME: ${{ env.TAG_NAME }}
         RELEASE_DOWNLOAD: ${{ env.RELEASE_DOWNLOAD_URL }}
         PACKAGE_TYPE: ${{ env.PACKAGE_TYPE }}
-        PACKAGE_VERSION: ${{ steps.manifest.outputs.version }}
-        PACKAGE_DOWNLOAD: ${{ steps.manifest.outputs.download }}
       run: |
+        PACKAGE_VERSION=$(jq -r '.version' "$PACKAGE_TYPE.json")
+        PACKAGE_DOWNLOAD=$(jq -r '.download' "$PACKAGE_TYPE.json")
+
         # Validate that the tag being released matches the package version.
         if [[ ! $TAG_NAME == release-$PACKAGE_VERSION ]]; then
           echo "The $PACKAGE_TYPE.json version does not match tag name."
@@ -134,50 +96,22 @@ jobs:
 
 
     - name: Adjust manifest
-      uses: TomaszKandula/variable-substitution@v1.0.2
-      with:
-        files: "system.json"
-      env:
-        flags.hotReload: false
+      run: jq '.flags.hotReload = false' system.json > system.json.tmp && mv system.json.tmp system.json
 
 
     - name: Set protected flag for premium modules
-      if: ${{ steps.premium.outputs.value }}
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: "${{ env.PACKAGE_TYPE }}.json"
-      env:
-        protected: true
+      if: env.PREMIUM == 'true'
+      run: jq '.protected = true' "$PACKAGE_TYPE.json" > manifest.tmp && mv manifest.tmp "$PACKAGE_TYPE.json"
 
 
     - name: Determine archive contents
       id: archive
-      uses: actions/github-script@v6
-      env:
-        ESMODULES: ${{ steps.manifest.outputs.esmodules }}
-        INCLUDES: ${{ steps.config.outputs.includes }}
-        LANGUAGES: ${{ steps.manifest.outputs.languages }}
-        PACKS: ${{ steps.manifest.outputs.packs }}
-        STYLES: ${{ steps.manifest.outputs.styles }}
-      with:
-        result-encoding: string
-        script: |
-          const manifest = {};
-          if ( process.env.ESMODULES ) manifest.esmodules = JSON.parse(process.env.ESMODULES);
-          if ( process.env.INCLUDES ) manifest.includes = JSON.parse(process.env.INCLUDES);
-          if ( process.env.LANGUAGES ) manifest.languages = JSON.parse(process.env.LANGUAGES);
-          if ( process.env.PACKS ) manifest.packs = JSON.parse(process.env.PACKS);
-          if ( process.env.STYLES ) manifest.styles = JSON.parse(process.env.STYLES);
-          const includes = [
-            "${{ env.PACKAGE_TYPE }}.json",
-            ...(manifest.esmodules ?? []),
-            ...(manifest.esmodules?.map(s => `${s}.map`) ?? []),
-            ...(manifest.styles ?? []),
-            ...(manifest.packs?.map(p => p.path) ?? []),
-            ...(manifest.languages?.map(l => l.path) ?? []),
-            ...(manifest.includes ?? [])
-          ];
-          return includes.join(" ");
+      run: |
+        INCLUDES=$(jq -r --slurpfile config foundryvtt.json '[
+          input_filename, .esmodules[]?, (.esmodules[]? + ".map"), .styles[]?, .packs[]?.path, .languages[]?.path,
+          $config[0].includes[]?
+        ] | join(" ")' "$PACKAGE_TYPE.json")
+        echo "result=$INCLUDES" >> $GITHUB_OUTPUT
 
 
     - name: Zip package
