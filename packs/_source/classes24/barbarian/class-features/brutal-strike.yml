@@ -8,10 +8,9 @@ system:
       <p>If you use [[/item Reckless Attack]], you can forgo any Advantage on
       one Strength-based attack roll of your choice on your turn. The chosen
       attack roll mustn't have Disadvantage. If the chosen attack roll hits, the
-      target takes an extra [[lookup @scale.barbarian.brutal-strike]]{1d10}
-      damage of the same type dealt by the weapon or Unarmed Strike, and you can
-      cause one Brutal Strike effect of your choice. You have the following
-      effect
+      target takes an extra [[lookup @scale.brutal-strike.damage]]{1d10} damage
+      of the same type dealt by the weapon or Unarmed Strike, and you can cause
+      one Brutal Strike effect of your choice. You have the following effect
       options.</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.WKgVJp5AQRLqOlDh
       caption=false cite=false
       nameStyle=inline]</p><p>@Embed[Compendium.dnd5e.classes24.Item.phbbrbBrutalStri.Activity.l33Ty0yfpOXRiLve
@@ -60,8 +59,8 @@ system:
           on one Strength-based attack roll of your choice on your turn. The
           chosen attack roll mustn't have Disadvantage. If the chosen attack
           roll hits, the target takes an extra [[lookup
-          @scale.barbarian.brutal-strike]]{1d10} damage of the same type dealt
-          by the weapon or Unarmed Strike.</p>
+          @scale.brutal-strike.damage]]{1d10} damage of the same type dealt by
+          the weapon or Unarmed Strike.</p>
       duration:
         units: inst
         concentration: false
@@ -446,8 +445,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792088967435
-      modifiedTime: 1792088967435
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     img: icons/skills/melee/strike-axe-blood-red.webp
@@ -518,8 +517,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792088967435
-      modifiedTime: 1792088967435
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -566,8 +565,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792088967435
-      modifiedTime: 1792088967435
+      createdTime: 1792692286451
+      modifiedTime: 1792692286451
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -581,8 +580,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792088967435
-  modifiedTime: 1792088967435
+  createdTime: 1792692286451
+  modifiedTime: 1792692286451
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

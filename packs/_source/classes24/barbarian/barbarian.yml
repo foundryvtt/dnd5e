@@ -410,8 +410,15 @@ system:
         document: null
         uuid: null
       level: 3
-      hint: ''
+      hint: >-
+        <p>You gain a Barbarian subclass of your choice. The Path of the
+        Berserker, Path of the Wild Heart, Path of the World Tree, and Path of
+        the Zealot subclasses are detailed after this class’s description. A
+        subclass is a specialization that grants you features at certain
+        Barbarian levels. For the rest of your career, you gain each of your
+        subclass’s features that are of your Barbarian level or lower.</p>
       flags: {}
+      classRestriction: ''
       name: ''
     yRMpy6l9CCzZfkmT:
       _id: yRMpy6l9CCzZfkmT
@@ -588,8 +595,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792088967433
-  modifiedTime: 1792088967433
+  createdTime: 1792692286446
+  modifiedTime: 1792692286446
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

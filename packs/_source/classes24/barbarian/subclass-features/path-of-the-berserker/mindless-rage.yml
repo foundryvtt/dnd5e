@@ -62,7 +62,9 @@ system:
       effects:
         - _id: Y9LOXK6Q4vot2cxi
           uuid: null
-          level: {}
+          level:
+            min: null
+            max: null
       flags: {}
       range:
         units: self
@@ -76,7 +78,7 @@ system:
           type: ''
         affects:
           choice: false
-          type: ''
+          type: self
         override: false
         prompt: true
       uses:
@@ -120,7 +122,7 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 5PYS0xptk1GleJRQ
+          _id: JT2ISxtIpG1izyYW
           conditions: '{}'
           replacement: ''
         - key: system.traits.ci.value
@@ -128,7 +130,7 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: PiKmWcAFBGdo5hzm
+          _id: 7PB2knEaZ7ckTrfw
           conditions: '{}'
           replacement: ''
       origin:
@@ -152,8 +154,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792088970510
-      modifiedTime: 1792088970510
+      createdTime: 1792692177228
+      modifiedTime: 1792692177228
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -167,8 +169,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792088970510
-  modifiedTime: 1792088970510
+  createdTime: 1792692177228
+  modifiedTime: 1792692177228
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
