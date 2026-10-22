@@ -1,0 +1,108 @@
+_id: phbsptForestGnom
+name: Forest Gnome
+type: feat
+img: icons/environment/wilderness/tree-oak.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p>You know the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMinorIllus]{Minor
+      Illusion}</em> cantrip. You also always have the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithA]{Speak
+      with Animals}</em> spell prepared. You can cast it without a spell slot a
+      number of times equal to your Proficiency Bonus, and you regain all
+      expended uses when you finish a Long Rest. You can also use any spell
+      slots you have to cast the spell.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:gnome
+    repeatable: false
+  properties: []
+  requirements: Gnome
+  identifier: forest-gnome
+  advancement:
+    5ENIyYfAxcpuh426:
+      _id: 5ENIyYfAxcpuh426
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplMinorIllus
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 0
+      hint: ''
+      name: Cantrip
+      flags: {}
+    KIOe7GcuEGboouMQ:
+      _id: KIOe7GcuEGboouMQ
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSpeakwithA
+            optional: false
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '@prof'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 0
+      hint: ''
+      name: Spell
+      flags: {}
+  crewed: false
+effects: []
+folder: e9Bx86LUj7rJMszu
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791577597819
+  modifiedTime: 1791577597819
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptForestGnom'

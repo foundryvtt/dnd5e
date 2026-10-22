@@ -1,0 +1,151 @@
+_id: phbsptAbyssalLeg
+name: Abyssal
+type: feat
+img: icons/creatures/unholy/demon-female-succubus-orange.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <table><caption><p>Abyssal Legacy
+      Traits</p></caption><thead><tr><td><p>Level 1</p></td><td><p>Level
+      3</p></td><td><p>Level 5</p></td></tr></thead><tbody><tr><td><p>You have
+      &amp;Reference[Resistance] to Poison damage. You also know the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplPoisonSpra]{Poison
+      Spray}</em>
+      cantrip.</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplRayofSickn]{Ray
+      of
+      Sickness}</em></p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplHoldPerson]{Hold
+      Person}</em></p></td></tr></tbody></table>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:tiefling
+    repeatable: false
+  properties: []
+  requirements: Tiefling
+  identifier: fiendish-legacy-abyssal
+  advancement:
+    V8h8fLg4XG1QGewy:
+      _id: V8h8fLg4XG1QGewy
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - dr:poison
+        choices: []
+      value:
+        chosen: []
+      level: 0
+      hint: <p>You have Resistance to Poison damage.</p>
+      name: ''
+      flags: {}
+    VhCiGFOLtG8H93jy:
+      _id: VhCiGFOLtG8H93jy
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplPoisonSpra
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+          method: spell
+        sorting: m
+      value: {}
+      level: 0
+      hint: ''
+      name: Abyssal Traits
+      flags: {}
+    KwcwntR3Ai0R5iPN:
+      _id: KwcwntR3Ai0R5iPN
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplRayofSickn
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 3
+      hint: ''
+      name: Abyssal Traits
+      flags: {}
+    9iZufhdzY3XN7Em3:
+      _id: 9iZufhdzY3XN7Em3
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplHoldPerson
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 5
+      hint: ''
+      name: Abyssal Traits
+      flags: {}
+  crewed: false
+effects: []
+folder: VZQeqwpBruLqnL6x
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791578299754
+  modifiedTime: 1791578299754
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptAbyssalLeg'

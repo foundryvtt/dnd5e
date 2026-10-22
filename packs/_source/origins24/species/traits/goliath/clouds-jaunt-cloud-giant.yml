@@ -1,0 +1,116 @@
+_id: phbsptCloudsJaun
+name: Cloud's Jaunt (Cloud Giant)
+type: feat
+img: icons/magic/air/weather-clouds.webp
+system:
+  activities:
+    t4npBWLqABsnPZwL:
+      type: teleport
+      name: Cloud's Jaunt
+      _id: t4npBWLqABsnPZwL
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        override: false
+        units: ft
+        special: ''
+        value: '30'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: Unoccupied space
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
+      teleport:
+        override: false
+        units: ft
+  uses:
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+    max: '@prof'
+  description:
+    value: >-
+      <p>As a Bonus Action, you magically teleport up to 30 feet to an
+      unoccupied space you can see.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:goliath
+    repeatable: false
+  properties: []
+  requirements: Goliath
+  identifier: clouds-jaunt
+  advancement: {}
+  crewed: false
+effects: []
+folder: 4KZykhQTGVAuVo1I
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.369'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1792697779251
+  modifiedTime: 1792697779251
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptCloudsJaun'
