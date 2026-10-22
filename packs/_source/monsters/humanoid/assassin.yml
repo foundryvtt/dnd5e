@@ -687,7 +687,7 @@ items:
       uses:
         max: '1'
         recovery:
-          - period: turnStart
+          - period: turn
             type: recoverAll
         spent: 0
       type:
