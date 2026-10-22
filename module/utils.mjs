@@ -40,6 +40,24 @@ export function getCollectionDocumentOptions(collection, { disabled }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Convert a currency value from one denomination to another.
+ * @param {number} value         The currency value.
+ * @param {string} from          The current denomination.
+ * @param {object} [options]
+ * @param {string} [options.to]  The target denomination, if specified, otherwise defaults to the configured default
+ *                               currency.
+ * @returns {number|null}
+ */
+export function convertCurrency(value, from, { to=CONFIG.DND5E.defaultCurrency }={}) {
+  const fromConversion = CONFIG.DND5E.currencies[from]?.conversion;
+  const toConversion = CONFIG.DND5E.currencies[to]?.conversion;
+  if ( !fromConversion || !toConversion ) return null;
+  return value * toConversion / fromConversion;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Round a specific denomination to the number of digits specified in the configuration.
  * @param {number} value         Currency value to round.
  * @param {string} denomination  Denomination that the value represents.
