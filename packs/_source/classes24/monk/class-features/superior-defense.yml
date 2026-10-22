@@ -7,19 +7,16 @@ system:
   description:
     value: >-
       <p>At the start of your turn, you can expend 3 Focus Points to bolster
-      yourself against harm for 1 minute or until you have the Incapacitated
-      condition. During that time, you have Resistance to all damage except
-      Force damage.</p><section id="secret-jojCvqn1dDjsyTzI"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature will
-      expend 3 Focus Points and includes an Active Effect which will apply the
-      relevant Resistances.</p></section>
+      yourself against harm for 1 minute or until you have the
+      &amp;Reference[Incapacitated apply=false] condition. During that time, you
+      have Resistance to all damage except Force damage.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -29,18 +26,19 @@ system:
     subtype: ki
   prerequisites:
     level: 18
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Monk
   activities:
     tED3Z5V5ZlCkyzWU:
       type: utility
       _id: tED3Z5V5ZlCkyzWU
       activation:
-        type: ''
+        type: turnStart
         value: null
         override: false
-        condition: At the start of your turn
+        condition: ''
       consumption:
         scaling:
           allowed: false
@@ -48,16 +46,22 @@ system:
         targets:
           - type: itemUses
             value: '3'
-            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            target: feat:monks-focus
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: zAtnsWRpAcTIkjpz
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -67,10 +71,12 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
           type: self
+          special: ''
         override: false
         prompt: false
       uses:
@@ -83,12 +89,25 @@ system:
         visible: false
         name: ''
         formula: ''
-      name: ''
+      name: Bolster
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: superior-defense
+  advancement: {}
+  crewed: false
 effects:
   - name: Superior Defense
-    img: systems/dnd5e/icons/svg/items/feature.svg
+    img: icons/magic/defensive/shield-barrier-blue.webp
     origin: Compendium.dnd5e.classes24.Item.phbmnkSuperiorDe
     transfer: false
     _id: zAtnsWRpAcTIkjpz
@@ -100,80 +119,114 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 0SpF8C2Il1jfl1S7
+          _id: Q0aC66Pny2OXI2Fn
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: bludgeoning
           priority: null
           type: add
           phase: initial
-          _id: DCS8TDE3lsibJ6X0
+          _id: yERDt6pFLcW79fpI
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: cold
           priority: null
           type: add
           phase: initial
-          _id: rSNaVHlqptKVYBaS
+          _id: 8H4sJkC8hFKRkckl
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: fire
           priority: null
           type: add
           phase: initial
-          _id: HY6mBo5wwMfsprR0
+          _id: xEAhVfIyHL1shZZ8
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: lightning
           priority: null
           type: add
           phase: initial
-          _id: GgD9yPK7YzbNmUxi
+          _id: DngiXnjzmN5GzG2q
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: necrotic
           priority: null
           type: add
           phase: initial
-          _id: I6wPPNbLkaRz8xKI
+          _id: 8GFZf7dzvEMydD9h
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: piercing
           priority: null
           type: add
           phase: initial
-          _id: 94FQYiMaWbxCo7Ma
+          _id: eYVtIy6HYiZs1oE2
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: poison
           priority: null
           type: add
           phase: initial
-          _id: ssCnvYbSq9sy0lOs
+          _id: EKLjM2R8CoVCBZXi
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: psychic
           priority: null
           type: add
           phase: initial
-          _id: XmTGxpyNC0qbEvi2
+          _id: greHoK6kyZbCY4hn
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: radiant
           priority: null
           type: add
           phase: initial
-          _id: Dt5sLKB23tBmwtpi
+          _id: a8a73bQAT5Sl99s5
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: slashing
           priority: null
           type: add
           phase: initial
-          _id: WNAAi1m4jXAw8RPT
+          _id: Z7fDJ03VOUrx7V3o
+          conditions: '{}'
+          replacement: ''
         - key: system.traits.dr.value
           value: thunder
           priority: null
           type: add
           phase: initial
-          _id: N2HoYpmILIFTXleh
+          _id: kKWHTyvuX3lfOE8s
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
-      value: 60
-      units: seconds
-      expiry: turnStart
+      value: 1
+      units: minutes
+      expiry: null
       expired: false
-    description: ''
+    description: <p>You have Resistance to all damage except Force damage.</p>
     tint: '#ffffff'
     statuses: []
     sort: 0
@@ -181,29 +234,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544102846
-      modifiedTime: 1783544102846
+      systemVersion: 6.0.6
+      createdTime: 1792443355977
+      modifiedTime: 1792443355977
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbmnkSuperiorDe.zAtnsWRpAcTIkjpz'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1783544102846
+  systemVersion: 6.0.6
+  createdTime: 1792443355977
+  modifiedTime: 1792443355977
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1700000

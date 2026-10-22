@@ -16,21 +16,14 @@ system:
       yourself that isn't behind Total Cover if the attack was a ranged attack.
       That creature must succeed on a Dexterity saving throw or take damage
       equal to two rolls of your Martial Arts die plus your Dexterity modifier.
-      The damage is the same type dealt by the attack.</p><section
-      class="secret" id="secret-zWGu1AEB09UqQ21D"><p><strong>Foundry
-      Note</strong></p><p>The <strong>Reduce</strong> activity can be used to
-      heal yourself to reduce the total damage if it's not enough to reduce it
-      to 0.</p><p>The <strong>Redirect</strong> activity can be used to roll
-      damage and consume a use of your Focus Points if you can reduce it to 0.
-      You can select the type of damage in the roll dialog. The dice increase
-      automatically as you level up.</p></section>
+      The damage is the same type dealt by the attack.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -40,9 +33,10 @@ system:
     subtype: ''
   prerequisites:
     level: 3
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Monk
   activities:
     rQwRKkuZ7WhnB7v7:
       type: heal
@@ -61,10 +55,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -75,6 +71,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -98,7 +95,19 @@ system:
         scaling:
           number: 1
         bonus: '@abilities.dex.mod + @classes.monk.levels'
+        modifiers: []
       name: Reduce
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
     dJv36KHyIVsbD00p:
       type: save
       name: Redirect
@@ -115,14 +124,16 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            target: feat:monks-focus
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -133,6 +144,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -159,6 +171,7 @@ system:
               - slashing
             scaling:
               number: 1
+            modifiers: []
         onSave: none
       save:
         ability:
@@ -166,21 +179,126 @@ system:
         dc:
           calculation: wis
           formula: ''
+        bonus: ''
+        visible: true
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: 12
+        identifier: monk
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
+    Idc1BbOMH5CiZis0:
+      type: save
+      name: Redirect (Any Damage)
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: If you reduce the damage to 0
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: feat:monks-focus
+            scaling: {}
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        override: false
+        units: self
+        special: 5 feet for melee attacks or 60 feet for ranged attacks
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Isn't behind Total Cover
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: 2@scale.monk.die + @abilities.dex.mod
+            number: null
+            denomination: 0
+            bonus: ''
+            modifiers: []
+            types:
+              - bludgeoning
+              - piercing
+              - slashing
+              - acid
+              - cold
+              - fire
+              - force
+              - lightning
+              - necrotic
+              - poison
+              - psychic
+              - radiant
+              - thunder
+            scaling:
+              number: 1
+        onSave: none
+      save:
+        ability:
+          - dex
+        dc:
+          calculation: wis
+          formula: ''
+        visible: true
+        bonus: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level:
+          min: 13
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: monk
+      _id: Idc1BbOMH5CiZis0
   enchant: {}
   identifier: deflect-attacks
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1740680085009
+  systemVersion: 6.0.6
+  createdTime: 1792443355974
+  modifiedTime: 1792443355974
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 300000

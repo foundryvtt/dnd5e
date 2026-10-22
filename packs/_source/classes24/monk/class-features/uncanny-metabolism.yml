@@ -9,19 +9,15 @@ system:
       <p>When you roll Initiative, you can regain all expended Focus Points.
       When you do so, roll your Martial Arts die, and regain a number of Hit
       Points equal to your Monk level plus the number rolled.</p><p>Once you use
-      this feature, you can't use it again until you finish a Long
-      Rest.</p><section id="secret-KTgTyrtJJBs1nIDS"
-      class="secret"><p><strong>Foundry Note</strong></p><p>Using this feature
-      will restore all expended Focus Points and offers a Healing roll for
-      restoring your Hit Points. It includes a single free use per Long
-      Rest.</p></section>
+      this feature, you can't use it again until you finish a Long Rest.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: '1'
     spent: 0
@@ -33,37 +29,41 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Monk
   activities:
     RfyAj9VDmzAJkTL3:
       type: heal
       name: Uncanny Metabolism
       _id: RfyAj9VDmzAJkTL3
       activation:
-        type: ''
+        type: encounter
         value: null
         override: false
-        condition: When you roll initiative
+        condition: ''
       consumption:
         scaling:
           allowed: false
         spellSlot: true
         targets:
           - type: itemUses
-            value: -@classes.monk.levels
-            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            value: -@scale.monk.focus
+            target: feat:monks-focus
             scaling: {}
           - type: itemUses
             value: '1'
+            target: ''
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -74,6 +74,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -88,7 +89,7 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
@@ -97,21 +98,31 @@ system:
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: uncanny-metabolism
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1745256763496
+  systemVersion: 6.0.6
+  createdTime: 1792443355975
+  modifiedTime: 1792443355975
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 2000000

@@ -9,22 +9,18 @@ system:
       <p>Once per turn when you hit a creature with a Monk weapon or an Unarmed
       Strike, you can expend 1 Focus Point to attempt a stunning strike. The
       target must make a Constitution saving throw. On a failed save, the target
-      has the Stunned condition until the start of your next turn. On a
-      successful save, the target's Speed is halved until the start of your next
-      turn, and the next attack roll made against the target before then has
-      Advantage.</p><section class="secret"
-      id="secret-bfJBOqZfcoIiBtoP"><p><strong>Foundry Note</strong></p><p>This
-      feature includes the Saving Throw and a Stunned Active Effect which
-      applies the Stunned status if they fail and a Slowed Active Effect for
-      tracking that their Speed is halved and that the next attack roll made
-      against them has Advantage if they succeed.</p></section>
+      has the &amp;Reference[Stunned apply=false] condition until the start of
+      your next turn. On a successful save, the target's Speed is halved until
+      the start of your next turn, and the next attack roll made against the
+      target before then has Advantage.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   uses:
     max: ''
     spent: 0
@@ -34,15 +30,16 @@ system:
     subtype: ki
   prerequisites:
     level: 5
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Monk
   activities:
     Xto99a8Zt46VLwaR:
       type: save
       _id: Xto99a8Zt46VLwaR
       activation:
-        type: ''
+        type: special
         value: null
         override: false
         condition: >-
@@ -55,19 +52,30 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            target: feat:monks-focus
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        value: '1'
+        expiry: null
       effects:
         - _id: vofnieSTB0l8rpRg
           onSave: false
+          level:
+            min: null
+            max: null
+          uuid: null
         - _id: cj9HhBNKtF6iOsH4
           onSave: false
+          level:
+            min: null
+            max: null
+          uuid: null
       range:
         override: false
         units: self
@@ -77,6 +85,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -98,9 +107,24 @@ system:
         dc:
           calculation: wis
           formula: ''
+        bonus: ''
+        visible: true
       name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: stunning-strike
+  advancement: {}
+  crewed: false
 effects:
   - name: Stunned
     img: icons/skills/melee/unarmed-punch-fist-blue.webp
@@ -110,27 +134,39 @@ effects:
     type: base
     system:
       changes: []
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
-      value: 1
-      units: turns
-      expiry: turnStart
+      value: null
+      units: rounds
+      expiry: sourceStart
       expired: false
     description: ''
     tint: '#ffffff'
     statuses:
       - stunned
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.6
+      createdTime: 1792691451182
+      modifiedTime: 1792691451182
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
@@ -143,44 +179,60 @@ effects:
     _id: cj9HhBNKtF6iOsH4
     type: base
     system:
-      changes: []
+      changes:
+        - key: system.attributes.movement.multiplier
+          value: 0.5
+          priority: null
+          type: multiply
+          phase: initial
+          _id: DvtgKfRbYGoqUZPq
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
-      value: 1
-      units: turns
-      expiry: turnStart
+      value: null
+      units: rounds
+      expiry: sourceStart
       expired: false
     description: ''
     tint: '#ffffff'
     statuses: []
     sort: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.6
+      createdTime: 1792691451182
+      modifiedTime: 1792691451182
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
     showIcon: 1
     folder: null
     _key: '!items.effects!phbmnkStunningSt.cj9HhBNKtF6iOsH4'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1745256763368
+  systemVersion: 6.0.6
+  createdTime: 1792691451182
+  modifiedTime: 1792691451182
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1600000

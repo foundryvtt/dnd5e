@@ -1,0 +1,42 @@
+name: Disengaged
+type: base
+_id: DovP6Uo8YmIohHeK
+img: systems/dnd5e/icons/svg/action/disengage.svg
+system:
+  changes: []
+  origin:
+    actor: null
+    behavior: null
+    effect: null
+    item: null
+    message: null
+  conditions: '{}'
+  magical: false
+  rider:
+    statuses: []
+disabled: false
+start: null
+duration:
+  value: null
+  units: seconds
+  expiry: turnEnd
+  expired: false
+description: ''
+origin: null
+tint: '#ffffff'
+transfer: true
+statuses: []
+showIcon: 1
+folder: IfLBBXmSvJFGNJaF
+sort: 2150000
+flags: {}
+_stats:
+  coreVersion: '14.369'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1792690678498
+  modifiedTime: 1792690933245
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!effects!DovP6Uo8YmIohHeK'
