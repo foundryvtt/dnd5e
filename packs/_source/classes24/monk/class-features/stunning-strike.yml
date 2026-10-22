@@ -164,8 +164,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792443355978
-      modifiedTime: 1792443355978
+      createdTime: 1792691451182
+      modifiedTime: 1792691451182
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
@@ -180,12 +180,12 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.speed
+        - key: system.attributes.movement.multiplier
           value: 0.5
           priority: null
           type: multiply
           phase: initial
-          _id: ZAtmOAYuZBdX5INJ
+          _id: DvtgKfRbYGoqUZPq
           conditions: '{}'
           replacement: ''
       rider:
@@ -217,8 +217,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792443355978
-      modifiedTime: 1792443355978
+      createdTime: 1792691451182
+      modifiedTime: 1792691451182
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -231,8 +231,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792443355978
-  modifiedTime: 1792443355978
+  createdTime: 1792691451182
+  modifiedTime: 1792691451182
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1600000

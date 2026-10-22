@@ -21,19 +21,15 @@ system:
       modifier instead of your Strength modifier for the attack and damage rolls
       of your Unarmed Strikes and Monk weapons. In addition, when you use the
       Grapple or Shove option of your Unarmed Strike, you can use your Dexterity
-      modifier instead of your Strength modifier to determine the save
-      DC.</p><section id="secret-krbGYn2lplFe7kOG"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
-      includes activities for enchanting a weapon which adds a <strong>Monk
-      Attack</strong> activity to it that integrates the changes mentioned
-      above.</p></section>
+      modifier instead of your Strength modifier to determine the save DC.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
     book: ''
+    page: ''
     license: CC-BY-4.0
-    revision: 1
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -208,7 +204,7 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: zX7mabt9jbozmjuW
+          _id: JJvFvRl931ylZWTJ
           conditions: '{}'
           replacement: ''
         - key: system.damage.base.custom.enabled
@@ -216,7 +212,7 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: J3Yjrt96p757tKHn
+          _id: V51RLnzEALerJ3nZ
           conditions: '{}'
           replacement: ''
         - key: system.damage.base.custom.formula
@@ -224,7 +220,7 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: rINuCNByHeKDAdyw
+          _id: Gu0DLTIftVSXTX2L
           conditions: '{}'
           replacement: ''
         - key: name
@@ -232,7 +228,7 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: CokQ88q1RO1qsvRL
+          _id: 5hkLD74aTqfrAIuk
           conditions: '{}'
           replacement: ''
       magical: false
@@ -272,8 +268,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792443355976
-      modifiedTime: 1792443355976
+      createdTime: 1792691451180
+      modifiedTime: 1792691451180
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -290,8 +286,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792443355976
-  modifiedTime: 1792443355976
+  createdTime: 1792691451180
+  modifiedTime: 1792691451180
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

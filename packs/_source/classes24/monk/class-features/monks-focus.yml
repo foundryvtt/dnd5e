@@ -145,8 +145,19 @@ system:
         units: inst
         concentration: false
         override: false
+        value: '1'
         expiry: null
-      effects: []
+      effects:
+        - _id: s4ICA7r2jpREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.DovP6Uo8YmIohHeK
+          level:
+            min: null
+            max: null
+        - _id: YIFZ91amdhREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.yX7sz2cDadXezSp9
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -208,7 +219,13 @@ system:
         concentration: false
         override: false
         expiry: null
-      effects: []
+        value: '1'
+      effects:
+        - _id: g6EsrygI3mREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.DovP6Uo8YmIohHeK
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -241,7 +258,7 @@ system:
       visibility:
         level:
           min: null
-          max: 9
+          max: null
         identifier: monk
         requireAttunement: false
         requireIdentification: false
@@ -271,9 +288,11 @@ system:
         override: false
         expiry: null
       effects:
-        - _id: 92bFICMzRpJmnO56
-          uuid: null
-          level: {}
+        - _id: pGmNwB1r9AREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.XoEv3BmHKAGLFX3m
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -341,9 +360,16 @@ system:
         override: false
         expiry: null
       effects:
-        - _id: 92bFICMzRpJmnO56
-          uuid: null
-          level: {}
+        - _id: dpu7JGuLcHREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.DovP6Uo8YmIohHeK
+          level:
+            min: null
+            max: null
+        - _id: 0KmRUEKMbyREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.XoEv3BmHKAGLFX3m
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -482,7 +508,18 @@ system:
         expiry: null
         concentration: false
         override: false
-      effects: []
+        value: '1'
+      effects:
+        - _id: 6391LFme34REMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.DovP6Uo8YmIohHeK
+          level:
+            min: null
+            max: null
+        - _id: qt1lHOyWJJREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.yX7sz2cDadXezSp9
+          level:
+            min: null
+            max: null
       flags: {}
       range:
         units: self
@@ -556,8 +593,13 @@ system:
         override: false
         expiry: null
       effects:
-        - _id: 92bFICMzRpJmnO56
-          uuid: null
+        - _id: 0rFfxtDAWtREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.DovP6Uo8YmIohHeK
+          level:
+            min: null
+            max: null
+        - _id: c4WKXznfQhREMOTE
+          uuid: Compendium.dnd5e.effects.ActiveEffect.XoEv3BmHKAGLFX3m
           level: {}
       range:
         override: false
@@ -609,8 +651,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792443355978
-  modifiedTime: 1792443355978
+  createdTime: 1792691451178
+  modifiedTime: 1792691451178
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1200000

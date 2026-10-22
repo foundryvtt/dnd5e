@@ -39,7 +39,7 @@ system:
         type: special
         value: null
         override: false
-        condition: When you make a saving throw an fail
+        condition: When you make a saving throw and fail
       consumption:
         scaling:
           allowed: false
@@ -148,8 +148,8 @@ effects:
       coreVersion: '14.369'
       systemId: dnd5e
       systemVersion: 6.0.6
-      createdTime: 1792443355976
-      modifiedTime: 1792443355976
+      createdTime: 1792691451179
+      modifiedTime: 1792691451179
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
@@ -161,8 +161,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792443355976
-  modifiedTime: 1792443355976
+  createdTime: 1792691451179
+  modifiedTime: 1792691451179
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 500000
