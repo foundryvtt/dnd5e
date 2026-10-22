@@ -168,34 +168,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
    * @returns {DamageApplicationOptions}
    */
   getMergedOptions(uuid) {
-    const fallback = this.#dirty ? this.multiplier : (this.#saveMultiplier(uuid) ?? this.multiplier);
+    const multiplier = this.#dirty ? this.multiplier : (this.#saveMultiplier(uuid) ?? this.multiplier);
     const options = this.getTargetOptions(uuid);
-    const defaultOptions = this.chatMessage.system.applicationOptions ?? {};
-    return {
-      ...options,
-      downgrade: this.#mergeOption(options.downgrade, defaultOptions.downgrade),
-      ignore: options.ignore === true ? options.ignore : {
-        ...(options.ignore ?? {}),
-        immunity: this.#mergeOption(options.ignore?.immunity, defaultOptions.ignore?.immunity),
-        resistance: this.#mergeOption(options.ignore?.resistance, defaultOptions.ignore?.resistance),
-        vulnerability: this.#mergeOption(options.ignore?.vulnerability, defaultOptions.ignore?.vulnerability)
-      },
-      multiplier: options.multiplier ?? fallback
-    };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Merge a single application option with the default options from the chat message.
-   * @param {boolean|Set<string>} targetOption  Option for a specific target.
-   * @param {Set<string>|void} defaultOption    Default option from chat message.
-   * @returns {boolean|Set<string>|void}
-   */
-  #mergeOption(targetOption, defaultOption) {
-    if ( !defaultOption || (targetOption === true) ) return targetOption;
-    if ( defaultOption.has("ALL") ) return true;
-    return new Set(targetOption ?? []).union(defaultOption);
+    return this.chatMessage.system.getDamageApplicationOptions({ multiplier, ...options });
   }
 
   /* -------------------------------------------- */

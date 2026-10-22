@@ -124,4 +124,42 @@ export default class DamageMessageData extends RollMessageData {
 
     return context;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the final damage application options, merging the defaults from this card into a set of base options.
+   * @param {DamageApplicationOptions} [base={}]  Base options into which this card's defaults should be merged.
+   * @returns {DamageApplicationOptions}
+   */
+  getDamageApplicationOptions(base={}) {
+    const defaultOptions = this.applicationOptions ?? {};
+    return {
+      ...base,
+      downgrade: this.#mergeOption(base.downgrade, defaultOptions.downgrade),
+      ignore: base.ignore === true ? base.ignore : {
+        ...(base.ignore ?? {}),
+        immunity: this.#mergeOption(base.ignore?.immunity, defaultOptions.ignore?.immunity),
+        resistance: this.#mergeOption(base.ignore?.resistance, defaultOptions.ignore?.resistance),
+        vulnerability: this.#mergeOption(base.ignore?.vulnerability, defaultOptions.ignore?.vulnerability)
+      },
+      multiplier: base.multiplier
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge a single application option with the default options from the chat message.
+   * @param {boolean|Set<string>} targetOption  Option for a specific target.
+   * @param {Set<string>|void} defaultOption    Default option from chat message.
+   * @returns {boolean|Set<string>|void}
+   */
+  #mergeOption(targetOption, defaultOption) {
+    if ( !defaultOption || (targetOption === true) ) return targetOption;
+    if ( defaultOption.has("ALL") ) return true;
+    return new Set(targetOption ?? []).union(defaultOption);
+  }
 }
