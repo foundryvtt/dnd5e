@@ -16,11 +16,11 @@ system:
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
-    max: max(1,@abilities.wis.mod)
+    max: max(1, @abilities.wis.mod)
     spent: 0
     recovery:
       - period: lr
@@ -30,9 +30,10 @@ system:
     subtype: ''
   prerequisites:
     level: 6
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Warrior of the Open Hand
   activities:
     CoatPmjognJHbfZ6:
       type: heal
@@ -53,10 +54,12 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -67,6 +70,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -81,31 +85,41 @@ system:
       sort: 0
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
           enabled: true
-          formula: '@scale.monk.die + @abilities.wis.mod'
+          formula: max(1, @scale.monk.die + @abilities.wis.mod)
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
       name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: wholeness-of-body
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.347'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.1
-  createdTime: 1735866574822
-  modifiedTime: 1755538201234
+  systemVersion: 6.0.6
+  createdTime: 1792443358648
+  modifiedTime: 1792443358648
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

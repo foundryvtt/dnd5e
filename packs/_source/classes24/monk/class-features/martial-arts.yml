@@ -8,32 +8,28 @@ system:
     value: >-
       <p>Your practice of martial arts gives you mastery of combat styles that
       use your Unarmed Strike and Monk weapons, which are the
-      following:</p><ul><li>Simple Melee weapons</li><li>Martial Melee weapons
-      that have the Light property</li></ul><p>You gain the following benefits
-      while you are unarmed or wielding only Monk weapons and you aren't wearing
-      armor or wielding a Shield.</p><p><strong>Bonus Unarmed Strike.</strong>
-      You can make an Unarmed Strike as a Bonus Action.</p><p><strong>Martial
-      Arts Die.</strong> You can roll 1d6 in place of the normal damage of your
-      Unarmed Strike or Monk weapons. This die changes as you gain Monk levels,
-      as shown in the Martial Arts column of the Monk Features
-      table.</p><p><strong>Current Martial Arts Die:</strong> [[lookup
-      @scale.monk.die]]</p><p><strong>Dexterous Attacks.</strong>You can use
-      your Dexterity modifier instead of your Strength modifier for the attack
-      and damage rolls of your Unarmed Strikes and Monk weapons. In addition,
-      when you use the Grapple or Shove option of your Unarmed Strike, you can
-      use your Dexterity modifier instead of your Strength modifier to determine
-      the save DC.</p><section class="secret"
-      id="secret-krbGYn2lplFe7kOG"><p><strong>Foundry Note</strong></p><p>This
-      feature includes activities for enchanting a weapon which adds a
-      <strong>Monk Attack</strong> activity to it that integrates the changes
-      mentioned above.</p></section>
+      following:</p><ul><li><p>Simple Melee weapons</p></li><li><p>Martial Melee
+      weapons that have the Light property</p></li></ul><p>You gain the
+      following benefits while you are unarmed or wielding only Monk weapons and
+      you aren't wearing armor or wielding a Shield.</p><p><em><strong>Bonus
+      Unarmed Strike.</strong></em> You can make an Unarmed Strike as a Bonus
+      Action.</p><p><em><strong>Martial Arts Die.</strong></em> You can roll 1d6
+      in place of the normal damage of your Unarmed Strike or Monk weapons. This
+      die changes as you gain Monk levels, as shown in the Martial Arts column
+      of the Monk Features table.</p><p><em><strong>Dexterous
+      Attacks.</strong></em><strong> </strong>You can use your Dexterity
+      modifier instead of your Strength modifier for the attack and damage rolls
+      of your Unarmed Strikes and Monk weapons. In addition, when you use the
+      Grapple or Shove option of your Unarmed Strike, you can use your Dexterity
+      modifier instead of your Strength modifier to determine the save DC.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -43,9 +39,10 @@ system:
     subtype: ''
   prerequisites:
     level: 1
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Monk
   activities:
     x7fKZy0kgRTMACTa:
       type: enchant
@@ -64,10 +61,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: VnV6opO1b3apq6wt
           level:
@@ -78,6 +77,7 @@ system:
               - w1iULzeSjTNs16nf
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -87,6 +87,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -99,7 +100,7 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -107,8 +108,13 @@ system:
         properties: []
         type: weapon
       img: ''
-      appliedEffects:
-        - VnV6opO1b3apq6wt
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     uCIVkZurvxHYJ0h0:
       type: enchant
       name: Master Light Martial Weapon
@@ -125,10 +131,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects:
         - _id: VnV6opO1b3apq6wt
           level:
@@ -139,6 +147,7 @@ system:
               - w1iULzeSjTNs16nf
             effect: []
             item: []
+          uuid: null
       range:
         override: false
         units: self
@@ -148,6 +157,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: '1'
@@ -160,7 +170,7 @@ system:
         recovery: []
         max: ''
       enchant:
-        identifier: ''
+        self: false
       restrictions:
         allowMagical: true
         categories:
@@ -170,10 +180,17 @@ system:
         type: weapon
       _id: uCIVkZurvxHYJ0h0
       img: ''
-      appliedEffects:
-        - VnV6opO1b3apq6wt
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: martial-arts
+  advancement: {}
+  crewed: false
 effects:
   - type: enchantment
     name: Dexterous Attacks & Martial Arts Damage
@@ -187,40 +204,56 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: bvOMMWdBF5rVRf5k
+          _id: JJvFvRl931ylZWTJ
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.custom.enabled
           value: true
           priority: null
           type: override
           phase: initial
-          _id: VxbQQBKUdtQfwD1P
+          _id: V51RLnzEALerJ3nZ
+          conditions: '{}'
+          replacement: ''
         - key: system.damage.base.custom.formula
           value: '@scale.monk.die + @mod'
           priority: null
           type: override
           phase: initial
-          _id: u58nJx6t8vjGmWYR
+          _id: Gu0DLTIftVSXTX2L
+          conditions: '{}'
+          replacement: ''
         - key: name
           value: '{} (Martial Arts)'
           priority: null
           type: override
           phase: initial
-          _id: SuB6scR5qWZZ6swj
+          _id: 5hkLD74aTqfrAIuk
+          conditions: '{}'
+          replacement: ''
+      magical: false
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
     duration:
       value: null
       units: seconds
       expiry: null
       expired: false
     description: >-
-      <p><strong>Martial Arts Die.</strong> You can roll [[lookup
+      <p><em><strong>Martial Arts Die.</strong></em> You can roll [[lookup
       @scale.monk.die]] in place of the normal damage of your Unarmed Strike or
       Monk weapons. This die changes as you gain Monk levels, as shown in the
-      Martial Arts column of the Monk Features table.</p><p><strong>Dexterous
-      Attacks.</strong> You can use your Dexterity modifier instead of your
-      Strength modifier for the attack and damage rolls of your Unarmed Strikes
-      and Monk weapons. In addition, when you use the Grapple or Shove option of
-      your Unarmed Strike, you can use your Dexterity modifier instead of your
-      Strength modifier to determine the save DC.</p><p></p>
+      Martial Arts column of the Monk Features
+      table.</p><p><em><strong>Dexterous Attacks.</strong></em> You can use your
+      Dexterity modifier instead of your Strength modifier for the attack and
+      damage rolls of your Unarmed Strikes and Monk weapons. In addition, when
+      you use the Grapple or Shove option of your Unarmed Strike, you can use
+      your Dexterity modifier instead of your Strength modifier to determine the
+      save DC.</p><p></p>
     origin: null
     tint: '#ffffff'
     transfer: true
@@ -228,16 +261,15 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1726772286789
-      modifiedTime: 1783544102739
+      systemVersion: 6.0.6
+      createdTime: 1792691451180
+      modifiedTime: 1792691451180
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -249,14 +281,13 @@ flags:
     riders:
       activity:
         - w1iULzeSjTNs16nf
-      effect: []
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.0
-  createdTime: 1724425979197
-  modifiedTime: 1783544102739
+  systemVersion: 6.0.6
+  createdTime: 1792691451180
+  modifiedTime: 1792691451180
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 1100000

@@ -8,19 +8,15 @@ system:
     value: >-
       <p>Your physical and mental discipline grant you proficiency in all saving
       throws.</p><p>Additionally, whenever you make a saving throw and fail, you
-      can expend 1 Focus Point to reroll it, and you must use the new
-      roll.</p><section class="secret"
-      id="secret-VLGTfBDBcfExjSXG"><p><strong>Foundry Note</strong></p><p>You
-      will automatically be granted the additional Saving Throw proficiencies as
-      you level up.</p><p>Use this feature to expend 1 Focus
-      Point.</p></section>
+      can expend 1 Focus Point to reroll it, and you must use the new roll.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: ''
     spent: 0
@@ -30,19 +26,20 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Monk
   activities:
     P38SXEOizo5QaG8h:
       type: utility
-      name: Consume Focus Point
+      name: Reroll Saving Throw
       _id: P38SXEOizo5QaG8h
       activation:
-        type: ''
+        type: special
         value: null
         override: false
-        condition: ''
+        condition: When you make a saving throw and fail
       consumption:
         scaling:
           allowed: false
@@ -50,14 +47,18 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbmnkMonksFocus
+            target: feat:monks-focus
             scaling: {}
       description:
         chatFlavor: ''
+        value: >-
+          <p>Whenever you make a saving throw and fail, you can expend 1 Focus
+          Point to reroll it, and you must use the new roll.</p>
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -68,6 +69,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -84,14 +86,27 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: disciplined-survivor
+  advancement: {}
+  crewed: false
 effects:
   - name: Disciplined Survivor
     img: icons/skills/wounds/injury-pain-body-orange.webp
     origin: Compendium.dnd5e.classes24.Item.phbmnkDiscipline
-    _id: Js4phYMTL714onqn
     type: base
+    _id: tKd3mh0VaGrzK0TS
     system:
       changes:
         - key: flags.dnd5e.diamondSoul
@@ -99,52 +114,55 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: F7SIeHevEt2DrdNi
+          _id: A95db7YXOLK9ZPDu
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
       units: seconds
       expiry: null
       expired: false
-    description: >-
-      <p>Your physical and mental discipline grant you proficiency in all saving
-      throws.</p><p>Additionally, whenever you make a saving throw and fail, you
-      can expend 1 Focus Point to reroll it, and you must use the new roll.</p>
+    description: ''
     tint: '#ffffff'
     transfer: true
     statuses: []
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
-      compendiumSource: >-
-        Compendium.dnd5e.classes24.Item.phbmnkDiscipline.ActiveEffect.Js4phYMTL714onqn
+      compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1761846933462
-      modifiedTime: 1783544102645
+      systemVersion: 6.0.6
+      createdTime: 1792691451179
+      modifiedTime: 1792691451179
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
     folder: null
-    _key: '!items.effects!phbmnkDiscipline.Js4phYMTL714onqn'
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+    _key: '!items.effects!phbmnkDiscipline.tKd3mh0VaGrzK0TS'
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866307724
-  modifiedTime: 1783544102645
+  systemVersion: 6.0.6
+  createdTime: 1792691451179
+  modifiedTime: 1792691451179
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 500000
