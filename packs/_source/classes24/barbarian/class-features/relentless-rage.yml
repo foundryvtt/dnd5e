@@ -10,18 +10,14 @@ system:
       make a DC 10 Constitution saving throw. If you succeed, your Hit Points
       instead change to a number equal to twice your Barbarian level.</p><p>Each
       time you use this feature after the first, the DC increases by 5. When you
-      finish a Short or Long Rest, the DC resets to 10.</p><section
-      class="secret" id="secret-GTpuSHXh1ZobcQYd"><p><strong>Foundry
-      Note</strong></p><p>This feature will automatically increase the DC by 5
-      if you consume the resource when activating it. It will also automatically
-      reset to 10 after a Short or Long Rest.</p></section>
+      finish a Short or Long Rest, the DC resets to 10.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: '20'
     recovery:
@@ -33,6 +29,7 @@ system:
     subtype: ''
   prerequisites:
     level: 11
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
@@ -41,9 +38,11 @@ system:
       _id: dnd5eactivity100
       type: save
       activation:
-        type: ''
+        type: special
         value: null
-        condition: ''
+        condition: >-
+          When you drop to 0 Hit Points while your Rage is active and don't die
+          outright
         override: false
       consumption:
         targets:
@@ -57,11 +56,13 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         value: ''
         units: inst
         special: ''
         override: false
+        expiry: null
         concentration: false
       effects: []
       range:
@@ -76,7 +77,8 @@ system:
           size: ''
           width: ''
           height: ''
-          units: ''
+          units: ft
+          stationary: false
         affects:
           count: ''
           type: self
@@ -93,12 +95,25 @@ system:
         dc:
           calculation: ''
           formula: 10 + (@item.uses.spent * 5)
+        bonus: ''
+        visible: true
       uses:
         spent: 0
         recovery: []
         max: ''
       sort: 0
       name: ''
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
     Y2xWUsWmpklWLtVT:
       type: heal
       name: ''
@@ -116,10 +131,12 @@ system:
         targets: []
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -130,6 +147,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -143,7 +161,7 @@ system:
         max: ''
       healing:
         number: null
-        denomination: 0
+        denomination: null
         types:
           - healing
         custom:
@@ -152,22 +170,29 @@ system:
         scaling:
           number: 1
         bonus: ''
+        modifiers: []
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
   enchant: {}
   identifier: relentless-rage
+  advancement: {}
+  crewed: false
 effects: []
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1740680080815
+  systemVersion: 6.0.6
+  createdTime: 1792088967434
+  modifiedTime: 1792088967434
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -7,17 +7,14 @@ system:
     value: >-
       <p>The extra damage of your Brutal Strike increases to 2d10. In addition,
       you can use two different Brutal Strike effects whenever you use your
-      Brutal Strike feature.</p><section id="secret-XCUecJBPB6amtvj9"
-      class="secret"><p><strong>Foundry Note</strong></p><p>The damage roll in
-      Brutal Strike will automatically scale to use this new
-      value.</p></section>
+      Brutal Strike feature.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -27,26 +24,25 @@ system:
     subtype: ''
   prerequisites:
     level: 17
+    items: []
     repeatable: false
   properties: []
   requirements: Barbarian
   activities: {}
   enchant: {}
   identifier: improved-brutal-strike-2
+  advancement: {}
+  crewed: false
 effects: []
 folder: p6WDpW0gzmKfhGad
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735865940469
-  modifiedTime: 1745256759861
+  systemVersion: 6.0.6
+  createdTime: 1792088967434
+  modifiedTime: 1792088967434
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

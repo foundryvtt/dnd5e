@@ -7,19 +7,16 @@ system:
     value: >-
       <p>You gain an uncanny sense of when things aren't as they should be,
       giving you an edge when you dodge perils. You have Advantage on Dexterity
-      saving throws unless you have the &amp;Reference[Incapacitated]
-      condition.</p><section id="secret-gIJELszWrIqRFCxF"
-      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
-      automates the Advantage on Dexterity saving throws but is not
-      automatically disabled when Incapacitated. It can be temporarily
-      deactivated in the Effects tab.</p></section>
+      saving throws unless you have the &amp;Reference[Incapacitated
+      apply=false] condition.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   uses:
     max: ''
     spent: 0
@@ -29,11 +26,15 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
+    repeatable: false
   properties: []
   requirements: Barbarian
   activities: {}
   enchant: {}
   identifier: danger-sense
+  advancement: {}
+  crewed: false
 effects:
   - name: Danger Sense
     img: icons/skills/wounds/injury-face-impact-orange.webp
@@ -47,7 +48,26 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: lVFSbJLjCvkkdvoP
+          _id: KWRELCZZNOZiRbeT
+          conditions: '{}'
+          replacement: ''
+      conditions: |-
+        {
+          "o": "NOT",
+          "v": {
+            "k": "statuses.incapacitated",
+            "v": 1
+          }
+        }
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      magical: false
     disabled: false
     duration:
       value: null
@@ -63,17 +83,16 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1760130562890
-      modifiedTime: 1783544101069
+      systemVersion: 6.0.6
+      createdTime: 1792088967435
+      modifiedTime: 1792088967435
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
@@ -83,11 +102,11 @@ folder: p6WDpW0gzmKfhGad
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1724425956869
-  modifiedTime: 1783544101069
+  systemVersion: 6.0.6
+  createdTime: 1792088967435
+  modifiedTime: 1792088967435
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

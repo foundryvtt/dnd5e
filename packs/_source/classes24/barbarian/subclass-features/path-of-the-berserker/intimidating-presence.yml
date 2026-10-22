@@ -9,24 +9,19 @@ system:
       presence and primal power. When you do so, each creature of your choice in
       a 30-foot Emanation originating from you must make a Wisdom saving throw
       (DC 8 plus your Strength modifier and Proficiency Bonus). On a failed
-      save, a creature has the Frightened condition for 1 minute. At the end of
-      each of the &amp;Reference[Frightened] creature's turns, the creature
-      repeats the save, ending the effect on itself on a success.</p><p>Once you
-      use this feature, you can't use it again until you finish a Long Rest
-      unless you expend a use of your Rage (no action required) to restore your
-      use of it.</p><section class="secret"
-      id="secret-vRQdGrtACAbxH4Tm"><p><strong>Foundry Note</strong></p><p>The
-      <strong>Save</strong> activity includes an Active Effect which adds the
-      Frightened condition.</p><p>The <strong>Recharge</strong> activity
-      consumes a use of Rage and recharges your use of Intimidating
-      Presence.</p></section>
+      save, a creature has the &amp;Reference[Frightened apply=false] condition
+      for 1 minute. At the end of each of the Frightened creature's turns, the
+      creature repeats the save, ending the effect on itself on a
+      success.</p><p>Once you use this feature, you can't use it again until you
+      finish a Long Rest unless you expend a use of your Rage (no action
+      required) to restore your use of it.</p>
     chat: ''
   source:
     custom: ''
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: '1'
     recovery:
@@ -38,6 +33,7 @@ system:
     subtype: ''
   prerequisites:
     level: 14
+    items: []
     repeatable: false
   properties: []
   requirements: Path of the Berserker
@@ -60,13 +56,17 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
         concentration: false
+        expiry: null
       effects:
         - _id: 3LofAPFLZJMQJirN
           onSave: false
+          uuid: null
+          level: {}
       range:
         override: false
         units: self
@@ -78,6 +78,7 @@ system:
           type: radius
           size: '30'
           count: ''
+          stationary: false
         affects:
           choice: true
           count: ''
@@ -97,9 +98,18 @@ system:
         ability:
           - wis
         dc:
-          calculation: ''
+          calculation: custom
           formula: 8 + @abilities.str.mod + @prof
+        visible: true
       name: ''
+      img: ''
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
     Qr0vi4CEDfbdMNMa:
       type: utility
       _id: Qr0vi4CEDfbdMNMa
@@ -112,7 +122,7 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbbrbRage000000
+            target: feat:rage
             scaling: {}
           - type: itemUses
             value: '-1'
@@ -123,10 +133,12 @@ system:
         spellSlot: true
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         override: false
         concentration: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -137,6 +149,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -154,16 +167,28 @@ system:
         name: ''
         formula: ''
       name: Recharge with Rage
-      img: systems/dnd5e/icons/svg/trait-damage-immunities.svg
+      img: systems/dnd5e/icons/svg/action/restore-use.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: intimidating-presence
+  advancement: {}
+  crewed: false
 effects:
   - name: Intimidated
     origin: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
     duration:
       value: 1
-      units: rounds
-      expiry: turnStart
+      units: minutes
+      expiry: null
       expired: false
     disabled: false
     flags: {}
@@ -172,7 +197,21 @@ effects:
     type: base
     system:
       changes: []
-    description: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
+    description: >-
+      <p>On a failed save, a creature has the &amp;Reference[Frightened
+      apply=false] condition for 1 minute. At the end of each of the Frightened
+      creature's turns, the creature repeats the save, ending the effect on
+      itself on a success.</p>
     tint: '#ffffff'
     transfer: false
     statuses:
@@ -181,30 +220,26 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      systemVersion: 6.0.6
+      createdTime: 1792088970509
+      modifiedTime: 1792088970509
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     showIcon: 2
     start: null
     folder: null
     _key: '!items.effects!phbbrbIntimidati.3LofAPFLZJMQJirN'
 folder: bEMqmmgGROsTGe0J
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866492370
-  modifiedTime: 1745256759960
+  systemVersion: 6.0.6
+  createdTime: 1792088970509
+  modifiedTime: 1792088970509
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

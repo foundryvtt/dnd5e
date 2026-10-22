@@ -5,65 +5,88 @@ img: systems/dnd5e/icons/classes/berserker.webp
 system:
   description:
     value: >-
-      <blockquote><p>Channel Rage into Violent
-      Fury</p></blockquote><p>Barbarians who walk the Path of the Berserker
-      direct their Rage primarily toward violence. Their path is one of
-      untrammeled fury, and they thrill in the chaos of battle as they allow
-      their Rage to seize and empower them.</p>
+      <div class="item-entry-details"><p class="item-entry-tag">Channel Rage
+      into Violent Fury</p></div><p>Barbarians who walk the Path of the
+      Berserker direct their Rage primarily toward violence. Their path is one
+      of untrammeled fury, and they thrill in the chaos of battle as they allow
+      their Rage to seize and empower them.</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbBarbarian0000.JournalEntryPage.GvRPKO7EAbXB7TXM]{Subclass
+      Details}</em></p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
-  identifier: berserker
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
+  identifier: path-berserker
   classIdentifier: barbarian
   advancement:
-    - _id: F2EPRo00Nf6Ds8Lk
+    F2EPRo00Nf6Ds8Lk:
+      _id: F2EPRo00Nf6Ds8Lk
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbFrenzy0000
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 3
-      title: Subclass Features
-    - _id: 2AGvW4P2FHYxDTmU
+      name: Subclass Features
+      flags: {}
+      hint: ''
+    2AGvW4P2FHYxDTmU:
+      _id: 2AGvW4P2FHYxDTmU
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbMindlessRa
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 6
-      title: Subclass Features
-    - _id: HPirEn8oG5KFLosG
+      name: Subclass Features
+      flags: {}
+      hint: ''
+    HPirEn8oG5KFLosG:
+      _id: HPirEn8oG5KFLosG
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbRetaliatio
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 10
-      title: Subclass Features
-    - _id: GouI4YrjO1nFz4uM
+      name: Subclass Features
+      flags: {}
+      hint: ''
+    GouI4YrjO1nFz4uM:
+      _id: GouI4YrjO1nFz4uM
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbbrbIntimidati
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 14
-      title: Subclass Features
+      name: Subclass Features
+      flags: {}
+      hint: ''
   spellcasting:
     progression: none
     ability: ''
@@ -74,11 +97,11 @@ folder: ZzMJGIp9Rxhr2hDV
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866492370
-  modifiedTime: 1745256759673
+  systemVersion: 6.0.6
+  createdTime: 1792088970509
+  modifiedTime: 1792088970509
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
