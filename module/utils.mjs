@@ -40,19 +40,25 @@ export function getCollectionDocumentOptions(collection, { disabled }={}) {
 /* -------------------------------------------- */
 
 /**
- * Convert a currency value from one denomination to another.
- * @param {number} value         The currency value.
- * @param {string} from          The current denomination.
- * @param {object} [options]
- * @param {string} [options.to]  The target denomination, if specified, otherwise defaults to the configured default
- *                               currency.
- * @returns {number|null}
+ * Copy of currency configuration with all conversion values inverted to match other units.
+ * @type {Record<string, CurrencyConfiguration>}
  */
-export function convertCurrency(value, from, { to=CONFIG.DND5E.defaultCurrency }={}) {
-  const fromConversion = CONFIG.DND5E.currencies[from]?.conversion;
-  const toConversion = CONFIG.DND5E.currencies[to]?.conversion;
-  if ( !fromConversion || !toConversion ) return null;
-  return value * toConversion / fromConversion;
+let _invertedCurrencyConfig;
+
+/**
+ * Convert a currency value from one denomination to another.
+ * @param {number} value             The currency value.
+ * @param {string} from              The current denomination.
+ * @param {UnitConversionOptions} [options={}]
+ * @param {boolean} [options.round]  Round currency according to maximum decimal digits allowed by denomination.
+ * @returns {{ value: number, denomination: string }}
+ */
+export function convertCurrency(value, from, { round, ...options }={}) {
+  _invertedCurrencyConfig ??= Object.fromEntries(Object.entries(CONFIG.DND5E.currencies)
+    .map(([k, v]) => [k, { ...v, conversion: 1 / v.conversion }]));
+  const message = unit => `Currency ${unit} not defined in CONFIG.DND5E.currencies`;
+  const r = _convertSystemUnits(value, from, _invertedCurrencyConfig, { ...options, message });
+  return { value: round ? roundCurrency(r.value, r.unit) : r.value, denomination: r.unit };
 }
 
 /* -------------------------------------------- */

@@ -331,8 +331,13 @@ export default class ItemDataModel extends SystemDataModel {
     if ( !this.properties.has("mgc") || !rarities.size ) {
       const { mundane } = CONFIG.DND5E.crafting;
       const valueInGP = price.valueInGP ?? 0;
-      const gold = convertCurrency(roundCurrency(price.value * mundane.gold, price.denomination), price.denomination);
-      return { days: Math.ceil(valueInGP * mundane.days), gold: gold ?? 0 };
+      const gold = convertCurrency(roundCurrency(price.value * mundane.gold, price.denomination), price.denomination, {
+        to: CONFIG.DND5E.defaultCurrency
+      });
+      return {
+        days: Math.ceil(valueInGP * mundane.days),
+        gold: gold.denomination === CONFIG.DND5E.defaultCurrency ? gold.value : 0
+      };
     }
 
     // Exceptions

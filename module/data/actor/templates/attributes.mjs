@@ -601,8 +601,8 @@ export default class AttributesFields {
   static preparePrice() {
     const { price } = this.attributes;
     if ( price.value === null ) return;
-    const valueInGP = convertCurrency(price.value, price.denomination);
-    if ( valueInGP !== null ) price.valueInGP = valueInGP;
+    const valueInGP = convertCurrency(price.value, price.denomination, { to: CONFIG.DND5E.defaultCurrency });
+    if ( valueInGP.denomination === CONFIG.DND5E.defaultCurrency ) price.valueInGP = valueInGP.value;
   }
 
   /* -------------------------------------------- */
