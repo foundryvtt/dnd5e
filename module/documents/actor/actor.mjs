@@ -888,10 +888,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       return obj;
     }, {});
     const applyModification = (d, type, changesKey) => {
-      if ( !modifications[type] || this.#changeIsIgnored("modification", type, { options }) ) return;
+      if ( !modifications[type] ) return;
+      if ( (changesKey === "active") && this.#changeIsIgnored("modification", type, { options }) ) return;
       const isSpecial = !(type in CONFIG.DND5E.damageTypes) && !(type in CONFIG.DND5E.healingTypes) && (type !== "ALL");
       this.#setDamageActive(
-        "modification", d[changesKey], isSpecial ? "special" : "type", isSpecial ? type : null
+        "modification", d[changesKey], type === "ALL" ? "all" : isSpecial ? "special" : "type", isSpecial ? type : null
       );
       if ( changesKey === "potential" ) return;
       const originalValue = d.value;
@@ -962,14 +963,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     damages.amount = Math.trunc(damages.amount);
 
     // Apply damage threshold
-    if ( ((damages.amount > 0) && (damages.amount < (this.system.attributes?.hp?.dt ?? -Infinity)))
-      && !((options.ignore === true) || options.ignore?.threshold) ) {
-      damages.amount = 0;
-      damages.forEach(d => {
-        d.value = 0;
-        d.active.multiplier = 0;
-        d.active.threshold = true;
-      });
+    const dt = this.system.attributes?.hp?.dt ?? -Infinity;
+    if ( (damages.amount > 0) && (damages.amount < dt) ) {
+      damages.forEach(d => d.potential.threshold = true);
+      if ( !((options.ignore === true) || options.ignore?.threshold) ) {
+        damages.amount = 0;
+        damages.forEach(d => {
+          d.value = 0;
+          d.active.multiplier = 0;
+          d.active.threshold = true;
+        });
+      }
     }
 
     /**

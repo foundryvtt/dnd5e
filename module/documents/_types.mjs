@@ -57,6 +57,7 @@
 
 /**
  * @typedef DamageChangesDescription
+ * @property {{ [modification]: boolean }} [all]  Did modification for all types affect this total?
  * @property {number} [multiplier]            Final calculated multiplier.
  * @property {Record<string, DamageAffectDescription>} [special]  How special resistance/etc. targeting this
  *                                            damage affect the total (e.g. falling resistance).

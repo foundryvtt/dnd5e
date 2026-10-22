@@ -173,7 +173,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const defaultOptions = this.chatMessage.system.applicationOptions ?? {};
     return {
       ...options,
-      downgrade: this.#mergeOption(options.options, defaultOptions.downgrade),
+      downgrade: this.#mergeOption(options.downgrade, defaultOptions.downgrade),
       ignore: options.ignore === true ? options.ignore : {
         ...(options.ignore ?? {}),
         immunity: this.#mergeOption(options.ignore?.immunity, defaultOptions.ignore?.immunity),

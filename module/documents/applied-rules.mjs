@@ -5,7 +5,9 @@ import { simplifyBonus } from "../utils.mjs";
  */
 
 const D20_TESTS = new Set(["attack", "check", "save"]);
-const DAMAGE_APPLICATION_OPTIONS = ["downgradeImmunity", "ignoreImmunity", "ignoreResistance", "ignoreVulnerability"];
+const DAMAGE_APPLICATION_OPTIONS = [
+  "damage.downgrade", "damage.ignore.immunity", "damage.ignore.resistance", "damage.ignore.vulnerability"
+];
 
 /**
  * @extends {Map<string, Map<string, ChangeData[]>>}
@@ -16,7 +18,7 @@ export default class AppliedRules extends Map {
    * @param {ActiveEffectChangeData} change
    */
   add(change) {
-    const type = change.type.startsWith("dnd5e.") ? change.type.split(".")[1] : change.type;
+    const type = change.type.startsWith("dnd5e.") ? change.type.slice(6) : change.type;
     this.getOrInsert(change.key, new Map()).getOrInsert(type, []).push(change);
   }
 
@@ -181,11 +183,11 @@ class RulesIterator extends Iterator {
   toDamageApplicationOptions(initial) {
     const options = initial ? foundry.utils.deepClone(initial) : {};
     for ( const option of this ) {
-      if ( option.type === "dnd5e.downgradeImmunity" ) {
+      if ( option.type === "dnd5e.damage.downgrade" ) {
         options.downgrade ??= new Set();
         options.downgrade.add(option.value);
-      } else {
-        const key = option.type.slice(12).toLowerCase();
+      } else if ( option.type.startsWith("dnd5e.damage.ignore.") ) {
+        const key = option.type.slice(20);
         options.ignore ??= {};
         options.ignore[key] ??= new Set();
         options.ignore[key].add(option.value);
