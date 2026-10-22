@@ -17,6 +17,7 @@ system:
     revision: 2
     rules: '2024'
     book: ''
+    page: ''
     license: CC-BY-4.0
   enchant: {}
   type:
@@ -24,9 +25,13 @@ system:
     subtype: ''
   prerequisites:
     level: null
+    items: []
+    repeatable: false
   properties: []
   requirements: Gnome
   identifier: gnomish-cunning
+  advancement: {}
+  crewed: false
 effects:
   - name: Gnomish Cunning
     img: icons/magic/light/hand-sparks-glow-yellow.webp
@@ -40,19 +45,35 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: 9Al2Ahcgj3dF9tPG
+          _id: WHExZSX0H8Dfe8Ja
+          conditions: '{}'
+          replacement: ''
         - key: system.abilities.wis.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: 6AviMY5qrr977eI4
+          _id: YAtbNU4Xo09fRoyR
+          conditions: '{}'
+          replacement: ''
         - key: system.abilities.cha.save.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: LAO365RHFlhFzlpM
+          _id: xlORVTkLQOjX8prp
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
       value: null
@@ -68,17 +89,16 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1760131706242
-      modifiedTime: 1783544081937
+      systemVersion: 6.0.6
+      createdTime: 1791577597820
+      modifiedTime: 1791577597820
       lastModifiedBy: dnd5ebuilder0000
     start: null
     showIcon: 1
@@ -88,11 +108,11 @@ folder: e9Bx86LUj7rJMszu
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1725718946261
-  modifiedTime: 1783544081937
+  systemVersion: 6.0.6
+  createdTime: 1791577597819
+  modifiedTime: 1791577597819
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 100000

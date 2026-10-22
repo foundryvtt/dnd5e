@@ -1,0 +1,182 @@
+_id: phbsptWoodElfLin
+name: Wood Elf
+type: feat
+img: icons/magic/nature/plant-sproud-hands-dirt-green.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <table><caption><p>Wood Elf Lineage
+      Features</p></caption><thead><tr><td><p>Level 1</p></td><td><p>Level
+      3</p></td><td><p>Level 5</p></td></tr></thead><tbody><tr><td><p>Your Speed
+      increases to 35 feet. You also know the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDruidcraft]{Druidcraft}</em>
+      cantrip.</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplLongstride]{Longstrider}</em></p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplPasswithou]{Pass
+      without Trace}</em></p></td></tr></tbody></table>
+    chat: ''
+  source:
+    revision: 2
+    rules: '2024'
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:elf
+    repeatable: false
+  properties: []
+  requirements: Elf
+  identifier: wood-elf
+  advancement:
+    YFS9oEa9Iw1molNm:
+      _id: YFS9oEa9Iw1molNm
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDruidcraft
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 0
+        sorting: m
+      value: {}
+      level: 1
+      hint: ''
+      name: Wood Elf Traits
+      flags: {}
+    FRJszO7cYchbaGzt:
+      _id: FRJszO7cYchbaGzt
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplLongstride
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 3
+      hint: >-
+        Intelligence, Wisdom, or Charisma can be chosen for your spellcasting
+        ability.
+      name: Wood Elf Traits
+      flags: {}
+    zFsEPXauTgmYxqiJ:
+      _id: zFsEPXauTgmYxqiJ
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplPasswithou
+            sort: 0
+        optional: false
+        spell:
+          ability: []
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 5
+      hint: >-
+        Intelligence, Wisdom, or Charisma can be chosen for your spellcasting
+        ability.
+      name: Wood Elf Traits
+      flags: {}
+  crewed: false
+effects:
+  - name: Wood Elf Lineage
+    img: icons/magic/nature/plant-sproud-hands-dirt-green.webp
+    system:
+      magical: false
+      origin:
+        item: Compendium.dnd5e.origins24.Item.phbsptWoodElfLin
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      changes:
+        - key: system.attributes.movement.speeds.walk
+          type: upgrade
+          value: 35
+          phase: initial
+          _id: wdTD2yaA5CkJtGjD
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: mvlJfduBL4fdWtAj
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: <p>Your Speed increases to 35 feet.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.368'
+      systemId: dnd5e
+      systemVersion: 6.0.6
+      createdTime: 1791576272365
+      modifiedTime: 1791576272365
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!phbsptWoodElfLin.mvlJfduBL4fdWtAj'
+folder: 3uafOaOCZJQeUNtw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791576272365
+  modifiedTime: 1791576272365
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptWoodElfLin'

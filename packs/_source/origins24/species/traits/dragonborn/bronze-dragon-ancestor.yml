@@ -1,0 +1,75 @@
+folder: 2Bw096HjE0HyGMwM
+name: Bronze Dragon Ancestor
+type: feat
+_id: phbsptDrgAncBron
+img: icons/magic/lightning/bolt-blue.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  advancement:
+    IaR3pVDOqu3KpLSw:
+      type: Trait
+      _id: IaR3pVDOqu3KpLSw
+      configuration:
+        allowReplacements: false
+        choices: []
+        grants:
+          - dr:lightning
+        mode: default
+      level: 0
+      hint: ''
+      name: ''
+      flags: {}
+      value: {}
+    5Jv1yh73H3KXci30:
+      name: ''
+      type: ModifyItem
+      _id: 5Jv1yh73H3KXci30
+      configuration:
+        changes:
+          - _id: vvlgGIkKKyREMOTE
+            uuid: Compendium.dnd5e.effects.ActiveEffect.phbeffBreWeapLig
+            identifiers:
+              - feat:breath-weapon
+      flags: {}
+      value:
+        modified: []
+      level: 0
+      hint: ''
+  description:
+    value: ''
+    chat: ''
+  identifier: bronze-dragon-ancestor
+  source:
+    revision: 1
+    rules: '2024'
+  crewed: false
+  enchant: {}
+  prerequisites:
+    items:
+      - race:dragonborn
+    repeatable: false
+    level: null
+  properties: []
+  requirements: Dragonborn
+  type:
+    value: race
+    subtype: lineage
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791576679014
+  modifiedTime: 1791576679014
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!phbsptDrgAncBron'

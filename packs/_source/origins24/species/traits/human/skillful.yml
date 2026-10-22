@@ -9,37 +9,53 @@ system:
     recovery: []
     max: ''
   description:
-    value: >-
-      <p>You gain proficiency in one skill of your choice.</p><section
-      id="secret-lvP62g2xTxkz2VN3" class="secret"><p><strong>Foundry
-      Note</strong></p><p>You will be prompted for this choice when you select
-      this Species.</p></section>
+    value: <p>You gain proficiency in one skill of your choice.</p>
     chat: ''
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Human
   identifier: skillful
+  advancement:
+    xIdIaWtTj1cBERln:
+      _id: xIdIaWtTj1cBERln
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 0
+      hint: <p>You gain proficiency in one skill of your choice.</p>
+      name: Skillful
+      flags: {}
+  crewed: false
 effects: []
 folder: uCr9wkkriM8r4C9R
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866697989
-  modifiedTime: 1740680089956
+  systemVersion: 6.0.6
+  createdTime: 1791577976896
+  modifiedTime: 1791577976896
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 200000

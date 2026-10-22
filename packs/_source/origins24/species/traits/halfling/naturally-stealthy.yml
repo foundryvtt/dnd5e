@@ -16,28 +16,31 @@ system:
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Halfling
   identifier: naturally-stealthy
+  advancement: {}
+  crewed: false
 effects: []
 folder: zVLJosGQ7viZqH14
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866704040
-  modifiedTime: 1740680089941
+  systemVersion: 6.0.6
+  createdTime: 1791577895530
+  modifiedTime: 1791577895530
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

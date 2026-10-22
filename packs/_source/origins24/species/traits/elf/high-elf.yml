@@ -1,0 +1,137 @@
+_id: phbsptHighElfLin
+name: High Elf
+type: feat
+img: icons/magic/nature/leaf-oak-wreath-glow-green.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <table><caption><p>High Elf Lineage
+      Features</p></caption><thead><tr><td><p>Level 1</p></td><td><p>Level
+      3</p></td><td><p>Level 5</p></td></tr></thead><tbody><tr><td><p>You know
+      the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplPrestidigi]{Prestidigitation}</em>
+      cantrip. Whenever you finish a Long Rest, you can replace that cantrip
+      with a different cantrip from the Wizard spell
+      list.</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplDetectMagi]{Detect
+      Magic}</em></p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplMistyStep0]{Misty
+      Step}</em></p></td></tr></tbody></table>
+    chat: ''
+  source:
+    revision: 2
+    rules: '2024'
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:elf
+    repeatable: false
+  properties: []
+  requirements: Elf
+  identifier: high-elf
+  advancement:
+    hraql8YRB41ssDA6:
+      _id: hraql8YRB41ssDA6
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplPrestidigi
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          prepared: 2
+          method: spell
+        sorting: m
+      value: {}
+      level: 1
+      hint: ''
+      name: High Elf Traits
+      flags: {}
+    iztB4GPENKXiA72M:
+      _id: iztB4GPENKXiA72M
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplDetectMagi
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 3
+      hint: ''
+      name: High Elf Traits
+      flags: {}
+    1LZlC6uInez1oV7n:
+      _id: 1LZlC6uInez1oV7n
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplMistyStep0
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 5
+      hint: ''
+      name: High Elf Traits
+      flags: {}
+  crewed: false
+effects: []
+folder: 3uafOaOCZJQeUNtw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791576272361
+  modifiedTime: 1791576272361
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptHighElfLin'

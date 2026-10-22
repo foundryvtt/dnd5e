@@ -1,0 +1,187 @@
+_id: phbsptFrostsChil
+name: Frost's Chill (Frost Giant)
+type: feat
+img: icons/magic/water/heart-ice-freeze.webp
+system:
+  activities:
+    6goWQaWLexUqgig8:
+      type: damage
+      name: Chill
+      _id: 6goWQaWLexUqgig8
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you hit a target with an attack roll and deal damage to it
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects:
+        - _id: YHKgdj2KIbQRBZWW
+          level:
+            min: null
+            max: null
+          uuid: null
+      range:
+        override: false
+        units: spec
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - cold
+            modifiers: []
+            scaling:
+              number: 1
+      img: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
+  uses:
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+    max: '@prof'
+  description:
+    value: >-
+      <p>When you hit a target with an attack roll and deal damage to it, you
+      can also deal 1d6 Cold damage to that target and reduce its Speed by 10
+      feet until the start of your next turn.</p>
+    chat: ''
+  source:
+    revision: 2
+    rules: '2024'
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:goliath
+    repeatable: false
+  properties: []
+  requirements: Goliath
+  identifier: frosts-chill
+  advancement: {}
+  crewed: false
+effects:
+  - name: Chilled
+    img: icons/magic/water/heart-ice-freeze.webp
+    origin: Compendium.dnd5e.origins24.Item.phbsptFrostsChil
+    transfer: false
+    _id: YHKgdj2KIbQRBZWW
+    type: base
+    system:
+      changes:
+        - key: system.attributes.movement.bonus
+          value: 10
+          priority: null
+          type: subtract
+          phase: initial
+          _id: 76bWNZbenGC19pDR
+          conditions: '{}'
+          replacement: ''
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+    disabled: false
+    duration:
+      value: null
+      units: seconds
+      expiry: sourceStart
+      expired: false
+    description: ''
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '14.368'
+      systemId: dnd5e
+      systemVersion: 6.0.6
+      createdTime: 1791577738702
+      modifiedTime: 1791577738702
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
+    start: null
+    showIcon: 1
+    folder: null
+    _key: '!items.effects!phbsptFrostsChil.YHKgdj2KIbQRBZWW'
+folder: 4KZykhQTGVAuVo1I
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791577738702
+  modifiedTime: 1791577738702
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptFrostsChil'

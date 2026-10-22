@@ -10,24 +10,27 @@ system:
     max: ''
   description:
     value: >-
-      <p>When you roll a 1 on the d20 of a D20 Test, you can reroll the die, and
-      you must use the new roll.</p>
+      <p>When you roll a 1 on the d20 of a &amp;Reference[D20 Test], you can
+      reroll the die, and you must use the new roll.</p>
     chat: ''
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Halfling
   identifier: luck
+  advancement: {}
+  crewed: false
 effects:
   - name: Luck
     img: icons/commodities/flowers/clover.webp
@@ -41,7 +44,19 @@ effects:
           priority: null
           type: override
           phase: initial
-          _id: ashaA8mn4vTnhbsO
+          _id: CHHrjpxgegR7dbTk
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -57,11 +72,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544082022
-      modifiedTime: 1783544082022
+      systemVersion: 6.0.6
+      createdTime: 1791577895531
+      modifiedTime: 1791577895531
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -69,18 +84,14 @@ effects:
     folder: null
     _key: '!items.effects!phbsptLuck000000.k1FDpZEBCHzRsFSA'
 folder: zVLJosGQ7viZqH14
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866704040
-  modifiedTime: 1783544082021
+  systemVersion: 6.0.6
+  createdTime: 1791577895531
+  modifiedTime: 1791577895531
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

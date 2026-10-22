@@ -1,0 +1,150 @@
+_id: phbsptChthonicLe
+name: Chthonic
+type: feat
+img: icons/creatures/eyes/humanoid-single-yellow.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <table><caption><p>Chthonic Legacy
+      Traits</p></caption><thead><tr><td><p>Level 1</p></td><td><p>Level
+      3</p></td><td><p>Level 5</p></td></tr></thead><tbody><tr><td><p>You have
+      &amp;Reference[Resistance] to Necrotic damage.You also know the
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplChillTouch]{Chill
+      Touch}</em>
+      cantrip.</p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplFalseLife0]{False
+      Life}</em></p></td><td><p><em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplRayofEnfee]{Ray
+      of Enfeeblement}</em></p></td></tr></tbody></table>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:tiefling
+    repeatable: false
+  properties: []
+  requirements: Tiefling
+  identifier: fiendish-legacy-chthonic
+  advancement:
+    O6M9VGAwHx9Kkfhj:
+      _id: O6M9VGAwHx9Kkfhj
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - dr:necrotic
+        choices: []
+      value:
+        chosen: []
+      level: 0
+      hint: <p>You have Resistance to Necrotic damage.</p>
+      name: ''
+      flags: {}
+    pIi692Cevlw7qZRe:
+      _id: pIi692Cevlw7qZRe
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplChillTouch
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 0
+      hint: ''
+      name: Chthonic Traits
+      flags: {}
+    DU7Y6D1IJSSgObJK:
+      _id: DU7Y6D1IJSSgObJK
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplFalseLife0
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 3
+      hint: ''
+      name: Chthonic Traits
+      flags: {}
+    R0k1RmQximNOQw1R:
+      _id: R0k1RmQximNOQw1R
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd-players-handbook.spells.Item.phbsplRayofEnfee
+            sort: 0
+        optional: false
+        spell:
+          ability:
+            - int
+            - wis
+            - cha
+          uses:
+            max: '1'
+            per: lr
+            requireSlot: false
+          method: spell
+          prepared: 2
+        sorting: m
+      value: {}
+      level: 5
+      hint: ''
+      name: Chthonic Traits
+      flags: {}
+  crewed: false
+effects: []
+folder: VZQeqwpBruLqnL6x
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791578299754
+  modifiedTime: 1791578299754
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptChthonicLe'

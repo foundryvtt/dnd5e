@@ -13,36 +13,63 @@ system:
       <p>You gain an
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbFeats00000000.JournalEntryPage.otAeQs0TLHYIBNuj]{Origin
       feat} of your choice.
-      @UUID[Compendium.dnd5e.feats24.Item.phbftSkilled0000]{Skilled} is
-      recommended.</p><section id="secret-9E1yve6WHohyBage"
-      class="secret"><p><strong>Foundry Note</strong></p><p>You will be prompted
-      for your choice when you select this Species.</p></section>
+      @UUID[Compendium.dnd-players-handbook.feats.Item.phbftSkilled0000]{Skilled}
+      is recommended.</p>
     chat: ''
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Human
   identifier: versatile
+  advancement:
+    KB8IQLwyuL6SOFnv:
+      _id: KB8IQLwyuL6SOFnv
+      type: ItemChoice
+      configuration:
+        choices:
+          '0':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - sort: 0
+            uuid: Compendium.dnd-players-handbook.feats.Item.phbftSkilled0000
+        spell: null
+        restriction:
+          type: feat
+          subtype: origin
+          list: []
+          school: []
+        sorting: a
+      value:
+        added: {}
+        replaced: {}
+      hint: <p>You gain an Origin feat of your choice. Skilled is recommended.</p>
+      name: Versatile
+      flags: {}
+  crewed: false
 effects: []
 folder: uCr9wkkriM8r4C9R
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866697989
-  modifiedTime: 1740680089966
+  systemVersion: 6.0.6
+  createdTime: 1791577976897
+  modifiedTime: 1791577976897
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 150000

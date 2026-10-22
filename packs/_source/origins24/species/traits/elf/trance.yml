@@ -17,32 +17,31 @@ system:
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Elf
   identifier: trance
+  advancement: {}
+  crewed: false
 effects: []
 folder: 3uafOaOCZJQeUNtw
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866707969
-  modifiedTime: 1745256778021
+  systemVersion: 6.0.6
+  createdTime: 1791576272361
+  modifiedTime: 1791576272361
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

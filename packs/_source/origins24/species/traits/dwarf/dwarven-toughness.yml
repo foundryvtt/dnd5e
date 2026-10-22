@@ -11,26 +11,26 @@ system:
   description:
     value: >-
       <p>Your Hit Point maximum increases by 1, and it increases by 1 again
-      whenever you gain a level.</p><section class="secret"
-      id="secret-FK9DFLudP5EzEss9"><p><strong>Foundry Note</strong></p><p>The
-      Hit Point maximum increase is handled automatically each
-      level.</p></section>
+      whenever you gain a level.</p>
     chat: ''
   source:
     revision: 1
     rules: '2024'
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   enchant: {}
   type:
     value: race
     subtype: ''
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: Dwarf
   identifier: dwarven-toughness
+  advancement: {}
+  crewed: false
 effects:
   - name: Dwarven Toughness
     img: icons/magic/life/heart-cross-strong-purple-orange.webp
@@ -43,7 +43,19 @@ effects:
           priority: null
           type: add
           phase: initial
-          _id: IVXd3b8kW0iLjKM0
+          _id: 8zl254xZgMLM2NDo
+          conditions: '{}'
+          replacement: ''
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
+      rider:
+        statuses: []
     disabled: false
     duration:
       value: null
@@ -60,11 +72,11 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1783544081863
-      modifiedTime: 1783544081863
+      systemVersion: 6.0.6
+      createdTime: 1791577388394
+      modifiedTime: 1791577388394
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -72,18 +84,14 @@ effects:
     folder: null
     _key: '!items.effects!phbsptDwarvenTou.Na7W3p67eT9YqW87'
 folder: R0KprZdOrRDNsTBv
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866718338
-  modifiedTime: 1783544081862
+  systemVersion: 6.0.6
+  createdTime: 1791577388393
+  modifiedTime: 1791577388393
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

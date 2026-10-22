@@ -5,19 +5,17 @@ system:
       <p>Starting at character level 5, you can change your size to Large as a
       Bonus Action if you're in a big enough space. This transformation lasts
       for 10 minutes or until you end it (no action required). For that
-      duration, you have Advantage on Strength checks, and your Speed increases
-      by 10 feet. Once you use this trait, you can't use it again until you
-      finish a Long Rest.</p><section class="secret"
-      id="secret-MnS2QCGjgh6nXxEa"><p><strong>Foundry Note</strong></p><p>This
-      feature includes an Active Effect which automates the increase to your
-      Speed and the Advantage on Strength checks.</p></section>
+      duration, you have Advantage on Strength checks, and your
+      &amp;Reference[Speed] increases by 10 feet. Once you use this trait, you
+      can't use it again until you finish a Long Rest.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
     book: ''
+    page: ''
     license: CC-BY-4.0
+    revision: 3
   uses:
     max: '1'
     spent: 0
@@ -29,6 +27,8 @@ system:
     subtype: ''
   prerequisites:
     level: 5
+    items: []
+    repeatable: false
   properties: []
   requirements: Goliath
   activities:
@@ -53,13 +53,19 @@ system:
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: minute
         concentration: false
         override: false
         value: '10'
+        expiry: null
       effects:
         - _id: QI7POclNlvX9a8VD
+          uuid: null
+          level:
+            min: null
+            max: null
       range:
         override: false
         units: self
@@ -69,6 +75,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -85,11 +92,21 @@ system:
         visible: false
         name: ''
         formula: ''
-      img: systems/dnd5e/icons/svg/size.svg
-      appliedEffects:
-        - QI7POclNlvX9a8VD
+      img: systems/dnd5e/icons/svg/action/enlarge.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: large-form
+  advancement: {}
+  crewed: false
 _id: phbsptLargeForm0
 type: feat
 folder: 4KZykhQTGVAuVo1I
@@ -103,23 +120,45 @@ effects:
     type: base
     system:
       changes:
-        - key: system.attributes.movement.walk
+        - key: system.attributes.movement.bonus
           value: 10
           priority: null
           type: add
           phase: initial
-          _id: EK8IRsBsVtxfuAK9
+          _id: 0FIwvPsAApWl4u4H
+          conditions: '{}'
+          replacement: ''
         - key: system.abilities.str.check.roll.mode
           value: 1
           priority: null
           type: add
           phase: initial
-          _id: 00Zlo6HTM5uZRvUo
+          _id: v3E94wSnKHZOv2ws
+          conditions: '{}'
+          replacement: ''
+        - key: system.traits.size
+          type: upgrade
+          value: large
+          phase: initial
+          _id: UvmdwplPAMNxN4AS
+          conditions: '{}'
+          replacement: ''
+          priority: null
+      rider:
+        statuses: []
+      origin:
+        actor: null
+        behavior: null
+        effect: null
+        item: null
+        message: null
+      conditions: '{}'
+      magical: false
     disabled: false
     duration:
-      value: 600
-      units: seconds
-      expiry: turnStart
+      value: 10
+      units: minutes
+      expiry: null
       expired: false
     description: >-
       <p>For the duration, you have Advantage on Strength checks, and your Speed
@@ -130,16 +169,15 @@ effects:
     sort: 0
     flags:
       dnd5e:
-        riders:
-          statuses: []
+        riders: {}
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '14.364'
+      coreVersion: '14.368'
       systemId: dnd5e
-      systemVersion: 6.0.0
-      createdTime: 1725810985123
-      modifiedTime: 1783544082004
+      systemVersion: 6.0.6
+      createdTime: 1791577738702
+      modifiedTime: 1791577738702
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     start: null
@@ -149,18 +187,14 @@ effects:
 sort: 100000
 ownership:
   default: 0
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '14.364'
+  coreVersion: '14.368'
   systemId: dnd5e
-  systemVersion: 5.1.9
-  createdTime: 1724425891196
-  modifiedTime: 1783544082004
+  systemVersion: 6.0.6
+  createdTime: 1791577738701
+  modifiedTime: 1791577738701
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 _key: '!items!phbsptLargeForm0'

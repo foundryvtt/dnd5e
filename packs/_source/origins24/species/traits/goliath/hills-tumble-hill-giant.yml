@@ -1,0 +1,117 @@
+_id: phbsptHillsTumbl
+name: Hill's Tumble (Hill Giant)
+type: feat
+img: icons/magic/control/silhouette-fall-slip-prone.webp
+system:
+  activities:
+    I2wKOUDxhIb5hHb7:
+      type: utility
+      name: Hill's Tumble
+      _id: I2wKOUDxhIb5hHb7
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          When you hit a Large or smaller creature with an attack roll and deal
+          damage to it
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+        value: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+        expiry: null
+      effects: []
+      range:
+        override: false
+        units: spec
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+          stationary: false
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/damage/slashing.svg
+      behaviors: []
+      flags: {}
+      visibility:
+        level: {}
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+  uses:
+    spent: 0
+    recovery:
+      - period: lr
+        type: recoverAll
+    max: '@prof'
+  description:
+    value: >-
+      <p>When you hit a Large or smaller creature with an attack roll and deal
+      damage to it, you can give that target the &amp;Reference[Prone]
+      condition.</p>
+    chat: ''
+  source:
+    revision: 1
+    rules: '2024'
+    book: ''
+    license: CC-BY-4.0
+  enchant: {}
+  type:
+    value: race
+    subtype: lineage
+  prerequisites:
+    level: null
+    items:
+      - race:goliath
+    repeatable: false
+  properties: []
+  requirements: Goliath
+  identifier: hills-tumble
+  advancement: {}
+  crewed: false
+effects: []
+folder: 4KZykhQTGVAuVo1I
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '14.368'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1791577738701
+  modifiedTime: 1791577738701
+  lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbsptHillsTumbl'
