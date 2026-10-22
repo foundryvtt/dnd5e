@@ -5,19 +5,19 @@ img: icons/magic/time/clock-stopwatch-white-blue.webp
 system:
   description:
     value: >-
-      <blockquote><p>Cost: 2 Sorcery Points</p></blockquote><p>When you cast a
-      spell that has a casting time of an action, you can spend 2 Sorcery Points
-      to change the casting time to a Bonus Action for this casting. You can't
-      modify a spell in this way if you've already cast a level 1+ spell on the
-      current turn, nor can you cast a level 1+ spell on this turn after
-      modifying a spell in this way.</p>
+      <div class="item-entry-details"><p class="item-entry-tag">Cost: 2 Sorcery
+      Points</p></div><p>When you cast a spell that has a casting time of an
+      action, you can spend 2 Sorcery Points to change the casting time to a
+      Bonus Action for this casting. You can't modify a spell in this way if
+      you've already cast a level 1+ spell on the current turn, nor can you cast
+      a level 1+ spell on this turn after modifying a spell in this way.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -27,6 +27,7 @@ system:
     subtype: metamagic
   prerequisites:
     level: null
+    items: []
     repeatable: false
   properties: []
   requirements: ''
@@ -47,14 +48,16 @@ system:
         targets:
           - type: itemUses
             value: '2'
-            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            target: feat:font-of-magic
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -65,6 +68,7 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
           count: ''
@@ -81,22 +85,31 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      visibility:
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: quickened-spell
+  advancement: {}
+  crewed: false
 effects: []
 folder: 6RKLEZHPbdWG3fZe
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866286897
-  modifiedTime: 1745256762774
+  systemVersion: 6.0.6
+  createdTime: 1792004130665
+  modifiedTime: 1792004130665
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

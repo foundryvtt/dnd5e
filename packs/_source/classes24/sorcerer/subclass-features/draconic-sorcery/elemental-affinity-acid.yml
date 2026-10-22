@@ -1,0 +1,124 @@
+folder: wwMlXikGly63a6go
+name: 'Elemental Affinity: Acid'
+type: feat
+_id: phbscrElemAffAci
+img: icons/magic/acid/dissolve-drip-droplet-smoke.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  advancement:
+    GtZSPY1PbRCl5lH3:
+      name: ''
+      type: Trait
+      _id: GtZSPY1PbRCl5lH3
+      configuration:
+        allowReplacements: false
+        choices: []
+        grants:
+          - dr:acid
+        mode: default
+      flags: {}
+      level: 6
+      hint: <p>You have &amp;Reference[Resistance] to acid damage.</p>
+      value: {}
+  description:
+    value: >-
+      <p>You have &amp;Reference[Resistance] to acid damage, and when you cast a
+      spell that deals damage of that type, you can add your Charisma modifier
+      to one damage roll of that spell.</p>
+    chat: ''
+  identifier: elemental-affinity-acid
+  source:
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2024'
+  crewed: false
+  enchant: {}
+  prerequisites:
+    items: []
+    repeatable: false
+    level: null
+  properties: []
+  requirements: Draconic Sorcery
+  type:
+    value: ''
+    subtype: ''
+effects:
+  - name: Bonus Acid Damage
+    img: systems/dnd5e/icons/svg/damage/acid.svg
+    system:
+      magical: false
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbscrElemAffAci
+        actor: null
+        behavior: null
+        effect: null
+        message: null
+      changes:
+        - key: damage
+          type: dnd5e.bonus
+          value: '@abilities.cha.mod'
+          phase: initial
+          _id: AGp4yjYRCqUCsWeQ
+          conditions: |-
+            [{
+              "k": "roll.damage.type",
+              "v": "acid"
+            }, {
+              "k": "item.level",
+              "o": "gte",
+              "v": 0
+            }]
+          replacement: ''
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: 6Eu8DTeG0HJGozGV
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>When you cast a spell that deals acid damage, you can add your Charisma
+      modifier to one damage roll of that spell.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.369'
+      systemId: dnd5e
+      systemVersion: 6.0.6
+      createdTime: 1792004148304
+      modifiedTime: 1792004148304
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!phbscrElemAffAci.6Eu8DTeG0HJGozGV'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.369'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1792004148304
+  modifiedTime: 1792004148304
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!phbscrElemAffAci'

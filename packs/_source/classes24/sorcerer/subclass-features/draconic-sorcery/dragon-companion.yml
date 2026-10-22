@@ -7,23 +7,20 @@ system:
   description:
     value: >-
       <p>You can cast
-      @UUID[Compendium.dnd5e.spells24.Item.phbsplSummonDrag]{Summon Dragon}
-      without a Material component. You can also cast it once without a spell
-      slot, and you regain the ability to cast it in this way when you finish a
-      Long Rest.</p><p>Whenever you start casting the spell, you can modify it
-      so that it doesn't require Concentration. If you do so, the spell's
-      duration becomes 1 minute for that casting.</p><section
-      id="secret-dxl0rjuVblJvTXgy" class="secret"><p><strong>Foundry
-      Note</strong></p><p>This feature can be used for tracking your free usage.
-      When you cast the spell you can uncheck the "Consumption" box and,
-      optionally, the "Concentration" box.</p></section>
+      <em>@UUID[Compendium.dnd-players-handbook.spells.Item.phbsplSummonDrag]{Summon
+      Dragon}</em> without a Material component. You can also cast it once
+      without a spell slot, and you regain the ability to cast it in this way
+      when you finish a Long Rest.</p><p>Whenever you start casting the spell,
+      you can modify it so that it doesn't require Concentration. If you do so,
+      the spell's duration becomes 1 minute for that casting.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 2
   uses:
     max: '1'
     spent: 0
@@ -35,20 +32,29 @@ system:
     subtype: ''
   prerequisites:
     level: 18
+    items: []
     repeatable: false
   properties: []
-  requirements: ''
+  requirements: Draconic Sorcery
   activities:
-    8HTVZ32kirDLNqOu:
-      type: utility
-      name: Expend Use
-      _id: 8HTVZ32kirDLNqOu
-      sort: 0
+    y8gmdS8yx2dvmUYB:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSummonDrag
+        challenge:
+          override: false
+        properties:
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      _id: y8gmdS8yx2dvmUYB
+      img: ''
+      sort: 100000
       activation:
-        type: ''
-        value: null
+        type: action
         override: false
-        condition: ''
+      behaviors: []
       consumption:
         scaling:
           allowed: false
@@ -58,51 +64,114 @@ system:
             value: '1'
             scaling: {}
       description:
+        value: ''
         chatFlavor: ''
       duration:
         units: inst
+        expiry: null
         concentration: false
         override: false
-      effects: []
+      flags: {}
       range:
-        override: false
         units: self
-        special: ''
+        override: false
       target:
         template:
           contiguous: false
+          stationary: false
           units: ft
-          type: ''
         affects:
           choice: false
-          count: ''
-          type: ''
         override: false
-        prompt: false
+        prompt: true
       uses:
         spent: 0
         recovery: []
         max: ''
-      roll:
-        prompt: false
-        visible: false
-        name: ''
-        formula: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: ''
+    9S31kXoJfaMdZrd6:
+      type: cast
+      spell:
+        uuid: Compendium.dnd-players-handbook.spells.Item.phbsplSummonDrag
+        challenge:
+          override: false
+        properties:
+          - material
+        spellbook: true
+        ability: ''
+        level: 5
+      _id: 9S31kXoJfaMdZrd6
+      img: ''
+      sort: 200000
+      activation:
+        type: action
+        override: false
+      behaviors: []
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        value: ''
+        chatFlavor: ''
+      duration:
+        units: minute
+        expiry: null
+        concentration: false
+        override: true
+        value: '1'
+      flags: {}
+      range:
+        units: self
+        override: false
+      target:
+        template:
+          contiguous: false
+          stationary: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      visibility:
+        level:
+          min: null
+          max: null
+        requireAttunement: false
+        requireIdentification: false
+        requireMagic: false
+        identifier: ''
+      name: Summon Dragon (No Concentration)
   enchant: {}
   identifier: dragon-companion
+  advancement: {}
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866556244
-  modifiedTime: 1745256765404
+  systemVersion: 6.0.6
+  createdTime: 1792004148303
+  modifiedTime: 1792004148303
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

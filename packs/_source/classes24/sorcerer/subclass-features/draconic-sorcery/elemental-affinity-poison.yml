@@ -1,0 +1,124 @@
+folder: wwMlXikGly63a6go
+name: 'Elemental Affinity: Poison'
+type: feat
+_id: phbscrElemAffPoi
+img: icons/magic/acid/projectile-glowing-bubbles.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  advancement:
+    GtZSPY1PbRCl5lH3:
+      name: ''
+      type: Trait
+      _id: GtZSPY1PbRCl5lH3
+      configuration:
+        allowReplacements: false
+        choices: []
+        grants:
+          - dr:poison
+        mode: default
+      flags: {}
+      level: 6
+      hint: <p>You have &amp;Reference[Resistance] to poison damage.</p>
+      value: {}
+  description:
+    value: >-
+      <p>You have &amp;Reference[Resistance] to poison damage, and when you cast
+      a spell that deals damage of that type, you can add your Charisma modifier
+      to one damage roll of that spell.</p>
+    chat: ''
+  identifier: elemental-affinity-poison
+  source:
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2024'
+  crewed: false
+  enchant: {}
+  prerequisites:
+    items: []
+    repeatable: false
+    level: null
+  properties: []
+  requirements: Draconic Sorcery
+  type:
+    value: ''
+    subtype: ''
+effects:
+  - name: Bonus Poison Damage
+    img: systems/dnd5e/icons/svg/damage/poison.svg
+    system:
+      magical: false
+      origin:
+        item: Compendium.dnd5e.classes24.Item.phbscrElemAffPoi
+        behavior: null
+        message: null
+        actor: null
+        effect: null
+      changes:
+        - key: damage
+          type: dnd5e.bonus
+          value: '@abilities.cha.mod'
+          phase: initial
+          _id: AGp4yjYRCqUCsWeQ
+          conditions: |-
+            [{
+              "k": "roll.damage.type",
+              "v": "poison"
+            }, {
+              "k": "item.level",
+              "o": "gte",
+              "v": 0
+            }]
+          replacement: ''
+          priority: null
+      conditions: '{}'
+      rider:
+        statuses: []
+    type: base
+    _id: A08yoiXRKO7AF6k6
+    disabled: false
+    start: null
+    duration:
+      value: null
+      units: seconds
+      expiry: null
+      expired: false
+    description: >-
+      <p>When you cast a spell that deals poison damage, you can add your
+      Charisma modifier to one damage roll of that spell.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    showIcon: 1
+    folder: null
+    sort: 0
+    flags: {}
+    _stats:
+      coreVersion: '14.369'
+      systemId: dnd5e
+      systemVersion: 6.0.6
+      createdTime: 1792004148305
+      modifiedTime: 1792004148305
+      lastModifiedBy: dnd5ebuilder0000
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    _key: '!items.effects!phbscrElemAffPoi.A08yoiXRKO7AF6k6'
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '14.369'
+  systemId: dnd5e
+  systemVersion: 6.0.6
+  createdTime: 1792004148305
+  modifiedTime: 1792004148305
+  lastModifiedBy: dnd5ebuilder0000
+  duplicateSource: null
+  exportSource: null
+_key: '!items!phbscrElemAffPoi'
