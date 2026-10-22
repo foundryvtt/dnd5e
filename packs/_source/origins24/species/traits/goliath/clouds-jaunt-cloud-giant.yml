@@ -90,7 +90,8 @@ system:
     subtype: lineage
   prerequisites:
     level: null
-    items: []
+    items:
+      - race:goliath
     repeatable: false
   properties: []
   requirements: Goliath
@@ -105,8 +106,8 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1792692915258
-  modifiedTime: 1792692915258
+  createdTime: 1792697779251
+  modifiedTime: 1792697779251
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
