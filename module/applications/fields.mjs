@@ -78,6 +78,24 @@ export function createNumberInput(field, config) {
 
 /**
  * Create a text input for a StringField.
+ * @param {StringField} field                                   The field.
+ * @param {FormInputConfig<string> & SelectInputConfig} config  The input configuration.
+ * @returns {HTMLSelectElement}
+ */
+export function createSelectInput(field, config) {
+  delete config.input;
+  const input = field.toInput(config);
+  for ( const option of input.querySelectorAll("option") ) {
+    const data = config.options?.find(o => o.value === option.value);
+    if ( data?.hint ) option.title = data.hint;
+  }
+  return input;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create a text input for a StringField.
  * @param {StringField} field               The field.
  * @param {FormInputConfig<string>} config  The input configuration.
  * @returns {HTMLElement|HTMLCollection}
