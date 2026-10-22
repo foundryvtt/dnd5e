@@ -3,6 +3,7 @@ import { defineConfig, includeIgnoreFile } from "eslint/config";
 import jsdoc from "eslint-plugin-jsdoc";
 import globals from "globals";
 import { fileURLToPath } from "node:url";
+import dnd5e from "./utils/eslint/plugin.mjs";
 
 export default defineConfig([
   includeIgnoreFile(fileURLToPath(new URL(".gitignore", import.meta.url)), { gitignoreResolution: true }),
@@ -17,7 +18,7 @@ export default defineConfig([
       },
       sourceType: "module"
     },
-    plugins: { jsdoc, "@stylistic": stylistic },
+    plugins: { dnd5e, jsdoc, "@stylistic": stylistic },
     rules: {
       "@stylistic/array-bracket-spacing": ["warn", "never"],
       "array-callback-return": "warn",
@@ -157,6 +158,8 @@ export default defineConfig([
         catch: "always"
       }],
       "@stylistic/spaced-comment": "warn",
+
+      "dnd5e/space-in-control-flow-parens": "warn",
 
       "jsdoc/check-access": "warn",
       "jsdoc/check-alignment": "warn",
