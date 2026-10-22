@@ -143,7 +143,7 @@ export default defineConfig([
       "@stylistic/nonblock-statement-body-position": ["warn", "beside"],
       "one-var": ["warn", "never"],
       "@stylistic/operator-linebreak": ["warn", "before", {
-        overrides: { "=": "after", "+=": "after", "-=": "after" }
+        overrides: { "=": "after", "+=": "after", "-=": "after", "??=": "after", "||=": "after", "&&=": "after" }
       }],
       "prefer-template": "warn",
       "@stylistic/quote-props": ["warn", "as-needed", { keywords: false }],
