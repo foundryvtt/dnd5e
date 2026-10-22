@@ -1904,7 +1904,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Filter out items already in containers to avoid creating duplicates
-    const containers = new Set(items.filter(i => i.type === "container").map(i => i._id));
+    const containers = new Set(items.filter(i => (i.type === "container") && i._id).map(i => i._id));
     items = items.filter(i => !containers.has(i.system.container));
 
     // Transform physical items from NPCs to their gear versions
