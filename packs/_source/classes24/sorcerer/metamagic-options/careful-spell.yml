@@ -5,22 +5,21 @@ img: icons/magic/nature/beam-hand-leaves-green.webp
 system:
   description:
     value: >-
-      <blockquote><p>Cost: 1 Sorcery Point</p></blockquote><p>When you cast a
-      spell that forces other creatures to make a saving throw, you can protect
-      some of those creatures from the spell's full force. To do so, spend 1
-      Sorcery Point and choose a number of those creatures up to your Charisma
-      modifier (minimum of one creature). A chosen creature automatically
-      succeeds on its saving throw against the spell, and it takes no damage if
-      it would normally take half damage on a successful
-      save.</p><p><strong>Creatures You Can Protect:</strong> [[lookup
-      @abilities.cha.mod]]</p>
+      <div class="item-entry-details"><p class="item-entry-tag">Cost: 1 Sorcery
+      Point</p></div><p>When you cast a spell that forces other creatures to
+      make a saving throw, you can protect some of those creatures from the
+      spell's full force. To do so, spend 1 Sorcery Point and choose a number of
+      those creatures up to your Charisma modifier (minimum of one creature). A
+      chosen creature automatically succeeds on its saving throw against the
+      spell, and it takes no damage if it would normally take half damage on a
+      successful save.</p>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
+    revision: 1
   uses:
     max: ''
     spent: 0
@@ -30,8 +29,10 @@ system:
     subtype: metamagic
   prerequisites:
     level: null
+    items: []
     repeatable: false
-  properties: []
+  properties:
+    - mgc
   requirements: ''
   activities:
     jD3THRjOL2ILRYuM:
@@ -52,14 +53,16 @@ system:
         targets:
           - type: itemUses
             value: '1'
-            target: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
+            target: feat:font-of-magic
             scaling: {}
       description:
         chatFlavor: ''
+        value: ''
       duration:
         units: inst
         concentration: false
         override: false
+        expiry: null
       effects: []
       range:
         override: false
@@ -70,9 +73,10 @@ system:
           contiguous: false
           units: ft
           type: ''
+          stationary: false
         affects:
           choice: false
-          count: '@abilities.cha.mod'
+          count: max(1, @abilities.cha.mod)
           type: creature
           special: ''
         override: false
@@ -87,22 +91,31 @@ system:
         visible: false
         name: ''
         formula: ''
+      img: systems/dnd5e/icons/svg/action/magic.svg
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireAttunement: false
+        requireIdentification: false
+      behaviors: []
+      flags: {}
   enchant: {}
   identifier: careful-spell
+  advancement: {}
+  crewed: false
 effects: []
 folder: 6RKLEZHPbdWG3fZe
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866286897
-  modifiedTime: 1745256762636
+  systemVersion: 6.0.6
+  createdTime: 1792004130665
+  modifiedTime: 1792004130665
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0

@@ -6,46 +6,26 @@ img: systems/dnd5e/icons/classes/sorcerer.webp
 system:
   description:
     value: >-
-      <h3>Core Sorcerer Traits</h3><table
-      class="core-class-traits"><tbody><tr><th scope="row"><p><strong>Primary
-      Ability</strong></p></th><td><p>Charisma</p></td></tr><tr><th
-      scope="row"><p><strong>Hit Point Die</strong></p></th><td><p>D6 per
-      Sorcerer level</p></td></tr><tr><th scope="row"><p><strong>Saving Throw
-      Proficiencies</strong></p></th><td><p>Constitution and
-      Charisma</p></td></tr><tr><th scope="row"><p><strong>Skill
-      Proficiencies</strong></p></th><td><p><em>Choose 2:</em> Arcana,
-      Deception, Insight, Intimidation, Persuasion, or
-      Religion</p></td></tr><tr><th scope="row"><p><strong>Weapon
-      Proficiencies</strong></p></th><td><p>Simple weapons</p></td></tr><tr><th
-      scope="row"><p><strong>Armor
-      Training</strong></p></th><td><p>None</p></td></tr><tr><th
-      scope="row"><p><strong>Starting
-      Equipment</strong></p></th><td><p><em>Choose A or B: </em>(A)
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepSpear00000]{Spear}, 2
-      @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Daggers},
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagArcaneFocus]{Arcane Focus}
-      (@UUID[Compendium.dnd5e.equipment24.Item.phbafcCrystal000]{crystal}),
-      @UUID[Compendium.dnd5e.equipment24.Item.phbagDungeoneers]{Dungeoneer's
-      Pack}, and [[/award 28GP]]; or (B) [[/award
-      50GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbscrSorcerer00
-      inline classes="free-rules-embed"]</p><h2>Becoming a Sorcerer …</h2><h3>As
-      a Level 1 Character</h3><ul><li>Gain all the traits in the Core Sorcerer
-      Traits table.</li><li>Gain the Sorcerer's level 1 features, which are
-      listed in the
-      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSorcerer00000.JournalEntryPage.fsqRUA4acVXH4I3O#class-features]{Sorcerer
-      Features table}.</li></ul><h3>As a Multiclass Character</h3><ul><li>Gain
-      the Hit Point Die from the Core Sorcerer Traits table.</li><li>Gain the
-      Sorcerer's level 1 features, which are listed in the Sorcerer Features
-      table. See the
+      <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbscrSorcerer00
+      inline classes="free-rules-embed"]</p><p
+      class="hide-in-embed"><em>@UUID[Compendium.dnd5e.content24.JournalEntry.phbSorcerer00000]{Class
+      Details}</em></p><h3>Becoming a Sorcerer …</h3><h4>As a Level 1
+      Character</h4><ul><li><p>Gain all the traits in the Core Sorcerer Traits
+      table.</p></li><li><p>Gain the Sorcerer's level 1 features, which are
+      listed in the Sorcerer Features table.</p></li></ul><h4>As a Multiclass
+      Character</h4><ul><li><p>Gain the Hit Point Die from the Core Sorcerer
+      Traits table.</p></li><li><p>Gain the Sorcerer's level 1 features, which
+      are listed in the Sorcerer Features table. See the
       @UUID[Compendium.dnd5e.content24.JournalEntry.phbCreatingAChar.JournalEntryPage.vcs4jfEKRxPCsgXm]{multiclassing
-      rules} to determine your available spell slots.</li></ul>
+      rules} to determine your available spell slots.</p></li></ul>
     chat: ''
   source:
     custom: ''
     rules: '2024'
-    revision: 2
-    license: CC-BY-4.0
     book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 3
   startingEquipment:
     - type: AND
       requiresProficiency: false
@@ -54,14 +34,14 @@ system:
       sort: 100000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbwepSpear00000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepSpear00000
       requiresProficiency: false
       _id: qlvsOcz6euiRnNL3
       group: pR0mEuxe1qPdiMXB
       sort: 200000
     - type: linked
       count: 2
-      key: Compendium.dnd5e.equipment24.Item.phbwepDagger0000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbwepDagger0000
       requiresProficiency: false
       _id: A2PetGWTbbmothUy
       group: pR0mEuxe1qPdiMXB
@@ -73,14 +53,14 @@ system:
       sort: 400000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbafcCrystal000
+      key: Compendium.dnd-players-handbook.equipment.Item.phbafcCrystal000
       requiresProficiency: false
       _id: zmwYHbS3JVzU8FXX
       group: C1ovxcWZDF54nw08
       sort: 600000
     - type: linked
       count: null
-      key: Compendium.dnd5e.equipment24.Item.phbagDungeoneers
+      key: Compendium.dnd-players-handbook.equipment.Item.phbagDungeoneers
       requiresProficiency: false
       _id: LgbG4QYKBQTlDhOd
       group: pR0mEuxe1qPdiMXB
@@ -89,76 +69,107 @@ system:
       count: 28
       key: gp
       requiresProficiency: false
-      _id: mXGHdwbuSIEboiMy
+      _id: hOT7zGZpYDgXPFcP
       group: pR0mEuxe1qPdiMXB
       sort: 700000
   identifier: sorcerer
   levels: 1
   advancement:
-    - _id: wu4INYdfnMUSeDqH
+    wu4INYdfnMUSeDqH:
+      _id: wu4INYdfnMUSeDqH
       type: HitPoints
       configuration: {}
       value: {}
-    - _id: preISmaDhLpsoWqy
+      flags: {}
+      hint: ''
+    preISmaDhLpsoWqy:
+      _id: preISmaDhLpsoWqy
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbscrSpellcasti
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbscrInnateSorc
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 1
-      title: Class Features
-    - _id: c5fRAxTbRHamZM7M
+      name: Class Features
+      flags: {}
+      hint: ''
+    c5fRAxTbRHamZM7M:
+      _id: c5fRAxTbRHamZM7M
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbscrFontOfMagi
             optional: false
+            sort: 0
           - uuid: Compendium.dnd5e.classes24.Item.phbscrMetamagic0
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 2
-      title: Class Features
-    - _id: SihgGDvXjAktGkt1
+      name: Class Features
+      flags: {}
+      hint: ''
+    SihgGDvXjAktGkt1:
+      _id: SihgGDvXjAktGkt1
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbscrSorcerousR
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 5
-      title: Class Features
-    - _id: vGoDRNITjHNqxW1z
+      name: Class Features
+      flags: {}
+      hint: ''
+    vGoDRNITjHNqxW1z:
+      _id: vGoDRNITjHNqxW1z
       type: ItemGrant
       configuration:
         items:
           - optional: false
             uuid: Compendium.dnd5e.classes24.Item.phbscrSorceryInc
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 7
-      title: Class Features
-    - _id: g3PLJU1zYyUrHCY0
+      name: Class Features
+      flags: {}
+      hint: ''
+    g3PLJU1zYyUrHCY0:
+      _id: g3PLJU1zYyUrHCY0
       type: ItemGrant
       configuration:
         items:
           - uuid: Compendium.dnd5e.classes24.Item.phbscrArcaneApot
             optional: false
+            sort: 0
         optional: false
         spell: null
+        sorting: m
       value: {}
       level: 20
-      title: Class Features
-    - _id: bwCLOdauuzoHofil
+      name: Class Features
+      flags: {}
+      hint: ''
+    bwCLOdauuzoHofil:
+      _id: bwCLOdauuzoHofil
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -172,10 +183,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 4
-      title: ''
-    - _id: mRSh9oUVjLU33e7p
+      name: ''
+      flags: {}
+      hint: ''
+    mRSh9oUVjLU33e7p:
+      _id: mRSh9oUVjLU33e7p
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -189,10 +204,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 8
-      title: ''
-    - _id: mhZh3LfLMa15tXee
+      name: ''
+      flags: {}
+      hint: ''
+    mhZh3LfLMa15tXee:
+      _id: mhZh3LfLMa15tXee
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -206,10 +225,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 12
-      title: ''
-    - _id: FOf5CkGnSs0OlppY
+      name: ''
+      flags: {}
+      hint: ''
+    FOf5CkGnSs0OlppY:
+      _id: FOf5CkGnSs0OlppY
       type: AbilityScoreImprovement
       configuration:
         points: 2
@@ -223,10 +246,14 @@ system:
         cap: 2
         locked: []
         recommendation: null
-      value: {}
+      value:
+        type: asi
       level: 16
-      title: ''
-    - _id: DUHZI0oND7OQ6lox
+      name: ''
+      flags: {}
+      hint: ''
+    DUHZI0oND7OQ6lox:
+      _id: DUHZI0oND7OQ6lox
       type: ScaleValue
       configuration:
         identifier: max-prepared
@@ -269,12 +296,15 @@ system:
           '20':
             value: 22
       value: {}
-      title: Max Prepared Spells
       hint: ''
-    - _id: zMjMi0B3XrcQMqAS
+      name: Prepared Spells
+      flags: {}
+      classRestriction: ''
+    zMjMi0B3XrcQMqAS:
+      _id: zMjMi0B3XrcQMqAS
       type: ScaleValue
       configuration:
-        identifier: ''
+        identifier: cantrips-known
         type: number
         distance:
           units: ''
@@ -286,56 +316,30 @@ system:
           '10':
             value: 6
       value: {}
-      title: Cantrips Known
       hint: ''
-    - _id: nIaa61I4SSnwAQvz
-      type: ItemChoice
-      configuration:
-        choices:
-          '2':
-            count: 2
-            replacement: false
-          '10':
-            count: 2
-            replacement: false
-          '17':
-            count: 2
-            replacement: false
-        allowDrops: true
-        type: feat
-        pool:
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoCarefulSpe
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoDistantSpe
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoEmpoweredS
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoExtendedSp
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoHeightened
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoQuickenedS
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoSeekingSpe
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoSubtleSpel
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoTransmuted
-          - uuid: Compendium.dnd5e.classes24.Item.phbmmoTwinnedSpe
-        spell: null
-        restriction:
-          type: class
-          subtype: metamagic
-          list: []
-      value:
-        added: {}
-        replaced: {}
-      title: Metamagic
-      hint: >-
-        Because your magic flows from within, you can alter your spells to suit
-        your needs; you gain two Metamagic options.
-    - _id: q7N6Am8hFSq15JTl
+      name: Cantrips
+      flags: {}
+      classRestriction: ''
+    q7N6Am8hFSq15JTl:
+      _id: q7N6Am8hFSq15JTl
       type: Subclass
       configuration: {}
       value:
         document: null
         uuid: null
       level: 3
-      title: ''
-      hint: ''
-    - _id: XzTd1a6iGhCAqMs3
+      hint: >-
+        <p>You gain a Sorcerer subclass of your choice. The Aberrant Sorcery,
+        Clockwork Sorcery, Draconic Sorcery, and Wild Magic Sorcery subclasses
+        are detailed after this class’s description. A subclass is a
+        specialization that grants you features at certain Sorcerer levels. For
+        the rest of your career, you gain each of your subclass’s features that
+        are of your Sorcerer level or lower.</p>
+      name: ''
+      flags: {}
+      classRestriction: ''
+    XzTd1a6iGhCAqMs3:
+      _id: XzTd1a6iGhCAqMs3
       type: Trait
       configuration:
         mode: default
@@ -347,10 +351,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Saving Throw Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: 7xtY4ilruYHMPFfM
+      name: Saving Throw Proficiencies
+      flags: {}
+    7xtY4ilruYHMPFfM:
+      _id: 7xtY4ilruYHMPFfM
       type: Trait
       configuration:
         mode: default
@@ -368,10 +374,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Skill Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: nFvwOhQGBMwm07Fa
+      name: Skill Proficiencies
+      flags: {}
+    nFvwOhQGBMwm07Fa:
+      _id: nFvwOhQGBMwm07Fa
       type: Trait
       configuration:
         mode: default
@@ -382,10 +390,12 @@ system:
       value:
         chosen: []
       level: 1
-      title: Weapon Proficiencies
       hint: ''
       classRestriction: primary
-    - _id: mQyTV3LMkMQT1zfO
+      name: Weapon Proficiencies
+      flags: {}
+    mQyTV3LMkMQT1zfO:
+      _id: mQyTV3LMkMQT1zfO
       type: ScaleValue
       configuration:
         identifier: points
@@ -432,10 +442,12 @@ system:
           '20':
             value: 20
       value: {}
-      title: Sorcery Points
       hint: ''
-    - type: AbilityScoreImprovement
-      _id: EgWvwpbMp6gDqqiT
+      name: Sorcery Points
+      flags: {}
+    29Ufd0MpG7PBckVs:
+      type: AbilityScoreImprovement
+      _id: 29Ufd0MpG7PBckVs
       configuration:
         cap: 2
         fixed:
@@ -447,12 +459,14 @@ system:
           cha: 0
         locked: []
         points: 2
-        recommendation: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+        recommendation: Compendium.dnd-players-handbook.feats.Item.phbBoonofDimensi
         max: null
-      value: {}
+      value:
+        type: asi
       level: 19
-      title: ''
       hint: ''
+      name: Epic Boon
+      flags: {}
   spellcasting:
     progression: full
     ability: cha
@@ -467,15 +481,16 @@ system:
     denomination: d6
     spent: 0
     additional: ''
+  properties: []
 effects: []
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.348'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 5.2.0
-  createdTime: 1735866286897
-  modifiedTime: 1757541715654
+  systemVersion: 6.0.6
+  createdTime: 1792004130664
+  modifiedTime: 1792004130664
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
