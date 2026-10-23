@@ -41,18 +41,16 @@ export function getCollectionDocumentOptions(collection, { disabled }={}) {
 
 /**
  * Convert a currency value from one denomination to another.
- * @param {number} value         The currency value.
- * @param {string} from          The current denomination.
- * @param {object} [options]
- * @param {string} [options.to]  The target denomination, if specified, otherwise defaults to the configured default
- *                               currency.
- * @returns {number|null}
+ * @param {number} value             The currency value.
+ * @param {string} from              The current denomination.
+ * @param {UnitConversionOptions} [options={}]
+ * @param {boolean} [options.round]  Round currency according to maximum decimal digits allowed by denomination.
+ * @returns {{ value: number, denomination: string }}
  */
-export function convertCurrency(value, from, { to=CONFIG.DND5E.defaultCurrency }={}) {
-  const fromConversion = CONFIG.DND5E.currencies[from]?.conversion;
-  const toConversion = CONFIG.DND5E.currencies[to]?.conversion;
-  if ( !fromConversion || !toConversion ) return null;
-  return value * toConversion / fromConversion;
+export function convertCurrency(value, from, { round, ...options }={}) {
+  const message = unit => `Currency ${unit} not defined in CONFIG.DND5E.currencies`;
+  const r = _convertSystemUnits(value, from, CONFIG.DND5E.currencies, { ...options, message, invertConversion: true });
+  return { value: round ? roundCurrency(r.value, r.unit) : r.value, denomination: r.unit };
 }
 
 /* -------------------------------------------- */
@@ -951,7 +949,9 @@ export function convertWeight(value, from, options={}, _options={}) {
  * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
  * @returns {{ value: number, unit: string }}
  */
-export function _convertSystemUnits(value, from, config, { message, strict, system, truncate, to, validTargetUnits }) {
+export function _convertSystemUnits(value, from, config, {
+  invertConversion, message, strict, system, truncate, to, validTargetUnits
+}) {
   if ( (from === to) || (!to && system && (config[from]?.type === system)) ) {
     return { value: truncate ? Math.floor(value) : value, unit: from };
   }
@@ -968,16 +968,19 @@ export function _convertSystemUnits(value, from, config, { message, strict, syst
     const unitOptions = Object.entries(config)
       .reduce((arr, [key, v]) => {
         if ( validTargetUnits && !validTargetUnits.has(key) ) return arr;
-        const fits = truncate ? base >= v.conversion : ((base % v.conversion === 0) || (base >= v.conversion * 2));
+        const conversion = invertConversion ? 1 / v.conversion : v.conversion;
+        const fits = truncate ? base >= conversion : ((base % conversion === 0) || (base >= conversion * 2));
         if ( fits && (config[from]?.type === v.type) ) arr.push({ key, conversion: v.conversion });
         return arr;
       }, [])
-      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+      .sort((lhs, rhs) => invertConversion ? lhs.conversion - rhs.conversion : rhs.conversion - lhs.conversion);
     to = unitOptions[0]?.key ?? from;
   }
 
   if ( !config[to] || (from === to) ) return { value: truncate ? Math.floor(value) : value, unit: from };
-  const converted = value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
+  const converted = value
+    * (config[invertConversion ? to : from].conversion ?? 1)
+    / (config[invertConversion ? from : to].conversion ?? 1);
   return { value: truncate ? Math.floor(converted) : converted, unit: to };
 }
 
