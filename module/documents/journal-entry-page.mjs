@@ -5,9 +5,9 @@ import EmbeddableDocumentMixin from "./mixins/embeddable.mjs";
  */
 
 /**
- * Custom implementation of journal entry pages for providing roll data.
+ * Extend the base JournalEntryPage class to implement system-specific logic.
  */
-export default class JournalEntryPage5e extends EmbeddableDocumentMixin(JournalEntryPage) {
+export default class JournalEntryPage5e extends EmbeddableDocumentMixin(foundry.documents.JournalEntryPage) {
   /**
    * Return a data object regarding this page and from the containing journal entry.
    * @returns {JournalEntryPageRollData}

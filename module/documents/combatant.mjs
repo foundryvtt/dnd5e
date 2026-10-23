@@ -7,9 +7,9 @@ import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
  */
 
 /**
- * Custom combatant with custom initiative roll handling.
+ * Extend the base Combatant class to implement system-specific logic.
  */
-export default class Combatant5e extends Combatant {
+export default class Combatant5e extends foundry.documents.Combatant {
   /**
    * Create a chat message representing actor changes and displaying possible actions for this turn.
    * @param {object} [data={}]

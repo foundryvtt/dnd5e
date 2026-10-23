@@ -21,7 +21,7 @@ const ATTACK_ABILITY_SHIM_REGEX = new RegExp(/system\.activities\.\w+\.attack\.a
 /**
  * Extend the base ActiveEffect class to implement system-specific logic.
  */
-export default class ActiveEffect5e extends DependentDocumentMixin(ActiveEffect) {
+export default class ActiveEffect5e extends DependentDocumentMixin(foundry.documents.ActiveEffect) {
 
   /**
    * The default icon used for newly created Active Effect documents.

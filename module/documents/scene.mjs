@@ -1,7 +1,7 @@
 /**
- * Extend the base Scene class to implement additional system-specific logic.
+ * Extend the base Scene class to implement system-specific logic.
  */
-export default class Scene5e extends Scene {
+export default class Scene5e extends foundry.documents.Scene {
 
   /* -------------------------------------------- */
   /*  Falling                                     */
