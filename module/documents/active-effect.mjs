@@ -1265,9 +1265,11 @@ export default class ActiveEffect5e extends DependentDocumentMixin(foundry.docum
     const context = {
       ...change,
       typeLabel: _loc(ActiveEffect.CHANGE_TYPES[change.type]?.label),
-      value: foundry.utils.isPlainObject(change.value) ? JSON.stringify(change.value, null, 2) : change.value,
+      value: foundry.utils.isPlainObject(change.value) || Array.isArray(change.value)
+        ? JSON.stringify(change.value, null, 2) : change.value,
       ...((await this.system.getSheetChangeContext?.(change)) ?? {})
     };
+    context.showValue = context.value !== undefined;
     context.name ||= change.key;
     return context;
   }
