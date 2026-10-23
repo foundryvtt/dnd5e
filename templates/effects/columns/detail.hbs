@@ -1,4 +1,4 @@
-<div class="item-detail effect-detail {{#unless (or ctx.source ctx.value)}}empty{{/unless}}" data-column-id="detail">
+<div class="item-detail effect-detail {{#unless (or ctx.source ctx.showValue)}}empty{{/unless}}" data-column-id="detail">
     {{#if ctx.source}}
     <span class="effect-source">
         {{#if ctx.hasTooltip}}
@@ -8,7 +8,7 @@
         {{ ctx.source.name }}
         {{/if}}
     </span>
-    {{else if ctx.value}}
+    {{else if ctx.showValue}}
     {{#if (gt ctx.value.length 15)}}
     <i class="fa-solid fa-database" data-tooltip aria-label="{{ ctx.value }}"></i>
     {{else}}
