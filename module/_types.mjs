@@ -796,6 +796,8 @@
 
 /**
  * @typedef UnitConversionOptions
+ * @property {boolean} [invertConversion]  Divide by conversion values rather than multiplying. Used for currencies
+ *                                 where smaller conversion values are used for more valuable currencies.
  * @property {boolean} [strict]    Throw an error if either unit isn't found.
  * @property {string} [to]         The final unit. If neither this nor the unit system is provided then will convert to
  *                                 the largest unit that can represent the value as an integer.
