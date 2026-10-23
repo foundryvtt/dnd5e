@@ -1124,7 +1124,7 @@ Active effects have a special syntax that allows them to hide items on the actor
 ## Token Changes
 Active effects can also be used to make changes directly onto a token.
 
-![Token Light Changes](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/effect/effect-change-tokens.jpg)
+![Token Light Changes](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/effects/effect-change-tokens.jpg)
 
 ### Token Lighting
 
