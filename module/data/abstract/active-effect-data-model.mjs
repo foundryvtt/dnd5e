@@ -1,7 +1,7 @@
 import { getHumanReadableAttributeLabel, staticID } from "../../utils.mjs";
 import FiltersField from "../fields/filters-field.mjs";
 
-const { DocumentIdField, DocumentUUIDField, SchemaField, StringField } = foundry.data.fields;
+const { DocumentIdField, DocumentUUIDField, IntegerSortField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Abstract base class to add some shared functionality to all of the system's custom active effect types.
@@ -36,7 +36,8 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
           origin: "DND5E.EFFECT.Replacement.Origin",
           target: "DND5E.EFFECT.Replacement.Target"
         }
-      })
+      }),
+      sort: new IntegerSortField()
     });
     return schema;
   }
