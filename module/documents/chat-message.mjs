@@ -498,8 +498,9 @@ export default class ChatMessage5e extends ChatMessage {
       type: roll.options.type,
       properties: new Set(roll.options.properties ?? [])
     }));
+    const applicationOptions = this.system.getDamageApplicationOptions?.({ multiplier }) ?? { multiplier };
     return Promise.all(canvas.tokens.controlled.map(t => {
-      return t.actor?.applyDamage(damages, { multiplier, isDelta: true, originatingMessage: this });
+      return t.actor?.applyDamage(damages, { ...applicationOptions, isDelta: true, originatingMessage: this });
     }));
   }
 

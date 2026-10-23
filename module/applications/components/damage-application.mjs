@@ -130,39 +130,34 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const damages = actor.calculateDamage(this.damages, options);
     let { amount, temp, tempMax } = damages;
 
-    let active = {
+    const active = {
+      modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
+    };
+    const potential = {
       modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
     };
     for ( const damage of damages ) {
       for ( const category of Object.keys(active) ) {
         if ( category === "threshold" ) {
           if ( damage.active.threshold ) active.threshold = true;
+          if ( damage.potential.threshold ) potential.threshold = true;
           continue;
         }
         if ( damage.active.all?.[category] ) active[category].add("ALL");
+        if ( damage.potential.all?.[category] ) potential[category].add("ALL");
         if ( damage.active.type?.[category] ) active[category].add(damage.type);
+        if ( damage.potential.type?.[category] ) potential[category].add(damage.type);
         for ( const [special, value] of Object.entries(damage.active.special ?? {}) ) {
           if ( value[category] ) active[category].add(special);
+        }
+        for ( const [special, value] of Object.entries(damage.potential.special ?? {}) ) {
+          if ( value[category] ) potential[category].add(special);
         }
       }
     }
     temp = Math.floor(Math.max(0, temp));
 
-    // Add values from options to prevent active changes from being lost when re-rendering target list
-    const union = t => {
-      if ( foundry.utils.getType(options.ignore?.[t]) === "Set" ) active[t] = active[t].union(options.ignore[t]);
-    };
-    union("modification");
-    union("resistance");
-    union("vulnerability");
-    union("immunity");
-    if ( foundry.utils.getType(options.downgrade) === "Set" ) {
-      active.immunity = active.immunity.union(options.downgrade);
-      active.resistance = active.resistance.difference(options.downgrade);
-    }
-    active.threshold ||= options.ignore?.threshold;
-
-    return { active, temp, tempMax, total: amount };
+    return { active, potential, temp, tempMax, total: amount };
   }
 
   /* -------------------------------------------- */
@@ -173,9 +168,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
    * @returns {DamageApplicationOptions}
    */
   getMergedOptions(uuid) {
-    const fallback = this.#dirty ? this.multiplier : (this.#saveMultiplier(uuid) ?? this.multiplier);
+    const multiplier = this.#dirty ? this.multiplier : (this.#saveMultiplier(uuid) ?? this.multiplier);
     const options = this.getTargetOptions(uuid);
-    return { ...options, multiplier: options.multiplier ?? fallback };
+    return this.chatMessage.system.getDamageApplicationOptions({ multiplier, ...options });
   }
 
   /* -------------------------------------------- */
@@ -198,11 +193,17 @@ export default class DamageApplicationElement extends ChatTrayElement {
    * @param {{ change: string, type: string }} operation  The operation being performed.
    */
   #cycleChangeSource(options, { type, change }={}) {
+    const defaultOptions = this.chatMessage.system.applicationOptions ?? {};
+    const hasDefaultDowngrade = defaultOptions.downgrade?.has(type) || defaultOptions.downgrade?.has("ALL");
+    if ( (change === "resistance" && hasDefaultDowngrade)
+      || defaultOptions.ignore?.[change]?.has(type) || defaultOptions.ignore?.[change]?.has("ALL") ) return;
     if ( change === "immunity" ) {
       if ( options.ignore?.immunity?.has(type) ) {
         options.ignore.immunity.delete(type);
-        options.downgrade ??= new Set();
-        options.downgrade.add(type);
+        if ( !hasDefaultDowngrade ) {
+          options.downgrade ??= new Set();
+          options.downgrade.add(type);
+        }
       } else if ( options.downgrade?.has(type) ) {
         options.downgrade.delete(type);
       } else {
@@ -418,12 +419,18 @@ export default class DamageApplicationElement extends ChatTrayElement {
    * @param {string} type                       Damage type represented by this source.
    * @param {string} change                     Change type (e.g. resistance, immunity, etc.).
    * @param {DamageApplicationOptions} options  Options object from which to determine final values.
+   * @param {boolean} [isActive]                Is this change source currently active.
    * @returns {{label: string, mode: "active"|"ignore"|"downgrade", pressed: string, title: string}}
    */
-  getChangeSourceOptions(type, change, options) {
+  getChangeSourceOptions(type, change, options, isActive) {
     let mode = "active";
-    if ( (options.ignore?.[change] === true) || options.ignore?.[change]?.has?.(type) ) mode = "ignore";
-    else if ( (change === "immunity") && options.downgrade?.has(type) ) mode = "downgrade";
+    if ( isActive !== true ) {
+      if ( (options.ignore?.[change] === true) || options.ignore?.[change]?.has?.(type) ) mode = "ignore";
+      else if ( ((change === "immunity") || (change === "resistance"))
+        && ((options.downgrade === true) || options.downgrade?.has(type)) ) {
+        mode = "downgrade";
+      }
+    }
 
     const title = _loc(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
       type: CONFIG.DND5E.healingTypes[type]?.label ?? Trait.keyLabel(type, { trait: `d${change.slice(0, 1)}` })
@@ -473,13 +480,14 @@ export default class DamageApplicationElement extends ChatTrayElement {
 
   /**
    * Build the display of options that affect the target's damage calculation.
-   * @param {Record<string, Set<string>|boolean>} active  Active multiplier sources.
-   * @param {DamageApplicationOptions} options            Options object from which to determine final values.
+   * @param {Record<string, Set<string>|boolean>} active     Active multiplier sources.
+   * @param {Record<string, Set<string>|boolean>} potential  Potential multiplier sources.
+   * @param {DamageApplicationOptions} options               Options object from which to determine final values.
    * @returns {HTMLLIElement[]}
    */
-  #buildChangeSources(active, options) {
+  #buildChangeSources(active, potential, options) {
     const entries = [];
-    for ( const [change, values] of Object.entries(active) ) {
+    for ( const [change, values] of Object.entries(potential) ) {
       const types = change === "threshold" ? (values ? ["threshold"] : []) : Array.from(values ?? []);
       for ( const type of types ) {
         const icon = type === "ALL"
@@ -489,7 +497,8 @@ export default class DamageApplicationElement extends ChatTrayElement {
             : CONFIG.DND5E.healingTypes[type]?.icon
               ?? Trait.keyIcon(type, { trait: `d${change.slice(0, 1)}` });
         if ( !icon ) continue;
-        const { label, mode, pressed, title } = this.getChangeSourceOptions(type, change, options);
+        const isActive = change === "threshold" ? active.threshold : active[change].has(type);
+        const { label, mode, pressed, title } = this.getChangeSourceOptions(type, change, options, isActive);
         const li = document.createElement("li");
         li.classList.add("menu-change-source");
         li.insertAdjacentHTML("afterbegin", `
@@ -529,7 +538,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
       calc = this.calculateDamage(token.actor, options);
       if ( open ) Object.assign(this.#paneState, { calc, options });
     }
-    const { active, total } = calc;
+    const { active, potential, total } = calc;
     const label = key => {
       const div = document.createElement("div");
       div.classList.add("menu-section");
@@ -554,7 +563,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     multipliers.append(...this.buildMultiplierButtons(new Set(uuids.map(u => this.getMergedOptions(u).multiplier))));
     const sources = document.createElement("menu");
     sources.classList.add("menu-change-sources", "unlist");
-    sources.append(...this.#buildChangeSources(active, options));
+    sources.append(...this.#buildChangeSources(active, potential, options));
     const sections = [header, label("Multiplier"), multipliers];
     if ( sources.children.length ) sections.push(label("Changes"), sources);
     if ( uuids.length > 1 ) sections.push(label("Targets"));

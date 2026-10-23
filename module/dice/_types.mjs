@@ -1,5 +1,6 @@
 /**
  * @import { TravelPace5e } from "../data/actor/fields/_types.mjs";
+ * @import { DefaultDamageApplicationOptions } from "../data/chat-message/_types.mjs";
  */
 
 /**
@@ -104,12 +105,13 @@
  * Configuration data for the process of rolling a damage roll.
  *
  * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
- * @property {DamageRollConfiguration[]} rolls         Configuration data for individual rolls.
- * @property {string} [ability]                        Ability used to calculate the damage modifier.
- * @property {CriticalDamageConfiguration} [critical]  Critical configuration for all rolls.
- * @property {string[]} [properties]                   Properties applied to all rolls.
- * @property {boolean} [isCritical]                    Treat each roll as a critical unless otherwise specified.
- * @property {number} [scaling=0]                      Scale increase above base damage.
+ * @property {DamageRollConfiguration[]} rolls                Configuration data for individual rolls.
+ * @property {string} [ability]                               Ability used to calculate the damage modifier.
+ * @property {DefaultDamageApplicationOptions} [application]  Damage application options to use.
+ * @property {CriticalDamageConfiguration} [critical]         Critical configuration for all rolls.
+ * @property {string[]} [properties]                          Properties applied to all rolls.
+ * @property {boolean} [isCritical]                           Treat each roll as a critical unless otherwise specified.
+ * @property {number} [scaling=0]                             Scale increase above base damage.
  */
 
 /**

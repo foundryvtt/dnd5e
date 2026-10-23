@@ -848,6 +848,12 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         .concat(config.properties ?? [])
         .filter(p => CONFIG.DND5E.itemProperties[p]?.isPhysical)
     });
+
+    rollConfig.applicationOptions = AppliedRules
+      .collect(`${this.constructor.damageRuleCategory}:damageApplicationOptions`, this.actor, this.item)
+      .filterWith(rollData)
+      .toDamageApplicationOptions(rollConfig.applicationOptions);
+
     const rules = {
       bonus: AppliedRules.collect(`${this.constructor.damageRuleCategory}:bonus`, this.actor, this.item).toArray(),
       consumed: new Set()

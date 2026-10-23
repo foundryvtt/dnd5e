@@ -66,6 +66,16 @@ export default class DamageRoll extends BasicRoll {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static async buildPost(rolls, config, message) {
+    if ( config.applicationOptions ) {
+      foundry.utils.setProperty(message.data, "system.applicationOptions", config.applicationOptions);
+    }
+    return super.buildPost(rolls, config, message);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   static applyKeybindings(config, dialog, message) {
     const keys = {
