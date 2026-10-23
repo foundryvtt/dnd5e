@@ -475,10 +475,11 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
 
     // Add applied effects
     const effects = await this.getApplicableEffects();
-    for (const effect of effects) {
-        const effectData = effect.toObject();
-        effectData.system.changes = await ActiveEffect.implementation.forApplication(effectData.system.changes, this, actor);
-        actorUpdates.effects.push(effectData);
+    for ( const effect of effects ?? [] ) {
+      const effectData = effect.toObject();
+      effectData.system.changes =
+        await ActiveEffect.implementation.forApplication(effectData.system.changes, this, actor);
+      actorUpdates.effects.push(effectData);
     }
 
     return { actorUpdates, tokenUpdates };
