@@ -1,7 +1,7 @@
 import aggregateDamageRolls from "../../dice/aggregate-damage-rolls.mjs";
 import RollMessageData from "./roll-message-data.mjs";
 
-const { StringField } = foundry.data.fields;
+const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @import { DamageMessageSystemData } from "./_types.mjs";
@@ -22,6 +22,14 @@ export default class DamageMessageData extends RollMessageData {
   static defineSchema() {
     return {
       ...super.defineSchema(),
+      applicationOptions: new SchemaField({
+        downgrade: new SetField(new StringField(), { required: false }),
+        ignore: new SchemaField({
+          immunity: new SetField(new StringField(), { required: false }),
+          resistance: new SetField(new StringField(), { required: false }),
+          vulnerability: new SetField(new StringField(), { required: false })
+        }, { required: false })
+      }, { required: false }),
       onSave: new StringField({ blank: false, initial: null, nullable: true, required: false })
     };
   }
@@ -115,5 +123,43 @@ export default class DamageMessageData extends RollMessageData {
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Get the final damage application options, merging the defaults from this card into a set of base options.
+   * @param {DamageApplicationOptions} [base={}]  Base options into which this card's defaults should be merged.
+   * @returns {DamageApplicationOptions}
+   */
+  getDamageApplicationOptions(base={}) {
+    const defaultOptions = this.applicationOptions ?? {};
+    return {
+      ...base,
+      downgrade: this.#mergeOption(base.downgrade, defaultOptions.downgrade),
+      ignore: base.ignore === true ? base.ignore : {
+        ...(base.ignore ?? {}),
+        immunity: this.#mergeOption(base.ignore?.immunity, defaultOptions.ignore?.immunity),
+        resistance: this.#mergeOption(base.ignore?.resistance, defaultOptions.ignore?.resistance),
+        vulnerability: this.#mergeOption(base.ignore?.vulnerability, defaultOptions.ignore?.vulnerability)
+      },
+      multiplier: base.multiplier
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Merge a single application option with the default options from the chat message.
+   * @param {boolean|Set<string>} targetOption  Option for a specific target.
+   * @param {Set<string>|void} defaultOption    Default option from chat message.
+   * @returns {boolean|Set<string>|void}
+   */
+  #mergeOption(targetOption, defaultOption) {
+    if ( !defaultOption || (targetOption === true) ) return targetOption;
+    if ( defaultOption.has("ALL") ) return true;
+    return new Set(targetOption ?? []).union(defaultOption);
   }
 }
