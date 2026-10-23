@@ -37,7 +37,7 @@ export default class SizeFlow extends AdvancementFlow {
   /** @inheritDoc */
   async _prepareHeaderContext(context, options) {
     context = await super._prepareHeaderContext(context, options);
-    context.hint ||= this.advancement.automaticHint;
+    context.hint ||= `<p>${this.advancement.automaticHint}</p>`;
     return context;
   }
 }
