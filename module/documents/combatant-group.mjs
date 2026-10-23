@@ -1,7 +1,11 @@
 /**
- * Custom CombatantGroup implementation.
+ * @import Combatant5e from "./combatant.mjs";
  */
-export default class CombatantGroup5e extends (foundry.documents.CombatantGroup ?? class {}) {
+
+/**
+ * Extend the base CombatantGroup class to implement system-specific logic.
+ */
+export default class CombatantGroup5e extends foundry.documents.CombatantGroup {
   /**
    * Nominate a Combatant that will perform operations on behalf of the group.
    * @returns {Combatant5e|null}

@@ -1,7 +1,7 @@
 /**
- * Extended version of Combat to trigger events on combat start & turn changes.
+ * Extend the base Combat class to implement system-specific logic.
  */
-export default class Combat5e extends Combat {
+export default class Combat5e extends foundry.documents.Combat {
 
   /* -------------------------------------------- */
   /*  Properties                                  */
