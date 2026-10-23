@@ -66,7 +66,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
           render: false
         });
       }
-    } catch (err) {
+    } catch ( err ) {
       logError(err, "Actor", actor.name);
     }
     incrementProgress();
@@ -94,7 +94,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
           recursive: !flags.persistSourceMigration, render: false
         });
       }
-    } catch (err) {
+    } catch ( err ) {
       logError(err, "Item", item.name);
     }
     incrementProgress();
@@ -108,7 +108,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         log(`Migrating Macro document ${m.name}`);
         await m.update(updateData, {enforceTypes: false, render: false});
       }
-    } catch (err) {
+    } catch ( err ) {
       logError(err, "Macro", m.name);
     }
     incrementProgress();
@@ -129,7 +129,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         messageBatch.push({ _id: m.id, ...updateData });
         if ( messageBatch.length >= MESSAGE_MIGRATION_BATCH_SIZE ) await flushMessageBatch();
       }
-    } catch (err) {
+    } catch ( err ) {
       err.message = `Failed dnd5e system migration for Message ${m.id}: ${err.message}`;
       console.error(err);
     }
@@ -144,7 +144,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         log(`Migrating RollTable document ${table.name}`);
         await table.update(updateData, { enforceTypes: false, render: false });
       }
-    } catch (err) {
+    } catch ( err ) {
       logError(err, "RollTable", table.name);
     }
     incrementProgress();
@@ -158,7 +158,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         log(`Migrating Scene document ${s.name}`);
         await s.update(updateData, {enforceTypes: false, render: false});
       }
-    } catch (err) {
+    } catch ( err ) {
       logError(err, "Scene", s.name);
     }
 
@@ -199,7 +199,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
             recursive: !flags.persistSourceMigration, render: false
           });
         }
-      } catch (err) {
+      } catch ( err ) {
         logError(err, "ActorDelta", `[${token.id}]`);
       }
       incrementProgress();
@@ -307,7 +307,7 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, increm
       }
 
       // Handle migration failures
-      catch (err) {
+      catch ( err ) {
         err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
         console.error(err);
         hasErrors = true;
@@ -398,7 +398,7 @@ export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true
   if ( migrate ) {
     try {
       await migrateCompendium(pack, { bypassVersionCheck, strict: true });
-    } catch (err) {
+    } catch ( err ) {
       err.message = `Failed dnd5e system migration pack ${pack.collection}: ${err.message}`;
       console.error(err);
       return;
@@ -468,7 +468,7 @@ export async function migrateArmorClass(pack) {
 
       // CASE 2: NPC Natural Armor
       else if ( src.type === "npc" ) update["system.attributes.ac.calc"] = "natural";
-    } catch (err) {
+    } catch ( err ) {
       console.warn(`Failed to migrate armor class for Actor ${actor.name}`, err);
     }
   }
@@ -559,8 +559,8 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
 
     // Prepared, Equipped, and Proficient for NPC actors
     if ( actorData.type === "npc" ) {
-      if (foundry.utils.getProperty(itemData.system, "prepared") === false) itemUpdate["system.prepared"] = 1;
-      if (foundry.utils.getProperty(itemData.system, "equipped") === false) itemUpdate["system.equipped"] = true;
+      if ( foundry.utils.getProperty(itemData.system, "prepared") === false ) itemUpdate["system.prepared"] = 1;
+      if ( foundry.utils.getProperty(itemData.system, "equipped") === false ) itemUpdate["system.equipped"] = true;
     }
 
     // Update the Owned Item
@@ -994,7 +994,7 @@ export async function getMigrationData() {
     const icons = await fetch("systems/dnd5e/json/icon-migration.json");
     const spellIcons = await fetch("systems/dnd5e/json/spell-icon-migration.json");
     data.iconMap = {...await icons.json(), ...await spellIcons.json()};
-  } catch (err) {
+  } catch ( err ) {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
   }
   return data;

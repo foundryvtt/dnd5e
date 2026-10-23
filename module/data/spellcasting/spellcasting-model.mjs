@@ -96,7 +96,7 @@ export class SpellcastingModel extends foundry.abstract.DataModel {
       if ( !Model ) return delete spellcasting[key];
       try {
         spellcasting[key] = new Model(config, { key });
-      } catch (err) {
+      } catch ( err ) {
         console.error(`Failed to instantiate model for spellcasting method '${key}'`, err);
         return delete spellcasting[key];
       }

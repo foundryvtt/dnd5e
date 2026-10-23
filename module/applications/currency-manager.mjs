@@ -226,7 +226,7 @@ export default class CurrencyManager extends Application5e {
     0);
 
     // Convert base units into the highest denomination possible
-    for ( const [denomination, config] of currencies) {
+    for ( const [denomination, config] of currencies ) {
       const ratio = smallestConversion / config.conversion;
       currency[denomination] = roundCurrency(amount / ratio, denomination);
       amount -= currency[denomination] * ratio;

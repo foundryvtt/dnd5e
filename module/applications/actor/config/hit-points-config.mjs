@@ -100,7 +100,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
     try {
       const roll = await this.document.rollNPCHitPoints();
       this.submit({ updateData: { "system.attributes.hp.max": roll.total } });
-    } catch (err) {
+    } catch ( err ) {
       ui.notifications.error("DND5E.HPFormulaError", { localize: true });
       throw err;
     }
