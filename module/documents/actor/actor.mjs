@@ -1004,20 +1004,20 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
    * @param {DamageDescription} damage                       Damage description to consider or a specific type.
    * @param {object} [options={}]
    * @param {DamageApplicationOptions} [options.options={}]  Damage application options.
-   * @returns {{ type: "type"|"special", subtype?: string }|null}
+   * @returns {{ type: "type"|"special", [subtype]: string }|null}
    */
   #changeHasEffect(category, damage, { options={} }={}) {
     const config = this.system.traits?.[`d${category.slice(0, 1)}`];
-    const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+    const downgrade = type => (options.downgrade === true) || options.downgrade?.has?.(type)
+      || options.downgrade?.has?.("ALL");
     const type = damage.type;
     const isHealingType = type in CONFIG.DND5E.healingTypes;
 
     // If category is resistance, check for downgraded immunities
     if ( category === "resistance" ) {
-      if ( (!isHealingType && downgrade("ALL") && this.#hasImmunity("ALL", options))
-        || (downgrade(type) && this.#hasImmunity(type, options)) ) return { type: "type" };
+      if ( downgrade(type) && this.#hasImmunity(type, options) ) return { type: "type" };
       for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
-        if ( !downgrade(key) || !filter.check(damage) ) continue;
+        if ( !downgrade(key) || !this.system.traits?.di?.value.has(key) || !filter.check(damage) ) continue;
         if ( this.#hasImmunity(key, options) ) return { type: "special", subtype: key };
       }
     }
@@ -1029,10 +1029,8 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     // If specific damage type isn't ignored and actor either has all damage in this category
     // (healing types are excluded from "All Damage") or has specific damage type in this category
     const o = { options };
-    if ( !this.#changeIsIgnored(category, type, o) && (
-      (!isHealingType && config?.value.has("ALL") && !this.#changeIsIgnored(category, "ALL", o))
-      || config?.value.has(type)
-    ) ) return { type: "type" };
+    if ( !this.#changeIsIgnored(category, type, o)
+      && ((!isHealingType && config?.value.has("ALL")) || config?.value.has(type)) ) return { type: "type" };
 
     // Check filters against special resistance types
     for ( const [key, { filter }] of Object.entries(CONFIG.DND5E.damageResistanceTypes) ) {
@@ -1055,13 +1053,15 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
    * @returns {boolean}
    */
   #changeIsIgnored(category, type, { options={}, skipDowngrade=false }={}) {
-    const downgrade = type => options.downgrade === true || options.downgrade?.has?.(type);
+    const downgrade = type => (options.downgrade === true) || options.downgrade?.has?.(type)
+      || options.downgrade?.has?.("ALL");
 
     // All categories are ignored
     if ( options.ignore === true ) return true;
 
     // Specific category is ignored, or specific category has this type in its ignore list
-    if ( (options.ignore?.[category] === true) || (options.ignore?.[category]?.has?.(type)) ) return true;
+    if ( (options.ignore?.[category] === true) || (options.ignore?.[category]?.has?.(type))
+      || ((category !== "modification") && options.ignore?.[category]?.has?.("ALL")) ) return true;
 
     // When downgrading, always ignore immunities unless `skipDowngrade` option is set
     if ( (category === "immunity") && downgrade(type) && !skipDowngrade ) return true;
@@ -1081,10 +1081,9 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
    * @returns {boolean}
    */
   #hasImmunity(type, options={}) {
+    if ( this.#changeIsIgnored("immunity", type, { options, skipDowngrade: true }) ) return false;
     const value = this.system.traits?.di?.value;
-    const ignored = key => this.#changeIsIgnored("immunity", key, { options, skipDowngrade: true });
-    if ( ignored(type) ) return false;
-    return (!(type in CONFIG.DND5E.healingTypes) && value?.has("ALL") && !ignored("ALL")) || value?.has(type);
+    return (!(type in CONFIG.DND5E.healingTypes) && value?.has("ALL")) || value?.has(type);
   }
 
   /* -------------------------------------------- */
