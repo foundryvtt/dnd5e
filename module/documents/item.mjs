@@ -32,9 +32,9 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  */
 
 /**
- * Override and extend the basic Item implementation.
+ * Extend the base Item class to implement system-specific logic.
  */
-export default class Item5e extends SystemDocumentMixin(Item) {
+export default class Item5e extends SystemDocumentMixin(foundry.documents.Item) {
 
   /** @override */
   static DEFAULT_ICON = "systems/dnd5e/icons/svg/documents/item.svg";

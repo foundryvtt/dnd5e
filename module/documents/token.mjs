@@ -3,9 +3,9 @@ import { postFallDamage } from "../rules/falling.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
- * Extend the base TokenDocument class to implement system-specific HP bar logic.
+ * Extend the base TokenDocument class to implement system-specific logic.
  */
-export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
+export default class TokenDocument5e extends SystemFlagsMixin(foundry.documents.TokenDocument) {
 
   /**
    * Cached sense-derived overrides, used to skip vision re-derivation when senses are unchanged.

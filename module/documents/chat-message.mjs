@@ -7,7 +7,10 @@ import ContextMenu5e from "../applications/context-menu.mjs";
  * @import Item5e from "./item.mjs";
  */
 
-export default class ChatMessage5e extends ChatMessage {
+/**
+ * Extend the base ChatMessage class to implement system-specific logic.
+ */
+export default class ChatMessage5e extends foundry.documents.ChatMessage {
 
   /**
    * HTML tag names for chat trays that can open and close.
