@@ -40,9 +40,9 @@ import ConditionData from "../../data/active-effect/condition.mjs";
  */
 
 /**
- * Extend the base Actor class to implement additional system-specific logic.
+ * Extend the base Actor class to implement system-specific logic.
  */
-export default class Actor5e extends SystemDocumentMixin(Actor) {
+export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor) {
 
   /** @override */
   static DEFAULT_ICON = "systems/dnd5e/icons/svg/documents/actor.svg";
