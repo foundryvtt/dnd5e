@@ -271,7 +271,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       const proficiencyEffect = new ActiveEffect.implementation({
         _id: staticID("dnd5eMatchProficiency"),
         disabled: false,
-        icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
+        img: "icons/skills/targeting/crosshair-bars-yellow.webp",
         name: _loc("DND5E.SUMMON.FIELDS.match.proficiency.label"),
         system: {
           changes: [{
@@ -301,7 +301,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           actorUpdates.effects.push((new ActiveEffect.implementation({
             _id: staticID("dnd5eACBonus"),
             disabled: false,
-            icon: "icons/magic/defensive/shield-barrier-blue.webp",
+            img: "icons/magic/defensive/shield-barrier-blue.webp",
             name: _loc("DND5E.SUMMON.FIELDS.bonuses.ac.label"),
             system: {
               changes: [{
@@ -323,7 +323,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         actorUpdates.effects.push((new ActiveEffect.implementation({
           _id: staticID("dnd5eHDBonus"),
           disabled: false,
-          icon: "icons/sundries/gaming/dice-runed-brown.webp",
+          img: "icons/sundries/gaming/dice-runed-brown.webp",
           name: _loc("DND5E.SUMMON.FIELDS.bonuses.hd.label"),
           system: {
             changes: [{
@@ -350,7 +350,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
           return (new ActiveEffect.implementation({
             _id: staticID("dnd5eHPBonus"),
             disabled: false,
-            icon: "icons/magic/life/heart-glowing-red.webp",
+            img: "icons/magic/life/heart-glowing-red.webp",
             name: _loc("DND5E.SUMMON.FIELDS.bonuses.hp.label"),
             system: {
               changes: [{
@@ -420,7 +420,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
       actorUpdates.effects.push((new ActiveEffect.implementation({
         _id: staticID("dnd5eDamageChanges"),
         disabled: false,
-        icon: "icons/skills/melee/strike-slashes-orange.webp",
+        img: "icons/skills/melee/strike-slashes-orange.webp",
         name: _loc("DND5E.SUMMON.DamageChanges.Label"),
         system: { changes }
       })).toObject());
@@ -473,7 +473,7 @@ export default class SummonActivity extends ActivityMixin(BaseSummonActivityData
         const effect = (new ActiveEffect.implementation({
           _id: staticID("dnd5eItemChanges"),
           disabled: false,
-          icon: "icons/skills/melee/strike-slashes-orange.webp",
+          img: "icons/skills/melee/strike-slashes-orange.webp",
           name: _loc("DND5E.SUMMON.ItemChanges.Label"),
           system: {
             changes,
