@@ -1205,7 +1205,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
      * @param {ActiveEffect5e} effect     The ActiveEffect that will be deleted.
      * @returns {boolean}                 Explicitly return false to prevent the effect from being deleted.
      */
-    if ( Hooks.call("dnd5e.preEndConcentration", this, effect) === false) return [];
+    if ( Hooks.call("dnd5e.preEndConcentration", this, effect) === false ) return [];
 
     await effect.delete();
 

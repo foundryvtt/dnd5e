@@ -65,7 +65,7 @@ export default class PropertyAttribution extends Application5e {
   async _prepareContext(options) {
     const property = foundry.utils.getProperty(this.object.system, this.property);
     let total;
-    if ( Number.isNumeric(property)) total = property;
+    if ( Number.isNumeric(property) ) total = property;
     else if ( typeof property === "object" && Number.isNumeric(property.value) ) total = property.value;
     const sources = foundry.utils.duplicate(this.attributions);
     for ( const source of sources ) {

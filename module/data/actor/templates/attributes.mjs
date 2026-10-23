@@ -271,7 +271,7 @@ export default class AttributesFields {
 
     // Identify Equipped Items
     const { armors, shields } = this.parent.itemTypes.equipment.reduce((obj, equip) => {
-      if ( !equip.system.equipped || !(equip.system.type.value in CONFIG.DND5E.armorTypes)) return obj;
+      if ( !equip.system.equipped || !(equip.system.type.value in CONFIG.DND5E.armorTypes) ) return obj;
       if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
       else obj.armors.push(equip);
       return obj;

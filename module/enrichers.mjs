@@ -52,7 +52,7 @@ export function chatMessage(message) {
   if ( !match ) return;
   let { type, config } = match.groups;
   config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
-  switch (type) {
+  switch ( type ) {
     case "attack": handleAttackCommand(config); break;
     case "award": Award.handleAward(message); break;
     case "heal":
@@ -354,7 +354,7 @@ export async function enrichAward(config, label, options) {
   let parsed;
   try {
     parsed = Award.parseAwardCommand(command);
-  } catch (err) {
+  } catch ( err ) {
     logWarning(err.message, options);
     return null;
   }

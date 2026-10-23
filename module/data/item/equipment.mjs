@@ -213,7 +213,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   static #migrateArmor(source) {
     if ( !("armor" in source) ) return;
     source.armor ??= {};
-    if ( (typeof source.armor.dex === "string") ) {
+    if ( typeof source.armor.dex === "string" ) {
       const dex = source.armor.dex;
       if ( dex === "" ) source.armor.dex = null;
       else if ( Number.isNumeric(dex) ) source.armor.dex = Number(dex);

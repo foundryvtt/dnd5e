@@ -1164,7 +1164,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     let data;
     try {
       data = JSON.parse(dragData);
-    } catch (err) {
+    } catch ( err ) {
       console.error(err);
       return;
     }

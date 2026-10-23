@@ -514,7 +514,7 @@ export function prepareFormulaValue(model, keyPath, label, rollData) {
     const formula = replaceFormulaData(value, rollData, { item, property });
     const roll = new Roll(formula);
     foundry.utils.setProperty(model, keyPath, roll.evaluateSync().total);
-  } catch (err) {
+  } catch ( err ) {
     if ( item.isEmbedded ) {
       const message = _loc("DND5E.FormulaMalformedError", { property, name: model.name ?? item.name });
       item.actor._preparationWarnings.push({ message, link: item.uuid, type: "error" });
@@ -592,7 +592,7 @@ export function simplifyBonus(bonus, data={}, { strict }={}) {
   try {
     const roll = new Roll(bonus, data);
     return roll.isDeterministic ? roll.evaluateSync().total : 0;
-  } catch (err) {
+  } catch ( err ) {
     if ( strict ) throw err;
     console.error(err);
     return 0;

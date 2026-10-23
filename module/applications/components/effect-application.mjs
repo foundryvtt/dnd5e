@@ -334,7 +334,7 @@ export default class EffectApplicationElement extends ChatTrayElement {
         try {
           const operation = await this._prepareEffectData(effect, actor);
           (operation.action === "create" ? data : updates).push(operation.data);
-        } catch (err) {
+        } catch ( err ) {
           Hooks.onError("EffectApplicationElement._prepareEffectData", err, { notify: "warn", log: "warn" });
         }
       }

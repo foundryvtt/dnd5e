@@ -389,7 +389,7 @@ export default class Award extends Application5e {
         const app = new Award({ award: { currency, xp, each, savedDestinations } });
         app.render({ force: true });
       }
-    } catch (err) {
+    } catch ( err ) {
       ui.notifications.warn(err.message);
     }
   }

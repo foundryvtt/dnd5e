@@ -43,7 +43,7 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
   /** @override */
   _cast(value) {
     if ( typeof value === "string" ) return value;
-    if ( (value instanceof this.model) ) return value._id;
+    if ( value instanceof this.model ) return value._id;
     throw new Error(`The value provided to a LocalDocumentField must be a ${this.model.name} instance.`);
   }
 
