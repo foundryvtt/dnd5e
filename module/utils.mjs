@@ -1579,9 +1579,17 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     if ( prefixItemName && (item instanceof Item) ) name = item.name;
     type = "item";
     if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
+    else if ( attr === "ability" ) label = "DND5E.ATTACK.FIELDS.attack.abilities.label";
+    else if ( attr === "attack.bonus" ) label = "DND5E.ATTACK.FIELDS.attack.bonus.label";
+    else if ( attr === "attack.flat" ) label = "DND5E.ATTACK.FIELDS.attack.flat.label";
+    else if ( attr === "damageBonus" ) label = "DND5E.BonusDamage";
+    else if ( attr === "damage.parts" ) label = "DND5E.DAMAGE.FIELDS.damage.parts.label";
+    else if ( attr === "damage.types" ) label = "DND5E.DAMAGE.FIELDS.damage.parts.FIELDS.types.label";
     else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
     else if ( attr === "level" ) label = "DND5E.Level";
     else if ( attr === "properties" ) label = "DND5E.Properties";
+    else if ( attr === "save.dc" ) label = "DND5E.SAVE.FIELDS.save.dc.formula.label";
+    else if ( attr === "save.scaling" ) label = "DND5E.SAVE.FIELDS.save.dc.calculation.label";
     else if ( attr === "uses.spent" ) label = "DND5E.Uses";
     else label = getSchemaLabel(attr, "Item", item);
   }
@@ -1669,6 +1677,12 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
     }
   }
 
+  // Status Effects
+  else if ( attr.startsWith("statuses.") ) {
+    const key = attr.slice(9);
+    label = CONFIG.statusEffects[key]?.name;
+  }
+
   // Subclasses
   else if ( attr.startsWith("subclasses.") ) {
     const [, identifier, ...rest] = attr.split(".");
@@ -1686,9 +1700,14 @@ export function getHumanReadableAttributeLabel(attr, { actor, item, prefixItemNa
 
   // Traits
   else if ( attr.startsWith("traits.dm.amount.") ) {
-    const key = attr.replace("traits.dm.amount.", "");
+    const key = attr.slice(17);
     const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("traits.dm.amount");
     label = mapping.getFieldLabel(key);
+  }
+  else if ( attr.startsWith("traits.languages.communication.") ) {
+    const [key, ...path] = attr.slice(31).split(".");
+    const mapping = dnd5e.dataModels.actor.CharacterData.schema.getField("traits.languages.communication");
+    label = mapping.getFieldLabel(key, path.reverse());
   }
 
   // Attempt to find the attribute in a data model
