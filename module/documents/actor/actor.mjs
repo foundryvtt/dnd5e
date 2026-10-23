@@ -1425,6 +1425,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const pace = TravelField.getTravelPaceMode(config.pace, config.skill);
 
     const rollData = this.getRollData({ roll: true });
+    const sourceData = config.activity?.getRollData() ?? config.item?.getRollData();
+    if ( sourceData?.activity ) rollData.activity = sourceData.activity;
+    if ( sourceData?.item ) rollData.item = sourceData.item;
     rollData.roll = {
       ability: abilityId,
       proficient: dnd5e.dataModels.actor.CommonTemplate
@@ -1520,6 +1523,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const originalProf = calculateSkillToolProficiency(hostActor, abilityId, process);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
     const rollData = this.getRollData({ roll: true });
+    const sourceData = process.activity?.getRollData() ?? process.item?.getRollData();
+    if ( sourceData?.activity ) rollData.activity = sourceData.activity;
+    if ( sourceData?.item ) rollData.item = sourceData.item;
     Object.assign(rollData.roll, {
       ability: abilityId,
       proficient: prof.multiplier >= 1,
@@ -1648,6 +1654,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
 
     const rollData = this.getRollData({ roll: true });
+    const sourceData = config.activity?.getRollData() ?? config.item?.getRollData();
+    if ( sourceData?.activity ) rollData.activity = sourceData.activity;
+    if ( sourceData?.item ) rollData.item = sourceData.item;
     Object.assign(rollData.roll, {
       ability: config.ability,
       proficient: ability?.[type]?.prof?.multiplier >= 1,
