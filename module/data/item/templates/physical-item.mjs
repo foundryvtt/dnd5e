@@ -260,8 +260,8 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     const converted = convertWeight(this.weight.value, this.weight.units, { system: unitSystem, legacy: false });
     Object.assign(this.weight, { value: converted.value, units: converted.unit });
 
-    const valueInGP = convertCurrency(this.price.value, this.price.denomination);
-    if ( valueInGP !== null ) this.price.valueInGP = valueInGP;
+    const valueInGP = convertCurrency(this.price.value, this.price.denomination, { to: CONFIG.DND5E.defaultCurrency });
+    if ( valueInGP.denomination === CONFIG.DND5E.defaultCurrency ) this.price.valueInGP = valueInGP.value;
   }
 
   /* -------------------------------------------- */
