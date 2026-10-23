@@ -419,7 +419,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     const riders = [];
     const riderIds = new Set(this.item.getFlag("dnd5e", "riders.effect") ?? []);
     context.tab = context.tabs.effects;
-    context.effects = EffectsElement.prepareCategories(this.item.effects, { parent: this.item });
+    const effects = Array.from(this.item.effects).sort((lhs, rhs) => lhs.sort - rhs.sort);
+    context.effects = EffectsElement.prepareCategories(effects, { parent: this.item });
     const columns = [EffectsElement.COLUMNS.detail, EffectsElement.COLUMNS.controls];
     let origins = {};
     for ( const category of Object.values(context.effects) ) {
@@ -1019,11 +1020,14 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    */
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
-    if ( !this.item.isOwner || !effect
-      || (this.item.uuid === effect.parent?.uuid)
-      || effect.matchesOrigin(this.item.uuid) ) return false;
+    if ( !this.item.isOwner || !effect ) return false;
     const effectData = effect.toObject();
     const options = { parent: this.item, keepOrigin: false };
+
+    if ( (event._behavior === "move") && (this.item.uuid === effect.parent?.uuid) ) {
+      const result = await EffectsElement.sortActiveEffect(event, effect);
+      return result?.length ? effect : null;
+    }
 
     if ( effect.type === "enchantment" ) {
       if ( event._behavior === "link" ) {
