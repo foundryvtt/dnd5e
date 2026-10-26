@@ -29,15 +29,17 @@ system:
       value: 18
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -46,15 +48,17 @@ system:
       value: 12
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -63,15 +67,17 @@ system:
       value: 14
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -80,15 +86,17 @@ system:
       value: 6
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -97,15 +105,17 @@ system:
       value: 12
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -114,15 +124,17 @@ system:
       value: 8
       proficient: 0
       max: null
-      bonuses:
-        check: ''
-        save: ''
       check:
         roll:
           min: null
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -162,22 +174,6 @@ system:
     sp: 0
     cp: 0
   bonuses:
-    mwak:
-      attack: ''
-      damage: ''
-    rwak:
-      attack: ''
-      damage: ''
-    msak:
-      attack: ''
-      damage: ''
-    rsak:
-      attack: ''
-      damage: ''
-    abilities:
-      check: ''
-      save: ''
-      skill: ''
     spell:
       dc: ''
   skills:
@@ -189,7 +185,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ani:
       ability: wis
@@ -199,7 +194,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     arc:
       ability: int
@@ -209,7 +203,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ath:
       ability: str
@@ -219,7 +212,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     dec:
       ability: cha
@@ -229,7 +221,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     his:
       ability: int
@@ -239,7 +230,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ins:
       ability: wis
@@ -249,7 +239,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     itm:
       ability: cha
@@ -259,7 +248,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     inv:
       ability: int
@@ -269,7 +257,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     med:
       ability: wis
@@ -279,7 +266,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     nat:
       ability: int
@@ -289,7 +275,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prc:
       ability: wis
@@ -299,7 +284,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     prf:
       ability: cha
@@ -309,7 +293,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     per:
       ability: cha
@@ -319,7 +302,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     rel:
       ability: int
@@ -329,7 +311,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     slt:
       ability: dex
@@ -339,7 +320,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     ste:
       ability: dex
@@ -349,7 +329,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
     sur:
       ability: wis
@@ -359,7 +338,6 @@ system:
         mode: 0
       value: 0
       bonuses:
-        check: ''
         passive: ''
   tools: {}
   spells:
@@ -400,12 +378,12 @@ system:
         min: null
         max: null
         mode: 0
-      bonus: ''
     movement:
-      walk: '60'
       units: null
       hover: false
       ignoredDifficultTerrain: []
+      speeds:
+        walk: '60'
     attunement:
       max: 3
     senses:
@@ -424,12 +402,13 @@ system:
         min: null
         max: null
         mode: 0
-      bonuses:
-        save: ''
       limit: 1
     ac:
       flat: 10
-      calc: natural
+      calcs:
+        - natural
+      formulas: []
+      override: null
     hd:
       spent: 0
     hp:
@@ -445,8 +424,6 @@ system:
         mode: 0
       success: 0
       failure: 0
-      bonuses:
-        save: ''
     spell:
       level: 0
     loyalty: {}
@@ -654,12 +631,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.6
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiLifeBond00'
   - name: Otherworldly Slam
     system:
@@ -704,12 +681,14 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects: []
           range:
             value: '5'
@@ -759,6 +738,7 @@ items:
                   - necrotic
                 scaling:
                   number: 1
+                modifiers: []
           uses:
             spent: 0
             recovery: []
@@ -772,6 +752,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: otherworldly-slam
       advancement: {}
@@ -793,12 +774,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.365'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 5.3.0
-      lastModifiedBy: null
-      createdTime: null
-      modifiedTime: null
+      systemVersion: 6.0.6
+      lastModifiedBy: dnd5ebuilder0000
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiOtherworld'
   - name: Fell Glare (Fiend Only)
     system:
@@ -852,16 +833,19 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects:
             - _id: mvCvu3ezA2FV5IeR
               onSave: false
               level: {}
+              uuid: null
           range:
             value: '60'
             units: ft
@@ -893,6 +877,7 @@ items:
             dc:
               calculation: spellcasting
               formula: ''
+            visible: true
           uses:
             spent: 0
             recovery: []
@@ -904,6 +889,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: fell-glare
       advancement: {}
@@ -914,12 +900,22 @@ items:
     effects:
       - name: Frightened
         img: systems/dnd5e/icons/svg/statuses/frightened.svg
-        origin: Compendium.dnd5e.actors24.Actor.phbmobOtherworld.Item.phbaoiFellGlareF
+        origin: null
         transfer: false
         _id: mvCvu3ezA2FV5IeR
         type: base
         system:
           changes: []
+          origin:
+            item: Compendium.dnd5e.actors24.Actor.phbmobOtherworld.Item.phbaoiFellGlareF
+            actor: null
+            behavior: null
+            effect: null
+            message: null
+          conditions: '{}'
+          magical: false
+          rider:
+            statuses: []
         disabled: false
         duration:
           value: null
@@ -936,12 +932,12 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '14.367'
+          coreVersion: '14.369'
           systemId: dnd5e
-          systemVersion: 5.3.0
+          systemVersion: 6.0.6
           lastModifiedBy: dnd5ebuilder0000
-          createdTime: 1787691343729
-          modifiedTime: 1787691343729
+          createdTime: 1793047962920
+          modifiedTime: 1793047962920
         showIcon: 2
         start: null
         folder: null
@@ -961,10 +957,10 @@ items:
       exportSource: null
       coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 5.3.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1792789598034
-      modifiedTime: 1792789598034
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiFellGlareF'
   - name: Fey Step (Fey Only)
     system:
@@ -1014,12 +1010,14 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects: []
           range:
             value: '60'
@@ -1061,6 +1059,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: fey-step
       advancement: {}
@@ -1084,10 +1083,10 @@ items:
       exportSource: null
       coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 5.3.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1792789605373
-      modifiedTime: 1792789605373
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiFeyStepFey'
   - name: Healing Touch (Celestial Only)
     system:
@@ -1139,12 +1138,14 @@ items:
             spellSlot: true
           description:
             chatFlavor: ''
+            value: ''
           duration:
             value: ''
             units: inst
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects: []
           range:
             value: '5'
@@ -1181,6 +1182,7 @@ items:
               mode: whole
               number: null
               formula: ''
+            modifiers: []
           uses:
             spent: 0
             recovery: []
@@ -1192,6 +1194,7 @@ items:
             requireAttunement: false
             requireIdentification: false
             requireMagic: false
+          behaviors: []
       enchant: {}
       identifier: healing-touch
       advancement: {}
@@ -1211,10 +1214,10 @@ items:
       exportSource: null
       coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 5.3.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1792789612543
-      modifiedTime: 1792789612543
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiHealingTou'
 effects: []
 folder: l9ar6UzbvIRDyYmA
@@ -1238,7 +1241,7 @@ _stats:
   coreVersion: '14.369'
   systemId: dnd5e
   systemVersion: 6.0.6
-  createdTime: 1773684723633
-  modifiedTime: 1792789578003
+  createdTime: 1793047962920
+  modifiedTime: 1793047962921
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbmobOtherworld'
