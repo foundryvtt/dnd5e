@@ -39,6 +39,11 @@ system:
           min: null
           max: null
           mode: 0
+      attack:
+        roll:
+          min: null
+          max: null
+          mode: 0
     dex:
       value: 12
       proficient: 0
@@ -49,6 +54,11 @@ system:
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -67,6 +77,11 @@ system:
           min: null
           max: null
           mode: 0
+      attack:
+        roll:
+          min: null
+          max: null
+          mode: 0
     int:
       value: 6
       proficient: 0
@@ -77,6 +92,11 @@ system:
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -95,6 +115,11 @@ system:
           min: null
           max: null
           mode: 0
+      attack:
+        roll:
+          min: null
+          max: null
+          mode: 0
     cha:
       value: 8
       proficient: 0
@@ -105,6 +130,11 @@ system:
           max: null
           mode: 0
       save:
+        roll:
+          min: null
+          max: null
+          mode: 0
+      attack:
         roll:
           min: null
           max: null
@@ -131,8 +161,11 @@ system:
       custom: ''
     languages:
       value: []
-      custom: Telepathy 1 mile (works only with you)
-      communication: {}
+      custom: ''
+      communication:
+        telepathy:
+          value: 1
+          units: mi
     important: false
   currency:
     pp: 0
@@ -381,8 +414,8 @@ system:
     hp:
       value: 5
       max: 5
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 0d10 + 5
     death:
       roll:
@@ -413,7 +446,62 @@ system:
     rules: '2024'
     book: ''
     license: CC-BY-4.0
-  rolls: {}
+  rolls:
+    ability:
+      check:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+      save:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+      skill:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+      tool:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+    attack:
+      bonus: ''
+      msak:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+      mwak:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+      rsak:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+      rwak:
+        bonus: ''
+        min: null
+        max: null
+        mode: 0
+      min: null
+      max: null
+      mode: 0
+    damage:
+      msak:
+        bonus: ''
+      mwak:
+        bonus: ''
+      rsak:
+        bonus: ''
+      rwak:
+        bonus: ''
 _id: phbmobOtherworld
 img: ''
 prototypeToken:
@@ -507,7 +595,6 @@ items:
       source:
         custom: ''
         rules: '2024'
-        license: CC-BY-4.0
         revision: 1
       uses:
         max: ''
@@ -544,12 +631,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.367'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1787693557545
-      modifiedTime: 1787693557545
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiLifeBond00'
   - name: Otherworldly Slam
     system:
@@ -561,8 +648,8 @@ items:
         chat: ''
       source:
         custom: ''
-        rules: '2024'
         license: CC-BY-4.0
+        rules: '2024'
         revision: 1
       uses:
         max: ''
@@ -601,6 +688,7 @@ items:
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects: []
           range:
             value: '5'
@@ -686,14 +774,14 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.367'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1787693557545
-      modifiedTime: 1787693557545
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiOtherworld'
-  - name: Fell Glare
+  - name: Fell Glare (Fiend Only)
     system:
       description:
         value: >-
@@ -704,9 +792,9 @@ items:
         chat: ''
       source:
         custom: ''
-        rules: '2024'
         license: CC-BY-4.0
         revision: 2
+        rules: '2024'
       uses:
         max: '1'
         recovery:
@@ -752,6 +840,7 @@ items:
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects:
             - _id: mvCvu3ezA2FV5IeR
               onSave: false
@@ -811,12 +900,18 @@ items:
     effects:
       - name: Frightened
         img: systems/dnd5e/icons/svg/statuses/frightened.svg
-        origin: Compendium.dnd5e.actors24.Actor.phbmobOtherworld.Item.phbaoiFellGlareF
+        origin: null
         transfer: false
         _id: mvCvu3ezA2FV5IeR
         type: base
         system:
           changes: []
+          origin:
+            item: Compendium.dnd5e.actors24.Actor.phbmobOtherworld.Item.phbaoiFellGlareF
+            actor: null
+            behavior: null
+            effect: null
+            message: null
           conditions: '{}'
           magical: false
           rider:
@@ -837,17 +932,16 @@ items:
           compendiumSource: null
           duplicateSource: null
           exportSource: null
-          coreVersion: '14.367'
+          coreVersion: '14.369'
           systemId: dnd5e
-          systemVersion: 6.0.0
+          systemVersion: 6.0.6
           lastModifiedBy: dnd5ebuilder0000
-          createdTime: 1787693557545
-          modifiedTime: 1787693557545
+          createdTime: 1793047962920
+          modifiedTime: 1793047962920
         showIcon: 2
         start: null
         folder: null
-        _key: >-
-          !actors.items.effects!phbmobOtherworld.phbaoiFellGlareF.mvCvu3ezA2FV5IeR
+        _key: '!actors.items.effects!phbmobOtherworld.phbaoiFellGlareF.mvCvu3ezA2FV5IeR'
     folder: null
     sort: 0
     ownership:
@@ -861,14 +955,14 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.367'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1787693557545
-      modifiedTime: 1787693557545
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiFellGlareF'
-  - name: Fey Step
+  - name: Fey Step (Fey Only)
     system:
       description:
         value: >-
@@ -877,6 +971,7 @@ items:
         chat: ''
       source:
         custom: ''
+        license: CC-BY-4.0
         revision: 1
         rules: '2024'
       uses:
@@ -922,6 +1017,7 @@ items:
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects: []
           range:
             value: '60'
@@ -985,14 +1081,14 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.367'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1787693557545
-      modifiedTime: 1787693557545
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiFeyStepFey'
-  - name: Healing Touch
+  - name: Healing Touch (Celestial Only)
     system:
       description:
         value: >-
@@ -1001,6 +1097,7 @@ items:
         chat: ''
       source:
         custom: ''
+        license: CC-BY-4.0
         revision: 1
         rules: '2024'
       uses:
@@ -1048,6 +1145,7 @@ items:
             special: ''
             override: false
             concentration: false
+            expiry: null
           effects: []
           range:
             value: '5'
@@ -1114,12 +1212,12 @@ items:
       compendiumSource: null
       duplicateSource: null
       exportSource: null
-      coreVersion: '14.367'
+      coreVersion: '14.369'
       systemId: dnd5e
-      systemVersion: 6.0.0
+      systemVersion: 6.0.6
       lastModifiedBy: dnd5ebuilder0000
-      createdTime: 1787693557546
-      modifiedTime: 1787693557546
+      createdTime: 1793047962920
+      modifiedTime: 1793047962920
     _key: '!actors.items!phbmobOtherworld.phbaoiHealingTou'
 effects: []
 folder: l9ar6UzbvIRDyYmA
@@ -1128,14 +1226,22 @@ ownership:
   default: 0
 flags:
   dnd5e:
-    showTokenPortrait: false
+    statBlockOverride:
+      hp: >-
+        5 + 10 per spell level (the steed has a number of Hit Dice [d10s] equal
+        to the spell’s level)
+      ac: 10 + 1 per spell level
+      speed: 60 ft., Fly 60 ft. (requires level 4+ spell)
+      languages: Telepathy 1 mile (works only with you)
+      cr: None
+      pb: PB equals your Proficiency Bonus
 _stats:
   duplicateSource: null
   exportSource: null
-  coreVersion: '14.367'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 6.0.0
-  createdTime: 1787693557544
-  modifiedTime: 1787693557544
+  systemVersion: 6.0.6
+  createdTime: 1793047962920
+  modifiedTime: 1793047962921
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!phbmobOtherworld'
