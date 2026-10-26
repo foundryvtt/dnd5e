@@ -22,7 +22,7 @@ system:
       _id: Z62czXwABB7SN1lP
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -80,7 +80,7 @@ system:
       _id: 4h4Aazi3L1MmByOt
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -138,7 +138,7 @@ system:
       _id: 76MvwJBXwm1GbzfW
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -196,7 +196,7 @@ system:
       _id: F6QdFpERu7c4x6cd
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -254,7 +254,7 @@ system:
       _id: uDrKgJTXIcF0EM33
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -312,7 +312,7 @@ system:
       _id: yMZ4RIhJV1jvkKaf
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -358,7 +358,7 @@ system:
       _id: DIkFGxynTge6LTPJ
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: false
         condition: ''
@@ -421,7 +421,7 @@ system:
       name: Cloud of Oversized Butterflies (41-45)
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: false
         condition: ''
@@ -498,7 +498,7 @@ system:
       _id: EhdR11nT5sMOi9h5
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -556,7 +556,7 @@ system:
       _id: cKz4qaK2elWiFRCS
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -601,7 +601,7 @@ system:
       name: Grass Cover (61-64)
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: false
         condition: ''
@@ -666,7 +666,7 @@ system:
       _id: 6kTej94dEVrwxM9D
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: false
         condition: ''
@@ -748,7 +748,7 @@ system:
       _id: hohchQU2VPFVUIWG
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -794,7 +794,7 @@ system:
       _id: R4TuLg6r7fTmIMF9
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: false
         condition: ''
@@ -875,7 +875,7 @@ system:
       _id: Wxry2v7kMU16VG7T
       sort: 0
       activation:
-        type: ''
+        type: action
         value: null
         override: true
         condition: ''
@@ -915,6 +915,62 @@ system:
           min: null
           max: null
         identifier: ''
+    xDi7G9xhB53y4SEd:
+      type: utility
+      name: Expend
+      _id: xDi7G9xhB53y4SEd
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        value: '120'
+        units: ft
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      img: ''
+      appliedEffects: []
+      visibility:
+        requireMagic: true
+        level:
+          min: null
+          max: null
+        identifier: ''
+        requireIdentification: true
   uses:
     spent: 0
     recovery:
