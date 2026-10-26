@@ -417,6 +417,12 @@ export default class ActivityUsageDialog extends Dialog5e {
         return { value, label, disabled, selected: spellSlotValue === value };
       }).filter(_ => _);
 
+      if ( spellSlotValue && (spellSlotValue !== this.config.spell.slot) ) {
+        this.config.spell.slot = spellSlotValue;
+        this.config.scaling = Math.max(0, this.actor.system.spells[spellSlotValue].level - this.item.system.level);
+        this.#item = this.#item.scaledClone(this.config.scaling);
+      }
+
       context.spellSlots = {
         field: new StringField({ required: true, blank: false, label: _loc("DND5E.SpellCastUpcast") }),
         name: "spell.slot",
