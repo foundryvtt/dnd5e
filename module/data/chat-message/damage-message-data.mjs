@@ -4,6 +4,7 @@ import RollMessageData from "./roll-message-data.mjs";
 const { SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { DamageAffectCategory } from "../../documents/_types.mjs";
  * @import { DamageMessageSystemData } from "./_types.mjs";
  */
 
@@ -147,6 +148,21 @@ export default class DamageMessageData extends RollMessageData {
       },
       multiplier: base.multiplier
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Whether this roll was configured with a given damage application option.
+   * @param {"downgrade"|DamageAffectCategory} option  The option.
+   * @param {string} type                              The damage type.
+   * @returns {boolean}
+   */
+  hasDamageApplicationOption(option, type) {
+    const value = option === "downgrade"
+      ? this.applicationOptions?.downgrade
+      : this.applicationOptions?.ignore?.[option];
+    return !!(value?.has(type) || value?.has("ALL"));
   }
 
   /* -------------------------------------------- */

@@ -129,34 +129,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
   calculateDamage(actor, options) {
     const damages = actor.calculateDamage(this.damages, options);
     let { amount, temp, tempMax } = damages;
-
-    const active = {
-      modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
-    };
-    const potential = {
-      modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
-    };
-    for ( const damage of damages ) {
-      for ( const category of Object.keys(active) ) {
-        if ( category === "threshold" ) {
-          if ( damage.active.threshold ) active.threshold = true;
-          if ( damage.potential.threshold ) potential.threshold = true;
-          continue;
-        }
-        if ( damage.active.all?.[category] ) active[category].add("ALL");
-        if ( damage.potential.all?.[category] ) potential[category].add("ALL");
-        if ( damage.active.type?.[category] ) active[category].add(damage.type);
-        if ( damage.potential.type?.[category] ) potential[category].add(damage.type);
-        for ( const [special, value] of Object.entries(damage.active.special ?? {}) ) {
-          if ( value[category] ) active[category].add(special);
-        }
-        for ( const [special, value] of Object.entries(damage.potential.special ?? {}) ) {
-          if ( value[category] ) potential[category].add(special);
-        }
-      }
-    }
+    const active = this.#flattenChanges(damages, "active");
+    const potential = this.#flattenChanges(damages, "potential");
     temp = Math.floor(Math.max(0, temp));
-
     return { active, potential, temp, tempMax, total: amount };
   }
 
@@ -193,10 +168,9 @@ export default class DamageApplicationElement extends ChatTrayElement {
    * @param {{ change: string, type: string }} operation  The operation being performed.
    */
   #cycleChangeSource(options, { type, change }={}) {
-    const defaultOptions = this.chatMessage.system.applicationOptions ?? {};
-    const hasDefaultDowngrade = defaultOptions.downgrade?.has(type) || defaultOptions.downgrade?.has("ALL");
-    if ( (change === "resistance" && hasDefaultDowngrade)
-      || defaultOptions.ignore?.[change]?.has(type) || defaultOptions.ignore?.[change]?.has("ALL") ) return;
+    const msg = this.chatMessage.system;
+    const hasDefaultDowngrade = msg.hasDamageApplicationOption("downgrade", type);
+    if ( ((change === "resistance") && hasDefaultDowngrade) || msg.hasDamageApplicationOption(change, type) ) return;
     if ( change === "immunity" ) {
       if ( options.ignore?.immunity?.has(type) ) {
         options.ignore.immunity.delete(type);
@@ -222,6 +196,34 @@ export default class DamageApplicationElement extends ChatTrayElement {
       options.ignore[change] ??= new Set();
       options.ignore[change].add(type);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert from a list of damage descriptors to a flattened object of damage types.
+   * @param {DamageDescription[]} damages  The damage descriptors.
+   * @param {"active"|"potential"} key     Whether we are operating on the active or potential set.
+   * @returns {Record<string, Set<string>>}
+   */
+  #flattenChanges(damages, key) {
+    const changes = {
+      modification: new Set(), resistance: new Set(), vulnerability: new Set(), immunity: new Set(), threshold: false
+    };
+    const categories = ["modification", "resistance", "vulnerability", "immunity"];
+    for ( const damage of damages ) {
+      const d = damage[key];
+      if ( d.threshold ) changes.threshold = true;
+      for ( const category of categories ) {
+        const change = changes[category];
+        if ( d.all?.[category] ) change.add("ALL");
+        if ( d.type?.[category] ) change.add(damage.type);
+        for ( const [special, value] of Object.entries(d.special ?? {}) ) {
+          if ( value[category] ) change.add(special);
+        }
+      }
+    }
+    return changes;
   }
 
   /* -------------------------------------------- */
