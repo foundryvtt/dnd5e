@@ -315,6 +315,26 @@ export default class ItemDataModel extends SystemDataModel {
   /* -------------------------------------------- */
 
   /**
+   * Find the identifier for the class that granted this item, if any.
+   * @param {string} [sourceItemIdentifier]  Identifier for the item that directly granted this item (can be typed).
+   * @returns {string}
+   */
+  getClassIdentifier(sourceItemIdentifier) {
+    let sourceItem = sourceItemIdentifier ? this.parent.actor?.identifiedItems.get(this.sourceItem)?.first()
+      : this.parent.actor?.items.get(this.parent.getFlag("dnd5e", "advancementOrigin")?.slice(0, 16));
+    if ( !sourceItem ) return "";
+
+    if ( sourceItem && (sourceItem.type !== "class") && (sourceItem.type !== "subclass") ) {
+      sourceItem = this.parent.actor?.items.get(sourceItem.getFlag("dnd5e", "advancementRoot")?.slice(0, 16));
+    }
+    if ( sourceItem?.type === "class" ) return sourceItem.identifier;
+    if ( sourceItem?.type === "subclass" ) return sourceItem.system.classIdentifier ?? "";
+    return "";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Determine the cost to craft this Item.
    * @param {object} [options]
    * @param {"buy"|"craft"|"none"} [options.baseItem="craft"]  Ignore base item if "none". Include full base item gold
