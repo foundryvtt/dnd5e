@@ -61,7 +61,8 @@ export default class ItemDataModel extends SystemDataModel {
    * @type {Item5e|void}
    */
   get advancementRootItem() {
-    return this.parent?.actor?.items.get(this.parent.getFlag("dnd5e", "advancementRoot")?.split(".")?.[0]);
+    const origin = this.parent?.flags?.dnd5e?.advancementRoot ?? this.parent?.flags?.dnd5e?.advancementOrigin ?? "";
+    return this.parent?.actor?.items.get(origin.slice(0, 16));
   }
 
   /* -------------------------------------------- */
@@ -320,15 +321,12 @@ export default class ItemDataModel extends SystemDataModel {
    * @returns {string}
    */
   getClassIdentifier(sourceItemIdentifier) {
-    let sourceItem = sourceItemIdentifier ? this.parent.actor?.identifiedItems.get(this.sourceItem)?.first()
-      : this.parent.actor?.items.get(this.parent.getFlag("dnd5e", "advancementOrigin")?.slice(0, 16));
-    if ( !sourceItem ) return "";
-
-    if ( sourceItem && (sourceItem.type !== "class") && (sourceItem.type !== "subclass") ) {
-      sourceItem = this.parent.actor?.items.get(sourceItem.getFlag("dnd5e", "advancementRoot")?.slice(0, 16));
-    }
-    if ( sourceItem?.type === "class" ) return sourceItem.identifier;
-    if ( sourceItem?.type === "subclass" ) return sourceItem.system.classIdentifier ?? "";
+    let source = sourceItemIdentifier ? this.parent.actor?.identifiedItems.get(sourceItemIdentifier)?.first()
+      : this.advancementRootItem;
+    if ( !source ) return "";
+    if ( (source.type !== "class") && (source.type !== "subclass") ) source = source.system.advancementRootItem;
+    if ( source?.type === "class" ) return source.identifier;
+    if ( source?.type === "subclass" ) return source.system.classIdentifier ?? "";
     return "";
   }
 
