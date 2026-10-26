@@ -171,6 +171,16 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /**
+   * The identifier of the class associated with this feature.
+   * @type {string}
+   */
+  get classIdentifier() {
+    return this.getClassIdentifier();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Does this feature represent a group of individual enchantments (e.g. the "Infuse Item" feature stores data about
    * all of the character's infusions).
    * @type {boolean}
@@ -365,6 +375,15 @@ export default class FeatData extends ItemDataModel.mixin(
     }
 
     return messages;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  getRollData(...options) {
+    const data = super.getRollData(...options);
+    data.item.classIdentifier = this.classIdentifier;
+    return data;
   }
 
   /* -------------------------------------------- */

@@ -61,7 +61,8 @@ export default class ItemDataModel extends SystemDataModel {
    * @type {Item5e|void}
    */
   get advancementRootItem() {
-    return this.parent?.actor?.items.get(this.parent.getFlag("dnd5e", "advancementRoot")?.split(".")?.[0]);
+    const origin = this.parent?.flags?.dnd5e?.advancementRoot ?? this.parent?.flags?.dnd5e?.advancementOrigin ?? "";
+    return this.parent?.actor?.items.get(origin.slice(0, 16));
   }
 
   /* -------------------------------------------- */
@@ -310,6 +311,23 @@ export default class ItemDataModel extends SystemDataModel {
       weight: this.weight
     });
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Find the identifier for the class that granted this item, if any.
+   * @param {string} [sourceItemIdentifier]  Identifier for the item that directly granted this item (can be typed).
+   * @returns {string}
+   */
+  getClassIdentifier(sourceItemIdentifier) {
+    let source = sourceItemIdentifier ? this.parent.actor?.identifiedItems.get(sourceItemIdentifier)?.first()
+      : this.advancementRootItem;
+    if ( !source ) return "";
+    if ( (source.type !== "class") && (source.type !== "subclass") ) source = source.system.advancementRootItem;
+    if ( source?.type === "class" ) return source.identifier;
+    if ( source?.type === "subclass" ) return source.system.classIdentifier ?? "";
+    return "";
   }
 
   /* -------------------------------------------- */
