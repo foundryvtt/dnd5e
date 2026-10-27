@@ -12,6 +12,11 @@ export default class ActiveEffectDataModel extends foundry.data.ActiveEffectType
   /*  Model Configuration                         */
   /* -------------------------------------------- */
 
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.EFFECT.BASE"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     const schema = {
