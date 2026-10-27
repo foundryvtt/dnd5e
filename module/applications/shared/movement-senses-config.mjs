@@ -2,7 +2,7 @@ import { defaultUnits } from "../../utils.mjs";
 import BaseConfigSheet from "../actor/api/base-config-sheet.mjs";
 
 /**
- * Configuration application for an actor or species's movement & senses.
+ * Configuration application for an actor or species' movement & senses.
  */
 export default class MovementSensesConfig extends BaseConfigSheet {
   /** @override */
@@ -58,11 +58,14 @@ export default class MovementSensesConfig extends BaseConfigSheet {
 
   /**
    * Specific types measured, depending on trait type and actor type.
-   * @type {string}
+   * @type {string[]}
    */
   get types() {
     if ( this.options.type === "senses" ) return Object.keys(CONFIG.DND5E.senses);
-    return Object.keys(CONFIG.DND5E.movementTypes);
+    return foundry.utils.iterateEntries(CONFIG.DND5E.movementTypes).reduce((arr, [k, config]) => {
+      if ( !config.hidden ) arr.push(k);
+      return arr;
+    }, []);
   }
 
   /* -------------------------------------------- */
@@ -95,7 +98,7 @@ export default class MovementSensesConfig extends BaseConfigSheet {
         name: this.subPath ? `system.${this.keyPath}.${this.subPath}.${key}` : `system.${this.keyPath}.${key}`,
         value: this.subPath ? context.data[this.subPath][key] : context.data[key],
         placeholder: placeholderData?.[key] ?? ""
-      })).filter(type => type.field);
+      }));
 
       context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
       context.unitsOptions.blank = false;
