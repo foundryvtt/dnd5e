@@ -307,6 +307,10 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       if ( unmatched ) r.riderTooltip = true;
       return unmatched;
     }));
+    // Flatten rider activities so that they each appear nested under the root activity.
+    for ( const { riders } of context.activities ) {
+      for ( const rider of riders ) rider.riders.forEach(r => riders.add(r));
+    }
     return context;
   }
 
