@@ -4011,7 +4011,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.Rules",
-    keyOptions: Object.freeze([...D20_ROLLS, { rule: true }, ...DAMAGE_ROLLS]),
+    keyOptions: ALL_ROLLS,
     skipConditions: true
   },
   "dnd5e.maximum": {
@@ -4043,6 +4043,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.damage.downgrade": {
     label: "DND5E.EFFECT.Change.Type.DowngradeImmunityResistance.Label",
+    hint: "DND5E.EFFECT.Change.Type.DowngradeImmunityResistance.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.DamageApplicationOptions",
@@ -4051,6 +4052,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.damage.ignore.immunity": {
     label: "DND5E.EFFECT.Change.Type.IgnoreImmunity.Label",
+    hint: "DND5E.EFFECT.Change.Type.IgnoreImmunity.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.DamageApplicationOptions",
@@ -4059,6 +4061,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.damage.ignore.resistance": {
     label: "DND5E.EFFECT.Change.Type.IgnoreResistance.Label",
+    hint: "DND5E.EFFECT.Change.Type.IgnoreResistance.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.DamageApplicationOptions",
@@ -4067,6 +4070,7 @@ DND5E.activeEffectChangeTypes = Object.freeze({
   },
   "dnd5e.damage.ignore.vulnerability": {
     label: "DND5E.EFFECT.Change.Type.IgnoreVulnerability.Label",
+    hint: "DND5E.EFFECT.Change.Type.IgnoreVulnerability.Hint",
     defaultPriority: 100,
     handler: ActiveEffect5e._applyChangeRule,
     group: "DND5E.EFFECT.Change.Group.DamageApplicationOptions",

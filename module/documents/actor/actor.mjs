@@ -2048,9 +2048,6 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
    * @returns {Promise<BasicRoll[]|null>}            The created Roll instances, or `null` if no hit die was rolled.
    */
   async rollHitDie(config={}, dialog={}, message={}) {
-    let formula;
-    let oldFormat = false;
-
     let cls = null;
 
     // NPCs only have one denomination
@@ -2086,14 +2083,17 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     }
 
     const rollData = this.getRollData({ roll: true });
-    rollData.roll.hitDie = Number(config.denomination.slice(1));
+    Object.assign(rollData.roll, { hitDie: Number(config.denomination.slice(1)), type: "hitDie" });
     const rulesVersion = dnd5e.settings.rulesVersion;
     const minimumValue = rulesVersion === "modern" ? 1 : 0;
+    const bonus = AppliedRules.collect("hitDie:bonus", this).filterWith(rollData).toFormula(["@abilities.con.mod"]);
     const modifiers = AppliedRules.collect("hitDie:modifier", this).filterWith(rollData).toModifiers();
-    formula ??= `max(${minimumValue}, 1${config.denomination}${Array.from(modifiers).join("")} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "hitDie"];
-    rollConfig.rolls = [{ parts: [formula], data: rollData }].concat(config.rolls ?? []);
+    rollConfig.rolls = [{
+      parts: [`max(${minimumValue}, 1${config.denomination}${Array.from(modifiers).join("")} + ${bonus})`],
+      data: rollData
+    }].concat(config.rolls ?? []);
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
@@ -2113,7 +2113,6 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
 
     const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
     if ( !rolls.length ) return null;
-    const returnValue = oldFormat && rolls?.length ? rolls[0] : rolls;
 
     const updates = { actor: {}, class: {} };
     if ( rollConfig.modifyHitDice !== false ) {
@@ -2140,8 +2139,8 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
      * @param {object} data.updates.class  Updates that will be applied to the class.
      * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollHitDie", rolls, { subject: this, updates }) === false ) return returnValue;
-    if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { subject: this, updates }) === false ) return returnValue;
+    if ( Hooks.call("dnd5e.rollHitDie", rolls, { subject: this, updates }) === false ) return rolls;
+    if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { subject: this, updates }) === false ) return rolls;
 
     // Perform updates
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
@@ -2157,7 +2156,7 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
      */
     Hooks.callAll("dnd5e.postRollHitDie", rolls, { subject: this });
 
-    return returnValue;
+    return rolls;
   }
 
   /* -------------------------------------------- */
@@ -2174,10 +2173,12 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
 
     const rollData = item.getRollData({ roll: true });
-    rollData.roll.hitDie = Number(item.system.hd.denomination.slice(1));
+    Object.assign(rollData.roll, { hitDie: Number(item.system.hd.denomination.slice(1)), type: "classHitPoints" });
     const modifiers = AppliedRules.collect("hitDie:modifier", this).filterWith(rollData).toModifiers();
     const config = {
-      formula: `1${item.system.hd.denomination}${Array.from(modifiers).join("")}`,
+      formula: AppliedRules.collect("hitDie:bonus", this).filterWith(rollData).toFormula([
+        `1${item.system.hd.denomination}${Array.from(modifiers).join("")}`
+      ]),
       data: rollData,
       chatMessage
     };
