@@ -20,7 +20,11 @@ export default class MovementField extends foundry.data.fields.SchemaField {
       }),
       special: new StringField({ label: "DND5E.MOVEMENT.FIELDS.special.label" }),
       speeds: new MappingField(new FormulaField({ deterministic: true }), {
-        initialKeys: CONFIG.DND5E.movementTypes, initialKeysOnly: true
+        initialKeys: foundry.utils.iterateEntries(CONFIG.DND5E.movementTypes).reduce((arr, [k, config]) => {
+          if ( !config.hidden ) arr.push(k);
+          return arr;
+        }, []),
+        initialKeysOnly: true
       }),
       units: new StringField({
         required: true, nullable: true, blank: false, initial: initialUnits, label: "DND5E.MOVEMENT.FIELDS.units.label"
@@ -43,7 +47,7 @@ export default class MovementField extends foundry.data.fields.SchemaField {
    * Default movement types that need to be migrated and shimmed.
    * @type {string[]}
    */
-  static #DEFAULT_SPEEDS = ["walk", "burrow", "climb", "fly", "jump", "swim"];
+  static #DEFAULT_SPEEDS = ["walk", "burrow", "climb", "fly", "swim"];
 
   /* -------------------------------------------- */
 
@@ -70,7 +74,7 @@ export default class MovementField extends foundry.data.fields.SchemaField {
    * @param {MovementData} movement  Movement data object to shim.
    */
   static _shim(movement) {
-    for ( const key of MovementField.#DEFAULT_SPEEDS ) {
+    for ( const key of [...MovementField.#DEFAULT_SPEEDS, "jump"] ) {
       Object.defineProperty(movement, key, {
         get() {
           return this.speeds[key];
