@@ -15,8 +15,8 @@ system:
     custom: ''
     rules: '2024'
     revision: 1
-    license: CC-BY-4.0
     book: ''
+    license: CC-BY-4.0
   uses:
     max: ''
     spent: 0
@@ -26,25 +26,63 @@ system:
     subtype: ''
   prerequisites:
     level: 2
+    items: []
     repeatable: false
   properties: []
   requirements: Bard
   activities: {}
   enchant: {}
   identifier: expertise
+  advancement:
+    zHtnbRgLICltyy8V:
+      _id: zHtnbRgLICltyy8V
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 2
+      name: Expertise
+      flags: {}
+      hint: >-
+        <p>You gain &amp;Reference[Expertise] in two of your skill proficiencies
+        of your choice. Performance and Persuasion are recommended if you have
+        proficiency in them.</p>
+    e8hDmktYGVFiT6M0:
+      _id: e8hDmktYGVFiT6M0
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 9
+      name: Expertise
+      flags: {}
+      hint: >-
+        <p>You gain &amp;Reference[Expertise] in two more of your skill
+        proficiencies of your choice.</p>
+  crewed: false
 effects: []
-flags:
-  dnd5e:
-    riders:
-      activity: []
-      effect: []
+flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '13.344'
+  coreVersion: '14.369'
   systemId: dnd5e
-  systemVersion: 4.4.0
-  createdTime: 1735866377962
-  modifiedTime: 1745256760380
+  systemVersion: 6.1.0
+  createdTime: 1793220715225
+  modifiedTime: 1793220715225
   lastModifiedBy: dnd5ebuilder0000
   exportSource: null
 sort: 0
