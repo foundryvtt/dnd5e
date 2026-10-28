@@ -37,8 +37,7 @@ system:
       type: ''
     template:
       units: ft
-      type: square
-      size: '5'
+      type: ''
       contiguous: false
       count: ''
   range:
@@ -113,7 +112,7 @@ system:
         ac: ''
         hd: ''
         hp: ''
-        attackDamage: (@item.level - 2)d8
+        attackDamage: ''
         saveDamage: ''
         healing: ''
       creatureSizes: []
