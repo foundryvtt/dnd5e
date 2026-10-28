@@ -196,6 +196,13 @@
  */
 
 /**
+ * @typedef {RollData & Maybe<ActorRollData> & Maybe<ItemRollData>} EffectRollData
+ * @property {object} effect        Object containing the effect's system data.
+ * @property {object} effect.flags  Flags set on the effect.
+ * @property {string} effect.name   Name of the effect.
+ */
+
+/**
  * @typedef {RollData & Maybe<ActorRollData>} ItemRollData
  * @property {object} item        Object containing the item's system data.
  * @property {object} item.flags  Flags set on the item.
