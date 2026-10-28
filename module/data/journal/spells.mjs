@@ -3,7 +3,9 @@ import { formatIdentifier } from "../../utils.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 
-const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const {
+  ArrayField, DocumentIdField, DocumentUUIDField, HTMLField, NumberField, SchemaField, SetField, StringField
+} = foundry.data.fields;
 
 /**
  * @import { SpellsJournalPageSystemData } from "./_types.mjs";
@@ -34,12 +36,15 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
       unlinkedSpells: new ArrayField(new SchemaField({
         _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
         identifier: new IdentifierField({ label: "DND5E.Identifier" }),
-        name: new StringField({ required: true, label: "DOCUMENT.FIELDS.name.label" }),
+        name: new StringField({ required: true, label: _loc("DND5E.BASE.Name") }),
         system: new SchemaField({
           level: new NumberField({ min: 0, integer: true, label: "DND5E.Level" }),
           school: new StringField({ label: "DND5E.School" })
         }),
-        source: new SourceField({license: false, revision: false, rules: false, uuid: new StringField()})
+        source: new SourceField({
+          license: false, revision: false, rules: false,
+          uuid: new DocumentUUIDField({ embedded: false, type: "Item" })
+        })
       }), { label: "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Label" })
     };
   }
