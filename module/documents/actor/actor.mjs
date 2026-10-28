@@ -3807,16 +3807,10 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
   performBulkUpdate(
     { operations=[], ...updates }, { createOptions={}, deleteOptions={}, updateOptions={}, ...options }={}
   ) {
-    if ( !foundry.utils.isEmpty(updates.actor) ) operations.push(this.parent
-      ? {
-        action: "update", documentName: "ActorDelta", parent: this.parent,
-        updates: [{ ...updates.actor, _id: this.parent.delta.id }], ...options
-      }
-      : {
-        action: "update", documentName: "Actor", pack: this.pack,
-        updates: [{ _id: this.id, ...updates.actor }], ...options
-      }
-    );
+    if ( !foundry.utils.isEmpty(updates.actor) ) operations.push({
+      action: "update", documentName: "Actor", pack: this.pack, parent: this.parent,
+      updates: [{ ...updates.actor, _id: this.id }], ...options
+    });
     if ( !foundry.utils.isEmpty(updates.create) ) operations.push({
       action: "create", documentName: "Item", data: updates.create, parent: this, keepId: true,
       ...options, ...createOptions
