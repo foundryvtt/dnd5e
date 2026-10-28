@@ -10,6 +10,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { NumberField, ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { EffectRollData, RollDataOptions } from "./_types.mjs";
  * @import { FavoriteData5e } from "../data/abstract/_types.mjs";
  * @import Actor5e from "./actor/actor.mjs";
  * @import Item5e from "./item.mjs";
@@ -1224,12 +1225,24 @@ export default class ActiveEffect5e extends DependentDocumentMixin(foundry.docum
       extras, properties,
       description: await TextEditor.enrichHTML(this.description ?? "", {
         ...enrichmentOptions,
-        relativeTo: this
-        // TODO: Use this once https://github.com/foundryvtt/dnd5e/issues/5758 is resolved
-        // rollData: this.getRollData()
+        relativeTo: this,
+        rollData: this.getRollData()
       }),
       effect: this
     };
+  }
+
+  /* -------------------------------------------------- */
+
+  /**
+   * Prepare a data object which defines the data schema used by dice roll commands against this ActiveEffect.
+   * @param {RollDataOptions} [options]
+   * @returns {EffectRollData}
+   */
+  getRollData(options={}) {
+    const rollData = this.isEmbedded ? this.parent.getRollData(options) : {};
+    rollData.effect = { ...this.system, name: this.name, flags: this.flags };
+    return rollData;
   }
 
   /* -------------------------------------------- */
