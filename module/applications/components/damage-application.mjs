@@ -455,7 +455,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const [d, t, m] = entry.querySelectorAll(".calculated:is(.damage, .temp, .temp-max) > .value");
     d.textContent = formatNumber(-total, { signDisplay: "exceptZero" });
     d.parentElement.classList.toggle("healing", total < 0);
-    d.parentElement.dataset.tooltip = `DND5E.${total < 0 ? "Healing" : "Damage"}`;
+    d.parentElement.dataset.tooltip = total < 0 ? "DND5E.HEAL.Type.HealingShort" : "DND5E.Damage";
     d.parentElement.hidden = !total && (!!temp || !!tempMax);
     t.textContent = formatNumber(temp);
     t.parentElement.hidden = !temp;
