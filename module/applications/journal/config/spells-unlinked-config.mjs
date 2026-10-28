@@ -1,4 +1,4 @@
-import DocumentSheet5e from "../api/document-sheet.mjs";
+import DocumentSheet5e from "../../api/document-sheet.mjs";
 
 /**
  * Application for configuring a single unlinked spell in a spell list.
@@ -46,7 +46,7 @@ export default class SpellsUnlinkedConfig extends DocumentSheet5e {
   async _prepareContext(options) {
     const context = {
       ...await super._prepareContext(options),
-      ...this.document.system.unlinkedSpells.find(u => u._id === this.options.unlinkedId),
+      ...this.document.system._source.unlinkedSpells.find(u => u._id === this.options.unlinkedId),
       fields: this.document.system.schema.fields.unlinkedSpells.element.fields,
       spellLevelOptions: Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label })),
       spellSchoolOptions: Object.entries(CONFIG.DND5E.spellSchools).map(([value, { label }]) => ({ value, label }))
