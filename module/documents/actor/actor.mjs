@@ -7,6 +7,7 @@ import AttributesFields from "../../data/actor/templates/attributes.mjs";
 import BastionTurnMessageData from "../../data/chat-message/bastion-turn-message-data.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
+import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import D20RollModificationField from "../../data/shared/d20-roll-modification-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { Filter } from "../../filter.mjs";
@@ -606,13 +607,11 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
   /* -------------------------------------------- */
 
   /**
-   * Is this actor under the effect of this property from some status or due to its level of exhaustion?
-   * @param {string} key                     A key in `DND5E.conditionEffects`.
-   * @param {object} [options={}]
-   * @param {boolean} [options.label=false]  Return the responsible status label rather than a boolean.
-   * @returns {boolean|string}               Whether the actor is affected, or the label of the responsible status.
+   * Is this actor under the effect of this property from some status or due to its level of a condition?
+   * @param {string} key      A key in `DND5E.conditionEffects`.
+   * @returns {string|void}   The entry in `DND5E.conditionEffects` that applies, if any.
    */
-  hasConditionEffect(key, { label=false }={}) {
+  hasConditionEffect(key) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
     const conditions = this.system.conditions ?? {};
     const imms = this.system.traits?.ci?.value ?? new Set();
@@ -636,12 +635,21 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
       return Number(level) <= conditions[status];
     };
 
-    const match = props.find(applyCondition);
-    if ( !label ) return !!match;
-    if ( !match ) return null;
-    const [, n] = match.match(/^exhaustion-(\d+)$/) ?? [];
-    return n ? _loc("DND5E.ExhaustionLevel", { n: Number(n) })
-      : _loc(CONFIG.DND5E.conditionTypes[match]?.name ?? match);
+    return props.find(applyCondition);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the label for an entry in `DND5E.conditionEffects`.
+   * @param {string} prop  An entry in `DND5E.conditionEffects`.
+   * @returns {string}     Label of the status or condition level.
+   * @protected
+   */
+  _getConditionEffectLabel(prop) {
+    const [status, level] = prop.split("-");
+    const { name } = CONFIG.statusEffects[status];
+    return level ? `${name} (${this.system.conditions[status]})` : name;
   }
 
   /* -------------------------------------------- */
@@ -2876,22 +2884,25 @@ export default class Actor5e extends SystemDocumentMixin(foundry.documents.Actor
 
   /**
    * Break down the sources of advantage and disadvantage for one or more roll mode fields.
-   * @param {string|string[]} keyPaths    Path(s) to the roll mode field(s).
+   * @param {string[]} keyPaths           Paths to the roll mode fields.
    * @returns {AttributionDescription[]}  Individual contributions to this roll's mode.
    * @protected
    */
   _prepareRollModeAttributions(keyPaths) {
-    keyPaths = Array.isArray(keyPaths) ? keyPaths : [keyPaths];
+    const { counts } = AdvantageModeField.combineFields(this.system, keyPaths);
+    const changes = [...counts.advantages.sources, ...counts.disadvantages.sources];
+    if ( counts.overrideSource ) changes.unshift(counts.overrideSource);
     const unknown = _loc("COMMON.Unknown");
-    return AdvantageModeField.collectSources(this.system, keyPaths).map(({ value, source }) => {
-      if ( !source ) return { value, label: _loc("DND5E.AdvantageModeManual"), document: null };
-      if ( source.effect ) {
-        let label = source.effect.sourceName;
-        if ( !source.effect.origin || (source.effect.origin === this.uuid)
-          || (label === unknown) ) label = source.effect.name;
-        return { value, label, document: source.effect };
+    return changes.map(change => {
+      const { type } = change;
+      const value = Number(change.value);
+      const source = change.effect ?? change.source;
+      if ( source instanceof ActiveEffect5e ) {
+        let label = source.sourceName;
+        if ( !source.origin || source.matchesOrigin(this.uuid) || (label === unknown) ) label = source.name;
+        return { value, type, label, document: source };
       }
-      return { value, label: source.label, document: null };
+      return { value, type, label: source?.name ?? source ?? unknown, document: null };
     });
   }
 

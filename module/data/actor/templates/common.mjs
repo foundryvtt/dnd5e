@@ -369,20 +369,26 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       // Adjust rolling mode
       const isPhysicalAbility = CONFIG.DND5E.abilities[id]?.type === "physical";
-      const checkDisadvantage = this.parent.hasConditionEffect("abilityCheckDisadvantage", { label: true })
-        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalCheckDisadvantage", { label: true }));
+      const checkDisadvantage = this.parent.hasConditionEffect("abilityCheckDisadvantage")
+        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalCheckDisadvantage"));
       if ( checkDisadvantage ) {
-        AdvantageModeField.setMode(this, `abilities.${id}.check.roll.mode`, -1, { source: { label: checkDisadvantage } });
+        AdvantageModeField.setMode(this, `abilities.${id}.check.roll.mode`, -1, {
+          source: this.parent._getConditionEffectLabel(checkDisadvantage)
+        });
       }
-      const saveAdvantage = (id === "dex") && this.parent.hasConditionEffect("dexteritySaveAdvantage", { label: true });
+      const saveAdvantage = (id === "dex") && this.parent.hasConditionEffect("dexteritySaveAdvantage");
       if ( saveAdvantage ) {
-        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, 1, { source: { label: saveAdvantage } });
+        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, 1, {
+          source: this.parent._getConditionEffectLabel(saveAdvantage)
+        });
       }
-      const saveDisadvantage = this.parent.hasConditionEffect("abilitySaveDisadvantage", { label: true })
-        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalSaveDisadvantage", { label: true }))
-        || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage", { label: true }));
+      const saveDisadvantage = this.parent.hasConditionEffect("abilitySaveDisadvantage")
+        || (isPhysicalAbility && this.parent.hasConditionEffect("physicalSaveDisadvantage"))
+        || ((id === "dex") && this.parent.hasConditionEffect("dexteritySaveDisadvantage"));
       if ( saveDisadvantage ) {
-        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1, { source: { label: saveDisadvantage } });
+        AdvantageModeField.setMode(this, `abilities.${id}.save.roll.mode`, -1, {
+          source: this.parent._getConditionEffectLabel(saveDisadvantage)
+        });
       }
 
       CommonTemplate.shimAbilityData(abl, id);
