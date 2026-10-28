@@ -40,6 +40,13 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  get _defaultTitle() {
+    return this.constructor.metadata.title;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   get levels() {
     return Array.from(Object.keys(this.configuration.choices));
   }
