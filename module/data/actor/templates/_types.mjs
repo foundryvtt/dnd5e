@@ -43,6 +43,12 @@
  */
 
 /**
+ * @typedef HitDiceData
+ * @property {number} recovery  Fraction of hit dice recovery on a long rest.
+ * @property {number} [spent]   Number of hit dice a NPC has spent.
+ */
+
+/**
  * @typedef HitPointsData
  * @property {number} dt       Damage threshold.
  * @property {number} max      Maximum allowed HP value.
