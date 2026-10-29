@@ -228,7 +228,7 @@ export default class ItemDataModel extends SystemDataModel {
     enrichmentOptions.relativeTo ??= this.parent;
 
     const source = (await activity?.getCardData()) ?? {};
-    const usage = this.getUsageData({ activity });
+    const usage = foundry.utils.deepClone(this.getUsageData({ activity }));
 
     if ( source.activity?.chatFlavor ) {
       source.activity.chatFlavor = await TextEditor.enrichHTML(source.activity.chatFlavor, enrichmentOptions);
